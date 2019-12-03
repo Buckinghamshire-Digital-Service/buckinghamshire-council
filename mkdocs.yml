@@ -30,3 +30,4 @@ nav:
   - 'Continuous integration': 'continuous-integration.md'
   - 'Anonymised data': 'anonymised_data.md'
   - 'Data protection': 'data_protection.md'
+  - 'CHANGELOG': 'CHANGELOG.md'
