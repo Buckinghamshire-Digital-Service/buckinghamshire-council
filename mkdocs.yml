@@ -1,6 +1,6 @@
 site_name: Buckinghamshire Council
 repo_url: https://git.torchbox.com/buckinghamshire-council/bc
-site_url:
+site_url: https://buckinghamshire-council.pages.torchbox.com/bc/
 edit_uri: 'edit/master/docs/'
 
 repo_name: Gitlab
