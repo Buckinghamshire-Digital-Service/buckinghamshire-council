@@ -19,48 +19,32 @@ If you need to preview work on `staging`, this can be merged and deployed manual
 
 ## Deployment Cycle
 
-<!-- #FIXME Developer, delete this once you have reviewed this file.
-Choose a deployment approach below, and delete what you don't need.
--->
-
-<!-- Option one, simple deployment cycle
-
-### Simple flavour
-
-Make sure `master` contains all the desired changes (and is pushed to the remote repository and has passed CI). Deploy to production (see [deployment documentation](deployment.md)).
-
--->
-
-<!-- Option two, release-based deployment cycle
-
 ### Versioned releases
 
-This requires a 'release' QA server running a `release-x.x.x` branch which can be considered to be a merge source.
+The version number is of the form `MAJOR.PATCH`. Planned releases which add features increase the major version number. Bug fix releases increase the patch number.
 
-1. Make merge requests to the branch `release-x.x.x`.
-1. Add a heading `# x.x.x (yyyy-mm-dd)` to `CHANGELOG.md`, detailing what is in this release.
-1. Merge `release-x.x.x` to `master`.
+1. Make merge requests to the branch `release-x.x`.
+1. Add a heading `# x.x (yyyy-mm-dd)` to `CHANGELOG.md`, detailing what is in this release.
+1. Merge `release-x.x` to `master`.
 1. Deploy to production (see [deployment documentation](deployment.md)).
 1. Tag the merge commit
-    1. `git tag x.x.x`
-    1. `git push --tags`
-1. Create a new branch `release-x.x+1.x`, or `release-x+1.x.x` as appropriate, from `master`.
+   1. `git tag x.x`
+   1. `git push --tags`
+1. Create a new branch `release-x+1.x` from `master`.
 
-Add release notes to (docs/release-notes.md).
+### Deploying bug fixes
 
-#### Deploying bug fixes
-
-Urgent bug fixes should be made against the latest-deployed release, i.e. x.x.x. There is possibly already a `release-x.(x+1).x` branch in progress.
+Urgent bug fixes should be made against the latest-deployed release, i.e. x.x. There is possibly already a `release-(x+1).x` branch in progress.
 
 1. Pull `master`.
 1. Create the bug fix branch, e.g. `hotfix/mend-squiggles`.
-    1. In `CHANGELOG.md`, add a new section to `x.x.(x+1) (yyyy-mm-dd)` where
-       the date is the release date.
+   1. In `CHANGELOG.md`, add a new section to `x.(x+1) (yyyy-mm-dd)` where the
+      date is the release date.
 1. If it needs client approval, or to be user-tested, deploy to staging.
 1. Make a merge request from `hotfix/mend-squiggles` to `master`.
-1. Once the change is approved, accept the merge request, and deploy to Production
+1. Once the change is approved, accept the merge request, and deploy to
+   Production
 1. Tag the merge commit
-    1. `git tag x.x.(x+1)`
-    1. `git push --tags`
-1. Merge master into `release-(x+1).x.x`.
--->
+   1. `git tag x.(x+1)`
+   1. `git push --tags`
+1. Merge master into `release-(x+1).x`.

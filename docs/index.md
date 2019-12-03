@@ -4,17 +4,23 @@
 
 ## Project overview
 
-- Who is the client?
-- What role does this project have? Is it an app, a CMS, any special functions?
-- Are there any project conventions?
+Buckinghamshire Council is a new unitary council formed from the five previous county and district councils in Buckinghamshire.
+
+This project is primarily a CMS. During the initial phase, when the council is first inaugurated, it will serve a mixture of content written specially for the new council, and links to the previous councils' pages where services differ on a local basis.
+
+Other features include:
+
+- a job listings portal
 
 To work on this project, see the README.
 
 ### External integrations
 
-List here any external services this project uses. Preferably link to a separate documentation page for each.
+<!-- List here any external services this project uses. Preferably link to a separate documentation page for each. -->
 
-Include any external credentials in the README.
+The jobs portal will work with Lumesse.
+
+See the README for details of what credentials are needed for deployments and local development.
 
 ## Adding documentation
 
