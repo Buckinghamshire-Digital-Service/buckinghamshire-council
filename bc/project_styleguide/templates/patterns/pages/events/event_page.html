@@ -1,0 +1,36 @@
+{% extends "patterns/base_page.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block content %}
+<section class="section section--main">
+
+    <div class="intro">
+        <div class="container">
+            <h1>{{ page.title }}</h1>
+            {% if page.introduction %}
+                <h4>{{ page.introduction }}</h4>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container">
+        <p>{{ page.start_date }} {{ page.start_time|default:"" }} {{ page.end_date|default:"" }} {{ page.end_time|default:"" }}</p>
+        <p>{{ page.event_types.all|join:", " }}</p>
+        <ul>
+            <li>{{ page.street_address_1|default:"" }}</li>
+            <li>{{ page.street_address_2|default:"" }}</li>
+            <li>{{ page.city|default:"" }}</li>
+            <li>{{ page.region|default:"" }}</li>
+            <li>{{ page.postcode|default:"" }}</li>
+            <li>{{ page.country|default:"" }}</li>
+        </ul>
+    </div>
+
+    <div class="container">
+        {% include_block page.body %}
+        {% include "patterns/molecules/share/share.html" %}
+    </div>
+</section>
+{% include "patterns/molecules/relatedcontent/relatedcontent.html" with related_pages=page.related_pages.all %}
+
+{% endblock %}

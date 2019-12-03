@@ -1,0 +1,61 @@
+{% extends "patterns/base_page.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block content %}
+
+<div class="wrapper wrapper--small">
+
+    <h1>{{ page.title }}</h1>
+
+    <section class="listing">
+        {% if events %}
+            {% if events.object_list.exists %}
+                <ul role="list">
+                    {% for event in events.object_list.specific %}
+                        <li>
+                            {% if event.listing_image %}
+                                <a href="{% pageurl event %}">
+                                {% image event.listing_image fill-450x300 %}
+                                </a>
+                            {% endif %}
+                            <div>
+                                <h2 role="listitem">
+                                    <a href="{% pageurl event %}">
+                                        {% firstof event.listing_title event.title %}
+                                    </a>
+                                </h2>
+                                {% if event.end_date and not event.end_date == event.start_date %}
+                                    {{ event.start_time|time|default:"" }} {{ event.start_date|date }} to {{ event.end_time|time|default:"" }} {{ event.end_date|date }}
+                                {% elif event.end_time %}
+                                    {{ event.start_date|date }} {{ event.start_time|time }}&ndash;{{ event.end_time|time }}
+                                {% else %}
+                                    {{ event.start_date|date }} {{ event.start_time|time|default:"" }}
+                                {% endif %}
+                                {% if event.listing_summary or event.introduction %}
+                                    <p>{% firstof event.listing_summary event.introduction %}</p>
+                                {% endif %}
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                {# no items on this page #}
+            {% endif %}
+
+            {% include "patterns/molecules/pagination/pagination.html" with paginator_page=events %}
+
+        {% else %}
+            {# no items on any page #}
+        {% endif %}
+
+        {% if show_past and upcoming_events.exists %}
+            <a href="{% pageurl page %}">View upcoming events</a>
+        {% elif past_events.exists %}
+            <a href="{% pageurl page %}?past=True">View past events</a>
+        {% endif %}
+
+    </section>
+
+</div>
+
+{% endblock %}
