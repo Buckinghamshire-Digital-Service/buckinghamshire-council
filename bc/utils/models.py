@@ -98,9 +98,7 @@ class LinkFields(models.Model):
 # Related pages
 class RelatedPage(Orderable, models.Model):
     page = models.ForeignKey(
-        "wagtailcore.Page",
-        on_delete=models.CASCADE,
-        related_name="+",
+        "wagtailcore.Page", on_delete=models.CASCADE, related_name="+"
     )
 
     class Meta:
