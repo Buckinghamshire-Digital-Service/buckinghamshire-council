@@ -31,15 +31,17 @@
 
         {% wagtailuserbar %}
 
-        {% block header %}{% endblock %}
+        <div class="wrapper wrapper--grid">
+            {% block header %}{% endblock %}
 
-        <main class="wrapper wrapper--large wrapper--main" id="main-content">
-            {% block content %}
-                {{ pattern_library_rendered_pattern }}
-            {% endblock %}
-        </main>
+            <main class="wrapper wrapper--main wrapper--large" id="main-content">
+                {% block content %}
+                    {{ pattern_library_rendered_pattern }}
+                {% endblock %}
+            </main>
 
-        {% block footer %}{% endblock %}
+            {% block footer %}{% endblock %}
+        </div>
 
         <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 

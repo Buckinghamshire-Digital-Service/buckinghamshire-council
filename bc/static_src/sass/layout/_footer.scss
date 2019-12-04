@@ -1,7 +1,8 @@
 .footer {
     padding: 20px 10px;
     color: $color--secondary;
-    background-color: $color--primary;
+    background-color: $color--tertiary;
+    grid-area: footer;
 
     &__inner {
         display: flex;
