@@ -59,24 +59,25 @@ $weight--normal: 400;
 $weight--light: 200;
 
 // Font sizes
+// To get an accurate px font size from design multiply design size by 1.333
 $base-font-size: 16px; // 12 in designs
 $base-line-height: 25px;
 $font-sizes: (
-    xxxl: 48px,
-    // 36 in designs
+    // 48px = 36 in designs
+        xxxl: 48px,
+    // 43px = 32 in designs
         xxl: 43px,
-    // 32 in designs
+    // 28px = 21 in designs // possibly not needed
         xl: 28px,
-    // 21 in designs // possibly not needed
+    // 24px = 18 in designs
         l: 24px,
-    // 18 in designs
+    // 21px = 15.5 in designs
         m: 21px,
-    // 15.5 in designs
+    // 18px = 13.5 in designs
         s: 18px,
-    // 13.5 in designs
-        xs: $base-font-size,
-    xxs: 14px,
-    // 10.5 in designs,
+    xs: $base-font-size,
+    // 14px = 10.5 in designs,
+        xxs: 14px
 );
 
 // --------------------------------- Breakpoints --------------------------------
