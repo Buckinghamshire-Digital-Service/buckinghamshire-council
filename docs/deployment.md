@@ -4,12 +4,12 @@ The VM comes preinstalled with Fabric, Heroku CLI and AWS CLI.
 
 ## Deployed environments
 
-| Environment | Branch    | URL                                  | Heroku               |
-| ----------- | --------- | ------------------------------------ | -------------------- |
-| Production  | `master`  | e.g. https://bc.org                  | e.g. `bc-production` |
-| Staging     | `staging` | e.g. https://bc.staging.torchbox.com | e.g. `bc-staging`    |
+| Environment | Branch    | URL                                  | Heroku          |
+| ----------- | --------- | ------------------------------------ | --------------- |
+| Production  | `master`  | e.g. https://buckinghamshire.org     | `bc-production` |
+| Staging     | `staging` | e.g. https://bc.staging.torchbox.com | `bc-staging`    |
 
-## Login to Heroku
+## Log in to Heroku
 
 Please log in to Heroku before executing any commands for servers hosted there
 using the `Heroku login -i` command. You have to do it both in the VM and your

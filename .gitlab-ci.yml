@@ -209,6 +209,8 @@ pages:
   only:
     - master
   script:
+    # Include CHANGELOG in the docs
+    - cp CHANGELOG.md docs/changelog.md
     - pip install -r requirements-docs.txt
     - mkdocs build
     - mv site/* public
