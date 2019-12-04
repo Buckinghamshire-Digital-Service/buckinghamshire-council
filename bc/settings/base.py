@@ -146,9 +146,7 @@ WSGI_APPLICATION = "bc.wsgi.application"
 # https://github.com/kennethreitz/dj-database-url
 
 DATABASES = {
-    "default": dj_database_url.config(
-        conn_max_age=600, default="postgres:///bc"
-    )
+    "default": dj_database_url.config(conn_max_age=600, default="postgres:///bc")
 }
 
 
@@ -339,11 +337,7 @@ LOGGING = {
         }
     },
     "loggers": {
-        "bc": {
-            "handlers": ["console", "sentry"],
-            "level": "INFO",
-            "propagate": False,
-        },
+        "bc": {"handlers": ["console", "sentry"], "level": "INFO", "propagate": False},
         "wagtail": {
             "handlers": ["console", "sentry"],
             "level": "INFO",
@@ -587,9 +581,7 @@ if env.get("BASIC_AUTH_ENABLED", "false").lower().strip() == "true":
 
     # This is the credentials users will have to use to access the site.
     BASIC_AUTH_LOGIN = env.get("BASIC_AUTH_LOGIN", "bc")
-    BASIC_AUTH_PASSWORD = env.get(
-        "BASIC_AUTH_PASSWORD", "showmebc"
-    )
+    BASIC_AUTH_PASSWORD = env.get("BASIC_AUTH_PASSWORD", "showmebc")
 
     # This is the list of network IP addresses that are allowed in without
     # basic authentication check.

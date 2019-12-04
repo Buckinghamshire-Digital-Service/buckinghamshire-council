@@ -26,11 +26,7 @@ class PersonTypeModelAdmin(ModelAdmin):
 
 class TaxonomiesModelAdminGroup(ModelAdminGroup):
     menu_label = "Taxonomies"
-    items = (
-        NewsTypeModelAdmin,
-        EventTypeModelAdmin,
-        PersonTypeModelAdmin,
-    )
+    items = (NewsTypeModelAdmin, EventTypeModelAdmin, PersonTypeModelAdmin)
     menu_icon = "tag"
 
 

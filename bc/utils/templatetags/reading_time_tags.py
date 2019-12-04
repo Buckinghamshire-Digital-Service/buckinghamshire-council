@@ -26,7 +26,7 @@ def get_reading_time_minutes(context, page, streamfield_name):
     """
     total_seconds = 0
 
-    page._reading_time = getattr(page, '_reading_time', {})
+    page._reading_time = getattr(page, "_reading_time", {})
 
     reading_time = page._reading_time.get(streamfield_name)
     if not reading_time:
@@ -35,7 +35,7 @@ def get_reading_time_minutes(context, page, streamfield_name):
         html_content = content_stream_value.render_as_block(context=context.flatten())
 
         # Strip all the HTML tags
-        soup = BeautifulSoup(str(html_content), 'html5lib')
+        soup = BeautifulSoup(str(html_content), "html5lib")
         stripped_value = soup.text
 
         try:
