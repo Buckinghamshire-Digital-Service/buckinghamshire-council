@@ -3,9 +3,9 @@
         min-height: 100vh;
         display: grid;
         grid-template-areas:
-            "header"
-            "content"
-            "footer";
+            'header'
+            'content'
+            'footer';
         grid-template-rows: 70px auto 250px;
         grid-template-columns: auto;
     }
@@ -39,4 +39,3 @@
         }
     }
 }
-

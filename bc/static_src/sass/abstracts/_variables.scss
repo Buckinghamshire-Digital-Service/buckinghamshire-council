@@ -14,7 +14,6 @@ $color--grape: #3e2d73;
 $color--leaf: #80ad34;
 $color--charcoal: #212121;
 
-
 $color--earth: #d0cdc4;
 $color--earth-light: #f7f6f2;
 
@@ -63,14 +62,21 @@ $weight--light: 200;
 $base-font-size: 16px; // 12 in designs
 $base-line-height: 25px;
 $font-sizes: (
-    xxxl: 48px, // 36 in designs
-    xxl: 43px, // 32 in designs
-    xl: 28px, // 21 in designs // possibly not needed
-    l: 24px, // 18 in designs
-    m: 21px, // 15.5 in designs
-    s: 18px, // 13.5 in designs
-    xs: $base-font-size,
-    xxs: 14px, // 10.5 in designs
+    xxxl: 48px,
+    // 36 in designs
+        xxl: 43px,
+    // 32 in designs
+        xl: 28px,
+    // 21 in designs // possibly not needed
+        l: 24px,
+    // 18 in designs
+        m: 21px,
+    // 15.5 in designs
+        s: 18px,
+    // 13.5 in designs
+        xs: $base-font-size,
+    xxs: 14px,
+    // 10.5 in designs,
 );
 
 // --------------------------------- Breakpoints --------------------------------

@@ -4,8 +4,8 @@ The VM comes preinstalled with Fabric, Heroku CLI and AWS CLI.
 
 ## Deployed environments
 
-| Environment | Branch    | URL                                           | Heroku                        |
-| ----------- | --------- | --------------------------------------------- | ----------------------------- |
+| Environment | Branch    | URL                                  | Heroku               |
+| ----------- | --------- | ------------------------------------ | -------------------- |
 | Production  | `master`  | e.g. https://bc.org                  | e.g. `bc-production` |
 | Staging     | `staging` | e.g. https://bc.staging.torchbox.com | e.g. `bc-staging`    |
 
