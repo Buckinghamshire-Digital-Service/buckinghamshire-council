@@ -1,12 +1,10 @@
 {% extends "patterns/base_page.html" %}
 {% load wagtailcore_tags wagtailimages_tags static %}
 
-{% block content %}
-    <h1>{{ page.strapline }}</h1>
+{% block header %}
+    {{ block.super }}
 
-    {% if page.hero_image %}
-        {% image page.hero_image max-1200x190 %}
-    {% endif %}
+    {% include "patterns/molecules/hero/hero.html" %}
 
     {% include "patterns/molecules/cta/call_to_action.html" with call_to_action=page.call_to_action %}
 
