@@ -5,43 +5,7 @@ from bc.navigation.models import NavigationSettings
 register = template.Library()
 
 
-# Primary nav snippets
-@register.inclusion_tag(
-    "patterns/molecules/navigation/primarynav.html", takes_context=True
-)
-def primarynav(context):
-    request = context["request"]
-    return {
-        "primarynav": NavigationSettings.for_site(request.site).primary_navigation,
-        "request": request,
-    }
-
-
-# Secondary nav snippets
-@register.inclusion_tag(
-    "patterns/molecules/navigation/secondarynav.html", takes_context=True
-)
-def secondarynav(context):
-    request = context["request"]
-    return {
-        "secondarynav": NavigationSettings.for_site(request.site).secondary_navigation,
-        "request": request,
-    }
-
-
-# Footer nav snippets
-@register.inclusion_tag(
-    "patterns/molecules/navigation/footernav.html", takes_context=True
-)
-def footernav(context):
-    request = context["request"]
-    return {
-        "footernav": NavigationSettings.for_site(request.site).footer_navigation,
-        "request": request,
-    }
-
-
-# Footer nav snippets
+# Sidebar snippets
 @register.inclusion_tag(
     "patterns/molecules/navigation/sidebar.html", takes_context=True
 )
