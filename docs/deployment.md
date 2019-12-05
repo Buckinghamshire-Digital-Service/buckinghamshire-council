@@ -4,10 +4,10 @@ The VM comes preinstalled with Fabric, Heroku CLI and AWS CLI.
 
 ## Deployed environments
 
-| Environment | Branch    | URL                                  | Heroku          |
-| ----------- | --------- | ------------------------------------ | --------------- |
-| Production  | `master`  | e.g. https://buckinghamshire.org     | `bc-production` |
-| Staging     | `staging` | e.g. https://bc.staging.torchbox.com | `bc-staging`    |
+| Environment | Branch    | URL                                                  | Heroku                       |
+| ----------- | --------- | ---------------------------------------------------- | ---------------------------- |
+| Production  | `master`  | e.g. https://buckinghamshire.org                     | `buckinghamshire-production` |
+| Staging     | `staging` | https://buckinghamshire-staging.staging.torchbox.com | `buckinghamshire-staging`    |
 
 ## Log in to Heroku
 

@@ -2,8 +2,8 @@ from invoke import run as local
 from invoke.exceptions import Exit
 from invoke.tasks import task
 
-PRODUCTION_APP_INSTANCE = "bc-production"
-STAGING_APP_INSTANCE = "bc-staging"
+PRODUCTION_APP_INSTANCE = "buckinghamshire-production"
+STAGING_APP_INSTANCE = "buckinghamshire-staging"
 
 LOCAL_MEDIA_FOLDER = "/vagrant/media"
 LOCAL_IMAGES_FOLDER = "/vagrant/media/original_images"
@@ -259,7 +259,7 @@ def delete_local_renditions(local_database_name=LOCAL_DATABASE_NAME):
                 database_name=local_database_name
             )
         )
-    except:
+    except Exception:
         pass
 
     try:
@@ -268,7 +268,7 @@ def delete_local_renditions(local_database_name=LOCAL_DATABASE_NAME):
                 database_name=local_database_name
             )
         )
-    except:
+    except Exception:
         pass
 
 
