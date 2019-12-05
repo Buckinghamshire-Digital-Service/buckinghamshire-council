@@ -183,7 +183,7 @@ deploy_staging:
   variables:
     # Your app's name.
     #   $ heroku apps - t torchbox
-    HEROKU_APP: bc-staging
+    HEROKU_APP: buckinghamshire-staging
   only:
     - staging
   <<: *heroku_deploy_job_definition
@@ -197,7 +197,7 @@ deploy_production:
   variables:
     # Your app's name.
     #   $ heroku apps - t torchbox
-    HEROKU_APP: bc-production
+    HEROKU_APP: buckinghamshire-production
   only:
     - master
   when: manual
