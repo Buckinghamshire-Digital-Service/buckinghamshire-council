@@ -1,17 +1,33 @@
 .wrapper {
+    &--grid {
+        min-height: 100vh;
+        display: grid;
+        grid-template-areas:
+            'header'
+            'content'
+            'footer';
+        grid-template-rows: 70px auto 250px;
+        grid-template-columns: auto;
+    }
+
+    &--main {
+        grid-area: content;
+    }
+
     &--small {
         max-width: $wrapper--small;
         margin: 0 auto;
     }
 
     &--large {
+        width: 100%;
         max-width: $site-width;
         margin: 0 auto;
-    }
+        padding: 0 20px;
 
-    &--main {
-        padding: 20px;
-        background-color: $color--white;
+        @include media-query(tablet-portrait) {
+            padding: 0 50px;
+        }
     }
 
     &--flex {

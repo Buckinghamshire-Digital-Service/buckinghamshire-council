@@ -13,13 +13,11 @@
 html {
     font-family: $font--primary;
     text-size-adjust: 100%;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
     overflow-x: hidden;
-    background-color: $color--tertiary;
+    background-color: $color--white;
 
     &.no-scroll {
         overflow-y: hidden;
@@ -45,14 +43,33 @@ textarea {
     font-family: inherit;
 }
 
-a {
-    color: $color--primary;
-    text-decoration: none;
-    transition: color $transition;
+button {
+    background: transparent;
+    border: 0;
+    padding: 0;
+}
 
-    &:hover {
-        color: darken($color--primary, 20%);
-        cursor: pointer;
+a,
+.link {
+    color: $color--link;
+    transition: color $transition;
+    cursor: pointer;
+
+    #{$hover-states} {
+        color: $color--link-hover;
+        text-decoration: none;
+    }
+
+    &:active {
+        color: $color--link-active;
+    }
+
+    &--alt {
+        text-decoration: none;
+
+        #{$hover-states} {
+            text-decoration: underline;
+        }
     }
 }
 
