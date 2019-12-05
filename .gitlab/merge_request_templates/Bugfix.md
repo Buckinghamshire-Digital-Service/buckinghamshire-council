@@ -18,7 +18,9 @@ Ticket URL:
 Review and release process:
 
 - [ ] This MR is based on `master` and is a MR to `master`.
-- [ ] Code is reviewed.
+- Code is reviewed
+  - [ ] Front end code
+  - [ ] Back end code
 - [ ] Deployed to staging.
 - [ ] Tested on staging by developer.
 - [ ] QA on staging by client or DM, with a clone of production data if necessary.

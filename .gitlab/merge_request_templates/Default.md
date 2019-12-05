@@ -16,7 +16,9 @@ Ticket URL:
 
 Review and release process:
 
-- [ ] Code is reviewed
+- Code is reviewed
+  - [ ] Front end code
+  - [ ] Back end code
 - [ ] Deployed to staging
 - [ ] Tested on staging by developer
 - [ ] QA on staging by client or DM
