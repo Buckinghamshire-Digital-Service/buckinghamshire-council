@@ -6,8 +6,10 @@
     Font smoothing
 */
 @mixin font-smoothing {
+    // stylelint-disable
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    // stylelint-enable
 }
 
 /* ============================================
