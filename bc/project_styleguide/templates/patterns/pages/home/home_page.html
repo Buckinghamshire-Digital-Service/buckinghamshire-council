@@ -2,9 +2,11 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
+    <h1>{{ page.strapline }}</h1>
 
-    {{ page.strapline }}
+    {% if page.hero_image %}
+        {% image page.hero_image max-1200x190 %}
+    {% endif %}
 
     {% include "patterns/molecules/cta/call_to_action.html" with call_to_action=page.call_to_action %}
 
