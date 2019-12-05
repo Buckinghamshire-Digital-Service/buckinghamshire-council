@@ -47,6 +47,8 @@ button {
     background: transparent;
     border: 0;
     padding: 0;
+    box-shadow: none;
+    cursor: pointer;
 }
 
 a,
@@ -57,7 +59,6 @@ a,
 
     #{$hover-states} {
         color: $color--link-hover;
-        text-decoration: none;
     }
 
     &:active {
@@ -66,10 +67,6 @@ a,
 
     &--alt {
         text-decoration: none;
-
-        #{$hover-states} {
-            text-decoration: underline;
-        }
     }
 }
 
