@@ -115,14 +115,13 @@ class HomePageModelTests(TestCase):
         """
         Test that the queryset for IndexPage uses Wagtail explorer sort order
         """
+        section_page = self.index_pages[0]
         original_order = list(
             self.homepage.children_sections.values_list("title", flat=True)
         )
         # Move self.index_pages[0]'s sortoder to last
-        self.index_pages[0].path = IndexPage._get_children_path_interval(
-            self.homepage.path
-        )[1]
-        self.index_pages[0].save()
+        section_page.path = IndexPage._get_children_path_interval(self.homepage.path)[1]
+        section_page.save()
         self.assertNotEqual(
             original_order,
             list(self.homepage.children_sections.values_list("title", flat=True)),
@@ -156,12 +155,26 @@ class HomePageModelTests(TestCase):
     @skip
     def test_children_sections_returns_public_grandchildren(self):
         pass
-        # TODO: add test
+        # TODO: find out how to set a page as private programmatically and add test.
 
-    @skip
     def test_children_sections_grandchildren_sortorder(self):
         """
         Test that the queryset grandchildren uses Wagtail explorer sort order
         """
-        pass
-        # TODO: add test
+        section_page = self.index_pages[0]
+        child_page = section_page.featured_pages.first()
+
+        original_order = list(
+            section_page.featured_pages.values_list("title", flat=True)
+        )
+        # Move childpage's sortoder to last
+        child_page.path = InformationPage._get_children_path_interval(
+            section_page.path
+        )[1]
+        child_page.save()
+
+        self.assertNotEqual(
+            original_order,
+            list(section_page.featured_pages.values_list("title", flat=True)),
+            msg="IndexPage.featured_pages should sort by page path (Wagtail explorer custom sort).",
+        )

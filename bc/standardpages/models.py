@@ -45,7 +45,7 @@ class IndexPage(BasePage):
 
     @cached_property
     def featured_pages(self):
-        return self.get_children().live().public()[:3]
+        return self.get_children().live().public().order_by("path")[:3]
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
