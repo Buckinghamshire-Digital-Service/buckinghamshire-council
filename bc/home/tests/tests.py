@@ -1,5 +1,3 @@
-from unittest import skip
-
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
@@ -103,7 +101,7 @@ class HomePageModelTests(TestCase):
             msg="HomePage.children_sections should not include unpublished pages.",
         )
 
-    def test_children_sections_only_get_live_sections(self):
+    def test_children_sections_only_get_public_sections(self):
         self.index_pages[0].view_restrictions.create(password="test")
         self.assertEqual(
             len(self.homepage.children_sections),
@@ -141,21 +139,26 @@ class HomePageModelTests(TestCase):
             msg="IndexPage.featured_pages should be limited to max 3.",
         )
 
-    @skip
     def test_children_sections_returns_live_grandchildren(self):
         # Unpublish 2 of the 4 children
-        self.index_pages[0].get_children[0].unpublish()
-        self.index_pages[0].get_children[1].unpublish()
+        children = self.index_pages[0].featured_pages
+        children[0].unpublish()
+        children[1].unpublish()
         self.assertNotEqual(
             len(self.index_pages[0].featured_pages),
             len(self.index_pages[0].get_children().public()[:3]),
             msg="IndexPage.featured_pages should not include unpublished pages.",
         )
 
-    @skip
     def test_children_sections_returns_public_grandchildren(self):
-        pass
-        # TODO: find out how to set a page as private programmatically and add test.
+        section_page = self.index_pages[0]
+        section_page.get_children().first().delete()  # delete 1 so we only have 3 to start with
+        section_page.get_children().last().view_restrictions.create(password="test")
+        self.assertEqual(
+            len(section_page.featured_pages),
+            len(section_page.get_children().live()) - 1,
+            msg="IndexPage.featured_pages should not include private pages.",
+        )
 
     def test_children_sections_grandchildren_sortorder(self):
         """
