@@ -91,6 +91,11 @@ small {
 
     &--first {
         @include font-size(xxl);
+        margin: $grid 0;
+
+        @include media-query(tablet-portrait) {
+            margin: $grid--large 0;
+        }
     }
 
     &--second {

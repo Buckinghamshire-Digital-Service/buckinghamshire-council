@@ -1,53 +1,30 @@
 .grid {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    margin: $grid 0 $grid--large;
+    grid-gap: $grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 
     > * {
-        flex-basis: calc(100% - 20px);
-        margin: 10px;
-
-        @media all and (min-width: 480px) {
-            flex-basis: calc(50% - 20px);
-        }
-
-        @media all and (min-width: 1024px) {
-            flex-basis: calc(30% - 20px);
-        }
-    }
-
-    &--narrow {
-        text-align: center;
-
-        @include media-query(tablet-portrait) {
-            text-align: left;
-        }
+        flex-basis: initial;
+        margin: 0;
     }
 }
 
-@supports (display: grid) {
+@supports not (display: grid) {
     .grid {
-        display: grid;
-        margin: 30px 0;
-        grid-gap: 10px;
-        grid-template-columns: repeat(auto-fit, minmax(calc(50% - 20px), 1fr));
-
-        @include media-query(tablet-portrait) {
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        }
+        display: flex;
+        flex-wrap: wrap;
 
         > * {
-            flex-basis: initial;
-            margin: 0;
-        }
+            flex-basis: calc(100% - 20px);
+            margin: 10px;
 
-        &--narrow {
-            justify-content: center;
-            text-align: center;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 200px));
+            @media all and (min-width: 480px) {
+                flex-basis: calc(50% - 20px);
+            }
 
-            @include media-query(tablet-portrait) {
-                justify-content: flex-start;
-                text-align: left;
+            @media all and (min-width: 1024px) {
+                flex-basis: calc(33% - 20px);
             }
         }
     }

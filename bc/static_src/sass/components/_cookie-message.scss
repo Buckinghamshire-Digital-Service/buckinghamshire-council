@@ -1,6 +1,6 @@
 .cookie {
     $root: &;
-    @include gutter(0, 0.5, 0.5, 0.5);
+    // @include gutter(0, 0.5, 0.5, 0.5);
     position: fixed;
     right: auto;
     bottom: 0;
@@ -24,7 +24,7 @@
 
     &__container {
         @include font-size(xs);
-        @include gutter(0.25, 0.5, 0.25, 0.5);
+        // @include gutter(0.25, 0.5, 0.25, 0.5);
         display: flex;
         align-items: center;
         justify-content: space-between;
