@@ -1,9 +1,10 @@
 .link-block {
+    line-height: 1.3;
+
     &__list-item {
         padding-left: 25px;
         margin-bottom: 5px;
         position: relative;
-        line-height: 1.3;
 
         &::before {
             content: '';
