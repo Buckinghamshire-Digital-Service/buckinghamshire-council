@@ -1,9 +1,11 @@
 .section {
     &--main {
         max-width: $wrapper--small;
+        width: 100%;
 
         &:only-child {
             margin: 0 auto;
+            max-width: none;
         }
     }
 }

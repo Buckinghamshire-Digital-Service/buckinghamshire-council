@@ -19,6 +19,7 @@ $color--earth-light: #f7f6f2;
 
 $color--grey-light: #e5e3de;
 $color--grey-medium: #999;
+$color--grey-dark: #858585;
 
 $color--default: $color--charcoal;
 
@@ -86,6 +87,7 @@ $font-sizes: (
 $breakpoints: (
     'mob-portrait' '(min-width: 320px)',
     'mob-landscape' '(min-width: 480px)',
+    'px550' '(min-width: 550px)',
     'tablet-portrait' '(min-width: 768px)',
     'tablet-landscape' '(min-width: 1024px)',
     'desktop' '(min-width: 1280px)',
@@ -96,21 +98,13 @@ $breakpoints: (
 
 // Wrappers
 $site-width: 1024px;
-$wrapper--small: 790px;
+$wrapper--small: 610px;
 
 // Grid setup
 $grid: 30px;
-
-// These should match the breakpoints array
-$gutters: (
-    'default': $grid,
-    'mob-portrait': $grid,
-    'mob-landscape': $grid,
-    'tablet-portrait': $grid,
-    'tablet-landscape': $grid * 1.25,
-    'desktop': $grid * 1.25,
-    'desktop-wide': $grid * 1.5,
-) !default;
+$grid--min: 10px;
+$grid--small: 20px;
+$grid--large: 50px;
 
 // --------------------------------- Transitions --------------------------------
 
@@ -119,3 +113,7 @@ $transition: 0.25s ease-out;
 // --------------------------------- Hover --------------------------------------
 
 $hover-states: '&:hover, &:active, &:focus';
+
+// --------------------------------- Borders ------------------------------------
+
+$border--accent: 5px solid;

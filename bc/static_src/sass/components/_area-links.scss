@@ -1,0 +1,27 @@
+.area-links {
+    padding: $grid--small;
+    background: $color--earth-light;
+    border-left: $border--accent $color--leaf;
+
+    &__list {
+        margin: $grid--small 0;
+    }
+
+    &__item {
+        padding-left: 40px;
+        position: relative;
+    }
+
+    &__arrow {
+        width: 15px;
+        height: 15px;
+        fill: $color--grey-dark;
+        position: absolute;
+        left: 10px;
+        top: 8px;
+    }
+
+    &__heading {
+        margin-bottom: 5px;
+    }
+}
