@@ -1,0 +1,11 @@
+context:
+  value:
+    title: Planning and building control
+    url: '#'
+  links:
+    - url: '#'
+      title: Planning applications
+    - url: '#'
+      title: Local development plans that are a bit longer
+    - url: '#'
+      title: Planning enforcement

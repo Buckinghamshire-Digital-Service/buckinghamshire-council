@@ -57,7 +57,6 @@ a,
 
     #{$hover-states} {
         color: $color--link-hover;
-        text-decoration: none;
     }
 
     &:active {
@@ -66,10 +65,6 @@ a,
 
     &--alt {
         text-decoration: none;
-
-        #{$hover-states} {
-            text-decoration: underline;
-        }
     }
 }
 
