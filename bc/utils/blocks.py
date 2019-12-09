@@ -2,6 +2,8 @@ from wagtail.core import blocks
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.images.blocks import ImageChooserBlock
 
+from .constants import RICH_TEXT_FEATURES
+
 
 class ImageBlock(blocks.StructBlock):
     image = ImageChooserBlock()
@@ -37,7 +39,7 @@ class StoryBlock(blocks.StreamBlock):
         icon="title",
         template="patterns/molecules/streamfield/blocks/heading_block.html",
     )
-    paragraph = blocks.RichTextBlock()
+    paragraph = blocks.RichTextBlock(features=RICH_TEXT_FEATURES,)
 
     class Meta:
         template = "patterns/molecules/streamfield/stream_block.html"
