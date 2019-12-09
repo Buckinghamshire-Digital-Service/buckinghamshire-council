@@ -33,12 +33,20 @@ class QuoteBlock(blocks.StructBlock):
 
 
 class LocalAreaLinksBlock(blocks.StructBlock):
-    introduction = blocks.RichTextBlock(features=RICH_TEXT_FEATURES)
+    introduction = blocks.RichTextBlock(
+        features=RICH_TEXT_FEATURES,
+        default="<p>Select your local area for information:</p>",
+    )
     aylesbury_vale_url = blocks.URLBlock(required=False, label="Aylesbury Vale URL")
     chiltern_url = blocks.URLBlock(required=False, label="Chiltern URL")
     south_bucks_url = blocks.URLBlock(required=False, label="South Bucks URL")
     wycombe_url = blocks.URLBlock(required=False, label="Wycombe URL")
-    postscript = blocks.RichTextBlock(required=False, features=RICH_TEXT_FEATURES)
+    postscript = blocks.RichTextBlock(
+        required=False,
+        features=RICH_TEXT_FEATURES,
+        default='<p>Or <a href="https://www.gov.uk/find-local-council">click here</a> '
+        "to find your area based on your postcode.</p>",
+    )
 
     class Meta:
         icon = ""
@@ -52,7 +60,7 @@ class StoryBlock(blocks.StreamBlock):
         icon="title",
         template="patterns/molecules/streamfield/blocks/heading_block.html",
     )
-    paragraph = blocks.RichTextBlock(features=RICH_TEXT_FEATURES,)
+    paragraph = blocks.RichTextBlock(features=RICH_TEXT_FEATURES)
     local_area_links = LocalAreaLinksBlock()
 
     class Meta:
