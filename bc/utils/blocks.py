@@ -32,6 +32,19 @@ class QuoteBlock(blocks.StructBlock):
         template = "patterns/molecules/streamfield/blocks/quote_block.html"
 
 
+class LocalAreaLinksBlock(blocks.StructBlock):
+    introduction = blocks.RichTextBlock(features=RICH_TEXT_FEATURES)
+    aylesbury_vale_url = blocks.URLBlock(required=False, label="Aylesbury Vale URL")
+    chiltern_url = blocks.URLBlock(required=False, label="Chiltern URL")
+    south_bucks_url = blocks.URLBlock(required=False, label="South Bucks URL")
+    wycombe_url = blocks.URLBlock(required=False, label="Wycombe URL")
+    postscript = blocks.RichTextBlock(required=False, features=RICH_TEXT_FEATURES)
+
+    class Meta:
+        icon = ""
+        template = "patterns/molecules/local_area_links.html"
+
+
 # Main streamfield block to be inherited by Pages
 class StoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(
@@ -40,6 +53,7 @@ class StoryBlock(blocks.StreamBlock):
         template="patterns/molecules/streamfield/blocks/heading_block.html",
     )
     paragraph = blocks.RichTextBlock(features=RICH_TEXT_FEATURES,)
+    local_area_links = LocalAreaLinksBlock()
 
     class Meta:
         template = "patterns/molecules/streamfield/stream_block.html"
