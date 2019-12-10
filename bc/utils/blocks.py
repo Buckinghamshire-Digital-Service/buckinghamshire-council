@@ -52,6 +52,19 @@ class LocalAreaLinksBlock(blocks.StructBlock):
         icon = ""
         template = "patterns/molecules/local_area_links.html"
 
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context=parent_context)
+        context["has_area_links"] = any(
+            [
+                value["aylesbury_vale_url"],
+                value["chiltern_url"],
+                value["south_bucks_url"],
+                value["wycombe_url"],
+            ]
+        )
+        context["wu"] = value["wycombe_url"]
+        return context
+
 
 # Main streamfield block to be inherited by Pages
 class StoryBlock(blocks.StreamBlock):

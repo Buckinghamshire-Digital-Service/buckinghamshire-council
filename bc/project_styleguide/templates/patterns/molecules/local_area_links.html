@@ -4,6 +4,7 @@
 
     <div>{{ value.introduction|richtext }}</div>
 
+    {% if has_area_links %}
     <ul>
         {% if value.aylesbury_vale_url %}
         <li>
@@ -26,6 +27,9 @@
         </li>
         {% endif %}
     </ul>
+    {% endif %}
 
+    {% if value.postscript %}
     <div>{{ value.postscript|richtext }}</div>
+    {% endif %}
 </div>
