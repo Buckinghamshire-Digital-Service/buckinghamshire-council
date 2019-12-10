@@ -6,7 +6,7 @@
             'header'
             'content'
             'footer';
-        grid-template-rows: 70px auto 250px;
+        grid-template-rows: minmax(70px, max-content) auto 250px;
         grid-template-columns: auto;
     }
 
