@@ -19,10 +19,11 @@
                             <svg class="icon icon--footer-social"><use xlink:href="#twitter"></use></svg>
                         </a>
                     {% endif %}
-                    <!-- TODO: add social media field for youtube -->
-                        <a href="https://twitter.com/">
+                    {% if settings.utils.SocialMediaSettings.youtube_channel_url %}
+                        <a href="{{ settings.utils.SocialMediaSettings.youtube_channel_url }}">
                             <svg class="icon icon--footer-social"><use xlink:href="#youtube"></use></svg>
                         </a>
+                    {% endif %}
                 </section>
             {% endif %}
         </div>
