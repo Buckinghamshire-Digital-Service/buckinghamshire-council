@@ -4,6 +4,7 @@
     flex-direction: row;
     width: 100%;
     margin: $grid 0;
+    grid-area: breadcrumbs;
 
     @include media-query(tablet-portrait) {
         margin: $grid 0 $grid--large;
