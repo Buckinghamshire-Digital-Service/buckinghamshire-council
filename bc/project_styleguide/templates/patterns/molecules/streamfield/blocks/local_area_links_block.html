@@ -2,8 +2,9 @@
 <div class="area-links">
     <h2 class="u-sr-only">Local Area Links</h2>
 
-    <div class="area-links__intro">{{ value.intro|richtext }}</div>
+    <div class="area-links__intro">{{ value.introduction|richtext }}</div>
 
+    {% if has_area_links %}
     <ul class="area-links__list">
         {% if value.aylesbury_vale_url %}
             <li class="area-links__item">
@@ -38,6 +39,9 @@
             </li>
         {% endif %}
     </ul>
+    {% endif %}
 
-    <div class="area-links__outro">{{ value.outro|richtext }}</div>
+    {% if value.postscript %}
+        <div class="area-links__outro">{{ value.postscript|richtext }}</div>
+    {% endif %}
 </div>
