@@ -109,12 +109,4 @@ small {
     &--fourth {
         @include font-size(s);
     }
-
-    &--large-margin {
-        margin: $grid 0;
-
-        @include media-query(tablet-portrait) {
-            margin: $grid--large 0;
-        }
-    }
 }
