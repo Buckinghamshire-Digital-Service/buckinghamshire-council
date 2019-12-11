@@ -1,7 +1,6 @@
 context:
   page:
     title: Test info page
-    introduction: Some intro text
 
 tags:
   include_block:
