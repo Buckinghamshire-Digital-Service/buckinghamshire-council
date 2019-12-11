@@ -18,6 +18,8 @@ from wagtail.snippets.models import register_snippet
 from bc.utils.cache import get_default_cache_control_decorator
 from bc.utils.constants import RICH_TEXT_FEATURES
 
+from .validators import validate_youtube_domain
+
 
 class LinkFields(models.Model):
     """
@@ -250,6 +252,11 @@ class SocialMediaSettings(BaseSetting):
     )
     facebook_app_id = models.CharField(
         max_length=255, blank=True, help_text="Your Facebook app ID."
+    )
+    youtube_channel_url = models.URLField(
+        blank=True,
+        help_text="Your YouTube channel URL.",
+        validators=[validate_youtube_domain],
     )
     default_sharing_text = models.CharField(
         max_length=255,

@@ -1,0 +1,27 @@
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+
+    @include media-query(tablet-portrait) {
+        flex-direction: row;
+    }
+
+    &__item {
+        margin-bottom: $grid--small;
+        margin-right: $grid--small;
+
+        @include media-query(tablet-portrait) {
+            margin-right: $grid;
+            margin-bottom: 0;
+        }
+    }
+
+    &__link {
+        color: $color--white;
+
+        #{$hover-states} {
+            color: $color--grey-medium;
+        }
+    }
+}

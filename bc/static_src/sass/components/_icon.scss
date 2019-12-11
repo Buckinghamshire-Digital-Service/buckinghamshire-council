@@ -16,8 +16,10 @@
     }
 
     &--footer-social {
-        @include media-query(tablet-portrait) {
-            margin-right: 10px;
+        margin-right: $grid;
+
+        #{$hover-states} {
+            fill: $color--grey-medium;
         }
     }
 }
