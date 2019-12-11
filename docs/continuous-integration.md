@@ -15,3 +15,9 @@ To use when making commits on your host machine you must install pre-commit, eit
 Pre-commit will not run by default. To set it up, run `pre-commit install` inside the Vagrant box, or on the host if you have installed pre-commit there.
 
 If you are using pre-commit locally (outside of vagrant) you will need to install seed-isort-config with `pip install seed-isort-config`.
+
+    The `detect-secrets` hook requires a baseline secrets file to be included. If you need to, you can update this file, e.g. when adding dummy secrets for unit tests:
+
+    ```bash
+    $ detect-secrets scan > .secrets.baseline
+    ```

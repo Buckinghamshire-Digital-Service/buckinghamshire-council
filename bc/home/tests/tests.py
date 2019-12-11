@@ -32,7 +32,7 @@ class HomePageModelTests(TestCase):
 
         """
         Create a homepage which satisfies all required fields for positive test.
-        Please update this when adding new require fields to the model.
+        Please update this when adding new required fields to the model.
         """
         self.hero_image = CustomImage.objects.create(
             title="Test image", file=get_test_image_file(),
