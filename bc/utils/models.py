@@ -16,6 +16,7 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.models import register_snippet
 
 from bc.utils.cache import get_default_cache_control_decorator
+from bc.utils.constants import RICH_TEXT_FEATURES
 
 from .validators import validate_youtube_domain
 
@@ -172,7 +173,7 @@ class ListingFields(models.Model):
 @register_snippet
 class CallToActionSnippet(models.Model):
     title = models.CharField(max_length=255)
-    summary = RichTextField(blank=True, max_length=255)
+    summary = RichTextField(blank=True, max_length=255, features=RICH_TEXT_FEATURES)
     image = models.ForeignKey(
         "images.CustomImage",
         null=True,
@@ -279,6 +280,7 @@ class SystemMessagesSettings(BaseSetting):
     body_404 = RichTextField(
         "Text",
         default="<p>You may be trying to find a page that doesn&rsquo;t exist or has been moved.</p>",
+        features=RICH_TEXT_FEATURES,
     )
 
     panels = [
