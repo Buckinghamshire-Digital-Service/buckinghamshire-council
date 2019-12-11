@@ -12,7 +12,6 @@
             <h1>{{ page.title }}</h1>
             {% get_reading_time_minutes page 'body' as reading_time_minutes %}
             {{ reading_time_minutes }} minute read
-            <h5>{{ page.introduction }}</h5>
 
             {% include_block page.body %}
             {% include "patterns/molecules/share/share.html" %}

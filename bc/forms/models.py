@@ -15,6 +15,7 @@ from wagtail.search import index
 
 from wagtailcaptcha.models import WagtailCaptchaEmailForm
 
+from bc.utils.constants import RICH_TEXT_FEATURES
 from bc.utils.models import BasePage
 
 
@@ -34,6 +35,7 @@ class FormPage(WagtailCaptchaEmailForm, BasePage):
     thank_you_text = RichTextField(
         blank=True,
         help_text="Text displayed to the user on successful submission of the form",
+        features=RICH_TEXT_FEATURES,
     )
     action_text = models.CharField(
         max_length=32, blank=True, help_text='Form action text. Defaults to "Submit"'

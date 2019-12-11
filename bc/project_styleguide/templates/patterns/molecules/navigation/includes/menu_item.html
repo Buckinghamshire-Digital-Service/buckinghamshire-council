@@ -1,5 +1,5 @@
 {% load wagtailcore_tags %}{% pageurl page as item_url %}
-<a class="nav__link"{% if has_children %} data-open-subnav{% endif %} href="{{ item_url }}"
+<a class="nav__link {{ classes }}"{% if has_children %} data-open-subnav{% endif %} href="{{ item_url }}"
     role="menuitem"
     {% if has_children %} aria-haspopup="true" {% endif %}
     >
