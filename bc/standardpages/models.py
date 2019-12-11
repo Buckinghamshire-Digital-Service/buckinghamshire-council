@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
+from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
 from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
@@ -41,6 +42,10 @@ class IndexPage(BasePage):
     content_panels = BasePage.content_panels + [FieldPanel("introduction")]
 
     search_fields = BasePage.search_fields + [index.SearchField("introduction")]
+
+    @cached_property
+    def featured_pages(self):
+        return self.get_children().live().public().order_by("path")[:3]
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
