@@ -90,11 +90,11 @@ small {
     }
 
     &--first {
-        @include font-size(xxl);
-        margin: $grid 0;
+        @include font-size(xl);
+        margin-bottom: $grid;
 
-        @include media-query(tablet-portrait) {
-            margin: $grid--large 0;
+        @include media-query(mob-landscape) {
+            @include font-size(xxl);
         }
     }
 
@@ -108,5 +108,13 @@ small {
 
     &--fourth {
         @include font-size(s);
+    }
+
+    &--large-margin {
+        margin: $grid 0;
+
+        @include media-query(tablet-portrait) {
+            margin: $grid--large 0;
+        }
     }
 }

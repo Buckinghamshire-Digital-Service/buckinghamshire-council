@@ -19,6 +19,7 @@ $color--earth-light: #f7f6f2;
 
 $color--grey-light: #e5e3de;
 $color--grey-medium: #999;
+$color--grey-dark: #858585;
 
 $color--default: $color--charcoal;
 
@@ -113,3 +114,7 @@ $transition: 0.25s ease-out;
 // --------------------------------- Hover --------------------------------------
 
 $hover-states: '&:hover, &:focus';
+
+// --------------------------------- Borders ------------------------------------
+
+$border--accent: 5px solid;

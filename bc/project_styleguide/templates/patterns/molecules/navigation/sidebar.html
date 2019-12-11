@@ -1,14 +1,13 @@
 {% load wagtailcore_tags %}
-{% if children %}
-    <aside class="sidebar">
-        <div class="sidebar__inner">
-            <h5>In this section</h5>
-            <ul>
-                {% for child in children %}
-                <li><a href="{% pageurl child %}">{{ child.title }}</a></li>
-                {% endfor %}
-            </ul>
-        </div>
-    </aside>
-{% endif %}
+
+<aside class="sidebar">
+    <div class="sidebar__inner">
+        <ul>
+            {% for child in children %}
+            <li><a href="{% pageurl child %}">{{ child.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</aside>
+
 

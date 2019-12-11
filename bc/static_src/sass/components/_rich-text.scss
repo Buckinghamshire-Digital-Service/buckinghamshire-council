@@ -1,9 +1,34 @@
 .rich-text {
     ul {
-        list-style: inside disc;
+        margin-left: $grid--small;
+
+        li {
+            padding-left: 25px;
+            position: relative;
+
+            &::before {
+                content: '';
+                width: 7px;
+                height: 7px;
+                background: $color--grey-dark;
+                border-radius: 100%;
+                position: absolute;
+                left: 0;
+                top: 8px;
+            }
+        }
     }
 
     ol {
-        list-style: inside decimal;
+        list-style: decimal;
+        margin-left: 35px;
+
+        li {
+            padding-left: 10px;
+        }
+    }
+
+    li {
+        margin-bottom: 5px;
     }
 }
