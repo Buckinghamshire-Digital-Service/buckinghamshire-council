@@ -5,6 +5,9 @@
     {{ block.super }}
 
     {% include "patterns/molecules/hero/hero.html" %}
+{% endblock %}
+
+{% block content %}
 
     {% include "patterns/molecules/cta/call_to_action.html" with call_to_action=page.call_to_action %}
 
