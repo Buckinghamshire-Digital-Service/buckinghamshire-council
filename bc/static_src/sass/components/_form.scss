@@ -12,4 +12,19 @@
         color: $color--white;
         background-color: $color--tertiary;
     }
+
+    input {
+        height: 40px;
+        padding: $grid--min;
+        width: 100%;
+
+        @include media-query(tablet-portrait) {
+            width: 390px;
+        }
+    }
+
+    &--header-search {
+        display: flex;
+        justify-content: flex-end;
+    }
 }
