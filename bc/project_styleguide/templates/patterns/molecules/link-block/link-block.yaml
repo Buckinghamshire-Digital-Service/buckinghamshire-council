@@ -1,11 +1,18 @@
 context:
-  value:
+  section:
     title: Planning and building control
-    url: '#'
-  links:
-    - url: '#'
-      title: Planning applications
-    - url: '#'
-      title: Local development plans
-    - url: '#'
-      title: Planning enforcement
+    specific:
+      featured_pages:
+        - page:
+            title: Planning applications
+        - page:
+            title: Local development plans
+        - page:
+            title: Planning enforcement
+
+tags:
+  pageurl:
+    page:
+      raw: '#'
+    section:
+      raw: '#'
