@@ -3,32 +3,33 @@
 <footer class="footer">
     <div class="footer__inner wrapper wrapper--large">
         <div class="footer__nav-container">
+            <section>
+                {% footerlinks %}
+            </section>
+
             {% if settings.utils.SocialMediaSettings.twitter_handle or settings.utils.SocialMediaSettings.facebook_app_id %}
                 <section class="footer__social-links">
-                    <h5 class="footer__heading">Follow us:</h5>
-                    {% if settings.utils.SocialMediaSettings.twitter_handle %}
-                        <a href="https://twitter.com/{{ settings.utils.SocialMediaSettings.twitter_handle }}">
-                            <svg class="icon icon--footer-social"><use xlink:href="#twitter"></use></svg>
-                        </a>
-                    {% endif %}
                     {% if settings.utils.SocialMediaSettings.facebook_app_id %}
                         <a href="https://www.facebook.com/{{ settings.utils.SocialMediaSettings.facebook_app_id }}">
                             <svg class="icon icon--footer-social"><use xlink:href="#facebook"></use></svg>
                         </a>
                     {% endif %}
+                    {% if settings.utils.SocialMediaSettings.twitter_handle %}
+                        <a href="https://twitter.com/{{ settings.utils.SocialMediaSettings.twitter_handle }}">
+                            <svg class="icon icon--footer-social"><use xlink:href="#twitter"></use></svg>
+                        </a>
+                    {% endif %}
+                    {% if settings.utils.SocialMediaSettings.youtube_channel_url %}
+                        <a href="{{ settings.utils.SocialMediaSettings.youtube_channel_url }}">
+                            <svg class="icon icon--footer-social"><use xlink:href="#youtube"></use></svg>
+                        </a>
+                    {% endif %}
                 </section>
             {% endif %}
-
-            <section>
-                {% footerlinks %}
-            </section>
         </div>
 
         <div class="footer__credit">
-            {% if COPYRIGHT %}
-                <p>© {% now "Y" %} {{ COPYRIGHT }}</p>
-            {% endif %}
-            <div>Site by <a href="https://torchbox.com/">Torchbox</a></div>
+            <p>© {% now "Y" %} {{ settings.utils.SocialMediaSettings.site_name }}</p>
         </div>
     </div>
 </footer>
