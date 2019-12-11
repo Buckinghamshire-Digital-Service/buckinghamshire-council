@@ -8,10 +8,8 @@
         flex-basis: initial;
         margin: 0;
     }
-}
 
-@supports not (display: grid) {
-    .grid {
+    @include target-ie11() {
         display: flex;
         flex-wrap: wrap;
 
