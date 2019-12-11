@@ -89,6 +89,7 @@ $breakpoints: (
     'mob-landscape' '(min-width: 480px)',
     'px550' '(min-width: 550px)',
     'tablet-portrait' '(min-width: 768px)',
+    'px900' '(min-width: 900px)',
     'tablet-landscape' '(min-width: 1024px)',
     'desktop' '(min-width: 1280px)',
     'desktop-wide' '(min-width: 2556px)'
@@ -112,7 +113,7 @@ $transition: 0.25s ease-out;
 
 // --------------------------------- Hover --------------------------------------
 
-$hover-states: '&:hover, &:active, &:focus';
+$hover-states: '&:hover, &:focus';
 
 // --------------------------------- Borders ------------------------------------
 
