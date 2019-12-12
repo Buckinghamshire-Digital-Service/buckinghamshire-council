@@ -11,6 +11,15 @@
 }
 
 /* ============================================
+    IE11 specific styles
+*/
+@mixin target-ie11() {
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        @content;
+    }
+}
+
+/* ============================================
     Media queries
 */
 @mixin media-query($queries...) {
