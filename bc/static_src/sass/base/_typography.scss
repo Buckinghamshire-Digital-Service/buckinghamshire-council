@@ -86,7 +86,15 @@ small {
 
 .heading {
     &--hero {
-        @include font-size(xxxl);
+        @include font-size(xl);
+
+        @include media-query(mob-landscape) {
+            @include font-size(xxl);
+        }
+
+        @include media-query(tablet-portrait) {
+            @include font-size(xxxl);
+        }
     }
 
     &--first {

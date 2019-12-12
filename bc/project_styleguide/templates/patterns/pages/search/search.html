@@ -5,13 +5,33 @@
 
 {% block title %}{% if search_query %}Search results for &ldquo;{{ search_query }}&rdquo;{% else %}Search{% endif %}{% endblock %}
 
+{% block breadcrumbs %}
+    <div class="wrapper wrapper--large">
+        <nav role="navigation" aria-label="breadcrumb">
+            <ul class="breadcrumb">
+                <li class="breadcrumb__item">
+                    <a class="breadcrumb__link" href="{% slugurl 'home' %}" title="Home">
+                        Home
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+{% endblock %}
+
 {% block content %}
 
-    <h1>{% if search_query %}Search results for &ldquo;{{ search_query }}&rdquo;{% else %}Search{% endif %}</h1>
+    <h1 class="heading heading--first">{% if search_query %}Search results for &ldquo;{{ search_query }}&rdquo;{% else %}Search{% endif %}</h1>
 
-    <form action="{% url 'search' %}" method="get" role="search">
-        <input type="text" placeholder="Search…" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-        <input type="submit" value="Search">
+    <form action="{% url 'search' %}" method="get" role="search" class="form form--search form--search-page">
+        <label class="u-sr-only" for="search">Search this website</label>
+        <input class="input" id="search" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
+        <button class="button button--search button--header" type="submit" aria-label="Search">
+            <svg class="button__icon" aria-hidden="true">
+                <use xlink:href="#magnifying-glass"></use>
+            </svg>
+            <span class="u-sr-only">Search</span>
+        </button>
     </form>
 
     {% get_search_promotions search_query as search_picks %}

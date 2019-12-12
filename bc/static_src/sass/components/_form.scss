@@ -27,4 +27,18 @@
         display: flex;
         justify-content: flex-end;
     }
+
+    &--hero-search {
+        display: flex;
+        margin-bottom: $grid;
+
+        input {
+            height: 50px;
+            max-width: 540px;
+
+            @include media-query(tablet-portrait) {
+                width: 100%;
+            }
+        }
+    }
 }
