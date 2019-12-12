@@ -50,7 +50,7 @@ class LocalAreaLinksBlock(blocks.StructBlock):
 
     class Meta:
         icon = ""
-        template = "patterns/molecules/local_area_links.html"
+        template = "patterns/molecules/streamfield/blocks/local_area_links_block.html"
 
     def get_context(self, value, parent_context=None):
         context = super().get_context(value, parent_context=parent_context)
