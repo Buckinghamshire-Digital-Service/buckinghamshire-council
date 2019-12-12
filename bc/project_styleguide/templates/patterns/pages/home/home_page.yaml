@@ -7,9 +7,3 @@ context:
       summary: Check out our awesome stub content
       get_link_text: Click here
       get_link_url: '#'
-
-tags:
-  image:
-    page.hero_image max-1200x190:
-      raw: |
-        <img src="http://via.placeholder.com/1200x190" width="1200" height="190" alt="Some alt">
