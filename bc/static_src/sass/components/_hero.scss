@@ -3,7 +3,6 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    // min-height: 325px;
     padding: $grid 0;
 
     @include media-query(tablet-portrait) {
