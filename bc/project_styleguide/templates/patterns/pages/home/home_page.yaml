@@ -1,7 +1,7 @@
 context:
   page:
     title: Homepage
-    strapline: This is a home page
+    strapline: Welcome to Buckinghamshire
     call_to_action:
       title: Stub content
       summary: Check out our awesome stub content

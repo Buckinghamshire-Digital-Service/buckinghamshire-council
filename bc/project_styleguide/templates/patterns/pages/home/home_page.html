@@ -2,9 +2,9 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block header %}
-    <h1>{{ page.title }}</h1>
+    {{ block.super }}
 
-    {{ page.strapline }}
+    {% include "patterns/molecules/hero/hero.html" %}
 {% endblock %}
 
 {% block content %}
