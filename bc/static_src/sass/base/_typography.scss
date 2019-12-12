@@ -112,6 +112,7 @@ small {
 
     &--third {
         @include font-size(m);
+        margin-bottom: 5px;
     }
 
     &--fourth {

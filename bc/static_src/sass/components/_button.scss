@@ -23,6 +23,11 @@
         &:active {
             background: $color--link-active;
         }
+
+        #{$root}__icon {
+            width: 30px;
+            height: 30px;
+        }
     }
 
     &--header {
