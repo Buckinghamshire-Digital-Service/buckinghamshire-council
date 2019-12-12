@@ -4,10 +4,12 @@
         display: grid;
         grid-template-areas:
             'header'
+            'hero'
             'breadcrumbs'
             'content'
             'footer';
         grid-template-rows:
+            minmax(min-content, max-content)
             minmax(min-content, max-content)
             minmax(min-content, max-content)
             auto
