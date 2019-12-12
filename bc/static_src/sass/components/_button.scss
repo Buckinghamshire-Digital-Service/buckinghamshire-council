@@ -6,13 +6,13 @@
 
     &__icon {
         fill: $color--white;
-        width: 24px;
-        height: 24px;
+        width: 22px;
+        height: 22px;
         transition: fill $transition;
     }
 
     &--search {
-        padding: ($grid--small / 2) $grid--small;
+        padding: $grid--min 25px;
         background: $color--link;
         transition: background $transition;
 
@@ -27,6 +27,7 @@
 
     &--header {
         background: $color--charcoal;
+        padding: $grid--min $grid--small;
 
         #{$hover-states} {
             background: lighten($color--charcoal, 25%);
