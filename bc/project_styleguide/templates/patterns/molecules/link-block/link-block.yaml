@@ -3,12 +3,9 @@ context:
     title: Planning and building control
     specific:
       featured_pages:
-        - page:
-            title: Planning applications
-        - page:
-            title: Local development plans
-        - page:
-            title: Planning enforcement
+        - title: Planning applications
+        - title: Local development plans
+        - title: Planning enforcement
 
 tags:
   pageurl:
