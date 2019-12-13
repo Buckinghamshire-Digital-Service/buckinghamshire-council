@@ -1,0 +1,19 @@
+.alert-message {
+    background: $color--primary;
+    color: $color--white;
+    padding: $grid $grid--small;
+    margin: 0 (-$grid--small);
+
+    @include media-query(tablet-portrait) {
+        margin: 0;
+        margin-top: -45px;
+    }
+
+    a {
+        color: $color--white;
+    }
+
+    &__content {
+        margin-bottom: $grid--min;
+    }
+}
