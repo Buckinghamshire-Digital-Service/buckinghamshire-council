@@ -9,6 +9,18 @@
 
 {% block content %}
 
+    <h2>Pages</h2>
+    <ul>
+    {% for section in sections %}
+        <li>
+            <a href="{% pageurl section %}"><h3>{{section.title}}</h3></a>
+            {% for page in section.featured_pages %}
+                <a href="{% pageurl page %}">{{page.title}}</a>
+            {% endfor %}
+        </li>
+    {% endfor %}
+    </ul>
+
     {% include "patterns/molecules/cta/call_to_action.html" with call_to_action=page.call_to_action %}
 
 {% endblock %}
