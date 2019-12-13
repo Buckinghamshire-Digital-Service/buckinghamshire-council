@@ -9,41 +9,36 @@
             <p>{{ page.introduction }}</p>
         {% endif %}
 
-        {% if subpages %}
-            {% if subpages.object_list.exists %}
-                <div class="grid grid--index">
-                    {% for subpage in subpages.object_list.specific|slice:":3" %}
-                        <a class="card" href="{% pageurl subpage %}">
-                            <h2 class="card__title heading heading--fourth" role="listitem">
+        {% if featured_pages %}
+            <div class="grid grid--index">
+                {% for subpage in featured_pages %}
+                    <a class="card" href="{% pageurl subpage %}">
+                        <h2 class="card__title heading heading--fourth" role="listitem">
+                            {% firstof subpage.listing_title subpage.title %}
+                        </h2>
+                        {% if subpage.listing_summary %}
+                            <p class="card__summary">{{ subpage.listing_summary }}</p>
+                        {% endif %}
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if ordinary_pages %}
+            <div class="listing">
+                {% for subpage in ordinary_pages %}
+                    <article class="listing__item">
+                        <a class="listing__link" href="{% pageurl subpage %}">
+                            <h2 class="listing__title heading heading--fourth" role="listitem">
                                 {% firstof subpage.listing_title subpage.title %}
                             </h2>
-                            {% if subpage.listing_summary %}
-                                <p class="card__summary">{{ subpage.listing_summary }}</p>
-                            {% endif %}
                         </a>
-                    {% endfor %}
-                </div>
-            {% endif %}
-
-            {% if subpages.object_list.exists %}
-                <div class="listing">
-                    {% for subpage in subpages.object_list.specific|slice:"3:" %}
-                        <article class="listing__item">
-                            <a class="listing__link" href="{% pageurl subpage %}">
-                                <h2 class="listing__title heading heading--fourth" role="listitem">
-                                    {% firstof subpage.listing_title subpage.title %}
-                                </h2>
-                            </a>
-                            {% if subpage.listing_summary %}
-                                <p class="listing__summary">{{ subpage.listing_summary }}</p>
-                            {% endif %}
-                        </article>
-                    {% endfor %}
-                </div>
-            {% endif %}
-
-        {% else %}
-            {# no items on any page #}
+                        {% if subpage.listing_summary %}
+                            <p class="listing__summary">{{ subpage.listing_summary }}</p>
+                        {% endif %}
+                    </article>
+                {% endfor %}
+            </div>
         {% endif %}
 
     </section>
