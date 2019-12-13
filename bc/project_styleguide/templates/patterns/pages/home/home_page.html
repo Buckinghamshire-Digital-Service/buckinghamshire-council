@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block content %}
+    {% include "patterns/organisms/link-block-grid/link-block-grid.html" %}
 
     <h2>Pages</h2>
     <ul>
@@ -22,5 +23,4 @@
     </ul>
 
     {% include "patterns/molecules/cta/call_to_action.html" with call_to_action=page.call_to_action %}
-
 {% endblock %}

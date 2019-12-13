@@ -1,0 +1,11 @@
+{% load wagtailcore_tags %}
+
+<section role="navigation" aria-label="Main">
+    <h2 class="u-sr-only">Table of contents</h2>
+
+    <div class="grid grid--home">
+        {% for section in sections %}
+            {% include "patterns/molecules/link-block/link-block.html" %}
+        {% endfor %}
+    </div>
+</section>

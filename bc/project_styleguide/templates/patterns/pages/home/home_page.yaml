@@ -9,14 +9,16 @@ context:
       get_link_url: '#'
   sections:
     - title: 'Waste and recycling'
-      featured_pages:
-        - title: 'Household bin collections'
-        - title: 'Recycling centres'
-        - title: 'Garden waster collection'
+      specific:
+        featured_pages:
+          - title: 'Household bin collections'
+          - title: 'Recycling centres'
+          - title: 'Garden waster collection'
     - title: 'Planning and building control'
-      featured_pages:
-        - title: 'Planning application'
-        - title: 'Local development plans'
+      specific:
+        featured_pages:
+          - title: 'Planning application'
+          - title: 'Local development plans'
 
 tags:
   pageurl:
