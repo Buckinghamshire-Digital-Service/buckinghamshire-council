@@ -1,11 +1,13 @@
 from django.db import models
+from django.utils.functional import cached_property
 
 from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
-from bc.utils.models import BasePage
+from ..standardpages.models import IndexPage
+from ..utils.models import BasePage
 
 
 class HomePage(BasePage):
@@ -35,3 +37,19 @@ class HomePage(BasePage):
         ImageChooserPanel("hero_image"),
         SnippetChooserPanel("call_to_action"),
     ]
+
+    @cached_property
+    def child_sections(self):
+        """
+        Returns queryset of this page's live, public children that are of IndexPage class
+        Ordered by Wagtail explorer custom sort (ie. path)
+        """
+        return IndexPage.objects.child_of(self).live().public().order_by("path")
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+
+        sections = self.child_sections
+        context["sections"] = sections
+
+        return context
