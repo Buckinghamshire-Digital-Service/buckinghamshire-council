@@ -39,19 +39,17 @@ class HomePage(BasePage):
     ]
 
     @cached_property
-    def children_sections(self):
+    def child_sections(self):
         """
         Returns queryset of this page's live, public children that are of IndexPage class
         Ordered by Wagtail explorer custom sort (ie. path)
         """
-        x = self.get_children().live().public().type(IndexPage).order_by("path")
-        x.annotate()
-        return x
+        return IndexPage.objects.child_of(self).live().public().order_by("path")
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
 
-        sections = self.children_sections
+        sections = self.child_sections
         context["sections"] = sections
 
         return context

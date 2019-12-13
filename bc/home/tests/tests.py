@@ -2,13 +2,13 @@ from django.core.exceptions import ValidationError
 from django.test import TestCase
 
 from wagtail.core.models import Page
-from wagtail.images.tests.utils import get_test_image_file
 from wagtail.tests.utils import WagtailPageTests
 
-from bc.images.models import CustomImage
+from bc.standardpages.tests.fixtures import IndexPageFactory, InformationPageFactory
 
 from ...standardpages.models import IndexPage, InformationPage
 from ..models import HomePage
+from .fixtures import HomePageFactory
 
 
 class HomepageWagtailPageTests(WagtailPageTests):
@@ -33,17 +33,8 @@ class HomePageModelTests(TestCase):
 
         """
         Create a homepage which satisfies all required fields for positive test.
-        Please update this when adding new required fields to the model.
         """
-        self.hero_image = CustomImage.objects.create(
-            title="Test image", file=get_test_image_file(),
-        )
-        self.homepage = HomePage(
-            title="Home page",
-            depth=2,
-            strapline="Welcome to Buckinghamshire",
-            hero_image=self.hero_image,
-        )
+        self.homepage = HomePageFactory.build_with_fk_objs_committed()
         self.root_page.add_child(instance=self.homepage)
 
         """
@@ -52,27 +43,23 @@ class HomePageModelTests(TestCase):
         """
         self.index_pages = []
         for i in range(5):
-            index_page = IndexPage(title="Section " + str(i), depth=3,)
+            index_page = IndexPageFactory.build()
             self.homepage.add_child(instance=index_page)
             self.index_pages.append(index_page)
 
             for j in range(4):
-                information_page = InformationPage(
-                    title="Page " + str(i) + str(j), depth=4,
-                )
+                information_page = InformationPageFactory.build()
                 index_page.add_child(instance=information_page)
 
         """
         Set up information page as children of homepage
         """
-        self.information_page = InformationPage(
-            title="Homepage information page", depth=3,
-        )
+        self.information_page = InformationPageFactory.build()
         self.homepage.add_child(instance=self.information_page)
 
     def test_hero_validation_when_no_image(self):
         with self.assertRaises(ValidationError):
-            self.hero_image.delete()
+            self.homepage.hero_image.delete()
             self.homepage.save()
 
     def test_hero_validation_when_no_strapline(self):
@@ -80,53 +67,60 @@ class HomePageModelTests(TestCase):
             self.homepage.strapline = None
             self.homepage.save()
 
-    def test_children_sections_types(self):
+    def test_child_sections_types(self):
         # IndexPage can only be created as direct children of homepage, so we don't have to test for nested IndexPage
         self.assertEqual(
-            len(self.homepage.children_sections),
+            len(self.homepage.child_sections),
             len(self.index_pages),
-            msg="HomePage.children_sections should get IndexPage pages under the homepage, nothing more.",
+            msg="HomePage.child_sections should get IndexPage pages under the homepage, nothing more.",
         )
-        self.assertNotEqual(
-            len(self.homepage.children_sections),
-            len(self.homepage.get_children()),
-            msg="Homepage.children_sections should not include pages that are not IndexPage.",
+        self.assertTrue(
+            len(self.homepage.child_sections) < len(self.homepage.get_children()),
+            msg="Homepage.child_sections should not include pages that are not IndexPage.",
         )
 
-    def test_children_sections_only_get_published_sections(self):
+    def test_child_sections_only_get_published_sections(self):
         self.index_pages[0].unpublish()
         self.assertEqual(
-            len(self.homepage.children_sections),
+            len(self.homepage.child_sections),
             len(self.index_pages) - 1,
-            msg="HomePage.children_sections should not include unpublished pages.",
+            msg="HomePage.child_sections should not include unpublished pages.",
         )
 
-    def test_children_sections_only_get_public_sections(self):
+    def test_child_sections_only_get_public_sections(self):
         self.index_pages[0].view_restrictions.create(password="test")
         self.assertEqual(
-            len(self.homepage.children_sections),
+            len(self.homepage.child_sections),
             len(self.index_pages) - 1,
-            msg="HomePage.children_sections should not include private pages.",
+            msg="HomePage.child_sections should not include private pages.",
         )
 
-    def test_children_sections_sortorder(self):
+    def test_child_sections_sortorder(self):
         """
         Test that the queryset for IndexPage uses Wagtail explorer sort order
         """
         section_page = self.index_pages[0]
         original_order = list(
-            self.homepage.children_sections.values_list("title", flat=True)
+            self.homepage.child_sections.values_list("title", flat=True)
         )
         # Move self.index_pages[0]'s sortoder to last
         section_page.path = IndexPage._get_children_path_interval(self.homepage.path)[1]
         section_page.save()
         self.assertNotEqual(
             original_order,
-            list(self.homepage.children_sections.values_list("title", flat=True)),
-            msg="HomePage.children_sections should sort by page path (Wagtail explorer custom sort).",
+            list(self.homepage.child_sections.values_list("title", flat=True)),
+            msg="HomePage.child_sections should sort by page path (Wagtail explorer custom sort).",
         )
 
-    def test_children_sections_returns_max_3_grandchildren(self):
+    """
+    Testing IndexPage.featured_pages
+
+    This is also covered in IndexPageModelTests(). However we are also testing here
+    in case someone decides to change how it behaves on IndexPage and doesn't realise
+    it also affects HomePage.
+    """
+
+    def test_child_sections_returns_max_3_grandchildren(self):
         # We have initially created 4 children under self.index_pages[0]
         self.assertNotEqual(
             len(self.index_pages[0].featured_pages),
@@ -139,7 +133,7 @@ class HomePageModelTests(TestCase):
             msg="IndexPage.featured_pages should be limited to max 3.",
         )
 
-    def test_children_sections_returns_live_grandchildren(self):
+    def test_child_sections_returns_live_grandchildren(self):
         # Unpublish 2 of the 4 children
         children = self.index_pages[0].featured_pages
         children[0].unpublish()
@@ -150,7 +144,7 @@ class HomePageModelTests(TestCase):
             msg="IndexPage.featured_pages should not include unpublished pages.",
         )
 
-    def test_children_sections_returns_public_grandchildren(self):
+    def test_child_sections_returns_public_grandchildren(self):
         section_page = self.index_pages[0]
         section_page.get_children().first().delete()  # delete 1 so we only have 3 to start with
         section_page.get_children().last().view_restrictions.create(password="test")
@@ -160,7 +154,7 @@ class HomePageModelTests(TestCase):
             msg="IndexPage.featured_pages should not include private pages.",
         )
 
-    def test_children_sections_grandchildren_sortorder(self):
+    def test_child_sections_grandchildren_sortorder(self):
         """
         Test that the queryset grandchildren uses Wagtail explorer sort order
         """
