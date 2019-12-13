@@ -2,13 +2,13 @@ from django.core.exceptions import ValidationError
 from django.test import TestCase
 
 from wagtail.core.models import Page
-from wagtail.images.tests.utils import get_test_image_file
 from wagtail.tests.utils import WagtailPageTests
 
-from bc.images.models import CustomImage
+from bc.standardpages.tests.fixtures import IndexPageFactory, InformationPageFactory
 
 from ...standardpages.models import IndexPage, InformationPage
 from ..models import HomePage
+from .fixtures import HomePageFactory
 
 
 class HomepageWagtailPageTests(WagtailPageTests):
@@ -33,16 +33,8 @@ class HomePageModelTests(TestCase):
 
         """
         Create a homepage which satisfies all required fields for positive test.
-        Please update this when adding new required fields to the model.
         """
-        self.hero_image = CustomImage.objects.create(
-            title="Test image", file=get_test_image_file(),
-        )
-        self.homepage = HomePage(
-            title="Home page",
-            strapline="Welcome to Buckinghamshire",
-            hero_image=self.hero_image,
-        )
+        self.homepage = HomePageFactory.build_with_fk_objs_committed()
         self.root_page.add_child(instance=self.homepage)
 
         """
@@ -51,23 +43,23 @@ class HomePageModelTests(TestCase):
         """
         self.index_pages = []
         for i in range(5):
-            index_page = IndexPage(title="Section " + str(i),)
+            index_page = IndexPageFactory.build()
             self.homepage.add_child(instance=index_page)
             self.index_pages.append(index_page)
 
             for j in range(4):
-                information_page = InformationPage(title="Page " + str(i) + str(j),)
+                information_page = InformationPageFactory.build()
                 index_page.add_child(instance=information_page)
 
         """
         Set up information page as children of homepage
         """
-        self.information_page = InformationPage(title="Homepage information page",)
+        self.information_page = InformationPageFactory.build()
         self.homepage.add_child(instance=self.information_page)
 
     def test_hero_validation_when_no_image(self):
         with self.assertRaises(ValidationError):
-            self.hero_image.delete()
+            self.homepage.hero_image.delete()
             self.homepage.save()
 
     def test_hero_validation_when_no_strapline(self):
@@ -119,6 +111,14 @@ class HomePageModelTests(TestCase):
             list(self.homepage.child_sections.values_list("title", flat=True)),
             msg="HomePage.child_sections should sort by page path (Wagtail explorer custom sort).",
         )
+
+    """
+    Testing IndexPage.featured_pages
+
+    This is also covered in IndexPageModelTests(). However we are also testing here
+    in case someone decides to change how it behaves on IndexPage and doesn't realise
+    it also affects HomePage.
+    """
 
     def test_child_sections_returns_max_3_grandchildren(self):
         # We have initially created 4 children under self.index_pages[0]
