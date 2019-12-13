@@ -1,0 +1,15 @@
+context:
+  section:
+    title: Planning and building control
+    specific:
+      featured_pages:
+        - title: Planning applications
+        - title: Local development plans
+        - title: Planning enforcement
+
+tags:
+  pageurl:
+    page:
+      raw: '#'
+    section:
+      raw: '#'
