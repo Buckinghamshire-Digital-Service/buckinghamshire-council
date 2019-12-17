@@ -1,15 +1,26 @@
 .card {
-    padding: 20px;
-    background-color: $color--tertiary;
-    transition: background-color $transition;
+    $root: &;
+    padding: $grid--small;
+    background-color: $color--earth-light;
+    transition: background-color $transition, border-color $transition;
+    border-bottom: 5px solid $color--lake;
+    text-decoration: none;
 
-    &:hover {
-        background-color: darken($color--tertiary, 10%);
+    &__title {
+        text-decoration: underline;
+        transition: color $transition;
     }
-}
 
-.card-with-image {
-    &:only-child {
-        max-width: 260px;
+    &__summary {
+        color: $color--default;
+    }
+
+    #{$hover-states} {
+        border-color: $color--link-hover;
+        background-color: darken($color--earth-light, 5%);
+
+        #{$root}__title {
+            color: $color--link;
+        }
     }
 }

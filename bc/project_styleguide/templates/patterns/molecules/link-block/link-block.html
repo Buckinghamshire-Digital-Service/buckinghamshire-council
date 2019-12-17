@@ -1,0 +1,15 @@
+{% load wagtailcore_tags %}
+
+<div class="link-block">
+    <a href="{% pageurl section %}" class="link-block__title-link">
+        <h3 class="link-block__heading heading heading--fourth">{{ section.title }}</h3>
+    </a>
+
+    <ul class="link-block__list">
+        {% for page in section.specific.featured_pages %}
+            <li class="link-block__list-item">
+                <a href="{% pageurl page %}" class="link-block__link link--alt">{{ page.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

@@ -2,42 +2,44 @@
 {% load wagtailcore_tags wagtailimages_tags navigation_tags static %}
 
 {% block content %}
-<div class="wrapper">
     <section class="section section--main">
-        <h1>{{ page.title }}</h1>
-        <p>{{ page.introduction }}</p>
+        <h1 class="heading heading--first">{{ page.title }}</h1>
 
-        {% if subpages %}
-            <div class="grid">
-                {% if subpages.object_list.exists %}
-                    {% for subpage in subpages.object_list.specific %}
-                        <a class="card-with-image" href="{% pageurl subpage %}">
-                            {% if subpage.listing_image %}
-                                {% image subpage.listing_image fill-450x300 %}
-                            {% else %}
-                                {# Add a default image here #}
-                            {% endif %}
-                            <div class="card">
-                                <h3 role="listitem">
-                                    {% firstof subpage.listing_title subpage.title %}
-                                </h3>
-                                {% if subpage.listing_summary or subpage.introduction %}
-                                    <p>{% firstof subpage.listing_summary subpage.introduction %}</p>
-                                {% endif %}
-                            </div>
-                        </a>
-                    {% endfor %}
-                {% else %}
-                    {# no items on this page #}
-                {% endif %}
+        {% if page.introduction %}
+            <p>{{ page.introduction }}</p>
+        {% endif %}
+
+        {% if featured_pages %}
+            <div class="grid grid--index">
+                {% for subpage in featured_pages %}
+                    <a class="card" href="{% pageurl subpage %}">
+                        <h2 class="card__title heading heading--fourth" role="listitem">
+                            {% firstof subpage.listing_title subpage.title %}
+                        </h2>
+                        {% if subpage.listing_summary %}
+                            <p class="card__summary">{{ subpage.listing_summary }}</p>
+                        {% endif %}
+                    </a>
+                {% endfor %}
             </div>
+        {% endif %}
 
-            {% include "patterns/molecules/pagination/pagination.html" with paginator_page=subpages %}
-
-        {% else %}
-            {# no items on any page #}
+        {% if ordinary_pages %}
+            <div class="listing">
+                {% for subpage in ordinary_pages %}
+                    <article class="listing__item">
+                        <a class="listing__link" href="{% pageurl subpage %}">
+                            <h2 class="listing__title heading heading--fourth" role="listitem">
+                                {% firstof subpage.listing_title subpage.title %}
+                            </h2>
+                        </a>
+                        {% if subpage.listing_summary %}
+                            <p class="listing__summary">{{ subpage.listing_summary }}</p>
+                        {% endif %}
+                    </article>
+                {% endfor %}
+            </div>
         {% endif %}
 
     </section>
-</div>
 {% endblock %}
