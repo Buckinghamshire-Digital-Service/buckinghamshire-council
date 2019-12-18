@@ -85,7 +85,7 @@ small {
 }
 
 .heading {
-    &--hero {
+    &--xxxl {
         @include font-size(xl);
 
         @include media-query(mob-landscape) {
@@ -97,7 +97,7 @@ small {
         }
     }
 
-    &--first {
+    &--xxl {
         @include font-size(xl);
         margin-bottom: $grid;
 
@@ -106,15 +106,19 @@ small {
         }
     }
 
-    &--second {
+    &--xl {
+        @include font-size(xl);
+    }
+
+    &--l {
         @include font-size(l);
     }
 
-    &--third {
+    &--m {
         @include font-size(m);
     }
 
-    &--fourth {
+    &--s {
         @include font-size(s);
     }
 }
