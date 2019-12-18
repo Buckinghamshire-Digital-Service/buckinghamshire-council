@@ -1,0 +1,20 @@
+.listing {
+    margin: $grid--large 0;
+
+    @include media-query(tablet-portrait) {
+        margin: $grid--large 0 ($grid--large * 2);
+    }
+
+    &__item {
+        margin-bottom: $grid;
+        max-width: $wrapper--small;
+    }
+
+    &__title {
+        margin: 0;
+    }
+
+    &__summary {
+        margin: 0;
+    }
+}

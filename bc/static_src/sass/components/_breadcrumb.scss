@@ -1,0 +1,40 @@
+.breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    margin: $grid 0;
+    grid-area: breadcrumbs;
+
+    @include media-query(tablet-portrait) {
+        margin: $grid 0 $grid--large;
+    }
+
+    &__item {
+        width: auto;
+
+        &::after {
+            color: $color--earth;
+            content: '/';
+            margin: 0 8px;
+        }
+
+        &:last-child {
+            &::after {
+                display: none;
+            }
+        }
+    }
+
+    &__link {
+        color: $color--link;
+
+        #{$hover-states} {
+            color: $color--link-hover;
+        }
+
+        &:active {
+            color: $color--link-active;
+        }
+    }
+}

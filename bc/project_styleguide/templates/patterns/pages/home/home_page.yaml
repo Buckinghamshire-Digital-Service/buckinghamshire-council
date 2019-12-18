@@ -1,9 +1,28 @@
 context:
   page:
     title: Homepage
-    strapline: This is a home page
+    strapline: Welcome to Buckinghamshire
     call_to_action:
       title: Stub content
       summary: Check out our awesome stub content
       get_link_text: Click here
       get_link_url: '#'
+  sections:
+    - title: 'Waste and recycling'
+      specific:
+        featured_pages:
+          - title: 'Household bin collections'
+          - title: 'Recycling centres'
+          - title: 'Garden waster collection'
+    - title: 'Planning and building control'
+      specific:
+        featured_pages:
+          - title: 'Planning application'
+          - title: 'Local development plans'
+
+tags:
+  pageurl:
+    section:
+      raw: '#'
+    page:
+      raw: '#'

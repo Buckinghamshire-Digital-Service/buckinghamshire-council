@@ -1,0 +1,22 @@
+{% load static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags %}
+
+<header class="header">
+    <div class="header__inner wrapper wrapper--large">
+        <a class="header__home-link" href="{% slugurl 'home' %}" aria-label="Home">
+            Buckinghamshire<br> Council
+        </a>
+
+        <div class="header__search">
+            <form action="{% url 'search' %}" method="get" role="search" class="form form--header-search">
+                <input class="input" id="search" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
+                <label class="u-sr-only" for="search">Search this website</label>
+                <button class="button button--search button--header" type="submit" aria-label="Search">
+                    <svg class="button__icon" aria-hidden="true">
+                        <use xlink:href="#magnifying-glass"></use>
+                    </svg>
+                    <span class="u-sr-only">Search</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</header>

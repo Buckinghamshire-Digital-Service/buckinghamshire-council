@@ -12,15 +12,20 @@
 @import 'base/typography';
 
 // Components
+@import 'components/area-links';
 @import 'components/button';
 @import 'components/blockquote';
+@import 'components/breadcrumb';
 @import 'components/card';
 @import 'components/call-to-action';
+@import 'components/footer-links';
 @import 'components/form';
 @import 'components/form-item';
 @import 'components/grid';
+@import 'components/hero';
 @import 'components/icon';
-@import 'components/nav';
+@import 'components/link-block';
+@import 'components/listing';
 @import 'components/responsive-object';
 @import 'components/rich-text';
 @import 'components/section';

@@ -1,0 +1,35 @@
+{% load static wagtailuserbar wagtailcore_tags navigation_tags util_tags %}
+
+<footer class="footer">
+    <div class="footer__inner wrapper wrapper--large">
+        <div class="footer__nav-container">
+            <section>
+                {% footerlinks %}
+            </section>
+
+            {% if settings.utils.SocialMediaSettings.twitter_handle or settings.utils.SocialMediaSettings.facebook_app_id %}
+                <section class="footer__social-links">
+                    {% if settings.utils.SocialMediaSettings.facebook_app_id %}
+                        <a href="https://www.facebook.com/{{ settings.utils.SocialMediaSettings.facebook_app_id }}">
+                            <svg class="icon icon--footer-social"><use xlink:href="#facebook"></use></svg>
+                        </a>
+                    {% endif %}
+                    {% if settings.utils.SocialMediaSettings.twitter_handle %}
+                        <a href="https://twitter.com/{{ settings.utils.SocialMediaSettings.twitter_handle }}">
+                            <svg class="icon icon--footer-social"><use xlink:href="#twitter"></use></svg>
+                        </a>
+                    {% endif %}
+                    {% if settings.utils.SocialMediaSettings.youtube_channel_url %}
+                        <a href="{{ settings.utils.SocialMediaSettings.youtube_channel_url }}">
+                            <svg class="icon icon--footer-social"><use xlink:href="#youtube"></use></svg>
+                        </a>
+                    {% endif %}
+                </section>
+            {% endif %}
+        </div>
+
+        <div class="footer__credit">
+            <p>© {% now "Y" %} {{ settings.utils.SocialMediaSettings.site_name }}</p>
+        </div>
+    </div>
+</footer>

@@ -19,7 +19,7 @@ html {
 @mixin heading-text() {
     font-family: $font--primary;
     font-style: inherit;
-    font-weight: inherit;
+    font-weight: $weight--bold;
 }
 
 @mixin body-text() {
@@ -30,7 +30,7 @@ html {
 }
 
 @mixin quote-text() {
-    font-family: $font--secondary;
+    font-family: $font--primary;
     font-style: italic;
     font-weight: inherit;
     text-transform: inherit;
@@ -82,4 +82,39 @@ h6 {
 
 small {
     @include font-size(xxs);
+}
+
+.heading {
+    &--hero {
+        @include font-size(xl);
+
+        @include media-query(mob-landscape) {
+            @include font-size(xxl);
+        }
+
+        @include media-query(tablet-portrait) {
+            @include font-size(xxxl);
+        }
+    }
+
+    &--first {
+        @include font-size(xl);
+        margin-bottom: $grid;
+
+        @include media-query(mob-landscape) {
+            @include font-size(xxl);
+        }
+    }
+
+    &--second {
+        @include font-size(l);
+    }
+
+    &--third {
+        @include font-size(m);
+    }
+
+    &--fourth {
+        @include font-size(s);
+    }
 }
