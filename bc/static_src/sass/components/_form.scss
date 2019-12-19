@@ -14,9 +14,11 @@
     }
 
     input {
-        height: 50px;
+        border: 0;
         padding: $grid--min;
         width: 100%;
+        max-width: 540px;
+        height: 50px;
     }
 
     &--search {
@@ -51,9 +53,6 @@
         margin-bottom: $grid;
 
         input {
-            height: 50px;
-            max-width: 540px;
-
             @include media-query(tablet-portrait) {
                 width: 100%;
             }
