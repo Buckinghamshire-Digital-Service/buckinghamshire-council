@@ -14,18 +14,38 @@
     }
 
     input {
-        height: 40px;
+        border: 0;
         padding: $grid--min;
         width: 100%;
+        max-width: 540px;
+        height: 50px;
+    }
+
+    &--search {
+        display: flex;
+        margin-bottom: $grid;
 
         @include media-query(tablet-portrait) {
-            width: 390px;
+            margin-bottom: $grid--large;
+        }
+
+        input {
+            border: 2px solid $color--charcoal;
+            border-right: 0;
         }
     }
 
     &--header-search {
         display: flex;
         justify-content: flex-end;
+
+        input {
+            height: 40px;
+
+            @include media-query(tablet-portrait) {
+                width: 390px;
+            }
+        }
     }
 
     &--hero-search {
@@ -33,9 +53,6 @@
         margin-bottom: $grid;
 
         input {
-            height: 50px;
-            max-width: 540px;
-
             @include media-query(tablet-portrait) {
                 width: 100%;
             }

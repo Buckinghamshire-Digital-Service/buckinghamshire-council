@@ -7,8 +7,8 @@
 
         <div class="hero__search">
             <form action="{% url 'search' %}" method="get" role="search" class="form form--hero-search">
-                <input class="input" id="search" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
-                <label class="u-sr-only" for="search">Search this website</label>
+                <input class="input" id="search--hero" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
+                <label class="u-sr-only" for="search--hero">Search this website</label>
                 <button class="button button--search button--hero" type="submit" aria-label="Search">
                     <svg class="button__icon" aria-hidden="true">
                         <use xlink:href="#magnifying-glass"></use>

@@ -8,8 +8,8 @@
 
         <div class="header__search">
             <form action="{% url 'search' %}" method="get" role="search" class="form form--header-search">
-                <input class="input" id="search" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
                 <label class="u-sr-only" for="search">Search this website</label>
+                <input class="input" id="search" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
                 <button class="button button--search button--header" type="submit" aria-label="Search">
                     <svg class="button__icon" aria-hidden="true">
                         <use xlink:href="#magnifying-glass"></use>
