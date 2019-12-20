@@ -27,6 +27,7 @@ The version number is of the form `MAJOR.PATCH`. Planned releases which add feat
 
 1. Make merge requests to the branch `release-x.x`.
 1. Add a heading `# x.x (yyyy-mm-dd)` to `CHANGELOG.md`, detailing what is in this release.
+1. Add a comparison link below the `x.x` heading (see other releases for syntax; note that this will not work until the release is tagged, below)
 1. Merge `release-x.x` to `master`.
 1. Deploy to production (see [deployment documentation](deployment.md)).
 1. Tag the merge commit
@@ -42,6 +43,7 @@ Urgent bug fixes should be made against the latest-deployed release, i.e. x.x. T
 1. Create the bug fix branch, e.g. `hotfix/mend-squiggles`.
    1. In `CHANGELOG.md`, add a new section to `x.(x+1) (yyyy-mm-dd)` where the
       date is the release date.
+   1. Add a comparison link below the `x.x` heading (see other releases for syntax; note that this will not work until the release is tagged, below)
 1. If it needs client approval, or to be user-tested, deploy to staging.
 1. Make a merge request from `hotfix/mend-squiggles` to `master`.
 1. Once the change is approved, accept the merge request, and deploy to

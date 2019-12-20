@@ -1,8 +1,13 @@
 context:
   paginator_page:
     number: 1
-    has_previous: false
+    has_previous: true
     has_next: true
     next_page_number: 2
     paginator:
       num_pages: 10
+      page_range:
+        - 1
+        - 2
+        - 3
+        - 4

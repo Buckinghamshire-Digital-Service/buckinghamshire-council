@@ -3,3 +3,4 @@ context:
     strapline: Welcome to Buckinghamshire
   hero_image:
     url: http://via.placeholder.com/1600x350
+  alert: true

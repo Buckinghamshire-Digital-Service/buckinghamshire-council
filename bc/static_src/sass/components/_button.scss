@@ -38,6 +38,11 @@
         @include media-query(tablet-portrait) {
             min-width: 195px;
         }
+
+        #{$root}__icon {
+            width: 30px;
+            height: 30px;
+        }
     }
 
     &--search {

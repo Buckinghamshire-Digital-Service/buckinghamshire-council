@@ -1,0 +1,12 @@
+{% load wagtailcore_tags %}
+
+<div class="alert alert--message">
+    <h2 class="heading heading--second">{{ value.title }}</h2>
+
+    <div class="alert__content">{{ value.body|richtext }}</div>
+
+    <!-- TODO: hook up to use the same content as the site wide banner (ticket 29) -->
+    {% if site_message %}
+        <div class="alert__site-message">{{ site_message|richtext }}</div>
+    {% endif %}
+</div>

@@ -43,6 +43,10 @@
         }
     }
 
+    &--page {
+        max-width: $wrapper--page;
+    }
+
     &--flex {
         display: flex;
         flex-direction: column;

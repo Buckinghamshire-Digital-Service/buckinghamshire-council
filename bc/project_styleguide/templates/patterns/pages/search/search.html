@@ -5,44 +5,52 @@
 
 {% block title %}{% if search_query %}Search results for &ldquo;{{ search_query }}&rdquo;{% else %}Search{% endif %}{% endblock %}
 
+{% block breadcrumbs %}
+    <div class="wrapper wrapper--large">
+        <nav role="navigation" aria-label="breadcrumb">
+            <ul class="breadcrumb">
+                <li class="breadcrumb__item">
+                    <a class="breadcrumb__link" href="{% slugurl 'home' %}" title="Home">
+                        Home
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+{% endblock %}
+
 {% block content %}
+    <div class="wrapper wrapper--page search">
+        <h1 class="heading heading--first">Search</h1>
 
-    <h1>{% if search_query %}Search results for &ldquo;{{ search_query }}&rdquo;{% else %}Search{% endif %}</h1>
+        <form action="{% url 'search' %}" method="get" role="search" class="form form--search">
+            <label class="u-sr-only" for="search--page">Search this website</label>
+            <input class="input" id="search--page" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
+            <button class="button button--search" type="submit" aria-label="Search">
+                <svg class="button__icon" aria-hidden="true">
+                    <use xlink:href="#magnifying-glass"></use>
+                </svg>
+                <span class="u-sr-only">Search</span>
+            </button>
+        </form>
 
-    <form action="{% url 'search' %}" method="get" role="search">
-        <input type="text" placeholder="Search…" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-        <input type="submit" value="Search">
-    </form>
+        {% if search_results %}
+            <section class="search__results">
+                <header class="search__results-header">
+                    {% with count=search_results.paginator.count %}
+                        <h2 class="heading heading--third">{{ count }} result{{ count|pluralize }} for ‘{{ search_query }}’</h2>
+                    {% endwith %}
+                </header>
 
-    {% get_search_promotions search_query as search_picks %}
-    {% if search_picks %}
-         <ul>
-            {% for pick in search_picks %}
-                <li>
-                    {% include "patterns/molecules/search-result/search-result.html" with result=pick.page.specific %}
-                </li>
-             {% endfor %}
-         </ul>
-    {% endif %}
-
-    {% if search_results %}
-
-        {% with count=search_results.paginator.count %}
-            {{ count }} result{{ count|pluralize }} found.
-        {% endwith %}
-
-        <ul>
-            {% for result in search_results %}
-                <li>
+                {% for result in search_results %}
                     {% include "patterns/molecules/search-result/search-result.html" with result=result.specific %}
-                </li>
-            {% endfor %}
-        </ul>
+                {% endfor %}
 
-        {% include "patterns/molecules/pagination/pagination.html" with paginator_page=search_results %}
+                {% include "patterns/molecules/pagination/pagination.html" with paginator_page=search_results %}
+            </section>
 
-    {% elif search_query and not search_picks %}
-        No results found.
-    {% endif %}
-
+        {% else %}
+            <p>No results found.</p>
+        {% endif %}
+    </div>
 {% endblock %}
