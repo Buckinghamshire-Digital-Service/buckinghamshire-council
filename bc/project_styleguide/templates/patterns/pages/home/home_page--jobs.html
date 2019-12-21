@@ -1,0 +1,16 @@
+{% extends "patterns/base_page.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block body_class %}template-jobs-home{% endblock %}
+
+{% block header %}
+    {{ block.super }}
+
+    {% include "patterns/molecules/hero/hero--jobs.html" %}
+{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+    blah
+{% endblock %}

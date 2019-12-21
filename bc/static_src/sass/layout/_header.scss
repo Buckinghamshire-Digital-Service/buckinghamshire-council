@@ -41,7 +41,8 @@
     &__search {
         width: 100%;
 
-        .template-home-page & {
+        .template-home-page &,
+        .template-jobs-home & {
             display: none;
         }
     }

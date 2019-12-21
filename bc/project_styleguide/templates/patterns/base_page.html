@@ -72,8 +72,9 @@
 
     {% include "patterns/organisms/header/header.html" %}
 
-    <!-- TODO: wrap in an if when backend is done -->
-    {% include "patterns/molecules/alerts/alert-banner.html" %}
+    {% if alert %}
+        {% include "patterns/molecules/alerts/alert-banner.html" %}
+    {% endif %}
 {% endblock header %}
 
 {% block footer %}
