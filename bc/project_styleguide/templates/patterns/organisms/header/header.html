@@ -3,7 +3,9 @@
 <header class="header">
     <div class="header__inner wrapper wrapper--large">
         <a class="header__home-link" href="{% slugurl 'home' %}" aria-label="Home">
-            Buckinghamshire<br> Council
+            <svg class="header__logo" aria-hidden="true">
+                <use xlink:href="#logo"></use>
+            </svg>
         </a>
 
         <div class="header__search">
@@ -11,7 +13,7 @@
                 <label class="u-sr-only" for="search">Search this website</label>
                 <input class="input" id="search" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
                 <button class="button button--search button--header" type="submit" aria-label="Search">
-                    <svg class="button__icon" aria-hidden="true">
+                    <svg class="button__icon icon icon--stroke" aria-hidden="true">
                         <use xlink:href="#magnifying-glass"></use>
                     </svg>
                     <span class="u-sr-only">Search</span>

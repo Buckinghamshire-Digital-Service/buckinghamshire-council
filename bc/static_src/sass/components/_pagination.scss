@@ -19,7 +19,13 @@
 
         #{$hover-states} {
             #{$root}__icon {
-                fill: $color--link-hover;
+                stroke: $color--link-hover;
+            }
+        }
+
+        &:active {
+            #{$root}__icon {
+                stroke: $color--link-active;
             }
         }
     }
@@ -28,7 +34,6 @@
         margin-left: 5px;
         width: 18px;
         height: 18px;
-        fill: $color--link;
 
         &--previous {
             transform: rotate(180deg);
