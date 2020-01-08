@@ -1,0 +1,25 @@
+.article-link {
+    margin-bottom: $grid;
+
+    &__title {
+        margin-bottom: 5px;
+    }
+
+    &__meta {
+        @include font-size(xxs);
+        margin: 0;
+    }
+
+    &__meta-item {
+        &::before {
+            content: '•';
+            padding: 0 8px 0 5px;
+        }
+
+        &:first-child {
+            &::before {
+                display: none;
+            }
+        }
+    }
+}
