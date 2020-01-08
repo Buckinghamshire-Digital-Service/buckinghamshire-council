@@ -21,17 +21,20 @@
         height: 50px;
     }
 
-    &--search {
-        display: flex;
-        margin-bottom: $grid;
+    &--subscribe {
+        max-width: 760px;
 
-        @include media-query(tablet-portrait) {
-            margin-bottom: $grid--large;
+        @include media-query(mob-landscape) {
+            display: flex;
         }
 
         input {
-            border: 2px solid $color--charcoal;
-            border-right: 0;
+            margin-bottom: $grid--small;
+
+            @include media-query(mob-landscape) {
+                margin-bottom: 0;
+                margin-right: $grid--small;
+            }
         }
     }
 
