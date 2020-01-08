@@ -1,7 +1,7 @@
-{% extends "patterns/base_page.html" %}
+{% extends "patterns/base_page--jobs.html" %}
 {% load wagtailcore_tags wagtailimages_tags static %}
 
-{% block body_class %}template-jobs-home{% endblock %}
+{% block body_class %}template-jobs-home {{ block.super }}{% endblock %}
 
 {% block header %}
     {{ block.super }}
@@ -12,5 +12,5 @@
 {% block breadcrumbs %}{% endblock %}
 
 {% block content %}
-    blah
+    {% include "patterns/molecules/split-content/split-content.html" %}
 {% endblock %}
