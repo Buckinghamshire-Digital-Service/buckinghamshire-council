@@ -1,50 +1,68 @@
 .button {
     $root: &;
+    @include font-size(s);
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    background: $color--link;
+    color: $color--white;
+    font-weight: $weight--bold;
+    min-height: 50px;
+    padding: 0 $grid--small;
+    transition: background $transition;
+
+    #{$hover-states} {
+        background: $color--link-hover;
+    }
+
+    &:active {
+        background: $color--link-active;
+    }
 
     &__icon {
         fill: $color--white;
-        width: 22px;
-        height: 22px;
+        width: 30px;
+        height: 30px;
         transition: fill $transition;
     }
 
-    &--search {
-        padding: $grid--min 25px;
-        background: $color--link;
-        transition: background $transition;
+    &--subscribe {
+        background: $color--lake;
+        border: 2px solid $color--white;
+        width: 100%;
 
-        #{$hover-states} {
-            background: $color--link-hover;
+        @include media-query(mob-landscape) {
+            width: auto;
         }
 
-        &:active {
-            background: $color--link-active;
+        @include media-query(tablet-portrait) {
+            min-width: 195px;
         }
 
         #{$root}__icon {
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
+            fill: transparent;
+            stroke: $color--white;
+            transition: stroke $transition;
         }
+    }
+
+    &--search {
+        min-height: 40px;
     }
 
     &--header {
         background: $color--charcoal;
-        padding: $grid--min $grid--small;
-
-        #{$hover-states} {
-            background: lighten($color--charcoal, 25%);
-        }
+        padding: 0 15px;
 
         &:active {
-            background: lighten($color--charcoal, 15%);
+            background: darken($color--sky, 5%);
         }
 
         #{$root}__icon {
-            width: 20px;
-            height: 20px;
+            width: 28px;
+            height: 28px;
         }
     }
 }
