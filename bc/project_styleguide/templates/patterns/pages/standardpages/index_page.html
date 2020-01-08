@@ -17,7 +17,7 @@
                             {% firstof subpage.listing_title subpage.title %}
                         </h2>
                         {% if subpage.listing_summary %}
-                            <p class="card__summary">{{ subpage.listing_summary }}</p>
+                            <p class="card__summary">{{ subpage.listing_summary|truncatechars:60 }}</p>
                         {% endif %}
                     </a>
                 {% endfor %}
@@ -34,7 +34,7 @@
                             </h2>
                         </a>
                         {% if subpage.listing_summary %}
-                            <p class="listing__summary">{{ subpage.listing_summary }}</p>
+                            <p class="listing__summary">{{ subpage.listing_summary|truncatechars:60 }}</p>
                         {% endif %}
                     </article>
                 {% endfor %}
