@@ -13,16 +13,16 @@
         position: relative;
     }
 
-    &__arrow {
-        width: 15px;
-        height: 15px;
-        fill: $color--grey-dark;
-        position: absolute;
-        left: 10px;
-        top: 8px;
-    }
-
     &__heading {
         margin-bottom: 5px;
+    }
+
+    .icon {
+        width: 17px;
+        height: 14px;
+        stroke: $color--grey-dark;
+        position: absolute;
+        left: 10px;
+        top: 7px;
     }
 }
