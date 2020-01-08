@@ -21,7 +21,7 @@
 
 {% block content %}
     <div class="wrapper wrapper--page search">
-        <h1 class="heading heading--first">Search</h1>
+        <h1 class="heading heading--xxl">Search</h1>
 
         <form action="{% url 'search' %}" method="get" role="search" class="form form--search">
             <label class="u-sr-only" for="search--page">Search this website</label>
@@ -38,7 +38,7 @@
             <section class="search__results">
                 <header class="search__results-header">
                     {% with count=search_results.paginator.count %}
-                        <h2 class="heading heading--third">{{ count }} result{{ count|pluralize }} for ‘{{ search_query }}’</h2>
+                        <h2 class="heading heading--l">{{ count }} result{{ count|pluralize }} for ‘{{ search_query }}’</h2>
                     {% endwith %}
                 </header>
 
