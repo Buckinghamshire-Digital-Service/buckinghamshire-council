@@ -1,9 +1,9 @@
 <div class="article-link-list">
-    <h2 class="heading heading--l article-link-list__heading">{{ value.heading }}</h2>
+    <h2 class="heading heading--l article-link-list__heading">{{ heading }}</h2>
 
     {% for article in articles %}
         {% include "patterns/atoms/links/article-link.html" %}
     {% endfor %}
 
-    <a class="article-link-list__more-link" href="{{ value.url }}">More {{ value.heading }}</a>
+    <a class="article-link-list__more-link" href="{{ value.url }}">More {{ heading }}</a>
 </div>
