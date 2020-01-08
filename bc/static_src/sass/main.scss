@@ -12,6 +12,7 @@
 @import 'base/typography';
 
 // Components
+@import 'components/alert-message';
 @import 'components/area-links';
 @import 'components/article-link';
 @import 'components/article-link-list';
@@ -29,10 +30,13 @@
 @import 'components/latest-articles';
 @import 'components/link-block';
 @import 'components/listing';
+@import 'components/pagination';
 @import 'components/responsive-object';
 @import 'components/rich-text';
+@import 'components/search';
 @import 'components/section';
 @import 'components/skip-link';
+@import 'components/subscribe';
 @import 'components/wrapper';
 @import 'components/cookie-message';
 @import 'components/accordion';

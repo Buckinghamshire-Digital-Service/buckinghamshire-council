@@ -1,0 +1,14 @@
+<div class="subscribe">
+    <div class="subscribe__inner wrapper wrapper--large">
+        <h2 class="subscribe__heading heading heading--second">{{ value.heading }}</h2>
+
+        <p class="subscribe__text">{{ value.text }}</p>
+
+        <!-- TODO: hook up form -->
+        <form action="#" method="get" class="form form--subscribe">
+            <label class="u-sr-only" for="email">Enter your email address</label>
+            <input class="input" id="email" type="email" placeholder="Enter your email address">
+            <button class="button button--subscribe" type="submit">{{ value.button_text }}</button>
+        </form>
+    </div>
+</div>

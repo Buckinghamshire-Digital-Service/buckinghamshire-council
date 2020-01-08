@@ -1,0 +1,13 @@
+.subscribe {
+    background: $color--primary;
+    color: $color--white;
+
+    &__inner {
+        padding-top: $grid;
+        padding-bottom: $grid--large;
+    }
+
+    &__text {
+        margin-bottom: $grid;
+    }
+}

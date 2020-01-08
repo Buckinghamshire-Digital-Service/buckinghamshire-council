@@ -1,35 +1,18 @@
 {% load static wagtailcore_tags wagtailsearchpromotions_tags wagtailimages_tags %}
 
-{# breadcrumbs #}
-{% if result.get_ancestors|length > 2 %}
-    <div>
-    {% for ancestor in result.get_ancestors %}
-        {% if not ancestor.is_root %}
-            {% if ancestor.depth > 2 %}
-                {{ ancestor.title }}
-                {% if ancestor.depth|add:1 < result.depth %}
-                    &nbsp;/&nbsp;
-                {% endif %}
-            {% else %}/{% endif %} {# the first one #}
-        {% endif %}
-    {% endfor %}
-    </div>
-{% endif %}
+<article class="search__result">
+    <h3 class="search__result-title heading heading--third">
+        <a class="search__result-link" href="{% pageurl result %}">
+            {% firstof result.listing_title result.title %}
+        </a>
+    </h3>
 
-{% if result.listing_image %}
-    <a href="{% pageurl result %}">
-        {% image result.listing_image fill-450x300 %}
-    </a>
-{% endif %}
+    {% if result.listing_summary or result.search_description %}
+        <p class="search__result-description">{% firstof result.listing_summary result.search_description %}</p>
+    {% endif %}
 
-<h4>
-    <a href="{% pageurl result %}">
-        {% firstof result.listing_title result.title %}
-    </a>
-</h4>
-
-{% if pick.description or result.listing_summary or result.search_description %}
-    <p>{% firstof pick.description result.listing_summary result.search_description %}</p>
-{% endif %}
-
-
+    <!-- TODO: make this work properly -->
+    {% if result.has_area_links %}
+        {% include "patterns/molecules/area-links-list/area-links-list.html" %}
+    {% endif %}
+</article>

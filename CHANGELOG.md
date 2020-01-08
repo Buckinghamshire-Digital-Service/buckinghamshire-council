@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+## 1.1 (2019-12-19)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/1.0...1.1
+
+- Django 2.2.9 security release
+
+## 1.0 (2019-12-18)
+
+https://git.torchbox.com/buckinghamshire-council/bc/-/tags/1.0
+
 - 7, 27 IndexPage
   - Added child_pages, featured_pages and ordinary_pages properties
   - Updated page context and template to remove paginator and to use above properties
@@ -13,7 +23,3 @@
   - Limit rich text features
   - Local Area Links block
 - 21 disable events, news, people, and forms apps as we are not using them yet.
-
-## 1.0 (yyyy-mm-dd)
-
-- feature y

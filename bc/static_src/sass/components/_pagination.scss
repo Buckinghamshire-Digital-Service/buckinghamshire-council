@@ -1,0 +1,44 @@
+.pagination {
+    $root: &;
+    border-top: 1px solid $color--grey-medium;
+    margin: $grid--large 0;
+    padding-top: $grid--small;
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__link {
+        @include font-size(s);
+        display: flex;
+        align-items: center;
+        font-weight: $weight--bold;
+        padding: 0 $grid--min;
+        margin-bottom: $grid--min;
+
+        #{$hover-states} {
+            #{$root}__icon {
+                stroke: $color--link-hover;
+            }
+        }
+
+        &:active {
+            #{$root}__icon {
+                stroke: $color--link-active;
+            }
+        }
+    }
+
+    &__icon {
+        margin-left: 5px;
+        width: 18px;
+        height: 18px;
+
+        &--previous {
+            transform: rotate(180deg);
+            margin-left: 0;
+            margin-right: 5px;
+        }
+    }
+}
