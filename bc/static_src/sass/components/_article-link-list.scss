@@ -1,0 +1,11 @@
+.article-link-list {
+    &__heading {
+        margin-bottom: $grid;
+    }
+
+    &__more-link {
+        @include font-size(s);
+        margin: $grid--small 0;
+        font-weight: $weight--bold;
+    }
+}

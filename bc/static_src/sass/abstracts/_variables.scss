@@ -64,20 +64,21 @@ $weight--light: 200;
 $base-font-size: 16px; // 12 in designs
 $base-line-height: 25px;
 $font-sizes: (
-    // 48px = 36 in designs
+    // xxxl = 48px = 36 in designs
         xxxl: 48px,
-    // 43px = 32 in designs
+    // xxl = 43px = 32 in designs
         xxl: 43px,
-    // 28px = 21 in designs // possibly not needed
+    // xl = 28px = 21 in designs
         xl: 28px,
-    // 24px = 18 in designs
+    // l = 24px = 18 in designs
         l: 24px,
-    // 21px = 15.5 in designs
+    // m = 21px = 15.5 in designs
         m: 21px,
-    // 18px = 13.5 in designs
+    // s = 18px = 13.5 in designs
         s: 18px,
-    xs: $base-font-size,
-    // 14px = 10.5 in designs,
+    // xs = 16px = 12 in designs
+        xs: $base-font-size,
+    // xxs = 14px = 10.5 in designs,
         xxs: 14px
 );
 
