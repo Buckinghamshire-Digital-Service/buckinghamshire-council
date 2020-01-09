@@ -1,7 +1,7 @@
 .icon {
     $root: &;
-    width: 22px;
-    height: 22px;
+    width: 28px;
+    height: 28px;
     transition: fill $transition;
     fill: $color--link;
 
@@ -14,7 +14,7 @@
         stroke: $color--link;
         fill: transparent;
 
-        #{$root}--white {
+        &.icon--white {
             stroke: $color--white;
         }
     }
