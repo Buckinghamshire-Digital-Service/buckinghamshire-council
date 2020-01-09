@@ -1,0 +1,33 @@
+.highlighted-content {
+    min-height: 340px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin: $grid--large (-$grid--small);
+    padding: $grid--small;
+    display: flex;
+    justify-content: flex-end;
+
+    @include media-query(tablet-landscape) {
+        margin: $grid--large 0;
+        padding: $grid;
+    }
+
+    &__content {
+        background: $color--white;
+        padding: $grid--small;
+        border-bottom: $border--accent $color--leaf;
+
+        @include media-query(mob-landscape) {
+            max-width: 300px;
+        }
+
+        a {
+            font-weight: $weight--bold;
+        }
+    }
+
+    &__title {
+        color: $color--leaf;
+    }
+}
