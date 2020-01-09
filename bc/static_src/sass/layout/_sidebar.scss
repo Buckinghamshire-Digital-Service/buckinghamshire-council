@@ -1,11 +1,15 @@
 .sidebar {
-    margin: $grid 0;
-    border-top: $border--accent $color--grey-dark;
-    padding: $grid--small 0;
+    margin: 0 0 $grid;
+    padding-bottom: $grid--small;
 
     @include media-query(tablet-landscape) {
         flex: 0 0 290px;
         margin: 0 0 0 $grid--large;
+    }
+
+    &__heading {
+        border-top: $border--accent $color--grey-dark;
+        padding-top: $grid--small;
     }
 
     &__link {
