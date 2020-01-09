@@ -19,13 +19,6 @@
         background: $color--link-active;
     }
 
-    &__icon {
-        fill: $color--white;
-        width: 30px;
-        height: 30px;
-        transition: fill $transition;
-    }
-
     &--subscribe {
         background: $color--lake;
         border: 2px solid $color--white;
@@ -61,8 +54,8 @@
         }
 
         #{$root}__icon {
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
         }
     }
 }

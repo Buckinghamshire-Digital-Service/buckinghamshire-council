@@ -21,13 +21,13 @@
 
 {% block content %}
     <div class="wrapper wrapper--page search">
-        <h1 class="heading heading--first">Search</h1>
+        <h1 class="heading heading--xxl">Search</h1>
 
         <form action="{% url 'search' %}" method="get" role="search" class="form form--search">
             <label class="u-sr-only" for="search--page">Search this website</label>
             <input class="input" id="search--page" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
             <button class="button button--search" type="submit" aria-label="Search">
-                <svg class="button__icon icon icon--stroke" aria-hidden="true">
+                <svg class="button__icon icon icon--stroke icon--white" aria-hidden="true">
                     <use xlink:href="#magnifying-glass"></use>
                 </svg>
                 <span class="u-sr-only">Search</span>
@@ -38,7 +38,7 @@
             <section class="search__results">
                 <header class="search__results-header">
                     {% with count=search_results.paginator.count %}
-                        <h2 class="heading heading--third">{{ count }} result{{ count|pluralize }} for ‘{{ search_query }}’</h2>
+                        <h2 class="heading heading--l">{{ count }} result{{ count|pluralize }} for ‘{{ search_query }}’</h2>
                     {% endwith %}
                 </header>
 
