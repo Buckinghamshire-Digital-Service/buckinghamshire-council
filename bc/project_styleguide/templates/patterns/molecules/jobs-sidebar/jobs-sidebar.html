@@ -1,0 +1,32 @@
+{% load wagtailcore_tags %}
+
+<aside class="sidebar sidebar--jobs">
+    <a href="{{ job.url }}" class="sidebar__apply-link">
+        <h2 class="heading heading--s">Apply for this job</h2>
+    </a>
+
+    <dl class="sidebar__job-details">
+        <div>
+            <dt class="sidebar__job-detail-title">Working pattern</dt>
+            <dd class="sidebar__job-detail-description">{{ job.work_pattern }}</dd>
+        </div>
+        <div>
+            <dt class="sidebar__job-detail-title">Salary</dt>
+            <dd class="sidebar__job-detail-description">{{ job.salary }}</dd>
+        </div>
+        <div>
+            <dt class="sidebar__job-detail-title">Application deadline</dt>
+            <dd class="sidebar__job-detail-description">{{ job.deadline }}</dd>
+        </div>
+        <div>
+            <dt class="sidebar__job-detail-title">Expected start date</dt>
+            <dd class="sidebar__job-detail-description">{{ job.start_date }}</dd>
+        </div>
+        <div>
+            <dt class="sidebar__job-detail-title">Date posted</dt>
+            <dd class="sidebar__job-detail-description">{{ job.date_posted }}</dd>
+        </div>
+    </dl>
+
+</aside>
+

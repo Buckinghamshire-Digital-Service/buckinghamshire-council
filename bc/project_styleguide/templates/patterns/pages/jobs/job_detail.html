@@ -1,0 +1,16 @@
+{% extends "patterns/base_page--jobs.html" %}
+{% load wagtailcore_tags static %}
+
+{% block content %}
+    <div class="wrapper wrapper--flex">
+        <section class="section section--main">
+
+            <h1 class="heading heading--xxl heading--no-margin">{{ page.title }}</h1>
+            <p class="heading heading--subheading heading--xl">Location: {{ page.location }}</p>
+
+            {% include_block page.body %}
+        </section>
+
+        {% include "patterns/molecules/jobs-sidebar/jobs-sidebar.html" %}
+    </div>
+{% endblock %}
