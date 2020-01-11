@@ -1,14 +1,14 @@
 {% load static wagtailcore_tags wagtailsearchpromotions_tags wagtailimages_tags %}
 
-<article class="search__result">
-    <h3 class="search__result-title heading heading--third">
-        <a class="search__result-link" href="{% pageurl result %}">
+<article class="search-result">
+    <h3 class="search-result__title heading heading--third">
+        <a class="search-result__link" href="{% pageurl result %}">
             {% firstof result.listing_title result.title %}
         </a>
     </h3>
 
     {% if result.listing_summary or result.search_description %}
-        <p class="search__result-description">{% firstof result.listing_summary result.search_description %}</p>
+        <p class="search-result__description">{% firstof result.listing_summary result.search_description %}</p>
     {% endif %}
 
     <!-- TODO: make this work properly -->
