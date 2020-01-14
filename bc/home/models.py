@@ -1,10 +1,13 @@
 from django.db import models
 from django.utils.functional import cached_property
 
-from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
+from wagtail.core.fields import RichTextField
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
+
+from bc.utils.constants import RICH_TEXT_FEATURES
 
 from ..standardpages.models import IndexPage
 from ..utils.models import BasePage
@@ -29,6 +32,8 @@ class HomePage(BasePage):
         on_delete=models.SET_NULL,
         related_name="+",
     )
+    alert_title = models.CharField(max_length=255, blank=True,)
+    alert_message = RichTextField(blank=True, features=RICH_TEXT_FEATURES)
 
     search_fields = BasePage.search_fields + [index.SearchField("strapline")]
 
@@ -36,6 +41,11 @@ class HomePage(BasePage):
         FieldPanel("strapline"),
         ImageChooserPanel("hero_image"),
         SnippetChooserPanel("call_to_action"),
+        MultiFieldPanel(
+            [FieldPanel("alert_title"), FieldPanel("alert_message")],
+            "Temporary alert message",
+            help_text="This will only be displayed if both alert title and alert message are defined.",
+        ),
     ]
 
     @cached_property

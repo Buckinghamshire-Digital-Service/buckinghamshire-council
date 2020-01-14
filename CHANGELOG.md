@@ -3,6 +3,7 @@
 ## Unreleased
 
 - 47 Search results to display local area links where applicable
+- 76 Homepage temporary banner
 
 ## 1.1 (2019-12-19)
 
