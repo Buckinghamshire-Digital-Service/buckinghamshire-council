@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- 47 Search results to display local area links where applicable
+
 ## 1.1 (2019-12-19)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/1.0...1.1
