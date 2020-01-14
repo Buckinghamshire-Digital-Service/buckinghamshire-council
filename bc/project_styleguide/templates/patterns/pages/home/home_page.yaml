@@ -5,8 +5,15 @@ context:
     call_to_action:
       title: Stub content
       summary: Check out our awesome stub content
-      get_link_text: Click here
-      get_link_url: '#'
+      link:
+        - block_type: external_link
+          value:
+            title: View plans for the new centre
+            url: '#'
+        - block_type: internal_link
+          value:
+            page:
+              title: Participate in the conversation
     alert_title: Unitary authority from 1 April 2020
     alert_message: <p>From 1 April 2020, Aylesbury Vale District Council, Buckinghamshire County Council, Chiltern District Council, South Bucks District Council and Wycombe District Council will be replaced by a single new Buckinghamshire Council.</p><p></p><ul><li><a href="http://test.com">How does this affect me?</a></li><li><a href="/test/">Key facts and benefits</a>
   sections:

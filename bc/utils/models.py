@@ -203,7 +203,6 @@ class CallToActionSnippet(models.Model):
                     ),
                 ),
             ],
-            max_num=1,
             required=True,
         ),
         blank=True,
@@ -215,29 +214,6 @@ class CallToActionSnippet(models.Model):
         ImageChooserPanel("image"),
         StreamFieldPanel("link"),
     ]
-
-    def get_link_text(self):
-        # Link is required, so we should always have
-        # an element with index 0
-        block = self.link[0]
-
-        title = block.value["title"]
-        if block.block_type == "external_link":
-            return title
-
-        # Title is optional for internal_link
-        # so fallback to page's title, if it's empty
-        return title or block.value["page"].title
-
-    def get_link_url(self):
-        # Link is required, so we should always have
-        # an element with index 0
-        block = self.link[0]
-
-        if block.block_type == "external_link":
-            return block.value["url"]
-
-        return block.value["page"].get_url()
 
     def __str__(self):
         return self.title
