@@ -1,0 +1,16 @@
+{% extends "patterns/base_page--jobs.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block body_class %}template-jobs-home {{ block.super }}{% endblock %}
+
+{% block header %}
+    {{ block.super }}
+
+    {% include "patterns/molecules/hero/hero--jobs.html" %}
+{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+    {% include "patterns/molecules/split-content/split-content.html" with content_block=page.body %}
+{% endblock %}
