@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "bc.documents",
     # "bc.events",  To re-enable, also uncomment code in bc/utils/wagtail_hooks.py
     # "bc.forms",
+    "bc.recruitment",
     "bc.home",
     "bc.images",
     "bc.navigation",
