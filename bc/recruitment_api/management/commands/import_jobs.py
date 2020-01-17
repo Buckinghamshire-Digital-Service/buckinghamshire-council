@@ -31,5 +31,6 @@ class Command(BaseCommand):
                         created += 1
 
                     job = update_job_from_ad(job, ad)
+        self.stdout.write("No more results")
         self.stdout.write(f"{updated} existing jobs updated")
         self.stdout.write(f"{created} new jobs created")
