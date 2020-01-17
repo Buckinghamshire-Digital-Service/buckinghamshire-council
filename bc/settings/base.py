@@ -60,6 +60,8 @@ INSTALLED_APPS = [
     "bc.navigation",
     "bc.news",
     # "bc.people",  To re-enable, also uncomment code in bc/utils/wagtail_hooks.py
+    "bc.recruitment",
+    "bc.recruitment_api",
     "bc.search",
     "bc.standardpages",
     "bc.users",
@@ -654,3 +656,9 @@ PATTERN_LIBRARY_TEMPLATE_DIR = os.path.join(
 
 # Google Tag Manager ID from env
 GOOGLE_TAG_MANAGER_ID = env.get("GOOGLE_TAG_MANAGER_ID")
+
+
+# Lumesse TalentLink API credentials
+TALENTLINK_API_KEY = env.get("TALENTLINK_API_KEY")
+TALENTLINK_API_PASSWORD = env.get("TALENTLINK_API_PASSWORD")
+TALENTLINK_API_USERNAME = env.get("TALENTLINK_API_USERNAME")
