@@ -14,9 +14,9 @@ transport = ZeepAPIKeyTransport(
 zeep_settings = Settings(strict=False, xml_huge_tree=True)
 
 
-def get_client():
+def get_client(wsdl=TALENTLINK_API_WSDL):
     return Client(
-        TALENTLINK_API_WSDL,
+        wsdl,
         settings=zeep_settings,
         transport=transport,
         wsse=UsernameToken(

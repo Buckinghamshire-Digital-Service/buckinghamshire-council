@@ -3,6 +3,7 @@
 django-extensions==2.1.6
 Werkzeug==0.14.1
 stellar==0.4.5
+responses==0.10.9
 
 # Remember to update a version in .gitlab-ci.yml
 flake8==3.7.7

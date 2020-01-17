@@ -1,11 +1,40 @@
+import pathlib
 from unittest.mock import MagicMock
 
 from django.test import TestCase, override_settings
 
+import responses
 from lxml import etree
 
 from bc.recruitment_api.client import get_client
+from bc.recruitment_api.constants import TALENTLINK_API_WSDL
 from bc.recruitment_api.transports import ZeepAPIKeyTransport
+
+wsdl_file_path = pathlib.Path(__file__).parent / "wsdl.xml"
+
+
+class ClientTestMixin:
+    def get_client(self):
+        wsdl_file_path = pathlib.Path(__file__).parent / "wsdl.xml"
+        wsdl_file_url = f"file://{wsdl_file_path}"
+        return get_client(wsdl=wsdl_file_url)
+
+
+class ClientTest(TestCase, ClientTestMixin):
+    @responses.activate
+    def test_creating_normal_client_calls_url(self):
+        with open(wsdl_file_path, "r") as f:
+            xml = f.read()
+        responses.add(
+            responses.GET, TALENTLINK_API_WSDL, xml, status=200, content_type="text/xml"
+        )
+        get_client()
+        self.assertEqual(len(responses.calls), 1)
+
+    @responses.activate
+    def test_creating_our_client_does_not_call_url(self):
+        self.get_client()
+        self.assertEqual(len(responses.calls), 0)
 
 
 class TransportTest(TestCase):
