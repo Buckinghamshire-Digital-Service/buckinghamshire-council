@@ -7,6 +7,7 @@
 - 67 Enabled News and Events apps. Add latest news and events to homepage.
 - 76 Homepage temporary banner
 - 84 Site wide alpha banner
+- 43, 71 Inline Index page
 
 ## 1.1 (2019-12-19)
 

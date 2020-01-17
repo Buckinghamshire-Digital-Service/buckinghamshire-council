@@ -1,0 +1,31 @@
+context:
+  page:
+    id: 123
+    is_inline_index: True
+    subtitle: Introduction
+    # is_inline_index_child: True
+    get_parent:
+      title: Council Tax
+    title: Council Tax
+    body: "Here's some richtext content"
+    get_index:
+      - id: 123
+        subtitle: Introduction
+      - Working out your Council Tax
+      - Who has to pay
+      - Discounts for full-time students
+      - Discounts for disabled people
+    # get_prev_page: Test
+    get_next_page: Working out your Council Tax
+
+tags:
+  sidebar:
+    '':
+      template_name: 'patterns/molecules/navigation/sidebar.html'
+  pageurl:
+    link:
+      raw: '#'
+    prev_sibling:
+      raw: '#'
+    next_sibling:
+      raw: '#'
