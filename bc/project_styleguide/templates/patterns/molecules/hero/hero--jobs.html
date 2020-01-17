@@ -7,7 +7,7 @@
 
         <div class="hero__search">
             <form action="{% url 'search' %}" method="get" role="search" class="form form--hero-search form--jobs-hero">
-                <input class="input" id="search--hero" type="text" placeholder="Search jobs, e.g. “Teacher in Aylesbury”" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
+                <input class="input" id="search--hero" type="text" placeholder="{{page.search_box_placeholder}}" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
                 <label class="u-sr-only" for="search--hero">Search jobs</label>
                 <button class="button button--search button--hero" type="submit" aria-label="Search">
                     <svg class="button__icon" aria-hidden="true">

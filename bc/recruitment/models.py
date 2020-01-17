@@ -23,6 +23,11 @@ class RecruitmentHomePage(BasePage):
     hero_image = models.ForeignKey(
         "images.CustomImage", null=True, related_name="+", on_delete=models.SET_NULL,
     )
+    search_box_placeholder = models.CharField(
+        max_length=255,
+        default="Search jobs, e.g. “Teacher in Aylesbury”",
+        help_text="eg. Search jobs, e.g. “Teacher in Aylesbury”",
+    )
     body = StreamField(
         blocks.StreamBlock(
             [
@@ -49,7 +54,12 @@ class RecruitmentHomePage(BasePage):
 
     content_panels = BasePage.content_panels + [
         MultiFieldPanel(
-            [FieldPanel("hero_title"), ImageChooserPanel("hero_image")], "Hero",
+            [
+                FieldPanel("hero_title"),
+                ImageChooserPanel("hero_image"),
+                FieldPanel("search_box_placeholder"),
+            ],
+            "Hero",
         ),
         StreamFieldPanel("body"),
     ]
