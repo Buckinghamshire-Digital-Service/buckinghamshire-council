@@ -5,6 +5,7 @@
 - 66 Update Call to Action snippet to support multiple links
 - 47 Search results to display local area links where applicable
 - 76 Homepage temporary banner
+- 59 Jobs homepage
 
 ## 1.1 (2019-12-19)
 
