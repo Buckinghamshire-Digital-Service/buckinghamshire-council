@@ -6,6 +6,7 @@
 - 47 Search results to display local area links where applicable
 - 67 Enabled News and Events apps. Add latest news and events to homepage.
 - 76 Homepage temporary banner
+- 59 Jobs homepage
 
 ## 1.1 (2019-12-19)
 
