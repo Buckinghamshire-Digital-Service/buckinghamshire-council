@@ -19,6 +19,9 @@
                         {% if subpage.listing_summary %}
                             <p class="card__summary">{{ subpage.listing_summary }}</p>
                         {% endif %}
+                        {% if subpage.redirect_to %}
+                            <p class="card__summary">This links to an external site.</p>
+                        {% endif %}
                     </a>
                 {% endfor %}
             </div>
@@ -35,6 +38,9 @@
                         </a>
                         {% if subpage.listing_summary %}
                             <p class="listing__summary">{{ subpage.listing_summary }}</p>
+                        {% endif %}
+                        {% if subpage.redirect_to %}
+                            <p class="listing__summary">This links to an external site.</p>
                         {% endif %}
                     </article>
                 {% endfor %}

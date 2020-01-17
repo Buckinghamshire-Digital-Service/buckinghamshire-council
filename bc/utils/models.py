@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 
 from wagtail.admin.edit_handlers import (
@@ -289,10 +290,35 @@ class SiteBannerSettings(BaseSetting):
 @method_decorator(get_default_cache_control_decorator(), name="serve")
 class BasePage(SocialFields, ListingFields, Page):
     show_in_menus_default = True
+    redirect_to = models.URLField(
+        blank=True,
+        verbose_name="Redirect to external URL",
+        help_text="Entering a URL here will prevent the page from being visited, and will instead redirect the user.",
+    )
 
     class Meta:
         abstract = True
 
     promote_panels = (
-        Page.promote_panels + SocialFields.promote_panels + ListingFields.promote_panels
+        # extend Page.promote_panels
+        [
+            MultiFieldPanel(
+                [
+                    FieldPanel("slug"),
+                    FieldPanel("seo_title"),
+                    FieldPanel("show_in_menus"),
+                    FieldPanel("search_description"),
+                    FieldPanel("redirect_to"),
+                ],
+                "Common page configuration",
+            )
+        ]
+        + SocialFields.promote_panels
+        + ListingFields.promote_panels
     )
+
+    def serve(self, request, *args, **kwargs):
+        if self.redirect_to and not getattr(request, "is_preview", False):
+            return HttpResponseRedirect(self.redirect_to)
+
+        return super().serve(request, *args, **kwargs)
