@@ -3,16 +3,16 @@
 {% if paginator_page.paginator.num_pages > 1 %}
     <nav class="pagination" role="navigation" aria-label="Pagination">
         <ul class="pagination__list">
-            <li class="pagination__item">
-                {% if paginator_page.has_previous %}
+            {% if paginator_page.has_previous %}
+                <li class="pagination__item">
                     <a class="pagination__link pagination__link--previous" href="{% pagination_link paginator_page.previous_page_number %}" class="previous">
                         <svg class="pagination__icon pagination__icon--previous icon icon--stroke" aria-hidden="true">
                             <use xlink:href="#arrow"></use>
                         </svg>
                         <span class="pagination__link-text">Previous</span>
                     </a>
-                {% endif %}
-            </li>
+                </li>
+            {% endif %}
 
             {% for page_number in paginator_page.paginator.page_range|slice_pagination:paginator_page.number %}
                 <li class="pagination__item">
@@ -28,16 +28,16 @@
                 </li>
             {% endfor %}
 
-            <li class="pagination__item">
-                {% if paginator_page.has_next %}
+            {% if paginator_page.has_next %}
+                <li class="pagination__item">
                     <a class="pagination__link pagination__link--next" href="{% pagination_link paginator_page.next_page_number %}" class="next">
                         <span class="pagination__link-text">Next</span>
                         <svg class="pagination__icon pagination__icon--next icon icon--stroke" aria-hidden="true">
                             <use xlink:href="#arrow"></use>
                         </svg>
                     </a>
-                {% endif %}
-            </li>
+                </li>
+            {% endif %}
         </ul>
     </nav>
 {% endif %}
