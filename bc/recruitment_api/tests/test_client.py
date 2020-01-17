@@ -1,6 +1,8 @@
 import pathlib
 from unittest.mock import MagicMock
 
+from django.conf import settings
+from django.core.cache import caches
 from django.test import TestCase, override_settings
 
 import responses
@@ -73,7 +75,7 @@ class TransportTest(TestCase):
     TALENTLINK_API_USERNAME="eggs_username:ham:FO",
     TALENTLINK_API_PASSWORD="sausage",
 )
-class AuthenticationTest(TestCase):
+class AuthenticationTest(TestCase, ClientTestMixin):
     def setUp(self):
         expected = """
         <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
@@ -95,7 +97,7 @@ class AuthenticationTest(TestCase):
         self.expected = "".join([x.strip() for x in expected.splitlines()])
 
     def test_api_key(self):
-        client = get_client()
+        client = self.get_client()
 
         root = client.create_message(
             client.service, "getAdvertisementsByPage", pageNumber=1
@@ -106,7 +108,7 @@ class AuthenticationTest(TestCase):
         )
 
     def test_api_key_with_request(self):
-        client = get_client()
+        client = self.get_client()
         client.transport.post = MagicMock()
         try:
             client.service.getAdvertisementsByPage(1)
@@ -125,6 +127,42 @@ class AuthenticationTest(TestCase):
         )
 
 
-class ZeepCacheTest(TestCase):
-    # TODO
-    pass
+@override_settings(
+    CACHES={"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}}
+)
+class ZeepCacheTest(TestCase, ClientTestMixin):
+    def setUp(self):
+        with open(wsdl_file_path, "r") as f:
+            xml = f.read()
+        responses.add(
+            responses.GET, TALENTLINK_API_WSDL, xml, status=200, content_type="text/xml"
+        )
+        cache_name = getattr(settings, "ZEEP_DJANGO_CACHE_NAME", "default")
+        self.cache = caches[cache_name]
+        self.cache.clear()
+
+    @responses.activate
+    def test_cache_is_initially_empty(self):
+        self.assertEqual(self.cache.get(TALENTLINK_API_WSDL), None)
+
+    @responses.activate
+    def test_cache_is_set(self):
+        get_client()  # NB the real one
+        self.assertNotEqual(self.cache.get(TALENTLINK_API_WSDL), None)
+
+    @responses.activate
+    def test_cache_is_used(self):
+        get_client()  # NB the real one
+        self.assertEqual(len(responses.calls), 1)
+
+        get_client()  # NB the real one
+        self.assertEqual(len(responses.calls), 1)
+
+    @responses.activate
+    def test_cache_is_reused_once_expired(self):
+        get_client()  # NB the real one
+        self.assertEqual(len(responses.calls), 1)
+
+        self.cache.clear()
+        get_client()  # NB the real one
+        self.assertEqual(len(responses.calls), 2)
