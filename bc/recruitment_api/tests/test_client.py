@@ -45,20 +45,7 @@ class TransportTest(TestCase):
     TALENTLINK_API_PASSWORD="sausage",
 )
 class AuthenticationTest(TestCase):
-    def test_api_key(self):
-        client = get_client()
-        client.transport.post = MagicMock()
-        try:
-            client.service.getAdvertisementsByPage(1)
-        except Exception:  # We expect this, it receives no response
-            pass
-        name, args, kwargs = client.transport.post.mock_calls[0]
-        url, body, headers = args
-        root = etree.fromstring(body)
-        nsmap = {}
-        for el in root.iter():
-            nsmap.update(el.nsmap)
-
+    def setUp(self):
         expected = """
         <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
             <soap-env:Header>
@@ -76,8 +63,39 @@ class AuthenticationTest(TestCase):
             </soap-env:Body>
         </soap-env:Envelope>
         """  # noqa
-        expected = "".join([x.strip() for x in expected.splitlines()])
+        self.expected = "".join([x.strip() for x in expected.splitlines()])
+
+    def test_api_key(self):
+        client = get_client()
+
+        root = client.create_message(
+            client.service, "getAdvertisementsByPage", pageNumber=1
+        )
+        self.assertEqual(
+            etree.tostring(root),
+            etree.tostring(etree.fromstring(self.expected.encode())),
+        )
+
+    def test_api_key_with_request(self):
+        client = get_client()
+        client.transport.post = MagicMock()
+        try:
+            client.service.getAdvertisementsByPage(1)
+        except Exception:  # We expect this, it receives no response
+            pass
+        name, args, kwargs = client.transport.post.mock_calls[0]
+        url, body, headers = args
+        root = etree.fromstring(body)
+        nsmap = {}
+        for el in root.iter():
+            nsmap.update(el.nsmap)
 
         self.assertEqual(
-            etree.tostring(root), etree.tostring(etree.fromstring(expected.encode()))
+            etree.tostring(root),
+            etree.tostring(etree.fromstring(self.expected.encode())),
         )
+
+
+class ZeepCacheTest(TestCase):
+    # TODO
+    pass
