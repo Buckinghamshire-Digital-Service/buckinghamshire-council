@@ -4,7 +4,9 @@ from unittest import mock
 from django.core.management import call_command
 from django.test import TestCase
 
-from .fixtures import TalentLinkJobFactory, advertisement, no_further_pages_response
+from bc.recruitment.tests.fixtures import TalentLinkJobFactory
+
+from .fixtures import advertisement, no_further_pages_response
 
 
 @mock.patch("bc.recruitment_api.management.commands.import_jobs.get_client")
