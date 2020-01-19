@@ -7,7 +7,8 @@
         margin: 0 0 0 $grid--large;
     }
 
-    .template-news-page & {
+    .template-news-page &,
+    .template-news-index & {
         @include media-query(tablet-landscape) {
             flex: 0 0 220px;
         }

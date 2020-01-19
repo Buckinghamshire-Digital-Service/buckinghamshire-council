@@ -2,46 +2,45 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-<div class="wrapper wrapper--flex">
-    <section class="section section--main">
-        <h1>{{ page.title }}</h1>
 
-        {% if news %}
-            <ul role="list">
-                {% for n in news %}
-                    <li>
-                        <a href="{% pageurl n %}">
-                            {% if n.listing_image %}
-                                {% image n.listing_image fill-450x300 %}
-                            {% endif %}
-                            <div>
-                                <h2 role="listitem">
-                                    {% firstof n.listing_title n.title %}
-                                </h2>
-                                <span>{{ n.display_date }}</span>
+    <div class="wrapper wrapper--flex news">
+        <section class="section section--main">
+            <h1 class="heading heading--xxl">{{ page.title }}</h1>
+
+            {% if news %}
+                <ul class="news-index" role="list">
+                    {% for n in news %}
+                        <li class="news-index__item">
+                            <div class="news-index__content">
+                                <a class="news-index__link" href="{% pageurl n %}">
+                                    <h2 class="heading heading--m news-index__title" role="listitem">
+                                        {% firstof n.listing_title n.title %}
+                                    </h2>
+                                </a>
+
                                 {% if n.listing_summary or n.introduction %}
-                                    <p>{% firstof n.listing_summary n.introduction %}</p>
+                                    <p class="news-index__summary">{% firstof n.listing_summary n.introduction %}</p>
                                 {% endif %}
+
+                                <span class="news-index__date">{{ n.display_date|date:"d F Y" }}</span>
                             </div>
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-            {% include "patterns/molecules/pagination/pagination.html" with paginator_page=news %}
-        {% else %}
-            {# no items #}
-        {% endif %}
-    </section>
-    <aside class="sidebar sidebar--filters">
-        <form method="GET">
-            <select name="news_type">
-                <option value="">All</option>
-                {% for news_type in news_types %}
-                    <option value="{{ news_type.0 }}" {% if request.GET.news_type == news_type.0|slugify %}selected="selected"{% endif %}>{{ news_type.1 }}</option>
-                {% endfor %}
-            </select>
-            <input type="submit" value="Filter">
-        </form>
-    </aside>
-</div>
+
+                            {% if n.listing_image %}
+                                <div class="news-index__image">
+                                    {% image n.listing_image fill-510x270 %}
+                                </div>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                {% include "patterns/molecules/pagination/pagination.html" with paginator_page=news %}
+
+            {% else %}
+                {# no items #}
+            {% endif %}
+        </section>
+
+        {% include "patterns/molecules/navigation/sidebar.html" with related_pages=page.related_pages.all sidebar_title="Related resources" %}
+    </div>
 {% endblock %}
