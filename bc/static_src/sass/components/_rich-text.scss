@@ -31,4 +31,8 @@
     li {
         margin-bottom: 5px;
     }
+
+    p {
+        @include font-size(s);
+    }
 }

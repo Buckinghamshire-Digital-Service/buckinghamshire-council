@@ -1,0 +1,10 @@
+.news {
+    &__published {
+        color: $color--grey-accessible;
+        margin-bottom: $grid--large;
+    }
+
+    &__intro {
+        @include font-size(m);
+    }
+}

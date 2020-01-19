@@ -89,6 +89,7 @@ small {
 
     &--xxl {
         @include font-size(xl);
+        line-height: 1.2;
         margin-bottom: $grid;
 
         @include media-query(mob-landscape) {

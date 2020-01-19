@@ -2,7 +2,13 @@
 
 <aside class="sidebar">
     {% if page.related_pages.all %}
-        <h2 class="sidebar__heading heading heading--m">Related content</h2>
+        <h2 class="sidebar__heading heading heading--m">
+            {% if sidebar_title %}
+                {{ sidebar_title }}
+            {% else %}
+                Related content
+            {% endif %}
+        </h2>
 
         <ul class="sidebar__link-list">
             {% for related in page.related_pages.all %}

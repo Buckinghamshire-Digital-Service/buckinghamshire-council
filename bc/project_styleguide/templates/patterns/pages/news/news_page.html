@@ -2,20 +2,17 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-<div class="wrapper wrapper--small">
+    <div class="wrapper wrapper--flex news">
+        <section class="section section--main">
 
-    <h1>{{ page.title }}</h1>
-    <p>{{ page.display_date }}</p>
-    <p>{{ page.introduction }}</p>
+            <h1 class="heading heading--xxl">{{ page.title }}</h1>
 
-    <section class="main-body">
-        {% include_block page.body %}
-    </section>
+            <p class="news__published">{{ page.display_date }}</p>
+            <p class="news__intro">{{ page.introduction }}</p>
 
-    {% include "patterns/molecules/share/share.html" %}
+            {% include_block page.body %}
+        </section>
 
-</div>
-
-{% include "patterns/molecules/relatedcontent/relatedcontent.html" with related_documents=page.related_documents.all related_pages=page.related_pages.all %}
-
+        {% include "patterns/molecules/navigation/sidebar.html" with related_pages=page.related_pages.all sidebar_title="Related resources" %}
+    </div>
 {% endblock %}

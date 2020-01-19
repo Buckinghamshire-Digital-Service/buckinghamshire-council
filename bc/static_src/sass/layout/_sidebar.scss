@@ -7,9 +7,16 @@
         margin: 0 0 0 $grid--large;
     }
 
+    .template-news-page & {
+        @include media-query(tablet-landscape) {
+            flex: 0 0 220px;
+        }
+    }
+
     &__heading {
         border-top: $border--accent $color--grey-dark;
         padding-top: $grid--small;
+        margin-bottom: $grid--small;
     }
 
     &__link {
