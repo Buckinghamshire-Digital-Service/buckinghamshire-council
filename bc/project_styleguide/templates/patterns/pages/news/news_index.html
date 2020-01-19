@@ -25,11 +25,11 @@
                                 <span class="news-index__date">{{ n.display_date|date:"d F Y" }}</span>
                             </div>
 
-                            {% if n.listing_image %}
-                                <div class="news-index__image">
-                                    {% image n.listing_image fill-510x270 %}
-                                </div>
-                            {% endif %}
+                            <div class="news-index__image {% if not n.listing_image %}news-index__image--empty{% endif %}">
+                                {% if n.listing_image %}
+                                    {% image n.listing_image fill-500x250 %}
+                                {% endif %}
+                            </div>
                         </li>
                     {% endfor %}
                 </ul>

@@ -7,6 +7,7 @@
 
         @include media-query(px550) {
             flex-direction: row;
+            align-items: flex-start;
         }
     }
 
@@ -21,11 +22,25 @@
 
     &__image {
         margin-bottom: $grid--small;
+        background-image: url('../images/listing-image-default.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
 
         @include media-query(px550) {
+            width: 290px;
+            height: 145px;
             flex-shrink: 0;
             margin-bottom: 0;
             margin-left: $grid;
+        }
+
+        &--empty {
+            display: none;
+
+            @include media-query(px550) {
+                display: flex;
+            }
         }
 
         img {
