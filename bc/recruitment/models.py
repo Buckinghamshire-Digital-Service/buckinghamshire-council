@@ -1,6 +1,8 @@
 from django.db import models
+from django.shortcuts import get_object_or_404, render
 
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
+from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.core import blocks
 from wagtail.core.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
@@ -38,7 +40,7 @@ class TalentLinkJob(models.Model):
         return f"{self.job_number}: {self.title}"
 
 
-class RecruitmentHomePage(BasePage):
+class RecruitmentHomePage(RoutablePageMixin, BasePage):
     template = "patterns/pages/home/home_page--jobs.html"
 
     # Only allow creating HomePages at the root level
@@ -90,3 +92,8 @@ class RecruitmentHomePage(BasePage):
         ),
         StreamFieldPanel("body"),
     ]
+
+    @route(r"^job_detail/(\w+)/$")
+    def job_detail(self, request, job_number):
+        page = get_object_or_404(TalentLinkJob, job_number=job_number)
+        return render(request, "patterns/pages/jobs/job_detail.html", {"page": page})
