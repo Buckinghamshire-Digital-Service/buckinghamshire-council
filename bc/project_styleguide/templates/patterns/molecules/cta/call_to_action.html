@@ -9,7 +9,13 @@
 
             {{ call_to_action.summary|richtext }}
 
-            <p><a href="{{ call_to_action.get_link_url }}">{{ call_to_action.get_link_text }}</a></p>
+            {% for block in call_to_action.link %}
+                {% if block.block_type == 'external_link' %}
+                    <p><a href="{{ block.value.url }}">{{ block.value.title }}</a></p>
+                {% elif block.block_type == 'internal_link'%}
+                    <p><a href="{% pageurl block.value.page %}">{% firstof block.value.title block.value.page.title %}</a></p>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 {% endif %}

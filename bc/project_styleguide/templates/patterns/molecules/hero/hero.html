@@ -20,8 +20,8 @@
     </div>
 </div>
 
-{% if alert %}
+{% if page.alert_title and page.alert_message %}
     <div class="wrapper wrapper--large">
-        {% include "patterns/molecules/alerts/alert-message.html" %}
+        {% include "patterns/molecules/alerts/alert-message.html" with title=page.alert_title body=page.alert_message %}
     </div>
 {% endif %}

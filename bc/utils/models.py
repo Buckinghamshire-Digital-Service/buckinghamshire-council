@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 
 from wagtail.admin.edit_handlers import (
@@ -203,7 +204,6 @@ class CallToActionSnippet(models.Model):
                     ),
                 ),
             ],
-            max_num=1,
             required=True,
         ),
         blank=True,
@@ -215,29 +215,6 @@ class CallToActionSnippet(models.Model):
         ImageChooserPanel("image"),
         StreamFieldPanel("link"),
     ]
-
-    def get_link_text(self):
-        # Link is required, so we should always have
-        # an element with index 0
-        block = self.link[0]
-
-        title = block.value["title"]
-        if block.block_type == "external_link":
-            return title
-
-        # Title is optional for internal_link
-        # so fallback to page's title, if it's empty
-        return title or block.value["page"].title
-
-    def get_link_url(self):
-        # Link is required, so we should always have
-        # an element with index 0
-        block = self.link[0]
-
-        if block.block_type == "external_link":
-            return block.value["url"]
-
-        return block.value["page"].get_url()
 
     def __str__(self):
         return self.title
@@ -288,14 +265,60 @@ class SystemMessagesSettings(BaseSetting):
     ]
 
 
+@register_setting
+class SiteBannerSettings(BaseSetting):
+    class Meta:
+        verbose_name = "Site banner"
+
+    show_banner = models.BooleanField(
+        default=False,
+        help_text="When set to True, the banner will be displayed on all pages of "
+        + "the site except for homepage. For homepage, please use the alert fields on homepage.",
+    )
+    label = models.CharField("Alert label", max_length=255)
+    body = RichTextField("Text", features=RICH_TEXT_FEATURES,)
+
+    panels = [
+        MultiFieldPanel(
+            [FieldPanel("show_banner"), FieldPanel("label"), FieldPanel("body")],
+            "Banner",
+        )
+    ]
+
+
 # Apply default cache headers on this page model's serve method.
 @method_decorator(get_default_cache_control_decorator(), name="serve")
 class BasePage(SocialFields, ListingFields, Page):
     show_in_menus_default = True
+    redirect_to = models.URLField(
+        blank=True,
+        verbose_name="Redirect to external URL",
+        help_text="Entering a URL here will prevent the page from being visited, and will instead redirect the user.",
+    )
 
     class Meta:
         abstract = True
 
     promote_panels = (
-        Page.promote_panels + SocialFields.promote_panels + ListingFields.promote_panels
+        # extend Page.promote_panels
+        [
+            MultiFieldPanel(
+                [
+                    FieldPanel("slug"),
+                    FieldPanel("seo_title"),
+                    FieldPanel("show_in_menus"),
+                    FieldPanel("search_description"),
+                    FieldPanel("redirect_to"),
+                ],
+                "Common page configuration",
+            )
+        ]
+        + SocialFields.promote_panels
+        + ListingFields.promote_panels
     )
+
+    def serve(self, request, *args, **kwargs):
+        if self.redirect_to and not getattr(request, "is_preview", False):
+            return HttpResponseRedirect(self.redirect_to)
+
+        return super().serve(request, *args, **kwargs)
