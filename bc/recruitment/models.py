@@ -12,6 +12,7 @@ class TalentLinkJob(models.Model):
     salary_range = models.CharField(max_length=255)
     working_hours = models.CharField(max_length=255)
     closing_date = models.DateField()
+    expected_start_date = models.DateField(null=True)
 
     contact_email = models.EmailField()
 
