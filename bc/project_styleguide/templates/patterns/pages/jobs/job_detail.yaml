@@ -1,0 +1,12 @@
+context:
+  page:
+    title: Test info page
+    location: County wide
+
+tags:
+  include_block:
+    page.body:
+      template_name: 'patterns/molecules/streamfield/stream_block.html'
+  sidebar:
+    '':
+      template_name: 'patterns/molecules/jobs-sidebar/jobs-sidebar.html'

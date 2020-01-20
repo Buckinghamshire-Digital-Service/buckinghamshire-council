@@ -1,0 +1,65 @@
+.search-filters {
+    $root: &;
+    width: 290px;
+    margin: $grid--min $grid $grid--large 0;
+    padding: $grid--small;
+    background: $color--grey-light;
+    border-bottom: $border--accent $color--primary;
+
+    &__fieldset {
+        margin-bottom: $grid;
+    }
+
+    &__label {
+        cursor: pointer;
+        display: flex;
+        padding: 5px 0;
+
+        #{$hover-states} {
+            #{$root}__dummy-checkbox {
+                box-shadow: 0 0 0 5px rgba($color--black, 0.3);
+            }
+        }
+    }
+
+    &__checkbox {
+        @include hidden();
+
+        &:checked {
+            + #{$root}__label {
+                #{$root}__check-icon {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    &__check-icon {
+        width: 20px;
+        height: 20px;
+        opacity: 0;
+        transition: opacity $transition;
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        fill: $color--default;
+    }
+
+    &__dummy-checkbox {
+        position: relative;
+        display: block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid $color--default;
+        background: $color--white;
+        margin-right: $grid--min;
+        box-shadow: none;
+        transition: box-shadow $transition;
+    }
+
+    &__count {
+        @include font-size(xxs);
+        margin-left: 3px;
+        align-self: center;
+    }
+}
