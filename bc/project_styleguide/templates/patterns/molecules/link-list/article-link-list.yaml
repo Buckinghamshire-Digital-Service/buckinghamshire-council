@@ -1,0 +1,10 @@
+context:
+  heading: News
+  url: '#'
+  articles:
+    - title: Wendover bypass resurfacing nears completion
+      display_date: !!timestamp '2019-11-16'
+    - title: TfBs Street lighting team = ready for the longer nights
+      display_date: !!timestamp '2019-11-14'
+    - title: Get ready for brexit
+      display_date: !!timestamp '2019-11-11'

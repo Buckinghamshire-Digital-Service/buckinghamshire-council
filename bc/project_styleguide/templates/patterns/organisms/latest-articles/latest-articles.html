@@ -1,0 +1,19 @@
+{% load wagtailcore_tags %}
+
+{% if news_index or event_index %}
+<section class="latest-articles">
+    {% if news_index %}
+    <div class="latest-articles__section latest-articles__section--news">
+        {% pageurl news_index as news_index_url %}
+        {% include "patterns/molecules/link-list/article-link-list.html" with heading="News" url=news_index_url articles=latest_news %}
+    </div>
+    {% endif %}
+
+    {% if event_index %}
+    <div class="latest-articles__section latest-articles__section--events">
+        {% pageurl event_index as event_index_url %}
+        {% include "patterns/molecules/link-list/article-link-list.html" with heading="Events" url=event_index_url articles=latest_events %}
+    </div>
+    {% endif %}
+</section>
+{% endif %}

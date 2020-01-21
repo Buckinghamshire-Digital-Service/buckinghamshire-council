@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+## 2.0 (2020-01-21)
+
+- 26 Add GOV.UK Notify email backend
+- 79 Redirect-to field on all pages
+- 66 Update Call to Action snippet to support multiple links
+- 47 Search results to display local area links where applicable
+- 67 Enabled News and Events apps. Add latest news and events to homepage.
+- 76 Homepage temporary banner
+- 86 Amend Local Area Links postscript default text
+- 84 Site wide alpha banner
+- 43, 71 Inline Index page
+
 ## 1.1 (2019-12-19)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/1.0...1.1

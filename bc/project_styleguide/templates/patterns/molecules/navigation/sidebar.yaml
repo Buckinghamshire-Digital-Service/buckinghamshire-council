@@ -1,11 +1,22 @@
 context:
-  children:
-    - title: Page 1
-    - title: Page 2
-    - title: Page 3
-    - title: Page 4
+  page:
+    related_pages:
+      all:
+        - page:
+            live: true
+            specific:
+              title: Page title
+        - page:
+            live: true
+            specific:
+              title: Page title
+              listing_title: Listing title
+        - page:
+            live: true
+            specific:
+              title: Page title
 
 tags:
   pageurl:
-    child:
+    specific_related_page:
       raw: '#'

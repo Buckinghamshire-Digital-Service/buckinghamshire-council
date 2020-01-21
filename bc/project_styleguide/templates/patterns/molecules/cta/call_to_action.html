@@ -1,25 +1,21 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
-{% comment %}
 
-This template can be used in different places. In streamfield block
-or directly in a page template. To use this template pass `call_to_action` into context.
-
-Example:
-    {% include "patterns/molecules/cta/call_to_action.html" with call_to_action=call_to_action %}
-
-{% endcomment %}
-
+{% image call_to_action.image min-1024x340 as image %}
 {% if call_to_action %}
-    <div class="call-to-action">
+    <div class="highlighted-content" style="background-image: url('{{ image.url }}');">
+        <div class="highlighted-content__content">
+            <h2 class="highlighted-content__title heading heading--xl">{{ call_to_action.title }}</h2>
 
-        <h2>{{ call_to_action.title }}</h2>
+            {{ call_to_action.summary|richtext }}
 
-        {{ call_to_action.summary|richtext }}
-
-        {% image call_to_action.image fill-450x300 %}
-
-        <p><a href="{{ call_to_action.get_link_url }}">{{ call_to_action.get_link_text }}</a></p>
-
+            {% for block in call_to_action.link %}
+                {% if block.block_type == 'external_link' %}
+                    <p><a href="{{ block.value.url }}">{{ block.value.title }}</a></p>
+                {% elif block.block_type == 'internal_link'%}
+                    <p><a href="{% pageurl block.value.page %}">{% firstof block.value.title block.value.page.title %}</a></p>
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
 {% endif %}

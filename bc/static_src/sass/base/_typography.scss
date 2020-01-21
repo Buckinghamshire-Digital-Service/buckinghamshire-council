@@ -41,15 +41,6 @@ h2,
 h3,
 h4,
 h5,
-h6 {
-    margin: 0 0 1rem;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
 h6,
 .heading-text {
     @include heading-text();
@@ -65,19 +56,15 @@ blockquote {
 }
 
 // Default sizes
-h1 {
-    @include font-size(xl);
-}
-
-h2 {
-    @include font-size(l);
-}
-
+h1,
+h2,
 h3,
 h4,
 h5,
 h6 {
-    @include font-size(m);
+    @include font-size(xs);
+    font-weight: $weight--normal;
+    margin: 0;
 }
 
 small {
@@ -85,7 +72,10 @@ small {
 }
 
 .heading {
-    &--hero {
+    font-weight: $weight--bold;
+    margin-bottom: $grid--min;
+
+    &--xxxl {
         @include font-size(xl);
 
         @include media-query(mob-landscape) {
@@ -97,7 +87,7 @@ small {
         }
     }
 
-    &--first {
+    &--xxl {
         @include font-size(xl);
         margin-bottom: $grid;
 
@@ -106,15 +96,20 @@ small {
         }
     }
 
-    &--second {
+    &--xl {
+        @include font-size(xl);
+    }
+
+    &--l {
         @include font-size(l);
     }
 
-    &--third {
+    &--m {
         @include font-size(m);
+        margin-bottom: 5px;
     }
 
-    &--fourth {
+    &--s {
         @include font-size(s);
     }
 }

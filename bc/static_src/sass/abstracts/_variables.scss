@@ -7,8 +7,8 @@ $color--off-black: #141414;
 $color--red: #d4351c;
 $color--border: rgba($color--off-black, 0.2);
 
-$color--river: #233b8e;
-$color--lake: #304da3;
+$color--river: #2c2d84;
+$color--lake: #233b8e;
 $color--sky: #1065a3;
 $color--grape: #3e2d73;
 $color--leaf: #80ad34;
@@ -17,7 +17,7 @@ $color--charcoal: #212121;
 $color--earth: #d0cdc4;
 $color--earth-light: #f7f6f2;
 
-$color--grey-light: #e5e3de;
+$color--grey-light: #efefef;
 $color--grey-medium: #999;
 $color--grey-dark: #858585;
 
@@ -64,20 +64,21 @@ $weight--light: 200;
 $base-font-size: 16px; // 12 in designs
 $base-line-height: 25px;
 $font-sizes: (
-    // 48px = 36 in designs
+    // xxxl = 48px = 36 in designs
         xxxl: 48px,
-    // 43px = 32 in designs
+    // xxl = 43px = 32 in designs
         xxl: 43px,
-    // 28px = 21 in designs // possibly not needed
+    // xl = 28px = 21 in designs
         xl: 28px,
-    // 24px = 18 in designs
+    // l = 24px = 18 in designs
         l: 24px,
-    // 21px = 15.5 in designs
+    // m = 21px = 15.5 in designs
         m: 21px,
-    // 18px = 13.5 in designs
+    // s = 18px = 13.5 in designs
         s: 18px,
-    xs: $base-font-size,
-    // 14px = 10.5 in designs,
+    // xs = 16px = 12 in designs
+        xs: $base-font-size,
+    // xxs = 14px = 10.5 in designs,
         xxs: 14px
 );
 
@@ -100,6 +101,7 @@ $breakpoints: (
 // Wrappers
 $site-width: 1024px;
 $wrapper--small: 610px;
+$wrapper--page: 690px;
 
 // Grid setup
 $grid: 30px;

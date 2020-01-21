@@ -1,0 +1,13 @@
+{% load wagtailcore_tags %}
+
+{% with banner_settings=settings.utils.SiteBannerSettings %}
+{% if banner_settings.show_banner %}
+<div class="alert alert--banner">
+    <div class="alert__inner wrapper wrapper--large">
+        <span class="alert__alpha">{{ banner_settings.label }}</span>
+
+        <div class="alert__content">{{ banner_settings.body|richtext }}</div>
+    </div>
+</div>
+{% endif %}
+{% endwith %}

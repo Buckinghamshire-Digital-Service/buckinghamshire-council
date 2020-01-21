@@ -1,11 +1,24 @@
 .section {
     &--main {
-        max-width: $wrapper--small;
         width: 100%;
+        margin-bottom: $grid--large;
+
+        @include media-query(desktop) {
+            max-width: $wrapper--small;
+        }
+
+        @include media-query(desktop) {
+            max-width: $wrapper--small;
+        }
 
         &:only-child {
-            margin: 0 auto;
+            margin: 0 auto $grid--large;
             max-width: none;
         }
+    }
+
+    &--inline-index {
+        border-top: 1px solid $color--grey-medium;
+        padding-top: $grid--small;
     }
 }

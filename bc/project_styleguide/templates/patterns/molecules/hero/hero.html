@@ -1,16 +1,16 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% image page.hero_image min-1600x350 as hero_image %}
-<div class="hero" style="background-image: url('{{ hero_image.url }}');">
+<div class="hero {% if alert %}hero--with-alert{% endif %}" style="background-image: url('{{ hero_image.url }}');">
     <div class="wrapper wrapper--large">
-        <h1 class="hero__strapline heading heading--hero">{{ page.strapline }}</h1>
+        <h1 class="hero__strapline heading heading--xxxl">{{ page.strapline }}</h1>
 
         <div class="hero__search">
             <form action="{% url 'search' %}" method="get" role="search" class="form form--hero-search">
-                <input class="input" id="search" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
-                <label class="u-sr-only" for="search">Search this website</label>
+                <input class="input" id="search--hero" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
+                <label class="u-sr-only" for="search--hero">Search this website</label>
                 <button class="button button--search button--hero" type="submit" aria-label="Search">
-                    <svg class="button__icon" aria-hidden="true">
+                    <svg class="button__icon icon icon--stroke icon--white" aria-hidden="true">
                         <use xlink:href="#magnifying-glass"></use>
                     </svg>
                     <span class="u-sr-only">Search</span>
@@ -19,3 +19,9 @@
         </div>
     </div>
 </div>
+
+{% if page.alert_title and page.alert_message %}
+    <div class="wrapper wrapper--large">
+        {% include "patterns/molecules/alerts/alert-message.html" with title=page.alert_title body=page.alert_message %}
+    </div>
+{% endif %}

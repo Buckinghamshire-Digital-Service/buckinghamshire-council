@@ -1,6 +1,7 @@
-from django.test import TestCase
+from django.test import TestCase, override_settings
+from django.urls import reverse
 
-from wagtail.tests.utils import WagtailPageTests
+from wagtail.tests.utils import WagtailPageTests, WagtailTestUtils
 
 from bc.home.models import HomePage
 
@@ -24,7 +25,7 @@ class IndexPageWagtailPageTests(WagtailPageTests):
         )
 
 
-class IndexPageModelTests(TestCase):
+class IndexPageModelTests(TestCase, WagtailTestUtils):
     def setUp(self):
         """
         Create 1 IndexPage with 3 child_pages
@@ -237,3 +238,26 @@ class IndexPageModelTests(TestCase):
             list(self.index_page.ordinary_pages.values_list("title", flat=True)),
             msg="IndexPage.ordinary_pages should sort by page path (Wagtail explorer custom sort).",
         )
+
+    def test_redirect_field_sends_302_response(self):
+        redirect_page = InformationPageFactory.build(
+            redirect_to="https://www.example.com"
+        )
+        self.index_page.add_child(instance=redirect_page)
+
+        response = self.client.get(redirect_page.url)
+        self.assertEqual(response.status_code, 302)
+
+    @override_settings(ALLOWED_HOSTS=["localhost", "testserver"])
+    def test_redirect_field_sends_normal_response_when_viewing_draft(self):
+        redirect_page = InformationPageFactory.build(
+            redirect_to="https://www.example.com"
+        )
+        self.index_page.add_child(instance=redirect_page)
+
+        # Try getting page draft
+        self.login()
+        response = self.client.get(
+            reverse("wagtailadmin_pages:view_draft", args=(redirect_page.id,))
+        )
+        self.assertEqual(response.status_code, 200)

@@ -1,0 +1,33 @@
+.latest-articles {
+    display: flex;
+    flex-wrap: wrap;
+    margin: $grid--large 0 ($grid--large * 2);
+
+    &__section {
+        width: 100%;
+
+        @include media-query(tablet-portrait) {
+            flex-basis: 50%;
+        }
+
+        &--news {
+            padding-bottom: $grid;
+            margin-bottom: $grid;
+            border-bottom: 2px solid $color--grey-light;
+
+            @include media-query(tablet-portrait) {
+                margin: 0;
+                border: 0;
+                padding: 0;
+                padding-right: $grid;
+            }
+        }
+
+        &--events {
+            @include media-query(tablet-portrait) {
+                padding-left: $grid;
+                border-left: 2px solid $color--grey-light;
+            }
+        }
+    }
+}

@@ -7,20 +7,21 @@
     {% include "patterns/molecules/hero/hero.html" %}
 {% endblock %}
 
+{# Do not show the alert banner on the homepage #}
+{% block alert_banner %}{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
 {% block content %}
     {% include "patterns/organisms/link-block-grid/link-block-grid.html" %}
 
-    <h2>Pages</h2>
-    <ul>
-    {% for section in sections %}
-        <li>
-            <a href="{% pageurl section %}"><h3>{{section.title}}</h3></a>
-            {% for page in section.featured_pages %}
-                <a href="{% pageurl page %}">{{page.title}}</a>
-            {% endfor %}
-        </li>
-    {% endfor %}
-    </ul>
-
     {% include "patterns/molecules/cta/call_to_action.html" with call_to_action=page.call_to_action %}
+
+    {% include "patterns/organisms/latest-articles/latest-articles.html" %}
+{% endblock %}
+
+{% block footer %}
+    {% include "patterns/molecules/subscribe/subscribe.html" %}
+
+    {{ block.super }}
 {% endblock %}

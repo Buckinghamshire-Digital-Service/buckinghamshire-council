@@ -3,7 +3,7 @@
 
 {% block content %}
     <section class="section section--main">
-        <h1 class="heading heading--first">{{ page.title }}</h1>
+        <h1 class="heading heading--xxl">{{ page.title }}</h1>
 
         {% if page.introduction %}
             <p>{{ page.introduction }}</p>
@@ -13,11 +13,14 @@
             <div class="grid grid--index">
                 {% for subpage in featured_pages %}
                     <a class="card" href="{% pageurl subpage %}">
-                        <h2 class="card__title heading heading--fourth" role="listitem">
+                        <h2 class="card__title heading heading--s" role="listitem">
                             {% firstof subpage.listing_title subpage.title %}
                         </h2>
                         {% if subpage.listing_summary %}
                             <p class="card__summary">{{ subpage.listing_summary }}</p>
+                        {% endif %}
+                        {% if subpage.redirect_to %}
+                            <p class="card__summary">This links to an external site.</p>
                         {% endif %}
                     </a>
                 {% endfor %}
@@ -29,12 +32,15 @@
                 {% for subpage in ordinary_pages %}
                     <article class="listing__item">
                         <a class="listing__link" href="{% pageurl subpage %}">
-                            <h2 class="listing__title heading heading--fourth" role="listitem">
+                            <h2 class="listing__title heading heading--s" role="listitem">
                                 {% firstof subpage.listing_title subpage.title %}
                             </h2>
                         </a>
                         {% if subpage.listing_summary %}
                             <p class="listing__summary">{{ subpage.listing_summary }}</p>
+                        {% endif %}
+                        {% if subpage.redirect_to %}
+                            <p class="listing__summary">This links to an external site.</p>
                         {% endif %}
                     </article>
                 {% endfor %}

@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.db.models.functions import Coalesce
+from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
 from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
@@ -78,7 +79,8 @@ class NewsIndex(BasePage):
     subpage_types = ["NewsPage"]
     parent_page_types = ["home.HomePage"]
 
-    def get_context(self, request, *args, **kwargs):
+    @cached_property
+    def news_pages(self):
         news = (
             NewsPage.objects.live()
             .public()
@@ -86,6 +88,10 @@ class NewsIndex(BasePage):
             .annotate(date=Coalesce("publication_date", "first_published_at"))
             .order_by("-date")
         )
+        return news
+
+    def get_context(self, request, *args, **kwargs):
+        news = self.news_pages
 
         if request.GET.get("news_type"):
             news = news.filter(news_types__news_type=request.GET.get("news_type"))

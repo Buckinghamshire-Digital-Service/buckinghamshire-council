@@ -32,13 +32,16 @@
         {% wagtailuserbar %}
 
         <div class="wrapper wrapper--grid">
-            {% block header %}{% endblock %}
+            <div class="wrapper wrapper--header-space">
+                {% block header %}{% endblock %}
+                {% block alert_banner %}{% endblock %}
 
-            {% block breadcrumbs %}
-                <div class="wrapper wrapper--large">
-                    {% include "patterns/molecules/navigation/breadcrumbs.html" %}
-                </div>
-            {% endblock %}
+                {% block breadcrumbs %}
+                    <div class="wrapper wrapper--large">
+                        {% include "patterns/molecules/navigation/breadcrumbs.html" %}
+                    </div>
+                {% endblock %}
+            </div>
 
             <main class="wrapper wrapper--main wrapper--large" id="main-content">
                 {% block content %}
@@ -46,7 +49,9 @@
                 {% endblock %}
             </main>
 
-            {% block footer %}{% endblock %}
+            <div class="wrapper wrapper--footer-space">
+                {% block footer %}{% endblock %}
+            </div>
         </div>
 
         <script type="text/javascript" src="{% static 'js/main.js' %}"></script>

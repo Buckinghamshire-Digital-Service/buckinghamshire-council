@@ -1,22 +1,27 @@
 .icon {
-    width: 20px;
-    height: 20px;
+    $root: &;
+    width: 28px;
+    height: 28px;
     transition: fill $transition;
-    fill: $color--white;
+    fill: $color--link;
 
-    &:hover {
-        fill: darken($color--white, 20%);
+    &--white {
+        fill: $color--white;
     }
 
-    &--home {
-        width: 15px;
-        height: 15px;
-        margin-right: 5px;
-        fill: $color--primary;
+    &--stroke {
+        transition: stroke $transition;
+        stroke: $color--link;
+        fill: transparent;
+
+        &.icon--white {
+            stroke: $color--white;
+        }
     }
 
     &--footer-social {
-        margin-right: $grid;
+        margin-right: 15px;
+        fill: $color--white;
 
         #{$hover-states} {
             fill: $color--grey-medium;
