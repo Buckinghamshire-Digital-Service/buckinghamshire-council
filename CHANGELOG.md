@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 2.0 (2020-01-21)
+
 - 26 Add GOV.UK Notify email backend
 - 79 Redirect-to field on all pages
 - 66 Update Call to Action snippet to support multiple links
