@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- 26 Add GOV.UK Notify email backend
 - 79 Redirect-to field on all pages
 - 66 Update Call to Action snippet to support multiple links
 - 47 Search results to display local area links where applicable
