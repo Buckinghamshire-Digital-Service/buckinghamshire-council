@@ -1,10 +1,10 @@
 context:
   value:
     title: Wendover bypass resurfacing nears completion
-    posted: '16 November 2019'
+    display_date: !!timestamp '2019-11-16'
     location: Buckingham Library
 
 tags:
   pageurl:
-    page:
+    value:
       raw: '#'

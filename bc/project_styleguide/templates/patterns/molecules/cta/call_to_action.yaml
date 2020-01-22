@@ -2,7 +2,19 @@ context:
   call_to_action:
     title: Stub content
     summary: Check out our awesome stub content
-    get_link_text: Click here
-    get_link_url: '#'
+    link:
+      - block_type: external_link
+        value:
+          title: View plans for the new centre
+          url: '#'
+      - block_type: internal_link
+        value:
+          page:
+            title: Participate in the conversation
+
+tags:
+  pageurl:
+    block.value.page:
+      raw: '#'
   image:
     url: http://via.placeholder.com/450x300

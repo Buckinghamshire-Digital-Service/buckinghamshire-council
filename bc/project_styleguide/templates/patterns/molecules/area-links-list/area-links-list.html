@@ -1,3 +1,10 @@
+{% load wagtailcore_tags %}
+
+{% if show_intro %}
+    {% comment %} Show intro for search results {% endcomment %}
+    <div class="area-links__intro">{{ value.introduction|richtext }}</div>
+{% endif %}
+
 <ul class="area-links__list">
     {% if value.aylesbury_vale_url %}
         <li class="area-links__item">

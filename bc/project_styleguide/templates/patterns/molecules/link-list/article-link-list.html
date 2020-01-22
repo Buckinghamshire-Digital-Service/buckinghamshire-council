@@ -2,8 +2,7 @@
     <h2 class="heading heading--l article-link-list__heading">{{ heading }}</h2>
 
     {% for article in articles %}
-        {% include "patterns/atoms/links/article-link.html" %}
+        {% include "patterns/atoms/links/article-link.html" with value=article %}
     {% endfor %}
-
-    <a class="article-link-list__more-link" href="{{ value.url }}">More {{ heading }}</a>
+    <a class="article-link-list__more-link" href="{{ url }}">More {{ heading }}</a>
 </div>
