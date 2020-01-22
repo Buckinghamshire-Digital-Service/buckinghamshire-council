@@ -14,7 +14,7 @@
 stages:
   - build
   - test
-  - deploy
+  - deploy_site
   - pages
 
 # Test if static assets can be built succesfully.
@@ -180,7 +180,7 @@ deploy_staging:
   # We use Debian image because Heroku has a lot of dependencies and is well
   # supported on Debian based distributions.
   image: debian:stretch
-  stage: deploy
+  stage: deploy_site
   variables:
     # Your app's name.
     #   $ heroku apps - t torchbox
@@ -194,7 +194,7 @@ deploy_production:
   # We use Debian image because Heroku has a lot of dependencies and is well
   # supported on Debian based distributions.
   image: debian:stretch
-  stage: deploy
+  stage: deploy_site
   variables:
     # Your app's name.
     #   $ heroku apps - t torchbox
