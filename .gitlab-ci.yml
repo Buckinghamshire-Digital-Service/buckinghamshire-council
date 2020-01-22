@@ -207,8 +207,8 @@ deploy_production:
 pages:
   image: python:3.6
   stage: pages
-  only:
-    - master
+  # only:
+  #   - master
   script:
     # Include CHANGELOG in the docs
     - cp CHANGELOG.md docs/changelog.md
