@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Update CI pipeline stage names and order to make progress clearer
+
 ## 2.1 (2020-01-22)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/2.0...2.1
