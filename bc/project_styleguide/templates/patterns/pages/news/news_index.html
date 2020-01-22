@@ -8,24 +8,24 @@
             <h1 class="heading heading--xxl">{{ page.title }}</h1>
 
             {% if news %}
-                <ul class="news-index" role="list">
+                <ul class="article-index" role="list">
                     {% for n in news %}
-                        <li class="news-index__item">
-                            <div class="news-index__content">
-                                <a class="news-index__link" href="{% pageurl n %}">
-                                    <h2 class="heading heading--m news-index__title" role="listitem">
+                        <li class="article-index__item">
+                            <div class="article-index__content">
+                                <a class="article-index__link" href="{% pageurl n %}">
+                                    <h2 class="heading heading--m article-index__title" role="listitem">
                                         {% firstof n.listing_title n.title %}
                                     </h2>
                                 </a>
 
                                 {% if n.listing_summary or n.introduction %}
-                                    <p class="news-index__summary">{% firstof n.listing_summary n.introduction %}</p>
+                                    <p class="article-index__summary">{% firstof n.listing_summary n.introduction %}</p>
                                 {% endif %}
 
-                                <span class="news-index__date">{{ n.display_date|date:"d F Y" }}</span>
+                                <span class="article-index__date">{{ n.display_date|date:"d F Y" }}</span>
                             </div>
 
-                            <div class="news-index__image {% if not n.listing_image %}news-index__image--empty{% endif %}">
+                            <div class="article-index__image {% if not n.listing_image %}article-index__image--empty{% endif %}">
                                 {% if n.listing_image %}
                                     {% image n.listing_image fill-500x250 %}
                                 {% endif %}
@@ -41,6 +41,6 @@
             {% endif %}
         </section>
 
-        {% include "patterns/molecules/navigation/sidebar.html" with related_pages=page.related_pages.all sidebar_title="Related resources" %}
+        {% include "patterns/molecules/navigation/sidebar.html" with related_pages=page.related_pages.all sidebar_title="Related resources" classes="sidebar--narrow" %}
     </div>
 {% endblock %}

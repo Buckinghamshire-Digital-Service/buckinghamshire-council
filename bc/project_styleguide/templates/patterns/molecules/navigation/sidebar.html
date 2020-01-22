@@ -1,6 +1,6 @@
 {% load wagtailcore_tags %}
 
-<aside class="sidebar">
+<aside class="sidebar {{ classes }}">
     {% if page.related_pages.all %}
         <h2 class="sidebar__heading heading heading--m">
             {% if sidebar_title %}
