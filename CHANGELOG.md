@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+## 2.1 (2020-01-22)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/2.0...2.1
+
+Temporary changes for launch
+
+- Remove email signup form
+- Remove cookie banner
+
 ## 2.0 (2020-01-21)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/1.1...2.0
