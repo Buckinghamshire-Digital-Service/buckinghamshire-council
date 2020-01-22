@@ -1,0 +1,29 @@
+context:
+  news_index: placeholder
+  latest_news:
+    - title: Wendover bypass resurfacing nears completion
+      display_date: !!timestamp '2019-11-16'
+    - title: TfBs Street lighting team = ready for the longer nights
+      display_date: !!timestamp '2019-11-14'
+    - title: Get ready for brexit
+      display_date: !!timestamp '2019-11-11'
+  event_index: placeholder
+  latest_events:
+    - title: Buckinghamshire Integrated Sensory Service
+      display_date: !!timestamp '2019-12-16'
+      location: Buckingham Library
+    - title: Coffee morning
+      display_date: !!timestamp '2019-12-20'
+      location: High Wycombe Library
+    - title: Family History Sessions
+      display_date: !!timestamp '2019-12-22'
+      location: Hazlemere Library
+
+tags:
+  pageurl:
+    'news_index as news_index_url':
+      target_var: news_index_url
+      raw: '#'
+    'event_index as event_index_url':
+      target_var: event_index_url
+      raw: '#'

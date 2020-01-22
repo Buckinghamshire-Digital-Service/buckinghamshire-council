@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailsearchpromotions_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailsearchpromotions_tags wagtailimages_tags local_area_links_tags %}
 
 <article class="search-result">
     <h3 class="search-result__title heading heading--third">
@@ -11,8 +11,5 @@
         <p class="search-result__description">{% firstof result.listing_summary result.search_description %}</p>
     {% endif %}
 
-    <!-- TODO: make this work properly -->
-    {% if result.has_area_links %}
-        {% include "patterns/molecules/area-links-list/area-links-list.html" %}
-    {% endif %}
+    {% local_area_links result %}
 </article>

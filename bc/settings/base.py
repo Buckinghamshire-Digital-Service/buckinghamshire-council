@@ -53,17 +53,18 @@ INSTALLED_APPS = [
     # first - http://help.apm.scoutapp.com/#django.
     "scout_apm.django",
     "bc.documents",
-    # "bc.events",  To re-enable, also uncomment code in bc/utils/wagtail_hooks.py
+    "bc.events",
     # "bc.forms",
     "bc.home",
     "bc.images",
     "bc.navigation",
-    # "bc.news",  To re-enable, also uncomment code in bc/utils/wagtail_hooks.py
+    "bc.news",
     # "bc.people",  To re-enable, also uncomment code in bc/utils/wagtail_hooks.py
     "bc.search",
     "bc.standardpages",
     "bc.users",
     "bc.utils",
+    "bc.inlineindex",
     "wagtail.contrib.modeladmin",
     "wagtail.contrib.postgres_search",
     "wagtail.contrib.settings",
