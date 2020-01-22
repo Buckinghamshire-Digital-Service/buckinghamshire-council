@@ -14,6 +14,7 @@
 stages:
   - build
   - test
+  - pages
   - deploy
 
 # Test if static assets can be built succesfully.
@@ -205,7 +206,7 @@ deploy_production:
 
 pages:
   image: python:3.6
-  stage: deploy
+  stage: pages
   only:
     - master
   script:
