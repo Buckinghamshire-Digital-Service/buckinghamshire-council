@@ -1,0 +1,21 @@
+.index-nav {
+    margin-bottom: $grid--large;
+    max-width: $wrapper--small;
+
+    &__title {
+        margin-bottom: $grid--min;
+        font-weight: $weight--bold;
+    }
+
+    &__item {
+        margin-bottom: $grid--min;
+        padding-left: $grid;
+        position: relative;
+
+        &::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+        }
+    }
+}

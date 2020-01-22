@@ -53,10 +53,5 @@
                 color: $color--link-active;
             }
         }
-
-        // Don't show on home page
-        .template-home-page & {
-            display: none;
-        }
     }
 }

@@ -7,9 +7,18 @@
             max-width: $wrapper--small;
         }
 
+        @include media-query(desktop) {
+            max-width: $wrapper--small;
+        }
+
         &:only-child {
             margin: 0 auto $grid--large;
             max-width: none;
         }
+    }
+
+    &--inline-index {
+        border-top: 1px solid $color--grey-medium;
+        padding-top: $grid--small;
     }
 }
