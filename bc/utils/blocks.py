@@ -44,8 +44,7 @@ class LocalAreaLinksBlock(blocks.StructBlock):
     postscript = blocks.RichTextBlock(
         required=False,
         features=RICH_TEXT_FEATURES,
-        default='<p>Or <a href="https://www.gov.uk/find-local-council">click here</a> '
-        "to find your area based on your postcode.</p>",
+        default='<p>Or <a href="https://www.gov.uk/find-local-council">find your area based on your postcode</a>.</p>',
     )
 
     class Meta:

@@ -9,6 +9,8 @@ from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
 from bc.utils.constants import RICH_TEXT_FEATURES
 
+from ..events.models import EventIndexPage
+from ..news.models import NewsIndex
 from ..standardpages.models import IndexPage
 from ..utils.models import BasePage
 
@@ -58,6 +60,22 @@ class HomePage(BasePage):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
+
+        try:
+            news_index = NewsIndex.objects.live().public().first()
+            context["news_index"] = news_index
+            context["latest_news"] = news_index.news_pages[:3]
+        except AttributeError:
+            # No news index, ignore
+            pass
+
+        try:
+            event_index = EventIndexPage.objects.live().public().first()
+            context["event_index"] = event_index
+            context["latest_events"] = event_index.upcoming_events[:3]
+        except AttributeError:
+            # No event index, ignore
+            pass
 
         sections = self.child_sections
         context["sections"] = sections

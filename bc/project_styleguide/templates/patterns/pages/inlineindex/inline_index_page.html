@@ -1,0 +1,87 @@
+{% extends "patterns/base_page.html" %}
+
+{% load wagtailcore_tags navigation_tags %}
+
+{% block body_class %}template-inlineindex{% endblock body_class %}
+
+{% block content %}
+    <h1 class="heading heading--xxl">
+        {% if page.is_inline_index %}
+            {{ page.title }}
+        {% elif page.is_inline_index_child %}
+            {{ page.get_parent.title }}
+        {% endif %}
+    </h1>
+
+    {% with page_links=page.get_index %}
+    <nav class="index-nav" aria-label="Pages in this section">
+        <h2 class="index-nav__title">Contents</h2>
+        <ul class="index-nav__list">
+            {% for link in page_links %}
+                {% if link.id == page.id %}
+                    <li class="index-nav__item index-nav__item--current">
+                        <span class="index-nav__link">{{ link.subtitle|default:link }}</span>
+                    </li>
+                {% else %}
+                    <li class="index-nav__item">
+                        <a class="index-nav__link" href="{% pageurl link %}">{{ link.subtitle|default:link }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </nav>
+
+    <div class="wrapper wrapper--flex">
+        <section class="section section--main section--inline-index">
+            <h2 class="heading heading--xl">
+                {% if page.is_inline_index %}
+                    {{ page.subtitle }}
+                {% elif page.is_inline_index_child %}
+                    {{ page.title }}
+                {% endif %}
+            </h2>
+
+            <div class="main-body">
+                {{ page.body }}
+
+                <nav class="index-pagination">
+                    {% with next_sibling=page.get_next_page prev_sibling=page.get_prev_page %}
+                        <ul class="index-pagination__list">
+                            <li class="index-pagination__item index-pagination__item--previous">
+                                {% if prev_sibling %}
+                                    <a class="index-pagination__button link--alt" href="{% pageurl prev_sibling %}">
+                                        <svg class="index-pagination__icon index-pagination__icon--previous" aria-hidden="true">
+                                            <use xlink:href="#arrow"></use>
+                                        </svg>
+                                        <span class="index-pagination__text">
+                                            Previous
+                                            <span class="index-pagination__page-title">{{ prev_sibling }}</span>
+                                        </span>
+                                    </a>
+                                {% endif %}
+                            </li>
+
+                            <li class="index-pagination__item index-pagination__item--next">
+                                {% if next_sibling %}
+                                    <a class="index-pagination__button index-pagination__button--next link--alt" href="{% pageurl next_sibling %}">
+                                        <svg class="index-pagination__icon index-pagination__icon--next" aria-hidden="true">
+                                            <use xlink:href="#arrow"></use>
+                                        </svg>
+                                        <span class="index-pagination__text">
+                                            Next
+                                            <span class="index-pagination__page-title">{{ next_sibling }}</span>
+                                        </span>
+                                    </a>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    {% endwith %}
+                </nav>
+            </div>
+        </section>
+
+        {% sidebar %}
+    </div>
+    {% endwith %}
+
+{% endblock %}

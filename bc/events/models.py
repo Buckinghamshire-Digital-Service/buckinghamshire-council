@@ -58,6 +58,7 @@ class EventPage(BasePage):
     end_date = models.DateField(blank=True, null=True)
     end_time = models.TimeField(blank=True, null=True)
 
+    location_name = models.CharField(_("Location name"), max_length=255)
     street_address_1 = models.CharField(
         _("Street Address 1"), blank=True, max_length=255
     )
@@ -89,6 +90,7 @@ class EventPage(BasePage):
         InlinePanel("event_types", label="Event types"),
         MultiFieldPanel(
             [
+                FieldPanel("location_name"),
                 FieldPanel("street_address_1"),
                 FieldPanel("street_address_2"),
                 FieldPanel("city"),
@@ -102,6 +104,16 @@ class EventPage(BasePage):
         StreamFieldPanel("body"),
         InlinePanel("related_pages", label="Related pages"),
     ]
+
+    @property
+    def display_date(self):
+        if self.start_date:
+            return self.start_date
+
+    @property
+    def location(self):
+        if self.location_name:
+            return self.location_name
 
     def clean_fields(self, exclude=None):
         errors = defaultdict(list)

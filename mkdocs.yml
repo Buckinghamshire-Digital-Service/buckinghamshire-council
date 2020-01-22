@@ -24,6 +24,7 @@ markdown_extensions:
 nav:
   - 'Home': 'index.md'
   - 'Infrastructure': 'infrastructure.md'
+  - 'Email and SMS': 'email_and_sms.md'
   - 'Project conventions': 'project_conventions.md'
   - 'Deployment': 'deployment.md'
   - 'Front end tooling': 'front-end-tooling.md'

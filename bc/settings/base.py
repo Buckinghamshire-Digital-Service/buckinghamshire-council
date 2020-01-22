@@ -53,18 +53,19 @@ INSTALLED_APPS = [
     # first - http://help.apm.scoutapp.com/#django.
     "scout_apm.django",
     "bc.documents",
-    # "bc.events",  To re-enable, also uncomment code in bc/utils/wagtail_hooks.py
+    "bc.events",
     # "bc.forms",
     "bc.recruitment",
     "bc.home",
     "bc.images",
     "bc.navigation",
-    # "bc.news",  To re-enable, also uncomment code in bc/utils/wagtail_hooks.py
+    "bc.news",
     # "bc.people",  To re-enable, also uncomment code in bc/utils/wagtail_hooks.py
     "bc.search",
     "bc.standardpages",
     "bc.users",
     "bc.utils",
+    "bc.inlineindex",
     "wagtail.contrib.modeladmin",
     "wagtail.contrib.postgres_search",
     "wagtail.contrib.settings",
@@ -655,3 +656,8 @@ PATTERN_LIBRARY_TEMPLATE_DIR = os.path.join(
 
 # Google Tag Manager ID from env
 GOOGLE_TAG_MANAGER_ID = env.get("GOOGLE_TAG_MANAGER_ID")
+
+# GOV.UK Notify service
+EMAIL_BACKEND = "bc.utils.email.NotifyEmailBackend"
+GOVUK_NOTIFY_API_KEY = env.get("GOVUK_NOTIFY_API_KEY")
+GOVUK_NOTIFY_PLAIN_EMAIL_TEMPLATE_ID = env.get("GOVUK_NOTIFY_PLAIN_EMAIL_TEMPLATE_ID")
