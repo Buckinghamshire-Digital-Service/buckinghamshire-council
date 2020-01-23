@@ -1,0 +1,13 @@
+context:
+  result:
+    title: Page title
+    listing_title: Listing title
+    listing_summary: Listing summary
+    salary: '£23,742 – £28,426 '
+    closing_date: 13th December
+    location: Aylesbury
+
+tags:
+  pageurl:
+    result:
+      raw: '#'

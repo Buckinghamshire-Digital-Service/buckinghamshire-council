@@ -39,6 +39,21 @@
         }
     }
 
+    &--search {
+        display: flex;
+        margin-bottom: $grid;
+
+        @include media-query(tablet-portrait) {
+            margin-bottom: $grid--large;
+        }
+
+        input {
+            border: 2px solid $color--charcoal;
+            border-right: 0;
+            max-width: 100%;
+        }
+    }
+
     &--header-search {
         display: flex;
         justify-content: flex-end;

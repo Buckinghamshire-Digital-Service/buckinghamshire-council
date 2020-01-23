@@ -6,13 +6,6 @@
 
     &__results {
         margin-bottom: $grid;
-    }
-
-    &__result {
-        margin-bottom: $grid;
-    }
-
-    &__result-description {
-        margin: 0;
+        flex-basis: 100%;
     }
 }
