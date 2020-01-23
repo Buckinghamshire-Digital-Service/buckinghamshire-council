@@ -14,7 +14,7 @@
 stages:
   - build
   - test
-  - deploy_site
+  - deploy
   - pages
 
 # Test if static assets can be built succesfully.
