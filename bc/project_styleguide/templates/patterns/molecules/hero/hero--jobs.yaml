@@ -1,7 +1,7 @@
 context:
   page:
-    strapline: Find a job in Buckinghamshire
-  hero_image:
-    url: http://via.placeholder.com/1600x350
+    hero_title: Find a job in Buckinghamshire
+    hero_image:
+      url: http://via.placeholder.com/1600x350
   vacancies: 303
   search_url: '#'

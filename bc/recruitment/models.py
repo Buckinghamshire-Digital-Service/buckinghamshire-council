@@ -54,9 +54,7 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
         "images.CustomImage", null=True, related_name="+", on_delete=models.SET_NULL,
     )
     search_box_placeholder = models.CharField(
-        max_length=255,
-        default="Search jobs, e.g. “Teacher in Aylesbury”",
-        help_text="eg. Search jobs, e.g. “Teacher in Aylesbury”",
+        max_length=255, help_text="eg. Search jobs, e.g. “Teacher in Aylesbury”",
     )
     body = StreamField(
         blocks.StreamBlock(
