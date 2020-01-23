@@ -655,3 +655,8 @@ PATTERN_LIBRARY_TEMPLATE_DIR = os.path.join(
 
 # Google Tag Manager ID from env
 GOOGLE_TAG_MANAGER_ID = env.get("GOOGLE_TAG_MANAGER_ID")
+
+# GOV.UK Notify service
+EMAIL_BACKEND = "bc.utils.email.NotifyEmailBackend"
+GOVUK_NOTIFY_API_KEY = env.get("GOVUK_NOTIFY_API_KEY")
+GOVUK_NOTIFY_PLAIN_EMAIL_TEMPLATE_ID = env.get("GOVUK_NOTIFY_PLAIN_EMAIL_TEMPLATE_ID")
