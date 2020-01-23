@@ -14,6 +14,7 @@
     }
 
     input {
+        @include font-size(m);
         border: 0;
         padding: $grid--min;
         width: 100%;
@@ -60,5 +61,9 @@
                 width: 100%;
             }
         }
+    }
+
+    &--jobs-hero {
+        margin-bottom: 15px;
     }
 }

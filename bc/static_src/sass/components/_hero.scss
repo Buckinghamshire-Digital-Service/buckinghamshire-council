@@ -1,5 +1,5 @@
 .hero {
-    grid-area: hero;
+    $root: &;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -16,9 +16,26 @@
         margin-bottom: $grid;
     }
 
+    &__vacancies {
+        color: $color--link;
+        margin: 0;
+    }
+
     &--with-alert {
         @include media-query(tablet-portrait) {
             padding-bottom: 60px;
+        }
+    }
+
+    &--jobs {
+        background-color: $color--earth;
+        margin-bottom: $grid--large;
+
+        #{$root} {
+            &__strapline {
+                color: $color--default;
+                line-height: 1.2;
+            }
         }
     }
 }
