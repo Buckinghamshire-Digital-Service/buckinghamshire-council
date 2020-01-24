@@ -1,8 +1,8 @@
 context:
-  job:
-    url: '#'
-    work_pattern: Full-time only
-    salary: £19,000 to £21,000 per year
-    deadline: 11 December 2019 at 4pm
-    start_date: 6 January 2020
-    date_posted: 28 November 2019
+  page:
+    working_hours: Full-time only
+    salary_range: £19,000 to £21,000 per year
+    closing_date: 11 December 2019 at 4pm
+    expected_start_date: 6 January 2020
+    posting_start_date: 28 November 2019
+    show_apply_button: True
