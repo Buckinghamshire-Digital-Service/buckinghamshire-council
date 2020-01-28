@@ -1,0 +1,21 @@
+.split-content {
+    &__section {
+        @include font-size(s);
+        margin-bottom: $grid--large;
+
+        @include media-query(tablet-portrait) {
+            flex-basis: 50%;
+
+            &:not(:only-child) {
+                &:first-child {
+                    padding-right: $grid;
+                }
+
+                &:last-child {
+                    padding-left: $grid;
+                    border-left: $border--grey;
+                }
+            }
+        }
+    }
+}

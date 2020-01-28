@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- 59 Jobs homepage
 - Update CI pipeline stage names and order to make progress clearer
 
 ## 2.1 (2020-01-22)
