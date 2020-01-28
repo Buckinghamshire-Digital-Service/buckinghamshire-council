@@ -2,7 +2,9 @@
 
 ## Unreleased
 
+- 59 Jobs homepage
 - 85 TalentLink API client, and importer commands
+- Update CI pipeline stage names and order to make progress clearer
 
 ## 2.1 (2020-01-22)
 

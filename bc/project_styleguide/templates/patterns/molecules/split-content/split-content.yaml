@@ -1,0 +1,8 @@
+context:
+  content_block:
+    - value:
+        title: Living and working in Buckinghamshire
+        paragraph: Rich text content
+    - value:
+        title: What we can offer you
+        paragraph: Rich text content

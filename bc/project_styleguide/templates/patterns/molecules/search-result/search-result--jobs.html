@@ -1,0 +1,18 @@
+{% load static wagtailcore_tags wagtailsearchpromotions_tags wagtailimages_tags %}
+
+<article class="search-result">
+    <h3 class="search-result__title heading heading--third">
+        <a class="search-result__link" href="{% pageurl result %}">
+            {% firstof result.listing_title result.title %}
+        </a>
+    </h3>
+
+    <dl class="search-result__meta-list">
+        <dt class="search-result__meta-title">Salary:</dt>
+        <dd class="search-result__meta-description">{{ result.salary }}£23,742 – £28,426 </dd>
+        <dt class="search-result__meta-title">Closing date:</dt>
+        <dd class="search-result__meta-description">{{ result.closing_date }}13th December</dd>
+        <dt class="search-result__meta-title">Location:</dt>
+        <dd class="search-result__meta-description">{{ result.location }}Aylesbury</dd>
+    </dl>
+</article>

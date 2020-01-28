@@ -43,6 +43,12 @@ textarea {
     font-family: inherit;
 }
 
+fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
 button {
     background: transparent;
     border: 0;
@@ -75,4 +81,8 @@ ol {
     padding: 0;
     margin: 0;
     list-style: none;
+}
+
+.hidden {
+    @include hidden();
 }
