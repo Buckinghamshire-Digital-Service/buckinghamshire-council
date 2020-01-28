@@ -4,11 +4,11 @@ from zeep import Client
 from zeep.wsse import UsernameToken
 
 from bc.recruitment_api.cache import ZeepDjangoBackendCache
-from bc.recruitment_api.constants import TALENTLINK_API_WSDL
 from bc.recruitment_api.transports import ZeepAPIKeyTransport
 
 
-def get_client(wsdl=TALENTLINK_API_WSDL):
+def get_client(wsdl=None):
+    wsdl = wsdl or settings.TALENTLINK_API_WSDL
     return Client(
         wsdl,
         transport=ZeepAPIKeyTransport(
