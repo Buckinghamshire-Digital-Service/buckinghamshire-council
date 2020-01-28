@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- 85 TalentLink API client, and importer commands
+
 ## 2.1 (2020-01-22)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/2.0...2.1
