@@ -21,7 +21,7 @@ class ClientTestMixin:
         return get_client(wsdl=wsdl_file_url)
 
 
-@override_settings(TALENTLINK_API_WSDL="https://some.api.example.com/?WSDL",)
+@override_settings(TALENTLINK_API_WSDL="https://some.api.example.com/?WSDL")
 class ClientTest(TestCase, ClientTestMixin):
     @responses.activate
     def test_creating_normal_client_calls_url(self):
@@ -133,7 +133,8 @@ class AuthenticationTest(TestCase, ClientTestMixin):
 
 
 @override_settings(
-    CACHES={"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}}
+    CACHES={"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}},
+    TALENTLINK_API_WSDL="https://some.api.example.com/?WSDL",
 )
 class ZeepCacheTest(TestCase, ClientTestMixin):
     def setUp(self):
