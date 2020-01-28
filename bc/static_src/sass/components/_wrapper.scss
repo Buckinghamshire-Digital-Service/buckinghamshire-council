@@ -55,4 +55,13 @@
             flex-direction: row;
         }
     }
+
+    &--flex-small {
+        display: flex;
+        flex-direction: column;
+
+        @include media-query(tablet-portrait) {
+            flex-direction: row;
+        }
+    }
 }
