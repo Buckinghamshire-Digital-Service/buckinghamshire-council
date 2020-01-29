@@ -283,7 +283,9 @@ advertisement = {
             },
         ]
     },
-    "postingEndDate": datetime.datetime(2020, 1, 31, 23, 59, 59),
+    "postingEndDate": datetime.datetime(
+        2020, 1, 31, 23, 59, 59, tzinfo=pytz.FixedOffset(60)
+    ),
     "postingStartDate": datetime.datetime(
         2020, 1, 15, 0, 0, tzinfo=pytz.FixedOffset(60)
     ),
