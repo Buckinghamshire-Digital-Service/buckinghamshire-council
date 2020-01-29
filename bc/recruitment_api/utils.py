@@ -29,7 +29,9 @@ JOB_CUSTOM_LOVS_MAPPING = {
 }
 
 
-def update_job_from_ad(job, ad):
+def update_job_from_ad(job, ad, defaults=None):
+    defaults = defaults or {}
+
     job.job_number = ad["jobNumber"]
     job.title = ad["jobTitle"]
     job.is_published = ad["postingTargetStatus"] == POSTING_TARGET_STATUS_PUBLISHED
@@ -70,5 +72,7 @@ def update_job_from_ad(job, ad):
                 target_field,
                 parser(custom_lov["criteria"]["criterion"][0]["label"]),
             )
+    for k, v in defaults.items():
+        setattr(job, k, v)
     job.save()
     return job

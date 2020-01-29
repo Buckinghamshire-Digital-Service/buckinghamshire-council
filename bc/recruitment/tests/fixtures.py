@@ -1,9 +1,13 @@
+import datetime
+
 import factory
 
 
 class TalentLinkJobFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = "recruitment.TalentLinkJob"
+
+    last_imported = factory.Faker("date_time", tzinfo=datetime.timezone.utc)
 
     talentlink_id = factory.Sequence(lambda n: n)
     job_number = factory.Sequence(lambda n: f"FS{str(n).zfill(5)}")

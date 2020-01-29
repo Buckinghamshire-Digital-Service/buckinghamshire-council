@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand
+from django.utils.timezone import now
 
 from bc.recruitment.models import TalentLinkJob
 from bc.recruitment_api.client import get_client
@@ -30,7 +31,7 @@ class Command(BaseCommand):
                         job = TalentLinkJob(talentlink_id=ad["id"])
                         created += 1
 
-                    job = update_job_from_ad(job, ad)
+                    job = update_job_from_ad(job, ad, defaults={"last_imported": now()})
         self.stdout.write("No more results")
         self.stdout.write(f"{updated} existing jobs updated")
         self.stdout.write(f"{created} new jobs created")

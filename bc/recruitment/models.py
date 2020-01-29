@@ -18,6 +18,10 @@ from ..utils.models import BasePage
 
 class TalentLinkJob(models.Model):
 
+    created = models.DateTimeField(auto_now_add=True)
+    last_imported = models.DateTimeField(blank=True)
+    last_modified = models.DateTimeField(auto_now=True)
+
     talentlink_id = models.IntegerField(unique=True)
     job_number = models.CharField(max_length=10, unique=True, blank=False)
 
