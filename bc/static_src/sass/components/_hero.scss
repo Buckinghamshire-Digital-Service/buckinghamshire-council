@@ -30,6 +30,7 @@
     &--jobs {
         background-color: $color--earth;
         margin-bottom: $grid--large;
+        min-height: 330px;
 
         #{$root} {
             &__strapline {
@@ -37,5 +38,9 @@
                 line-height: 1.2;
             }
         }
+    }
+
+    &--no-search {
+        padding: ($grid--large * 2) 0;
     }
 }
