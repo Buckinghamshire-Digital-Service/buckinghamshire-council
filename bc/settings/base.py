@@ -55,12 +55,13 @@ INSTALLED_APPS = [
     "bc.documents",
     "bc.events",
     # "bc.forms",
-    "bc.recruitment",
     "bc.home",
     "bc.images",
     "bc.navigation",
     "bc.news",
     # "bc.people",  To re-enable, also uncomment code in bc/utils/wagtail_hooks.py
+    "bc.recruitment",
+    "bc.recruitment_api",
     "bc.search",
     "bc.standardpages",
     "bc.users",
@@ -72,6 +73,7 @@ INSTALLED_APPS = [
     "wagtail.contrib.search_promotions",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
+    "wagtail.contrib.routable_page",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
@@ -657,7 +659,14 @@ PATTERN_LIBRARY_TEMPLATE_DIR = os.path.join(
 # Google Tag Manager ID from env
 GOOGLE_TAG_MANAGER_ID = env.get("GOOGLE_TAG_MANAGER_ID")
 
+
 # GOV.UK Notify service
 EMAIL_BACKEND = "bc.utils.email.NotifyEmailBackend"
 GOVUK_NOTIFY_API_KEY = env.get("GOVUK_NOTIFY_API_KEY")
 GOVUK_NOTIFY_PLAIN_EMAIL_TEMPLATE_ID = env.get("GOVUK_NOTIFY_PLAIN_EMAIL_TEMPLATE_ID")
+
+
+# Lumesse TalentLink API credentials
+TALENTLINK_API_KEY = env.get("TALENTLINK_API_KEY")
+TALENTLINK_API_PASSWORD = env.get("TALENTLINK_API_PASSWORD")
+TALENTLINK_API_USERNAME = env.get("TALENTLINK_API_USERNAME")
