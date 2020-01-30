@@ -53,6 +53,7 @@
 
         @include media-query(tablet-landscape) {
             flex-direction: row;
+            align-items: flex-start;
         }
     }
 
