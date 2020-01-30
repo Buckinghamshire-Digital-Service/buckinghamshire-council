@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Update CI pipeline stage names and order to make progress clearer
+- 88 Updated IndexPage to allow it to be created under IndexPage
 
 ## 2.1 (2020-01-22)
 
