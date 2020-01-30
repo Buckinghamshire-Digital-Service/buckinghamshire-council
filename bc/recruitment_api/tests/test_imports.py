@@ -51,7 +51,7 @@ class ImportTest(TestCase):
 
         instant = datetime.datetime(2020, 1, 29, 12, 0, 0, tzinfo=datetime.timezone.utc)
         with freeze_time(instant):
-            call_command("import_jobs")
+            call_command("import_jobs", stdout=mock.MagicMock())
 
         job = TalentLinkJob.objects.get(talentlink_id=164579)
         self.assertEqual(job.created, instant)
@@ -67,7 +67,7 @@ class ImportTest(TestCase):
 
         later = instant + datetime.timedelta(days=1)
         with freeze_time(later):
-            call_command("import_jobs")
+            call_command("import_jobs", stdout=mock.MagicMock())
 
         job.refresh_from_db()
         self.assertEqual(job.created, instant)
@@ -77,7 +77,7 @@ class ImportTest(TestCase):
 
         instant = datetime.datetime(2020, 1, 29, 12, 0, 0, tzinfo=datetime.timezone.utc)
         with freeze_time(instant):
-            call_command("import_jobs")
+            call_command("import_jobs", stdout=mock.MagicMock())
 
         job = TalentLinkJob.objects.get(talentlink_id=164579)
         self.assertEqual(job.last_imported, instant)
@@ -92,7 +92,7 @@ class ImportTest(TestCase):
 
         later = instant + datetime.timedelta(days=1)
         with freeze_time(later):
-            call_command("import_jobs")
+            call_command("import_jobs", stdout=mock.MagicMock())
 
         job.refresh_from_db()
         self.assertEqual(job.last_imported, later)
