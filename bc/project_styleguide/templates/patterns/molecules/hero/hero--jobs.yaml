@@ -5,3 +5,11 @@ context:
       url: http://via.placeholder.com/1600x350
   vacancies: 303
   search_url: '#'
+  hero_image:
+    url: http://via.placeholder.com/1600x350
+
+tags:
+  image:
+    page.hero_image min-1600x350 as hero_image:
+      raw: |
+        <img src="http://via.placeholder.com/1600x350" width="1600" height="350" alt="Some alt">
