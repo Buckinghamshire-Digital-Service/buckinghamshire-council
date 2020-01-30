@@ -2,6 +2,15 @@
 
 This is hosted at https://jobs.buckinghamshire.gov.uk/. It is a Django/Wagtail app sitting within the main project, with a set of page types for this site only, including its own home page type.
 
+## Credentials
+
+The following environment variables must be set to authenticate with the API (or configured in local settings, for dev enviromnents):
+
+- `TALENTLINK_API_KEY`
+- `TALENTLINK_API_PASSWORD`
+- `TALENTLINK_API_USERNAME`
+- `TALENTLINK_API_WSDL`, this is configurable, but not secret, and should be set to "https://api3.lumesse-talenthub.com/CareerPortal/SOAP/FoAdvert?WSDL"
+
 ## SOAP
 
 Jobs are fetched from the Lumesse TalentLink SOAP API. We use [Zeep](https://python-zeep.readthedocs.io/en/master/client.html) as an API client.
