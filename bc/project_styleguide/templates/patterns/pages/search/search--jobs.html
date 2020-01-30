@@ -48,12 +48,17 @@
                 <section class="search__results">
                     <header class="search__results-header">
                         {% with count=search_results.paginator.count %}
-                            <h2 class="heading heading--l">{{ count }} result{{ count|pluralize }} for ‘{{ search_query }}’</h2>
+                            {% if search_query %}
+                                <h2 class="heading heading--l">{{ count }} job{{ count|pluralize }} found for ‘{{ search_query }}’</h2>
+                                <a href="/search">Clear</a>
+                            {% else %}
+                                <h2 class="heading heading--l">{{ count }} job{{ count|pluralize }} found</h2>
+                            {% endif %}
                         {% endwith %}
                     </header>
 
                     {% for result in search_results %}
-                        {% include "patterns/molecules/search-result/search-result--jobs.html" with result=result.specific %}
+                        {% include "patterns/molecules/search-result/search-result--jobs.html" with result=result %}
                     {% endfor %}
 
                     {% include "patterns/molecules/pagination/pagination.html" with paginator_page=search_results %}

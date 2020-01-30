@@ -1,5 +1,8 @@
 from django.db import models
 from django.shortcuts import get_object_or_404, render
+from django.utils.functional import cached_property
+from django.utils.html import strip_tags
+from django.utils.text import Truncator
 
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
@@ -39,6 +42,22 @@ class TalentLinkJob(models.Model):
 
     def __str__(self):
         return f"{self.job_number}: {self.title}"
+
+    @cached_property
+    def short_description(self):
+        if self.description:
+            # Imported description typically start with a 'Overview' heading which we want to remove.
+            clean_description = strip_tags(
+                self.description.replace("<h2>Overview</h2>", "", 1)
+            )
+            return Truncator(clean_description).chars(140)
+
+    @property
+    def url(self):
+        homepage = RecruitmentHomePage.objects.live().public().first()
+        return homepage.url + homepage.reverse_subpage(
+            "job_detail", args=(self.job_number,)
+        )
 
 
 class RecruitmentHomePage(RoutablePageMixin, BasePage):

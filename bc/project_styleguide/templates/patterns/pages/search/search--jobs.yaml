@@ -1,37 +1,15 @@
 context:
   search_query: test query
   search_results:
-    - specific:
-        title: Page title
-        listing_image: fake
-        listing_title: Listing title
-        listing_summary: Listing summary
-        search_description: Search description
-        depth: 6
-        get_ancestors:
-          - is_root: false
-            depth: 3
-            title: Some category
-          - is_root: false
-            depth: 4
-            title: Some sub category
-          - is_root: false
-            depth: 5
-            title: We need to go deeper
-    - specific:
-        title: Page title
-        listing_image: fake
-        listing_title: Listing title
-        listing_summary: Listing summary
-        search_description: Search description
-        depth: 6
-        get_ancestors:
-          - is_root: false
-            depth: 3
-            title: Some category
-          - is_root: false
-            depth: 4
-            title: Some sub category
-          - is_root: false
-            depth: 5
-            title: We need to go deeper
+    - title: Supply Teachers - Supply Desk
+      salary_range: '£21,807 - £23,570'
+      closing_date: 31 Jan 2020
+      searchable_location: Aylesbury Vale
+      url: #
+      short_description: 'Full time and part time (job share considered) MPS Start date: April 2020 St Peter’s Catholic Primary School are seeking enthusiastic KS1/…'
+    - title: Learning Support Assistant - King’s Wood School
+      salary_range: '£19,077 - £21,428'
+      closing_date: 27 Jan 2020
+      searchable_location: Wycombe
+      url: #
+      short_description: 'Maternity Cover from Easter 2020 MPS We are looking to appoint an excellent classroom practitioner to help us achieve our on-going aim of …'
