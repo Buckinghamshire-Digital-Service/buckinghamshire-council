@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- 62 Jobs detail page
 - 59 Jobs homepage
 - 85 TalentLink API client, and importer commands
 - Update CI pipeline stage names and order to make progress clearer
