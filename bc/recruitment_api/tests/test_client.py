@@ -9,7 +9,6 @@ import responses
 from lxml import etree
 
 from bc.recruitment_api.client import get_client
-from bc.recruitment_api.constants import TALENTLINK_API_WSDL
 from bc.recruitment_api.transports import ZeepAPIKeyTransport
 
 wsdl_file_path = pathlib.Path(__file__).parent / "wsdl.xml"
@@ -22,13 +21,18 @@ class ClientTestMixin:
         return get_client(wsdl=wsdl_file_url)
 
 
+@override_settings(TALENTLINK_API_WSDL="https://some.api.example.com/?WSDL")
 class ClientTest(TestCase, ClientTestMixin):
     @responses.activate
     def test_creating_normal_client_calls_url(self):
         with open(wsdl_file_path, "r") as f:
             xml = f.read()
         responses.add(
-            responses.GET, TALENTLINK_API_WSDL, xml, status=200, content_type="text/xml"
+            responses.GET,
+            settings.TALENTLINK_API_WSDL,
+            xml,
+            status=200,
+            content_type="text/xml",
         )
         get_client()
         self.assertEqual(len(responses.calls), 1)
@@ -74,6 +78,7 @@ class TransportTest(TestCase):
     TALENTLINK_API_KEY="spam_key",
     TALENTLINK_API_USERNAME="eggs_username:ham:FO",
     TALENTLINK_API_PASSWORD="sausage",
+    TALENTLINK_API_WSDL="https://some.api.example.com/?WSDL",
 )
 class AuthenticationTest(TestCase, ClientTestMixin):
     def setUp(self):
@@ -128,14 +133,19 @@ class AuthenticationTest(TestCase, ClientTestMixin):
 
 
 @override_settings(
-    CACHES={"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}}
+    CACHES={"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}},
+    TALENTLINK_API_WSDL="https://some.api.example.com/?WSDL",
 )
 class ZeepCacheTest(TestCase, ClientTestMixin):
     def setUp(self):
         with open(wsdl_file_path, "r") as f:
             xml = f.read()
         responses.add(
-            responses.GET, TALENTLINK_API_WSDL, xml, status=200, content_type="text/xml"
+            responses.GET,
+            settings.TALENTLINK_API_WSDL,
+            xml,
+            status=200,
+            content_type="text/xml",
         )
         cache_name = getattr(settings, "ZEEP_DJANGO_CACHE_NAME", "default")
         self.cache = caches[cache_name]
@@ -143,12 +153,12 @@ class ZeepCacheTest(TestCase, ClientTestMixin):
 
     @responses.activate
     def test_cache_is_initially_empty(self):
-        self.assertEqual(self.cache.get(TALENTLINK_API_WSDL), None)
+        self.assertEqual(self.cache.get(settings.TALENTLINK_API_WSDL), None)
 
     @responses.activate
     def test_cache_is_set(self):
         get_client()  # NB the real one
-        self.assertNotEqual(self.cache.get(TALENTLINK_API_WSDL), None)
+        self.assertNotEqual(self.cache.get(settings.TALENTLINK_API_WSDL), None)
 
     @responses.activate
     def test_cache_is_used(self):

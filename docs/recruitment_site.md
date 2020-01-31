@@ -2,6 +2,20 @@
 
 This is hosted at https://jobs.buckinghamshire.gov.uk/. It is a Django/Wagtail app sitting within the main project, with a set of page types for this site only, including its own home page type.
 
+## Local development
+
+Either grab a database dump from production or staging, or:
+
+1. At root, add a Job home page
+1. Edit sites (/admin/sites/), and add a new site for job homepage, selecting the newly created job homepage as home page
+1. Update sites settings:
+   1. Update sites settings to use the local domain for job homepage
+   1. Update your /etc/hosts with the new job domain if needed. Eg. mine is 127.0.0.1 jobs.bc.local bc.local
+1. In VM, run `dj import_jobs` (see below about credentials). You should see something like "Fetching page 1... 140 new jobs created."
+1. Jobs are imported as TalentLinkJob models, and not page models. So you won't see the pages. To view a job page, you will need to append `/job_detail/<job_number>/`. Eg. http://jobs.bc.local:8000/job_detail/FS11566/
+
+To find out what job numbers have been imported, launch `dj shell_plus` and run `TalentLinkJob.objects.values_list('job_number')`.
+
 ## Credentials
 
 The following environment variables must be set to authenticate with the API (or configured in local settings, for dev enviromnents):
