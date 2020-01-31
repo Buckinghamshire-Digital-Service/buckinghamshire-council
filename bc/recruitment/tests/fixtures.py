@@ -1,9 +1,13 @@
+import datetime
+
 import factory
 
 
 class TalentLinkJobFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = "recruitment.TalentLinkJob"
+
+    last_imported = factory.Faker("date_time", tzinfo=datetime.timezone.utc)
 
     talentlink_id = factory.Sequence(lambda n: n)
     job_number = factory.Sequence(lambda n: f"FS{str(n).zfill(5)}")
@@ -22,5 +26,9 @@ class TalentLinkJobFactory(factory.django.DjangoModelFactory):
 
     searchable_salary = factory.Faker("sentence", nb_words=2)
     searchable_location = factory.Faker("city")
-    posting_start_date = factory.Faker("date_this_month")
-    posting_end_date = factory.Faker("date_this_month")
+    posting_start_date = factory.Faker(
+        "date_time_this_month", tzinfo=datetime.timezone.utc
+    )
+    posting_end_date = factory.Faker(
+        "date_time_this_month", tzinfo=datetime.timezone.utc
+    )

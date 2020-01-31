@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand
+from django.utils.timezone import now
 
 from bc.recruitment.models import TalentLinkJob
 from bc.recruitment_api.client import get_client
@@ -12,8 +13,9 @@ class Command(BaseCommand):
         client = get_client()
         page = 1
         results = True
-        updated = 0
-        created = 0
+        num_updated = 0
+        num_created = 0
+        errors = []
         while results:
             self.stdout.write(f"Fetching page {page}")
             response = client.service.getAdvertisementsByPage(page)
@@ -25,12 +27,30 @@ class Command(BaseCommand):
 
                     try:
                         job = TalentLinkJob.objects.get(talentlink_id=ad["id"])
-                        updated += 1
+                        created = False
                     except TalentLinkJob.DoesNotExist:
                         job = TalentLinkJob(talentlink_id=ad["id"])
-                        created += 1
+                        created = True
 
-                    job = update_job_from_ad(job, ad)
+                    try:
+                        job = update_job_from_ad(
+                            job, ad, defaults={"last_imported": now()}
+                        )
+                    except Exception as e:
+                        msg = (
+                            f"Error occurred while processing job {ad['id']}:\n"
+                            + str(e)
+                        )
+                        errors.append(msg)
+                    else:
+                        if created:
+                            num_created += 1
+                        else:
+                            num_updated += 1
+
         self.stdout.write("No more results")
-        self.stdout.write(f"{updated} existing jobs updated")
-        self.stdout.write(f"{created} new jobs created")
+        self.stdout.write(f"{num_updated} existing jobs updated")
+        self.stdout.write(f"{num_created} new jobs created")
+        self.stdout.write(self.style.ERROR(f"{len(errors)} errors"))
+        for error in errors:
+            self.stdout.write(self.style.ERROR(msg))
