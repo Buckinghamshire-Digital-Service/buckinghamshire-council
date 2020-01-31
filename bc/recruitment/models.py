@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Count, F
 from django.shortcuts import get_object_or_404, render
 from django.utils.functional import cached_property
 from django.utils.html import strip_tags
@@ -16,6 +17,32 @@ from bc.utils.constants import RICH_TEXT_FEATURES
 from ..utils.models import BasePage
 
 
+class JobCategory(models.Model):
+    title = models.CharField(max_length=128)
+    description = models.TextField(blank=True)
+
+    def get_categories_summary():
+        """Returns a QuerySet that returns dictionaries, when used as an iterable.
+
+           The dictionary keys are: category (category id), count, title, description
+           This is ordered by highest count first.
+        """
+        job_categories = (
+            TalentLinkJob.objects.values("category")
+            .annotate(count=Count("category"))
+            .annotate(title=F("category__title"))
+            .annotate(description=F("category__description"))
+            .order_by("-count")
+        )
+        return job_categories
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name_plural = "Job categories"
+
+
 class TalentLinkJob(models.Model):
 
     created = models.DateTimeField(auto_now_add=True)
@@ -27,7 +54,7 @@ class TalentLinkJob(models.Model):
 
     title = models.CharField(max_length=255, blank=False)
     description = models.TextField()
-    category = models.CharField(max_length=255)
+    category = models.ForeignKey("recruitment.JobCategory", on_delete=models.PROTECT)
     salary_range = models.CharField(max_length=255)
     working_hours = models.CharField(max_length=255)
     closing_date = models.DateField()
@@ -114,6 +141,12 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
         ),
         StreamFieldPanel("body"),
     ]
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context["job_categories"] = JobCategory.get_categories_summary()
+
+        return context
 
     @route(r"^job_detail/(\w+)/$")
     def job_detail(self, request, job_number):

@@ -7,17 +7,24 @@ from django.test import TestCase
 
 from freezegun import freeze_time
 
-from bc.recruitment.models import TalentLinkJob
-from bc.recruitment.tests.fixtures import TalentLinkJobFactory
+from bc.recruitment.models import JobCategory, TalentLinkJob
+from bc.recruitment.tests.fixtures import JobCategoryFactory, TalentLinkJobFactory
 from bc.recruitment_api.utils import update_job_from_ad
 
 from .fixtures import get_advertisement, no_further_pages_response
+
+# Job category title to match dummy Job Group in get_advertisement() fixture
+FIXTURE_JOB_CATEGORY_TITLE = "Schools & Early Years - Support"
 
 
 @mock.patch("bc.recruitment_api.management.commands.import_jobs.get_client")
 class ImportTest(TestCase):
     def get_mocked_client(self, advertisements=None):
         advertisements = advertisements or [get_advertisement()]
+
+        # create matching category
+        JobCategoryFactory(title=FIXTURE_JOB_CATEGORY_TITLE)
+
         client = mock.Mock()
         client.service.getAdvertisementsByPage.side_effect = [
             {"advertisements": {"advertisement": advertisements}, "totalResults": 143},
@@ -43,6 +50,78 @@ class ImportTest(TestCase):
 
         out = StringIO()
         call_command("import_jobs", stdout=out)
+        out.seek(0)
+        output = out.read()
+        self.assertIn("1 existing jobs updated", output)
+        self.assertIn("0 new jobs created", output)
+        self.assertEqual(
+            JobCategory.objects.filter(title=FIXTURE_JOB_CATEGORY_TITLE).count(),
+            1,
+            msg="Category should be inserted if --import_categories is specified.",
+        )
+
+    def test_import_with_missing_categories(self, mock_get_client):
+        mock_get_client.return_value = self.get_mocked_client()
+        JobCategory.objects.all().delete()
+
+        out = StringIO()
+        call_command("import_jobs", stdout=out)
+        out.seek(0)
+        output = out.read()
+        self.assertIn("0 existing jobs updated", output)
+        self.assertIn("0 new jobs created", output)
+        self.assertIn("JobCategory matching query does not exist.", output)
+        self.assertEqual(
+            JobCategory.objects.all().count(),
+            0,
+            msg="Category should not be inserted if --import_categories is not specified.",
+        )
+
+    def test_import_missing_categories(self, mock_get_client):
+        mock_get_client.return_value = self.get_mocked_client()
+        JobCategory.objects.all().delete()
+
+        out = StringIO()
+        call_command("import_jobs", "--import_categories", stdout=out)
+        out.seek(0)
+        output = out.read()
+        self.assertIn("0 existing jobs updated", output)
+        self.assertIn("1 new jobs created", output)
+        self.assertEqual(
+            JobCategory.objects.filter(title=FIXTURE_JOB_CATEGORY_TITLE).count(),
+            1,
+            msg="Category should be inserted if --import_categories is specified.",
+        )
+
+    def test_update_existing_job_with_missing_categories(self, mock_get_client):
+        TalentLinkJobFactory(talentlink_id=164579)
+
+        mock_get_client.return_value = self.get_mocked_client()
+        JobCategory.objects.get(title=FIXTURE_JOB_CATEGORY_TITLE).delete()
+
+        out = StringIO()
+        call_command("import_jobs", stdout=out)
+        out.seek(0)
+        output = out.read()
+        self.assertIn("0 existing jobs updated", output)
+        self.assertIn("0 new jobs created", output)
+        self.assertIn("JobCategory matching query does not exist.", output)
+        self.assertEqual(
+            JobCategory.objects.filter(title=FIXTURE_JOB_CATEGORY_TITLE).count(),
+            0,
+            msg="Category should not be inserted if --import_categories is not specified.",
+        )
+
+    def test_update_existing_job_and_importing_missing_categories(
+        self, mock_get_client
+    ):
+        TalentLinkJobFactory(talentlink_id=164579)
+
+        mock_get_client.return_value = self.get_mocked_client()
+        JobCategory.objects.get(title=FIXTURE_JOB_CATEGORY_TITLE).delete()
+
+        out = StringIO()
+        call_command("import_jobs", "--import_categories", stdout=out)
         out.seek(0)
         output = out.read()
         self.assertIn("1 existing jobs updated", output)
@@ -124,12 +203,12 @@ class ImportTest(TestCase):
 
         error_message = "This is a test error message"
 
-        def error_or_original(job, ad, defaults):
+        def error_or_original(job, ad, defaults, import_categories):
             """ Raise an error for id 1 only"""
             if job.talentlink_id == 1:
                 raise KeyError(error_message)
             else:
-                return update_job_from_ad(job, ad, defaults)
+                return update_job_from_ad(job, ad, defaults, import_categories)
 
         mock_update_fn.side_effect = error_or_original
 

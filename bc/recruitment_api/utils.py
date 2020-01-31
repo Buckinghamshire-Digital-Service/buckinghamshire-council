@@ -1,5 +1,7 @@
 from dateutil.parser import parse
 
+from ..recruitment.models import JobCategory
+
 
 def date_parser(value):
     return parse(value, dayfirst=True)
@@ -13,13 +15,31 @@ def yesno_parser(value):
     return value.lower() == "yes"
 
 
+def job_category_parser(value):
+    """Get existing JobCategory
+
+    If category does not exist, we don't want to import this job.
+    This will throw a `JobCategory.DoesNotExist` error
+    which will be handled by the calling import_jobs command.
+    """
+    clean_value = string_parser(value)
+    return JobCategory.objects.get(title=clean_value)
+
+
+def job_category_insert_parser(value):
+    """Get or create existing JobCategory"""
+    clean_value = string_parser(value)
+    category_object, created = JobCategory.objects.get_or_create(title=clean_value)
+    return category_object
+
+
 POSTING_TARGET_STATUS_PUBLISHED = "Published"
 
 # source field to (target_field, parser) mapping
 JOB_CONFIGURABLE_FIELDS_MAPPING = {"Closing Date": ("closing_date", date_parser)}
 
 JOB_CUSTOM_LOVS_MAPPING = {
-    "Job Group": ("category", string_parser),
+    "Job Group": ("category", job_category_parser),
     "Location": ("location", string_parser),
     "Salary Range - FTE": ("salary_range", string_parser),
     "Searchable Location": ("searchable_location", string_parser),
@@ -29,7 +49,7 @@ JOB_CUSTOM_LOVS_MAPPING = {
 }
 
 
-def update_job_from_ad(job, ad, defaults=None):
+def update_job_from_ad(job, ad, defaults=None, import_categories=False):
     defaults = defaults or {}
 
     job.job_number = ad["jobNumber"]
@@ -67,6 +87,10 @@ def update_job_from_ad(job, ad, defaults=None):
         except KeyError:
             pass
         else:
+            # Use insert category parser if command specifies `--import_categories`
+            if (parser is job_category_parser) and import_categories:
+                parser = job_category_insert_parser
+
             setattr(
                 job,
                 target_field,

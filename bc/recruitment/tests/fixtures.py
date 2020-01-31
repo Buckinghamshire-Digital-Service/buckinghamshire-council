@@ -3,6 +3,15 @@ import datetime
 import factory
 
 
+class JobCategoryFactory(factory.django.DjangoModelFactory):
+
+    title = factory.Sequence(lambda n: f"Job Category {n}")
+    description = factory.Faker("sentence", nb_words=10)
+
+    class Meta:
+        model = "recruitment.JobCategory"
+
+
 class TalentLinkJobFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = "recruitment.TalentLinkJob"
@@ -13,7 +22,7 @@ class TalentLinkJobFactory(factory.django.DjangoModelFactory):
     job_number = factory.Sequence(lambda n: f"FS{str(n).zfill(5)}")
 
     title = factory.Faker("sentence", nb_words=5)
-    category = "default category"
+    category = factory.SubFactory("bc.recruitment.tests.fixtures.JobCategoryFactory")
     salary_range = "£18,000 - £21,000"
     working_hours = "Full time"
     closing_date = factory.Faker("date_this_month")

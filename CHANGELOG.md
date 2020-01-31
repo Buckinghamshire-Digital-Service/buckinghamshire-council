@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- 90 Jobs Category and homepage categories listing
 - 62 Jobs detail page
 - 59 Jobs homepage
 - 85 TalentLink API client, and importer commands

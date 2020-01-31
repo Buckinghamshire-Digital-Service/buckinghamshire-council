@@ -6,8 +6,14 @@ from wagtail.contrib.modeladmin.options import (
 
 from bc.events.models import EventType
 from bc.news.models import NewsType
+from bc.recruitment.models import JobCategory
 
 # from bc.people.models import PersonType
+
+
+class JobCategoryModelAdmin(ModelAdmin):
+    model = JobCategory
+    menu_icon = "tag"
 
 
 class EventTypeModelAdmin(ModelAdmin):
@@ -28,7 +34,7 @@ class NewsTypeModelAdmin(ModelAdmin):
 class TaxonomiesModelAdminGroup(ModelAdminGroup):
     menu_label = "Taxonomies"
     # items = (NewsTypeModelAdmin, EventTypeModelAdmin, PersonTypeModelAdmin)
-    items = (NewsTypeModelAdmin, EventTypeModelAdmin)
+    items = (NewsTypeModelAdmin, EventTypeModelAdmin, JobCategoryModelAdmin)
     menu_icon = "tag"
 
 
