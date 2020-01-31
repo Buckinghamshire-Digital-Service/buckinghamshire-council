@@ -9,6 +9,14 @@ from bc.recruitment_api.utils import update_job_from_ad
 class Command(BaseCommand):
     help = "Imports all jobs from the API"
 
+    def add_arguments(self, parser):
+        # Named (optional) arguments
+        parser.add_argument(
+            "--import_categories",
+            action="store_true",
+            help="Import missing categories instead of rejecting jobs without matching categories.",
+        )
+
     def handle(self, *args, **options):
         client = get_client()
         page = 1
@@ -34,7 +42,10 @@ class Command(BaseCommand):
 
                     try:
                         job = update_job_from_ad(
-                            job, ad, defaults={"last_imported": now()}
+                            job,
+                            ad,
+                            defaults={"last_imported": now()},
+                            import_categories=options["import_categories"],
                         )
                     except Exception as e:
                         msg = (

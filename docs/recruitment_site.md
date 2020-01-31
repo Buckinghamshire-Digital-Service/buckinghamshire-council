@@ -11,7 +11,7 @@ Either grab a database dump from production or staging, or:
 1. Update sites settings:
    1. Update sites settings to use the local domain for job homepage
    1. Update your /etc/hosts with the new job domain if needed. Eg. mine is 127.0.0.1 jobs.bc.local bc.local
-1. In VM, run `dj import_jobs` (see below about credentials). You should see something like "Fetching page 1... 140 new jobs created."
+1. In VM, run `dj import_jobs` (see below about credentials). You should see something like "Fetching page 1... 140 new jobs created." (If you get `JobCategory.DoesNotExist` errors, run the import command with `dj import_jobs --import_categories`. This will import the missing categories).
 1. Jobs are imported as TalentLinkJob models, and not page models. So you won't see the pages. To view a job page, you will need to append `/job_detail/<job_number>/`. Eg. http://jobs.bc.local:8000/job_detail/FS11566/
 
 To find out what job numbers have been imported, launch `dj shell_plus` and run `TalentLinkJob.objects.values_list('job_number')`.
@@ -83,3 +83,5 @@ You can call this in Python code with:
 ## Importing jobs
 
 The management command `import_jobs` will fetch results from the API.
+
+If the `--import_categories` option is specified when running the `import_jobs` command, new categories will be imported. Otherwise, jobs with categories that do not match existing `JobCategory` instances will be skipped in the import.
