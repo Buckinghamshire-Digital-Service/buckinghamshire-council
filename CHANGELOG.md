@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Update CI pipeline stage names and order to make progress clearer
+- 87 Remove flag from external links
 
 ## 2.1 (2020-01-22)
 
