@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Update CI pipeline stage names and order to make progress clearer
+- Hotfix: Pin Redis version in requirements.txt
 
 ## 2.1 (2020-01-22)
 
