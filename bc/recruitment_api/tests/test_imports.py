@@ -17,10 +17,10 @@ from .fixtures import get_advertisement, no_further_pages_response
 FIXTURE_JOB_CATEGORY_TITLE = "Schools & Early Years - Support"
 
 
-@mock.patch("bc.recruitment_api.management.commands.import_jobs.get_client")
-class ImportTest(TestCase):
+class ImportTestMixin:
     def get_mocked_client(self, advertisements=None):
-        advertisements = advertisements or [get_advertisement()]
+        if advertisements is None:
+            advertisements = [get_advertisement()]
 
         # create matching category
         JobCategoryFactory(title=FIXTURE_JOB_CATEGORY_TITLE)
@@ -32,6 +32,9 @@ class ImportTest(TestCase):
         ]
         return client
 
+
+@mock.patch("bc.recruitment_api.management.commands.import_jobs.get_client")
+class ImportTest(TestCase, ImportTestMixin):
     def test_with_mocked_client(self, mock_get_client):
 
         mock_get_client.return_value = self.get_mocked_client()
@@ -234,3 +237,71 @@ class ImportTest(TestCase):
         job_2.refresh_from_db()
         self.assertEqual(job_2.title, "New title 2")  # job 2 has been updated
         self.assertEqual(job_2.last_imported, later)  # job 2 has been updated
+
+
+@mock.patch("bc.recruitment_api.management.commands.import_jobs.get_client")
+class DeletedAndUpdatedJobsTest(TestCase, ImportTestMixin):
+    def test_job_number_clash_with_existing_job(self, mock_get_client):
+        job_number = "FS10000"
+        instant = datetime.datetime(2020, 1, 29, 12, 0, 0, tzinfo=datetime.timezone.utc)
+
+        job = TalentLinkJobFactory(
+            talentlink_id=1, job_number=job_number, last_imported=instant
+        )
+
+        advertisements = [
+            get_advertisement(talentlink_id=1, job_number=job_number),
+            get_advertisement(talentlink_id=2, job_number=job_number),
+        ]
+        mock_get_client.return_value = self.get_mocked_client(advertisements)
+
+        later = instant + datetime.timedelta(days=1)
+        with freeze_time(later):
+            call_command("import_jobs", stdout=mock.MagicMock())
+
+        jobs = TalentLinkJob.objects.filter(job_number=job_number)
+        self.assertEqual(jobs.count(), 2)
+        # Both jobs have been (re)imported
+        for job in jobs:
+            self.assertEqual(job.last_imported, later)
+
+    def test_job_number_can_be_changed(self, mock_get_client):
+        old_number = "FS10000"
+        new_number = "FS10001"
+        instant = datetime.datetime(2020, 1, 29, 12, 0, 0, tzinfo=datetime.timezone.utc)
+
+        job = TalentLinkJobFactory(
+            talentlink_id=1, job_number=old_number, last_imported=instant
+        )
+
+        advertisements = [get_advertisement(talentlink_id=1, job_number=new_number)]
+        mock_get_client.return_value = self.get_mocked_client(advertisements)
+
+        later = instant + datetime.timedelta(days=1)
+        with freeze_time(later):
+            call_command("import_jobs", stdout=mock.MagicMock())
+
+        # No new job has been created
+        self.assertEqual(TalentLinkJob.objects.count(), 1)
+        job.refresh_from_db()
+
+        self.assertEqual(job.talentlink_id, 1)
+        self.assertEqual(job.job_number, new_number)
+        # The job has been reimported
+        self.assertEqual(job.last_imported, later)
+
+    def test_job_missing_from_import(self, mock_get_client):
+        instant = datetime.datetime(2020, 1, 29, 12, 0, 0, tzinfo=datetime.timezone.utc)
+        job = TalentLinkJobFactory(talentlink_id=1, last_imported=instant)
+        self.assertEqual(TalentLinkJob.objects.count(), 1)
+
+        advertisements = []
+        mock_get_client.return_value = self.get_mocked_client(advertisements)
+
+        call_command("import_jobs", stdout=mock.MagicMock())
+
+        # No new job has been created
+        self.assertEqual(TalentLinkJob.objects.count(), 1)
+        job.refresh_from_db()
+        # The job has not been reimported
+        self.assertEqual(job.last_imported, instant)
