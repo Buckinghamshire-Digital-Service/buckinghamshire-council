@@ -50,7 +50,7 @@ class TalentLinkJob(models.Model):
     last_modified = models.DateTimeField(auto_now=True)
 
     talentlink_id = models.IntegerField(unique=True)
-    job_number = models.CharField(max_length=10, unique=True, blank=False)
+    job_number = models.CharField(max_length=10, blank=False)
 
     title = models.CharField(max_length=255, blank=False)
     description = models.TextField()
@@ -87,7 +87,7 @@ class TalentLinkJob(models.Model):
     def url(self):
         homepage = RecruitmentHomePage.objects.live().public().first()
         return homepage.url + homepage.reverse_subpage(
-            "job_detail", args=(self.job_number,)
+            "job_detail", args=(self.talentlink_id,)
         )
 
 
@@ -148,7 +148,7 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
 
         return context
 
-    @route(r"^job_detail/(\w+)/$")
-    def job_detail(self, request, job_number):
-        page = get_object_or_404(TalentLinkJob, job_number=job_number)
+    @route(r"^job_detail/(\d+)/$")
+    def job_detail(self, request, talentlink_id):
+        page = get_object_or_404(TalentLinkJob, talentlink_id=talentlink_id)
         return render(request, "patterns/pages/jobs/job_detail.html", {"page": page})
