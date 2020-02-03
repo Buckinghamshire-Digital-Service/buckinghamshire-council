@@ -87,7 +87,7 @@ class TalentLinkJob(models.Model):
     def url(self):
         homepage = RecruitmentHomePage.objects.live().public().first()
         return homepage.url + homepage.reverse_subpage(
-            "job_detail", args=(self.job_number,)
+            "job_detail", args=(self.talentlink_id,)
         )
 
 

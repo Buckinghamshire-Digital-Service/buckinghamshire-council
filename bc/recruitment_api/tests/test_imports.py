@@ -63,73 +63,6 @@ class ImportTest(TestCase, ImportTestMixin):
             msg="Category should be inserted if --import_categories is specified.",
         )
 
-    def test_import_with_missing_categories(self, mock_get_client):
-        mock_get_client.return_value = self.get_mocked_client()
-        JobCategory.objects.all().delete()
-
-        out = StringIO()
-        call_command("import_jobs", stdout=out)
-        out.seek(0)
-        output = out.read()
-        self.assertIn("0 existing jobs updated", output)
-        self.assertIn("0 new jobs created", output)
-        self.assertIn("JobCategory matching query does not exist.", output)
-        self.assertEqual(
-            JobCategory.objects.all().count(),
-            0,
-            msg="Category should not be inserted if --import_categories is not specified.",
-        )
-
-    def test_import_missing_categories(self, mock_get_client):
-        mock_get_client.return_value = self.get_mocked_client()
-        JobCategory.objects.all().delete()
-
-        out = StringIO()
-        call_command("import_jobs", "--import_categories", stdout=out)
-        out.seek(0)
-        output = out.read()
-        self.assertIn("0 existing jobs updated", output)
-        self.assertIn("1 new jobs created", output)
-        self.assertEqual(
-            JobCategory.objects.filter(title=FIXTURE_JOB_CATEGORY_TITLE).count(),
-            1,
-            msg="Category should be inserted if --import_categories is specified.",
-        )
-
-    def test_update_existing_job_with_missing_categories(self, mock_get_client):
-        TalentLinkJobFactory(talentlink_id=164579)
-
-        mock_get_client.return_value = self.get_mocked_client()
-        JobCategory.objects.get(title=FIXTURE_JOB_CATEGORY_TITLE).delete()
-
-        out = StringIO()
-        call_command("import_jobs", stdout=out)
-        out.seek(0)
-        output = out.read()
-        self.assertIn("0 existing jobs updated", output)
-        self.assertIn("0 new jobs created", output)
-        self.assertIn("JobCategory matching query does not exist.", output)
-        self.assertEqual(
-            JobCategory.objects.filter(title=FIXTURE_JOB_CATEGORY_TITLE).count(),
-            0,
-            msg="Category should not be inserted if --import_categories is not specified.",
-        )
-
-    def test_update_existing_job_and_importing_missing_categories(
-        self, mock_get_client
-    ):
-        TalentLinkJobFactory(talentlink_id=164579)
-
-        mock_get_client.return_value = self.get_mocked_client()
-        JobCategory.objects.get(title=FIXTURE_JOB_CATEGORY_TITLE).delete()
-
-        out = StringIO()
-        call_command("import_jobs", "--import_categories", stdout=out)
-        out.seek(0)
-        output = out.read()
-        self.assertIn("1 existing jobs updated", output)
-        self.assertIn("0 new jobs created", output)
-
     def test_new_job_created_date(self, mock_get_client):
         mock_get_client.return_value = self.get_mocked_client()
 
@@ -237,6 +170,76 @@ class ImportTest(TestCase, ImportTestMixin):
         job_2.refresh_from_db()
         self.assertEqual(job_2.title, "New title 2")  # job 2 has been updated
         self.assertEqual(job_2.last_imported, later)  # job 2 has been updated
+
+
+@mock.patch("bc.recruitment_api.management.commands.import_jobs.get_client")
+class JobCategoriesTest(TestCase, ImportTestMixin):
+    def test_import_with_missing_categories(self, mock_get_client):
+        mock_get_client.return_value = self.get_mocked_client()
+        JobCategory.objects.all().delete()
+
+        out = StringIO()
+        call_command("import_jobs", stdout=out)
+        out.seek(0)
+        output = out.read()
+        self.assertIn("0 existing jobs updated", output)
+        self.assertIn("0 new jobs created", output)
+        self.assertIn("JobCategory matching query does not exist.", output)
+        self.assertEqual(
+            JobCategory.objects.all().count(),
+            0,
+            msg="Category should not be inserted if --import_categories is not specified.",
+        )
+
+    def test_import_missing_categories(self, mock_get_client):
+        mock_get_client.return_value = self.get_mocked_client()
+        JobCategory.objects.all().delete()
+
+        out = StringIO()
+        call_command("import_jobs", "--import_categories", stdout=out)
+        out.seek(0)
+        output = out.read()
+        self.assertIn("0 existing jobs updated", output)
+        self.assertIn("1 new jobs created", output)
+        self.assertEqual(
+            JobCategory.objects.filter(title=FIXTURE_JOB_CATEGORY_TITLE).count(),
+            1,
+            msg="Category should be inserted if --import_categories is specified.",
+        )
+
+    def test_update_existing_job_with_missing_categories(self, mock_get_client):
+        TalentLinkJobFactory(talentlink_id=164579)
+
+        mock_get_client.return_value = self.get_mocked_client()
+        JobCategory.objects.get(title=FIXTURE_JOB_CATEGORY_TITLE).delete()
+
+        out = StringIO()
+        call_command("import_jobs", stdout=out)
+        out.seek(0)
+        output = out.read()
+        self.assertIn("0 existing jobs updated", output)
+        self.assertIn("0 new jobs created", output)
+        self.assertIn("JobCategory matching query does not exist.", output)
+        self.assertEqual(
+            JobCategory.objects.filter(title=FIXTURE_JOB_CATEGORY_TITLE).count(),
+            0,
+            msg="Category should not be inserted if --import_categories is not specified.",
+        )
+
+    def test_update_existing_job_and_importing_missing_categories(
+        self, mock_get_client
+    ):
+        TalentLinkJobFactory(talentlink_id=164579)
+
+        mock_get_client.return_value = self.get_mocked_client()
+        JobCategory.objects.get(title=FIXTURE_JOB_CATEGORY_TITLE).delete()
+
+        out = StringIO()
+        call_command("import_jobs", "--import_categories", stdout=out)
+        out.seek(0)
+        output = out.read()
+        self.assertIn("1 existing jobs updated", output)
+        self.assertIn("0 new jobs created", output)
 
 
 @mock.patch("bc.recruitment_api.management.commands.import_jobs.get_client")
