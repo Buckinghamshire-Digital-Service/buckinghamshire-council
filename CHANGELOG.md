@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Django 2.2.10
 - Update CI pipeline stage names and order to make progress clearer
 
 ## 2.1 (2020-01-22)
