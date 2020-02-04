@@ -1,3 +1,5 @@
+from django.utils.html import strip_tags
+
 from bleach.sanitizer import Cleaner
 from bs4 import BeautifulSoup
 from dateutil.parser import parse
@@ -91,9 +93,13 @@ def update_job_from_ad(job, ad, defaults=None, import_categories=False):
             description.append(cleaner.clean(custom_field["value"]))
             if i == 0:
                 soup = BeautifulSoup(custom_field["value"], "html.parser")
-                job.short_description = cleaner.clean(
-                    " ".join(soup.find("p").text.split())
-                )
+                if soup.find("p"):
+                    text = soup.find("p").text
+                else:
+                    # The value is plaintext, or at least contains no p tags
+                    text = strip_tags(custom_field["value"])
+
+                job.short_description = cleaner.clean(" ".join(text.split()))
 
     job.description = "\n".join(description)
 

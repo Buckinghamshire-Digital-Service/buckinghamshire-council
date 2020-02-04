@@ -561,3 +561,25 @@ class ShortDescriptionsTest(TestCase, ImportTestMixin):
         expected = "Only this should be the short description."
 
         self.compare_processed_record(description, expected)
+
+    def test_plaintext_is_imported(self):
+        description = [
+            {"label": "First section", "order": 1, "value": "This is plaintext."}
+        ]
+
+        expected = "This is plaintext."
+
+        self.compare_processed_record(description, expected)
+
+    def test_html_hiding_in_plaintext_is_still_cleaned(self):
+        description = [
+            {
+                "label": "First section",
+                "order": 1,
+                "value": "<div><h3>This <em>was not</em> plaintext.</h3></div>",
+            }
+        ]
+
+        expected = "This was not plaintext."
+
+        self.compare_processed_record(description, expected)
