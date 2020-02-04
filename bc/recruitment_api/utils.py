@@ -1,6 +1,8 @@
+from bleach.sanitizer import Cleaner
 from dateutil.parser import parse
 
 from ..recruitment.models import JobCategory
+from . import constants
 
 
 def date_parser(value):
@@ -52,6 +54,12 @@ JOB_CUSTOM_LOVS_MAPPING = {
 def update_job_from_ad(job, ad, defaults=None, import_categories=False):
     defaults = defaults or {}
 
+    cleaner = Cleaner(
+        tags=constants.BLEACH_ALLOWED_TAGS,
+        attributes=constants.BLEACH_ALLOWED_ATTRIBUTES,
+        strip=True,
+    )
+
     job.job_number = ad["jobNumber"]
     job.title = ad["jobTitle"]
     job.is_published = ad["postingTargetStatus"] == POSTING_TARGET_STATUS_PUBLISHED
@@ -77,8 +85,9 @@ def update_job_from_ad(job, ad, defaults=None, import_categories=False):
     description = []
     for custom_field in ad["customFields"]["customField"]:
         if custom_field["value"]:
-            description.append(f"<h2>{custom_field['label'].strip()}</h2>")
-            description.append(custom_field["value"].strip())
+            description.append(f"<h3>{custom_field['label'].strip()}</h3>")
+            description.append(cleaner.clean(custom_field["value"]))
+
     job.description = "\n".join(description)
 
     for custom_lov in ad["customLovs"]["customLov"]:
