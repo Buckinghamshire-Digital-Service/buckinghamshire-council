@@ -83,7 +83,9 @@ def update_job_from_ad(job, ad, defaults=None, import_categories=False):
 
     # The description is conveyed in 'custom' fields, where the label acts as a subheading
     description = []
-    for custom_field in ad["customFields"]["customField"]:
+    for custom_field in sorted(
+        ad["customFields"]["customField"], key=lambda x: x["order"]
+    ):
         if custom_field["value"]:
             description.append(f"<h3>{custom_field['label'].strip()}</h3>")
             description.append(cleaner.clean(custom_field["value"]))

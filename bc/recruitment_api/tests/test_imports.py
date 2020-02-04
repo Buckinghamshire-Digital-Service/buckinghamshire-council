@@ -429,3 +429,26 @@ class DescriptionsTest(TestCase):
             Email <a href="mailto:user@example.org">a named user</a> for more info.</p>
             """
         self.compare_processed_record(description, expected)
+
+    def test_ordering(self):
+        description = [
+            {
+                "label": "Second section",
+                "order": 2,
+                "value": "<p>This is a second paragraph.</p>",
+            },
+            {
+                "label": "First section",
+                "order": 1,
+                "value": "<p>This is a paragraph of text.</p>",
+            },
+        ]
+
+        expected = """
+            <h3>First section</h3>
+            <p>This is a paragraph of text.</p>
+            <h3>Second section</h3>
+            <p>This is a second paragraph.</p>
+            """
+
+        self.compare_processed_record(description, expected)
