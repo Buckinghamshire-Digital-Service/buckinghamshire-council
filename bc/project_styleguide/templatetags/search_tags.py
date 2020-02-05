@@ -40,6 +40,6 @@ def pagination_link(context, page_number, page_param_name="page"):
     """Returns a URL to the specified page, keeping the GET parameters intact"""
     params = context["request"].GET.copy()
     # Filter out empty query parameters
-    params = {key: value for key, value in params.lists() if value != ""}
+    params = {key: value for key, value in params.lists() if value != [""]}
     params[page_param_name] = page_number
     return f"?{urlencode(params, doseq=True)}"
