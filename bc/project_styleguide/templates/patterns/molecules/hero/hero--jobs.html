@@ -3,6 +3,42 @@
 {% image page.hero_image min-1600x350 as hero_image %}
 <div class="hero hero--jobs hero--no-search" style="background-image: url('{{ hero_image.url }}');">
     <div class="wrapper wrapper--large">
+<<<<<<< HEAD
         <h1 class="hero__strapline heading heading--xxxl">{{ page.title }}</h1>
+||||||| merged common ancestors
+        <h1 class="hero__strapline heading heading--hero">{{ page.strapline }}</h1>
+
+        <div class="hero__search">
+            <form action="{% url 'search' %}" method="get" role="search" class="form form--hero-search form--jobs-hero">
+                <input class="input" id="search--hero" type="text" placeholder="Search jobs, e.g. “Teacher in Aylesbury”" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
+                <label class="u-sr-only" for="search--hero">Search jobs</label>
+                <button class="button button--search button--hero" type="submit">
+                    <svg class="button__icon" aria-hidden="true">
+                        <use xlink:href="#magnifying-glass"></use>
+                    </svg>
+                    <span class="u-sr-only">Search</span>
+                </button>
+            </form>
+
+            <p class="hero__vacancies">{{ vacancies }} vacancies – <a href="{{ search_url }}"><strong>see all</strong></a></p>
+        </div>
+=======
+        <h1 class="hero__strapline heading heading--hero">{{ page.hero_title }}</h1>
+
+        <div class="hero__search">
+            <form action="{% url 'search' %}" method="get" role="search" class="form form--hero-search form--jobs-hero">
+                <input class="input" id="search--hero" type="text" placeholder="{{page.search_box_placeholder}}" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
+                <label class="u-sr-only" for="search--hero">Search jobs</label>
+                <button class="button button--search button--hero" type="submit">
+                    <svg class="button__icon" aria-hidden="true">
+                        <use xlink:href="#magnifying-glass"></use>
+                    </svg>
+                    <span class="u-sr-only">Search</span>
+                </button>
+            </form>
+
+            <p class="hero__vacancies">{{ vacancies }} vacancies – <a href="{{ search_url }}"><strong>see all</strong></a></p>
+        </div>
+>>>>>>> origin/epic/job-search
     </div>
 </div>

@@ -2,7 +2,12 @@
 
 ## Unreleased
 
+- 90 Jobs Category and homepage categories listing
+- 62 Jobs detail page
+- 59 Jobs homepage
+- 85 TalentLink API client, and importer commands
 - Update CI pipeline stage names and order to make progress clearer
+- Hotfix: Pin Redis version in requirements.txt
 
 ## 2.1 (2020-01-22)
 
