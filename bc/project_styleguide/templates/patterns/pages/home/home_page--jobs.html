@@ -14,19 +14,29 @@
 {% block content %}
     {% include "patterns/molecules/split-content/split-content.html" with content_block=page.body %}
 
-    <h2>Top job categories</h2>
+    <section class="categories">
+        <h2 class="heading heading--xl">Top job categories</h2>
 
-    <ul>
-    {% for cat in job_categories|slice:":6" %}
-        {% if cat.count %}
-        <li>
-            <h3><a href="search/?category={{cat.category}}">{{ cat.title }}</a> ({{ cat.count }} jobs)</h3>
-            {% if cat.description %}
-                <p>{{ cat.description }}</p>
-            {% endif %}
-            <p><a href="search/?category={{cat.category}}">See jobs</a></p>
-        </li>
-        {% endif %}
-    {% endfor %}
-    </ul>
+        <div class="categories__grid grid grid--categories">
+            {% for cat in job_categories|slice:":6" %}
+                {% if cat.count %}
+                    <a class="categories__card link--alt" href="search/?category={{cat.category}}">
+                        <header class="categories__header">
+                            <h3 class="categories__category-title heading heading--s">{{ cat.title }}</h3>
+                            <p class="categories__job-count">({{ cat.count }} jobs)</p>
+                        </header>
+                        <div class="categories__content">
+                                <p class="categories__description">From Social Workers to Occupational Therapists and Support Workers – this could be the perfect place to take your next step in your career.{{ cat.description }}</p>
+                            {% if cat.description %}
+                            {% endif %}
+                            <p class="categories__jobs-link">See jobs</p>
+                        </div>
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <a class="categories__all-vacancies" href="search/">See all {{ vacancies }} current vacancies</a>
+    </section>
+
 {% endblock %}
