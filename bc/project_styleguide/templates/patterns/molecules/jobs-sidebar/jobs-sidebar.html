@@ -1,10 +1,8 @@
 {% load wagtailcore_tags %}
 
 <aside class="sidebar sidebar--jobs">
+        <a href="/apply/{{page.job_number}}" class="sidebar__apply-link button button--apply">Apply for this job</a>
     {% if page.show_apply_button %}
-        <a href="/apply/{{page.job_number}}" class="sidebar__apply-link">
-            <h2 class="heading heading--s">Apply for this job</h2>
-        </a>
     {% endif %}
 
     <dl class="sidebar__job-details">
