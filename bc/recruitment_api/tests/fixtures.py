@@ -16,31 +16,42 @@ def get_advertisement(
             {
                 "label": "Overview",
                 "order": 1,
-                "value": """<p>Required for 24th February 2020 (or as close to as
-                possible)</p>\n<p>Salary: Bucks Pay Range 3 Scale 16 - 20</p>\n<p>Full
-                Time 08:15 – 15:45 Term Time Only (+5 INSET Days)</p>\n<p><strong>Are
-                you a dynamic and compassionate practitioner with the capacity to grow
-                and develop within a growing team? </strong></p>\n<p><strong>We are
-                looking for a Higher-Level Teaching Assistant with experience of
-                teaching whole classes in the Early Years Foundation
-                Stage.</strong></p>\n<p>In joining Elmhurst School and the Great
-                Learners Trust you will benefit from being a part of a dynamic and
-                forward-thinking Multi-Academy Trust.</p>""",  # noqa
+                "value": """
+                    <p>This is a first section of text.</p>\n<p>Salary:
+                    £enough</p>\n<p>This is a third paragraph in the first
+                    section.</p>
+                """,
             },
             {
                 "label": "About us",
                 "order": 2,
-                "value": '<p><strong>Elmhurst Values are: Aspire, Create, Think</strong></p>\n<p>Our GLT motto is<strong> "Believe and Achieve"</strong>, which reflects the determination of the Trust to expect great things for all our children, whatever their prior attainment.</p>\n<p>The vision of the Great Learners Trust is that all children in the Multi-Academy Trust community of schools are provided with outstanding educational opportunities.</p>\n<p>Our purpose is the best education for all children, regardless of their starting points, their individual learning needs, their level of disadvantage or advantage, their family background or their beliefs.</p>\n<p>We aim for:</p>\n<p>Challenge for All – Growth Mindset in Action</p>\n<p>Exceptional Progress</p>\n<p>Unforgettable Learning Experiences</p>\n<p>The Great Learners Trust believes that every child can be a great learner – it is our job to make that happen.</p>\n<p>Websites: http://www.elmhurstschool.org and http://www.greatlearnerstrust.co.uk/</p>',  # noqa
+                "value": """
+                    <p><strong>Our values are <strong>Kovemmin, Paremmin, Nopeammin,
+                    Vahvemmin</strong>.</p>\n<p>Our GLT motto is <strong>"Usko ja
+                    teke"</strong>, which reflects our determination to expect great
+                    things for all.</p>\n<p>Websites: http://www.example.org and
+                    http://www.example.com</p>
+                """,
             },
             {
                 "label": "About the role",
                 "order": 3,
-                "value": "<p>The HLTA is responsible for supporting the delivery of teaching and learning in Early Years Foundation Stage (2YOs, Nursery & Reception). Their timetable will be flexible and will include supporting a class teacher, delivery of lessons on both a regular and ad hoc basis (e.g. to cover first day sickness or courses).</p>\n<p>For more information please see attached Job description below.\xa0</p>",  # noqa
+                "value": """
+                    <p>This role has lots of responsibility.</p>\n<p>For more
+                    information please see attached Job description below.</p>
+                """,  # noqa
             },
             {
                 "label": "About you",
                 "order": 4,
-                "value": "<p>We are looking for a Higher-Level Teaching Assistant who:</p>\n<p>Has confidence in themselves to effectively teach, manage behaviour and build strong, positive relationships.</p>\n<p>Is flexible, open minded and able to think on his/her feet.</p>\n<p>Is able to motivate pupils and staff within the team to ensure the best results are achieved.</p>\n<p>Has energy, enthusiasm and a growth mindset</p>\n<p>For more information please see attached Person specification below.\xa0</p>",  # noqa
+                "value": """
+                    <p>We are looking for a worker drone who:</p>\n<p>Has confidence in
+                    themselves to effectively split infinitives in a clumsy
+                    way.</p>\n<p>Is flexible about typesetting sentence fragments as
+                    though they're full sentences.</p>\n<p>Has energy, enthusiasm and
+                    jargonny attributes like a growth mindset</p>\n<p>For more
+                    information please see attached Person specification below.\xa0</p>
+                """,  # noqa
             },
             {
                 "label": "Other information",
