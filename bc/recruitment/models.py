@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import Count, F
 from django.shortcuts import get_object_or_404, render
+from django.utils.functional import cached_property
 
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
@@ -141,3 +142,25 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
     def job_detail(self, request, talentlink_id):
         page = get_object_or_404(TalentLinkJob, talentlink_id=talentlink_id)
         return render(request, "patterns/pages/jobs/job_detail.html", {"page": page})
+
+
+class RecruitmentIndexPage(BasePage):
+    template = "patterns/pages/standardpages/index_page--jobs.html"
+
+    hero_image = models.ForeignKey(
+        "images.CustomImage", null=True, related_name="+", on_delete=models.SET_NULL,
+    )
+
+    content_panels = BasePage.content_panels + [
+        ImageChooserPanel("hero_image"),
+    ]
+
+    @cached_property
+    def child_pages(self):
+        return self.get_children().live().public().specific().order_by("path")
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context["subpages"] = self.child_pages
+
+        return context

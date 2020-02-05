@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- 92 Recruitment index page
 - 90 Jobs Category and homepage categories listing
 - 62 Jobs detail page
 - 59 Jobs homepage
