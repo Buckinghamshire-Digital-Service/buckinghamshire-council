@@ -15,39 +15,20 @@ def search(request):
     search_query = request.GET.get("query", None)
     page = request.GET.get("page", 1)
     template_path = "patterns/pages/search/search.html"
-    is_jobs_search = False
 
-    # Check if this is the recruitment site
+    # Recruitment site search
     if request.site.root_page.specific.__class__ == RecruitmentHomePage:
         template_path = "patterns/pages/search/search--jobs.html"
-        is_jobs_search = True
+        search_results = get_jobs_search_results(request)
 
-    # Search
-    if search_query:
-        if is_jobs_search:
-            vector = (
-                SearchVector("title", weight="A")
-                + SearchVector("category", weight="B")
-                + SearchVector("searchable_location", weight="B")
-                + SearchVector("description", weight="C")
-            )
-            query = SearchQuery(search_query, search_type="phrase")
-            search_results = (
-                TalentLinkJob.objects.annotate(rank=SearchRank(vector, query))
-                .filter(rank__gte=0.3)
-                .order_by("-rank")
-            )
-
-        else:
+    # Main site search
+    else:
+        if search_query:
             search_results = Page.objects.live().search(search_query, operator="and")
             query = Query.get(search_query)
             # Record hit
             query.add_hit()
 
-    else:
-        if is_jobs_search:
-            # Order by newest job at top
-            search_results = TalentLinkJob.objects.all().order_by("posting_start_date")
         else:
             search_results = Page.objects.none()
 
@@ -73,3 +54,31 @@ def search(request):
     else:
         patch_cache_control(response, **get_default_cache_control_kwargs())
     return response
+
+
+def get_jobs_search_results(request):
+    search_query = request.GET.get("query", None)
+    filter_job_category = request.GET.getlist("category")
+
+    if search_query:
+        vector = (
+            SearchVector("title", weight="A")
+            + SearchVector("searchable_location", weight="B")
+            + SearchVector("description", weight="C")
+        )
+        query = SearchQuery(search_query, search_type="phrase")
+        search_results = (
+            TalentLinkJob.objects.annotate(rank=SearchRank(vector, query))
+            .filter(rank__gte=0.3)
+            .order_by("-rank")
+        )
+
+    else:
+        # Order by newest job at top
+        search_results = TalentLinkJob.objects.all().order_by("posting_start_date")
+
+    # Process filters
+    if filter_job_category:
+        search_results = search_results.filter(category__id__in=filter_job_category)
+
+    return search_results

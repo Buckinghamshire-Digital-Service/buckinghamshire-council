@@ -20,14 +20,14 @@
         <div class="categories__grid grid grid--categories">
             {% for cat in job_categories|slice:":6" %}
                 {% if cat.count %}
-                    <a class="categories__card link--alt" href="search/?category={{cat.category}}">
+                    <a class="categories__card link--alt" href="search/?category={{cat.id}}">
                         <header class="categories__header">
-                            <h3 class="categories__category-title heading heading--s">{{ cat.title }}</h3>
+                            <h3 class="categories__category-title heading heading--s">{{ cat.label }}</h3>
                             <p class="categories__job-count">({{ cat.count }} jobs)</p>
                         </header>
                         <div class="categories__content">
-                                <p class="categories__description">From Social Workers to Occupational Therapists and Support Workers – this could be the perfect place to take your next step in your career.{{ cat.description }}</p>
                             {% if cat.description %}
+                                <p class="categories__description">{{ cat.description }}</p>
                             {% endif %}
                             <p class="categories__jobs-link">See jobs</p>
                         </div>
