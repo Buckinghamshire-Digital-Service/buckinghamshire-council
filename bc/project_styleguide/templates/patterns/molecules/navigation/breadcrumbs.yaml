@@ -16,6 +16,3 @@ tags:
   pageurl:
     ancestor_page:
       raw: '#'
-  slugurl:
-    "'home'":
-      raw: '#'
