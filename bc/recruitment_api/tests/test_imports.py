@@ -1,9 +1,11 @@
 import datetime
+import textwrap
 from io import StringIO
 from unittest import mock
 
 from django.core.management import call_command
 from django.test import TestCase
+from django.utils import timezone
 
 from freezegun import freeze_time
 
@@ -308,3 +310,276 @@ class DeletedAndUpdatedJobsTest(TestCase, ImportTestMixin):
         job.refresh_from_db()
         # The job has not been reimported
         self.assertEqual(job.last_imported, instant)
+
+
+class DescriptionsTest(TestCase):
+    def setUp(self):
+        # create matching category
+        JobCategoryFactory(title=FIXTURE_JOB_CATEGORY_TITLE)
+
+    def compare_processed_record(self, description, expected):
+
+        try:
+            job = TalentLinkJob.objects.get(talentlink_id=1)
+        except TalentLinkJob.DoesNotExist:
+            job = TalentLinkJob(talentlink_id=1)
+
+        job = update_job_from_ad(
+            job,
+            get_advertisement(talentlink_id=1, description=description),
+            defaults={"last_imported": timezone.now()},
+        )
+
+        expected = textwrap.dedent(expected).strip()
+        self.assertEqual(job.description, expected)
+
+    def test_basic_case(self):
+        description = [
+            {
+                "label": "First section",
+                "order": 1,
+                "value": "<p>This is a paragraph of text.</p>",
+            },
+            {
+                "label": "Second section",
+                "order": 2,
+                "value": "<p>This is a second paragraph.</p>",
+            },
+        ]
+
+        expected = """
+            <h3>First section</h3>
+            <p>This is a paragraph of text.</p>
+            <h3>Second section</h3>
+            <p>This is a second paragraph.</p>
+            """
+
+        self.compare_processed_record(description, expected)
+
+    def test_descriptions_are_updated(self):
+        job = TalentLinkJobFactory(talentlink_id=1, description="Old value")
+        description = [
+            {
+                "label": "New Info",
+                "order": 1,
+                "value": "<p>This is a paragraph of text.</p>",
+            }
+        ]
+        expected = """
+            <h3>New Info</h3>
+            <p>This is a paragraph of text.</p>
+            """
+        self.assertEqual(job.description, "Old value")
+        self.compare_processed_record(description, expected)
+
+    def test_style_attributes_are_stripped(self):
+        description = [
+            {
+                "label": "Colourful text",
+                "order": 1,
+                "value": '<p style="color: #2a2a2a;">This is a paragraph of text.</p>',
+            }
+        ]
+        expected = """
+            <h3>Colourful text</h3>
+            <p>This is a paragraph of text.</p>
+            """
+        self.compare_processed_record(description, expected)
+
+    def test_class_attributes_are_stripped(self):
+        description = [
+            {
+                "label": "Classy text",
+                "order": 1,
+                "value": '<p class="manatee">This is a paragraph of text.</p>',
+            }
+        ]
+        expected = """
+            <h3>Classy text</h3>
+            <p>This is a paragraph of text.</p>
+            """
+        self.compare_processed_record(description, expected)
+
+    def test_ids_are_stripped(self):
+        description = [
+            {
+                "label": "Mighty fine text",
+                "order": 1,
+                "value": '<p id="mediocre">This is a paragraph of text.</p>',
+            }
+        ]
+        expected = """
+            <h3>Mighty fine text</h3>
+            <p>This is a paragraph of text.</p>
+            """
+        self.compare_processed_record(description, expected)
+
+    def test_link_references_are_passed(self):
+        description = [
+            {
+                "label": "Hyperlinked text",
+                "order": 1,
+                "value": '<p>Visit <a href="https://www.example.com">example.com</a>.\n'
+                'Email <a href="mailto:user@example.org">a named user</a> for more info.</p>',
+            }
+        ]
+        expected = """
+            <h3>Hyperlinked text</h3>
+            <p>Visit <a href="https://www.example.com">example.com</a>.
+            Email <a href="mailto:user@example.org">a named user</a> for more info.</p>
+            """
+        self.compare_processed_record(description, expected)
+
+    def test_ordering(self):
+        description = [
+            {
+                "label": "Second section",
+                "order": 2,
+                "value": "<p>This is a second paragraph.</p>",
+            },
+            {
+                "label": "First section",
+                "order": 1,
+                "value": "<p>This is a paragraph of text.</p>",
+            },
+        ]
+
+        expected = """
+            <h3>First section</h3>
+            <p>This is a paragraph of text.</p>
+            <h3>Second section</h3>
+            <p>This is a second paragraph.</p>
+            """
+
+        self.compare_processed_record(description, expected)
+
+
+class ShortDescriptionsTest(TestCase, ImportTestMixin):
+    def setUp(self):
+        # create matching category
+        JobCategoryFactory(title=FIXTURE_JOB_CATEGORY_TITLE)
+
+    def compare_processed_record(self, description, expected):
+
+        try:
+            job = TalentLinkJob.objects.get(talentlink_id=1)
+        except TalentLinkJob.DoesNotExist:
+            job = TalentLinkJob(talentlink_id=1)
+
+        job = update_job_from_ad(
+            job,
+            get_advertisement(talentlink_id=1, description=description),
+            defaults={"last_imported": timezone.now()},
+        )
+
+        expected = textwrap.dedent(expected).strip()
+        self.assertEqual(job.short_description, expected)
+
+    def test_basic_case(self):
+        description = [
+            {
+                "label": "First section",
+                "order": 1,
+                "value": "<p>This is a paragraph of text.</p>",
+            },
+            {
+                "label": "Second section",
+                "order": 2,
+                "value": "<p>This is a second paragraph.</p>",
+            },
+        ]
+
+        expected = "This is a paragraph of text."
+
+        self.compare_processed_record(description, expected)
+
+    def test_paragraph_is_first_by_order_attribute(self):
+        description = [
+            {
+                "label": "First section",
+                "order": 2,
+                "value": "<p>This is a paragraph of text.</p>",
+            },
+            {
+                "label": "Second section",
+                "order": 1,
+                "value": "<p>This was the second indexed, but first by order attribute.</p>",
+            },
+        ]
+
+        expected = "This was the second indexed, but first by order attribute."
+
+        self.compare_processed_record(description, expected)
+
+    def test_all_tags_within_paragraph_are_stripped(self):
+        description = [
+            {
+                "label": "First section",
+                "order": 1,
+                "value": """
+                    <p>This <b>beefy</b> <em>emphatic</em> <strong>strong</strong>
+                    <i>Italian</i> <span class="sentiment">sentiment</span> needeth not
+                    <a href="https://en.wiktionary.org/wiki/koe">decoration</a>.</p>
+                """,
+            }
+        ]
+
+        expected = (
+            "This beefy emphatic strong Italian sentiment needeth not decoration."
+        )
+
+        self.compare_processed_record(description, expected)
+
+    def test_preceding_non_paragraph_elements_are_ignored(self):
+        description = [
+            {
+                "label": "First section",
+                "order": 1,
+                "value": """
+                    <div><h2>To be ignored</h2></div>
+                    <p>To be the short description.</p>
+                """,
+            }
+        ]
+
+        expected = "To be the short description."
+
+        self.compare_processed_record(description, expected)
+
+    def test_subsequent_paragraphs_are_ignored(self):
+        description = [
+            {
+                "label": "First section",
+                "order": 1,
+                "value": """
+                    <p>Only this should be the short description.</p>
+                    <p>This should be ignored.</p>
+                """,
+            }
+        ]
+
+        expected = "Only this should be the short description."
+
+        self.compare_processed_record(description, expected)
+
+    def test_plaintext_is_imported(self):
+        description = [
+            {"label": "First section", "order": 1, "value": "This is plaintext."}
+        ]
+
+        expected = "This is plaintext."
+
+        self.compare_processed_record(description, expected)
+
+    def test_html_hiding_in_plaintext_is_still_cleaned(self):
+        description = [
+            {
+                "label": "First section",
+                "order": 1,
+                "value": "<div><h3>This <em>was not</em> plaintext.</h3></div>",
+            }
+        ]
+
+        expected = "This was not plaintext."
+
+        self.compare_processed_record(description, expected)

@@ -2,10 +2,12 @@
 
 ## Unreleased
 
+- 96 Jobs search: add category filter
 - 90 Jobs Category and homepage categories listing
 - 62 Jobs detail page
 - 59 Jobs homepage
 - 85 TalentLink API client, and importer commands
+- 94 Jobs import HTML formatting improvements
 - Update CI pipeline stage names and order to make progress clearer
 - Hotfix: Pin Redis version in requirements.txt
 

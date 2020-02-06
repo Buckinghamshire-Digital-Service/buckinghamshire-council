@@ -84,3 +84,15 @@ You can call this in Python code with:
 The management command `import_jobs` will fetch results from the API.
 
 If the `--import_categories` option is specified when running the `import_jobs` command, new categories will be imported. Otherwise, jobs with categories that do not match existing `JobCategory` instances will be skipped in the import.
+
+### Imported fields
+
+This is a non-exhaustive reference of the fields we map from the API return. It serves to highlight some of the noteworthy aspects:
+
+#### Description
+
+This is a concatenation of multiple `custom_field` fields, whose format is a 'label' and a 'value'. We turn the label into a `<h3>` element, and the value into a paragraph, but we also strip out most HTML formatting, according to a whitelist of tags and their attributes in `bc.recruitment_api.constants`.
+
+#### Short description
+
+This is either the text of the first `<p>` element in the first custom_field value from above, or the entire first custom_field value, if it is formatted as plain text.

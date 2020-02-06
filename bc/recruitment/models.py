@@ -1,9 +1,6 @@
 from django.db import models
 from django.db.models import Count, F
 from django.shortcuts import get_object_or_404, render
-from django.utils.functional import cached_property
-from django.utils.html import strip_tags
-from django.utils.text import Truncator
 
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
@@ -29,8 +26,9 @@ class JobCategory(models.Model):
         """
         job_categories = (
             TalentLinkJob.objects.values("category")
+            .annotate(id=F("category__id"))
             .annotate(count=Count("category"))
-            .annotate(title=F("category__title"))
+            .annotate(label=F("category__title"))
             .annotate(description=F("category__description"))
             .order_by("-count")
         )
@@ -53,6 +51,7 @@ class TalentLinkJob(models.Model):
     job_number = models.CharField(max_length=10, blank=False)
 
     title = models.CharField(max_length=255, blank=False)
+    short_description = models.TextField()
     description = models.TextField()
     category = models.ForeignKey("recruitment.JobCategory", on_delete=models.PROTECT)
     salary_range = models.CharField(max_length=255)
@@ -73,15 +72,6 @@ class TalentLinkJob(models.Model):
 
     def __str__(self):
         return f"{self.job_number}: {self.title}"
-
-    @cached_property
-    def short_description(self):
-        if self.description:
-            # Imported description typically start with a 'Overview' heading which we want to remove.
-            clean_description = strip_tags(
-                self.description.replace("<h2>Overview</h2>", "", 1)
-            )
-            return Truncator(clean_description).chars(140)
 
     @property
     def url(self):

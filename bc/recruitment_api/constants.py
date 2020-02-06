@@ -1,3 +1,24 @@
-TALENTLINK_API_WSDL = (
-    "https://api3.lumesse-talenthub.com/CareerPortal/SOAP/FoAdvert?WSDL"
-)
+BLEACH_ALLOWED_TAGS = [
+    "a",
+    "address",
+    "br",
+    "dd",
+    "div",
+    "dl",
+    "dt",
+    "em",
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "li",
+    "ol",
+    "p",
+    "span",
+    "strong",
+    "sup",
+    "ul",
+]
+BLEACH_ALLOWED_ATTRIBUTES = {"a": ["href", "title"]}
