@@ -31,7 +31,7 @@
                     <legend class="hidden">{{ filter.title }}</legend>
                     {% for option in filter.options %}
                         <div class="search-filters__option">
-                            <input class="search-filters__checkbox" type="checkbox" id="{{ option.id }}">
+                            <input class="search-filters__checkbox" type="checkbox" id="{{ option.id }}" {% if option.id|slugify in filter.selected %}checked{% endif %}>
                             <label class="search-filters__label" for="{{ option.id }}">
                                 <span class="search-filters__dummy-checkbox">
                                     <svg class="search-filters__check-icon icon">

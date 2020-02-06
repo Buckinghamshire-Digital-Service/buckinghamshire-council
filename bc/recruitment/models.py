@@ -27,8 +27,9 @@ class JobCategory(models.Model):
         """
         job_categories = (
             TalentLinkJob.objects.values("category")
+            .annotate(id=F("category__id"))
             .annotate(count=Count("category"))
-            .annotate(title=F("category__title"))
+            .annotate(label=F("category__title"))
             .annotate(description=F("category__description"))
             .order_by("-count")
         )

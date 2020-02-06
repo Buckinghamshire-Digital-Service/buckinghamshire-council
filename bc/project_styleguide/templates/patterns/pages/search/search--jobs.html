@@ -1,5 +1,5 @@
 {% extends "patterns/base_page--jobs.html" %}
-{% load static wagtailcore_tags wagtailsearchpromotions_tags %}
+{% load static wagtailcore_tags wagtailsearchpromotions_tags jobs_search_filters %}
 
 {% block body_class %}{{ block.super }} template-searchresults{% endblock %}
 
@@ -40,8 +40,7 @@
             <div class="search__results-wrapper wrapper wrapper--flex">
                 <aside class="search__filters">
                     <h2 class="heading heading--m">Filter jobs</h2>
-
-                    {% include "patterns/molecules/search-filters/search-filters.html" %}
+                    {% jobs_search_filters request %}
                 </aside>
 
                 <section class="search__results">

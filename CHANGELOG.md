@@ -3,6 +3,7 @@
 ## Unreleased
 
 - 92 Recruitment index page
+- 96 Jobs search: add category filter
 - 90 Jobs Category and homepage categories listing
 - 62 Jobs detail page
 - 59 Jobs homepage
