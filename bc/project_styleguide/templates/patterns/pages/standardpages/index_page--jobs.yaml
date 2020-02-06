@@ -1,36 +1,22 @@
 context:
   page:
-    title: Test listing page
-    hero_image:
-      url: http://via.placeholder.com/1600x350
+    title: What we offer our employees
   subpages:
-    - title: Test sub page
+    - title: Where we work
       listing_image: fake
-      listing_summary: Listing summary for the sub page
-    - title: Another test sub page
+      listing_summary: Surrounded by countryside and a short commute from the buzz of London, Buckinghamshire offers our staff the best of both worlds. As an area of outstanding beauty, it has been ranked as one of the best rural places to live in the UK. We have offices in Aylesbury, High Wycombe and Amersham and offer discounted travel to our BC employees
+    - title: Employee Values
       listing_image: fake
-      listing_summary: Listing summary for the sub page
-    - title: Another test sub page
+      listing_summary: With the best interests of our residents are at the heart of what we do, we need people who can live by our core values of being proud, ambitious, collaborative and trustworthy. Add more about new EVP
+    - title: Flexible and agile working
       listing_image: fake
-      listing_summary: Listing summary for the sub page
-    - title: Test sub page
-      listing_image: fake
-      listing_summary: Listing summary for the sub page
-    - title: Another test sub page
-      listing_image: fake
-      listing_summary: Listing summary for the sub page
-    - title: Another test sub page
-      listing_image: fake
-      listing_summary: Listing summary for the sub page
+      listing_summary: As long as it works for us too, you can apply for different working patterns such as compressed hours, sabbaticals and job sharing. We encourage agile working both in the office and from home where possible, making it easier for you to fit your job around your lifestyle.
 
 tags:
   pageurl:
     subpage:
       raw: '#'
   image:
-    subpage.listing_image fill-450x300:
+    subpage.listing_image fill-530x530:
       raw: |
-        <img src="http://via.placeholder.com/450x300" width="450" height="300" alt="Some alt">
-    page.hero_image min-1600x350 as hero_image:
-      raw: |
-        <img src="http://via.placeholder.com/1600x350" width="1600" height="350" alt="Some alt">
+        <img src="http://via.placeholder.com/530x530" width="530" height="530" alt="Some alt">
