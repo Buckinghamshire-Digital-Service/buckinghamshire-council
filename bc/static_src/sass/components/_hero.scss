@@ -16,11 +16,6 @@
         margin-bottom: $grid;
     }
 
-    &__vacancies {
-        color: $color--link;
-        margin: 0;
-    }
-
     &--with-alert {
         @include media-query(tablet-portrait) {
             padding-bottom: 60px;

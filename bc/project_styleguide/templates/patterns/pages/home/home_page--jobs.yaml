@@ -4,26 +4,25 @@ context:
     strapline: Find a job in Buckinghamshire
   job_categories:
     - id: 1
-      label: Schools & Early Years - Support
+      label: Social care
       count: 55
-      description: From Social Workers to Occcupational Therapists and Support Workers - this could be the perfect place to take your next step i our career.
+      description: 'From Social Workers to Occcupational Therapists and Support Workers - this could be the perfect place to take your next step i our career.'
     - id: 14
-      label: Schools - Secondary - Teaching
+      label: Business Support
       count: 22
       description: Are you an experienced senior social worker with leadership and management experience? Perhaps you are already an Assistant Team Manager looking to make their mark on a new local authority?
     - id: 30
-      label: Schools - Early Years & Primary - Teaching
+      label: Teaching
       count: 20
       description: Are you passionate about improving the lives of children and young people? Do you want to work for an employer who places major importance on high quality supervision, wellbeing and career development?
     - id: 3
-      label: Children's Social Care
+      label: Corporate roles
       count: 7
       description: Are you passionate about improving the lives of children and young people? Do you want to work for an employer who places major importance on learning, wellbeing and career development?
     - id: 5
-      label: Schools & Early Years - Leadership
+      label: Revenues and Benefits
       count: 6
       description: Are you passionate about improving the lives of children and young people? Do you want to work for an employer who places major importance on high quality supervision, wellbeing and career development?
     - id: 6
       label: Other
       count: 5
-      description:
