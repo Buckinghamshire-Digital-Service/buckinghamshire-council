@@ -44,7 +44,6 @@ class JobCategory(models.Model):
         )
         return job_categories
 
-    @staticmethod
     def _slug_is_available(slug, job_category=None):
         """
         Determine whether the given slug is available for use and not a duplicate
