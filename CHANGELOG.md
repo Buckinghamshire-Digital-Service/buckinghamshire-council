@@ -5,6 +5,7 @@
 - Django 2.2.10
 - Update CI pipeline stage names and order to make progress clearer
 - 87 Remove flag from external links
+- 88 Updated IndexPage to allow it to be created under IndexPage
 - Hotfix: Pin Redis version in requirements.txt
 
 ## 2.1 (2020-01-22)
