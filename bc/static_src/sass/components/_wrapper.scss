@@ -65,4 +65,8 @@
             flex-direction: row;
         }
     }
+
+    &--margin {
+        margin: $grid--large 0;
+    }
 }

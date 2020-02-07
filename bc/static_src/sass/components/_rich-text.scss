@@ -39,4 +39,16 @@
     li {
         margin-bottom: 5px;
     }
+
+    h2 {
+        @include font-size(m);
+        margin-bottom: 5px;
+        font-weight: $weight--bold;
+    }
+
+    h3 {
+        @include font-size(s);
+        margin-bottom: 5px;
+        font-weight: $weight--bold;
+    }
 }
