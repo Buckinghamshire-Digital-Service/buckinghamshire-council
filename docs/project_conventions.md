@@ -35,6 +35,8 @@ The version number is of the form `MAJOR.PATCH`. Planned releases which add feat
    1. `git push --tags`
 1. Create a new branch `release-x+1.0` from `master`.
 
+Tidy up: delete the old `release-x.x` branch, and merge master to staging. Check the repository graph looks sensible (https://git.torchbox.com/buckinghamshire-council/bc/-/network/master).
+
 ### Deploying bug fixes
 
 Urgent bug fixes should be made against the latest-deployed release, i.e. x.x. There is possibly already a `release-(x+1).x` branch in progress.
