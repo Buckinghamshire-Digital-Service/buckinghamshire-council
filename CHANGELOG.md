@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## 3.1 (2020-02-10)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/3.0...3.1
+
+- 82 Adjust header logo size
+
 ## 3.0 (2020-02-10)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/2.1...3.0
