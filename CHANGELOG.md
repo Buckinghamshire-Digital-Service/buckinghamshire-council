@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Update deployment documentation
+
 ## 3.0 (2020-02-10)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/2.1...3.0
