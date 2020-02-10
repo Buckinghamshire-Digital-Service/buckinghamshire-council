@@ -33,7 +33,7 @@ The version number is of the form `MAJOR.PATCH`. Planned releases which add feat
 1. Tag the merge commit
    1. `git tag x.x`
    1. `git push --tags`
-1. Create a new branch `release-x+1.x` from `master`.
+1. Create a new branch `release-x+1.0` from `master`.
 
 ### Deploying bug fixes
 
