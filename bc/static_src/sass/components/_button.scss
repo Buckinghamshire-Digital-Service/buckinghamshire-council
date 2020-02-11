@@ -58,4 +58,30 @@
             height: 24px;
         }
     }
+
+    &--apply {
+        display: flex;
+        background: $color--leaf;
+        text-decoration: none;
+        font-weight: $weight--bold;
+        color: $color--slate;
+        border-bottom: $border--accent $color--slate;
+        transition: background $transition;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto $grid;
+
+        @include media-query(tablet-landscape) {
+            margin-bottom: 0;
+        }
+
+        #{$hover-states} {
+            background: darken($color--leaf, 3%);
+            color: $color--slate;
+        }
+
+        &:active {
+            background: darken($color--leaf, 8%);
+        }
+    }
 }
