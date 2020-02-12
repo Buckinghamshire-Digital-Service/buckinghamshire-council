@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- 104 Add job subcategory
 - 99 Add slugs to job category
 - 92 Recruitment index page
 - 96 Jobs search: add category filter
