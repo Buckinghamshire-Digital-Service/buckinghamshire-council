@@ -67,8 +67,6 @@ class JobCategory(models.Model):
            The dictionary keys are: category (category id), count, title, description
            This is ordered by highest count first.
         """
-        # TODO: cleanup
-        # TalentLinkJob.objects.annotate(category=F('subcategory__categories')).values("category").annotate(count=Count("category"))
         job_categories = (
             TalentLinkJob.objects.annotate(category=F("subcategory__categories"))
             .values("category")
@@ -78,14 +76,7 @@ class JobCategory(models.Model):
             .annotate(description=F("subcategory__categories__description"))
             .order_by("-count")
         )
-        # job_categories = (
-        #     TalentLinkJob.objects.values("category")
-        #     .annotate(id=F("category__slug"))
-        #     .annotate(count=Count("category"))
-        #     .annotate(label=F("category__title"))
-        #     .annotate(description=F("category__description"))
-        #     .order_by("-count")
-        # )
+
         return job_categories
 
     def _slug_is_available(slug, job_category=None):
