@@ -30,14 +30,11 @@ class JobSubcategory(models.Model):
         if self.categories:
             return list(self.categories.values_list("title", flat=True))
 
+    # Set short description for Modeladmin lists so displays this instead of `get_categories_list`
     get_categories_list.short_description = "Categories"
 
     def __str__(self):
-        categories = self.get_categories_list()
-        if categories:
-            return "%s (%s)" % (self.title, ", ".join(self.get_categories_list()))
-        else:
-            return self.title
+        return self.title
 
     class Meta:
         verbose_name_plural = "Job subcategories"
@@ -69,6 +66,7 @@ class JobCategory(models.Model):
         """
         job_categories = (
             TalentLinkJob.objects.annotate(category=F("subcategory__categories"))
+            .exclude(category=None)
             .values("category")
             .annotate(id=F("subcategory__categories__slug"))
             .annotate(count=Count("category"))
@@ -162,6 +160,13 @@ class TalentLinkJob(models.Model):
     posting_start_date = models.DateTimeField()
     posting_end_date = models.DateTimeField()
     show_apply_button = models.BooleanField(default=True)
+
+    def get_categories_list(self):
+        if self.subcategory:
+            return self.subcategory.get_categories_list()
+
+    # Set short description for Modeladmin lists so displays this instead of `get_categories_list`
+    get_categories_list.short_description = "Categories"
 
     def __str__(self):
         return f"{self.job_number}: {self.title}"

@@ -9,14 +9,14 @@ from django.utils import timezone
 
 from freezegun import freeze_time
 
-from bc.recruitment.models import JobCategory, TalentLinkJob
-from bc.recruitment.tests.fixtures import JobCategoryFactory, TalentLinkJobFactory
+from bc.recruitment.models import JobSubcategory, TalentLinkJob
+from bc.recruitment.tests.fixtures import JobSubcategoryFactory, TalentLinkJobFactory
 from bc.recruitment_api.utils import update_job_from_ad
 
 from .fixtures import get_advertisement, no_further_pages_response
 
 # Job category title to match dummy Job Group in get_advertisement() fixture
-FIXTURE_JOB_CATEGORY_TITLE = "Schools & Early Years - Support"
+FIXTURE_JOB_SUBCATEGORY_TITLE = "Schools & Early Years - Support"
 
 
 class ImportTestMixin:
@@ -25,7 +25,7 @@ class ImportTestMixin:
             advertisements = [get_advertisement()]
 
         # create matching category
-        JobCategoryFactory(title=FIXTURE_JOB_CATEGORY_TITLE)
+        JobSubcategoryFactory(title=FIXTURE_JOB_SUBCATEGORY_TITLE)
 
         client = mock.Mock()
         client.service.getAdvertisementsByPage.side_effect = [
@@ -60,7 +60,7 @@ class ImportTest(TestCase, ImportTestMixin):
         self.assertIn("1 existing jobs updated", output)
         self.assertIn("0 new jobs created", output)
         self.assertEqual(
-            JobCategory.objects.filter(title=FIXTURE_JOB_CATEGORY_TITLE).count(),
+            JobSubcategory.objects.filter(title=FIXTURE_JOB_SUBCATEGORY_TITLE).count(),
             1,
             msg="Category should be inserted if --import_categories is specified.",
         )
@@ -175,10 +175,10 @@ class ImportTest(TestCase, ImportTestMixin):
 
 
 @mock.patch("bc.recruitment_api.management.commands.import_jobs.get_client")
-class JobCategoriesTest(TestCase, ImportTestMixin):
-    def test_import_with_missing_categories(self, mock_get_client):
+class JobSubcategoriesTest(TestCase, ImportTestMixin):
+    def test_import_with_missing_subcategories(self, mock_get_client):
         mock_get_client.return_value = self.get_mocked_client()
-        JobCategory.objects.all().delete()
+        JobSubcategory.objects.all().delete()
 
         out = StringIO()
         call_command("import_jobs", stdout=out)
@@ -186,16 +186,16 @@ class JobCategoriesTest(TestCase, ImportTestMixin):
         output = out.read()
         self.assertIn("0 existing jobs updated", output)
         self.assertIn("0 new jobs created", output)
-        self.assertIn("JobCategory matching query does not exist.", output)
+        self.assertIn("JobSubcategory matching query does not exist.", output)
         self.assertEqual(
-            JobCategory.objects.all().count(),
+            JobSubcategory.objects.all().count(),
             0,
-            msg="Category should not be inserted if --import_categories is not specified.",
+            msg="Subcategory should not be inserted if --import_categories is not specified.",
         )
 
-    def test_import_missing_categories(self, mock_get_client):
+    def test_import_missing_subcategories(self, mock_get_client):
         mock_get_client.return_value = self.get_mocked_client()
-        JobCategory.objects.all().delete()
+        JobSubcategory.objects.all().delete()
 
         out = StringIO()
         call_command("import_jobs", "--import_categories", stdout=out)
@@ -204,16 +204,16 @@ class JobCategoriesTest(TestCase, ImportTestMixin):
         self.assertIn("0 existing jobs updated", output)
         self.assertIn("1 new jobs created", output)
         self.assertEqual(
-            JobCategory.objects.filter(title=FIXTURE_JOB_CATEGORY_TITLE).count(),
+            JobSubcategory.objects.filter(title=FIXTURE_JOB_SUBCATEGORY_TITLE).count(),
             1,
-            msg="Category should be inserted if --import_categories is specified.",
+            msg="Subcategory should be inserted if --import_categories is specified.",
         )
 
-    def test_update_existing_job_with_missing_categories(self, mock_get_client):
+    def test_update_existing_job_with_missing_subcategories(self, mock_get_client):
         TalentLinkJobFactory(talentlink_id=164579)
 
         mock_get_client.return_value = self.get_mocked_client()
-        JobCategory.objects.get(title=FIXTURE_JOB_CATEGORY_TITLE).delete()
+        JobSubcategory.objects.get(title=FIXTURE_JOB_SUBCATEGORY_TITLE).delete()
 
         out = StringIO()
         call_command("import_jobs", stdout=out)
@@ -221,20 +221,20 @@ class JobCategoriesTest(TestCase, ImportTestMixin):
         output = out.read()
         self.assertIn("0 existing jobs updated", output)
         self.assertIn("0 new jobs created", output)
-        self.assertIn("JobCategory matching query does not exist.", output)
+        self.assertIn("JobSubcategory matching query does not exist.", output)
         self.assertEqual(
-            JobCategory.objects.filter(title=FIXTURE_JOB_CATEGORY_TITLE).count(),
+            JobSubcategory.objects.filter(title=FIXTURE_JOB_SUBCATEGORY_TITLE).count(),
             0,
-            msg="Category should not be inserted if --import_categories is not specified.",
+            msg="Subcategory should not be inserted if --import_categories is not specified.",
         )
 
-    def test_update_existing_job_and_importing_missing_categories(
+    def test_update_existing_job_and_importing_missing_subcategories(
         self, mock_get_client
     ):
         TalentLinkJobFactory(talentlink_id=164579)
 
         mock_get_client.return_value = self.get_mocked_client()
-        JobCategory.objects.get(title=FIXTURE_JOB_CATEGORY_TITLE).delete()
+        JobSubcategory.objects.get(title=FIXTURE_JOB_SUBCATEGORY_TITLE).delete()
 
         out = StringIO()
         call_command("import_jobs", "--import_categories", stdout=out)
@@ -315,7 +315,7 @@ class DeletedAndUpdatedJobsTest(TestCase, ImportTestMixin):
 class DescriptionsTest(TestCase):
     def setUp(self):
         # create matching category
-        JobCategoryFactory(title=FIXTURE_JOB_CATEGORY_TITLE)
+        JobSubcategoryFactory(title=FIXTURE_JOB_SUBCATEGORY_TITLE)
 
     def compare_processed_record(self, description, expected):
 
@@ -457,7 +457,7 @@ class DescriptionsTest(TestCase):
 class ShortDescriptionsTest(TestCase, ImportTestMixin):
     def setUp(self):
         # create matching category
-        JobCategoryFactory(title=FIXTURE_JOB_CATEGORY_TITLE)
+        JobSubcategoryFactory(title=FIXTURE_JOB_SUBCATEGORY_TITLE)
 
     def compare_processed_record(self, description, expected):
 
