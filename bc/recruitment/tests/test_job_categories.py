@@ -42,7 +42,7 @@ class JobCategoryAndJobSubcategoryGroupingTest(TestCase):
         self.talentlinkjobs = []
         self.subcategories = []
         self.categories = []
-        for i in range(5):
+        for i in range(4):
             subcat = JobSubcategoryFactory.build()
             subcat.save()
             # Add jobs for each subcategory according to its index (eg. self.subcategories[2] gets 2 jobs)
