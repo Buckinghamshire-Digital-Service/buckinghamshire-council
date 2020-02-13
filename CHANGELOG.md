@@ -2,14 +2,14 @@
 
 ## Unreleased
 
-- 99 Add slugs to job category
-- 92 Recruitment index page
-- 96 Jobs search: add category filter
-- 90 Jobs Category and homepage categories listing
-- 62 Jobs detail page
 - 59 Jobs homepage
+- 62 Jobs detail page
 - 85 TalentLink API client, and importer commands
+- 90 Jobs Category and homepage categories listing
+- 92 Recruitment index page
 - 94 Jobs import HTML formatting improvements
+- 96 Jobs search: add category filter
+- 99 Add slugs to job category
 - Update CI pipeline stage names and order to make progress clearer
 - Hotfix: Pin Redis version in requirements.txt
 
