@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- 116 Enable StreamField Table Block
 - 118 Add border to search inputs
 
 ## 3.1 (2020-02-10)
