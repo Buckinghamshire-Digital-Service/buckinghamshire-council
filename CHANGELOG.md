@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- 116 Enable StreamField Table Block
+
 ## 3.1 (2020-02-10)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/3.0...3.1
