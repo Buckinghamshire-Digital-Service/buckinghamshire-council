@@ -20,11 +20,12 @@ class JobCategorySlugTest(TestCase):
         )
 
     def test_job_category_unique_slug(self):
-        job_category_1 = JobCategoryFactory(title="My title")
-        job_category_1_slug = job_category_1.slug
-        job_category_2 = JobCategoryFactory(title="My title")
-        self.assertEqual(job_category_1.slug, job_category_1_slug)
-        self.assertNotEqual(job_category_1.slug, job_category_2.slug)
+        job_categories = [
+            JobCategoryFactory(title="My title"),
+            JobCategoryFactory(title="My title"),
+            JobCategoryFactory(title="My title"),
+        ]
+        self.assertEqual(len(set([jc.slug for jc in job_categories])), 3)
 
     def test_job_category_retains_slug(self):
         job_category = JobCategoryFactory(title="My title")
