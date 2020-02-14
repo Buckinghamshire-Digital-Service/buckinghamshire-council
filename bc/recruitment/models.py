@@ -14,8 +14,8 @@ from wagtail.core.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 
-from bc.utils.constants import RICH_TEXT_FEATURES
-
+from ..utils.blocks import StoryBlock
+from ..utils.constants import RICH_TEXT_FEATURES
 from ..utils.models import BasePage
 
 
@@ -203,9 +203,11 @@ class RecruitmentIndexPage(BasePage):
     hero_image = models.ForeignKey(
         "images.CustomImage", null=True, related_name="+", on_delete=models.SET_NULL,
     )
+    body = StreamField(StoryBlock(required=False), blank=True)
 
     content_panels = BasePage.content_panels + [
         ImageChooserPanel("hero_image"),
+        StreamFieldPanel("body"),
     ]
 
     @cached_property
