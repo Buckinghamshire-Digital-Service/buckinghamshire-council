@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- 118 Add border to search inputs
+
 ## 3.1 (2020-02-10)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/3.0...3.1
