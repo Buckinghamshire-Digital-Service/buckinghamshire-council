@@ -110,8 +110,12 @@ test_python:
     RECAPTCHA_PUBLIC_KEY: 'dummy-key-value'
     RECAPTCHA_PRIVATE_KEY: 'dummy-key-value'
 
+    # Postgres credentials
+    POSTGRES_USER: db_user
+    POSTGRES_PASSWORD: db_pass # pragma: allowlist secret
+
     # This is the URL used by databases on our CI.
-    DATABASE_URL: postgres://postgres@postgres/postgres
+    DATABASE_URL: postgres://db_user:db_pass@postgres/postgres # pragma: allowlist secret
 
     # Don't redirect to HTTPS in tests.
     SECURE_SSL_REDIRECT: 'false'
