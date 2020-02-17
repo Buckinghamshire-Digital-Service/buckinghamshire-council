@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 3.2 (2020-02-17)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/3.1...3.2
+
 - 116 Enable StreamField Table Block
 - 118 Add border to search inputs
 
