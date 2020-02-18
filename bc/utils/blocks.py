@@ -1,3 +1,4 @@
+from wagtail.contrib.table_block.blocks import TableBlock
 from wagtail.core import blocks
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.images.blocks import ImageChooserBlock
@@ -74,6 +75,7 @@ class StoryBlock(blocks.StreamBlock):
     )
     paragraph = blocks.RichTextBlock(features=RICH_TEXT_FEATURES)
     local_area_links = LocalAreaLinksBlock()
+    table = TableBlock()
 
     class Meta:
         template = "patterns/molecules/streamfield/stream_block.html"

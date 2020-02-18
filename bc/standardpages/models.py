@@ -32,7 +32,7 @@ class InformationPage(BasePage):
 class IndexPage(BasePage):
     template = "patterns/pages/standardpages/index_page.html"
 
-    parent_page_types = ["home.HomePage"]
+    parent_page_types = ["home.HomePage", "IndexPage"]
 
     introduction = models.TextField(blank=True)
 

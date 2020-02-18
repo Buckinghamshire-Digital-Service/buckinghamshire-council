@@ -1,7 +1,4 @@
 tags:
-  slugurl:
-    "'home'":
-      raw: '#'
   footerlinks:
     '':
       template_name: 'patterns/molecules/navigation/footerlinks.html'
