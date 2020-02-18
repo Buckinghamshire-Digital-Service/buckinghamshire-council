@@ -10,7 +10,6 @@
 - 94 Jobs import HTML formatting improvements
 - 96 Jobs search: add category filter
 - 99 Add slugs to job category
-- Update CI pipeline stage names and order to make progress clearer
 - Update deployment documentation
 
 ## 3.2 (2020-02-17)
