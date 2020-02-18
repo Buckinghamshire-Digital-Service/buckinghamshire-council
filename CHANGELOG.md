@@ -11,8 +11,32 @@
 - 96 Jobs search: add category filter
 - 99 Add slugs to job category
 - 104 Add job subcategory
-- Update CI pipeline stage names and order to make progress clearer
+- Update deployment documentation
+
+## 3.2 (2020-02-17)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/3.1...3.2
+
+- 116 Enable StreamField Table Block
+- 118 Add border to search inputs
+
+## 3.1 (2020-02-10)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/3.0...3.1
+
+- 82 Adjust header logo size
+
+## 3.0 (2020-02-10)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/2.1...3.0
+
+- Django 2.2.10
 - Hotfix: Pin Redis version in requirements.txt
+- Update CI pipeline stage names and order to make progress clearer
+- 83 Specify border radius on inputs
+- 87 Remove flag from external links
+- 88 Updated IndexPage to allow it to be created under IndexPage
+- Fix: Update "Home" breadcrumb link target to work with multiple sites
 
 ## 2.1 (2020-01-22)
 

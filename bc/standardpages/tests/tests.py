@@ -20,8 +20,8 @@ class IndexPageWagtailPageTests(WagtailPageTests):
     def test_can_only_create_indexpage_under_homepage(self):
         self.assertAllowedParentPageTypes(
             IndexPage,
-            {HomePage},
-            msg="IndexPage should only be added as child of HomePage.",
+            {HomePage, IndexPage},
+            msg="IndexPage should only be added as child of HomePage and IndexPage.",
         )
 
 
