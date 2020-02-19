@@ -21,6 +21,11 @@ private_urlpatterns = [
     path("documents/", include(wagtaildocs_urls)),
     # Search cache-control headers are set on the view itself.
     path("search/", search_views.search, name="search"),
+    path(
+        "jobs_alert/",
+        search_views.SearchAlertSubscriptionView.as_view(),
+        name="search_alert_subscribe",
+    ),
 ]
 
 

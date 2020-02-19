@@ -1,3 +1,5 @@
+import secrets
+
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Count, F
@@ -217,3 +219,19 @@ class RecruitmentIndexPage(BasePage):
         context["subpages"] = self.child_pages
 
         return context
+
+
+class JobAlertSubscription(models.Model):
+    email = models.EmailField()
+    search = models.CharField(
+        max_length=255
+    )  # Serialised list of selected category ids and search term
+    confirmed = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    token = models.CharField(max_length=255, unique=True, editable=False)
+
+    def full_clean(self, *args, **kwargs):
+        if not self.token:
+            self.token = secrets.token_urlsafe(32)
+
+        super().full_clean(*args, **kwargs)

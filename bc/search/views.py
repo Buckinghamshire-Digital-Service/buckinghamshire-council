@@ -1,13 +1,21 @@
+import json
+
 from django.conf import settings
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.template.response import TemplateResponse
 from django.utils.cache import add_never_cache_headers, patch_cache_control
+from django.views.generic.edit import FormView
 
 from wagtail.core.models import Page
 from wagtail.search.models import Query
 
-from bc.recruitment.models import RecruitmentHomePage, TalentLinkJob
+from bc.recruitment.forms import SearchAlertSubscriptionForm
+from bc.recruitment.models import (
+    JobAlertSubscription,
+    RecruitmentHomePage,
+    TalentLinkJob,
+)
 from bc.utils.cache import get_default_cache_control_kwargs
 
 
@@ -82,3 +90,46 @@ def get_jobs_search_results(request):
         search_results = search_results.filter(category__slug__in=filter_job_category)
 
     return search_results
+
+
+class SearchAlertSubscriptionView(FormView):
+    form_class = SearchAlertSubscriptionForm
+    template_name = "patterns/pages/search/jobs_alert.html"
+    # success_url = lazy_reverse('search:search')
+
+    def get_serialized_search(self):
+        #  eg. http://jobs.bc.local:8000/jobs_alert/?query=teacher&category=schools-early-years-support&category=it
+        search = {}
+        search["query"] = self.request.GET.get("query", None)
+        search["category"] = self.request.GET.getlist("category")
+        # If empty assumes subscribing to all new jobs?
+        # TODO: display summary?
+        return json.dumps(search)
+
+    def form_valid(self, form):
+        search = self.get_serialized_search()
+        email = form.cleaned_data["email"]
+
+        # Search if already exists and confirmed:
+        try:
+            subscription = JobAlertSubscription.objects.get(email=email, search=search)
+            if subscription.confirmed:
+                # Tell user they're already subscribed
+                # TODO
+                # import pdb; pdb.set_trace()
+                pass
+
+        except JobAlertSubscription.DoesNotExist:
+            subscription = JobAlertSubscription(email=email, search=search)
+            subscription.full_clean()
+            subscription.save()
+
+        self.send_mail(subscription)
+        return super(SearchAlertSubscriptionView, self).form_valid(form)
+
+    def send_mail(self, subscription):
+        # TODO: email token to user
+        import pdb
+
+        pdb.set_trace()
+        pass
