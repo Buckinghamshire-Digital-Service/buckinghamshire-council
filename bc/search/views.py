@@ -71,13 +71,14 @@ def get_jobs_search_results(request):
     if search_query:
         vector = (
             SearchVector("title", weight="A")
+            # + SearchVector("short_description", weight="A")
             + SearchVector("searchable_location", weight="B")
             + SearchVector("description", weight="C")
         )
         query = SearchQuery(search_query, search_type="phrase")
         search_results = (
             TalentLinkJob.objects.annotate(rank=SearchRank(vector, query))
-            .filter(rank__gte=0.3)
+            .filter(rank__gte=0.1)
             .order_by("-rank")
         )
 
@@ -87,7 +88,9 @@ def get_jobs_search_results(request):
 
     # Process filters
     if filter_job_category:
-        search_results = search_results.filter(category__slug__in=filter_job_category)
+        search_results = search_results.filter(
+            subcategory__categories__slug__in=filter_job_category
+        )
 
     return search_results
 

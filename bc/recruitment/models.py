@@ -16,19 +16,49 @@ from wagtail.core.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 
-from bc.utils.constants import RICH_TEXT_FEATURES
-
+from ..utils.blocks import StoryBlock
+from ..utils.constants import RICH_TEXT_FEATURES
 from ..utils.models import BasePage
+
+
+class JobSubcategory(models.Model):
+    """
+    This corresponds to Job Group in the TalentLink import API
+    """
+
+    title = models.CharField(max_length=128)
+
+    def get_categories_list(self):
+        if self.categories:
+            return list(self.categories.values_list("title", flat=True))
+
+    # Set short description for Modeladmin lists so displays this instead of `get_categories_list`
+    get_categories_list.short_description = "Categories"
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name_plural = "Job subcategories"
+        ordering = ["title"]
 
 
 class JobCategory(models.Model):
     title = models.CharField(max_length=128)
     description = models.TextField(blank=True)
+    subcategories = models.ManyToManyField(JobSubcategory, related_name="categories")
+
     slug = models.SlugField(
         allow_unicode=True,
         max_length=255,
         help_text="The name of the category as it will appear in search filter e.g /search/category=[my-slug]",
     )
+
+    def get_subcategories_list(self):
+        if self.subcategories:
+            return list(self.subcategories.values_list("title", flat=True))
+
+    get_subcategories_list.short_description = "Subcategories"
 
     def get_categories_summary():
         """Returns a QuerySet that returns dictionaries, when used as an iterable.
@@ -37,13 +67,16 @@ class JobCategory(models.Model):
            This is ordered by highest count first.
         """
         job_categories = (
-            TalentLinkJob.objects.values("category")
-            .annotate(id=F("category__slug"))
+            TalentLinkJob.objects.annotate(category=F("subcategory__categories"))
+            .exclude(category=None)
+            .values("category")
+            .annotate(id=F("subcategory__categories__slug"))
             .annotate(count=Count("category"))
-            .annotate(label=F("category__title"))
-            .annotate(description=F("category__description"))
+            .annotate(label=F("subcategory__categories__title"))
+            .annotate(description=F("subcategory__categories__description"))
             .order_by("-count")
         )
+
         return job_categories
 
     def _slug_is_available(slug, job_category=None):
@@ -84,7 +117,7 @@ class JobCategory(models.Model):
             raise ValidationError({"slug": "This slug is already in use"})
 
     def __str__(self):
-        return "%s (%s)" % (self.title, self.slug)
+        return self.title
 
     class Meta:
         verbose_name_plural = "Job categories"
@@ -108,7 +141,12 @@ class TalentLinkJob(models.Model):
     title = models.CharField(max_length=255, blank=False)
     short_description = models.TextField()
     description = models.TextField()
-    category = models.ForeignKey("recruitment.JobCategory", on_delete=models.PROTECT)
+    subcategory = models.ForeignKey(
+        "recruitment.JobSubcategory",
+        on_delete=models.PROTECT,
+        null=True,
+        related_name="jobs",
+    )
     salary_range = models.CharField(max_length=255)
     working_hours = models.CharField(max_length=255)
     closing_date = models.DateField()
@@ -124,6 +162,13 @@ class TalentLinkJob(models.Model):
     posting_start_date = models.DateTimeField()
     posting_end_date = models.DateTimeField()
     show_apply_button = models.BooleanField(default=True)
+
+    def get_categories_list(self):
+        if self.subcategory:
+            return self.subcategory.get_categories_list()
+
+    # Set short description for Modeladmin lists so displays this instead of `get_categories_list`
+    get_categories_list.short_description = "Categories"
 
     def __str__(self):
         return f"{self.job_number}: {self.title}"
@@ -143,7 +188,7 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
     parent_page_types = ["wagtailcore.Page"]
 
     hero_title = models.CharField(
-        max_length=255, help_text="eg. Finding a job in Buckinghamshire"
+        max_length=255, help_text="e.g. Finding a job in Buckinghamshire"
     )
     hero_image = models.ForeignKey(
         "images.CustomImage", null=True, related_name="+", on_delete=models.SET_NULL,
@@ -151,6 +196,7 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
     search_box_placeholder = models.CharField(
         max_length=255, help_text="eg. Search jobs, e.g. “Teacher in Aylesbury”",
     )
+    hero_link_text = models.CharField(max_length=255, help_text="e.g. Browse jobs")
     body = StreamField(
         blocks.StreamBlock(
             [
@@ -181,6 +227,7 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
                 FieldPanel("hero_title"),
                 ImageChooserPanel("hero_image"),
                 FieldPanel("search_box_placeholder"),
+                FieldPanel("hero_link_text"),
             ],
             "Hero",
         ),
@@ -205,9 +252,11 @@ class RecruitmentIndexPage(BasePage):
     hero_image = models.ForeignKey(
         "images.CustomImage", null=True, related_name="+", on_delete=models.SET_NULL,
     )
+    body = StreamField(StoryBlock(required=False), blank=True)
 
     content_panels = BasePage.content_panels + [
         ImageChooserPanel("hero_image"),
+        StreamFieldPanel("body"),
     ]
 
     @cached_property
