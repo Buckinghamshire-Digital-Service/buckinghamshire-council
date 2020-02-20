@@ -53,6 +53,15 @@
                                 <h2 class="heading heading--l">{{ count }} job{{ count|pluralize }} found</h2>
                             {% endif %}
                         {% endwith %}
+                        {% comment %} FE TODO: {% endcomment %}
+                        <div>
+                            <form action="#" method="post" role="search">{% csrf_token %}
+                                {% comment %} <label for="email">Email address</label>
+                                <input class="input" id="email" type="text" placeholder="Your email address" name="email"> {% endcomment %}
+                                {{ job_alert_form.as_p }}
+                                <input type="submit" value="Subscribe to job alert">
+                            </form>
+                        </div>
                     </header>
 
                     {% for result in search_results %}

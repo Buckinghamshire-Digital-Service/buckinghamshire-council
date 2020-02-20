@@ -11,7 +11,7 @@ from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.utils.urlpatterns import decorate_urlpatterns
 
-from bc.search import views as search_views
+from bc.search.views import SearchView
 from bc.utils.cache import get_default_cache_control_decorator
 
 # Private URLs are not meant to be cached.
@@ -20,12 +20,7 @@ private_urlpatterns = [
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     # Search cache-control headers are set on the view itself.
-    path("search/", search_views.search, name="search"),
-    path(
-        "jobs_alert/",
-        search_views.SearchAlertSubscriptionView.as_view(),
-        name="search_alert_subscribe",
-    ),
+    path("search/", SearchView.as_view(), name="search"),
 ]
 
 

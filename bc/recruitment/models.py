@@ -276,7 +276,7 @@ class JobAlertSubscription(models.Model):
         max_length=255
     )  # Serialised list of selected category ids and search term
     confirmed = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
     token = models.CharField(max_length=255, unique=True, editable=False)
 
     def full_clean(self, *args, **kwargs):
