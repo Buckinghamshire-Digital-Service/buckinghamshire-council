@@ -14,8 +14,8 @@ from wagtail.core.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 
-from bc.utils.constants import RICH_TEXT_FEATURES
-
+from ..utils.blocks import StoryBlock
+from ..utils.constants import RICH_TEXT_FEATURES
 from ..utils.models import BasePage
 
 
@@ -186,7 +186,7 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
     parent_page_types = ["wagtailcore.Page"]
 
     hero_title = models.CharField(
-        max_length=255, help_text="eg. Finding a job in Buckinghamshire"
+        max_length=255, help_text="e.g. Finding a job in Buckinghamshire"
     )
     hero_image = models.ForeignKey(
         "images.CustomImage", null=True, related_name="+", on_delete=models.SET_NULL,
@@ -194,6 +194,7 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
     search_box_placeholder = models.CharField(
         max_length=255, help_text="eg. Search jobs, e.g. “Teacher in Aylesbury”",
     )
+    hero_link_text = models.CharField(max_length=255, help_text="e.g. Browse jobs")
     body = StreamField(
         blocks.StreamBlock(
             [
@@ -224,6 +225,7 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
                 FieldPanel("hero_title"),
                 ImageChooserPanel("hero_image"),
                 FieldPanel("search_box_placeholder"),
+                FieldPanel("hero_link_text"),
             ],
             "Hero",
         ),
@@ -248,9 +250,11 @@ class RecruitmentIndexPage(BasePage):
     hero_image = models.ForeignKey(
         "images.CustomImage", null=True, related_name="+", on_delete=models.SET_NULL,
     )
+    body = StreamField(StoryBlock(required=False), blank=True)
 
     content_panels = BasePage.content_panels + [
         ImageChooserPanel("hero_image"),
+        StreamFieldPanel("body"),
     ]
 
     @cached_property
