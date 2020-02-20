@@ -80,6 +80,8 @@ def get_jobs_search_results(request):
 
     # Process filters
     if filter_job_category:
-        search_results = search_results.filter(category__slug__in=filter_job_category)
+        search_results = search_results.filter(
+            subcategory__categories__slug__in=filter_job_category
+        )
 
     return search_results

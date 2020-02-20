@@ -12,6 +12,14 @@ class JobCategoryFactory(factory.django.DjangoModelFactory):
         model = "recruitment.JobCategory"
 
 
+class JobSubcategoryFactory(factory.django.DjangoModelFactory):
+
+    title = factory.Sequence(lambda n: f"Job Subcategory {n}")
+
+    class Meta:
+        model = "recruitment.JobSubcategory"
+
+
 class TalentLinkJobFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = "recruitment.TalentLinkJob"
@@ -22,7 +30,9 @@ class TalentLinkJobFactory(factory.django.DjangoModelFactory):
     job_number = factory.Sequence(lambda n: f"FS{str(n).zfill(5)}")
 
     title = factory.Faker("sentence", nb_words=5)
-    category = factory.SubFactory("bc.recruitment.tests.fixtures.JobCategoryFactory")
+    subcategory = factory.SubFactory(
+        "bc.recruitment.tests.fixtures.JobSubcategoryFactory"
+    )
     salary_range = "£18,000 - £21,000"
     working_hours = "Full time"
     closing_date = factory.Faker("date_this_month")

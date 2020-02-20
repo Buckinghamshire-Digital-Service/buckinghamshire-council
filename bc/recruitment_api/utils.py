@@ -4,7 +4,7 @@ from bleach.sanitizer import Cleaner
 from bs4 import BeautifulSoup
 from dateutil.parser import parse
 
-from ..recruitment.models import JobCategory
+from ..recruitment.models import JobSubcategory
 from . import constants
 
 
@@ -20,22 +20,24 @@ def yesno_parser(value):
     return value.lower() == "yes"
 
 
-def job_category_parser(value):
-    """Get existing JobCategory
+def job_subcategory_parser(value):
+    """Get existing JobSubcategory
 
-    If category does not exist, we don't want to import this job.
-    This will throw a `JobCategory.DoesNotExist` error
+    If subcategory does not exist, we don't want to import this job.
+    This will throw a `JobSubcategory.DoesNotExist` error
     which will be handled by the calling import_jobs command.
     """
     clean_value = string_parser(value)
-    return JobCategory.objects.get(title=clean_value)
+    return JobSubcategory.objects.get(title=clean_value)
 
 
-def job_category_insert_parser(value):
-    """Get or create existing JobCategory"""
+def job_subcategory_insert_parser(value):
+    """Get or create existing JobSubcategory"""
     clean_value = string_parser(value)
-    category_object, created = JobCategory.objects.get_or_create(title=clean_value)
-    return category_object
+    subcategory_object, created = JobSubcategory.objects.get_or_create(
+        title=clean_value
+    )
+    return subcategory_object
 
 
 POSTING_TARGET_STATUS_PUBLISHED = "Published"
@@ -44,7 +46,7 @@ POSTING_TARGET_STATUS_PUBLISHED = "Published"
 JOB_CONFIGURABLE_FIELDS_MAPPING = {"Closing Date": ("closing_date", date_parser)}
 
 JOB_CUSTOM_LOVS_MAPPING = {
-    "Job Group": ("category", job_category_parser),
+    "Job Group": ("subcategory", job_subcategory_parser),
     "Location": ("location", string_parser),
     "Salary Range - FTE": ("salary_range", string_parser),
     "Searchable Location": ("searchable_location", string_parser),
@@ -109,9 +111,9 @@ def update_job_from_ad(job, ad, defaults=None, import_categories=False):
         except KeyError:
             pass
         else:
-            # Use insert category parser if command specifies `--import_categories`
-            if (parser is job_category_parser) and import_categories:
-                parser = job_category_insert_parser
+            # Use insert subcategory parser if command specifies `--import_categories`
+            if (parser is job_subcategory_parser) and import_categories:
+                parser = job_subcategory_insert_parser
 
             setattr(
                 job,

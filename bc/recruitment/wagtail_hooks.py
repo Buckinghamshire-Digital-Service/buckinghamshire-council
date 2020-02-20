@@ -10,7 +10,13 @@ from bc.recruitment.models import TalentLinkJob
 class TalentLinkJobModelAdmin(ModelAdmin):
     model = TalentLinkJob
     menu_icon = "tag"
-    list_display = ("talentlink_id", "job_number", "title", "last_imported")
+    list_display = (
+        "talentlink_id",
+        "job_number",
+        "title",
+        "get_categories_list",
+        "last_imported",
+    )
 
 
 class RecruitmentModelAdminGroup(ModelAdminGroup):
