@@ -2,6 +2,10 @@
     ul {
         margin-left: $grid--small;
 
+        .page--jobs & {
+            margin: $grid--min 0;
+        }
+
         li {
             padding-left: 25px;
             position: relative;
@@ -15,6 +19,10 @@
                 position: absolute;
                 left: 0;
                 top: 8px;
+
+                .page--jobs & {
+                    background: $color--leaf;
+                }
             }
         }
     }
@@ -30,5 +38,17 @@
 
     li {
         margin-bottom: 5px;
+    }
+
+    h2 {
+        @include font-size(m);
+        margin-bottom: 5px;
+        font-weight: $weight--bold;
+    }
+
+    h3 {
+        @include font-size(s);
+        margin-bottom: 5px;
+        font-weight: $weight--bold;
     }
 }

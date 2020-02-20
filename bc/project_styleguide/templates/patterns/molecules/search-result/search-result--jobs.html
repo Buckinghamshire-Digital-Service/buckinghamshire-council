@@ -1,0 +1,23 @@
+{% load static wagtailcore_tags wagtailsearchpromotions_tags wagtailimages_tags %}
+
+<article class="search-result">
+    <h3 class="search-result__title heading heading--third">
+        <a class="search-result__link" href="{{result.url}}">
+            {{ result.title }}
+        </a>
+    </h3>
+    {% if result.short_description %}
+        <p>{{result.short_description}}</p>
+    {% endif %}
+
+    <dl class="search-result__meta-list">
+        {% if result.salary_range %}
+            <dt class="search-result__meta-title">Salary:</dt>
+            <dd class="search-result__meta-description">{{ result.salary_range }}</dd>
+        {% endif %}
+        <dt class="search-result__meta-title">Closing date:</dt>
+        <dd class="search-result__meta-description">{{ result.closing_date }}</dd>
+        <dt class="search-result__meta-title">Location:</dt>
+        <dd class="search-result__meta-description">{{ result.searchable_location }}</dd>
+    </dl>
+</article>

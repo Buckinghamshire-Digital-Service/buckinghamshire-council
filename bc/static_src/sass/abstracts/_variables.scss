@@ -11,15 +11,20 @@ $color--river: #2c2d84;
 $color--lake: #233b8e;
 $color--sky: #1065a3;
 $color--grape: #3e2d73;
-$color--leaf: #80ad34;
+$color--leaf: #9fc63b;
 $color--charcoal: #212121;
+$color--slate: #3c3c3b;
 
 $color--earth: #d0cdc4;
 $color--earth-light: #f7f6f2;
+$color--almond: #e4dbd2;
 
 $color--grey-light: #efefef;
 $color--grey-medium: #999;
 $color--grey-dark: #858585;
+$color--grey-accessible: #6d6d6c;
+
+$color--grey-border: #cecece;
 
 $color--default: $color--charcoal;
 
@@ -66,8 +71,8 @@ $base-line-height: 25px;
 $font-sizes: (
     // xxxl = 48px = 36 in designs
         xxxl: 48px,
-    // xxl = 43px = 32 in designs
-        xxl: 43px,
+    // xxl = 42px = 32 in designs
+        xxl: 42px,
     // xl = 28px = 21 in designs
         xl: 28px,
     // l = 24px = 18 in designs
@@ -120,3 +125,4 @@ $hover-states: '&:hover, &:focus';
 // --------------------------------- Borders ------------------------------------
 
 $border--accent: 5px solid;
+$border--grey: 1px solid $color--grey-border;
