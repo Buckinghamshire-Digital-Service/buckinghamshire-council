@@ -101,6 +101,8 @@ class SearchAlertSubscriptionView(FormView):
     # success_url = lazy_reverse('search:search')
 
     def get_serialized_search(self):
+        # TODO: refactor to centralise the logic for this so
+        # can be used together with search view, and only one place to update when adding new filters
         #  eg. http://jobs.bc.local:8000/jobs_alert/?query=teacher&category=schools-early-years-support&category=it
         search = {}
         search["query"] = self.request.GET.get("query", None)
