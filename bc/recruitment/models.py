@@ -60,6 +60,7 @@ class JobCategory(models.Model):
 
     get_subcategories_list.short_description = "Subcategories"
 
+    @staticmethod
     def get_categories_summary():
         """Returns a QuerySet that returns dictionaries, when used as an iterable.
 
@@ -272,9 +273,7 @@ class RecruitmentIndexPage(BasePage):
 
 class JobAlertSubscription(models.Model):
     email = models.EmailField()
-    search = models.CharField(
-        max_length=255
-    )  # Serialised list of selected category ids and search term
+    search = models.CharField(max_length=255)
     confirmed = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     token = models.CharField(max_length=255, unique=True, editable=False)
@@ -284,3 +283,7 @@ class JobAlertSubscription(models.Model):
             self.token = secrets.token_urlsafe(32)
 
         super().full_clean(*args, **kwargs)
+
+    def send_confirmation_email(self):
+        # TODO: implement
+        pass

@@ -55,9 +55,7 @@
                         {% endwith %}
                         {% comment %} FE TODO: {% endcomment %}
                         <div>
-                            <form action="#" method="post" role="search">{% csrf_token %}
-                                {% comment %} <label for="email">Email address</label>
-                                <input class="input" id="email" type="text" placeholder="Your email address" name="email"> {% endcomment %}
+                            <form method="post" role="search">{% csrf_token %}
                                 {{ job_alert_form.as_p }}
                                 <input type="submit" value="Subscribe to job alert">
                             </form>
