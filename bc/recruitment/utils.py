@@ -7,9 +7,11 @@ def is_recruitment_site(request):
     return request.site.root_page.specific.__class__ == RecruitmentHomePage
 
 
-def get_jobs_search_results(request):
-    search_query = request.GET.get("query", None)
-    filter_job_category = request.GET.getlist("category")
+def get_jobs_search_results(querydict, queryset=None):
+    if queryset is None:
+        queryset = TalentLinkJob.objects.all()
+    search_query = querydict.get("query", None)
+    filter_job_category = querydict.getlist("category")
 
     if search_query:
         vector = (
@@ -20,14 +22,14 @@ def get_jobs_search_results(request):
         )
         query = SearchQuery(search_query, search_type="phrase")
         search_results = (
-            TalentLinkJob.objects.annotate(rank=SearchRank(vector, query))
+            queryset.annotate(rank=SearchRank(vector, query))
             .filter(rank__gte=0.1)
             .order_by("-rank")
         )
 
     else:
         # Order by newest job at top
-        search_results = TalentLinkJob.objects.all().order_by("posting_start_date")
+        search_results = queryset.order_by("posting_start_date")
 
     # Process filters
     # TODO: https://simpleisbetterthancomplex.com/tutorial/2016/11/28/how-to-filter-querysets-dynamically.html
