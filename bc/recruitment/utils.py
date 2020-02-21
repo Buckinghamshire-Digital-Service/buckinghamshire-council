@@ -27,16 +27,16 @@ def get_search_filters(querystring):
     return filters
 
 
-def get_current_search(request):
+def get_current_search(querystring):
     """
     Returns search query and filters in request.GET as json string
     """
     search = {}
 
-    if request.GET.get("query", None):
-        search["query"] = request.GET.get("query", None)
+    if querystring.get("query", None):
+        search["query"] = querystring.get("query", None)
 
-    for filter in get_search_filters(request.GET):
+    for filter in get_search_filters(querystring):
         if filter["selected"]:
             search[filter["name"]] = filter["selected"]
 

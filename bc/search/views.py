@@ -67,6 +67,9 @@ class SearchView(View):
         return response
 
     def post(self, request, *args, **kwargs):
+        """
+        Job alert subscription
+        """
         if not is_recruitment_site(request):
             return
 
@@ -74,7 +77,7 @@ class SearchView(View):
 
         if form.is_valid():
             # e.g. query=school&category=work-experiencetraineeshipinternship&category=transport-economy-environment
-            search = get_current_search(request)
+            search = get_current_search(request.GET)
             email = form.cleaned_data["email"]
 
             # Search if already exists and confirmed:
@@ -103,10 +106,39 @@ class SearchView(View):
                 subscription.full_clean()
                 subscription.save()
 
-            subscription.send_confirmation_email()
+            subscription.send_confirmation_email(request)
             response = TemplateResponse(
                 request,
                 "patterns/pages/jobs_alert/subscription_processed.html",
                 {"title": "Thank you", "status": "email_sent"},
             )
             return response
+
+
+class JobAlertConfirmView(View):
+    def get(self, request, *args, **kwargs):
+        token = self.kwargs["token"]
+
+        try:
+            subscription = JobAlertSubscription.objects.get(token=token)
+        except JobAlertSubscription.DoesNotExist:
+            context = {"title": "Subscription not found", "status": "link_expired"}
+        else:
+            subscription.confirmed = True
+            subscription.save()
+            context = {
+                "title": "Job alert subscription confirmed",
+                "status": "confirmed",
+            }
+
+        response = TemplateResponse(
+            request, "patterns/pages/jobs_alert/subscription_processed.html", context,
+        )
+        return response
+
+
+class JobAlertUnsubscribeView(View):
+    pass
+    # TODO: implement
+    # Display subscribed search and user to confirm unsubscribe.
+    # Also display list of other subscription with the same email so user can unsubscribe all?

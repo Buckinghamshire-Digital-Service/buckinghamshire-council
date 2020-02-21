@@ -6,10 +6,13 @@ from django.db.models import Count, F
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.shortcuts import get_object_or_404, render
+from django.template.loader import render_to_string
+from django.urls import reverse
 from django.utils.functional import cached_property
 from django.utils.text import slugify
 
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
+from wagtail.admin.mail import send_mail
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.core import blocks
 from wagtail.core.fields import StreamField
@@ -284,6 +287,18 @@ class JobAlertSubscription(models.Model):
 
         super().full_clean(*args, **kwargs)
 
-    def send_confirmation_email(self):
-        # TODO: implement
-        pass
+    def send_confirmation_email(self, request):
+        template_name = "patterns/email/confirm_job_alert.html"
+        context = {}
+        context["search"] = "todo"  # TODO: implement
+        context["confirmation_url"] = request.build_absolute_uri(
+            reverse("confirm_job_alert", args=[self.token])
+        )
+        context["unsubscribe_url"] = request.build_absolute_uri(
+            reverse("unsubscribe_job_alert", args=[self.token])
+        )
+
+        content = render_to_string(template_name, context=context)
+        send_mail(
+            "Job alert subscription", content, [self.email],
+        )
