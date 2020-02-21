@@ -20,6 +20,16 @@ class JobSubcategoryFactory(factory.django.DjangoModelFactory):
         model = "recruitment.JobSubcategory"
 
 
+class RecruitmentHomePageFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = "recruitment.RecruitmentHomePage"
+
+    title = factory.Sequence(lambda n: f"Recruitment HomePage")
+    hero_title = "foo"
+    hero_link_text = "foo"
+    search_box_placeholder = "foo"
+
+
 class TalentLinkJobFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = "recruitment.TalentLinkJob"
@@ -51,3 +61,11 @@ class TalentLinkJobFactory(factory.django.DjangoModelFactory):
     posting_end_date = factory.Faker(
         "date_time_this_month", tzinfo=datetime.timezone.utc
     )
+
+
+class JobAlertSubscriptionFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = "recruitment.JobAlertSubscription"
+
+    email = factory.Faker("email")
+    confirmed = True

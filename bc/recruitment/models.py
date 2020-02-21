@@ -180,6 +180,13 @@ class TalentLinkJob(models.Model):
             "job_detail", args=(self.talentlink_id,)
         )
 
+    @property
+    def full_url(self):
+        homepage = RecruitmentHomePage.objects.live().public().first()
+        return homepage.full_url + homepage.reverse_subpage(
+            "job_detail", args=(self.talentlink_id,)
+        )
+
 
 class RecruitmentHomePage(RoutablePageMixin, BasePage):
     template = "patterns/pages/home/home_page--jobs.html"
@@ -284,3 +291,9 @@ class JobAlertSubscription(models.Model):
             self.token = secrets.token_urlsafe(32)
 
         super().full_clean(*args, **kwargs)
+
+
+class JobAlertNotificationTask(models.Model):
+    started = models.DateTimeField()
+    ended = models.DateTimeField(null=True)
+    is_successful = models.BooleanField(default=False)
