@@ -96,3 +96,17 @@ This is a concatenation of multiple `custom_field` fields, whose format is a 'la
 #### Short description
 
 This is either the text of the first `<p>` element in the first custom_field value from above, or the entire first custom_field value, if it is formatted as plain text.
+
+## Job Alerts
+
+### Management command
+
+```python
+dj send_job_alerts
+```
+
+This searches for new matches for all confirmed job alert subscriptions.
+
+A new match is any job whose created date is since the start of the last successful run, and since the alert was created.
+
+The way the command is written intends it to be called daily, but other durations shouldn't matter, so long as the duration is longer than the time taken for the command to run. It specifically jobs imported during the running of the alert command, leaving them for the next alert cycle.

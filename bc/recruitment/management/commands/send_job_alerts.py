@@ -15,6 +15,11 @@ from bc.utils.email import NotifyEmailMessage
 
 
 class Command(BaseCommand):
+    """This checks job alert subscriptions, and sends messages about new matches.
+
+    Any further documentation for this feature is at docs/recruitment_site.md
+    """
+
     help = "Notifies job alert subscribers of new matches"
 
     def handle(self, *args, **options):
