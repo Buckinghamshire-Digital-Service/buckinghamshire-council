@@ -1,0 +1,25 @@
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    thead,
+    caption {
+        font-weight: $weight--bold;
+        text-align: left;
+    }
+
+    td,
+    th {
+        border-bottom: 1px solid $color--grey-medium;
+        padding: 10px;
+        text-align: left;
+
+        &:first-child {
+            padding-left: 0;
+        }
+
+        &:last-child {
+            padding-right: 0;
+        }
+    }
+}
