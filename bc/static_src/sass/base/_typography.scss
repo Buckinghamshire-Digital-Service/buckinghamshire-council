@@ -112,4 +112,14 @@ small {
     &--s {
         @include font-size(s);
     }
+
+    &--no-margin {
+        margin: 0;
+    }
+
+    &--subheading {
+        font-weight: $weight--normal;
+        color: $color--grey-accessible;
+        margin: 0 0 $grid--large;
+    }
 }

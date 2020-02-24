@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+## 4.0 (2020-02-24)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/3.2...4.0
+
+- Update deployment documentation
+- 59 Jobs homepage
+- 62 Jobs detail page
+- 85 TalentLink API client, and importer commands
+- 90 Jobs Category and homepage categories listing
+- 92 Recruitment index page
+- 94 Jobs import HTML formatting improvements
+- 96 Jobs search: add category filter
+- 99 Add slugs to job category
+- 104 Add job subcategory
+
 ## 3.2 (2020-02-17)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/3.1...3.2

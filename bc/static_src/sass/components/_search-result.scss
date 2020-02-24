@@ -1,0 +1,22 @@
+.search-result {
+    margin-bottom: $grid;
+
+    &__description {
+        margin: 0;
+    }
+
+    &__meta-list {
+        display: grid;
+        grid-template-columns: minmax(min-content, max-content) 1fr;
+        grid-gap: 0 $grid--min;
+        margin: 0;
+    }
+
+    &__meta-title {
+        color: $color--grey-accessible;
+    }
+
+    &__meta-description {
+        margin: 0;
+    }
+}

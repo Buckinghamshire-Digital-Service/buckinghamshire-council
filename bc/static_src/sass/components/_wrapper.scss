@@ -53,6 +53,20 @@
 
         @include media-query(tablet-landscape) {
             flex-direction: row;
+            align-items: flex-start;
         }
+    }
+
+    &--flex-small {
+        display: flex;
+        flex-direction: column;
+
+        @include media-query(tablet-portrait) {
+            flex-direction: row;
+        }
+    }
+
+    &--margin {
+        margin: $grid--large 0;
     }
 }

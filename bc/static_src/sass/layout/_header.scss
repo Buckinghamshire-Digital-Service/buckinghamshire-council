@@ -32,7 +32,8 @@
             margin-top: 0;
         }
 
-        .template-home-page & {
+        .template-home-page &,
+        .template-jobs-home & {
             display: none;
         }
     }

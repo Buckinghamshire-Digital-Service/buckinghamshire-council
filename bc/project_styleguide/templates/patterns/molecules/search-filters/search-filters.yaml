@@ -1,0 +1,58 @@
+context:
+  filters:
+    - title: Show only
+      options:
+        - label: Schools - teaching
+          id: option1
+          count: 2
+        - label: Schools - non teaching
+          id: option2
+          count: 5
+        - label: Early years
+          id: option3
+          count: 1
+        - label: Social care
+          id: option4
+          count: 2
+    - title: Contract type
+      options:
+        - label: Schools - teaching
+          id: option5
+          count: 2
+        - label: Schools - non teaching
+          id: option6
+          count: 5
+        - label: Early years
+          id: option7
+          count: 1
+        - label: Social care
+          id: option8
+          count: 2
+    - title: Working hours
+      options:
+        - label: Schools - teaching
+          id: option9
+          count: 2
+        - label: Schools - non teaching
+          id: option10
+          count: 5
+        - label: Early years
+          id: option11
+          count: 1
+        - label: Social care
+          id: option12
+          count: 2
+    - title: Salary range
+      options:
+        - label: Schools - teaching
+          id: option13
+          count: 2
+        - label: Schools - non teaching
+          id: option14
+          count: 5
+        - label: Early years
+          id: option15
+          count: 1
+        - label: Social care
+          id: option16
+          count: 2

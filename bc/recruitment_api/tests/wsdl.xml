@@ -1,0 +1,1013 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions name='FoAdvertWebService' targetNamespace='http://ws.mrted.com/' xmlns='http://schemas.xmlsoap.org/wsdl/' xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/' xmlns:tns='http://ws.mrted.com/' xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
+ <types>
+  <xs:schema targetNamespace='http://ws.mrted.com/' version='1.0' xmlns:tns='http://ws.mrted.com/' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
+   <xs:element name='advertisementResult' type='tns:advertisementResultDto'/>
+   <xs:element name='advertisementSortingColumns' type='tns:advertisementSortingColumns'/>
+   <xs:element name='advertisements' type='tns:advertisementDto'/>
+   <xs:element name='assignedImage' type='tns:assignedImageDto'/>
+   <xs:element name='attachmentContent' type='tns:attachmentContentDto'/>
+   <xs:element name='availablesearchcriteria' type='tns:availableSearchCriteriaDto'/>
+   <xs:element name='countrycriterion' type='tns:countryCriterion'/>
+   <xs:element name='criterion' type='tns:criterion'/>
+   <xs:element name='customField' type='tns:customField'/>
+   <xs:element name='customLovGroup' type='tns:customLovGroup'/>
+   <xs:element name='getAdvertisementById' type='tns:getAdvertisementById'/>
+   <xs:element name='getAdvertisementByIdResponse' type='tns:getAdvertisementByIdResponse'/>
+   <xs:element name='getAdvertisementImages' type='tns:getAdvertisementImages'/>
+   <xs:element name='getAdvertisementImagesResponse' type='tns:getAdvertisementImagesResponse'/>
+   <xs:element name='getAdvertisementPreviewByToken' type='tns:getAdvertisementPreviewByToken'/>
+   <xs:element name='getAdvertisementPreviewByTokenResponse' type='tns:getAdvertisementPreviewByTokenResponse'/>
+   <xs:element name='getAdvertisements' type='tns:getAdvertisements'/>
+   <xs:element name='getAdvertisementsByPage' type='tns:getAdvertisementsByPage'/>
+   <xs:element name='getAdvertisementsByPageResponse' type='tns:getAdvertisementsByPageResponse'/>
+   <xs:element name='getAdvertisementsResponse' type='tns:getAdvertisementsResponse'/>
+   <xs:element name='getAdvertisementsSortingColumns' type='tns:getAdvertisementsSortingColumns'/>
+   <xs:element name='getAdvertisementsSortingColumnsResponse' type='tns:getAdvertisementsSortingColumnsResponse'/>
+   <xs:element name='getAttachments' type='tns:getAttachments'/>
+   <xs:element name='getAttachmentsFromToken' type='tns:getAttachmentsFromToken'/>
+   <xs:element name='getAttachmentsFromTokenResponse' type='tns:getAttachmentsFromTokenResponse'/>
+   <xs:element name='getAttachmentsResponse' type='tns:getAttachmentsResponse'/>
+   <xs:element name='getCriteria' type='tns:getCriteria'/>
+   <xs:element name='getCriteriaResponse' type='tns:getCriteriaResponse'/>
+   <xs:element name='getSimpleAdvertisements' type='tns:getSimpleAdvertisements'/>
+   <xs:element name='getSimpleAdvertisementsByPage' type='tns:getSimpleAdvertisementsByPage'/>
+   <xs:element name='getSimpleAdvertisementsByPageResponse' type='tns:getSimpleAdvertisementsByPageResponse'/>
+   <xs:element name='getSimpleAdvertisementsResponse' type='tns:getSimpleAdvertisementsResponse'/>
+   <xs:element name='getStandardCriteria' type='tns:getStandardCriteria'/>
+   <xs:element name='getStandardCriteriaResponse' type='tns:getStandardCriteriaResponse'/>
+   <xs:element name='keyValueDTO' type='tns:keyValueDTO'/>
+   <xs:element name='lovactivatorscriterion' type='tns:lovWithActivatorsCriterion'/>
+   <xs:element name='lovcriterion' type='tns:lovCriterion'/>
+   <xs:element name='lovhiercriterion' type='tns:lovHierarchedCriterion'/>
+   <xs:element name='organizationcriterion' type='tns:organizationCriterion'/>
+   <xs:element name='searchCriteriaSorting' type='tns:searchCriteriaSorting'/>
+   <xs:element name='searchcriteria' type='tns:searchCriteriaDto'/>
+   <xs:element name='simpleAdvertisementResult' type='tns:simpleAdvertisementResultDto'/>
+   <xs:element name='simpleadvertisement' type='tns:simpleAdvertisementDto'/>
+   <xs:element name='simpleuserdto' type='tns:simpleUserDto'/>
+   <xs:element name='sponsoredJobContextDto' type='tns:sponsoredJobContextDto'/>
+   <xs:element name='sortingdetails' type='tns:sortingDetailsDto'/>
+   <xs:element name='uploadJobDescription' type='tns:uploadJobDescription'/>
+   <xs:element name='uploadJobDescriptionResponse' type='tns:uploadJobDescriptionResponse'/>
+   <xs:complexType name='getAdvertisements'>
+    <xs:sequence>
+     <xs:element form='qualified' name='firstResult' type='xs:int'/>
+     <xs:element form='qualified' name='maxResults' type='xs:int'/>
+     <xs:element form='qualified' minOccurs='0' name='searchCriteriaDto' type='tns:searchCriteriaDto'/>
+     <xs:element form='qualified' minOccurs='0' name='sortingDetailsDto' type='tns:sortingDetailsDto'/>
+     <xs:element form='qualified' minOccurs='0' name='langCode' type='tns:langCode'/>
+     <xs:element form='qualified' minOccurs='0' name='showJobLocation' type='xs:boolean'/>
+     <xs:element form='qualified' minOccurs='0' name='displayFullContent' type='xs:boolean'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='searchCriteriaDto'>
+    <xs:sequence>
+     <xs:element name='adLanguages'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='language' type='xs:string'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element name='categoryLists'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='categoryList' type='tns:categoryNameDto'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element name='contractTypes'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='contractType' type='xs:long'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element name='countries'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='country' type='xs:long'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element name='customLovs'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='customLovGroup' type='tns:customLovGroup'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element minOccurs='0' name='generalApplication' type='xs:boolean'/>
+     <xs:element minOccurs='0' name='jobNumber' type='xs:string'/>
+     <xs:element minOccurs='0' name='keywords' type='xs:string'/>
+     <xs:element minOccurs='0' name='showImages' type='xs:boolean'/>
+     <xs:element name='organizationIds'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='organizationId' type='xs:long'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element minOccurs='0' name='postedSince' type='xs:int'/>
+     <xs:element name='regions'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='region' type='xs:long'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element name='scheduleTypes'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='scheduleType' type='xs:long'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='categoryNameDto'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='categoryIds'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='categoryId' type='xs:long'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element minOccurs='0' name='order' type='xs:int'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='customLovGroup'>
+    <xs:sequence>
+     <xs:element maxOccurs='unbounded' minOccurs='0' name='customLov' type='xs:long'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='sortingDetailsDto'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='columnName' type='xs:string'/>
+     <xs:element minOccurs='0' name='sortType' type='tns:sortType'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='getAdvertisementsResponse'>
+    <xs:sequence>
+     <xs:element minOccurs='0' ref='tns:advertisementResult'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='advertisementResultDto'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='advertisements'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='advertisement' type='tns:advertisementDto'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element minOccurs='0' name='totalResults' type='xs:int'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='advertisementDto'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='applicationUrl' type='xs:string'/>
+     <xs:element name='categoryLists'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='categoryList' type='tns:categoryListCriterion'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element minOccurs='0' name='comment' type='xs:string'/>
+     <xs:element minOccurs='0' name='compensationMaxValue' type='xs:double'/>
+     <xs:element minOccurs='0' name='compensationMinValue' type='xs:double'/>
+     <xs:element minOccurs='0' name='configurableFields'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='configurableField' type='tns:lovCriterion'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element minOccurs='0' name='customFields'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='customField' type='tns:customField'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element minOccurs='0' name='customLovs'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='customLov' type='tns:lovCriterion'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element minOccurs='0' name='dueDate' type='xs:dateTime'/>
+     <xs:element minOccurs='0' name='duration' type='xs:string'/>
+     <xs:element minOccurs='0' name='expectedEndDate' type='xs:dateTime'/>
+     <xs:element minOccurs='0' name='expectedStartDate' type='xs:dateTime'/>
+     <xs:element minOccurs='0' name='externalJobNumber' type='xs:string'/>
+     <xs:element name='generalApplication' type='xs:boolean'/>
+     <xs:element minOccurs='0' name='id' type='xs:long'/>
+     <xs:element minOccurs='0' name='jobNumber' type='xs:string'/>
+     <xs:element minOccurs='0' name='jobTitle' type='xs:string'/>
+     <xs:element minOccurs='0' name='keyword' type='xs:string'/>
+     <xs:element minOccurs='0' name='language' type='xs:string'/>
+     <xs:element minOccurs='0' name='location' type='xs:string'/>
+     <xs:element minOccurs='0' name='operationals'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='operational' type='tns:simpleUserDto'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element minOccurs='0' name='organizations'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='organization' type='tns:organizationCriterion'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element minOccurs='0' name='postingEndDate' type='xs:dateTime'/>
+     <xs:element minOccurs='0' name='postingStartDate' type='xs:dateTime'/>
+     <xs:element minOccurs='0' name='postingTargetStatus' type='xs:string'/>
+     <xs:element minOccurs='0' name='recruiters'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='recruiter' type='tns:simpleUserDto'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element minOccurs='0' name='recruitingCompany' type='xs:string'/>
+     <xs:element name='showCompensation' type='xs:boolean'/>
+     <xs:element name='showRecruiter' type='xs:boolean'/>
+     <xs:element minOccurs='0' name='siteLanguage' type='xs:string'/>
+     <xs:element minOccurs='0' name='standardLovs'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='standardLov' type='tns:lovCriterion'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element minOccurs='0' name='status' type='xs:string'/>
+     <xs:element maxOccurs='1' minOccurs='0' name='strapline' type='xs:string'/>
+     <xs:element minOccurs='0' name='assignedImages'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='assignedImage' type='tns:assignedImageDto'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element maxOccurs='1' minOccurs='0' name='requisitionInternalJobNumber' type='xs:string'/>
+     <xs:element minOccurs='0' name='jobLocations'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='jobLocation' type='tns:jobLocationDto'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element maxOccurs='1' minOccurs='0' name='sponsoredJobContext' type='tns:sponsoredJobContextDto'/>
+     <xs:element minOccurs='0' name='jobUpdateDate' type='xs:dateTime'/>
+     <xs:element maxOccurs='1' minOccurs='0' name='descriptionUrl' type='xs:string'/>
+     <xs:element maxOccurs='1' minOccurs='0' name='postingUserEmail' type='xs:string'/>
+     <xs:element maxOccurs='1' minOccurs='0' name='indeedConfiguration' type='tns:indeedConfiguration'/>
+     <xs:element maxOccurs='1' minOccurs='0' name='contractCompensationPeriod' type='xs:string'/>
+     <xs:element maxOccurs='1' minOccurs='0' name='contractDuration' type='xs:int'/>
+     <xs:element maxOccurs='1' minOccurs='0' name='standardRate' type='tns:standardRate'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='jobLocationDto'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='name' type='xs:string'/>
+     <xs:element minOccurs='0' name='departmentId' type='xs:long'/>
+     <xs:element minOccurs='0' name='creationUserId' type='xs:long'/>
+     <xs:element minOccurs='0' name='updateUserId' type='xs:long'/>
+     <xs:element minOccurs='0' name='creationDate' type='xs:dateTime'/>
+     <xs:element minOccurs='0' name='updateDate' type='xs:dateTime'/>
+     <xs:element minOccurs='0' name='country' type='xs:string'/>
+     <xs:element minOccurs='0' name='region' type='xs:string'/>
+     <xs:element minOccurs='0' name='city' type='xs:string'/>
+     <xs:element minOccurs='0' name='street' type='xs:string'/>
+     <xs:element minOccurs='0' name='streetNumber' type='xs:string'/>
+     <xs:element minOccurs='0' name='zipCode' type='xs:string'/>
+     <xs:element minOccurs='0' name='latitude' type='xs:double'/>
+     <xs:element minOccurs='0' name='longitude' type='xs:double'/>
+     <xs:element minOccurs='0' name='id' type='xs:long'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='indeedConfiguration'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='organic' type='xs:boolean'/>
+     <xs:element minOccurs='0' name='sponsored' type='xs:boolean'/>
+     <xs:element minOccurs='0' name='indeedApply' type='xs:boolean'/>
+     <xs:element maxOccurs='1' minOccurs='0' name='indeedApplyEndpoints' type='tns:indeedApplyEndpoints'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='indeedApplyEndpoints'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='submissionsUrl' type='xs:string'/>
+     <xs:element minOccurs='0' name='questionsUrl' type='xs:string'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='categoryListCriterion'>
+    <xs:complexContent>
+     <xs:extension base='tns:criterion'>
+      <xs:sequence>
+       <xs:element minOccurs='0' name='order' type='xs:long'/>
+       <xs:element minOccurs='0' name='criteria'>
+        <xs:complexType>
+         <xs:sequence>
+          <xs:element maxOccurs='unbounded' minOccurs='0' name='criterion' type='tns:criterion'/>
+         </xs:sequence>
+        </xs:complexType>
+       </xs:element>
+      </xs:sequence>
+     </xs:extension>
+    </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name='criterion'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='label' type='xs:string'/>
+     <xs:element minOccurs='0' name='value' type='xs:string'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='lovCriterion'>
+    <xs:complexContent>
+     <xs:extension base='tns:criterion'>
+      <xs:sequence>
+       <xs:element minOccurs='0' name='order' type='xs:long'/>
+       <xs:element minOccurs='0' name='parents'>
+        <xs:complexType>
+         <xs:sequence>
+          <xs:element maxOccurs='unbounded' minOccurs='0' name='parent' type='tns:criterion'/>
+         </xs:sequence>
+        </xs:complexType>
+       </xs:element>
+       <xs:element minOccurs='0' name='criteria'>
+        <xs:complexType>
+         <xs:sequence>
+          <xs:element maxOccurs='unbounded' minOccurs='0' name='criterion' type='tns:lovWithActivatorsCriterion'/>
+         </xs:sequence>
+        </xs:complexType>
+       </xs:element>
+      </xs:sequence>
+     </xs:extension>
+    </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name='lovWithActivatorsCriterion'>
+    <xs:complexContent>
+     <xs:extension base='tns:criterion'>
+      <xs:sequence>
+       <xs:element maxOccurs='unbounded' minOccurs='0' name='activators' type='tns:activators'/>
+      </xs:sequence>
+     </xs:extension>
+    </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name='activators'>
+    <xs:sequence>
+     <xs:element maxOccurs='unbounded' minOccurs='0' name='criterion' type='tns:lovHierarchedCriterion'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='lovHierarchedCriterion'>
+    <xs:complexContent>
+     <xs:extension base='tns:criterion'>
+      <xs:sequence>
+       <xs:element minOccurs='0' name='parent' type='xs:string'/>
+      </xs:sequence>
+     </xs:extension>
+    </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name='customField'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='label' type='xs:string'/>
+     <xs:element name='order' type='xs:int'/>
+     <xs:element minOccurs='0' name='value' type='xs:string'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='simpleUserDto'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='order' type='xs:long'/>
+     <xs:element minOccurs='0' name='value' type='xs:string'/>
+     <xs:element minOccurs='0' name='email' type='xs:string'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='sponsoredJobContextDto'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='maxBudget' type='xs:string'/>
+     <xs:element minOccurs='0' name='phoneNumber' type='xs:string'/>
+     <xs:element minOccurs='0' name='maxBudgetValue' type='xs:double'/>
+     <xs:element minOccurs='0' name='sponsoredUserEmail' type='xs:string'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='organizationCriterion'>
+    <xs:complexContent>
+     <xs:extension base='tns:criterion'>
+      <xs:sequence>
+       <xs:element minOccurs='0' name='level' type='xs:long'/>
+       <xs:element minOccurs='0' name='suborganizations'>
+        <xs:complexType>
+         <xs:sequence>
+          <xs:element maxOccurs='unbounded' minOccurs='0' name='organization' type='tns:organizationCriterion'/>
+         </xs:sequence>
+        </xs:complexType>
+       </xs:element>
+      </xs:sequence>
+     </xs:extension>
+    </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name='getAdvertisementsByPage'>
+    <xs:sequence>
+     <xs:element form='qualified' name='pageNumber' type='xs:int'/>
+     <xs:element form='qualified' minOccurs='0' name='searchCriteriaDto' type='tns:searchCriteriaDto'/>
+     <xs:element form='qualified' minOccurs='0' name='sortingDetailsDto' type='tns:sortingDetailsDto'/>
+     <xs:element form='qualified' minOccurs='0' name='langCode' type='tns:langCode'/>
+     <xs:element form='qualified' minOccurs='0' name='showJobLocation' type='xs:boolean'/>
+     <xs:element form='qualified' minOccurs='0' name='displayFullContent' type='xs:boolean'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='getAdvertisementsByPageResponse'>
+    <xs:sequence>
+     <xs:element minOccurs='0' ref='tns:advertisementResult'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='getAdvertisementsSortingColumns'>
+    <xs:sequence/>
+   </xs:complexType>
+   <xs:complexType name='getAdvertisementsSortingColumnsResponse'>
+    <xs:sequence>
+     <xs:element minOccurs='0' ref='tns:advertisementSortingColumns'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='advertisementSortingColumns'>
+    <xs:sequence>
+     <xs:element maxOccurs='unbounded' minOccurs='0' name='column' type='tns:keyValueDTO'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='keyValueDTO'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='key' type='xs:string'/>
+     <xs:element minOccurs='0' name='value' type='xs:string'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='getSimpleAdvertisements'>
+    <xs:sequence>
+     <xs:element form='qualified' name='firstResult' type='xs:int'/>
+     <xs:element form='qualified' name='maxResults' type='xs:int'/>
+     <xs:element form='qualified' minOccurs='0' name='searchCriteriaDto' type='tns:searchCriteriaDto'/>
+     <xs:element form='qualified' minOccurs='0' name='sortingDetailsDto' type='tns:sortingDetailsDto'/>
+     <xs:element form='qualified' minOccurs='0' name='langCode' type='tns:langCode'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='getSimpleAdvertisementsResponse'>
+    <xs:sequence>
+     <xs:element minOccurs='0' ref='tns:simpleAdvertisementResult'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='simpleAdvertisementResultDto'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='simpleAdvertisements'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='simpleAdvertisement' type='tns:simpleAdvertisementDto'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element minOccurs='0' name='totalResults' type='xs:int'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='simpleAdvertisementDto'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='id' type='xs:long'/>
+     <xs:element minOccurs='0' name='jobTitle' type='xs:string'/>
+     <xs:element maxOccurs='1' minOccurs='0' name='requisitionInternalJobNumber' type='xs:string'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='getSimpleAdvertisementsByPage'>
+    <xs:sequence>
+     <xs:element form='qualified' name='pageNumber' type='xs:int'/>
+     <xs:element form='qualified' minOccurs='0' name='searchCriteriaDto' type='tns:searchCriteriaDto'/>
+     <xs:element form='qualified' minOccurs='0' name='sortingDetailsDto' type='tns:sortingDetailsDto'/>
+     <xs:element form='qualified' minOccurs='0' name='langCode' type='tns:langCode'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='getSimpleAdvertisementsByPageResponse'>
+    <xs:sequence>
+     <xs:element minOccurs='0' ref='tns:simpleAdvertisementResult'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='getAdvertisementById'>
+    <xs:sequence>
+     <xs:element form='qualified' minOccurs='0' name='postingTargetId' type='xs:long'/>
+     <xs:element form='qualified' minOccurs='0' name='langCode' type='tns:langCode'/>
+     <xs:element form='qualified' minOccurs='0' name='showImages' nillable='true' type='xs:boolean'/>
+     <xs:element form='qualified' minOccurs='0' name='includeStructuredData' nillable='true' type='xs:boolean'/>
+     <xs:element form='qualified' minOccurs='0' name='showJobLocation' type='xs:boolean'/>
+     <xs:element form='qualified' minOccurs='0' name='displayFullContent' type='xs:boolean'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='getAdvertisementByIdResponse'>
+    <xs:sequence>
+     <xs:element form='qualified' minOccurs='0' name='advertisement' type='tns:advertisementDto'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='getStandardCriteria'>
+    <xs:sequence>
+     <xs:element form='qualified' minOccurs='0' name='langCode' type='tns:langCode'/>
+     <xs:element minOccurs='0' ref='tns:searchCriteriaSorting'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='searchCriteriaSorting'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='categoryListsSorting' type='tns:criteriaSortType'/>
+     <xs:element minOccurs='0' name='customLovsSorting' type='tns:criteriaSortType'/>
+     <xs:element minOccurs='0' name='standardLovsSorting' type='tns:criteriaSortType'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='getStandardCriteriaResponse'>
+    <xs:sequence>
+     <xs:element form='qualified' minOccurs='0' name='standardCriteria' type='tns:availableSearchCriteriaDto'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='availableSearchCriteriaDto'>
+    <xs:sequence>
+     <xs:element name='adLanguages'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='language' type='tns:criterion'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element name='categoryLists'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='categoryList' type='tns:categoryListCriterion'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element name='countries'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='country' type='tns:countryCriterion'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element name='customlovs'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='customLov' type='tns:lovCriterion'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element minOccurs='0' name='jobNumber' type='xs:string'/>
+     <xs:element minOccurs='0' name='keywords' type='xs:string'/>
+     <xs:element name='organizations'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='organization' type='tns:organizationCriterion'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+     <xs:element minOccurs='0' name='postedSince' type='xs:int'/>
+     <xs:element name='standardLovs'>
+      <xs:complexType>
+       <xs:sequence>
+        <xs:element maxOccurs='unbounded' minOccurs='0' name='standardLov' type='tns:lovCriterion'/>
+       </xs:sequence>
+      </xs:complexType>
+     </xs:element>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='countryCriterion'>
+    <xs:complexContent>
+     <xs:extension base='tns:criterion'>
+      <xs:sequence>
+       <xs:element name='regions'>
+        <xs:complexType>
+         <xs:sequence>
+          <xs:element maxOccurs='unbounded' minOccurs='0' name='region' type='tns:criterion'/>
+         </xs:sequence>
+        </xs:complexType>
+       </xs:element>
+      </xs:sequence>
+     </xs:extension>
+    </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name='getCriteria'>
+    <xs:sequence>
+     <xs:element form='qualified' minOccurs='0' name='langCode' type='tns:langCode'/>
+     <xs:element minOccurs='0' ref='tns:searchCriteriaSorting'/>
+     <xs:element form='qualified' minOccurs='0' name='lovOrders' type='xs:string'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='getCriteriaResponse'>
+    <xs:sequence>
+     <xs:element form='qualified' minOccurs='0' name='standardCriteriaWithLovs' type='tns:availableSearchCriteriaDto'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='getAdvertisementPreviewByToken'>
+    <xs:sequence>
+     <xs:element form='qualified' minOccurs='0' name='tokenString' type='xs:string'/>
+     <xs:element form='qualified' minOccurs='0' name='langCode' type='tns:langCode'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='getAdvertisementPreviewByTokenResponse'>
+    <xs:sequence>
+     <xs:element form='qualified' minOccurs='0' name='advertisement' type='tns:advertisementDto'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='getAdvertisementImages'>
+    <xs:sequence>
+     <xs:element form='qualified' minOccurs='0' name='postingTargetId' type='xs:long'/>
+     <xs:element form='qualified' minOccurs='0' name='tokenString' type='xs:string'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='getAdvertisementImagesResponse'>
+    <xs:sequence>
+     <xs:element form='qualified' maxOccurs='unbounded' minOccurs='0' name='advertisementImage' type='tns:assignedImageDto'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='assignedImageDto'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='id' type='xs:string'/>
+     <xs:element minOccurs='0' name='url' type='xs:string'/>
+     <xs:element minOccurs='0' name='position' type='tns:values'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='getAttachments'>
+    <xs:sequence>
+     <xs:element form='qualified' minOccurs='0' name='postingTargetId' type='xs:long'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='getAttachmentsResponse'>
+    <xs:sequence>
+     <xs:element form='qualified' maxOccurs='unbounded' minOccurs='0' name='attachment' type='tns:attachmentContentDto'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='attachmentContentDto'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='id' type='xs:long'/>
+     <xs:element minOccurs='0' name='mimeType' type='xs:string'/>
+     <xs:element minOccurs='0' name='fileName' type='xs:string'/>
+     <xs:element minOccurs='0' name='content' type='xs:base64Binary'/>
+     <xs:element minOccurs='0' name='description' type='xs:string'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='getAttachmentsFromToken'>
+    <xs:sequence>
+     <xs:element form='qualified' minOccurs='0' name='tokenString' type='xs:string'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='getAttachmentsFromTokenResponse'>
+    <xs:sequence>
+     <xs:element form='qualified' maxOccurs='unbounded' minOccurs='0' name='attachment' type='tns:attachmentContentDto'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:simpleType name='sortType'>
+    <xs:restriction base='xs:string'>
+     <xs:enumeration value='NONE'/>
+     <xs:enumeration value='ASCENDING'/>
+     <xs:enumeration value='DESCENDING'/>
+    </xs:restriction>
+   </xs:simpleType>
+   <xs:complexType name='uploadJobDescription'>
+    <xs:sequence>
+     <xs:element form='qualified' minOccurs='0' name='postingTargetId' type='xs:long'/>
+     <xs:element form='qualified' minOccurs='0' name='jobDescriptionUrl' type='xs:string'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='uploadJobDescriptionResponse'>
+    <xs:sequence/>
+   </xs:complexType>
+   <xs:simpleType name='langCode'>
+    <xs:restriction base='xs:string'>
+     <xs:enumeration value='XX'/>
+     <xs:enumeration value='AR'/>
+     <xs:enumeration value='BG'/>
+     <xs:enumeration value='BR'/>
+     <xs:enumeration value='CH'/>
+     <xs:enumeration value='CN'/>
+     <xs:enumeration value='CS'/>
+     <xs:enumeration value='CY'/>
+     <xs:enumeration value='DE'/>
+     <xs:enumeration value='DN'/>
+     <xs:enumeration value='EL'/>
+     <xs:enumeration value='US'/>
+     <xs:enumeration value='EN'/>
+     <xs:enumeration value='ET'/>
+     <xs:enumeration value='FL'/>
+     <xs:enumeration value='FN'/>
+     <xs:enumeration value='FR'/>
+     <xs:enumeration value='GL'/>
+     <xs:enumeration value='HR'/>
+     <xs:enumeration value='HU'/>
+     <xs:enumeration value='IS'/>
+     <xs:enumeration value='IT'/>
+     <xs:enumeration value='JA'/>
+     <xs:enumeration value='KO'/>
+     <xs:enumeration value='LT'/>
+     <xs:enumeration value='LV'/>
+     <xs:enumeration value='MY'/>
+     <xs:enumeration value='NL'/>
+     <xs:enumeration value='NW'/>
+     <xs:enumeration value='PL'/>
+     <xs:enumeration value='PT'/>
+     <xs:enumeration value='RO'/>
+     <xs:enumeration value='RU'/>
+     <xs:enumeration value='SK'/>
+     <xs:enumeration value='SL'/>
+     <xs:enumeration value='SP'/>
+     <xs:enumeration value='SR'/>
+     <xs:enumeration value='SW'/>
+     <xs:enumeration value='TH'/>
+     <xs:enumeration value='TR'/>
+     <xs:enumeration value='TW'/>
+     <xs:enumeration value='UA'/>
+     <xs:enumeration value='UK'/>
+     <xs:enumeration value='VI'/>
+     <xs:enumeration value='ID'/>
+     <xs:enumeration value='MX'/>
+     <xs:enumeration value='AT'/>
+     <xs:enumeration value='WA'/>
+     <xs:enumeration value='CA'/>
+    </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name='criteriaSortType'>
+    <xs:restriction base='xs:string'>
+     <xs:enumeration value='LABEL'/>
+     <xs:enumeration value='ORDER'/>
+    </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name='values'>
+    <xs:restriction base='xs:string'>
+     <xs:enumeration value='Header1'/>
+     <xs:enumeration value='Header2'/>
+     <xs:enumeration value='TopOfJobDescription'/>
+     <xs:enumeration value='Bottom'/>
+    </xs:restriction>
+   </xs:simpleType>
+   <xs:complexType name='standardRate'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='minAmount' type='xs:decimal'/>
+     <xs:element minOccurs='0' name='maxAmount' type='xs:decimal'/>
+     <xs:element minOccurs='0' name='currency' type='xs:string'/>
+     <xs:element minOccurs='0' name='period' type='xs:string'/>
+    </xs:sequence>
+   </xs:complexType>
+  </xs:schema>
+ </types>
+ <message name='FoAdvertWebService_getAdvertisementById'>
+  <part element='tns:getAdvertisementById' name='getAdvertisementById'></part>
+ </message>
+ <message name='FoAdvertWebService_getSimpleAdvertisementsResponse'>
+  <part element='tns:getSimpleAdvertisementsResponse' name='getSimpleAdvertisementsResponse'></part>
+ </message>
+ <message name='FoAdvertWebService_uploadJobDescriptionResponse'>
+  <part element='tns:uploadJobDescriptionResponse' name='uploadJobDescriptionResponse'></part>
+ </message>
+ <message name='FoAdvertWebService_getAdvertisementsByPage'>
+  <part element='tns:getAdvertisementsByPage' name='getAdvertisementsByPage'></part>
+ </message>
+ <message name='FoAdvertWebService_getAdvertisementsSortingColumns'>
+  <part element='tns:getAdvertisementsSortingColumns' name='getAdvertisementsSortingColumns'></part>
+ </message>
+ <message name='FoAdvertWebService_getSimpleAdvertisementsByPageResponse'>
+  <part element='tns:getSimpleAdvertisementsByPageResponse' name='getSimpleAdvertisementsByPageResponse'></part>
+ </message>
+ <message name='FoAdvertWebService_getCriteria'>
+  <part element='tns:getCriteria' name='getCriteria'></part>
+ </message>
+ <message name='FoAdvertWebService_getStandardCriteriaResponse'>
+  <part element='tns:getStandardCriteriaResponse' name='getStandardCriteriaResponse'></part>
+ </message>
+ <message name='FoAdvertWebService_uploadJobDescription'>
+  <part element='tns:uploadJobDescription' name='uploadJobDescription'></part>
+ </message>
+ <message name='FoAdvertWebService_getAdvertisementsByPageResponse'>
+  <part element='tns:getAdvertisementsByPageResponse' name='getAdvertisementsByPageResponse'></part>
+ </message>
+ <message name='FoAdvertWebService_getAttachments'>
+  <part element='tns:getAttachments' name='getAttachments'></part>
+ </message>
+ <message name='FoAdvertWebService_getCriteriaResponse'>
+  <part element='tns:getCriteriaResponse' name='getCriteriaResponse'></part>
+ </message>
+ <message name='FoAdvertWebService_getStandardCriteria'>
+  <part element='tns:getStandardCriteria' name='getStandardCriteria'></part>
+ </message>
+ <message name='FoAdvertWebService_getAdvertisementByIdResponse'>
+  <part element='tns:getAdvertisementByIdResponse' name='getAdvertisementByIdResponse'></part>
+ </message>
+ <message name='FoAdvertWebService_getAdvertisementsResponse'>
+  <part element='tns:getAdvertisementsResponse' name='getAdvertisementsResponse'></part>
+ </message>
+ <message name='FoAdvertWebService_getAdvertisementImages'>
+  <part element='tns:getAdvertisementImages' name='getAdvertisementImages'></part>
+ </message>
+ <message name='FoAdvertWebService_getSimpleAdvertisementsByPage'>
+  <part element='tns:getSimpleAdvertisementsByPage' name='getSimpleAdvertisementsByPage'></part>
+ </message>
+ <message name='FoAdvertWebService_getAdvertisementsSortingColumnsResponse'>
+  <part element='tns:getAdvertisementsSortingColumnsResponse' name='getAdvertisementsSortingColumnsResponse'></part>
+ </message>
+ <message name='FoAdvertWebService_getAdvertisementPreviewByTokenResponse'>
+  <part element='tns:getAdvertisementPreviewByTokenResponse' name='getAdvertisementPreviewByTokenResponse'></part>
+ </message>
+ <message name='FoAdvertWebService_getAttachmentsFromTokenResponse'>
+  <part element='tns:getAttachmentsFromTokenResponse' name='getAttachmentsFromTokenResponse'></part>
+ </message>
+ <message name='FoAdvertWebService_getAdvertisements'>
+  <part element='tns:getAdvertisements' name='getAdvertisements'></part>
+ </message>
+ <message name='FoAdvertWebService_getAdvertisementImagesResponse'>
+  <part element='tns:getAdvertisementImagesResponse' name='getAdvertisementImagesResponse'></part>
+ </message>
+ <message name='FoAdvertWebService_getAttachmentsFromToken'>
+  <part element='tns:getAttachmentsFromToken' name='getAttachmentsFromToken'></part>
+ </message>
+ <message name='FoAdvertWebService_getSimpleAdvertisements'>
+  <part element='tns:getSimpleAdvertisements' name='getSimpleAdvertisements'></part>
+ </message>
+ <message name='FoAdvertWebService_getAdvertisementPreviewByToken'>
+  <part element='tns:getAdvertisementPreviewByToken' name='getAdvertisementPreviewByToken'></part>
+ </message>
+ <message name='FoAdvertWebService_getAttachmentsResponse'>
+  <part element='tns:getAttachmentsResponse' name='getAttachmentsResponse'></part>
+ </message>
+ <portType name='FoAdvertWebService'>
+  <operation name='getAdvertisementById' parameterOrder='getAdvertisementById'>
+   <input message='tns:FoAdvertWebService_getAdvertisementById'></input>
+   <output message='tns:FoAdvertWebService_getAdvertisementByIdResponse'></output>
+  </operation>
+  <operation name='getAdvertisementImages' parameterOrder='getAdvertisementImages'>
+   <input message='tns:FoAdvertWebService_getAdvertisementImages'></input>
+   <output message='tns:FoAdvertWebService_getAdvertisementImagesResponse'></output>
+  </operation>
+  <operation name='getAdvertisementPreviewByToken' parameterOrder='getAdvertisementPreviewByToken'>
+   <input message='tns:FoAdvertWebService_getAdvertisementPreviewByToken'></input>
+   <output message='tns:FoAdvertWebService_getAdvertisementPreviewByTokenResponse'></output>
+  </operation>
+  <operation name='getAdvertisements' parameterOrder='getAdvertisements'>
+   <input message='tns:FoAdvertWebService_getAdvertisements'></input>
+   <output message='tns:FoAdvertWebService_getAdvertisementsResponse'></output>
+  </operation>
+  <operation name='getAdvertisementsByPage' parameterOrder='getAdvertisementsByPage'>
+   <input message='tns:FoAdvertWebService_getAdvertisementsByPage'></input>
+   <output message='tns:FoAdvertWebService_getAdvertisementsByPageResponse'></output>
+  </operation>
+  <operation name='getAdvertisementsSortingColumns' parameterOrder='getAdvertisementsSortingColumns'>
+   <input message='tns:FoAdvertWebService_getAdvertisementsSortingColumns'></input>
+   <output message='tns:FoAdvertWebService_getAdvertisementsSortingColumnsResponse'></output>
+  </operation>
+  <operation name='getAttachments' parameterOrder='getAttachments'>
+   <input message='tns:FoAdvertWebService_getAttachments'></input>
+   <output message='tns:FoAdvertWebService_getAttachmentsResponse'></output>
+  </operation>
+  <operation name='getAttachmentsFromToken' parameterOrder='getAttachmentsFromToken'>
+   <input message='tns:FoAdvertWebService_getAttachmentsFromToken'></input>
+   <output message='tns:FoAdvertWebService_getAttachmentsFromTokenResponse'></output>
+  </operation>
+  <operation name='getCriteria' parameterOrder='getCriteria'>
+   <input message='tns:FoAdvertWebService_getCriteria'></input>
+   <output message='tns:FoAdvertWebService_getCriteriaResponse'></output>
+  </operation>
+  <operation name='getSimpleAdvertisements' parameterOrder='getSimpleAdvertisements'>
+   <input message='tns:FoAdvertWebService_getSimpleAdvertisements'></input>
+   <output message='tns:FoAdvertWebService_getSimpleAdvertisementsResponse'></output>
+  </operation>
+  <operation name='getSimpleAdvertisementsByPage' parameterOrder='getSimpleAdvertisementsByPage'>
+   <input message='tns:FoAdvertWebService_getSimpleAdvertisementsByPage'></input>
+   <output message='tns:FoAdvertWebService_getSimpleAdvertisementsByPageResponse'></output>
+  </operation>
+  <operation name='getStandardCriteria' parameterOrder='getStandardCriteria'>
+   <input message='tns:FoAdvertWebService_getStandardCriteria'></input>
+   <output message='tns:FoAdvertWebService_getStandardCriteriaResponse'></output>
+  </operation>
+  <operation name='uploadJobDescription' parameterOrder='uploadJobDescription'>
+   <input message='tns:FoAdvertWebService_uploadJobDescription'></input>
+   <output message='tns:FoAdvertWebService_uploadJobDescriptionResponse'></output>
+  </operation>
+ </portType>
+ <binding name='FoAdvertWebServiceBinding' type='tns:FoAdvertWebService'>
+  <soap:binding style='document' transport='http://schemas.xmlsoap.org/soap/http'/>
+  <operation name='getAdvertisementById'>
+   <soap:operation soapAction=''/>
+   <input>
+    <soap:body use='literal'/>
+   </input>
+   <output>
+    <soap:body use='literal'/>
+   </output>
+  </operation>
+  <operation name='getAdvertisementImages'>
+   <soap:operation soapAction=''/>
+   <input>
+    <soap:body use='literal'/>
+   </input>
+   <output>
+    <soap:body use='literal'/>
+   </output>
+  </operation>
+  <operation name='getAdvertisementPreviewByToken'>
+   <soap:operation soapAction=''/>
+   <input>
+    <soap:body use='literal'/>
+   </input>
+   <output>
+    <soap:body use='literal'/>
+   </output>
+  </operation>
+  <operation name='getAdvertisements'>
+   <soap:operation soapAction=''/>
+   <input>
+    <soap:body use='literal'/>
+   </input>
+   <output>
+    <soap:body use='literal'/>
+   </output>
+  </operation>
+  <operation name='getAdvertisementsByPage'>
+   <soap:operation soapAction=''/>
+   <input>
+    <soap:body use='literal'/>
+   </input>
+   <output>
+    <soap:body use='literal'/>
+   </output>
+  </operation>
+  <operation name='getAdvertisementsSortingColumns'>
+   <soap:operation soapAction=''/>
+   <input>
+    <soap:body use='literal'/>
+   </input>
+   <output>
+    <soap:body use='literal'/>
+   </output>
+  </operation>
+  <operation name='getAttachments'>
+   <soap:operation soapAction=''/>
+   <input>
+    <soap:body use='literal'/>
+   </input>
+   <output>
+    <soap:body use='literal'/>
+   </output>
+  </operation>
+  <operation name='getAttachmentsFromToken'>
+   <soap:operation soapAction=''/>
+   <input>
+    <soap:body use='literal'/>
+   </input>
+   <output>
+    <soap:body use='literal'/>
+   </output>
+  </operation>
+  <operation name='getCriteria'>
+   <soap:operation soapAction=''/>
+   <input>
+    <soap:body use='literal'/>
+   </input>
+   <output>
+    <soap:body use='literal'/>
+   </output>
+  </operation>
+  <operation name='getSimpleAdvertisements'>
+   <soap:operation soapAction=''/>
+   <input>
+    <soap:body use='literal'/>
+   </input>
+   <output>
+    <soap:body use='literal'/>
+   </output>
+  </operation>
+  <operation name='getSimpleAdvertisementsByPage'>
+   <soap:operation soapAction=''/>
+   <input>
+    <soap:body use='literal'/>
+   </input>
+   <output>
+    <soap:body use='literal'/>
+   </output>
+  </operation>
+  <operation name='getStandardCriteria'>
+   <soap:operation soapAction=''/>
+   <input>
+    <soap:body use='literal'/>
+   </input>
+   <output>
+    <soap:body use='literal'/>
+   </output>
+  </operation>
+  <operation name='uploadJobDescription'>
+   <soap:operation soapAction=''/>
+   <input>
+    <soap:body use='literal'/>
+   </input>
+   <output>
+    <soap:body use='literal'/>
+   </output>
+  </operation>
+ </binding>
+ <service name='FoAdvertWebService'>
+  <port binding='tns:FoAdvertWebServiceBinding' name='FoAdvertWebServicePort'>
+   <soap:address location='https://api3.lumesse-talenthub.com/CareerPortal/SOAP/FoAdvert'/>
+  </port>
+ </service>
+</definitions>

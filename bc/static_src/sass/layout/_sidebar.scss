@@ -17,4 +17,64 @@
         margin-bottom: $grid--min;
         line-height: 1.3;
     }
+
+    &__job-details {
+        @include media-query(mob-landscape) {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: $grid--small;
+        }
+
+        @include media-query(px550) {
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: $grid;
+        }
+
+        @include media-query(tablet-landscape) {
+            display: block;
+            margin-top: $grid;
+        }
+    }
+
+    &__job-detail-title {
+        font-weight: $weight--bold;
+    }
+
+    &__job-detail-description {
+        margin: 0 0 $grid--min;
+
+        @include media-query(mob-landscape) {
+            margin: 0;
+        }
+
+        @include media-query(tablet-landscape) {
+            margin: 0 0 $grid--min;
+        }
+    }
+
+    &--jobs {
+        border: 0;
+        padding: $grid $grid--small;
+        background: $color--grey-light;
+        position: relative;
+        margin-top: 130px;
+
+        &::before {
+            content: '';
+            background-image: url('../images/bc-logo.png');
+            background-repeat: no-repeat;
+            background-size: contain;
+            width: 110px;
+            height: 110px;
+            position: absolute;
+            top: -130px;
+            left: 50%;
+            margin-left: -55px;
+
+            @include media-query(tablet-landscape) {
+                left: 0;
+                margin: 0;
+            }
+        }
+    }
 }
