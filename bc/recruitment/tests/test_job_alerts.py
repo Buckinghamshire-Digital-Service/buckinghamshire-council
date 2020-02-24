@@ -115,3 +115,68 @@ class JobAlertTest(TestCase):
                 self.assertIn("1 subscriptions evaluated", output)
                 self.assertIn("0 emails sent", output)
                 mock_message_class.assert_not_called()
+
+    def test_job_is_notified_if_the_intended_earlier_task_failed(self):
+        subscription = JobAlertSubscriptionFactory(
+            search=json.dumps({"query": "cycling"})
+        )
+        with freeze_time(
+            datetime.datetime(2020, 1, 29, 0, 0, tzinfo=datetime.timezone.utc)
+        ) as frozen_datetime:
+            TalentLinkJobFactory.create(title="cycling")
+
+            frozen_datetime.tick(delta=datetime.timedelta(days=1))
+            JobAlertNotificationTask.objects.create(
+                started=frozen_datetime.time_to_freeze,
+                ended=frozen_datetime.time_to_freeze + datetime.timedelta(minutes=1),
+                is_successful=False,
+            )
+
+            frozen_datetime.tick(delta=datetime.timedelta(days=1))
+            with mock.patch(
+                COMMAND_MODULE_PATH + ".NotifyEmailMessage"
+            ) as mock_message_class:
+                out = StringIO()
+                call_command("send_job_alerts", stdout=out)
+                out.seek(0)
+                output = out.read()
+                self.assertIn("1 subscriptions evaluated", output)
+                self.assertIn("1 emails sent", output)
+                mock_message_class.assert_called_once_with(
+                    to=[subscription.email], subject=mock.ANY, body=mock.ANY
+                )
+
+    def test_job_not_notified_if_created_after_the_start_of_this_task(self):
+        instant = datetime.datetime(2020, 1, 29, 0, 0, tzinfo=datetime.timezone.utc)
+        subscription = JobAlertSubscriptionFactory(
+            search=json.dumps({"query": "cycling"})
+        )
+        with freeze_time(instant + datetime.timedelta(seconds=10)):
+            # NOTE This test then travels backwards in time. 🤷
+            TalentLinkJobFactory.create(title="cycling")
+
+        with freeze_time(instant) as frozen_datetime:
+            with mock.patch(
+                COMMAND_MODULE_PATH + ".NotifyEmailMessage"
+            ) as mock_message_class:
+                out = StringIO()
+                call_command("send_job_alerts", stdout=out)
+                out.seek(0)
+                output = out.read()
+                self.assertIn("1 subscriptions evaluated", output)
+                self.assertIn("0 emails sent", output)
+                mock_message_class.assert_not_called()
+
+            frozen_datetime.tick(delta=datetime.timedelta(days=1))
+            with mock.patch(
+                COMMAND_MODULE_PATH + ".NotifyEmailMessage"
+            ) as mock_message_class:
+                out = StringIO()
+                call_command("send_job_alerts", stdout=out)
+                out.seek(0)
+                output = out.read()
+                self.assertIn("1 subscriptions evaluated", output)
+                self.assertIn("1 emails sent", output)
+                mock_message_class.assert_called_once_with(
+                    to=[subscription.email], subject=mock.ANY, body=mock.ANY
+                )
