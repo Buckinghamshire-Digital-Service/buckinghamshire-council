@@ -11,7 +11,7 @@ from wagtail.core.models import Page, Site
 import wagtail_factories
 from freezegun import freeze_time
 
-from bc.recruitment.models import JobAlertNotificationTask
+from bc.recruitment.models import JobAlertNotificationTask, TalentLinkJob
 
 from .fixtures import (
     JobAlertSubscriptionFactory,
@@ -53,29 +53,61 @@ class JobAlertTest(TestCase):
 
     def test_queryset_search(self):
         instant = datetime.datetime(2020, 1, 29, 12, 0, 0, tzinfo=datetime.timezone.utc)
-        JobAlertNotificationTask.objects.create(
-            started=instant,
-            ended=instant + datetime.timedelta(minutes=1),
-            is_successful=True,
-        )
+        with freeze_time(instant) as frozen_datetime:
+            JobAlertSubscriptionFactory()
+            JobAlertNotificationTask.objects.create(
+                ended=frozen_datetime.time_to_freeze + datetime.timedelta(minutes=1),
+                is_successful=True,
+            )
 
-        later = instant + datetime.timedelta(days=1)
-        with freeze_time(later):
+            frozen_datetime.tick(delta=datetime.timedelta(days=1))
             with mock.patch(
-                COMMAND_MODULE_PATH + ".Command.get_queryset"
+                COMMAND_MODULE_PATH + ".Command.get_queryset",
+                return_value=TalentLinkJob.objects.none(),
+            ) as mock_get_queryset:
+                mock_get_queryset
+                out = StringIO()
+                call_command("send_job_alerts", stdout=out)
+
+                mock_get_queryset.assert_called_once_with(
+                    start_time=instant, end_time=instant + datetime.timedelta(days=1)
+                )
+
+    def test_queryset_search_with_new_alert(self):
+        instant = datetime.datetime(2020, 1, 29, 12, 0, 0, tzinfo=datetime.timezone.utc)
+        with freeze_time(instant) as frozen_datetime:
+            JobAlertNotificationTask.objects.create(
+                ended=frozen_datetime.time_to_freeze + datetime.timedelta(minutes=1),
+                is_successful=True,
+            )
+
+            frozen_datetime.tick(delta=datetime.timedelta(hours=1))
+            alert = JobAlertSubscriptionFactory()
+
+            frozen_datetime.tick(delta=datetime.timedelta(hours=23))
+            with mock.patch(
+                COMMAND_MODULE_PATH + ".Command.get_queryset",
+                return_value=TalentLinkJob.objects.none(),
             ) as mock_get_queryset:
                 out = StringIO()
                 call_command("send_job_alerts", stdout=out)
 
-                mock_get_queryset.assert_called_once_with(instant, later)
+                alert.refresh_from_db()
+                mock_get_queryset.assert_called_once_with(
+                    start_time=alert.created,
+                    end_time=instant + datetime.timedelta(days=1),
+                )
 
     def test_job_notified(self):
         instant = datetime.datetime(2020, 1, 29, 0, 0, tzinfo=datetime.timezone.utc)
-        subscription = JobAlertSubscriptionFactory(
-            search=json.dumps({"query": "cycling"})
-        )
         with freeze_time(instant) as frozen_datetime:
+            subscription = JobAlertSubscriptionFactory(
+                search=json.dumps({"query": "cycling"})
+            )
+
+            frozen_datetime.tick()
             TalentLinkJobFactory.create(title="cycling")
+
             frozen_datetime.tick()
             with mock.patch(
                 COMMAND_MODULE_PATH + ".NotifyEmailMessage"
@@ -91,15 +123,16 @@ class JobAlertTest(TestCase):
                 )
 
     def test_job_not_notified_if_a_successful_task_was_started_since_import(self):
-        JobAlertSubscriptionFactory(search=json.dumps({"query": "cycling"}))
         with freeze_time(
             datetime.datetime(2020, 1, 29, 0, 0, tzinfo=datetime.timezone.utc)
         ) as frozen_datetime:
+            JobAlertSubscriptionFactory(search=json.dumps({"query": "cycling"}))
+
+            frozen_datetime.tick()
             TalentLinkJobFactory.create(title="cycling")
 
             frozen_datetime.tick(delta=datetime.timedelta(days=1))
             JobAlertNotificationTask.objects.create(
-                started=frozen_datetime.time_to_freeze,
                 ended=frozen_datetime.time_to_freeze + datetime.timedelta(minutes=1),
                 is_successful=True,
             )
@@ -117,17 +150,18 @@ class JobAlertTest(TestCase):
                 mock_message_class.assert_not_called()
 
     def test_job_is_notified_if_the_intended_earlier_task_failed(self):
-        subscription = JobAlertSubscriptionFactory(
-            search=json.dumps({"query": "cycling"})
-        )
         with freeze_time(
             datetime.datetime(2020, 1, 29, 0, 0, tzinfo=datetime.timezone.utc)
         ) as frozen_datetime:
+            subscription = JobAlertSubscriptionFactory(
+                search=json.dumps({"query": "cycling"})
+            )
+
+            frozen_datetime.tick()
             TalentLinkJobFactory.create(title="cycling")
 
             frozen_datetime.tick(delta=datetime.timedelta(days=1))
             JobAlertNotificationTask.objects.create(
-                started=frozen_datetime.time_to_freeze,
                 ended=frozen_datetime.time_to_freeze + datetime.timedelta(minutes=1),
                 is_successful=False,
             )
@@ -148,14 +182,15 @@ class JobAlertTest(TestCase):
 
     def test_job_not_notified_if_created_after_the_start_of_this_task(self):
         instant = datetime.datetime(2020, 1, 29, 0, 0, tzinfo=datetime.timezone.utc)
-        subscription = JobAlertSubscriptionFactory(
-            search=json.dumps({"query": "cycling"})
-        )
         with freeze_time(instant + datetime.timedelta(seconds=10)):
             # NOTE This test then travels backwards in time. 🤷
             TalentLinkJobFactory.create(title="cycling")
 
         with freeze_time(instant) as frozen_datetime:
+            subscription = JobAlertSubscriptionFactory(
+                search=json.dumps({"query": "cycling"})
+            )
+            frozen_datetime.tick()
             with mock.patch(
                 COMMAND_MODULE_PATH + ".NotifyEmailMessage"
             ) as mock_message_class:
@@ -180,3 +215,25 @@ class JobAlertTest(TestCase):
                 mock_message_class.assert_called_once_with(
                     to=[subscription.email], subject=mock.ANY, body=mock.ANY
                 )
+
+    def test_job_not_notified_if_created_before_the_subscription(self):
+
+        with freeze_time(
+            datetime.datetime(2020, 1, 29, 0, 0, tzinfo=datetime.timezone.utc)
+        ) as frozen_datetime:
+            TalentLinkJobFactory.create(title="cycling")
+
+            frozen_datetime.tick()
+            JobAlertSubscriptionFactory(search=json.dumps({"query": "cycling"}))
+
+            frozen_datetime.tick(delta=datetime.timedelta(hours=1))
+            with mock.patch(
+                COMMAND_MODULE_PATH + ".NotifyEmailMessage"
+            ) as mock_message_class:
+                out = StringIO()
+                call_command("send_job_alerts", stdout=out)
+                out.seek(0)
+                output = out.read()
+                self.assertIn("1 subscriptions evaluated", output)
+                self.assertIn("0 emails sent", output)
+                mock_message_class.assert_not_called()

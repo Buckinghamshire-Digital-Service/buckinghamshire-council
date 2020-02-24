@@ -1,4 +1,5 @@
 import datetime
+import json
 
 import factory
 
@@ -67,5 +68,6 @@ class JobAlertSubscriptionFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = "recruitment.JobAlertSubscription"
 
+    search = json.dumps({})
     email = factory.Faker("email")
     confirmed = True

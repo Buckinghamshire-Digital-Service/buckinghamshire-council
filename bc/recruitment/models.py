@@ -294,6 +294,6 @@ class JobAlertSubscription(models.Model):
 
 
 class JobAlertNotificationTask(models.Model):
-    started = models.DateTimeField()
+    started = models.DateTimeField(auto_now_add=True)
     ended = models.DateTimeField(null=True)
     is_successful = models.BooleanField(default=False)

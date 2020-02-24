@@ -18,9 +18,15 @@ class Command(BaseCommand):
     help = "Notifies job alert subscribers of new matches"
 
     def handle(self, *args, **options):
-        start_time, end_time = self.get_times()
-        queryset = self.get_queryset(start_time, end_time)
-        task = JobAlertNotificationTask.objects.create(started=end_time)
+        task = JobAlertNotificationTask.objects.create()
+        try:
+            start_time = (
+                JobAlertNotificationTask.objects.filter(is_successful=True)
+                .latest("started")
+                .started
+            )
+        except JobAlertNotificationTask.DoesNotExist:
+            start_time = None
 
         messages = []
 
@@ -29,7 +35,13 @@ class Command(BaseCommand):
             search_params = json.loads(alert.search)
             querydict = QueryDict(mutable=True)
             querydict.update(search_params)
-            results = get_jobs_search_results(querydict, queryset)
+            results = get_jobs_search_results(
+                querydict,
+                self.get_queryset(
+                    start_time=max(filter(None, [start_time, alert.created])),
+                    end_time=task.started,
+                ),
+            )
 
             if results:
                 # TODO Add this when the unsubscription view is written
@@ -59,19 +71,6 @@ class Command(BaseCommand):
 
         self.stdout.write(f"{len(alerts)} subscriptions evaluated")
         self.stdout.write(f"{num_sent} emails sent")
-
-    def get_times(self):
-        # Set the search start date from the latest notification date
-        try:
-            start_time = (
-                JobAlertNotificationTask.objects.filter(is_successful=True)
-                .latest("started")
-                .started
-            )
-        except JobAlertNotificationTask.DoesNotExist:
-            start_time = None
-        end_time = now()
-        return start_time, end_time
 
     def get_queryset(self, start_time, end_time):
         params = {"created__lt": end_time}
