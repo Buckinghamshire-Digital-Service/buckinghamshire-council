@@ -11,6 +11,7 @@
 - 96 Jobs search: add category filter
 - 99 Add slugs to job category
 - 104 Add job subcategory
+- 110 Job search alert notifications
 - Update deployment documentation
 
 ## 3.2 (2020-02-17)
