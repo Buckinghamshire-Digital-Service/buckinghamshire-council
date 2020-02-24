@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- 110 Job search alert notifications
+
+## 4.0 (2020-02-24)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/3.2...4.0
+
+- Update deployment documentation
 - 59 Jobs homepage
 - 62 Jobs detail page
 - 85 TalentLink API client, and importer commands
@@ -11,8 +18,6 @@
 - 96 Jobs search: add category filter
 - 99 Add slugs to job category
 - 104 Add job subcategory
-- 110 Job search alert notifications
-- Update deployment documentation
 
 ## 3.2 (2020-02-17)
 
