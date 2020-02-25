@@ -276,10 +276,20 @@ class RecruitmentIndexPage(BasePage):
 
 class JobAlertSubscription(models.Model):
     email = models.EmailField()
-    search = models.TextField()
+    search = models.TextField(
+        default="{}", editable=False
+    )  # stop site admins from entering bad values
     confirmed = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     token = models.CharField(max_length=255, unique=True, editable=False)
+
+    @property
+    def confirmation_url(self):
+        return reverse("confirm_job_alert", args=[self.token])
+
+    @property
+    def unsubscribe_url(self):
+        return reverse("unsubscribe_job_alert", args=[self.token])
 
     def full_clean(self, *args, **kwargs):
         if not self.token:
@@ -290,13 +300,11 @@ class JobAlertSubscription(models.Model):
     def send_confirmation_email(self, request):
         template_name = "patterns/email/confirm_job_alert.html"
         context = {}
-        context["search"] = "todo"  # TODO: implement
-        context["confirmation_url"] = request.build_absolute_uri(
-            reverse("confirm_job_alert", args=[self.token])
-        )
-        context["unsubscribe_url"] = request.build_absolute_uri(
-            reverse("unsubscribe_job_alert", args=[self.token])
-        )
+        context[
+            "search"
+        ] = self.search  # TODO: add search summary in human readable format
+        context["confirmation_url"] = request.build_absolute_uri(self.confirmation_url)
+        context["unsubscribe_url"] = request.build_absolute_uri(self.unsubscribe_url)
 
         content = render_to_string(template_name, context=context)
         send_mail(
