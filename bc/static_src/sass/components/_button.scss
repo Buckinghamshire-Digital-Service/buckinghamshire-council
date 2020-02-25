@@ -19,6 +19,27 @@
         background: $color--link-active;
     }
 
+    &--basic {
+        background-color: $color--leaf;
+        border-bottom: 3px solid darken($color--leaf, 10);
+        color: $color--default;
+        font-weight: $weight--bold;
+        text-decoration: none;
+
+        &:hover {
+            background-color: darken($color--leaf, 5);
+            border-bottom: 3px solid darken($color--leaf, 20);
+            color: $color--default;
+        }
+
+        &:active,
+        &:focus {
+            background-color: $color--mustard;
+            border-bottom: 3px solid $color--default;
+            color: $color--default;
+        }
+    }
+
     &--subscribe {
         background: $color--lake;
         border: 2px solid $color--white;
