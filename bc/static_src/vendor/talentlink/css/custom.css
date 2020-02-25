@@ -3,7 +3,6 @@ body {
     font-size: 1.6rem;
     color: #fff;
     background-color: #969eaa;
-    background-image: url(../images/bkg_dark.png);
     font-family: "Open Sans Light",Arial,Helvetica,Georgia,sans-serif;
 }
 
@@ -204,7 +203,6 @@ a, a:hover {
 .lumesse-apply-save-app-save-button,
 .lumesse-apply-save-app-edit-button {
     background-color: #969eaa;
-    background-image: url(../images/bkg_dark.png);
 }
 
 .alert-danger {
