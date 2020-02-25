@@ -1,19 +1,20 @@
-import json
-
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.template.response import TemplateResponse
 from django.utils.cache import add_never_cache_headers, patch_cache_control
 from django.utils.timezone import now
 from django.views.generic.base import View
-from django.views.generic.edit import FormView
 
 from wagtail.core.models import Page
 from wagtail.search.models import Query
 
 from bc.recruitment.forms import SearchAlertSubscriptionForm
 from bc.recruitment.models import JobAlertSubscription
-from bc.recruitment.utils import get_jobs_search_results, is_recruitment_site
+from bc.recruitment.utils import (
+    get_current_search,
+    get_job_search_results,
+    is_recruitment_site,
+)
 from bc.utils.cache import get_default_cache_control_kwargs
 
 
@@ -27,7 +28,7 @@ class SearchView(View):
         # Recruitment site search
         if is_recruitment_site(request):
             template_path = "patterns/pages/search/search--jobs.html"
-            search_results = get_jobs_search_results(querydict=request.GET)
+            search_results = get_job_search_results(querydict=request.GET)
             context["job_alert_form"] = SearchAlertSubscriptionForm
 
         # Main site search
@@ -66,65 +67,78 @@ class SearchView(View):
         return response
 
     def post(self, request, *args, **kwargs):
+        """
+        Job alert subscription
+        """
         if not is_recruitment_site(request):
             return
 
         form = SearchAlertSubscriptionForm(data=request.POST)
+
         if form.is_valid():
-            import pdb
+            # e.g. query=school&category=work-experiencetraineeshipinternship&category=transport-economy-environment
+            search = get_current_search(request.GET)
+            email = form.cleaned_data["email"]
 
-            pdb.set_trace()
-            pass
-            # TODO: process
-        else:
-            # TODO: return to search page with warning
-            pass
+            # Search if already exists and confirmed:
+            try:
+                subscription = JobAlertSubscription.objects.get(
+                    email=email, search=search
+                )
+                if subscription.confirmed:
+                    # Tell user they're already subscribed
+                    response = TemplateResponse(
+                        request,
+                        "patterns/pages/jobs_alert/subscription_processed.html",
+                        {
+                            "title": "You are already subscribed",
+                            "status": "already_subscribed",
+                        },
+                    )
+                    return response
+                else:
+                    # Treat this as a new subscription request and
+                    # refresh created date to give this more time to be confirmed.
+                    subscription.created = now()
+
+            except JobAlertSubscription.DoesNotExist:
+                subscription = JobAlertSubscription(email=email, search=search)
+                subscription.full_clean()
+                subscription.save()
+
+            subscription.send_confirmation_email(request)
+            response = TemplateResponse(
+                request,
+                "patterns/pages/jobs_alert/subscription_processed.html",
+                {"title": "Thank you", "status": "email_sent"},
+            )
+            return response
 
 
-class SearchAlertSubscriptionView(FormView):
-    form_class = SearchAlertSubscriptionForm
-    template_name = "patterns/pages/search/job_alert.html"
-    # success_url = lazy_reverse('search:search')
+class JobAlertConfirmView(View):
+    def get(self, request, *args, **kwargs):
+        token = self.kwargs["token"]
 
-    def get_serialized_search(self):
-        # TODO: refactor to centralise the logic for this so
-        # can be used together with search view, and only one place to update when adding new filters
-        # http://jobs.bc.local:8000/job_alert/?query=school&category=work-experiencetraineeshipinternship&category=transport-economy-environment
-        search = {}
-        search["query"] = self.request.GET.get("query", None)
-        search["category"] = self.request.GET.getlist("category")
-        # If empty assumes subscribing to all new jobs?
-        # TODO: display summary?
-        return json.dumps(search)
-
-    def form_valid(self, form):
-        search = self.get_serialized_search()
-        email = form.cleaned_data["email"]
-
-        # Search if already exists and confirmed:
         try:
-            subscription = JobAlertSubscription.objects.get(email=email, search=search)
-            if subscription.confirmed:
-                # Tell user they're already subscribed
-                # TODO
-                # import pdb; pdb.set_trace()
-                pass
-            else:
-                # Treat this as a new subscription request and
-                # refresh created date to give this more time to be confirmed.
-                subscription.created = now()
-
+            subscription = JobAlertSubscription.objects.get(token=token)
         except JobAlertSubscription.DoesNotExist:
-            subscription = JobAlertSubscription(email=email, search=search)
-            subscription.full_clean()
+            context = {"title": "Subscription not found", "status": "link_expired"}
+        else:
+            subscription.confirmed = True
             subscription.save()
+            context = {
+                "title": "Job alert subscription confirmed",
+                "status": "confirmed",
+            }
 
-        self.send_mail(subscription)
-        return super(SearchAlertSubscriptionView, self).form_valid(form)
+        response = TemplateResponse(
+            request, "patterns/pages/jobs_alert/subscription_processed.html", context,
+        )
+        return response
 
-    def send_mail(self, subscription):
-        # TODO: email token to user
-        import pdb
 
-        pdb.set_trace()
-        pass
+class JobAlertUnsubscribeView(View):
+    pass
+    # TODO: implement
+    # Display subscribed search and user to confirm unsubscribe.
+    # Also display list of other subscription with the same email so user can unsubscribe all?

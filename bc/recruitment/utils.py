@@ -1,5 +1,8 @@
+import json
+
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 
+from bc.recruitment.constants import JOB_FILTERS
 from bc.recruitment.models import RecruitmentHomePage, TalentLinkJob
 
 
@@ -7,11 +10,28 @@ def is_recruitment_site(request):
     return request.site.root_page.specific.__class__ == RecruitmentHomePage
 
 
-def get_jobs_search_results(querydict, queryset=None):
+def get_current_search(querydict):
+    """
+    Returns search query and filters in request.GET as json string
+    """
+    search = {}
+
+    if querydict.get("query", None):
+        search["query"] = querydict.get("query", None)
+
+    # Loop through our filters so we don't just store any query params
+    for filter in JOB_FILTERS:
+        selected = querydict.getlist(filter["name"])
+        if selected:
+            search[filter["name"]] = selected
+
+    return json.dumps(search)
+
+
+def get_job_search_results(querydict, queryset=None):
     if queryset is None:
         queryset = TalentLinkJob.objects.all()
     search_query = querydict.get("query", None)
-    filter_job_category = querydict.getlist("category")
 
     if search_query:
         vector = (
@@ -32,10 +52,11 @@ def get_jobs_search_results(querydict, queryset=None):
         search_results = queryset.order_by("posting_start_date")
 
     # Process filters
-    # TODO: https://simpleisbetterthancomplex.com/tutorial/2016/11/28/how-to-filter-querysets-dynamically.html
-    if filter_job_category:
-        search_results = search_results.filter(
-            subcategory__categories__slug__in=filter_job_category
-        )
+    for filter in JOB_FILTERS:
+        selected = querydict.getlist(filter["name"])
+        if selected:
+            search_results = search_results.filter(
+                **{filter["filter_key"] + "__in": selected}
+            )
 
     return search_results

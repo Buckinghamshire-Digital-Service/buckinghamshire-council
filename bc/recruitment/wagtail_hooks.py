@@ -22,7 +22,7 @@ class TalentLinkJobModelAdmin(ModelAdmin):
 class JobAlertSubscriptionModelAdmin(ModelAdmin):
     model = JobAlertSubscription
     menu_icon = "tag"
-    list_display = ("email", "confirmed", "created", "search")
+    list_display = ("email", "confirmed", "created", "search", "token")
 
 
 class RecruitmentModelAdminGroup(ModelAdminGroup):

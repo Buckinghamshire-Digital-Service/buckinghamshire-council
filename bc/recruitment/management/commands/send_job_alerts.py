@@ -10,7 +10,7 @@ from bc.recruitment.models import (
     JobAlertSubscription,
     TalentLinkJob,
 )
-from bc.recruitment.utils import get_jobs_search_results
+from bc.recruitment.utils import get_job_search_results
 from bc.utils.email import NotifyEmailMessage
 
 
@@ -40,7 +40,7 @@ class Command(BaseCommand):
             search_params = json.loads(alert.search)
             querydict = QueryDict(mutable=True)
             querydict.update(search_params)
-            results = get_jobs_search_results(
+            results = get_job_search_results(
                 querydict,
                 self.get_queryset(
                     start_time=max(filter(None, [start_time, alert.created])),
