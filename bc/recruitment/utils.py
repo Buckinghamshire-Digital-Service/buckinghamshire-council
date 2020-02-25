@@ -42,14 +42,14 @@ def get_job_search_results(querydict, queryset=None):
         )
         query = SearchQuery(search_query, search_type="phrase")
         search_results = (
-            TalentLinkJob.objects.annotate(rank=SearchRank(vector, query))
+            queryset.annotate(rank=SearchRank(vector, query))
             .filter(rank__gte=0.1)
             .order_by("-rank")
         )
 
     else:
         # Order by newest job at top
-        search_results = TalentLinkJob.objects.all().order_by("posting_start_date")
+        search_results = queryset.order_by("posting_start_date")
 
     # Process filters
     for filter in JOB_FILTERS:
