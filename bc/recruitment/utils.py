@@ -2,6 +2,7 @@ import json
 
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 
+from bc.recruitment.constants import JOB_FILTERS
 from bc.recruitment.models import RecruitmentHomePage, TalentLinkJob
 
 
@@ -9,42 +10,28 @@ def is_recruitment_site(request):
     return request.site.root_page.specific.__class__ == RecruitmentHomePage
 
 
-def get_search_filters(querystring):
-    # Use this to add future filters
-    # TODO: tie in with templatetags/jobs_search_filters.py
-    filters = []
-    category = {
-        "name": "category",
-        "filter_key": "subcategory__categories__slug",  # to use in Queryset Filter. Eg. 'subcategory__categories__slug'
-        "selected": None,
-    }
-    if querystring:
-        category["selected"] = querystring.getlist(category["name"])
-        category["selected"] = [x for x in category["selected"] if x.strip()]
-        category["selected"].sort()
-    filters.append(category)
-
-    return filters
-
-
-def get_current_search(querystring):
+def get_current_search(querydict):
     """
     Returns search query and filters in request.GET as json string
     """
     search = {}
 
-    if querystring.get("query", None):
-        search["query"] = querystring.get("query", None)
+    if querydict.get("query", None):
+        search["query"] = querydict.get("query", None)
 
-    for filter in get_search_filters(querystring):
-        if filter["selected"]:
-            search[filter["name"]] = filter["selected"]
+    # Loop through our filters so we don't just store any query params
+    for filter in JOB_FILTERS:
+        selected = querydict.getlist(filter["name"])
+        if selected:
+            search[filter["name"]] = selected
 
     return json.dumps(search)
 
 
-def get_job_search_results(request):
-    search_query = request.GET.get("query", None)
+def get_job_search_results(querydict, queryset=None):
+    if queryset is None:
+        queryset = TalentLinkJob.objects.all()
+    search_query = querydict.get("query", None)
 
     if search_query:
         vector = (
@@ -65,10 +52,11 @@ def get_job_search_results(request):
         search_results = TalentLinkJob.objects.all().order_by("posting_start_date")
 
     # Process filters
-    for filter in get_search_filters(request.GET):
-        if filter["selected"]:
+    for filter in JOB_FILTERS:
+        selected = querydict.getlist(filter["name"])
+        if selected:
             search_results = search_results.filter(
-                **{filter["filter_key"] + "__in": filter["selected"]}
+                **{filter["filter_key"] + "__in": selected}
             )
 
     return search_results

@@ -276,7 +276,7 @@ class RecruitmentIndexPage(BasePage):
 
 class JobAlertSubscription(models.Model):
     email = models.EmailField()
-    search = models.CharField(max_length=255)
+    search = models.TextField()
     confirmed = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     token = models.CharField(max_length=255, unique=True, editable=False)

@@ -28,7 +28,7 @@ class SearchView(View):
         # Recruitment site search
         if is_recruitment_site(request):
             template_path = "patterns/pages/search/search--jobs.html"
-            search_results = get_job_search_results(request)
+            search_results = get_job_search_results(request.GET)
             context["job_alert_form"] = SearchAlertSubscriptionForm
 
         # Main site search
