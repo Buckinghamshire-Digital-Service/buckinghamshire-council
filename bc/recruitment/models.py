@@ -243,6 +243,10 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
         page = get_object_or_404(TalentLinkJob, talentlink_id=talentlink_id)
         return render(request, "patterns/pages/jobs/job_detail.html", {"page": page})
 
+    @route(r"^apply/$")
+    def apply(self, request):
+        return render(request, "patterns/pages/jobs/apply.html")
+
 
 class RecruitmentIndexPage(BasePage):
     template = "patterns/pages/standardpages/index_page--jobs.html"
