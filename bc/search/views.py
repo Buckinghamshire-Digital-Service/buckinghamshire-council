@@ -138,7 +138,23 @@ class JobAlertConfirmView(View):
 
 
 class JobAlertUnsubscribeView(View):
-    pass
-    # TODO: implement
-    # Display subscribed search and user to confirm unsubscribe.
-    # Also display list of other subscription with the same email so user can unsubscribe all?
+    # TODO:  Future feature: display all subscriptions for this email address and
+    # allow user to unsubscribe from all or selected.
+    def get(self, request, *args, **kwargs):
+        token = self.kwargs["token"]
+
+        try:
+            subscription = JobAlertSubscription.objects.get(token=token)
+        except JobAlertSubscription.DoesNotExist:
+            context = {"title": "Subscription not found", "status": "link_expired"}
+        else:
+            subscription.delete()
+            context = {
+                "title": "Job alert unsubscribed",
+                "status": "success",
+            }
+
+        response = TemplateResponse(
+            request, "patterns/pages/jobs_alert/unsubscribe.html", context,
+        )
+        return response

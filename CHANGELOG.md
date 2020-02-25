@@ -3,6 +3,7 @@
 ## Unreleased
 
 - 109 Job alert subscription
+- 111 Job alert unsubscribe
 
 ## 4.0 (2020-02-24)
 
