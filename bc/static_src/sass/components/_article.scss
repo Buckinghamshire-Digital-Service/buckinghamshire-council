@@ -1,0 +1,14 @@
+.article {
+    &__meta {
+        margin-bottom: $grid--large;
+        color: $color--grey-accessible;
+
+        p {
+            margin: 0 0 $grid--min;
+        }
+    }
+
+    &__intro {
+        @include font-size(m);
+    }
+}
