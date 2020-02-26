@@ -4,6 +4,7 @@ from io import StringIO
 from unittest import mock
 
 from django.core.management import call_command
+from django.http import QueryDict
 from django.test import RequestFactory, TestCase
 
 from wagtail.core.models import Page, Site
@@ -12,8 +13,9 @@ import wagtail_factories
 from freezegun import freeze_time
 
 from bc.home.tests.fixtures import HomePageFactory
+from bc.recruitment.constants import JOB_FILTERS
 from bc.recruitment.models import JobAlertNotificationTask, TalentLinkJob
-from bc.recruitment.utils import is_recruitment_site
+from bc.recruitment.utils import get_current_search, is_recruitment_site
 
 from .fixtures import (
     JobAlertSubscriptionFactory,
@@ -80,6 +82,31 @@ class JobAlertTest(TestCase):
         main_site_request = RequestFactory().request()
         main_site_request.site = main_site
         self.assertFalse(is_recruitment_site(main_site_request))
+
+    def test_utils_get_current_search(self):
+        query = QueryDict("query=school")
+        query_json = get_current_search(query)
+        self.assertEqual(query_json, json.dumps({"query": "school"}))
+
+        query = QueryDict()
+        query_json = get_current_search(query)
+        self.assertEqual(query_json, json.dumps({}))
+
+        for filter in JOB_FILTERS:
+            query = QueryDict(filter["name"] + "=test1&" + filter["name"] + "=test2&")
+            query_json = get_current_search(query)
+            self.assertEqual(
+                query_json, json.dumps({filter["name"]: ["test1", "test2"]})
+            )
+
+        # Test with rogue query parameters (not in JOB_FILTERS)
+        query = QueryDict("query=school&rogue=ha")
+        query_json = get_current_search(query)
+        self.assertEqual(
+            query_json,
+            json.dumps({"query": "school"}),
+            msg="Parameters not in JOB_FILTERS should be ignored.",
+        )
 
     def test_times(self):
         instant = datetime.datetime(2020, 1, 29, 12, 0, 0, tzinfo=datetime.timezone.utc)
