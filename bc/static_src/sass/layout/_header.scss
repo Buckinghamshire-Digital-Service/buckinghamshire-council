@@ -1,5 +1,5 @@
 .header {
-    padding: $grid--small 0;
+    padding: 12px 0;
     background-color: $color--primary;
 
     &__inner {
@@ -20,8 +20,8 @@
 
     &__logo {
         fill: $color--white;
-        height: 40px;
-        width: 160px;
+        height: 45px;
+        width: 177px;
     }
 
     &__search {
@@ -32,7 +32,8 @@
             margin-top: 0;
         }
 
-        .template-home-page & {
+        .template-home-page &,
+        .template-jobs-home & {
             display: none;
         }
     }

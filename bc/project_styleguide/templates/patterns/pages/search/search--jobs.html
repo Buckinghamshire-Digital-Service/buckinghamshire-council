@@ -1,0 +1,70 @@
+{% extends "patterns/base_page--jobs.html" %}
+{% load static wagtailcore_tags wagtailsearchpromotions_tags jobs_search_filters %}
+
+{% block body_class %}{{ block.super }} template-searchresults{% endblock %}
+
+{% block title %}{% if search_query %}Search results for &ldquo;{{ search_query }}&rdquo;{% else %}Search{% endif %}{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="wrapper wrapper--large">
+        <nav role="navigation" aria-label="breadcrumb">
+            <ul class="breadcrumb">
+                <li class="breadcrumb__item">
+                    <a class="breadcrumb__link" href="/" title="Home">
+                        Home
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="search">
+        <div class="wrapper wrapper--page">
+            <h1 class="heading heading--xxl">Search Jobs</h1>
+
+            <form action="{% url 'search' %}" method="get" role="search" class="form form--search">
+                <label class="u-sr-only" for="search--page">Search this website</label>
+                <input class="input" id="search--page" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
+                <button class="button button--search" type="submit" aria-label="Search">
+                    <svg class="button__icon icon icon--stroke icon--white" aria-hidden="true">
+                        <use xlink:href="#magnifying-glass"></use>
+                    </svg>
+                    <span class="u-sr-only">Search</span>
+                </button>
+            </form>
+        </div>
+
+        {% if search_results %}
+            <div class="search__results-wrapper wrapper wrapper--flex">
+                <aside class="search__filters">
+                    <h2 class="heading heading--m">Filter jobs</h2>
+                    {% jobs_search_filters request %}
+                </aside>
+
+                <section class="search__results">
+                    <header class="search__results-header">
+                        {% with count=search_results.paginator.count %}
+                            {% if search_query %}
+                                <h2 class="heading heading--l">{{ count }} job{{ count|pluralize }} found for ‘{{ search_query }}’</h2>
+                                <a href="/search">Clear</a>
+                            {% else %}
+                                <h2 class="heading heading--l">{{ count }} job{{ count|pluralize }} found</h2>
+                            {% endif %}
+                        {% endwith %}
+                    </header>
+
+                    {% for result in search_results %}
+                        {% include "patterns/molecules/search-result/search-result--jobs.html" with result=result %}
+                    {% endfor %}
+
+                    {% include "patterns/molecules/pagination/pagination.html" with paginator_page=search_results %}
+                </section>
+            </div>
+
+        {% else %}
+            <p>No results found.</p>
+        {% endif %}
+    </div>
+{% endblock %}

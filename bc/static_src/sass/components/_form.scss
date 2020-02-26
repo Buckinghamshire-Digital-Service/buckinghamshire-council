@@ -14,7 +14,9 @@
     }
 
     input {
+        @include font-size(m);
         border: 0;
+        border-radius: 0;
         padding: $grid--min;
         width: 100%;
         max-width: 540px;
@@ -35,6 +37,21 @@
                 margin-bottom: 0;
                 margin-right: $grid--small;
             }
+        }
+    }
+
+    &--search {
+        display: flex;
+        margin-bottom: $grid;
+
+        @include media-query(tablet-portrait) {
+            margin-bottom: $grid--large;
+        }
+
+        input {
+            border: 2px solid $color--charcoal;
+            border-right: 0;
+            max-width: 100%;
         }
     }
 
@@ -60,5 +77,9 @@
                 width: 100%;
             }
         }
+    }
+
+    &--jobs-hero {
+        margin-bottom: 15px;
     }
 }

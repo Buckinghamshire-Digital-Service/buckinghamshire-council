@@ -14,7 +14,8 @@
 stages:
   - build
   - test
-  - deploy
+  - deploy_site
+  - pages
 
 # Test if static assets can be built succesfully.
 static:
@@ -109,8 +110,12 @@ test_python:
     RECAPTCHA_PUBLIC_KEY: 'dummy-key-value'
     RECAPTCHA_PRIVATE_KEY: 'dummy-key-value'
 
+    # Postgres credentials
+    POSTGRES_USER: db_user
+    POSTGRES_PASSWORD: db_pass # pragma: allowlist secret
+
     # This is the URL used by databases on our CI.
-    DATABASE_URL: postgres://postgres@postgres/postgres
+    DATABASE_URL: postgres://db_user:db_pass@postgres/postgres # pragma: allowlist secret
 
     # Don't redirect to HTTPS in tests.
     SECURE_SSL_REDIRECT: 'false'
@@ -179,7 +184,7 @@ deploy_staging:
   # We use Debian image because Heroku has a lot of dependencies and is well
   # supported on Debian based distributions.
   image: debian:stretch
-  stage: deploy
+  stage: deploy_site
   variables:
     # Your app's name.
     #   $ heroku apps - t torchbox
@@ -193,7 +198,7 @@ deploy_production:
   # We use Debian image because Heroku has a lot of dependencies and is well
   # supported on Debian based distributions.
   image: debian:stretch
-  stage: deploy
+  stage: deploy_site
   variables:
     # Your app's name.
     #   $ heroku apps - t torchbox
@@ -205,7 +210,7 @@ deploy_production:
 
 pages:
   image: python:3.6
-  stage: deploy
+  stage: pages
   only:
     - master
   script:

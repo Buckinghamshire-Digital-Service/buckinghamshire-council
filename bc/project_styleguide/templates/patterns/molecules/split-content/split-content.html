@@ -1,0 +1,13 @@
+{% load wagtailcore_tags %}
+
+<section class="split-content wrapper wrapper--flex-small">
+    {% for block in content_block %}
+        <div class="split-content__section">
+            <h2 class="split-content__title heading heading--xl">{{ block.value.title }}</h2>
+
+            <div class="split-content__content rich-text">
+                {{ block.value.paragraph|richtext }}
+            </div>
+        </div>
+    {% endfor %}
+</section>

@@ -1,0 +1,50 @@
+{% load wagtailcore_tags %}
+
+<div class="search-filters" role="tablist" aria-multiselectable="true">
+    {% for filter in filters %}
+        <div class="search-filters__accordion accordion" data-accordion>
+            <a
+                href=""
+                class="search-filters__accordion-title accordion__title link--alt"
+                data-accordion-question
+                role="tab"
+                aria-controls="answer-{{ forloop.counter }}"
+                aria-expanded="false"
+                aria-selected="false"
+                tabindex="0"
+                id="question-{{ forloop.counter }}">
+                <h3>{{ filter.title }}</h3>
+                <svg class="accordion__icon icon icon--stroke" aria-hidden="true">
+                    <use xlink:href="#chevron"></use>
+                </svg>
+            </a>
+            <div
+                aria-live="polite"
+                class="search-filters__accordion-content accordion__content"
+                data-accordion-answer
+                id="answer-{{ forloop.counter }}"
+                role="tabpanel"
+                aria-labelledby="question-{{ forloop.counter }}"
+                aria-hidden="false">
+
+                <fieldset class="search-filters__fieldset">
+                    <legend class="hidden">{{ filter.title }}</legend>
+                    {% for option in filter.options %}
+                        <div class="search-filters__option">
+                            <input class="search-filters__checkbox" type="checkbox" id="{{ option.id }}" {% if option.id|slugify in filter.selected %}checked{% endif %}>
+                            <label class="search-filters__label" for="{{ option.id }}">
+                                <span class="search-filters__dummy-checkbox">
+                                    <svg class="search-filters__check-icon icon">
+                                        <use xlink:href="#close"></use>
+                                    </svg>
+                                </span>
+                                {{ option.label }}
+                                <span class="search-filters__count">({{ option.count }})</span>
+                            </label>
+                        </div>
+                    {% endfor %}
+                </fieldset>
+            </div>
+        </div>
+    {% endfor %}
+</div>

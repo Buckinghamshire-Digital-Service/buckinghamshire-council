@@ -24,10 +24,12 @@ markdown_extensions:
 nav:
   - 'Home': 'index.md'
   - 'Infrastructure': 'infrastructure.md'
+  - 'Email and SMS': 'email_and_sms.md'
   - 'Project conventions': 'project_conventions.md'
-  - 'Deployment': 'deployment.md'
+  - 'Hosting': 'hosting.md'
   - 'Front end tooling': 'front-end-tooling.md'
   - 'Continuous integration': 'continuous-integration.md'
   - 'Anonymised data': 'anonymised_data.md'
   - 'Data protection': 'data_protection.md'
+  - 'Recruitment Site': 'recruitment_site.md'
   - 'CHANGELOG': 'CHANGELOG.md'

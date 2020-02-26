@@ -1,0 +1,63 @@
+.categories {
+    $root: &;
+    margin-bottom: $grid--large * 2;
+
+    &__card {
+        background: $color--earth-light;
+        display: flex;
+        flex-direction: column;
+
+        #{$hover-states} {
+            #{$root} {
+                &__header {
+                    background: $color--link-hover;
+                }
+            }
+        }
+    }
+
+    &__header {
+        background: $color--link;
+        padding: $grid--small;
+        display: flex;
+        align-items: baseline;
+        flex-wrap: wrap;
+        color: $color--white;
+        transition: background $transition;
+    }
+
+    &__category-title {
+        margin: 0;
+        margin-right: $grid--min;
+        text-decoration: underline;
+    }
+
+    &__job-count {
+        opacity: 0.8;
+        margin: 0;
+    }
+
+    &__content {
+        padding: $grid--small;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+    }
+
+    &__description {
+        color: $color--default;
+        margin: 0;
+    }
+
+    &__jobs-link {
+        @include font-size(xxs);
+        text-decoration: underline;
+        font-weight: $weight--bold;
+        margin-bottom: 0;
+    }
+
+    &__all-vacancies {
+        font-weight: $weight--bold;
+    }
+}
