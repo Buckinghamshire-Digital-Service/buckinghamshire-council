@@ -53,6 +53,7 @@
     h2 {
         @include font-size(m);
         margin-bottom: 5px;
+        margin-top: 45px;
         font-weight: $weight--bold;
     }
 
