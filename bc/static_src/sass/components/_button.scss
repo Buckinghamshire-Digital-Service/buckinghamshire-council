@@ -59,7 +59,8 @@
         }
     }
 
-    &--apply {
+    &--apply,
+    &--basic {
         display: flex;
         background: $color--leaf;
         text-decoration: none;
@@ -82,6 +83,15 @@
 
         &:active {
             background: darken($color--leaf, 8%);
+        }
+    }
+
+    &--basic {
+        &:active,
+        &:focus {
+            background-color: $color--mustard;
+            border-bottom: $border--accent $color--slate;
+            color: $color--default;
         }
     }
 }
