@@ -3,6 +3,7 @@ from wagtail.contrib.modeladmin.options import (
     ModelAdminGroup,
     modeladmin_register,
 )
+from wagtail.search.utils import OR
 
 from bc.recruitment.models import JobAlertSubscription, TalentLinkJob
 
@@ -23,6 +24,9 @@ class JobAlertSubscriptionModelAdmin(ModelAdmin):
     model = JobAlertSubscription
     menu_icon = "tag"
     list_display = ("email", "confirmed", "created", "search", "token")
+    search_fields = ("email", "search")
+    list_filter = ("confirmed", "created")
+    extra_search_kwargs = {"operator": OR}
 
 
 class RecruitmentModelAdminGroup(ModelAdminGroup):
