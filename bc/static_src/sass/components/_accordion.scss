@@ -7,6 +7,10 @@
             transform: rotate(180deg);
         }
 
+        #{$root}__title {
+            margin-bottom: 10px;
+        }
+
         #{$root}__content {
             display: block;
         }
@@ -15,7 +19,6 @@
     &__title {
         display: flex;
         align-items: center;
-        justify-content: space-between;
         transition: color 0.2s ease;
         color: $color--default;
 
@@ -42,7 +45,7 @@
     &__icon {
         width: 20px;
         height: 20px;
-        margin-left: 20px;
+        margin-right: 20px;
         transition: transform, stroke, 0.2s ease;
         stroke: $color--default;
     }
