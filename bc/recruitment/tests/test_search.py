@@ -3,8 +3,6 @@
 # from bc.recruitment.models import JobAlertSubscription
 
 # TODO: Add tests
-#
-#   test JobAlertSubscription correctly sets token
 #   test JobAlertSubscription.send_confirmation_email()
 #   test is_recruitment_site()
 #   test get_current_search() works for different filters and empty filters

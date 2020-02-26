@@ -319,6 +319,12 @@ class JobAlertSubscription(models.Model):
         )
 
 
+@receiver(pre_save, sender=JobAlertSubscription)
+def callback_jobalertsubscription_run_full_clean(sender, instance, *args, **kwargs):
+    if not instance.token:
+        instance.slug = instance.full_clean()
+
+
 class JobAlertNotificationTask(models.Model):
     started = models.DateTimeField(auto_now_add=True)
     ended = models.DateTimeField(null=True)

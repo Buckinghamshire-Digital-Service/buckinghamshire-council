@@ -4,14 +4,16 @@ from io import StringIO
 from unittest import mock
 
 from django.core.management import call_command
-from django.test import TestCase
+from django.test import RequestFactory, TestCase
 
 from wagtail.core.models import Page, Site
 
 import wagtail_factories
 from freezegun import freeze_time
 
+from bc.home.tests.fixtures import HomePageFactory
 from bc.recruitment.models import JobAlertNotificationTask, TalentLinkJob
+from bc.recruitment.utils import is_recruitment_site
 
 from .fixtures import (
     JobAlertSubscriptionFactory,
@@ -24,16 +26,60 @@ COMMAND_MODULE_PATH = "bc.recruitment.management.commands.send_job_alerts"
 
 class JobAlertTest(TestCase):
     def setUp(self):
-        root_page = Page.objects.get(id=1)
+        self.root_page = Page.objects.get(id=1)
 
         # For simple tests
         hero_image = wagtail_factories.ImageFactory()
-        recruitment_homepage = root_page.add_child(
+        recruitment_homepage = self.root_page.add_child(
             instance=RecruitmentHomePageFactory.build(hero_image=hero_image)
         )
-        Site.objects.create(
+        self.site = Site.objects.create(
             hostname="example.com", port=80, root_page=recruitment_homepage
         )
+
+    def test_job_alert_token(self):
+        alert = JobAlertSubscriptionFactory()
+        self.assertNotEqual(
+            alert.token,
+            "",
+            msg="Token should be automatically generated when instance is saved.",
+        )
+
+        previous_token = alert.token
+        alert.search = '{"query": "Test"}'
+        alert.save()
+        self.assertEqual(
+            alert.token,
+            previous_token,
+            msg="Token shouldn't change when instance is updated.",
+        )
+
+        new_alert = JobAlertSubscriptionFactory()
+        self.assertNotEqual(
+            new_alert.token,
+            "",
+            msg="Token should be automatically generated when instance is saved.",
+        )
+        self.assertNotEqual(
+            new_alert.token, previous_token, msg="Token should be unique."
+        )
+
+    def test_utils_is_recruitment_site(self):
+        request = RequestFactory().request()
+        request.site = self.site
+        self.assertTrue(is_recruitment_site(request))
+
+        # Create a main site (not recruitment site)
+        hero_image = wagtail_factories.ImageFactory()
+        main_site_homepage = self.root_page.add_child(
+            instance=HomePageFactory.build(hero_image=hero_image)
+        )
+        main_site = Site.objects.create(
+            hostname="main.com", port=80, root_page=main_site_homepage
+        )
+        main_site_request = RequestFactory().request()
+        main_site_request.site = main_site
+        self.assertFalse(is_recruitment_site(main_site_request))
 
     def test_times(self):
         instant = datetime.datetime(2020, 1, 29, 12, 0, 0, tzinfo=datetime.timezone.utc)
