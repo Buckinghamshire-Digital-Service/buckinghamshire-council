@@ -9,7 +9,7 @@ freezegun==0.3.14
 notifications-python-client==5.4.1
 responses==0.10.9
 zeep==3.4.0
-wagtail-orderable==1.0.2
+wagtail-orderable==1.0.3
 
 # Production dependencies
 whitenoise[brotli]==4.1.2

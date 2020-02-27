@@ -68,7 +68,6 @@ INSTALLED_APPS = [
     "bc.utils",
     "bc.inlineindex",
     "wagtailorderable",
-    "wagtailorderable_patch",  # Temporary patch for https://github.com/elton2048/wagtail-orderable/issues/21
     "wagtail.contrib.modeladmin",
     "wagtail.contrib.postgres_search",
     "wagtail.contrib.settings",
