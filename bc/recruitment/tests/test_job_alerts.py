@@ -92,6 +92,7 @@ class JobAlertTest(TestCase):
         query_json = get_current_search(query)
         self.assertEqual(query_json, json.dumps({}))
 
+    def test_utils_get_current_search_with_filters(self):
         for filter in JOB_FILTERS:
             query = QueryDict(filter["name"] + "=test1&" + filter["name"] + "=test2&")
             query_json = get_current_search(query)
@@ -99,6 +100,41 @@ class JobAlertTest(TestCase):
                 query_json, json.dumps({filter["name"]: ["test1", "test2"]})
             )
 
+    def test_utils_get_current_search_is_sorted(self):
+        for filter in JOB_FILTERS:
+            querystring = "{0}={3}&{0}={1}&{0}={2}".format(
+                filter["name"], "test1", "test2", "test3"
+            )
+            query_json = get_current_search(QueryDict(querystring))
+
+            querystring_2 = "{0}={2}&{0}={3}&{0}={1}".format(
+                filter["name"], "test1", "test2", "test3"
+            )
+            query_json_2 = get_current_search(QueryDict(querystring_2))
+
+            self.assertEqual(
+                query_json,
+                query_json_2,
+                msg="Filters should be saved in same order regardless of their sort order on the querystring.",
+            )
+
+    def test_utils_get_current_search_ignores_duplicate_filters(self):
+        for filter in JOB_FILTERS:
+            querystring = "{0}={1}&{0}={2}".format(filter["name"], "test1", "test2")
+            query_json = get_current_search(QueryDict(querystring))
+
+            querystring_2 = "{0}={1}&{0}={2}&{0}={1}".format(
+                filter["name"], "test1", "test2"
+            )
+            query_json_2 = get_current_search(QueryDict(querystring_2))
+
+            self.assertEqual(
+                query_json,
+                query_json_2,
+                msg="Duplicate values in filters should be treated as one.",
+            )
+
+    def test_utils_get_current_search_with_rogue_param(self):
         # Test with rogue query parameters (not in JOB_FILTERS)
         query = QueryDict("query=school&rogue=ha")
         query_json = get_current_search(query)

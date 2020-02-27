@@ -23,7 +23,8 @@ def get_current_search(querydict):
     for filter in JOB_FILTERS:
         selected = querydict.getlist(filter["name"])
         if selected:
-            search[filter["name"]] = selected.sort()
+            selected = list(dict.fromkeys(selected))  # Remove duplicate options
+            search[filter["name"]] = sorted(selected)  # Sort options alphabetically
 
     return json.dumps(search)
 
