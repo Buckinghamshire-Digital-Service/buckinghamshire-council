@@ -49,16 +49,13 @@ class Command(BaseCommand):
             )
 
             if results:
-                # TODO Add this when the unsubscription view is written
-                # unsubscribe_url = reverse("alert_unsubscribe", args=[alert.token])
                 subject = "New job search results"
                 body = render_to_string(
                     "patterns/email/job_search_results_alert.txt",
                     context={
                         "results": results,
                         "search_term": alert.search,
-                        # TODO Add this when the unsubscription view is written
-                        # "unsubscribe_url": unsubscribe_url,
+                        "unsubscribe_url": alert.unsubscribe_url,
                     },
                 )
                 messages.append(

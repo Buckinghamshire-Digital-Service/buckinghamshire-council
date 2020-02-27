@@ -7,7 +7,7 @@ from bc.recruitment.models import RecruitmentHomePage, TalentLinkJob
 
 
 def is_recruitment_site(request):
-    return request.site.root_page.specific.__class__ == RecruitmentHomePage
+    return isinstance(request.site.root_page.specific, RecruitmentHomePage)
 
 
 def get_current_search(querydict):
