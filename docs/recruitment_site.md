@@ -109,4 +109,4 @@ This searches for new matches for all confirmed job alert subscriptions.
 
 A new match is any job whose created date is since the start of the last successful run, and since the alert was created.
 
-The way the command is written intends it to be called daily, but other durations shouldn't matter, so long as the duration is longer than the time taken for the command to run. It specifically jobs imported during the running of the alert command, leaving them for the next alert cycle.
+The way the command is written intends it to be called daily, but other durations shouldn't matter, so long as the duration is longer than the time taken for the command to run. It specifically ignores jobs imported during the running of the alert command, leaving them for the next alert cycle.
