@@ -23,7 +23,7 @@ def get_current_search(querydict):
     for filter in JOB_FILTERS:
         selected = querydict.getlist(filter["name"])
         if selected:
-            search[filter["name"]] = selected
+            search[filter["name"]] = selected.sort()
 
     return json.dumps(search)
 
