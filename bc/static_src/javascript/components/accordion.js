@@ -20,12 +20,10 @@ class Accordion {
 
             if (open) {
                 this.question.setAttribute('aria-expanded', 'false');
-                this.question.setAttribute('tab-index', 0);
                 this.answer.setAttribute('aria-hidden', 'true');
                 open = false;
             } else {
                 this.question.setAttribute('aria-expanded', 'true');
-                this.question.setAttribute('tab-index', -1);
                 this.answer.setAttribute('aria-hidden', 'false');
                 open = true;
             }
