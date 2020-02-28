@@ -54,7 +54,14 @@ def get_job_search_results(querydict, queryset=None):
 
     # Process filters
     for filter in JOB_FILTERS:
-        selected = querydict.getlist(filter["name"])
+        # QueryDict.update() used in send_job_alerts.py adds the values as list instead of multivalue dict.
+        if isinstance(querydict.get(filter["name"]), list):
+            selected = querydict.get(filter["name"])
+        else:
+            selected = querydict.getlist(
+                filter["name"]
+            )  # will return empty list if not found
+
         if selected:
             search_results = search_results.filter(
                 **{filter["filter_key"] + "__in": selected}
