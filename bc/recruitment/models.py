@@ -12,12 +12,13 @@ from django.utils.functional import cached_property
 from django.utils.text import slugify
 
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
-from wagtail.admin.mail import send_mail
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.core import blocks
 from wagtail.core.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
+
+from bc.utils.email import NotifyEmailMessage
 
 from ..utils.blocks import StoryBlock
 from ..utils.constants import RICH_TEXT_FEATURES
@@ -305,7 +306,7 @@ class JobAlertSubscription(models.Model):
         super().full_clean(*args, **kwargs)
 
     def send_confirmation_email(self, request):
-        template_name = "patterns/email/confirm_job_alert.html"
+        template_name = "patterns/email/confirm_job_alert.txt"
         context = {}
         context[
             "search"
@@ -314,8 +315,8 @@ class JobAlertSubscription(models.Model):
         context["unsubscribe_url"] = request.build_absolute_uri(self.unsubscribe_url)
 
         content = render_to_string(template_name, context=context)
-        send_mail(
-            "Job alert subscription", content, [self.email],
+        NotifyEmailMessage(
+            subject="Job alert subscription", body=content, to=[self.email]
         )
 
 
