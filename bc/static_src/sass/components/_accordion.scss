@@ -21,20 +21,15 @@
             height: 30px;
             margin-right: 0;
             width: 30px;
+        }
 
-            h3 {
-                @include font-size(s);
-                font-weight: $weight--normal;
-            }
+        #{$root}__header {
+            @include font-size(s);
+            font-weight: $weight--normal;
         }
 
         #{$root}__title {
             text-decoration: underline;
-
-            h3 {
-                @include font-size(s);
-                font-weight: $weight--normal;
-            }
         }
 
         #{$root}__content {
@@ -63,14 +58,14 @@
                 color: $color--link-hover;
             }
         }
+    }
 
-        h3 {
-            @include font-size(m);
-            @include heading-text();
-            color: $color--lake;
-            margin: 0;
-            padding: 0;
-        }
+    &__header {
+        @include font-size(m);
+        @include heading-text();
+        color: $color--lake;
+        margin: 0;
+        padding: 0;
     }
 
     &__icon {
