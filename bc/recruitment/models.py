@@ -315,9 +315,10 @@ class JobAlertSubscription(models.Model):
         context["unsubscribe_url"] = request.build_absolute_uri(self.unsubscribe_url)
 
         content = render_to_string(template_name, context=context)
-        NotifyEmailMessage(
+        email = NotifyEmailMessage(
             subject="Job alert subscription", body=content, to=[self.email]
         )
+        email.send()
 
 
 @receiver(pre_save, sender=JobAlertSubscription)
