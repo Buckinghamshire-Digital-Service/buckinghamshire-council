@@ -1,3 +1,4 @@
+import json
 import secrets
 
 from django.core.exceptions import ValidationError
@@ -308,9 +309,7 @@ class JobAlertSubscription(models.Model):
     def send_confirmation_email(self, request):
         template_name = "patterns/email/confirm_job_alert.txt"
         context = {}
-        context[
-            "search"
-        ] = self.search  # TODO: add search summary in human readable format
+        context["search"] = json.loads(self.search)
         context["confirmation_url"] = request.build_absolute_uri(self.confirmation_url)
         context["unsubscribe_url"] = request.build_absolute_uri(self.unsubscribe_url)
 
