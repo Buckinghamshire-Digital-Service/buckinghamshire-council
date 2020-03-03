@@ -17,6 +17,14 @@ from bc.recruitment.utils import (
 )
 from bc.utils.cache import get_default_cache_control_kwargs
 
+JOB_ALERT_STATUSES = {
+    "STATUS_ALREADY_SUBSCRIBED": "already_subscribed",
+    "STATUS_EMAIL_SENT": "email_sent",
+    "STATUS_CONFIRMED": "confirmed",
+    "STATUS_LINK_EXPIRED": "link_expired",
+    "STATUS_UNSUBSCRIBED": "unsubscribed",
+}
+
 
 class SearchView(View):
     def get(self, request, *args, **kwargs):
@@ -79,6 +87,7 @@ class SearchView(View):
             # e.g. query=school&category=work-experiencetraineeshipinternship&category=transport-economy-environment
             search = get_current_search(request.GET)
             email = form.cleaned_data["email"]
+            context = {"STATUSES": JOB_ALERT_STATUSES}
 
             # Search if already exists and confirmed:
             try:
@@ -87,13 +96,16 @@ class SearchView(View):
                 )
                 if subscription.confirmed:
                     # Tell user they're already subscribed
+                    context.update(
+                        {
+                            "title": "You are already subscribed",
+                            "status": context["STATUSES"]["STATUS_ALREADY_SUBSCRIBED"],
+                        }
+                    )
                     response = TemplateResponse(
                         request,
                         "patterns/pages/jobs_alert/subscription_processed.html",
-                        {
-                            "title": "You are already subscribed",
-                            "status": "already_subscribed",
-                        },
+                        context,
                     )
                     return response
                 else:
@@ -107,10 +119,16 @@ class SearchView(View):
                 subscription.save()
 
             subscription.send_confirmation_email(request)
+            context.update(
+                {
+                    "title": "Thank you",
+                    "status": context["STATUSES"]["STATUS_EMAIL_SENT"],
+                }
+            )
             response = TemplateResponse(
                 request,
                 "patterns/pages/jobs_alert/subscription_processed.html",
-                {"title": "Thank you", "status": "email_sent"},
+                context,
             )
             return response
 
@@ -118,18 +136,26 @@ class SearchView(View):
 class JobAlertConfirmView(View):
     def get(self, request, *args, **kwargs):
         token = self.kwargs["token"]
+        context = {"STATUSES": JOB_ALERT_STATUSES}
 
         try:
             subscription = JobAlertSubscription.objects.get(token=token)
         except JobAlertSubscription.DoesNotExist:
-            context = {"title": "Subscription not found", "status": "link_expired"}
+            context.update(
+                {
+                    "title": "Subscription not found",
+                    "status": context["STATUSES"]["STATUS_LINK_EXPIRED"],
+                }
+            )
         else:
             subscription.confirmed = True
             subscription.save()
-            context = {
-                "title": "Job alert subscription confirmed",
-                "status": "confirmed",
-            }
+            context.update(
+                {
+                    "title": "Job alert subscription confirmed",
+                    "status": context["STATUSES"]["STATUS_CONFIRMED"],
+                }
+            )
 
         response = TemplateResponse(
             request, "patterns/pages/jobs_alert/subscription_processed.html", context,
@@ -142,17 +168,25 @@ class JobAlertUnsubscribeView(View):
     # allow user to unsubscribe from all or selected.
     def get(self, request, *args, **kwargs):
         token = self.kwargs["token"]
+        context = {"STATUSES": JOB_ALERT_STATUSES}
 
         try:
             subscription = JobAlertSubscription.objects.get(token=token)
         except JobAlertSubscription.DoesNotExist:
-            context = {"title": "Subscription not found", "status": "link_expired"}
+            context.update(
+                {
+                    "title": "Subscription not found",
+                    "status": context["STATUSES"]["STATUS_LINK_EXPIRED"],
+                }
+            )
         else:
             subscription.delete()
-            context = {
-                "title": "Job alert unsubscribed",
-                "status": "success",
-            }
+            context.update(
+                {
+                    "title": "Job alert unsubscribed",
+                    "status": context["STATUSES"]["STATUS_UNSUBSCRIBED"],
+                }
+            )
 
         response = TemplateResponse(
             request, "patterns/pages/jobs_alert/unsubscribe.html", context,

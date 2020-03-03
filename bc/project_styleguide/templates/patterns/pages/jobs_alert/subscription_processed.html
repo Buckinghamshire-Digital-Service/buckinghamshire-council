@@ -20,16 +20,16 @@
 {% endblock %}
 
 {% block content %}
-    {% if status == 'email_sent' %}
+    {% if status == STATUSES.STATUS_EMAIL_SENT %}
         Thank you for subscribing to the job alert.
         We will send a confirmation email to the email address provided.
         Please click on the confirmation link to enable the subscription.
-    {% elif status == 'already_subscribed' %}
+    {% elif status == STATUSES.STATUS_ALREADY_SUBSCRIBED %}
         You have already subscribed to this list.
         If you wish to unsubscribe, please use the unsubscribe link in your job alert email.
-    {% elif status == 'confirmed' %}
+    {% elif status == STATUSES.STATUS_CONFIRMED %}
         Thank you for confirming your job alert subscription.
-    {% elif status == 'link_expired' %}
+    {% elif status == STATUSES.STATUS_LINK_EXPIRED %}
         Sorry we could not find a matching subscription. The link you used may have expired.
     {% endif %}
 {% endblock %}
