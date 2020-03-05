@@ -75,7 +75,7 @@ class ButtonBlock(blocks.StructBlock):
     link_page = blocks.PageChooserBlock(required=False)
 
     def clean(self, value):
-        result = super(ButtonBlock, self).clean(value)
+        result = super().clean(value)
         errors = {}
 
         if not value["link_url"] and not value["link_page"]:
