@@ -82,7 +82,7 @@
     textarea,
     select {
         width: 100%;
-        padding: 10px;
+        padding: $grid--min;
         border: 1px solid $color--grey-dark;
     }
 
@@ -93,9 +93,13 @@
     &__checkbox {
         @include hidden();
 
+        + #{$root}__label {
+            @include font-size(s);
+            font-weight: normal;
+        }
+
         &:checked {
             + #{$root}__label {
-                // to avoid nesting beyond 4 levels
                 #{$root}__dummy-checkbox::after {
                     opacity: 1;
                 }
@@ -105,7 +109,7 @@
         &:focus {
             + #{$root}__label {
                 #{$root}__dummy-checkbox {
-                    box-shadow: 0 0 0 4px $color--mustard;
+                    box-shadow: 0 0 0 4px $color--grey-medium;
                 }
             }
         }
@@ -113,7 +117,7 @@
 
     &__dummy-checkbox {
         position: relative;
-        display: block;
+        display: inline-block;
         min-width: 25px;
         width: 25px;
         height: 25px;
@@ -121,6 +125,7 @@
         background: $color--white;
         margin-right: $grid--min;
         box-shadow: none;
+        vertical-align: middle;
 
         &::after {
             content: '';

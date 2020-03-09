@@ -1,7 +1,7 @@
 .helpful-hint {
     $root: &;
     display: inline-block;
-    padding: $grid--min;
+    padding: $grid--min $grid--small;
     background-color: $color--earth-light;
     margin: $grid--small 0;
     transition: background-color $transition, border-color $transition;
