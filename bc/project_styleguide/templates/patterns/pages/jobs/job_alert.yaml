@@ -1,0 +1,18 @@
+context:
+  page:
+    title: Sign up for job alerts
+    hint: To do this you'll need to provide an active email address
+    keywords: business support
+    description: "<p>To be able to send you job alerts we need to keep your email on our records.</p><p>We will send an email for each new job that is posted that matches your criteria.</p><p>You'll be able to unsubscribe from receiving alerts at anytime</p>"
+
+tags:
+  pageurl:
+    'job_alert as job_alert_url':
+      target_var: job_alert_url
+      raw: '#'
+  include_block:
+    page.body:
+      template_name: 'patterns/molecules/streamfield/stream_block.html'
+  sidebar:
+    '':
+      template_name: 'patterns/molecules/jobs-sidebar/jobs-sidebar.html'

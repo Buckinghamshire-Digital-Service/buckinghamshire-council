@@ -14,13 +14,13 @@
     }
 
     input {
-        @include font-size(m);
+        @include font-size(s);
         border: 0;
         border-radius: 0;
         padding: $grid--min;
         width: 100%;
         max-width: 540px;
-        height: 50px;
+        height: 40px;
     }
 
     &--subscribe {
