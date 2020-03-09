@@ -29,7 +29,8 @@
 
         &:checked {
             + #{$root}__label {
-                #{$root}__dummy-checkbox &::after {
+                // to avoid nesting beyond 4 levels
+                #{$root}__dummy-checkbox::after {
                     opacity: 1;
                 }
             }
