@@ -4,23 +4,22 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    background: $color--link;
+    background-color: $color--link;
     color: $color--white;
     font-weight: $weight--bold;
     min-height: 50px;
     padding: 0 $grid--small;
-    transition: background $transition;
 
     #{$hover-states} {
-        background: $color--link-hover;
+        background-color: $color--link-hover;
     }
 
     &:active {
-        background: $color--link-active;
+        background-color: $color--link-active;
     }
 
     &--subscribe {
-        background: $color--lake;
+        background-color: $color--lake;
         border: 2px solid $color--white;
         width: 100%;
 
@@ -46,7 +45,7 @@
     }
 
     &--header {
-        background: $color--charcoal;
+        background-color: $color--charcoal;
         padding: 0 15px;
 
         &:active {
@@ -61,37 +60,33 @@
 
     &--apply,
     &--basic {
-        display: flex;
-        background: $color--leaf;
+        display: inline-block;
+        background-color: $color--leaf;
         text-decoration: none;
         font-weight: $weight--bold;
         color: $color--slate;
-        border-bottom: $border--accent $color--slate;
-        transition: background $transition;
-        width: 100%;
-        max-width: 300px;
+        border-bottom: $border--accent darken($color--leaf, 10);
+        width: auto;
         margin: 0 auto $grid;
+        padding: $grid--min $grid--small;
 
-        @include media-query(tablet-landscape) {
-            margin-bottom: 0;
-        }
-
-        #{$hover-states} {
+        &:hover {
             background: darken($color--leaf, 3%);
             color: $color--slate;
         }
 
-        &:active {
-            background: darken($color--leaf, 8%);
-        }
-    }
-
-    &--basic {
-        &:active,
         &:focus {
+            background-color: darken($color--leaf, 3%);
+            border-bottom: none;
+            border-top: $border--accent darken($color--leaf, 10);
+            color: $color--slate;
+        }
+
+        &:active {
             background-color: $color--mustard;
             border-bottom: $border--accent $color--slate;
-            color: $color--default;
+            border-top: none;
+            color: $color--slate;
         }
     }
 }
