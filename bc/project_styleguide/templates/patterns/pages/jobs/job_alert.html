@@ -23,16 +23,16 @@
 
                     <div class="form-item">
                         <fieldset>
-                            <label class="form-item__label" for="{{ option.id }}">
+                            <label class="form-item__label" for="email">
                                 Email address
                             </label>
-                            <input type="text" id="{{ option.id }}" />
+                            <input type="text" id="email" />
                         </fieldset>
                     </div>
 
                     <fieldset>
-                        <input class="form-item__checkbox" type="checkbox" id="{{ option.id }}" {% if option.id|slugify in filter.selected %}checked{% endif %}>
-                        <label class="form-item__label" for="{{ option.id }}">
+                        <input class="form-item__checkbox" type="checkbox" id="checkbox" {% if option.id|slugify in filter.selected %}checked{% endif %}>
+                        <label class="form-item__label" for="checkbox">
                             <span class="form-item__dummy-checkbox"></span>
                             Confirm consent to keep email
                         </label>
