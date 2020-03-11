@@ -32,6 +32,9 @@ class ImportTestMixin:
             {"advertisements": {"advertisement": advertisements}, "totalResults": 143},
             no_further_pages_response,
         ]
+        # TODO: add dummy content for attachments
+        # Should return list of files with 'content', 'description', 'fileName', 'id', 'mimeType'
+        client.service.getAttachments.side_effect = [{}]
         return client
 
 
@@ -628,3 +631,18 @@ class ApplicationURLTest(TestCase, ImportTestMixin):
         expected = "spam=1&spam=2"
 
         self.compare_processed_record(imported, expected)
+
+
+# TODO: Add tests
+class AttachmentsTest(TestCase, ImportTestMixin):
+    def test_attachment_is_imported(self):
+        pass
+
+    def text_job_with_no_attachment(self):
+        pass
+
+    def test_multiple_attachments_are_imported(self):
+        pass
+
+    def test_previously_imported_attachments_are_skipped(self):
+        pass

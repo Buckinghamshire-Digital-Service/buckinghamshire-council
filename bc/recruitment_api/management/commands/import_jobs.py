@@ -64,6 +64,8 @@ class Command(BaseCommand):
 
                         # Fetch attachments via a different call
                         try:
+                            # This will return list of attachments with
+                            #   'content', 'description', 'fileName', 'id', 'mimeType'
                             attachments_response = client.service.getAttachments(
                                 job.talentlink_id
                             )
