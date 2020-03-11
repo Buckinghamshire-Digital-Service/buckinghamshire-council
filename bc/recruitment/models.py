@@ -162,6 +162,9 @@ class TalentLinkJob(models.Model):
     posting_start_date = models.DateTimeField()
     posting_end_date = models.DateTimeField()
     show_apply_button = models.BooleanField(default=True)
+    attachments = models.ManyToManyField(
+        "documents.CustomDocument", blank=True, related_name="jobs"
+    )
     application_url_query = models.CharField(max_length=255)
 
     def get_categories_list(self):

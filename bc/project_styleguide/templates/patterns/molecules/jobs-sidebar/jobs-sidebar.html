@@ -36,6 +36,21 @@
                 <dd class="sidebar__job-detail-description">{{ page.posting_start_date }}</dd>
             </div>
         {% endif %}
+        {% if page.attachments.all %}
+            <div>
+                <dt class="sidebar__job-detail-title">Additional Information</dt>
+                <dd class="sidebar__job-detail-description">
+                    {% for document in page.attachments.all %}
+                        <div class="card">
+                            <a href="{{ document.url }}">
+                                {{ document.title }}
+                                ({{ document.file_extension }})
+                            </a>
+                        </div>
+                    {% endfor %}
+                </dd>
+            </div>
+        {% endif %}
     </dl>
 
 </aside>
