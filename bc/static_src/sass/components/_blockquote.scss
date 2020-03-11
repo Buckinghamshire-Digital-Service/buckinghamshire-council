@@ -1,6 +1,14 @@
-blockquote {
-    padding: 1rem;
-    margin: 1rem 0;
-    background: $color--tertiary;
-    border-left: 10px solid $color--secondary;
+.quote {
+    @include font-size(l);
+    padding: $grid $grid--small;
+    margin: $grid 0;
+    background: $color--earth-light;
+    border-bottom: $border--accent $color--earth;
+
+    &__attribution {
+        @include font-size(s);
+        margin-top: $grid--small;
+        font-style: normal;
+        text-align: right;
+    }
 }

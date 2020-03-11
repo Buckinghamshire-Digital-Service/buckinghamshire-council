@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- 105 Job applications
 - 109 Job alert subscription
 - 110 Job search alert notifications
 - 111 Job alert unsubscribe

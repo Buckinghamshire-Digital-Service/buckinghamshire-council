@@ -1,0 +1,7 @@
+.image-block {
+    margin: $grid 0 $grid--large;
+
+    &__caption {
+        color: $color--grey-accessible;
+    }
+}

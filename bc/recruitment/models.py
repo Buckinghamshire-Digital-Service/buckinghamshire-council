@@ -1,5 +1,6 @@
 import json
 import secrets
+from urllib.parse import urlsplit, urlunsplit
 
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -168,6 +169,7 @@ class TalentLinkJob(models.Model):
     posting_start_date = models.DateTimeField()
     posting_end_date = models.DateTimeField()
     show_apply_button = models.BooleanField(default=True)
+    application_url_query = models.CharField(max_length=255)
 
     def get_categories_list(self):
         if self.subcategory:
@@ -179,19 +181,21 @@ class TalentLinkJob(models.Model):
     def __str__(self):
         return f"{self.job_number}: {self.title}"
 
+    @cached_property
+    def homepage(self):
+        return RecruitmentHomePage.objects.live().public().first()
+
     @property
     def url(self):
-        homepage = RecruitmentHomePage.objects.live().public().first()
-        return homepage.url + homepage.reverse_subpage(
+        return self.homepage.url + self.homepage.reverse_subpage(
             "job_detail", args=(self.talentlink_id,)
         )
 
     @property
-    def full_url(self):
-        homepage = RecruitmentHomePage.objects.live().public().first()
-        return homepage.full_url + homepage.reverse_subpage(
-            "job_detail", args=(self.talentlink_id,)
-        )
+    def application_url(self):
+        base_url = self.homepage.url + self.homepage.reverse_subpage("apply")
+        scheme, netloc, path, query, fragment = urlsplit(base_url)
+        return urlunsplit((scheme, netloc, path, self.application_url_query, fragment))
 
 
 class RecruitmentHomePage(RoutablePageMixin, BasePage):
@@ -257,6 +261,10 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
     def job_detail(self, request, talentlink_id):
         page = get_object_or_404(TalentLinkJob, talentlink_id=talentlink_id)
         return render(request, "patterns/pages/jobs/job_detail.html", {"page": page})
+
+    @route(r"^apply/$")
+    def apply(self, request):
+        return render(request, "patterns/pages/jobs/apply.html")
 
 
 class RecruitmentIndexPage(BasePage):
