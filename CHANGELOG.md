@@ -3,6 +3,7 @@
 ## Unreleased
 
 - 105 Job applications
+- 125 Job attachments
 
 ## 4.0 (2020-02-24)
 
