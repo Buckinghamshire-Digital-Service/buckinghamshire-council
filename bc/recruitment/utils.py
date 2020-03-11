@@ -37,6 +37,7 @@ def get_job_search_results(querydict, queryset=None):
     if search_query:
         vector = (
             SearchVector("title", weight="A")
+            + SearchVector("job_number", weight="A")
             # + SearchVector("short_description", weight="A")
             + SearchVector("searchable_location", weight="B")
             + SearchVector("description", weight="C")
