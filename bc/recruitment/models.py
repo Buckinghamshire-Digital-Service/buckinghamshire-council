@@ -1,3 +1,5 @@
+import json
+import secrets
 from urllib.parse import urlsplit, urlunsplit
 
 from django.core.exceptions import ValidationError
@@ -6,6 +8,8 @@ from django.db.models import Count, F
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.shortcuts import get_object_or_404, render
+from django.template.loader import render_to_string
+from django.urls import reverse
 from django.utils.functional import cached_property
 from django.utils.text import slugify
 
@@ -15,6 +19,8 @@ from wagtail.core import blocks
 from wagtail.core.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
+
+from bc.utils.email import NotifyEmailMessage
 
 from ..utils.blocks import StoryBlock
 from ..utils.constants import RICH_TEXT_FEATURES
@@ -60,6 +66,7 @@ class JobCategory(models.Model):
 
     get_subcategories_list.short_description = "Subcategories"
 
+    @staticmethod
     def get_categories_summary():
         """Returns a QuerySet that returns dictionaries, when used as an iterable.
 
@@ -282,3 +289,52 @@ class RecruitmentIndexPage(BasePage):
         context["subpages"] = self.child_pages
 
         return context
+
+
+class JobAlertSubscription(models.Model):
+    email = models.EmailField()
+    search = models.TextField(
+        default="{}", editable=False
+    )  # stop site admins from entering bad values
+    confirmed = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True)
+    token = models.CharField(max_length=255, unique=True, editable=False)
+
+    @property
+    def confirmation_url(self):
+        return reverse("confirm_job_alert", args=[self.token])
+
+    @property
+    def unsubscribe_url(self):
+        return reverse("unsubscribe_job_alert", args=[self.token])
+
+    def full_clean(self, *args, **kwargs):
+        if not self.token:
+            self.token = secrets.token_urlsafe(32)
+
+        super().full_clean(*args, **kwargs)
+
+    def send_confirmation_email(self, request):
+        template_name = "patterns/email/confirm_job_alert.txt"
+        context = {}
+        context["search"] = json.loads(self.search)
+        context["confirmation_url"] = request.build_absolute_uri(self.confirmation_url)
+        context["unsubscribe_url"] = request.build_absolute_uri(self.unsubscribe_url)
+
+        content = render_to_string(template_name, context=context)
+        email = NotifyEmailMessage(
+            subject="Job alert subscription", body=content, to=[self.email]
+        )
+        email.send()
+
+
+@receiver(pre_save, sender=JobAlertSubscription)
+def callback_jobalertsubscription_run_full_clean(sender, instance, *args, **kwargs):
+    if not instance.token:
+        instance.full_clean()
+
+
+class JobAlertNotificationTask(models.Model):
+    started = models.DateTimeField(auto_now_add=True)
+    ended = models.DateTimeField(null=True)
+    is_successful = models.BooleanField(default=False)
