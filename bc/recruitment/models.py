@@ -5,7 +5,7 @@ from urllib.parse import urlsplit, urlunsplit
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Count, F
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_delete, pre_save
 from django.dispatch import receiver
 from django.shortcuts import get_object_or_404, render
 from django.template.loader import render_to_string
@@ -199,6 +199,14 @@ class TalentLinkJob(models.Model):
         base_url = self.homepage.url + self.homepage.reverse_subpage("apply")
         scheme, netloc, path, query, fragment = urlsplit(base_url)
         return urlunsplit((scheme, netloc, path, self.application_url_query, fragment))
+
+
+@receiver(pre_delete, sender=TalentLinkJob)
+def callback_talentlinkjob_delete_attachments(sender, instance, *args, **kwargs):
+    # if instance.attachments:
+    for doc in instance.attachments.all():
+        if doc.jobs.all().count() == 1:
+            doc.delete()
 
 
 class RecruitmentHomePage(RoutablePageMixin, BasePage):
