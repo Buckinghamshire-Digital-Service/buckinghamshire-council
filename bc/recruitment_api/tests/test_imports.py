@@ -20,7 +20,7 @@ FIXTURE_JOB_SUBCATEGORY_TITLE = "Schools & Early Years - Support"
 
 
 class ImportTestMixin:
-    def get_mocked_client(self, advertisements=None):
+    def get_mocked_client(self, advertisements=None, attachments=None):
         if advertisements is None:
             advertisements = [get_advertisement()]
 
@@ -32,9 +32,13 @@ class ImportTestMixin:
             {"advertisements": {"advertisement": advertisements}, "totalResults": 143},
             no_further_pages_response,
         ]
-        # TODO: add dummy content for attachments
-        # Should return list of files with 'content', 'description', 'fileName', 'id', 'mimeType'
-        client.service.getAttachments.side_effect = [{}]
+
+        # Attachments
+        if attachments is None:
+            client.service.getAttachments.side_effect = [{}]
+        else:
+            client.service.getAttachments.side_effect = attachments
+
         return client
 
 
@@ -633,16 +637,68 @@ class ApplicationURLTest(TestCase, ImportTestMixin):
         self.compare_processed_record(imported, expected)
 
 
-# TODO: Add tests
+@mock.patch("bc.recruitment_api.management.commands.import_jobs.get_client")
 class AttachmentsTest(TestCase, ImportTestMixin):
-    def test_attachment_is_imported(self):
+    def test_attachment_is_imported(self, mock_get_client):
+        advertisements = [
+            get_advertisement(talentlink_id=1, title="New title 1"),
+            get_advertisement(talentlink_id=2, title="New title 2"),
+        ]
+
+        job_1_get_attachments_response = [
+            {
+                "id": 111,
+                "mimeType": "application/pdf",
+                "fileName": "Attachment 1 For Job 1.pdf",
+                "content": "Test content 1",
+                "description": None,
+            },
+            {
+                "id": 112,
+                "mimeType": "application/pdf",
+                "fileName": "Attachment 2 For Job 1.pdf",
+                "content": "Test content 1 - 2",
+                "description": None,
+            },
+        ]
+
+        job_2_get_attachments_response = [
+            {
+                "id": 222,
+                "mimeType": "application/pdf",
+                "fileName": "Attachment For Job 2.pdf",
+                "content": "Test content 2",
+                "description": None,
+            }
+        ]
+
+        attachments = [job_1_get_attachments_response, job_2_get_attachments_response]
+        mock_get_client.return_value = self.get_mocked_client(
+            advertisements, attachments
+        )
+
+        out = StringIO()
+        call_command("import_jobs", stdout=out)
+        out.seek(0)
+        output = out.read()
+
+        self.assertIn("0 existing jobs updated", output)
+        self.assertIn("2 new jobs created", output)
+        self.assertIn("3 new documents imported", output)
+
+    def test_job_with_no_attachment(self, mock_get_client):
         pass
 
-    def text_job_with_no_attachment(self):
+    def test_multiple_attachments_are_imported(self, mock_get_client):
         pass
 
-    def test_multiple_attachments_are_imported(self):
+    def test_previously_imported_attachments_are_skipped(self, mock_get_client):
         pass
 
-    def test_previously_imported_attachments_are_skipped(self):
+    def test_attachments_are_deleted_when_the_job_is(self, mock_get_client):
+        pass
+
+    def test_attachments_are_not_deleted_if_another_job_uses_them(
+        self, mock_get_client
+    ):
         pass
