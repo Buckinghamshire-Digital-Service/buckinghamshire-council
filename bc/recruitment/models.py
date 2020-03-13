@@ -97,7 +97,7 @@ class JobCategory(models.Model):
             queryset.annotate(category=F("subcategory__categories"))
             .exclude(category=None)
             .values("category")
-            .annotate(id=F("subcategory__categories__slug"))
+            .annotate(key=F("subcategory__categories__slug"))
             .annotate(count=Count("category"))
             .annotate(label=F("subcategory__categories__title"))
             .annotate(description=F("subcategory__categories__description"))
@@ -205,6 +205,50 @@ class TalentLinkJob(models.Model):
 
     def __str__(self):
         return f"{self.job_number}: {self.title}"
+
+    @staticmethod
+    def get_working_hours_options(queryset=None):
+        """Returns a QuerySet that returns dictionaries, when used as an iterable.
+
+           The dictionary keys are: count, title, key
+           This is ordered by highest count first.
+        """
+        if not queryset:
+            queryset = TalentLinkJob.objects.all()
+
+        options = (
+            queryset.annotate(key=F("working_hours"))
+            .exclude(working_hours=None)
+            .values("working_hours")
+            .annotate(key=F("working_hours"))
+            .annotate(count=Count("key"))
+            .annotate(label=F("working_hours"))
+            .order_by("-count")
+        )
+
+        return options
+
+    @staticmethod
+    def get_salary_range_options(queryset=None):
+        """Returns a QuerySet that returns dictionaries, when used as an iterable.
+
+           The dictionary keys are: count, title, key
+           This is ordered by label.
+        """
+        if not queryset:
+            queryset = TalentLinkJob.objects.all()
+
+        options = (
+            queryset.annotate(key=F("searchable_salary"))
+            .exclude(searchable_salary=None)
+            .values("searchable_salary")
+            .annotate(key=F("searchable_salary"))
+            .annotate(count=Count("searchable_salary"))
+            .annotate(label=F("searchable_salary"))
+            .order_by("-count")
+        )
+
+        return options
 
     @cached_property
     def homepage(self):

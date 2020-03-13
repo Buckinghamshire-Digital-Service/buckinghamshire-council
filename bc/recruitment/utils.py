@@ -74,7 +74,9 @@ def get_job_search_results(querydict, queryset=None):
 
         if selected:
             search_results = search_results.filter(
-                **{filter["filter_key"] + "__in": selected}
+                **{
+                    filter["filter_key"] + "__in": selected
+                }  # TODO: make case insensitive
             )
 
     return search_results, search_results_with_schools
