@@ -9,11 +9,12 @@ from django.utils import timezone
 
 from freezegun import freeze_time
 
+from bc.documents.models import CustomDocument
 from bc.recruitment.models import JobSubcategory, TalentLinkJob
 from bc.recruitment.tests.fixtures import JobSubcategoryFactory, TalentLinkJobFactory
 from bc.recruitment_api.utils import update_job_from_ad
 
-from .fixtures import get_advertisement, no_further_pages_response
+from .fixtures import get_advertisement, get_attachment, no_further_pages_response
 
 # Job category title to match dummy Job Group in get_advertisement() fixture
 FIXTURE_JOB_SUBCATEGORY_TITLE = "Schools & Early Years - Support"
@@ -646,30 +647,11 @@ class AttachmentsTest(TestCase, ImportTestMixin):
         ]
 
         job_1_get_attachments_response = [
-            {
-                "id": 111,
-                "mimeType": "application/pdf",
-                "fileName": "Attachment 1 For Job 1.pdf",
-                "content": "Test content 1",
-                "description": None,
-            },
-            {
-                "id": 112,
-                "mimeType": "application/pdf",
-                "fileName": "Attachment 2 For Job 1.pdf",
-                "content": "Test content 1 - 2",
-                "description": None,
-            },
+            get_attachment(id=111),
         ]
 
         job_2_get_attachments_response = [
-            {
-                "id": 222,
-                "mimeType": "application/pdf",
-                "fileName": "Attachment For Job 2.pdf",
-                "content": "Test content 2",
-                "description": None,
-            }
+            get_attachment(id=222),
         ]
 
         attachments = [job_1_get_attachments_response, job_2_get_attachments_response]
@@ -682,23 +664,178 @@ class AttachmentsTest(TestCase, ImportTestMixin):
         out.seek(0)
         output = out.read()
 
-        self.assertIn("0 existing jobs updated", output)
         self.assertIn("2 new jobs created", output)
-        self.assertIn("3 new documents imported", output)
+        self.assertIn("2 new documents imported", output)
+
+        job_1 = TalentLinkJob.objects.get(talentlink_id=1)
+        job_2 = TalentLinkJob.objects.get(talentlink_id=2)
+
+        self.assertEqual(job_1.attachments.all().count(), 1)
+        self.assertEqual(job_2.attachments.all().count(), 1)
+        self.assertEqual(job_1.attachments.first().talentlink_attachment_id, 111)
+        self.assertEqual(job_2.attachments.first().talentlink_attachment_id, 222)
+
+    def test_duplicate_attachment_is_not_imported(self, mock_get_client):
+        advertisements = [
+            get_advertisement(talentlink_id=1, title="New title 1"),
+            get_advertisement(talentlink_id=2, title="New title 2"),
+        ]
+
+        job_1_get_attachments_response = [
+            get_attachment(id=111),
+        ]
+
+        job_2_get_attachments_response = [
+            get_attachment(id=111),
+        ]
+
+        attachments = [job_1_get_attachments_response, job_2_get_attachments_response]
+        mock_get_client.return_value = self.get_mocked_client(
+            advertisements, attachments
+        )
+
+        out = StringIO()
+        call_command("import_jobs", stdout=out)
+        out.seek(0)
+        output = out.read()
+
+        self.assertIn("2 new jobs created", output)
+        self.assertIn("1 new documents imported", output)
+
+        docs = CustomDocument.objects.filter(talentlink_attachment_id=111)
+        self.assertEqual(
+            docs.count(),
+            1,
+            msg="Documents with same talentlink_attachment_id should only be imported once.",
+        )
 
     def test_job_with_no_attachment(self, mock_get_client):
-        pass
+        advertisements = [
+            get_advertisement(talentlink_id=1, title="New title 1"),
+        ]
+        attachments = [{}]
+        mock_get_client.return_value = self.get_mocked_client(
+            advertisements, attachments
+        )
+
+        out = StringIO()
+        call_command("import_jobs", stdout=out)
+        out.seek(0)
+        output = out.read()
+
+        self.assertIn("1 new jobs created", output)
+        self.assertIn("0 new documents imported", output)
+
+        job = TalentLinkJob.objects.get(talentlink_id=1)
+        self.assertEqual(job.attachments.all().count(), 0)
 
     def test_multiple_attachments_are_imported(self, mock_get_client):
-        pass
+        advertisements = [
+            get_advertisement(talentlink_id=1, title="New title 1"),
+            get_advertisement(talentlink_id=2, title="New title 2"),
+        ]
 
-    def test_previously_imported_attachments_are_skipped(self, mock_get_client):
-        pass
+        job_1_get_attachments_response = [
+            get_attachment(id=111),
+            get_attachment(id=112),
+        ]
+
+        attachments = [job_1_get_attachments_response]
+        mock_get_client.return_value = self.get_mocked_client(
+            advertisements, attachments
+        )
+
+        out = StringIO()
+        call_command("import_jobs", stdout=out)
+        out.seek(0)
+        output = out.read()
+
+        self.assertIn("2 new documents imported", output)
+
+        job = TalentLinkJob.objects.get(talentlink_id=1)
+        self.assertEqual(job.attachments.all().count(), 2)
 
     def test_attachments_are_deleted_when_the_job_is(self, mock_get_client):
-        pass
+        advertisements = [
+            get_advertisement(talentlink_id=1, title="New title 1"),
+        ]
+
+        job_1_get_attachments_response = [
+            get_attachment(id=111),
+        ]
+
+        attachments = [job_1_get_attachments_response]
+        mock_get_client.return_value = self.get_mocked_client(
+            advertisements, attachments
+        )
+
+        out = StringIO()
+        call_command("import_jobs", stdout=out)
+        out.seek(0)
+        output = out.read()
+
+        self.assertIn("1 new jobs created", output)
+        self.assertIn("1 new documents imported", output)
+
+        job = TalentLinkJob.objects.filter(talentlink_id=1)
+        doc = CustomDocument.objects.filter(talentlink_attachment_id=111)
+
+        self.assertEqual(job.count(), 1)
+        self.assertEqual(doc.count(), 1)
+
+        job.delete()
+        job = TalentLinkJob.objects.filter(talentlink_id=1)
+        doc = CustomDocument.objects.filter(talentlink_attachment_id=111)
+
+        self.assertEqual(job.count(), 0)
+        self.assertEqual(
+            doc.count(),
+            0,
+            msg="attached document should be deleted if its job is deleted",
+        )
 
     def test_attachments_are_not_deleted_if_another_job_uses_them(
         self, mock_get_client
     ):
-        pass
+        advertisements = [
+            get_advertisement(talentlink_id=1, title="New title 1"),
+            get_advertisement(talentlink_id=2, title="New title 2"),
+        ]
+
+        job_1_get_attachments_response = [
+            get_attachment(id=111),
+            get_attachment(id=112),
+        ]
+        job_2_get_attachments_response = [
+            get_attachment(id=111),
+        ]
+
+        attachments = [job_1_get_attachments_response, job_2_get_attachments_response]
+        mock_get_client.return_value = self.get_mocked_client(
+            advertisements, attachments
+        )
+
+        out = StringIO()
+        call_command("import_jobs", stdout=out)
+        out.seek(0)
+        output = out.read()
+
+        self.assertIn("2 new jobs created", output)
+        self.assertIn("2 new documents imported", output)
+
+        job = TalentLinkJob.objects.get(talentlink_id=1)
+        doc = CustomDocument.objects.get(talentlink_attachment_id=111)
+
+        self.assertEqual(doc.jobs.all().count(), 2)
+
+        job.delete()
+        job = TalentLinkJob.objects.filter(talentlink_id=1)
+        doc = CustomDocument.objects.filter(talentlink_attachment_id=111)
+
+        self.assertEqual(job.count(), 0)
+        self.assertEqual(
+            doc.count(),
+            1,
+            msg="attached document should be not deleted if it is being used elsewhere",
+        )
+        self.assertEqual(doc[0].jobs.all().count(), 1)
