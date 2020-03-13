@@ -36,7 +36,9 @@ class SearchView(View):
         # Recruitment site search
         if is_recruitment_site(request):
             template_path = "patterns/pages/search/search--jobs.html"
-            search_results = get_job_search_results(querydict=request.GET)
+            search_results, search_results_with_schools = get_job_search_results(
+                querydict=request.GET
+            )
             context["job_alert_form"] = SearchAlertSubscriptionForm
 
         # Main site search
@@ -53,6 +55,7 @@ class SearchView(View):
                 search_results = Page.objects.none()
 
         # Pagination
+        full_results = search_results
         paginator = Paginator(search_results, settings.DEFAULT_PER_PAGE)
         try:
             search_results = paginator.page(page)
@@ -62,6 +65,14 @@ class SearchView(View):
             search_results = paginator.page(paginator.num_pages)
 
         context.update({"search_query": search_query, "search_results": search_results})
+
+        if is_recruitment_site(request):
+            context.update(
+                {
+                    "full_results": full_results,
+                    "search_results_with_schools": search_results_with_schools,
+                }
+            )
 
         response = TemplateResponse(request, template_path, context,)
 

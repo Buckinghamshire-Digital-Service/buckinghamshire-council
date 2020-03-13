@@ -1,18 +1,26 @@
 context:
+  hide_schools_and_early_years:
+    label: Hide all schools and early years jobs
+    count: 99
+    selected: True
   filters:
     - title: Show only
       options:
         - label: Schools - teaching
           id: option1
+          is_school_and_early_years: True
           count: 2
         - label: Schools - non teaching
           id: option2
+          is_school_and_early_years: False
           count: 5
         - label: Early years
           id: option3
+          is_school_and_early_years: False
           count: 1
         - label: Social care
           id: option4
+          is_school_and_early_years: False
           count: 2
     - title: Contract type
       options:

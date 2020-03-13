@@ -3,7 +3,7 @@ import json
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 
 from bc.recruitment.constants import JOB_FILTERS
-from bc.recruitment.models import RecruitmentHomePage, TalentLinkJob
+from bc.recruitment.models import JobCategory, RecruitmentHomePage, TalentLinkJob
 
 
 def is_recruitment_site(request):
@@ -52,6 +52,16 @@ def get_job_search_results(querydict, queryset=None):
         # Order by newest job at top
         search_results = queryset.order_by("posting_start_date")
 
+    # Process 'hide schools and early years job'
+    search_results_with_schools = search_results
+    if querydict.get("hide_schools_and_early_years", False):
+        schools_and_early_years_categories = (
+            JobCategory.get_school_and_early_years_slugs()
+        )
+        search_results = search_results.exclude(
+            subcategory__categories__slug__in=schools_and_early_years_categories
+        )
+
     # Process filters
     for filter in JOB_FILTERS:
         # QueryDict.update() used in send_job_alerts.py adds the values as list instead of multivalue dict.
@@ -67,4 +77,4 @@ def get_job_search_results(querydict, queryset=None):
                 **{filter["filter_key"] + "__in": selected}
             )
 
-    return search_results
+    return search_results, search_results_with_schools

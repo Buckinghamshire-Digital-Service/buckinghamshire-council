@@ -1,6 +1,17 @@
 {% load wagtailcore_tags %}
 
 <div class="search-filters" role="tablist" aria-multiselectable="true">
+    <input class="search-filters__checkbox" type="checkbox" id="hide_schools_and_early_years" {% if hide_schools_and_early_years.selected %}checked{% endif %}>
+    <label class="search-filters__label" for="hide_schools_and_early_years">
+        <span class="search-filters__dummy-checkbox">
+            <svg class="search-filters__check-icon icon">
+                <use xlink:href="#close"></use>
+            </svg>
+        </span>
+        {{ hide_schools_and_early_years.label }}
+        <span class="search-filters__count">({{ hide_schools_and_early_years.count }})</span>
+    </label>
+
     {% for filter in filters %}
         <div class="search-filters__accordion accordion" data-accordion>
             <a
@@ -30,7 +41,7 @@
                 <fieldset class="search-filters__fieldset">
                     <legend class="hidden">{{ filter.title }}</legend>
                     {% for option in filter.options %}
-                        <div class="search-filters__option">
+                        <div class="search-filters__option {% if option.is_school_and_early_years %}is_school_and_early_years{% endif %}">
                             <input class="search-filters__checkbox" type="checkbox" id="{{ option.id }}" {% if option.id|slugify in filter.selected %}checked{% endif %}>
                             <label class="search-filters__label" for="{{ option.id }}">
                                 <span class="search-filters__dummy-checkbox">
