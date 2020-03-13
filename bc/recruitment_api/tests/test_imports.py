@@ -10,6 +10,7 @@ from django.utils import timezone
 from freezegun import freeze_time
 
 from bc.documents.models import CustomDocument
+from bc.documents.tests.fixtures import DocumentFactory
 from bc.recruitment.models import JobSubcategory, TalentLinkJob
 from bc.recruitment.tests.fixtures import JobSubcategoryFactory, TalentLinkJobFactory
 from bc.recruitment_api.utils import update_job_from_ad
@@ -756,26 +757,10 @@ class AttachmentsTest(TestCase, ImportTestMixin):
         self.assertEqual(job.attachments.all().count(), 2)
 
     def test_attachments_are_deleted_when_the_job_is(self, mock_get_client):
-        advertisements = [
-            get_advertisement(talentlink_id=1, title="New title 1"),
-        ]
-
-        job_1_get_attachments_response = [
-            get_attachment(id=111),
-        ]
-
-        attachments = [job_1_get_attachments_response]
-        mock_get_client.return_value = self.get_mocked_client(
-            advertisements, attachments
-        )
-
-        out = StringIO()
-        call_command("import_jobs", stdout=out)
-        out.seek(0)
-        output = out.read()
-
-        self.assertIn("1 new jobs created", output)
-        self.assertIn("1 new documents imported", output)
+        job = TalentLinkJobFactory(talentlink_id=1)
+        doc = DocumentFactory(talentlink_attachment_id=111)
+        job.attachments.add(doc)
+        job.save()
 
         job = TalentLinkJob.objects.filter(talentlink_id=1)
         doc = CustomDocument.objects.filter(talentlink_attachment_id=111)
@@ -797,31 +782,17 @@ class AttachmentsTest(TestCase, ImportTestMixin):
     def test_attachments_are_not_deleted_if_another_job_uses_them(
         self, mock_get_client
     ):
-        advertisements = [
-            get_advertisement(talentlink_id=1, title="New title 1"),
-            get_advertisement(talentlink_id=2, title="New title 2"),
-        ]
 
-        job_1_get_attachments_response = [
-            get_attachment(id=111),
-            get_attachment(id=112),
-        ]
-        job_2_get_attachments_response = [
-            get_attachment(id=111),
-        ]
+        job_1 = TalentLinkJobFactory(talentlink_id=1)
+        doc_1 = DocumentFactory(talentlink_attachment_id=111)
+        doc_2 = DocumentFactory(talentlink_attachment_id=222)
+        job_1.attachments.add(doc_1)
+        job_1.attachments.add(doc_2)
+        job_1.save()
 
-        attachments = [job_1_get_attachments_response, job_2_get_attachments_response]
-        mock_get_client.return_value = self.get_mocked_client(
-            advertisements, attachments
-        )
-
-        out = StringIO()
-        call_command("import_jobs", stdout=out)
-        out.seek(0)
-        output = out.read()
-
-        self.assertIn("2 new jobs created", output)
-        self.assertIn("2 new documents imported", output)
+        job_2 = TalentLinkJobFactory(talentlink_id=2)
+        job_2.attachments.add(doc_1)
+        job_2.save()
 
         job = TalentLinkJob.objects.get(talentlink_id=1)
         doc = CustomDocument.objects.get(talentlink_attachment_id=111)
@@ -839,3 +810,6 @@ class AttachmentsTest(TestCase, ImportTestMixin):
             msg="attached document should be not deleted if it is being used elsewhere",
         )
         self.assertEqual(doc[0].jobs.all().count(), 1)
+
+        job_2 = TalentLinkJob.objects.get(talentlink_id=2)
+        self.assertEqual(job_2.attachments.first(), doc[0])
