@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.http import QueryDict
 from django.template.response import TemplateResponse
 from django.utils.cache import add_never_cache_headers, patch_cache_control
 from django.utils.timezone import now
@@ -62,6 +63,15 @@ class SearchView(View):
             search_results = paginator.page(paginator.num_pages)
 
         context.update({"search_query": search_query, "search_results": search_results})
+
+        if is_recruitment_site(request):
+            context.update(
+                {
+                    "unfiltered_results": get_job_search_results(
+                        querydict=QueryDict("query=" + request.GET.get("query", ""))
+                    ),
+                }
+            )
 
         response = TemplateResponse(request, template_path, context,)
 

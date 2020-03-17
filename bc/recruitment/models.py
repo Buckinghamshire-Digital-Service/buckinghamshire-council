@@ -53,6 +53,7 @@ class JobCategory(models.Model):
     title = models.CharField(max_length=128)
     description = models.TextField(blank=True)
     subcategories = models.ManyToManyField(JobSubcategory, related_name="categories")
+    is_schools_and_early_years = models.BooleanField(default=False)
 
     slug = models.SlugField(
         allow_unicode=True,
@@ -67,20 +68,36 @@ class JobCategory(models.Model):
     get_subcategories_list.short_description = "Subcategories"
 
     @staticmethod
-    def get_categories_summary():
+    def get_school_and_early_years_categories():
+        return list(
+            JobCategory.objects.filter(is_schools_and_early_years=True).values_list(
+                "slug", flat=True
+            )
+        )
+
+    @staticmethod
+    def get_categories_summary(queryset=None):
         """Returns a QuerySet that returns dictionaries, when used as an iterable.
 
            The dictionary keys are: category (category id), count, title, description
            This is ordered by highest count first.
         """
+        if not queryset:
+            queryset = TalentLinkJob.objects.all()
+
         job_categories = (
-            TalentLinkJob.objects.annotate(category=F("subcategory__categories"))
+            queryset.annotate(category=F("subcategory__categories"))
             .exclude(category=None)
             .values("category")
-            .annotate(id=F("subcategory__categories__slug"))
+            .annotate(key=F("subcategory__categories__slug"))
             .annotate(count=Count("category"))
             .annotate(label=F("subcategory__categories__title"))
             .annotate(description=F("subcategory__categories__description"))
+            .annotate(
+                is_schools_and_early_years=F(
+                    "subcategory__categories__is_schools_and_early_years"
+                )
+            )
             .order_by("-count")
         )
 
