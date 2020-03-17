@@ -6,6 +6,7 @@
 - 109 Job alert subscription
 - 110 Job search alert notifications
 - 111 Job alert unsubscribe
+- 133 Search by job number
 
 ## 4.0 (2020-02-24)
 
