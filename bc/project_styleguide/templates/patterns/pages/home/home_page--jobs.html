@@ -20,7 +20,7 @@
         <div class="categories__grid grid grid--categories">
             {% for cat in job_categories|slice:":6" %}
                 {% if cat.count %}
-                    <a class="categories__card link--alt" href="search/?category={{cat.id}}">
+                    <a class="categories__card link--alt" href="search/?category={{cat.key}}">
                         <header class="categories__header">
                             <h3 class="categories__category-title heading heading--s">{{ cat.label }}</h3>
                             <p class="categories__job-count">({{ cat.count }} jobs)</p>
