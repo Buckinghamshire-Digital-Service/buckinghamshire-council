@@ -1,0 +1,9 @@
+context:
+  title: 'Job alert unsubscribed'
+  STATUSES:
+    STATUS_ALREADY_SUBSCRIBED: 'already_subscribed'
+    STATUS_EMAIL_SENT: 'email_sent'
+    STATUS_CONFIRMED: 'confirmed'
+    STATUS_LINK_EXPIRED: 'link_expired'
+    STATUS_UNSUBSCRIBED: 'unsubscribed'
+  status: 'unsubscribed'

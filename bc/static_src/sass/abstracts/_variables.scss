@@ -23,7 +23,6 @@ $color--grey-light: #efefef;
 $color--grey-medium: #999;
 $color--grey-dark: #858585;
 $color--grey-accessible: #6d6d6c;
-
 $color--grey-border: #cecece;
 
 $color--default: $color--charcoal;
@@ -125,4 +124,5 @@ $hover-states: '&:hover, &:focus';
 // --------------------------------- Borders ------------------------------------
 
 $border--accent: 5px solid;
+$border--listing: 2px solid $color--earth;
 $border--grey: 1px solid $color--grey-border;

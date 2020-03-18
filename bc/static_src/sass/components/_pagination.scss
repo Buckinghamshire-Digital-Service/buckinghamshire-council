@@ -4,6 +4,11 @@
     margin: $grid--large 0;
     padding-top: $grid--small;
 
+    .template-news-index-page &,
+    .template-event-index-page & {
+        margin-top: 0;
+    }
+
     &__list {
         display: flex;
         flex-wrap: wrap;
