@@ -12,7 +12,7 @@ def jobs_search_filters(request, unfiltered_results):
         "hide_schools_and_early_years", False
     )
     job_categories = JobCategory.get_categories_summary(unfiltered_results).order_by(
-        "label"
+        "sort_order"
     )
 
     return {
