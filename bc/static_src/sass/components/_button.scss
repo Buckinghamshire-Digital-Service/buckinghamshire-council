@@ -66,6 +66,7 @@
         font-weight: $weight--bold;
         color: $color--slate;
         border-bottom: $border--accent darken($color--leaf, 10);
+        max-height: 45px;
         width: auto;
         margin: 0 auto $grid;
         padding: $grid--min $grid--small;
