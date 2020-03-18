@@ -45,6 +45,13 @@
         }
     }
 
+    &__heading {
+        align-items: center;
+        display: flex;
+        flex: 1 0 0;
+        justify-content: space-between;
+    }
+
     &__heading-title {
         @include font-size(xl);
         color: $color--white;
@@ -54,6 +61,17 @@
         @include media-query(px550) {
             @include font-size(xl);
             margin-top: 0;
+        }
+    }
+
+    &__heading-logo {
+        background-color: $color--white;
+        max-width: 100px;
+        padding: 5px 5px 0 5px;
+
+        @include media-query(px550) {
+            align-self: flex-end;
+            max-width: 150px;
         }
     }
 }
