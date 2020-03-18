@@ -11,6 +11,7 @@ responses==0.10.9
 wagtail-factories==2.0.0
 zeep==3.4.0
 wagtail-orderable==1.0.3
+haversine==2.2.0
 
 # Production dependencies
 whitenoise[brotli]==4.1.2

@@ -168,6 +168,13 @@ class TalentLinkJob(models.Model):
         max_length=255, help_text="Salary group for filtering"
     )
     searchable_location = models.CharField(max_length=255)
+    location_postcode = models.CharField(max_length=8, blank=True)
+    location_lat = models.DecimalField(
+        max_digits=9, decimal_places=6, null=True, blank=True
+    )
+    location_lon = models.DecimalField(
+        max_digits=9, decimal_places=6, null=True, blank=True
+    )
     is_published = models.BooleanField(default=True)
     posting_start_date = models.DateTimeField()
     posting_end_date = models.DateTimeField()

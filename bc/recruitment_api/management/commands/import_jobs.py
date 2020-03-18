@@ -26,7 +26,9 @@ class Command(BaseCommand):
         errors = []
         while results:
             self.stdout.write(f"Fetching page {page}")
-            response = client.service.getAdvertisementsByPage(page)
+            response = client.service.getAdvertisementsByPage(
+                pageNumber=page, showJobLocation=True
+            )
             results = response["advertisements"]
             page += 1
             if results:
