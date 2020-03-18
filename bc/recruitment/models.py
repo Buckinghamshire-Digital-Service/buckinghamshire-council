@@ -20,6 +20,8 @@ from wagtail.core.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 
+from wagtailorderable.models import Orderable
+
 from bc.utils.email import NotifyEmailMessage
 
 from ..utils.blocks import StoryBlock
@@ -49,7 +51,7 @@ class JobSubcategory(models.Model):
         ordering = ["title"]
 
 
-class JobCategory(models.Model):
+class JobCategory(Orderable, models.Model):
     title = models.CharField(max_length=128)
     description = models.TextField(blank=True)
     subcategories = models.ManyToManyField(JobSubcategory, related_name="categories")
@@ -81,6 +83,7 @@ class JobCategory(models.Model):
             .annotate(count=Count("category"))
             .annotate(label=F("subcategory__categories__title"))
             .annotate(description=F("subcategory__categories__description"))
+            .annotate(sort_order=F("subcategory__categories__sort_order"))
             .order_by("-count")
         )
 
