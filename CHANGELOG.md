@@ -3,11 +3,11 @@
 ## Unreleased
 
 - 201 additional components
-  - 115 StreamField Button Link block
-  - 117 StreamField Table styles
-  - 121 Progressive disclosure accordion
-  - 122 General formatting improvements
-  - 123 Subheading block
+- 115 StreamField Button Link block
+- 117 StreamField Table styles
+- 121 Progressive disclosure accordion
+- 122 General formatting improvements
+- 123 Subheading block
 
 ## 4.0 (2020-02-24)
 
