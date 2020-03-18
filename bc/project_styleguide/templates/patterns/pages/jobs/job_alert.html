@@ -14,14 +14,6 @@
             <form action="{% pageurl job_alert as job_alert_url %}" method="post" class="form">
                 <div class="form__container">
                     <div class="form-item">
-                        {% if field.errors %}
-                            <div class="form-item__errors">
-                                {{ field.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-
-                    <div class="form-item">
                         <fieldset>
                             <label class="form-item__label" for="email">
                                 Email address
@@ -31,7 +23,7 @@
                     </div>
 
                     <fieldset>
-                        <input class="form-item__checkbox" type="checkbox" id="checkbox" {% if option.id|slugify in filter.selected %}checked{% endif %}>
+                        <input class="form-item__checkbox" type="checkbox" id="checkbox">
                         <label class="form-item__label" for="checkbox">
                             <span class="form-item__dummy-checkbox"></span>
                             Confirm consent to keep email

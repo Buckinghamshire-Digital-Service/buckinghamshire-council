@@ -3,7 +3,7 @@
     padding: $grid--small;
     background-color: $color--earth-light;
     transition: background-color $transition, border-color $transition;
-    border-left: 5px solid $color--lake;
+    border-bottom: 5px solid $color--lake;
     text-decoration: none;
 
     &__title {
