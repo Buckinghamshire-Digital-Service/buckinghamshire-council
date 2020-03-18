@@ -76,16 +76,16 @@
         }
 
         &:focus {
-            background-color: darken($color--leaf, 3%);
-            border-bottom: none;
-            border-top: $border--accent darken($color--leaf, 10);
+            background-color: $color--mustard;
+            border-bottom: $border--accent $color--slate;
+            border-top: none;
             color: $color--slate;
         }
 
         &:active {
-            background-color: $color--mustard;
-            border-bottom: $border--accent $color--slate;
-            border-top: none;
+            background-color: darken($color--leaf, 3%);
+            border-bottom: none;
+            border-top: $border--accent darken($color--leaf, 10);
             color: $color--slate;
         }
     }
