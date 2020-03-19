@@ -1,61 +1,66 @@
 {% load wagtailcore_tags %}
 
 <div class="search-filters" role="tablist" aria-multiselectable="true">
-    <input class="search-filters__checkbox" type="checkbox" id="hide_schools_and_early_years" {% if hide_schools_and_early_years.selected %}checked{% endif %}>
-    <label class="search-filters__label" for="hide_schools_and_early_years">
-        <span class="search-filters__dummy-checkbox">
-            <svg class="search-filters__check-icon icon">
-                <use xlink:href="#close"></use>
-            </svg>
-        </span>
-        {{ hide_schools_and_early_years.label }}
-        <span class="search-filters__count">({{ hide_schools_and_early_years.count }})</span>
-    </label>
+    <form action="#" method="post" role="filter" class="form">
+        {% for filter in filters %}
+            {% if forloop.first %}
+                <h3 class="search-filters__group-title">{{ filter.title }}</h3>
 
-    {% for filter in filters %}
-        <div class="search-filters__accordion accordion" data-accordion>
-            <a
-                href=""
-                class="search-filters__accordion-title accordion__title link--alt"
-                data-accordion-question
-                role="tab"
-                aria-controls="answer-{{ forloop.counter }}"
-                aria-expanded="false"
-                aria-selected="false"
-                tabindex="0"
-                id="question-{{ forloop.counter }}">
-                <h3>{{ filter.title }}</h3>
-                <svg class="accordion__icon icon icon--stroke" aria-hidden="true">
-                    <use xlink:href="#chevron"></use>
-                </svg>
-            </a>
-            <div
-                aria-live="polite"
-                class="search-filters__accordion-content accordion__content"
-                data-accordion-answer
-                id="answer-{{ forloop.counter }}"
-                role="tabpanel"
-                aria-labelledby="question-{{ forloop.counter }}"
-                aria-hidden="false">
-
-                <fieldset class="search-filters__fieldset">
-                    <legend class="hidden">{{ filter.title }}</legend>
+                <div class="search-filters__fieldset">
                     {% for option in filter.options %}
-                        <div class="search-filters__option {% if option.is_school_and_early_years %}is_school_and_early_years{% endif %}">
-                            <input class="search-filters__checkbox" type="checkbox" id="{{ option.key }}" {% if option.key|slugify in filter.selected %}checked{% endif %}>
-                            <label class="search-filters__label" for="{{ option.key }}">
-                                <span class="search-filters__dummy-checkbox">
-                                    <svg class="search-filters__check-icon icon">
-                                        <use xlink:href="#close"></use>
-                                    </svg>
-                                </span>
+                        <div class="search-filters__option">
+                            <input class="search-filters__checkbox" type="checkbox" id="{{ option.id }}" {% if option.id|slugify in filter.selected %}checked{% endif %}>
+                            <label class="search-filters__label" for="{{ option.id }}">
+                                <span class="search-filters__dummy-checkbox"></span>
                                 {{ option.label }}
                                 <span class="search-filters__count">({{ option.count }})</span>
                             </label>
                         </div>
                     {% endfor %}
-                </fieldset>
-            </div>
-        </div>
-    {% endfor %}
+                </div>
+            {% else %}
+                <div class="search-filters__accordion accordion" data-accordion>
+                    <a
+                        href=""
+                        class="search-filters__accordion-title accordion__title link link--alt"
+                        data-accordion-question
+                        role="tab"
+                        aria-controls="answer-{{ forloop.counter }}"
+                        aria-expanded="false"
+                        aria-selected="false"
+                        id="question-{{ forloop.counter }}">
+                        <svg class="accordion__icon icon icon--stroke" aria-hidden="true">
+                            <use xlink:href="#chevron"></use>
+                        </svg>
+
+                        <h3 class="search-filters__group-title">{{ filter.title }}</h3>
+                    </a>
+                    <div
+                        aria-live="polite"
+                        class="search-filters__accordion-content accordion__content"
+                        data-accordion-answer
+                        id="answer-{{ forloop.counter }}"
+                        role="tabpanel"
+                        aria-labelledby="question-{{ forloop.counter }}"
+                        aria-hidden="false">
+
+                        <div class="search-filters__fieldset">
+                            {% for option in filter.options %}
+                                <div class="search-filters__option">
+                                    <input class="search-filters__checkbox" type="checkbox" id="{{ option.id }}" {% if option.id|slugify in filter.selected %}checked{% endif %}>
+                                    <label class="search-filters__label" for="{{ option.id }}">
+                                        <span class="search-filters__dummy-checkbox"></span>
+                                        {{ option.label }}
+                                        <span class="search-filters__count">({{ option.count }})</span>
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <input type="submit" value="Filter" class="search-filters__submit button button--basic" />
+    </form>
 </div>
