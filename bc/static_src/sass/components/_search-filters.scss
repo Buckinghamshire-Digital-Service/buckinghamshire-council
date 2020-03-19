@@ -26,10 +26,10 @@
 
     &__checkbox {
         @include hidden();
+        padding: 0;
 
         &:checked {
             + #{$root}__label {
-                // to avoid nesting beyond 4 levels
                 #{$root}__dummy-checkbox::after {
                     opacity: 1;
                 }
@@ -73,8 +73,8 @@
 
     &__count {
         @include font-size(xxs);
-        margin-left: 3px;
-        align-self: center;
+        margin-left: $grid--min;
+        align-self: flex-start;
     }
 
     &__submit {

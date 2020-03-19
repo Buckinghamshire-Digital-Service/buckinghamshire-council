@@ -6,8 +6,7 @@
             {% if forloop.first %}
                 <h3 class="search-filters__group-title">{{ filter.title }}</h3>
 
-                <fieldset class="search-filters__fieldset">
-                    <legend class="hidden">{{ filter.title }}</legend>
+                <div class="search-filters__fieldset">
                     {% for option in filter.options %}
                         <div class="search-filters__option">
                             <input class="search-filters__checkbox" type="checkbox" id="{{ option.id }}" {% if option.id|slugify in filter.selected %}checked{% endif %}>
@@ -18,18 +17,17 @@
                             </label>
                         </div>
                     {% endfor %}
-                </fieldset>
+                </div>
             {% else %}
                 <div class="search-filters__accordion accordion" data-accordion>
                     <a
                         href=""
-                        class="search-filters__accordion-title accordion__title link--alt"
+                        class="search-filters__accordion-title accordion__title link link--alt"
                         data-accordion-question
                         role="tab"
                         aria-controls="answer-{{ forloop.counter }}"
                         aria-expanded="false"
                         aria-selected="false"
-                        tabindex="0"
                         id="question-{{ forloop.counter }}">
                         <svg class="accordion__icon icon icon--stroke" aria-hidden="true">
                             <use xlink:href="#chevron"></use>
@@ -46,8 +44,7 @@
                         aria-labelledby="question-{{ forloop.counter }}"
                         aria-hidden="false">
 
-                        <fieldset class="search-filters__fieldset">
-                            <legend class="hidden">{{ filter.title }}</legend>
+                        <div class="search-filters__fieldset">
                             {% for option in filter.options %}
                                 <div class="search-filters__option">
                                     <input class="search-filters__checkbox" type="checkbox" id="{{ option.id }}" {% if option.id|slugify in filter.selected %}checked{% endif %}>
@@ -58,12 +55,12 @@
                                     </label>
                                 </div>
                             {% endfor %}
-                        </fieldset>
+                        </div>
                     </div>
                 </div>
             {% endif %}
         {% endfor %}
-        
+
         <input type="submit" value="Filter" class="search-filters__submit button button--basic" />
     </form>
 </div>
