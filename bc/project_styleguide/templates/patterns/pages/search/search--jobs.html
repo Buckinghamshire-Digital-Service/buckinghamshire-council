@@ -54,12 +54,12 @@
                             {% endif %}
                         {% endwith %}
                         {% comment %} FE TODO: {% endcomment %}
-                        <div>
-                            <form method="post" role="search">{% csrf_token %}
+                        <form method="post" role="search" class="form form--job-alerts">{% csrf_token %}
+                            <div class="form-item">
                                 {{ job_alert_form.as_p }}
-                                <input type="submit" value="Subscribe to job alert">
-                            </form>
-                        </div>
+                            </div>
+                            <input type="submit" class="button button--default" value="Subscribe to job alert">
+                        </form>
                     </header>
 
                     {% for result in search_results %}

@@ -82,8 +82,14 @@
     textarea,
     select {
         width: 100%;
+        outline: 0;
         padding: $grid--min;
-        border: 1px solid $color--grey-dark;
+        border: 2px solid $color--off-black;
+
+        &:focus,
+        &:focus-within {
+            box-shadow: 0 0 0 4px $color--mustard;
+        }
     }
 
     input[type='checkbox'] {

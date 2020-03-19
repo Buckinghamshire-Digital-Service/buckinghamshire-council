@@ -84,4 +84,18 @@
     &--jobs-hero {
         margin-bottom: 15px;
     }
+
+    &--job-alerts {
+        margin-bottom: $grid;
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        label,
+        input {
+            display: block;
+            max-width: 540px;
+        }
+    }
 }

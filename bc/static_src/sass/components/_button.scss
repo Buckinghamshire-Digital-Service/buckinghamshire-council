@@ -13,6 +13,7 @@
 
     #{$hover-states} {
         background: $color--link-hover;
+        cursor: pointer;
     }
 
     &:active {
