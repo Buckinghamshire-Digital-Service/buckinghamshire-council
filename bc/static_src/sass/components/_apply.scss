@@ -124,7 +124,6 @@
         border-radius: 50%;
         margin: 0 $grid--min 0 0;
 
-        /* stylelint-disable selector-max-specificity */
         &:checked {
             // background-color: $color--black;
             // background-size: 30%;
@@ -133,7 +132,6 @@
             background-repeat: no-repeat;
             background-position: center;
         }
-        /* stylelint-enable selector-max-specificity */
     }
 
     // radio labels (radio buttons nested inside)
@@ -260,7 +258,6 @@
         position: relative;
 
         .apply-required {
-            /* stylelint-disable selector-max-specificity */
             &::before {
                 @include font-size(xl);
                 line-height: 28px;
@@ -270,7 +267,6 @@
                 left: -0.75em;
                 top: 0;
             }
-            /* stylelint-enable selector-max-specificity */
         }
     }
 
