@@ -1,0 +1,314 @@
+// note that .apply is a body class that has to namespace all the other third party
+// classnames in case of clashes with our naming system
+.apply {
+    // because of potential shared classnames for outer template elements (e.g row) and generic styles for inputs and buttons, we have a further level of nesting here
+    .application-content {
+        position: relative; // allows positioning of save progress button at the bottom of the form
+
+        // reset from clashing namespace
+        .grid {
+            display: block;
+            margin: 0;
+        }
+
+        // header styles
+        .apply-application-title-header {
+            @include font-size(l);
+            display: block;
+            color: $color--grey-medium;
+        }
+
+        .apply-application-title-content,
+        .lumesse-apply-resume-application-header {
+            // mirrors heading heading--xxl
+            @include font-size(xl);
+            font-weight: $weight--bold;
+            margin-bottom: $grid;
+
+            @include media-query(mob-landscape) {
+                @include font-size(xxl);
+            }
+        }
+
+        // save progress button - moved to the bottom
+        .lumesse-apply-save-app-container {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+
+        // edit button - follows example vendor styles
+        .lumesse-apply-save-app-edit-disabled
+            > .lumesse-apply-save-app-edit-button {
+            display: none;
+        }
+
+        // options at the top to re-use previous appliation
+        // info-box style
+        .well {
+            display: block;
+            margin: $grid 0;
+            padding: $grid--small;
+            background: $color--grey-light;
+            border-left: $border--accent $color--primary;
+        }
+
+        // previous application / import buttons
+        .awli-buttons-wrapper {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        // all buttons
+        button,
+        .btn-primary {
+            @include font-size(s);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: $weight--bold;
+            min-height: 50px;
+            padding: 0 $grid--small;
+            transition: background $transition;
+            text-decoration: none;
+            background: $color--leaf;
+            color: $color--slate;
+            border-bottom: $border--accent darken($color--leaf, 25%);
+            max-width: 200px;
+
+            #{$hover-states} {
+                background: darken($color--leaf, 3%);
+            }
+        }
+
+        // file upload / remove button
+        .btn-primary,
+        .apply-remove-button {
+            color: $color--grey-accessible;
+            background: $color--grey-light;
+            margin: $grid--min $grid--min $grid--min 0;
+            border-bottom: $border--accent $color--grey-accessible;
+
+            #{$hover-states} {
+                background: darken($color--grey-light, 3%);
+            }
+
+            &:focus {
+                outline: none;
+                box-shadow: 0 0 0 3px $color--mustard;
+            }
+        }
+
+        // other file upload bits
+        .apply-attached-document-component {
+            .row {
+                display: block;
+            }
+        }
+
+        .filename-txt {
+            display: none;
+        }
+
+        .apply-fileitem-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .apply-filename-container {
+            order: 1;
+            color: $color--grey-accessible;
+        }
+
+        // submit button (has to override styles for file upload)
+        .lumesse-apply-widget-submit {
+            .btn-primary {
+                background: $color--leaf;
+                color: $color--slate;
+                border: 0;
+                border-bottom: $border--accent darken($color--leaf, 25%);
+                cursor: pointer;
+                margin: 0;
+
+                #{$hover-states} {
+                    background: darken($color--leaf, 3%);
+                }
+            }
+        }
+
+        // hide 'ready to be sent' text
+        .lumesse-apply-ready {
+            display: none;
+        }
+
+        // fieldset / form section
+        .lum-apply-section {
+            border-top: 1px solid $color--grey-accessible;
+            padding-top: $grid--small;
+            padding-bottom: $grid;
+
+            h2 {
+                @include font-size(l);
+                font-weight: $weight--bold;
+                color: $color--link;
+            }
+        }
+
+        .apply-form {
+            // duplicates the h2
+            .form-legend {
+                display: none;
+            }
+        }
+
+        // info box style
+        .apply-no-answer {
+            display: block;
+            background: $color--grey-light;
+            margin: $grid 0;
+            padding: $grid--small;
+            border-left: $border--accent $color--primary;
+        }
+
+        .form-group {
+            margin-top: $grid--small;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        // various input styles
+        input,
+        select,
+        textarea {
+            @include font-size(m);
+            border-radius: 0;
+            padding: $grid--min;
+            border: 2px solid $color--slate;
+            color: $color--slate;
+            margin-top: $grid--min;
+            max-width: 300px;
+
+            &:focus {
+                outline: none;
+                box-shadow: 0 0 0 3px $color--mustard;
+            }
+        }
+
+        input {
+            width: 100%;
+            height: 40px;
+        }
+
+        textarea {
+            width: 100%;
+            max-width: 540px;
+            height: 230px;
+        }
+
+        select {
+            @include font-size(s);
+            height: 40px;
+        }
+
+        input[type='radio'] {
+            appearance: none;
+            width: 30px;
+            height: 30px;
+            border: 2px solid $color--black;
+            border-radius: 50%;
+            margin: 0 $grid--min 0 0;
+
+            /* stylelint-disable selector-max-specificity */
+            &:checked {
+                // background-color: $color--black;
+                // background-size: 30%;
+                background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 14 14' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='7' cy='7' r='7'/%3E%3C/svg%3E");
+                background-size: 12px 12px;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+            /* stylelint-enable selector-max-specificity */
+        }
+
+        // radio labels (radio buttons nested inside)
+        .radio-inline {
+            display: flex;
+            margin-top: $grid--min;
+            align-items: center;
+        }
+
+        // other labels
+        .control-label {
+            @include font-size(s);
+            font-family: $font--primary;
+            color: $color--slate;
+            position: relative;
+
+            .apply-required {
+                /* stylelint-disable selector-max-specificity */
+                &::before {
+                    @include font-size(xl);
+                    line-height: 28px;
+                    content: '*';
+                    color: $color--purple;
+                    position: absolute;
+                    left: -0.75em;
+                    top: 0;
+                }
+                /* stylelint-enable selector-max-specificity */
+            }
+        }
+
+        // countries drop down - sits alongside phone number box
+        .country-code {
+            margin-right: $grid;
+        }
+
+        // help text - overrides inline style
+        /* stylelint-disable declaration-no-important  */
+        .apply-description-list {
+            @include font-size(s);
+            display: block !important;
+            color: $color--grey-accessible;
+        }
+        /* stylelint-enable declaration-no-important  */
+
+        // error messages
+        .alert__fields {
+            background: $color--grey-light;
+            margin: $grid 0;
+            padding: $grid--small;
+            border-left: $border--accent $color--red;
+
+            li {
+                margin-bottom: $grid--min;
+            }
+
+            a {
+                color: $color--red;
+            }
+        }
+    }
+
+    // modal
+    .confirm-dialog-container {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.8);
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow-y: auto;
+        z-index: 200;
+    }
+
+    .confirm-dialog-position-of {
+        height: 100%;
+        width: 100%;
+    }
+}
