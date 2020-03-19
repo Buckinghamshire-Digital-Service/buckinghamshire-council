@@ -10,6 +10,7 @@ def get_advertisement(
     talentlink_id=164579,
     title="Higher Level Teaching Assistant - Elmhurst School ",
     description=None,
+    application_url="https://www.example.com/?jobId=QQPFK026203F3VBQBV7V779XA-167759&langCode=en_GB",
 ):
     if description is None:
         description = [
@@ -64,7 +65,7 @@ def get_advertisement(
         ]
 
     return {
-        "applicationUrl": "https://www.example.com/",
+        "applicationUrl": application_url,
         "categoryLists": None,
         "comment": None,
         "compensationMaxValue": None,

@@ -2,6 +2,7 @@ const path = require('path');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const postcssCustomProperties = require('postcss-custom-properties');
 const sass = require('sass');
 
@@ -21,6 +22,12 @@ const options = {
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',
         }),
+        new CopyPlugin([
+            {
+                from: `./${projectRoot}/static_src/vendor`,
+                to: `./vendor`,
+            },
+        ]),
     ],
     module: {
         rules: [

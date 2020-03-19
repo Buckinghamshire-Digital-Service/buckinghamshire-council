@@ -7,7 +7,7 @@ register = template.Library()
 
 @register.inclusion_tag("patterns/molecules/search-filters/search-filters.html")
 def jobs_search_filters(request):
-    job_categories = JobCategory.get_categories_summary().order_by("label")
+    job_categories = JobCategory.get_categories_summary().order_by("sort_order")
     selected_categories = request.GET.getlist("category")
 
     return {
