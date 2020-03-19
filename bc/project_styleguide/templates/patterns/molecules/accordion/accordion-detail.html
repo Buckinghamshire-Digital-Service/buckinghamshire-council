@@ -3,7 +3,7 @@
 
 <div role="tablist" aria-multiselectable="true">
     {% for accordion in accordions %}
-        <div class="accordion" data-accordion>
+        <div class="accordion accordion--detail" data-accordion>
             <a
                 href=""
                 class="accordion__title"
@@ -12,7 +12,6 @@
                 aria-controls="answer-{{ forloop.counter }}"
                 aria-expanded="false"
                 aria-selected="false"
-                tabindex="0"
                 id="question-{{ forloop.counter }}">
                 <svg class="accordion__icon icon--stroke" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 51.8 103.7" aria-hidden="true">
                     <title>Arrow icon</title>
@@ -30,7 +29,6 @@
                 aria-hidden="false">
                 {{ accordion.content|richtext }}
             </div>
-
         </div>
     {% endfor %}
 </div>

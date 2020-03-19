@@ -19,10 +19,11 @@
 
     input {
         @include font-size(s);
-        border: 0;
         border-radius: 0;
         max-width: 540px;
-        height: 40px;
+        height: 45px;
+        padding: 10px;
+        width: 100%;
     }
 
     &--subscribe {
@@ -95,7 +96,11 @@
         label,
         input {
             display: block;
-            max-width: 540px;
+        }
+
+        input[type='submit'] {
+            padding: 0;
+            max-width: 250px;
         }
     }
 }
