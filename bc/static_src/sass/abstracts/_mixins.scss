@@ -185,10 +185,16 @@
     text-decoration: none;
     background: $backgroundColor;
     color: $textColor;
+    border: 0;
     border-bottom: $border--accent $borderColor;
     max-width: 200px;
 
     #{$hover-states} {
         background: darken($backgroundColor, 3%);
     }
+}
+
+@mixin focus() {
+    outline: none;
+    box-shadow: 0 0 0 3px $color--mustard;
 }

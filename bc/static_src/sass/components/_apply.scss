@@ -26,20 +26,33 @@
 
         // row styling
         .row {
-            display: flex;
-            justify-content: space-between;
+            @include media-query(tablet-portrait) {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+
+        // override row styling to fix ie11 bug in a specific case
+        .apply-main-form {
+            display: block;
+        }
+
+        // ensures text inputs don't adjust width when errror message below shows.
+        .col-sm-12 {
+            width: 100%;
         }
     }
 
-    // header styles
+    // HEADER STYLES
     .apply-application-title-header {
         @include font-size(l);
         display: block;
-        color: $color--grey-medium;
+        color: $color--grey-accessible;
     }
 
     .apply-application-title-content,
-    .lumesse-apply-resume-application-header {
+    .lumesse-apply-resume-application-header,
+    h1 {
         // mirrors heading heading--xxl
         @include font-size(xl);
         font-weight: $weight--bold;
@@ -50,7 +63,7 @@
         }
     }
 
-    // options at the top to re-use previous appliation
+    // OPTIONS TO RE-USE PREVIOUS APPLICATION / UPLOAD FROM CV
     // info-box style
     .well {
         display: block;
@@ -62,8 +75,18 @@
 
     // previous application / import buttons
     .awli-buttons-wrapper {
-        display: flex;
-        justify-content: space-between;
+        @include media-query(tablet-portrait) {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    .apply-cv-button {
+        margin-top: $grid--small;
+
+        @include media-query(tablet-portrait) {
+            margin: 0;
+        }
     }
 
     // initially hide 'how it works' text
@@ -78,7 +101,7 @@
         font-weight: $weight--bold;
     }
 
-    // various input styles
+    // VARIOUS INPUT STYLES
     .textarea,
     .select-input,
     .form-control,
@@ -92,30 +115,39 @@
         max-width: 300px;
 
         &:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px $color--mustard;
+            @include focus();
         }
+    }
+
+    .text-input {
+        width: 100%;
     }
 
     .select-input,
     .form-control,
     .text-input {
-        width: 100%;
         height: 40px;
     }
 
+    /* stylelint-disable declaration-no-important  */
     .textarea {
         width: 100%;
         max-width: 540px;
-        height: 230px;
+        height: 230px !important; //inline style override
     }
+    /* stylelint-enable declaration-no-important  */
 
     .select-input,
     .form-control {
         @include font-size(s);
-        height: 40px;
+        height: 50px;
+
+        @include media-query(tablet-portrait) {
+            height: 40px;
+        }
     }
 
+    // radio button styling
     input[type='radio'] {
         appearance: none;
         width: 30px;
@@ -123,14 +155,17 @@
         border: 2px solid $color--black;
         border-radius: 50%;
         margin: 0 $grid--min 0 0;
+        background-color: $color--white;
 
         &:checked {
-            // background-color: $color--black;
-            // background-size: 30%;
             background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 14 14' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='7' cy='7' r='7'/%3E%3C/svg%3E");
             background-size: 12px 12px;
             background-repeat: no-repeat;
             background-position: center;
+        }
+
+        &:focus {
+            @include focus();
         }
     }
 
@@ -141,7 +176,36 @@
         align-items: center;
     }
 
-    // Button styling
+    // checkbox styling
+    input[type='checkbox'] {
+        appearance: none;
+        width: 30px;
+        height: 30px;
+        border: 2px solid $color--black;
+        margin: 0 $grid--min 0 0;
+        position: relative;
+        background-color: $color--white;
+
+        &:checked {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M20.285 2L9 13.567 3.714 8.556 0 12.272 9 21 24 5.715z'/%3E%3C/svg%3E");
+            background-size: 16px 16px;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        &:focus {
+            @include focus();
+        }
+    }
+
+    // checkbox labels (check boxes nested inside)
+    .checkbox-inline {
+        display: flex;
+        margin-top: $grid--min;
+        align-items: center;
+    }
+
+    // BUTTON STYLING
     // file upload / remove button
     // Most buttons have the btn-primary class. using the secondary button style
     // which file upload buttons need as the default, as they have no other useful identifier
@@ -184,6 +248,10 @@
         margin-left: $grid--min;
     }
 
+    .apply-answer-row-label-block {
+        margin-bottom: $grid--min;
+    }
+
     // submit button (has to override styles for file upload)
     .lumesse-apply-widget-submit {
         .btn-primary {
@@ -198,6 +266,31 @@
     // save and edit buttons (have to override styles for file upload)
     .lumesse-apply-save-app-save-button,
     .lumesse-apply-save-app-edit-button {
+        @include button($color--slate, darken($color--leaf, 25%), $color--leaf);
+    }
+
+    // resume application button (have to override styles for file upload)
+    .lumesse-apply-resume-application-button {
+        @include button($color--slate, darken($color--leaf, 25%), $color--leaf);
+    }
+
+    // start again button
+    .lumesse-apply-resume-start-again-button {
+        @include button(
+            $color--grey-accessible,
+            $color--grey-accessible,
+            $color--grey-light
+        );
+
+        margin-top: $grid--small;
+
+        @include media-query(tablet-portrait) {
+            margin: 0;
+        }
+    }
+
+    // remove button (repeatable employment block)
+    .repeatable-question-remove {
         @include button($color--slate, darken($color--leaf, 25%), $color--leaf);
     }
 
@@ -217,7 +310,7 @@
         display: none;
     }
 
-    // fieldset / form section
+    // FIELDSET / FORM SECTION STYLING
     .lum-apply-section {
         border-top: 1px solid $color--grey-accessible;
         padding-top: $grid--small;
@@ -237,20 +330,11 @@
         }
     }
 
-    // info box style
-    .apply-no-answer {
-        display: block;
-        background: $color--grey-light;
-        margin: $grid 0;
-        padding: $grid--small;
-        border-left: $border--accent $color--primary;
-    }
-
     .form-group {
         margin-top: $grid--small;
     }
 
-    // other labels
+    // OTHER LABELS
     .control-label {
         @include font-size(s);
         font-family: $font--primary;
@@ -258,14 +342,16 @@
         position: relative;
 
         .apply-required {
-            &::before {
-                @include font-size(xl);
-                line-height: 28px;
-                content: '*';
-                color: $color--purple;
-                position: absolute;
-                left: -0.75em;
-                top: 0;
+            @include media-query(tablet-portrait) {
+                &::before {
+                    @include font-size(xl);
+                    line-height: 28px;
+                    content: '*';
+                    color: $color--purple;
+                    position: absolute;
+                    left: -0.75em;
+                    top: 0;
+                }
             }
         }
     }
@@ -284,7 +370,7 @@
     }
     /* stylelint-enable declaration-no-important  */
 
-    // error messages
+    // ERROR MESSAGES
     .alert__fields {
         background: $color--grey-light;
         margin: $grid 0;
@@ -300,7 +386,34 @@
         }
     }
 
-    // modal
+    // disable all the rules... third party markup is such fun
+    /* stylelint-disable selector-class-pattern  */
+    /* stylelint-disable selector-max-id   */
+    /* stylelint-disable selector-max-specificity   */
+    .Error_field_required,
+    .Error_valid_mail,
+    .Error_value_max_length,
+    .Error_incorrect_phone_number_detailed,
+    .Error_unsupported_file_extension,
+    #lumesse-apply-resume-application-error .help-block {
+        display: block;
+        color: $color--red;
+        padding-top: $grid--min;
+    }
+    /* stylelint-enable selector-class-pattern  */
+    /* stylelint-enable selector-max-id  */
+    /* stylelint-enable selector-max-specificity   */
+
+    // MODAL STYLES
+
+    .modal-body {
+        // reset from clashing namespace
+        .grid {
+            display: block;
+            margin: 0;
+        }
+    }
+
     .confirm-dialog-container {
         position: fixed;
         width: 100vw;
@@ -319,14 +432,14 @@
     .ui-dialog {
         background-color: $color--white;
         position: relative;
-        top: 50% !important;
-        transform: translateY(50%);
-        width: 90% !important;
         margin: 0 auto;
         padding: $grid;
+        width: 90% !important;
 
         @include media-query(tablet-portrait) {
+            top: 50% !important;
             width: 56% !important;
+            transform: translateY(50%);
             max-width: 800px;
         }
     }
@@ -338,6 +451,7 @@
         margin-bottom: 5px;
         display: block;
         font-weight: $weight--bold;
+        margin-top: $grid--large; // leaves room for 'close' at mobile
     }
 
     // close button
@@ -347,5 +461,63 @@
         top: $grid;
         right: $grid;
         z-index: 2;
+    }
+
+    .modal-footer {
+        margin-top: $grid--small;
+    }
+
+    // Application received text
+    .apply-message-aplication-received {
+        font-weight: $weight--normal;
+        color: $color--grey-accessible;
+        margin: 0 0 $grid--large;
+    }
+
+    // EMPLOYMENT HISTORY BOX THAT GETS DYNAMICALLY ADDED
+    /* stylelint-disable selector-class-pattern  */
+    .apply-dynamically-added,
+    .subQuestions {
+        background-color: $color--grey-light;
+        padding: $grid--small;
+        margin-bottom: $grid--small;
+    }
+    /* stylelint-enable selector-class-pattern  */
+
+    .apply-subquestion-noanswer {
+        @include font-size(m);
+        font-weight: $weight--bold;
+        margin-bottom: 5px;
+    }
+
+    // hide weird duplicate labels in employment history
+    // scoping in case needed elsewhere
+    /* stylelint-disable selector-class-pattern  */
+    .employment_history {
+        .repeatable-question-row-label,
+        .composite-question-row-label {
+            display: none;
+        }
+    }
+    /* stylelint-enable selector-class-pattern  */
+
+    // RESUME APPLICATION STYLES
+
+    // make the buttons sit side by side
+    .lumesse-apply-resume-application-content {
+        .form-group {
+            @include media-query(tablet-portrait) {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+
+        // undo display:flex as this element is also .form-group and the above
+        // rule has nothing more specific to hook it onto
+        .lumesse-apply-resume-application-group {
+            @include media-query(tablet-portrait) {
+                display: block;
+            }
+        }
     }
 }
