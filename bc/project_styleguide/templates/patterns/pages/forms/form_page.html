@@ -26,7 +26,7 @@
 
                             {% for field in form %}
 
-                                {% get_form_additional_text page.form_fields field as additional_text %}
+                                {% get_form_additional_text page field as additional_text %}
                                 <p>{{ additional_text|richtext }}</p>
 
                                 {% with widget_type=field|widget_type field_type=field|field_type %}
