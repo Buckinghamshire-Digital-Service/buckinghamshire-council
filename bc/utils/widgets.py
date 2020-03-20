@@ -9,10 +9,8 @@ class CustomCheckboxSelectMultiple(forms.widgets.CheckboxSelectMultiple):
 
 
 class CustomHeadingField(Widget):
-    is_required = False
     template_name = "patterns/molecules/form-widgets/heading.html"
 
 
 class CustomSubheadingField(Widget):
-    is_required = False
     template_name = "patterns/molecules/form-widgets/subheading.html"
