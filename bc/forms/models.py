@@ -21,6 +21,7 @@ from bc.utils.constants import RICH_TEXT_FEATURES
 from bc.utils.models import BasePage
 from bc.utils.widgets import (
     CustomCheckboxSelectMultiple,
+    CustomCheckboxSelectSingle,
     CustomHeadingField,
     CustomSubheadingField,
 )
@@ -53,6 +54,10 @@ class CustomFormBuilder(FormBuilder):
         options["required"] = False
 
         return forms.Field(widget=CustomSubheadingField, **options)
+
+    def create_checkbox_field(self, field, options):
+        # Based on code in wagtail.contrib.forms, but changing widget
+        return forms.BooleanField(widget=CustomCheckboxSelectSingle, **options)
 
     def create_checkboxes_field(self, field, options):
         # Based on code in wagtail.contrib.forms, but changing widget

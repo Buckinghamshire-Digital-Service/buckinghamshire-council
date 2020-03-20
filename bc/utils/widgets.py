@@ -8,6 +8,10 @@ class CustomCheckboxSelectMultiple(forms.widgets.CheckboxSelectMultiple):
     )
 
 
+class CustomCheckboxSelectSingle(forms.widgets.CheckboxInput):
+    template_name = "patterns/molecules/form-widgets/custom_checkbox_select_single.html"
+
+
 class CustomHeadingField(Widget):
     template_name = "patterns/molecules/form-widgets/heading.html"
 
