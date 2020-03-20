@@ -55,6 +55,7 @@ class CustomFormBuilder(FormBuilder):
         return forms.Field(widget=CustomSubheadingField, **options)
 
     def create_checkboxes_field(self, field, options):
+        # Based on code in wagtail.contrib.forms, but changing widget
         options["choices"] = [(x.strip(), x.strip()) for x in field.choices.split(",")]
         options["initial"] = [x.strip() for x in field.default_value.split(",")]
         return forms.MultipleChoiceField(widget=CustomCheckboxSelectMultiple, **options)
