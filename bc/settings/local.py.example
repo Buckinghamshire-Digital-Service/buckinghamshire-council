@@ -23,3 +23,5 @@ TALENTLINK_API_KEY = "not_a_real_key"  # pragma: allowlist secret
 TALENTLINK_API_PASSWORD = "foo"  # pragma: allowlist secret
 TALENTLINK_API_USERNAME = "bar:baz:FO"
 TALENTLINK_API_WSDL = "https://api3.lumesse-talenthub.com/CareerPortal/SOAP/FoAdvert?WSDL"
+
+YANDEX_VERIFICATION_STRING = "test_string"

@@ -660,6 +660,9 @@ PATTERN_LIBRARY_TEMPLATE_DIR = os.path.join(
 # Google Tag Manager ID from env
 GOOGLE_TAG_MANAGER_ID = env.get("GOOGLE_TAG_MANAGER_ID")
 
+# For Yandex search indexing verification
+YANDEX_VERIFICATION_STRING = env.get("YANDEX_VERIFICATION_STRING")
+
 
 # GOV.UK Notify service
 EMAIL_BACKEND = "bc.utils.email.NotifyEmailBackend"
