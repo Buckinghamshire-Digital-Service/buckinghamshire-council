@@ -3,6 +3,7 @@
 ## Unreleased
 
 - 105 Job applications
+- 106 Job applications front-end
 
 ## 4.0 (2020-02-24)
 
