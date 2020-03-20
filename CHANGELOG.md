@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Enable FormPages
 - Add Yandex and Bing verification strings
 
 ## 4.0 (2020-02-24)
