@@ -1,5 +1,5 @@
 {% extends "patterns/base_page.html" %}
-{% load wagtailcore_tags wagtailimages_tags util_tags static %}
+{% load wagtailcore_tags wagtailimages_tags form_tags util_tags static %}
 
 {% block content %}
 
@@ -25,6 +25,9 @@
                             {% endif %}
 
                             {% for field in form %}
+
+                                {% get_form_additional_text page.form_fields field as additional_text %}
+                                <p>{{ additional_text|richtext }}</p>
 
                                 {% with widget_type=field|widget_type field_type=field|field_type %}
                                     <div class="form-item {% if field_type %}form-item--{{ field_type }}{% endif %} {% if widget_type %}form-item--{{ widget_type }}{% endif %} {% if field.errors %}form-item--errors{% endif %}">
