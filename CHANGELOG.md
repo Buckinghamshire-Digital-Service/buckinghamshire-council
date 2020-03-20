@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add Yandex and Bing verification strings
+
 ## 4.0 (2020-02-24)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/3.2...4.0
