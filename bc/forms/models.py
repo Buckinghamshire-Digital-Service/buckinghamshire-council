@@ -45,14 +45,12 @@ class CustomFormBuilder(FormBuilder):
     def create_heading_field(self, field, options):
         options["initial"] = options["label"]
         options["required"] = False
-        options["label"] = None
 
         return forms.Field(widget=CustomHeadingField, **options)
 
     def create_subheading_field(self, field, options):
         options["initial"] = options["label"]
         options["required"] = False
-        options["label"] = None
 
         return forms.Field(widget=CustomSubheadingField, **options)
 
