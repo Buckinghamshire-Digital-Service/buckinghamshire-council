@@ -19,7 +19,7 @@ from wagtailcaptcha.models import WagtailCaptchaEmailForm
 
 from bc.utils.constants import RICH_TEXT_FEATURES
 from bc.utils.models import BasePage
-from bc.utils.widgets import CustomCheckboxSelectMultiple
+from bc.utils.widgets import CustomCheckboxSelectMultiple, CustomCheckboxSelectSingle
 
 
 class FormField(AbstractFormField):
@@ -35,6 +35,10 @@ class FormField(AbstractFormField):
 class CustomFormBuilder(FormBuilder):
     # create a function that returns an instanced Django form field
     # function name must match create_<field_type_key>_field
+    def create_checkbox_field(self, field, options):
+        # Based on code in wagtail.contrib.forms, but changing widget
+        return forms.BooleanField(widget=CustomCheckboxSelectSingle, **options)
+
     def create_checkboxes_field(self, field, options):
         # Based on code in wagtail.contrib.forms, but changing widget
         options["choices"] = [(x.strip(), x.strip()) for x in field.choices.split(",")]
