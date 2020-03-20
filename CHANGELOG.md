@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 5.0 (2020-03-20)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/4.0...5.0
+
 - Enable FormPages
 - Add Yandex and Bing verification strings
 
