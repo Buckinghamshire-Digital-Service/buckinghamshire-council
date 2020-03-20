@@ -13,14 +13,14 @@
         background-color: $color--tertiary;
     }
 
-    input {
+    input:not([type='checkbox']),
+    select {
         @include font-size(m);
         border: 0;
         border-radius: 0;
         padding: $grid--min;
         width: 100%;
         max-width: 540px;
-        height: 50px;
     }
 
     &--subscribe {

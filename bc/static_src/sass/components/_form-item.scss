@@ -59,10 +59,9 @@
     }
 
     &__label {
-        @include font-size(m);
+        @include font-size(s);
         display: block;
         margin-bottom: 5px;
-        font-weight: bold;
     }
 
     &__errors {
@@ -83,7 +82,23 @@
     select {
         width: 100%;
         padding: 10px;
-        border: 1px solid $color--default;
+        border-radius: 0;
+        outline: 0;
+        border: 2px solid $color--off-black;
+
+        &:focus,
+        &:focus-within {
+            box-shadow: 0 0 0 4px $color--mustard;
+        }
+    }
+
+    input:not([type='checkbox']),
+    select {
+        height: 40px;
+    }
+
+    textarea {
+        height: 200px;
     }
 
     input[type='checkbox'] {

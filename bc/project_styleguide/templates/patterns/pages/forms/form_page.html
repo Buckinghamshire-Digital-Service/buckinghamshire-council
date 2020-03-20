@@ -14,7 +14,7 @@
     <section class="main-body">
         <div class="container">
             {% if page.form_fields.exists %}
-                    <form action="{% pageurl page %}" method="post" class="form">
+                    <form action="{% pageurl page %}" method="post" class="form form--standard">
                         <div class="form__container">
                             {% csrf_token %}
 
