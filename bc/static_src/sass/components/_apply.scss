@@ -468,9 +468,11 @@
 
         // stop the form from being focussed automatically - tab still
         // works fine to the input box so I think this is ok.
+        /* stylelint-disable a11y/no-outline-none  */
         form:focus {
             outline: 0;
         }
+        /* stylelint-enable a11y/no-outline-none  */
     }
     /* stylelint-enable declaration-no-important  */
 
