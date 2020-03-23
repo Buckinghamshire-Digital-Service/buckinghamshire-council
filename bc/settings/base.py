@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     # According to the official docs, it's important that Scout is listed
     # first - http://help.apm.scoutapp.com/#django.
     "scout_apm.django",
+    "bc.cases",
     "bc.documents",
     "bc.events",
     # "bc.forms",
