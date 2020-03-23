@@ -268,7 +268,11 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
             page = get_object_or_404(TalentLinkJob, talentlink_id=talentlink_id)
         else:
             raise Http404("Missing job details")
-        return render(request, "patterns/pages/jobs/apply.html", {"page": page})
+        return render(
+            request,
+            "patterns/pages/jobs/apply.html",
+            {"page": page, "show_apply_button": False},
+        )
 
 
 class RecruitmentIndexPage(BasePage):
