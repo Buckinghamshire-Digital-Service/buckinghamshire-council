@@ -224,11 +224,6 @@
             $color--grey-accessible,
             $color--grey-light
         );
-
-        &:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px $color--mustard;
-        }
     }
 
     // other file upload bits
