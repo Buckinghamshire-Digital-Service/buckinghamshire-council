@@ -192,6 +192,10 @@
     #{$hover-states} {
         background: darken($backgroundColor, 3%);
     }
+
+    &:active {
+        background: darken($backgroundColor, 8%);
+    }
 }
 
 @mixin focus() {

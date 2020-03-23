@@ -48,15 +48,17 @@
         @include font-size(l);
         display: block;
         color: $color--grey-accessible;
+        font-weight: $weight--normal;
     }
 
     .apply-application-title-content,
     .lumesse-apply-resume-application-header,
     h1 {
-        // mirrors heading heading--xxl
+        // mirrors heading heading--xxl with a slightly shorter bottom margin to allow the grey
+        // info box below to align with the grey job details box in the sidebar
         @include font-size(xl);
         font-weight: $weight--bold;
-        margin-bottom: $grid;
+        margin-bottom: 28px;
 
         @include media-query(mob-landscape) {
             @include font-size(xxl);
@@ -67,17 +69,22 @@
     // info-box style
     .well {
         display: block;
-        margin: $grid 0;
+        margin: 0 0 $grid 0;
         padding: $grid--small;
         background: $color--grey-light;
         border-left: $border--accent $color--primary;
     }
 
-    // previous application / import buttons
+    // resuse previous application / import from my cv buttons
     .awli-buttons-wrapper {
         @include media-query(tablet-portrait) {
             display: flex;
-            justify-content: space-between;
+        }
+    }
+
+    .reuse-button {
+        @include media-query(tablet-portrait) {
+            margin-right: $grid--small;
         }
     }
 
@@ -99,6 +106,7 @@
         color: $color--link;
         text-decoration: underline;
         font-weight: $weight--bold;
+        text-transform: capitalize;
     }
 
     // VARIOUS INPUT STYLES
@@ -291,7 +299,7 @@
 
     // remove button (repeatable employment block)
     .repeatable-question-remove {
-        @include button($color--slate, darken($color--leaf, 25%), $color--leaf);
+        @include button($color--white, darken($color--red, 25%), $color--red);
     }
 
     // save progress button in modal (has to override styles for file upload)
@@ -353,6 +361,22 @@
                     top: 0;
                 }
             }
+        }
+    }
+
+    // data protection question is required, but the .apply-required class is inside
+    // a legend so the styling above is not applied. Use some custom styling here.
+    .dps {
+        position: relative;
+
+        fieldset::before {
+            @include font-size(xl);
+            line-height: 28px;
+            content: '*';
+            color: $color--purple;
+            position: absolute;
+            left: -0.75em;
+            top: 0;
         }
     }
 
@@ -437,10 +461,15 @@
         width: 90% !important;
 
         @include media-query(tablet-portrait) {
-            top: 50% !important;
+            top: 150px !important;
             width: 56% !important;
-            transform: translateY(50%);
             max-width: 800px;
+        }
+
+        // stop the form from being focussed automatically - tab still
+        // works fine to the input box so I think this is ok.
+        form:focus {
+            outline: 0;
         }
     }
     /* stylelint-enable declaration-no-important  */
@@ -481,6 +510,12 @@
         background-color: $color--grey-light;
         padding: $grid--small;
         margin-bottom: $grid--small;
+    }
+
+    .apply-dynamically-added {
+        .subQuestions {
+            padding: 0;
+        }
     }
     /* stylelint-enable selector-class-pattern  */
 
