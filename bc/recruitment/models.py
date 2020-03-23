@@ -254,7 +254,11 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
     @route(r"^job_detail/(\d+)/$")
     def job_detail(self, request, talentlink_id):
         page = get_object_or_404(TalentLinkJob, talentlink_id=talentlink_id)
-        return render(request, "patterns/pages/jobs/job_detail.html", {"page": page})
+        return render(
+            request,
+            "patterns/pages/jobs/job_detail.html",
+            {"page": page, "show_apply_button": page.show_apply_button},
+        )
 
     @route(r"^apply/$")
     def apply(self, request):
