@@ -8,6 +8,13 @@
 - 111 Job alert unsubscribe
 - 133 Search by job number
 
+## 5.0 (2020-03-20)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/4.0...5.0
+
+- Enable FormPages
+- Add Yandex and Bing verification strings
+
 ## 4.0 (2020-02-24)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/3.2...4.0

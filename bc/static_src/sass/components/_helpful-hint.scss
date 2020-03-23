@@ -1,0 +1,10 @@
+.helpful-hint {
+    $root: &;
+    display: inline-block;
+    padding: $grid--min;
+    background-color: $color--earth-light;
+    margin: $grid--small 0;
+    transition: background-color $transition, border-color $transition;
+    border-left: 5px solid $color--lake;
+    text-decoration: none;
+}

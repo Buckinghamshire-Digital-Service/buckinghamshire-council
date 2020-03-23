@@ -1,3 +1,4 @@
+from django import forms
 from django.db import models
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
@@ -9,6 +10,7 @@ from wagtail.admin.edit_handlers import (
     InlinePanel,
     MultiFieldPanel,
 )
+from wagtail.contrib.forms.forms import FormBuilder
 from wagtail.contrib.forms.models import AbstractFormField
 from wagtail.core.fields import RichTextField
 from wagtail.search import index
@@ -17,10 +19,31 @@ from wagtailcaptcha.models import WagtailCaptchaEmailForm
 
 from bc.utils.constants import RICH_TEXT_FEATURES
 from bc.utils.models import BasePage
+from bc.utils.widgets import CustomCheckboxSelectMultiple, CustomCheckboxSelectSingle
 
 
 class FormField(AbstractFormField):
     page = ParentalKey("FormPage", related_name="form_fields")
+
+    additional_text = RichTextField(
+        blank=True, help_text="Rich text to display before the form field"
+    )
+
+    panels = AbstractFormField.panels + [FieldPanel("additional_text")]
+
+
+class CustomFormBuilder(FormBuilder):
+    # create a function that returns an instanced Django form field
+    # function name must match create_<field_type_key>_field
+    def create_checkbox_field(self, field, options):
+        # Based on code in wagtail.contrib.forms, but changing widget
+        return forms.BooleanField(widget=CustomCheckboxSelectSingle, **options)
+
+    def create_checkboxes_field(self, field, options):
+        # Based on code in wagtail.contrib.forms, but changing widget
+        options["choices"] = [(x.strip(), x.strip()) for x in field.choices.split(",")]
+        options["initial"] = [x.strip() for x in field.default_value.split(",")]
+        return forms.MultipleChoiceField(widget=CustomCheckboxSelectMultiple, **options)
 
 
 # Never cache form pages since they include CSRF tokens.
@@ -61,3 +84,5 @@ class FormPage(WagtailCaptchaEmailForm, BasePage):
             "Email",
         ),
     ]
+
+    form_builder = CustomFormBuilder
