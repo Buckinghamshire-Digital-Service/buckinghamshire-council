@@ -6,22 +6,34 @@
     {% endif %}
 
     <dl class="sidebar__job-details">
-        {% if page.working_hours %}
-            <div>
-                <dt class="sidebar__job-detail-title">Working pattern</dt>
-                <dd class="sidebar__job-detail-description">{{ page.working_hours }}</dd>
-            </div>
-        {% endif %}
         {% if page.salary_range %}
             <div>
                 <dt class="sidebar__job-detail-title">Salary</dt>
                 <dd class="sidebar__job-detail-description">{{ page.salary_range }}</dd>
             </div>
         {% endif %}
-        {% if page.closing_date %}
+        {% if page.reference_number %}
             <div>
-                <dt class="sidebar__job-detail-title">Application deadline</dt>
-                <dd class="sidebar__job-detail-description">{{ page.closing_date }}</dd>
+                <dt class="sidebar__job-detail-title">Reference number</dt>
+                <dd class="sidebar__job-detail-description">{{ page.reference_number }}</dd>
+            </div>
+        {% endif %}
+        {% if page.contract_type %}
+            <div>
+                <dt class="sidebar__job-detail-title">Contract type</dt>
+                <dd class="sidebar__job-detail-description">{{ page.contract_type }}</dd>
+            </div>
+        {% endif %}
+        {% if page.working_pattern %}
+            <div>
+                <dt class="sidebar__job-detail-title">Working pattern</dt>
+                <dd class="sidebar__job-detail-description">{{ page.working_pattern }}</dd>
+            </div>
+        {% endif %}
+        {% if page.working_hours %}
+            <div>
+                <dt class="sidebar__job-detail-title">Working hours</dt>
+                <dd class="sidebar__job-detail-description">{{ page.working_hours }}</dd>
             </div>
         {% endif %}
         {% if page.expected_start_date %}
@@ -34,6 +46,12 @@
             <div>
                 <dt class="sidebar__job-detail-title">Date posted</dt>
                 <dd class="sidebar__job-detail-description">{{ page.posting_start_date }}</dd>
+            </div>
+        {% endif %}
+        {% if page.closing_date %}
+            <div>
+                <dt class="sidebar__job-detail-title">Application deadline</dt>
+                <dd class="sidebar__job-detail-description">{{ page.closing_date }}</dd>
             </div>
         {% endif %}
     </dl>
