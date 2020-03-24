@@ -12,6 +12,10 @@
         })(window,document,'script','dataLayer','{{ GOOGLE_TAG_MANAGER_ID|escapejs }}');</script>
     {% endif %}
 
+    {% if YANDEX_VERIFICATION_STRING %}
+        <meta name="yandex-verification" content="{{ YANDEX_VERIFICATION_STRING }}" />
+    {% endif %}
+
     {# favicons #}
     {% comment %}
         Generate favicons by http://realfavicongenerator.net and select the option to serve files up from the root of the site.

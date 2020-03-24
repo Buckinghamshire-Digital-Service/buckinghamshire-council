@@ -2,12 +2,19 @@
 
 ## Unreleased
 
-- 105 Job applications
+- 105 Job applications (back-end work only)
 - 109 Job alert subscription
 - 110 Job search alert notifications
 - 111 Job alert unsubscribe
 - 129 Jobs postcode search
 - 133 Search by job number
+
+## 5.0 (2020-03-20)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/4.0...5.0
+
+- Enable FormPages
+- Add Yandex and Bing verification strings
 
 ## 4.0 (2020-02-24)
 
