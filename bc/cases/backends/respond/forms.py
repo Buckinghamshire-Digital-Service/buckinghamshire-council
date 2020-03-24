@@ -10,6 +10,9 @@ from .constants import (
     RESPOND_CATEGORIES_CACHE_PREFIX,
     RESPOND_FIELDS_CACHE_PREFIX,
     XML_ENTITY_MAPPING,
+    CASE_FEEDBACK_TYPE,
+    CASE_HOW_RECEIVED,
+    CONTACT_CONTACT_IS,
 )
 
 FIELD_TYPES = [
@@ -31,6 +34,11 @@ class BaseCaseForm(django.forms.Form):
 
         entities = defaultdict(list)
 
+        # Add required field values
+        cleaned_data['Case.FeedbackType'] = CASE_FEEDBACK_TYPE
+        cleaned_data['Case.HowReceived'] = CASE_HOW_RECEIVED
+        cleaned_data['Contact.ContactIs'] = CONTACT_CONTACT_IS
+
         # Convert the fields to XML elements in entities dict
         reverse_field_types_dict = {k: v for v, k in FIELD_TYPES}
         for key, value in cleaned_data.items():
@@ -39,7 +47,7 @@ class BaseCaseForm(django.forms.Form):
             element = etree.Element(
                 "field",
                 **{
-                    "schema-name": key,
+                    "schemaName": key,
                     # "field-type": reverse_field_types_dict[
                     #     self.fields[key].widget.__class__.__name__
                     # ],

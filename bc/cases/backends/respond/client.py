@@ -114,7 +114,6 @@ class RespondClient:
         return self.make_request(f"metadata.svc/Categories/{definition}", **kwargs)
 
     def create_case(self, definition, data, **kwargs):
-        definition = "CrudeCase"
         return self.make_request(
             f"case.svc/{definition}", method="post", data=data, raw=True, **kwargs
         )
@@ -143,10 +142,14 @@ class RespondClient:
         for field in soup.find_all("field"):
             schema_name = field.attrs["schema-name"]
             cache_key = RESPOND_CATEGORIES_CACHE_PREFIX + schema_name
-            choices = [
-                (o.attrs["id"].strip(), o.find("name").text.strip())
+            field_options = [
+                o.find("name").text.strip()
                 for o in field.find_all("option")
                 if o.attrs["available"] == "true"
+            ]
+            choices = [
+                (option, option)
+                for option in field_options
             ]
             cache.set(cache_key, choices)
 
