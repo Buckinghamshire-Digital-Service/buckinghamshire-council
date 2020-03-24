@@ -61,10 +61,10 @@ class ApteanRespondCaseFormPage(BasePage):
             )
 
             if form.is_valid():
-                form = self.process_form_submission(form)
+                form, case_details = self.process_form_submission(form)
                 if form.is_valid():  # still
                     return self.render_landing_page(
-                        request, form, *args, **kwargs
+                        request, form, case_details, *args, **kwargs
                     )
         else:
             form = self.get_form()
@@ -77,16 +77,19 @@ class ApteanRespondCaseFormPage(BasePage):
         case_xml = form.get_xml_string()
         client = get_client()
         response = client.create_case(self.web_service_definition, case_xml)
+        soup = BeautifulSoup(response.content, "xml")
         if response.status_code != 200:
-            soup = BeautifulSoup(response.content, "xml")
             for error in soup.find_all('failure'):
                 form.add_error(error.attrs['schemaName'], error.text)
-        return form
+            return form, None
+        else:
+            case = soup.find('case')
+            return form, case.attrs
 
     def get_landing_page_template(self, request, *args, **kwargs):
         return self.landing_page_template
 
-    def render_landing_page(self, request, form_submission=None, *args, **kwargs):
+    def render_landing_page(self, request, form_submission=None, case_details=None, *args, **kwargs):
         """
         Renders the landing page.
         You can override this method to return a different HttpResponse as
@@ -94,4 +97,5 @@ class ApteanRespondCaseFormPage(BasePage):
         """
         context = self.get_context(request)
         context["form_submission"] = form_submission
+        context["case_details"] = case_details
         return render(request, self.get_landing_page_template(request), context)
