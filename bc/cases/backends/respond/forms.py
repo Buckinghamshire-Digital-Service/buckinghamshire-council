@@ -38,9 +38,15 @@ class BaseCaseForm(django.forms.Form):
         entities = defaultdict(list)
 
         # Add required field values
+        # TODO: Case.FeedbackType and Contact.ContactIs may need to vary by form
         cleaned_data['Case.FeedbackType'] = CASE_FEEDBACK_TYPE
         cleaned_data['Case.HowReceived'] = CASE_HOW_RECEIVED
         cleaned_data['Contact.ContactIs'] = CONTACT_CONTACT_IS
+
+        # The Contact.Title filed must be set to Other if the user
+        # enters a title
+        if cleaned_data['Contact.OtherTitle'] != "":
+            cleaned_data['Contact.Title'] = 'Other'
 
         # Convert the fields to XML elements in entities dict
         reverse_field_types_dict = {k: v for v, k in FIELD_TYPES}
