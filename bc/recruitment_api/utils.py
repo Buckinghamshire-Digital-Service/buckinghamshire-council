@@ -129,9 +129,10 @@ def update_job_from_ad(job, ad, defaults=None, import_categories=False):
     # Get location data
     if ad["jobLocations"]:
         location = ad["jobLocations"]["jobLocation"][0]
-        job.location_postcode = location["zipCode"]
-        job.location_lat = location["latitude"]
-        job.location_lon = location["longitude"]
+        if location["zipCode"]:
+            job.location_postcode = location["zipCode"]
+            job.location_lat = location["latitude"]
+            job.location_lon = location["longitude"]
 
     job.save()
     return job
