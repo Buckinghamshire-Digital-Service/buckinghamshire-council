@@ -3,15 +3,8 @@
 
 {% block content %}
 
-    <div class="intro">
-        <div class="container">
-            {% include "patterns/molecules/share/share.html" %}
-            <h1>{{ page.title }}</h1>
-            <p>{{ page.introduction }}</p>
-        </div>
-    </div>
-
-    <section class="main-body">
+    <section class="section section--main">
+        <h1 class="heading heading--xxl">{{ form_title }}</h1>
         <div class="container">
             {% if form %}
                     <form action="{% pageurl page %}" method="post" class="form">
@@ -55,7 +48,7 @@
                             <input class="form__submit button" type="submit" value="{% if page.action_text %}{{ page.action_text|safe }}{% else %}Submit{% endif %}" />
                         </div>
                     </form>
-                {% endif %}
+            {% endif %}
         </div>
     </section>
 

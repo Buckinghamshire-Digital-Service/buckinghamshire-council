@@ -9,7 +9,11 @@ from wagtail.search import index
 from bs4 import BeautifulSoup
 
 from bc.cases.backends.respond.client import get_client
-from bc.cases.backends.respond.constants import CREATE_CASE_SERVICES, CREATE_CASE_TYPE
+from bc.cases.backends.respond.constants import (
+    CREATE_CASE_SERVICES,
+    CREATE_CASE_TYPE,
+    FORM_TITLES,
+)
 from bc.utils.constants import RICH_TEXT_FEATURES
 
 from ..utils.models import BasePage
@@ -70,6 +74,7 @@ class ApteanRespondCaseFormPage(BasePage):
             form = self.get_form()
 
         context = self.get_context(request)
+        context["form_title"] = FORM_TITLES[self.web_service_definition]
         context["form"] = form
         return render(request, self.get_template(request), context)
 

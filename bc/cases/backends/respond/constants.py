@@ -11,6 +11,10 @@ CREATE_CASE_SERVICES = [COMPLAINTS_WEBSERVICE]
 RESPOND_FIELDS_CACHE_PREFIX = "respond_field__"
 RESPOND_CATEGORIES_CACHE_PREFIX = "respond_categories__"
 
+FORM_TITLES = {
+    COMPLAINTS_WEBSERVICE: "Complain about our services"
+}
+
 FIELD_MAPPINGS = {
     COMPLAINTS_WEBSERVICE: OrderedDict(
         [

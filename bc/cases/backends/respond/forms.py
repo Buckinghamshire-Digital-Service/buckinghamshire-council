@@ -1,4 +1,5 @@
 from collections import OrderedDict, defaultdict
+import logging
 
 import django.forms
 from django.core.cache import cache
@@ -14,6 +15,8 @@ from .constants import (
     CASE_HOW_RECEIVED,
     CONTACT_CONTACT_IS,
 )
+
+logger = logging.getLogger(__name__)
 
 FIELD_TYPES = [
     # "Status", This one appears only in one web service, not of the create case type
@@ -124,6 +127,11 @@ class CaseFormBuilder:
                 raise ValueError("Unexpected field data type encountered")
             create_field = getattr(self, f"create_{field_type}_field")
             options = self.get_field_options(xml_field)
+            if not options:
+                logger.error(f"options could not be found for field '{schema_name}")
+                # TODO: We will end up here if a field definition is missing
+                # from the field definition endpoint response. We should
+                # probably raise an exception here
             options["label"] = label
             formfields[schema_name] = create_field(schema_name, options)
         return formfields
