@@ -1,6 +1,7 @@
 from wagtail.contrib.table_block.blocks import TableBlock
 from wagtail.core import blocks
 from wagtail.documents.blocks import DocumentChooserBlock
+from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 
 from .constants import RICH_TEXT_FEATURES
@@ -74,6 +75,8 @@ class StoryBlock(blocks.StreamBlock):
         template="patterns/molecules/streamfield/blocks/heading_block.html",
     )
     paragraph = blocks.RichTextBlock(features=RICH_TEXT_FEATURES)
+    image = ImageBlock()
+    embed = EmbedBlock()
     local_area_links = LocalAreaLinksBlock()
     table = TableBlock()
 
