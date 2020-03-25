@@ -9,6 +9,7 @@ register = template.Library()
 def jobs_search_filters(request):
     job_categories = JobCategory.get_categories_summary().order_by("sort_order")
     selected_categories = request.GET.getlist("category")
+    search_postcode = request.GET.get("postcode", None)
 
     return {
         "filters": [
@@ -19,4 +20,5 @@ def jobs_search_filters(request):
                 "key": "category",
             }
         ],
+        "search_postcode": search_postcode,
     }

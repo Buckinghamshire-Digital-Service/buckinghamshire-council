@@ -47,4 +47,15 @@
             </div>
         </div>
     {% endfor %}
+
+    {% comment %} FE TODO {% endcomment %}
+    <div>
+        <fieldset class="search-filters__fieldset">
+            <legend class="hidden">Location</legend>
+            <div class="search-filters__input">
+                <label for="search--page">Location</label>
+                <input class="input" id="search--postcode" type="text" placeholder="e.g HP14 5SW" name="postcode"{% if search_postcode %} value="{{ search_postcode }}{% endif %}">
+            </div>
+        </fieldset>
+    </div>
 </div>
