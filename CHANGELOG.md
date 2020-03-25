@@ -2,7 +2,11 @@
 
 ## Unreleased
 
-- 105 Job applications (back-end work only)
+## 7.0 (2020-03-25)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/6.0...7.0
+
+- 105 Job applications back-end
 - 106 Job applications front-end
 - 109 Job alert subscription
 - 110 Job search alert notifications
