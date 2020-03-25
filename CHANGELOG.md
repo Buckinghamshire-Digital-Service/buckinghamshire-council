@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+## 7.0 (2020-03-25)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/6.0...7.0
+
+- 105 Job applications back-end
+- 106 Job applications front-end
+- 109 Job alert subscription
+- 110 Job search alert notifications
+- 111 Job alert unsubscribe
+- 130 Add a Schools and Early years search filter, and enable Job Category to be tagged as such.
+- 133 Search by job number
+
 ## 6.0 (2020-03-24)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/5.0...6.0

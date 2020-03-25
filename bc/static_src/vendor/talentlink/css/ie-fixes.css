@@ -1,0 +1,31 @@
+/* This is the vendor styling for the application forms. It is not currently used at all, but I am keeping it for now for reference. */
+/* stylelint-disable */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .section-legend > h2 {
+        margin-bottom: 0;
+    }
+
+    .application-valid > .lumesse-apply-valid-icon::before {
+        font-size: 28px !important;
+    }
+
+    #free_form_cover_letter > fieldset,
+    #free_form_resume > fieldset {
+        width: 100%;
+        position: relative;
+        float: left;
+    }
+
+    .dps > fieldset,
+    .lum-apply-section > fieldset,
+    .apply-main-form > fieldset {
+        display: block;
+    }
+}
+
+
+@supports (-ms-ime-align: auto) {
+    .section-legend.lum-apply-section__name {
+        margin-bottom: 10px;
+    }
+}

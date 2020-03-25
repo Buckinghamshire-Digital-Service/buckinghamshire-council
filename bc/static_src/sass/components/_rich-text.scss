@@ -40,6 +40,10 @@
         margin-bottom: 5px;
     }
 
+    p {
+        @include font-size(s);
+    }
+
     h2 {
         @include font-size(m);
         margin-bottom: 5px;

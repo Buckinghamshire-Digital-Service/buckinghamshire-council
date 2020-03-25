@@ -15,6 +15,7 @@ $color--leaf: #9fc63b;
 $color--charcoal: #212121;
 $color--slate: #3c3c3b;
 $color--mustard: #fcbc00;
+$color--purple: #51247a;
 
 $color--earth: #d0cdc4;
 $color--earth-light: #f7f6f2;
@@ -24,7 +25,6 @@ $color--grey-light: #efefef;
 $color--grey-medium: #999;
 $color--grey-dark: #858585;
 $color--grey-accessible: #6d6d6c;
-
 $color--grey-border: #cecece;
 
 $color--default: $color--charcoal;
@@ -126,4 +126,5 @@ $hover-states: '&:hover, &:focus';
 // --------------------------------- Borders ------------------------------------
 
 $border--accent: 5px solid;
+$border--listing: 2px solid $color--earth;
 $border--grey: 1px solid $color--grey-border;

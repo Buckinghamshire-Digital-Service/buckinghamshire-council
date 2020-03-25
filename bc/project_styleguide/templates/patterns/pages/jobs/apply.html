@@ -1,0 +1,98 @@
+{% extends "patterns/base_page--jobs.html" %}
+{% load static %}
+
+{% comment %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Application Form (Apply)">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Application Form</title>
+{% endcomment %}
+
+{% block body_class %}apply{% endblock %}
+
+{% block extra_css %}
+    <!-- Apply -->
+    <!-- CTS Default / Branded Bootstrap -->
+    {% comment %} <link href="https://emea3.recruitmentplatform.com/apply-app/static/vanilla-silk/release/1-LATEST/css/cmp-bs.css"
+          rel="stylesheet">
+    <!-- CTS / Cascada Main Silk Style -->
+    <link href="https://emea3.recruitmentplatform.com/apply-app/static/vanilla-silk/release/1-LATEST/css/main.css"
+          rel="stylesheet">
+    <link href="https://cdn-ui.lumessetalentlink.com/thirdparties/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Boogaloo" rel="stylesheet">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Questrial">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/talentlink/css/custom.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/talentlink/css/ie-fixes.css' %}"/> {% endcomment %}
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn-ui.lumessetalentlink.com/thirdparties/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn-ui.lumessetalentlink.com/thirdparties/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+{% endblock %}
+
+{% comment %}
+</head>
+<body id="vanillaApplyBody">
+{% endcomment %}
+
+{% block content %}
+<div class="wrapper wrapper--flex wrapper--margin">
+    <section class="section section--main">
+
+        <div class="row">
+            <div id="apply-content" class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+                <section>
+                    <div data-lumesse-apply-resume class="hidden"></div>
+                    <div data-lumesse-apply-container data-lumesse-apply-errors-placement="top"
+                        data-lumesse-apply-description-placement="top" class="tsApplyContainer"></div>
+                    <div data-lumesse-apply-submission-accepted class=""></div>
+                </section>
+            </div>
+        </div>
+    </section>
+
+    {% include "patterns/molecules/jobs-sidebar/jobs-sidebar.html" %}
+</div>
+{% comment %}
+<main class="container" id="vanillaApplyContent">
+    <div class="row">
+        <div id="apply-content" class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+            <section id="apply-details">
+                <div data-lumesse-apply-resume class="hidden"></div>
+                <div data-lumesse-apply-container data-lumesse-apply-errors-placement="top"
+                     data-lumesse-apply-description-placement="top" class="tsApplyContainer"></div>
+                <div data-lumesse-apply-submission-accepted class=""></div>
+            </section>
+        </div>
+    </div>
+</main>
+{% endcomment %}
+{% endblock %}
+
+{% block extra_js %}
+<!--Apply ReferenceSite on LOCALHOST default config-->
+<script type="text/javascript"
+        src="https://emea3.recruitmentplatform.com/apply-app/static/apply/release/2-LATEST/apply-preloader-namespaced.js"
+        data-lumesse-apply
+        data-lumesse-apply-config-key="AAABsQAA-ab7c1a3e-9f80-4968-b0c1-70689943a3c8"
+        data-lumesse-apply-host="https://emea3.recruitmentplatform.com"
+        data-lumesse-apply-description-placement="top"
+        data-lumesse-apply-errors-placement="top"
+        data-lumesse-apply-menu-placement="top">
+</script>
+<script type="text/javascript"
+        src="https://emea3.recruitmentplatform.com/apply-app/static/apply/release/2-LATEST/apply-application-form-namespaced.js"></script>
+<script src="https://cdn-ui.lumessetalentlink.com/thirdparties/jquery/1.12.3/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'vendor/talentlink/javascript/main.js' %}"></script>
+{% comment %} <script src="https://cdn-ui.lumessetalentlink.com/thirdparties/bootstrap/3.4.1/js/bootstrap.min.js"></script> {% endcomment %}
+{% endblock %}
+{% comment %}
+</body>
+</html>
+{% endcomment %}

@@ -26,3 +26,12 @@ def widget_type(bound_field):
 @register.filter(name="field_type")
 def field_type(bound_field):
     return camelcase_to_underscore(bound_field.field.__class__.__name__)
+
+
+# Look up dictionary values
+@register.filter(name="lookup")
+def lookup(value, arg):
+    if isinstance(value[arg], list):
+        return (", ").join(value[arg])
+
+    return value[arg]

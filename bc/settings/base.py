@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     "bc.users",
     "bc.utils",
     "bc.inlineindex",
+    "wagtailorderable",
     "wagtail.contrib.modeladmin",
     "wagtail.contrib.postgres_search",
     "wagtail.contrib.settings",

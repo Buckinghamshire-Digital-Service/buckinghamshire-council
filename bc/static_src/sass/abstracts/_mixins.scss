@@ -172,3 +172,37 @@
         $last-pad: $new-pad;
     }
 }
+
+@mixin button($textColor, $borderColor, $backgroundColor) {
+    @include font-size(s);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: $weight--bold;
+    min-height: 50px;
+    padding: 0 $grid--small;
+    transition: background $transition;
+    text-decoration: none;
+    background: $backgroundColor;
+    color: $textColor;
+    border: 0;
+    border-bottom: $border--accent $borderColor;
+    max-width: 200px;
+
+    #{$hover-states} {
+        background: darken($backgroundColor, 3%);
+    }
+
+    &:active {
+        background: darken($backgroundColor, 8%);
+    }
+
+    &:focus {
+        @include focus();
+    }
+}
+
+@mixin focus() {
+    outline: none;
+    box-shadow: 0 0 0 4px $color--mustard;
+}

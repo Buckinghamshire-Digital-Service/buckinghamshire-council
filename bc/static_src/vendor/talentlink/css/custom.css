@@ -1,0 +1,236 @@
+/* This is the vendor styling for the application forms. It is not currently used at all, but I am keeping it for now for reference. */
+/* stylelint-disable */
+body {
+    font-size: 1.6rem;
+    color: #fff;
+    background-color: #969eaa;
+    font-family: "Open Sans Light",Arial,Helvetica,Georgia,sans-serif;
+}
+
+h1, .h1 {
+    text-transform: uppercase;
+    font-family: 'Boogaloo', cursive,"Open Sans Light",Arial,Helvetica,Georgia,sans-serif;
+    color: #FFF;
+    font-weight: 300;
+    line-height: 1.1;
+    font-size: 47px;
+}
+
+h2, .h2,
+.lum-apply-section__name span[data-apply-msg-key=Label_dps] {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    font-family: "Open Sans Light",Arial,Helvetica,Georgia,sans-serif;
+    color: #FFF;
+}
+
+.lum-apply-section__name span[data-apply-msg-key=Label_dps] {
+    padding-bottom: 25px;
+}
+
+label, .apply-form legend {
+    font-family: "Open Sans Light",Arial,Helvetica,Georgia,sans-serif;
+    color: #FFF;
+    font-size: 17px;
+    font-weight: 300;
+}
+
+.form-content label span.apply-answer-row-label {
+    color: #FFF;
+    font-family: "Open Sans Light",Arial,Helvetica,Georgia,sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 1.3;
+}
+
+.has-success .help-block, .has-warning .help-block, .has-error .help-block, .has-success .control-label, .has-warning .control-label, .has-error .control-label, .has-success .radio, .has-warning .radio, .has-error .radio, .has-success .checkbox, .has-warning .checkbox, .has-error .checkbox, .has-success .radio-inline, .has-warning .radio-inline, .has-error .radio-inline, .has-success .checkbox-inline, .has-warning .checkbox-inline, .has-error .checkbox-inline, .has-success.radio label, .has-warning.radio label, .has-error.radio label, .has-success.checkbox label, .has-warning.checkbox label, .has-error.checkbox label, .has-success.radio-inline label, .has-warning.radio-inline label, .has-error.radio-inline label, .has-success.checkbox-inline label, .has-warning.checkbox-inline label, .has-error.checkbox-inline label, legend {
+    color: #FFF;
+}
+
+.btn-link, .btn-link:hover, .btn-link:focus {
+    color: #FFF;
+    font-size: 17px;
+}
+
+.ui-dialog-titlebar-close {
+    color: #85a509;
+    opacity: 1;
+}
+
+.text-required.apply-required {
+    color: #85a509;
+    font-style: italic;
+    line-height: 1.3;
+    font-size: 16px;
+    font-weight: normal;
+    font-family: "Open Sans Light",Arial,Helvetica,Georgia,sans-serif;
+}
+
+.sFontSize-12px label span {
+    font-size: inherit !important;
+}
+
+.form-content input.form-control,
+.form-content select.form-control,
+.apply-save-application-modal-body .form-control,
+.lumesse-apply-resume-application-pin {
+    min-height: 45px;
+    padding: 6px 10px;
+    background-color: #fff;
+    border-radius: 0;
+    box-shadow: none;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    outline: 0;
+    border: 1px solid #eee;
+    font-family: "Open Sans Light",Arial,Helvetica,Georgia,sans-serif;
+    font-size: 16px;
+}
+
+.form-control {
+    font-weight: 700;
+}
+
+.form-content input.form-control:focus,
+.form-control:focus,
+.form-content select.form-control:focus {
+    border: 1px solid #85a509;
+    -webkit-box-shadow: 0px 0px 20px 1px #85a509;
+    box-shadow: 0px 0px 20px 1px #85a509;
+}
+
+.apply-drag-drop-area:hover, .apply-drag-drop-area-hover {
+    background: rgba(251, 251, 251, 0);
+    border-color: #69931e;
+}
+
+.apply-description-list {
+    background: none;
+    color: #6e6e6e;
+    font-weight: bold;
+    margin-bottom: 22px;
+}
+
+.apply-description-list::after {
+    border-top: 7px solid #6e6e6e;
+    bottom: 0;
+    top: 100%;
+    border-bottom: 0;
+}
+
+a, a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.btn-primary,
+.btn-default,
+.btn-primary:hover,
+.btn-default:hover,
+.btn-default:active,
+.btn-default:focus,
+.btn-default.focus,
+.open .dropdown-toggle.btn-default,
+.btn-default:active:focus,
+.btn-primary:focus,
+.btn-primary.focus,
+.btn-primary:active:focus {
+    color: #85a509;
+    font-size: 18px;
+    background-color: rgba(255, 0, 0, 0);
+    border-color: #85a509;
+    border-radius: 0;
+}
+
+.has-error .help-block,
+.has-error .control-label,
+.has-error .radio,
+.has-error .checkbox,
+.has-error .radio-inline,
+.has-error .checkbox-inline,
+.has-error.radio label,
+.has-error.checkbox label,
+.has-error.radio-inline label,
+.has-error.checkbox-inline label {
+    color: #a94442;
+}
+
+.section-legend::before,
+.lum-apply-section__name::before,
+.apply-submit-wrapper::before {
+    border: 5px solid #bcbcbc;
+}
+
+.lum-apply-section__content:before {
+    background: #bcbcbc;
+}
+
+.lum-apply-section.apply-section-validated .section-legend::before, .lum-apply-section.apply-section-validated .lum-apply-section__name::before, .lum-apply-section.apply-section-validated .apply-submit-wrapper::before, .application-valid:before {
+    border-color: #49a520;
+}
+
+.lum-apply-section.apply-section-validated .lum-apply-section__content:before {
+    background-image: linear-gradient(to bottom,#eee 49%, #49a520 49%);
+}
+
+.apply-section-validated fieldset div .section-legend h2:before,
+.apply-section-validated fieldset .lum-apply-section__name span:before {
+    color: #49a520;
+    font-size: 29px;
+}
+
+.apply-drag-drop-area .apply-fileitem-container {
+    background: rgba(238, 238, 238, 0);
+}
+
+.application-valid .lumesse-apply-valid-icon::before {
+    color: #49a520;
+    left: -52px;
+    top: 8px;
+}
+
+.well {
+    background-color: rgba(245, 245, 245, 0);
+}
+
+.panel {
+    background-color: rgba(255, 255, 255, 0);
+    border: 0;
+}
+
+.ui-dialog,
+.lumesse-apply-save-app-save-button,
+.lumesse-apply-save-app-edit-button {
+    background-color: #969eaa;
+}
+
+.alert-danger {
+    color: #c00000;
+    background-color: #ffffff;
+    line-height: 2em;
+}
+
+.lumesse-apply-save-app-container {
+    top: 0;
+    padding: 8px;
+}
+
+@media screen and (max-width: 767px) {
+    .lum-apply-section, .apply-submit-wrapper {
+        border-left: 10px solid #bcbcbc;
+    }
+
+    .apply-section-validated, .application-valid {
+        border-left-color: #49a520;
+    }
+
+    .sIndentation-left label {
+        word-break: break-all;
+    }
+
+    .lumesse-apply-save-app-container {
+        right: 0;
+    }
+}
