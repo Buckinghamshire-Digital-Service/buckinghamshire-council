@@ -9,6 +9,12 @@
 - 129 Jobs postcode search
 - 133 Search by job number
 
+## 6.0 (2020-03-24)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/5.0...6.0
+
+- Added image and embed blocks to StoryBlock
+
 ## 5.0 (2020-03-20)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/4.0...5.0
