@@ -7,6 +7,7 @@ from django.db import models
 from django.db.models import Count, F
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 from django.template.loader import render_to_string
 from django.urls import reverse
@@ -280,11 +281,25 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
     @route(r"^job_detail/(\d+)/$")
     def job_detail(self, request, talentlink_id):
         page = get_object_or_404(TalentLinkJob, talentlink_id=talentlink_id)
-        return render(request, "patterns/pages/jobs/job_detail.html", {"page": page})
+        return render(
+            request,
+            "patterns/pages/jobs/job_detail.html",
+            {"page": page, "show_apply_button": page.show_apply_button},
+        )
 
     @route(r"^apply/$")
     def apply(self, request):
-        return render(request, "patterns/pages/jobs/apply.html")
+        job_id = request.GET.get("jobId")
+        if job_id:
+            talentlink_id = job_id.split("-")[1]
+            page = get_object_or_404(TalentLinkJob, talentlink_id=talentlink_id)
+        else:
+            raise Http404("Missing job details")
+        return render(
+            request,
+            "patterns/pages/jobs/apply.html",
+            {"page": page, "show_apply_button": False},
+        )
 
 
 class RecruitmentIndexPage(BasePage):
