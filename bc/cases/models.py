@@ -10,6 +10,8 @@ from bs4 import BeautifulSoup
 
 from bc.cases.backends.respond.client import get_client
 from bc.cases.backends.respond.constants import (
+    COMPLETION_TITLES,
+    COMPLETION_CONTENT,
     CREATE_CASE_SERVICES,
     CREATE_CASE_TYPE,
     FORM_TITLES,
@@ -101,6 +103,8 @@ class ApteanRespondCaseFormPage(BasePage):
         landing page. E.g. you could return a redirect to a separate page.
         """
         context = self.get_context(request)
+        context['completion_title'] = COMPLETION_TITLES[self.web_service_definition]
+        context['completion_content'] = COMPLETION_CONTENT[self.web_service_definition]
         context["form_submission"] = form_submission
         context["case_details"] = case_details
         return render(request, self.get_landing_page_template(request), context)
