@@ -22,7 +22,12 @@ class JobSubcategoryModelAdmin(ModelAdmin):
 class JobCategoryModelAdmin(OrderableMixin, ModelAdmin):
     model = JobCategory
     menu_icon = "tag"
-    list_display = ("title", "slug", "get_subcategories_list")
+    list_display = (
+        "title",
+        "slug",
+        "get_subcategories_list",
+        "is_schools_and_early_years",
+    )
     search_fields = ("title", "slug")
 
 
