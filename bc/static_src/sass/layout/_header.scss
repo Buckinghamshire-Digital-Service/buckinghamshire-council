@@ -57,6 +57,7 @@
         color: $color--white;
         font-weight: $weight--bold;
         margin-top: $grid--min;
+        margin-right: 10px;
 
         @include media-query(px550) {
             @include font-size(xl);
@@ -66,12 +67,12 @@
 
     &__heading-logo {
         background-color: $color--white;
-        max-width: 100px;
-        padding: 5px 5px 0 5px;
+        max-width: 85px;
+        padding: 3px 3px 0 3px;
 
         @include media-query(px550) {
             align-self: flex-end;
-            max-width: 150px;
+            max-width: 100px;
         }
     }
 }
