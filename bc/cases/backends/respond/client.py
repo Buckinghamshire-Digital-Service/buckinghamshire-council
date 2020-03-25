@@ -147,10 +147,7 @@ class RespondClient:
                 for o in field.find_all("option")
                 if o.attrs["available"] == "true"
             ]
-            choices = [
-                (option, option)
-                for option in field_options
-            ]
+            choices = [(option, option) for option in field_options]
             cache.set(cache_key, choices)
 
 
