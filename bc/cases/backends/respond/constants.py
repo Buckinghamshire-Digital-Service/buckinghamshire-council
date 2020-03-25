@@ -11,22 +11,6 @@ CREATE_CASE_SERVICES = [COMPLAINTS_WEBSERVICE]
 RESPOND_FIELDS_CACHE_PREFIX = "respond_field__"
 RESPOND_CATEGORIES_CACHE_PREFIX = "respond_categories__"
 
-FORM_TITLES = {
-    COMPLAINTS_WEBSERVICE: "Complain about our services"
-}
-
-COMPLETION_TITLES = {
-    COMPLAINTS_WEBSERVICE: "Complaint submitted"
-}
-
-COMPLETION_CONTENT = {
-    COMPLAINTS_WEBSERVICE: (
-        "<p>We've sent your complaint to the appropriate department.</p>"
-        "<p>They will respond within 10 working days or let you know if it cannot be dealt with under our complaints policy.</p>"
-        "<p>For more information, see <a href=\"#\">how we deal with complaints</a>.</p>"
-    )
-}
-
 FIELD_MAPPINGS = {
     COMPLAINTS_WEBSERVICE: OrderedDict(
         [

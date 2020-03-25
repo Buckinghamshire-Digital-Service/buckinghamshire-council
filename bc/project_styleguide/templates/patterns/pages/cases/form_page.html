@@ -4,9 +4,9 @@
 {% block content %}
 
     <section class="section section--main">
-        <h1 class="heading heading--xxl">{{ form_title }}</h1>
+        <h1 class="heading heading--xxl">{{ page.title }}</h1>
+        <p>{{ page.introduction }}</p>
         <div class="container">
-            {% if form %}
                     <form action="{% pageurl page %}" method="post" class="form">
                         <div class="form__container">
                             {% csrf_token %}
@@ -45,10 +45,10 @@
                                 {% endwith %}
 
                             {% endfor %}
+                            <p>{{ page.pre_submission_text|richtext }}</p>
                             <input class="form__submit button" type="submit" value="{% if page.action_text %}{{ page.action_text|safe }}{% else %}Submit{% endif %}" />
                         </div>
                     </form>
-            {% endif %}
         </div>
     </section>
 

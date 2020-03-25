@@ -1,16 +1,17 @@
 {% extends "patterns/base_page.html" %}
-{% load wagtailcore_tags wagtailimages_tags static %}
+{% load wagtailcore_tags %}
 
 {% block content %}
 
     <section class="section section--main">
         <div class="completion-heading">
-            <h1 class="heading heading--xxl">{{ completion_title }}</h1>
+            <h1 class="heading heading--xxl">{{ page.completion_title }}</h1>
             <p>Reference number</p>
             <p>{{ case_details.Name }}</p>
         </div>
+        <div>We have sent you a confirmation email.</div>
         <h2 class="heading heading--l">What happens next</h2>
-        <div>{{ completion_content|safe }}</div>
+        <div>{{ page.completion_content|richtext }}</div>
     </section>
 
 {% endblock %}
