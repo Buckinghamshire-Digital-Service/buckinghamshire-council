@@ -1,5 +1,5 @@
-from collections import OrderedDict, defaultdict
 import logging
+from collections import OrderedDict, defaultdict
 
 import django.forms
 from django.core.cache import cache
@@ -7,13 +7,13 @@ from django.core.cache import cache
 from lxml import etree
 
 from .constants import (
+    CASE_FEEDBACK_TYPE,
+    CASE_HOW_RECEIVED,
+    CONTACT_CONTACT_IS,
     FIELD_MAPPINGS,
     RESPOND_CATEGORIES_CACHE_PREFIX,
     RESPOND_FIELDS_CACHE_PREFIX,
     XML_ENTITY_MAPPING,
-    CASE_FEEDBACK_TYPE,
-    CASE_HOW_RECEIVED,
-    CONTACT_CONTACT_IS,
 )
 
 logger = logging.getLogger(__name__)
@@ -39,17 +39,17 @@ class BaseCaseForm(django.forms.Form):
 
         # Add required field values
         # TODO: Case.FeedbackType and Contact.ContactIs may need to vary by form
-        cleaned_data['Case.FeedbackType'] = CASE_FEEDBACK_TYPE
-        cleaned_data['Case.HowReceived'] = CASE_HOW_RECEIVED
-        cleaned_data['Contact.ContactIs'] = CONTACT_CONTACT_IS
+        cleaned_data["Case.FeedbackType"] = CASE_FEEDBACK_TYPE
+        cleaned_data["Case.HowReceived"] = CASE_HOW_RECEIVED
+        cleaned_data["Contact.ContactIs"] = CONTACT_CONTACT_IS
 
         # The Contact.Title filed must be set to Other if the user
         # enters a title
-        if cleaned_data['Contact.OtherTitle'] != "":
-            cleaned_data['Contact.Title'] = 'Other'
+        if cleaned_data["Contact.OtherTitle"] != "":
+            cleaned_data["Contact.Title"] = "Other"
 
         # Convert the fields to XML elements in entities dict
-        reverse_field_types_dict = {k: v for v, k in FIELD_TYPES}
+        # reverse_field_types_dict = {k: v for v, k in FIELD_TYPES}
         for key, value in cleaned_data.items():
             entity_name = key.partition(".")[0]
 

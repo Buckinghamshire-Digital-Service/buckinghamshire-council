@@ -1,22 +1,12 @@
+from collections import defaultdict
 from unittest import skip
 
-from django.test import TestCase, override_settings
+from django.test import TestCase
 
 from lxml import etree
 
+from bc.cases.backends.respond.constants import XML_ENTITY_MAPPING
 from bc.cases.backends.respond.forms import BaseCaseForm
-
-from ..client import get_client
-
-
-@override_settings(
-    CACHES={"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}}
-)
-class TestNow(TestCase):
-    @skip
-    def test_connection(self):
-        # client = get_client()
-        pass
 
 
 class SchemaTest(TestCase):
@@ -83,7 +73,7 @@ class SchemaTest(TestCase):
             etree.fromstring(f.read().encode("utf-8"), self.parser)
 
     def test_a_known_form_submission_validates(self):
-        root = etree.fromstring(self.known_xml, self.parser)
+        etree.fromstring(self.known_xml, self.parser)
 
     def test_form_converts_to_valid_xml(self):
         form = BaseCaseForm()
@@ -103,9 +93,12 @@ class SchemaTest(TestCase):
             "Contact.County": "",
             "Contact.ZipCode": "",
         }
-        generated = etree.tostring(form.get_xml(cleaned_data), pretty_print=True).decode()
+        generated = etree.tostring(
+            form.get_xml(cleaned_data), pretty_print=True
+        ).decode()
         self.assertEqual(generated, self.known_xml)
 
+    # FIXME this needs to work
     @skip
     def test_building_xml(self):
         def element(entity_name):
@@ -114,4 +107,4 @@ class SchemaTest(TestCase):
             etree.SubElement(outer_container, container_name, Tag="")
             return outer_container
 
-        entities = defaultdict(element)
+        entities = defaultdict(element)  # noqa
