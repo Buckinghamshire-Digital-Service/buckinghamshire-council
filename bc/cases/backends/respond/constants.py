@@ -53,6 +53,6 @@ XML_ENTITY_MAPPING = OrderedDict(
     ]
 )
 
-CASE_FEEDBACK_TYPE = 'Corporate'
-CASE_HOW_RECEIVED = 'Web Form'
-CONTACT_CONTACT_IS = 'Other'
+CASE_FEEDBACK_TYPE = "Corporate"
+CASE_HOW_RECEIVED = "Web Form"
+CONTACT_CONTACT_IS = "Other"

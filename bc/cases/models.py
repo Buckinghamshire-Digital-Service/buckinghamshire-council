@@ -96,11 +96,11 @@ class ApteanRespondCaseFormPage(BasePage):
         response = client.create_case(self.web_service_definition, case_xml)
         soup = BeautifulSoup(response.content, "xml")
         if response.status_code != 200:
-            for error in soup.find_all('failure'):
-                form.add_error(error.attrs['schemaName'], error.text)
+            for error in soup.find_all("failure"):
+                form.add_error(error.attrs["schemaName"], error.text)
             return form, None
         else:
-            case = soup.find('case')
+            case = soup.find("case")
             return form, case.attrs
 
     def get_landing_page_template(self, request, *args, **kwargs):
