@@ -5,8 +5,9 @@ FIELD_INFO_TYPE = "FieldInfo"
 CATEGORY_INFO_TYPE = "CategoryInfo"
 
 COMPLAINTS_WEBSERVICE = "TestCreateComplaints"
+FOI_WEBSERVICE = "TestCreateFOI"
 
-CREATE_CASE_SERVICES = [COMPLAINTS_WEBSERVICE]
+CREATE_CASE_SERVICES = [COMPLAINTS_WEBSERVICE, FOI_WEBSERVICE]
 
 RESPOND_FIELDS_CACHE_PREFIX = "respond_field__"
 RESPOND_CATEGORIES_CACHE_PREFIX = "respond_categories__"
@@ -37,7 +38,23 @@ FIELD_MAPPINGS = {
             ("County", "County"),
             ("Postcode", "Postcode"),
         ]
-    )
+    ),
+    FOI_WEBSERVICE: OrderedDict(
+        [
+            ("Organisation/Company name", "Organisation"),
+            ("What information do you need", "Description"),
+            ("Title", "Other Title"),
+            ("First name", "First Name"),
+            ("Last name", "Surname"),
+            ("How would you prefer to be contacted?", "Preferred Contact Method"),
+            ("Email address", "E-mail Address"),
+            ("Contact number", "Home Phone"),
+            ("Street ", "Address Line 1"),
+            ("Town", "Town"),
+            ("County", "County"),
+            ("Postcode", "Postcode"),
+        ]
+    ),
 }
 
 XML_ENTITY_MAPPING = OrderedDict(
