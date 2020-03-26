@@ -43,15 +43,15 @@ FIELD_MAPPINGS = {
     FOI_WEBSERVICE: OrderedDict(
         [
             ("Organisation/Company name", "Contact.Organisation"),
-            ("What information do you need", "Case.Description"),
+            ("What information do you need?", "Case.Description"),
             ("Title", "Contact.OtherTitle"),
             ("First name", "Contact.FirstName"),
             ("Last name", "Contact.Surname"),
             ("How would you prefer to be contacted?", "Contact.PreferredContactMethod"),
             ("Email address", "Contact.Email"),
             ("Contact number", "Contact.HomePhone"),
-            ("Street ", "Contact.Address01"),
-            ("Town", "Contact.Town"),
+            ("Building and street address", "Contact.Address01"),
+            ("Town or city", "Contact.Town"),
             ("County", "Contact.County"),
             ("Postcode", "Contact.ZipCode"),
         ]
@@ -73,8 +73,8 @@ FIELD_MAPPINGS = {
             ),
             ("Email address", "Contact.Email"),
             ("Contact number", "Contact.Mobile"),
-            ("Street ", "Contact.Address01"),
-            ("Town", "Contact.Town"),
+            ("Building and street address", "Contact.Address01"),
+            ("Town or city", "Contact.Town"),
             ("County", "Contact.County"),
             ("Postcode", "Contact.ZipCode"),
         ]
