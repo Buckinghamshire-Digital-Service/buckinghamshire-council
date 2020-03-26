@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.shortcuts import render
 
@@ -21,9 +22,7 @@ class ApteanRespondCaseFormPage(BasePage):
     landing_page_template = "patterns/pages/cases/form_page_landing.html"
 
     web_service_definition = models.CharField(
-        max_length=255,
-        help_text="The name of the CreateCase web service to use.",
-        choices=[(s, s) for s in CREATE_CASE_SERVICES],
+        max_length=255, help_text="The name of the CreateCase web service to use.",
     )
 
     introduction = models.TextField(blank=True)
@@ -53,7 +52,8 @@ class ApteanRespondCaseFormPage(BasePage):
 
     content_panels = BasePage.content_panels + [
         FieldPanel(
-            "web_service_definition", widget=forms.Select(choices=CREATE_CASE_SERVICES)
+            "web_service_definition",
+            widget=forms.Select(choices=[(s, s) for s in CREATE_CASE_SERVICES],),
         ),
         FieldPanel("introduction"),
         FieldPanel("pre_submission_text"),
@@ -115,3 +115,10 @@ class ApteanRespondCaseFormPage(BasePage):
         context = self.get_context(request)
         context["case_details"] = case_details
         return render(request, self.get_landing_page_template(request), context)
+
+    def clean_fields(self, exclude=None):
+        if "web_service_definition" not in exclude:
+            if self.web_service_definition not in CREATE_CASE_SERVICES:
+                raise ValidationError(
+                    {"web_service_definition": "Choose one of the available options"}
+                )
