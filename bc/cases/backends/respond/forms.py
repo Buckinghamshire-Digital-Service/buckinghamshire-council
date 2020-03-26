@@ -11,6 +11,7 @@ from .constants import (
     CASE_HOW_RECEIVED,
     CONTACT_CONTACT_IS,
     FIELD_MAPPINGS,
+    HELP_TEXT,
     RESPOND_CATEGORIES_CACHE_PREFIX,
     RESPOND_FIELDS_CACHE_PREFIX,
     XML_ENTITY_MAPPING,
@@ -113,6 +114,7 @@ class CaseFormBuilder:
 
         service_name = self.web_service_definition.find("name").text.strip()
         field_mapping = FIELD_MAPPINGS[service_name]
+        help_texts = HELP_TEXT[service_name]
 
         # The webservice definition contains field name and schema name. We need to
         # match these to the client-supplied constants.FIELD_MAPPING which maps field
@@ -139,6 +141,10 @@ class CaseFormBuilder:
                 # from the field definition endpoint response. We should
                 # probably raise an exception here
             options["label"] = label
+            try:
+                options["help_text"] = help_texts[schema_name]
+            except KeyError:
+                pass
             formfields[schema_name] = create_field(schema_name, options)
         return formfields
 

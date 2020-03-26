@@ -57,6 +57,24 @@ FIELD_MAPPINGS = {
     ),
 }
 
+
+"""Help text format:
+>>> {
+    service_name: {
+        SchemaName: text_string
+    }
+}
+"""
+HELP_TEXT = {
+    COMPLAINTS_WEBSERVICE: {},
+    FOI_WEBSERVICE: {
+        "Description": (
+            "Where appropriate, include names, dates, references and descriptions to "
+            "enable us to identify and locate the required information"
+        )
+    },
+}
+
 XML_ENTITY_MAPPING = OrderedDict(
     [
         # Format
