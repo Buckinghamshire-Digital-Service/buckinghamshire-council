@@ -12,6 +12,7 @@ from .constants import (
     CATEGORY_INFO_TYPE,
     CREATE_CASE_SERVICES,
     CREATE_CASE_TYPE,
+    CUSTOM_OPTIONS,
     FIELD_INFO_TYPE,
     RESPOND_CATEGORIES_CACHE_PREFIX,
     RESPOND_FIELDS_CACHE_PREFIX,
@@ -143,12 +144,19 @@ class RespondClient:
             schema_name = field.attrs["schema-name"]
             cache_key = RESPOND_CATEGORIES_CACHE_PREFIX + schema_name
             field_options = [
-                o.find("name").text.strip()
+                self.get_option_label(schema_name, o)
                 for o in field.find_all("option")
                 if o.attrs["available"] == "true"
             ]
             choices = [(option, option) for option in field_options]
             cache.set(cache_key, choices)
+
+    def get_option_label(self, schema_name, option_xml):
+        provided_label = option_xml.find("name").text.strip()
+        try:
+            return CUSTOM_OPTIONS[schema_name][provided_label]
+        except KeyError:
+            return provided_label
 
 
 def get_client():

@@ -66,14 +66,33 @@ FIELD_MAPPINGS = {
 }
 """
 HELP_TEXT = {
-    COMPLAINTS_WEBSERVICE: {},
+    COMPLAINTS_WEBSERVICE: {
+        "Case.Description": "Which service is this about? What happened and when?",
+        "Contact.OtherTitle": "optional",
+    },
     FOI_WEBSERVICE: {
-        "Description": (
+        "Case.Description": (
             "Where appropriate, include names, dates, references and descriptions to "
             "enable us to identify and locate the required information"
         )
     },
 }
+
+
+"""Custom options format:
+>>> {
+    SchemaName: {
+        provided_label: desired_label
+    }
+}
+"""
+CUSTOM_OPTIONS = {
+    "Contact.ContactType": {
+        "Primary": "I am the complainant",
+        "Secondary": "I represent someone else",
+    }
+}
+
 
 XML_ENTITY_MAPPING = OrderedDict(
     [
