@@ -7,8 +7,14 @@ CATEGORY_INFO_TYPE = "CategoryInfo"
 COMPLAINTS_WEBSERVICE = "TestCreateComplaints"
 FOI_WEBSERVICE = "TestCreateFOI"
 SAR_WEBSERVICE = "TestCreateSAR"
+COMMENTS_WEBSERVICE = "TestCreateComments"
 
-CREATE_CASE_SERVICES = [COMPLAINTS_WEBSERVICE, FOI_WEBSERVICE, SAR_WEBSERVICE]
+CREATE_CASE_SERVICES = [
+    COMPLAINTS_WEBSERVICE,
+    FOI_WEBSERVICE,
+    SAR_WEBSERVICE,
+    COMMENTS_WEBSERVICE,
+]
 
 RESPOND_FIELDS_CACHE_PREFIX = "respond_field__"
 RESPOND_CATEGORIES_CACHE_PREFIX = "respond_categories__"
@@ -79,6 +85,24 @@ FIELD_MAPPINGS = {
             ("Postcode", "Contact.ZipCode"),
         ]
     ),
+    COMMENTS_WEBSERVICE: OrderedDict(
+        [
+            ("Your comment or suggestion", "Case.Description"),
+            ("Title", "Contact.OtherTitle"),
+            ("First name", "Contact.FirstName"),
+            ("Last name", "Contact.Surname"),
+            (
+                "How would you prefer to be contacted? ",
+                "Contact.PreferredContactMethod",
+            ),
+            ("Email address", "Contact.Email"),
+            ("Contact number", "Contact.Mobile"),
+            ("Building and street address", "Contact.Address01"),
+            ("Town or city", "Contact.Town"),
+            ("County", "Contact.County"),
+            ("Postcode", "Contact.ZipCode"),
+        ]
+    ),
 }
 
 
@@ -107,6 +131,7 @@ HELP_TEXT = {
         ),
         "Contact.DateofBirth": "For example, 23 05 1978",
     },
+    COMMENTS_WEBSERVICE: {},
 }
 
 
