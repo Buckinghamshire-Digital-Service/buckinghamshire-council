@@ -19,15 +19,15 @@ from .constants import (
 
 logger = logging.getLogger(__name__)
 
-FIELD_TYPES = [
+FIELD_TYPES = {
     # "Status", This one appears only in one web service, not of the create case type
     # "SystemAllocation", Maybe a foreign key field, used for data like 'created by'
     # "Journal", This appears only against a field with schema Case.ActionTaken
-    ("Category", "RadioSelect"),
-    ("DateTime", "DateInput"),
-    ("LongText", "Textarea"),
-    ("ShortText", "TextInput"),
-]
+    "Category": "RadioSelect",
+    "DateTime": "DateInput",
+    "LongText": "Textarea",
+    "ShortText": "TextInput",
+}
 
 
 class BaseCaseForm(django.forms.Form):
@@ -116,12 +116,11 @@ class CaseFormBuilder:
         field_mapping = FIELD_MAPPINGS[service_name]
         help_texts = HELP_TEXT[service_name]
 
-        field_types_dict = dict(FIELD_TYPES)
         for label, schema_name in field_mapping.items():
             xml_field = self.web_service_definition.find(**{"schema-name": schema_name})
             data_type = xml_field.attrs["data-type"]
             try:
-                field_type = field_types_dict[data_type]
+                field_type = FIELD_TYPES[data_type]
             except KeyError:
                 raise ValueError("Unexpected field data type encountered")
             create_field = getattr(self, f"create_{field_type}_field")
