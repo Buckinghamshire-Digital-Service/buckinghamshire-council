@@ -116,8 +116,16 @@ class CaseFormBuilder:
         field_mapping = FIELD_MAPPINGS[service_name]
         help_texts = HELP_TEXT[service_name]
 
+        # It's much faster to build a dict of field elements and use dictionary lookups
+        # than to use self.web_service_definition.find(**{schema-name: schema_name}) on
+        # a per-field basis.
+        field_defs = {
+            xml_field.attrs["schema-name"]: xml_field
+            for xml_field in self.web_service_definition.find_all("field")
+        }
+
         for label, schema_name in field_mapping.items():
-            xml_field = self.web_service_definition.find(**{"schema-name": schema_name})
+            xml_field = field_defs[schema_name]
             data_type = xml_field.attrs["data-type"]
             try:
                 field_type = FIELD_TYPES[data_type]
