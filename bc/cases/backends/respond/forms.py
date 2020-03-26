@@ -7,9 +7,9 @@ from django.core.cache import cache
 from lxml import etree
 
 from .constants import (
-    CASE_FEEDBACK_TYPE,
-    CASE_HOW_RECEIVED,
-    CONTACT_CONTACT_IS,
+    CASE_FEEDBACK_TYPE_VALUE,
+    CASE_HOW_RECEIVED_VALUE,
+    CONTACT_CONTACT_IS_VALUE,
     FIELD_MAPPINGS,
     HELP_TEXT,
     RESPOND_CATEGORIES_CACHE_PREFIX,
@@ -40,9 +40,9 @@ class BaseCaseForm(django.forms.Form):
 
         # Add required field values
         # TODO: Case.FeedbackType and Contact.ContactIs may need to vary by form
-        cleaned_data["Case.FeedbackType"] = CASE_FEEDBACK_TYPE
-        cleaned_data["Case.HowReceived"] = CASE_HOW_RECEIVED
-        cleaned_data["Contact.ContactIs"] = CONTACT_CONTACT_IS
+        cleaned_data["Case.FeedbackType"] = CASE_FEEDBACK_TYPE_VALUE
+        cleaned_data["Case.HowReceived"] = CASE_HOW_RECEIVED_VALUE
+        cleaned_data["Contact.ContactIs"] = CONTACT_CONTACT_IS_VALUE
 
         # The Contact.Title filed must be set to Other if the user
         # enters a title

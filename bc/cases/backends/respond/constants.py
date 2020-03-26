@@ -107,6 +107,7 @@ XML_ENTITY_MAPPING = OrderedDict(
     ]
 )
 
-CASE_FEEDBACK_TYPE = "Corporate"
-CASE_HOW_RECEIVED = "Web Form"
-CONTACT_CONTACT_IS = "Other"
+# Hardcode some fields
+CASE_FEEDBACK_TYPE_VALUE = "Corporate"
+CASE_HOW_RECEIVED_VALUE = "Web Form"
+CONTACT_CONTACT_IS_VALUE = "Other"
