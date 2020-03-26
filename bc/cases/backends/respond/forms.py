@@ -116,25 +116,16 @@ class CaseFormBuilder:
         field_mapping = FIELD_MAPPINGS[service_name]
         help_texts = HELP_TEXT[service_name]
 
-        # The webservice definition contains field name and schema name. We need to
-        # match these to the client-supplied constants.FIELD_MAPPING which maps field
-        # names to desired labels.
-        field_defs = {
-            xml_field.find("name").text: xml_field
-            for xml_field in self.web_service_definition.find_all("field")
-        }
-
         field_types_dict = dict(FIELD_TYPES)
-        for label, name in field_mapping.items():
-            xml_field = field_defs[name]
-            schema_name = xml_field.attrs["schema-name"]
+        for label, schema_name in field_mapping.items():
+            xml_field = self.web_service_definition.find(**{"schema-name": schema_name})
             data_type = xml_field.attrs["data-type"]
             try:
                 field_type = field_types_dict[data_type]
             except KeyError:
                 raise ValueError("Unexpected field data type encountered")
             create_field = getattr(self, f"create_{field_type}_field")
-            options = self.get_field_options(xml_field)
+            options = self.get_field_options(schema_name)
             if not options:
                 logger.error(f"options could not be found for field '{schema_name}")
                 # TODO: We will end up here if a field definition is missing
@@ -187,9 +178,8 @@ class CaseFormBuilder:
         options["choices"] = cached_choices
         return django.forms.ChoiceField(widget=django.forms.RadioSelect, **options)
 
-    def get_field_options(self, xml_field):
+    def get_field_options(self, schema_name):
         """ This may end up just returning 'required' or not. """
-        schema_name = xml_field.attrs["schema-name"]
         cache_key = RESPOND_FIELDS_CACHE_PREFIX + schema_name
         return cache.get(cache_key)
 

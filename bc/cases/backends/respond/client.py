@@ -128,8 +128,7 @@ class RespondClient:
             <folder base-locale="en-GB" base-value="Case Details"/>
         </field>
         """
-        service_name = self.services[FIELD_INFO_TYPE]
-        soup = self.get_fields(service_name)
+        soup = self.get_fields(self.services[FIELD_INFO_TYPE])
         for field in soup.find_all("field"):
             schema_name = field.attrs["schema-name"]
             options = {"required": field.attrs["mandatory"] == "true"}
@@ -138,8 +137,7 @@ class RespondClient:
 
     def cache_category_info(self):
         """Cache the choices for choice fields."""
-        service_name = self.services[CATEGORY_INFO_TYPE]
-        soup = self.get_categories(service_name)
+        soup = self.get_categories(self.services[CATEGORY_INFO_TYPE])
         for field in soup.find_all("field"):
             schema_name = field.attrs["schema-name"]
             cache_key = RESPOND_CATEGORIES_CACHE_PREFIX + schema_name
