@@ -67,12 +67,11 @@
 
     &__heading-logo {
         background-color: $color--white;
-        max-width: 85px;
+        max-height: 45px;
         padding: 3px 3px 0 3px;
 
         @include media-query(px550) {
             align-self: flex-end;
-            max-width: 100px;
         }
     }
 }
