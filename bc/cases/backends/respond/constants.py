@@ -109,7 +109,7 @@ FIELD_MAPPINGS = {
 """Help text format:
 >>> {
     service_name: {
-        SchemaName: text_string
+        schema_name: text_string
     }
 }
 """
