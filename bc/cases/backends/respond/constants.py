@@ -15,7 +15,7 @@ RESPOND_CATEGORIES_CACHE_PREFIX = "respond_categories__"
 FIELD_MAPPINGS = {
     COMPLAINTS_WEBSERVICE: OrderedDict(
         [
-            ("Your Involvement", "Client is"),
+            ("Your Involvement", "Contact Type"),
             # TODO This field is missing from the API response
             # ("Which service is this about?", "Service Area"),
             ("Your complaint", "Description"),
@@ -31,10 +31,10 @@ FIELD_MAPPINGS = {
             ("First name", "First Name"),
             ("Surname", "Surname"),
             ("How would you prefer to be contacted?", "Preferred Contact Method"),
-            ("Email address", "E-mail Address"),
+            ("Email", "E-mail Address"),
             ("Contact number", "Contact Number"),
-            ("Street", "Address Line 1"),
-            ("Town", "Town"),
+            ("Building and street address", "Address Line 1"),
+            ("Town or city", "Town"),
             ("County", "County"),
             ("Postcode", "Postcode"),
         ]
