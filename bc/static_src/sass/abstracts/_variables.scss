@@ -113,6 +113,7 @@ $wrapper--page: 690px;
 $grid: 30px;
 $grid--min: 10px;
 $grid--small: 20px;
+$grid--medium: 45px;
 $grid--large: 50px;
 
 // --------------------------------- Transitions --------------------------------
@@ -125,6 +126,6 @@ $hover-states: '&:hover, &:focus';
 
 // --------------------------------- Borders ------------------------------------
 
-$border--accent: 5px solid;
+$border--accent: 4px solid;
 $border--listing: 2px solid $color--earth;
 $border--grey: 1px solid $color--grey-border;

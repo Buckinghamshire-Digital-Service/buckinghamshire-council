@@ -77,7 +77,7 @@
                     width: 8px;
                     height: 14px;
                     border: solid $color--default;
-                    border-width: 0 3px 3px 0;
+                    border-width: 0 4px 4px 0;
                     position: absolute;
                     opacity: 0;
                     transform: rotate(45deg);
@@ -136,26 +136,6 @@
         @include font-size(s);
         margin-top: 5px;
         color: rgba($color--default, 0.6);
-    }
-
-    input:not([type='checkbox']),
-    textarea,
-    select {
-        width: 100%;
-        padding: 10px;
-        border-radius: 0;
-        outline: 0;
-        border: 2px solid $color--off-black;
-
-        &:focus,
-        &:focus-within {
-            box-shadow: 0 0 0 3px $color--mustard;
-        }
-    }
-
-    input:not([type='checkbox']),
-    select {
-        height: 40px;
     }
 
     textarea {

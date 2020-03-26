@@ -13,15 +13,44 @@
         background-color: $color--tertiary;
     }
 
-    input:not([type='checkbox']),
+    input:not([type='checkbox']):not([type='submit']),
+    textarea,
     select {
-        @include font-size(m);
-        border: 0;
+        @include font-size(s);
+        border: 2px solid $color--off-black;
         border-radius: 0;
         padding: $grid--min;
         width: 100%;
         max-width: 540px;
-        height: 50px;
+        height: 45px;
+
+        &:focus,
+        &:focus-within {
+            outline: 0;
+            box-shadow: 0 0 0 4px $color--mustard;
+        }
+    }
+
+    // radio button styling
+    input[type='radio'] {
+        appearance: none;
+        width: 30px;
+        height: 30px;
+        border: 2px solid $color--black;
+        border-radius: 50%;
+        margin: 0 $grid--min 0 0;
+        background-color: $color--white;
+
+        &:checked {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 14 14' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='7' cy='7' r='7'/%3E%3C/svg%3E");
+            background-size: 12px 12px;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        &:focus {
+            @include focus();
+        }
     }
 
     &--subscribe {
@@ -32,6 +61,7 @@
         }
 
         input {
+            border: 0;
             margin-bottom: $grid--small;
 
             @include media-query(mob-landscape) {
@@ -50,7 +80,6 @@
         }
 
         input {
-            border: 2px solid $color--charcoal;
             border-right: 0;
             max-width: 100%;
         }
@@ -61,7 +90,7 @@
         justify-content: flex-end;
 
         input {
-            height: 40px;
+            border: 0;
 
             @include media-query(tablet-portrait) {
                 width: 390px;
@@ -74,6 +103,8 @@
         margin-bottom: $grid;
 
         input {
+            border: 0;
+
             @include media-query(tablet-portrait) {
                 width: 100%;
             }
@@ -82,5 +113,9 @@
 
     &--jobs-hero {
         margin-bottom: 15px;
+
+        input:not([type='checkbox']):not([type='submit']) {
+            border: 0;
+        }
     }
 }

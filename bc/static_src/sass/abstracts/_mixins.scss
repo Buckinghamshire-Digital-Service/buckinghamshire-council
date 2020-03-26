@@ -173,36 +173,46 @@
     }
 }
 
-@mixin button($textColor, $borderColor, $backgroundColor) {
+@mixin button($textColor: $color--slate, $borderColor, $backgroundColor) {
     @include font-size(s);
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: $weight--bold;
-    min-height: 50px;
+    height: $grid--medium;
     padding: 0 $grid--small;
-    transition: background $transition;
     text-decoration: none;
     background: $backgroundColor;
     color: $textColor;
     border: 0;
-    border-bottom: $border--accent $borderColor;
+    border-bottom: $border--accent darken($borderColor, 10);
+    max-height: $grid--medium;
     max-width: 200px;
 
-    #{$hover-states} {
-        background: darken($backgroundColor, 3%);
+    &:focus {
+        @include focus-button();
     }
 
     &:active {
-        background: darken($backgroundColor, 8%);
+        background: darken($backgroundColor, 3%);
+        border-bottom: 0;
+        border-top: $border--accent darken($borderColor, 10);
     }
 
-    &:focus {
-        @include focus();
+    &:hover {
+        background: darken($backgroundColor, 3%);
     }
 }
 
 @mixin focus() {
     outline: none;
     box-shadow: 0 0 0 4px $color--mustard;
+}
+
+@mixin focus-button() {
+    outline: none;
+    background-color: $color--mustard;
+    border-bottom: $border--accent $color--slate;
+    border-top: none;
+    color: $color--slate;
 }
