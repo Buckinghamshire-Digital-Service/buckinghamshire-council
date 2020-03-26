@@ -6,8 +6,9 @@ CATEGORY_INFO_TYPE = "CategoryInfo"
 
 COMPLAINTS_WEBSERVICE = "TestCreateComplaints"
 FOI_WEBSERVICE = "TestCreateFOI"
+SAR_WEBSERVICE = "TestCreateSAR"
 
-CREATE_CASE_SERVICES = [COMPLAINTS_WEBSERVICE, FOI_WEBSERVICE]
+CREATE_CASE_SERVICES = [COMPLAINTS_WEBSERVICE, FOI_WEBSERVICE, SAR_WEBSERVICE]
 
 RESPOND_FIELDS_CACHE_PREFIX = "respond_field__"
 RESPOND_CATEGORIES_CACHE_PREFIX = "respond_categories__"
@@ -55,6 +56,29 @@ FIELD_MAPPINGS = {
             ("Postcode", "Contact.ZipCode"),
         ]
     ),
+    SAR_WEBSERVICE: OrderedDict(
+        [
+            ("Your Involvement", "Contact.ContactType"),
+            ("Type of information requested", "Case.TypeofSAR"),
+            ("What personal information is required?", "Case.Description"),
+            ("Which time period does your request cover?", "Case.IncidentDate"),
+            ("Title", "Contact.OtherTitle"),
+            ("First name", "Contact.FirstName"),
+            ("Surname", "Contact.Surname"),
+            ("Previous names, if applicable", "Case.Anyothercomments"),
+            ("Date of Birth", "Contact.DateofBirth"),
+            (
+                "How would you prefer to be contacted? ",
+                "Contact.PreferredContactMethod",
+            ),
+            ("Email address", "Contact.Email"),
+            ("Contact number", "Contact.Mobile"),
+            ("Street ", "Contact.Address01"),
+            ("Town", "Contact.Town"),
+            ("County", "Contact.County"),
+            ("Postcode", "Contact.ZipCode"),
+        ]
+    ),
 }
 
 
@@ -75,6 +99,13 @@ HELP_TEXT = {
             "Where appropriate, include names, dates, references and descriptions to "
             "enable us to identify and locate the required information"
         )
+    },
+    SAR_WEBSERVICE: {
+        "Case.TypeofSAR": (
+            "Include any known reference numbers or other unique identifiers to help "
+            "us locate your personal data (for example, a customer account number)"
+        ),
+        "Contact.DateofBirth": "For example, 23 05 1978",
     },
 }
 

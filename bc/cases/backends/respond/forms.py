@@ -145,8 +145,8 @@ class CaseFormBuilder:
     def create_Textarea_field(self, schema_name, options):
         return django.forms.CharField(widget=django.forms.Textarea, **options)
 
-    def create_datetime_field(self, options):
-        return django.forms.DateTimeField(**options)
+    def create_DateInput_field(self, schema_name, options):
+        return django.forms.DateField(**options)
 
     # def create_email_field(self, schema_name, options):
     #     return django.forms.EmailField(**options)
