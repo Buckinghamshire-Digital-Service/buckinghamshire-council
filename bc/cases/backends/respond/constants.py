@@ -4,6 +4,9 @@ CREATE_CASE_TYPE = "CaseCreate"
 FIELD_INFO_TYPE = "FieldInfo"
 CATEGORY_INFO_TYPE = "CategoryInfo"
 
+APPEND_TO_DESCRIPTION = "append to description"
+DESCRIPTION_SCHEMA_NAME = "Case.Description"
+
 RESPOND_FIELDS_CACHE_PREFIX = "respond_field__"
 RESPOND_CATEGORIES_CACHE_PREFIX = "respond_categories__"
 
@@ -22,7 +25,7 @@ CREATE_CASE_SERVICES = {
     COMPLAINTS_WEBSERVICE: {
         "stanagedicfixelds": {},
         "help_text": {
-            "Case.Description": "Which service is this about? What happened and when?",
+            DESCRIPTION_SCHEMA_NAME: "Which service is this about? What happened and when?",
             "Contact.OtherTitle": "optional",
         },
         "field_type_overrides": {"Case.ActionTaken01": "TextInput"},
@@ -30,7 +33,7 @@ CREATE_CASE_SERVICES = {
     FOI_WEBSERVICE: {
         "stanagedicfixelds": {},
         "help_text": {
-            "Case.Description": (
+            DESCRIPTION_SCHEMA_NAME: (
                 "Where appropriate, include names, dates, references and descriptions to "
                 "enable us to identify and locate the required information"
             )
@@ -74,7 +77,7 @@ FIELD_MAPPINGS = {
             ("Your Involvement", "Contact.ContactType"),
             # TODO This field is missing from the API response
             # ("Which service is this about?", "Service Area"),
-            ("Your complaint", "Case.Description"),
+            ("Your complaint", DESCRIPTION_SCHEMA_NAME),
             (
                 "What would you like to happen as a result of your complaint?",
                 "Case.ActionTaken01",
@@ -98,7 +101,7 @@ FIELD_MAPPINGS = {
     FOI_WEBSERVICE: OrderedDict(
         [
             ("Organisation/Company name", "Contact.Organisation"),
-            ("What information do you need?", "Case.Description"),
+            ("What information do you need?", DESCRIPTION_SCHEMA_NAME),
             ("Title", "Contact.OtherTitle"),
             ("First name", "Contact.FirstName"),
             ("Last name", "Contact.Surname"),
@@ -115,7 +118,7 @@ FIELD_MAPPINGS = {
         [
             ("Your Involvement", "Contact.ContactType"),
             ("Type of information requested", "Case.TypeofSAR"),
-            ("What personal information is required?", "Case.Description"),
+            ("What personal information is required?", DESCRIPTION_SCHEMA_NAME),
             ("Which time period does your request cover?", "Case.IncidentDate"),
             ("Title", "Contact.OtherTitle"),
             ("First name", "Contact.FirstName"),
@@ -136,7 +139,7 @@ FIELD_MAPPINGS = {
     ),
     COMMENTS_WEBSERVICE: OrderedDict(
         [
-            ("Your comment or suggestion", "Case.Description"),
+            ("Your comment or suggestion", DESCRIPTION_SCHEMA_NAME),
             ("Title", "Contact.OtherTitle"),
             ("First name", "Contact.FirstName"),
             ("Last name", "Contact.Surname"),
@@ -154,7 +157,7 @@ FIELD_MAPPINGS = {
     ),
     COMPLIMENTS_WEBSERVICE: OrderedDict(
         [
-            ("Your comment or suggestion", "Case.Description"),
+            ("Your comment or suggestion", DESCRIPTION_SCHEMA_NAME),
             ("Title", "Contact.OtherTitle"),
             ("First name", "Contact.FirstName"),
             ("Last name", "Contact.Surname"),

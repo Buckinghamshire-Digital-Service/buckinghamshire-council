@@ -7,7 +7,9 @@ from django.core.cache import cache
 from lxml import etree
 
 from .constants import (
+    APPEND_TO_DESCRIPTION,
     CREATE_CASE_SERVICES,
+    DESCRIPTION_SCHEMA_NAME,
     FIELD_MAPPINGS,
     RESPOND_CATEGORIES_CACHE_PREFIX,
     RESPOND_FIELDS_CACHE_PREFIX,
@@ -16,6 +18,7 @@ from .constants import (
 
 logger = logging.getLogger(__name__)
 
+SHORT_TEXT_DATA_TYPE = "ShortText"
 FIELD_TYPES = {
     # "Status", This one appears only in one web service, not of the create case type
     # "SystemAllocation", Maybe a foreign key field, used for data like 'created by'
@@ -23,11 +26,17 @@ FIELD_TYPES = {
     "Category": "RadioSelect",
     "DateTime": "DateInput",
     "LongText": "Textarea",
-    "ShortText": "TextInput",
+    SHORT_TEXT_DATA_TYPE: "TextInput",
 }
 
 
 class BaseCaseForm(django.forms.Form):
+    def create_element(self, key, value):
+        element = etree.Element("field", schemaName=key)
+        value_element = etree.SubElement(element, "value")
+        value_element.text = value
+        return element
+
     def get_xml(self, cleaned_data):
         case = etree.Element(
             "case", Tag="", xmlns="http://www.aptean.com/respond/caserequest/1"
@@ -37,16 +46,26 @@ class BaseCaseForm(django.forms.Form):
         service_name = cleaned_data.pop("service_name")
         cleaned_data.update(CREATE_CASE_SERVICES[service_name]["stanagedicfixelds"])
 
+        description = cleaned_data.pop(DESCRIPTION_SCHEMA_NAME)
         entities = defaultdict(list)
 
         # Convert the fields to XML elements in entities dict
         for key, value in cleaned_data.items():
             entity_name = key.partition(".")[0]
+            if entity_name == APPEND_TO_DESCRIPTION:
+                # Special case: append this type of field to the description, rather
+                # than creating an XML element.
+                label = self.fields[key].label
+                description = description + f"\n\n{label}:\n{value}"
+                continue
 
-            element = etree.Element("field", schemaName=key)
-            value_element = etree.SubElement(element, "value")
-            value_element.text = value
-            entities[entity_name].append(element)
+            entities[entity_name].append(self.create_element(key, value))
+
+        # Finally, add the updated description
+        description_schema_entity_name = DESCRIPTION_SCHEMA_NAME.partition(".")[0]
+        entities[description_schema_entity_name].append(
+            self.create_element(DESCRIPTION_SCHEMA_NAME, description)
+        )
 
         # Now assemble the XML document in the right order
         # Put Case fields at the root level, and first.
@@ -117,19 +136,25 @@ class CaseFormBuilder:
         }
 
         for label, schema_name in field_mapping.items():
-            xml_field = field_defs[schema_name]
-            data_type = xml_field.attrs["data-type"]
+            if schema_name.startswith(APPEND_TO_DESCRIPTION):
+                # special case
+                data_type = SHORT_TEXT_DATA_TYPE
+                options = {}
+            else:
+                xml_field = field_defs[schema_name]
+                data_type = xml_field.attrs["data-type"]
+                options = self.get_field_options(schema_name)
+                if not options:
+                    logger.error(f"options could not be found for field '{schema_name}")
+                    # TODO: We will end up here if a field definition is missing
+                    # from the field definition endpoint response. We should
+                    # probably raise an exception here
+
             try:
                 field_type = FIELD_TYPES[data_type]
             except KeyError:
                 raise ValueError("Unexpected field data type encountered")
             create_field = getattr(self, f"create_{field_type}_field")
-            options = self.get_field_options(schema_name)
-            if not options:
-                logger.error(f"options could not be found for field '{schema_name}")
-                # TODO: We will end up here if a field definition is missing
-                # from the field definition endpoint response. We should
-                # probably raise an exception here
             options["label"] = label
             try:
                 options["help_text"] = help_texts[schema_name]

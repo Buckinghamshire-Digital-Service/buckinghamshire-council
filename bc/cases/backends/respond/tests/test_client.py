@@ -1,12 +1,18 @@
+import textwrap
 from collections import defaultdict
 from unittest import skip
 
+from django import forms
 from django.test import TestCase
 
+from bs4 import BeautifulSoup
 from lxml import etree
 
 from bc.cases.backends.respond.constants import (
+    APPEND_TO_DESCRIPTION,
     COMPLAINTS_WEBSERVICE,
+    DESCRIPTION_SCHEMA_NAME,
+    SAR_WEBSERVICE,
     XML_ENTITY_MAPPING,
 )
 from bc.cases.backends.respond.forms import BaseCaseForm
@@ -15,9 +21,6 @@ from bc.cases.backends.respond.forms import BaseCaseForm
 class SchemaTest(TestCase):
 
     known_xml = """<case Tag="" xmlns="http://www.aptean.com/respond/caserequest/1">
-  <field schemaName="Case.Description">
-    <value>I don\'t like fish.</value>
-  </field>
   <field schemaName="Case.ActionTaken01">
     <value></value>
   </field>
@@ -29,6 +32,9 @@ class SchemaTest(TestCase):
   </field>
   <field schemaName="Case.HowReceived">
     <value>Web Form</value>
+  </field>
+  <field schemaName="Case.Description">
+    <value>I don\'t like fish.</value>
   </field>
   <Contacts>
     <contact Tag="">
@@ -109,6 +115,7 @@ class SchemaTest(TestCase):
         generated = etree.tostring(
             form.get_xml(cleaned_data), pretty_print=True
         ).decode()
+        self.maxDiff = None
         self.assertEqual(generated, self.known_xml)
 
     # FIXME this needs to work
@@ -121,3 +128,71 @@ class SchemaTest(TestCase):
             return outer_container
 
         entities = defaultdict(element)  # noqa
+
+    def test_appending_a_custom_field_to_the_description(self):
+        extra_field_name = APPEND_TO_DESCRIPTION + ".time_period"
+
+        class TestCaseForm(BaseCaseForm):
+            def __init__(self, *args, **kwargs):
+                super().__init__(self, *args, **kwargs)
+                self.fields = {
+                    DESCRIPTION_SCHEMA_NAME: forms.CharField(label="Description"),
+                    extra_field_name: forms.CharField(
+                        label="Extra field to be appended"
+                    ),
+                }
+
+        form = TestCaseForm()
+
+        cleaned_data = {
+            DESCRIPTION_SCHEMA_NAME: "Some description",
+            extra_field_name: "Two weeks last Sunday",
+            "service_name": SAR_WEBSERVICE,
+        }
+        soup = BeautifulSoup(etree.tostring(form.get_xml(cleaned_data)), "lxml")
+        self.assertEqual(
+            soup.find(schemaname=DESCRIPTION_SCHEMA_NAME).text,
+            textwrap.dedent(
+                """\
+                Some description
+
+                Extra field to be appended:
+                Two weeks last Sunday"""
+            ),
+        )
+
+    def test_appending_two_custom_fields_to_the_description(self):
+        extra_field_one = APPEND_TO_DESCRIPTION + ".context"
+        extra_field_two = APPEND_TO_DESCRIPTION + ".song"
+
+        class TestCaseForm(BaseCaseForm):
+            def __init__(self, *args, **kwargs):
+                super().__init__(self, *args, **kwargs)
+                self.fields = {
+                    DESCRIPTION_SCHEMA_NAME: forms.CharField(label="Description"),
+                    extra_field_one: forms.CharField(label="First extra field"),
+                    extra_field_two: forms.CharField(label="Second extra field"),
+                }
+
+        form = TestCaseForm()
+
+        cleaned_data = {
+            DESCRIPTION_SCHEMA_NAME: "Some description",
+            extra_field_one: "Synthetic past",
+            extra_field_two: "Spider bite",
+            "service_name": SAR_WEBSERVICE,
+        }
+        soup = BeautifulSoup(etree.tostring(form.get_xml(cleaned_data)), "lxml")
+        self.assertEqual(
+            soup.find(schemaname=DESCRIPTION_SCHEMA_NAME).text,
+            textwrap.dedent(
+                """\
+                Some description
+
+                First extra field:
+                Synthetic past
+
+                Second extra field:
+                Spider bite"""
+            ),
+        )
