@@ -103,8 +103,7 @@ class CaseFormBuilder:
         """
 
         service_name = self.web_service_definition.find("name").text.strip()
-        self.create_TextInput_field(
-            self,
+        formfields["service_name"] = self.create_TextInput_field(
             schema_name="",
             options={
                 "initial": service_name,
