@@ -1,10 +1,11 @@
 .accordion {
     $root: &;
-    margin-bottom: $grid--min;
+    border-top: 1px solid $color--grey-accessible;
+    padding: 15px 0;
 
     &.is-open {
         #{$root}__icon {
-            transform: rotate(180deg);
+            transform: rotate(0deg);
         }
 
         #{$root}__title {
@@ -16,11 +17,39 @@
         }
     }
 
+    &--detail {
+        border: 0;
+        padding: 10px 0;
+
+        #{$root}__icon {
+            height: 30px;
+            margin-right: 0;
+            width: 30px;
+        }
+
+        #{$root}__header {
+            @include font-size(s);
+            font-weight: $weight--normal;
+        }
+
+        #{$root}__title {
+            text-decoration: underline;
+        }
+
+        #{$root}__content {
+            border-left: 5px solid $color--grey-border;
+            margin-bottom: 0;
+            margin-left: 5px;
+            padding: 10px $grid--small;
+            margin-top: 10px;
+        }
+    }
+
     &__title {
         display: flex;
         align-items: center;
         transition: color 0.2s ease;
-        color: $color--default;
+        text-decoration: none;
 
         #{$hover-states} {
             cursor: pointer;
@@ -33,24 +62,29 @@
                 color: $color--link-hover;
             }
         }
+    }
 
-        h3 {
-            @include font-size(s);
-            font-weight: $weight--normal;
-            margin: 0;
-            padding: 5px 0;
-        }
+    &__header {
+        @include font-size(m);
+        @include heading-text();
+        color: $color--lake;
+        margin: 0;
+        padding: 0;
     }
 
     &__icon {
-        width: 20px;
-        height: 20px;
-        margin-right: 20px;
+        width: 35px;
+        height: 35px;
+        margin-right: $grid--small;
         transition: transform, stroke, 0.2s ease;
-        stroke: $color--default;
+        stroke: $color--lake;
+        transform: rotate(-90deg);
     }
 
     &__content {
         display: none;
+        margin-bottom: 15px;
+        margin-left: 35px + $grid--small;
+        margin-top: 15px;
     }
 }

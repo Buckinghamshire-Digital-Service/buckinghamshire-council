@@ -20,16 +20,22 @@
 {% endblock %}
 
 {% block content %}
-    {% if status == STATUSES.STATUS_EMAIL_SENT %}
-        Thank you for subscribing to the job alert.
-        We will send a confirmation email to the email address provided.
-        Please click on the confirmation link to enable the subscription.
-    {% elif status == STATUSES.STATUS_ALREADY_SUBSCRIBED %}
-        You have already subscribed to this list.
-        If you wish to unsubscribe, please use the unsubscribe link in your job alert email.
-    {% elif status == STATUSES.STATUS_CONFIRMED %}
-        Thank you for confirming your job alert subscription.
-    {% elif status == STATUSES.STATUS_LINK_EXPIRED %}
-        Sorry we could not find a matching subscription. The link you used may have expired.
-    {% endif %}
+<div class="wrapper wrapper--flex">
+    <section class="section section--main">
+        {% if status == STATUSES.STATUS_EMAIL_SENT %}
+            <h1 class="heading heading--xxl">Thank you for subscribing to the job alert</h1>
+            <p>We will send a confirmation email to the email address provided.</p>
+            <p>Please click on the confirmation link to enable your subscription.</p>
+        {% elif status == STATUSES.STATUS_ALREADY_SUBSCRIBED %}
+            <h1 class="heading heading--xxl">You have already subscribed to this list</h1>
+            <p>If you wish to unsubscribe, please use the unsubscribe link in your job alert email.</p>
+        {% elif status == STATUSES.STATUS_CONFIRMED %}
+            <h1 class="heading heading--xxl">Subscription confirmed</h1>
+            <p>Thank you for confirming your job alert subscription.</p>
+        {% elif status == STATUSES.STATUS_LINK_EXPIRED %}
+            <h1 class="heading heading--xxl">No subscription found</h1>
+            <p>Sorry we could not find a matching subscription. The link you used may have expired.</p>
+        {% endif %}
+    </section>
+</div>
 {% endblock %}

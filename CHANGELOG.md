@@ -3,6 +3,14 @@
 ## Unreleased
 
 - Update documentation to reflect change in git workflow.
+- 201 additional components
+- 115 StreamField Button Link block
+- 117 StreamField Table styles
+- 121 Progressive disclosure accordion
+- 122 General formatting improvements
+- 123 Subheading block
+- 108 Search alert (FE)
+- 112 Unsubscribe from alerts (FE)
 
 ## 7.0 (2020-03-25)
 
