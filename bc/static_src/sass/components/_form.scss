@@ -13,7 +13,18 @@
         background-color: $color--tertiary;
     }
 
-    input:not([type='checkbox']):not([type='submit']),
+    &__submit {
+        @include button(
+            $color--slate,
+            $color--leaf,
+            $color--leaf
+        );
+    }
+
+    input[type='text'],
+    input[type='number'],
+    input[type='email'],
+    input[type='url'],
     textarea,
     select {
         @include font-size(s);
@@ -28,28 +39,6 @@
         &:focus-within {
             outline: 0;
             box-shadow: 0 0 0 4px $color--mustard;
-        }
-    }
-
-    // radio button styling
-    input[type='radio'] {
-        appearance: none;
-        width: 30px;
-        height: 30px;
-        border: 2px solid $color--black;
-        border-radius: 50%;
-        margin: 0 $grid--min 0 0;
-        background-color: $color--white;
-
-        &:checked {
-            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 14 14' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='7' cy='7' r='7'/%3E%3C/svg%3E");
-            background-size: 12px 12px;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-
-        &:focus {
-            @include focus();
         }
     }
 
@@ -89,7 +78,7 @@
         display: flex;
         justify-content: flex-end;
 
-        input {
+        input[type='text'] {
             border: 0;
 
             @include media-query(tablet-portrait) {
@@ -102,7 +91,7 @@
         display: flex;
         margin-bottom: $grid;
 
-        input {
+        input[type='text'] {
             border: 0;
 
             @include media-query(tablet-portrait) {
@@ -114,7 +103,7 @@
     &--jobs-hero {
         margin-bottom: 15px;
 
-        input:not([type='checkbox']):not([type='submit']) {
+        input[type='text'] {
             border: 0;
         }
     }
