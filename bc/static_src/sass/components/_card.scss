@@ -51,6 +51,8 @@
             &__summary {
                 color: $color--white;
                 flex-grow: 1;
+                margin-top: 0;
+                margin-bottom: $grid--small;
             }
         }
 
