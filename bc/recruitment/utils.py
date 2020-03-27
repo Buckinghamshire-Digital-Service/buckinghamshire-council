@@ -90,8 +90,9 @@ def get_school_and_early_years_count(search_results=None):
     schools_and_early_years_categories = (
         JobCategory.get_school_and_early_years_categories()
     )
-    search_results = search_results.filter(
-        subcategory__categories__slug__in=schools_and_early_years_categories
-    )
+    if len(schools_and_early_years_categories):
+        search_results = search_results.filter(
+            subcategory__categories__slug__in=schools_and_early_years_categories
+        )
 
     return len(search_results)
