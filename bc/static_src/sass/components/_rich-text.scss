@@ -1,9 +1,14 @@
 .rich-text {
     ul {
-        margin-left: $grid--small;
+        @include font-size(s);
+        margin: $grid--small 0 $grid--small $grid--small;
 
         .page--jobs & {
             margin: $grid--min 0;
+        }
+
+        ul, ol {
+            margin: $grid--min 0 0 $grid--small;
         }
 
         li {
@@ -28,8 +33,13 @@
     }
 
     ol {
+        @include font-size(s);
         list-style: decimal;
-        margin-left: 35px;
+        margin: $grid--small 0 $grid--small $grid--small;
+
+        ol, ul {
+            margin: $grid--min 0 0 $grid--small;
+        }
 
         li {
             padding-left: 10px;
