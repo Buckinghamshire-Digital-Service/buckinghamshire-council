@@ -40,19 +40,10 @@ class BaseCaseForm(django.forms.Form):
         entities = defaultdict(list)
 
         # Convert the fields to XML elements in entities dict
-        # reverse_field_types_dict = {k: v for v, k in FIELD_TYPES}
         for key, value in cleaned_data.items():
             entity_name = key.partition(".")[0]
 
-            element = etree.Element(
-                "field",
-                **{
-                    "schemaName": key,
-                    # "field-type": reverse_field_types_dict[
-                    #     self.fields[key].widget.__class__.__name__
-                    # ],
-                },
-            )
+            element = etree.Element("field", schemaName=key)
             value_element = etree.SubElement(element, "value")
             value_element.text = value
             entities[entity_name].append(element)
