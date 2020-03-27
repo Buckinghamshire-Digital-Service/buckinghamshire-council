@@ -119,7 +119,10 @@ FIELD_MAPPINGS = {
             ("Your Involvement", "Contact.ContactType"),
             ("Type of information requested", "Case.TypeofSAR"),
             ("What personal information is required?", DESCRIPTION_SCHEMA_NAME),
-            ("Which time period does your request cover?", "Case.IncidentDate"),
+            (
+                "Which time period does your request cover?",
+                APPEND_TO_DESCRIPTION + ".time_period",
+            ),
             ("Title", "Contact.OtherTitle"),
             ("First name", "Contact.FirstName"),
             ("Surname", "Contact.Surname"),
