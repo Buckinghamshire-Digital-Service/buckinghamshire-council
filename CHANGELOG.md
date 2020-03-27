@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Update documentation to reflect change in git workflow.
+
 ## 7.0 (2020-03-25)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/6.0...7.0
