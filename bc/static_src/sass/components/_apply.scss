@@ -1,0 +1,555 @@
+// note that .apply is a body class that has to namespace all the other third party
+// classnames in case of clashes with our naming system
+.apply {
+    // because of potential shared classnames for outer template elements (e.g row), we have a further level of nesting here
+    .application-content {
+        position: relative; // allows positioning of save progress button at the bottom of the form
+
+        // reset from clashing namespace
+        .grid {
+            display: block;
+            margin: 0;
+        }
+
+        // save progress button - moved to the bottom
+        .lumesse-apply-save-app-container {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+
+        // edit button - follows example vendor styles
+        .lumesse-apply-save-app-edit-disabled
+            > .lumesse-apply-save-app-edit-button {
+            display: none;
+        }
+
+        // row styling
+        .row {
+            @include media-query(tablet-portrait) {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+
+        // override row styling to fix ie11 bug in a specific case
+        .apply-main-form {
+            display: block;
+        }
+
+        // ensures text inputs don't adjust width when errror message below shows.
+        .col-sm-12 {
+            width: 100%;
+        }
+    }
+
+    // HEADER STYLES
+    .apply-application-title-header {
+        @include font-size(l);
+        display: block;
+        color: $color--grey-accessible;
+        font-weight: $weight--normal;
+    }
+
+    .apply-application-title-content,
+    .lumesse-apply-resume-application-header,
+    h1 {
+        // mirrors heading heading--xxl with a slightly shorter bottom margin to allow the grey
+        // info box below to align with the grey job details box in the sidebar
+        @include font-size(xl);
+        font-weight: $weight--bold;
+        margin-bottom: 28px;
+
+        @include media-query(mob-landscape) {
+            @include font-size(xxl);
+        }
+    }
+
+    // OPTIONS TO RE-USE PREVIOUS APPLICATION / UPLOAD FROM CV
+    // info-box style
+    .well {
+        display: block;
+        margin: 0 0 $grid 0;
+        padding: $grid--small;
+        background: $color--grey-light;
+        border-left: $border--accent $color--primary;
+    }
+
+    // resuse previous application / import from my cv buttons
+    .awli-buttons-wrapper {
+        @include media-query(tablet-portrait) {
+            display: flex;
+        }
+    }
+
+    .reuse-button {
+        @include media-query(tablet-portrait) {
+            margin-right: $grid--small;
+        }
+    }
+
+    .apply-cv-button {
+        margin-top: $grid--small;
+
+        @include media-query(tablet-portrait) {
+            margin: 0;
+        }
+    }
+
+    // initially hide 'how it works' text
+    .apply-sna-description {
+        display: none;
+    }
+
+    // how it works text
+    .apply-sna-show-description-button {
+        color: $color--link;
+        text-decoration: underline;
+        font-weight: $weight--bold;
+        text-transform: capitalize;
+    }
+
+    // VARIOUS INPUT STYLES
+    .textarea,
+    .select-input,
+    .form-control,
+    .text-input {
+        @include font-size(m);
+        border-radius: 0;
+        padding: $grid--min;
+        border: 2px solid $color--slate;
+        color: $color--slate;
+        margin-top: $grid--min;
+        max-width: 300px;
+
+        &:focus {
+            @include focus();
+        }
+    }
+
+    .text-input {
+        width: 100%;
+    }
+
+    .select-input,
+    .form-control,
+    .text-input {
+        height: 40px;
+    }
+
+    /* stylelint-disable declaration-no-important  */
+    .textarea {
+        width: 100%;
+        max-width: 540px;
+        height: 230px !important; //inline style override
+    }
+    /* stylelint-enable declaration-no-important  */
+
+    .select-input,
+    .form-control {
+        @include font-size(s);
+        height: 50px;
+
+        @include media-query(tablet-portrait) {
+            height: 40px;
+        }
+    }
+
+    // radio button styling
+    input[type='radio'] {
+        appearance: none;
+        width: 30px;
+        height: 30px;
+        border: 2px solid $color--black;
+        border-radius: 50%;
+        margin: 0 $grid--min 0 0;
+        background-color: $color--white;
+
+        &:checked {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 14 14' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='7' cy='7' r='7'/%3E%3C/svg%3E");
+            background-size: 12px 12px;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        &:focus {
+            @include focus();
+        }
+    }
+
+    // radio labels (radio buttons nested inside)
+    .radio-inline {
+        display: flex;
+        margin-top: $grid--min;
+        align-items: center;
+    }
+
+    // checkbox styling
+    input[type='checkbox'] {
+        appearance: none;
+        width: 30px;
+        height: 30px;
+        border: 2px solid $color--black;
+        margin: 0 $grid--min 0 0;
+        position: relative;
+        background-color: $color--white;
+
+        &:checked {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M20.285 2L9 13.567 3.714 8.556 0 12.272 9 21 24 5.715z'/%3E%3C/svg%3E");
+            background-size: 16px 16px;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        &:focus {
+            @include focus();
+        }
+    }
+
+    // checkbox labels (check boxes nested inside)
+    .checkbox-inline {
+        display: flex;
+        margin-top: $grid--min;
+        align-items: center;
+    }
+
+    // BUTTON STYLING
+    // file upload / remove button
+    // Most buttons have the btn-primary class. using the secondary button style
+    // which file upload buttons need as the default, as they have no other useful identifier
+    .btn-primary,
+    .apply-remove-button {
+        @include button(
+            $color--grey-accessible,
+            $color--grey-accessible,
+            $color--grey-light
+        );
+    }
+
+    // other file upload bits
+    .apply-attached-document-component {
+        .row {
+            display: block;
+        }
+    }
+
+    .filename-txt {
+        display: none;
+    }
+
+    .apply-fileitem-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .apply-filename-container {
+        order: 1;
+        color: $color--grey-accessible;
+    }
+
+    .apply-filename-block {
+        margin-left: $grid--min;
+    }
+
+    .apply-answer-row-label-block {
+        margin-bottom: $grid--min;
+    }
+
+    // submit button (has to override styles for file upload)
+    .lumesse-apply-widget-submit {
+        .btn-primary {
+            @include button(
+                $color--slate,
+                darken($color--leaf, 25%),
+                $color--leaf
+            );
+        }
+    }
+
+    // save and edit buttons (have to override styles for file upload)
+    .lumesse-apply-save-app-save-button,
+    .lumesse-apply-save-app-edit-button {
+        @include button($color--slate, darken($color--leaf, 25%), $color--leaf);
+    }
+
+    // resume application button (have to override styles for file upload)
+    .lumesse-apply-resume-application-button {
+        @include button($color--slate, darken($color--leaf, 25%), $color--leaf);
+    }
+
+    // start again button
+    .lumesse-apply-resume-start-again-button {
+        @include button(
+            $color--grey-accessible,
+            $color--grey-accessible,
+            $color--grey-light
+        );
+
+        margin-top: $grid--small;
+
+        @include media-query(tablet-portrait) {
+            margin: 0;
+        }
+    }
+
+    // remove button (repeatable employment block)
+    .repeatable-question-remove {
+        @include button($color--white, darken($color--red, 25%), $color--red);
+    }
+
+    // save progress button in modal (has to override styles for file upload)
+    // get access code button in modal (ditto)
+    // reuse button
+    // import data from cv button
+    .save-progress-btn,
+    .my-prev-app-submit-btn,
+    .reuse-button,
+    .apply-cv-button {
+        @include button($color--slate, darken($color--leaf, 25%), $color--leaf);
+    }
+
+    // hide 'ready to be sent' text
+    .lumesse-apply-ready {
+        display: none;
+    }
+
+    // FIELDSET / FORM SECTION STYLING
+    .lum-apply-section {
+        border-top: 1px solid $color--grey-accessible;
+        padding-top: $grid--small;
+        padding-bottom: $grid;
+
+        h2 {
+            @include font-size(l);
+            font-weight: $weight--bold;
+            color: $color--link;
+        }
+    }
+
+    .apply-form {
+        // duplicates the h2
+        .form-legend {
+            display: none;
+        }
+    }
+
+    .form-group {
+        margin-top: $grid--small;
+    }
+
+    // OTHER LABELS
+    .control-label {
+        @include font-size(s);
+        font-family: $font--primary;
+        color: $color--slate;
+        position: relative;
+
+        .apply-required {
+            @include media-query(tablet-portrait) {
+                &::before {
+                    @include font-size(xl);
+                    line-height: 28px;
+                    content: '*';
+                    color: $color--purple;
+                    position: absolute;
+                    left: -0.75em;
+                    top: 0;
+                }
+            }
+        }
+    }
+
+    // data protection question is required, but the .apply-required class is inside
+    // a legend so the styling above is not applied. Use some custom styling here.
+    .dps {
+        position: relative;
+
+        fieldset::before {
+            @include font-size(xl);
+            line-height: 28px;
+            content: '*';
+            color: $color--purple;
+            position: absolute;
+            left: -0.75em;
+            top: 0;
+        }
+    }
+
+    // countries drop down - sits alongside phone number box
+    .country-code {
+        margin-right: $grid;
+    }
+
+    // help text - overrides inline style
+    /* stylelint-disable declaration-no-important  */
+    .apply-description-list {
+        @include font-size(s);
+        display: block !important;
+        color: $color--grey-accessible;
+    }
+    /* stylelint-enable declaration-no-important  */
+
+    // ERROR MESSAGES
+    .alert__fields {
+        background: $color--grey-light;
+        margin: $grid 0;
+        padding: $grid--small;
+        border-left: $border--accent $color--red;
+
+        li {
+            margin-bottom: $grid--min;
+        }
+
+        a {
+            color: $color--red;
+        }
+    }
+
+    // disable all the rules... third party markup is such fun
+    /* stylelint-disable selector-class-pattern  */
+    /* stylelint-disable selector-max-id   */
+    /* stylelint-disable selector-max-specificity   */
+    .Error_field_required,
+    .Error_valid_mail,
+    .Error_value_max_length,
+    .Error_incorrect_phone_number_detailed,
+    .Error_unsupported_file_extension,
+    #lumesse-apply-resume-application-error .help-block {
+        display: block;
+        color: $color--red;
+        padding-top: $grid--min;
+    }
+    /* stylelint-enable selector-class-pattern  */
+    /* stylelint-enable selector-max-id  */
+    /* stylelint-enable selector-max-specificity   */
+
+    // MODAL STYLES
+
+    .modal-body {
+        // reset from clashing namespace
+        .grid {
+            display: block;
+            margin: 0;
+        }
+    }
+
+    .confirm-dialog-container {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.8);
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow-y: auto;
+        z-index: 200;
+    }
+
+    // overrding inline styles
+    /* stylelint-disable declaration-no-important  */
+    .ui-dialog {
+        background-color: $color--white;
+        position: relative;
+        margin: 0 auto;
+        padding: $grid;
+        width: 90% !important;
+
+        @include media-query(tablet-portrait) {
+            top: 150px !important;
+            width: 56% !important;
+            max-width: 800px;
+        }
+
+        // stop the form from being focussed automatically - tab still
+        // works fine to the input box so I think this is ok.
+        /* stylelint-disable a11y/no-outline-none  */
+        form:focus {
+            outline: 0;
+        }
+        /* stylelint-enable a11y/no-outline-none  */
+    }
+    /* stylelint-enable declaration-no-important  */
+
+    .ui-dialog-title {
+        // equivalent of heading--m
+        @include font-size(m);
+        margin-bottom: 5px;
+        display: block;
+        font-weight: $weight--bold;
+        margin-top: $grid--large; // leaves room for 'close' at mobile
+    }
+
+    // close button
+    .ui-button-text {
+        position: absolute;
+        display: inline-block;
+        top: $grid;
+        right: $grid;
+        z-index: 2;
+    }
+
+    .modal-footer {
+        margin-top: $grid--small;
+    }
+
+    // Application received text
+    .apply-message-aplication-received {
+        font-weight: $weight--normal;
+        color: $color--grey-accessible;
+        margin: 0 0 $grid--large;
+    }
+
+    // EMPLOYMENT HISTORY BOX THAT GETS DYNAMICALLY ADDED
+    /* stylelint-disable selector-class-pattern  */
+    .apply-dynamically-added,
+    .subQuestions {
+        background-color: $color--grey-light;
+        padding: $grid--small;
+        margin-bottom: $grid--small;
+    }
+
+    .apply-dynamically-added {
+        .subQuestions {
+            padding: 0;
+        }
+    }
+    /* stylelint-enable selector-class-pattern  */
+
+    .apply-subquestion-noanswer {
+        @include font-size(m);
+        font-weight: $weight--bold;
+        margin-bottom: 5px;
+    }
+
+    // hide weird duplicate labels in employment history
+    // scoping in case needed elsewhere
+    /* stylelint-disable selector-class-pattern  */
+    .employment_history {
+        .repeatable-question-row-label,
+        .composite-question-row-label {
+            display: none;
+        }
+    }
+    /* stylelint-enable selector-class-pattern  */
+
+    // RESUME APPLICATION STYLES
+
+    // make the buttons sit side by side
+    .lumesse-apply-resume-application-content {
+        .form-group {
+            @include media-query(tablet-portrait) {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+
+        // undo display:flex as this element is also .form-group and the above
+        // rule has nothing more specific to hook it onto
+        .lumesse-apply-resume-application-group {
+            @include media-query(tablet-portrait) {
+                display: block;
+            }
+        }
+    }
+}

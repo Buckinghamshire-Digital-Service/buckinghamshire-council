@@ -12,10 +12,12 @@
     <title>Application Form</title>
 {% endcomment %}
 
+{% block body_class %}apply{% endblock %}
+
 {% block extra_css %}
     <!-- Apply -->
     <!-- CTS Default / Branded Bootstrap -->
-    <link href="https://emea3.recruitmentplatform.com/apply-app/static/vanilla-silk/release/1-LATEST/css/cmp-bs.css"
+    {% comment %} <link href="https://emea3.recruitmentplatform.com/apply-app/static/vanilla-silk/release/1-LATEST/css/cmp-bs.css"
           rel="stylesheet">
     <!-- CTS / Cascada Main Silk Style -->
     <link href="https://emea3.recruitmentplatform.com/apply-app/static/vanilla-silk/release/1-LATEST/css/main.css"
@@ -24,7 +26,7 @@
     <link href="https://fonts.googleapis.com/css?family=Boogaloo" rel="stylesheet">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Questrial">
     <link rel="stylesheet" type="text/css" href="{% static 'vendor/talentlink/css/custom.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'vendor/talentlink/css/ie-fixes.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/talentlink/css/ie-fixes.css' %}"/> {% endcomment %}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -40,6 +42,24 @@
 {% endcomment %}
 
 {% block content %}
+<div class="wrapper wrapper--flex wrapper--margin">
+    <section class="section section--main">
+
+        <div class="row">
+            <div id="apply-content" class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+                <section>
+                    <div data-lumesse-apply-resume class="hidden"></div>
+                    <div data-lumesse-apply-container data-lumesse-apply-errors-placement="top"
+                        data-lumesse-apply-description-placement="top" class="tsApplyContainer"></div>
+                    <div data-lumesse-apply-submission-accepted class=""></div>
+                </section>
+            </div>
+        </div>
+    </section>
+
+    {% include "patterns/molecules/jobs-sidebar/jobs-sidebar.html" %}
+</div>
+{% comment %}
 <main class="container" id="vanillaApplyContent">
     <div class="row">
         <div id="apply-content" class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
@@ -52,6 +72,7 @@
         </div>
     </div>
 </main>
+{% endcomment %}
 {% endblock %}
 
 {% block extra_js %}
@@ -69,7 +90,7 @@
         src="https://emea3.recruitmentplatform.com/apply-app/static/apply/release/2-LATEST/apply-application-form-namespaced.js"></script>
 <script src="https://cdn-ui.lumessetalentlink.com/thirdparties/jquery/1.12.3/jquery.min.js"></script>
 <script type="text/javascript" src="{% static 'vendor/talentlink/javascript/main.js' %}"></script>
-<script src="https://cdn-ui.lumessetalentlink.com/thirdparties/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+{% comment %} <script src="https://cdn-ui.lumessetalentlink.com/thirdparties/bootstrap/3.4.1/js/bootstrap.min.js"></script> {% endcomment %}
 {% endblock %}
 {% comment %}
 </body>

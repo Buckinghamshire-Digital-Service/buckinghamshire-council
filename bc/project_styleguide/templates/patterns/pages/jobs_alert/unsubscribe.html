@@ -20,9 +20,17 @@
 {% endblock %}
 
 {% block content %}
-    {% if status == STATUSES.STATUS_UNSUBSCRIBED %}
-        You have been unsubscribed from the job alert.
-    {% elif status == STATUSES.STATUS_LINK_EXPIRED %}
-        Sorry we could not find a matching job alert subscription.
-    {% endif %}
+
+<div class="wrapper wrapper--flex">
+    <section class="section section--main">
+        {% if status == STATUSES.STATUS_UNSUBSCRIBED %}
+            <h1 class="heading heading--xxl">You have successfully unsubscribed</h1>
+            <p>You've been unsubscribed from the job alert.</p>
+        {% elif status == STATUSES.STATUS_LINK_EXPIRED %}
+            <h1 class="heading heading--xxl">Subscription not found</h1>
+            <p>Sorry, we could not find a matching job alert subscription.</p>
+        {% endif %}
+    </section>
+</div>
+
 {% endblock %}

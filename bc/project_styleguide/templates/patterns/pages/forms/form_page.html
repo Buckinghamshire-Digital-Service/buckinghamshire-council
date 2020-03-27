@@ -1,20 +1,19 @@
 {% extends "patterns/base_page.html" %}
-{% load wagtailcore_tags wagtailimages_tags util_tags static %}
+{% load wagtailcore_tags wagtailimages_tags form_tags util_tags static %}
 
 {% block content %}
 
     <div class="intro">
         <div class="container">
-            {% include "patterns/molecules/share/share.html" %}
-            <h1>{{ page.title }}</h1>
-            <p>{{ page.introduction }}</p>
+            <h1 class="heading heading--xxl">{{ page.title }}</h1>
+            <div class="helpful-hint">{{ page.introduction }}</div>
         </div>
     </div>
 
     <section class="main-body">
         <div class="container">
             {% if page.form_fields.exists %}
-                    <form action="{% pageurl page %}" method="post" class="form">
+                    <form action="{% pageurl page %}" method="post" class="form form--standard">
                         <div class="form__container">
                             {% csrf_token %}
 
@@ -25,6 +24,9 @@
                             {% endif %}
 
                             {% for field in form %}
+
+                                {% get_form_additional_text page field as additional_text %}
+                                <p>{{ additional_text|richtext }}</p>
 
                                 {% with widget_type=field|widget_type field_type=field|field_type %}
                                     <div class="form-item {% if field_type %}form-item--{{ field_type }}{% endif %} {% if widget_type %}form-item--{{ widget_type }}{% endif %} {% if field.errors %}form-item--errors{% endif %}">

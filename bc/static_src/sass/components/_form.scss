@@ -13,14 +13,17 @@
         background-color: $color--tertiary;
     }
 
+    fieldset {
+        margin-bottom: $grid--min;
+    }
+
     input {
-        @include font-size(m);
-        border: 0;
+        @include font-size(s);
         border-radius: 0;
-        padding: $grid--min;
-        width: 100%;
         max-width: 540px;
-        height: 50px;
+        height: 45px;
+        padding: 10px;
+        width: 100%;
     }
 
     &--subscribe {
@@ -81,5 +84,23 @@
 
     &--jobs-hero {
         margin-bottom: 15px;
+    }
+
+    &--job-alerts {
+        margin-bottom: $grid;
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        label,
+        input {
+            display: block;
+        }
+
+        input[type='submit'] {
+            padding: 0;
+            max-width: 250px;
+        }
     }
 }
