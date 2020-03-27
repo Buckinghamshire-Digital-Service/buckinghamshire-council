@@ -11,6 +11,7 @@
 - 123 Subheading block
 - 108 Search alert (FE)
 - 112 Unsubscribe from alerts (FE)
+- 138 Additional job sidebar fields (FE)
 
 ## 7.0 (2020-03-25)
 
