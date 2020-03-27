@@ -5,7 +5,10 @@ from django.test import TestCase
 
 from lxml import etree
 
-from bc.cases.backends.respond.constants import XML_ENTITY_MAPPING
+from bc.cases.backends.respond.constants import (
+    COMPLAINTS_WEBSERVICE,
+    XML_ENTITY_MAPPING,
+)
 from bc.cases.backends.respond.forms import BaseCaseForm
 
 
@@ -20,6 +23,12 @@ class SchemaTest(TestCase):
   </field>
   <field schemaName="Case.AdditionalComments">
     <value></value>
+  </field>
+  <field schemaName="Case.FeedbackType">
+    <value>Corporate</value>
+  </field>
+  <field schemaName="Case.HowReceived">
+    <value>Web Form</value>
   </field>
   <Contacts>
     <contact Tag="">
@@ -55,6 +64,9 @@ class SchemaTest(TestCase):
       </field>
       <field schemaName="Contact.ZipCode">
         <value></value>
+      </field>
+      <field schemaName="Contact.ContactIs">
+        <value>Other</value>
       </field>
     </contact>
   </Contacts>
@@ -92,6 +104,7 @@ class SchemaTest(TestCase):
             "Contact.Town": "",
             "Contact.County": "",
             "Contact.ZipCode": "",
+            "service_name": COMPLAINTS_WEBSERVICE,
         }
         generated = etree.tostring(
             form.get_xml(cleaned_data), pretty_print=True

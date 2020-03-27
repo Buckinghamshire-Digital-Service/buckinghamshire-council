@@ -16,3 +16,6 @@ class TestCleanedData(TestCase):
 
     def test_help_text(TestCase):
         pass
+
+    def test_hidden_service_name_field(TestCase):
+        pass

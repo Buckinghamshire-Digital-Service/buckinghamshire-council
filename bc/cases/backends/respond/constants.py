@@ -4,20 +4,67 @@ CREATE_CASE_TYPE = "CaseCreate"
 FIELD_INFO_TYPE = "FieldInfo"
 CATEGORY_INFO_TYPE = "CategoryInfo"
 
+RESPOND_FIELDS_CACHE_PREFIX = "respond_field__"
+RESPOND_CATEGORIES_CACHE_PREFIX = "respond_categories__"
+
+# Known create case web services
 COMPLAINTS_WEBSERVICE = "TestCreateComplaints"
 FOI_WEBSERVICE = "TestCreateFOI"
 SAR_WEBSERVICE = "TestCreateSAR"
 COMMENTS_WEBSERVICE = "TestCreateComments"
 
-CREATE_CASE_SERVICES = [
-    COMPLAINTS_WEBSERVICE,
-    FOI_WEBSERVICE,
-    SAR_WEBSERVICE,
-    COMMENTS_WEBSERVICE,
-]
+# This defines the services to register, and provides options for them. Only set
+# stanagedicfixelds (system-managed static fixed fields) where they differ from those in
+# the defaults set below here. This options dictionary is processed when the module is
+# loaded.
+CREATE_CASE_SERVICES = {
+    COMPLAINTS_WEBSERVICE: {
+        "stanagedicfixelds": {},
+        "help_text": {
+            "Case.Description": "Which service is this about? What happened and when?",
+            "Contact.OtherTitle": "optional",
+        },
+        "field_type_overrides": {"Case.ActionTaken01": "TextInput"},
+    },
+    FOI_WEBSERVICE: {
+        "stanagedicfixelds": {},
+        "help_text": {
+            "Case.Description": (
+                "Where appropriate, include names, dates, references and descriptions to "
+                "enable us to identify and locate the required information"
+            )
+        },
+    },
+    SAR_WEBSERVICE: {
+        "stanagedicfixelds": {},
+        "help_text": {
+            "Case.TypeofSAR": (
+                "Include any known reference numbers or other unique identifiers to help "
+                "us locate your personal data (for example, a customer account number)"
+            ),
+            "Contact.DateofBirth": "For example, 23 05 1978",
+        },
+    },
+    COMMENTS_WEBSERVICE: {},
+}
 
-RESPOND_FIELDS_CACHE_PREFIX = "respond_field__"
-RESPOND_CATEGORIES_CACHE_PREFIX = "respond_categories__"
+DEFAULT_STANAGEDICFIXELDS = {
+    "Case.FeedbackType": "Corporate",
+    "Case.HowReceived": "Web Form",
+    "Contact.ContactIs": "Other",
+}
+
+# Set defaults for services which have not set custom stanagedicfixelds
+for service in CREATE_CASE_SERVICES.values():
+    try:
+        stanagedicfixelds = service["stanagedicfixelds"]
+    except KeyError:
+        service["stanagedicfixelds"] = DEFAULT_STANAGEDICFIXELDS
+    else:
+        for key in DEFAULT_STANAGEDICFIXELDS:
+            if key not in stanagedicfixelds:
+                stanagedicfixelds[key] = DEFAULT_STANAGEDICFIXELDS[key]
+
 
 FIELD_MAPPINGS = {
     COMPLAINTS_WEBSERVICE: OrderedDict(
@@ -106,36 +153,7 @@ FIELD_MAPPINGS = {
 }
 
 
-"""Help text format:
->>> {
-    service_name: {
-        schema_name: text_string
-    }
-}
-"""
-HELP_TEXT = {
-    COMPLAINTS_WEBSERVICE: {
-        "Case.Description": "Which service is this about? What happened and when?",
-        "Contact.OtherTitle": "optional",
-    },
-    FOI_WEBSERVICE: {
-        "Case.Description": (
-            "Where appropriate, include names, dates, references and descriptions to "
-            "enable us to identify and locate the required information"
-        )
-    },
-    SAR_WEBSERVICE: {
-        "Case.TypeofSAR": (
-            "Include any known reference numbers or other unique identifiers to help "
-            "us locate your personal data (for example, a customer account number)"
-        ),
-        "Contact.DateofBirth": "For example, 23 05 1978",
-    },
-    COMMENTS_WEBSERVICE: {},
-}
-
-
-"""Custom options format:
+"""Custom option labels for select input fields. Format:
 >>> {
     SchemaName: {
         provided_label: desired_label
@@ -150,6 +168,7 @@ CUSTOM_OPTIONS = {
 }
 
 
+# This is used to generate the submitted data in accordance with the provided schema
 XML_ENTITY_MAPPING = OrderedDict(
     [
         # Format
@@ -162,8 +181,3 @@ XML_ENTITY_MAPPING = OrderedDict(
         ("Activity", ("Activities", "activity")),
     ]
 )
-
-# Hardcode some fields
-CASE_FEEDBACK_TYPE_VALUE = "Corporate"
-CASE_HOW_RECEIVED_VALUE = "Web Form"
-CONTACT_CONTACT_IS_VALUE = "Other"

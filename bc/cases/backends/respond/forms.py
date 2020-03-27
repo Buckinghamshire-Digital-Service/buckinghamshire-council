@@ -7,11 +7,8 @@ from django.core.cache import cache
 from lxml import etree
 
 from .constants import (
-    CASE_FEEDBACK_TYPE_VALUE,
-    CASE_HOW_RECEIVED_VALUE,
-    CONTACT_CONTACT_IS_VALUE,
+    CREATE_CASE_SERVICES,
     FIELD_MAPPINGS,
-    HELP_TEXT,
     RESPOND_CATEGORIES_CACHE_PREFIX,
     RESPOND_FIELDS_CACHE_PREFIX,
     XML_ENTITY_MAPPING,
@@ -36,13 +33,11 @@ class BaseCaseForm(django.forms.Form):
             "case", Tag="", xmlns="http://www.aptean.com/respond/caserequest/1"
         )
 
-        entities = defaultdict(list)
-
         # Add required field values
-        # TODO: Case.FeedbackType and Contact.ContactIs may need to vary by form
-        cleaned_data["Case.FeedbackType"] = CASE_FEEDBACK_TYPE_VALUE
-        cleaned_data["Case.HowReceived"] = CASE_HOW_RECEIVED_VALUE
-        cleaned_data["Contact.ContactIs"] = CONTACT_CONTACT_IS_VALUE
+        service_name = cleaned_data.pop("service_name")
+        cleaned_data.update(CREATE_CASE_SERVICES[service_name]["stanagedicfixelds"])
+
+        entities = defaultdict(list)
 
         # Convert the fields to XML elements in entities dict
         # reverse_field_types_dict = {k: v for v, k in FIELD_TYPES}
@@ -108,8 +103,20 @@ class CaseFormBuilder:
         """
 
         service_name = self.web_service_definition.find("name").text.strip()
+        self.create_TextInput_field(
+            self,
+            schema_name="",
+            options={
+                "initial": service_name,
+                "widget": django.forms.widgets.HiddenInput(),
+            },
+        )
+
         field_mapping = FIELD_MAPPINGS[service_name]
-        help_texts = HELP_TEXT[service_name]
+        try:
+            help_texts = CREATE_CASE_SERVICES[service_name]["help_text"]
+        except KeyError:
+            help_texts = {}
 
         # It's much faster to build a dict of field elements and use dictionary lookups
         # than to use self.web_service_definition.find(**{schema-name: schema_name}) on
