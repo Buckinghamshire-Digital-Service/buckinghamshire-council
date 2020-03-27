@@ -12,22 +12,16 @@
                 <dd class="sidebar__job-detail-description">{{ page.salary_range }}</dd>
             </div>
         {% endif %}
-        {% if page.reference_number %}
+        {% if page.job_number %}
             <div>
                 <dt class="sidebar__job-detail-title">Reference number</dt>
-                <dd class="sidebar__job-detail-description">{{ page.reference_number }}</dd>
+                <dd class="sidebar__job-detail-description">{{ page.job_number }}</dd>
             </div>
         {% endif %}
         {% if page.contract_type %}
             <div>
                 <dt class="sidebar__job-detail-title">Contract type</dt>
                 <dd class="sidebar__job-detail-description">{{ page.contract_type }}</dd>
-            </div>
-        {% endif %}
-        {% if page.working_pattern %}
-            <div>
-                <dt class="sidebar__job-detail-title">Working pattern</dt>
-                <dd class="sidebar__job-detail-description">{{ page.working_pattern }}</dd>
             </div>
         {% endif %}
         {% if page.working_hours %}

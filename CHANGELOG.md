@@ -12,6 +12,7 @@
 - 108 Search alert (FE)
 - 112 Unsubscribe from alerts (FE)
 - 138 Additional job sidebar fields (FE)
+- 139 Additional job sidebar fields (BE)
 
 ## 7.0 (2020-03-25)
 
