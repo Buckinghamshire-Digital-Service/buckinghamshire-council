@@ -44,11 +44,6 @@ class BaseCaseForm(django.forms.Form):
         cleaned_data["Case.HowReceived"] = CASE_HOW_RECEIVED_VALUE
         cleaned_data["Contact.ContactIs"] = CONTACT_CONTACT_IS_VALUE
 
-        # The Contact.Title filed must be set to Other if the user
-        # enters a title
-        if cleaned_data["Contact.OtherTitle"] != "":
-            cleaned_data["Contact.Title"] = "Other"
-
         # Convert the fields to XML elements in entities dict
         # reverse_field_types_dict = {k: v for v, k in FIELD_TYPES}
         for key, value in cleaned_data.items():
