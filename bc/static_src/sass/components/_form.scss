@@ -14,11 +14,7 @@
     }
 
     &__submit {
-        @include button(
-            $color--slate,
-            $color--leaf,
-            $color--leaf
-        );
+        @include button($color--slate, $color--leaf, $color--leaf);
     }
 
     input[type='text'],
