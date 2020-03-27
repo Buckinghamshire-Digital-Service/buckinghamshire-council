@@ -16,6 +16,8 @@
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/6.0...7.0
 
+- 51 Events Page front end
+- 68 News Page front end
 - 105 Job applications back-end
 - 106 Job applications front-end
 - 109 Job alert subscription
