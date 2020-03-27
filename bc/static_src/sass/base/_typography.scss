@@ -74,6 +74,7 @@ small {
 .heading {
     font-weight: $weight--bold;
     margin-bottom: $grid--min;
+    margin-top: 0;
 
     &--xxxl {
         @include font-size(xl);

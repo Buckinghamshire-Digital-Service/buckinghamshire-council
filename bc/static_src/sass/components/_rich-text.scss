@@ -7,7 +7,8 @@
             margin: $grid--min 0;
         }
 
-        ul, ol {
+        ul,
+        ol {
             margin: $grid--min 0 0 $grid--small;
         }
 
@@ -37,7 +38,8 @@
         list-style: decimal;
         margin: $grid--small 0 $grid--small $grid--small;
 
-        ol, ul {
+        ol,
+        ul {
             margin: $grid--min 0 0 $grid--small;
         }
 
@@ -56,13 +58,13 @@
 
     h2 {
         @include font-size(m);
-        margin-bottom: 5px;
+        margin-bottom: $grid--min;
         font-weight: $weight--bold;
     }
 
     h3 {
         @include font-size(s);
-        margin-bottom: 5px;
+        margin-bottom: $grid--min;
         font-weight: $weight--bold;
     }
 }
