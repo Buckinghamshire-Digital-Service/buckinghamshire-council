@@ -12,6 +12,7 @@ COMPLAINTS_WEBSERVICE = "TestCreateComplaints"
 FOI_WEBSERVICE = "TestCreateFOI"
 SAR_WEBSERVICE = "TestCreateSAR"
 COMMENTS_WEBSERVICE = "TestCreateComments"
+COMPLIMENTS_WEBSERVICE = "TestCreateCompliments"
 
 # This defines the services to register, and provides options for them. Only set
 # stanagedicfixelds (system-managed static fixed fields) where they differ from those in
@@ -46,6 +47,7 @@ CREATE_CASE_SERVICES = {
         },
     },
     COMMENTS_WEBSERVICE: {},
+    COMPLIMENTS_WEBSERVICE: {"stanagedicfixelds": {"Case.FeedbackType": "Compliment"}},
 }
 
 DEFAULT_STANAGEDICFIXELDS = {
@@ -133,6 +135,24 @@ FIELD_MAPPINGS = {
         ]
     ),
     COMMENTS_WEBSERVICE: OrderedDict(
+        [
+            ("Your comment or suggestion", "Case.Description"),
+            ("Title", "Contact.OtherTitle"),
+            ("First name", "Contact.FirstName"),
+            ("Last name", "Contact.Surname"),
+            (
+                "How would you prefer to be contacted? ",
+                "Contact.PreferredContactMethod",
+            ),
+            ("Email address", "Contact.Email"),
+            ("Contact number", "Contact.Mobile"),
+            ("Building and street address", "Contact.Address01"),
+            ("Town or city", "Contact.Town"),
+            ("County", "Contact.County"),
+            ("Postcode", "Contact.ZipCode"),
+        ]
+    ),
+    COMPLIMENTS_WEBSERVICE: OrderedDict(
         [
             ("Your comment or suggestion", "Case.Description"),
             ("Title", "Contact.OtherTitle"),
