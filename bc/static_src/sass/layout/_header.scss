@@ -1,4 +1,5 @@
 .header {
+    $root: &;
     padding: 12px 0;
     background-color: $color--primary;
 
@@ -14,7 +15,7 @@
         display: block;
 
         @include media-query(px550) {
-            margin-right: $grid;
+            margin-right: $grid * 2;
         }
     }
 
@@ -35,6 +36,42 @@
         .template-home-page &,
         .template-jobs-home & {
             display: none;
+        }
+    }
+
+    &--jobs {
+        #{$root}__inner {
+            justify-content: flex-start;
+        }
+    }
+
+    &__heading {
+        align-items: center;
+        display: flex;
+        flex: 1 0 0;
+        justify-content: space-between;
+    }
+
+    &__heading-title {
+        @include font-size(xl);
+        color: $color--white;
+        font-weight: $weight--bold;
+        margin-top: $grid--min;
+        margin-right: 10px;
+
+        @include media-query(px550) {
+            @include font-size(xl);
+            margin-top: 0;
+        }
+    }
+
+    &__heading-logo {
+        background-color: $color--white;
+        max-height: 44px;
+        padding: 3px 3px 0 3px;
+
+        @include media-query(px550) {
+            align-self: flex-end;
         }
     }
 }
