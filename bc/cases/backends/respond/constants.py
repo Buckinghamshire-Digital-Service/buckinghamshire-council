@@ -117,7 +117,6 @@ FIELD_MAPPINGS = {
     SAR_WEBSERVICE: OrderedDict(
         [
             ("Your Involvement", "Contact.ContactType"),
-            ("Type of information requested", "Case.TypeofSAR"),
             ("What personal information is required?", DESCRIPTION_SCHEMA_NAME),
             (
                 "Which time period does your request cover?",
@@ -188,7 +187,8 @@ FIELD_MAPPINGS = {
 """
 CUSTOM_OPTIONS = {
     "Contact.ContactType": {
-        "Primary": "I am the complainant",
+        # Ideally this text would be different for Complaints and for SARs
+        "Primary": "I am submitting this form for myself",
         "Secondary": "I represent someone else",
     }
 }
