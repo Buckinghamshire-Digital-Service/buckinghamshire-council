@@ -1,6 +1,11 @@
 .search-result {
     margin-bottom: $grid;
 
+    &__logo {
+        float: right;
+        margin: 0 $grid--small 0 $grid--small;
+    }
+
     &__description {
         margin: 0;
     }
