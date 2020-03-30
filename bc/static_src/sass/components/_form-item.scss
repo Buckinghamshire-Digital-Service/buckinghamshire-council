@@ -166,6 +166,35 @@
         height: 200px;
     }
 
+    input[type='checkbox'] {
+        margin-right: 10px;
+    }
+
+    &__checkbox {
+        @include hidden();
+
+        + #{$root}__label {
+            @include font-size(s);
+            font-weight: normal;
+        }
+
+        &:checked {
+            + #{$root}__label {
+                #{$root}__dummy-checkbox::after {
+                    opacity: 1;
+                }
+            }
+        }
+
+        &:focus {
+            + #{$root}__label {
+                #{$root}__dummy-checkbox {
+                    box-shadow: 0 0 0 4px $color--grey-medium;
+                }
+            }
+        }
+    }
+
     &__dummy-checkbox {
         position: relative;
         display: inline-block;
