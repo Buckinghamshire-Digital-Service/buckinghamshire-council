@@ -1,0 +1,8 @@
+.checkbox-button {
+    &__set {
+        align-items: center;
+        display: flex;
+        justify-content: flex-start;
+        margin: 0 0 $grid--min 0;
+    }
+}
