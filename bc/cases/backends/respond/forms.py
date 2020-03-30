@@ -19,11 +19,12 @@ from .constants import (
 logger = logging.getLogger(__name__)
 
 SHORT_TEXT_DATA_TYPE = "ShortText"
+CATEGORY_DATA_TYPE = "Category"
 FIELD_TYPES = {
     # "Status", This one appears only in one web service, not of the create case type
     # "SystemAllocation", Maybe a foreign key field, used for data like 'created by'
     # "Journal", This appears only against a field with schema Case.ActionTaken
-    "Category": "RadioSelect",
+    CATEGORY_DATA_TYPE: "RadioSelect",
     "DateTime": "DateInput",
     "LongText": "Textarea",
     SHORT_TEXT_DATA_TYPE: "TextInput",
@@ -112,20 +113,16 @@ class CaseFormBuilder:
         </field>
         """
 
-        service_name = self.web_service_definition.find("name").text.strip()
+        self.service_name = self.web_service_definition.find("name").text.strip()
         formfields["service_name"] = self.create_TextInput_field(
             schema_name="",
             options={
-                "initial": service_name,
+                "initial": self.service_name,
                 "widget": django.forms.widgets.HiddenInput(),
             },
         )
 
-        field_mapping = FIELD_MAPPINGS[service_name]
-        try:
-            help_texts = CREATE_CASE_SERVICES[service_name]["help_text"]
-        except KeyError:
-            help_texts = {}
+        field_mapping = FIELD_MAPPINGS[self.service_name]
 
         # It's much faster to build a dict of field elements and use dictionary lookups
         # than to use self.web_service_definition.find(**{schema-name: schema_name}) on
@@ -138,28 +135,23 @@ class CaseFormBuilder:
         for label, schema_name in field_mapping.items():
             if schema_name.startswith(APPEND_TO_DESCRIPTION):
                 # special case
-                data_type = SHORT_TEXT_DATA_TYPE
-                options = {}
+                options = self.get_field_options(schema_name, permit_cache_miss=True)
+                if "choices" in options:
+                    data_type = CATEGORY_DATA_TYPE
+                else:
+                    data_type = SHORT_TEXT_DATA_TYPE
             else:
                 xml_field = field_defs[schema_name]
                 data_type = xml_field.attrs["data-type"]
                 options = self.get_field_options(schema_name)
-                if not options:
-                    logger.error(f"options could not be found for field '{schema_name}")
-                    # TODO: We will end up here if a field definition is missing
-                    # from the field definition endpoint response. We should
-                    # probably raise an exception here
+
+            options["label"] = label
 
             try:
                 field_type = FIELD_TYPES[data_type]
             except KeyError:
                 raise ValueError("Unexpected field data type encountered")
             create_field = getattr(self, f"create_{field_type}_field")
-            options["label"] = label
-            try:
-                options["help_text"] = help_texts[schema_name]
-            except KeyError:
-                pass
             formfields[schema_name] = create_field(schema_name, options)
         return formfields
 
@@ -178,34 +170,28 @@ class CaseFormBuilder:
 
     def create_RadioSelect_field(self, schema_name, options):
         """A radio input"""
-        cache_key = RESPOND_CATEGORIES_CACHE_PREFIX + schema_name
-        cached_choices = cache.get(cache_key)
-        """ Example categories API response element
-        <field data-type="Category" leaf-only="true" multiple-select="false" schema-name="Contact.ContactType">
-            <name locale="en-GB">
-                Contact Type
-            </name>
-            <options>
-                <option available="true" id="552affc7-1596-4762-a771-3a47e5b3bab2">
-                    <name locale="en-GB">
-                        Primary
-                    </name>
-                </option>
-                <option available="true" id="3286a683-7ce8-4b9e-bb78-af34ae0d9fe1">
-                    <name locale="en-GB">
-                        Secondary
-                    </name>
-                </option>
-            </options>
-        </field>
-        """
-        options["choices"] = cached_choices
+        if "choices" not in options:
+            cache_key = RESPOND_CATEGORIES_CACHE_PREFIX + schema_name
+            cached_choices = cache.get(cache_key)
+            options["choices"] = cached_choices
         return django.forms.ChoiceField(widget=django.forms.RadioSelect, **options)
 
-    def get_field_options(self, schema_name):
+    def get_field_options(self, schema_name, permit_cache_miss=False):
         """ This may end up just returning 'required' or not. """
         cache_key = RESPOND_FIELDS_CACHE_PREFIX + schema_name
-        return cache.get(cache_key)
+        options = cache.get(cache_key, {})
+        if not options and not permit_cache_miss:
+            raise Exception("Cache miss for field options")
+
+        try:
+            options.update(
+                CREATE_CASE_SERVICES[self.service_name]["custom_field_options"][
+                    schema_name
+                ]
+            )
+        except KeyError:
+            pass
+        return options
 
     def get_form_class(self):
         return type("CaseForm", (BaseCaseForm,), self.formfields)

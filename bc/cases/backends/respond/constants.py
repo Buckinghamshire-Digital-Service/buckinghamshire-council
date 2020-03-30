@@ -23,31 +23,36 @@ COMPLIMENTS_WEBSERVICE = "TestCreateCompliments"
 # loaded.
 CREATE_CASE_SERVICES = {
     COMPLAINTS_WEBSERVICE: {
-        "stanagedicfixelds": {},
-        "help_text": {
-            DESCRIPTION_SCHEMA_NAME: "Which service is this about? What happened and when?",
-            "Contact.OtherTitle": "optional",
+        "custom_field_options": {
+            DESCRIPTION_SCHEMA_NAME: {
+                "help_text": "Which service is this about? What happened and when?"
+            },
+            "Contact.OtherTitle": {"help_text": "optional"},
         },
         "field_type_overrides": {"Case.ActionTaken01": "TextInput"},
     },
     FOI_WEBSERVICE: {
-        "stanagedicfixelds": {},
-        "help_text": {
-            DESCRIPTION_SCHEMA_NAME: (
-                "Where appropriate, include names, dates, references and descriptions to "
-                "enable us to identify and locate the required information"
-            )
-        },
+        "custom_field_options": {
+            DESCRIPTION_SCHEMA_NAME: {
+                "help_text": {
+                    "Where appropriate, include names, dates, references and descriptions to "
+                    "enable us to identify and locate the required information"
+                }
+            }
+        }
     },
     SAR_WEBSERVICE: {
-        "stanagedicfixelds": {},
-        "help_text": {
-            "Case.TypeofSAR": (
-                "Include any known reference numbers or other unique identifiers to help "
-                "us locate your personal data (for example, a customer account number)"
-            ),
-            "Contact.DateofBirth": "For example, 23 05 1978",
-        },
+        "custom_field_options": {
+            "Case.TypeofSAR": {
+                "help_text": {
+                    (
+                        "Include any known reference numbers or other unique identifiers to help "
+                        "us locate your personal data (for example, a customer account number)"
+                    )
+                }
+            },
+            "Contact.DateofBirth": {"help_text": "For example, 23 05 1978"},
+        }
     },
     COMMENTS_WEBSERVICE: {},
     COMPLIMENTS_WEBSERVICE: {"stanagedicfixelds": {"Case.FeedbackType": "Compliment"}},
