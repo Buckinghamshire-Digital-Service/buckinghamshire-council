@@ -170,9 +170,6 @@ class CaseFormBuilder:
     def create_DateInput_field(self, schema_name, options):
         return django.forms.DateField(**options)
 
-    # def create_email_field(self, schema_name, options):
-    #     return django.forms.EmailField(**options)
-
     def create_RadioSelect_field(self, schema_name, options):
         """A radio input"""
         if "choices" not in options:

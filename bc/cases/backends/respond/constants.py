@@ -22,9 +22,6 @@ DISCLOSURE_WEBSERVICE = "TestCreateDisclosures"
 SHORT_TEXT_DATA_TYPE = "ShortText"
 CATEGORY_DATA_TYPE = "Category"
 FIELD_TYPES = {
-    # "Status", This one appears only in one web service, not of the create case type
-    # "SystemAllocation", Maybe a foreign key field, used for data like 'created by'
-    # "Journal", This appears only against a field with schema Case.ActionTaken
     CATEGORY_DATA_TYPE: "RadioSelect",
     "DateTime": "DateInput",
     "LongText": "Textarea",
@@ -32,10 +29,10 @@ FIELD_TYPES = {
 }
 
 
-# This defines the services to register, and provides options for them. Only set
-# stanagedicfixelds (system-managed static fixed fields) where they differ from those in
-# the defaults set below here. This options dictionary is processed when the module is
-# loaded.
+# This defines the services to register, and provides options for them. The
+# stanagedicfixelds (system-managed static fixed fields) options dictionary is processed
+# when the module is loaded. Only set where they differ from those in the defaults set
+# below here.
 CREATE_CASE_SERVICES = {
     COMPLAINTS_WEBSERVICE: {
         "stanagedicfixelds": {"Case.FeedbackType": "Corporate"},
@@ -162,8 +159,6 @@ FIELD_MAPPINGS = {
     COMPLAINTS_WEBSERVICE: OrderedDict(
         [
             ("Your Involvement", "Contact.ContactType"),
-            # TODO This field is missing from the API response
-            # ("Which service is this about?", "Service Area"),
             ("Your complaint", DESCRIPTION_SCHEMA_NAME),
             (
                 "What would you like to happen as a result of your complaint?",
@@ -273,7 +268,6 @@ FIELD_MAPPINGS = {
     DISCLOSURE_WEBSERVICE: OrderedDict(
         [
             ("Details of information required", DESCRIPTION_SCHEMA_NAME),
-            # NOTE 'nature of the investigation -> 'additionalcomments' in doc but not in API
             ("Information required because", APPEND_TO_DESCRIPTION + ".reason"),
             # TODO ("Do you wish to attach any documents to this request?",
             ("Are you an individual or a company?", "Contact.Organisation"),
