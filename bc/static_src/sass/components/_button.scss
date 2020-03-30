@@ -7,7 +7,7 @@
     background-color: $color--link;
     color: $color--white;
     font-weight: $weight--bold;
-    max-height: $grid--medium;
+    min-height: $grid--medium;
     padding: 0 $grid--small;
 
     #{$hover-states} {
