@@ -26,7 +26,7 @@
         @include font-size(s);
         border: 2px solid $color--off-black;
         border-radius: 0;
-        padding: $grid--min;
+        padding: $grid--min / 2 $grid--min;
         width: 100%;
         max-width: 540px;
         min-height: $grid--medium;
