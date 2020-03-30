@@ -2,16 +2,20 @@
 
 ## Unreleased
 
+## 8.0 (2020-03-30)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/6.0...7.0
+
 - Update documentation to reflect change in git workflow.
-- 201 additional components
+- 108 Search alert (FE)
+- 112 Unsubscribe from alerts (FE)
 - 115 StreamField Button Link block
 - 117 StreamField Table styles
 - 121 Progressive disclosure accordion
 - 122 General formatting improvements
 - 123 Subheading block
-- 108 Search alert (FE)
-- 112 Unsubscribe from alerts (FE)
 - 163 Add Fathom Analytics
+- 201 additional components
 
 ## 7.0 (2020-03-25)
 
