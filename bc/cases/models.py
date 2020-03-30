@@ -97,7 +97,7 @@ class ApteanRespondCaseFormPage(BasePage):
         soup = BeautifulSoup(response.content, "xml")
         if response.status_code != 200:
             for error in soup.find_all("failure"):
-                if error.attrs["schemaName"] in form:
+                if error.attrs["schemaName"] in form.fields:
                     form.add_error(error.attrs["schemaName"], error.text)
                 else:
                     form.add_error(None, error.text)
