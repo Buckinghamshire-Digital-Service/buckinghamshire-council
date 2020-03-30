@@ -258,23 +258,19 @@
     // submit button (has to override styles for file upload)
     .lumesse-apply-widget-submit {
         .btn-primary {
-            @include button(
-                $color--slate,
-                darken($color--leaf, 25%),
-                $color--leaf
-            );
+            @include button($color--slate, $color--leaf, $color--leaf);
         }
     }
 
     // save and edit buttons (have to override styles for file upload)
     .lumesse-apply-save-app-save-button,
     .lumesse-apply-save-app-edit-button {
-        @include button($color--slate, darken($color--leaf, 25%), $color--leaf);
+        @include button($color--slate, $color--leaf, $color--leaf);
     }
 
     // resume application button (have to override styles for file upload)
     .lumesse-apply-resume-application-button {
-        @include button($color--slate, darken($color--leaf, 25%), $color--leaf);
+        @include button($color--slate, $color--leaf, $color--leaf);
     }
 
     // start again button
@@ -294,7 +290,7 @@
 
     // remove button (repeatable employment block)
     .repeatable-question-remove {
-        @include button($color--white, darken($color--red, 25%), $color--red);
+        @include button($color--white, $color--red, $color--red);
     }
 
     // save progress button in modal (has to override styles for file upload)
@@ -305,7 +301,7 @@
     .my-prev-app-submit-btn,
     .reuse-button,
     .apply-cv-button {
-        @include button($color--slate, darken($color--leaf, 25%), $color--leaf);
+        @include button($color--slate, $color--leaf, $color--leaf);
     }
 
     // hide 'ready to be sent' text
