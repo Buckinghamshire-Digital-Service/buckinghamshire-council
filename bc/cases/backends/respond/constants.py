@@ -70,13 +70,34 @@ CREATE_CASE_SERVICES = {
                 }
             },
             "Contact.DateofBirth": {"help_text": "YYYY-MM-DD, for example, 1978-05-23"},
-        }
+            APPEND_TO_DESCRIPTION
+            + ".buckinghamshire_council_employee": {
+                "choices": [("Yes", "Yes"), ("No", "No")]
+            },
+            "Contact.PreferredContactMethod": {
+                "required": True,
+                "choices": [
+                    ("E-mail", "E-mail"),
+                    ("Letter", "Letter"),
+                    ("Contact Number", "Contact Number"),
+                ],
+            },
+        },
+        "field_type_overrides": {"Case.Anyothercomments": SHORT_TEXT_DATA_TYPE},
     },
     COMMENTS_WEBSERVICE: {
         "custom_field_options": {
             APPEND_TO_DESCRIPTION
             + ".response_needed": {"choices": [("Yes", "Yes"), ("No", "No")]},
             DESCRIPTION_SCHEMA_NAME: {"required": False, "help_text": "optional"},
+            "Contact.PreferredContactMethod": {
+                "required": True,
+                "choices": [
+                    ("E-mail", "E-mail"),
+                    ("Letter", "Letter"),
+                    ("Contact Number", "Contact Number"),
+                ],
+            },
         }
     },
     COMPLIMENTS_WEBSERVICE: {"stanagedicfixelds": {"Case.FeedbackType": "Compliment"}},
@@ -179,6 +200,19 @@ FIELD_MAPPINGS = {
             (
                 "Which time period does your request cover?",
                 APPEND_TO_DESCRIPTION + ".time_period",
+            ),
+            (
+                "Do you work (or have worked in the past) for Buckinghamshire Council "
+                "or previous Buckinghamshire District Councils?",
+                APPEND_TO_DESCRIPTION + ".buckinghamshire_council_employee",
+            ),
+            (
+                "Your employee identification number",
+                APPEND_TO_DESCRIPTION + ".employee_id",
+            ),
+            (
+                "Your approximate dates of employment",
+                APPEND_TO_DESCRIPTION + ".employment_dates",
             ),
             ("Title", "Contact.OtherTitle"),
             ("First name", "Contact.FirstName"),
