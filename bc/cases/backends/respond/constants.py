@@ -75,7 +75,8 @@ CREATE_CASE_SERVICES = {
     COMMENTS_WEBSERVICE: {
         "custom_field_options": {
             APPEND_TO_DESCRIPTION
-            + ".response_needed": {"choices": [("Yes", "Yes"), ("No", "No")]}
+            + ".response_needed": {"choices": [("Yes", "Yes"), ("No", "No")]},
+            DESCRIPTION_SCHEMA_NAME: {"required": False, "help_text": "optional"},
         }
     },
     COMPLIMENTS_WEBSERVICE: {"stanagedicfixelds": {"Case.FeedbackType": "Compliment"}},
