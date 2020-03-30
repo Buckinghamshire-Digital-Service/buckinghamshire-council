@@ -1,6 +1,7 @@
 context:
   result:
     url: #
+    logo: true
     title: Learning Support Assistant - King’s Wood School
     salary_range: '£23,742 – £28,426 '
     closing_date: 13th December

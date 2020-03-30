@@ -1,8 +1,10 @@
 {% load static wagtailcore_tags wagtailsearchpromotions_tags wagtailimages_tags %}
 
 <article class="search-result">
-    {% image result.logo fill-80x80 class="search-result__logo" %}
-    
+    {% if result.logo %}
+        {% image result.logo fill-80x80 class="search-result__logo" %}
+    {% endif %}
+
     <h3 class="search-result__title heading heading--third">
         <a class="search-result__link" href="{{result.url}}">
             {{ result.title }}
