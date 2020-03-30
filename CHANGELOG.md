@@ -4,7 +4,7 @@
 
 ## 8.0 (2020-03-30)
 
-Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/6.0...7.0
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/7.0...8.0
 
 - Update documentation to reflect change in git workflow.
 - 108 Search alert (FE)
