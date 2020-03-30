@@ -72,7 +72,12 @@ CREATE_CASE_SERVICES = {
             "Contact.DateofBirth": {"help_text": "YYYY-MM-DD, for example, 1978-05-23"},
         }
     },
-    COMMENTS_WEBSERVICE: {},
+    COMMENTS_WEBSERVICE: {
+        "custom_field_options": {
+            APPEND_TO_DESCRIPTION
+            + ".response_needed": {"choices": [("Yes", "Yes"), ("No", "No")]}
+        }
+    },
     COMPLIMENTS_WEBSERVICE: {"stanagedicfixelds": {"Case.FeedbackType": "Compliment"}},
     DISCLOSURE_WEBSERVICE: {
         "custom_field_options": {
@@ -194,6 +199,10 @@ FIELD_MAPPINGS = {
     COMMENTS_WEBSERVICE: OrderedDict(
         [
             ("Your comment or suggestion", DESCRIPTION_SCHEMA_NAME),
+            (
+                "Do you require a response from us?",
+                APPEND_TO_DESCRIPTION + ".response_needed",
+            ),
             ("Title", "Contact.OtherTitle"),
             ("First name", "Contact.FirstName"),
             ("Last name", "Contact.Surname"),
