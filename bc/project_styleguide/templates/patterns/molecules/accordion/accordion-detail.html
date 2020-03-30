@@ -3,7 +3,7 @@
 
 <div role="tablist" aria-multiselectable="true">
     {% for accordion in accordions %}
-        <div class="accordion" data-accordion>
+        <div class="accordion accordion--detail" data-accordion>
             <a
                 href=""
                 class="accordion__title"
@@ -29,7 +29,6 @@
                 aria-hidden="false">
                 {{ accordion.content|richtext }}
             </div>
-
         </div>
     {% endfor %}
 </div>

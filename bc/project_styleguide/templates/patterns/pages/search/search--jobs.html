@@ -36,31 +36,30 @@
             </form>
         </div>
 
-
         <div class="search__results-wrapper wrapper wrapper--flex">
             <aside class="search__filters">
                 <h2 class="heading heading--m">Filter jobs</h2>
                 {% jobs_search_filters request unfiltered_results %}
             </aside>
 
-            <section class="search__results">
-                <header class="search__results-header">
-                    {% with count=search_results.paginator.count %}
-                        {% if search_query %}
-                            <h2 class="heading heading--l">{{ count }} job{{ count|pluralize }} found for ‘{{ search_query }}’</h2>
-                            <a href="/search">Clear</a>
-                        {% else %}
-                            <h2 class="heading heading--l">{{ count }} job{{ count|pluralize }} found</h2>
-                        {% endif %}
-                    {% endwith %}
-                    {% comment %} FE TODO: {% endcomment %}
-                    <div>
-                        <form method="post" role="search">{% csrf_token %}
-                            {{ job_alert_form.as_p }}
-                            <input type="submit" value="Subscribe to job alert">
+                <section class="search__results">
+                    <header class="search__results-header">
+                        {% with count=search_results.paginator.count %}
+                            {% if search_query %}
+                                <h2 class="heading heading--l">{{ count }} job{{ count|pluralize }} found for ‘{{ search_query }}’</h2>
+                                <a href="/search">Clear</a>
+                            {% else %}
+                                <h2 class="heading heading--l">{{ count }} job{{ count|pluralize }} found</h2>
+                            {% endif %}
+                        {% endwith %}
+
+                        <form method="post" role="search" class="form form--job-alerts">{% csrf_token %}
+                            <div class="form-item">
+                                {{ job_alert_form.as_p }}
+                            </div>
+                            <input type="submit" class="button button--basic" value="Subscribe to job alert">
                         </form>
-                    </div>
-                </header>
+                    </header>
 
                 {% if search_results %}
                     {% for result in search_results %}
