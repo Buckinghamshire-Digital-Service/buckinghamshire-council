@@ -179,14 +179,13 @@
     justify-content: center;
     align-items: center;
     font-weight: $weight--bold;
-    height: $grid--medium;
+    min-height: $grid--medium;
     padding: 0 $grid--small;
     text-decoration: none;
     background: $backgroundColor;
     color: $textColor;
     border: 0;
     border-bottom: $border--accent darken($borderColor, 10);
-    max-height: $grid--medium;
     max-width: 200px;
 
     &:focus {
