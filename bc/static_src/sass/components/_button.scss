@@ -8,7 +8,11 @@
     color: $color--white;
     font-weight: $weight--bold;
     min-height: $grid--medium;
+<<<<<<< HEAD
     padding: 0 $grid--small;
+=======
+    padding: $grid--min / 2 $grid--small;
+>>>>>>> fix/styling-consistency
 
     #{$hover-states} {
         background-color: $color--link-hover;

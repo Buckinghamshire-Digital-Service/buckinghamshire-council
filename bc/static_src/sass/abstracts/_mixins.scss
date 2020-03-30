@@ -180,7 +180,7 @@
     align-items: center;
     font-weight: $weight--bold;
     min-height: $grid--medium;
-    padding: 0 $grid--small;
+    padding: $grid--min / 2 $grid--small;
     text-decoration: none;
     background: $backgroundColor;
     color: $textColor;
