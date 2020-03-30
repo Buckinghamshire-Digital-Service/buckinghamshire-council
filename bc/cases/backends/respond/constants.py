@@ -52,10 +52,10 @@ CREATE_CASE_SERVICES = {
     FOI_WEBSERVICE: {
         "custom_field_options": {
             DESCRIPTION_SCHEMA_NAME: {
-                "help_text": {
+                "help_text": (
                     "Where appropriate, include names, dates, references and descriptions to "
                     "enable us to identify and locate the required information"
-                }
+                )
             }
         }
     },
