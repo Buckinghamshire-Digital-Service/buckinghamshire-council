@@ -16,6 +16,7 @@ FOI_WEBSERVICE = "TestCreateFOI"
 SAR_WEBSERVICE = "TestCreateSAR"
 COMMENTS_WEBSERVICE = "TestCreateComments"
 COMPLIMENTS_WEBSERVICE = "TestCreateCompliments"
+DISCLOSURE_WEBSERVICE = "TestCreateDisclosures"
 
 # This defines the services to register, and provides options for them. Only set
 # stanagedicfixelds (system-managed static fixed fields) where they differ from those in
@@ -56,6 +57,35 @@ CREATE_CASE_SERVICES = {
     },
     COMMENTS_WEBSERVICE: {},
     COMPLIMENTS_WEBSERVICE: {"stanagedicfixelds": {"Case.FeedbackType": "Compliment"}},
+    DISCLOSURE_WEBSERVICE: {
+        "custom_field_options": {
+            APPEND_TO_DESCRIPTION
+            + ".reason": {
+                "choices": [
+                    # Use a list comprehension to avoid repetition
+                    (x, x)
+                    for x in [
+                        "Without it the prevention or detection of crime will be prejudiced",
+                        "Without it the apprehension or prosecution of offenders will be prejudiced",
+                        "Without it the assessment or collection of any tax or duty will be prejudiced",
+                        (
+                            "The data is necessary for the purpose of, or in "
+                            "connection with, legal proceedings or is otherwise "
+                            "necessary for the purpose of establishing, exercising or "
+                            "defending legal rights"
+                        ),
+                        (
+                            "The data is necessary for the maintenance of effective "
+                            "immigration control and/or for the investigation or "
+                            "detection of activities that would undermine the "
+                            "maintenance of effective"
+                        ),
+                        "Disclosure is required by an Act of Parliament",
+                    ]
+                ]
+            }
+        }
+    },
 }
 
 DEFAULT_STANAGEDICFIXELDS = {
@@ -165,6 +195,28 @@ FIELD_MAPPINGS = {
     COMPLIMENTS_WEBSERVICE: OrderedDict(
         [
             ("Your comment or suggestion", DESCRIPTION_SCHEMA_NAME),
+            ("Title", "Contact.OtherTitle"),
+            ("First name", "Contact.FirstName"),
+            ("Last name", "Contact.Surname"),
+            (
+                "How would you prefer to be contacted? ",
+                "Contact.PreferredContactMethod",
+            ),
+            ("Email address", "Contact.Email"),
+            ("Contact number", "Contact.Mobile"),
+            ("Building and street address", "Contact.Address01"),
+            ("Town or city", "Contact.Town"),
+            ("County", "Contact.County"),
+            ("Postcode", "Contact.ZipCode"),
+        ]
+    ),
+    DISCLOSURE_WEBSERVICE: OrderedDict(
+        [
+            ("Details of information required", DESCRIPTION_SCHEMA_NAME),
+            # NOTE 'nature of the investigation -> 'additionalcomments' in doc but not in API
+            ("Information required because", APPEND_TO_DESCRIPTION + ".reason"),
+            # TODO ("Do you wish to attach any documents to this request?",
+            ("Are you an individual or a company?", "Contact.Organisation"),
             ("Title", "Contact.OtherTitle"),
             ("First name", "Contact.FirstName"),
             ("Last name", "Contact.Surname"),
