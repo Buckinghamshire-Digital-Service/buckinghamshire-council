@@ -18,6 +18,20 @@ COMMENTS_WEBSERVICE = "TestCreateComments"
 COMPLIMENTS_WEBSERVICE = "TestCreateCompliments"
 DISCLOSURE_WEBSERVICE = "TestCreateDisclosures"
 
+
+SHORT_TEXT_DATA_TYPE = "ShortText"
+CATEGORY_DATA_TYPE = "Category"
+FIELD_TYPES = {
+    # "Status", This one appears only in one web service, not of the create case type
+    # "SystemAllocation", Maybe a foreign key field, used for data like 'created by'
+    # "Journal", This appears only against a field with schema Case.ActionTaken
+    CATEGORY_DATA_TYPE: "RadioSelect",
+    "DateTime": "DateInput",
+    "LongText": "Textarea",
+    SHORT_TEXT_DATA_TYPE: "TextInput",
+}
+
+
 # This defines the services to register, and provides options for them. Only set
 # stanagedicfixelds (system-managed static fixed fields) where they differ from those in
 # the defaults set below here. This options dictionary is processed when the module is
@@ -30,7 +44,10 @@ CREATE_CASE_SERVICES = {
             },
             "Contact.OtherTitle": {"help_text": "optional"},
         },
-        "field_type_overrides": {"Case.ActionTaken01": "TextInput"},
+        "field_type_overrides": {
+            "Case.ActionTaken01": SHORT_TEXT_DATA_TYPE,
+            "Case.AdditionalComments": SHORT_TEXT_DATA_TYPE,
+        },
     },
     FOI_WEBSERVICE: {
         "custom_field_options": {

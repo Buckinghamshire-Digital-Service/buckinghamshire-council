@@ -9,27 +9,18 @@ from lxml import etree
 
 from .constants import (
     APPEND_TO_DESCRIPTION,
+    CATEGORY_DATA_TYPE,
     CREATE_CASE_SERVICES,
     DESCRIPTION_SCHEMA_NAME,
     FIELD_MAPPINGS,
+    FIELD_TYPES,
     RESPOND_CATEGORIES_CACHE_PREFIX,
     RESPOND_FIELDS_CACHE_PREFIX,
+    SHORT_TEXT_DATA_TYPE,
     XML_ENTITY_MAPPING,
 )
 
 logger = logging.getLogger(__name__)
-
-SHORT_TEXT_DATA_TYPE = "ShortText"
-CATEGORY_DATA_TYPE = "Category"
-FIELD_TYPES = {
-    # "Status", This one appears only in one web service, not of the create case type
-    # "SystemAllocation", Maybe a foreign key field, used for data like 'created by'
-    # "Journal", This appears only against a field with schema Case.ActionTaken
-    CATEGORY_DATA_TYPE: "RadioSelect",
-    "DateTime": "DateInput",
-    "LongText": "Textarea",
-    SHORT_TEXT_DATA_TYPE: "TextInput",
-}
 
 
 class BaseCaseForm(django.forms.Form):
@@ -153,6 +144,13 @@ class CaseFormBuilder:
                 options = self.get_field_options(schema_name)
 
             options["label"] = label
+
+            try:
+                data_type = CREATE_CASE_SERVICES[self.service_name][
+                    "field_type_overrides"
+                ][schema_name]
+            except KeyError:
+                pass
 
             try:
                 field_type = FIELD_TYPES[data_type]
