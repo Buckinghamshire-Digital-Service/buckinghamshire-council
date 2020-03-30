@@ -38,6 +38,7 @@ FIELD_TYPES = {
 # loaded.
 CREATE_CASE_SERVICES = {
     COMPLAINTS_WEBSERVICE: {
+        "stanagedicfixelds": {"Case.FeedbackType": "Corporate"},
         "custom_field_options": {
             DESCRIPTION_SCHEMA_NAME: {
                 "help_text": "Which service is this about? What happened and when?"
@@ -50,6 +51,7 @@ CREATE_CASE_SERVICES = {
         },
     },
     FOI_WEBSERVICE: {
+        "stanagedicfixelds": {"Case.FeedbackType": "FOI/EIR"},
         "custom_field_options": {
             DESCRIPTION_SCHEMA_NAME: {
                 "help_text": (
@@ -57,9 +59,10 @@ CREATE_CASE_SERVICES = {
                     "enable us to identify and locate the required information"
                 )
             }
-        }
+        },
     },
     SAR_WEBSERVICE: {
+        "stanagedicfixelds": {"Case.FeedbackType": "SAR"},
         "custom_field_options": {
             "Case.TypeofSAR": {
                 "help_text": {
@@ -86,6 +89,7 @@ CREATE_CASE_SERVICES = {
         "field_type_overrides": {"Case.Anyothercomments": SHORT_TEXT_DATA_TYPE},
     },
     COMMENTS_WEBSERVICE: {
+        "stanagedicfixelds": {"Case.FeedbackType": "Corporate"},
         "custom_field_options": {
             APPEND_TO_DESCRIPTION
             + ".response_needed": {"choices": [("Yes", "Yes"), ("No", "No")]},
@@ -98,10 +102,11 @@ CREATE_CASE_SERVICES = {
                     ("Contact Number", "Contact Number"),
                 ],
             },
-        }
+        },
     },
     COMPLIMENTS_WEBSERVICE: {"stanagedicfixelds": {"Case.FeedbackType": "Compliment"}},
     DISCLOSURE_WEBSERVICE: {
+        "stanagedicfixelds": {"Case.FeedbackType": "Disclosures"},
         "custom_field_options": {
             APPEND_TO_DESCRIPTION
             + ".reason": {
@@ -128,12 +133,15 @@ CREATE_CASE_SERVICES = {
                     ]
                 ]
             }
-        }
+        },
     },
+    # TODO
+    # DATA_BREACH_WEBSERVICE: {
+    #     "stanagedicfixelds": {"Case.FeedbackType": "Data Breach"},
+    # },
 }
 
 DEFAULT_STANAGEDICFIXELDS = {
-    "Case.FeedbackType": "Corporate",
     "Case.HowReceived": "Web Form",
     "Contact.ContactIs": "Other",
 }
