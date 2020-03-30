@@ -4,6 +4,8 @@ from wagtail.contrib.modeladmin.options import (
     modeladmin_register,
 )
 
+from wagtailorderable.modeladmin.mixins import OrderableMixin
+
 from bc.events.models import EventType
 from bc.news.models import NewsType
 from bc.recruitment.models import JobCategory, JobSubcategory
@@ -17,10 +19,15 @@ class JobSubcategoryModelAdmin(ModelAdmin):
     list_display = ("title", "get_categories_list")
 
 
-class JobCategoryModelAdmin(ModelAdmin):
+class JobCategoryModelAdmin(OrderableMixin, ModelAdmin):
     model = JobCategory
     menu_icon = "tag"
-    list_display = ("title", "slug", "get_subcategories_list")
+    list_display = (
+        "title",
+        "slug",
+        "get_subcategories_list",
+        "is_schools_and_early_years",
+    )
     search_fields = ("title", "slug")
 
 

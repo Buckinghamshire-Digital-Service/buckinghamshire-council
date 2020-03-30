@@ -583,3 +583,48 @@ class ShortDescriptionsTest(TestCase, ImportTestMixin):
         expected = "This was not plaintext."
 
         self.compare_processed_record(description, expected)
+
+
+class ApplicationURLTest(TestCase, ImportTestMixin):
+    def setUp(self):
+        # create matching category
+        JobSubcategoryFactory(title=FIXTURE_JOB_SUBCATEGORY_TITLE)
+
+    def compare_processed_record(self, imported, expected):
+
+        try:
+            job = TalentLinkJob.objects.get(talentlink_id=1)
+        except TalentLinkJob.DoesNotExist:
+            job = TalentLinkJob(talentlink_id=1)
+
+        job = update_job_from_ad(
+            job,
+            get_advertisement(talentlink_id=1, application_url=imported),
+            defaults={"last_imported": timezone.now()},
+        )
+
+        self.assertEqual(job.application_url_query, expected)
+
+    def test_empty_url_query(self):
+        imported = ""
+        expected = ""
+
+        self.compare_processed_record(imported, expected)
+
+    def test_basic_url_query(self):
+        imported = "https://www.example.com/?spam=eggs"
+        expected = "spam=eggs"
+
+        self.compare_processed_record(imported, expected)
+
+    def test_url_with_no_query(self):
+        imported = "https://www.example.com/?"
+        expected = ""
+
+        self.compare_processed_record(imported, expected)
+
+    def test_multi_value_dict(self):
+        imported = "https://www.example.com/?spam=1&spam=2"
+        expected = "spam=1&spam=2"
+
+        self.compare_processed_record(imported, expected)

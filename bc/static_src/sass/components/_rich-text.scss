@@ -1,12 +1,19 @@
 .rich-text {
     ul {
-        margin-left: $grid--small;
+        @include font-size(s);
+        margin: $grid--small 0 $grid--small $grid--small;
 
         .page--jobs & {
             margin: $grid--min 0;
         }
 
+        ul,
+        ol {
+            margin: $grid--min 0 0 $grid--small;
+        }
+
         li {
+            @include font-size(s);
             padding-left: 25px;
             position: relative;
 
@@ -14,41 +21,65 @@
                 content: '';
                 width: 7px;
                 height: 7px;
-                background: $color--grey-dark;
+                background: $color--default;
                 border-radius: 100%;
                 position: absolute;
                 left: 0;
-                top: 8px;
+                top: 10px;
 
                 .page--jobs & {
                     background: $color--leaf;
                 }
             }
         }
+
+        ul {
+            margin-top: 5px;
+        }
     }
 
     ol {
+        @include font-size(s);
         list-style: decimal;
-        margin-left: 35px;
+        margin: $grid--small 0 $grid--small $grid--small;
+
+        ol,
+        ul {
+            margin: $grid--min 0 0 $grid--small;
+        }
 
         li {
             padding-left: 10px;
         }
+
+        li > ol {
+            list-style-type: lower-alpha;
+            margin-left: 15px;
+
+            li > ol {
+                list-style-type: lower-roman;
+            }
+        }
     }
 
     li {
+        color: $color--default;
         margin-bottom: 5px;
+    }
+
+    p {
+        @include font-size(s);
     }
 
     h2 {
         @include font-size(m);
-        margin-bottom: 5px;
+        margin-bottom: $grid--min;
         font-weight: $weight--bold;
     }
 
     h3 {
         @include font-size(s);
-        margin-bottom: 5px;
+        margin-bottom: $grid--min;
         font-weight: $weight--bold;
     }
 }

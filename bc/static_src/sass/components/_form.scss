@@ -13,14 +13,29 @@
         background-color: $color--tertiary;
     }
 
-    input {
-        @include font-size(m);
-        border: 0;
+    &__submit {
+        @include button($color--slate, $color--leaf, $color--leaf);
+    }
+
+    input[type='text'],
+    input[type='number'],
+    input[type='email'],
+    input[type='url'],
+    textarea,
+    select {
+        @include font-size(s);
+        border: 2px solid $color--off-black;
         border-radius: 0;
-        padding: $grid--min;
+        padding: $grid--min / 2 $grid--min;
         width: 100%;
         max-width: 540px;
-        height: 50px;
+        min-height: $grid--medium;
+
+        &:focus,
+        &:focus-within {
+            outline: 0;
+            box-shadow: 0 0 0 4px $color--mustard;
+        }
     }
 
     &--subscribe {
@@ -31,6 +46,7 @@
         }
 
         input {
+            border: 0;
             margin-bottom: $grid--small;
 
             @include media-query(mob-landscape) {
@@ -49,7 +65,6 @@
         }
 
         input {
-            border: 2px solid $color--charcoal;
             border-right: 0;
             max-width: 100%;
         }
@@ -59,8 +74,8 @@
         display: flex;
         justify-content: flex-end;
 
-        input {
-            height: 40px;
+        input[type='text'] {
+            border: 0;
 
             @include media-query(tablet-portrait) {
                 width: 390px;
@@ -72,7 +87,9 @@
         display: flex;
         margin-bottom: $grid;
 
-        input {
+        input[type='text'] {
+            border: 0;
+
             @include media-query(tablet-portrait) {
                 width: 100%;
             }
@@ -81,5 +98,27 @@
 
     &--jobs-hero {
         margin-bottom: 15px;
+
+        input[type='text'] {
+            border: 0;
+        }
+    }
+
+    &--job-alerts {
+        margin-bottom: $grid;
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        label,
+        input {
+            display: block;
+        }
+
+        input[type='submit'] {
+            padding: 0;
+            max-width: 250px;
+        }
     }
 }

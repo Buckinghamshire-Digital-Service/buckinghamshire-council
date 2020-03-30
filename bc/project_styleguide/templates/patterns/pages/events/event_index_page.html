@@ -3,59 +3,63 @@
 
 {% block content %}
 
-<div class="wrapper wrapper--small">
-
-    <h1>{{ page.title }}</h1>
-
-    <section class="listing">
-        {% if events %}
-            {% if events.object_list.exists %}
-                <ul role="list">
-                    {% for event in events.object_list.specific %}
-                        <li>
-                            {% if event.listing_image %}
-                                <a href="{% pageurl event %}">
-                                {% image event.listing_image fill-450x300 %}
-                                </a>
-                            {% endif %}
-                            <div>
-                                <h2 role="listitem">
-                                    <a href="{% pageurl event %}">
-                                        {% firstof event.listing_title event.title %}
+    <div class="wrapper wrapper--flex news">
+        <section class="section section--main">
+            <h1 class="heading heading--xxl">{{ page.title }}</h1>
+            {% if events %}
+                {% if events.object_list.exists %}
+                    <ul class="article-index" role="list">
+                        {% for event in events.object_list.specific %}
+                            <li class="article-index__item">
+                                <div class="article-index__content">
+                                    <a class="article-index__link" href="{% pageurl event %}">
+                                        <h2 class="heading heading--m article-index__title" role="listitem">
+                                            {% firstof event.listing_title event.title %}
+                                        </h2>
                                     </a>
-                                </h2>
-                                {% if event.end_date and not event.end_date == event.start_date %}
-                                    {{ event.start_time|time|default:"" }} {{ event.start_date|date }} to {{ event.end_time|time|default:"" }} {{ event.end_date|date }}
-                                {% elif event.end_time %}
-                                    {{ event.start_date|date }} {{ event.start_time|time }}&ndash;{{ event.end_time|time }}
-                                {% else %}
-                                    {{ event.start_date|date }} {{ event.start_time|time|default:"" }}
-                                {% endif %}
-                                {% if event.listing_summary or event.introduction %}
-                                    <p>{% firstof event.listing_summary event.introduction %}</p>
-                                {% endif %}
-                            </div>
-                        </li>
-                    {% endfor %}
-                </ul>
+
+                                    <div class="article-index__meta">
+                                        {% if event.end_date and not event.end_date == event.start_date %}
+                                            {{ event.start_time|date:"hA"|default:"" }} {{ event.start_date|date }} to {{ event.end_time|date:"hA"|default:"" }} {{ event.end_date|date }}
+                                        {% elif event.end_time %}
+                                            {{ event.start_date|date }} {{ event.start_time|date:"hA" }} – {{ event.end_time|date:"hA" }}
+                                        {% else %}
+                                            {{ event.start_date|date }} {{ event.start_time|date:"hA"|default:"" }}
+                                        {% endif %}
+                                    </div>
+
+                                    {% if event.listing_summary or event.introduction %}
+                                        <p class="article-index__summary">{% firstof event.listing_summary event.introduction %}</p>
+                                    {% endif %}
+                                </div>
+
+                                <div class="article-index__image {% if not event.listing_image %}article-index__image--empty{% endif %}">
+                                    {% if event.listing_image %}
+                                        {% image event.listing_image fill-500x250 %}
+                                    {% endif %}
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    {# no items on this page #}
+                {% endif %}
+
+                {% include "patterns/molecules/pagination/pagination.html" with paginator_page=events %}
+
             {% else %}
-                {# no items on this page #}
+                {# no items on any page #}
             {% endif %}
 
-            {% include "patterns/molecules/pagination/pagination.html" with paginator_page=events %}
+            {% if show_past and upcoming_events.exists %}
+                <a href="{% pageurl page %}">View upcoming events</a>
+            {% elif past_events.exists %}
+                <a href="{% pageurl page %}?past=True">View past events</a>
+            {% endif %}
 
-        {% else %}
-            {# no items on any page #}
-        {% endif %}
+        </section>
 
-        {% if show_past and upcoming_events.exists %}
-            <a href="{% pageurl page %}">View upcoming events</a>
-        {% elif past_events.exists %}
-            <a href="{% pageurl page %}?past=True">View past events</a>
-        {% endif %}
-
-    </section>
-
-</div>
+        {% include "patterns/molecules/navigation/sidebar.html" with related_pages=page.related_pages.all sidebar_title="Related resources" classes="sidebar--narrow" %}
+    </div>
 
 {% endblock %}

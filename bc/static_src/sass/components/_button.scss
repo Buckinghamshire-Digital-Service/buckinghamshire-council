@@ -4,23 +4,23 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    background: $color--link;
+    background-color: $color--link;
     color: $color--white;
     font-weight: $weight--bold;
-    min-height: 50px;
-    padding: 0 $grid--small;
-    transition: background $transition;
+    min-height: $grid--medium;
+    padding: $grid--min / 2 $grid--small;
 
     #{$hover-states} {
-        background: $color--link-hover;
+        background-color: $color--link-hover;
+        cursor: pointer;
     }
 
     &:active {
-        background: $color--link-active;
+        background-color: $color--link-active;
     }
 
     &--subscribe {
-        background: $color--lake;
+        background-color: $color--lake;
         border: 2px solid $color--white;
         width: 100%;
 
@@ -46,7 +46,7 @@
     }
 
     &--header {
-        background: $color--charcoal;
+        background-color: $color--charcoal;
         padding: 0 15px;
 
         &:active {
@@ -59,29 +59,8 @@
         }
     }
 
-    &--apply {
-        display: flex;
-        background: $color--leaf;
-        text-decoration: none;
-        font-weight: $weight--bold;
-        color: $color--slate;
-        border-bottom: $border--accent $color--slate;
-        transition: background $transition;
-        width: 100%;
-        max-width: 300px;
-        margin: 0 auto $grid;
-
-        @include media-query(tablet-landscape) {
-            margin-bottom: 0;
-        }
-
-        #{$hover-states} {
-            background: darken($color--leaf, 3%);
-            color: $color--slate;
-        }
-
-        &:active {
-            background: darken($color--leaf, 8%);
-        }
+    &--apply,
+    &--basic {
+        @include button($color--slate, $color--leaf, $color--leaf);
     }
 }

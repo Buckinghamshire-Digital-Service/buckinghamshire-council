@@ -1,3 +1,5 @@
+from urllib.parse import urlsplit
+
 from django.utils.html import strip_tags
 
 from bleach.sanitizer import Cleaner
@@ -71,6 +73,7 @@ def update_job_from_ad(job, ad, defaults=None, import_categories=False):
     job.posting_start_date = ad["postingStartDate"]
     job.posting_end_date = ad["postingEndDate"]
     job.expected_start_date = ad["expectedStartDate"]
+    job.application_url_query = urlsplit(ad["applicationUrl"]).query
 
     for configurable_field in ad["configurableFields"]["configurableField"]:
         try:

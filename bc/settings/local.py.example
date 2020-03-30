@@ -26,7 +26,7 @@ TALENTLINK_API_WSDL = "https://api3.lumesse-talenthub.com/CareerPortal/SOAP/FoAd
 
 # Aptean Respond API credentials
 RESPOND_API_USERNAME = "Service"
-RESPOND_API_PASSWORD = "some_pass"
+RESPOND_API_PASSWORD = "some_pass"  # pragma: allowlist secret
 RESPOND_API_DATABASE = "Test"
 RESPOND_API_BASE_URL = "https://groupc.respond.apteancloud.com/Buckinghamshire/ws/"
 

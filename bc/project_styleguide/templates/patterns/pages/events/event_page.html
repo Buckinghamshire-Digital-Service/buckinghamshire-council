@@ -2,35 +2,38 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-<section class="section section--main">
 
-    <div class="intro">
-        <div class="container">
-            <h1>{{ page.title }}</h1>
+    <div class="wrapper wrapper--flex article">
+        <section class="section section--main">
+
+            <h1 class="heading heading--xxl">{{ page.title }}</h1>
+
+            <div class="article__meta">
+                <p class="article__date">
+                    {{ page.start_date }} {{ page.start_time|default:""|date:"hA" }}
+                    {% if page.end_date or page.end_time %}
+                        – {{ page.end_date|default:"" }} {{ page.end_time|default:""|date:"hA" }}
+                    {% endif %}
+                </p>
+                <p class="article__types">{{ page.event_types.all|join:", " }}</p>
+                <p class="article__address">
+                    <span>{{ page.street_address_1|default:"" }}</span>
+                    <span>{{ page.street_address_2|default:"" }}</span>
+                    <span>{{ page.city|default:"" }}</span>
+                    <span>{{ page.region|default:"" }}</span>
+                    <span>{{ page.postcode|default:"" }}</span>
+                    <span>{{ page.country|default:"" }}</span>
+                </p>
+            </div>
+
             {% if page.introduction %}
-                <h4>{{ page.introduction }}</h4>
+                <p class="article__intro">{{ page.introduction }}</p>
             {% endif %}
-        </div>
-    </div>
 
-    <div class="container">
-        <p>{{ page.start_date }} {{ page.start_time|default:"" }} {{ page.end_date|default:"" }} {{ page.end_time|default:"" }}</p>
-        <p>{{ page.event_types.all|join:", " }}</p>
-        <ul>
-            <li>{{ page.street_address_1|default:"" }}</li>
-            <li>{{ page.street_address_2|default:"" }}</li>
-            <li>{{ page.city|default:"" }}</li>
-            <li>{{ page.region|default:"" }}</li>
-            <li>{{ page.postcode|default:"" }}</li>
-            <li>{{ page.country|default:"" }}</li>
-        </ul>
-    </div>
+            {% include_block page.body %}
+        </section>
 
-    <div class="container">
-        {% include_block page.body %}
-        {% include "patterns/molecules/share/share.html" %}
+        {% include "patterns/molecules/navigation/sidebar.html" with related_pages=page.related_pages.all sidebar_title="Related resources"  classes="sidebar--narrow" %}
     </div>
-</section>
-{% include "patterns/molecules/relatedcontent/relatedcontent.html" with related_pages=page.related_pages.all %}
 
 {% endblock %}

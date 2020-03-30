@@ -36,12 +36,11 @@
             </form>
         </div>
 
-        {% if search_results %}
-            <div class="search__results-wrapper wrapper wrapper--flex">
-                <aside class="search__filters">
-                    <h2 class="heading heading--m">Filter jobs</h2>
-                    {% jobs_search_filters request %}
-                </aside>
+        <div class="search__results-wrapper wrapper wrapper--flex">
+            <aside class="search__filters">
+                <h2 class="heading heading--m">Filter jobs</h2>
+                {% jobs_search_filters request unfiltered_results %}
+            </aside>
 
                 <section class="search__results">
                     <header class="search__results-header">
@@ -53,18 +52,25 @@
                                 <h2 class="heading heading--l">{{ count }} job{{ count|pluralize }} found</h2>
                             {% endif %}
                         {% endwith %}
+
+                        <form method="post" role="search" class="form form--job-alerts">{% csrf_token %}
+                            <div class="form-item">
+                                {{ job_alert_form.as_p }}
+                            </div>
+                            <input type="submit" class="button button--basic" value="Subscribe to job alert">
+                        </form>
                     </header>
 
+                {% if search_results %}
                     {% for result in search_results %}
                         {% include "patterns/molecules/search-result/search-result--jobs.html" with result=result %}
                     {% endfor %}
 
                     {% include "patterns/molecules/pagination/pagination.html" with paginator_page=search_results %}
-                </section>
-            </div>
-
-        {% else %}
-            <p>No results found.</p>
-        {% endif %}
+                {% else %}
+                    <p>No results found.</p>
+                {% endif %}
+            </section>
+        </div>
     </div>
 {% endblock %}

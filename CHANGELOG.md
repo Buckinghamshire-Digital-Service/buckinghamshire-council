@@ -2,6 +2,48 @@
 
 ## Unreleased
 
+## 8.0 (2020-03-30)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/6.0...7.0
+
+- Update documentation to reflect change in git workflow.
+- 108 Search alert (FE)
+- 112 Unsubscribe from alerts (FE)
+- 115 StreamField Button Link block
+- 117 StreamField Table styles
+- 121 Progressive disclosure accordion
+- 122 General formatting improvements
+- 123 Subheading block
+- 163 Add Fathom Analytics
+- 201 additional components
+
+## 7.0 (2020-03-25)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/6.0...7.0
+
+- 51 Events Page front end
+- 68 News Page front end
+- 105 Job applications back-end
+- 106 Job applications front-end
+- 109 Job alert subscription
+- 110 Job search alert notifications
+- 111 Job alert unsubscribe
+- 130 Add a Schools and Early years search filter, and enable Job Category to be tagged as such.
+- 133 Search by job number
+
+## 6.0 (2020-03-24)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/5.0...6.0
+
+- Added image and embed blocks to StoryBlock
+
+## 5.0 (2020-03-20)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/4.0...5.0
+
+- Enable FormPages
+- Add Yandex and Bing verification strings
+
 ## 4.0 (2020-02-24)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/3.2...4.0

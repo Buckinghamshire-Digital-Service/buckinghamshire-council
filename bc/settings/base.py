@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     "bc.cases",
     "bc.documents",
     "bc.events",
-    # "bc.forms",
+    "bc.forms",
     "bc.home",
     "bc.images",
     "bc.navigation",
@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     "bc.users",
     "bc.utils",
     "bc.inlineindex",
+    "wagtailorderable",
     "wagtail.contrib.modeladmin",
     "wagtail.contrib.postgres_search",
     "wagtail.contrib.settings",
@@ -660,6 +661,12 @@ PATTERN_LIBRARY_TEMPLATE_DIR = os.path.join(
 
 # Google Tag Manager ID from env
 GOOGLE_TAG_MANAGER_ID = env.get("GOOGLE_TAG_MANAGER_ID")
+
+# For Fathom analytics
+FATHOM_SITE_ID = env.get("FATHOM_SITE_ID")
+
+# For Yandex search indexing verification
+YANDEX_VERIFICATION_STRING = env.get("YANDEX_VERIFICATION_STRING")
 
 
 # GOV.UK Notify service

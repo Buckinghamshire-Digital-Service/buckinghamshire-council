@@ -74,6 +74,7 @@ small {
 .heading {
     font-weight: $weight--bold;
     margin-bottom: $grid--min;
+    margin-top: 0;
 
     &--xxxl {
         @include font-size(xl);
@@ -89,6 +90,7 @@ small {
 
     &--xxl {
         @include font-size(xl);
+        line-height: 1.2;
         margin-bottom: $grid;
 
         @include media-query(mob-landscape) {
