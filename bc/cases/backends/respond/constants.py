@@ -51,7 +51,7 @@ CREATE_CASE_SERVICES = {
                     )
                 }
             },
-            "Contact.DateofBirth": {"help_text": "For example, 23 05 1978"},
+            "Contact.DateofBirth": {"help_text": "YYYY-MM-DD, for example, 1978-05-23"},
         }
     },
     COMMENTS_WEBSERVICE: {},

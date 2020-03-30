@@ -1,3 +1,4 @@
+import datetime
 import logging
 from collections import OrderedDict, defaultdict
 
@@ -38,6 +39,11 @@ class BaseCaseForm(django.forms.Form):
         value_element.text = value
         return element
 
+    def cast(self, value):
+        if isinstance(value, datetime.date):
+            value = str(value)
+        return value
+
     def get_xml(self, cleaned_data):
         case = etree.Element(
             "case", Tag="", xmlns="http://www.aptean.com/respond/caserequest/1"
@@ -52,6 +58,7 @@ class BaseCaseForm(django.forms.Form):
 
         # Convert the fields to XML elements in entities dict
         for key, value in cleaned_data.items():
+            value = self.cast(value)
             entity_name = key.partition(".")[0]
             if entity_name == APPEND_TO_DESCRIPTION:
                 # Special case: append this type of field to the description, rather
