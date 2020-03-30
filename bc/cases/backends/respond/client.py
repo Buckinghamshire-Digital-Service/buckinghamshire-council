@@ -141,20 +141,19 @@ class RespondClient:
         for field in soup.find_all("field"):
             schema_name = field.attrs["schema-name"]
             cache_key = RESPOND_CATEGORIES_CACHE_PREFIX + schema_name
-            field_options = [
+            choices = [
                 self.get_option_label(schema_name, o)
                 for o in field.find_all("option")
                 if o.attrs["available"] == "true"
             ]
-            choices = [(option, option) for option in field_options]
             cache.set(cache_key, choices)
 
     def get_option_label(self, schema_name, option_xml):
         provided_label = option_xml.find("name").text.strip()
         try:
-            return CUSTOM_OPTIONS[schema_name][provided_label]
+            return (provided_label, CUSTOM_OPTIONS[schema_name][provided_label])
         except KeyError:
-            return provided_label
+            return (provided_label, provided_label)
 
 
 def get_client():
