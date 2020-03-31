@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- 169 Adjust position of form field help text
+
 ## 8.0 (2020-03-30)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/7.0...8.0
