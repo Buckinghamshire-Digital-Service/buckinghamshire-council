@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- 114 StreamField Button Link block (BE)
 - 125 Job attachments
 
 ## 9.0 (2020-03-31)
