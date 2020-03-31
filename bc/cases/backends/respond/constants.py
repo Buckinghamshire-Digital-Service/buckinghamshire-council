@@ -34,6 +34,14 @@ CREATE_CASE_SERVICES = {
                 "help_text": "Which service is this about? What happened and when?"
             },
             "Contact.OtherTitle": {"help_text": "optional"},
+            "Contact.PreferredContactMethod": {
+                "required": True,
+                "choices": [
+                    ("E-mail", "E-mail"),
+                    ("Letter", "Letter"),
+                    ("Contact Number", "Contact Number"),
+                ],
+            },
         },
         "field_type_overrides": {
             "Case.ActionTaken01": SHORT_TEXT_DATA_TYPE,
@@ -48,7 +56,15 @@ CREATE_CASE_SERVICES = {
                     "Where appropriate, include names, dates, references and descriptions to "
                     "enable us to identify and locate the required information"
                 )
-            }
+            },
+            "Contact.PreferredContactMethod": {
+                "required": True,
+                "choices": [
+                    ("E-mail", "E-mail"),
+                    ("Letter", "Letter"),
+                    ("Contact Number", "Contact Number"),
+                ],
+            },
         },
     },
     settings.RESPOND_SAR_WEBSERVICE: {
@@ -124,7 +140,15 @@ CREATE_CASE_SERVICES = {
                         "Disclosure is required by an Act of Parliament",
                     ]
                 ]
-            }
+            },
+            "Contact.PreferredContactMethod": {
+                "required": True,
+                "choices": [
+                    ("E-mail", "E-mail"),
+                    ("Letter", "Letter"),
+                    ("Contact Number", "Contact Number"),
+                ],
+            },
         },
     },
     # TODO
