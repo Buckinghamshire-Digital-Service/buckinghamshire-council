@@ -4,6 +4,7 @@
 
 - 129 Jobs postcode search
 - 169 Adjust position of form field help text
+- Forms integration with Aptean Respond API
 
 ## 8.0 (2020-03-30)
 

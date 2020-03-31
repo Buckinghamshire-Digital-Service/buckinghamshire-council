@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<entities version="1" xmlns:="http://www.aptean.com/respond/fieldmetadata/1">
+ <entity schema-name="Case">
+  <name>
+   <name base-locale="en-GB" base-value="Case"/>
+  </name>
+  <fields>
+   <field data-type="Journal" mandatory="false" read-only="false" schema-name="Case.ActionTaken" sid="236">
+    <name base-locale="en-GB" base-value="Action Taken - Old"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="LongText" mandatory="false" read-only="false" schema-name="Case.AdditionalComments" sid="10596">
+    <name base-locale="en-GB" base-value="Additional Comments"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="Category" mandatory="true" read-only="false" schema-name="Case.BusinessUnit" sid="10439">
+    <name base-locale="en-GB" base-value="Corporate Director"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="LongText" mandatory="true" read-only="false" schema-name="Case.Description" sid="64">
+    <name base-locale="en-GB" base-value="Description"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="LongText" mandatory="false" read-only="false" schema-name="Case.ActionTaken01" sid="10566">
+    <name base-locale="en-GB" base-value="Desired outcome(s)"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.Ward" sid="10412">
+    <name base-locale="en-GB" base-value="Electoral Division"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="Category" mandatory="true" read-only="false" schema-name="Case.FeedbackType" sid="229">
+    <name base-locale="en-GB" base-value="Feedback Type"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="Category" mandatory="true" read-only="false" schema-name="Case.HowReceived" sid="230">
+    <name base-locale="en-GB" base-value="How Received"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="DateTime" mandatory="false" read-only="false" schema-name="Case.IncidentDate" sid="80">
+    <name base-locale="en-GB" base-value="Incident Date"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.LearningIdentified" sid="10663">
+    <name base-locale="en-GB" base-value="Learning Identified?"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.OverallOutcome" sid="10417">
+    <name base-locale="en-GB" base-value="Overall Outcome"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.ReceivedinStage" sid="10413">
+    <name base-locale="en-GB" base-value="Received in Stage"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="Category" mandatory="true" read-only="false" schema-name="Case.ServiceAreaTeam" sid="10293">
+    <name base-locale="en-GB" base-value="Service Director"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.Team" sid="10675">
+    <name base-locale="en-GB" base-value="Team"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="LongText" mandatory="false" read-only="false" schema-name="Case.Actions" sid="10324">
+    <name base-locale="en-GB" base-value="Corporate Actions"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Corporate"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.Outcome" sid="10321">
+    <name base-locale="en-GB" base-value="Corporate Outcome"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Corporate"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.Investigator" sid="10322">
+    <name base-locale="en-GB" base-value="Investigator"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Corporate"/>
+   </field>
+  </fields>
+ </entity>
+ <entity schema-name="Contact">
+  <name>
+   <name base-locale="en-GB" base-value="Contact"/>
+  </name>
+  <fields>
+   <field data-type="SystemAllocation" mandatory="false" read-only="true" schema-name="Contact.CreatedBy" sid="90">
+    <name base-locale="en-GB" base-value="Created By"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="System Fields"/>
+   </field>
+   <field data-type="DateTime" mandatory="false" read-only="true" schema-name="Contact.CreatedTime" sid="91">
+    <name base-locale="en-GB" base-value="Created Time"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="System Fields"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="true" schema-name="Contact.DisplayName" sid="193">
+    <name base-locale="en-GB" base-value="Display Name"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="System Fields"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="true" schema-name="Contact.FacebookScreenName" sid="228">
+    <name base-locale="en-GB" base-value="Facebook Screen Name"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="System Fields"/>
+   </field>
+   <field data-type="SystemAllocation" mandatory="false" read-only="true" schema-name="Contact.LastModifiedBy" sid="92">
+    <name base-locale="en-GB" base-value="Last Modified By"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="System Fields"/>
+   </field>
+   <field data-type="DateTime" mandatory="false" read-only="true" schema-name="Contact.LastModifiedTime" sid="93">
+    <name base-locale="en-GB" base-value="Last Modified Time"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="System Fields"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="true" schema-name="Contact.ParentDisplayName" sid="36">
+    <name base-locale="en-GB" base-value="Parent Display Name"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="System Fields"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="true" schema-name="Contact.TwitterScreenName" sid="227">
+    <name base-locale="en-GB" base-value="Twitter Screen Name"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="System Fields"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.Address01" sid="28">
+    <name base-locale="en-GB" base-value="Address Line 1"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.Address02" sid="29">
+    <name base-locale="en-GB" base-value="Address Line 2"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.Address03" sid="30">
+    <name base-locale="en-GB" base-value="Address Line 3"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.Address04" sid="31">
+    <name base-locale="en-GB" base-value="Address Line 4"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Contact.Clientis" sid="10438">
+    <name base-locale="en-GB" base-value="Client is"/>
+    <description base-locale="en-GB" base-value="Who is Service User....e.g Looked after child"/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Contact.ContactIs" sid="10286">
+    <name base-locale="en-GB" base-value="Contact Is"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.Mobile" sid="10289">
+    <name base-locale="en-GB" base-value="Contact Number"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="Category" mandatory="true" read-only="false" schema-name="Contact.ContactType" sid="10285">
+    <name base-locale="en-GB" base-value="Contact Type"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.County" sid="10284">
+    <name base-locale="en-GB" base-value="County"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="DateTime" mandatory="false" read-only="false" schema-name="Contact.DateofBirth" sid="10292">
+    <name base-locale="en-GB" base-value="Date of Birth"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.Email" sid="74">
+    <name base-locale="en-GB" base-value="E-mail Address"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.FirstName" sid="77">
+    <name base-locale="en-GB" base-value="First Name"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="true" schema-name="Contact.FullName" sid="10348">
+    <name base-locale="en-GB" base-value="Full Name"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.HomePhone" sid="10290">
+    <name base-locale="en-GB" base-value="Home Phone"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.Organisation" sid="10480">
+    <name base-locale="en-GB" base-value="Organisation"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.Phone01" sid="115">
+    <name base-locale="en-GB" base-value="Phone Number 1"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.Phone02" sid="116">
+    <name base-locale="en-GB" base-value="Phone Number 2"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.Phone03" sid="117">
+    <name base-locale="en-GB" base-value="Phone Number 3"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.ZipCode" sid="101">
+    <name base-locale="en-GB" base-value="Postcode"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Contact.PreferredContactMethod" sid="10288">
+    <name base-locale="en-GB" base-value="Preferred Contact Method"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Contact.PreferredContactTime" sid="10349">
+    <name base-locale="en-GB" base-value="Preferred Contact Time"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="DateTime" mandatory="true" read-only="false" schema-name="Contact.ReceiptDate" sid="109">
+    <name base-locale="en-GB" base-value="Receipt Date"/>
+    <description base-locale="en-GB" base-value="Date Received by BCC (this may not be the date the team received it)"/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.Reference" sid="108">
+    <name base-locale="en-GB" base-value="Reference"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="true" schema-name="Contact.Salutation" sid="110">
+    <name base-locale="en-GB" base-value="Salutation"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="true" read-only="false" schema-name="Contact.Surname" sid="112">
+    <name base-locale="en-GB" base-value="Surname"/>
+    <description base-locale="en-GB" base-value="if no surname provided use ANON"/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Contact.Title" sid="10295">
+    <name base-locale="en-GB" base-value="Title"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.Town" sid="10283">
+    <name base-locale="en-GB" base-value="Town"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.WorkPhone" sid="10291">
+    <name base-locale="en-GB" base-value="Work Phone"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+  </fields>
+ </entity>
+</entities>
