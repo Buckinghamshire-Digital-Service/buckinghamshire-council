@@ -8,6 +8,8 @@ register = template.Library()
 
 @register.inclusion_tag("patterns/molecules/search-filters/search-filters.html")
 def jobs_search_filters(request, unfiltered_results=None):
+    search_postcode = request.GET.get("postcode", None)
+
     if not unfiltered_results:
         # Provide a default queryset for Pattern Library
         unfiltered_results = TalentLinkJob.objects.all()
@@ -33,4 +35,5 @@ def jobs_search_filters(request, unfiltered_results=None):
                 "key": "category",
             },
         ],
+        "search_postcode": search_postcode,
     }

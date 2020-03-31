@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+    targetNamespace="http://www.aptean.com/respond/caserequest/1"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:rsp="http://www.aptean.com/respond/caserequest/1">
+    <xs:element name="case">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="field" type="rsp:field" />
+                <xs:element maxOccurs="1" minOccurs="0" name="Aspects" type="rsp:Aspects"/>
+                <xs:element maxOccurs="1" minOccurs="0" name="Qualities" type="rsp:Qualities"/>
+                <xs:element maxOccurs="1" minOccurs="0" name="Contacts" type="rsp:Contacts"/>
+                <xs:element maxOccurs="1" minOccurs="0" name="Tasks" type="rsp:Tasks"/>
+                <xs:element maxOccurs="1" minOccurs="0" name="Costs" type="rsp:Costs"/>
+                <xs:element maxOccurs="1" minOccurs="0" name="Activities" type="rsp:Activities"/>
+            </xs:sequence>
+            <xs:attribute name="Tag" type="xs:string" use="optional" />
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="field">
+        <xs:sequence minOccurs="1">
+            <xs:element maxOccurs="unbounded" name="value">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="type" type="xs:string" use="optional" />
+                            <xs:attribute name="id" type="xs:string" use="optional" />
+                            <xs:attribute name="currency" type="xs:string" use="optional" />
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="schemaName" type="xs:string" use="required" />
+    </xs:complexType>
+    <xs:complexType name="Contacts">
+        <xs:sequence>
+            <xs:element name="contact" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" maxOccurs="unbounded" name="field" type="rsp:field" />
+                        <xs:element maxOccurs="1" minOccurs="0" name="Tasks" type="rsp:Tasks"/>
+                        <xs:element maxOccurs="1" minOccurs="0" name="Costs" type="rsp:Costs"/>
+                        <xs:element maxOccurs="1" minOccurs="0" name="Activities" type="rsp:Activities"/>
+                    </xs:sequence>
+                    <xs:attribute name="action" type="rsp:Action" use="optional"/>
+                    <xs:attribute name="Id" type="xs:string" use="optional" />
+                    <xs:attribute name="Tag" type="xs:string" use="optional" />
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Tasks">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="task">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="field" type="rsp:field"/>
+                        <xs:element maxOccurs="1" minOccurs="0" name="Costs" type="rsp:Costs"/>
+                        <xs:element maxOccurs="1" minOccurs="0" name="Activities" type="rsp:Activities"/>
+                        <xs:element maxOccurs="1" minOccurs="0" name="Attachments" type="rsp:Attachments"/>
+                    </xs:sequence>
+                    <xs:attribute name="action" type="rsp:Action" use="optional"/>
+                    <xs:attribute name="TaskType" type="xs:string" use="optional" />
+                    <xs:attribute name="Id" type="xs:string" use="optional" />
+                    <xs:attribute name="Tag" type="xs:string" use="optional" />
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Aspects">
+        <xs:sequence>
+            <xs:element name="aspect" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="field" type="rsp:field"/>
+                        <xs:element maxOccurs="1" minOccurs="0" name="Contacts" type="rsp:Contacts"/>
+                        <xs:element maxOccurs="1" minOccurs="0" name="Tasks" type="rsp:Tasks"/>
+                        <xs:element maxOccurs="1" minOccurs="0" name="Costs" type="rsp:Costs"/>
+                        <xs:element maxOccurs="1" minOccurs="0" name="Activities" type="rsp:Activities"/>
+                    </xs:sequence>
+                    <xs:attribute name="action" type="rsp:Action" use="optional"/>
+                    <xs:attribute name="Id" type="xs:string" use="optional" />
+                    <xs:attribute name="Tag" type="xs:string" use="optional" />
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Qualities">
+        <xs:sequence>
+            <xs:element name="qualities" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="field" type="rsp:field" />
+                        <xs:element maxOccurs="1" minOccurs="0" name="Contacts" type="rsp:Contacts"/>
+                        <xs:element maxOccurs="1" minOccurs="0" name="Tasks" type="rsp:Tasks"/>
+                        <xs:element maxOccurs="1" minOccurs="0" name="Costs" type="rsp:Costs"/>
+                        <xs:element maxOccurs="1" minOccurs="0" name="Activities" type="rsp:Activities"/>
+                    </xs:sequence>
+                    <xs:attribute name="action" type="rsp:Action" use="optional"/>
+                    <xs:attribute name="Id" type="xs:string" use="optional" />
+                    <xs:attribute name="Tag" type="xs:string" use="optional" />
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Activities">
+        <xs:sequence>
+            <xs:element name="activity" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="field" type="rsp:field" />
+                    </xs:sequence>
+                    <xs:attribute name="action" type="rsp:Action" use="optional"/>
+                    <xs:attribute name="IsConfidential" type="xs:boolean" use="optional" />
+                    <xs:attribute name="Id" type="xs:string" use="optional" />
+                    <xs:attribute name="Tag" type="xs:string" use="optional" />
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Attachments">
+        <xs:sequence>
+            <xs:element name="attachment" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="location" type="xs:string" use="required" />
+                            <xs:attribute name="locationType" type="rsp:LocationType" use="optional"/>
+                            <xs:attribute name="summary" type="xs:string" use="optional" />
+                            <xs:attribute name="tag" type="xs:string" use="optional" />
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Costs">
+        <xs:sequence>
+            <xs:element name="cost" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="field" type="rsp:field"/>
+                        <xs:element maxOccurs="1" minOccurs="0" name="Activities" type="rsp:Activities"/>
+                    </xs:sequence>
+                    <xs:attribute name="action" type="rsp:Action" use="optional"/>
+                    <xs:attribute name="Id" type="xs:string" use="optional" />
+                    <xs:attribute name="Tag" type="xs:string" use="optional" />
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="Action">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="Create"/>
+            <xs:enumeration value="Update"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="LocationType">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="Database"/>
+            <xs:enumeration value="FileSystem"/>
+            <xs:enumeration value="Http"/>
+            <xs:enumeration value="Ftp"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

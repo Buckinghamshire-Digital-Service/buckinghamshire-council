@@ -48,7 +48,19 @@
                 <dd class="sidebar__job-detail-description">{{ page.closing_date }}</dd>
             </div>
         {% endif %}
+        {% if page.attachments.all %}
+            <div>
+                <dt class="sidebar__job-detail-title">Additional Information</dt>
+                <dd class="sidebar__job-detail-description">
+                    {% for document in page.attachments.all %}
+                        <a href="{{ document.url }}" class="sidebar__job-detail-attachment">
+                            {{ document.title }}
+                            ({{ document.file_extension }}{% if document.file_size %}, {{ document.file_size|filesizeformat }}{% endif %})
+                        </a>
+                    {% endfor %}
+                </dd>
+            </div>
+        {% endif %}
     </dl>
 
 </aside>
-

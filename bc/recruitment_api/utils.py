@@ -6,7 +6,7 @@ from bleach.sanitizer import Cleaner
 from bs4 import BeautifulSoup
 from dateutil.parser import parse
 
-from ..recruitment.models import JobSubcategory
+from ..recruitment.models import JobSubcategory, TalentLinkJob
 from . import constants
 
 
@@ -125,5 +125,32 @@ def update_job_from_ad(job, ad, defaults=None, import_categories=False):
             )
     for k, v in defaults.items():
         setattr(job, k, v)
+
+    # Get location data
+    if ad["jobLocations"]:
+        location = ad["jobLocations"]["jobLocation"][0]
+        if location["zipCode"]:
+            job.location_postcode = location["zipCode"]
+            job.location_lat = location["latitude"]
+            job.location_lon = location["longitude"]
+
     job.save()
     return job
+
+
+def delete_jobs(imported_before):
+    """Delete outdated TalentLinkJob objects
+
+    Args:
+        imported_before (datetime): Cutoff datetime for jobs `last_imported` values.
+
+    Returns:
+        (int) The number of jobs deleted.
+
+    """
+
+    outdated_jobs = TalentLinkJob.objects.filter(last_imported__lt=imported_before)
+    count = outdated_jobs.count()
+    outdated_jobs.delete()
+
+    return count
