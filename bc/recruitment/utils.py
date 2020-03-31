@@ -21,10 +21,10 @@ def get_current_search(querydict):
     search = {}
 
     if querydict.get("query", None):
-        search["query"] = querydict.get("query", None)
+        search["query"] = querydict["query"]
 
     if querydict.get("postcode", None):
-        search["postcode"] = querydict.get("postcode", None)
+        search["postcode"] = querydict["postcode"]
 
     # Loop through our filters so we don't just store any query params
     for filter in JOB_FILTERS:
