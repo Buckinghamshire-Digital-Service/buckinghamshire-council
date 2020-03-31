@@ -24,7 +24,7 @@
 
         @include media-query(tablet-portrait) {
             margin: 0;
-            margin-top: -45px;
+            margin-top: -$grid--medium;
         }
 
         a {
