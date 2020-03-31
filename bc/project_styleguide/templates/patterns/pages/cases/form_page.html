@@ -42,10 +42,10 @@
                                         {% else %}
                                             <label for="{{ field.id_for_label }}" class="form-item__label {% if field.field.required %}required{% endif %}">{{ field.label }} {% if field.field.required %}<span class="form-item__required">*</span>{% endif %}</label>
 
+                                            <div class="form-item__help">{% if field.help_text %}{{ field.help_text }}{% endif %}</div>
                                             {% if widget_type == 'date_input' or widget_type == 'date_time_input' %}<div class="{{ widget_type }}">{% endif %}
                                             {{ field }}
                                             {% if widget_type == 'date_input' or widget_type == 'date_time_input' %}</div>{% endif %}
-                                            <div class="form-item__help">{% if field.help_text %}{{ field.help_text }}{% endif %}</div>
                                         {% endif %}
 
                                     </div>
