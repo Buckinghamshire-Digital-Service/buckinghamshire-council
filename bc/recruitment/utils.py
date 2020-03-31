@@ -100,7 +100,11 @@ def get_job_search_results(querydict, queryset=None):
 
             search_results = search_results.annotate(
                 distance=GetDistance(search_lat, search_lon)
-            ).order_by("distance", "-rank")
+            ).order_by("distance")
+
+            if search_query:
+                # Rank is only used when there is a search query
+                search_results = search_results.order_by("distance", "-rank")
 
     return search_results
 
