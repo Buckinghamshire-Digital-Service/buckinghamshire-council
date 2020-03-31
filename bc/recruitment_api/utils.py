@@ -6,7 +6,7 @@ from bleach.sanitizer import Cleaner
 from bs4 import BeautifulSoup
 from dateutil.parser import parse
 
-from ..recruitment.models import JobSubcategory
+from ..recruitment.models import JobSubcategory, TalentLinkJob
 from . import constants
 
 
@@ -136,3 +136,21 @@ def update_job_from_ad(job, ad, defaults=None, import_categories=False):
 
     job.save()
     return job
+
+
+def delete_jobs(imported_before):
+    """Delete outdated TalentLinkJob objects
+
+    Args:
+        imported_before (datetime): Cutoff datetime for jobs `last_imported` values.
+
+    Returns:
+        (int) The number of jobs deleted.
+
+    """
+
+    outdated_jobs = TalentLinkJob.objects.filter(last_imported__lt=imported_before)
+    count = outdated_jobs.count()
+    outdated_jobs.delete()
+
+    return count

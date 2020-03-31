@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- 148 Delete outdated jobs when running import command
+
 ## 9.0 (2020-03-31)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/8.0...9.0
