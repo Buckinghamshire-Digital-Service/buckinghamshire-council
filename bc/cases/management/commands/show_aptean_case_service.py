@@ -7,7 +7,7 @@ from bc.cases.backends.respond.constants import CREATE_CASE_TYPE
 
 
 class Command(BaseCommand):
-    help = "Lists Web Services defined in the Aptean Respond API"
+    help = "Shows fields defined on CreateCase type services in the Aptean API"
 
     def handle(self, *args, **options):
         client = get_client()
