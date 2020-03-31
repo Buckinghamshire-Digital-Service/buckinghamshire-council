@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- 125 Job attachments
 - 148 Delete outdated jobs when running import command
 
 ## 9.0 (2020-03-31)

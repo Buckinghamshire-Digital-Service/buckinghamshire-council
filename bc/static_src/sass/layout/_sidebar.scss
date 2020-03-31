@@ -59,6 +59,19 @@
         }
     }
 
+    &__job-detail-attachment {
+        border-bottom: 1px solid $color--grey-medium;
+        display: block;
+        margin-bottom: $grid--min;
+        padding-bottom: $grid--min;
+
+        &:last-of-type {
+            border-bottom: 0;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+    }
+
     &--jobs {
         border: 0;
         padding: $grid $grid--small;

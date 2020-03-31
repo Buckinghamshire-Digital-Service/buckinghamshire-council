@@ -5,6 +5,22 @@ import pytz
 no_further_pages_response = {"advertisements": None, "totalResults": 143}
 
 
+def get_attachment(
+    id="123",
+    mime_type="application/pdf",
+    file_name="Application form.pdf",
+    content="Test file content",
+    description=None,
+):
+    return {
+        "id": id,
+        "mimeType": mime_type,
+        "fileName": file_name,
+        "content": content,
+        "description": description,
+    }
+
+
 def get_advertisement(
     job_number="FS11605",
     talentlink_id=164579,

@@ -1,3 +1,5 @@
+from django.utils.html import format_html
+
 from wagtail.contrib.modeladmin.options import (
     ModelAdmin,
     ModelAdminGroup,
@@ -14,11 +16,15 @@ class TalentLinkJobModelAdmin(ModelAdmin):
     list_display = (
         "talentlink_id",
         "job_number",
+        "job_link",
         "title",
         "get_categories_list",
         "last_imported",
         "location_postcode",
     )
+
+    def job_link(self, obj):
+        return format_html('<a href="{}">{}</span>', obj.url, obj.title,)
 
 
 class JobAlertSubscriptionModelAdmin(ModelAdmin):
