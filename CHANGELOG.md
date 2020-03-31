@@ -4,6 +4,8 @@
 
 - 114 StreamField Button Link block (BE)
 - 125 Job attachments
+- 138 Additional job sidebar fields (FE)
+- 139 Additional job sidebar fields (BE)
 - 148 Delete outdated jobs when running import command
 
 ## 9.0 (2020-03-31)

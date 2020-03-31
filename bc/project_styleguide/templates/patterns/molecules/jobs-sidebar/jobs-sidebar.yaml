@@ -1,10 +1,12 @@
 context:
   page:
-    working_hours: Full-time only
     salary_range: £19,000 to £21,000 per year
-    closing_date: 11 December 2019 at 4pm
+    job_number: FS11935
+    contract_type: Permanent
+    working_hours: Full-time only
     expected_start_date: 6 January 2020
     posting_start_date: 28 November 2019
+    closing_date: 11 December 2019 at 4pm
     show_apply_button: True
     attachments:
       all:
