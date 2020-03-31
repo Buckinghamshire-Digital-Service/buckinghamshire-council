@@ -1,6 +1,10 @@
 import json
 
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
+from django.db.models import F
+from django.db.models.functions import ACos, Cos, Radians, Sin
+
+import requests
 
 from bc.recruitment.constants import JOB_FILTERS
 from bc.recruitment.models import JobCategory, RecruitmentHomePage, TalentLinkJob
@@ -17,7 +21,10 @@ def get_current_search(querydict):
     search = {}
 
     if querydict.get("query", None):
-        search["query"] = querydict.get("query", None)
+        search["query"] = querydict["query"]
+
+    if querydict.get("postcode", None):
+        search["postcode"] = querydict["postcode"]
 
     # Loop through our filters so we don't just store any query params
     for filter in JOB_FILTERS:
@@ -80,7 +87,43 @@ def get_job_search_results(querydict, queryset=None):
                 }  # TODO: make case insensitive
             )
 
+    # Process postcode search
+    search_postcode = querydict.get("postcode", None)
+    if search_postcode:
+        postcode_response = requests.get(
+            "https://api.postcodes.io/postcodes/" + search_postcode
+        )
+        if postcode_response.status_code == 200:
+            postcode_response_json = postcode_response.json()
+            search_lon = postcode_response_json["result"]["longitude"]
+            search_lat = postcode_response_json["result"]["latitude"]
+
+            search_results = search_results.annotate(
+                distance=GetDistance(search_lat, search_lon)
+            ).order_by("distance")
+
+            if search_query:
+                # Rank is only used when there is a search query
+                search_results = search_results.order_by("distance", "-rank")
+
     return search_results
+
+
+def GetDistance(point_latitude, point_longitude):
+    # Calculate distance. See https://www.thutat.com/web/en/programming-and-tech-stuff/
+    # web-programming/postgres-query-with-gps-distance-calculations-without-postgis/
+    distance = (
+        ACos(
+            Sin(Radians(F("location_lat"))) * Sin(Radians(point_latitude))
+            + Cos(Radians(F("location_lat")))
+            * Cos(Radians(point_latitude))
+            * Cos(Radians(F("location_lon") - point_longitude))
+        )
+        * 6371
+        * 1000
+    )
+
+    return distance
 
 
 def get_school_and_early_years_count(search_results=None):
