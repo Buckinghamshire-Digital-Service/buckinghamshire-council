@@ -141,11 +141,14 @@ class ImportTest(TestCase, ImportTestMixin):
     @mock.patch("bc.recruitment_api.management.commands.import_jobs.update_job_from_ad")
     def test_error_cases_are_not_imported(self, mock_update_fn, mock_get_client):
         instant = datetime.datetime(2020, 1, 29, 12, 0, 0, tzinfo=datetime.timezone.utc)
-        job_1 = TalentLinkJobFactory(
+        TalentLinkJobFactory(
             talentlink_id=1, title="Original title 1", last_imported=instant
         )
         job_2 = TalentLinkJobFactory(
             talentlink_id=2, title="Original title 2", last_imported=instant
+        )
+        self.assertEqual(
+            TalentLinkJob.objects.count(), 2,
         )
 
         error_message = "This is a test error message"
@@ -175,9 +178,13 @@ class ImportTest(TestCase, ImportTestMixin):
         self.assertIn("1 existing jobs updated", output)
         self.assertIn("1 errors", output)
 
-        job_1.refresh_from_db()
-        self.assertEqual(job_1.title, "Original title 1")  # not updated
-        self.assertEqual(job_1.last_imported, instant)  # not updated
+        # job_1 should have been deleted from db as it isn't imported
+        self.assertEqual(
+            TalentLinkJob.objects.filter(talentlink_id=1).count(),
+            0,
+            msg="Jobs not in import should be deleted.",
+        )
+
         job_2.refresh_from_db()
         self.assertEqual(job_2.title, "New title 2")  # job 2 has been updated
         self.assertEqual(job_2.last_imported, later)  # job 2 has been updated
@@ -304,21 +311,23 @@ class DeletedAndUpdatedJobsTest(TestCase, ImportTestMixin):
         # The job has been reimported
         self.assertEqual(job.last_imported, later)
 
-    def test_job_missing_from_import(self, mock_get_client):
+    def test_job_missing_from_import_are_deleted(self, mock_get_client):
         instant = datetime.datetime(2020, 1, 29, 12, 0, 0, tzinfo=datetime.timezone.utc)
-        job = TalentLinkJobFactory(talentlink_id=1, last_imported=instant)
-        self.assertEqual(TalentLinkJob.objects.count(), 1)
+        TalentLinkJobFactory(talentlink_id=1, last_imported=instant)
+        TalentLinkJobFactory(talentlink_id=2, last_imported=instant)
+        self.assertEqual(TalentLinkJob.objects.count(), 2)
 
-        advertisements = []
+        advertisements = [
+            get_advertisement(talentlink_id=2),
+        ]
         mock_get_client.return_value = self.get_mocked_client(advertisements)
 
         call_command("import_jobs", stdout=mock.MagicMock())
 
-        # No new job has been created
+        # Only one new job remains. Jobs not in import are deleted.
         self.assertEqual(TalentLinkJob.objects.count(), 1)
-        job.refresh_from_db()
-        # The job has not been reimported
-        self.assertEqual(job.last_imported, instant)
+        self.assertEqual(TalentLinkJob.objects.filter(talentlink_id=1).count(), 0)
+        self.assertEqual(TalentLinkJob.objects.filter(talentlink_id=2).count(), 1)
 
 
 class DescriptionsTest(TestCase):
