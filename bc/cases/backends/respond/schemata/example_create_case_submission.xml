@@ -1,0 +1,88 @@
+<!-- The example gave no namespace for the root element. I have added this myself. -->
+<case Tag="" xmlns="http://www.aptean.com/respond/caserequest/1">
+    <field schemaName="Case.ReceiptDate">
+        <value>2012-01-06 08:17:00</value>
+    </field>
+    <field schemaName="Case.FeedbackType">
+        <value>Complaint</value>
+    </field>
+    <field schemaName="Case.BusinessArea">
+        <value id="325d88c3430146699842f167136b0f80">Banking</value>
+    </field>
+    <field schemaName="Case.Currency1">
+        <value currency="GBP">110.43</value>
+    </field>
+    <field schemaName="Case.Description">
+        <value>This is the description.</value>
+    </field>
+    <field schemaName="Case.HowReceived">
+        <value>Email</value>
+    </field>
+    <!-- In the example PDF, the order here was Contacts, Aspects, Qualities, 
+    Activities. However the schema specifies the order as: Aspects, Qualities, Contacts,
+    Tasks, Costs, Activities. I have rearranged the elements to suit. -->
+    <Aspects>
+        <aspect Tag="">
+            <field schemaName="Aspect.AspectOutcome">
+                <!-- In the example, the field Aspect.AspectOutcome was a self-closing 
+                tag with no value subelement. This did not validate. I have added the 
+                value element myself. -->
+                <value>Foo</value>
+            </field>
+            <field schemaName="Aspect.Product">
+                <value>Platinum (Credit Cards)</value>
+            </field>
+            <field schemaName="Aspect.AspectType">
+                <value>Primary</value>
+            </field>
+            <field schemaName="Aspect.Nature">
+                <value>Credit Increase (Advice)</value>
+            </field>
+            <field schemaName="Aspect.Description">
+                <value>Description from Xml.</value>
+            </field>
+        </aspect>
+    </Aspects>
+    <Qualities>
+        <qualities Tag="">
+            <field schemaName="Qualities.Description">
+                <value>this is the learning.</value>
+            </field>
+            <field schemaName="Qualities.DesiredAction">
+                <value>Training</value>
+            </field>
+        </qualities>
+    </Qualities>
+    <Contacts>
+        <contact Tag="">
+            <field schemaName="Contact.HowInvolved">
+                <value>Customer</value>
+            </field>
+            <field schemaName="Contact.Email">
+                <value>someone@somewhere.com</value>
+            </field>
+            <field schemaName="Contact.FirstName">
+                <value>Some</value>
+            </field>
+            <field schemaName="Contact.Title">
+                <value>Mr</value>
+            </field>
+            <field schemaName="Contact.Surname">
+                <value>Xml</value>
+            </field>
+        </contact>
+    </Contacts>
+    <Activities>
+        <activity Tag="">
+            <field schemaName="Activity.Note">
+                <value>This is the note text</value>
+            </field>
+            <!-- The example included this attachment, but according to the schema, only Tasks can have Attachments.
+            <Attachments>
+                <attachment locationType="Database" summary="kokppo" location="OfficeAddins.txt"
+                    tag="">77u/PD94bWwg...0aW9uPg==</attachment>
+            </Attachments>
+            -->
+        </activity>
+    </Activities>
+</case>

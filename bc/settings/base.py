@@ -52,9 +52,10 @@ INSTALLED_APPS = [
     # According to the official docs, it's important that Scout is listed
     # first - http://help.apm.scoutapp.com/#django.
     "scout_apm.django",
+    "bc.cases",
     "bc.documents",
     "bc.events",
-    # "bc.forms",
+    "bc.forms",
     "bc.home",
     "bc.images",
     "bc.navigation",
@@ -67,6 +68,7 @@ INSTALLED_APPS = [
     "bc.users",
     "bc.utils",
     "bc.inlineindex",
+    "wagtailorderable",
     "wagtail.contrib.modeladmin",
     "wagtail.contrib.postgres_search",
     "wagtail.contrib.settings",
@@ -660,6 +662,12 @@ PATTERN_LIBRARY_TEMPLATE_DIR = os.path.join(
 # Google Tag Manager ID from env
 GOOGLE_TAG_MANAGER_ID = env.get("GOOGLE_TAG_MANAGER_ID")
 
+# For Fathom analytics
+FATHOM_SITE_ID = env.get("FATHOM_SITE_ID")
+
+# For Yandex search indexing verification
+YANDEX_VERIFICATION_STRING = env.get("YANDEX_VERIFICATION_STRING")
+
 
 # GOV.UK Notify service
 EMAIL_BACKEND = "bc.utils.email.NotifyEmailBackend"
@@ -672,3 +680,17 @@ TALENTLINK_API_KEY = env.get("TALENTLINK_API_KEY")
 TALENTLINK_API_PASSWORD = env.get("TALENTLINK_API_PASSWORD")
 TALENTLINK_API_USERNAME = env.get("TALENTLINK_API_USERNAME")
 TALENTLINK_API_WSDL = env.get("TALENTLINK_API_WSDL")
+
+# Aptean Respond API credentials
+RESPOND_API_USERNAME = env.get("RESPOND_API_USERNAME")
+RESPOND_API_PASSWORD = env.get("RESPOND_API_PASSWORD")
+RESPOND_API_DATABASE = env.get("RESPOND_API_DATABASE")
+RESPOND_API_BASE_URL = env.get("RESPOND_API_BASE_URL")
+
+# Known create case web services
+RESPOND_COMPLAINTS_WEBSERVICE = env.get("RESPOND_COMPLAINTS_WEBSERVICE")
+RESPOND_FOI_WEBSERVICE = env.get("RESPOND_FOI_WEBSERVICE")
+RESPOND_SAR_WEBSERVICE = env.get("RESPOND_SAR_WEBSERVICE")
+RESPOND_COMMENTS_WEBSERVICE = env.get("RESPOND_COMMENTS_WEBSERVICE")
+RESPOND_COMPLIMENTS_WEBSERVICE = env.get("RESPOND_COMPLIMENTS_WEBSERVICE")
+RESPOND_DISCLOSURES_WEBSERVICE = env.get("RESPOND_DISCLOSURES_WEBSERVICE")
