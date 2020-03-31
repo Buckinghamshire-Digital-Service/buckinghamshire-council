@@ -1,0 +1,9 @@
+context:
+  page:
+    completion_title: Complaint submitted
+    completion_content:
+      'We’ve sent your complaint to the appropriate department.
+      They will respond within 10 working days or let you know if it cannot be dealt with under our complaints policy.
+      For more information, see how we deal with complaints.'
+  case_details:
+    Name: 'COR - 09849 Mänikkölahti'

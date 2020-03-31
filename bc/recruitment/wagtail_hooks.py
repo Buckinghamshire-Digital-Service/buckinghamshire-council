@@ -17,6 +17,7 @@ class TalentLinkJobModelAdmin(ModelAdmin):
         "title",
         "get_categories_list",
         "last_imported",
+        "location_postcode",
     )
 
 
