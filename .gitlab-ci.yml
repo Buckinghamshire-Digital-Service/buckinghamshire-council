@@ -175,6 +175,8 @@ test_js:
     # Add Heroku's Git remote using Heroku CLI.
     - heroku git:remote --app $HEROKU_APP --remote heroku
   script:
+    # Heroku rejects pushes from shallow clones
+    - git fetch --unshallow
     # Push to Heroku's Git via HTTP. Heroku always expects you to push to
     # master.
     - git push heroku HEAD:master
