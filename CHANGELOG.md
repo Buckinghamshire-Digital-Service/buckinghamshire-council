@@ -3,6 +3,7 @@
 ## Unreleased
 
 - 129 Jobs postcode search
+- 169 Adjust position of form field help text
 
 ## 8.0 (2020-03-30)
 
