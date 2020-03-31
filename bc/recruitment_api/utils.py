@@ -6,7 +6,7 @@ from bleach.sanitizer import Cleaner
 from bs4 import BeautifulSoup
 from dateutil.parser import parse
 
-from ..recruitment.models import JobSubcategory
+from ..recruitment.models import JobSubcategory, TalentLinkJob
 from . import constants
 
 
@@ -47,7 +47,7 @@ POSTING_TARGET_STATUS_PUBLISHED = "Published"
 # source field to (target_field, parser) mapping
 JOB_CONFIGURABLE_FIELDS_MAPPING = {"Closing Date": ("closing_date", date_parser)}
 
-JOB_CUSTOM_LOVS_MAPPING = {
+JOB_LOVS_MAPPING = {
     "Job Group": ("subcategory", job_subcategory_parser),
     "Location": ("location", string_parser),
     "Salary Range - FTE": ("salary_range", string_parser),
@@ -55,6 +55,7 @@ JOB_CUSTOM_LOVS_MAPPING = {
     "Searchable Salary": ("searchable_salary", string_parser),
     "Show Apply Button": ("show_apply_button", yesno_parser),
     "Working Hours Selection": ("working_hours", string_parser),
+    "Contract Type": ("contract_type", string_parser),
 }
 
 
@@ -108,9 +109,10 @@ def update_job_from_ad(job, ad, defaults=None, import_categories=False):
 
     job.description = "\n".join(description)
 
-    for custom_lov in ad["customLovs"]["customLov"]:
+    # CustomLovs and StandardLovs
+    for lov in ad["customLovs"]["customLov"] + ad["standardLovs"]["standardLov"]:
         try:
-            target_field, parser = JOB_CUSTOM_LOVS_MAPPING[custom_lov["label"]]
+            target_field, parser = JOB_LOVS_MAPPING[lov["label"]]
         except KeyError:
             pass
         else:
@@ -119,9 +121,7 @@ def update_job_from_ad(job, ad, defaults=None, import_categories=False):
                 parser = job_subcategory_insert_parser
 
             setattr(
-                job,
-                target_field,
-                parser(custom_lov["criteria"]["criterion"][0]["label"]),
+                job, target_field, parser(lov["criteria"]["criterion"][0]["label"]),
             )
     for k, v in defaults.items():
         setattr(job, k, v)
@@ -136,3 +136,21 @@ def update_job_from_ad(job, ad, defaults=None, import_categories=False):
 
     job.save()
     return job
+
+
+def delete_jobs(imported_before):
+    """Delete outdated TalentLinkJob objects
+
+    Args:
+        imported_before (datetime): Cutoff datetime for jobs `last_imported` values.
+
+    Returns:
+        (int) The number of jobs deleted.
+
+    """
+
+    outdated_jobs = TalentLinkJob.objects.filter(last_imported__lt=imported_before)
+    count = outdated_jobs.count()
+    outdated_jobs.delete()
+
+    return count

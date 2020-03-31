@@ -1,3 +1,6 @@
+from django.core.exceptions import ValidationError
+from django.forms.utils import ErrorList
+
 from wagtail.contrib.table_block.blocks import TableBlock
 from wagtail.core import blocks
 from wagtail.documents.blocks import DocumentChooserBlock
@@ -67,6 +70,46 @@ class LocalAreaLinksBlock(blocks.StructBlock):
         return context
 
 
+class ButtonBlock(blocks.StructBlock):
+    text = blocks.CharBlock(classname="title")
+    link_url = blocks.URLBlock(required=False)
+    link_page = blocks.PageChooserBlock(required=False)
+
+    def clean(self, value):
+        result = super().clean(value)
+        errors = {}
+
+        if not value["link_url"] and not value["link_page"]:
+            errors["link_url"] = ErrorList(["You must specify a link url or page."])
+            errors["link_page"] = ErrorList(["You must specify a link url or page."])
+
+        if value["link_url"] and value["link_page"]:
+            errors["link_url"] = ErrorList(
+                ["You must specify a link url or page and not both."]
+            )
+            errors["link_page"] = ErrorList(
+                ["You must specify a link url or page and not both."]
+            )
+
+        if errors:
+            raise ValidationError("Validation error in StructBlock", params=errors)
+
+        return result
+
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context=parent_context)
+        context["text"] = value["text"]
+        if value["link_url"]:
+            context["value"]["url"] = value["link_url"]
+        elif value["link_page"]:
+            context["value"]["url"] = value["link_page"].get_url
+        return context
+
+    class Meta:
+        icon = "success"
+        template = "patterns/molecules/streamfield/blocks/button_block.html"
+
+
 # Main streamfield block to be inherited by Pages
 class StoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(
@@ -79,6 +122,7 @@ class StoryBlock(blocks.StreamBlock):
     embed = EmbedBlock()
     local_area_links = LocalAreaLinksBlock()
     table = TableBlock()
+    button = ButtonBlock()
 
     class Meta:
         template = "patterns/molecules/streamfield/stream_block.html"

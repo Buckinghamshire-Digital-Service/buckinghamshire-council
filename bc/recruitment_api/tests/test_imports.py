@@ -9,18 +9,20 @@ from django.utils import timezone
 
 from freezegun import freeze_time
 
+from bc.documents.models import CustomDocument
+from bc.documents.tests.fixtures import DocumentFactory
 from bc.recruitment.models import JobSubcategory, TalentLinkJob
 from bc.recruitment.tests.fixtures import JobSubcategoryFactory, TalentLinkJobFactory
 from bc.recruitment_api.utils import update_job_from_ad
 
-from .fixtures import get_advertisement, no_further_pages_response
+from .fixtures import get_advertisement, get_attachment, no_further_pages_response
 
 # Job category title to match dummy Job Group in get_advertisement() fixture
 FIXTURE_JOB_SUBCATEGORY_TITLE = "Schools & Early Years - Support"
 
 
 class ImportTestMixin:
-    def get_mocked_client(self, advertisements=None):
+    def get_mocked_client(self, advertisements=None, attachments=None):
         if advertisements is None:
             advertisements = [get_advertisement()]
 
@@ -32,6 +34,13 @@ class ImportTestMixin:
             {"advertisements": {"advertisement": advertisements}, "totalResults": 143},
             no_further_pages_response,
         ]
+
+        # Attachments
+        if attachments is None:
+            client.service.getAttachments.side_effect = [{}]
+        else:
+            client.service.getAttachments.side_effect = attachments
+
         return client
 
 
@@ -132,11 +141,14 @@ class ImportTest(TestCase, ImportTestMixin):
     @mock.patch("bc.recruitment_api.management.commands.import_jobs.update_job_from_ad")
     def test_error_cases_are_not_imported(self, mock_update_fn, mock_get_client):
         instant = datetime.datetime(2020, 1, 29, 12, 0, 0, tzinfo=datetime.timezone.utc)
-        job_1 = TalentLinkJobFactory(
+        TalentLinkJobFactory(
             talentlink_id=1, title="Original title 1", last_imported=instant
         )
         job_2 = TalentLinkJobFactory(
             talentlink_id=2, title="Original title 2", last_imported=instant
+        )
+        self.assertEqual(
+            TalentLinkJob.objects.count(), 2,
         )
 
         error_message = "This is a test error message"
@@ -166,9 +178,13 @@ class ImportTest(TestCase, ImportTestMixin):
         self.assertIn("1 existing jobs updated", output)
         self.assertIn("1 errors", output)
 
-        job_1.refresh_from_db()
-        self.assertEqual(job_1.title, "Original title 1")  # not updated
-        self.assertEqual(job_1.last_imported, instant)  # not updated
+        # job_1 should have been deleted from db as it isn't imported
+        self.assertEqual(
+            TalentLinkJob.objects.filter(talentlink_id=1).count(),
+            0,
+            msg="Jobs not in import should be deleted.",
+        )
+
         job_2.refresh_from_db()
         self.assertEqual(job_2.title, "New title 2")  # job 2 has been updated
         self.assertEqual(job_2.last_imported, later)  # job 2 has been updated
@@ -295,21 +311,23 @@ class DeletedAndUpdatedJobsTest(TestCase, ImportTestMixin):
         # The job has been reimported
         self.assertEqual(job.last_imported, later)
 
-    def test_job_missing_from_import(self, mock_get_client):
+    def test_job_missing_from_import_are_deleted(self, mock_get_client):
         instant = datetime.datetime(2020, 1, 29, 12, 0, 0, tzinfo=datetime.timezone.utc)
-        job = TalentLinkJobFactory(talentlink_id=1, last_imported=instant)
-        self.assertEqual(TalentLinkJob.objects.count(), 1)
+        TalentLinkJobFactory(talentlink_id=1, last_imported=instant)
+        TalentLinkJobFactory(talentlink_id=2, last_imported=instant)
+        self.assertEqual(TalentLinkJob.objects.count(), 2)
 
-        advertisements = []
+        advertisements = [
+            get_advertisement(talentlink_id=2),
+        ]
         mock_get_client.return_value = self.get_mocked_client(advertisements)
 
         call_command("import_jobs", stdout=mock.MagicMock())
 
-        # No new job has been created
+        # Only one new job remains. Jobs not in import are deleted.
         self.assertEqual(TalentLinkJob.objects.count(), 1)
-        job.refresh_from_db()
-        # The job has not been reimported
-        self.assertEqual(job.last_imported, instant)
+        self.assertEqual(TalentLinkJob.objects.filter(talentlink_id=1).count(), 0)
+        self.assertEqual(TalentLinkJob.objects.filter(talentlink_id=2).count(), 1)
 
 
 class DescriptionsTest(TestCase):
@@ -628,3 +646,179 @@ class ApplicationURLTest(TestCase, ImportTestMixin):
         expected = "spam=1&spam=2"
 
         self.compare_processed_record(imported, expected)
+
+
+@mock.patch("bc.recruitment_api.management.commands.import_jobs.get_client")
+class AttachmentsTest(TestCase, ImportTestMixin):
+    def test_attachment_is_imported(self, mock_get_client):
+        advertisements = [
+            get_advertisement(talentlink_id=1, title="New title 1"),
+            get_advertisement(talentlink_id=2, title="New title 2"),
+        ]
+
+        job_1_get_attachments_response = [
+            get_attachment(id=111),
+        ]
+
+        job_2_get_attachments_response = [
+            get_attachment(id=222),
+        ]
+
+        attachments = [job_1_get_attachments_response, job_2_get_attachments_response]
+        mock_get_client.return_value = self.get_mocked_client(
+            advertisements, attachments
+        )
+
+        out = StringIO()
+        call_command("import_jobs", stdout=out)
+        out.seek(0)
+        output = out.read()
+
+        self.assertIn("2 new jobs created", output)
+        self.assertIn("2 new documents imported", output)
+
+        job_1 = TalentLinkJob.objects.get(talentlink_id=1)
+        job_2 = TalentLinkJob.objects.get(talentlink_id=2)
+
+        self.assertEqual(job_1.attachments.all().count(), 1)
+        self.assertEqual(job_2.attachments.all().count(), 1)
+        self.assertEqual(job_1.attachments.first().talentlink_attachment_id, 111)
+        self.assertEqual(job_2.attachments.first().talentlink_attachment_id, 222)
+
+    def test_duplicate_attachment_is_not_imported(self, mock_get_client):
+        advertisements = [
+            get_advertisement(talentlink_id=1, title="New title 1"),
+            get_advertisement(talentlink_id=2, title="New title 2"),
+        ]
+
+        job_1_get_attachments_response = [
+            get_attachment(id=111),
+        ]
+
+        job_2_get_attachments_response = [
+            get_attachment(id=111),
+        ]
+
+        attachments = [job_1_get_attachments_response, job_2_get_attachments_response]
+        mock_get_client.return_value = self.get_mocked_client(
+            advertisements, attachments
+        )
+
+        out = StringIO()
+        call_command("import_jobs", stdout=out)
+        out.seek(0)
+        output = out.read()
+
+        self.assertIn("2 new jobs created", output)
+        self.assertIn("1 new documents imported", output)
+
+        docs = CustomDocument.objects.filter(talentlink_attachment_id=111)
+        self.assertEqual(
+            docs.count(),
+            1,
+            msg="Documents with same talentlink_attachment_id should only be imported once.",
+        )
+
+    def test_job_with_no_attachment(self, mock_get_client):
+        advertisements = [
+            get_advertisement(talentlink_id=1, title="New title 1"),
+        ]
+        attachments = [{}]
+        mock_get_client.return_value = self.get_mocked_client(
+            advertisements, attachments
+        )
+
+        out = StringIO()
+        call_command("import_jobs", stdout=out)
+        out.seek(0)
+        output = out.read()
+
+        self.assertIn("1 new jobs created", output)
+        self.assertIn("0 new documents imported", output)
+
+        job = TalentLinkJob.objects.get(talentlink_id=1)
+        self.assertEqual(job.attachments.all().count(), 0)
+
+    def test_multiple_attachments_are_imported(self, mock_get_client):
+        advertisements = [
+            get_advertisement(talentlink_id=1, title="New title 1"),
+            get_advertisement(talentlink_id=2, title="New title 2"),
+        ]
+
+        job_1_get_attachments_response = [
+            get_attachment(id=111),
+            get_attachment(id=112),
+        ]
+
+        attachments = [job_1_get_attachments_response]
+        mock_get_client.return_value = self.get_mocked_client(
+            advertisements, attachments
+        )
+
+        out = StringIO()
+        call_command("import_jobs", stdout=out)
+        out.seek(0)
+        output = out.read()
+
+        self.assertIn("2 new documents imported", output)
+
+        job = TalentLinkJob.objects.get(talentlink_id=1)
+        self.assertEqual(job.attachments.all().count(), 2)
+
+    def test_attachments_are_deleted_when_the_job_is(self, mock_get_client):
+        job = TalentLinkJobFactory(talentlink_id=1)
+        doc = DocumentFactory(talentlink_attachment_id=111)
+        job.attachments.add(doc)
+        job.save()
+
+        job = TalentLinkJob.objects.filter(talentlink_id=1)
+        doc = CustomDocument.objects.filter(talentlink_attachment_id=111)
+
+        self.assertEqual(job.count(), 1)
+        self.assertEqual(doc.count(), 1)
+
+        job.delete()
+        job = TalentLinkJob.objects.filter(talentlink_id=1)
+        doc = CustomDocument.objects.filter(talentlink_attachment_id=111)
+
+        self.assertEqual(job.count(), 0)
+        self.assertEqual(
+            doc.count(),
+            0,
+            msg="attached document should be deleted if its job is deleted",
+        )
+
+    def test_attachments_are_not_deleted_if_another_job_uses_them(
+        self, mock_get_client
+    ):
+
+        job_1 = TalentLinkJobFactory(talentlink_id=1)
+        doc_1 = DocumentFactory(talentlink_attachment_id=111)
+        doc_2 = DocumentFactory(talentlink_attachment_id=222)
+        job_1.attachments.add(doc_1)
+        job_1.attachments.add(doc_2)
+        job_1.save()
+
+        job_2 = TalentLinkJobFactory(talentlink_id=2)
+        job_2.attachments.add(doc_1)
+        job_2.save()
+
+        job = TalentLinkJob.objects.get(talentlink_id=1)
+        doc = CustomDocument.objects.get(talentlink_attachment_id=111)
+
+        self.assertEqual(doc.jobs.all().count(), 2)
+
+        job.delete()
+        job = TalentLinkJob.objects.filter(talentlink_id=1)
+        doc = CustomDocument.objects.filter(talentlink_attachment_id=111)
+
+        self.assertEqual(job.count(), 0)
+        self.assertEqual(
+            doc.count(),
+            1,
+            msg="attached document should be not deleted if it is being used elsewhere",
+        )
+        self.assertEqual(doc[0].jobs.all().count(), 1)
+
+        job_2 = TalentLinkJob.objects.get(talentlink_id=2)
+        self.assertEqual(job_2.attachments.first(), doc[0])

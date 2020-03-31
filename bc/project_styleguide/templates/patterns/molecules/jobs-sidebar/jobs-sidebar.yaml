@@ -1,8 +1,20 @@
 context:
   page:
-    working_hours: Full-time only
     salary_range: £19,000 to £21,000 per year
-    closing_date: 11 December 2019 at 4pm
+    job_number: FS11935
+    contract_type: Permanent
+    working_hours: Full-time only
     expected_start_date: 6 January 2020
     posting_start_date: 28 November 2019
+    closing_date: 11 December 2019 at 4pm
     show_apply_button: True
+    attachments:
+      all:
+        - url: '/documents/906/IFPT_Application_Form_Trust_Business_Manager_k83UyRH.doc'
+          title: 'IFPT Application Form Trust Business Manager'
+          file_extension: 'doc'
+          filename: 'IFPT_Application_Form_Trust_Business_Manager_k83UyRH.doc'
+        - url: '/documents/868/test.doc'
+          title: 'Application Form Teaching (GDPR May 18)'
+          file_extension: 'doc'
+          filename: 'Application_Form_Teaching_GDPR_May_18_GnpQZWY.doc'
