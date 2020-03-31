@@ -3,6 +3,7 @@ from collections import defaultdict
 from unittest import skip
 
 from django import forms
+from django.conf import settings
 from django.test import TestCase
 
 from bs4 import BeautifulSoup
@@ -10,9 +11,7 @@ from lxml import etree
 
 from bc.cases.backends.respond.constants import (
     APPEND_TO_DESCRIPTION,
-    COMPLAINTS_WEBSERVICE,
     DESCRIPTION_SCHEMA_NAME,
-    SAR_WEBSERVICE,
     XML_ENTITY_MAPPING,
 )
 from bc.cases.backends.respond.forms import BaseCaseForm
@@ -110,7 +109,7 @@ class SchemaTest(TestCase):
             "Contact.Town": "",
             "Contact.County": "",
             "Contact.ZipCode": "",
-            "service_name": COMPLAINTS_WEBSERVICE,
+            "service_name": settings.RESPOND_COMPLAINTS_WEBSERVICE,
         }
         generated = etree.tostring(
             form.get_xml(cleaned_data), pretty_print=True
@@ -147,7 +146,7 @@ class SchemaTest(TestCase):
         cleaned_data = {
             DESCRIPTION_SCHEMA_NAME: "Some description",
             extra_field_name: "Two weeks last Sunday",
-            "service_name": SAR_WEBSERVICE,
+            "service_name": settings.RESPOND_SAR_WEBSERVICE,
         }
         soup = BeautifulSoup(etree.tostring(form.get_xml(cleaned_data)), "lxml")
         self.assertEqual(
@@ -180,7 +179,7 @@ class SchemaTest(TestCase):
             DESCRIPTION_SCHEMA_NAME: "Some description",
             extra_field_one: "Synthetic past",
             extra_field_two: "Spider bite",
-            "service_name": SAR_WEBSERVICE,
+            "service_name": settings.RESPOND_SAR_WEBSERVICE,
         }
         soup = BeautifulSoup(etree.tostring(form.get_xml(cleaned_data)), "lxml")
         self.assertEqual(

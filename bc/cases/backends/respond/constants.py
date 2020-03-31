@@ -1,5 +1,7 @@
 from collections import OrderedDict
 
+from django.conf import settings
+
 CREATE_CASE_TYPE = "CaseCreate"
 FIELD_INFO_TYPE = "FieldInfo"
 CATEGORY_INFO_TYPE = "CategoryInfo"
@@ -9,15 +11,6 @@ DESCRIPTION_SCHEMA_NAME = "Case.Description"
 
 RESPOND_FIELDS_CACHE_PREFIX = "respond_field__"
 RESPOND_CATEGORIES_CACHE_PREFIX = "respond_categories__"
-
-# Known create case web services
-COMPLAINTS_WEBSERVICE = "TestCreateComplaints"
-FOI_WEBSERVICE = "TestCreateFOI"
-SAR_WEBSERVICE = "TestCreateSAR"
-COMMENTS_WEBSERVICE = "TestCreateComments"
-COMPLIMENTS_WEBSERVICE = "TestCreateCompliments"
-DISCLOSURE_WEBSERVICE = "TestCreateDisclosures"
-
 
 SHORT_TEXT_DATA_TYPE = "ShortText"
 CATEGORY_DATA_TYPE = "Category"
@@ -34,7 +27,7 @@ FIELD_TYPES = {
 # when the module is loaded. Only set where they differ from those in the defaults set
 # below here.
 CREATE_CASE_SERVICES = {
-    COMPLAINTS_WEBSERVICE: {
+    settings.RESPOND_COMPLAINTS_WEBSERVICE: {
         "stanagedicfixelds": {"Case.FeedbackType": "Corporate"},
         "custom_field_options": {
             DESCRIPTION_SCHEMA_NAME: {
@@ -47,7 +40,7 @@ CREATE_CASE_SERVICES = {
             "Case.AdditionalComments": SHORT_TEXT_DATA_TYPE,
         },
     },
-    FOI_WEBSERVICE: {
+    settings.RESPOND_FOI_WEBSERVICE: {
         "stanagedicfixelds": {"Case.FeedbackType": "FOI/EIR"},
         "custom_field_options": {
             DESCRIPTION_SCHEMA_NAME: {
@@ -58,7 +51,7 @@ CREATE_CASE_SERVICES = {
             }
         },
     },
-    SAR_WEBSERVICE: {
+    settings.RESPOND_SAR_WEBSERVICE: {
         "stanagedicfixelds": {"Case.FeedbackType": "SAR"},
         "custom_field_options": {
             "Case.TypeofSAR": {
@@ -85,7 +78,7 @@ CREATE_CASE_SERVICES = {
         },
         "field_type_overrides": {"Case.Anyothercomments": SHORT_TEXT_DATA_TYPE},
     },
-    COMMENTS_WEBSERVICE: {
+    settings.RESPOND_COMMENTS_WEBSERVICE: {
         "stanagedicfixelds": {"Case.FeedbackType": "Corporate"},
         "custom_field_options": {
             APPEND_TO_DESCRIPTION
@@ -101,8 +94,10 @@ CREATE_CASE_SERVICES = {
             },
         },
     },
-    COMPLIMENTS_WEBSERVICE: {"stanagedicfixelds": {"Case.FeedbackType": "Compliment"}},
-    DISCLOSURE_WEBSERVICE: {
+    settings.RESPOND_COMPLIMENTS_WEBSERVICE: {
+        "stanagedicfixelds": {"Case.FeedbackType": "Compliment"}
+    },
+    settings.RESPOND_DISCLOSURES_WEBSERVICE: {
         "stanagedicfixelds": {"Case.FeedbackType": "Disclosures"},
         "custom_field_options": {
             APPEND_TO_DESCRIPTION
@@ -156,7 +151,7 @@ for service in CREATE_CASE_SERVICES.values():
 
 
 FIELD_MAPPINGS = {
-    COMPLAINTS_WEBSERVICE: OrderedDict(
+    settings.RESPOND_COMPLAINTS_WEBSERVICE: OrderedDict(
         [
             ("Your Involvement", "Contact.ContactType"),
             ("Your complaint", DESCRIPTION_SCHEMA_NAME),
@@ -180,7 +175,7 @@ FIELD_MAPPINGS = {
             ("Postcode", "Contact.ZipCode"),
         ]
     ),
-    FOI_WEBSERVICE: OrderedDict(
+    settings.RESPOND_FOI_WEBSERVICE: OrderedDict(
         [
             ("Organisation/Company name", "Contact.Organisation"),
             ("What information do you need?", DESCRIPTION_SCHEMA_NAME),
@@ -196,7 +191,7 @@ FIELD_MAPPINGS = {
             ("Postcode", "Contact.ZipCode"),
         ]
     ),
-    SAR_WEBSERVICE: OrderedDict(
+    settings.RESPOND_SAR_WEBSERVICE: OrderedDict(
         [
             ("Your Involvement", "Contact.ContactType"),
             ("What personal information is required?", DESCRIPTION_SCHEMA_NAME),
@@ -231,7 +226,7 @@ FIELD_MAPPINGS = {
             ("Postcode", "Contact.ZipCode"),
         ]
     ),
-    COMMENTS_WEBSERVICE: OrderedDict(
+    settings.RESPOND_COMMENTS_WEBSERVICE: OrderedDict(
         [
             ("Your comment or suggestion", DESCRIPTION_SCHEMA_NAME),
             (
@@ -250,7 +245,7 @@ FIELD_MAPPINGS = {
             ("Postcode", "Contact.ZipCode"),
         ]
     ),
-    COMPLIMENTS_WEBSERVICE: OrderedDict(
+    settings.RESPOND_COMPLIMENTS_WEBSERVICE: OrderedDict(
         [
             ("Your comment or suggestion", DESCRIPTION_SCHEMA_NAME),
             ("Title", "Contact.OtherTitle"),
@@ -265,7 +260,7 @@ FIELD_MAPPINGS = {
             ("Postcode", "Contact.ZipCode"),
         ]
     ),
-    DISCLOSURE_WEBSERVICE: OrderedDict(
+    settings.RESPOND_DISCLOSURES_WEBSERVICE: OrderedDict(
         [
             ("Details of information required", DESCRIPTION_SCHEMA_NAME),
             ("Information required because", APPEND_TO_DESCRIPTION + ".reason"),

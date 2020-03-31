@@ -30,4 +30,13 @@ RESPOND_API_PASSWORD = "some_pass"  # pragma: allowlist secret
 RESPOND_API_DATABASE = "Test"
 RESPOND_API_BASE_URL = "https://groupc.respond.apteancloud.com/Buckinghamshire/ws/"
 
+# Known create case web services
+RESPOND_COMPLAINTS_WEBSERVICE = "TestCreateComplaints"
+RESPOND_FOI_WEBSERVICE = "TestCreateFOI"
+RESPOND_SAR_WEBSERVICE = "TestCreateSAR"
+RESPOND_COMMENTS_WEBSERVICE = "TestCreateComments"
+RESPOND_COMPLIMENTS_WEBSERVICE = "TestCreateCompliments"
+RESPOND_DISCLOSURES_WEBSERVICE = "TestCreateDisclosures"
+
+
 YANDEX_VERIFICATION_STRING = "test_string"
