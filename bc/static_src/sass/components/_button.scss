@@ -7,8 +7,8 @@
     background-color: $color--link;
     color: $color--white;
     font-weight: $weight--bold;
-    max-height: $grid--medium;
-    padding: 0 $grid--small;
+    min-height: $grid--medium;
+    padding: $grid--min / 2 $grid--small;
 
     #{$hover-states} {
         background-color: $color--link-hover;
@@ -61,34 +61,6 @@
 
     &--apply,
     &--basic {
-        display: inline-block;
-        background-color: $color--leaf;
-        text-decoration: none;
-        font-weight: $weight--bold;
-        color: $color--slate;
-        border-bottom: $border--accent darken($color--leaf, 10);
-        max-height: $grid--medium;
-        width: auto;
-        margin: 0 0 $grid;
-        padding: $grid--min $grid--small;
-
-        &:hover {
-            background: darken($color--leaf, 3%);
-            color: $color--slate;
-        }
-
-        &:focus {
-            background-color: $color--mustard;
-            border-bottom: $border--accent $color--slate;
-            border-top: none;
-            color: $color--slate;
-        }
-
-        &:active {
-            background-color: darken($color--leaf, 3%);
-            border-bottom: none;
-            border-top: $border--accent darken($color--leaf, 10);
-            color: $color--slate;
-        }
+        @include button($color--slate, $color--leaf, $color--leaf);
     }
 }

@@ -34,25 +34,50 @@
 
     // stylelint-disable-next-line selector-class-pattern
     &--radio_select {
-        input:not([type='checkbox']) {
+        label {
+            display: block;
+            margin: $grid--min 0;
+        }
+
+        input {
+            appearance: none;
             display: inline-block;
-            // stylelint-disable-next-line declaration-no-important
-            width: auto !important;
-            margin-right: 5px;
+            width: 30px;
+            height: 30px;
+            border: 2px solid $color--black;
+            border-radius: 50%;
+            margin: 0 $grid--min 0 0;
+            background-color: $color--white;
+            vertical-align: middle;
+
+            // stylelint-disable-next-line selector-class-pattern
+            &:checked {
+                background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 14 14' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='7' cy='7' r='7'/%3E%3C/svg%3E");
+                background-size: 12px 12px;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+
+            // stylelint-disable-next-line selector-class-pattern
+            &:focus {
+                @include focus();
+            }
         }
     }
 
     /* stylelint-disable selector-class-pattern */
-    &--custom_checkbox_select_multiple {
+    &--custom_checkbox_select_multiple,
+    &--custom_checkbox_select_single {
         // custom checkbox styles
         input[type='checkbox'] {
             opacity: 0;
+            margin: 0 0 $grid--min 0;
             position: absolute;
 
             + label {
                 @include font-size(s);
-                padding: 0 0 0 30px;
-                margin: 0 0 $grid--large 0;
+                padding: 0 0 0 $grid--medium;
+                margin: 0;
                 line-height: 1.8;
                 position: relative;
 
@@ -62,26 +87,25 @@
                     border: 2px solid $color--default;
                     background-color: $color--white;
                     color: $color--default;
-                    height: 25px;
+                    height: 30px;
                     left: 0;
                     position: absolute;
                     top: 0;
-                    width: 25px;
+                    width: 30px;
                 }
 
                 // inside checkbox
                 &::after {
                     content: '';
-                    left: 8px;
+                    left: 10px;
                     top: 5px;
-                    width: 8px;
-                    height: 14px;
+                    width: 9px;
+                    height: 17px;
                     border: solid $color--default;
-                    border-width: 0 3px 3px 0;
+                    border-width: 0 4px 4px 0;
                     position: absolute;
                     opacity: 0;
                     transform: rotate(45deg);
-                    transition: opacity $transition;
                 }
             }
 
@@ -138,18 +162,8 @@
         color: rgba($color--default, 0.6);
     }
 
-    input:not([type='checkbox']),
-    textarea,
-    select {
-        width: 100%;
-        outline: 0;
-        padding: $grid--min;
-        border: 2px solid $color--off-black;
-
-        &:focus,
-        &:focus-within {
-            box-shadow: 0 0 0 4px $color--mustard;
-        }
+    textarea {
+        height: 200px;
     }
 
     input[type='checkbox'] {
