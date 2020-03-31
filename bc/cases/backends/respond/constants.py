@@ -83,6 +83,10 @@ CREATE_CASE_SERVICES = {
             + ".buckinghamshire_council_employee": {
                 "choices": [("Yes", "Yes"), ("No", "No")]
             },
+            APPEND_TO_DESCRIPTION
+            + ".employee_id": {"required": False, "help_text": "optional"},
+            APPEND_TO_DESCRIPTION
+            + ".employment_dates": {"required": False, "help_text": "optional"},
             "Contact.PreferredContactMethod": {
                 "required": True,
                 "choices": [
@@ -208,7 +212,7 @@ FIELD_MAPPINGS = {
             ("Last name", "Contact.Surname"),
             ("How would you prefer to be contacted?", "Contact.PreferredContactMethod"),
             ("Email address", "Contact.Email"),
-            ("Contact number", "Contact.HomePhone"),
+            ("Contact number", "Contact.Mobile"),
             ("Building and street address", "Contact.Address01"),
             ("Town or city", "Contact.Town"),
             ("County", "Contact.County"),
@@ -289,7 +293,7 @@ FIELD_MAPPINGS = {
             ("Details of information required", DESCRIPTION_SCHEMA_NAME),
             ("Information required because", APPEND_TO_DESCRIPTION + ".reason"),
             # TODO ("Do you wish to attach any documents to this request?",
-            ("Are you an individual or a company?", "Contact.Organisation"),
+            ("Name of your organisation", "Contact.Organisation"),
             ("Title", "Contact.OtherTitle"),
             ("First name", "Contact.FirstName"),
             ("Last name", "Contact.Surname"),
