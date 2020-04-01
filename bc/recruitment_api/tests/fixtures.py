@@ -21,6 +21,16 @@ def get_attachment(
     }
 
 
+def get_logo(
+    id="123", url="https://test.url/test.png",
+):
+    return {
+        "id": id,
+        "url": url,
+        "position": "Logo",
+    }
+
+
 def get_advertisement(
     job_number="FS11605",
     talentlink_id=164579,

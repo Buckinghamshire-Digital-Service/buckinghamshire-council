@@ -22,7 +22,7 @@ FIXTURE_JOB_SUBCATEGORY_TITLE = "Schools & Early Years - Support"
 
 
 class ImportTestMixin:
-    def get_mocked_client(self, advertisements=None, attachments=None):
+    def get_mocked_client(self, advertisements=None, attachments=None, logo=None):
         if advertisements is None:
             advertisements = [get_advertisement()]
 
@@ -40,6 +40,12 @@ class ImportTestMixin:
             client.service.getAttachments.side_effect = [{}]
         else:
             client.service.getAttachments.side_effect = attachments
+
+        # Logo
+        if logo is None:
+            client.service.getAdvertisementImages.side_effect = [{}]
+        else:
+            client.service.getAdvertisementImages.side_effect = logo
 
         return client
 
@@ -822,3 +828,21 @@ class AttachmentsTest(TestCase, ImportTestMixin):
 
         job_2 = TalentLinkJob.objects.get(talentlink_id=2)
         self.assertEqual(job_2.attachments.first(), doc[0])
+
+
+@mock.patch("bc.recruitment_api.management.commands.import_jobs.get_client")
+class LogoTest(TestCase, ImportTestMixin):
+    def test_logo_is_imported(self, mock_get_client):
+        pass
+
+    def test_duplicate_logo_is_not_imported(self, mock_get_client):
+        pass
+
+    def test_job_with_no_logo(self, mock_get_client):
+        pass
+
+    def test_logo_is_deleted_when_the_job_is(self, mock_get_client):
+        pass
+
+    def test_logo_is_not_deleted_if_another_job_is_using_it(self, mock_get_client):
+        pass
