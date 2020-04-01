@@ -75,25 +75,9 @@
         border-left: $border--accent $color--primary;
     }
 
-    // resuse previous application / import from my cv buttons
-    .awli-buttons-wrapper {
-        @include media-query(tablet-portrait) {
-            display: flex;
-        }
-    }
-
-    .reuse-button {
-        @include media-query(tablet-portrait) {
-            margin-right: $grid--small;
-        }
-    }
-
-    .apply-cv-button {
-        margin-top: $grid--small;
-
-        @include media-query(tablet-portrait) {
-            margin: 0;
-        }
+    // hide reuse previous application button
+    .apply-sna-button-container-myprevapp {
+        display: none;
     }
 
     // initially hide 'how it works' text
@@ -129,6 +113,11 @@
 
     .text-input {
         width: 100%;
+    }
+
+    // make email input full width
+    .text-input[type='email'] {
+        max-width: none;
     }
 
     .select-input,
@@ -354,6 +343,21 @@
             }
         }
     }
+
+    // Extra info text e.g. safeguarding
+    .apply-no-answer {
+        @include font-size(s);
+    }
+
+    // Ensures safeguarding heading looks like a heading - only class I could hook into here
+    // and it doesn't appear to be used elsewhere.
+    /* stylelint-disable selector-class-pattern  */
+    .sFontWeight-bold {
+        @include font-size(m);
+        font-weight: $weight--bold;
+        margin-bottom: 5px;
+    }
+    /* stylelint-enable selector-class-pattern  */
 
     // data protection question is required, but the .apply-required class is inside
     // a legend so the styling above is not applied. Use some custom styling here.
