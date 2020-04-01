@@ -276,7 +276,7 @@ class SiteBannerSettings(BaseSetting):
         + "the site except for homepage. For homepage, please use the alert fields on homepage.",
     )
     label = models.CharField("Alert label", max_length=255)
-    body = RichTextField("Text", features=RICH_TEXT_FEATURES,)
+    body = RichTextField("Text", features=RICH_TEXT_FEATURES)
 
     panels = [
         MultiFieldPanel(
@@ -322,3 +322,7 @@ class BasePage(SocialFields, ListingFields, Page):
             return HttpResponseRedirect(self.redirect_to)
 
         return super().serve(request, *args, **kwargs)
+
+
+BasePage._meta.get_field("seo_title").verbose_name = "Title tag"
+BasePage._meta.get_field("search_description").verbose_name = "Meta description"
