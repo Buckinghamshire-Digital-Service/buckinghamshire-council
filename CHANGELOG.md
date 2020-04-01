@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- Improve page 'Promote' tab SEO field labels
+
 ## 10.0 (2020-03-31)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/8.0...9.0
