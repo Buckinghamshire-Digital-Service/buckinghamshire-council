@@ -101,6 +101,14 @@
 
         input[type='text'] {
             border: 0;
+
+            &::placeholder {
+                font-size: 12px;
+
+                @include media-query(tablet-portrait) {
+                    font-size: $base-font-size;
+                }
+            }
         }
     }
 
