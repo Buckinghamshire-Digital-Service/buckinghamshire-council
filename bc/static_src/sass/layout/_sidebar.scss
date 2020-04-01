@@ -77,24 +77,5 @@
         padding: $grid $grid--small;
         background: $color--grey-light;
         position: relative;
-        margin-top: 130px;
-
-        &::before {
-            content: '';
-            background-image: url('../images/bc-logo.png');
-            background-repeat: no-repeat;
-            background-size: contain;
-            width: 110px;
-            height: 110px;
-            position: absolute;
-            top: -130px;
-            left: 50%;
-            margin-left: -55px;
-
-            @include media-query(tablet-landscape) {
-                left: 0;
-                margin: 0;
-            }
-        }
     }
 }
