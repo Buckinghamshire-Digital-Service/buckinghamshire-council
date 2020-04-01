@@ -3,10 +3,9 @@
 <div class="search-filters" role="tablist" aria-multiselectable="true">
     <form action="#" method="get" role="filter" class="form">
         <div class="search-filters__fieldset">
-            <div class="search-filters__option">
+            <div class="search-filters__option form-item--custom_checkbox_select_single">
                 <input class="search-filters__checkbox" type="checkbox" value="1" name="hide_schools_and_early_years" id="hide_schools_and_early_years" {% if hide_schools_and_early_years.selected %}checked{% endif %}>
                 <label class="search-filters__label" for="hide_schools_and_early_years">
-                    <span class="search-filters__dummy-checkbox"></span>
                     {{ hide_schools_and_early_years.label }}
                     <span class="search-filters__count">({{ hide_schools_and_early_years.count }})</span>
                 </label>
@@ -14,63 +13,41 @@
         </div>
 
         {% for filter in filters %}
-            {% if forloop.first %}
-                <h3 class="search-filters__group-title">{{ filter.title }}</h3>
+            <h3 class="search-filters__group-title">{{ filter.title }}</h3>
 
-                <div class="search-filters__fieldset">
-                    {% for option in filter.options %}
-                        <div class="search-filters__option {% if option.is_schools_and_early_years %}is_schools_and_early_years{% endif %}">
-                            <input class="search-filters__checkbox" type="checkbox" name="{{ filter.key }}" value="{{ option.key }}" id="{{ option.key }}" {% if option.key|slugify in filter.selected %}checked{% endif %}>
-                            <label class="search-filters__label" for="{{ option.key }}">
-                                <span class="search-filters__dummy-checkbox"></span>
-                                {{ option.label }}
-                                <span class="search-filters__count">({{ option.count }})</span>
-                            </label>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% else %}
-                <div class="search-filters__accordion accordion" data-accordion>
-                    <a
-                        href=""
-                        class="search-filters__accordion-title accordion__title link link--alt"
-                        data-accordion-question
-                        role="tab"
-                        aria-controls="answer-{{ forloop.counter }}"
-                        aria-expanded="false"
-                        aria-selected="false"
-                        id="question-{{ forloop.counter }}">
-                        <svg class="accordion__icon icon icon--stroke" aria-hidden="true">
-                            <use xlink:href="#chevron"></use>
-                        </svg>
+            <div class="search-filters__fieldset">
+                {% for option in filter.options %}
+                    <div class="search-filters__option form-item--custom_checkbox_select_single {% if option.is_schools_and_early_years %}is_schools_and_early_years{% endif %}">
+                        <input class="search-filters__checkbox" type="checkbox" name="{{ filter.key }}" value="{{ option.key }}" id="{{ option.key }}" {% if option.key|slugify in filter.selected %}checked{% endif %}>
+                        <label class="search-filters__label" for="{{ option.key }}">
+                            <span class="search-filters__dummy-checkbox"></span>
+                            {{ option.label }}
+                            <span class="search-filters__count">({{ option.count }})</span>
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
 
-                        <h3 class="search-filters__group-title">{{ filter.title }}</h3>
-                    </a>
-                    <div
-                        aria-live="polite"
-                        class="search-filters__accordion-content accordion__content"
-                        data-accordion-answer
-                        id="answer-{{ forloop.counter }}"
-                        role="tabpanel"
-                        aria-labelledby="question-{{ forloop.counter }}"
-                        aria-hidden="false">
+        {% if salary_filter %}
 
-                        <div class="search-filters__fieldset">
-                            {% for option in filter.options %}
-                                <div class="search-filters__option">
-                                    <input class="search-filters__checkbox" type="checkbox" id="{{ option.key }}" {% if option.key|slugify in filter.selected %}checked{% endif %}>
-                                    <label class="search-filters__label" for="{{ option.key }}">
-                                        <span class="search-filters__dummy-checkbox"></span>
-                                        {{ option.label }}
-                                        <span class="search-filters__count">({{ option.count }})</span>
-                                    </label>
-                                </div>
-                            {% endfor %}
-                        </div>
+        <div>
+            <fieldset class="search-filters__fieldset">
+                <legend class="hidden">Salary Range</legend>
+                <div class="search-filters__input">
+                    <label for="search--page">Salary Range</label>
+                    <div class="form-item__custom-select">
+                        <select>
+                            <option>£22,250 - £25,000</option>
+                            <option>£25,000 - £30,000</option>
+                            <option>£30,000 - £35,000</option>
+                        </select>
                     </div>
                 </div>
-            {% endif %}
-        {% endfor %}
+            </fieldset>
+        </div>
+
+        {% endif %}
 
         <div>
             <fieldset class="search-filters__fieldset">
@@ -78,6 +55,7 @@
                 <div class="search-filters__input">
                     <label for="search--page">Location</label>
                     <input class="input" id="search--postcode" type="text" placeholder="e.g HP14 5SW" name="postcode"{% if search_postcode %} value="{{ search_postcode }}{% endif %}">
+                    <div class="form-item__help search-filters__help">Closest jobs will display first</div>
                 </div>
             </fieldset>
         </div>

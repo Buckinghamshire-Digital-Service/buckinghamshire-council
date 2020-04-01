@@ -74,12 +74,35 @@
             margin: 0 0 $grid--min 0;
             position: absolute;
 
+            .search-filters__fieldset & {
+                + label {
+                    @include font-size(xs);
+                    padding: 0 0 0 35px;
+                }
+
+                + label::before {
+                    height: 25px;
+                    width: 25px;
+                }
+
+                + label::after {
+                    content: '';
+                    left: 9px;
+                    top: 5px;
+                    width: 7px;
+                    height: 14px;
+                    border-width: 0 3px 3px 0;
+                }
+            }
+
             + label {
                 @include font-size(s);
                 padding: 0 0 0 $grid--medium;
                 margin: 0;
                 line-height: 1.8;
                 position: relative;
+
+
 
                 // surrounding box
                 &::before {
@@ -189,7 +212,7 @@
         &:focus {
             + #{$root}__label {
                 #{$root}__dummy-checkbox {
-                    box-shadow: 0 0 0 4px $color--grey-medium;
+                    box-shadow: 0 0 0 4px $color--mustard;
                 }
             }
         }
@@ -216,9 +239,65 @@
             opacity: 0;
             position: absolute;
             top: 1.5px;
-            transition: opacity $transition;
             width: 8px;
             transform: rotate(45deg);
+        }
+    }
+
+    &__custom-select {
+        position: relative;
+        width: 100%;
+        background-color: $color--white;
+
+        &:active,
+        &:focus {
+            border-color: $color--primary;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 2;
+            width: 50px;
+            height: 7px;
+            margin: auto 0;
+            pointer-events: none;
+            background-image: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\'%3E%3Cpath d=\'M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z\'/%3E%3Cpath fill=\'none\' d=\'M0 0h24v24H0V0z\'/%3E%3C/svg%3E');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 24px 24px;
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            z-index: 1;
+            display: block;
+            width: $grid--medium;
+            height: ($grid--medium - 2px);
+            pointer-events: none;
+        }
+
+        select {
+            @include font-size(s);
+            background-color: $color--white;
+            height: $grid--medium;
+            margin: 0;
+            color: $color--default;
+            cursor: pointer;
+            outline: none;
+            appearance: none;
+            border-radius: 0;
+
+            &:active,
+            &:focus {
+                border-color: $color--primary;
+            }
         }
     }
 }
