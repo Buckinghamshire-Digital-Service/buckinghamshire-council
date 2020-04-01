@@ -276,7 +276,7 @@ class SiteBannerSettings(BaseSetting):
         + "the site except for homepage. For homepage, please use the alert fields on homepage.",
     )
     label = models.CharField("Alert label", max_length=255)
-    body = RichTextField("Text", features=RICH_TEXT_FEATURES,)
+    body = RichTextField("Text", features=RICH_TEXT_FEATURES)
 
     panels = [
         MultiFieldPanel(
@@ -294,6 +294,9 @@ class BasePage(SocialFields, ListingFields, Page):
         blank=True,
         verbose_name="Redirect to external URL",
         help_text="Entering a URL here will prevent the page from being visited, and will instead redirect the user.",
+    )
+    show_live_chat_client = models.BooleanField(
+        default=False, help_text="Show live chat support client on this page"
     )
 
     class Meta:
@@ -315,6 +318,7 @@ class BasePage(SocialFields, ListingFields, Page):
         ]
         + SocialFields.promote_panels
         + ListingFields.promote_panels
+        + [MultiFieldPanel([FieldPanel("show_live_chat_client")], "Page features")]
     )
 
     def serve(self, request, *args, **kwargs):

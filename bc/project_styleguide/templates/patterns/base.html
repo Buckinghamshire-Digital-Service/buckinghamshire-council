@@ -58,6 +58,21 @@
 
         {% block extra_js %}{% endblock %}
         {% block body_bottom %}{% endblock %}
+
+        {% if page.show_live_chat_client %}
+            <script type="text/javascript" >
+            function InitialiseC4A() {
+            / Chat Tool /
+            var Tool9 = new C4A.Tools(9);
+            C4A.Track.Enabled = false;
+            C4A.Run('9e767570-94bc-4ec9-958c-95abe8de225d');
+            }
+            </script>
+
+            <noscript><a href="https://www.click4assistance.co.uk/add-live-chat-software-click4assistance-uk" target="_blank" style="font-size:10px;position:fixed;bottom:2px;right:2px;">Click4Assistance UK Live Chat Software</a></noscript>
+
+            <script src="https://v4in1-si.click4assistance.co.uk/SI.js" type="text/javascript" defer="defer"></script>
+        {% endif %}
     </body>
 </html>
 
