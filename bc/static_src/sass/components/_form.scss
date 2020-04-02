@@ -103,10 +103,10 @@
             border: 0;
 
             &::placeholder {
-                font-size: 12px;
+                opacity: 0;
 
-                @include media-query(tablet-portrait) {
-                    font-size: $base-font-size;
+                @include media-query(mob-landscape) {
+                    opacity: 1;
                 }
             }
         }
