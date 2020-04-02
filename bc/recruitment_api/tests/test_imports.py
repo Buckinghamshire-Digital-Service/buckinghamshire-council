@@ -41,8 +41,9 @@ class ImportTestMixin:
         else:
             client.service.getAttachments.side_effect = attachments
 
-        # logos
+        # Logos
         if logos is None:
+            # Add empty getAdvertisementImages response for each advertisement
             client.service.getAdvertisementImages.side_effect = [
                 dict() for _ in range(len(advertisements))
             ]
