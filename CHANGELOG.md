@@ -2,8 +2,9 @@
 
 ## Unreleased
 
-- 175 Remove hard coded Bucks logo from job detail pages
 - 136 Employer logos (FE)
+- 172 Add live chat support feature
+- 175 Remove hard coded Bucks logo from job detail pages
 
 ## 11.0 (2020-04-01)
 
