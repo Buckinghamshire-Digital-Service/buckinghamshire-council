@@ -326,3 +326,7 @@ class BasePage(SocialFields, ListingFields, Page):
             return HttpResponseRedirect(self.redirect_to)
 
         return super().serve(request, *args, **kwargs)
+
+
+BasePage._meta.get_field("seo_title").verbose_name = "Title tag"
+BasePage._meta.get_field("search_description").verbose_name = "Meta description"
