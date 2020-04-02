@@ -1,5 +1,7 @@
 context:
   page:
+    logo: true
+    working_hours: Full-time only
     salary_range: £19,000 to £21,000 per year
     job_number: FS11935
     contract_type: Permanent
@@ -18,3 +20,9 @@ context:
           title: 'Application Form Teaching (GDPR May 18)'
           file_extension: 'doc'
           filename: 'Application_Form_Teaching_GDPR_May_18_GnpQZWY.doc'
+
+tags:
+  image:
+    page.logo fill-110x110 class="sidebar__job-detail-logo":
+      raw: |
+        <img src="http://via.placeholder.com/110x110" alt="Some alt" class="sidebar__job-detail-logo">

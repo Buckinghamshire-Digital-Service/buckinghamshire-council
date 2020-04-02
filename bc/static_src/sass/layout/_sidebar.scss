@@ -1,4 +1,5 @@
 .sidebar {
+    $root: &;
     margin: 0 0 $grid;
     padding-bottom: $grid--small;
 
@@ -43,6 +44,12 @@
         }
     }
 
+    &__job-detail-logo {
+        height: 110px;
+        margin-bottom: $grid--medium;
+        width: 110px;
+    }
+
     &__job-detail-title {
         font-weight: $weight--bold;
     }
@@ -74,8 +81,11 @@
 
     &--jobs {
         border: 0;
-        padding: $grid $grid--small;
-        background: $color--grey-light;
         position: relative;
+
+        #{$root}__inner {
+            background: $color--grey-light;
+            padding: $grid $grid--small;
+        }
     }
 }
