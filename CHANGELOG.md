@@ -1,5 +1,14 @@
 # Release History
 
+## 12.0 (2020-04-02)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/11.0...12.0
+
+- 136 Employer logos (FE)
+- 172 Add live chat support feature
+- 174 Fix button padding
+- 175 Remove hard coded Bucks logo from job detail pages
+
 ## 11.0 (2020-04-01)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/10.0...11.0

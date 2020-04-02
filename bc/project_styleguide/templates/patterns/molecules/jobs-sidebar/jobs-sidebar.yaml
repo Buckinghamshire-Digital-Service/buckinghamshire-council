@@ -1,9 +1,10 @@
 context:
   page:
+    logo: true
+    working_hours: Full-time only
     salary_range: £19,000 to £21,000 per year
     job_number: FS11935
     contract_type: Permanent
-    working_hours: Full-time only
     expected_start_date: 6 January 2020
     posting_start_date: 28 November 2019
     closing_date: 11 December 2019 at 4pm
@@ -18,3 +19,9 @@ context:
           title: 'Application Form Teaching (GDPR May 18)'
           file_extension: 'doc'
           filename: 'Application_Form_Teaching_GDPR_May_18_GnpQZWY.doc'
+
+tags:
+  image:
+    page.logo fill-110x110 class="sidebar__job-detail-logo":
+      raw: |
+        <img src="http://via.placeholder.com/110x110" alt="Some alt" class="sidebar__job-detail-logo">
