@@ -109,7 +109,7 @@ class Command(BaseCommand):
                                 job.talentlink_id
                             )
                             for image in logo_response:
-                                if image["position"] == "Logo":
+                                if image.get("position", None) == "Logo":
                                     talentlink_image_id = image["id"]
 
                                     # Only update image if it is changed or new
@@ -155,6 +155,7 @@ class Command(BaseCommand):
         self.stdout.write(f"{num_updated} existing jobs updated")
         self.stdout.write(f"{num_created} new jobs created")
         self.stdout.write(f"{doc_imported} new documents imported")
+        self.stdout.write(f"{image_imported} new images imported")
         self.stdout.write(f"{num_deleted} jobs deleted")
         self.stdout.write(self.style.ERROR(f"{len(errors)} errors"))
         for error in errors:

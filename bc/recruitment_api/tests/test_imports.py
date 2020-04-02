@@ -22,7 +22,7 @@ FIXTURE_JOB_SUBCATEGORY_TITLE = "Schools & Early Years - Support"
 
 
 class ImportTestMixin:
-    def get_mocked_client(self, advertisements=None, attachments=None, logo=None):
+    def get_mocked_client(self, advertisements=None, attachments=None, logos=None):
         if advertisements is None:
             advertisements = [get_advertisement()]
 
@@ -41,11 +41,13 @@ class ImportTestMixin:
         else:
             client.service.getAttachments.side_effect = attachments
 
-        # Logo
-        if logo is None:
-            client.service.getAdvertisementImages.side_effect = [{}]
+        # logos
+        if logos is None:
+            client.service.getAdvertisementImages.side_effect = [
+                dict() for _ in range(len(advertisements))
+            ]
         else:
-            client.service.getAdvertisementImages.side_effect = logo
+            client.service.getAdvertisementImages.side_effect = logos
 
         return client
 

@@ -22,7 +22,7 @@ def get_attachment(
 
 
 def get_logo(
-    id="123", url="https://test.url/test.png",
+    id="abc", url="https://test.url/test.png",
 ):
     return {
         "id": id,
