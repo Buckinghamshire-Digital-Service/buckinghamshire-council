@@ -20,7 +20,6 @@
                     <div class="search-filters__option form-item--custom_checkbox_select_single {% if option.is_schools_and_early_years %}is_schools_and_early_years{% endif %}">
                         <input class="search-filters__checkbox" type="checkbox" name="{{ filter.key }}" value="{{ option.key }}" id="{{ option.key }}" {% if option.key|slugify in filter.selected %}checked{% endif %}>
                         <label class="search-filters__label" for="{{ option.key }}">
-                            <span class="search-filters__dummy-checkbox"></span>
                             {{ option.label }}
                             <span class="search-filters__count">({{ option.count }})</span>
                         </label>
@@ -30,23 +29,21 @@
         {% endfor %}
 
         {% if salary_filter %}
-
-        <div>
-            <fieldset class="search-filters__fieldset">
-                <legend class="hidden">Salary Range</legend>
-                <div class="search-filters__input">
-                    <label for="search--page">Salary Range</label>
-                    <div class="form-item__custom-select">
-                        <select>
-                            <option>£22,250 - £25,000</option>
-                            <option>£25,000 - £30,000</option>
-                            <option>£30,000 - £35,000</option>
-                        </select>
+            <div>
+                <fieldset class="search-filters__fieldset">
+                    <legend class="hidden">Salary Range</legend>
+                    <div class="search-filters__input">
+                        <label for="search--page">Salary Range</label>
+                        <div class="form-item__custom-select">
+                            <select>
+                                <option>£22,250 - £25,000</option>
+                                <option>£25,000 - £30,000</option>
+                                <option>£30,000 - £35,000</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-            </fieldset>
-        </div>
-
+                </fieldset>
+            </div>
         {% endif %}
 
         <div>
