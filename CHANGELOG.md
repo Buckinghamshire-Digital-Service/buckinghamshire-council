@@ -1,8 +1,21 @@
 # Release History
 
+## Unreleased
+
+- 175 Remove hard coded Bucks logo from job detail pages
+- 136 Employer logos (FE)
+
+## 11.0 (2020-04-01)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/10.0...11.0
+
+- Improve page 'Promote' tab SEO field labels
+- 100 Job categories (FE)
+- 158 Job application form styling
+
 ## 10.0 (2020-03-31)
 
-Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/8.0...9.0
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/9.0...10.0
 
 - 114 StreamField Button Link block (BE)
 - 125 Job attachments
