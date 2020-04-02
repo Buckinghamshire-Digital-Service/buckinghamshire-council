@@ -17,22 +17,14 @@
     }
 
     &--message {
-        background: $color--primary;
-        color: $color--white;
-        padding: $grid $grid--small;
-        margin: 0 (-$grid--small);
+        background: $color--white;
+        border: 4px solid $color--orange;
+        color: $color--default;
+        padding: $grid / 2;
+        margin: $grid--small 0 0 0;
 
-        @include media-query(tablet-portrait) {
-            margin: 0;
-            margin-top: -$grid--medium;
-        }
-
-        a {
-            color: $color--white;
-        }
-
-        #{$root}__content {
-            margin-bottom: $grid--min;
+        * {
+            margin-bottom: 0;
         }
     }
 
