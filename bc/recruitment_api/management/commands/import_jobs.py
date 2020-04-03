@@ -3,7 +3,7 @@ from django.core.management.base import BaseCommand
 from django.utils.timezone import now
 
 from bc.documents.models import CustomDocument
-from bc.images.models import CustomImage
+from bc.images.models import CustomImage, import_image_from_url
 from bc.recruitment.models import TalentLinkJob
 from bc.recruitment_api.client import get_client
 from bc.recruitment_api.utils import delete_jobs, update_job_from_ad
@@ -103,13 +103,13 @@ class Command(BaseCommand):
                         # Fetch logo image via a different call
                         image_found = False
                         try:
-                            # This will return list of attachments with
+                            # This will return list of
                             #   'id', 'url', 'position'
                             logo_response = client.service.getAdvertisementImages(
                                 job.talentlink_id
                             )
                             for image in logo_response:
-                                if image.get("position", None) == "Logo":
+                                if image.get("position") == "Logo":
                                     talentlink_image_id = image["id"]
 
                                     # Only update image if it is changed or new
@@ -118,7 +118,7 @@ class Command(BaseCommand):
                                             talentlink_image_id=talentlink_image_id
                                         )
                                     except CustomImage.DoesNotExist:
-                                        logo_image = CustomImage.import_from_url(
+                                        logo_image = import_image_from_url(
                                             title=job.title,
                                             url=image["url"],
                                             filename="logo " + str(job.talentlink_id),
@@ -131,6 +131,7 @@ class Command(BaseCommand):
                                         job.save()
                                         image_found = True
                                         break
+
                         except Exception as e:
                             msg = (
                                 f"Error occurred while importing logo image for job {ad['id']}:\n"

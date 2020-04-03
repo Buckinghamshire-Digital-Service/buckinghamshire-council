@@ -24,11 +24,7 @@ def get_attachment(
 def get_logo(
     id="abc", url="https://test.url/test.png",
 ):
-    return {
-        "id": id,
-        "url": url,
-        "position": "Logo",
-    }
+    return [{"id": id, "url": url, "position": "Logo"}]
 
 
 def get_advertisement(

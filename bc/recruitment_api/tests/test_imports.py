@@ -15,7 +15,12 @@ from bc.recruitment.models import JobSubcategory, TalentLinkJob
 from bc.recruitment.tests.fixtures import JobSubcategoryFactory, TalentLinkJobFactory
 from bc.recruitment_api.utils import update_job_from_ad
 
-from .fixtures import get_advertisement, get_attachment, no_further_pages_response
+from .fixtures import (
+    get_advertisement,
+    get_attachment,
+    get_logo,
+    no_further_pages_response,
+)
 
 # Job category title to match dummy Job Group in get_advertisement() fixture
 FIXTURE_JOB_SUBCATEGORY_TITLE = "Schools & Early Years - Support"
@@ -34,6 +39,11 @@ class ImportTestMixin:
             {"advertisements": {"advertisement": advertisements}, "totalResults": 143},
             no_further_pages_response,
         ]
+
+        # TODO: Mock not being used?
+        # from bc.images.tests.fixtures import import_image_from_url_mock
+        # import_image_from_url = mock.Mock()
+        # import_image_from_url.side_effect = import_image_from_url_mock
 
         # Attachments
         if attachments is None:
@@ -836,7 +846,23 @@ class AttachmentsTest(TestCase, ImportTestMixin):
 @mock.patch("bc.recruitment_api.management.commands.import_jobs.get_client")
 class LogoTest(TestCase, ImportTestMixin):
     def test_logo_is_imported(self, mock_get_client):
-        pass
+        advertisements = [
+            get_advertisement(talentlink_id=1, title="New title 1"),
+        ]
+
+        logos = [get_logo(id="aaa")]
+        mock_get_client.return_value = self.get_mocked_client(
+            advertisements, logos=logos
+        )
+
+        # TODO: need to use mock for bc.images.models > import_image_from_url(),
+        # otherwise getting
+        # UnboundLocalError: local variable 'logo_image' referenced before assignment error
+
+        # out = StringIO()
+        # call_command("import_jobs", stdout=out)
+        # out.seek(0)
+        # output = out.read()
 
     def test_duplicate_logo_is_not_imported(self, mock_get_client):
         pass
