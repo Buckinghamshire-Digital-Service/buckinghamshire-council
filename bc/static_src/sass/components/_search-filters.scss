@@ -12,11 +12,12 @@
 
     &__group-title {
         @include font-size(s);
-        margin-bottom: $grid--small;
+        display: block;
+        margin-bottom: $grid--min / 2;
     }
 
     &__fieldset {
-        margin-bottom: $grid;
+        margin-bottom: $grid--small;
     }
 
     &__option {
