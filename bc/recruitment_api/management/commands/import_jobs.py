@@ -21,14 +21,12 @@ class Command(BaseCommand):
             help="Import missing categories instead of rejecting jobs without matching categories.",
         )
         parser.add_argument(
-            "-b",
-            "--board",
-            type=str,
-            help="Eg. internal or external. Default external.",
+            "--board", type=str, help="Eg. internal or external. Default external.",
         )
 
     def handle(self, *args, **options):
-        client = get_client(board=options["board"])
+        board = options.get("board", "external")
+        client = get_client(board=board)
         page = 1
         results = True
         num_updated = 0
@@ -37,7 +35,7 @@ class Command(BaseCommand):
         errors = []
         import_timestamp = now()
         while results:
-            self.stdout.write(f"Fetching page {page}")
+            self.stdout.write(f"Fetching page {page} from {board} board")
             response = client.service.getAdvertisementsByPage(
                 pageNumber=page, showJobLocation=True
             )
@@ -58,6 +56,7 @@ class Command(BaseCommand):
                         job = update_job_from_ad(
                             job,
                             ad,
+                            board=board,
                             defaults={"last_imported": import_timestamp},
                             import_categories=options["import_categories"],
                         )
@@ -86,7 +85,7 @@ class Command(BaseCommand):
         # Check for outdated jobs
         num_deleted = 0
         try:
-            num_deleted = delete_jobs(import_timestamp)
+            num_deleted = delete_jobs(imported_before=import_timestamp, board=board)
         except Exception as e:
             msg = f"Error occurred while deleting jobs:\n" + str(e)
             errors.append(msg)

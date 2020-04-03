@@ -158,6 +158,11 @@ def callback_jobcategory_autogenerate_slug_if_empty(sender, instance, *args, **k
 
 
 class TalentLinkJob(models.Model):
+    # TODO: Move this to somewhere centralised
+    JOB_BOARD_CHOICES = (
+        ("external", "External"),
+        ("internal", "Internal"),
+    )
 
     created = models.DateTimeField(auto_now_add=True)
     last_imported = models.DateTimeField(blank=True)
@@ -165,6 +170,7 @@ class TalentLinkJob(models.Model):
 
     talentlink_id = models.IntegerField(unique=True)
     job_number = models.CharField(max_length=10, blank=False)
+    job_board = models.CharField(max_length=20, choices=JOB_BOARD_CHOICES, blank=False)
 
     title = models.CharField(max_length=255, blank=False)
     short_description = models.TextField()

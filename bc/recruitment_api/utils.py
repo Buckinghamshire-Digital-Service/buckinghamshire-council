@@ -63,7 +63,7 @@ JOB_LOVS_MAPPING = {
 }
 
 
-def update_job_from_ad(job, ad, defaults=None, import_categories=False):
+def update_job_from_ad(job, ad, board, defaults=None, import_categories=False):
     defaults = defaults or {}
 
     cleaner = Cleaner(
@@ -72,6 +72,7 @@ def update_job_from_ad(job, ad, defaults=None, import_categories=False):
         strip=True,
     )
 
+    job.job_board = board
     job.job_number = ad["jobNumber"]
     job.title = ad["jobTitle"]
     job.is_published = ad["postingTargetStatus"] == POSTING_TARGET_STATUS_PUBLISHED
@@ -142,7 +143,7 @@ def update_job_from_ad(job, ad, defaults=None, import_categories=False):
     return job
 
 
-def delete_jobs(imported_before):
+def delete_jobs(imported_before, board):
     """Delete outdated TalentLinkJob objects
 
     Args:
@@ -153,7 +154,9 @@ def delete_jobs(imported_before):
 
     """
 
-    outdated_jobs = TalentLinkJob.objects.filter(last_imported__lt=imported_before)
+    outdated_jobs = TalentLinkJob.objects.filter(job_board=board).filter(
+        last_imported__lt=imported_before
+    )
     count = outdated_jobs.count()
     outdated_jobs.delete()
 
