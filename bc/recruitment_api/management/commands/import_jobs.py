@@ -20,9 +20,15 @@ class Command(BaseCommand):
             action="store_true",
             help="Import missing categories instead of rejecting jobs without matching categories.",
         )
+        parser.add_argument(
+            "-b",
+            "--board",
+            type=str,
+            help="Eg. internal or external. Default external.",
+        )
 
     def handle(self, *args, **options):
-        client = get_client()
+        client = get_client(board=options["board"])
         page = 1
         results = True
         num_updated = 0
