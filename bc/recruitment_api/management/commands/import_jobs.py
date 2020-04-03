@@ -1,11 +1,13 @@
-from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
 from django.utils.timezone import now
 
-from bc.documents.models import CustomDocument
 from bc.recruitment.models import TalentLinkJob
 from bc.recruitment_api.client import get_client
-from bc.recruitment_api.utils import delete_jobs, update_job_from_ad
+from bc.recruitment_api.utils import (
+    delete_jobs,
+    import_attachments_for_job,
+    update_job_from_ad,
+)
 
 
 class Command(BaseCommand):
@@ -67,30 +69,7 @@ class Command(BaseCommand):
 
                         # Fetch attachments via a different call
                         try:
-                            # This will return list of attachments with
-                            #   'content', 'description', 'fileName', 'id', 'mimeType'
-                            attachments_response = client.service.getAttachments(
-                                job.talentlink_id
-                            )
-                            for attachment in attachments_response:
-                                if attachment["id"] and attachment["fileName"]:
-                                    doc, created = CustomDocument.objects.get_or_create(
-                                        talentlink_attachment_id=attachment["id"]
-                                    )
-                                    if created:
-                                        doc.title = (
-                                            attachment["description"]
-                                            or attachment["fileName"].split(".")[0]
-                                        )
-                                        doc.file = ContentFile(
-                                            attachment["content"],
-                                            name=attachment["fileName"],
-                                        )
-                                        doc.save()
-                                        doc_imported += 1
-
-                                    job.attachments.add(doc)
-                                    job.save()
+                            doc_imported += import_attachments_for_job(job, client)
                         except Exception as e:
                             msg = (
                                 f"Error occurred while importing attachments for job {ad['id']}:\n"
