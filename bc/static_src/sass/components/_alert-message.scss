@@ -28,6 +28,22 @@
         }
     }
 
+    &--condensed {
+        #{$root}__header,
+        #{$root}__content {
+            display: inline;
+        }
+
+        #{$root}__header {
+            @include font-size(s);
+        }
+
+        #{$root}__link {
+            display: block;
+            margin-top: $grid--min;
+        }
+    }
+
     &--banner {
         @include font-size(xxs);
         background: $color--grey-light;
