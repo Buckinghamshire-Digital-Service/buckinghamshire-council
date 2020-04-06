@@ -32,6 +32,7 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/9.0...10.0
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/8.0...9.0
 
 - 129 Jobs postcode search
+- 161 Update job search filter styles and add custom select form field
 - 169 Adjust position of form field help text
 - Forms integration with Aptean Respond API
 - Fix an issue with CI deployments

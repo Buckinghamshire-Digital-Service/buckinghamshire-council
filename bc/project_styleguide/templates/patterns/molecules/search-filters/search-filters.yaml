@@ -25,43 +25,18 @@ context:
           count: 2
     - title: Contract type
       options:
-        - label: Schools - teaching
+        - label: Permanent
           key: option5
           count: 2
-        - label: Schools - non teaching
+        - label: Contract
           key: option6
           count: 5
-        - label: Early years
-          key: option7
-          count: 1
-        - label: Social care
-          key: option8
-          count: 2
     - title: Working hours
       options:
-        - label: Schools - teaching
+        - label: Full-time
           key: option9
           count: 2
-        - label: Schools - non teaching
+        - label: Part-time
           key: option10
           count: 5
-        - label: Early years
-          key: option11
-          count: 1
-        - label: Social care
-          key: option12
-          count: 2
-    - title: Salary range
-      options:
-        - label: Schools - teaching
-          key: option13
-          count: 2
-        - label: Schools - non teaching
-          key: option14
-          count: 5
-        - label: Early years
-          key: option15
-          count: 1
-        - label: Social care
-          key: option16
-          count: 2
+  salary_filter: true
