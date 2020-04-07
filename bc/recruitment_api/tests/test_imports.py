@@ -154,7 +154,7 @@ class ImportTest(TestCase, ImportTestMixin):
 
         error_message = "This is a test error message"
 
-        def error_or_original(job, ad, defaults, import_categories):
+        def error_or_original(job, ad, board, defaults, import_categories):
             """ Raise an error for id 1 only"""
             if job.talentlink_id == 1:
                 raise KeyError(error_message)

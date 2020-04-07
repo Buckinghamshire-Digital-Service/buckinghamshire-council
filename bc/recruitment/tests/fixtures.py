@@ -3,6 +3,8 @@ import json
 
 import factory
 
+from bc.recruitment.constants import JOB_BOARD_CHOICES_DEFAULT
+
 
 class JobCategoryFactory(factory.django.DjangoModelFactory):
 
@@ -39,6 +41,7 @@ class TalentLinkJobFactory(factory.django.DjangoModelFactory):
 
     talentlink_id = factory.Sequence(lambda n: n)
     job_number = factory.Sequence(lambda n: f"FS{str(n).zfill(5)}")
+    job_board = JOB_BOARD_CHOICES_DEFAULT
 
     title = factory.Faker("sentence", nb_words=5)
     subcategory = factory.SubFactory(
