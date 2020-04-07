@@ -23,10 +23,9 @@ from wagtail.search import index
 
 from wagtailorderable.models import Orderable
 
-from bc.utils.email import NotifyEmailMessage
-
 from ..utils.blocks import StoryBlock
 from ..utils.constants import RICH_TEXT_FEATURES
+from ..utils.email import NotifyEmailMessage
 from ..utils.models import BasePage
 
 
@@ -158,20 +157,15 @@ def callback_jobcategory_autogenerate_slug_if_empty(sender, instance, *args, **k
 
 
 class TalentLinkJob(models.Model):
-    # TODO: Move this to somewhere centralised
-    JOB_BOARD_CHOICES = (
-        ("external", "External"),
-        ("internal", "Internal"),
-    )
-
     created = models.DateTimeField(auto_now_add=True)
     last_imported = models.DateTimeField(blank=True)
     last_modified = models.DateTimeField(auto_now=True)
 
     talentlink_id = models.IntegerField(unique=True)
     job_number = models.CharField(max_length=10, blank=False)
-    job_board = models.CharField(max_length=20, choices=JOB_BOARD_CHOICES, blank=False)
-
+    job_board = models.CharField(
+        max_length=20, blank=False
+    )  # TODO: set choices=[(i,i) for i in JOB_BOARD_CHOICES]
     title = models.CharField(max_length=255, blank=False)
     short_description = models.TextField()
     description = models.TextField()

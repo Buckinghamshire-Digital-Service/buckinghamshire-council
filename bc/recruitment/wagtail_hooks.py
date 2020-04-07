@@ -14,6 +14,7 @@ class TalentLinkJobModelAdmin(ModelAdmin):
     model = TalentLinkJob
     menu_icon = "tag"
     list_display = (
+        "job_board",
         "talentlink_id",
         "job_number",
         "job_link",

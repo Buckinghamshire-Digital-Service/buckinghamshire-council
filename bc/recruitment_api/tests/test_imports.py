@@ -11,6 +11,7 @@ from freezegun import freeze_time
 
 from bc.documents.models import CustomDocument
 from bc.documents.tests.fixtures import DocumentFactory
+from bc.recruitment.constants import JOB_BOARD_CHOICES_DEFAULT
 from bc.recruitment.models import JobSubcategory, TalentLinkJob
 from bc.recruitment.tests.fixtures import JobSubcategoryFactory, TalentLinkJobFactory
 from bc.recruitment_api.utils import update_job_from_ad
@@ -158,7 +159,9 @@ class ImportTest(TestCase, ImportTestMixin):
             if job.talentlink_id == 1:
                 raise KeyError(error_message)
             else:
-                return update_job_from_ad(job, ad, defaults, import_categories)
+                return update_job_from_ad(
+                    job, ad, JOB_BOARD_CHOICES_DEFAULT, defaults, import_categories
+                )
 
         mock_update_fn.side_effect = error_or_original
 
@@ -345,6 +348,7 @@ class DescriptionsTest(TestCase):
         job = update_job_from_ad(
             job,
             get_advertisement(talentlink_id=1, description=description),
+            board=JOB_BOARD_CHOICES_DEFAULT,
             defaults={"last_imported": timezone.now()},
         )
 
@@ -487,6 +491,7 @@ class ShortDescriptionsTest(TestCase, ImportTestMixin):
         job = update_job_from_ad(
             job,
             get_advertisement(talentlink_id=1, description=description),
+            JOB_BOARD_CHOICES_DEFAULT,
             defaults={"last_imported": timezone.now()},
         )
 
@@ -618,6 +623,7 @@ class ApplicationURLTest(TestCase, ImportTestMixin):
         job = update_job_from_ad(
             job,
             get_advertisement(talentlink_id=1, application_url=imported),
+            JOB_BOARD_CHOICES_DEFAULT,
             defaults={"last_imported": timezone.now()},
         )
 

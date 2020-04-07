@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.utils.timezone import now
 
+from bc.recruitment.constants import JOB_BOARD_CHOICES, JOB_BOARD_CHOICES_DEFAULT
 from bc.recruitment.models import TalentLinkJob
 from bc.recruitment_api.client import get_client
 from bc.recruitment_api.utils import (
@@ -25,7 +26,14 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        board = options.get("board", "external")
+        board = options.get("board")
+        if not board:
+            board = JOB_BOARD_CHOICES_DEFAULT
+        elif board not in JOB_BOARD_CHOICES:
+            raise KeyError(
+                "Illegal board choice. Please see JOB_BOARD_CHOICES for options."
+            )
+
         client = get_client(board=board)
         page = 1
         results = True
