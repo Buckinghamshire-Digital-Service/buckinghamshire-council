@@ -31,6 +31,7 @@ class RecruitmentHomePageFactory(factory.django.DjangoModelFactory):
     hero_title = "foo"
     hero_link_text = "foo"
     search_box_placeholder = "foo"
+    job_board = JOB_BOARD_CHOICES_DEFAULT
 
 
 class TalentLinkJobFactory(factory.django.DjangoModelFactory):

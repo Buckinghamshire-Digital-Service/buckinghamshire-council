@@ -2,6 +2,7 @@ import json
 import secrets
 from urllib.parse import urlsplit, urlunsplit
 
+from django import forms
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Count, F
@@ -27,6 +28,7 @@ from ..utils.blocks import StoryBlock
 from ..utils.constants import RICH_TEXT_FEATURES
 from ..utils.email import NotifyEmailMessage
 from ..utils.models import BasePage
+from .constants import JOB_BOARD_CHOICES, JOB_BOARD_CHOICES_DEFAULT
 
 
 class JobSubcategory(models.Model):
@@ -78,14 +80,16 @@ class JobCategory(Orderable, models.Model):
         )
 
     @staticmethod
-    def get_categories_summary(queryset=None):
+    def get_categories_summary(queryset=None, job_board=JOB_BOARD_CHOICES_DEFAULT):
         """Returns a QuerySet that returns dictionaries, when used as an iterable.
 
            The dictionary keys are: category (category id), count, title, description
            This is ordered by highest count first.
         """
         if not queryset:
-            queryset = TalentLinkJob.objects.all()
+            queryset = TalentLinkJob.objects.filter(job_board=job_board).all()
+        else:
+            queryset = queryset.filter(job_board=job_board)
 
         job_categories = (
             queryset.annotate(category=F("subcategory__categories"))
@@ -244,6 +248,7 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
     # Only allow creating HomePages at the root level
     parent_page_types = ["wagtailcore.Page"]
 
+    job_board = models.CharField(max_length=20, blank=False)
     hero_title = models.CharField(
         max_length=255, help_text="e.g. Finding a job in Buckinghamshire"
     )
@@ -290,10 +295,18 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
         ),
         StreamFieldPanel("body"),
     ]
+    settings_panels = BasePage.settings_panels + [
+        FieldPanel(
+            "job_board",
+            widget=forms.Select(choices=[(s, s) for s in JOB_BOARD_CHOICES],),
+        ),
+    ]
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context["job_categories"] = JobCategory.get_categories_summary()
+        context["job_categories"] = JobCategory.get_categories_summary(
+            job_board=self.job_board
+        )
 
         return context
 
