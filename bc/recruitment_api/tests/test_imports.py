@@ -11,7 +11,7 @@ from freezegun import freeze_time
 
 from bc.documents.models import CustomDocument
 from bc.documents.tests.fixtures import DocumentFactory
-from bc.recruitment.constants import JOB_BOARD_CHOICES_DEFAULT
+from bc.recruitment.constants import JOB_BOARD_CHOICES, JOB_BOARD_CHOICES_DEFAULT
 from bc.recruitment.models import JobSubcategory, TalentLinkJob
 from bc.recruitment.tests.fixtures import JobSubcategoryFactory, TalentLinkJobFactory
 from bc.recruitment_api.utils import update_job_from_ad
@@ -331,6 +331,50 @@ class DeletedAndUpdatedJobsTest(TestCase, ImportTestMixin):
         self.assertEqual(TalentLinkJob.objects.count(), 1)
         self.assertEqual(TalentLinkJob.objects.filter(talentlink_id=1).count(), 0)
         self.assertEqual(TalentLinkJob.objects.filter(talentlink_id=2).count(), 1)
+
+    def test_job_missing_from_import_are_deleted_only_if_from_same_board(
+        self, mock_get_client
+    ):
+        instant = datetime.datetime(2020, 1, 29, 12, 0, 0, tzinfo=datetime.timezone.utc)
+        TalentLinkJobFactory(
+            talentlink_id=1,
+            job_number="AABBSAME",
+            job_board=JOB_BOARD_CHOICES[0],
+            last_imported=instant,
+        )
+        TalentLinkJobFactory(
+            talentlink_id=2,
+            job_number="CCDD",
+            job_board=JOB_BOARD_CHOICES[0],
+            last_imported=instant,
+        )
+        TalentLinkJobFactory(
+            talentlink_id=3,
+            job_number="AABBSAME",
+            job_board=JOB_BOARD_CHOICES[1],
+            last_imported=instant,
+        )
+        self.assertEqual(
+            TalentLinkJob.objects.filter(job_board=JOB_BOARD_CHOICES[0]).count(), 2
+        )
+        self.assertEqual(
+            TalentLinkJob.objects.filter(job_board=JOB_BOARD_CHOICES[1]).count(), 1
+        )
+
+        advertisements = [
+            get_advertisement(talentlink_id=1, job_number="AABBSAME"),
+        ]
+        mock_get_client.return_value = self.get_mocked_client(advertisements)
+
+        call_command("import_jobs", stdout=mock.MagicMock())
+
+        # Only one new job remains. Jobs not in import are deleted.
+        self.assertEqual(
+            TalentLinkJob.objects.filter(job_board=JOB_BOARD_CHOICES[0]).count(), 1
+        )
+        self.assertEqual(
+            TalentLinkJob.objects.filter(job_board=JOB_BOARD_CHOICES[1]).count(), 1
+        )
 
 
 class DescriptionsTest(TestCase):
