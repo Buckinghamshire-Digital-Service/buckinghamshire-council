@@ -22,19 +22,19 @@ class Command(BaseCommand):
             help="Import missing categories instead of rejecting jobs without matching categories.",
         )
         parser.add_argument(
-            "--board", type=str, help="Eg. internal or external. Default external.",
+            "--job_board", type=str, help="Eg. internal or external. Default external.",
         )
 
     def handle(self, *args, **options):
-        board = options.get("board")
-        if not board:
-            board = JOB_BOARD_CHOICES_DEFAULT
-        elif board not in JOB_BOARD_CHOICES:
+        job_board = options.get("job_board")
+        if not job_board:
+            job_board = JOB_BOARD_CHOICES_DEFAULT
+        elif job_board not in JOB_BOARD_CHOICES:
             raise KeyError(
-                "Illegal board choice. Please see JOB_BOARD_CHOICES for options."
+                "Illegal job_board choice. Please see JOB_BOARD_CHOICES for options."
             )
 
-        client = get_client(board=board)
+        client = get_client(job_board=job_board)
         page = 1
         results = True
         num_updated = 0
@@ -43,7 +43,7 @@ class Command(BaseCommand):
         errors = []
         import_timestamp = now()
         while results:
-            self.stdout.write(f"Fetching page {page} from {board} board")
+            self.stdout.write(f"Fetching page {page} from {job_board} job_board")
             response = client.service.getAdvertisementsByPage(
                 pageNumber=page, showJobLocation=True
             )
@@ -64,7 +64,7 @@ class Command(BaseCommand):
                         job = update_job_from_ad(
                             job,
                             ad,
-                            board=board,
+                            job_board=job_board,
                             defaults={"last_imported": import_timestamp},
                             import_categories=options["import_categories"],
                         )
@@ -93,7 +93,7 @@ class Command(BaseCommand):
         # Check for outdated jobs
         num_deleted = 0
         try:
-            num_deleted = delete_jobs(imported_before=import_timestamp, board=board)
+            num_deleted = delete_jobs(imported_before=import_timestamp, job_board=job_board)
         except Exception as e:
             msg = f"Error occurred while deleting jobs:\n" + str(e)
             errors.append(msg)

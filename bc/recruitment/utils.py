@@ -6,7 +6,7 @@ from django.db.models.functions import ACos, Cos, Radians, Sin
 
 import requests
 
-from bc.recruitment.constants import JOB_FILTERS
+from bc.recruitment.constants import JOB_FILTERS, JOB_BOARD_CHOICES_DEFAULT
 from bc.recruitment.models import JobCategory, RecruitmentHomePage, TalentLinkJob
 
 
@@ -126,10 +126,7 @@ def GetDistance(point_latitude, point_longitude):
     return distance
 
 
-def get_school_and_early_years_count(search_results=None):
-    if search_results is None:
-        search_results = TalentLinkJob.objects.all()
-
+def get_school_and_early_years_count(search_results):
     schools_and_early_years_categories = (
         JobCategory.get_school_and_early_years_categories()
     )

@@ -154,7 +154,7 @@ class ImportTest(TestCase, ImportTestMixin):
 
         error_message = "This is a test error message"
 
-        def error_or_original(job, ad, board, defaults, import_categories):
+        def error_or_original(job, ad, job_board, defaults, import_categories):
             """ Raise an error for id 1 only"""
             if job.talentlink_id == 1:
                 raise KeyError(error_message)
@@ -392,7 +392,7 @@ class DescriptionsTest(TestCase):
         job = update_job_from_ad(
             job,
             get_advertisement(talentlink_id=1, description=description),
-            board=JOB_BOARD_CHOICES_DEFAULT,
+            job_board=JOB_BOARD_CHOICES_DEFAULT,
             defaults={"last_imported": timezone.now()},
         )
 
