@@ -163,7 +163,7 @@ def callback_jobcategory_autogenerate_slug_if_empty(sender, instance, *args, **k
 class TalentLinkJob(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     last_imported = models.DateTimeField(blank=True)
-    last_modified = models.DateTimeField(auto_now=True)
+    last_modified = models.DateTimeField(auto_now=True)  # TODO: Do we still need this?
 
     talentlink_id = models.IntegerField(unique=True)
     job_number = models.CharField(max_length=10, blank=False)
@@ -219,7 +219,12 @@ class TalentLinkJob(models.Model):
 
     @cached_property
     def homepage(self):
-        return RecruitmentHomePage.objects.live().public().first()
+        return (
+            RecruitmentHomePage.objects.live()
+            .public()
+            .filter(job_board=self.job_board)
+            .first()
+        )
 
     @property
     def url(self):
@@ -369,6 +374,16 @@ class JobAlertSubscription(models.Model):
     confirmed = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     token = models.CharField(max_length=255, unique=True, editable=False)
+
+    @cached_property
+    def site_url(self):
+        root_page = (
+            RecruitmentHomePage.objects.live()
+            .public()
+            .filter(job_board=self.job_board)
+            .first()
+        )
+        return root_page.url.rstrip("/")
 
     @property
     def confirmation_url(self):

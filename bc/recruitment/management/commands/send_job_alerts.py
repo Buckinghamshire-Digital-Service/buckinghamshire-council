@@ -24,19 +24,19 @@ class Command(BaseCommand):
     help = "Notifies job alert subscribers of new matches"
 
     def handle(self, *args, **options):
+        task = JobAlertNotificationTask.objects.create()
+        try:
+            start_time = (
+                JobAlertNotificationTask.objects.filter(is_successful=True)
+                .latest("started")
+                .started
+            )
+        except JobAlertNotificationTask.DoesNotExist:
+            start_time = None
+
+        messages = []
+
         for job_board in JOB_BOARD_CHOICES:
-            task = JobAlertNotificationTask.objects.create()
-            try:
-                start_time = (
-                    JobAlertNotificationTask.objects.filter(is_successful=True)
-                    .latest("started")
-                    .started
-                )
-            except JobAlertNotificationTask.DoesNotExist:
-                start_time = None
-
-            messages = []
-
             alerts = JobAlertSubscription.objects.filter(
                 confirmed=True, job_board=job_board
             )
@@ -59,6 +59,7 @@ class Command(BaseCommand):
                     body = render_to_string(
                         "patterns/email/job_search_results_alert.txt",
                         context={
+                            "site_url": alert.site_url,
                             "results": results,
                             "search_term": alert.search,
                             "unsubscribe_url": alert.unsubscribe_url,
