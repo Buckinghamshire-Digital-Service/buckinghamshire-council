@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.utils.text import slugify
 
+from bc.recruitment.constants import JOB_BOARD_CHOICES, JOB_BOARD_CHOICES_DEFAULT
 from bc.recruitment.models import JobCategory
 from bc.recruitment.tests.fixtures import (
     JobCategoryFactory,
@@ -138,6 +139,28 @@ class JobCategoryAndJobSubcategoryGroupingTest(TestCase):
         self.assertEqual(summary.count(), 1)
         self.assertEqual(summary[0]["category"], self.categories[1].id)
         self.assertEqual(summary[0]["count"], 1)
+
+    def test_get_categories_summary_respects_job_board(self):
+        self.categories[1].subcategories.add(
+            self.subcategories[1]
+        )  # this subcategory has 1 job
+
+        summary = JobCategory.get_categories_summary(
+            job_board=JOB_BOARD_CHOICES_DEFAULT
+        )
+        self.assertEqual(summary.count(), 1)
+
+        # Should return nothing since the jobs in setup are all external jobs (JOB_BOARD_CHOICES[0])
+        summary = JobCategory.get_categories_summary(job_board=JOB_BOARD_CHOICES[1])
+        self.assertEqual(summary.count(), 0)
+
+        # Create internal job
+        job = TalentLinkJobFactory(job_board=JOB_BOARD_CHOICES[1])
+        job.subcategory = self.subcategories[1]
+        job.save()
+
+        summary = JobCategory.get_categories_summary(job_board=JOB_BOARD_CHOICES[1])
+        self.assertEqual(summary.count(), 1)
 
     def test_get_categories_summary_ranking(self):
         # Assign categories

@@ -258,7 +258,7 @@ class JobAlertTest(TestCase):
     def test_job_notified_respects_job_board(self):
         instant = datetime.datetime(2020, 1, 29, 0, 0, tzinfo=datetime.timezone.utc)
         with freeze_time(instant) as frozen_datetime:
-            subscription_1 = JobAlertSubscriptionFactory(
+            JobAlertSubscriptionFactory(
                 search=json.dumps({"query": "cycling"}), job_board=JOB_BOARD_CHOICES[0]
             )
             subscription_2 = JobAlertSubscriptionFactory(
