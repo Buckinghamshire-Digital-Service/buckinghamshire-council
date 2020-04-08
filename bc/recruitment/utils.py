@@ -6,12 +6,16 @@ from django.db.models.functions import ACos, Cos, Radians, Sin
 
 import requests
 
-from bc.recruitment.constants import JOB_FILTERS, JOB_BOARD_CHOICES_DEFAULT
+from bc.recruitment.constants import JOB_BOARD_CHOICES_DEFAULT, JOB_FILTERS
 from bc.recruitment.models import JobCategory, RecruitmentHomePage, TalentLinkJob
 
 
 def is_recruitment_site(request):
     return isinstance(request.site.root_page.specific, RecruitmentHomePage)
+
+
+def get_job_board(request):
+    return request.site.root_page.specific.job_board
 
 
 def get_current_search(querydict):
@@ -36,9 +40,11 @@ def get_current_search(querydict):
     return json.dumps(search)
 
 
-def get_job_search_results(querydict, queryset=None):
+def get_job_search_results(
+    querydict, job_board=JOB_BOARD_CHOICES_DEFAULT, queryset=None
+):
     if queryset is None:
-        queryset = TalentLinkJob.objects.all()
+        queryset = TalentLinkJob.objects.filter(job_board=job_board).all()
 
     search_query = querydict.get("query", None)
 

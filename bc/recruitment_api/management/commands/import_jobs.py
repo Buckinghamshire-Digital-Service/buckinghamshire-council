@@ -93,7 +93,9 @@ class Command(BaseCommand):
         # Check for outdated jobs
         num_deleted = 0
         try:
-            num_deleted = delete_jobs(imported_before=import_timestamp, job_board=job_board)
+            num_deleted = delete_jobs(
+                imported_before=import_timestamp, job_board=job_board
+            )
         except Exception as e:
             msg = f"Error occurred while deleting jobs:\n" + str(e)
             errors.append(msg)

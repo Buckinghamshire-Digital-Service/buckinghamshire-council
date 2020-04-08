@@ -363,6 +363,9 @@ class JobAlertSubscription(models.Model):
     search = models.TextField(
         default="{}", editable=False
     )  # stop site admins from entering bad values
+    job_board = models.CharField(
+        max_length=20, blank=False
+    )  # TODO: set choices=[(i,i) for i in JOB_BOARD_CHOICES]
     confirmed = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     token = models.CharField(max_length=255, unique=True, editable=False)

@@ -1,7 +1,7 @@
 from django import template
 
 from bc.recruitment.models import JobCategory, TalentLinkJob
-from bc.recruitment.utils import get_school_and_early_years_count
+from bc.recruitment.utils import get_job_board, get_school_and_early_years_count
 
 register = template.Library()
 
@@ -9,7 +9,7 @@ register = template.Library()
 @register.inclusion_tag("patterns/molecules/search-filters/search-filters.html")
 def jobs_search_filters(request, unfiltered_results=None):
     search_postcode = request.GET.get("postcode", None)
-    job_board = request.site.root_page.specific.job_board
+    job_board = get_job_board(request)
 
     if not unfiltered_results:
         # Provide a default queryset for Pattern Library

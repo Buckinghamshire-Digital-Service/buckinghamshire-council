@@ -13,6 +13,7 @@ from bc.recruitment.forms import SearchAlertSubscriptionForm
 from bc.recruitment.models import JobAlertSubscription
 from bc.recruitment.utils import (
     get_current_search,
+    get_job_board,
     get_job_search_results,
     is_recruitment_site,
 )
@@ -37,7 +38,10 @@ class SearchView(View):
         # Recruitment site search
         if is_recruitment_site(request):
             template_path = "patterns/pages/search/search--jobs.html"
-            search_results = get_job_search_results(querydict=request.GET)
+            job_board = get_job_board(request)
+            search_results = get_job_search_results(
+                querydict=request.GET, job_board=job_board
+            )
             context["job_alert_form"] = SearchAlertSubscriptionForm
 
         # Main site search
@@ -68,7 +72,8 @@ class SearchView(View):
             context.update(
                 {
                     "unfiltered_results": get_job_search_results(
-                        querydict=QueryDict("query=" + request.GET.get("query", ""))
+                        querydict=QueryDict("query=" + request.GET.get("query", "")),
+                        job_board=job_board,
                     ),
                 }
             )
@@ -98,11 +103,12 @@ class SearchView(View):
             search = get_current_search(request.GET)
             email = form.cleaned_data["email"]
             context = {"STATUSES": JOB_ALERT_STATUSES}
+            job_board = get_job_board(request)
 
             # Search if already exists and confirmed:
             try:
                 subscription = JobAlertSubscription.objects.get(
-                    email=email, search=search
+                    email=email, search=search, job_board=job_board
                 )
                 if subscription.confirmed:
                     # Tell user they're already subscribed
@@ -124,7 +130,9 @@ class SearchView(View):
                     subscription.created = now()
 
             except JobAlertSubscription.DoesNotExist:
-                subscription = JobAlertSubscription(email=email, search=search)
+                subscription = JobAlertSubscription(
+                    email=email, search=search, job_board=job_board
+                )
                 subscription.full_clean()
                 subscription.save()
 

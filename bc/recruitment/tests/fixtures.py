@@ -75,3 +75,4 @@ class JobAlertSubscriptionFactory(factory.django.DjangoModelFactory):
     search = json.dumps({})
     email = factory.Faker("email")
     confirmed = True
+    job_board = JOB_BOARD_CHOICES_DEFAULT
