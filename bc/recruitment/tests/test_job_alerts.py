@@ -13,7 +13,11 @@ import wagtail_factories
 from freezegun import freeze_time
 
 from bc.home.tests.fixtures import HomePageFactory
-from bc.recruitment.constants import JOB_BOARD_CHOICES_DEFAULT, JOB_FILTERS
+from bc.recruitment.constants import (
+    JOB_BOARD_CHOICES,
+    JOB_BOARD_CHOICES_DEFAULT,
+    JOB_FILTERS,
+)
 from bc.recruitment.models import JobAlertNotificationTask, TalentLinkJob
 from bc.recruitment.utils import get_current_search, is_recruitment_site
 
@@ -30,13 +34,27 @@ class JobAlertTest(TestCase):
     def setUp(self):
         self.root_page = Page.objects.get(id=1)
 
-        # For simple tests
+        # Job site (external)
         hero_image = wagtail_factories.ImageFactory()
         recruitment_homepage = self.root_page.add_child(
-            instance=RecruitmentHomePageFactory.build(hero_image=hero_image)
+            instance=RecruitmentHomePageFactory.build(
+                hero_image=hero_image, job_board=JOB_BOARD_CHOICES[0]
+            )
         )
         self.site = Site.objects.create(
             hostname="example.com", port=80, root_page=recruitment_homepage
+        )
+
+        # Internal job site
+        recruitment_homepage_internal = self.root_page.add_child(
+            instance=RecruitmentHomePageFactory.build(
+                hero_image=hero_image, job_board=JOB_BOARD_CHOICES[1]
+            )
+        )
+        self.site_internal = Site.objects.create(
+            hostname="example_internal.com",
+            port=80,
+            root_page=recruitment_homepage_internal,
         )
 
     def test_job_alert_token(self):
@@ -235,6 +253,42 @@ class JobAlertTest(TestCase):
                 self.assertIn("1 emails sent", output)
                 mock_message_class.assert_called_once_with(
                     to=[subscription.email], subject=mock.ANY, body=mock.ANY
+                )
+
+    def test_job_notified_respects_job_board(self):
+        instant = datetime.datetime(2020, 1, 29, 0, 0, tzinfo=datetime.timezone.utc)
+        with freeze_time(instant) as frozen_datetime:
+            subscription_1 = JobAlertSubscriptionFactory(
+                search=json.dumps({"query": "cycling"}), job_board=JOB_BOARD_CHOICES[0]
+            )
+            subscription_2 = JobAlertSubscriptionFactory(
+                search=json.dumps({"query": "cycling"}), job_board=JOB_BOARD_CHOICES[1]
+            )
+
+            frozen_datetime.tick()
+            TalentLinkJobFactory.create(title="cycling", job_board=JOB_BOARD_CHOICES[1])
+
+            frozen_datetime.tick()
+            with mock.patch(
+                COMMAND_MODULE_PATH + ".NotifyEmailMessage"
+            ) as mock_message_class:
+                out = StringIO()
+                call_command("send_job_alerts", stdout=out)
+                out.seek(0)
+                output = out.read()
+                self.assertIn(
+                    f"1 subscriptions for {JOB_BOARD_CHOICES[0]} job site evaluated",
+                    output,
+                )
+                self.assertIn("0 emails sent", output)
+                self.assertIn(
+                    f"1 subscriptions for {JOB_BOARD_CHOICES[1]} job site evaluated",
+                    output,
+                )
+                self.assertIn("1 emails sent", output)
+
+                mock_message_class.assert_called_once_with(
+                    to=[subscription_2.email], subject=mock.ANY, body=mock.ANY
                 )
 
     def test_job_not_notified_if_a_successful_task_was_started_since_import(self):
