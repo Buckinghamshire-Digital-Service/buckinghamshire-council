@@ -34,9 +34,8 @@ class Command(BaseCommand):
         except JobAlertNotificationTask.DoesNotExist:
             start_time = None
 
-        messages = []
-
         for job_board in JOB_BOARD_CHOICES:
+            messages = []
             alerts = JobAlertSubscription.objects.filter(
                 confirmed=True, job_board=job_board
             )

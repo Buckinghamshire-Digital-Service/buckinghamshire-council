@@ -13,7 +13,7 @@ import wagtail_factories
 from freezegun import freeze_time
 
 from bc.home.tests.fixtures import HomePageFactory
-from bc.recruitment.constants import JOB_FILTERS
+from bc.recruitment.constants import JOB_BOARD_CHOICES_DEFAULT, JOB_FILTERS
 from bc.recruitment.models import JobAlertNotificationTask, TalentLinkJob
 from bc.recruitment.utils import get_current_search, is_recruitment_site
 
@@ -179,7 +179,9 @@ class JobAlertTest(TestCase):
                 call_command("send_job_alerts", stdout=out)
 
                 mock_get_queryset.assert_called_once_with(
-                    start_time=instant, end_time=instant + datetime.timedelta(days=1)
+                    start_time=instant,
+                    end_time=instant + datetime.timedelta(days=1),
+                    job_board=JOB_BOARD_CHOICES_DEFAULT,
                 )
 
     def test_queryset_search_with_new_alert(self):
@@ -205,6 +207,7 @@ class JobAlertTest(TestCase):
                 mock_get_queryset.assert_called_once_with(
                     start_time=alert.created,
                     end_time=instant + datetime.timedelta(days=1),
+                    job_board=JOB_BOARD_CHOICES_DEFAULT,
                 )
 
     def test_job_notified(self):
@@ -225,7 +228,10 @@ class JobAlertTest(TestCase):
                 call_command("send_job_alerts", stdout=out)
                 out.seek(0)
                 output = out.read()
-                self.assertIn("1 subscriptions evaluated", output)
+                self.assertIn(
+                    f"1 subscriptions for {JOB_BOARD_CHOICES_DEFAULT} job site evaluated",
+                    output,
+                )
                 self.assertIn("1 emails sent", output)
                 mock_message_class.assert_called_once_with(
                     to=[subscription.email], subject=mock.ANY, body=mock.ANY
@@ -254,7 +260,10 @@ class JobAlertTest(TestCase):
                 call_command("send_job_alerts", stdout=out)
                 out.seek(0)
                 output = out.read()
-                self.assertIn("1 subscriptions evaluated", output)
+                self.assertIn(
+                    f"1 subscriptions for {JOB_BOARD_CHOICES_DEFAULT} job site evaluated",
+                    output,
+                )
                 self.assertIn("0 emails sent", output)
                 mock_message_class.assert_not_called()
 
@@ -283,7 +292,10 @@ class JobAlertTest(TestCase):
                 call_command("send_job_alerts", stdout=out)
                 out.seek(0)
                 output = out.read()
-                self.assertIn("1 subscriptions evaluated", output)
+                self.assertIn(
+                    f"1 subscriptions for {JOB_BOARD_CHOICES_DEFAULT} job site evaluated",
+                    output,
+                )
                 self.assertIn("1 emails sent", output)
                 mock_message_class.assert_called_once_with(
                     to=[subscription.email], subject=mock.ANY, body=mock.ANY
@@ -307,7 +319,10 @@ class JobAlertTest(TestCase):
                 call_command("send_job_alerts", stdout=out)
                 out.seek(0)
                 output = out.read()
-                self.assertIn("1 subscriptions evaluated", output)
+                self.assertIn(
+                    f"1 subscriptions for {JOB_BOARD_CHOICES_DEFAULT} job site evaluated",
+                    output,
+                )
                 self.assertIn("0 emails sent", output)
                 mock_message_class.assert_not_called()
 
@@ -319,7 +334,10 @@ class JobAlertTest(TestCase):
                 call_command("send_job_alerts", stdout=out)
                 out.seek(0)
                 output = out.read()
-                self.assertIn("1 subscriptions evaluated", output)
+                self.assertIn(
+                    f"1 subscriptions for {JOB_BOARD_CHOICES_DEFAULT} job site evaluated",
+                    output,
+                )
                 self.assertIn("1 emails sent", output)
                 mock_message_class.assert_called_once_with(
                     to=[subscription.email], subject=mock.ANY, body=mock.ANY
@@ -343,6 +361,9 @@ class JobAlertTest(TestCase):
                 call_command("send_job_alerts", stdout=out)
                 out.seek(0)
                 output = out.read()
-                self.assertIn("1 subscriptions evaluated", output)
+                self.assertIn(
+                    f"1 subscriptions for {JOB_BOARD_CHOICES_DEFAULT} job site evaluated",
+                    output,
+                )
                 self.assertIn("0 emails sent", output)
                 mock_message_class.assert_not_called()
