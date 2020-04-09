@@ -27,6 +27,7 @@ def get_advertisement(
     title="Higher Level Teaching Assistant - Elmhurst School ",
     description=None,
     application_url="https://www.example.com/?jobId=QQPFK026203F3VBQBV7V779XA-167759&langCode=en_GB",
+    job_group="Schools & Early Years - Support",
 ):
     if description is None:
         description = [
@@ -199,11 +200,7 @@ def get_advertisement(
                     "parents": None,
                     "criteria": {
                         "criterion": [
-                            {
-                                "label": "Schools & Early Years - Support",
-                                "value": "Schools  Early Years  Support",
-                                "activators": [],
-                            }
+                            {"label": job_group, "value": job_group, "activators": []}
                         ]
                     },
                 },

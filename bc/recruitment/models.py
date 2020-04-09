@@ -35,7 +35,7 @@ class JobSubcategory(models.Model):
     This corresponds to Job Group in the TalentLink import API
     """
 
-    title = models.CharField(max_length=128)
+    title = models.CharField(max_length=128, unique=True)
 
     def get_categories_list(self):
         if self.categories:
@@ -53,7 +53,7 @@ class JobSubcategory(models.Model):
 
 
 class JobCategory(Orderable, models.Model):
-    title = models.CharField(max_length=128)
+    title = models.CharField(max_length=128, unique=True)
     description = models.TextField(blank=True)
     subcategories = models.ManyToManyField(JobSubcategory, related_name="categories")
     is_schools_and_early_years = models.BooleanField(default=False)
@@ -62,6 +62,7 @@ class JobCategory(Orderable, models.Model):
         allow_unicode=True,
         max_length=255,
         help_text="The name of the category as it will appear in search filter e.g /search/category=[my-slug]",
+        unique=True,
     )
 
     def get_subcategories_list(self):

@@ -30,14 +30,14 @@ def job_subcategory_parser(value):
     which will be handled by the calling import_jobs command.
     """
     clean_value = string_parser(value)
-    return JobSubcategory.objects.get(title=clean_value)
+    return JobSubcategory.objects.get(title__iexact=clean_value)
 
 
 def job_subcategory_insert_parser(value):
     """Get or create existing JobSubcategory"""
     clean_value = string_parser(value)
     subcategory_object, created = JobSubcategory.objects.get_or_create(
-        title=clean_value
+        title__iexact=clean_value, defaults={"title": clean_value}
     )
     return subcategory_object
 
