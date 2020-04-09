@@ -125,9 +125,7 @@ def update_job_from_ad(job, ad, job_board, defaults=None, import_categories=Fals
             if (parser is job_subcategory_parser) and import_categories:
                 parser = job_subcategory_insert_parser
 
-            setattr(
-                job, target_field, parser(lov["criteria"]["criterion"][0]["label"]),
-            )
+            setattr(job, target_field, parser(lov["criteria"]["criterion"][0]["label"]))
     for k, v in defaults.items():
         setattr(job, k, v)
 
