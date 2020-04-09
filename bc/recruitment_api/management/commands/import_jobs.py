@@ -141,6 +141,9 @@ class Command(BaseCommand):
 
                         # Remove logo from existing job if it is gone from this import
                         if (not created) and (not image_found) and job.logo:
+                            # Also delete logo image if not used anywhere else too
+                            if TalentLinkJob.objects.filter(logo=job.logo).count() == 1:
+                                job.logo.delete()
                             job.logo = None
                             job.save()
 
