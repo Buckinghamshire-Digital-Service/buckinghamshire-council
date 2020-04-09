@@ -42,11 +42,6 @@ class ImportTestMixin:
             no_further_pages_response,
         ]
 
-        # TODO: Mock not being used?
-        # from bc.images.tests.fixtures import import_image_from_url_mock
-        # import_image_from_url = mock.Mock()
-        # import_image_from_url.side_effect = import_image_from_url_mock
-
         # Attachments
         if attachments is None:
             client.service.getAttachments.side_effect = [{}]
