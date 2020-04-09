@@ -66,4 +66,11 @@
     &__all-vacancies {
         font-weight: $weight--bold;
     }
+
+    @include target-ie11() {
+        &__category-title,
+        &__job-count {
+            width: 100%;
+        }
+    }
 }

@@ -1,0 +1,9 @@
+{% load wagtailcore_tags %}
+
+<div class="alert alert--message">
+    {% if title %}
+        <h2 class="alert__header heading heading--xl">{{ title }}</h2>
+    {% endif %}
+
+    <div class="alert__content">{{ body|richtext }}</div>
+</div>
