@@ -22,6 +22,8 @@ class TalentLinkJobModelAdmin(ModelAdmin):
         "last_imported",
         "location_postcode",
     )
+    search_fields = ("talentlink_id", "job_number", "title")
+    extra_search_kwargs = {"operator": OR}
 
     def job_link(self, obj):
         return format_html('<a href="{}">{}</span>', obj.url, obj.title,)
