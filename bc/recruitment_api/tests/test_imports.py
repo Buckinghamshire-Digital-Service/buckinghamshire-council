@@ -11,6 +11,8 @@ from freezegun import freeze_time
 
 from bc.documents.models import CustomDocument
 from bc.documents.tests.fixtures import DocumentFactory
+from bc.images.models import CustomImage
+from bc.images.tests.fixtures import mock_import_image_from_url
 from bc.recruitment.models import JobSubcategory, TalentLinkJob
 from bc.recruitment.tests.fixtures import JobSubcategoryFactory, TalentLinkJobFactory
 from bc.recruitment_api.utils import update_job_from_ad
@@ -845,7 +847,11 @@ class AttachmentsTest(TestCase, ImportTestMixin):
 
 @mock.patch("bc.recruitment_api.management.commands.import_jobs.get_client")
 class LogoTest(TestCase, ImportTestMixin):
-    def test_logo_is_imported(self, mock_get_client):
+    @mock.patch(
+        "bc.recruitment_api.management.commands.import_jobs.import_image_from_url",
+        side_effect=mock_import_image_from_url,
+    )
+    def test_logo_is_imported(self, mock_import_image_from_url, mock_get_client):
         advertisements = [
             get_advertisement(talentlink_id=1, title="New title 1"),
         ]
@@ -855,14 +861,18 @@ class LogoTest(TestCase, ImportTestMixin):
             advertisements, logos=logos
         )
 
-        # TODO: need to use mock for bc.images.models > import_image_from_url(),
-        # otherwise getting
-        # UnboundLocalError: local variable 'logo_image' referenced before assignment error
+        out = StringIO()
+        call_command("import_jobs", stdout=out)
+        out.seek(0)
+        output = out.read()
 
-        # out = StringIO()
-        # call_command("import_jobs", stdout=out)
-        # out.seek(0)
-        # output = out.read()
+        self.assertIn("1 new jobs created", output)
+        self.assertIn("1 new images imported", output)
+        self.assertEqual(CustomImage.objects.all().count(), 1)
+        self.assertEqual(
+            CustomImage.objects.get(talentlink_image_id="aaa"),
+            TalentLinkJob.objects.get(talentlink_id=1).logo,
+        )
 
     def test_duplicate_logo_is_not_imported(self, mock_get_client):
         pass
