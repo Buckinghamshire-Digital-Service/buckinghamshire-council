@@ -55,7 +55,7 @@ class Command(BaseCommand):
                         )
                     except Exception as e:
                         msg = (
-                            f"Error occurred while processing job {ad['id']}:\n"
+                            f"Error occurred while processing job {ad['id']} {ad['jobNumber']}:\n"
                             + str(e)
                         )
                         errors.append(msg)
@@ -93,7 +93,7 @@ class Command(BaseCommand):
                                     job.save()
                         except Exception as e:
                             msg = (
-                                f"Error occurred while importing attachments for job {ad['id']}:\n"
+                                f"Error occurred while importing attachments for job {ad['id']} {ad['jobNumber']}:\n"
                                 + str(e)
                             )
                             errors.append(msg)
@@ -112,5 +112,5 @@ class Command(BaseCommand):
         self.stdout.write(f"{doc_imported} new documents imported")
         self.stdout.write(f"{num_deleted} jobs deleted")
         self.stdout.write(self.style.ERROR(f"{len(errors)} errors"))
-        for error in errors:
+        for msg in errors:
             self.stdout.write(self.style.ERROR(msg))
