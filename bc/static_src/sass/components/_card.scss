@@ -54,6 +54,13 @@
                 margin-top: 0;
                 margin-bottom: $grid--small;
             }
+
+            @include target-ie11() {
+                &__image,
+                &__content {
+                    flex: 0 0 auto;
+                }
+            }
         }
 
         #{$hover-states} {
