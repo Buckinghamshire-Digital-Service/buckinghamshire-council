@@ -147,9 +147,7 @@ class ImportTest(TestCase, ImportTestMixin):
         job_2 = TalentLinkJobFactory(
             talentlink_id=2, title="Original title 2", last_imported=instant
         )
-        self.assertEqual(
-            TalentLinkJob.objects.count(), 2,
-        )
+        self.assertEqual(TalentLinkJob.objects.count(), 2)
 
         error_message = "This is a test error message"
 
@@ -317,9 +315,7 @@ class DeletedAndUpdatedJobsTest(TestCase, ImportTestMixin):
         TalentLinkJobFactory(talentlink_id=2, last_imported=instant)
         self.assertEqual(TalentLinkJob.objects.count(), 2)
 
-        advertisements = [
-            get_advertisement(talentlink_id=2),
-        ]
+        advertisements = [get_advertisement(talentlink_id=2)]
         mock_get_client.return_value = self.get_mocked_client(advertisements)
 
         call_command("import_jobs", stdout=mock.MagicMock())
@@ -656,13 +652,9 @@ class AttachmentsTest(TestCase, ImportTestMixin):
             get_advertisement(talentlink_id=2, title="New title 2"),
         ]
 
-        job_1_get_attachments_response = [
-            get_attachment(id=111),
-        ]
+        job_1_get_attachments_response = [get_attachment(id=111)]
 
-        job_2_get_attachments_response = [
-            get_attachment(id=222),
-        ]
+        job_2_get_attachments_response = [get_attachment(id=222)]
 
         attachments = [job_1_get_attachments_response, job_2_get_attachments_response]
         mock_get_client.return_value = self.get_mocked_client(
@@ -691,13 +683,9 @@ class AttachmentsTest(TestCase, ImportTestMixin):
             get_advertisement(talentlink_id=2, title="New title 2"),
         ]
 
-        job_1_get_attachments_response = [
-            get_attachment(id=111),
-        ]
+        job_1_get_attachments_response = [get_attachment(id=111)]
 
-        job_2_get_attachments_response = [
-            get_attachment(id=111),
-        ]
+        job_2_get_attachments_response = [get_attachment(id=111)]
 
         attachments = [job_1_get_attachments_response, job_2_get_attachments_response]
         mock_get_client.return_value = self.get_mocked_client(
@@ -720,9 +708,7 @@ class AttachmentsTest(TestCase, ImportTestMixin):
         )
 
     def test_job_with_no_attachment(self, mock_get_client):
-        advertisements = [
-            get_advertisement(talentlink_id=1, title="New title 1"),
-        ]
+        advertisements = [get_advertisement(talentlink_id=1, title="New title 1")]
         attachments = [{}]
         mock_get_client.return_value = self.get_mocked_client(
             advertisements, attachments
