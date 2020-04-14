@@ -186,7 +186,7 @@
     color: $textColor;
     border: 0;
     border-bottom: $border--accent darken($borderColor, 10);
-    max-width: 200px;
+    max-width: 250px;
 
     &:focus {
         @include focus-button();
@@ -200,6 +200,7 @@
 
     &:hover {
         background: darken($backgroundColor, 3%);
+        color: $textColor;
     }
 }
 
