@@ -1,11 +1,12 @@
 from django.test import TestCase
 from django.utils.text import slugify
 
-from bc.recruitment.constants import JOB_BOARD_CHOICES, JOB_BOARD_CHOICES_DEFAULT
+from bc.recruitment.constants import JOB_BOARD_CHOICES
 from bc.recruitment.models import JobCategory
 from bc.recruitment.tests.fixtures import (
     JobCategoryFactory,
     JobSubcategoryFactory,
+    RecruitmentHomePageFactory,
     TalentLinkJobFactory,
 )
 
@@ -46,12 +47,17 @@ class JobCategoryAndJobSubcategoryGroupingTest(TestCase):
         self.talentlinkjobs = []
         self.subcategories = []
         self.categories = []
+        self.homepage = RecruitmentHomePageFactory(job_board=JOB_BOARD_CHOICES[0])
+        self.homepage_internal = RecruitmentHomePageFactory(
+            job_board=JOB_BOARD_CHOICES[1]
+        )
+
         for i in range(4):
             subcat = JobSubcategoryFactory.build()
             subcat.save()
             # Add jobs for each subcategory according to its index (eg. self.subcategories[2] gets 2 jobs)
             for j in range(i):
-                job = TalentLinkJobFactory.build()
+                job = TalentLinkJobFactory.build(homepage=self.homepage)
                 job.subcategory = subcat
                 job.save()
                 self.talentlinkjobs.append(job)
@@ -145,21 +151,19 @@ class JobCategoryAndJobSubcategoryGroupingTest(TestCase):
             self.subcategories[1]
         )  # this subcategory has 1 job
 
-        summary = JobCategory.get_categories_summary(
-            job_board=JOB_BOARD_CHOICES_DEFAULT
-        )
+        summary = JobCategory.get_categories_summary(homepage=self.recruitment_homepage)
         self.assertEqual(summary.count(), 1)
 
         # Should return nothing since the jobs in setup are all external jobs (JOB_BOARD_CHOICES[0])
-        summary = JobCategory.get_categories_summary(job_board=JOB_BOARD_CHOICES[1])
+        summary = JobCategory.get_categories_summary(homepage=self.homepage_internal)
         self.assertEqual(summary.count(), 0)
 
         # Create internal job
-        job = TalentLinkJobFactory(job_board=JOB_BOARD_CHOICES[1])
+        job = TalentLinkJobFactory(homepage=self.homepage_internal)
         job.subcategory = self.subcategories[1]
         job.save()
 
-        summary = JobCategory.get_categories_summary(job_board=JOB_BOARD_CHOICES[1])
+        summary = JobCategory.get_categories_summary(homepage=self.homepage_internal)
         self.assertEqual(summary.count(), 1)
 
     def test_get_categories_summary_ranking(self):

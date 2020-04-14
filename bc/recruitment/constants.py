@@ -6,5 +6,3 @@ JOB_FILTERS = [
 ]
 
 JOB_BOARD_CHOICES = ["external", "internal"]
-
-JOB_BOARD_CHOICES_DEFAULT = "external"

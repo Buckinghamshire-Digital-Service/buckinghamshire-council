@@ -13,11 +13,7 @@ import wagtail_factories
 from freezegun import freeze_time
 
 from bc.home.tests.fixtures import HomePageFactory
-from bc.recruitment.constants import (
-    JOB_BOARD_CHOICES,
-    JOB_BOARD_CHOICES_DEFAULT,
-    JOB_FILTERS,
-)
+from bc.recruitment.constants import JOB_BOARD_CHOICES, JOB_FILTERS
 from bc.recruitment.models import JobAlertNotificationTask, TalentLinkJob
 from bc.recruitment.utils import get_current_search, is_recruitment_site
 
@@ -36,17 +32,17 @@ class JobAlertTest(TestCase):
 
         # Job site (external)
         hero_image = wagtail_factories.ImageFactory()
-        recruitment_homepage = self.root_page.add_child(
+        self.recruitment_homepage = self.root_page.add_child(
             instance=RecruitmentHomePageFactory.build(
                 hero_image=hero_image, job_board=JOB_BOARD_CHOICES[0]
             )
         )
         self.site = Site.objects.create(
-            hostname="example.com", port=80, root_page=recruitment_homepage
+            hostname="example.com", port=80, root_page=self.recruitment_homepage
         )
 
         # Internal job site
-        recruitment_homepage_internal = self.root_page.add_child(
+        self.recruitment_homepage_internal = self.root_page.add_child(
             instance=RecruitmentHomePageFactory.build(
                 hero_image=hero_image, job_board=JOB_BOARD_CHOICES[1]
             )
@@ -54,7 +50,7 @@ class JobAlertTest(TestCase):
         self.site_internal = Site.objects.create(
             hostname="example_internal.com",
             port=80,
-            root_page=recruitment_homepage_internal,
+            root_page=self.recruitment_homepage_internal,
         )
 
     def test_job_alert_token(self):
@@ -199,7 +195,7 @@ class JobAlertTest(TestCase):
                 mock_get_queryset.assert_called_once_with(
                     start_time=instant,
                     end_time=instant + datetime.timedelta(days=1),
-                    job_board=JOB_BOARD_CHOICES_DEFAULT,
+                    homepage=self.recruitment_homepage,
                 )
 
     def test_queryset_search_with_new_alert(self):
@@ -225,7 +221,7 @@ class JobAlertTest(TestCase):
                 mock_get_queryset.assert_called_once_with(
                     start_time=alert.created,
                     end_time=instant + datetime.timedelta(days=1),
-                    job_board=JOB_BOARD_CHOICES_DEFAULT,
+                    homepage=self.recruitment_homepage,
                 )
 
     def test_job_notified(self):
@@ -247,7 +243,7 @@ class JobAlertTest(TestCase):
                 out.seek(0)
                 output = out.read()
                 self.assertIn(
-                    f"1 subscriptions for {JOB_BOARD_CHOICES_DEFAULT} job site evaluated",
+                    f"1 subscriptions for {self.recruitment_homepage.id} job site evaluated",
                     output,
                 )
                 self.assertIn("1 emails sent", output)
@@ -259,14 +255,18 @@ class JobAlertTest(TestCase):
         instant = datetime.datetime(2020, 1, 29, 0, 0, tzinfo=datetime.timezone.utc)
         with freeze_time(instant) as frozen_datetime:
             JobAlertSubscriptionFactory(
-                search=json.dumps({"query": "cycling"}), job_board=JOB_BOARD_CHOICES[0]
+                search=json.dumps({"query": "cycling"}),
+                homepage=self.recruitment_homepage,
             )
             subscription_2 = JobAlertSubscriptionFactory(
-                search=json.dumps({"query": "cycling"}), job_board=JOB_BOARD_CHOICES[1]
+                search=json.dumps({"query": "cycling"}),
+                homepage=self.recruitment_homepage_internal,
             )
 
             frozen_datetime.tick()
-            TalentLinkJobFactory.create(title="cycling", job_board=JOB_BOARD_CHOICES[1])
+            TalentLinkJobFactory.create(
+                title="cycling", homepage=self.recruitment_homepage_internal
+            )
 
             frozen_datetime.tick()
             with mock.patch(
@@ -277,12 +277,12 @@ class JobAlertTest(TestCase):
                 out.seek(0)
                 output = out.read()
                 self.assertIn(
-                    f"1 subscriptions for {JOB_BOARD_CHOICES[0]} job site evaluated",
+                    f"1 subscriptions for {self.recruitment_homepage.id} job site evaluated",
                     output,
                 )
                 self.assertIn("0 emails sent", output)
                 self.assertIn(
-                    f"1 subscriptions for {JOB_BOARD_CHOICES[1]} job site evaluated",
+                    f"1 subscriptions for {self.recruitment_homepage_internal.id} job site evaluated",
                     output,
                 )
                 self.assertIn("1 emails sent", output)
@@ -315,7 +315,7 @@ class JobAlertTest(TestCase):
                 out.seek(0)
                 output = out.read()
                 self.assertIn(
-                    f"1 subscriptions for {JOB_BOARD_CHOICES_DEFAULT} job site evaluated",
+                    f"1 subscriptions for {self.recruitment_homepage.id} job site evaluated",
                     output,
                 )
                 self.assertIn("0 emails sent", output)
@@ -347,7 +347,7 @@ class JobAlertTest(TestCase):
                 out.seek(0)
                 output = out.read()
                 self.assertIn(
-                    f"1 subscriptions for {JOB_BOARD_CHOICES_DEFAULT} job site evaluated",
+                    f"1 subscriptions for {self.recruitment_homepage.id} job site evaluated",
                     output,
                 )
                 self.assertIn("1 emails sent", output)
@@ -374,7 +374,7 @@ class JobAlertTest(TestCase):
                 out.seek(0)
                 output = out.read()
                 self.assertIn(
-                    f"1 subscriptions for {JOB_BOARD_CHOICES_DEFAULT} job site evaluated",
+                    f"1 subscriptions for {self.recruitment_homepage.id} job site evaluated",
                     output,
                 )
                 self.assertIn("0 emails sent", output)
@@ -389,7 +389,7 @@ class JobAlertTest(TestCase):
                 out.seek(0)
                 output = out.read()
                 self.assertIn(
-                    f"1 subscriptions for {JOB_BOARD_CHOICES_DEFAULT} job site evaluated",
+                    f"1 subscriptions for {self.recruitment_homepage.id} job site evaluated",
                     output,
                 )
                 self.assertIn("1 emails sent", output)
@@ -416,7 +416,7 @@ class JobAlertTest(TestCase):
                 out.seek(0)
                 output = out.read()
                 self.assertIn(
-                    f"1 subscriptions for {JOB_BOARD_CHOICES_DEFAULT} job site evaluated",
+                    f"1 subscriptions for {self.recruitment_homepage.id} job site evaluated",
                     output,
                 )
                 self.assertIn("0 emails sent", output)

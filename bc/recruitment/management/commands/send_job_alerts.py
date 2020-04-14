@@ -5,10 +5,10 @@ from django.http import QueryDict
 from django.template.loader import render_to_string
 from django.utils.timezone import now
 
-from bc.recruitment.constants import JOB_BOARD_CHOICES
 from bc.recruitment.models import (
     JobAlertNotificationTask,
     JobAlertSubscription,
+    RecruitmentHomePage,
     TalentLinkJob,
 )
 from bc.recruitment.utils import get_job_search_results
@@ -34,10 +34,10 @@ class Command(BaseCommand):
         except JobAlertNotificationTask.DoesNotExist:
             start_time = None
 
-        for job_board in JOB_BOARD_CHOICES:
+        for homepage in RecruitmentHomePage.objects.live().all():
             messages = []
             alerts = JobAlertSubscription.objects.filter(
-                confirmed=True, job_board=job_board
+                confirmed=True, homepage=homepage
             )
             for alert in alerts:
                 search_params = json.loads(alert.search)
@@ -45,11 +45,11 @@ class Command(BaseCommand):
                 querydict.update(search_params)
                 results = get_job_search_results(
                     querydict=querydict,
-                    job_board=job_board,
+                    homepage=homepage,
                     queryset=self.get_queryset(
                         start_time=max(filter(None, [start_time, alert.created])),
                         end_time=task.started,
-                        job_board=job_board,
+                        homepage=homepage,
                     ),
                 )
 
@@ -78,12 +78,12 @@ class Command(BaseCommand):
             task.save()
 
             self.stdout.write(
-                f"{len(alerts)} subscriptions for {job_board} job site evaluated"
+                f"{len(alerts)} subscriptions for {homepage.title} job site evaluated"
             )
             self.stdout.write(f"{num_sent} emails sent")
 
-    def get_queryset(self, start_time, end_time, job_board):
-        params = {"job_board": job_board, "created__lt": end_time}
+    def get_queryset(self, start_time, end_time, homepage):
+        params = {"homepage": homepage, "created__lt": end_time}
         if start_time:
             params["created__gte"] = start_time
 

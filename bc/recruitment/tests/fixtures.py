@@ -3,7 +3,7 @@ import json
 
 import factory
 
-from bc.recruitment.constants import JOB_BOARD_CHOICES_DEFAULT
+from bc.recruitment.constants import JOB_BOARD_CHOICES
 
 
 class JobCategoryFactory(factory.django.DjangoModelFactory):
@@ -31,7 +31,7 @@ class RecruitmentHomePageFactory(factory.django.DjangoModelFactory):
     hero_title = "foo"
     hero_link_text = "foo"
     search_box_placeholder = "foo"
-    job_board = JOB_BOARD_CHOICES_DEFAULT
+    job_board = JOB_BOARD_CHOICES[0]
 
 
 class TalentLinkJobFactory(factory.django.DjangoModelFactory):
@@ -42,7 +42,9 @@ class TalentLinkJobFactory(factory.django.DjangoModelFactory):
 
     talentlink_id = factory.Sequence(lambda n: n)
     job_number = factory.Sequence(lambda n: f"FS{str(n).zfill(5)}")
-    job_board = JOB_BOARD_CHOICES_DEFAULT
+    homepage = factory.SubFactory(
+        "bc.recruitment.tests.fixtures.RecruitmentHomePageFactory"
+    )
 
     title = factory.Faker("sentence", nb_words=5)
     subcategory = factory.SubFactory(
@@ -75,4 +77,6 @@ class JobAlertSubscriptionFactory(factory.django.DjangoModelFactory):
     search = json.dumps({})
     email = factory.Faker("email")
     confirmed = True
-    job_board = JOB_BOARD_CHOICES_DEFAULT
+    homepage = factory.SubFactory(
+        "bc.recruitment.tests.fixtures.RecruitmentHomePageFactory"
+    )

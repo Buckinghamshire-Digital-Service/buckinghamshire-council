@@ -14,7 +14,7 @@ class TalentLinkJobModelAdmin(ModelAdmin):
     model = TalentLinkJob
     menu_icon = "tag"
     list_display = (
-        "job_board",
+        "homepage",
         "talentlink_id",
         "job_number",
         "job_link",
@@ -24,7 +24,7 @@ class TalentLinkJobModelAdmin(ModelAdmin):
         "location_postcode",
     )
     search_fields = ("talentlink_id", "job_number", "title")
-    list_filter = ("job_board",)
+    list_filter = ("homepage",)
     extra_search_kwargs = {"operator": OR}
 
     def job_link(self, obj):
@@ -34,9 +34,9 @@ class TalentLinkJobModelAdmin(ModelAdmin):
 class JobAlertSubscriptionModelAdmin(ModelAdmin):
     model = JobAlertSubscription
     menu_icon = "tag"
-    list_display = ("job_board", "email", "confirmed", "created", "search", "token")
+    list_display = ("homepage", "email", "confirmed", "created", "search", "token")
     search_fields = ("email", "search")
-    list_filter = ("confirmed", "created", "job_board")
+    list_filter = ("confirmed", "created", "homepage")
     extra_search_kwargs = {"operator": OR}
 
 

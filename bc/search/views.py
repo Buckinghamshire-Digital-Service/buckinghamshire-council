@@ -13,7 +13,6 @@ from bc.recruitment.forms import SearchAlertSubscriptionForm
 from bc.recruitment.models import JobAlertSubscription
 from bc.recruitment.utils import (
     get_current_search,
-    get_job_board,
     get_job_search_results,
     is_recruitment_site,
 )
@@ -38,9 +37,9 @@ class SearchView(View):
         # Recruitment site search
         if is_recruitment_site(request):
             template_path = "patterns/pages/search/search--jobs.html"
-            job_board = get_job_board(request)
+            homepage = request.site.root_page
             search_results = get_job_search_results(
-                querydict=request.GET, job_board=job_board
+                querydict=request.GET, homepage=homepage
             )
             context["job_alert_form"] = SearchAlertSubscriptionForm
 
@@ -73,7 +72,7 @@ class SearchView(View):
                 {
                     "unfiltered_results": get_job_search_results(
                         querydict=QueryDict("query=" + request.GET.get("query", "")),
-                        job_board=job_board,
+                        homepage=homepage,
                     ),
                 }
             )
@@ -103,12 +102,12 @@ class SearchView(View):
             search = get_current_search(request.GET)
             email = form.cleaned_data["email"]
             context = {"STATUSES": JOB_ALERT_STATUSES}
-            job_board = get_job_board(request)
+            homepage = request.site.root_page
 
             # Search if already exists and confirmed:
             try:
                 subscription = JobAlertSubscription.objects.get(
-                    email=email, search=search, job_board=job_board
+                    email=email, search=search, homepage=homepage
                 )
                 if subscription.confirmed:
                     # Tell user they're already subscribed
@@ -131,7 +130,7 @@ class SearchView(View):
 
             except JobAlertSubscription.DoesNotExist:
                 subscription = JobAlertSubscription(
-                    email=email, search=search, job_board=job_board
+                    email=email, search=search, homepage=homepage
                 )
                 subscription.full_clean()
                 subscription.save()

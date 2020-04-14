@@ -9,11 +9,14 @@ from bc.recruitment_api.transports import ZeepAPIKeyTransport
 
 def get_client(wsdl=None, job_board=None):
     wsdl = wsdl or settings.TALENTLINK_API_WSDL
-    # TODO: Update to be more dynamic
+
+    # VC TODO: Concatenate setting name
     if job_board == "internal":
         api_username = settings.TALENTLINK_INTERNAL_JOBS_API_USERNAME
-    else:
+    elif job_board == "external":
         api_username = settings.TALENTLINK_API_USERNAME
+    else:
+        raise ValueError(f"No matching _JOBS_API_USERNAME job board '{job_board}'")
 
     return Client(
         wsdl,
