@@ -28,10 +28,18 @@ class RecruitmentHomePageFactory(factory.django.DjangoModelFactory):
         model = "recruitment.RecruitmentHomePage"
 
     title = factory.Sequence(lambda n: f"Recruitment HomePage")
+    hero_image = factory.SubFactory("bc.images.tests.fixtures.ImageFactory")
     hero_title = "foo"
     hero_link_text = "foo"
     search_box_placeholder = "foo"
     job_board = JOB_BOARD_CHOICES[0]
+
+    @classmethod
+    def build_with_fk_objs_committed(cls, **kwargs):
+        from bc.images.tests.fixtures import ImageFactory
+
+        image = ImageFactory()
+        return cls.build(hero_image=image, **kwargs)
 
 
 class TalentLinkJobFactory(factory.django.DjangoModelFactory):
@@ -42,9 +50,9 @@ class TalentLinkJobFactory(factory.django.DjangoModelFactory):
 
     talentlink_id = factory.Sequence(lambda n: n)
     job_number = factory.Sequence(lambda n: f"FS{str(n).zfill(5)}")
-    homepage = factory.SubFactory(
-        "bc.recruitment.tests.fixtures.RecruitmentHomePageFactory"
-    )
+    # homepage = factory.SubFactory(
+    #     "bc.recruitment.tests.fixtures.RecruitmentHomePageFactory"
+    # )
 
     title = factory.Faker("sentence", nb_words=5)
     subcategory = factory.SubFactory(
@@ -77,6 +85,6 @@ class JobAlertSubscriptionFactory(factory.django.DjangoModelFactory):
     search = json.dumps({})
     email = factory.Faker("email")
     confirmed = True
-    homepage = factory.SubFactory(
-        "bc.recruitment.tests.fixtures.RecruitmentHomePageFactory"
-    )
+    # homepage = factory.SubFactory(
+    #     "bc.recruitment.tests.fixtures.RecruitmentHomePageFactory"
+    # )

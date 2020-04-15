@@ -164,7 +164,7 @@ def delete_jobs(imported_before, homepage):
 def import_attachments_for_job(job, client=None):
     doc_imported = 0
     if not client:
-        client = get_client()
+        client = get_client(job_board=job.homepage.job_board)
 
     # This will return list of attachments with
     #   'content', 'description', 'fileName', 'id', 'mimeType'

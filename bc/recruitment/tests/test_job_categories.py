@@ -1,6 +1,8 @@
 from django.test import TestCase
 from django.utils.text import slugify
 
+from wagtail.core.models import Page
+
 from bc.recruitment.constants import JOB_BOARD_CHOICES
 from bc.recruitment.models import JobCategory
 from bc.recruitment.tests.fixtures import (
@@ -47,10 +49,17 @@ class JobCategoryAndJobSubcategoryGroupingTest(TestCase):
         self.talentlinkjobs = []
         self.subcategories = []
         self.categories = []
-        self.homepage = RecruitmentHomePageFactory(job_board=JOB_BOARD_CHOICES[0])
-        self.homepage_internal = RecruitmentHomePageFactory(
-            job_board=JOB_BOARD_CHOICES[1]
+
+        self.root_page = Page.objects.get(id=1)
+        self.homepage = RecruitmentHomePageFactory.build_with_fk_objs_committed()
+        self.root_page.add_child(instance=self.homepage)
+
+        self.homepage_internal = (
+            RecruitmentHomePageFactory.build_with_fk_objs_committed()
         )
+        self.root_page.add_child(instance=self.homepage_internal)
+        self.homepage_internal.job_board = JOB_BOARD_CHOICES[1]
+        self.homepage_internal.save()
 
         for i in range(4):
             subcat = JobSubcategoryFactory.build()
@@ -151,7 +160,7 @@ class JobCategoryAndJobSubcategoryGroupingTest(TestCase):
             self.subcategories[1]
         )  # this subcategory has 1 job
 
-        summary = JobCategory.get_categories_summary(homepage=self.recruitment_homepage)
+        summary = JobCategory.get_categories_summary(homepage=self.homepage)
         self.assertEqual(summary.count(), 1)
 
         # Should return nothing since the jobs in setup are all external jobs (JOB_BOARD_CHOICES[0])

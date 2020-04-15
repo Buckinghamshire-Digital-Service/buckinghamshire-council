@@ -7,6 +7,8 @@ from django.core.management import call_command
 from django.test import TestCase
 from django.utils import timezone
 
+from wagtail.core.models import Page
+
 from freezegun import freeze_time
 
 from bc.documents.models import CustomDocument
@@ -26,8 +28,12 @@ from .fixtures import get_advertisement, get_attachment, no_further_pages_respon
 FIXTURE_JOB_SUBCATEGORY_TITLE = "Schools & Early Years - Support"
 
 
-# VC TODO: Fix tests, fix dj migrate
 class ImportTestMixin:
+    def setUpRecruitmentHomePage(self):
+        self.root_page = Page.objects.get(id=1)
+        self.homepage = RecruitmentHomePageFactory.build_with_fk_objs_committed()
+        self.root_page.add_child(instance=self.homepage)
+
     def get_mocked_client(self, advertisements=None, attachments=None):
         if advertisements is None:
             advertisements = [get_advertisement()]
@@ -52,6 +58,9 @@ class ImportTestMixin:
 
 @mock.patch("bc.recruitment_api.management.commands.import_jobs.get_client")
 class ImportTest(TestCase, ImportTestMixin):
+    def setUp(self):
+        ImportTestMixin.setUpRecruitmentHomePage(self)
+
     def test_with_mocked_client(self, mock_get_client):
 
         mock_get_client.return_value = self.get_mocked_client()
@@ -64,7 +73,7 @@ class ImportTest(TestCase, ImportTestMixin):
         self.assertIn("1 new jobs created", output)
 
     def test_with_existing_job(self, mock_get_client):
-        TalentLinkJobFactory(talentlink_id=164579)
+        TalentLinkJobFactory(talentlink_id=164579, homepage=self.homepage)
 
         mock_get_client.return_value = self.get_mocked_client()
 
@@ -93,7 +102,7 @@ class ImportTest(TestCase, ImportTestMixin):
     def test_existing_job_created_date(self, mock_get_client):
         instant = datetime.datetime(2020, 1, 29, 12, 0, 0, tzinfo=datetime.timezone.utc)
         with freeze_time(instant):
-            job = TalentLinkJobFactory(talentlink_id=164579)
+            job = TalentLinkJobFactory(talentlink_id=164579, homepage=self.homepage)
 
         self.assertEqual(job.created, instant)
 
@@ -118,7 +127,9 @@ class ImportTest(TestCase, ImportTestMixin):
 
     def test_existing_job_imported_date(self, mock_get_client):
         instant = datetime.datetime(2020, 1, 29, 12, 0, 0, tzinfo=datetime.timezone.utc)
-        job = TalentLinkJobFactory(talentlink_id=164579, last_imported=instant)
+        job = TalentLinkJobFactory(
+            talentlink_id=164579, last_imported=instant, homepage=self.homepage
+        )
 
         self.assertEqual(job.last_imported, instant)
 
@@ -148,10 +159,16 @@ class ImportTest(TestCase, ImportTestMixin):
     def test_error_cases_are_not_imported(self, mock_update_fn, mock_get_client):
         instant = datetime.datetime(2020, 1, 29, 12, 0, 0, tzinfo=datetime.timezone.utc)
         TalentLinkJobFactory(
-            talentlink_id=1, title="Original title 1", last_imported=instant
+            talentlink_id=1,
+            title="Original title 1",
+            last_imported=instant,
+            homepage=self.homepage,
         )
         job_2 = TalentLinkJobFactory(
-            talentlink_id=2, title="Original title 2", last_imported=instant
+            talentlink_id=2,
+            title="Original title 2",
+            last_imported=instant,
+            homepage=self.homepage,
         )
         self.assertEqual(TalentLinkJob.objects.count(), 2)
 
@@ -162,9 +179,8 @@ class ImportTest(TestCase, ImportTestMixin):
             if job.talentlink_id == 1:
                 raise KeyError(error_message)
             else:
-                homepage = RecruitmentHomePageFactory(job_board=JOB_BOARD_CHOICES[0])
                 return update_job_from_ad(
-                    job, ad, homepage, defaults, import_categories
+                    job, ad, self.homepage, defaults, import_categories
                 )
 
         mock_update_fn.side_effect = error_or_original
@@ -199,6 +215,9 @@ class ImportTest(TestCase, ImportTestMixin):
 
 @mock.patch("bc.recruitment_api.management.commands.import_jobs.get_client")
 class JobSubcategoriesTest(TestCase, ImportTestMixin):
+    def setUp(self):
+        ImportTestMixin.setUpRecruitmentHomePage(self)
+
     def test_import_with_missing_subcategories(self, mock_get_client):
         mock_get_client.return_value = self.get_mocked_client()
         JobSubcategory.objects.all().delete()
@@ -233,7 +252,7 @@ class JobSubcategoriesTest(TestCase, ImportTestMixin):
         )
 
     def test_update_existing_job_with_missing_subcategories(self, mock_get_client):
-        TalentLinkJobFactory(talentlink_id=164579)
+        TalentLinkJobFactory(talentlink_id=164579, homepage=self.homepage)
 
         mock_get_client.return_value = self.get_mocked_client()
         JobSubcategory.objects.get(title=FIXTURE_JOB_SUBCATEGORY_TITLE).delete()
@@ -254,7 +273,7 @@ class JobSubcategoriesTest(TestCase, ImportTestMixin):
     def test_update_existing_job_and_importing_missing_subcategories(
         self, mock_get_client
     ):
-        TalentLinkJobFactory(talentlink_id=164579)
+        TalentLinkJobFactory(talentlink_id=164579, homepage=self.homepage)
 
         mock_get_client.return_value = self.get_mocked_client()
         JobSubcategory.objects.get(title=FIXTURE_JOB_SUBCATEGORY_TITLE).delete()
@@ -269,12 +288,18 @@ class JobSubcategoriesTest(TestCase, ImportTestMixin):
 
 @mock.patch("bc.recruitment_api.management.commands.import_jobs.get_client")
 class DeletedAndUpdatedJobsTest(TestCase, ImportTestMixin):
+    def setUp(self):
+        ImportTestMixin.setUpRecruitmentHomePage(self)
+
     def test_job_number_clash_with_existing_job(self, mock_get_client):
         job_number = "FS10000"
         instant = datetime.datetime(2020, 1, 29, 12, 0, 0, tzinfo=datetime.timezone.utc)
 
         job = TalentLinkJobFactory(
-            talentlink_id=1, job_number=job_number, last_imported=instant
+            talentlink_id=1,
+            job_number=job_number,
+            last_imported=instant,
+            homepage=self.homepage,
         )
 
         advertisements = [
@@ -299,7 +324,10 @@ class DeletedAndUpdatedJobsTest(TestCase, ImportTestMixin):
         instant = datetime.datetime(2020, 1, 29, 12, 0, 0, tzinfo=datetime.timezone.utc)
 
         job = TalentLinkJobFactory(
-            talentlink_id=1, job_number=old_number, last_imported=instant
+            talentlink_id=1,
+            job_number=old_number,
+            last_imported=instant,
+            homepage=self.homepage,
         )
 
         advertisements = [get_advertisement(talentlink_id=1, job_number=new_number)]
@@ -320,8 +348,12 @@ class DeletedAndUpdatedJobsTest(TestCase, ImportTestMixin):
 
     def test_job_missing_from_import_are_deleted(self, mock_get_client):
         instant = datetime.datetime(2020, 1, 29, 12, 0, 0, tzinfo=datetime.timezone.utc)
-        TalentLinkJobFactory(talentlink_id=1, last_imported=instant)
-        TalentLinkJobFactory(talentlink_id=2, last_imported=instant)
+        TalentLinkJobFactory(
+            talentlink_id=1, last_imported=instant, homepage=self.homepage
+        )
+        TalentLinkJobFactory(
+            talentlink_id=2, last_imported=instant, homepage=self.homepage
+        )
         self.assertEqual(TalentLinkJob.objects.count(), 2)
 
         advertisements = [get_advertisement(talentlink_id=2)]
@@ -337,19 +369,22 @@ class DeletedAndUpdatedJobsTest(TestCase, ImportTestMixin):
     def test_job_missing_from_import_are_deleted_only_if_from_same_board(
         self, mock_get_client
     ):
-        homepage = RecruitmentHomePageFactory(job_board=JOB_BOARD_CHOICES[0])
-        homepage_internal = RecruitmentHomePageFactory(job_board=JOB_BOARD_CHOICES[1])
+        homepage_internal = RecruitmentHomePageFactory.build_with_fk_objs_committed()
+        self.root_page.add_child(instance=homepage_internal)
+        homepage_internal.job_board = JOB_BOARD_CHOICES[1]
+        homepage_internal.save()
+
         instant = datetime.datetime(2020, 1, 29, 12, 0, 0, tzinfo=datetime.timezone.utc)
         TalentLinkJobFactory(
             talentlink_id=1,
             job_number="AABBSAME",
-            homepage=homepage,
+            homepage=self.homepage,
             last_imported=instant,
         )
         TalentLinkJobFactory(
             talentlink_id=2,
             job_number="CCDD",
-            homepage=homepage,
+            homepage=self.homepage,
             last_imported=instant,
         )
         TalentLinkJobFactory(
@@ -358,30 +393,51 @@ class DeletedAndUpdatedJobsTest(TestCase, ImportTestMixin):
             homepage=homepage_internal,
             last_imported=instant,
         )
-        self.assertEqual(TalentLinkJob.objects.filter(homepage=homepage).count(), 2)
+        self.assertEqual(
+            TalentLinkJob.objects.filter(homepage=self.homepage).count(), 2
+        )
         self.assertEqual(
             TalentLinkJob.objects.filter(homepage=homepage_internal).count(), 1
         )
 
-        advertisements = [
+        # Create mock client faking results for 2 boards
+        board_external_advertisements = [
             get_advertisement(talentlink_id=1, job_number="AABBSAME"),
         ]
-        mock_get_client.return_value = self.get_mocked_client(advertisements)
+        board_internal_advertisements = [
+            get_advertisement(talentlink_id=3, job_number="AABBSAME"),
+        ]
+        client = mock.Mock()
+        client.service.getAdvertisementsByPage.side_effect = [
+            {
+                "advertisements": {"advertisement": board_external_advertisements},
+                "totalResults": 143,
+            },
+            no_further_pages_response,
+            {
+                "advertisements": {"advertisement": board_internal_advertisements},
+                "totalResults": 143,
+            },
+            no_further_pages_response,
+        ]
+        mock_get_client.return_value = client
 
-        call_command("import_jobs", stdout=mock.MagicMock())
+        call_command("import_jobs", import_categories=True, stdout=mock.MagicMock())
 
         # Only one new job remains. Jobs not in import are deleted.
-        self.assertEqual(TalentLinkJob.objects.filter(homepage=homepage).count(), 1)
+        self.assertEqual(
+            TalentLinkJob.objects.filter(homepage=self.homepage).count(), 1
+        )
         self.assertEqual(
             TalentLinkJob.objects.filter(homepage=homepage_internal).count(), 1
         )
 
 
-class DescriptionsTest(TestCase):
+class DescriptionsTest(TestCase, ImportTestMixin):
     def setUp(self):
+        ImportTestMixin.setUpRecruitmentHomePage(self)
         # create matching category
         JobSubcategoryFactory(title=FIXTURE_JOB_SUBCATEGORY_TITLE)
-        self.homepage = RecruitmentHomePageFactory(job_board=JOB_BOARD_CHOICES[0])
 
     def compare_processed_record(self, description, expected):
 
@@ -424,7 +480,9 @@ class DescriptionsTest(TestCase):
         self.compare_processed_record(description, expected)
 
     def test_descriptions_are_updated(self):
-        job = TalentLinkJobFactory(talentlink_id=1, description="Old value")
+        job = TalentLinkJobFactory(
+            talentlink_id=1, description="Old value", homepage=self.homepage
+        )
         description = [
             {
                 "label": "New Info",
@@ -523,9 +581,9 @@ class DescriptionsTest(TestCase):
 
 class ShortDescriptionsTest(TestCase, ImportTestMixin):
     def setUp(self):
+        ImportTestMixin.setUpRecruitmentHomePage(self)
         # create matching category
         JobSubcategoryFactory(title=FIXTURE_JOB_SUBCATEGORY_TITLE)
-        self.homepage = RecruitmentHomePageFactory(job_board=JOB_BOARD_CHOICES[0])
 
     def compare_processed_record(self, description, expected):
 
@@ -656,9 +714,10 @@ class ShortDescriptionsTest(TestCase, ImportTestMixin):
 
 class ApplicationURLTest(TestCase, ImportTestMixin):
     def setUp(self):
+        ImportTestMixin.setUpRecruitmentHomePage(self)
+
         # create matching category
         JobSubcategoryFactory(title=FIXTURE_JOB_SUBCATEGORY_TITLE)
-        self.homepage = RecruitmentHomePageFactory(job_board=JOB_BOARD_CHOICES[0])
 
     def compare_processed_record(self, imported, expected):
 
@@ -703,6 +762,9 @@ class ApplicationURLTest(TestCase, ImportTestMixin):
 
 @mock.patch("bc.recruitment_api.management.commands.import_jobs.get_client")
 class AttachmentsTest(TestCase, ImportTestMixin):
+    def setUp(self):
+        ImportTestMixin.setUpRecruitmentHomePage(self)
+
     def test_attachment_is_imported(self, mock_get_client):
         advertisements = [
             get_advertisement(talentlink_id=1, title="New title 1"),
@@ -809,7 +871,7 @@ class AttachmentsTest(TestCase, ImportTestMixin):
         self.assertEqual(job.attachments.all().count(), 2)
 
     def test_attachments_are_deleted_when_the_job_is(self, mock_get_client):
-        job = TalentLinkJobFactory(talentlink_id=1)
+        job = TalentLinkJobFactory(talentlink_id=1, homepage=self.homepage)
         doc = DocumentFactory(talentlink_attachment_id=111)
         job.attachments.add(doc)
         job.save()
@@ -835,14 +897,14 @@ class AttachmentsTest(TestCase, ImportTestMixin):
         self, mock_get_client
     ):
 
-        job_1 = TalentLinkJobFactory(talentlink_id=1)
+        job_1 = TalentLinkJobFactory(talentlink_id=1, homepage=self.homepage)
         doc_1 = DocumentFactory(talentlink_attachment_id=111)
         doc_2 = DocumentFactory(talentlink_attachment_id=222)
         job_1.attachments.add(doc_1)
         job_1.attachments.add(doc_2)
         job_1.save()
 
-        job_2 = TalentLinkJobFactory(talentlink_id=2)
+        job_2 = TalentLinkJobFactory(talentlink_id=2, homepage=self.homepage)
         job_2.attachments.add(doc_1)
         job_2.save()
 

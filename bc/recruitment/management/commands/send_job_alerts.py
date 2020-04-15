@@ -78,7 +78,7 @@ class Command(BaseCommand):
             task.save()
 
             self.stdout.write(
-                f"{len(alerts)} subscriptions for {homepage.title} job site evaluated"
+                f"{len(alerts)} subscriptions for job site (id={homepage.id}) evaluated"
             )
             self.stdout.write(f"{num_sent} emails sent")
 

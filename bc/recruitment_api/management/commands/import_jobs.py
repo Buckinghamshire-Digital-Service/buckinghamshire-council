@@ -24,6 +24,10 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # We import jobs for each Recruitment Homepage, including draft ones
         # so it is possible to import jobs before going live.
+        if not RecruitmentHomePage.objects.all().count():
+            msg = f"Please create a RecruitmentHomePage page before running the import."
+            self.stdout.write(self.style.ERROR(msg))
+
         for homepage in RecruitmentHomePage.objects.all():
             self.stdout.write(
                 f"Starting import for recruitment site with homepage id {homepage.id}':"
@@ -32,7 +36,7 @@ class Command(BaseCommand):
 
             try:
                 client = get_client(job_board=job_board)
-            # VC TODO: check for valid job board
+            # VC TODO: check for valid / duplicate job board
             except Exception:
                 msg = f"Job board not defined on RecruitmentHomePage id {homepage.id}. Skipping import for this site."
                 self.stdout.write(self.style.ERROR(msg))
@@ -54,14 +58,16 @@ class Command(BaseCommand):
                 if results:
                     self.stdout.write(f"{len(results['advertisement'])} advertisements")
                     for ad in response["advertisements"]["advertisement"]:
-
                         try:
-                            job = TalentLinkJob.objects.get(talentlink_id=ad["id"])
+                            job = TalentLinkJob.objects.get(
+                                talentlink_id=ad["id"], homepage=homepage
+                            )
                             created = False
                         except TalentLinkJob.DoesNotExist:
-                            job = TalentLinkJob(talentlink_id=ad["id"])
+                            job = TalentLinkJob(
+                                talentlink_id=ad["id"], homepage=homepage
+                            )
                             created = True
-
                         try:
                             job = update_job_from_ad(
                                 job,
