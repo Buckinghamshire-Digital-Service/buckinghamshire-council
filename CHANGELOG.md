@@ -1,10 +1,9 @@
 # Release History
 
-## 13.0 (In Development)
-
-Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/12.0...release
+## Unreleased
 
 - Upgrade Wagtail to 2.7.2 and Django to 2.2.12
+- Add documentation about Aptean Respond cases backend, and cookies
 
 ## 12.0 (2020-04-02)
 
