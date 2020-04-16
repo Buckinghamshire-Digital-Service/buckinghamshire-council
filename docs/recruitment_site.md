@@ -93,7 +93,7 @@ You can call this in Python code with:
 
 Saba is the system used for managing jobs and applications.
 
-Jobs are identified by a unique job number, eg. BUC0003 which corresponds to `TalentLinkJob.job_number` on the wagtail site.
+Jobs are identified by a unique job number, eg. BUC0003 which corresponds to `TalentLinkJob.job_number` on the Wagtail site.
 
 On Saba, jobs can have multiple advertisements. Advertisements can be posted to multiple targets. Each posting target (ie. job board) has its own TalentLink API credentials. We are currently only importing job advertisements posted to 'External site' and 'Internal site' on Saba.
 
