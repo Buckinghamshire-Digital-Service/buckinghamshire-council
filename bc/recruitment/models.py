@@ -254,7 +254,7 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
     # Only allow creating HomePages at the root level
     parent_page_types = ["wagtailcore.Page"]
 
-    job_board = models.CharField(max_length=20, blank=True)
+    job_board = models.CharField(max_length=20, blank=True, unique=True)
     hero_title = models.CharField(
         max_length=255, help_text="e.g. Finding a job in Buckinghamshire"
     )
