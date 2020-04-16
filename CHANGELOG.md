@@ -4,6 +4,7 @@
 
 - Upgrade Wagtail to 2.7.2 and Django to 2.2.12
 - Add documentation about Aptean Respond cases backend, and cookies
+- Add unit tests for Aptean Respond integration
 
 ## 12.0 (2020-04-02)
 
