@@ -24,7 +24,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # We import jobs for each Recruitment Homepage, including draft ones
         # so it is possible to import jobs before going live.
-        if not RecruitmentHomePage.objects.all().count():
+        if not RecruitmentHomePage.objects.exists():
             msg = f"Please create a RecruitmentHomePage page before running the import."
             self.stdout.write(self.style.ERROR(msg))
 
