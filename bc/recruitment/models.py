@@ -165,7 +165,7 @@ def callback_jobcategory_autogenerate_slug_if_empty(sender, instance, *args, **k
 class TalentLinkJob(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     last_imported = models.DateTimeField(blank=True)
-    last_modified = models.DateTimeField(auto_now=True)  # TODO: Do we still need this?
+    last_modified = models.DateTimeField(auto_now=True)  # For debugging; not modified during normal application flow.
 
     talentlink_id = models.IntegerField(unique=True)
     job_number = models.CharField(max_length=10, blank=False)
