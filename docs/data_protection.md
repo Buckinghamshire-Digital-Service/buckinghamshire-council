@@ -1,5 +1,7 @@
 # Buckinghamshire Council — Data Protection
 
+See also: [Cookies](cookies.md)
+
 This page gives an overview of potentially-sensitive data stored or processed by the Buckinghamshire Council project.
 
 ### User accounts
