@@ -9,4 +9,4 @@ JOB_BOARD_DEFAULT = "external"
 JOB_BOARD_CHOICES = [
     JOB_BOARD_DEFAULT,
     "internal",
-]  # Must define corresponding TALENTLINK_API_USERNAME
+]  # Must define corresponding TALENTLINK_{job board}_API_USERNAME on settings/base.py and env var.
