@@ -191,9 +191,7 @@ class JobAlertTest(TestCase):
                 call_command("send_job_alerts", stdout=out)
 
                 mock_get_queryset.assert_called_once_with(
-                    start_time=instant,
-                    end_time=instant + datetime.timedelta(days=1),
-                    homepage=self.homepage,
+                    start_time=instant, end_time=instant + datetime.timedelta(days=1),
                 )
 
     def test_queryset_search_with_new_alert(self):
@@ -219,7 +217,6 @@ class JobAlertTest(TestCase):
                 mock_get_queryset.assert_called_once_with(
                     start_time=alert.created,
                     end_time=instant + datetime.timedelta(days=1),
-                    homepage=self.homepage,
                 )
 
     def test_job_notified(self):

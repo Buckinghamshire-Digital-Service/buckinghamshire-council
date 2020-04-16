@@ -50,9 +50,6 @@ class TalentLinkJobFactory(factory.django.DjangoModelFactory):
 
     talentlink_id = factory.Sequence(lambda n: n)
     job_number = factory.Sequence(lambda n: f"FS{str(n).zfill(5)}")
-    # homepage = factory.SubFactory(
-    #     "bc.recruitment.tests.fixtures.RecruitmentHomePageFactory"
-    # )
 
     title = factory.Faker("sentence", nb_words=5)
     subcategory = factory.SubFactory(
@@ -85,6 +82,3 @@ class JobAlertSubscriptionFactory(factory.django.DjangoModelFactory):
     search = json.dumps({})
     email = factory.Faker("email")
     confirmed = True
-    # homepage = factory.SubFactory(
-    #     "bc.recruitment.tests.fixtures.RecruitmentHomePageFactory"
-    # )

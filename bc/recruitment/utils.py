@@ -38,7 +38,9 @@ def get_current_search(querydict):
 
 def get_job_search_results(querydict, homepage, queryset=None):
     if queryset is None:
-        queryset = TalentLinkJob.objects.filter(homepage=homepage).all()
+        queryset = TalentLinkJob.objects.all()
+
+    queryset = queryset.filter(homepage=homepage)
 
     search_query = querydict.get("query", None)
 

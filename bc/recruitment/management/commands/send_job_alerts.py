@@ -49,7 +49,6 @@ class Command(BaseCommand):
                     queryset=self.get_queryset(
                         start_time=max(filter(None, [start_time, alert.created])),
                         end_time=task.started,
-                        homepage=homepage,
                     ),
                 )
 
@@ -82,8 +81,8 @@ class Command(BaseCommand):
             )
             self.stdout.write(f"{num_sent} emails sent")
 
-    def get_queryset(self, start_time, end_time, homepage):
-        params = {"homepage": homepage, "created__lt": end_time}
+    def get_queryset(self, start_time, end_time):
+        params = {"created__lt": end_time}
         if start_time:
             params["created__gte"] = start_time
 

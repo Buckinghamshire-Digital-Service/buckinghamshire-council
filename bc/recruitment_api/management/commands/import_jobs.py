@@ -60,9 +60,7 @@ class Command(BaseCommand):
                     self.stdout.write(f"{len(results['advertisement'])} advertisements")
                     for ad in response["advertisements"]["advertisement"]:
                         try:
-                            job = TalentLinkJob.objects.get(
-                                talentlink_id=ad["id"], homepage=homepage
-                            )
+                            job = TalentLinkJob.objects.get(talentlink_id=ad["id"])
                             created = False
                         except TalentLinkJob.DoesNotExist:
                             job = TalentLinkJob(
