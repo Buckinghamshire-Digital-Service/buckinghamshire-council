@@ -369,10 +369,10 @@ class DeletedAndUpdatedJobsTest(TestCase, ImportTestMixin):
     def test_job_missing_from_import_are_deleted_only_if_from_same_board(
         self, mock_get_client
     ):
-        homepage_internal = RecruitmentHomePageFactory.build_with_fk_objs_committed()
+        homepage_internal = RecruitmentHomePageFactory.build_with_fk_objs_committed(
+            job_board=JOB_BOARD_CHOICES[1]
+        )
         self.root_page.add_child(instance=homepage_internal)
-        homepage_internal.job_board = JOB_BOARD_CHOICES[1]
-        homepage_internal.save()
 
         instant = datetime.datetime(2020, 1, 29, 12, 0, 0, tzinfo=datetime.timezone.utc)
         TalentLinkJobFactory(

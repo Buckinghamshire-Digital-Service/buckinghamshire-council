@@ -51,15 +51,14 @@ class JobCategoryAndJobSubcategoryGroupingTest(TestCase):
         self.categories = []
 
         self.root_page = Page.objects.get(id=1)
-        self.homepage = RecruitmentHomePageFactory.build_with_fk_objs_committed()
+        self.homepage = RecruitmentHomePageFactory.build_with_fk_objs_committed(
+            job_board=JOB_BOARD_CHOICES[0]
+        )
         self.root_page.add_child(instance=self.homepage)
-
-        self.homepage_internal = (
-            RecruitmentHomePageFactory.build_with_fk_objs_committed()
+        self.homepage_internal = RecruitmentHomePageFactory.build_with_fk_objs_committed(
+            job_board=JOB_BOARD_CHOICES[1]
         )
         self.root_page.add_child(instance=self.homepage_internal)
-        self.homepage_internal.job_board = JOB_BOARD_CHOICES[1]
-        self.homepage_internal.save()
 
         for i in range(4):
             subcat = JobSubcategoryFactory.build()
