@@ -21,8 +21,8 @@ GOVUK_NOTIFY_PLAIN_EMAIL_TEMPLATE_ID = "c370a02f-cae4-4606-bff4-fb4fc8e53347"
 # Lumesse TalentLink API credentials
 TALENTLINK_API_KEY = "not_a_real_key"  # pragma: allowlist secret
 TALENTLINK_API_PASSWORD = "foo"  # pragma: allowlist secret
-TALENTLINK_API_USERNAME = "foo:foz:FO"
-TALENTLINK_INTERNAL_JOBS_API_USERNAME = "bar:baz:FO"
+TALENTLINK_EXTERNAL_API_USERNAME = "foo:foz:FO"
+TALENTLINK_INTERNAL_API_USERNAME = "bar:baz:FO"
 TALENTLINK_API_WSDL = "https://api3.lumesse-talenthub.com/CareerPortal/SOAP/FoAdvert?WSDL"
 
 # Aptean Respond API credentials

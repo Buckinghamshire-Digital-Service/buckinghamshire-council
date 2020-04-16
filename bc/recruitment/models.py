@@ -335,12 +335,6 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
             {"page": page, "show_apply_button": False},
         )
 
-    def full_clean(self, *args, **kwargs):
-        if not self.job_board:
-            self.job_board = JOB_BOARD_CHOICES[0]
-
-        super().full_clean(*args, **kwargs)
-
 
 class RecruitmentIndexPage(BasePage):
     template = "patterns/pages/standardpages/index_page--jobs.html"

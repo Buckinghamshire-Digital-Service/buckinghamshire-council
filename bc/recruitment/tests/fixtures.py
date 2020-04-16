@@ -3,7 +3,7 @@ import json
 
 import factory
 
-from bc.recruitment.constants import JOB_BOARD_CHOICES
+from bc.recruitment.constants import JOB_BOARD_DEFAULT
 
 
 class JobCategoryFactory(factory.django.DjangoModelFactory):
@@ -32,7 +32,7 @@ class RecruitmentHomePageFactory(factory.django.DjangoModelFactory):
     hero_title = "foo"
     hero_link_text = "foo"
     search_box_placeholder = "foo"
-    job_board = JOB_BOARD_CHOICES[0]
+    job_board = JOB_BOARD_DEFAULT
 
     @classmethod
     def build_with_fk_objs_committed(cls, **kwargs):

@@ -30,16 +30,17 @@ class Command(BaseCommand):
 
         for homepage in RecruitmentHomePage.objects.all():
             self.stdout.write(
-                f"Starting import for recruitment site with homepage id {homepage.id}':"
+                f"Starting import for recruitment site with homepage id {homepage.id}:"
             )
             job_board = homepage.job_board
 
             try:
                 client = get_client(job_board=job_board)
-            # VC TODO: check for valid / duplicate job board
-            except Exception:
-                msg = f"Job board not defined on RecruitmentHomePage id {homepage.id}. Skipping import for this site."
+            except AttributeError as exception:
+                msg = exception.args[0] + "\n"
+                msg += f"Error fetching jobs for '{homepage.job_board}' job board. Skipping import for this site."
                 self.stdout.write(self.style.ERROR(msg))
+                continue
 
             page = 1
             results = True
@@ -49,7 +50,7 @@ class Command(BaseCommand):
             errors = []
             import_timestamp = now()
             while results:
-                self.stdout.write(f"Fetching page {page} from job board {job_board}")
+                self.stdout.write(f"Fetching page {page} from job board '{job_board}'")
                 response = client.service.getAdvertisementsByPage(
                     pageNumber=page, showJobLocation=True
                 )
