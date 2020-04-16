@@ -175,7 +175,7 @@
 
 @mixin button($textColor: $color--slate, $borderColor, $backgroundColor) {
     @include font-size(s);
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
     font-weight: $weight--bold;
@@ -186,7 +186,6 @@
     color: $textColor;
     border: 0;
     border-bottom: $border--accent darken($borderColor, 10);
-    max-width: 200px;
 
     &:focus {
         @include focus-button();
@@ -200,6 +199,7 @@
 
     &:hover {
         background: darken($backgroundColor, 3%);
+        color: $textColor;
     }
 }
 
