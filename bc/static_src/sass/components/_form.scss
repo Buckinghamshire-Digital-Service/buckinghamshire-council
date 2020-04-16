@@ -103,10 +103,10 @@
             border: 0;
 
             &::placeholder {
-                opacity: 0;
+                color: $color--white;
 
                 @include media-query(mob-landscape) {
-                    opacity: 1;
+                    color: $color--default;
                 }
             }
         }
