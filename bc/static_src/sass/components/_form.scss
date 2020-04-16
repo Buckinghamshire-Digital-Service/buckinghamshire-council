@@ -102,6 +102,7 @@
         input[type='text'] {
             border: 0;
 
+            // change colour to match bg and 'hide' placeholder on mobile, to avoid being cut off & unreadable
             &::placeholder {
                 color: $color--white;
 
