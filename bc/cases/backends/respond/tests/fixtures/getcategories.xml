@@ -10,12 +10,12 @@
      ACES
     </name>
    </option>
-   <option available="false" id="4a7d02ae-2aff-4520-9918-7d5d3c9bc60a">
+   <option available="true" id="4a7d02ae-2aff-4520-9918-7d5d3c9bc60a">
     <name locale="en-GB">
      CHASC
     </name>
    </option>
-   <option available="false" id="094c9dc4-8d27-4005-9444-086faaeeb043">
+   <option available="true" id="094c9dc4-8d27-4005-9444-086faaeeb043">
     <name locale="en-GB">
      Children's Services
     </name>
@@ -47,7 +47,7 @@
    </option>
    <option available="true" id="7dda35de-a425-458e-8487-b3138b5b98a2">
     <name locale="en-GB">
-     Corporate Director Childrenâ€™s Services (DCS)
+     Corporate Director Children’s Services (DCS)
     </name>
    </option>
    <option available="true" id="49257361-1cd6-49b4-a459-80af58436a41">
@@ -430,12 +430,12 @@
      E-mail
     </name>
    </option>
-   <option available="true" id="122e0ec8-4343-46b1-a937-514eabfad589">
+   <option available="false" id="122e0ec8-4343-46b1-a937-514eabfad589">
     <name locale="en-GB">
      Fax
     </name>
    </option>
-   <option available="true" id="206ce0fe-b6ed-48a1-a78f-901ba370c51e">
+   <option available="false" id="206ce0fe-b6ed-48a1-a78f-901ba370c51e">
     <name locale="en-GB">
      In Person
     </name>
@@ -445,7 +445,7 @@
      Letter
     </name>
    </option>
-   <option available="true" id="d6845c6d-c456-4eca-8cd0-0b0d4f38534a">
+   <option available="false" id="d6845c6d-c456-4eca-8cd0-0b0d4f38534a">
     <name locale="en-GB">
      SMS/Text
     </name>
@@ -457,34 +457,20 @@
    </option>
    <option available="true" id="44ede9f1-d983-434c-822e-6dc3081bf017">
     <name locale="en-GB">
-     Telephone
+     Verbal
     </name>
+    <help-text locale="en-GB">
+     Including in person and by telephone
+    </help-text>
    </option>
    <option available="true" id="98fc336a-3688-4764-82b2-b237a7ac8596">
     <name locale="en-GB">
-     Website
+     Web Form
     </name>
    </option>
    <option available="true" id="df6e835f-277a-4c3e-bac4-924f9e696703">
     <name locale="en-GB">
      Social Media
-    </name>
-   </option>
-  </options>
- </field>
- <field data-type="Category" leaf-only="false" multiple-select="false" schema-name="Case.LearningIdentified">
-  <name locale="en-GB">
-   Learning Identified?
-  </name>
-  <options>
-   <option available="true" id="b04b9391-76a5-4612-a6a1-8496e38077aa">
-    <name locale="en-GB">
-     No
-    </name>
-   </option>
-   <option available="true" id="332cec0c-3585-4a44-af36-dc498d0b4dc7">
-    <name locale="en-GB">
-     Yes
     </name>
    </option>
   </options>
@@ -3147,16 +3133,6 @@
    Client is
   </name>
   <options>
-   <option available="true" id="212f3677-b4f5-4461-b62f-fd7f4fe2bdcc">
-    <name locale="en-GB">
-     Social Care Client
-    </name>
-   </option>
-   <option available="true" id="63df6d9b-d39b-4620-a5b4-fffb52e772b4">
-    <name locale="en-GB">
-     Looked After Child
-    </name>
-   </option>
    <option available="true" id="01dc7fbb-4491-4255-ba13-6df32cfd9232">
     <name locale="en-GB">
      Carer
@@ -3172,14 +3148,14 @@
      Data incident/Breach
     </name>
     <options>
-     <option available="false" id="a027c8cb-5914-4fce-bd62-6b9ed269be95" parent-id="b8583e75-550d-4b60-9a5c-7590368ace41">
-      <name locale="en-GB">
-       Data Subject
-      </name>
-     </option>
      <option available="false" id="5367bfd9-3899-4420-8c2f-8bea8340885e" parent-id="b8583e75-550d-4b60-9a5c-7590368ace41">
       <name locale="en-GB">
        Data Recipient
+      </name>
+     </option>
+     <option available="false" id="a027c8cb-5914-4fce-bd62-6b9ed269be95" parent-id="b8583e75-550d-4b60-9a5c-7590368ace41">
+      <name locale="en-GB">
+       Data Subject
       </name>
      </option>
      <option available="false" id="c88d0f10-6430-4edf-bdff-cdcd2aabb75d" parent-id="b8583e75-550d-4b60-9a5c-7590368ace41">
@@ -3189,6 +3165,16 @@
      </option>
     </options>
    </option>
+   <option available="true" id="63df6d9b-d39b-4620-a5b4-fffb52e772b4">
+    <name locale="en-GB">
+     Looked After Child
+    </name>
+   </option>
+   <option available="true" id="212f3677-b4f5-4461-b62f-fd7f4fe2bdcc">
+    <name locale="en-GB">
+     Social Care Client
+    </name>
+   </option>
   </options>
  </field>
  <field data-type="Category" leaf-only="true" multiple-select="false" schema-name="Contact.ContactIs">
@@ -3196,27 +3182,25 @@
    Contact Is
   </name>
   <options>
-   <option available="true" id="51ae9417-afed-437d-9265-1901d65efa86">
-    <name locale="en-GB">
-     Action/Campaign Group
-    </name>
-   </option>
-   <option available="true" id="1a1b52a2-053e-4a1f-b4ba-5655b63c7bfe">
+   <option available="false" id="1a1b52a2-053e-4a1f-b4ba-5655b63c7bfe">
     <name locale="en-GB">
      Carer
     </name>
    </option>
-   <option available="true" id="98a4ce3c-5f8e-493e-a96b-2cc76e9151d1">
-    <name locale="en-GB">
-     Council Employee
-    </name>
-   </option>
-   <option available="true" id="cf6c4c9b-11f8-4568-b2ff-80ffad198293">
+   <option available="false" id="cf6c4c9b-11f8-4568-b2ff-80ffad198293">
     <name locale="en-GB">
      Developer
     </name>
    </option>
-   <option available="true" id="7329cba7-96d7-4c8e-8da4-e61051551e32">
+   <option available="true" id="98a4ce3c-5f8e-493e-a96b-2cc76e9151d1">
+    <name locale="en-GB">
+     Employee
+    </name>
+    <help-text locale="en-GB">
+     Including consultants
+    </help-text>
+   </option>
+   <option available="false" id="7329cba7-96d7-4c8e-8da4-e61051551e32">
     <name locale="en-GB">
      Health Professional
     </name>
@@ -3236,42 +3220,53 @@
      Member of Public
     </name>
    </option>
-   <option available="true" id="064a8691-1240-45cb-b564-cd48f1c50a6a">
+   <option available="false" id="064a8691-1240-45cb-b564-cd48f1c50a6a">
     <name locale="en-GB">
      Member/County Councillor
     </name>
    </option>
    <option available="true" id="f5f07c47-76b6-43b8-af70-6cbc75a46f83">
     <name locale="en-GB">
-     MP
-    </name>
-   </option>
-   <option available="true" id="b23e8952-60ad-4f51-962c-f408ac2166cb">
-    <name locale="en-GB">
-     Other
-    </name>
-   </option>
-   <option available="true" id="cb591d3d-b490-443c-b65b-7f345505628c">
-    <name locale="en-GB">
-     Other Public Authority/Body
-    </name>
-   </option>
-   <option available="true" id="ce2124ae-d610-4555-8a2d-895df4b6ba68">
-    <name locale="en-GB">
-     Parent
-    </name>
-   </option>
-   <option available="true" id="e94a8c17-d292-409a-8d20-ee2ae35895da">
-    <name locale="en-GB">
-     Parish/District Councillor
+     MP / Councillor
     </name>
    </option>
    <option available="true" id="cfb6b14a-1b70-4a7f-8e9d-f10730055b70">
     <name locale="en-GB">
-     Private Business
+     Organisation
     </name>
    </option>
-   <option available="true" id="c5d9fa26-abbb-490f-a567-22411ad02636">
+   <option available="false" id="b23e8952-60ad-4f51-962c-f408ac2166cb">
+    <name locale="en-GB">
+     Other
+    </name>
+   </option>
+   <option available="true" id="ce2124ae-d610-4555-8a2d-895df4b6ba68">
+    <name locale="en-GB">
+     Parent / Relative
+    </name>
+   </option>
+   <option available="false" id="e94a8c17-d292-409a-8d20-ee2ae35895da">
+    <name locale="en-GB">
+     Parish/District Councillor
+    </name>
+   </option>
+   <option available="true" id="51ae9417-afed-437d-9265-1901d65efa86">
+    <name locale="en-GB">
+     Pressure Group
+    </name>
+    <help-text locale="en-GB">
+     e.g. Shelter, WDTK, charity, 3rd sector, local campaign group
+    </help-text>
+   </option>
+   <option available="true" id="cb591d3d-b490-443c-b65b-7f345505628c">
+    <name locale="en-GB">
+     Public Sector Authority
+    </name>
+    <help-text locale="en-GB">
+     include education
+    </help-text>
+   </option>
+   <option available="false" id="c5d9fa26-abbb-490f-a567-22411ad02636">
     <name locale="en-GB">
      Relative
     </name>
@@ -3280,18 +3275,21 @@
     <name locale="en-GB">
      Representative/Advocate
     </name>
+    <help-text locale="en-GB">
+     Carer, Solicitor, Advocate
+    </help-text>
    </option>
-   <option available="true" id="cbe7f737-6380-45bf-a8fc-5858f9aeaacf">
+   <option available="false" id="cbe7f737-6380-45bf-a8fc-5858f9aeaacf">
     <name locale="en-GB">
      School
     </name>
    </option>
-   <option available="true" id="ffe6b390-f14e-4d0b-a586-195a575a5f73">
+   <option available="false" id="ffe6b390-f14e-4d0b-a586-195a575a5f73">
     <name locale="en-GB">
      Service Provider
     </name>
    </option>
-   <option available="true" id="0ed6f1b1-2633-4386-a12a-c295ff8b17c7">
+   <option available="false" id="0ed6f1b1-2633-4386-a12a-c295ff8b17c7">
     <name locale="en-GB">
      Service User
     </name>
@@ -3301,7 +3299,7 @@
      Social Care Client
     </name>
    </option>
-   <option available="true" id="518e4ba3-d18e-4c95-81d7-a1cd4d70f6f5">
+   <option available="false" id="518e4ba3-d18e-4c95-81d7-a1cd4d70f6f5">
     <name locale="en-GB">
      Solicitor
     </name>
@@ -3386,7 +3384,7 @@
  </field>
  <field data-type="Category" leaf-only="true" multiple-select="false" schema-name="Contact.Title">
   <name locale="en-GB">
-   Title
+   Title (Pre April 2020)
   </name>
   <options>
    <option available="true" id="adc99217-4593-49e7-8e5f-186fa66f6319">
@@ -3457,6 +3455,986 @@
    <option available="true" id="9524bb9a-d266-42f1-aac3-b2a3bb2f5a4f">
     <name locale="en-GB">
      Dame
+    </name>
+   </option>
+   <option available="true" id="6e4e6017-d1ce-4cc4-af64-2c08d5cb9e27">
+    <name locale="en-GB">
+     Other
+    </name>
+   </option>
+  </options>
+ </field>
+ <field data-type="Category" leaf-only="true" multiple-select="false" schema-name="Case.FOIorEIR">
+  <name locale="en-GB">
+   FOI or EIR?
+  </name>
+  <options>
+   <option available="true" id="a79e24cc-1f2b-4208-a506-4af6f161a6c5">
+    <name locale="en-GB">
+     EIR
+    </name>
+   </option>
+   <option available="true" id="0da8f5e0-e82b-4325-9304-a94b9f18f107">
+    <name locale="en-GB">
+     FOI
+    </name>
+   </option>
+   <option available="true" id="f7df863a-3d16-4a57-9818-87a5526fd71f">
+    <name locale="en-GB">
+     FOI &amp; EIR
+    </name>
+   </option>
+  </options>
+ </field>
+ <field data-type="Category" leaf-only="false" multiple-select="false" schema-name="Case.SubjectArea">
+  <name locale="en-GB">
+   Subject Area
+  </name>
+  <options>
+   <option available="true" id="2aadf824-2147-498c-a5d4-89629cac2b11">
+    <name locale="en-GB">
+     Accessing personal information (Family)
+    </name>
+   </option>
+   <option available="true" id="b1cb1d8d-553b-444f-94ff-144d9ebd1ada">
+    <name locale="en-GB">
+     Accessing personal information (Self)
+    </name>
+   </option>
+   <option available="true" id="4b5c18a3-c8cd-410f-8c40-481402e36939">
+    <name locale="en-GB">
+     Accessing personal information (Self - Category E)
+    </name>
+   </option>
+   <option available="true" id="a7f07641-5d22-4423-8a60-fa5a3ad2ffef">
+    <name locale="en-GB">
+     Accessing personal information (Third)
+    </name>
+   </option>
+   <option available="true" id="8b93a99d-591e-43c4-86db-80e327d9c0f0">
+    <name locale="en-GB">
+     Adult Learning
+    </name>
+   </option>
+   <option available="true" id="619adc63-2b44-4dee-b07d-0637f3ff7096">
+    <name locale="en-GB">
+     Adults
+    </name>
+   </option>
+   <option available="true" id="424a753f-4739-42e5-b4a9-91f89bd32d6c">
+    <name locale="en-GB">
+     Archaeology
+    </name>
+   </option>
+   <option available="true" id="0b6a029a-ee11-46d8-a52d-36b5825ea5df">
+    <name locale="en-GB">
+     Archival material
+    </name>
+   </option>
+   <option available="true" id="03560302-e1e4-4b0e-9702-c199559cb798">
+    <name locale="en-GB">
+     Births, marriages and deaths
+    </name>
+   </option>
+   <option available="true" id="7053b5b7-41c6-4903-b916-aec95fc16283">
+    <name locale="en-GB">
+     Business opportunities
+    </name>
+   </option>
+   <option available="true" id="477b6a59-e2b5-4cd5-b293-faffd8a2ce49">
+    <name locale="en-GB">
+     Children and families
+    </name>
+   </option>
+   <option available="true" id="e01703c7-de8a-4f0e-b36f-333c075eb429">
+    <name locale="en-GB">
+     Community cohesion and equality
+    </name>
+   </option>
+   <option available="true" id="4ebb5ae0-9fbd-4198-a544-bb473bf6b2a1">
+    <name locale="en-GB">
+     Community safety
+    </name>
+   </option>
+   <option available="true" id="89feb2c6-824f-4c01-9d94-f402528a2bef">
+    <name locale="en-GB">
+     Coroner service
+    </name>
+   </option>
+   <option available="true" id="02c6574e-63d6-4c5e-93ab-edaf8c489f63">
+    <name locale="en-GB">
+     Council structure
+    </name>
+   </option>
+   <option available="true" id="c2424c4f-e5a6-42b7-a626-c611d15d843a">
+    <name locale="en-GB">
+     Councillors
+    </name>
+   </option>
+   <option available="true" id="93f63cbd-0ddd-4bc5-b86a-2ea334d3b368">
+    <name locale="en-GB">
+     Cycling
+    </name>
+   </option>
+   <option available="true" id="d90b5d94-2c79-4bb6-9d32-a50404355623">
+    <name locale="en-GB">
+     District Council matter
+    </name>
+   </option>
+   <option available="true" id="6d457d15-a1f3-434c-9417-227d85497829">
+    <name locale="en-GB">
+     e-government
+    </name>
+   </option>
+   <option available="true" id="7923c67b-f024-4823-a84c-642604de589e">
+    <name locale="en-GB">
+     Early years and childcare
+    </name>
+   </option>
+   <option available="true" id="9693563e-8772-4235-8bf3-4f16c16780d7">
+    <name locale="en-GB">
+     Emergency planning
+    </name>
+   </option>
+   <option available="true" id="7ef47ae0-527d-403c-a428-ce3fc68774e9">
+    <name locale="en-GB">
+     Environmental sustainability
+    </name>
+   </option>
+   <option available="true" id="04497362-ed70-41eb-bba2-5c300718337c">
+    <name locale="en-GB">
+     External funding
+    </name>
+   </option>
+   <option available="true" id="7cd81c80-00d3-4949-aa12-b285980a5958">
+    <name locale="en-GB">
+     Finance
+    </name>
+   </option>
+   <option available="true" id="0e790cc9-4cb1-49e9-97dc-3853e59ce39d">
+    <name locale="en-GB">
+     Gypsies and travellers
+    </name>
+   </option>
+   <option available="true" id="8d0420b2-9d6c-4f1e-bd86-eca76919472e">
+    <name locale="en-GB">
+     Learning disabilities
+    </name>
+   </option>
+   <option available="true" id="160d8494-2b21-4dec-8add-26a7b4771448">
+    <name locale="en-GB">
+     Libraries
+    </name>
+   </option>
+   <option available="true" id="10f131d6-edf1-4968-9af8-d3b0dd1085fa">
+    <name locale="en-GB">
+     Meetings, minutes and decisions
+    </name>
+   </option>
+   <option available="true" id="239a6689-3a35-4b23-9752-0cec628d1c19">
+    <name locale="en-GB">
+     Mental health
+    </name>
+   </option>
+   <option available="true" id="d849c789-c857-4bff-9351-2d3a3d6ff02a">
+    <name locale="en-GB">
+     Mineral and waste plans
+    </name>
+   </option>
+   <option available="true" id="5712bf56-ee18-4971-a0f4-fc82443cd113">
+    <name locale="en-GB">
+     Older people
+    </name>
+   </option>
+   <option available="true" id="043a9e48-b20b-4f49-8e7b-e0a66cf4bbc8">
+    <name locale="en-GB">
+     Parking
+    </name>
+   </option>
+   <option available="true" id="8214f809-04d0-4af8-b82e-5958884b05af">
+    <name locale="en-GB">
+     Planning applications
+    </name>
+   </option>
+   <option available="true" id="2fff8e27-904d-481d-9785-2b7aa0ecf7ce">
+    <name locale="en-GB">
+     Policy, plans and performance
+    </name>
+   </option>
+   <option available="true" id="117233a8-7a80-4e8e-8dcb-a7c2bb1a9ae6">
+    <name locale="en-GB">
+     Public Health
+    </name>
+   </option>
+   <option available="true" id="e7884631-cc30-4598-ad36-262df7af9f61">
+    <name locale="en-GB">
+     Public transport
+    </name>
+   </option>
+   <option available="true" id="ae7e0fff-92f9-40b9-8888-e91e31635534">
+    <name locale="en-GB">
+     Publications
+    </name>
+   </option>
+   <option available="true" id="6373656b-85aa-4f09-88d8-78d935facddb">
+    <name locale="en-GB">
+     Rights of way
+    </name>
+   </option>
+   <option available="true" id="73ab3be9-78ba-4463-aa74-e5f0a52e68f1">
+    <name locale="en-GB">
+     Road safety
+    </name>
+   </option>
+   <option available="true" id="3cc67705-c7aa-4735-8cac-3b3b1251315b">
+    <name locale="en-GB">
+     Roads, highways and pavements
+    </name>
+   </option>
+   <option available="true" id="c93045b0-c38a-4c1e-89c2-2d2a2956e3a8">
+    <name locale="en-GB">
+     Schools
+    </name>
+   </option>
+   <option available="true" id="113e386f-e415-46e8-97dc-17e28b217e47">
+    <name locale="en-GB">
+     Selling to the Council
+    </name>
+   </option>
+   <option available="true" id="7d78d43f-1205-41df-9416-abc467cb3b47">
+    <name locale="en-GB">
+     Strategic plans
+    </name>
+   </option>
+   <option available="true" id="2762dcf3-c8f3-43cf-8007-9ca464e19d06">
+    <name locale="en-GB">
+     Trading standards
+    </name>
+   </option>
+   <option available="true" id="c2b59fb1-03a8-4c6f-be37-cdbafed24f89">
+    <name locale="en-GB">
+     Waste management
+    </name>
+   </option>
+   <option available="true" id="da3778a0-df8a-4b0e-9123-7d5ecf21f118">
+    <name locale="en-GB">
+     Young people
+    </name>
+   </option>
+  </options>
+ </field>
+ <field data-type="Category" leaf-only="true" multiple-select="false" schema-name="Case.Casecategory">
+  <name locale="en-GB">
+   Case category
+  </name>
+  <options>
+   <option available="true" id="c63e479b-b244-4209-b786-b54011e6afb7">
+    <name locale="en-GB">
+     Corruption or inability to recover electronic data
+    </name>
+   </option>
+   <option available="true" id="b04ea77f-d960-4c58-98e9-f9319825b254">
+    <name locale="en-GB">
+     Disclosed in error
+    </name>
+   </option>
+   <option available="true" id="154fecd3-7471-412a-92d7-fef42cf57343">
+    <name locale="en-GB">
+     Lost / stolen hardware
+    </name>
+   </option>
+   <option available="true" id="19ffba19-8035-4aa8-b205-cf0203d5295a">
+    <name locale="en-GB">
+     Lost / stolen paperwork
+    </name>
+   </option>
+   <option available="true" id="8eed1a7b-932e-45b9-a2c8-d867837a2ce8">
+    <name locale="en-GB">
+     Lost in transit
+    </name>
+   </option>
+   <option available="true" id="566da8d1-37af-41df-b101-1daed9f222a3">
+    <name locale="en-GB">
+     Non secure disposal - paperwork
+    </name>
+   </option>
+   <option available="true" id="abcd3876-257a-46b5-8d9f-474a4310f9da">
+    <name locale="en-GB">
+     Other
+    </name>
+   </option>
+   <option available="true" id="d8131ede-a8ee-47ed-8dc6-39cad43d3c6f">
+    <name locale="en-GB">
+     Technical security failing (hacking)
+    </name>
+   </option>
+   <option available="true" id="af3fad52-2f62-4d6b-992f-ad533118246d">
+    <name locale="en-GB">
+     Unauthorised access or disclosure
+    </name>
+   </option>
+   <option available="true" id="7d5e9231-0902-42ae-9469-3d3b56d729fd">
+    <name locale="en-GB">
+     Uploaded to website in error
+    </name>
+   </option>
+  </options>
+ </field>
+ <field data-type="Category" leaf-only="false" multiple-select="true" schema-name="Case.CategoriesofIndividualsAffected">
+  <name locale="en-GB">
+   Categories of Individuals Affected
+  </name>
+  <options>
+   <option available="true" id="d98b8d16-6c19-4084-9706-5d93ef3ad729">
+    <name locale="en-GB">
+     Employees
+    </name>
+   </option>
+   <option available="true" id="e55739fb-a15d-4dc9-af42-a23ccea1d811">
+    <name locale="en-GB">
+     Users
+    </name>
+   </option>
+   <option available="true" id="9899f4f9-bd90-4238-b8a1-bd4614ef428e">
+    <name locale="en-GB">
+     Subscribers
+    </name>
+   </option>
+   <option available="true" id="166a9c41-fdf8-435f-bdaa-edb19e6b217f">
+    <name locale="en-GB">
+     Students
+    </name>
+   </option>
+   <option available="true" id="a4335df4-652e-431f-b9ac-145cfd8af0f1">
+    <name locale="en-GB">
+     Customers or Prospective Customers
+    </name>
+   </option>
+   <option available="true" id="151e2a2c-87c2-4dfb-a416-b8cc52d1eab1">
+    <name locale="en-GB">
+     Patients
+    </name>
+   </option>
+   <option available="true" id="7bc57369-90bd-44b3-9164-2a733eeafca8">
+    <name locale="en-GB">
+     Children
+    </name>
+   </option>
+   <option available="true" id="b80b8ffb-9dad-4b0d-9125-ba3857edb0d9">
+    <name locale="en-GB">
+     Vulnerable Adults
+    </name>
+   </option>
+   <option available="true" id="f48f1d23-8fd6-4985-bd7d-ec22c49d0397">
+    <name locale="en-GB">
+     Not Yet Known
+    </name>
+   </option>
+   <option available="true" id="f73a9516-8b8f-4158-b568-d3611c6956db">
+    <name locale="en-GB">
+     Other
+    </name>
+   </option>
+  </options>
+ </field>
+ <field data-type="Category" leaf-only="false" multiple-select="true" schema-name="Case.CategoriesofPersonalData">
+  <name locale="en-GB">
+   Categories of Personal Data
+  </name>
+  <options>
+   <option available="true" id="de6ee7e6-63b0-4c0f-a21f-8940cc97fa6b">
+    <name locale="en-GB">
+     Basic Personal Identifiers
+    </name>
+   </option>
+   <option available="true" id="dfe5d1a3-5b16-4151-8dfd-c464b132e9c1">
+    <name locale="en-GB">
+     Criminal Convictions
+    </name>
+   </option>
+   <option available="true" id="f12a1d67-d5ef-4360-9217-1839cdbc0ff3">
+    <name locale="en-GB">
+     Economic and Financial Data
+    </name>
+   </option>
+   <option available="true" id="c36d4a1a-2a7b-4ea4-9bef-dba6a69d66cb">
+    <name locale="en-GB">
+     Gender Reassignment
+    </name>
+   </option>
+   <option available="true" id="f7de631d-65c1-4a5d-a63a-b228edec12f3">
+    <name locale="en-GB">
+     Genetic or Biometric
+    </name>
+   </option>
+   <option available="true" id="3d41a45a-465c-4d43-9cc9-4b7b1502c5fe">
+    <name locale="en-GB">
+     Health &amp; Social Care Data
+    </name>
+   </option>
+   <option available="true" id="06e47943-d127-4434-905f-75eaf52c40ec">
+    <name locale="en-GB">
+     Identification Data
+    </name>
+   </option>
+   <option available="true" id="6f3275a5-2b21-4dbd-9f9a-5d6bb9da1039">
+    <name locale="en-GB">
+     Location Data
+    </name>
+   </option>
+   <option available="true" id="a671dce6-0ed2-4969-b37b-a3ebb3464afe">
+    <name locale="en-GB">
+     Not Yet Known
+    </name>
+   </option>
+   <option available="true" id="a0f10c08-4786-4481-9d94-d707aea303ea">
+    <name locale="en-GB">
+     Official Documents
+    </name>
+   </option>
+   <option available="true" id="0ff15103-bd49-4038-a5e7-2e589446cfb8">
+    <name locale="en-GB">
+     Online Identifiers
+    </name>
+   </option>
+   <option available="true" id="c9ec4197-7289-4272-b4ac-60adfd4a2b03">
+    <name locale="en-GB">
+     Political Opinions
+    </name>
+   </option>
+   <option available="true" id="34283d9f-c566-471f-b725-da7d0425624c">
+    <name locale="en-GB">
+     Racial or Ethnic Origin
+    </name>
+   </option>
+   <option available="true" id="7ba009a1-ab0b-4ee4-b115-159ad681cb7b">
+    <name locale="en-GB">
+     Religious or Philosophical Beliefs
+    </name>
+   </option>
+   <option available="true" id="eec8e01a-508f-41dc-85e3-b1f9e23298d0">
+    <name locale="en-GB">
+     Sex Life Data
+    </name>
+   </option>
+   <option available="true" id="98d1d222-4c7a-4c44-8a26-456e14d78afa">
+    <name locale="en-GB">
+     Sexual Orientation
+    </name>
+   </option>
+   <option available="true" id="ff29ab7a-0c4a-4a85-b84f-c69c395ba753">
+    <name locale="en-GB">
+     Trade Union Membership
+    </name>
+   </option>
+   <option available="true" id="7ea7a430-db96-479d-a1b3-0a0dd0cce19a">
+    <name locale="en-GB">
+     Other
+    </name>
+   </option>
+  </options>
+ </field>
+ <field data-type="Category" leaf-only="false" multiple-select="false" schema-name="Case.Dataretrieved">
+  <name locale="en-GB">
+   Data retrieved
+  </name>
+  <options>
+   <option available="true" id="01d795fc-0045-4696-a896-1bd3da63772f">
+    <name locale="en-GB">
+     Yes
+    </name>
+   </option>
+   <option available="true" id="307c5511-6db1-471b-bbb5-d203f069ec4d">
+    <name locale="en-GB">
+     No
+    </name>
+   </option>
+   <option available="true" id="72ffd553-f2d0-43c6-af6b-c65c0af6fa2b">
+    <name locale="en-GB">
+     N/A
+    </name>
+   </option>
+  </options>
+ </field>
+ <field data-type="Category" leaf-only="false" multiple-select="false" schema-name="Case.DelayinReportingReason">
+  <name locale="en-GB">
+   Delay in Reporting Reason?
+  </name>
+  <options>
+   <option available="true" id="ecad3677-2d80-450d-b65a-7a211f9fde39">
+    <name locale="en-GB">
+     No delay occurred
+    </name>
+   </option>
+   <option available="true" id="749cf308-7700-47b6-a1c1-494e38e62f87">
+    <name locale="en-GB">
+     Absense
+    </name>
+   </option>
+   <option available="true" id="1ccbc837-0720-4988-a5c3-165c878f5397">
+    <name locale="en-GB">
+     Escalated Incorrectly
+    </name>
+   </option>
+   <option available="true" id="c252ed93-1068-4ed7-a9ca-966cd12091c7">
+    <name locale="en-GB">
+     Not Realised Significance
+    </name>
+   </option>
+   <option available="true" id="c2518246-75dc-4a1d-bda1-f412242e2c93">
+    <name locale="en-GB">
+     Safeguarding Risk Priority
+    </name>
+   </option>
+   <option available="true" id="b0663bb8-2821-4ff7-ac8b-a487c72544f2">
+    <name locale="en-GB">
+     Workload
+    </name>
+   </option>
+   <option available="true" id="23bd5eb3-449c-4e8e-a1cc-cc6e51de2754">
+    <name locale="en-GB">
+     Other
+    </name>
+   </option>
+  </options>
+ </field>
+ <field data-type="Category" leaf-only="false" multiple-select="false" schema-name="Case.NeedtoKnowFormCompleted">
+  <name locale="en-GB">
+   Does anybody else need to know?
+  </name>
+  <options>
+   <option available="true" id="75d879e4-7773-4130-8ce6-0dc76da0ebd8">
+    <name locale="en-GB">
+     Yes
+    </name>
+   </option>
+   <option available="true" id="5c927e39-8ef9-487d-99c3-a999d07cfd9e">
+    <name locale="en-GB">
+     No
+    </name>
+   </option>
+   <option available="true" id="e31be3c5-cc3f-4b43-bdd5-045cb049620b">
+    <name locale="en-GB">
+     Don't know
+    </name>
+   </option>
+  </options>
+ </field>
+ <field data-type="Category" leaf-only="false" multiple-select="false" schema-name="Case.IncidentType">
+  <name locale="en-GB">
+   DPO Final Assessment
+  </name>
+  <options>
+   <option available="true" id="3a177488-6502-44b8-bfba-c2a5041a903a">
+    <name locale="en-GB">
+     Reportable Breach
+    </name>
+    <help-text locale="en-GB">
+     A Reportable Breach is an error resulting in significant detriment or real risk of harm, wither due to the volume of data or its sensitivity and which the Director of Resources and Information Governance Lead decides in light of legal advice and in accordance with ICO Guidance should be reported to the ICO within 72 hours by the Data Protection Officer
+OR
+An incident that has been reported to the ICO by the complainant.
+    </help-text>
+   </option>
+   <option available="true" id="14280b3b-b3e4-4afb-a078-54c8082fb680">
+    <name locale="en-GB">
+     Major Breach
+    </name>
+    <help-text locale="en-GB">
+     A security incident involving releasing RESTRICTED information outside the organisation. This is Personal and Special Category data or over 1,000 pieces of Personal Data.
+    </help-text>
+   </option>
+   <option available="true" id="99b74193-3539-48f1-b5c6-a7ea09f09a5a">
+    <name locale="en-GB">
+     Minor Breach
+    </name>
+    <help-text locale="en-GB">
+     An incident involving PROTECTED information. This is Personal Information which includes sensitive information which is not released externally.
+    </help-text>
+   </option>
+   <option available="true" id="656a4de2-960f-4078-b488-f1155767d8bc">
+    <name locale="en-GB">
+     Concern
+    </name>
+    <help-text locale="en-GB">
+     A ‘near miss’ which is reported to provide lessons to learn for the department.
+    </help-text>
+   </option>
+   <option available="true" id="42d28f0c-f394-44a4-ae13-bb3aef40dd79">
+    <name locale="en-GB">
+     Third Party Breach
+    </name>
+   </option>
+  </options>
+ </field>
+ <field data-type="Category" leaf-only="false" multiple-select="false" schema-name="Case.Escalationrequired">
+  <name locale="en-GB">
+   Escalation required
+  </name>
+  <options>
+   <option available="true" id="3d96cd8d-db7b-43c5-b282-a2d5fdec101b">
+    <name locale="en-GB">
+     Yes
+    </name>
+   </option>
+   <option available="true" id="0ea4929a-3b95-4fe6-8df9-ed79498c5f47">
+    <name locale="en-GB">
+     No
+    </name>
+   </option>
+  </options>
+ </field>
+ <field data-type="Category" leaf-only="false" multiple-select="false" schema-name="Case.Impact">
+  <name locale="en-GB">
+   Impact
+  </name>
+  <options>
+   <option available="true" id="18234acd-78d4-4c22-b834-1603bf3e9c1a">
+    <name locale="en-GB">
+     Catastrophic
+    </name>
+   </option>
+   <option available="true" id="3e7f06d4-fe62-40da-8775-98efa5e38a3c">
+    <name locale="en-GB">
+     Serious
+    </name>
+   </option>
+   <option available="true" id="f048ad29-75ef-4fae-b589-73817d37c17b">
+    <name locale="en-GB">
+     Adverse
+    </name>
+   </option>
+   <option available="true" id="d0cbaaed-5a4c-4f36-84d6-b1d6bdf8daea">
+    <name locale="en-GB">
+     Minor
+    </name>
+   </option>
+   <option available="true" id="4d39c1fd-5385-43a9-b7ad-f5b5992241f3">
+    <name locale="en-GB">
+     No Impact
+    </name>
+   </option>
+  </options>
+ </field>
+ <field data-type="Category" leaf-only="false" multiple-select="false" schema-name="Case.InitialAssessment">
+  <name locale="en-GB">
+   Initial Assessment
+  </name>
+  <options>
+   <option available="true" id="d6b1ecf8-6dc8-4077-95ea-ee603e6347f5">
+    <name locale="en-GB">
+     Reportable Breach
+    </name>
+   </option>
+   <option available="true" id="7044621b-f985-4541-8811-ed40ede721b6">
+    <name locale="en-GB">
+     Major Breach
+    </name>
+   </option>
+   <option available="true" id="b18ccf0f-0aad-454a-abb5-3feb0a48b79b">
+    <name locale="en-GB">
+     Minor Breach
+    </name>
+   </option>
+   <option available="true" id="cb1f6dda-5fd7-43d1-bf94-8d03f432bf34">
+    <name locale="en-GB">
+     Concern
+    </name>
+   </option>
+   <option available="true" id="0dc33b5b-5ef3-4b2e-b70f-d1c43ee9ba1f">
+    <name locale="en-GB">
+     Third Party Breach
+    </name>
+   </option>
+  </options>
+ </field>
+ <field data-type="Category" leaf-only="false" multiple-select="false" schema-name="Case.LikelihoodofConsequence">
+  <name locale="en-GB">
+   Likelihood of Consequence
+  </name>
+  <options>
+   <option available="true" id="a7f5955b-053b-4a7f-bc22-d24785070894">
+    <name locale="en-GB">
+     Very Likely
+    </name>
+   </option>
+   <option available="true" id="b1e43735-c31e-4a9e-82b0-e7d5ffa9249b">
+    <name locale="en-GB">
+     Likely
+    </name>
+   </option>
+   <option available="true" id="582eed7a-c45c-4fa4-88cb-6a316b5c576d">
+    <name locale="en-GB">
+     Neutral
+    </name>
+   </option>
+   <option available="true" id="d2292d96-f274-441b-960d-bb86e9003d47">
+    <name locale="en-GB">
+     Unlikely
+    </name>
+   </option>
+   <option available="true" id="95f67e90-8b81-4189-8f45-7ecff807dcdc">
+    <name locale="en-GB">
+     Very Unlikely
+    </name>
+   </option>
+  </options>
+ </field>
+ <field data-type="Category" leaf-only="false" multiple-select="false" schema-name="Case.NumberofIndividualsaffected">
+  <name locale="en-GB">
+   Number of Individuals affected
+  </name>
+  <options>
+   <option available="true" id="ff3b03c9-cf2d-44f0-8ca0-cb53e5f61f80">
+    <name locale="en-GB">
+     Less than 10
+    </name>
+   </option>
+   <option available="true" id="5423a96a-ba4c-4237-9353-dd157df9d812">
+    <name locale="en-GB">
+     11 - 50
+    </name>
+   </option>
+   <option available="true" id="b809e9ec-29b5-428c-8ae2-8d6f9f0b85e1">
+    <name locale="en-GB">
+     51 - 100
+    </name>
+   </option>
+   <option available="true" id="4f7625da-ca8a-4525-85a0-b3947d6f45f2">
+    <name locale="en-GB">
+     101 - 500
+    </name>
+   </option>
+   <option available="true" id="a3895e50-5c4b-4d85-b549-a9e68f510e44">
+    <name locale="en-GB">
+     501 - 1000
+    </name>
+   </option>
+   <option available="true" id="246e6536-00b9-497e-9ca2-538154f05884">
+    <name locale="en-GB">
+     More than 1000
+    </name>
+   </option>
+   <option available="true" id="7d29c971-d05e-48cd-a5b6-f86d1a056b65">
+    <name locale="en-GB">
+     Unknown
+    </name>
+   </option>
+  </options>
+ </field>
+ <field data-type="Category" leaf-only="false" multiple-select="false" schema-name="Case.NumberofPersonalDataRecordsAffected">
+  <name locale="en-GB">
+   Number of Personal Data Records Affected
+  </name>
+  <options>
+   <option available="true" id="dd04be23-663e-4dda-922e-d6db8335cc83">
+    <name locale="en-GB">
+     Less than 10
+    </name>
+   </option>
+   <option available="true" id="b9ab5775-08c2-4212-99a8-5a54d0f4ed1e">
+    <name locale="en-GB">
+     11 - 50
+    </name>
+   </option>
+   <option available="true" id="36f0eba2-cd1c-476f-9a94-f320f9383b51">
+    <name locale="en-GB">
+     51 - 100
+    </name>
+   </option>
+   <option available="true" id="464ca85e-e2f5-4877-b4d1-788c53aa2bfa">
+    <name locale="en-GB">
+     101 - 500
+    </name>
+   </option>
+   <option available="true" id="ddfb2337-f725-490c-a51c-f91738768b26">
+    <name locale="en-GB">
+     More than 500
+    </name>
+   </option>
+   <option available="true" id="4325f206-fb4d-4351-850e-95436177121d">
+    <name locale="en-GB">
+     Unknown
+    </name>
+   </option>
+  </options>
+ </field>
+ <field data-type="Category" leaf-only="true" multiple-select="false" schema-name="Case.NeedtorequestID">
+  <name locale="en-GB">
+   Need to request ID?
+  </name>
+  <options>
+   <option available="true" id="fdd41b59-5e4c-491d-a1e0-1e0e3727484c">
+    <name locale="en-GB">
+     Yes
+    </name>
+   </option>
+   <option available="true" id="4a00aa46-860d-47a3-bf11-9ebafe9b470f">
+    <name locale="en-GB">
+     No
+    </name>
+   </option>
+  </options>
+ </field>
+ <field data-type="Category" leaf-only="true" multiple-select="false" schema-name="Case.TypeofSAR">
+  <name locale="en-GB">
+   Type of SAR / Criminal Disclosure
+  </name>
+  <options>
+   <option available="true" id="d2562440-915d-40d3-b397-e8c1a935ebe6">
+    <name locale="en-GB">
+     Adult Social Care
+    </name>
+   </option>
+   <option available="true" id="f635cd95-9a1d-411e-8051-376333b44ac4">
+    <name locale="en-GB">
+     CCTV
+    </name>
+   </option>
+   <option available="true" id="8d2504af-6af7-4220-8a35-79eb3467c3fb">
+    <name locale="en-GB">
+     Children
+    </name>
+   </option>
+   <option available="true" id="e22b8a16-ae65-4ca3-ae3a-13ea3536d83e">
+    <name locale="en-GB">
+     Standard SAR
+    </name>
+   </option>
+   <option available="true" id="a5a0858b-9f70-4621-a776-d78972106189">
+    <name locale="en-GB">
+     HR
+    </name>
+   </option>
+   <option available="false" id="81325083-1695-4456-ad9c-3f56054728fe">
+    <name locale="en-GB">
+     Parking
+    </name>
+   </option>
+   <option available="false" id="bdad547a-d748-43fe-ac9a-92e1a27c7773">
+    <name locale="en-GB">
+     Planning
+    </name>
+   </option>
+   <option available="false" id="4ace3509-d334-4858-b548-5e8d8036f929">
+    <name locale="en-GB">
+     Revenues &amp; Benefits
+    </name>
+   </option>
+   <option available="true" id="3af6e7c1-a305-4580-8472-7e7352c96740">
+    <name locale="en-GB">
+     SEN
+    </name>
+   </option>
+   <option available="true" id="5d5573c1-a390-4bf6-90d1-553f9262f50c">
+    <name locale="en-GB">
+     Other
+    </name>
+   </option>
+   <option available="true" id="7d761e95-2856-4eff-a610-54522f26f8a8">
+    <name locale="en-GB">
+     Other Rights
+    </name>
+    <help-text locale="en-GB">
+     Eg. Right to be Forgotten, Right to Rectification...
+    </help-text>
+   </option>
+  </options>
+ </field>
+ <field data-type="Category" leaf-only="false" multiple-select="false" schema-name="Case.LegalBasis">
+  <name locale="en-GB">
+   Legal Basis
+  </name>
+  <options>
+   <option available="true" id="52bf87ab-a352-4948-9957-a0587b09bee2">
+    <name locale="en-GB">
+     Prevention or Detection of Crime
+    </name>
+   </option>
+   <option available="true" id="4c426e99-76c7-4193-84c0-a81c61b84341">
+    <name locale="en-GB">
+     Apprehension or Prosecution of Offenders
+    </name>
+   </option>
+   <option available="true" id="282ff4f1-c91a-49d3-8938-12af1486ae72">
+    <name locale="en-GB">
+     Assessment of Collection of any Tax or Duty
+    </name>
+   </option>
+   <option available="true" id="f5c33ca0-ddc6-44d2-8aa5-d3f1db46d0df">
+    <name locale="en-GB">
+     Required by an Act of Parliament
+    </name>
+   </option>
+   <option available="true" id="2909b469-da95-4bf3-ae17-94b8581d9e44">
+    <name locale="en-GB">
+     Necessary for Legal Proceedings
+    </name>
+   </option>
+   <option available="true" id="41dfb230-9e08-42ba-9f6e-90a263cf1dab">
+    <name locale="en-GB">
+     Immigration Control
+    </name>
+   </option>
+  </options>
+ </field>
+ <field data-type="Category" leaf-only="false" multiple-select="false" schema-name="Case.TypeofDisclosure">
+  <name locale="en-GB">
+   Type of Disclosure
+  </name>
+  <options>
+   <option available="true" id="77d1e711-c8c7-49a9-a4df-2eb10b464e49">
+    <name locale="en-GB">
+     212
+    </name>
+   </option>
+   <option available="true" id="c17a5f3b-729d-4c54-b873-9e921fae61f0">
+    <name locale="en-GB">
+     Immigration
+    </name>
+   </option>
+   <option available="true" id="ff5678c5-fd97-4f73-818c-89af7f906859">
+    <name locale="en-GB">
+     Pensions
+    </name>
+   </option>
+   <option available="true" id="54b296e8-9892-414c-afad-22c226f8872e">
+    <name locale="en-GB">
+     Council Tax
+    </name>
+   </option>
+   <option available="true" id="f780584f-38b5-420b-85bb-92e163e34201">
+    <name locale="en-GB">
+     National Fraud Initiative
+    </name>
+   </option>
+   <option available="true" id="96a1bef1-c408-4c16-b7b7-ec0386da876d">
+    <name locale="en-GB">
+     Court Orders
+    </name>
+   </option>
+   <option available="true" id="10735c74-80f0-4bed-a5e3-5b0eb8d6812a">
+    <name locale="en-GB">
+     Act of Parliament
+    </name>
+   </option>
+   <option available="true" id="a108a5a7-6288-4754-876f-762ddca32a89">
+    <name locale="en-GB">
+     Childrens Services Legal Disclosure
+    </name>
+   </option>
+   <option available="true" id="d53fb951-37d5-4529-8292-687572d1f0a3">
+    <name locale="en-GB">
+     CCTV
+    </name>
+   </option>
+   <option available="true" id="14db7276-927d-4c68-bc82-0f5fc61c7cf8">
+    <name locale="en-GB">
+     Pending Employment Tribunal
+    </name>
+   </option>
+   <option available="true" id="354c4983-3fa0-4afc-a99d-5d7affffe77c">
+    <name locale="en-GB">
+     Other
     </name>
    </option>
   </options>
