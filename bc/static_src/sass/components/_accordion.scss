@@ -25,6 +25,7 @@
             height: 30px;
             margin-right: 0;
             width: 30px;
+            stroke-width: 4;
         }
 
         #{$root}__header {
@@ -75,16 +76,17 @@
     &__icon {
         width: 35px;
         height: 35px;
-        margin-right: $grid--small;
+        margin-right: $grid--min;
         transition: transform, stroke, 0.2s ease;
         stroke: $color--lake;
+        stroke-width: 4;
         transform: rotate(-90deg);
     }
 
     &__content {
         display: none;
         margin-bottom: 15px;
-        margin-left: 35px + $grid--small;
+        margin-left: 35px + $grid--min;
         margin-top: 15px;
     }
 }
