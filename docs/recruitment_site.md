@@ -144,3 +144,11 @@ A new match is any job whose created date is since the start of the last success
 The way the command is written intends it to be called daily, but other durations shouldn't matter, so long as the duration is longer than the time taken for the command to run. It specifically ignores jobs imported during the running of the alert command, leaving them for the next alert cycle.
 
 Job alerts are site specific.
+
+## Application forms
+
+This function is provided by the RAC, Responsive Application Component, a front-end application developed and supplied as-is by Saba Talentlink.
+
+This was originally developed by them and styled to match the previous county council's recruitment site, but is now styled by us.
+
+The vendor static files are in `/bc/static_src/vendor/talentlink/`, (though only the JS is still in use), and the HTML in `bc/project_styleguide/templates/patterns/pages/jobs/apply.html`. We have kept the layout of the HTML file fairly close to the originally-supplied file, with commented-out header tags etc., to make it easier to understand the diff in future if an updated file is supplied by Saba.

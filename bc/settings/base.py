@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     # first - http://help.apm.scoutapp.com/#django.
     "scout_apm.django",
     "bc.cases",
+    "bc.area_finder",
     "bc.documents",
     "bc.events",
     "bc.forms",
@@ -68,6 +69,7 @@ INSTALLED_APPS = [
     "bc.users",
     "bc.utils",
     "bc.inlineindex",
+    "rest_framework",
     "wagtailorderable",
     "wagtail.contrib.modeladmin",
     "wagtail.contrib.postgres_search",
@@ -695,3 +697,6 @@ RESPOND_SAR_WEBSERVICE = env.get("RESPOND_SAR_WEBSERVICE")
 RESPOND_COMMENTS_WEBSERVICE = env.get("RESPOND_COMMENTS_WEBSERVICE")
 RESPOND_COMPLIMENTS_WEBSERVICE = env.get("RESPOND_COMPLIMENTS_WEBSERVICE")
 RESPOND_DISCLOSURES_WEBSERVICE = env.get("RESPOND_DISCLOSURES_WEBSERVICE")
+
+# MapIt.MySociety API credentials
+MAPIT_API_KEY = env.get("MAPIT_API_KEY")

@@ -6,9 +6,12 @@ import MobileMenu from './components/mobile-menu';
 import MobileSubMenu from './components/mobile-sub-menu';
 // import CookieWarning from './components/cookie-message';
 import Accordion from './components/accordion';
+import AreaSearchForm from './components/area-search-form';
 import Carousel from './components/carousel';
 import ProgressBar from './components/progress-bar';
 import VideoModal from './components/video-modal';
+
+import 'whatwg-fetch';
 
 import '../sass/main.scss';
 
@@ -31,6 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (const accordion of document.querySelectorAll(Accordion.selector())) {
         new Accordion(accordion);
+    }
+
+    for (const areasearchform of document.querySelectorAll(
+        AreaSearchForm.selector(),
+    )) {
+        new AreaSearchForm(areasearchform);
     }
 
     for (const carousel of document.querySelectorAll(Carousel.selector())) {
