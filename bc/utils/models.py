@@ -17,7 +17,11 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.models import register_snippet
 
 from bc.utils.cache import get_default_cache_control_decorator
-from bc.utils.constants import RICH_TEXT_FEATURES
+from bc.utils.constants import (
+    BASE_PAGE_TEMPLATE,
+    BASE_PAGE_TEMPLATE_RECRUITMENT,
+    RICH_TEXT_FEATURES,
+)
 
 from .validators import validate_youtube_domain
 
@@ -330,9 +334,9 @@ class BasePage(SocialFields, ListingFields, Page):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         if getattr(request.site.root_page.specific, "is_recruitment_site", False):
-            context["base_page_template"] = "patterns/base_page--jobs.html"
+            context["base_page_template"] = BASE_PAGE_TEMPLATE_RECRUITMENT
         else:
-            context["base_page_template"] = "patterns/base_page.html"
+            context["base_page_template"] = BASE_PAGE_TEMPLATE
         return context
 
 
