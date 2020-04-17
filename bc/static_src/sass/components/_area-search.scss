@@ -1,0 +1,35 @@
+.area-search {
+    padding: $grid--small;
+    padding-bottom: 0;
+    background: $color--grey-light;
+    border-left: $border--accent $color--grey-border;
+    margin-left: 10px;
+    margin-bottom: 30px;
+
+    &__response-text {
+        @include font-size(s);
+        margin-top: 5px;
+
+        &--error {
+            color: $color--red;
+            font-weight: $weight--semibold;
+        }
+    }
+
+    &__input-wrapper {
+        display: block;
+    }
+
+    &__heading {
+        @include font-size(s);
+    }
+
+    &__title {
+        @include font-size(s);
+    }
+
+    &__info {
+        @include font-size(xs);
+        color: $color--grey-accessible;
+    }
+}

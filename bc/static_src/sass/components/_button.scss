@@ -63,4 +63,29 @@
     &--basic {
         @include button($color--slate, $color--leaf, $color--leaf);
     }
+
+    &--area-search {
+        display: flex;
+        min-height: 40px;
+        background: $color--leaf;
+        text-decoration: none;
+        font-weight: $weight--bold;
+        color: $color--slate;
+        transition: background $transition;
+        margin-top: 25px;
+        max-width: 400px;
+    }
+
+    &--link {
+        margin-top: 20px;
+        font-weight: $weight--normal;
+        /* stylelint-disable */
+        background: none !important;
+        padding: 0 !important;
+        /* stylelint-enable */
+        border: none;
+        color: $color--river;
+        text-decoration: underline;
+        cursor: pointer;
+    }
 }
