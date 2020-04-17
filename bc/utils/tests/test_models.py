@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, override_settings
 
 from wagtail.core.models import Page, Site
 
@@ -9,16 +9,19 @@ from bc.recruitment.tests.fixtures import RecruitmentHomePageFactory
 from bc.standardpages.tests.fixtures import IndexPageFactory, InformationPageFactory
 from bc.utils.constants import BASE_PAGE_TEMPLATE, BASE_PAGE_TEMPLATE_RECRUITMENT
 
+MAIN_HOSTNAME = "foo.example.com"
+RECRUITMENT_HOSTNAME = "bar.example.com"
 
+
+@override_settings(ALLOWED_HOSTS=[MAIN_HOSTNAME, RECRUITMENT_HOSTNAME])
 class BasePageTemplateTest(TestCase):
     def setUp(self):
         root_page = Page.objects.get(id=1)
 
         self.homepage = HomePageFactory.build_with_fk_objs_committed()
         root_page.add_child(instance=self.homepage)
-        self.main_hostname = "foo.example.com"
         self.main_site = Site.objects.create(
-            hostname=self.main_hostname, port=80, root_page=self.homepage
+            hostname=MAIN_HOSTNAME, port=80, root_page=self.homepage
         )
 
         hero_image = wagtail_factories.ImageFactory()
@@ -27,11 +30,8 @@ class BasePageTemplateTest(TestCase):
                 title="Jobs", hero_image=hero_image
             )
         )
-        self.recruitment_hostname = "bar.example.com"
         self.recruitment_site = Site.objects.create(
-            hostname=self.recruitment_hostname,
-            port=80,
-            root_page=self.recruitment_homepage,
+            hostname=RECRUITMENT_HOSTNAME, port=80, root_page=self.recruitment_homepage
         )
         self.page_factories = [InformationPageFactory, IndexPageFactory]
 
@@ -45,22 +45,22 @@ class BasePageTemplateTest(TestCase):
 
     def test_main_homepage_uses_main_site(self):
         """This is mainly a test that this test case is viable."""
-        response = self.client.get("/", SERVER_NAME=self.main_hostname)
+        response = self.client.get("/", SERVER_NAME=MAIN_HOSTNAME)
         self.assertEqual(response.context["request"].site, self.main_site)
 
     def test_recruitment_homepage_uses_recruitment_site(self):
         """This is mainly a test that this test case is viable."""
-        response = self.client.get("/", SERVER_NAME=self.recruitment_hostname)
+        response = self.client.get("/", SERVER_NAME=RECRUITMENT_HOSTNAME)
         self.assertEqual(response.context["request"].site, self.recruitment_site)
 
     def test_main_homepage_uses_main_base(self):
         with self.assertTemplateUsed(BASE_PAGE_TEMPLATE):
-            response = self.client.get("/", SERVER_NAME=self.main_hostname)
+            response = self.client.get("/", SERVER_NAME=MAIN_HOSTNAME)
             self.assertEqual(response.status_code, 200)
 
     def test_recruitment_homepage_uses_recruitment_base(self):
         with self.assertTemplateUsed(BASE_PAGE_TEMPLATE_RECRUITMENT):
-            response = self.client.get("/", SERVER_NAME=self.recruitment_hostname)
+            response = self.client.get("/", SERVER_NAME=RECRUITMENT_HOSTNAME)
             self.assertEqual(response.status_code, 200)
 
     def test_child_of_main_site_uses_main_base(self):
@@ -69,7 +69,7 @@ class BasePageTemplateTest(TestCase):
                 page = Factory.build()
                 self.homepage.add_child(instance=page)
                 with self.assertTemplateUsed(BASE_PAGE_TEMPLATE):
-                    response = self.client.get(page.url, SERVER_NAME=self.main_hostname)
+                    response = self.client.get(page.url, SERVER_NAME=MAIN_HOSTNAME)
                     self.assertEqual(response.status_code, 200)
                 self.assertEqual(
                     response.context["base_page_template"], BASE_PAGE_TEMPLATE
@@ -82,7 +82,7 @@ class BasePageTemplateTest(TestCase):
                 self.recruitment_homepage.add_child(instance=page)
                 with self.assertTemplateUsed(BASE_PAGE_TEMPLATE_RECRUITMENT):
                     response = self.client.get(
-                        page.url, SERVER_NAME=self.recruitment_hostname
+                        page.url, SERVER_NAME=RECRUITMENT_HOSTNAME
                     )
                     self.assertEqual(response.status_code, 200)
                 self.assertEqual(
