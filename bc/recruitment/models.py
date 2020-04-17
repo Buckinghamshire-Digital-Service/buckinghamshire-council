@@ -241,7 +241,6 @@ def callback_talentlinkjob_delete_attachments(sender, instance, *args, **kwargs)
 
 class RecruitmentHomePage(RoutablePageMixin, BasePage):
     is_recruitment_site = True
-
     template = "patterns/pages/home/home_page--jobs.html"
 
     # Only allow creating HomePages at the root level

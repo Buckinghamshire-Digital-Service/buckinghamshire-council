@@ -9,8 +9,6 @@ from bc.recruitment.tests.fixtures import RecruitmentHomePageFactory
 from bc.standardpages.tests.fixtures import IndexPageFactory, InformationPageFactory
 from bc.utils.constants import BASE_PAGE_TEMPLATE, BASE_PAGE_TEMPLATE_RECRUITMENT
 
-COMMAND_MODULE_PATH = "bc.recruitment.management.commands.send_job_alerts"
-
 
 class BasePageTemplateTest(TestCase):
     def setUp(self):
