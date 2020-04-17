@@ -103,13 +103,13 @@ class Command(BaseCommand):
                         # Fetch logo image via a different call
                         image_found = False
                         try:
-                            # This will return list of
+                            # This will return a assignedImageDto object with
                             #   'id', 'url', 'position'
                             logo_response = client.service.getAdvertisementImages(
                                 job.talentlink_id
                             )
                             for image in logo_response:
-                                if image.get("position") == "Logo":
+                                if image["position"] == "Logo":
                                     talentlink_image_id = image["id"]
 
                                     # Only update image if it is changed or new
