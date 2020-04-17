@@ -4,6 +4,7 @@
 
 - Upgrade Wagtail to 2.7.2 and Django to 2.2.12
 - Add documentation about Aptean Respond cases backend, and cookies
+- Add a base_page_template context variable, dependent on request site homepage type
 - 140 Job site breadcrumbs on all pages
 - 155 Jobs extra filters (BE)
 - 173 Search local council area by postcode
