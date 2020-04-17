@@ -72,6 +72,13 @@
         padding: 0;
     }
 
+    &__title--area-search {
+        color: $color--river;
+        position: relative;
+        padding-left: 40px;
+        left: -6px;
+    }
+
     &__icon {
         width: 35px;
         height: 35px;
@@ -86,5 +93,9 @@
         margin-bottom: 15px;
         margin-left: 35px + $grid--small;
         margin-top: 15px;
+    }
+
+    &__content--area-link {
+        margin-left: 0;
     }
 }
