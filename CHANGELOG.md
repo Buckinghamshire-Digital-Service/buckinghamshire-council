@@ -2,14 +2,9 @@
 
 ## Unreleased
 
-- 135 Employer logos (BE)
-
-## 13.0 (In Development)
-
-Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/12.0...release
-
 - Upgrade Wagtail to 2.7.2 and Django to 2.2.12
 - Add documentation about Aptean Respond cases backend, and cookies
+- 135 Employer logos (BE)
 - 140 Job site breadcrumbs on all pages
 - 155 Jobs extra filters (BE)
 - 173 Search local council area by postcode
