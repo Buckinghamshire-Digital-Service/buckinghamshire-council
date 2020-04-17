@@ -1,7 +1,28 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% image page.hero_image min-1600x350 as hero_image %}
-<div class="hero hero--jobs" style="background-image: url('{{ hero_image.url }}');">
+<div class="hero hero--jobs hero--no-padding-top" style="background-image: url('{{ hero_image.url }}');">
+
+    <div class="wrapper wrapper--large">
+        <nav role="navigation" aria-label="breadcrumb">
+            <ul class="breadcrumb breadcrumb--jobs">
+                {% for ancestor_page in page.get_ancestors %}
+                    {% if not ancestor_page.is_root %}
+                        {% if ancestor_page.depth > 2 %}
+                            <li class="breadcrumb__item">
+                                <a class="breadcrumb__link" href="{% pageurl ancestor_page %}" title="{{ ancestor_page.title }}">{{ ancestor_page.title }}</a>
+                            </li>
+                        {% else %}
+                            <li class="breadcrumb__item">
+                                <a class="breadcrumb__link" href="/" title="Home">Home</a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+
     <div class="wrapper wrapper--large">
         <h1 class="hero__strapline heading heading--xxxl">{{ page.title }}</h1>
     </div>
