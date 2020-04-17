@@ -180,6 +180,7 @@ class TalentLinkJob(models.Model):
     working_hours = models.CharField(max_length=255)
     closing_date = models.DateField()
     expected_start_date = models.DateField(null=True)
+    interview_date = models.DateField(null=True)
 
     contact_email = models.EmailField()
 
