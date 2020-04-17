@@ -327,6 +327,14 @@ class BasePage(SocialFields, ListingFields, Page):
 
         return super().serve(request, *args, **kwargs)
 
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        if getattr(request.site.root_page.specific, "is_recruitment_site", False):
+            context["base_page_template"] = "patterns/base_page--jobs.html"
+        else:
+            context["base_page_template"] = "patterns/base_page.html"
+        return context
+
 
 BasePage._meta.get_field("seo_title").verbose_name = "Title tag"
 BasePage._meta.get_field("search_description").verbose_name = "Meta description"
@@ -338,6 +346,4 @@ class ImportantPages(BaseSetting):
         "wagtailcore.Page", null=True, on_delete=models.SET_NULL, related_name="+"
     )
 
-    panels = [
-        PageChooserPanel("contact_us_page"),
-    ]
+    panels = [PageChooserPanel("contact_us_page")]
