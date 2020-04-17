@@ -35,6 +35,10 @@
         }
     }
 
+    &--no-padding-top {
+        padding-top: 0;
+    }
+
     &--no-search {
         padding: ($grid--large * 2) 0;
     }

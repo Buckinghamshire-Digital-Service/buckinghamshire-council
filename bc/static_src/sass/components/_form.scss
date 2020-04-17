@@ -128,4 +128,18 @@
             max-width: 250px;
         }
     }
+
+    &--area-search {
+        input[type='text'] {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 220px;
+        }
+    }
+
+    &--area-search-error {
+        input[type='text'] {
+            border: $border--error;
+        }
+    }
 }

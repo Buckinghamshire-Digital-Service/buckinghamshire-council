@@ -330,3 +330,14 @@ class BasePage(SocialFields, ListingFields, Page):
 
 BasePage._meta.get_field("seo_title").verbose_name = "Title tag"
 BasePage._meta.get_field("search_description").verbose_name = "Meta description"
+
+
+@register_setting
+class ImportantPages(BaseSetting):
+    contact_us_page = models.ForeignKey(
+        "wagtailcore.Page", null=True, on_delete=models.SET_NULL, related_name="+"
+    )
+
+    panels = [
+        PageChooserPanel("contact_us_page"),
+    ]

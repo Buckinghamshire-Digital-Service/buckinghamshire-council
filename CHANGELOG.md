@@ -10,6 +10,10 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/12.0...rele
 
 - Upgrade Wagtail to 2.7.2 and Django to 2.2.12
 - Add documentation about Aptean Respond cases backend, and cookies
+- 140 Job site breadcrumbs on all pages
+- 155 Jobs extra filters (BE)
+- 173 Search local council area by postcode
+- 179 Jobs additional fields BE
 
 ## 12.0 (2020-04-02)
 

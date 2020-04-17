@@ -45,7 +45,11 @@ def job_subcategory_insert_parser(value):
 POSTING_TARGET_STATUS_PUBLISHED = "Published"
 
 # source field to (target_field, parser) mapping
-JOB_CONFIGURABLE_FIELDS_MAPPING = {"Closing Date": ("closing_date", date_parser)}
+JOB_CONFIGURABLE_FIELDS_MAPPING = {
+    "Contact Information": ("contact_email", string_parser),
+    "Closing Date": ("closing_date", date_parser),
+    "Interview Information": ("interview_date", date_parser),
+}
 
 JOB_LOVS_MAPPING = {
     "Job Group": ("subcategory", job_subcategory_parser),

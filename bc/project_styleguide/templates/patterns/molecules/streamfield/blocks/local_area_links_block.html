@@ -8,7 +8,64 @@
         {% include "patterns/molecules/area-links-list/area-links-list.html" %}
     {% endif %}
 
-    {% if value.postscript %}
-        <div class="area-links__outro">{{ value.postscript|richtext }}</div>
-    {% endif %}
+
+    <div class="accordion" data-accordion>
+        <a
+            href=""
+            class="accordion__title accordion__title--area-search link--alt"
+            data-accordion-question
+            role="tab"
+            aria-controls="answer-{{ forloop.counter }}"
+            aria-expanded="false"
+            aria-selected="false"
+            id="question-{{ forloop.counter }}">
+            <svg class="accordion__icon icon icon--stroke" aria-hidden="true">
+                <use xlink:href="#chevron"></use>
+            </svg>
+            <h3 class="area-search__heading">Find your area based on your postcode</h3>
+
+        </a>
+        <div
+            aria-live="polite"
+            class="accordion__content accordion__content--area-link"
+            data-accordion-answer
+            id="answer-{{ forloop.counter }}"
+            role="tabpanel"
+            aria-labelledby="question-{{ forloop.counter }}"
+            aria-hidden="false"
+        >
+            <div class="area-search">
+                <form 
+                    role="search" 
+                    class="form form--area-search"
+                    method="get" 
+                    url="{% url 'area_finder' %}"
+                    data-area-search
+                    >
+                    <div data-form-title class="area-search__title">Enter your postcode</div>
+                    <div data-form-info class="area-search__info">For example HP20 1UY</div>
+                    <div data-response-text class="area-search__response-text"></div>
+                    <div data-form-input-wrapper class="area-search__input-wrapper">
+                        <label class="u-sr-only" for="postcode">Search postcode</label>
+                        <input data-input-value id="postcode" type="text" placeholder="Search" name="postcode">
+                        <button 
+                            data-submit-button
+                            class="button button--basic button--area-search" 
+                            type="submit" 
+                            aria-label="Search"
+                        >
+                            Find
+                        </button>
+                    </div>
+                    <button 
+                        data-find-another-button
+                        type="button"
+                        class="button button--link hide"
+                    >
+                        Find another postcode
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
