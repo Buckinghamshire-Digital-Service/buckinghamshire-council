@@ -53,6 +53,18 @@
                     <dd class="sidebar__job-detail-description">{{ page.closing_date }}</dd>
                 </div>
             {% endif %}
+            {% if page.interview_date %}
+                <div>
+                    <dt class="sidebar__job-detail-title">Interview date</dt>
+                    <dd class="sidebar__job-detail-description">{{ page.interview_date }}</dd>
+                </div>
+            {% endif %}
+            {% if page.contact_email %}
+                <div>
+                    <dt class="sidebar__job-detail-title">Contact email</dt>
+                    <dd class="sidebar__job-detail-description">{{ page.contact_email }}</dd>
+                </div>
+            {% endif %}
             {% if page.attachments.all %}
                 <div>
                     <dt class="sidebar__job-detail-title">Additional Information</dt>

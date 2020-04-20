@@ -13,38 +13,62 @@
         </div>
 
         {% for filter in filters %}
-            <h3 class="search-filters__group-title">{{ filter.title }}</h3>
+            {% if filter.key == "category"%}
+                <h3 class="search-filters__group-title">{{ filter.title }}</h3>
 
-            <div class="search-filters__fieldset">
-                {% for option in filter.options %}
-                    <div class="search-filters__option form-item--custom_checkbox_select_single {% if option.is_schools_and_early_years %}is_schools_and_early_years{% endif %}">
-                        <input class="search-filters__checkbox" type="checkbox" name="{{ filter.key }}" value="{{ option.key }}" id="{{ option.key }}" {% if option.key|slugify in filter.selected %}checked{% endif %}>
-                        <label class="search-filters__label" for="{{ option.key }}">
-                            {{ option.label }}
-                            <span class="search-filters__count">({{ option.count }})</span>
-                        </label>
-                    </div>
-                {% endfor %}
-            </div>
-        {% endfor %}
-
-        {% if salary_filter %}
-            <div>
                 <fieldset class="search-filters__fieldset">
-                    <legend class="hidden">Salary Range</legend>
-                    <div class="search-filters__input">
-                        <label class="search-filters__group-title" for="search--page">Salary Range</label>
-                        <div class="form-item__custom-select">
-                            <select>
-                                <option>£22,250 - £25,000</option>
-                                <option>£25,000 - £30,000</option>
-                                <option>£30,000 - £35,000</option>
-                            </select>
+                    {% for option in filter.options %}
+                        <div class="search-filters__option form-item--custom_checkbox_select_multiple">
+                            <input type="checkbox" name="{{ filter.key }}" value="{{ option.key }}" id="{{forloop.counter}}-{{ option.key }}" {% if option.key|slugify in filter.selected %}checked{% endif %}>
+                            <label class="search-filters__label" for="{{forloop.counter}}-{{ option.key }}">
+                                {{ option.label }}
+                                <span class="search-filters__count">({{ option.count }})</span>
+                            </label>
                         </div>
-                    </div>
+                    {% endfor %}
                 </fieldset>
-            </div>
-        {% endif %}
+            {% else %}
+                <div class="accordion accordion--search-filters
+                {% if filter.selected %} is-open{% endif %}
+                " data-accordion>
+                    <a
+                        href=""
+                        class="accordion__title accordion__title--search-filters"
+                        data-accordion-question
+                        role="tab"
+                        aria-controls="answer-{{ forloop.counter }}"
+                        aria-expanded="false"
+                        aria-selected="false"
+                        id="question-{{ forloop.counter }}">
+                        <svg class="accordion__icon accordion__icon--search-filter icon icon--stroke" aria-hidden="true">
+                            <use xlink:href="#chevron"></use>
+                        </svg>
+
+                        <h3 class="search-filters__group-title search-filters__group-title--accordion">{{ filter.title }}</h3>
+                    </a>
+                    <div
+                        aria-live="polite"
+                        class="accordion__content accordion__content--search-filters"
+                        data-accordion-answer
+                        id="answer-{{ forloop.counter }}"
+                        role="tabpanel"
+                        aria-labelledby="question-{{ forloop.counter }}"
+                        aria-hidden="false">
+
+                        <fieldset class="search-filters__fieldset">
+                            {% for option in filter.options %}
+                                <div class="search-filters__option form-item--custom_checkbox_select_multiple">
+                                    <input type="checkbox" name="{{ filter.key }}" value="{{ option.key }}" id="{{forloop.counter}}-{{ option.key }}" {% if option.key in filter.selected %}checked{% endif %}>
+                                    <label class="search-filters__label" for="{{forloop.counter}}-{{ option.key }}">
+                                        {{ option.label }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </fieldset>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
 
         <div>
             <fieldset class="search-filters__fieldset">
