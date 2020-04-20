@@ -13,6 +13,7 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/12.0...13.0
 - Add favicon
 - 140 Job site breadcrumbs on all pages
 - 155 Jobs extra filters (BE)
+- 161 Update job search filter styles and add custom select form field
 - 173 Search local council area by postcode
 - 179 Jobs additional fields BE
 
@@ -48,7 +49,6 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/9.0...10.0
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/8.0...9.0
 
 - 129 Jobs postcode search
-- 161 Update job search filter styles and add custom select form field
 - 169 Adjust position of form field help text
 - Forms integration with Aptean Respond API
 - Fix an issue with CI deployments
