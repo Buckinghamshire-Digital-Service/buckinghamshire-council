@@ -30,6 +30,7 @@ class TestNonMockedClient(TestCase):
     RESPOND_API_USERNAME="foo",
     RESPOND_API_PASSWORD="bar",
     RESPOND_API_BASE_URL="https://www.example.invalid/",
+    CACHES={"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}},
 )
 class TestClient(TestCase):
     def setUp(self):
