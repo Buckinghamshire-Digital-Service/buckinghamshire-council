@@ -43,6 +43,10 @@ We also define the names of the CreateCase-type services that we wish to 'regist
 - `RESPOND_COMPLIMENTS_WEBSERVICE`
 - `RESPOND_DISCLOSURES_WEBSERVICE`
 
+The client caches some responses, so for local development you should enable that:
+
+- `CACHES = {"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}}`
+
 ## API Client
 
 Constructing the client, and the forms.
