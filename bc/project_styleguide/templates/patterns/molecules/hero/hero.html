@@ -7,7 +7,7 @@
 
         <div class="hero__search">
             <form action="{% url 'search' %}" method="get" role="search" class="form form--hero-search">
-                <input class="input" id="search--hero" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
+                <input class="input" id="search--hero" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
                 <label class="u-sr-only" for="search--hero">Search this website</label>
                 <button class="button button--search button--hero" type="submit" aria-label="Search">
                     <svg class="button__icon icon icon--stroke icon--white" aria-hidden="true">
@@ -22,6 +22,6 @@
 
 {% if page.alert_title and page.alert_message %}
     <div class="wrapper wrapper--large">
-        {% include "patterns/molecules/alerts/alert-message.html" with title=page.alert_title body=page.alert_message %}
+        {% include "patterns/molecules/alerts/alert-message-home.html" with title=page.alert_title body=page.alert_message %}
     </div>
 {% endif %}

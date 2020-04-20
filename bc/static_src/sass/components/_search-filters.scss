@@ -1,6 +1,7 @@
 .search-filters {
     $root: &;
     margin: $grid--min $grid $grid--large 0;
+    max-width: 540px;
     padding: $grid--small;
     background: $color--grey-light;
     border-bottom: $border--accent $color--primary;
@@ -11,70 +12,40 @@
 
     &__group-title {
         @include font-size(s);
-        margin-bottom: $grid--small;
+        display: block;
+        margin-bottom: 20px;
+
+        &--accordion {
+            margin-bottom: $grid--min / 2;
+            position: relative;
+            left: -10px;
+        }
     }
 
     &__fieldset {
-        margin-bottom: $grid;
+        margin-bottom: $grid--small;
+    }
+
+    &__option {
+        margin-bottom: $grid--min;
     }
 
     &__label {
         cursor: pointer;
         display: flex;
         padding: 5px 0;
+        word-break: break-word;
     }
 
-    &__checkbox {
-        @include hidden();
-        padding: 0;
-
-        &:checked {
-            + #{$root}__label {
-                #{$root}__dummy-checkbox::after {
-                    opacity: 1;
-                }
-            }
-        }
-
-        &:focus {
-            + #{$root}__label {
-                #{$root}__dummy-checkbox {
-                    box-shadow: 0 0 0 4px $color--mustard;
-                }
-            }
-        }
-    }
-
-    &__dummy-checkbox {
-        position: relative;
-        display: block;
-        min-width: 25px;
-        width: 25px;
-        height: 25px;
-        border: 2px solid $color--default;
-        background: $color--white;
-        margin-right: $grid--min;
-        box-shadow: none;
-
-        &::after {
-            content: '';
-            border: solid $color--default;
-            border-width: 0 3px 3px 0;
-            height: 15px;
-            left: 6px;
-            opacity: 0;
-            position: absolute;
-            top: 1.5px;
-            transition: opacity $transition;
-            width: 8px;
-            transform: rotate(45deg);
-        }
+    &__help {
+        @include font-size(xs);
     }
 
     &__count {
         @include font-size(xxs);
         margin-left: $grid--min;
         align-self: flex-start;
+        word-break: normal;
     }
 
     &__submit {

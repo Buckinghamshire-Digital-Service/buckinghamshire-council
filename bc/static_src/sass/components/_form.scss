@@ -101,6 +101,15 @@
 
         input[type='text'] {
             border: 0;
+
+            // change colour to match bg and 'hide' placeholder on mobile, to avoid being cut off & unreadable
+            &::placeholder {
+                color: $color--white;
+
+                @include media-query(mob-landscape) {
+                    color: $color--default;
+                }
+            }
         }
     }
 
@@ -118,6 +127,20 @@
 
         input[type='submit'] {
             max-width: 250px;
+        }
+    }
+
+    &--area-search {
+        input[type='text'] {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 220px;
+        }
+    }
+
+    &--area-search-error {
+        input[type='text'] {
+            border: $border--error;
         }
     }
 }
