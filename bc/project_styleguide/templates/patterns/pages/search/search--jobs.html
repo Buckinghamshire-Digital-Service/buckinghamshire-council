@@ -26,8 +26,9 @@
 
             <form action="{% url 'search' %}" method="get" role="search" class="form form--search">
                 <label class="u-sr-only" for="search--page">Search this website</label>
-                <input class="input" id="search--page" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-                <button class="button button--search" type="submit" aria-label="Search">
+                {# Added form="" attribute to integrate this search with the job filters below - if the job filters are not on the same page, remove the form attribute here #}
+                <input form="job-filters" class="input" id="search--page" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
+                <button class="button button--search" type="submit" aria-label="Search" form="job-filters">
                     <svg class="button__icon icon icon--stroke icon--white" aria-hidden="true">
                         <use xlink:href="#magnifying-glass"></use>
                     </svg>
@@ -39,6 +40,7 @@
         <div class="search__results-wrapper wrapper wrapper--flex">
             <aside class="search__filters">
                 <h2 class="heading heading--m">Filter jobs</h2>
+                {# linked to the job search above - see 'molecules/search-filters/search-filters.html' #}
                 {% jobs_search_filters request unfiltered_results %}
             </aside>
 
