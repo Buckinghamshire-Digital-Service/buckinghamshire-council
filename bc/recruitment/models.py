@@ -202,6 +202,9 @@ class TalentLinkJob(models.Model):
     attachments = models.ManyToManyField(
         "documents.CustomDocument", blank=True, related_name="jobs"
     )
+    logo = models.ForeignKey(
+        "images.CustomImage", null=True, related_name="+", on_delete=models.SET_NULL,
+    )
     application_url_query = models.CharField(max_length=255)
 
     def get_categories_list(self):
@@ -232,11 +235,19 @@ class TalentLinkJob(models.Model):
 
 
 @receiver(pre_delete, sender=TalentLinkJob)
-def callback_talentlinkjob_delete_attachments(sender, instance, *args, **kwargs):
+def callback_talentlinkjob_delete_attachments_and_logo(
+    sender, instance, *args, **kwargs
+):
     # if instance.attachments:
     for doc in instance.attachments.all():
         if doc.jobs.all().count() == 1:
             doc.delete()
+
+    # Delete associated logo if it isn't used anywhere else
+    if instance.logo and (
+        TalentLinkJob.objects.filter(logo=instance.logo).count() == 1
+    ):
+        instance.logo.delete()
 
 
 class RecruitmentHomePage(RoutablePageMixin, BasePage):

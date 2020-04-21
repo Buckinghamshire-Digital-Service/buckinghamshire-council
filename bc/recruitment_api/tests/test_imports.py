@@ -11,18 +11,25 @@ from freezegun import freeze_time
 
 from bc.documents.models import CustomDocument
 from bc.documents.tests.fixtures import DocumentFactory
+from bc.images.models import CustomImage
+from bc.images.tests.fixtures import ImageFactory, mock_import_image_from_url
 from bc.recruitment.models import JobSubcategory, TalentLinkJob
 from bc.recruitment.tests.fixtures import JobSubcategoryFactory, TalentLinkJobFactory
 from bc.recruitment_api.utils import update_job_from_ad
 
-from .fixtures import get_advertisement, get_attachment, no_further_pages_response
+from .fixtures import (
+    get_advertisement,
+    get_attachment,
+    get_logo,
+    no_further_pages_response,
+)
 
 # Job category title to match dummy Job Group in get_advertisement() fixture
 FIXTURE_JOB_SUBCATEGORY_TITLE = "Schools & Early Years - Support"
 
 
 class ImportTestMixin:
-    def get_mocked_client(self, advertisements=None, attachments=None):
+    def get_mocked_client(self, advertisements=None, attachments=None, logos=None):
         if advertisements is None:
             advertisements = [get_advertisement()]
 
@@ -40,6 +47,15 @@ class ImportTestMixin:
             client.service.getAttachments.side_effect = [{}]
         else:
             client.service.getAttachments.side_effect = attachments
+
+        # Logos
+        if logos is None:
+            # Add empty getAdvertisementImages response for each advertisement
+            client.service.getAdvertisementImages.side_effect = [
+                dict() for _ in range(len(advertisements))
+            ]
+        else:
+            client.service.getAdvertisementImages.side_effect = logos
 
         return client
 
@@ -808,3 +824,225 @@ class AttachmentsTest(TestCase, ImportTestMixin):
 
         job_2 = TalentLinkJob.objects.get(talentlink_id=2)
         self.assertEqual(job_2.attachments.first(), doc[0])
+
+
+@mock.patch("bc.recruitment_api.management.commands.import_jobs.get_client")
+@mock.patch(
+    "bc.recruitment_api.management.commands.import_jobs.import_image_from_url",
+    side_effect=mock_import_image_from_url,
+)
+class LogoTest(TestCase, ImportTestMixin):
+    def test_logo_is_imported(self, mock_import_image_from_url, mock_get_client):
+        advertisements = [
+            get_advertisement(talentlink_id=1, title="New title 1"),
+            get_advertisement(talentlink_id=2, title="New title 2"),
+        ]
+
+        logos = [get_logo(id="aaa"), get_logo(id="bbb")]
+        mock_get_client.return_value = self.get_mocked_client(
+            advertisements, logos=logos
+        )
+
+        out = StringIO()
+        call_command("import_jobs", stdout=out)
+        out.seek(0)
+        output = out.read()
+
+        self.assertIn("2 new jobs created", output)
+        self.assertIn("2 new images imported", output)
+        self.assertEqual(CustomImage.objects.all().count(), 2)
+        self.assertEqual(
+            TalentLinkJob.objects.get(talentlink_id=1).logo,
+            CustomImage.objects.get(talentlink_image_id="aaa"),
+        )
+        self.assertEqual(
+            TalentLinkJob.objects.get(talentlink_id=2).logo,
+            CustomImage.objects.get(talentlink_image_id="bbb"),
+        )
+
+    def test_duplicate_logo_is_not_imported(
+        self, mock_import_image_from_url, mock_get_client
+    ):
+        advertisements = [
+            get_advertisement(talentlink_id=1, title="New title 1"),
+            get_advertisement(talentlink_id=2, title="New title 2"),
+        ]
+
+        logos = [get_logo(id="aaa"), get_logo(id="aaa")]  # Duplicated
+        mock_get_client.return_value = self.get_mocked_client(
+            advertisements, logos=logos
+        )
+
+        out = StringIO()
+        call_command("import_jobs", stdout=out)
+        out.seek(0)
+        output = out.read()
+
+        self.assertIn("2 new jobs created", output)
+        self.assertIn("1 new images imported", output)
+        self.assertEqual(CustomImage.objects.all().count(), 1)
+        self.assertEqual(
+            TalentLinkJob.objects.get(talentlink_id=1).logo,
+            CustomImage.objects.get(talentlink_image_id="aaa"),
+        )
+        self.assertEqual(
+            TalentLinkJob.objects.get(talentlink_id=2).logo,
+            CustomImage.objects.get(talentlink_image_id="aaa"),
+        )
+
+    def test_job_with_no_logo(self, mock_import_image_from_url, mock_get_client):
+        advertisements = [
+            get_advertisement(talentlink_id=1, title="New title 1"),
+        ]
+
+        logos = [
+            {},  # No logo
+        ]
+        mock_get_client.return_value = self.get_mocked_client(
+            advertisements, logos=logos
+        )
+
+        out = StringIO()
+        call_command("import_jobs", stdout=out)
+        out.seek(0)
+        output = out.read()
+
+        self.assertIn("1 new jobs created", output)
+        self.assertIn("0 new images imported", output)
+        self.assertEqual(CustomImage.objects.all().count(), 0)
+        self.assertEqual(TalentLinkJob.objects.get(talentlink_id=1).logo, None)
+
+    def test_job_logo_is_removed_if_removed_in_import(
+        self, mock_import_image_from_url, mock_get_client
+    ):
+        job = TalentLinkJobFactory(talentlink_id=1)
+        logo = ImageFactory(talentlink_image_id="aaa")
+        job.logo = logo
+        job.save()
+
+        advertisements = [
+            get_advertisement(talentlink_id=1, title="New title 1"),
+        ]
+        logos = [
+            {},
+        ]
+
+        mock_get_client.return_value = self.get_mocked_client(
+            advertisements, logos=logos
+        )
+        out = StringIO()
+        call_command("import_jobs", stdout=out)
+        out.seek(0)
+        output = out.read()
+
+        self.assertIn("1 existing jobs updated", output)
+        self.assertIn("0 new images imported", output)
+        self.assertEqual(
+            TalentLinkJob.objects.get(talentlink_id=1).logo, None,
+        )
+        self.assertEqual(
+            CustomImage.objects.filter(talentlink_image_id="aaa").count(), 0,
+        )
+
+    def test_used_job_logo_is_not_removed_if_removed_in_import(
+        self, mock_import_image_from_url, mock_get_client
+    ):
+        job = TalentLinkJobFactory(talentlink_id=1)
+        job_2 = TalentLinkJobFactory(talentlink_id=2)
+        logo = ImageFactory(talentlink_image_id="aaa")
+        job.logo = logo
+        job.save()
+        job_2.logo = logo
+        job_2.save()
+
+        advertisements = [
+            get_advertisement(talentlink_id=1, title="New title 1"),
+            get_advertisement(talentlink_id=2, title="New title 2"),
+        ]
+        logos = [
+            get_logo(id="aaa"),
+            {},
+        ]
+
+        mock_get_client.return_value = self.get_mocked_client(
+            advertisements, logos=logos
+        )
+        out = StringIO()
+        call_command("import_jobs", stdout=out)
+        out.seek(0)
+        output = out.read()
+
+        self.assertIn("2 existing jobs updated", output)
+        self.assertIn("0 new images imported", output)
+        self.assertEqual(
+            CustomImage.objects.filter(talentlink_image_id="aaa").count(), 1,
+        )
+        self.assertEqual(
+            TalentLinkJob.objects.get(talentlink_id=1).logo, logo,
+        )
+        self.assertEqual(
+            TalentLinkJob.objects.get(talentlink_id=2).logo, None,
+        )
+
+    def test_logo_is_deleted_when_the_job_is(
+        self, mock_import_image_from_url, mock_get_client
+    ):
+        job_1 = TalentLinkJobFactory(talentlink_id=1)
+        job_2 = TalentLinkJobFactory(talentlink_id=2)
+        logo_1 = ImageFactory()
+        logo_2 = ImageFactory()
+        job_1.logo = logo_1
+        job_2.logo = logo_2
+        job_1.save()
+        job_2.save()
+
+        self.assertEqual(
+            TalentLinkJob.objects.get(talentlink_id=1).logo,
+            CustomImage.objects.get(id=logo_1.id),
+        )
+
+        job_1.delete()
+
+        self.assertEqual(
+            CustomImage.objects.filter(id=logo_1.id).count(),
+            0,
+            msg="Logo 1 should be deleted when Job 1 is.",
+        )
+        self.assertEqual(
+            TalentLinkJob.objects.get(talentlink_id=2).logo,
+            CustomImage.objects.get(id=logo_2.id),
+            msg="Job 2 and Logo 2 should be unaffected when Job 1 and Logo 1 is deleted.",
+        )
+
+    def test_logo_is_not_deleted_if_another_job_is_using_it(
+        self, mock_import_image_from_url, mock_get_client
+    ):
+        job_1 = TalentLinkJobFactory(talentlink_id=1)
+        job_2 = TalentLinkJobFactory(talentlink_id=2)
+        logo = ImageFactory()
+        job_1.logo = logo
+        job_2.logo = logo
+        job_1.save()
+        job_2.save()
+
+        self.assertEqual(
+            TalentLinkJob.objects.get(talentlink_id=1).logo,
+            CustomImage.objects.get(id=logo.id),
+        )
+        self.assertEqual(
+            TalentLinkJob.objects.get(talentlink_id=2).logo,
+            CustomImage.objects.get(id=logo.id),
+        )
+
+        job_1.delete()
+
+        self.assertEqual(
+            CustomImage.objects.filter(id=logo.id).count(),
+            1,
+            msg="Logo should not be deleted if it is still in use.",
+        )
+        self.assertEqual(
+            TalentLinkJob.objects.get(talentlink_id=2).logo,
+            CustomImage.objects.get(id=logo.id),
+            msg="Job 2 and its logo should be unaffected when Job 1 is deleted.",
+        )

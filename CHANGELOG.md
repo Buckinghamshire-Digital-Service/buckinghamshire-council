@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- 135 Employer logos (BE)
+
 ## 13.0 (2020-04-20)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/12.0...13.0
