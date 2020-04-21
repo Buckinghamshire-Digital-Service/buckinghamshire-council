@@ -102,11 +102,12 @@
         input[type='text'] {
             border: 0;
 
+            // change colour to match bg and 'hide' placeholder on mobile, to avoid being cut off & unreadable
             &::placeholder {
-                opacity: 0;
+                color: $color--white;
 
                 @include media-query(mob-landscape) {
-                    opacity: 1;
+                    color: $color--default;
                 }
             }
         }

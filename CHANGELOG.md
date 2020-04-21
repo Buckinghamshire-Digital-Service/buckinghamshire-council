@@ -2,11 +2,19 @@
 
 ## Unreleased
 
+## 13.0 (2020-04-20)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/12.0...13.0
+
 - Upgrade Wagtail to 2.7.2 and Django to 2.2.12
 - Add documentation about Aptean Respond cases backend, and cookies
+- Make the separate forms on the jobs search page cooperate
+- Styling tweaks on recruitment index page ('benefits' page)
+- Add favicon
 - 140 Job site breadcrumbs on all pages
 - 142 Internal jobs site
 - 155 Jobs extra filters (BE)
+- 161 Update job search filter styles and add custom select form field
 - 173 Search local council area by postcode
 - 179 Jobs additional fields BE
 
@@ -42,7 +50,6 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/9.0...10.0
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/8.0...9.0
 
 - 129 Jobs postcode search
-- 161 Update job search filter styles and add custom select form field
 - 169 Adjust position of form field help text
 - Forms integration with Aptean Respond API
 - Fix an issue with CI deployments
