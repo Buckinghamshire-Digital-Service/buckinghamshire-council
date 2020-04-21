@@ -3,6 +3,7 @@
 ## Unreleased
 
 - 135 Employer logos (BE)
+- Accessibility 1 Remove redundant/inappropriate ARIA role overrides
 
 ## 13.0 (2020-04-20)
 
