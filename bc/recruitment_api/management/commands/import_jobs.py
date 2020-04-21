@@ -1,7 +1,6 @@
 from django.core.management.base import BaseCommand
 from django.utils.timezone import now
 
-from bc.documents.models import CustomDocument
 from bc.images.models import CustomImage, import_image_from_url
 from bc.recruitment.models import RecruitmentHomePage, TalentLinkJob
 from bc.recruitment_api.client import get_client
