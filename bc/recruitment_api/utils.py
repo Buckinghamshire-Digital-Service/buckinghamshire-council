@@ -15,7 +15,8 @@ def date_parser(value):
 
 
 def string_parser(value):
-    return value.strip()
+    # Remove multiple spaces as well as trailing and end spaces.
+    return " ".join(value.split())
 
 
 def yesno_parser(value):
