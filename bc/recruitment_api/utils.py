@@ -54,7 +54,7 @@ JOB_CONFIGURABLE_FIELDS_MAPPING = {
 JOB_LOVS_MAPPING = {
     "Job Group": ("subcategory", job_subcategory_parser),
     "Location": ("location", string_parser),
-    "Salary Range - FTE": ("salary_range", string_parser),
+    "Salary Range": ("salary_range", string_parser),
     "Searchable Location": ("searchable_location", string_parser),
     "Searchable Salary": ("searchable_salary", string_parser),
     "Show Apply Button": ("show_apply_button", yesno_parser),

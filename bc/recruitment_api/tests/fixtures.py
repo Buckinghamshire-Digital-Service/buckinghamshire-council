@@ -238,8 +238,8 @@ def get_advertisement(
                     },
                 },
                 {
-                    "label": "Salary Range - FTE",
-                    "value": "Salary Range  FTE",
+                    "label": "Salary Range",
+                    "value": "Salary Range",
                     "order": 10,
                     "parents": None,
                     "criteria": {
