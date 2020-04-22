@@ -32,6 +32,7 @@ def get_advertisement(
     talentlink_id=164579,
     title="Higher Level Teaching Assistant - Elmhurst School ",
     description=None,
+    location=None,
     application_url="https://www.example.com/?jobId=QQPFK026203F3VBQBV7V779XA-167759&langCode=en_GB",
 ):
     if description is None:
@@ -214,21 +215,6 @@ def get_advertisement(
                     },
                 },
                 {
-                    "label": "Location",
-                    "value": "Location",
-                    "order": 2,
-                    "parents": None,
-                    "criteria": {
-                        "criterion": [
-                            {
-                                "label": "Aylesbury",
-                                "value": "Aylesbury",
-                                "activators": [],
-                            }
-                        ]
-                    },
-                },
-                {
                     "label": "Show Apply Button",
                     "value": "Show Apply Button",
                     "order": 14,
@@ -288,21 +274,6 @@ def get_advertisement(
                             {
                                 "label": "SchoolsPrimaryRed",
                                 "value": "SchoolsPrimaryRed",
-                                "activators": [],
-                            }
-                        ]
-                    },
-                },
-                {
-                    "label": "Searchable Location",
-                    "value": "Searchable Location",
-                    "order": 17,
-                    "parents": None,
-                    "criteria": {
-                        "criterion": [
-                            {
-                                "label": "Aylesbury Vale",
-                                "value": "Aylesbury Vale",
                                 "activators": [],
                             }
                         ]
@@ -397,7 +368,29 @@ def get_advertisement(
         "strapline": None,
         "assignedImages": None,
         "requisitionInternalJobNumber": None,
-        "jobLocations": None,
+        "jobLocations": {
+            "jobLocation": [
+                {
+                    "name": "Walton Street Offices",
+                    "departmentId": 153,
+                    "creationUserId": 1,
+                    "updateUserId": None,
+                    "creationDate": datetime.datetime(
+                        2020, 3, 5, 11, 40, 41, tzinfo=pytz.FixedOffset(60)
+                    ),
+                    "updateDate": None,
+                    "country": "United Kingdom",
+                    "region": "England",
+                    "city": location or "Aylesbury Vale",
+                    "street": None,
+                    "streetNumber": None,
+                    "zipCode": "HP20 1UA",
+                    "latitude": 51.814526,
+                    "longitude": -0.812337,
+                    "id": 61,
+                }
+            ]
+        },
         "sponsoredJobContext": None,
         "jobUpdateDate": datetime.datetime(
             2020, 1, 15, 14, 11, 39, tzinfo=pytz.FixedOffset(60)

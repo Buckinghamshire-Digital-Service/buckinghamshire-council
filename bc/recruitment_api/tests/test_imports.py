@@ -141,6 +141,27 @@ class ImportTest(TestCase, ImportTestMixin):
         job.refresh_from_db()
         self.assertEqual(job.last_imported, later)
 
+    def test_new_job_imported_location(self, mock_get_client):
+        advertisements = [
+            get_advertisement(talentlink_id=1),
+        ]
+        mock_get_client.return_value = self.get_mocked_client(advertisements)
+
+        instant = datetime.datetime(2020, 1, 29, 12, 0, 0, tzinfo=datetime.timezone.utc)
+        with freeze_time(instant):
+            call_command("import_jobs", stdout=mock.MagicMock())
+
+        job = TalentLinkJob.objects.get(talentlink_id=1)
+        self.assertEqual(job.location, "Aylesbury Vale")
+
+        # test new location updates exisiting job
+        new_location = "South Bucks"
+        job = update_job_from_ad(
+            job, get_advertisement(talentlink_id=1, location=new_location),
+        )
+
+        self.assertEqual(job.location, new_location)
+
     @mock.patch("bc.recruitment_api.management.commands.import_jobs.update_job_from_ad")
     def test_errors_are_reported(self, mock_update_fn, mock_get_client):
         error_message = "This is a test error message"

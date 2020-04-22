@@ -3,6 +3,7 @@
 ## Unreleased
 
 - 135 Employer logos (BE)
+- 176 Jobs fix import location
 - 204 Jobs fix salary imports (BE)
 
 ## 13.0 (2020-04-20)

@@ -55,7 +55,7 @@ class TalentLinkJobFactory(factory.django.DjangoModelFactory):
     contact_email = factory.Faker("email")
 
     searchable_salary = factory.Faker("sentence", nb_words=2)
-    searchable_location = factory.Faker("city")
+    location = factory.Faker("city")
     posting_start_date = factory.Faker(
         "date_time_this_month", tzinfo=datetime.timezone.utc
     )
