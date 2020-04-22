@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Subheading block (BE)
 - 135 Employer logos (BE)
 - 176 Jobs fix import location
 - 204 Jobs fix salary imports (BE)
