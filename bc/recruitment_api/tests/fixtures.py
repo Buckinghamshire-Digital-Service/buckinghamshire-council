@@ -21,6 +21,12 @@ def get_attachment(
     }
 
 
+def get_logo(
+    id="abc", url="https://test.url/test.png",
+):
+    return [{"id": id, "url": url, "position": "Logo"}]
+
+
 def get_advertisement(
     job_number="FS11605",
     talentlink_id=164579,
@@ -229,8 +235,8 @@ def get_advertisement(
                     },
                 },
                 {
-                    "label": "Salary Range - FTE",
-                    "value": "Salary Range  FTE",
+                    "label": "Salary Range",
+                    "value": "Salary Range",
                     "order": 10,
                     "parents": None,
                     "criteria": {

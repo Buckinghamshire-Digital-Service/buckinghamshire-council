@@ -13,7 +13,13 @@
     &__group-title {
         @include font-size(s);
         display: block;
-        margin-bottom: $grid--min / 2;
+        margin-bottom: 20px;
+
+        &--accordion {
+            margin-bottom: $grid--min / 2;
+            position: relative;
+            left: -10px;
+        }
     }
 
     &__fieldset {
@@ -28,6 +34,7 @@
         cursor: pointer;
         display: flex;
         padding: 5px 0;
+        word-break: break-word;
     }
 
     &__help {
@@ -38,6 +45,7 @@
         @include font-size(xxs);
         margin-left: $grid--min;
         align-self: flex-start;
+        word-break: normal;
     }
 
     &__submit {

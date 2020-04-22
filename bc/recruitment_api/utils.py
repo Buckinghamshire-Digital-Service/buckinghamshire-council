@@ -46,12 +46,16 @@ def job_subcategory_insert_parser(value):
 POSTING_TARGET_STATUS_PUBLISHED = "Published"
 
 # source field to (target_field, parser) mapping
-JOB_CONFIGURABLE_FIELDS_MAPPING = {"Closing Date": ("closing_date", date_parser)}
+JOB_CONFIGURABLE_FIELDS_MAPPING = {
+    "Contact Information": ("contact_email", string_parser),
+    "Closing Date": ("closing_date", date_parser),
+    "Interview Information": ("interview_date", date_parser),
+}
 
 JOB_LOVS_MAPPING = {
     "Job Group": ("subcategory", job_subcategory_parser),
     "Location": ("location", string_parser),
-    "Salary Range - FTE": ("salary_range", string_parser),
+    "Salary Range": ("salary_range", string_parser),
     "Searchable Location": ("searchable_location", string_parser),
     "Searchable Salary": ("searchable_salary", string_parser),
     "Show Apply Button": ("show_apply_button", yesno_parser),
@@ -121,9 +125,7 @@ def update_job_from_ad(job, ad, defaults=None, import_categories=False):
             if (parser is job_subcategory_parser) and import_categories:
                 parser = job_subcategory_insert_parser
 
-            setattr(
-                job, target_field, parser(lov["criteria"]["criterion"][0]["label"]),
-            )
+            setattr(job, target_field, parser(lov["criteria"]["criterion"][0]["label"]))
     for k, v in defaults.items():
         setattr(job, k, v)
 
