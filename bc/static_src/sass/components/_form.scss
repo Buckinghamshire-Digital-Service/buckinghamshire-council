@@ -17,7 +17,11 @@
         @include button($color--slate, $color--leaf, $color--leaf);
 
         &[disabled] {
-            @include button($color--grey-medium, $color--grey-light, $color--grey-light);
+            @include button(
+                $color--grey-medium,
+                $color--grey-light,
+                $color--grey-light
+            );
         }
     }
 
