@@ -187,7 +187,7 @@ class TalentLinkJob(models.Model):
     searchable_salary = models.CharField(
         max_length=255, help_text="Salary group for filtering"
     )
-    searchable_location = models.CharField(max_length=255)
+    location = models.CharField(max_length=255)
     location_postcode = models.CharField(max_length=8, blank=True)
     location_lat = models.DecimalField(
         max_digits=9, decimal_places=6, null=True, blank=True

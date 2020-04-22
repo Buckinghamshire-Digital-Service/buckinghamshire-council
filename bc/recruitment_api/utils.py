@@ -53,9 +53,7 @@ JOB_CONFIGURABLE_FIELDS_MAPPING = {
 
 JOB_LOVS_MAPPING = {
     "Job Group": ("subcategory", job_subcategory_parser),
-    "Location": ("location", string_parser),
     "Salary Range": ("salary_range", string_parser),
-    "Searchable Location": ("searchable_location", string_parser),
     "Searchable Salary": ("searchable_salary", string_parser),
     "Show Apply Button": ("show_apply_button", yesno_parser),
     "Working Hours Selection": ("working_hours", string_parser),
@@ -135,6 +133,10 @@ def update_job_from_ad(job, ad, defaults=None, import_categories=False):
             job.location_postcode = location["zipCode"]
             job.location_lat = location["latitude"]
             job.location_lon = location["longitude"]
+        if location["city"]:
+            job.location = location["city"]
+        elif location["name"]:
+            job.location = location["name"]
 
     job.save()
     return job
