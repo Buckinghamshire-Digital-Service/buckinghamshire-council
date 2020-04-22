@@ -10,11 +10,11 @@
                     {% if not ancestor_page.is_root %}
                         {% if ancestor_page.depth > 2 %}
                             <li class="breadcrumb__item">
-                                <a class="breadcrumb__link" href="{% pageurl ancestor_page %}" title="{{ ancestor_page.title }}">{{ ancestor_page.title }}</a>
+                                <a class="breadcrumb__link" href="{% pageurl ancestor_page %}">{{ ancestor_page.title }}</a>
                             </li>
                         {% else %}
                             <li class="breadcrumb__item">
-                                <a class="breadcrumb__link" href="/" title="Home">Home</a>
+                                <a class="breadcrumb__link" href="/">Home</a>
                             </li>
                         {% endif %}
                     {% endif %}
