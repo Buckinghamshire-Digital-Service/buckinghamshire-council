@@ -4,6 +4,7 @@
 
 - 135 Employer logos (BE)
 - 204 Jobs fix salary imports (BE)
+- Accessibility 8 Hide all site icons for screen reader users
 
 ## 13.0 (2020-04-20)
 
