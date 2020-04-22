@@ -22,6 +22,13 @@
         border-bottom: 1px solid $color--grey-accessible;
         padding: 5px 0;
         margin-bottom: 10px;
+
+        &.is-open {
+            .search-filters__active {
+                // hide active filter counter when accordion is open
+                display: none;
+            }
+        }
     }
 
     &--detail {
@@ -72,6 +79,7 @@
 
         &--search-filters {
             @include font-size(s);
+            flex-wrap: wrap;
             left: 1px;
             position: relative;
             color: $color--charcoal;

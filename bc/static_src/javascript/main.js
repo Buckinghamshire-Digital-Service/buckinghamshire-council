@@ -12,9 +12,13 @@ import ProgressBar from './components/progress-bar';
 import VideoModal from './components/video-modal';
 import Filters from './components/job-filters';
 
+// Add polyfill fix for forEach carousel
+import foreachPolyfill from './polyfills/foreach-polyfill';
 import 'whatwg-fetch';
 
 import '../sass/main.scss';
+
+foreachPolyfill();
 
 // Open the mobile menu callback
 function openMobileMenu() {

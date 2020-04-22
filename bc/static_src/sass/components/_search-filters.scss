@@ -52,4 +52,20 @@
         margin-top: 20px;
         max-width: 200px;
     }
+
+    &__active {
+        display: none;
+
+        &.active {
+            @include font-size(xxs);
+            display: block;
+            flex: 1 0 100%;
+            color: $color--lake;
+            margin: -$grid--min / 2 0 $grid--min 35px;
+        }
+    }
+
+    &__reset {
+        margin-left: $grid--min;
+    }
 }

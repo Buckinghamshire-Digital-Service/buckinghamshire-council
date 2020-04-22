@@ -31,7 +31,7 @@
             {% else %}
                 <div class="accordion accordion--search-filters
                 {% if filter.selected %} is-open{% endif %}
-                " data-accordion>
+                " data-accordion data-filters>
                     <a
                         href=""
                         class="accordion__title accordion__title--search-filters"
@@ -46,6 +46,10 @@
                         </svg>
 
                         <h3 class="search-filters__group-title search-filters__group-title--accordion">{{ filter.title }}</h3>
+
+                        <div class="search-filters__active" data-filters-active>
+                            <span class="search-filters__active-counter" data-filters-counter>0</span> selected
+                        </div>
                     </a>
                     <div
                         aria-live="polite"
@@ -56,10 +60,10 @@
                         aria-labelledby="question-{{ forloop.counter }}"
                         aria-hidden="false">
 
-                        <fieldset class="search-filters__fieldset" [data-filters]>
+                        <fieldset class="search-filters__fieldset">
                             {% for option in filter.options %}
                                 <div class="search-filters__option form-item--custom_checkbox_select_multiple">
-                                    <input type="checkbox" name="{{ filter.key }}" value="{{ option.key }}" id="{{forloop.counter}}-{{ option.key }}" {% if option.key in filter.selected %}checked{% endif %} [data-filter]>
+                                    <input type="checkbox" name="{{ filter.key }}" value="{{ option.key }}" id="{{forloop.counter}}-{{ option.key }}" {% if option.key in filter.selected %}checked{% endif %} data-filter>
                                     <label class="search-filters__label" for="{{forloop.counter}}-{{ option.key }}">
                                         {{ option.label }}
                                     </label>
@@ -83,5 +87,6 @@
         </div>
 
         <input type="submit" value="Filter" class="button button--basic" />
+        <button class="search-filters__reset" data-filters-reset>Reset filters</button>
     </form>
 </div>
