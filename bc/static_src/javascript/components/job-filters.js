@@ -5,19 +5,17 @@ class Filters {
 
     constructor(node) {
         this.filters = node;
-        this.filter = this.filters.querySelectorAll(
-            '[data-filter]',
-        );
-        this.resetFilters = document.querySelector(
-            '[data-filters-reset]',
-        );
+        this.filter = this.filters.querySelectorAll('[data-filter]');
+        this.resetFilters = document.querySelector('[data-filters-reset]');
         this.showChecked();
         this.bindEvents();
     }
 
     checkboxCount() {
         // find number of active filters (i.e. checked checkboxes)
-        const activeFilters = this.filters.querySelectorAll('[data-filter]:checked').length;
+        const activeFilters = this.filters.querySelectorAll(
+            '[data-filter]:checked',
+        ).length;
         // return that number
         return activeFilters;
     }
@@ -26,9 +24,13 @@ class Filters {
         // number of checkboxes checked
         const checkboxCount = this.checkboxCount();
         // parent container of the active filter counter (display:none by default)
-        const filtersActive = this.filters.querySelector('[data-filters-active]');
+        const filtersActive = this.filters.querySelector(
+            '[data-filters-active]',
+        );
         // counter displaying the number of active filters
-        const filtersActiveCounter = this.filters.querySelector('[data-filters-counter]');
+        const filtersActiveCounter = this.filters.querySelector(
+            '[data-filters-counter]',
+        );
 
         // update active filter counter
         filtersActiveCounter.innerHTML = this.checkboxCount();
@@ -46,7 +48,7 @@ class Filters {
         this.filter.forEach((filter) => {
             filter.checked = false;
             this.showChecked();
-        })
+        });
     }
 
     bindEvents() {
@@ -54,7 +56,7 @@ class Filters {
             filter.addEventListener('click', () => {
                 this.showChecked();
             });
-        })
+        });
 
         this.resetFilters.addEventListener('click', (e) => {
             e.preventDefault();
