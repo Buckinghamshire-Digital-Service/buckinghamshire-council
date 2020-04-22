@@ -35,7 +35,7 @@ class JobSubcategory(models.Model):
     This corresponds to Job Group in the TalentLink import API
     """
 
-    title = models.CharField(max_length=128)
+    title = models.CharField(max_length=128, unique=True)
 
     def get_categories_list(self):
         if self.categories:

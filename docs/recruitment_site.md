@@ -83,7 +83,11 @@ You can call this in Python code with:
 
 The management command `import_jobs` will fetch results from the API.
 
-If the `--import_categories` option is specified when running the `import_jobs` command, new categories will be imported. Otherwise, jobs with categories that do not match existing `JobCategory` instances will be skipped in the import.
+If the `--import_categories` option is specified when running the `import_jobs` command, new categories will be imported. Otherwise, jobs with categories that do not match existing `JobSubcategory` instances will be skipped in the import.
+
+`JobSubcategory` objects are unique by title, but looked up case-insensitively by the importer. This is due to similar entries like "Schools secondary" and "Schools Secondary" in the source data.
+
+Note that the filtering performed by users is on the `JobCategory` model, whereas the imported `Job Group` attribute from the API is mapped to the `JobSubcategory` model in Django. The relationship between categories and their subcategories can be edited in the Wagtail admin.
 
 ### Imported fields
 

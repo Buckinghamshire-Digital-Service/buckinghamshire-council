@@ -29,12 +29,18 @@ FIXTURE_JOB_SUBCATEGORY_TITLE = "Schools & Early Years - Support"
 
 
 class ImportTestMixin:
-    def get_mocked_client(self, advertisements=None, attachments=None, logos=None):
+    def get_mocked_client(
+        self, advertisements=None, attachments=None, logos=None, category_titles=None
+    ):
         if advertisements is None:
             advertisements = [get_advertisement()]
 
-        # create matching category
-        JobSubcategoryFactory(title=FIXTURE_JOB_SUBCATEGORY_TITLE)
+        if category_titles is None:
+            category_titles = [FIXTURE_JOB_SUBCATEGORY_TITLE]
+
+        for title in category_titles:
+            # create matching category
+            JobSubcategoryFactory(title=title)
 
         client = mock.Mock()
         client.service.getAdvertisementsByPage.side_effect = [
@@ -228,8 +234,7 @@ class ImportTest(TestCase, ImportTestMixin):
 @mock.patch("bc.recruitment_api.management.commands.import_jobs.get_client")
 class JobSubcategoriesTest(TestCase, ImportTestMixin):
     def test_import_with_missing_subcategories(self, mock_get_client):
-        mock_get_client.return_value = self.get_mocked_client()
-        JobSubcategory.objects.all().delete()
+        mock_get_client.return_value = self.get_mocked_client(category_titles=[])
 
         out = StringIO()
         call_command("import_jobs", stdout=out)
@@ -245,8 +250,7 @@ class JobSubcategoriesTest(TestCase, ImportTestMixin):
         )
 
     def test_import_missing_subcategories(self, mock_get_client):
-        mock_get_client.return_value = self.get_mocked_client()
-        JobSubcategory.objects.all().delete()
+        mock_get_client.return_value = self.get_mocked_client(category_titles=[])
 
         out = StringIO()
         call_command("import_jobs", "--import_categories", stdout=out)
@@ -293,6 +297,57 @@ class JobSubcategoriesTest(TestCase, ImportTestMixin):
         output = out.read()
         self.assertIn("1 existing jobs updated", output)
         self.assertIn("0 new jobs created", output)
+
+    def test_case_subcategory_matching_is_case_insensitive_with_existing_categories(
+        self, mock_get_client
+    ):
+        JobSubcategoryFactory(title="Test")
+        advertisements = [
+            get_advertisement(talentlink_id=1, title="New title 1", job_group="tESt")
+        ]
+        mock_get_client.return_value = self.get_mocked_client(
+            advertisements, category_titles=[]
+        )
+
+        out = StringIO()
+        call_command("import_jobs", stdout=out)
+        out.seek(0)
+        output = out.read()
+        self.assertIn("0 existing jobs updated", output)
+        self.assertIn("1 new jobs created", output)
+        self.assertEqual(
+            JobSubcategory.objects.all().count(),
+            1,
+            msg="JobSubcategory matching should be case insensitive",
+        )
+        self.assertEqual(JobSubcategory.objects.first().title, "Test")
+
+    def test_case_subcategory_matching_is_case_insensitive_when_adding_categories(
+        self, mock_get_client
+    ):
+        advertisements = [
+            get_advertisement(talentlink_id=1, title="New title 1", job_group="Test"),
+            get_advertisement(talentlink_id=2, title="New title 2", job_group="tESt"),
+        ]
+        mock_get_client.return_value = self.get_mocked_client(
+            advertisements, category_titles=[]
+        )
+
+        out = StringIO()
+        call_command("import_jobs", "--import_categories", stdout=out)
+        out.seek(0)
+        output = out.read()
+        self.assertIn("0 existing jobs updated", output)
+        self.assertIn("2 new jobs created", output)
+        self.assertEqual(
+            JobSubcategory.objects.all().count(),
+            1,
+            msg="JobSubcategory matching should be case insensitive",
+        )
+        self.assertEqual(
+            TalentLinkJob.objects.get(talentlink_id=1).subcategory,
+            TalentLinkJob.objects.get(talentlink_id=2).subcategory,
+        )
 
 
 @mock.patch("bc.recruitment_api.management.commands.import_jobs.get_client")
