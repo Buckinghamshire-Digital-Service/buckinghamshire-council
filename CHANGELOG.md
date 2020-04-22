@@ -4,6 +4,8 @@
 
 - 135 Employer logos (BE)
 - 204 Jobs fix salary imports (BE)
+- Accessibility 7 Fix invalid markups in templates
+- Accessibility 15 Location field should be linked correctly to its label
 
 ## 13.0 (2020-04-20)
 
