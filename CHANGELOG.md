@@ -4,6 +4,7 @@
 
 - 135 Employer logos (BE)
 - 204 Jobs fix salary imports (BE)
+- Accessibility 9 Improvements to screen reader only navigational content
 
 ## 13.0 (2020-04-20)
 
