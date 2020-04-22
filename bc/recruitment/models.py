@@ -35,7 +35,7 @@ class JobSubcategory(models.Model):
     This corresponds to Job Group in the TalentLink import API
     """
 
-    title = models.CharField(max_length=128)
+    title = models.CharField(max_length=128, unique=True)
 
     def get_categories_list(self):
         if self.categories:
@@ -187,7 +187,7 @@ class TalentLinkJob(models.Model):
     searchable_salary = models.CharField(
         max_length=255, help_text="Salary group for filtering"
     )
-    searchable_location = models.CharField(max_length=255)
+    location = models.CharField(max_length=255)
     location_postcode = models.CharField(max_length=8, blank=True)
     location_lat = models.DecimalField(
         max_digits=9, decimal_places=6, null=True, blank=True
@@ -201,6 +201,9 @@ class TalentLinkJob(models.Model):
     show_apply_button = models.BooleanField(default=True)
     attachments = models.ManyToManyField(
         "documents.CustomDocument", blank=True, related_name="jobs"
+    )
+    logo = models.ForeignKey(
+        "images.CustomImage", null=True, related_name="+", on_delete=models.SET_NULL,
     )
     application_url_query = models.CharField(max_length=255)
 
@@ -232,11 +235,19 @@ class TalentLinkJob(models.Model):
 
 
 @receiver(pre_delete, sender=TalentLinkJob)
-def callback_talentlinkjob_delete_attachments(sender, instance, *args, **kwargs):
+def callback_talentlinkjob_delete_attachments_and_logo(
+    sender, instance, *args, **kwargs
+):
     # if instance.attachments:
     for doc in instance.attachments.all():
         if doc.jobs.all().count() == 1:
             doc.delete()
+
+    # Delete associated logo if it isn't used anywhere else
+    if instance.logo and (
+        TalentLinkJob.objects.filter(logo=instance.logo).count() == 1
+    ):
+        instance.logo.delete()
 
 
 class RecruitmentHomePage(RoutablePageMixin, BasePage):
