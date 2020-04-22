@@ -3,6 +3,7 @@
 ## Unreleased
 
 - 135 Employer logos (BE)
+- 176 Jobs fix import location
 - 204 Jobs fix salary imports (BE)
 
 ## 13.0 (2020-04-20)
@@ -29,6 +30,7 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/11.0...12.0
 - 172 Add live chat support feature
 - 174 Fix button padding
 - 175 Remove hard coded Bucks logo from job detail pages
+- 193 Fix issue with duplicate JobSubcategory titles
 
 ## 11.0 (2020-04-01)
 

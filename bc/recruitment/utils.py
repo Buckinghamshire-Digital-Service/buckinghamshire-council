@@ -49,7 +49,7 @@ def get_job_search_results(querydict, homepage, queryset=None):
             SearchVector("title", weight="A")
             + SearchVector("job_number", weight="A")
             # + SearchVector("short_description", weight="A")
-            + SearchVector("searchable_location", weight="B")
+            + SearchVector("location", weight="B")
             + SearchVector("description", weight="C")
         )
         query = SearchQuery(search_query, search_type="phrase")

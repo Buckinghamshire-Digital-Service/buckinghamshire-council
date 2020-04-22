@@ -19,7 +19,8 @@ def date_parser(value):
 
 
 def string_parser(value):
-    return value.strip()
+    # Remove multiple spaces as well as trailing and end spaces.
+    return " ".join(value.split())
 
 
 def yesno_parser(value):
@@ -34,14 +35,14 @@ def job_subcategory_parser(value):
     which will be handled by the calling import_jobs command.
     """
     clean_value = string_parser(value)
-    return JobSubcategory.objects.get(title=clean_value)
+    return JobSubcategory.objects.get(title__iexact=clean_value)
 
 
 def job_subcategory_insert_parser(value):
     """Get or create existing JobSubcategory"""
     clean_value = string_parser(value)
     subcategory_object, created = JobSubcategory.objects.get_or_create(
-        title=clean_value
+        title__iexact=clean_value, defaults={"title": clean_value}
     )
     return subcategory_object
 
@@ -57,9 +58,7 @@ JOB_CONFIGURABLE_FIELDS_MAPPING = {
 
 JOB_LOVS_MAPPING = {
     "Job Group": ("subcategory", job_subcategory_parser),
-    "Location": ("location", string_parser),
     "Salary Range": ("salary_range", string_parser),
-    "Searchable Location": ("searchable_location", string_parser),
     "Searchable Salary": ("searchable_salary", string_parser),
     "Show Apply Button": ("show_apply_button", yesno_parser),
     "Working Hours Selection": ("working_hours", string_parser),
@@ -140,6 +139,10 @@ def update_job_from_ad(job, ad, homepage, defaults=None, import_categories=False
             job.location_postcode = location["zipCode"]
             job.location_lat = location["latitude"]
             job.location_lon = location["longitude"]
+        if location["city"]:
+            job.location = location["city"]
+        elif location["name"]:
+            job.location = location["name"]
 
     job.save()
     return job

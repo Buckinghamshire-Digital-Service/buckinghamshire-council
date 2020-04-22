@@ -41,12 +41,18 @@ class ImportTestMixin:
         self.homepage = RecruitmentHomePageFactory.build_with_fk_objs_committed()
         self.root_page.add_child(instance=self.homepage)
 
-    def get_mocked_client(self, advertisements=None, attachments=None, logos=None):
+    def get_mocked_client(
+        self, advertisements=None, attachments=None, logos=None, category_titles=None
+    ):
         if advertisements is None:
             advertisements = [get_advertisement()]
 
-        # create matching category
-        JobSubcategoryFactory(title=FIXTURE_JOB_SUBCATEGORY_TITLE)
+        if category_titles is None:
+            category_titles = [FIXTURE_JOB_SUBCATEGORY_TITLE]
+
+        for title in category_titles:
+            # create matching category
+            JobSubcategoryFactory(title=title)
 
         client = mock.Mock()
         client.service.getAdvertisementsByPage.side_effect = [
@@ -161,6 +167,27 @@ class ImportTest(TestCase, ImportTestMixin):
         job.refresh_from_db()
         self.assertEqual(job.last_imported, later)
 
+    def test_new_job_imported_location(self, mock_get_client):
+        advertisements = [
+            get_advertisement(talentlink_id=1),
+        ]
+        mock_get_client.return_value = self.get_mocked_client(advertisements)
+
+        instant = datetime.datetime(2020, 1, 29, 12, 0, 0, tzinfo=datetime.timezone.utc)
+        with freeze_time(instant):
+            call_command("import_jobs", stdout=mock.MagicMock())
+
+        job = TalentLinkJob.objects.get(talentlink_id=1)
+        self.assertEqual(job.location, "Aylesbury Vale")
+
+        # test new location updates exisiting job
+        new_location = "South Bucks"
+        job = update_job_from_ad(
+            job, get_advertisement(talentlink_id=1, location=new_location),
+        )
+
+        self.assertEqual(job.location, new_location)
+
     @mock.patch("bc.recruitment_api.management.commands.import_jobs.update_job_from_ad")
     def test_errors_are_reported(self, mock_update_fn, mock_get_client):
         error_message = "This is a test error message"
@@ -238,8 +265,7 @@ class JobSubcategoriesTest(TestCase, ImportTestMixin):
         ImportTestMixin.setUpRecruitmentHomePage(self)
 
     def test_import_with_missing_subcategories(self, mock_get_client):
-        mock_get_client.return_value = self.get_mocked_client()
-        JobSubcategory.objects.all().delete()
+        mock_get_client.return_value = self.get_mocked_client(category_titles=[])
 
         out = StringIO()
         call_command("import_jobs", stdout=out)
@@ -255,8 +281,7 @@ class JobSubcategoriesTest(TestCase, ImportTestMixin):
         )
 
     def test_import_missing_subcategories(self, mock_get_client):
-        mock_get_client.return_value = self.get_mocked_client()
-        JobSubcategory.objects.all().delete()
+        mock_get_client.return_value = self.get_mocked_client(category_titles=[])
 
         out = StringIO()
         call_command("import_jobs", "--import_categories", stdout=out)
@@ -303,6 +328,57 @@ class JobSubcategoriesTest(TestCase, ImportTestMixin):
         output = out.read()
         self.assertIn("1 existing jobs updated", output)
         self.assertIn("0 new jobs created", output)
+
+    def test_case_subcategory_matching_is_case_insensitive_with_existing_categories(
+        self, mock_get_client
+    ):
+        JobSubcategoryFactory(title="Test")
+        advertisements = [
+            get_advertisement(talentlink_id=1, title="New title 1", job_group="tESt")
+        ]
+        mock_get_client.return_value = self.get_mocked_client(
+            advertisements, category_titles=[]
+        )
+
+        out = StringIO()
+        call_command("import_jobs", stdout=out)
+        out.seek(0)
+        output = out.read()
+        self.assertIn("0 existing jobs updated", output)
+        self.assertIn("1 new jobs created", output)
+        self.assertEqual(
+            JobSubcategory.objects.all().count(),
+            1,
+            msg="JobSubcategory matching should be case insensitive",
+        )
+        self.assertEqual(JobSubcategory.objects.first().title, "Test")
+
+    def test_case_subcategory_matching_is_case_insensitive_when_adding_categories(
+        self, mock_get_client
+    ):
+        advertisements = [
+            get_advertisement(talentlink_id=1, title="New title 1", job_group="Test"),
+            get_advertisement(talentlink_id=2, title="New title 2", job_group="tESt"),
+        ]
+        mock_get_client.return_value = self.get_mocked_client(
+            advertisements, category_titles=[]
+        )
+
+        out = StringIO()
+        call_command("import_jobs", "--import_categories", stdout=out)
+        out.seek(0)
+        output = out.read()
+        self.assertIn("0 existing jobs updated", output)
+        self.assertIn("2 new jobs created", output)
+        self.assertEqual(
+            JobSubcategory.objects.all().count(),
+            1,
+            msg="JobSubcategory matching should be case insensitive",
+        )
+        self.assertEqual(
+            TalentLinkJob.objects.get(talentlink_id=1).subcategory,
+            TalentLinkJob.objects.get(talentlink_id=2).subcategory,
+        )
 
 
 @mock.patch("bc.recruitment_api.management.commands.import_jobs.get_client")
