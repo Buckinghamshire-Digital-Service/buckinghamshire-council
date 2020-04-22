@@ -1,4 +1,8 @@
 {# Use with include, e.g. `{% include "patterns/atoms/icons/icon.html" with name="mybutton" classname="icon--stroke button__icon" %}` #}
-<svg class="icon icon--{{ name }}{% if classname %} {{ classname }}{% endif %}" aria-hidden="true" focusable="false">
+<svg
+    class="icon icon--{{ name }}{% if classname %} {{ classname }}{% endif %}"
+    {% if width %} width="{{ width }}"{% endif %}
+    {% if height %} height="{{ height }}"{% endif %}
+    aria-hidden="true" focusable="false">
     <use xlink:href="#{{ name }}"></use>
 </svg>
