@@ -41,9 +41,7 @@
                         aria-expanded="false"
                         aria-selected="false"
                         id="question-{{ forloop.counter }}">
-                        <svg class="accordion__icon accordion__icon--search-filter icon icon--stroke" aria-hidden="true">
-                            <use xlink:href="#chevron"></use>
-                        </svg>
+                        {% include "patterns/atoms/icons/icon.html" with name="chevron" classname="icon--stroke accordion__icon accordion__icon--search-filter" %}
 
                         <h3 class="search-filters__group-title search-filters__group-title--accordion">{{ filter.title }}</h3>
                     </a>
