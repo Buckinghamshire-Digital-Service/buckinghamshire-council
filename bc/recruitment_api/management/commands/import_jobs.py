@@ -94,7 +94,8 @@ class Command(BaseCommand):
                                 doc_imported += import_attachments_for_job(job, client)
                             except Exception as e:
                                 msg = (
-                                    f"Error occurred while importing attachments for job {ad['id']} {ad['jobNumber']}:\n"
+                                    "Error occurred while importing attachments "
+                                    + f"for job {ad['id']} {ad['jobNumber']}:\n"
                                     + str(e)
                                 )
                                 errors.append(msg)
