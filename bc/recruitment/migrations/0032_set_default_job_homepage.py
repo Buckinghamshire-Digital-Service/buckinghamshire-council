@@ -15,7 +15,7 @@ def set_default_job_homepage(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("recruitment", "0029_add_job_board"),
+        ("recruitment", "0031_add_job_board"),
     ]
 
     operations = [

@@ -180,10 +180,12 @@ class ImportTest(TestCase, ImportTestMixin):
         job = TalentLinkJob.objects.get(talentlink_id=1)
         self.assertEqual(job.location, "Aylesbury Vale")
 
-        # test new location updates exisiting job
+        # test new location updates existing job
         new_location = "South Bucks"
         job = update_job_from_ad(
-            job, get_advertisement(talentlink_id=1, location=new_location),
+            job,
+            get_advertisement(talentlink_id=1, location=new_location),
+            homepage=self.homepage,
         )
 
         self.assertEqual(job.location, new_location)
