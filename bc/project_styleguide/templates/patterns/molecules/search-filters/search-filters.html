@@ -17,7 +17,7 @@
             {% if filter.key == "category"%}
                 <h3 class="search-filters__group-title">{{ filter.title }}</h3>
 
-                <fieldset class="search-filters__fieldset" [data-filters]>
+                <fieldset class="search-filters__fieldset">
                     {% for option in filter.options %}
                         <div class="search-filters__option form-item--custom_checkbox_select_multiple">
                             <input type="checkbox" name="{{ filter.key }}" value="{{ option.key }}" id="{{forloop.counter}}-{{ option.key }}" {% if option.key|slugify in filter.selected %}checked{% endif %}>
