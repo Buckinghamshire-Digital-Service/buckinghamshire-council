@@ -16,7 +16,7 @@ class FormSubmit {
             if (this.classList.contains(submittedClass)) {
                 e.preventDefault();
                 submitButton.disabled = true;
-            // if form does not contain submitted class (first submission), add it
+                // if form does not contain submitted class (first submission), add it
             } else {
                 this.classList.add(submittedClass);
             }
