@@ -3,12 +3,12 @@
 <footer class="footer">
     <div class="footer__inner wrapper wrapper--large">
         <div class="footer__nav-container">
-            <section>
+            <div>
                 {% footerlinks %}
-            </section>
+            </div>
 
             {% if settings.utils.SocialMediaSettings.twitter_handle or settings.utils.SocialMediaSettings.facebook_app_id %}
-                <section class="footer__social-links">
+                <div class="footer__social-links">
                     {% if settings.utils.SocialMediaSettings.facebook_app_id %}
                         <a href="https://www.facebook.com/{{ settings.utils.SocialMediaSettings.facebook_app_id }}">
                             <svg class="icon icon--footer-social"><use xlink:href="#facebook"></use></svg>
@@ -24,7 +24,7 @@
                             <svg class="icon icon--footer-social"><use xlink:href="#youtube"></use></svg>
                         </a>
                     {% endif %}
-                </section>
+                </div>
             {% endif %}
         </div>
 
