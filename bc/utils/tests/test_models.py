@@ -1,4 +1,5 @@
 from django.test import TestCase, override_settings
+from django.urls import reverse
 
 from wagtail.core.models import Page, Site
 
@@ -89,3 +90,25 @@ class BasePageTemplateTest(TestCase):
                     response.context["base_page_template"],
                     BASE_PAGE_TEMPLATE_RECRUITMENT,
                 )
+
+    def test_main_404_uses_main_site(self):
+        response = self.client.get("/this_should_404/", SERVER_NAME=MAIN_HOSTNAME)
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.context["request"].site, self.main_site)
+
+    def test_recruitment_404_uses_recruitment_site(self):
+        response = self.client.get(
+            "/this_should_404/", SERVER_NAME=RECRUITMENT_HOSTNAME
+        )
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.context["request"].site, self.recruitment_site)
+
+    def test_main_search_uses_main_site(self):
+        response = self.client.get(reverse("search"), SERVER_NAME=MAIN_HOSTNAME)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["request"].site, self.main_site)
+
+    def test_recruitment_search_uses_recruitment_site(self):
+        response = self.client.get(reverse("search"), SERVER_NAME=RECRUITMENT_HOSTNAME)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["request"].site, self.recruitment_site)
