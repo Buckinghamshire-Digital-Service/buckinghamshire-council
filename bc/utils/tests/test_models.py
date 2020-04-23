@@ -36,14 +36,6 @@ class BasePageTemplateTest(TestCase):
         )
         self.page_factories = [InformationPageFactory, IndexPageFactory]
 
-    def test_recruitment_homepage_is_recruitment_site(self):
-        self.assertTrue(self.recruitment_homepage.is_recruitment_site)
-
-    def test_main_homepage_is_not_recruitment_site(self):
-        """We expect to have to use getattr, in case any other home page types are
-        created without the is_recruitment_site attribute."""
-        self.assertFalse(getattr(self.homepage, "is_recruitment_site", False))
-
     def test_main_homepage_uses_main_site(self):
         """This is mainly a test that this test case is viable."""
         response = self.client.get("/", SERVER_NAME=MAIN_HOSTNAME)

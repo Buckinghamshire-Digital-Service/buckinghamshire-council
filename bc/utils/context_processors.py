@@ -1,10 +1,11 @@
 from django.conf import settings
 
+from bc.recruitment.utils import is_recruitment_site
 from bc.utils.constants import BASE_PAGE_TEMPLATE, BASE_PAGE_TEMPLATE_RECRUITMENT
 
 
 def global_vars(request):
-    if getattr(request.site.root_page.specific, "is_recruitment_site", False):
+    if is_recruitment_site(request):
         base_page_template = BASE_PAGE_TEMPLATE_RECRUITMENT
     else:
         base_page_template = BASE_PAGE_TEMPLATE
