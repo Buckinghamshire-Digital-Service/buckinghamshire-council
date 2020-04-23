@@ -54,7 +54,7 @@ class Command(BaseCommand):
                     "patterns/email/job_search_results_alert.txt",
                     context={
                         "results": results,
-                        "search_term": alert.search,
+                        "search": json.loads(alert.search),
                         "unsubscribe_url": alert.unsubscribe_url,
                     },
                 )

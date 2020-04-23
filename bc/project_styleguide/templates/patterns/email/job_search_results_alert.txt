@@ -1,8 +1,21 @@
-Your search for "{{ search_term }}" has {{ results|length }} new match{{ results|pluralize:"es" }}.
+{% load util_tags %}
+
+Your search for jobs matching your search criteria has {{ results|length }} new match{{ results|pluralize:"es" }}:
+
 {% for result in results %}
 {{ forloop.counter }}. [{{ result.title }}]({{ result.url }})
   {{ result.short_description }}
 {% endfor %}
+
+Search criteria:
+
+{% if not search %}
+- Any
+{% endif %}
+{% for key in search %}
+- {{key|title}} : "{{ search|lookup:key }}"
+{% endfor %}
+
+
 ---
 You can unsubscribe from this alert at {{ unsubscribe_url }}.
-<a href="something">test</a>

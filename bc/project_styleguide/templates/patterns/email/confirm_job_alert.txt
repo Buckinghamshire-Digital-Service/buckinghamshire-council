@@ -2,6 +2,9 @@
 
 Thank you for subscribing to job alert for jobs matching:
 
+{% if not search %}
+- Any
+{% endif %}
 {% for key in search %}
 - {{key|title}} : "{{ search|lookup:key }}"
 {% endfor %}
