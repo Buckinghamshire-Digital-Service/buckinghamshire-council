@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Accessibility 11 Fix HTML validation errors on the main site
+
 ## 14.0 (2020-04-22)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/13.0...14.0
