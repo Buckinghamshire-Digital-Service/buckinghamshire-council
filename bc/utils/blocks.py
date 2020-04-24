@@ -105,13 +105,7 @@ class ButtonBlock(blocks.StructBlock):
         template = "patterns/molecules/streamfield/blocks/button_block.html"
 
 
-# Main streamfield block to be inherited by Pages
-class StoryBlock(blocks.StreamBlock):
-    heading = blocks.CharBlock(
-        classname="full title",
-        icon="title",
-        template="patterns/molecules/streamfield/blocks/heading_block.html",
-    )
+class StoryBlockBase(blocks.StreamBlock):
     paragraph = blocks.RichTextBlock(features=RICH_TEXT_FEATURES)
     image = ImageBlock()
     embed = EmbedBlock()
@@ -120,4 +114,40 @@ class StoryBlock(blocks.StreamBlock):
     button = ButtonBlock()
 
     class Meta:
+        abstract = True
         template = "patterns/molecules/streamfield/stream_block.html"
+
+
+class NestedStoryBlock(StoryBlockBase):
+    pass
+
+
+class Accordion(blocks.StructBlock):
+    items = blocks.ListBlock(
+        blocks.StructBlock(
+            [
+                (
+                    "title",
+                    blocks.CharBlock(
+                        classname="full title", icon="title", label="Accordion title"
+                    ),
+                ),
+                ("content", NestedStoryBlock(label="Accordion content")),
+            ]
+        ),
+        label="Accordion items",
+    )
+
+    class Meta:
+        icon = ("list-ul",)
+        template = ("patterns/molecules/streamfield/blocks/accordion.html",)
+
+
+# Main streamfield block to be inherited by Pages
+class StoryBlock(StoryBlockBase):
+    heading = blocks.CharBlock(
+        classname="full title",
+        icon="title",
+        template="patterns/molecules/streamfield/blocks/heading_block.html",
+    )
+    accordion = Accordion()

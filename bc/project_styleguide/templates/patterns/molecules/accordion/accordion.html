@@ -27,7 +27,7 @@
                 role="tabpanel"
                 aria-labelledby="question-{{ forloop.counter }}"
                 aria-hidden="false">
-                {{ accordion.content|richtext }}
+                {% include_block accordion.content %}
             </div>
 
         </div>
