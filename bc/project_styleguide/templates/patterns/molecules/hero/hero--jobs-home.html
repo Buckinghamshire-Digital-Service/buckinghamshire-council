@@ -1,7 +1,7 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% image page.hero_image min-1600x350 as hero_image %}
-<div class="hero hero--jobs hero--with-search" style="background-image: url('{{ hero_image.url }}');">
+<section class="hero hero--jobs hero--with-search" style="background-image: url('{{ hero_image.url }}');" aria-label="Hero">
     <div class="wrapper wrapper--large">
         <h1 class="hero__strapline heading heading--xxxl">{{ page.hero_title }}</h1>
 
@@ -17,7 +17,9 @@
                 </button>
             </form>
 
-            <a class="hero__search-link" href="{% url 'search' %}">{{ page.hero_link_text }}</a>
+            <nav>
+                <a class="hero__search-link" href="{% url 'search' %}">{{ page.hero_link_text }}</a>
+            </nav>
         </div>
     </div>
-</div>
+</section>
