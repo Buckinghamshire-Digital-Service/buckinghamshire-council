@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Accessibility 13 Fix jobs search filters HTML validation errors on IDs
+
 ## 14.0 (2020-04-22)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/13.0...14.0
