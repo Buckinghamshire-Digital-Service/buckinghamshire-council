@@ -105,7 +105,7 @@ class ButtonBlock(blocks.StructBlock):
         template = "patterns/molecules/streamfield/blocks/button_block.html"
 
 
-class StoryBlockBase(blocks.StreamBlock):
+class BaseStoryBlock(blocks.StreamBlock):
     subheading = blocks.CharBlock(
         classname="full title",
         icon="title",
@@ -123,7 +123,7 @@ class StoryBlockBase(blocks.StreamBlock):
         template = "patterns/molecules/streamfield/stream_block.html"
 
 
-class NestedStoryBlock(StoryBlockBase):
+class NestedStoryBlock(BaseStoryBlock):
     pass
 
 
@@ -149,7 +149,7 @@ class Accordion(blocks.StructBlock):
 
 
 # Main streamfield block to be inherited by Pages
-class StoryBlock(StoryBlockBase):
+class StoryBlock(BaseStoryBlock):
     heading = blocks.CharBlock(
         classname="full title",
         icon="title",
