@@ -11,9 +11,6 @@ class ConditionalField {
         this.allConditionalInputs = this.conditional.querySelectorAll(
             '[data-conditional-input]',
         );
-        this.allConditionalSubFields = this.conditional.querySelectorAll(
-            '[data-conditional-subfields]',
-        );
 
         this.bindEvents();
     }
@@ -21,15 +18,17 @@ class ConditionalField {
     handleInput(item) {
         const parentField = item.closest('[data-conditional-field]');
 
-        // remove active class from all fields
+        // remove active class from all conditional fields
         this.allConditionalFields.forEach(field => {
             field.classList.remove('is-checked');
             field.setAttribute('aria-expanded', 'false');
             field.setAttribute('aria-hidden', 'true');
         });
 
+        // if radio is checked, add is-checked class & aria-attributes to parent
         if (item.checked) {
             parentField.classList.add('is-checked');
+            this.setAttribute('aria-selected', 'true');
             parentField.setAttribute('aria-expanded', 'true');
             parentField.setAttribute('aria-hidden', 'false');
         }
@@ -40,14 +39,6 @@ class ConditionalField {
             item.addEventListener('click', () => {
                 this.handleInput(item);
             });
-        });
-
-        this.conditional.addEventListener('focus', () => {
-            this.conditional.setAttribute('aria-selected', 'true');
-        });
-
-        this.conditional.addEventListener('blur', () => {
-            this.conditional.setAttribute('aria-selected', 'false');
         });
     }
 }
