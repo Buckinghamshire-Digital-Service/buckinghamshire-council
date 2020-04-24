@@ -250,4 +250,18 @@
             }
         }
     }
+
+    &__conditional-fields {
+        border-left: 5px solid $color--grey-border;
+        display: none;
+        margin-bottom: 0;
+        margin-left: 10px;
+        padding: 10px $grid--small;
+        margin-top: 10px;
+        width: auto;
+
+        .is-checked & {
+            display: block;
+        }
+    }
 }

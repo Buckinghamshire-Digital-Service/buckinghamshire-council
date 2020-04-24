@@ -8,6 +8,7 @@ import MobileSubMenu from './components/mobile-sub-menu';
 import Accordion from './components/accordion';
 import AreaSearchForm from './components/area-search-form';
 import Carousel from './components/carousel';
+import ConditionalField from './components/conditional-field';
 import ProgressBar from './components/progress-bar';
 import VideoModal from './components/video-modal';
 
@@ -44,6 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (const carousel of document.querySelectorAll(Carousel.selector())) {
         new Carousel(carousel);
+    }
+
+    for (const conditionalfield of document.querySelectorAll(ConditionalField.selector())) {
+        new ConditionalField(conditionalfield);
     }
 
     for (const mobilemenu of document.querySelectorAll(MobileMenu.selector())) {
