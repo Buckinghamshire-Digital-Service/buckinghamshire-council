@@ -10,7 +10,7 @@ register = template.Library()
 @register.inclusion_tag("patterns/molecules/search-filters/search-filters.html")
 def jobs_search_filters(request, unfiltered_results=None):
     search_postcode = request.GET.get("postcode", None)
-    homepage = request.site.root_page
+    homepage = request.site.root_page.specific
 
     if not unfiltered_results:
         # Provide a default queryset for Pattern Library

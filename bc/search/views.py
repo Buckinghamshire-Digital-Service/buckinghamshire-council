@@ -102,7 +102,7 @@ class SearchView(View):
             search = get_current_search(request.GET)
             email = form.cleaned_data["email"]
             context = {"STATUSES": JOB_ALERT_STATUSES}
-            homepage = request.site.root_page
+            homepage = request.site.root_page.specific
 
             # Search if already exists and confirmed:
             try:
