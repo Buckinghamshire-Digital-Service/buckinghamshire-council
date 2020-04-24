@@ -19,7 +19,7 @@ class ConditionalField {
         const parentField = item.closest('[data-conditional-field]');
 
         // remove active class from all conditional fields
-        this.allConditionalFields.forEach(field => {
+        this.allConditionalFields.forEach((field) => {
             field.classList.remove('is-checked');
             field.setAttribute('aria-expanded', 'false');
             field.setAttribute('aria-hidden', 'true');
@@ -35,7 +35,7 @@ class ConditionalField {
     }
 
     bindEvents() {
-        this.allConditionalInputs.forEach(item => {
+        this.allConditionalInputs.forEach((item) => {
             item.addEventListener('click', () => {
                 this.handleInput(item);
             });

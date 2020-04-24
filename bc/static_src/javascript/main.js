@@ -47,7 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
         new Carousel(carousel);
     }
 
-    for (const conditionalfield of document.querySelectorAll(ConditionalField.selector())) {
+    for (const conditionalfield of document.querySelectorAll(
+        ConditionalField.selector(),
+    )) {
         new ConditionalField(conditionalfield);
     }
 
