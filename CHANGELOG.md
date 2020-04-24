@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Subheading block (BE)
+- Accessibility 16 Fix Jobs filter fieldset legends
 
 ## 14.0 (2020-04-22)
 
