@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Fix job alert unsubscribe email
+- Fix job alert email
 
 ## 14.0 (2020-04-22)
 
