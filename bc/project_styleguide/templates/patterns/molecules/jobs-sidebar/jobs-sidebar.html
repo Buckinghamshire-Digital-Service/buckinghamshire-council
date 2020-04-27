@@ -1,6 +1,6 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
 
-<aside class="sidebar sidebar--jobs">
+<div class="sidebar sidebar--jobs">
     {% if page.logo %}
         {% image page.logo fill-110x110 class="sidebar__job-detail-logo" %}
     {% endif %}
@@ -80,4 +80,4 @@
             {% endif %}
         </dl>
     </div>
-</aside>
+</div>
