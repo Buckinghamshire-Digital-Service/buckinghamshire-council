@@ -10,6 +10,7 @@ class FormSubmit {
 
     bindEvents() {
         this.form.addEventListener('submit', (e) => {
+            const submitButton = this.form.querySelector('[type="submit"]');
             const submittedClass = 'js-submitted';
 
             // if form contains submitted class, don't allow further submissions

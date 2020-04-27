@@ -22,6 +22,10 @@
                 $color--grey-light,
                 $color--grey-light
             );
+
+            &:hover {
+                background-color: $color--grey-light;
+            }
         }
     }
 
