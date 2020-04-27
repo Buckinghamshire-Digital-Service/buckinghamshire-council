@@ -44,10 +44,10 @@
         }
 
         #{$root}__content {
-            border-left: 5px solid $color--grey-border;
+            border-left: 4px solid $color--grey-border;
             margin-bottom: 0;
-            margin-left: 0;
-            padding: 10px $grid--small;
+            margin-left: 5px;
+            padding: 10px 15px;
             margin-top: 10px;
         }
     }
