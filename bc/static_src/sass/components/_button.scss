@@ -23,6 +23,19 @@
         background-color: $color--lake;
         border: 2px solid $color--white;
         width: 100%;
+        text-decoration: none;
+
+        #{$hover-states} {
+            background-color: $color--sky;
+            color: $color--white;
+            cursor: pointer;
+        }
+
+        &:active {
+            background-color: $color--mustard;
+            border: 2px solid $color--charcoal;
+            color: $color--charcoal;
+        }
 
         @include media-query(mob-landscape) {
             width: auto;
