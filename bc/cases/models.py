@@ -10,7 +10,12 @@ from wagtail.search import index
 from bs4 import BeautifulSoup
 
 from bc.cases.backends.respond.client import RespondClientException, get_client
-from bc.cases.backends.respond.constants import CREATE_CASE_SERVICES, CREATE_CASE_TYPE
+from bc.cases.backends.respond.constants import (
+    ATTACHMENT_FAILURE_ERROR,
+    ATTACHMENT_SCHEMA_NAME,
+    CREATE_CASE_SERVICES,
+    CREATE_CASE_TYPE,
+)
 from bc.utils.constants import RICH_TEXT_FEATURES
 
 from ..utils.models import BasePage
@@ -98,8 +103,16 @@ class ApteanRespondCaseFormPage(BasePage):
         soup = BeautifulSoup(response.content, "xml")
         if response.status_code != 200:
             for error in soup.find_all("failure"):
-                if error.attrs["schemaName"] in form.fields:
+                if (
+                    "schemaName" in error.attrs
+                    and error.attrs["schemaName"] in form.fields
+                ):
                     form.add_error(error.attrs["schemaName"], error.text)
+                elif (
+                    "type" in error.attrs
+                    and error.attrs["type"] == ATTACHMENT_FAILURE_ERROR
+                ):
+                    form.add_error(ATTACHMENT_SCHEMA_NAME, error.text)
                 else:
                     form.add_error(None, error.text)
             return form, None

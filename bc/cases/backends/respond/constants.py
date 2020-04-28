@@ -10,6 +10,8 @@ APPEND_TO_DESCRIPTION = "append to description"
 DESCRIPTION_SCHEMA_NAME = "Case.Description"
 ATTACHMENT_SCHEMA_NAME = "Activity.Note"
 
+ATTACHMENT_FAILURE_ERROR = "AttachmentFailure"
+
 RESPOND_FIELDS_CACHE_PREFIX = "respond_field__"
 RESPOND_CATEGORIES_CACHE_PREFIX = "respond_categories__"
 
