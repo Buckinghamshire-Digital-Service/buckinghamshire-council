@@ -64,7 +64,7 @@ class TestFormXML(TestCase):
 
         class TestCaseForm(BaseCaseForm):
             def __init__(self, *args, **kwargs):
-                super().__init__(self, *args, **kwargs)
+                super().__init__(*args, **kwargs)
                 self.fields = {
                     DESCRIPTION_SCHEMA_NAME: forms.CharField(label="Description"),
                     extra_field_name: forms.CharField(
@@ -97,7 +97,7 @@ class TestFormXML(TestCase):
 
         class TestCaseForm(BaseCaseForm):
             def __init__(self, *args, **kwargs):
-                super().__init__(self, *args, **kwargs)
+                super().__init__(*args, **kwargs)
                 self.fields = {
                     DESCRIPTION_SCHEMA_NAME: forms.CharField(label="Description"),
                     extra_field_one: forms.CharField(label="First extra field"),
