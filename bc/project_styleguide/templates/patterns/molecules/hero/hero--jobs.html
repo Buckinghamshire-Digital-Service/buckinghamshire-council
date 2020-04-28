@@ -1,7 +1,7 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% image page.hero_image min-1600x350 as hero_image %}
-<section class="hero hero--jobs hero--no-padding-top" style="background-image: url('{{ hero_image.url }}');" aria-label="Hero">
+<div class="hero hero--jobs hero--no-padding-top" style="background-image: url('{{ hero_image.url }}');">
 
     <div class="wrapper wrapper--large">
         <nav role="navigation" aria-label="breadcrumb">
@@ -26,4 +26,4 @@
     <div class="wrapper wrapper--large">
         <h1 class="hero__strapline heading heading--xxxl">{{ page.title }}</h1>
     </div>
-</section>
+</div>

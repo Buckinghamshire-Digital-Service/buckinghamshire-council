@@ -2,12 +2,12 @@
 
 {% with banner_settings=settings.utils.SiteBannerSettings %}
 {% if banner_settings.show_banner %}
-<aside class="alert alert--banner" aria-label="Notice">
+<div class="alert alert--banner" aria-label="Notice">
     <div class="alert__inner wrapper wrapper--large">
         <span class="alert__alpha">{{ banner_settings.label }}</span>
 
         <div class="alert__content">{{ banner_settings.body|richtext }}</div>
     </div>
-</aside>
+</div>
 {% endif %}
 {% endwith %}
