@@ -474,4 +474,14 @@
    </field>
   </fields>
  </entity>
+ <entity schema-name="Activity">
+  <name>
+   <name base-locale="en-GB" base-value="Activity"/>
+  </name>
+  <fields>
+   <field data-type="LongText" mandatory="false" read-only="false" schema-name="Activity.Note">
+    <name base-locale="en-GB" base-value="Note"/>
+   </field>
+  </fields>
+ </entity>
 </entities>

@@ -1,5 +1,6 @@
 import datetime
 import logging
+from base64 import b64encode
 from collections import OrderedDict, defaultdict
 
 import django.forms
@@ -9,11 +10,13 @@ from lxml import etree
 
 from .constants import (
     APPEND_TO_DESCRIPTION,
+    ATTACHMENT_SCHEMA_NAME,
     CATEGORY_DATA_TYPE,
     CREATE_CASE_SERVICES,
     DESCRIPTION_SCHEMA_NAME,
     FIELD_MAPPINGS,
     FIELD_TYPES,
+    FILE_DATA_TYPE,
     RESPOND_CATEGORIES_CACHE_PREFIX,
     RESPOND_FIELDS_CACHE_PREFIX,
     SHORT_TEXT_DATA_TYPE,
@@ -28,6 +31,20 @@ class BaseCaseForm(django.forms.Form):
         element = etree.Element("field", schemaName=key)
         value_element = etree.SubElement(element, "value")
         value_element.text = value
+        return element
+
+    def create_attachments_element(self, files, location_type="Database"):
+        element = etree.Element("Attachments")
+        for file in files:
+            attachment_element = etree.SubElement(
+                element,
+                "attachment",
+                locationType=location_type,
+                summary=file.name,
+                location=file.name,
+                tag="",
+            )
+            attachment_element.text = b64encode(file.read())
         return element
 
     def cast(self, value):
@@ -49,8 +66,13 @@ class BaseCaseForm(django.forms.Form):
 
         # Convert the fields to XML elements in entities dict
         for key, value in cleaned_data.items():
-            value = self.cast(value)
             entity_name = key.partition(".")[0]
+            if key == ATTACHMENT_SCHEMA_NAME:
+                files = self.files.getlist(ATTACHMENT_SCHEMA_NAME)
+                entities[entity_name].append(self.create_attachments_element(files))
+                continue
+
+            value = self.cast(value)
             if entity_name == APPEND_TO_DESCRIPTION:
                 # Special case: append this type of field to the description, rather
                 # than creating an XML element.
@@ -138,6 +160,11 @@ class CaseFormBuilder:
                     data_type = CATEGORY_DATA_TYPE
                 else:
                     data_type = SHORT_TEXT_DATA_TYPE
+            elif schema_name == ATTACHMENT_SCHEMA_NAME:
+                # special case: file attachments are appended to the Activity.Note
+                # LongText field
+                data_type = FILE_DATA_TYPE
+                options = self.get_field_options(schema_name)
             else:
                 xml_field = field_defs[schema_name]
                 data_type = xml_field.attrs["data-type"]
@@ -177,6 +204,11 @@ class CaseFormBuilder:
             cached_choices = cache.get(cache_key)
             options["choices"] = cached_choices
         return django.forms.ChoiceField(widget=django.forms.RadioSelect, **options)
+
+    def create_FileField_field(self, schema_name, options):
+        return django.forms.FileField(
+            widget=django.forms.ClearableFileInput(attrs={"multiple": True}), **options
+        )
 
     def get_field_options(self, schema_name, permit_cache_miss=False):
         """ This may end up just returning 'required' or not. """

@@ -3,13 +3,16 @@ from unittest import mock
 
 from django import forms
 from django.conf import settings
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
+from django.utils.datastructures import MultiValueDict
 
 from bs4 import BeautifulSoup
 from lxml import etree
 
 from bc.cases.backends.respond.constants import (
     APPEND_TO_DESCRIPTION,
+    ATTACHMENT_SCHEMA_NAME,
     DESCRIPTION_SCHEMA_NAME,
     RESPOND_CATEGORIES_CACHE_PREFIX,
     RESPOND_FIELDS_CACHE_PREFIX,
@@ -121,6 +124,100 @@ class TestFormXML(TestCase):
 
                 Second extra field:
                 Spider bite"""
+            ),
+        )
+
+    def test_attaching_one_file(self):
+        class TestCaseForm(BaseCaseForm):
+            def __init__(self, *args, **kwargs):
+                super().__init__(*args, **kwargs)
+                self.fields = {
+                    DESCRIPTION_SCHEMA_NAME: forms.CharField(label="Description"),
+                    ATTACHMENT_SCHEMA_NAME: forms.FileField(
+                        widget=forms.ClearableFileInput(attrs={"multiple": True}),
+                        label="Attachments",
+                    ),
+                    "service_name": forms.CharField(),
+                }
+
+        request_post = {
+            DESCRIPTION_SCHEMA_NAME: "Some description",
+            "service_name": settings.RESPOND_SAR_WEBSERVICE,
+        }
+        request_files = MultiValueDict(
+            {
+                ATTACHMENT_SCHEMA_NAME: [
+                    SimpleUploadedFile("password.txt", b"sensitive government secrets")
+                ]
+            }
+        )
+        form = TestCaseForm(request_post, request_files)
+        self.assertTrue(form.is_valid())
+
+        soup = BeautifulSoup(etree.tostring(form.get_xml(form.cleaned_data)), "xml")
+        self.maxDiff = None
+        self.assertEqual(
+            soup.find("Activities").prettify(),
+            textwrap.dedent(
+                """\
+                <Activities>
+                 <activity Tag="">
+                  <Attachments>
+                   <attachment location="password.txt" locationType="Database" summary="password.txt" tag="">
+                    c2Vuc2l0aXZlIGdvdmVybm1lbnQgc2VjcmV0cw==
+                   </attachment>
+                  </Attachments>
+                 </activity>
+                </Activities>"""
+            ),
+        )
+
+    def test_attaching_multiple_files(self):
+        class TestCaseForm(BaseCaseForm):
+            def __init__(self, *args, **kwargs):
+                super().__init__(*args, **kwargs)
+                self.fields = {
+                    DESCRIPTION_SCHEMA_NAME: forms.CharField(label="Description"),
+                    ATTACHMENT_SCHEMA_NAME: forms.FileField(
+                        widget=forms.ClearableFileInput(attrs={"multiple": True}),
+                        label="Attachments",
+                    ),
+                    "service_name": forms.CharField(),
+                }
+
+        request_post = {
+            DESCRIPTION_SCHEMA_NAME: "Some description",
+            "service_name": settings.RESPOND_SAR_WEBSERVICE,
+        }
+        request_files = MultiValueDict(
+            {
+                ATTACHMENT_SCHEMA_NAME: [
+                    SimpleUploadedFile("password.txt", b"sensitive government secrets"),
+                    SimpleUploadedFile("recipe.jpg", b"poor choice of data format"),
+                ]
+            }
+        )
+        form = TestCaseForm(request_post, request_files)
+        self.assertTrue(form.is_valid())
+
+        soup = BeautifulSoup(etree.tostring(form.get_xml(form.cleaned_data)), "xml")
+        self.maxDiff = None
+        self.assertEqual(
+            soup.find("Activities").prettify(),
+            textwrap.dedent(
+                """\
+                <Activities>
+                 <activity Tag="">
+                  <Attachments>
+                   <attachment location="password.txt" locationType="Database" summary="password.txt" tag="">
+                    c2Vuc2l0aXZlIGdvdmVybm1lbnQgc2VjcmV0cw==
+                   </attachment>
+                   <attachment location="recipe.jpg" locationType="Database" summary="recipe.jpg" tag="">
+                    cG9vciBjaG9pY2Ugb2YgZGF0YSBmb3JtYXQ=
+                   </attachment>
+                  </Attachments>
+                 </activity>
+                </Activities>"""
             ),
         )
 

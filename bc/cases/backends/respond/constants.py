@@ -8,17 +8,20 @@ CATEGORY_INFO_TYPE = "CategoryInfo"
 
 APPEND_TO_DESCRIPTION = "append to description"
 DESCRIPTION_SCHEMA_NAME = "Case.Description"
+ATTACHMENT_SCHEMA_NAME = "Activity.Note"
 
 RESPOND_FIELDS_CACHE_PREFIX = "respond_field__"
 RESPOND_CATEGORIES_CACHE_PREFIX = "respond_categories__"
 
 SHORT_TEXT_DATA_TYPE = "ShortText"
+FILE_DATA_TYPE = "File"
 CATEGORY_DATA_TYPE = "Category"
 FIELD_TYPES = {
     CATEGORY_DATA_TYPE: "RadioSelect",
     "DateTime": "DateInput",
     "LongText": "Textarea",
     SHORT_TEXT_DATA_TYPE: "TextInput",
+    FILE_DATA_TYPE: "FileField",
 }
 
 
@@ -304,6 +307,7 @@ FIELD_MAPPINGS = {
             ("Town or city", "Contact.Town"),
             ("County", "Contact.County"),
             ("Postcode", "Contact.ZipCode"),
+            ("Attachments", ATTACHMENT_SCHEMA_NAME),
         ]
     ),
 }
