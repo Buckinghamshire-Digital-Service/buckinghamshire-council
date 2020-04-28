@@ -310,7 +310,7 @@ class JobSubcategoriesTest(TestCase, ImportTestMixin):
         )
 
         out = StringIO()
-        call_command("import_jobs", stdout=out)
+        call_command("import_jobs", "--import_categories", stdout=out)
         out.seek(0)
         output = out.read()
         self.assertIn("0 existing jobs updated", output)
@@ -328,6 +328,63 @@ class JobSubcategoriesTest(TestCase, ImportTestMixin):
         advertisements = [
             get_advertisement(talentlink_id=1, title="New title 1", job_group="Test"),
             get_advertisement(talentlink_id=2, title="New title 2", job_group="tESt"),
+        ]
+        mock_get_client.return_value = self.get_mocked_client(
+            advertisements, category_titles=[]
+        )
+
+        out = StringIO()
+        call_command("import_jobs", "--import_categories", stdout=out)
+        out.seek(0)
+        output = out.read()
+        self.assertIn("0 existing jobs updated", output)
+        self.assertIn("2 new jobs created", output)
+        self.assertEqual(
+            JobSubcategory.objects.all().count(),
+            1,
+            msg="JobSubcategory matching should be case insensitive",
+        )
+        self.assertEqual(
+            TalentLinkJob.objects.get(talentlink_id=1).subcategory,
+            TalentLinkJob.objects.get(talentlink_id=2).subcategory,
+        )
+
+    def test_case_subcategory_matching_is_space_insensitive_with_existing_categories(
+        self, mock_get_client
+    ):
+        JobSubcategoryFactory(title="My Spacey Cat")
+        advertisements = [
+            get_advertisement(
+                talentlink_id=1, title="New title 1", job_group=" my spacey   cat "
+            )
+        ]
+        mock_get_client.return_value = self.get_mocked_client(
+            advertisements, category_titles=[]
+        )
+
+        out = StringIO()
+        call_command("import_jobs", "--import_categories", stdout=out)
+        out.seek(0)
+        output = out.read()
+        self.assertIn("0 existing jobs updated", output)
+        self.assertIn("1 new jobs created", output)
+        self.assertEqual(
+            JobSubcategory.objects.all().count(),
+            1,
+            msg="JobSubcategory matching should be case insensitive",
+        )
+        self.assertEqual(JobSubcategory.objects.first().title, "My Spacey Cat")
+
+    def test_case_subcategory_matching_is_space_insensitive_when_adding_categories(
+        self, mock_get_client
+    ):
+        advertisements = [
+            get_advertisement(
+                talentlink_id=1, title="New title 1", job_group=" my spacey   cat "
+            ),
+            get_advertisement(
+                talentlink_id=2, title="New title 2", job_group="   my   spacey cat"
+            ),
         ]
         mock_get_client.return_value = self.get_mocked_client(
             advertisements, category_titles=[]
