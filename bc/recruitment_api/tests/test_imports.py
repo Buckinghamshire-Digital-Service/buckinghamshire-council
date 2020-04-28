@@ -310,7 +310,7 @@ class JobSubcategoriesTest(TestCase, ImportTestMixin):
         )
 
         out = StringIO()
-        call_command("import_jobs", stdout=out)
+        call_command("import_jobs", "--import_categories", stdout=out)
         out.seek(0)
         output = out.read()
         self.assertIn("0 existing jobs updated", output)
@@ -363,7 +363,7 @@ class JobSubcategoriesTest(TestCase, ImportTestMixin):
         )
 
         out = StringIO()
-        call_command("import_jobs", stdout=out)
+        call_command("import_jobs", "--import_categories", stdout=out)
         out.seek(0)
         output = out.read()
         self.assertIn("0 existing jobs updated", output)
