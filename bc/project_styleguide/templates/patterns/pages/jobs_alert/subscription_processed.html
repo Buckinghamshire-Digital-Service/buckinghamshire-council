@@ -7,14 +7,17 @@
 
 {% block breadcrumbs %}
     <div class="wrapper wrapper--large">
-        <nav role="navigation" aria-label="breadcrumb">
-            <ul class="breadcrumb">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
                 <li class="breadcrumb__item">
                     <a class="breadcrumb__link" href="/" title="Home">
                         Home
                     </a>
                 </li>
-            </ul>
+                <li class="breadcrumb__item" aria-current="page">
+                    {{ page.title }}
+                </li>
+            </ol>
         </nav>
     </div>
 {% endblock %}
