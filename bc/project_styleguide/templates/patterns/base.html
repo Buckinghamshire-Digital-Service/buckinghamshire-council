@@ -34,6 +34,11 @@
         <div class="wrapper wrapper--grid">
             <div class="wrapper wrapper--header-space">
                 {% block header %}{% endblock %}
+            </div>
+
+            <main class="wrapper wrapper--main">
+                {# All content must be in a landmark (main, nav, etc.) #}
+                {% block hero %}{% endblock %}
                 {% block alert_banner %}{% endblock %}
 
                 {% block breadcrumbs %}
@@ -41,17 +46,17 @@
                         {% include "patterns/molecules/navigation/breadcrumbs.html" %}
                     </div>
                 {% endblock %}
-            </div>
 
-            <main class="wrapper wrapper--main wrapper--large" id="main-content">
-                {% block content %}
-                    {{ pattern_library_rendered_pattern }}
-                {% endblock %}
+                <div class="wrapper wrapper--large" id="main-content">
+                    {% block content %}
+                        {{ pattern_library_rendered_pattern }}
+                    {% endblock %}
+                </div>
             </main>
 
-            <div class="wrapper wrapper--footer-space">
+            <footer class="wrapper wrapper--footer-space">
                 {% block footer %}{% endblock %}
-            </div>
+            </footer>
         </div>
 
         <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
