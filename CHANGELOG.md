@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- 273 progressive disclosure details (BE)
+
 ## 16.0 (2020-05-07)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/15.1...16.0
