@@ -110,6 +110,14 @@ test_python:
     RECAPTCHA_PUBLIC_KEY: 'dummy-key-value'
     RECAPTCHA_PRIVATE_KEY: 'dummy-key-value'
 
+    # Some settings are used in constants
+    RESPOND_COMPLAINTS_WEBSERVICE: 'TestCreateComplaints'
+    RESPOND_FOI_WEBSERVICE: 'TestCreateFOI'
+    RESPOND_SAR_WEBSERVICE: 'TestCreateSAR'
+    RESPOND_COMMENTS_WEBSERVICE: 'TestCreateComments'
+    RESPOND_COMPLIMENTS_WEBSERVICE: 'TestCreateCompliments'
+    RESPOND_DISCLOSURES_WEBSERVICE: 'TestCreateDisclosures'
+
     # Postgres credentials
     POSTGRES_USER: db_user
     POSTGRES_PASSWORD: db_pass # pragma: allowlist secret

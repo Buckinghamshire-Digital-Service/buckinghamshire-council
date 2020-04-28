@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Add tests for job categories import fix
+- Add unit tests for Aptean Respond integration
 - Subheading block (BE)
 
 ## 14.0 (2020-04-22)

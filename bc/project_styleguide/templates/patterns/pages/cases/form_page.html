@@ -5,8 +5,9 @@
 
     <section class="section section--main">
         <h1 class="heading heading--xxl">{{ page.title }}</h1>
-        <p>{{ page.introduction }}</p>
-        <div class="container">
+        {% if form %}
+            <p>{{ page.introduction }}</p>
+            <div class="container">
                     <form action="{% pageurl page %}" method="post" class="form">
                         <div class="form__container">
                             {% csrf_token %}
@@ -56,7 +57,10 @@
                             <input class="form__submit button" type="submit" value="{% if page.action_text %}{{ page.action_text|safe }}{% else %}Submit{% endif %}" />
                         </div>
                     </form>
-        </div>
+            </div>
+        {% else %}
+            <p>Sorry, this form is not available at the moment.</p>
+        {% endif %}
     </section>
 
 {% endblock %}
