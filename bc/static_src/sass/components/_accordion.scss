@@ -32,6 +32,7 @@
             height: 30px;
             margin-right: $grid--min;
             stroke-width: 4;
+            width: 15px;
         }
 
         #{$root}__header {
@@ -47,7 +48,7 @@
             border-left: 4px solid $color--grey-border;
             margin-bottom: 0;
             margin-left: 5px;
-            padding: 10px 15px;
+            padding: 10px 15px 10px 16px;
             margin-top: 10px;
         }
     }
@@ -98,7 +99,6 @@
     &__title--area-search {
         color: $color--river;
         position: relative;
-        padding-left: 40px;
         left: -6px;
     }
 
@@ -109,6 +109,7 @@
         stroke: $color--lake;
         stroke-width: 4;
         transform: rotate(-90deg);
+        width: 17px;
 
         &--search-filter {
             stroke: $color--charcoal;
@@ -119,10 +120,16 @@
         }
     }
 
+    &__icon--area-search {
+        stroke: $color--river;
+        width: 20px;
+        margin-left: 8px;
+    }
+
     &__content {
         display: none;
         margin-bottom: 10px;
-        margin-left: 20px + $grid--small;
+        margin-left: 20px + 17px; // icon's right margin + icon width
         margin-top: 15px;
 
         &--search-filters {
