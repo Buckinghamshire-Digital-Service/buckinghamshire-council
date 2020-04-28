@@ -58,6 +58,12 @@
         font-weight: $weight--bold;
         margin-top: $grid--min;
         margin-right: 10px;
+        text-decoration: none;
+
+        #{$hover-states} {
+            color: $color--white;
+            text-decoration: underline;
+        }
 
         @include media-query(px550) {
             @include font-size(xl);
