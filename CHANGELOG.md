@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Subheading block (BE)
+- Accessibility 19 Remove nesting for landmarks
 
 ## 14.0 (2020-04-22)
 
