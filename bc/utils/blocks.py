@@ -128,7 +128,9 @@ class AccordionDetail(blocks.StructBlock):
 
     class Meta:
         icon = ("list-ul",)
-        template = ("patterns/molecules/streamfield/blocks/accordion_detail_block.html",)
+        template = (
+            "patterns/molecules/streamfield/blocks/accordion_detail_block.html",
+        )
 
 
 # Main streamfield block to be inherited by Pages
