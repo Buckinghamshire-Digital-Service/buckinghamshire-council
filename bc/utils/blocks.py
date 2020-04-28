@@ -106,12 +106,20 @@ class ButtonBlock(blocks.StructBlock):
 
 
 class BaseStoryBlock(blocks.StreamBlock):
+    heading = blocks.CharBlock(
+        classname="full title",
+        icon="title",
+        template="patterns/molecules/streamfield/blocks/heading_block.html",
+        group="Heading",
+        label="Main heading",
+    )
     subheading = blocks.CharBlock(
         classname="full title",
         icon="title",
         template="patterns/molecules/streamfield/blocks/subheading_block.html",
+        group="Heading",
     )
-    paragraph = blocks.RichTextBlock(features=RICH_TEXT_FEATURES)
+    paragraph = blocks.RichTextBlock(features=RICH_TEXT_FEATURES,)
     image = ImageBlock()
     embed = EmbedBlock()
     local_area_links = LocalAreaLinksBlock()
@@ -124,7 +132,19 @@ class BaseStoryBlock(blocks.StreamBlock):
 
 
 class NestedStoryBlock(BaseStoryBlock):
-    pass
+    def __init__(self, local_blocks=None, **kwargs):
+        super().__init__(**kwargs)
+        # Bump down template for heading fields so headings don't clash with those outside the accordion
+        self.child_blocks[
+            "heading"
+        ].meta.template = (
+            "patterns/molecules/streamfield/blocks/subsubheading_block.html"
+        )
+        self.child_blocks[
+            "subheading"
+        ].meta.template = (
+            "patterns/molecules/streamfield/blocks/subsubsubheading_block.html"
+        )
 
 
 class Accordion(blocks.StructBlock):
@@ -150,9 +170,4 @@ class Accordion(blocks.StructBlock):
 
 # Main streamfield block to be inherited by Pages
 class StoryBlock(BaseStoryBlock):
-    heading = blocks.CharBlock(
-        classname="full title",
-        icon="title",
-        template="patterns/molecules/streamfield/blocks/heading_block.html",
-    )
     accordion = Accordion()
