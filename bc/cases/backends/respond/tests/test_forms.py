@@ -230,64 +230,100 @@ class TestFormXML(TestCase):
 
 class SchemaTest(TestCase):
 
-    known_xml = """<case Tag="" xmlns="http://www.aptean.com/respond/caserequest/1">
-  <field schemaName="Case.ActionTaken01">
-    <value></value>
-  </field>
-  <field schemaName="Case.AdditionalComments">
-    <value></value>
-  </field>
-  <field schemaName="Case.FeedbackType">
-    <value>Corporate</value>
-  </field>
-  <field schemaName="Case.HowReceived">
-    <value>Web Form</value>
-  </field>
-  <field schemaName="Case.Description">
-    <value>I don\'t like fish.</value>
-  </field>
-  <Contacts>
-    <contact Tag="">
-      <field schemaName="Contact.Clientis">
-        <value>212f3677-b4f5-4461-b62f-fd7f4fe2bdcc</value>
-      </field>
-      <field schemaName="Contact.OtherTitle">
-        <value>Kreivi</value>
-      </field>
-      <field schemaName="Contact.FirstName">
-        <value></value>
-      </field>
-      <field schemaName="Contact.Surname">
-        <value>M&#228;nnikk&#246;lahti</value>
-      </field>
-      <field schemaName="Contact.PreferredContactMethod">
-        <value></value>
-      </field>
-      <field schemaName="Contact.Email">
-        <value></value>
-      </field>
-      <field schemaName="Contact.Mobile">
-        <value></value>
-      </field>
-      <field schemaName="Contact.Address01">
-        <value></value>
-      </field>
-      <field schemaName="Contact.Town">
-        <value></value>
-      </field>
-      <field schemaName="Contact.County">
-        <value></value>
-      </field>
-      <field schemaName="Contact.ZipCode">
-        <value></value>
-      </field>
-      <field schemaName="Contact.ContactIs">
-        <value>Other</value>
-      </field>
-    </contact>
-  </Contacts>
-</case>
-"""
+    known_xml = textwrap.dedent(
+        """\
+        <case Tag="" xmlns="http://www.aptean.com/respond/caserequest/1">
+          <field schemaName="Case.ActionTaken01">
+            <value></value>
+          </field>
+          <field schemaName="Case.AdditionalComments">
+            <value></value>
+          </field>
+          <field schemaName="Case.FeedbackType">
+            <value>Corporate</value>
+          </field>
+          <field schemaName="Case.HowReceived">
+            <value>Web Form</value>
+          </field>
+          <field schemaName="Case.Description">
+            <value>I don\'t like fish.</value>
+          </field>
+          <Contacts>
+            <contact Tag="">
+              <field schemaName="Contact.Clientis">
+                <value>212f3677-b4f5-4461-b62f-fd7f4fe2bdcc</value>
+              </field>
+              <field schemaName="Contact.OtherTitle">
+                <value>Kreivi</value>
+              </field>
+              <field schemaName="Contact.FirstName">
+                <value></value>
+              </field>
+              <field schemaName="Contact.Surname">
+                <value>M&#228;nnikk&#246;lahti</value>
+              </field>
+              <field schemaName="Contact.PreferredContactMethod">
+                <value></value>
+              </field>
+              <field schemaName="Contact.Email">
+                <value></value>
+              </field>
+              <field schemaName="Contact.Mobile">
+                <value></value>
+              </field>
+              <field schemaName="Contact.Address01">
+                <value></value>
+              </field>
+              <field schemaName="Contact.Town">
+                <value></value>
+              </field>
+              <field schemaName="Contact.County">
+                <value></value>
+              </field>
+              <field schemaName="Contact.ZipCode">
+                <value></value>
+              </field>
+              <field schemaName="Contact.ContactIs">
+                <value>Other</value>
+              </field>
+            </contact>
+          </Contacts>
+        </case>
+        """
+    )
+
+    known_xml_with_file = textwrap.dedent(
+        """\
+        <case Tag="" xmlns="http://www.aptean.com/respond/caserequest/1">
+          <field schemaName="Case.FeedbackType">
+            <value>Disclosures</value>
+          </field>
+          <field schemaName="Case.HowReceived">
+            <value>Web Form</value>
+          </field>
+          <field schemaName="Case.Description">
+            <value>Please accept my resignation.</value>
+          </field>
+          <Contacts>
+            <contact Tag="">
+              <field schemaName="Contact.ContactIs">
+                <value>Other</value>
+              </field>
+            </contact>
+          </Contacts>
+          <Activities>
+            <activity Tag="">
+              <field schemaName="Activity.Note">
+                <value></value>
+              </field>
+              <Attachments>
+                <attachment locationType="Database" summary="i_quit.docx" location="i_quit.docx" tag="">SSd2ZSBoYWQgZW5vdWdoIG9mIHRoaXMu</attachment>
+              </Attachments>
+            </activity>
+          </Activities>
+        </case>
+        """  # noqa
+    )
 
     def setUp(self):
         with open("bc/cases/backends/respond/schemata/create_case.xsd", "r") as f:
@@ -300,10 +336,18 @@ class SchemaTest(TestCase):
         ) as f:
             etree.fromstring(f.read().encode("utf-8"), self.parser)
 
-    def test_a_known_form_submission_validates(self):
-        etree.fromstring(self.known_xml, self.parser)
+    def test_known_form_submissions_validate(self):
+        for label, xml in [
+            ("known XML", self.known_xml),
+            ("known XML with file", self.known_xml_with_file),
+        ]:
+            with self.subTest(label):
+                try:
+                    etree.fromstring(xml, self.parser)
+                except etree.XMLSyntaxError:
+                    self.fail("XML failed to validate")
 
-    def test_form_converts_to_valid_xml(self):
+    def test_form_converts_to_known_valid_xml(self):
         form = BaseCaseForm()
         cleaned_data = {
             "Contact.Clientis": "212f3677-b4f5-4461-b62f-fd7f4fe2bdcc",
@@ -327,3 +371,81 @@ class SchemaTest(TestCase):
         ).decode()
         self.maxDiff = None
         self.assertEqual(generated, self.known_xml)
+
+    def test_file_field_converts_to_known_valid_xml(self):
+        class TestCaseForm(BaseCaseForm):
+            def __init__(self, *args, **kwargs):
+                super().__init__(*args, **kwargs)
+                self.fields = {
+                    DESCRIPTION_SCHEMA_NAME: forms.CharField(label="Description"),
+                    ATTACHMENT_SCHEMA_NAME: forms.FileField(
+                        widget=forms.ClearableFileInput(attrs={"multiple": True}),
+                        label="Attachments",
+                    ),
+                    "service_name": forms.CharField(),
+                }
+
+        request_post = {
+            "Case.Description": "Please accept my resignation.",
+            "service_name": settings.RESPOND_DISCLOSURES_WEBSERVICE,
+        }
+        request_files = MultiValueDict(
+            {
+                ATTACHMENT_SCHEMA_NAME: [
+                    SimpleUploadedFile("i_quit.docx", b"I've had enough of this.")
+                ]
+            }
+        )
+        form = TestCaseForm(request_post, request_files)
+        self.assertTrue(form.is_valid())
+
+        generated = etree.tostring(
+            form.get_xml(form.cleaned_data), pretty_print=True
+        ).decode()
+        self.maxDiff = None
+        self.assertEqual(generated, self.known_xml_with_file)
+        try:
+            etree.fromstring(generated, self.parser)
+        except etree.XMLSyntaxError:
+            self.fail("XML failed to validate")
+
+    def test_file_field_with_multiple_uploads_converts_to_valid_xml(self):
+        class TestCaseForm(BaseCaseForm):
+            def __init__(self, *args, **kwargs):
+                super().__init__(*args, **kwargs)
+                self.fields = {
+                    DESCRIPTION_SCHEMA_NAME: forms.CharField(label="Description"),
+                    ATTACHMENT_SCHEMA_NAME: forms.FileField(
+                        widget=forms.ClearableFileInput(attrs={"multiple": True}),
+                        label="Attachments",
+                    ),
+                    "service_name": forms.CharField(),
+                }
+
+        request_post = {
+            "Case.Description": "We prick you we prick you we prick you",
+            "service_name": settings.RESPOND_DISCLOSURES_WEBSERVICE,
+        }
+        request_files = MultiValueDict(
+            {
+                ATTACHMENT_SCHEMA_NAME: [
+                    SimpleUploadedFile(
+                        "fragile champion_boys.xlsx", b"Toys, toys, little black toys"
+                    ),
+                    SimpleUploadedFile(
+                        "rose-kissed foxy girls.ppt",
+                        b"Shoes, shoes, little white shoes",
+                    ),
+                ]
+            }
+        )
+        form = TestCaseForm(request_post, request_files)
+        self.assertTrue(form.is_valid())
+
+        generated = etree.tostring(
+            form.get_xml(form.cleaned_data), pretty_print=True
+        ).decode()
+        try:
+            etree.fromstring(generated, self.parser)
+        except etree.XMLSyntaxError:
+            self.fail("XML failed to validate")
