@@ -1,5 +1,6 @@
 import json
 import secrets
+from datetime import date
 from urllib.parse import urlsplit, urlunsplit
 
 from django.core.exceptions import ValidationError
@@ -308,6 +309,35 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
         context["job_categories"] = JobCategory.get_categories_summary()
 
         return context
+
+    def get_sitemap_urls(self, request=None):
+        sitemap = super().get_sitemap_urls(request)
+
+        today = date.today()
+        jobs = TalentLinkJob.objects.filter(
+            posting_start_date__lte=today, posting_end_date__gte=today,
+        )
+
+        jobs_sitemap = []
+        for job in jobs:
+            jobs_sitemap.append(
+                {
+                    "location": self.full_url
+                    + self.reverse_subpage("job_detail", args=(job.talentlink_id,),),
+                    "lastmod": job.last_modified,
+                }
+            )
+            if job.show_apply_button:
+                jobs_sitemap.append(
+                    {
+                        "location": self.full_url
+                        + self.reverse_subpage("apply")
+                        + job.application_url,
+                        "lastmod": job.last_modified,
+                    }
+                )
+
+        return sitemap + jobs_sitemap
 
     @route(r"^job_detail/(\d+)/$")
     def job_detail(self, request, talentlink_id):
