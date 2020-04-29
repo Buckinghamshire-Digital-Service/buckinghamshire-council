@@ -39,6 +39,10 @@
     &__link {
         color: $color--link;
 
+        &--current {
+            text-decoration: none;
+        }
+
         #{$hover-states} {
             color: $color--link-hover;
         }
