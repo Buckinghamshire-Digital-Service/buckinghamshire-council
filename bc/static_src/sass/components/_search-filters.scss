@@ -10,13 +10,6 @@
         min-width: 290px;
     }
 
-    &.is-open {
-        #{$root}__active {
-            // hide active filter counter when accordion is open
-            display: none;
-        }
-    }
-
     &__group-title {
         @include font-size(s);
         display: block;
@@ -25,7 +18,6 @@
         &--accordion {
             margin-bottom: $grid--min / 2;
             position: relative;
-            left: -10px;
         }
     }
 
@@ -67,8 +59,8 @@
             @include font-size(xxs);
             display: block;
             flex: 1 0 100%;
-            color: $color--lake;
-            margin: -$grid--min / 2 0 $grid--min 35px;
+            color: $color--charcoal-75;
+            margin: -$grid--min / 2 0 $grid--min 26px;
         }
     }
 
