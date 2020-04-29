@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Fix for employer logo sizes (FE)
+- Accessibility 14 Increase contrast of Highlighted Content heading
 
 ## 15.1 (2020-05-01)
 
