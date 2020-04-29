@@ -387,6 +387,13 @@ class JobAlertSubscription(models.Model):
     token = models.CharField(max_length=255, unique=True, editable=False)
 
     @cached_property
+    def search_dict(self):
+        search_dict = json.loads(self.search)
+        if "category" in search_dict:
+            search_dict['category'] = list(JobCategory.objects.filter(slug__in=search_dict['category']).values_list('title', flat=True))
+        return search_dict
+
+    @cached_property
     def site_url(self):
         return self.homepage.url.rstrip("/")
 
@@ -406,10 +413,12 @@ class JobAlertSubscription(models.Model):
 
         super().full_clean(*args, **kwargs)
 
+    # TODO: Make similiar to send_job_alerts and don't use request
     def send_confirmation_email(self, request):
         template_name = "patterns/email/confirm_job_alert.txt"
         context = {}
-        context["search"] = json.loads(self.search)
+        context["search"] = self.search_dict
+        # TODO: use alert.site_url
         context["confirmation_url"] = request.build_absolute_uri(self.confirmation_url)
         context["unsubscribe_url"] = request.build_absolute_uri(self.unsubscribe_url)
 
@@ -418,6 +427,10 @@ class JobAlertSubscription(models.Model):
             subject="Job alert subscription", body=content, to=[self.email]
         )
         email.send()
+
+    # TODO: Move send_job_alerts to here
+    def send_job_alert_email(self):
+        pass
 
 
 @receiver(pre_save, sender=JobAlertSubscription)

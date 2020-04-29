@@ -52,13 +52,14 @@ class Command(BaseCommand):
                     ),
                 )
                 if results:
+                    # TODO: Move to model
                     subject = "New job search results"
                     body = render_to_string(
                         "patterns/email/job_search_results_alert.txt",
                         context={
                             "site_url": alert.site_url,
                             "results": results,
-                            "search": json.loads(alert.search),
+                            "search": alert.search_dict,
                             "unsubscribe_url": alert.unsubscribe_url,
                         },
                     )
