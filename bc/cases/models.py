@@ -11,6 +11,7 @@ from bs4 import BeautifulSoup
 
 from bc.cases.backends.respond.client import RespondClientException, get_client
 from bc.cases.backends.respond.constants import CREATE_CASE_SERVICES, CREATE_CASE_TYPE
+from bc.cases.utils import format_case_reference
 from bc.utils.constants import RICH_TEXT_FEATURES
 
 from ..utils.models import BasePage
@@ -77,10 +78,10 @@ class ApteanRespondCaseFormPage(BasePage):
                 form = self.get_form(request.POST, request.FILES)
 
                 if form.is_valid():
-                    form, case_details = self.process_form_submission(form)
+                    form, case_reference = self.process_form_submission(form)
                     if form.is_valid():  # still
                         return self.render_landing_page(
-                            request, case_details, *args, **kwargs
+                            request, case_reference, *args, **kwargs
                         )
             else:
                 form = self.get_form()
@@ -104,20 +105,20 @@ class ApteanRespondCaseFormPage(BasePage):
                     form.add_error(None, error.text)
             return form, None
         else:
-            case = soup.find("case")
-            return form, case.attrs
+            case_reference = format_case_reference(soup.find("case").attrs["Name"])
+            return form, case_reference
 
     def get_landing_page_template(self, request, *args, **kwargs):
         return self.landing_page_template
 
-    def render_landing_page(self, request, case_details=None, *args, **kwargs):
+    def render_landing_page(self, request, case_reference=None, *args, **kwargs):
         """
         Renders the landing page.
         You can override this method to return a different HttpResponse as
         landing page. E.g. you could return a redirect to a separate page.
         """
         context = self.get_context(request)
-        context["case_details"] = case_details
+        context["case_reference"] = case_reference
         return render(request, self.get_landing_page_template(request), context)
 
     def clean_fields(self, exclude=None):
