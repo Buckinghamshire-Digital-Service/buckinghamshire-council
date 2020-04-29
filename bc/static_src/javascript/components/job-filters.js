@@ -58,8 +58,7 @@ class Filters {
             });
         });
 
-        this.resetFilters.addEventListener('click', (e) => {
-            e.preventDefault();
+        this.resetFilters.addEventListener('click', () => {
             this.resetAllFilters();
         });
     }

@@ -10,6 +10,13 @@
         min-width: 290px;
     }
 
+    &.is-open {
+        #{$root}__active {
+            // hide active filter counter when accordion is open
+            display: none;
+        }
+    }
+
     &__group-title {
         @include font-size(s);
         display: block;
