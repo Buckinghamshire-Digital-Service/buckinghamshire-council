@@ -162,6 +162,9 @@ class TestFormXML(TestCase):
                 """\
                 <Activities>
                  <activity Tag="">
+                  <field schemaName="Activity.Note">
+                   <value/>
+                  </field>
                   <Attachments>
                    <attachment location="password.txt" locationType="Database" summary="password.txt" tag="">
                     c2Vuc2l0aXZlIGdvdmVybm1lbnQgc2VjcmV0cw==
@@ -208,6 +211,9 @@ class TestFormXML(TestCase):
                 """\
                 <Activities>
                  <activity Tag="">
+                  <field schemaName="Activity.Note">
+                   <value/>
+                  </field>
                   <Attachments>
                    <attachment location="password.txt" locationType="Database" summary="password.txt" tag="">
                     c2Vuc2l0aXZlIGdvdmVybm1lbnQgc2VjcmV0cw==

@@ -68,6 +68,10 @@ class BaseCaseForm(django.forms.Form):
         for key, value in cleaned_data.items():
             entity_name = key.partition(".")[0]
             if key == ATTACHMENT_SCHEMA_NAME:
+                # The 'value' of the Activity.Note element is a text note. We're not
+                # using that, so just add an empty note element.
+                entities[entity_name].append(self.create_element(key, ""))
+
                 files = self.files.getlist(ATTACHMENT_SCHEMA_NAME)
                 entities[entity_name].append(self.create_attachments_element(files))
                 continue
