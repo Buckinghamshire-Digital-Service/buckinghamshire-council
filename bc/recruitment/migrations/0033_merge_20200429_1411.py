@@ -6,9 +6,8 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('recruitment', '0032_set_default_job_homepage'),
-        ('recruitment', '0031_add_subheading_block'),
+        ("recruitment", "0032_set_default_job_homepage"),
+        ("recruitment", "0031_add_subheading_block"),
     ]
 
-    operations = [
-    ]
+    operations = []
