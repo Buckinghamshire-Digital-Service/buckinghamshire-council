@@ -30,12 +30,12 @@ class RespondClientException(Exception):
 class RespondClient:
     """Wrapper for Aptean Respond API."""
 
-    BASE_URL = settings.RESPOND_API_BASE_URL
     FORMS = "Forms"
     HMAC = "HMAC"
     authentication_method = FORMS
 
     def __init__(self):
+        self.BASE_URL = settings.RESPOND_API_BASE_URL
         self.services = {CREATE_CASE_TYPE: {}}
         self.forms = {}
         self.field_mappings = {}
@@ -156,8 +156,8 @@ class RespondClient:
             return (provided_label, provided_label)
 
 
-def get_client():
+def get_client(force_refresh=False):
     global client
-    if client is None:
+    if force_refresh or client is None:
         client = RespondClient()
     return client
