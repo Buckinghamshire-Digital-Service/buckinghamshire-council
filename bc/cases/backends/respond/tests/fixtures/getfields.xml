@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="utf-8"?>
+<entities version="1" xmlns:="http://www.aptean.com/respond/fieldmetadata/1">
+ <entity schema-name="Contact">
+  <name>
+   <name base-locale="en-GB" base-value="Contact"/>
+  </name>
+  <fields>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Contact.ContactIs" sid="10286">
+    <name base-locale="en-GB" base-value="Contact Is"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="Category" mandatory="true" read-only="false" schema-name="Contact.ContactType" sid="10285">
+    <name base-locale="en-GB" base-value="Contact Type"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Contact.PreferredContactTime" sid="10349">
+    <name base-locale="en-GB" base-value="Preferred Contact Time"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Contact.Title" sid="10295">
+    <name base-locale="en-GB" base-value="Title (Pre April 2020)"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Contact.Clientis" sid="10438">
+    <name base-locale="en-GB" base-value="Client is"/>
+    <description base-locale="en-GB" base-value="Who is Service User....e.g Looked after child"/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Contact.PreferredContactMethod" sid="10288">
+    <name base-locale="en-GB" base-value="Preferred Contact Method"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.Address01" sid="28">
+    <name base-locale="en-GB" base-value="Address Line 1"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.Address02" sid="29">
+    <name base-locale="en-GB" base-value="Address Line 2"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.Address03" sid="30">
+    <name base-locale="en-GB" base-value="Address Line 3"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.Address04" sid="31">
+    <name base-locale="en-GB" base-value="Address Line 4"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.Mobile" sid="10289">
+    <name base-locale="en-GB" base-value="Contact Number"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.County" sid="10284">
+    <name base-locale="en-GB" base-value="County"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="DateTime" mandatory="false" read-only="false" schema-name="Contact.DateofBirth" sid="10292">
+    <name base-locale="en-GB" base-value="Date of Birth"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.Email" sid="74">
+    <name base-locale="en-GB" base-value="E-mail Address"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.FirstName" sid="77">
+    <name base-locale="en-GB" base-value="First Name"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.HomePhone" sid="10290">
+    <name base-locale="en-GB" base-value="Home Phone"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.Organisation" sid="10480">
+    <name base-locale="en-GB" base-value="Organisation"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.Phone01" sid="115">
+    <name base-locale="en-GB" base-value="Phone Number 1"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.Phone02" sid="116">
+    <name base-locale="en-GB" base-value="Phone Number 2"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.Phone03" sid="117">
+    <name base-locale="en-GB" base-value="Phone Number 3"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.ZipCode" sid="101">
+    <name base-locale="en-GB" base-value="Postcode"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="DateTime" mandatory="true" read-only="false" schema-name="Contact.ReceiptDate" sid="109">
+    <name base-locale="en-GB" base-value="Receipt Date"/>
+    <description base-locale="en-GB" base-value="Date Received by BCC (this may not be the date the team received it)"/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.Reference" sid="108">
+    <name base-locale="en-GB" base-value="Reference"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="true" read-only="false" schema-name="Contact.Surname" sid="112">
+    <name base-locale="en-GB" base-value="Surname"/>
+    <description base-locale="en-GB" base-value="if no surname provided use ANON"/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.Town" sid="10283">
+    <name base-locale="en-GB" base-value="Town"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.WorkPhone" sid="10291">
+    <name base-locale="en-GB" base-value="Work Phone"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Contact.OtherTitle" sid="10697">
+    <name base-locale="en-GB" base-value="Title"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Contact"/>
+   </field>
+  </fields>
+ </entity>
+ <entity schema-name="Case">
+  <name>
+   <name base-locale="en-GB" base-value="Case"/>
+  </name>
+  <fields>
+   <field data-type="Journal" mandatory="false" read-only="false" schema-name="Case.ActionTaken" sid="236">
+    <name base-locale="en-GB" base-value="Action Taken - Old"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="LongText" mandatory="false" read-only="false" schema-name="Case.AdditionalComments" sid="10596">
+    <name base-locale="en-GB" base-value="Additional Comments"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="LongText" mandatory="true" read-only="false" schema-name="Case.Description" sid="64">
+    <name base-locale="en-GB" base-value="Description"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="LongText" mandatory="false" read-only="false" schema-name="Case.ActionTaken01" sid="10566">
+    <name base-locale="en-GB" base-value="Desired outcome(s)"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="DateTime" mandatory="false" read-only="false" schema-name="Case.IncidentDate" sid="80">
+    <name base-locale="en-GB" base-value="Incident Date"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="true" schema-name="Case.APIReference" sid="10698">
+    <name base-locale="en-GB" base-value="API Reference"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="DateTime" mandatory="false" read-only="false" schema-name="Case.DateAllInformationReceived" sid="10670">
+    <name base-locale="en-GB" base-value="Date All Information Received"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="FOI / EIR / DP SARS"/>
+   </field>
+   <field data-type="DateTime" mandatory="false" read-only="false" schema-name="Case.FOIRequestClosedDate" sid="10482">
+    <name base-locale="en-GB" base-value="FOI/EIR Request Closed Date"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="FOI / EIR / DP SARS"/>
+   </field>
+   <field data-type="DateTime" mandatory="false" read-only="false" schema-name="Case.FOIStartDate" sid="10481">
+    <name base-locale="en-GB" base-value="FOI/EIR Start Date"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="FOI / EIR / DP SARS"/>
+   </field>
+   <field data-type="LongText" mandatory="false" read-only="false" schema-name="Case.IRAppealNotes" sid="10345">
+    <name base-locale="en-GB" base-value="IR Appeal Notes"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="FOI / EIR / DP SARS"/>
+   </field>
+   <field data-type="DateTime" mandatory="false" read-only="false" schema-name="Case.IRAppealStartDate" sid="10341">
+    <name base-locale="en-GB" base-value="IR Appeal Start Date"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="FOI / EIR / DP SARS"/>
+   </field>
+   <field data-type="LongText" mandatory="false" read-only="false" schema-name="Case.IRExemption" sid="10336">
+    <name base-locale="en-GB" base-value="IR Exemption"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="FOI / EIR / DP SARS"/>
+   </field>
+   <field data-type="LongText" mandatory="false" read-only="false" schema-name="Case.IROutcomeDescription" sid="10340">
+    <name base-locale="en-GB" base-value="IR Outcome Description"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="FOI / EIR / DP SARS"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Case.IRPassedTo" sid="10334">
+    <name base-locale="en-GB" base-value="IR Passed To"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="FOI / EIR / DP SARS"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Case.IRReference" sid="10346">
+    <name base-locale="en-GB" base-value="IR Reference"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="FOI / EIR / DP SARS"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Case.IRSourcedFrom" sid="10347">
+    <name base-locale="en-GB" base-value="IR Sourced From"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="FOI / EIR / DP SARS"/>
+   </field>
+   <field data-type="DateTime" mandatory="false" read-only="false" schema-name="Case.OnHoldReasonDate" sid="10581">
+    <name base-locale="en-GB" base-value="On Hold Reason Date"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="FOI / EIR / DP SARS"/>
+   </field>
+   <field data-type="DateTime" mandatory="false" read-only="false" schema-name="Case.ServiceDirectorSignoffDate" sid="10673">
+    <name base-locale="en-GB" base-value="Service Director Signoff Date"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="FOI / EIR / DP SARS"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Case.Subject" sid="10676">
+    <name base-locale="en-GB" base-value="Subject"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="FOI / EIR / DP SARS"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Case.Completedby" sid="10453">
+    <name base-locale="en-GB" base-value="Completed by"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Case.Dataretrievedby" sid="10499">
+    <name base-locale="en-GB" base-value="Data retrieved by"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Case.Dataretrievedbyjobtitle" sid="10500">
+    <name base-locale="en-GB" base-value="Data retrieved by job title"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="DateTime" mandatory="false" read-only="false" schema-name="Case.DateCorporateElearningundertaken01" sid="10489">
+    <name base-locale="en-GB" base-value="Date Corporate E-learning undertaken"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="DateTime" mandatory="false" read-only="false" schema-name="Case.DateDataBreachAcknowledged" sid="10476">
+    <name base-locale="en-GB" base-value="Date Data Breach Acknowledged"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="DateTime" mandatory="false" read-only="false" schema-name="Case.DateDiscovered" sid="10679">
+    <name base-locale="en-GB" base-value="Date Discovered"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="LongText" mandatory="false" read-only="false" schema-name="Case.Findings" sid="10686">
+    <name base-locale="en-GB" base-value="Findings"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="Integer" mandatory="false" read-only="false" schema-name="Case.NoofaffectedDataSubjects" sid="10552">
+    <name base-locale="en-GB" base-value="No. of affected Data Subjects"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Case.OtherCategoriesofIndividualsAffected" sid="10691">
+    <name base-locale="en-GB" base-value="Other Categories of Individuals Affected"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Case.OtherCategoriesofPersonalData" sid="10689">
+    <name base-locale="en-GB" base-value="Other Categories of Personal Data"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Case.OtherDelayinReportingReason" sid="10682">
+    <name base-locale="en-GB" base-value="Other Delay in Reporting Reason"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Case.Originatorsname" sid="10460">
+    <name base-locale="en-GB" base-value="Person responsible for incident/breach"/>
+    <description base-locale="en-GB" base-value="Name of person responsible for causing the incident/breach"/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="LongText" mandatory="false" read-only="false" schema-name="Case.Closingsummary" sid="10461">
+    <name base-locale="en-GB" base-value="Recommendations"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="DateTime" mandatory="false" read-only="false" schema-name="Case.WhendidtheBreachhappen" sid="10680">
+    <name base-locale="en-GB" base-value="When did the Breach happen?"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="LongText" mandatory="false" read-only="false" schema-name="Case.Anyothercomments" sid="10529">
+    <name base-locale="en-GB" base-value="Any other comments"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="SAR"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Case.ActofParliament" sid="10667">
+    <name base-locale="en-GB" base-value="Act of Parliament"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Disclosures"/>
+   </field>
+   <field data-type="Journal" mandatory="false" read-only="false" schema-name="Case.Comments" sid="10664">
+    <name base-locale="en-GB" base-value="Comments"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Disclosures"/>
+   </field>
+   <field data-type="LongText" mandatory="false" read-only="false" schema-name="Case.Descriptionofmaterialreleased" sid="10620">
+    <name base-locale="en-GB" base-value="Description of material released"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Disclosures"/>
+   </field>
+   <field data-type="LongText" mandatory="false" read-only="false" schema-name="Case.Locationofdata" sid="10621">
+    <name base-locale="en-GB" base-value="Location of data "/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Disclosures"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Case.OtherTypeofDisclosure" sid="10666">
+    <name base-locale="en-GB" base-value="Other Type of Disclosure"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Disclosures"/>
+   </field>
+   <field data-type="ShortText" mandatory="false" read-only="false" schema-name="Case.Whoauthorisedrelease" sid="10506">
+    <name base-locale="en-GB" base-value="Who authorised release"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Disclosures"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.BusinessUnit" sid="10439">
+    <name base-locale="en-GB" base-value="Corporate Director"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.Ward" sid="10412">
+    <name base-locale="en-GB" base-value="Electoral Division"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="Category" mandatory="true" read-only="false" schema-name="Case.FeedbackType" sid="229">
+    <name base-locale="en-GB" base-value="Feedback Type"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="Category" mandatory="true" read-only="false" schema-name="Case.HowReceived" sid="230">
+    <name base-locale="en-GB" base-value="How Received"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.OverallOutcome" sid="10417">
+    <name base-locale="en-GB" base-value="Overall Outcome"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.ServiceAreaTeam" sid="10293">
+    <name base-locale="en-GB" base-value="Service Director"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.Team" sid="10675">
+    <name base-locale="en-GB" base-value="Team"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Case Details"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.Outcome" sid="10321">
+    <name base-locale="en-GB" base-value="Corporate Outcome"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Corporate"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.FOIorEIR" sid="10568">
+    <name base-locale="en-GB" base-value="FOI or EIR? "/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="FOI / EIR / DP SARS"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.SubjectArea" sid="10484">
+    <name base-locale="en-GB" base-value="Subject Area"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="FOI / EIR / DP SARS"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.Casecategory" sid="10463">
+    <name base-locale="en-GB" base-value="Case category"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.CategoriesofIndividualsAffected" sid="10690">
+    <name base-locale="en-GB" base-value="Categories of Individuals Affected"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.CategoriesofPersonalData" sid="10688">
+    <name base-locale="en-GB" base-value="Categories of Personal Data"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.Dataretrieved" sid="10492">
+    <name base-locale="en-GB" base-value="Data retrieved"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.DelayinReportingReason" sid="10681">
+    <name base-locale="en-GB" base-value="Delay in Reporting Reason?"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.NeedtoKnowFormCompleted" sid="10493">
+    <name base-locale="en-GB" base-value="Does anybody else need to know?"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.IncidentType" sid="10450">
+    <name base-locale="en-GB" base-value="DPO Final Assessment"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.Escalationrequired" sid="10501">
+    <name base-locale="en-GB" base-value="Escalation required"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.LikelihoodofConsequence" sid="10693">
+    <name base-locale="en-GB" base-value="Likelihood of Consequence"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.NumberofIndividualsaffected" sid="10683">
+    <name base-locale="en-GB" base-value="Number of Individuals affected"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.NumberofPersonalDataRecordsAffected" sid="10696">
+    <name base-locale="en-GB" base-value="Number of Personal Data Records Affected"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Data Breaches"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.NeedtorequestID" sid="10518">
+    <name base-locale="en-GB" base-value="Need to request ID?"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="SAR"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.TypeofSAR" sid="10511">
+    <name base-locale="en-GB" base-value="Type of SAR / Criminal Disclosure"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="SAR"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.LegalBasis" sid="10668">
+    <name base-locale="en-GB" base-value="Legal Basis"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Disclosures"/>
+   </field>
+   <field data-type="Category" mandatory="false" read-only="false" schema-name="Case.TypeofDisclosure" sid="10665">
+    <name base-locale="en-GB" base-value="Type of Disclosure"/>
+    <description base-locale="en-GB" base-value=""/>
+    <folder base-locale="en-GB" base-value="Disclosures"/>
+   </field>
+  </fields>
+ </entity>
+</entities>
