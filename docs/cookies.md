@@ -1,0 +1,12 @@
+# Buckinghamshire Council — Cookies
+
+See also: [Data Protection](data_protection.md)
+
+The website team values minimising cookies, and data protection. Examples include:
+
+- using Fathom Analytics, which is cookie-free, instead of e.g. Google Analytics
+- a clear listing of all cookies at https://www.buckinghamshire.gov.uk/about/cookies/
+
+## Integrating with other services
+
+If you add a feature which must set a cookie, speak to the client about whether it is necessary, and include updating the cookie policy page as part of the work.

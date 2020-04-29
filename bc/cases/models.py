@@ -9,7 +9,7 @@ from wagtail.search import index
 
 from bs4 import BeautifulSoup
 
-from bc.cases.backends.respond.client import get_client
+from bc.cases.backends.respond.client import RespondClientException, get_client
 from bc.cases.backends.respond.constants import CREATE_CASE_SERVICES, CREATE_CASE_TYPE
 from bc.utils.constants import RICH_TEXT_FEATURES
 
@@ -22,7 +22,7 @@ class ApteanRespondCaseFormPage(BasePage):
     landing_page_template = "patterns/pages/cases/form_page_landing.html"
 
     web_service_definition = models.CharField(
-        max_length=255, help_text="The name of the CreateCase web service to use.",
+        max_length=255, help_text="The name of the CreateCase web service to use."
     )
 
     introduction = models.TextField(blank=True)
@@ -53,7 +53,7 @@ class ApteanRespondCaseFormPage(BasePage):
     content_panels = BasePage.content_panels + [
         FieldPanel(
             "web_service_definition",
-            widget=forms.Select(choices=[(s, s) for s in CREATE_CASE_SERVICES],),
+            widget=forms.Select(choices=[(s, s) for s in CREATE_CASE_SERVICES]),
         ),
         FieldPanel("introduction"),
         FieldPanel("pre_submission_text"),
@@ -72,19 +72,20 @@ class ApteanRespondCaseFormPage(BasePage):
         return form_class(*args, **kwargs)
 
     def serve(self, request, *args, **kwargs):
-        if request.method == "POST":
-            form = self.get_form(
-                request.POST, request.FILES  # , page=self, user=request.user
-            )
+        try:
+            if request.method == "POST":
+                form = self.get_form(request.POST, request.FILES)
 
-            if form.is_valid():
-                form, case_details = self.process_form_submission(form)
-                if form.is_valid():  # still
-                    return self.render_landing_page(
-                        request, case_details, *args, **kwargs
-                    )
-        else:
-            form = self.get_form()
+                if form.is_valid():
+                    form, case_details = self.process_form_submission(form)
+                    if form.is_valid():  # still
+                        return self.render_landing_page(
+                            request, case_details, *args, **kwargs
+                        )
+            else:
+                form = self.get_form()
+        except RespondClientException:
+            form = None
 
         context = self.get_context(request)
         context["form"] = form

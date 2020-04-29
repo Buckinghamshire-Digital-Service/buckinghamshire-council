@@ -14,6 +14,7 @@ class TalentLinkJobModelAdmin(ModelAdmin):
     model = TalentLinkJob
     menu_icon = "tag"
     list_display = (
+        "homepage",
         "talentlink_id",
         "job_number",
         "job_link",
@@ -22,6 +23,9 @@ class TalentLinkJobModelAdmin(ModelAdmin):
         "last_imported",
         "location_postcode",
     )
+    search_fields = ("talentlink_id", "job_number", "title")
+    list_filter = ("homepage",)
+    extra_search_kwargs = {"operator": OR}
 
     def job_link(self, obj):
         return format_html('<a href="{}">{}</span>', obj.url, obj.title,)
@@ -30,9 +34,9 @@ class TalentLinkJobModelAdmin(ModelAdmin):
 class JobAlertSubscriptionModelAdmin(ModelAdmin):
     model = JobAlertSubscription
     menu_icon = "tag"
-    list_display = ("email", "confirmed", "created", "search", "token")
+    list_display = ("homepage", "email", "confirmed", "created", "search", "token")
     search_fields = ("email", "search")
-    list_filter = ("confirmed", "created")
+    list_filter = ("confirmed", "created", "homepage")
     extra_search_kwargs = {"operator": OR}
 
 

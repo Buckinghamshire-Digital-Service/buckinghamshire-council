@@ -1,10 +1,14 @@
 from urllib.parse import urlsplit
 
+from django.core.files.base import ContentFile
 from django.utils.html import strip_tags
 
 from bleach.sanitizer import Cleaner
 from bs4 import BeautifulSoup
 from dateutil.parser import parse
+
+from bc.documents.models import CustomDocument
+from bc.recruitment_api.client import get_client
 
 from ..recruitment.models import JobSubcategory, TalentLinkJob
 from . import constants
@@ -15,7 +19,8 @@ def date_parser(value):
 
 
 def string_parser(value):
-    return value.strip()
+    # Remove multiple spaces as well as trailing and end spaces.
+    return " ".join(value.split())
 
 
 def yesno_parser(value):
@@ -30,14 +35,14 @@ def job_subcategory_parser(value):
     which will be handled by the calling import_jobs command.
     """
     clean_value = string_parser(value)
-    return JobSubcategory.objects.get(title=clean_value)
+    return JobSubcategory.objects.get(title__iexact=clean_value)
 
 
 def job_subcategory_insert_parser(value):
     """Get or create existing JobSubcategory"""
     clean_value = string_parser(value)
     subcategory_object, created = JobSubcategory.objects.get_or_create(
-        title=clean_value
+        title__iexact=clean_value, defaults={"title": clean_value}
     )
     return subcategory_object
 
@@ -45,13 +50,15 @@ def job_subcategory_insert_parser(value):
 POSTING_TARGET_STATUS_PUBLISHED = "Published"
 
 # source field to (target_field, parser) mapping
-JOB_CONFIGURABLE_FIELDS_MAPPING = {"Closing Date": ("closing_date", date_parser)}
+JOB_CONFIGURABLE_FIELDS_MAPPING = {
+    "Contact Information": ("contact_email", string_parser),
+    "Closing Date": ("closing_date", date_parser),
+    "Interview Information": ("interview_date", date_parser),
+}
 
 JOB_LOVS_MAPPING = {
     "Job Group": ("subcategory", job_subcategory_parser),
-    "Location": ("location", string_parser),
-    "Salary Range - FTE": ("salary_range", string_parser),
-    "Searchable Location": ("searchable_location", string_parser),
+    "Salary Range": ("salary_range", string_parser),
     "Searchable Salary": ("searchable_salary", string_parser),
     "Show Apply Button": ("show_apply_button", yesno_parser),
     "Working Hours Selection": ("working_hours", string_parser),
@@ -59,7 +66,7 @@ JOB_LOVS_MAPPING = {
 }
 
 
-def update_job_from_ad(job, ad, defaults=None, import_categories=False):
+def update_job_from_ad(job, ad, homepage, defaults=None, import_categories=False):
     defaults = defaults or {}
 
     cleaner = Cleaner(
@@ -68,6 +75,7 @@ def update_job_from_ad(job, ad, defaults=None, import_categories=False):
         strip=True,
     )
 
+    job.homepage = homepage
     job.job_number = ad["jobNumber"]
     job.title = ad["jobTitle"]
     job.is_published = ad["postingTargetStatus"] == POSTING_TARGET_STATUS_PUBLISHED
@@ -120,9 +128,7 @@ def update_job_from_ad(job, ad, defaults=None, import_categories=False):
             if (parser is job_subcategory_parser) and import_categories:
                 parser = job_subcategory_insert_parser
 
-            setattr(
-                job, target_field, parser(lov["criteria"]["criterion"][0]["label"]),
-            )
+            setattr(job, target_field, parser(lov["criteria"]["criterion"][0]["label"]))
     for k, v in defaults.items():
         setattr(job, k, v)
 
@@ -133,12 +139,16 @@ def update_job_from_ad(job, ad, defaults=None, import_categories=False):
             job.location_postcode = location["zipCode"]
             job.location_lat = location["latitude"]
             job.location_lon = location["longitude"]
+        if location["city"]:
+            job.location = location["city"]
+        elif location["name"]:
+            job.location = location["name"]
 
     job.save()
     return job
 
 
-def delete_jobs(imported_before):
+def delete_jobs(imported_before, homepage):
     """Delete outdated TalentLinkJob objects
 
     Args:
@@ -149,8 +159,39 @@ def delete_jobs(imported_before):
 
     """
 
-    outdated_jobs = TalentLinkJob.objects.filter(last_imported__lt=imported_before)
+    outdated_jobs = TalentLinkJob.objects.filter(homepage=homepage).filter(
+        last_imported__lt=imported_before
+    )
     count = outdated_jobs.count()
     outdated_jobs.delete()
 
     return count
+
+
+def import_attachments_for_job(job, client=None):
+    doc_imported = 0
+    if not client:
+        client = get_client(job_board=job.homepage.job_board)
+
+    # This will return list of attachments with
+    #   'content', 'description', 'fileName', 'id', 'mimeType'
+    attachments_response = client.service.getAttachments(job.talentlink_id)
+    for attachment in attachments_response:
+        if attachment["id"] and attachment["fileName"]:
+            doc, created = CustomDocument.objects.get_or_create(
+                talentlink_attachment_id=attachment["id"]
+            )
+            if created:
+                doc.title = (
+                    attachment["description"] or attachment["fileName"].split(".")[0]
+                )
+                doc.file = ContentFile(
+                    attachment["content"], name=attachment["fileName"],
+                )
+                doc.save()
+                doc_imported += 1
+
+            job.attachments.add(doc)
+            job.save()
+
+    return doc_imported

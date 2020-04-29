@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     # first - http://help.apm.scoutapp.com/#django.
     "scout_apm.django",
     "bc.cases",
+    "bc.area_finder",
     "bc.documents",
     "bc.events",
     "bc.forms",
@@ -68,6 +69,7 @@ INSTALLED_APPS = [
     "bc.users",
     "bc.utils",
     "bc.inlineindex",
+    "rest_framework",
     "wagtailorderable",
     "wagtail.contrib.modeladmin",
     "wagtail.contrib.postgres_search",
@@ -678,7 +680,8 @@ GOVUK_NOTIFY_PLAIN_EMAIL_TEMPLATE_ID = env.get("GOVUK_NOTIFY_PLAIN_EMAIL_TEMPLAT
 # Lumesse TalentLink API credentials
 TALENTLINK_API_KEY = env.get("TALENTLINK_API_KEY")
 TALENTLINK_API_PASSWORD = env.get("TALENTLINK_API_PASSWORD")
-TALENTLINK_API_USERNAME = env.get("TALENTLINK_API_USERNAME")
+TALENTLINK_EXTERNAL_API_USERNAME = env.get("TALENTLINK_EXTERNAL_API_USERNAME")
+TALENTLINK_INTERNAL_API_USERNAME = env.get("TALENTLINK_INTERNAL_API_USERNAME")
 TALENTLINK_API_WSDL = env.get("TALENTLINK_API_WSDL")
 
 # Aptean Respond API credentials
@@ -694,3 +697,6 @@ RESPOND_SAR_WEBSERVICE = env.get("RESPOND_SAR_WEBSERVICE")
 RESPOND_COMMENTS_WEBSERVICE = env.get("RESPOND_COMMENTS_WEBSERVICE")
 RESPOND_COMPLIMENTS_WEBSERVICE = env.get("RESPOND_COMPLIMENTS_WEBSERVICE")
 RESPOND_DISCLOSURES_WEBSERVICE = env.get("RESPOND_DISCLOSURES_WEBSERVICE")
+
+# MapIt.MySociety API credentials
+MAPIT_API_KEY = env.get("MAPIT_API_KEY")

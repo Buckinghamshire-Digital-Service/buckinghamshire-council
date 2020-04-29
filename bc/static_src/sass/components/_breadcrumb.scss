@@ -10,13 +10,23 @@
         margin: $grid 0 $grid--large;
     }
 
+    &--jobs {
+        margin: 0;
+        padding: $grid 0;
+
+        @include media-query(tablet-portrait) {
+            margin: 0;
+            padding: $grid 0 $grid--large;
+        }
+    }
+
     &__item {
         width: auto;
 
         &::after {
             color: $color--earth;
             content: '/';
-            margin: 0 8px;
+            margin: 0 8px 0 4px;
         }
 
         &:last-child {

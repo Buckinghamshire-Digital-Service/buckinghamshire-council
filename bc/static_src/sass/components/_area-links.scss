@@ -1,11 +1,21 @@
 .area-links {
+    $root: &;
     margin: $grid 0;
     padding: $grid--small;
-    background: $color--earth-light;
+    background: $color--grey-light;
     border-left: $border--accent $color--leaf;
 
     &__list {
         margin: $grid--small 0;
+
+        .icon {
+            width: 17px;
+            height: 14px;
+            stroke: $color--grey-dark;
+            position: absolute;
+            left: 10px;
+            top: 7px;
+        }
     }
 
     &__item {
@@ -17,12 +27,29 @@
         margin-bottom: 5px;
     }
 
-    .icon {
-        width: 17px;
-        height: 14px;
-        stroke: $color--grey-dark;
-        position: absolute;
-        left: 10px;
-        top: 7px;
+    &__warning {
+        display: flex;
+        align-items: flex-start;
+        margin-top: $grid;
+
+        &::before {
+            content: '!';
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: $weight--bold;
+            font-size: 26px;
+            width: 36px;
+            height: 36px;
+            background: $color--default;
+            border-radius: 50%;
+            color: $color--white;
+            margin-right: $grid--small;
+        }
+
+        p {
+            margin: 0;
+        }
     }
 }

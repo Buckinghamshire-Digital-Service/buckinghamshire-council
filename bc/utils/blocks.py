@@ -46,11 +46,6 @@ class LocalAreaLinksBlock(blocks.StructBlock):
     chiltern_url = blocks.URLBlock(required=False, label="Chiltern URL")
     south_bucks_url = blocks.URLBlock(required=False, label="South Bucks URL")
     wycombe_url = blocks.URLBlock(required=False, label="Wycombe URL")
-    postscript = blocks.RichTextBlock(
-        required=False,
-        features=RICH_TEXT_FEATURES,
-        default='<p>Or <a href="https://www.gov.uk/find-local-council">find your area based on your postcode</a>.</p>',
-    )
 
     class Meta:
         icon = ""
@@ -116,6 +111,11 @@ class StoryBlock(blocks.StreamBlock):
         classname="full title",
         icon="title",
         template="patterns/molecules/streamfield/blocks/heading_block.html",
+    )
+    subheading = blocks.CharBlock(
+        classname="full title",
+        icon="title",
+        template="patterns/molecules/streamfield/blocks/subheading_block.html",
     )
     paragraph = blocks.RichTextBlock(features=RICH_TEXT_FEATURES)
     image = ImageBlock()
