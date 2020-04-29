@@ -3,6 +3,9 @@
 ## Unreleased
 
 - Fix job alert email
+- Add tests for job categories import fix
+- Add unit tests for Aptean Respond integration
+- Subheading block (BE)
 
 ## 14.0 (2020-04-22)
 
@@ -22,6 +25,7 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/12.0...13.0
 - Styling tweaks on recruitment index page ('benefits' page)
 - Add favicon
 - 140 Job site breadcrumbs on all pages
+- 142 Internal jobs site
 - 155 Jobs extra filters (BE)
 - 161 Update job search filter styles and add custom select form field
 - 173 Search local council area by postcode
