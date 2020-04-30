@@ -8,6 +8,8 @@ from django.core.cache import cache
 
 from lxml import etree
 
+from bc.utils.validators import FileExtensionValidator
+
 from .constants import (
     APPEND_TO_DESCRIPTION,
     ATTACHMENT_SCHEMA_NAME,
@@ -20,6 +22,7 @@ from .constants import (
     RESPOND_CATEGORIES_CACHE_PREFIX,
     RESPOND_FIELDS_CACHE_PREFIX,
     SHORT_TEXT_DATA_TYPE,
+    VALID_FILE_EXTENSIONS,
     XML_ENTITY_MAPPING,
 )
 
@@ -211,7 +214,9 @@ class CaseFormBuilder:
 
     def create_FileField_field(self, schema_name, options):
         return django.forms.FileField(
-            widget=django.forms.ClearableFileInput(attrs={"multiple": True}), **options
+            validators=[FileExtensionValidator(valid_extensions=VALID_FILE_EXTENSIONS)],
+            widget=django.forms.ClearableFileInput(attrs={"multiple": True}),
+            **options,
         )
 
     def get_field_options(self, schema_name, permit_cache_miss=False):

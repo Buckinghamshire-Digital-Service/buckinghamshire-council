@@ -26,6 +26,25 @@ FIELD_TYPES = {
     FILE_DATA_TYPE: "FileField",
 }
 
+VALID_FILE_EXTENSIONS = [
+    ".gif",
+    ".jpeg",
+    ".jpg",
+    ".m4a",
+    ".mp3",
+    ".msg",
+    ".pdf",
+    ".png",
+    ".pptx",
+    ".rtf",
+    ".txt",
+    ".wav",
+    ".xls",
+    ".xlsm",
+    ".xlsx",
+    ".zip",
+]
+
 
 # This defines the services to register, and provides options for them. The
 # stanagedicfixelds (system-managed static fixed fields) options dictionary is processed
