@@ -6,6 +6,10 @@
 - Add tests for job categories import fix
 - Add unit tests for Aptean Respond integration
 - Subheading block (BE)
+- Styling fix for links to local areas
+- Fix spacing in breadcrumb navigation
+- Fix spacing on job detail template
+- Fix for multiple form submissions
 
 ## 14.0 (2020-04-22)
 
