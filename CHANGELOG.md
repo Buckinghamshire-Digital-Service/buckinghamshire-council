@@ -10,6 +10,8 @@
 - Fix spacing on job detail template
 - Fix for multiple form submissions
 - Accessibility 13 Fix jobs search filters HTML validation errors on IDs
+- Accessibility 8 Hide all site icons for screen reader users
+- Accessibility 9 Improvements to screen reader only navigational content
 
 ## 14.0 (2020-04-22)
 
@@ -18,7 +20,6 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/13.0...14.0
 - 135 Employer logos (BE)
 - 176 Jobs fix import location
 - 204 Jobs fix salary imports (BE)
-- Accessibility 8 Hide all site icons for screen reader users
 
 ## 13.0 (2020-04-20)
 

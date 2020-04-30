@@ -10,7 +10,7 @@
         <nav role="navigation" aria-label="breadcrumb">
             <ul class="breadcrumb">
                 <li class="breadcrumb__item">
-                    <a class="breadcrumb__link" href="/" title="Home">
+                    <a class="breadcrumb__link" href="/">
                         Home
                     </a>
                 </li>
@@ -28,9 +28,8 @@
                 <label class="u-sr-only" for="search--page">Search this website</label>
                 {# Added form="" attribute to integrate this search with the job filters below - if the job filters are not on the same page, remove the form attribute here #}
                 <input form="job-filters" class="input" id="search--page" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-                <button class="button button--search" type="submit" aria-label="Search" form="job-filters">
+                <button class="button button--search" type="submit" aria-label="Submit" form="job-filters">
                     {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke icon--white button__icon" %}
-                    <span class="u-sr-only">Search</span>
                 </button>
             </form>
         </div>
