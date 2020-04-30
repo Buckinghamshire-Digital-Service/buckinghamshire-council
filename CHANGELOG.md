@@ -15,6 +15,7 @@
 - Accessibility 11 Fix HTML validation errors on the main site
 - Accessibility 13 Fix jobs search filters HTML validation errors on IDs
 - Accessibility 9 & 13 Breadcrumb improvements
+- Accessibility 22 Switch unnecessary heading tag to link in Jobs header
 - Accessibility 23 Increase contrast of jobs filter help text
 - Accessibility 28 Update language attribute on all templates
 
