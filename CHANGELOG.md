@@ -4,6 +4,7 @@
 
 - Add tests for job categories import fix
 - Subheading block (BE)
+- Accessibility - Breadcrumb improvements
 
 ## 14.0 (2020-04-22)
 
