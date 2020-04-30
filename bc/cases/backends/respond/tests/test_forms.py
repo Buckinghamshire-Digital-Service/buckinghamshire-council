@@ -162,8 +162,10 @@ class TestFormXML(TestCase):
                 """\
                 <Activities>
                  <activity Tag="">
-                  <field schemaName="Activity.Note">
-                   <value/>
+                  <field schemaName="Activity.Title">
+                   <value>
+                    Web form attachments
+                   </value>
                   </field>
                   <Attachments>
                    <attachment location="password.txt" locationType="Database" summary="password.txt" tag="">
@@ -211,8 +213,10 @@ class TestFormXML(TestCase):
                 """\
                 <Activities>
                  <activity Tag="">
-                  <field schemaName="Activity.Note">
-                   <value/>
+                  <field schemaName="Activity.Title">
+                   <value>
+                    Web form attachments
+                   </value>
                   </field>
                   <Attachments>
                    <attachment location="password.txt" locationType="Database" summary="password.txt" tag="">
@@ -313,8 +317,8 @@ class SchemaTest(TestCase):
           </Contacts>
           <Activities>
             <activity Tag="">
-              <field schemaName="Activity.Note">
-                <value></value>
+              <field schemaName="Activity.Title">
+                <value>Web form attachments</value>
               </field>
               <Attachments>
                 <attachment locationType="Database" summary="i_quit.docx" location="i_quit.docx" tag="">SSd2ZSBoYWQgZW5vdWdoIG9mIHRoaXMu</attachment>

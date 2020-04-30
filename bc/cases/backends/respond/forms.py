@@ -11,7 +11,9 @@ from lxml import etree
 from bc.utils.validators import FileExtensionValidator
 
 from .constants import (
+    ACTIVITY_TITLE_SCHEMA_NAME,
     APPEND_TO_DESCRIPTION,
+    ATTACHMENT_ACTIVITY_TITLE,
     ATTACHMENT_SCHEMA_NAME,
     CATEGORY_DATA_TYPE,
     CREATE_CASE_SERVICES,
@@ -71,9 +73,14 @@ class BaseCaseForm(django.forms.Form):
         for key, value in cleaned_data.items():
             entity_name = key.partition(".")[0]
             if key == ATTACHMENT_SCHEMA_NAME:
-                # The 'value' of the Activity.Note element is a text note. We're not
-                # using that, so just add an empty note element.
-                entities[entity_name].append(self.create_element(key, ""))
+                # The documentation tells only of the Activity.Note element, but we use
+                # the undocumented Activity.Title field for fun, because it lands in a
+                # more sensible place; we hardcode the title.
+                entities[entity_name].append(
+                    self.create_element(
+                        ACTIVITY_TITLE_SCHEMA_NAME, ATTACHMENT_ACTIVITY_TITLE
+                    )
+                )
 
                 files = self.files.getlist(ATTACHMENT_SCHEMA_NAME)
                 entities[entity_name].append(self.create_attachments_element(files))
@@ -168,7 +175,7 @@ class CaseFormBuilder:
                 else:
                     data_type = SHORT_TEXT_DATA_TYPE
             elif schema_name == ATTACHMENT_SCHEMA_NAME:
-                # special case: file attachments are appended to the Activity.Note
+                # special case: file attachments are appended to the Activity.Title
                 # LongText field
                 data_type = FILE_DATA_TYPE
                 options = self.get_field_options(schema_name)

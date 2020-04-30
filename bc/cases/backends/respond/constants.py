@@ -8,9 +8,11 @@ CATEGORY_INFO_TYPE = "CategoryInfo"
 
 APPEND_TO_DESCRIPTION = "append to description"
 DESCRIPTION_SCHEMA_NAME = "Case.Description"
+ACTIVITY_TITLE_SCHEMA_NAME = "Activity.Title"
 ATTACHMENT_SCHEMA_NAME = "Activity.Note"
 
 ATTACHMENT_FAILURE_ERROR = "AttachmentFailure"
+ATTACHMENT_ACTIVITY_TITLE = "Web form attachments"
 
 RESPOND_FIELDS_CACHE_PREFIX = "respond_field__"
 RESPOND_CATEGORIES_CACHE_PREFIX = "respond_categories__"
