@@ -12,6 +12,7 @@
 - Accessibility 1 Remove redundant/inappropriate ARIA role overrides
 - Accessibility 8 Hide all site icons for screen reader users
 - Accessibility 9 Improvements to screen reader only navigational content
+- Accessibility 11 Fix HTML validation errors on the main site
 - Accessibility 13 Fix jobs search filters HTML validation errors on IDs
 
 ## 14.0 (2020-04-22)
