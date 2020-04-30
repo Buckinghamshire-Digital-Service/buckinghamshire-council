@@ -57,8 +57,8 @@
                         <fieldset class="search-filters__fieldset">
                             {% for option in filter.options %}
                                 <div class="search-filters__option form-item--custom_checkbox_select_multiple">
-                                    <input type="checkbox" name="{{ filter.key }}" value="{{ option.key }}" id="{{forloop.counter}}-{{ option.key }}" {% if option.key in filter.selected %}checked{% endif %}>
-                                    <label class="search-filters__label" for="{{forloop.counter}}-{{ option.key }}">
+                                    <input type="checkbox" name="{{ filter.key }}" value="{{ option.key }}" id="{{forloop.counter}}-{{ option.key|slugify }}" {% if option.key in filter.selected %}checked{% endif %}>
+                                    <label class="search-filters__label" for="{{forloop.counter}}-{{ option.key|slugify }}">
                                         {{ option.label }}
                                     </label>
                                 </div>

@@ -9,6 +9,7 @@
 - Fix spacing in breadcrumb navigation
 - Fix spacing on job detail template
 - Fix for multiple form submissions
+- Accessibility 13 Fix jobs search filters HTML validation errors on IDs
 
 ## 14.0 (2020-04-22)
 
