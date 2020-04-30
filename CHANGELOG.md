@@ -18,6 +18,7 @@
 - Accessibility 22 Switch unnecessary heading tag to link in Jobs header
 - Accessibility 23 Increase contrast of jobs filter help text
 - Accessibility 28 Update language attribute on all templates
+- Accessibility 36 Update homepage table of contents & add aria-labelledby
 
 ## 14.0 (2020-04-22)
 
