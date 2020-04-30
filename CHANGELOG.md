@@ -9,6 +9,7 @@
 - Fix spacing in breadcrumb navigation
 - Fix spacing on job detail template
 - Fix for multiple form submissions
+- Reformat Aptean Respond submitted case reference numbers for display to users
 
 ## 14.0 (2020-04-22)
 
