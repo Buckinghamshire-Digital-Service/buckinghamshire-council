@@ -1,0 +1,8 @@
+{% load util_tags %}
+
+{% if not search_criteria %}
+- Any
+{% endif %}
+{% for key in search_criteria %}
+- {{key|title}} : {{ search_criteria|lookup:key }}
+{% endfor %}

@@ -1,21 +1,14 @@
-{% load util_tags %}
+Your search for jobs matching the following criteria has {{ results|length }} new match{{ results|pluralize:"es" }}:
 
-Your search for jobs matching your search criteria has {{ results|length }} new match{{ results|pluralize:"es" }}:
+Search criteria:
+
+{% include "patterns/email/search_criteria.txt" with search_criteria=search_criteria %}
+---
 
 {% for result in results %}
 {{ forloop.counter }}. [{{ result.title }}]({{ result.url }})
   {{ result.short_description }}
 {% endfor %}
 
-Search criteria:
-
-{% if not search %}
-- Any
-{% endif %}
-{% for key in search %}
-- {{key|title}} : "{{ search|lookup:key }}"
-{% endfor %}
-
-
 ---
-You can unsubscribe from this alert at {{ site_url }}{{ unsubscribe_url }}.
+You can unsubscribe from this alert at {{ unsubscribe_url }}.
