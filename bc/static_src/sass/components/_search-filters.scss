@@ -65,6 +65,7 @@
     }
 
     &__reset {
+        @include button($color--slate, $color--charcoal-25, $color--charcoal-25);
         margin-left: $grid--min;
     }
 }
