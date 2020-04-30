@@ -19,9 +19,7 @@
             aria-expanded="false"
             aria-selected="false"
             id="question-{{ forloop.counter }}">
-            <svg class="accordion__icon icon icon--stroke" aria-hidden="true">
-                <use xlink:href="#chevron"></use>
-            </svg>
+            {% include "patterns/atoms/icons/icon.html" with name="chevron" classname="icon--stroke accordion__icon" %}
             <h3 class="area-search__heading">Find your area based on your postcode</h3>
 
         </a>

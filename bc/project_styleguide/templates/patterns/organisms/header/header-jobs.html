@@ -3,9 +3,7 @@
 <header class="header header--jobs">
     <div class="header__inner wrapper wrapper--large">
         <a class="header__home-link" href="/" aria-label="Home">
-            <svg class="header__logo" aria-hidden="true">
-                <use xlink:href="#logo"></use>
-            </svg>
+            {% include "patterns/atoms/icons/icon.html" with name="logo" classname="header__logo" %}
         </a>
 
         <div class="header__heading">

@@ -17,6 +17,7 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/13.0...14.0
 - 135 Employer logos (BE)
 - 176 Jobs fix import location
 - 204 Jobs fix salary imports (BE)
+- Accessibility 8 Hide all site icons for screen reader users
 
 ## 13.0 (2020-04-20)
 
