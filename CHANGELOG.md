@@ -15,6 +15,7 @@
 - Accessibility 11 Fix HTML validation errors on the main site
 - Accessibility 13 Fix jobs search filters HTML validation errors on IDs
 - Accessibility 9 & 13 Breadcrumb improvements
+- Accessibility 28 Update language attribute on all templates
 
 ## 14.0 (2020-04-22)
 
