@@ -5,7 +5,7 @@
 
     <div class="wrapper wrapper--large">
         <nav aria-label="breadcrumb">
-            <ul class="breadcrumb breadcrumb--jobs">
+            <ol class="breadcrumb breadcrumb--jobs">
                 {% for ancestor_page in page.get_ancestors %}
                     {% if not ancestor_page.is_root %}
                         {% if ancestor_page.depth > 2 %}
@@ -19,7 +19,12 @@
                         {% endif %}
                     {% endif %}
                 {% endfor %}
-            </ul>
+                <li class="breadcrumb__item">
+                    <a class="breadcrumb__link breadcrumb__link--current" href="#" aria-current="page">
+                        {{ page.title }}
+                    </a>
+                </li>
+            </ol>
         </nav>
     </div>
 
