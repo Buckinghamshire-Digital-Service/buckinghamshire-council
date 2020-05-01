@@ -5,10 +5,9 @@ from collections import OrderedDict, defaultdict
 
 import django.forms
 from django.core.cache import cache
+from django.core.validators import FileExtensionValidator
 
 from lxml import etree
-
-from bc.utils.validators import FileExtensionValidator
 
 from .constants import (
     ACTIVITY_TITLE_SCHEMA_NAME,
@@ -221,7 +220,9 @@ class CaseFormBuilder:
 
     def create_FileField_field(self, schema_name, options):
         return django.forms.FileField(
-            validators=[FileExtensionValidator(valid_extensions=VALID_FILE_EXTENSIONS)],
+            validators=[
+                FileExtensionValidator(allowed_extensions=VALID_FILE_EXTENSIONS)
+            ],
             widget=django.forms.ClearableFileInput(attrs={"multiple": True}),
             **options,
         )

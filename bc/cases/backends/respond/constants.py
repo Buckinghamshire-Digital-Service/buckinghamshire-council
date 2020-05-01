@@ -29,22 +29,22 @@ FIELD_TYPES = {
 }
 
 VALID_FILE_EXTENSIONS = [
-    ".gif",
-    ".jpeg",
-    ".jpg",
-    ".m4a",
-    ".mp3",
-    ".msg",
-    ".pdf",
-    ".png",
-    ".pptx",
-    ".rtf",
-    ".txt",
-    ".wav",
-    ".xls",
-    ".xlsm",
-    ".xlsx",
-    ".zip",
+    "gif",
+    "jpeg",
+    "jpg",
+    "m4a",
+    "mp3",
+    "msg",
+    "pdf",
+    "png",
+    "pptx",
+    "rtf",
+    "txt",
+    "wav",
+    "xls",
+    "xlsm",
+    "xlsx",
+    "zip",
 ]
 
 
