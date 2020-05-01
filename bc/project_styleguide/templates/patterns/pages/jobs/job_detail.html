@@ -3,25 +3,28 @@
 
 {% block breadcrumbs %}
     <div class="wrapper wrapper--large">
-        <nav role="navigation" aria-label="breadcrumb">
-            <ul class="breadcrumb">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
                 <li class="breadcrumb__item">
-                    <a class="breadcrumb__link" href="/" title="Home">
-                        Home
-                    </a>
+                    <a class="breadcrumb__link" href="/">Home</a>
                 </li>
                 <li class="breadcrumb__item">
-                    <a class="breadcrumb__link" href="{% url 'search' %}" title="Home">
+                    <a class="breadcrumb__link" href="{% url 'search' %}">
                         Search results
                     </a>
                 </li>
-            </ul>
+                <li class="breadcrumb__item">
+                    <a class="breadcrumb__link breadcrumb__link--current" href="#" aria-current="page">
+                        {{ page.title }}
+                    </a>
+                </li>
+            </ol>
         </nav>
     </div>
 {% endblock %}
 
 {% block content %}
-    <div class="wrapper wrapper--flex wrapper--margin">
+    <div class="wrapper wrapper--flex">
         <section class="section section--main">
 
             <h1 class="heading heading--xxl heading--no-margin">{{ page.title }}</h1>

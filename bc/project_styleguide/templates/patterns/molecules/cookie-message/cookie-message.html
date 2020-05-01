@@ -5,9 +5,7 @@
         </div>
         <div class="cookie__action">
             <a aria-label="Close" href="#" class="cookie__btn" data-cookie-dismiss>
-                <svg class="cookie__btn-icon" width="24" height="24">
-                    <use xlink:href="#close" />
-                </svg>
+                {% include "patterns/atoms/icons/icon.html" with name="close" classname="cookie__btn-icon" width="24" height="24" %}
             </a>
         </div>
     </div>

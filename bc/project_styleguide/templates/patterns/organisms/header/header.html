@@ -2,21 +2,16 @@
 
 <header class="header">
     <div class="header__inner wrapper wrapper--large">
-        <a class="header__home-link" href="/" aria-label="Home">
-            <svg class="header__logo" aria-hidden="true">
-                <use xlink:href="#logo"></use>
-            </svg>
+        <a class="header__home-link" href="/" aria-label="Buckinghamshire Council">
+            {% include "patterns/atoms/icons/icon.html" with name="logo" classname="header__logo" %}
         </a>
 
         <div class="header__search">
             <form action="{% url 'search' %}" method="get" role="search" class="form form--header-search">
                 <label class="u-sr-only" for="search">Search this website</label>
                 <input class="input" id="search" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-                <button class="button button--search button--header" type="submit" aria-label="Search">
-                    <svg class="button__icon icon icon--stroke icon--white" aria-hidden="true">
-                        <use xlink:href="#magnifying-glass"></use>
-                    </svg>
-                    <span class="u-sr-only">Search</span>
+                <button class="button button--search button--header" type="submit" aria-label="Submit">
+                    {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke icon--white button__icon" %}
                 </button>
             </form>
         </div>

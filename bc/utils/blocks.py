@@ -112,6 +112,11 @@ class StoryBlock(blocks.StreamBlock):
         icon="title",
         template="patterns/molecules/streamfield/blocks/heading_block.html",
     )
+    subheading = blocks.CharBlock(
+        classname="full title",
+        icon="title",
+        template="patterns/molecules/streamfield/blocks/subheading_block.html",
+    )
     paragraph = blocks.RichTextBlock(features=RICH_TEXT_FEATURES)
     image = ImageBlock()
     embed = EmbedBlock()
