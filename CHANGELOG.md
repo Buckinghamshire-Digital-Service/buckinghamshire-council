@@ -9,7 +9,18 @@
 - Fix spacing in breadcrumb navigation
 - Fix spacing on job detail template
 - Fix for multiple form submissions
+- Alert panel and Aptean Form Page confirmation page template update
 - Reformat Aptean Respond submitted case reference numbers for display to users
+- Accessibility 1 Remove redundant/inappropriate ARIA role overrides
+- Accessibility 8 Hide all site icons for screen reader users
+- Accessibility 9 Improvements to screen reader only navigational content
+- Accessibility 11 Fix HTML validation errors on the main site
+- Accessibility 13 Fix jobs search filters HTML validation errors on IDs
+- Accessibility 9 & 13 Breadcrumb improvements
+- Accessibility 22 Switch unnecessary heading tag to link in Jobs header
+- Accessibility 23 Increase contrast of jobs filter help text
+- Accessibility 28 Update language attribute on all templates
+- Accessibility 36 Update homepage table of contents & add aria-labelledby
 
 ## 14.0 (2020-04-22)
 
