@@ -227,6 +227,7 @@ FIELD_MAPPINGS = {
             ("Town or city", "Contact.Town"),
             ("County", "Contact.County"),
             ("Postcode", "Contact.ZipCode"),
+            ("Upload file", ATTACHMENT_SCHEMA_NAME),
         ]
     ),
     settings.RESPOND_FOI_WEBSERVICE: OrderedDict(
@@ -243,6 +244,7 @@ FIELD_MAPPINGS = {
             ("Town or city", "Contact.Town"),
             ("County", "Contact.County"),
             ("Postcode", "Contact.ZipCode"),
+            ("Upload file", ATTACHMENT_SCHEMA_NAME),
         ]
     ),
     settings.RESPOND_SAR_WEBSERVICE: OrderedDict(
@@ -278,6 +280,7 @@ FIELD_MAPPINGS = {
             ("Town or city", "Contact.Town"),
             ("County", "Contact.County"),
             ("Postcode", "Contact.ZipCode"),
+            ("Upload file", ATTACHMENT_SCHEMA_NAME),
         ]
     ),
     settings.RESPOND_COMMENTS_WEBSERVICE: OrderedDict(
@@ -330,7 +333,7 @@ FIELD_MAPPINGS = {
             ("Town or city", "Contact.Town"),
             ("County", "Contact.County"),
             ("Postcode", "Contact.ZipCode"),
-            ("Attachments", ATTACHMENT_SCHEMA_NAME),
+            ("Upload file", ATTACHMENT_SCHEMA_NAME),
         ]
     ),
 }
