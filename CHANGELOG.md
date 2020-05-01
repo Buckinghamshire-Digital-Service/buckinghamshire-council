@@ -15,6 +15,7 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/14.0...15.0
 - Fix spacing in breadcrumb navigation
 - Fix spacing on job detail template
 - Fix for multiple form submissions
+- 142 Internal jobs site
 - Alert panel and Aptean Form Page confirmation page template update
 - Reformat Aptean Respond submitted case reference numbers for display to users
 - Accessibility 1 Remove redundant/inappropriate ARIA role overrides
@@ -46,7 +47,6 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/12.0...13.0
 - Styling tweaks on recruitment index page ('benefits' page)
 - Add favicon
 - 140 Job site breadcrumbs on all pages
-- 142 Internal jobs site
 - 155 Jobs extra filters (BE)
 - 161 Update job search filter styles and add custom select form field
 - 173 Search local council area by postcode
