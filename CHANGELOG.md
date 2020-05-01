@@ -10,6 +10,7 @@
 - Fix spacing on job detail template
 - Fix for multiple form submissions
 - Alert panel and Aptean Form Page confirmation page template update
+- Reformat Aptean Respond submitted case reference numbers for display to users
 - Accessibility 1 Remove redundant/inappropriate ARIA role overrides
 - Accessibility 8 Hide all site icons for screen reader users
 - Accessibility 9 Improvements to screen reader only navigational content
