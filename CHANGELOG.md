@@ -1,5 +1,11 @@
 # Release History
 
+## 15.1 (2020-05-01)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/15.0...15.1
+
+- Fix for breadcrumbs
+
 ## 15.0 (2020-05-01)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/14.0...15.0
