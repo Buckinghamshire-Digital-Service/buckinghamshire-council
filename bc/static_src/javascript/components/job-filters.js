@@ -6,7 +6,6 @@ class Filters {
     constructor(node) {
         this.filters = node;
         this.filter = this.filters.querySelectorAll('[data-filter]');
-        this.resetFilters = document.querySelector('[data-filters-reset]');
         this.showChecked();
         this.bindEvents();
     }
@@ -52,6 +51,9 @@ class Filters {
     }
 
     bindEvents() {
+        this.submitFilters = document.querySelector('[data-filters-submit]');
+        this.resetFilters = document.querySelector('[data-filters-reset]');
+
         this.filter.forEach((filter) => {
             filter.addEventListener('click', () => {
                 this.showChecked();
@@ -60,6 +62,7 @@ class Filters {
 
         this.resetFilters.addEventListener('click', () => {
             this.resetAllFilters();
+            this.submitFilters.click();
         });
     }
 }
