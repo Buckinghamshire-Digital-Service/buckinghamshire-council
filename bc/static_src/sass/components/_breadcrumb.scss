@@ -24,8 +24,8 @@
         width: auto;
 
         &::after {
+            content: '/';
             color: $color--earth;
-            content: '/' / '';
             margin: 0 8px;
         }
 
