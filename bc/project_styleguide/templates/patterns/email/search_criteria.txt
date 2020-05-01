@@ -1,8 +1,6 @@
 {% load util_tags %}
-
 {% if not search_criteria %}
 - Any
 {% endif %}
-{% for key in search_criteria %}
-- {{key|title}} : {{ search_criteria|lookup:key }}
-{% endfor %}
+{% for key, value in search_criteria.items %}
+- {{ key|title }}: {{ value|join_list }}{% endfor %}

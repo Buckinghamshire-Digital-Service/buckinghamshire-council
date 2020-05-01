@@ -388,18 +388,18 @@ class JobAlertSubscription(models.Model):
 
     @cached_property
     def prettified_search(self):
-        search_dict = json.loads(self.search)
+        search_params = json.loads(self.search)
         # Rename the key, 'query' to something nicer
-        if "query" in search_dict:
-            search_dict["search term"] = search_dict.pop("query")
+        if "query" in search_params:
+            search_params["search term"] = search_params.pop("query")
         # Replace category slugs with category titles
-        if "category" in search_dict:
-            search_dict["category"] = list(
+        if "category" in search_params:
+            search_params["category"] = list(
                 JobCategory.objects.filter(
-                    slug__in=search_dict["category"]
+                    slug__in=search_params["category"]
                 ).values_list("title", flat=True)
             )
-        return search_dict
+        return search_params
 
     @cached_property
     def site_url(self):
