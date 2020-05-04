@@ -105,32 +105,13 @@ class ButtonBlock(blocks.StructBlock):
         template = "patterns/molecules/streamfield/blocks/button_block.html"
 
 
-class AccordionDetail(blocks.StructBlock):
-    items = blocks.ListBlock(
-        blocks.StructBlock(
-            [
-                (
-                    "title",
-                    blocks.CharBlock(
-                        classname="full title", icon="title", label="Accordion title"
-                    ),
-                ),
-                (
-                    "content",
-                    blocks.RichTextBlock(
-                        features=RICH_TEXT_FEATURES, label="Accordion content"
-                    ),
-                ),
-            ]
-        ),
-        label="Accordion items",
-    )
+class DetailBlock(blocks.StructBlock):
+    title = blocks.CharBlock(classname="full title", icon="title", label="Detail title")
+    content = blocks.RichTextBlock(features=RICH_TEXT_FEATURES, label="Detail content")
 
     class Meta:
-        icon = ("list-ul",)
-        template = (
-            "patterns/molecules/streamfield/blocks/accordion_detail_block.html",
-        )
+        icon = ""
+        template = "patterns/molecules/streamfield/blocks/detail_block.html"
 
 
 # Main streamfield block to be inherited by Pages
@@ -151,7 +132,7 @@ class StoryBlock(blocks.StreamBlock):
     local_area_links = LocalAreaLinksBlock()
     table = TableBlock()
     button = ButtonBlock()
-    accordion_detail = AccordionDetail()
+    detail = DetailBlock()
 
     class Meta:
         template = "patterns/molecules/streamfield/stream_block.html"
