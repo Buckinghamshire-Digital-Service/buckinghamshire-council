@@ -6,9 +6,8 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('recruitment', '0033_merge_20200429_1411'),
-        ('recruitment', '0032_add_accordion_detail_to_storyblock'),
+        ("recruitment", "0033_merge_20200429_1411"),
+        ("recruitment", "0032_add_accordion_detail_to_storyblock"),
     ]
 
-    operations = [
-    ]
+    operations = []
