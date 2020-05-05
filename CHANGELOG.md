@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Fix for employer logo sizes (FE)
+- Accessibility - Hide "Find out more" for screen reader users (Jobs benefits)
 
 ## 15.1 (2020-05-01)
 
