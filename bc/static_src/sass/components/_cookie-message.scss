@@ -1,14 +1,10 @@
 .cookie {
     $root: &;
-    padding: 0 $grid--small $grid--small;
-    position: fixed;
-    right: auto;
-    bottom: 0;
-    left: auto;
+    padding: $grid--min $grid--small;
+    position: relative;
     z-index: 13;
-    display: none; // Doesn't display unless there isn't a cookie
+    // display: none; // Doesn't display unless there isn't a cookie
     width: 100%;
-    pointer-events: none;
     transition: transform $transition 0s;
 
     // Applied if cookie just added
@@ -24,17 +20,14 @@
 
     &__container {
         @include font-size(xs);
-        padding: $grid--small $grid--min;
+        padding: $grid--small;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        max-width: ($grid * 35);
         margin: 0 auto;
         line-height: 1.4;
-        color: $color--off-black;
+        color: $color--default;
         background-color: $color--white;
-        border: 1px solid $color--border;
-        border-radius: 5px;
 
         @include media-query(tablet-landscape) {
             @include font-size(s);
@@ -43,36 +36,12 @@
 
     &__message {
         p {
+            margin-top: 0;
             margin-bottom: 0;
         }
     }
 
-    &__link {
-        color: $color--primary;
-        pointer-events: auto;
-
-        &:hover {
-            color: $color--off-black;
-        }
-    }
-
-    &__btn {
-        @include font-size(s);
-        display: block;
-        width: 24px;
-        height: 24px;
-        pointer-events: auto;
-        cursor: pointer;
-
-        &:hover {
-            #{$root}__btn-icon {
-                fill: $color--secondary;
-            }
-        }
-    }
-
-    &__btn-icon {
-        transition: fill $transition 0s;
-        fill: $color--off-black;
+    &__button {
+        margin-top: $grid--small;
     }
 }
