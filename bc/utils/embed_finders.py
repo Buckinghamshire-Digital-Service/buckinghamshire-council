@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 
 
 class YouTubeNoCookieAndPreserveRelFinder(OEmbedFinder):
-    """ 
+    """
     OEmbed finder which preserves the rel=0 parameter on YouTube URLs
     as well as forces the use of the youtube-nocookie.com domain instead
     of youtube.com
