@@ -29,6 +29,13 @@ FIELD_TYPES = {
 }
 
 VALID_FILE_EXTENSIONS = [
+    "bmp",
+    "csv",
+    "doc",
+    "docx",
+    "dot",
+    "dotx",
+    "eml",
     "gif",
     "jpeg",
     "jpg",
