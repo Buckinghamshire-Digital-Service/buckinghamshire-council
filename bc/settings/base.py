@@ -4,6 +4,8 @@ Django settings for bc project.
 import os
 import sys
 
+from wagtail.embeds.oembed_providers import youtube
+
 import dj_database_url
 import raven
 from raven.exceptions import InvalidGitRepository
@@ -189,6 +191,14 @@ WAGTAILSEARCH_BACKENDS = {
     "default": {"BACKEND": "wagtail.contrib.postgres_search.backend"}
 }
 
+
+WAGTAILEMBEDS_FINDERS = [
+    {
+        "class": "bc.utils.embed_finders.YouTubeNoCookieAndPreserveRelFinder",
+        "providers": [youtube],
+    },
+    {"class": "wagtail.embeds.finders.oembed",},
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/stable/ref/settings/#auth-password-validators
