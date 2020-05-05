@@ -3,6 +3,7 @@
 ## Unrelease
 
 - Update documentation about personally-identifying data
+- Add documentation about the procedure for resetting the staging branch/server/db
 
 ## 15.1 (2020-05-01)
 
