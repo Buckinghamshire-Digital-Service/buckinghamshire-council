@@ -1,8 +1,8 @@
 {% load wagtailcore_tags %}
-<nav role="navigation" aria-label="Quaternary">
+<nav role="navigation" aria-label="Footer">
     <ul class="footer-links">
         {% for link in footerlinks %}
-            <li class="footer-links__item" role="presentation">
+            <li class="footer-links__item">
                 {% include_block link with classes="footer-links__link link--alt" %}
             </li>
         {% endfor %}

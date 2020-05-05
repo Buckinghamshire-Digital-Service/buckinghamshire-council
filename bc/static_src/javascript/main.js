@@ -10,6 +10,7 @@ import AreaSearchForm from './components/area-search-form';
 import Carousel from './components/carousel';
 import ProgressBar from './components/progress-bar';
 import VideoModal from './components/video-modal';
+import FormSubmit from './components/form-submit';
 
 import 'whatwg-fetch';
 
@@ -44,6 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (const carousel of document.querySelectorAll(Carousel.selector())) {
         new Carousel(carousel);
+    }
+
+    for (const formsubmit of document.querySelectorAll(FormSubmit.selector())) {
+        new FormSubmit(formsubmit);
     }
 
     for (const mobilemenu of document.querySelectorAll(MobileMenu.selector())) {

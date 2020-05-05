@@ -1,6 +1,6 @@
 {% load static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags %}
 <!doctype html>
-<html class="no-js" lang="en-US">
+<html lang="en-GB">
     <head>
         {# TODO fallbacks if page is not defined e.g. for 404 page #}
         <meta charset="utf-8" />
@@ -54,13 +54,13 @@
             </div>
         </div>
 
-        <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script>
 
         {% block extra_js %}{% endblock %}
         {% block body_bottom %}{% endblock %}
 
         {% if page.show_live_chat_client %}
-            <script type="text/javascript" >
+            <script>
             function InitialiseC4A() {
             / Chat Tool /
             var Tool9 = new C4A.Tools(9);
@@ -68,8 +68,7 @@
             C4A.Run('9e767570-94bc-4ec9-958c-95abe8de225d');
             }
             </script>
-            <script src="https://v4in1-si.click4assistance.co.uk/SI.js" type="text/javascript" defer="defer"></script>
+            <script src="https://v4in1-si.click4assistance.co.uk/SI.js" defer="defer"></script>
         {% endif %}
     </body>
 </html>
-

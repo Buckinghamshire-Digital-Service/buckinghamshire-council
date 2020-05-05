@@ -24,8 +24,8 @@
         width: auto;
 
         &::after {
-            color: $color--earth;
             content: '/';
+            color: $color--earth;
             margin: 0 8px;
         }
 
@@ -38,6 +38,10 @@
 
     &__link {
         color: $color--link;
+
+        &--current {
+            text-decoration: none;
+        }
 
         #{$hover-states} {
             color: $color--link-hover;
