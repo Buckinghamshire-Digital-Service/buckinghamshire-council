@@ -51,10 +51,10 @@ class Filters {
             filter.checked = false;
 
             // if text input (postcode search) is not blank, reset it
-            if (filter.value !== ""){
-                filter.value = "";
+            if (filter.value !== '') {
+                filter.value = '';
             }
-            
+
             this.showChecked();
         });
     }
