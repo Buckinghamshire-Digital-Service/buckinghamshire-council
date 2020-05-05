@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- Fix for employer logo sizes (FE)
+
 ## 15.1 (2020-05-01)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/15.0...15.1
