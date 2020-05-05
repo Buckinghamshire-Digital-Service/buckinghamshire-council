@@ -55,3 +55,5 @@ If a request is received to purge or report the stored data for a given user, wh
 - For user account data, delete the user from the Wagtail admin https://www.buckinghamshire.gov.uk/admin/users/
 - For form submissions, ask the client to handle requests as the first option. Failing that, search the submissions and delete if necessary using the Django shell.
 - For JobAlertsSubscriptions, find and delete from https://www.buckinghamshire.gov.uk/admin/recruitment/jobalertsubscription/
+
+Note: this will not purge such data from backups.
