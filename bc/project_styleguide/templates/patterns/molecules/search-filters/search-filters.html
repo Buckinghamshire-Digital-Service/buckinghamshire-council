@@ -3,24 +3,24 @@
 <div class="search-filters" role="tablist" aria-multiselectable="true">
     {# Form ID is used to link the filters with the job search field - see 'pages/search/search--jobs.html' #}
     <form id="job-filters" action="#" method="get" role="filter" class="form">
-        <div class="search-filters__fieldset">
+        <fieldset class="search-filters__fieldset" data-filters>
             <div class="search-filters__option form-item--custom_checkbox_select_single">
-                <input class="search-filters__checkbox" type="checkbox" value="1" name="hide_schools_and_early_years" id="hide_schools_and_early_years" {% if hide_schools_and_early_years.selected %}checked{% endif %}>
+                <input class="search-filters__checkbox" type="checkbox" value="1" name="hide_schools_and_early_years" id="hide_schools_and_early_years" {% if hide_schools_and_early_years.selected %}checked{% endif %} data-filter>
                 <label class="search-filters__label" for="hide_schools_and_early_years">
                     {{ hide_schools_and_early_years.label }}
                     <span class="search-filters__count">({{ hide_schools_and_early_years.count }})</span>
                 </label>
             </div>
-        </div>
+        </fieldset>
 
         {% for filter in filters %}
             {% if filter.key == "category"%}
                 <h3 class="search-filters__group-title">{{ filter.title }}</h3>
 
-                <fieldset class="search-filters__fieldset">
+                <fieldset class="search-filters__fieldset" data-filters>
                     {% for option in filter.options %}
                         <div class="search-filters__option form-item--custom_checkbox_select_multiple">
-                            <input type="checkbox" name="{{ filter.key }}" value="{{ option.key }}" id="{{forloop.counter}}-{{ option.key }}" {% if option.key|slugify in filter.selected %}checked{% endif %}>
+                            <input type="checkbox" name="{{ filter.key }}" value="{{ option.key }}" id="{{forloop.counter}}-{{ option.key }}" {% if option.key|slugify in filter.selected %}checked{% endif %} data-filter>
                             <label class="search-filters__label" for="{{forloop.counter}}-{{ option.key }}">
                                 {{ option.label }}
                                 <span class="search-filters__count">({{ option.count }})</span>
@@ -76,11 +76,11 @@
         {% endfor %}
 
         <div>
-            <fieldset class="search-filters__fieldset">
+            <fieldset class="search-filters__fieldset" data-filters>
                 <legend class="hidden">Location</legend>
                 <div class="search-filters__input">
                     <label class="search-filters__group-title" for="search--page">Location</label>
-                    <input class="input" id="search--postcode" type="text" placeholder="e.g HP14 5SW" name="postcode"{% if search_postcode %} value="{{ search_postcode }}{% endif %}">
+                    <input class="input" id="search--postcode" type="text" placeholder="e.g HP14 5SW" name="postcode"{% if search_postcode %} value="{{ search_postcode }}{% endif %}" data-filter>
                     <div class="form-item__help search-filters__help">Jobs will be ordered by closest first</div>
                 </div>
             </fieldset>

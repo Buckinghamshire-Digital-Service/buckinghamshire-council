@@ -31,21 +31,30 @@ class Filters {
             '[data-filters-counter]',
         );
 
-        // update active filter counter
-        filtersActiveCounter.innerHTML = this.checkboxCount();
+        // update active filter counter if present
+        if (filtersActiveCounter) {
+            filtersActiveCounter.innerHTML = this.checkboxCount();
 
-        if (checkboxCount > 0) {
-            // show active filter container when at least 1 filter (checkbox) is active (checked)
-            filtersActive.classList.add('active');
-        } else {
-            // hide active filter container when no filters (checkboxes) are active (checked)
-            filtersActive.classList.remove('active');
+            if (checkboxCount > 0) {
+                // show active filter container when at least 1 filter (checkbox) is active (checked)
+                filtersActive.classList.add('active');
+            } else {
+                // hide active filter container when no filters (checkboxes) are active (checked)
+                filtersActive.classList.remove('active');
+            }
         }
     }
 
     resetAllFilters() {
         this.filter.forEach((filter) => {
+            // remove each checked filter
             filter.checked = false;
+
+            // if text input (postcode search) is not blank, reset it
+            if (filter.value !== ""){
+                filter.value = "";
+            }
+            
             this.showChecked();
         });
     }
