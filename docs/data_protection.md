@@ -2,7 +2,7 @@
 
 See also: [Cookies](cookies.md)
 
-This page gives an overview of potentially-sensitive data stored or processed by the Buckinghamshire Council project.
+This page gives an overview of personally-identifying information (PII) stored or processed by the Buckinghamshire Council project.
 
 ### User accounts
 
@@ -14,7 +14,7 @@ Buckinghamshire Council Wagtail user accounts store a user's name and email addr
 
 These can store any type of data, as they are configured by the editors at Buckinghamshire Council.
 
-Responsibility for ensuring GDPR compliance in the normal storage and processing of this data rests with the client, Buckinghamshire Council.
+Responsibility for the definition and use of form fields, and their compliance with the GDPR, rests with the Data Controller, Buckinghamshire Council.
 
 When duplicating the database for development purposes, developers are responsible for deleting these records from duplicates. See _Data locations_ below.
 
@@ -22,7 +22,7 @@ When duplicating the database for development purposes, developers are responsib
 
 These submissions, part of the `bc.cases` app, are processed by Django view functions, but data is not stored in our application. Form submissions are posted via HTTPS to the Aptean Forms API. We also process responses to those submissions, which may contain PII if the response is an error message.
 
-### Other non-issues
+### Other personal data handling
 
 These are common sources of personal data which are _not_ handled by the Buckinghamshire Council Django application.
 
@@ -36,7 +36,7 @@ These requests are handled by a third-party provider. The code which processes d
 
 ## Data locations
 
-Data is stored in the database, in the models:
+PII is stored in the database, in the models:
 
 - `bc.recruitment.models.JobAlertSubscription`
 - `bc.users.models.User`
