@@ -55,6 +55,11 @@ Steps for resetting the `staging` git branch, and deploying it with a clone of t
    Take note if any of the above are stale, not needing to be recreated.
 
 1. Are there any user accounts on staging only, which will need to be recreated? Check with the client, and record them.
+1. Take a backup of production
+   ```bash
+   $ heroku pg:backups:capture -a buckinghamshire-production
+   ```
+1. And staging `$ heroku pg:backups:capture -a buckinghamshire-staging`
 
 ### Git
 
@@ -83,12 +88,6 @@ Steps for resetting the `staging` git branch, and deploying it with a clone of t
 1. Check for any newly necessary merge migrations `$ ./manage.py makemigrations --check`
 
 ### Database
-
-1. Take a backup of production
-   ```bash
-   $ heroku pg:backups:capture -a buckinghamshire-production
-   ```
-1. And staging `$ heroku pg:backups:capture -a buckinghamshire-staging`
 
 1. Duplicate the database from production to staging:
    ```bash
