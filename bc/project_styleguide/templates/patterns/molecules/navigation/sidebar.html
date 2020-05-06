@@ -1,8 +1,8 @@
 {% load wagtailcore_tags %}
 
-<aside class="sidebar {{ classes }}">
+<section class="sidebar {{ classes }}" aria-labelledby="sidebar-heading">
     {% if page.related_pages.all %}
-        <h2 class="sidebar__heading heading heading--m">
+        <h2 class="sidebar__heading heading heading--m" id="sidebar-heading">
             {% if sidebar_title %}
                 {{ sidebar_title }}
             {% else %}
@@ -22,5 +22,4 @@
             {% endfor %}
         </ul>
     {% endif %}
-</aside>
-
+</section>
