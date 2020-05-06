@@ -44,7 +44,29 @@ PII is stored in the database, in the models:
 
 All backups, automated or otherwise, include this data.
 
-All exports include this data. The first steps when downloading a copy of the production database, or cloning it to staging, should be to delete all records in the above tables.
+### Exports
+
+All exports include the above data. The first steps when downloading a copy of the production database, or cloning it to staging, should be to delete all records in the user-submitted tables:
+
+```bash
+$ python manage.py shell_plus
+>>> JobAlertSubscription.objects.all().delete()
+>>> FormSubmission.objects.all().delete()
+```
+
+When copying the data to staging, you probably want to leave user accounts intact, as users are not members of the public and will still want to access the staging site. If using the data locally, you should anonymise user accounts:
+
+```bash
+$ python manage.py shell_plus
+>>> for user in User.objects.all():
+...     user.first_name = "User"
+...     user.last_name = user.id
+...     user.email = f"user.{user.id}@example.com"
+...     user.username = f"user.{user.id}"
+...     user.save()
+```
+
+### Error logs
 
 Personally-identifying data may also appear in error reports, at sentry.io. We have configured the Sentry project to anonymise known sensitive fields, including some bespoke fields for this project, such as for Aptean forms submissions.
 
@@ -53,7 +75,7 @@ Personally-identifying data may also appear in error reports, at sentry.io. We h
 If a request is received to purge or report the stored data for a given user, what steps are needed?
 
 - For user account data, delete the user from the Wagtail admin https://www.buckinghamshire.gov.uk/admin/users/
-- For form submissions, ask the client to handle requests as the first option. Failing that, search the submissions and delete if necessary using the Django shell.
+- For form submissions, ask the client to handle requests as a first option. Failing that, search the submissions and delete if necessary using the Django shell.
 - For JobAlertsSubscriptions, find and delete from https://www.buckinghamshire.gov.uk/admin/recruitment/jobalertsubscription/
 
 Note: this will not purge such data from backups.
