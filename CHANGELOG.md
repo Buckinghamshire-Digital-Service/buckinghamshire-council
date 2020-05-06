@@ -5,6 +5,7 @@
 - Add tests for job categories import fix
 - Add unit tests for Aptean Respond integration
 - Subheading block (BE)
+- Add active checkbox counter & reset filters button for job search (FE)
 
 ## 14.0 (2020-04-22)
 
