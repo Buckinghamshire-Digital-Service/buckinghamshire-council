@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Update job search salary filter to use searchable salary instead of salary range
 - Fix for employer logo sizes (FE)
 - Accessibility 14 Increase contrast of Highlighted Content heading
 - Accessibility 16 Fix Jobs filter fieldset legends
