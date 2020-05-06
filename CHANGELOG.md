@@ -7,6 +7,7 @@
 - Accessibility 16 Fix Jobs filter fieldset legends
 - Accessibility 18 Page content should be in a landmark
 - Accessibility 19 Remove nesting for landmarks
+- Accessibility 44 & 75 Pagination improvements
 
 ## 15.1 (2020-05-01)
 
