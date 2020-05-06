@@ -5,6 +5,7 @@
 - Fix for employer logo sizes (FE)
 - Accessibility 14 Increase contrast of Highlighted Content heading
 - Accessibility 16 Fix Jobs filter fieldset legends
+- Accessibility 18 Page content should be in a landmark
 - Accessibility 19 Remove nesting for landmarks
 
 ## 15.1 (2020-05-01)
