@@ -100,7 +100,14 @@ TODO: these steps do not currently use the Heroku backup from production; it wou
 
 ### Media
 
-The fab commands are sufficient here:
+The fab commands are sufficient here. It's quicker just to copy original image files across (with no renditions):
+
+```bash
+$ fab pull-production-images
+$ fab push-staging-images
+```
+
+…otherwise if you need everything, i.e. uploaded documents, images and renditions:
 
 ```bash
 $ fab pull-production-media
