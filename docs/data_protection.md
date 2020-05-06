@@ -20,7 +20,7 @@ When duplicating the database for development purposes, developers are responsib
 
 #### Aptean forms submissions
 
-These submissions, part of the `bc.cases` app, are processed by Django view functions, but data is not stored in our application. Form submissions are posted via HTTPS to the Aptean Forms API. We also process responses to those submissions, which may contain PII if the response is an error message.
+These submissions, part of the `bc.cases` app, are processed by Django view functions, but data is not stored in our application. Form submissions are posted via HTTPS to the Aptean Forms API. We also process responses to those submissions, which may contain PII if the response is an error message. Form field error messages are merely displayed to the user where possible, but may be stored in Sentry if a server error is caused. See _Data locations > Error logs_ below.
 
 ### Other personal data handling
 
