@@ -183,7 +183,7 @@ class CaseFormBuilder:
         cache_key = RESPOND_FIELDS_CACHE_PREFIX + schema_name
         options = cache.get(cache_key, {})
         if not options and not permit_cache_miss:
-            raise Exception("Cache miss for field options")
+            raise Exception(f"Cache miss for field options: key={cache_key}")
 
         try:
             options.update(

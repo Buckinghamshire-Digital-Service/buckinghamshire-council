@@ -2,7 +2,7 @@
 
 <article class="search-result">
     {% if result.logo %}
-        {% image result.logo fill-80x80 class="search-result__logo" %}
+        {% image result.logo max-80x80 class="search-result__logo" %}
     {% endif %}
 
     <h3 class="search-result__title heading heading--third">
@@ -23,6 +23,6 @@
         <dt class="search-result__meta-title">Closing date:</dt>
         <dd class="search-result__meta-description">{{ result.closing_date }}</dd>
         <dt class="search-result__meta-title">Location:</dt>
-        <dd class="search-result__meta-description">{{ result.searchable_location }}</dd>
+        <dd class="search-result__meta-description">{{ result.location }}</dd>
     </dl>
 </article>

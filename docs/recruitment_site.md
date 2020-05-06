@@ -2,6 +2,14 @@
 
 This is hosted at https://jobs.buckinghamshire.gov.uk/. It is a Django/Wagtail app sitting within the main project, with a set of page types for this site only, including its own home page type.
 
+# Internal Recruitment Site
+
+There is also a recruitment site for internal jobs. This is hosted on TBC. It is a clone of the main recruitment site with different jobs and job alert associated.
+
+Each recruitment site will display different job listing. Many jobs may be posted to both sites. The jobs on each site will have a different `talentlink_id` though they will share the same `job_number`.
+
+Note that categories and subcategories are shared across the recruitment sites.
+
 ## Local development
 
 Either grab a database dump from production or staging, or:
@@ -21,7 +29,9 @@ The following environment variables must be set to authenticate with the API (or
 
 - `TALENTLINK_API_KEY`
 - `TALENTLINK_API_PASSWORD`
-- `TALENTLINK_API_USERNAME`
+- `TALENTLINK_EXTERNAL_API_USERNAME`
+- `TALENTLINK_INTERNAL_API_USERNAME`
+- And potentially `TALENTLINK_{uppercase job board name}_API_USERNAME` for any new boards
 - `TALENTLINK_API_WSDL`, this is configurable, but not secret, and should be set to "https://api3.lumesse-talenthub.com/CareerPortal/SOAP/FoAdvert?WSDL"
 
 ## SOAP
@@ -79,11 +89,37 @@ You can call this in Python code with:
 '2 x Support Workers - Autism - Spring Valley Day Centre / Spectrum Unit'
 ```
 
+## Saba
+
+Saba is the system used for managing jobs and applications.
+
+Jobs are identified by a unique job number, eg. BUC0003 which corresponds to `TalentLinkJob.job_number` on the Wagtail site.
+
+On Saba, jobs can have multiple advertisements. Advertisements can be posted to multiple targets. Each posting target (ie. job board) has its own TalentLink API credentials. We are currently only importing job advertisements posted to 'External site' and 'Internal site' on Saba.
+
+Each job advertisement posting to a job board will have a start date, end date, and status. It will only appear on the TalentLink API feed for the job board if its status is 'Published'.
+
+The posting will also have a unique ad id which corresponds to `TalentLinkJob.talentlink_id`. This is different for each job board, even if it is from the same job advertisement.
+
 ## Importing jobs
 
 The management command `import_jobs` will fetch results from the API.
 
-If the `--import_categories` option is specified when running the `import_jobs` command, new categories will be imported. Otherwise, jobs with categories that do not match existing `JobCategory` instances will be skipped in the import.
+If the `--import_categories` option is specified when running the `import_jobs` command, new categories will be imported. Otherwise, jobs with categories that do not match existing `JobSubcategory` instances will be skipped in the import.
+
+`JobSubcategory` objects are unique by title, but looked up case-insensitively by the importer. This is due to similar entries like "Schools secondary" and "Schools Secondary" in the source data.
+
+Note that the filtering performed by users is on the `JobCategory` model, whereas the imported `Job Group` attribute from the API is mapped to the `JobSubcategory` model in Django. The relationship between categories and their subcategories can be edited in the Wagtail admin.
+
+### Job Boards (ie. External and Internal job sites)
+
+Jobs on TalentLink can be posted to multiple job boards (eg. External or Internal). The job board is set on the recruitment homepage (go to the Settings tab).
+
+Each TalentLinkJob instance belongs to only one recruitment site.
+
+The import script loops through the instances of recruitment homepage on the system and import jobs for the job board defined on the instance.
+
+If a corresponding API_USERNANE for the job board (eg. `settings.TALENTLINK_EXTERNAL_API_USERNAME`) is not defined on settings, import will be skipped for the recruitment site.
 
 ### Imported fields
 
@@ -110,6 +146,8 @@ This searches for new matches for all confirmed job alert subscriptions.
 A new match is any job whose created date is since the start of the last successful run, and since the alert was created.
 
 The way the command is written intends it to be called daily, but other durations shouldn't matter, so long as the duration is longer than the time taken for the command to run. It specifically ignores jobs imported during the running of the alert command, leaving them for the next alert cycle.
+
+Job alerts are site specific.
 
 ## Application forms
 

@@ -73,6 +73,7 @@
 
         &--search-filters {
             @include font-size(s);
+            flex-wrap: wrap;
             left: 1px;
             position: relative;
             color: $color--charcoal;
@@ -113,10 +114,11 @@
 
         &--search-filter {
             stroke: $color--charcoal;
-            width: 22px;
-            height: 22px;
+            stroke-width: 3;
+            width: 18px;
+            height: 20px;
             margin-bottom: 5px;
-            margin-right: 22px;
+            margin-right: 8px;
         }
     }
 

@@ -36,9 +36,11 @@ def get_current_search(querydict):
     return json.dumps(search)
 
 
-def get_job_search_results(querydict, queryset=None):
+def get_job_search_results(querydict, homepage, queryset=None):
     if queryset is None:
         queryset = TalentLinkJob.objects.all()
+
+    queryset = queryset.filter(homepage=homepage)
 
     search_query = querydict.get("query", None)
 
@@ -47,7 +49,7 @@ def get_job_search_results(querydict, queryset=None):
             SearchVector("title", weight="A")
             + SearchVector("job_number", weight="A")
             # + SearchVector("short_description", weight="A")
-            + SearchVector("searchable_location", weight="B")
+            + SearchVector("location", weight="B")
             + SearchVector("description", weight="C")
         )
         query = SearchQuery(search_query, search_type="phrase")
@@ -126,10 +128,7 @@ def GetDistance(point_latitude, point_longitude):
     return distance
 
 
-def get_school_and_early_years_count(search_results=None):
-    if search_results is None:
-        search_results = TalentLinkJob.objects.all()
-
+def get_school_and_early_years_count(search_results):
     schools_and_early_years_categories = (
         JobCategory.get_school_and_early_years_categories()
     )

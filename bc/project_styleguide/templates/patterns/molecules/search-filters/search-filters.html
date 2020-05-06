@@ -1,25 +1,26 @@
 {% load wagtailcore_tags %}
 
 <div class="search-filters" role="tablist" aria-multiselectable="true">
-    <form action="#" method="get" role="filter" class="form">
-        <div class="search-filters__fieldset">
+    {# Form ID is used to link the filters with the job search field - see 'pages/search/search--jobs.html' #}
+    <form id="job-filters" action="#" method="get" role="search" class="form">
+        <fieldset class="search-filters__fieldset" data-filters>
             <div class="search-filters__option form-item--custom_checkbox_select_single">
-                <input class="search-filters__checkbox" type="checkbox" value="1" name="hide_schools_and_early_years" id="hide_schools_and_early_years" {% if hide_schools_and_early_years.selected %}checked{% endif %}>
+                <input class="search-filters__checkbox" type="checkbox" value="1" name="hide_schools_and_early_years" id="hide_schools_and_early_years" {% if hide_schools_and_early_years.selected %}checked{% endif %} data-filter>
                 <label class="search-filters__label" for="hide_schools_and_early_years">
                     {{ hide_schools_and_early_years.label }}
                     <span class="search-filters__count">({{ hide_schools_and_early_years.count }})</span>
                 </label>
             </div>
-        </div>
+        </fieldset>
 
         {% for filter in filters %}
             {% if filter.key == "category"%}
-                <h3 class="search-filters__group-title">{{ filter.title }}</h3>
+                <fieldset class="search-filters__fieldset" data-filters>
+                    <legend class="search-filters__group-title">{{ filter.title }}</legend>
 
-                <fieldset class="search-filters__fieldset">
                     {% for option in filter.options %}
                         <div class="search-filters__option form-item--custom_checkbox_select_multiple">
-                            <input type="checkbox" name="{{ filter.key }}" value="{{ option.key }}" id="{{forloop.counter}}-{{ option.key }}" {% if option.key|slugify in filter.selected %}checked{% endif %}>
+                            <input type="checkbox" name="{{ filter.key }}" value="{{ option.key }}" id="{{forloop.counter}}-{{ option.key }}" {% if option.key|slugify in filter.selected %}checked{% endif %} data-filter>
                             <label class="search-filters__label" for="{{forloop.counter}}-{{ option.key }}">
                                 {{ option.label }}
                                 <span class="search-filters__count">({{ option.count }})</span>
@@ -30,7 +31,7 @@
             {% else %}
                 <div class="accordion accordion--search-filters
                 {% if filter.selected %} is-open{% endif %}
-                " data-accordion>
+                " data-accordion data-filters>
                     <a
                         href=""
                         class="accordion__title accordion__title--search-filters"
@@ -40,11 +41,13 @@
                         aria-expanded="false"
                         aria-selected="false"
                         id="question-{{ forloop.counter }}">
-                        <svg class="accordion__icon accordion__icon--search-filter icon icon--stroke" aria-hidden="true">
-                            <use xlink:href="#chevron"></use>
-                        </svg>
+                        {% include "patterns/atoms/icons/icon.html" with name="chevron" classname="icon--stroke accordion__icon accordion__icon--search-filter" %}
 
-                        <h3 class="search-filters__group-title search-filters__group-title--accordion">{{ filter.title }}</h3>
+                        <span class="search-filters__group-title search-filters__group-title--accordion">{{ filter.title }}</span>
+
+                        <div class="search-filters__checked" data-filters-checked>
+                            <span class="search-filters__checked-counter" data-filters-counter>0</span> selected
+                        </div>
                     </a>
                     <div
                         aria-live="polite"
@@ -56,10 +59,11 @@
                         aria-hidden="false">
 
                         <fieldset class="search-filters__fieldset">
+                            <legend class="hidden">{{ filter.title }}</legend>
                             {% for option in filter.options %}
                                 <div class="search-filters__option form-item--custom_checkbox_select_multiple">
-                                    <input type="checkbox" name="{{ filter.key }}" value="{{ option.key }}" id="{{forloop.counter}}-{{ option.key }}" {% if option.key in filter.selected %}checked{% endif %}>
-                                    <label class="search-filters__label" for="{{forloop.counter}}-{{ option.key }}">
+                                    <input type="checkbox" name="{{ filter.key }}" value="{{ option.key }}" id="{{forloop.counter}}-{{ option.key|slugify }}" {% if option.key in filter.selected %}checked{% endif %} data-filter>
+                                    <label class="search-filters__label" for="{{forloop.counter}}-{{ option.key|slugify }}">
                                         {{ option.label }}
                                     </label>
                                 </div>
@@ -71,16 +75,17 @@
         {% endfor %}
 
         <div>
-            <fieldset class="search-filters__fieldset">
+            <fieldset class="search-filters__fieldset" data-filters>
                 <legend class="hidden">Location</legend>
                 <div class="search-filters__input">
-                    <label class="search-filters__group-title" for="search--page">Location</label>
-                    <input class="input" id="search--postcode" type="text" placeholder="e.g HP14 5SW" name="postcode"{% if search_postcode %} value="{{ search_postcode }}{% endif %}">
+                    <label class="search-filters__group-title" for="search--postcode">Location</label>
+                    <input class="input" id="search--postcode" type="text" placeholder="e.g HP14 5SW" name="postcode"{% if search_postcode %} value="{{ search_postcode }}"{% endif %} data-filter>
                     <div class="form-item__help search-filters__help">Jobs will be ordered by closest first</div>
                 </div>
             </fieldset>
         </div>
 
-        <input type="submit" value="Filter" class="button button--basic" />
+        <input type="submit" value="Filter" class="button button--basic" data-filters-submit />
+        <button class="search-filters__reset" type="button" data-filters-reset>Reset filters</button>
     </form>
 </div>

@@ -2,10 +2,66 @@
 
 ## Unreleased
 
+- Fix for employer logo sizes (FE)
+- Add active checkbox counter & reset filters button for job search (FE)
+- Accessibility 14 Increase contrast of Highlighted Content heading
+- Accessibility 16 Fix Jobs filter fieldset legends
+- Accessibility 18 Page content should be in a landmark
+- Accessibility 19 Remove nesting for landmarks
+- Accessibility 44 & 75 Pagination improvements
+- Accessibility 61 Hide "Find out more" for screen reader users (Jobs benefits)
+
+## 15.1 (2020-05-01)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/15.0...15.1
+
+- Fix for breadcrumbs
+
+## 15.0 (2020-05-01)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/14.0...15.0
+
+- Add tests for job categories import fix
+- Add unit tests for Aptean Respond integration
+- Subheading block (BE)
+- Styling fix for links to local areas
+- Fix spacing in breadcrumb navigation
+- Fix spacing on job detail template
+- Fix for multiple form submissions
+- 142 Internal jobs site
+- Alert panel and Aptean Form Page confirmation page template update
+- Reformat Aptean Respond submitted case reference numbers for display to users
+- Accessibility 1 Remove redundant/inappropriate ARIA role overrides
+- Accessibility 8 Hide all site icons for screen reader users
+- Accessibility 9 Improvements to screen reader only navigational content
+- Accessibility 11 Fix HTML validation errors on the main site
+- Accessibility 13 Fix jobs search filters HTML validation errors on IDs
+- Accessibility 9 & 13 Breadcrumb improvements
+- Accessibility 22 Switch unnecessary heading tag to link in Jobs header
+- Accessibility 23 Increase contrast of jobs filter help text
+- Accessibility 28 Update language attribute on all templates
+- Accessibility 36 Update homepage table of contents & add aria-labelledby
+
+## 14.0 (2020-04-22)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/13.0...14.0
+
+- 135 Employer logos (BE)
+- 176 Jobs fix import location
+- 204 Jobs fix salary imports (BE)
+
+## 13.0 (2020-04-20)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/12.0...13.0
+
 - Upgrade Wagtail to 2.7.2 and Django to 2.2.12
 - Add documentation about Aptean Respond cases backend, and cookies
+- Make the separate forms on the jobs search page cooperate
+- Styling tweaks on recruitment index page ('benefits' page)
+- Add favicon
 - 140 Job site breadcrumbs on all pages
 - 155 Jobs extra filters (BE)
+- 161 Update job search filter styles and add custom select form field
 - 173 Search local council area by postcode
 - 179 Jobs additional fields BE
 
@@ -17,6 +73,7 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/11.0...12.0
 - 172 Add live chat support feature
 - 174 Fix button padding
 - 175 Remove hard coded Bucks logo from job detail pages
+- 193 Fix issue with duplicate JobSubcategory titles
 
 ## 11.0 (2020-04-01)
 
@@ -41,7 +98,6 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/9.0...10.0
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/8.0...9.0
 
 - 129 Jobs postcode search
-- 161 Update job search filter styles and add custom select form field
 - 169 Adjust position of form field help text
 - Forms integration with Aptean Respond API
 - Fix an issue with CI deployments
