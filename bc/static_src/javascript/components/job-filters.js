@@ -24,7 +24,7 @@ class Filters {
         const checkboxCount = this.checkboxCount();
         // parent container of the active filter counter (display:none by default)
         const filtersActive = this.filters.querySelector(
-            '[data-filters-active]',
+            '[data-filters-checked]',
         );
         // counter displaying the number of active filters
         const filtersActiveCounter = this.filters.querySelector(
@@ -49,12 +49,9 @@ class Filters {
         this.filter.forEach((filter) => {
             // remove each checked filter
             filter.checked = false;
-
-            // if text input (postcode search) is not blank, reset it
-            if (filter.value !== '') {
-                filter.value = '';
-            }
-
+            // empty postcode search
+            filter.value = '';
+            // update checkbox counter
             this.showChecked();
         });
     }
