@@ -24,9 +24,9 @@
         width: auto;
 
         &::after {
-            color: $color--earth;
             content: '/';
-            margin: 0 8px 0 4px;
+            color: $color--earth;
+            margin: 0 8px;
         }
 
         &:last-child {
@@ -38,6 +38,10 @@
 
     &__link {
         color: $color--link;
+
+        &--current {
+            text-decoration: none;
+        }
 
         #{$hover-states} {
             color: $color--link-hover;

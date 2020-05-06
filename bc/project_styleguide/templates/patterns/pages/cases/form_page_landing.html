@@ -4,11 +4,8 @@
 {% block content %}
 
     <section class="section section--main">
-        <div class="completion-heading">
-            <h1 class="heading heading--xxl">{{ page.completion_title }}</h1>
-            <p>Reference number</p>
-            <p>{{ case_details.Name }}</p>
-        </div>
+        {% include "patterns/molecules/alerts/alert-panel.html" with title=page.completion_title body='Reference number' ref=case_reference %}
+        
         <h2 class="heading heading--l">What happens next</h2>
         <div>{{ page.completion_content|richtext }}</div>
     </section>
