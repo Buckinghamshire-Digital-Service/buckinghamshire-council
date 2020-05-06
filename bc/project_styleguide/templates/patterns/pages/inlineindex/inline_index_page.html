@@ -49,7 +49,7 @@
                         <ul class="index-pagination__list">
                             <li class="index-pagination__item index-pagination__item--previous">
                                 {% if prev_sibling %}
-                                    <a class="index-pagination__button link--alt" href="{% pageurl prev_sibling %}">
+                                    <a class="index-pagination__button link--alt" href="{% pageurl prev_sibling %}" rel="prev">
                                         {% include "patterns/atoms/icons/icon.html" with name="arrow" classname="icon--stroke index-pagination__icon index-pagination__icon--previous" %}
                                         <span class="index-pagination__text">
                                             Previous
@@ -61,7 +61,7 @@
 
                             <li class="index-pagination__item index-pagination__item--next">
                                 {% if next_sibling %}
-                                    <a class="index-pagination__button index-pagination__button--next link--alt" href="{% pageurl next_sibling %}">
+                                    <a class="index-pagination__button index-pagination__button--next link--alt" href="{% pageurl next_sibling %}" rel="next">
                                         {% include "patterns/atoms/icons/icon.html" with name="arrow" classname="icon--stroke index-pagination__icon index-pagination__icon--next" %}
                                         <span class="index-pagination__text">
                                             Next

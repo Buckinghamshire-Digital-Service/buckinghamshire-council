@@ -5,7 +5,7 @@
         <ul class="pagination__list">
             {% if paginator_page.has_previous %}
                 <li class="pagination__item">
-                    <a class="pagination__link pagination__link--previous" href="{% pagination_link paginator_page.previous_page_number %}" class="previous">
+                    <a class="pagination__link pagination__link--previous" href="{% pagination_link paginator_page.previous_page_number %}" class="previous" rel="prev">
                         {% include "patterns/atoms/icons/icon.html" with name="arrow" classname="icon--stroke pagination__icon pagination__icon--previous" %}
                         <span class="pagination__link-text">Previous</span>
                     </a>
@@ -15,9 +15,9 @@
             {% for page_number in paginator_page.paginator.page_range|slice_pagination:paginator_page.number %}
                 <li class="pagination__item">
                     {% if paginator_page.number == page_number %}
-                        <span class="pagination__link pagination__link--active">
+                        <a href="#" class="pagination__link pagination__link--active" aria-current="page">
                             {{ page_number }}
-                        </span>
+                        </a>
                     {% else %}
                         <a class="pagination__link" href="{% pagination_link page_number %}">
                             {{ page_number }}
@@ -28,7 +28,7 @@
 
             {% if paginator_page.has_next %}
                 <li class="pagination__item">
-                    <a class="pagination__link pagination__link--next next" href="{% pagination_link paginator_page.next_page_number %}">
+                    <a class="pagination__link pagination__link--next next" href="{% pagination_link paginator_page.next_page_number %}" rel="next">
                         <span class="pagination__link-text">Next</span>
                         {% include "patterns/atoms/icons/icon.html" with name="arrow" classname="icon--stroke pagination__icon pagination__icon--next" %}
                     </a>
