@@ -8,6 +8,7 @@
 - Accessibility 18 Page content should be in a landmark
 - Accessibility 19 Remove nesting for landmarks
 - Accessibility 44 & 75 Pagination improvements
+- Accessibility 61 Hide "Find out more" for screen reader users (Jobs benefits)
 
 ## 15.1 (2020-05-01)
 
