@@ -44,6 +44,30 @@
         }
     }
 
+    &--panel {
+        border: 8px solid $color--leaf;
+        margin-bottom: $grid;
+        padding: $grid $grid / 2;
+        text-align: center;
+
+        #{$root}__title {
+            @include font-size(xxl);
+            font-weight: $weight--bold;
+            margin-bottom: $grid--min;
+        }
+
+        #{$root}__body {
+            @include font-size(xl);
+            line-height: 1.2;
+        }
+    }
+
+    &__ref {
+        @include font-size(xl);
+        display: block;
+        font-weight: $weight--bold;
+    }
+
     &--banner {
         @include font-size(xxs);
         background: $color--grey-light;

@@ -13,10 +13,7 @@
                 aria-expanded="false"
                 aria-selected="false"
                 id="question-{{ forloop.counter }}">
-                <svg class="accordion__icon icon--stroke" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 51.8 103.7" aria-hidden="true">
-                    <title>Arrow icon</title>
-                    <use xlink:href="#chevron"></use>
-                </svg>
+                {% include "patterns/atoms/icons/icon.html" with name="chevron" classname="icon--stroke accordion__icon" %}
                 <h3 class="accordion__header">{{ accordion.title }}</h3>
             </a>
             <div

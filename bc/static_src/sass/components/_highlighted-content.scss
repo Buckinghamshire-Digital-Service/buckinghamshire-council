@@ -16,7 +16,7 @@
     &__content {
         background: $color--white;
         padding: $grid--small;
-        border-bottom: $border--accent $color--leaf;
+        border-bottom: $border--accent $color--leaf-dark;
 
         @include media-query(mob-landscape) {
             max-width: 300px;
@@ -28,6 +28,6 @@
     }
 
     &__title {
-        color: $color--leaf;
+        color: $color--leaf-dark;
     }
 }
