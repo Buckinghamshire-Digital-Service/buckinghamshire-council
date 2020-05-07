@@ -1,8 +1,11 @@
-from django.test import TestCase
-from bc.utils.embed_finders import YouTubeNoCookieAndRelFinder
 from unittest.mock import patch
+
+from django.test import TestCase
+
 from wagtail.embeds import oembed_providers
 from wagtail.embeds.finders import get_finders
+
+from bc.utils.embed_finders import YouTubeNoCookieAndRelFinder
 
 
 class YouTubeNoCookieAndRelFinderTest(TestCase):
