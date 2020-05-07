@@ -4,5 +4,5 @@ Your search for "{{ search_term }}" has {{ results|length }} new match{{ results
   {{ result.short_description }}
 {% endfor %}
 ---
-You can unsubscribe from this alert at {{ unsubscribe_url }}.
+You can unsubscribe from this alert at {{ site_url }}{{ unsubscribe_url }}.
 <a href="something">test</a>

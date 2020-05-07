@@ -2,6 +2,7 @@ import json
 import secrets
 from urllib.parse import urlsplit, urlunsplit
 
+from django import forms
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Count, F
@@ -23,11 +24,11 @@ from wagtail.search import index
 
 from wagtailorderable.models import Orderable
 
-from bc.utils.email import NotifyEmailMessage
-
 from ..utils.blocks import StoryBlock
 from ..utils.constants import RICH_TEXT_FEATURES
+from ..utils.email import NotifyEmailMessage
 from ..utils.models import BasePage
+from .constants import JOB_BOARD_CHOICES
 
 
 class JobSubcategory(models.Model):
@@ -79,14 +80,18 @@ class JobCategory(Orderable, models.Model):
         )
 
     @staticmethod
-    def get_categories_summary(queryset=None):
+    def get_categories_summary(queryset=None, homepage=None):
         """Returns a QuerySet that returns dictionaries, when used as an iterable.
 
            The dictionary keys are: category (category id), count, title, description
            This is ordered by highest count first.
         """
+        if not homepage:
+            homepage = RecruitmentHomePage.objects.live().first()
         if not queryset:
-            queryset = TalentLinkJob.objects.all()
+            queryset = TalentLinkJob.objects.filter(homepage=homepage).all()
+        else:
+            queryset = queryset.filter(homepage=homepage)
 
         job_categories = (
             queryset.annotate(category=F("subcategory__categories"))
@@ -158,14 +163,17 @@ def callback_jobcategory_autogenerate_slug_if_empty(sender, instance, *args, **k
 
 
 class TalentLinkJob(models.Model):
-
     created = models.DateTimeField(auto_now_add=True)
     last_imported = models.DateTimeField(blank=True)
-    last_modified = models.DateTimeField(auto_now=True)
+    last_modified = models.DateTimeField(
+        auto_now=True
+    )  # For debugging; not modified during normal application flow.
 
     talentlink_id = models.IntegerField(unique=True)
     job_number = models.CharField(max_length=10, blank=False)
-
+    homepage = models.ForeignKey(
+        "RecruitmentHomePage", on_delete=models.CASCADE, blank=True, null=True
+    )
     title = models.CharField(max_length=255, blank=False)
     short_description = models.TextField()
     description = models.TextField()
@@ -217,10 +225,6 @@ class TalentLinkJob(models.Model):
     def __str__(self):
         return f"{self.job_number}: {self.title}"
 
-    @cached_property
-    def homepage(self):
-        return RecruitmentHomePage.objects.live().public().first()
-
     @property
     def url(self):
         return self.homepage.url + self.homepage.reverse_subpage(
@@ -232,6 +236,12 @@ class TalentLinkJob(models.Model):
         base_url = self.homepage.url + self.homepage.reverse_subpage("apply")
         scheme, netloc, path, query, fragment = urlsplit(base_url)
         return urlunsplit((scheme, netloc, path, self.application_url_query, fragment))
+
+    def full_clean(self, *args, **kwargs):
+        if not self.homepage:
+            self.homepage = RecruitmentHomePage.objects.live().first()
+
+        super().full_clean(*args, **kwargs)
 
 
 @receiver(pre_delete, sender=TalentLinkJob)
@@ -256,6 +266,7 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
     # Only allow creating HomePages at the root level
     parent_page_types = ["wagtailcore.Page"]
 
+    job_board = models.CharField(max_length=20, blank=True, unique=True)
     hero_title = models.CharField(
         max_length=255, help_text="e.g. Finding a job in Buckinghamshire"
     )
@@ -302,10 +313,16 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
         ),
         StreamFieldPanel("body"),
     ]
+    settings_panels = BasePage.settings_panels + [
+        FieldPanel(
+            "job_board",
+            widget=forms.Select(choices=[(s, s) for s in JOB_BOARD_CHOICES],),
+        ),
+    ]
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context["job_categories"] = JobCategory.get_categories_summary()
+        context["job_categories"] = JobCategory.get_categories_summary(homepage=self)
 
         return context
 
@@ -362,9 +379,16 @@ class JobAlertSubscription(models.Model):
     search = models.TextField(
         default="{}", editable=False
     )  # stop site admins from entering bad values
+    homepage = models.ForeignKey(
+        "RecruitmentHomePage", on_delete=models.CASCADE, blank=True, null=True
+    )
     confirmed = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     token = models.CharField(max_length=255, unique=True, editable=False)
+
+    @cached_property
+    def site_url(self):
+        return self.homepage.url.rstrip("/")
 
     @property
     def confirmation_url(self):
@@ -377,6 +401,8 @@ class JobAlertSubscription(models.Model):
     def full_clean(self, *args, **kwargs):
         if not self.token:
             self.token = secrets.token_urlsafe(32)
+        if not self.homepage:
+            self.homepage = RecruitmentHomePage.objects.live().first()
 
         super().full_clean(*args, **kwargs)
 

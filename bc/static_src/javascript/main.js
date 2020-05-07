@@ -11,10 +11,16 @@ import Carousel from './components/carousel';
 import ConditionalField from './components/conditional-field';
 import ProgressBar from './components/progress-bar';
 import VideoModal from './components/video-modal';
+import FormSubmit from './components/form-submit';
+import Filters from './components/job-filters';
 
+// Add polyfill fix for forEach carousel
+import foreachPolyfill from './polyfills/foreach-polyfill';
 import 'whatwg-fetch';
 
 import '../sass/main.scss';
+
+foreachPolyfill();
 
 // Open the mobile menu callback
 function openMobileMenu() {
@@ -51,6 +57,14 @@ document.addEventListener('DOMContentLoaded', () => {
         ConditionalField.selector(),
     )) {
         new ConditionalField(conditionalfield);
+    }
+
+    for (const formsubmit of document.querySelectorAll(FormSubmit.selector())) {
+        new FormSubmit(formsubmit);
+    }
+
+    for (const filters of document.querySelectorAll(Filters.selector())) {
+        new Filters(filters);
     }
 
     for (const mobilemenu of document.querySelectorAll(MobileMenu.selector())) {

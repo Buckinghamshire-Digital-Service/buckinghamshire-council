@@ -2,6 +2,53 @@
 
 ## Unreleased
 
+## 16.0 (2020-05-07)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/15.1...16.0
+
+- Fix for employer logo sizes (FE)
+- Add active checkbox counter & reset filters button for job search (FE)
+- Progressive accordion styling update (including postcode search fix)
+- Accessibility 14 Increase contrast of Highlighted Content heading
+- Accessibility 16 Fix Jobs filter fieldset legends
+- Accessibility 18 Page content should be in a landmark
+- Accessibility 19 Remove nesting for landmarks
+- Accessibility 44 & 75 Pagination improvements
+- Accessibility 58 Add screen-reader-only text to filters’ item count
+- Accessibility 60 Fix typo in location field placeholder
+- Accessibility 62 Hide "Find out more" for screen reader users (Jobs benefits)
+
+## 15.1 (2020-05-01)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/15.0...15.1
+
+- Fix for breadcrumbs
+
+## 15.0 (2020-05-01)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/14.0...15.0
+
+- Add tests for job categories import fix
+- Add unit tests for Aptean Respond integration
+- Subheading block (BE)
+- Styling fix for links to local areas
+- Fix spacing in breadcrumb navigation
+- Fix spacing on job detail template
+- Fix for multiple form submissions
+- 142 Internal jobs site
+- Alert panel and Aptean Form Page confirmation page template update
+- Reformat Aptean Respond submitted case reference numbers for display to users
+- Accessibility 1 Remove redundant/inappropriate ARIA role overrides
+- Accessibility 8 Hide all site icons for screen reader users
+- Accessibility 9 Improvements to screen reader only navigational content
+- Accessibility 11 Fix HTML validation errors on the main site
+- Accessibility 13 Fix jobs search filters HTML validation errors on IDs
+- Accessibility 9 & 13 Breadcrumb improvements
+- Accessibility 22 Switch unnecessary heading tag to link in Jobs header
+- Accessibility 23 Increase contrast of jobs filter help text
+- Accessibility 28 Update language attribute on all templates
+- Accessibility 36 Update homepage table of contents & add aria-labelledby
+
 ## 14.0 (2020-04-22)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/13.0...14.0

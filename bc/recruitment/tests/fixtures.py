@@ -3,6 +3,8 @@ import json
 
 import factory
 
+from bc.recruitment.constants import JOB_BOARD_DEFAULT
+
 
 class JobCategoryFactory(factory.django.DjangoModelFactory):
 
@@ -26,9 +28,18 @@ class RecruitmentHomePageFactory(factory.django.DjangoModelFactory):
         model = "recruitment.RecruitmentHomePage"
 
     title = factory.Sequence(lambda n: f"Recruitment HomePage")
+    hero_image = factory.SubFactory("bc.images.tests.fixtures.ImageFactory")
     hero_title = "foo"
     hero_link_text = "foo"
     search_box_placeholder = "foo"
+    job_board = JOB_BOARD_DEFAULT
+
+    @classmethod
+    def build_with_fk_objs_committed(cls, **kwargs):
+        from bc.images.tests.fixtures import ImageFactory
+
+        image = ImageFactory()
+        return cls.build(hero_image=image, **kwargs)
 
 
 class TalentLinkJobFactory(factory.django.DjangoModelFactory):
