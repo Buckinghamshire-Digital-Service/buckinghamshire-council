@@ -8,7 +8,7 @@
                 <input class="search-filters__checkbox" type="checkbox" value="1" name="hide_schools_and_early_years" id="hide_schools_and_early_years" {% if hide_schools_and_early_years.selected %}checked{% endif %} data-filter>
                 <label class="search-filters__label" for="hide_schools_and_early_years">
                     {{ hide_schools_and_early_years.label }}
-                    <span class="search-filters__count">({{ hide_schools_and_early_years.count }})</span>
+                    <span class="search-filters__count">({{ hide_schools_and_early_years.count }}) <span class="u-sr-only">items</span></span>
                 </label>
             </div>
         </fieldset>
@@ -23,7 +23,7 @@
                             <input type="checkbox" name="{{ filter.key }}" value="{{ option.key }}" id="{{forloop.counter}}-{{ option.key }}" {% if option.key|slugify in filter.selected %}checked{% endif %} data-filter>
                             <label class="search-filters__label" for="{{forloop.counter}}-{{ option.key }}">
                                 {{ option.label }}
-                                <span class="search-filters__count">({{ option.count }})</span>
+                                <span class="search-filters__count">({{ option.count }}) <span class="u-sr-only">items</span></span>
                             </label>
                         </div>
                     {% endfor %}
