@@ -14,7 +14,7 @@ class YouTubeNoCookieAndRelFinder(OEmbedFinder):
     This finder operates on the youtube provider only and adds or preserves the
     source URL rel=0 parameter, if present (because YouTube's OEmbed API
     endpoint strips it from the formatted HTML it returns).
-    
+
     It also forces the use of the youtube-nocookie.com domain instead of
     youtube.com.
     """
@@ -55,4 +55,3 @@ class YouTubeNoCookieAndRelFinder(OEmbedFinder):
         embed["html"] = str(soup)
 
         return embed
-
