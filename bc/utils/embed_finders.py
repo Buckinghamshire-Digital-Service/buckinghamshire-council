@@ -8,7 +8,7 @@ from wagtail.embeds.oembed_providers import youtube
 from bs4 import BeautifulSoup
 
 
-class YouTubeNoCookieAndPreserveRelFinder(OEmbedFinder):
+class YouTubeNoCookieAndRelFinder(OEmbedFinder):
     """OEmbed finder to add or preserve the rel=0 parameter and prevent cookies.
 
     This finder operates on the youtube provider only and adds or preserves the
@@ -25,7 +25,7 @@ class YouTubeNoCookieAndPreserveRelFinder(OEmbedFinder):
 
         if providers != [youtube]:
             raise ImproperlyConfigured(
-                "The YouTubeNoCookieAndPreserveRelFinder only operates on the youtube provider"
+                "The YouTubeNoCookieAndRelFinder only operates on the youtube provider"
             )
         super().__init__(providers=providers, options=options)
 
@@ -40,7 +40,7 @@ class YouTubeNoCookieAndPreserveRelFinder(OEmbedFinder):
             or iframe_url.startswith("http://")
             or iframe_url.startswith("https://")
         ):
-            # apply scheme for urlparse to be able to parse netloc properly
+            # apply scheme for urlparse to be able to parse netloc
             iframe_url = "https://" + iframe_url
         scheme, netloc, path, params, query, fragment = urlparse(iframe_url)
         netloc = "www.youtube-nocookie.com"
