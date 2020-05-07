@@ -110,7 +110,7 @@ class DetailBlock(blocks.StructBlock):
     content = blocks.RichTextBlock(features=RICH_TEXT_FEATURES, label="Detail content")
 
     class Meta:
-        icon = ""
+        icon = "arrow-right"
         template = "patterns/molecules/streamfield/blocks/detail_block.html"
 
 
