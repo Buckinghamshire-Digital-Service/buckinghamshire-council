@@ -12,7 +12,7 @@
 - Accessibility 44 & 75 Pagination improvements
 - Accessibility 58 Add screen-reader-only text to filters’ item count
 - Accessibility 60 Fix typo in location field placeholder
-- Accessibility 61 Hide "Find out more" for screen reader users (Jobs benefits)
+- Accessibility 62 Hide "Find out more" for screen reader users (Jobs benefits)
 
 ## 15.1 (2020-05-01)
 
