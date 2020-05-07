@@ -10,7 +10,8 @@
 - Add favicon to recruitment site
 - Reinstate display of promoted search results
 - Fix 'no results found' message when there is no search query
-- Prevent cookies and use rel=0 parameter for embedded YouTube videos
+- Enable embedding YouTube videos without using cookies and without showing
+  unrelated video links
 
 ## 19.1 (2020-06-23)
 
