@@ -1,5 +1,4 @@
 {% load wagtailcore_tags %}
-<h2 class="heading heading--l">An accordion</h2>
 
 <div role="tablist" aria-multiselectable="true">
     {% for accordion in accordions %}
@@ -14,7 +13,7 @@
                 aria-selected="false"
                 id="question-{{ forloop.counter }}">
                 {% include "patterns/atoms/icons/icon.html" with name="chevron" classname="icon--stroke accordion__icon" %}
-                <h3 class="accordion__header">{{ accordion.title }}</h3>
+                <h2 class="accordion__header">{{ accordion.title }}</h2>
             </a>
             <div
                 aria-live="polite"
