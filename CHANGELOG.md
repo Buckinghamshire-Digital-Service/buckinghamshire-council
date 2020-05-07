@@ -1,5 +1,21 @@
 # Release History
 
+## 16.0 (2020-05-07)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/15.1...16.0
+
+- Fix for employer logo sizes (FE)
+- Add active checkbox counter & reset filters button for job search (FE)
+- Progressive accordion styling update (including postcode search fix)
+- Accessibility 14 Increase contrast of Highlighted Content heading
+- Accessibility 16 Fix Jobs filter fieldset legends
+- Accessibility 18 Page content should be in a landmark
+- Accessibility 19 Remove nesting for landmarks
+- Accessibility 44 & 75 Pagination improvements
+- Accessibility 58 Add screen-reader-only text to filters’ item count
+- Accessibility 60 Fix typo in location field placeholder
+- Accessibility 62 Hide "Find out more" for screen reader users (Jobs benefits)
+
 ## 15.1 (2020-05-01)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/15.0...15.1

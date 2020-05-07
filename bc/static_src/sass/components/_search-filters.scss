@@ -18,7 +18,6 @@
         &--accordion {
             margin-bottom: $grid--min / 2;
             position: relative;
-            left: -10px;
         }
     }
 
@@ -52,5 +51,26 @@
     &__submit {
         margin-top: 20px;
         max-width: 200px;
+    }
+
+    &__checked {
+        display: none;
+
+        &.active {
+            @include font-size(xxs);
+            display: block;
+            flex: 1 0 100%;
+            color: $color--charcoal-75;
+            margin: -$grid--min / 2 0 $grid--min 26px;
+        }
+    }
+
+    &__reset {
+        @include button(
+            $color--slate,
+            $color--charcoal-25,
+            $color--charcoal-25
+        );
+        margin-left: $grid--min;
     }
 }
