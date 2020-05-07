@@ -9,14 +9,14 @@ from bs4 import BeautifulSoup
 
 
 class YouTubeNoCookieAndPreserveRelFinder(OEmbedFinder):
-    """
-    OEmbed finder which preserves the rel=0 parameter on YouTube URLs
-    as well as forces the use of the youtube-nocookie.com domain instead
-    of youtube.com
+    """OEmbed finder to add or preserve the rel=0 parameter and prevent cookies.
 
-    This finder operates on the youtube provider only, and reproduces the
-    source URL's rel=0 parameter if present (because YouTube's OEmbed API
-    endpoint strips it from the formatted HTML it returns)..
+    This finder operates on the youtube provider only and adds or preserves the
+    source URL rel=0 parameter, if present (because YouTube's OEmbed API
+    endpoint strips it from the formatted HTML it returns).
+    
+    It also forces the use of the youtube-nocookie.com domain instead of
+    youtube.com.
     """
 
     def __init__(self, providers=None, options=None):
@@ -25,30 +25,34 @@ class YouTubeNoCookieAndPreserveRelFinder(OEmbedFinder):
 
         if providers != [youtube]:
             raise ImproperlyConfigured(
-                "The YouTubePreserveRelFinder only operates on the youtube provider"
+                "The YouTubeNoCookieAndPreserveRelFinder only operates on the youtube provider"
             )
-
         super().__init__(providers=providers, options=options)
 
     def find_embed(self, url, max_width=None):
         embed = super().find_embed(url, max_width)
-
-        embed["html"] = embed["html"].replace(
-            "youtube.com/embed", "youtube-nocookie.com/embed"
-        )
         rel = parse_qs(urlparse(url).query).get("rel")
-        if rel is not None:
+        soup = BeautifulSoup(embed["html"], "html.parser")
+        iframe_url = soup.find("iframe").attrs["src"]
 
-            soup = BeautifulSoup(embed["html"], "html.parser")
-            iframe_url = soup.find("iframe").attrs["src"]
-            scheme, netloc, path, params, query, fragment = urlparse(iframe_url)
-            querydict = parse_qs(query)
-            if querydict.get("rel") != rel:
-                querydict["rel"] = rel
-                query = urlencode(querydict, doseq=1)
-
-                iframe_url = urlunparse((scheme, netloc, path, params, query, fragment))
-                soup.find("iframe").attrs["src"] = iframe_url
-                embed["html"] = str(soup)
+        if not (
+            iframe_url.startswith("//")
+            or iframe_url.startswith("http://")
+            or iframe_url.startswith("https://")
+        ):
+            # apply scheme for urlparse to be able to parse netloc properly
+            iframe_url = "https://" + iframe_url
+        scheme, netloc, path, params, query, fragment = urlparse(iframe_url)
+        netloc = "www.youtube-nocookie.com"
+        querydict = parse_qs(query)
+        if rel is None:
+            rel = 0
+        if querydict.get("rel") != rel:
+            querydict["rel"] = rel
+        query = urlencode(querydict, doseq=1)
+        iframe_url = urlunparse((scheme, netloc, path, params, query, fragment))
+        soup.find("iframe").attrs["src"] = iframe_url
+        embed["html"] = str(soup)
 
         return embed
+
