@@ -4,6 +4,7 @@
 
 - Fix for employer logo sizes (FE)
 - Add active checkbox counter & reset filters button for job search (FE)
+- Progressive accordion styling update (including postcode search fix)
 - Accessibility 14 Increase contrast of Highlighted Content heading
 - Accessibility 16 Fix Jobs filter fieldset legends
 - Accessibility 18 Page content should be in a landmark
