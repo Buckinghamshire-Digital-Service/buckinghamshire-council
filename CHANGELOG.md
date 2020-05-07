@@ -10,6 +10,7 @@
 - Accessibility 18 Page content should be in a landmark
 - Accessibility 19 Remove nesting for landmarks
 - Accessibility 44 & 75 Pagination improvements
+- Accessibility 47 Increase contrast of form help text
 - Accessibility 58 Add screen-reader-only text to filters’ item count
 - Accessibility 60 Fix typo in location field placeholder
 - Accessibility 62 Hide "Find out more" for screen reader users (Jobs benefits)
