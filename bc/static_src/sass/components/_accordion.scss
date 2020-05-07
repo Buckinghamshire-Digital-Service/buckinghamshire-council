@@ -98,9 +98,10 @@
     }
 
     &__title--area-search {
+        border-top: 1px solid $color--grey-border;
         color: $color--river;
+        padding-top: $grid--small;
         position: relative;
-        left: -6px;
     }
 
     &__icon {
