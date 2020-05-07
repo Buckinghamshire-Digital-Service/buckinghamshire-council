@@ -57,7 +57,7 @@
                             {% endif %}
                         {% endwith %}
 
-                        <form method="post" role="search" class="form form--job-alerts">{% csrf_token %}
+                        <form method="post" class="form form--job-alerts" aria-label="Subscribe to job alert">{% csrf_token %}
                             <div class="form-item">
                                 {{ job_alert_form.as_p }}
                             </div>
