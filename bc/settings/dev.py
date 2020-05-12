@@ -19,10 +19,8 @@ SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 # Allow requests from the local IPs to see more debug information.
 INTERNAL_IPS = ("127.0.0.1", "10.0.2.2")
 
-
 # This is only to test Wagtail emails.
 BASE_URL = "http://localhost:8000"
-
 
 # Display sent emails in the console while developing locally.
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

@@ -1,0 +1,84 @@
+{% extends "patterns/base_page.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block header %}
+    {{ block.super }}
+
+    {% image page.hero_image min-1600x350 as hero_image %}
+    <div class="hero {% if alert %}hero--with-alert{% endif %}" style="background-image: url('{{ hero_image.url }}');">
+    <!-- <div class="hero"> -->
+        <div class="wrapper wrapper--large">
+            {% include "patterns/molecules/navigation/breadcrumbs.html" %}
+            <h1 class="hero__strapline heading heading--xxxl">Family information service</h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+{% block alert_banner %}{% endblock %}
+
+{% block content %}
+    <form action="https://scout-x.netlify.app" action="get">
+
+        <label for="service_type">Where</label>
+        <select id="service_type" name="service_type">
+            <option value="services">Activities, groups and services</option>
+            <option value="childcare">Childcare</option>
+            <option value="schools">Schools</option>
+        </select>
+
+        <label for="coverage">Where</label>
+        <input id="coverage" name="coverage" placeholder="Enter a postcode"/>
+        <button class="button button--search button--hero">Search</button>
+    </form>
+
+    <section>
+        <h2>Things you might find useful</h2>
+        <hr/>
+        {% for link in self.useful_links.all %}
+            <h3><a href="{{ lede.url }}">{{ link.title }}</a></h3>
+            {{ link.lede }}
+        {% endfor %}
+
+        {% image self.links_image width-3560 as img %}
+
+        <img src="{{ img.url }}"/>
+
+    </section>
+
+    <h2 class="heading heading--l">Get information, advice and guidance</h2>
+    <div class="grid grid--index">
+        {% for subpage in self.get_children.specific %}
+            <a class="card" href="{% pageurl subpage %}">
+                <h2 class="card__title heading heading--s">
+                    {% firstof subpage.listing_title subpage.title %}
+                </h2>
+                {% if subpage.listing_summary %}
+                    <p class="card__summary">{{ subpage.listing_summary }}</p>
+                {% endif %}
+            </a>
+        {% endfor %}
+    </div>
+
+    {% include "patterns/molecules/cta/call_to_action.html" with call_to_action=page.call_to_action %}
+
+    <div class="latest-articles">
+        <aside class="latest-articles__section articles__section--news">
+            <h2 class="heading heading--l">{{ self.left_title }}</h2>
+            <p>{{ self.left_lede }}</p>
+            <a class="button button--no-underline" href="{{ self.left_action.url }}">{{ self.left_label }}</a>
+        </aside>
+        <aside class="latest-articles__section latest-articles__section--events">
+            <h2 class="heading heading--l">{{ self.right_title }}</h2>
+            <p>{{ self.right_lede }}</p>
+            <a class="button button--skeleton" href="{{ self.right_action.url }}">{{ self.right_label }}</a>
+        </aside>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {% comment %} 
+        {% include "patterns/molecules/subscribe/subscribe.html" %} 
+    {% endcomment %}
+    {{ block.super }}
+{% endblock %}
