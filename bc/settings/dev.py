@@ -13,6 +13,8 @@ PATTERN_LIBRARY_ENABLED = True
 # Allow all the hosts locally only.
 ALLOWED_HOSTS = ["*"]
 
+# Silence recapcha key warning
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 
 # Allow requests from the local IPs to see more debug information.
 INTERNAL_IPS = ("127.0.0.1", "10.0.2.2")
