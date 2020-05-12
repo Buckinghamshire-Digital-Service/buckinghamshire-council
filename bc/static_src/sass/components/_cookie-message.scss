@@ -9,13 +9,11 @@
 
     // Applied if cookie just added
     &.inactive {
-        display: block;
-        transform: translate3d(0, 100%, 0);
+        display: none;
     }
 
     &.active {
         display: block;
-        transform: translate3d(0, 0, 0);
     }
 
     &__container {
