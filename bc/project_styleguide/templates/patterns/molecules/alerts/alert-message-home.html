@@ -1,8 +1,8 @@
 {% load wagtailcore_tags %}
 
-<section class="alert alert--message" aria-labelledby="alert__title">
+<section class="alert alert--message" aria-labelledby="alert--home-title">
     {% if title %}
-        <h2 class="alert__header heading heading--xl" id="alert__title">{{ title }}</h2>
+        <h2 class="alert__header heading heading--xl" id="alert--home-title">{{ title }}</h2>
     {% endif %}
 
     <div class="alert__content">{{ body|richtext }}</div>
