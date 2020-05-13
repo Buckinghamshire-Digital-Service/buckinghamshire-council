@@ -72,13 +72,13 @@
 
     {% include "patterns/molecules/cta/call_to_action.html" with call_to_action=page.call_to_action %}
 
-    <div class="latest-articles">
-        <aside class="latest-articles__section articles__section--news">
+    <div class="split-content wrapper wrapper--flex-small">
+        <aside class="split-content__section">
             <h2 class="heading heading--l">{{ self.left_title }}</h2>
             <p>{{ self.left_lede }}</p>
             <a class="button button--no-underline" href="{{ self.left_action.url }}">{{ self.left_label }}</a>
         </aside>
-        <aside class="latest-articles__section latest-articles__section--events">
+        <aside class="split-content__section">
             <h2 class="heading heading--l">{{ self.right_title }}</h2>
             <p>{{ self.right_lede }}</p>
             <a class="button button--skeleton" href="{{ self.right_action.url }}">{{ self.right_label }}</a>
