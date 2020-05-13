@@ -6,13 +6,11 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('family_information', '0004_auto_20200512_2343'),
+        ("family_information", "0004_auto_20200512_2343"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='usefullinks',
-            name='lede',
-            field=models.TextField(),
+            model_name="usefullinks", name="lede", field=models.TextField(),
         ),
     ]

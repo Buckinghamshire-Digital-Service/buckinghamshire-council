@@ -64,9 +64,7 @@ INSTALLED_APPS = [
     "bc.images",
     "bc.inlineindex",
     "bc.navigation",
-    
     "bc.family_information",
-
     "bc.news",
     # "bc.people",  To re-enable, also uncomment code in bc/utils/wagtail_hooks.py
     "bc.recruitment",

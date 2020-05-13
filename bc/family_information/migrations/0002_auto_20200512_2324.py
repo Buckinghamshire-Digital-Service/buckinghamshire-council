@@ -8,39 +8,49 @@ import wagtail.core.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wagtailcore', '0041_group_collection_permissions_verbose_name_plural'),
-        ('family_information', '0001_initial'),
+        ("wagtailcore", "0041_group_collection_permissions_verbose_name_plural"),
+        ("family_information", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='familyinformationhomepage',
-            name='left_action',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to='wagtailcore.Page'),
+            model_name="familyinformationhomepage",
+            name="left_action",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="+",
+                to="wagtailcore.Page",
+            ),
         ),
         migrations.AddField(
-            model_name='familyinformationhomepage',
-            name='left_lede',
+            model_name="familyinformationhomepage",
+            name="left_lede",
             field=wagtail.core.fields.RichTextField(null=True),
         ),
         migrations.AddField(
-            model_name='familyinformationhomepage',
-            name='left_title',
+            model_name="familyinformationhomepage",
+            name="left_title",
             field=models.CharField(max_length=255, null=True),
         ),
         migrations.AddField(
-            model_name='familyinformationhomepage',
-            name='right_action',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to='wagtailcore.Page'),
+            model_name="familyinformationhomepage",
+            name="right_action",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="+",
+                to="wagtailcore.Page",
+            ),
         ),
         migrations.AddField(
-            model_name='familyinformationhomepage',
-            name='right_lede',
+            model_name="familyinformationhomepage",
+            name="right_lede",
             field=wagtail.core.fields.RichTextField(null=True),
         ),
         migrations.AddField(
-            model_name='familyinformationhomepage',
-            name='right_title',
+            model_name="familyinformationhomepage",
+            name="right_title",
             field=models.CharField(max_length=255, null=True),
         ),
     ]
