@@ -40,8 +40,8 @@
         </div>
 
         <div class="search__results-wrapper wrapper wrapper--flex">
-            <div class="search__filters">
-                <h2 class="heading heading--m">Filter jobs</h2>
+            <div class="search__filters" aria-labelledby="filter-jobs">
+                <h2 class="heading heading--m" id="filter-jobs">Filter jobs</h2>
                 {# linked to the job search above - see 'molecules/search-filters/search-filters.html' #}
                 {% jobs_search_filters request unfiltered_results %}
             </div>
