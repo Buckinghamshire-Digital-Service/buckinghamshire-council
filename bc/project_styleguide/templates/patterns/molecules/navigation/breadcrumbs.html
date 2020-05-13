@@ -1,8 +1,10 @@
 {% load wagtailcore_tags %}
 
+
+
 {% if page.get_ancestors|length > 1 %}
     <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
+        <ol class="breadcrumb {{ custom_class }}">
             {% for ancestor_page in page.get_ancestors %}
                 {% if not ancestor_page.is_root %}
                     {% if ancestor_page.depth > 2 %}

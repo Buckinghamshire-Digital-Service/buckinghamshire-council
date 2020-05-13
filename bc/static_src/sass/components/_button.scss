@@ -102,25 +102,25 @@
         cursor: pointer;
     }
 
-
     &--no-underline {
         text-decoration: none;
-        &:hover, &:focus{
+        &:hover,
+        &:focus {
             color: $color--white;
         }
     }
 
     &--skeleton {
-        background:  none;
+        background: none;
         text-decoration: none;
         color: $color--link;
         border: 2px solid $color--link;
-        &:hover{
+        &:hover {
             background: none;
             border-color: $color--link-hover;
             color: $color--link-hover;
         }
-        &:focus{
+        &:focus {
             background: none;
         }
     }

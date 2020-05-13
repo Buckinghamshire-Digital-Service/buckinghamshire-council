@@ -1,0 +1,70 @@
+.family-info-search {
+    padding: 60px 0;
+
+    &__form {
+        display: block;
+        margin-bottom: 0;
+        @include media-query(tablet-landscape) {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+        }
+    }
+
+    &__field {
+        display: block;
+        position: relative;
+        margin-bottom: 25px;
+        @include media-query(tablet-landscape) {
+            margin-bottom: 0;
+            margin-right: 20px;
+            flex: 1 1 0%;
+        }
+
+        &--select::after {
+            content: '';
+            position: absolute;
+            height: 45px;
+            right: 0;
+            bottom: 0;
+            z-index: 2;
+            width: 50px;
+            margin: auto 0;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3Cpath fill='none' d='M0 0h24v24H0V0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 24px 24px;
+        }
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type='text'],
+    select {
+        width: 100%;
+        max-width: 100%;
+        font-size: 1rem;
+        padding: 10px 45px 10px 10px;
+        height: 45px;
+        min-height: inherit;
+    }
+
+    select {
+        position: relative;
+        appearance: none;
+    }
+
+    .button {
+        display: block;
+        width: 100%;
+        @include media-query(tablet-landscape) {
+            width: 100px;
+            height: 45px;
+        }
+    }
+}
