@@ -1,16 +1,15 @@
 from django.db import models
 
 from modelcluster.fields import ParentalKey
-
-from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import (
     FieldPanel,
-    MultiFieldPanel,
     InlinePanel,
+    MultiFieldPanel,
     PageChooserPanel,
 )
-from wagtail.snippets.edit_handlers import SnippetChooserPanel
+from wagtail.core.fields import RichTextField
 from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
 from ..utils.models import BasePage, Orderable
 
