@@ -9,6 +9,9 @@ from bc.recruitment.constants import JOB_BOARD_CHOICES
 
 from .fixtures import RecruitmentHomePageFactory, TalentLinkJobFactory
 
+INTERNAL_HOSTNAME = "example-internal.com"
+EXTERNAL_HOSTNAME = "example.com"
+
 
 class TestApplyConfigKey(TestCase):
     def setUp(self):
@@ -36,6 +39,12 @@ class TestApplyConfigKey(TestCase):
         )
 
     @override_settings(
+        ALLOWED_HOSTS=[
+            "localhost",
+            "testserver",
+            INTERNAL_HOSTNAME,
+            EXTERNAL_HOSTNAME,
+        ],
         TALENTLINK_APPLY_CONFIG_KEY_EXTERNAL="the-external-one",
         TALENTLINK_APPLY_CONFIG_KEY_INTERNAL="the-internal-one",
     )
@@ -53,6 +62,12 @@ class TestApplyConfigKey(TestCase):
         )
 
     @override_settings(
+        ALLOWED_HOSTS=[
+            "localhost",
+            "testserver",
+            INTERNAL_HOSTNAME,
+            EXTERNAL_HOSTNAME,
+        ],
         TALENTLINK_APPLY_CONFIG_KEY_EXTERNAL="the-external-one",
         TALENTLINK_APPLY_CONFIG_KEY_INTERNAL="the-internal-one",
     )
@@ -69,6 +84,14 @@ class TestApplyConfigKey(TestCase):
             settings.TALENTLINK_APPLY_CONFIG_KEY_EXTERNAL, resp.content.decode()
         )
 
+    @override_settings(
+        ALLOWED_HOSTS=[
+            "localhost",
+            "testserver",
+            INTERNAL_HOSTNAME,
+            EXTERNAL_HOSTNAME,
+        ],
+    )
     def test_404_when_job_id_is_badly_formatted(self):
         """This is mainly to ensure that IDs which previously raised a 500 don't."""
         for job_id in [
