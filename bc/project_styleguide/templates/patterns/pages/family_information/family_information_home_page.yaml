@@ -1,0 +1,19 @@
+context:
+  page:
+    title: Family information service
+
+  useful_links:
+    - title: Special educational needs and disabilities
+      lede: Support for families with children who are disabled or have special educational needs (SEND)
+      url: example.com
+    - title: "Finding childcare: A parents guide"
+      lede: How to find, choose, arrange and pay for childcare as a parent or carer
+      url: example.com
+
+  left_title: Contact the family information service
+  left_lede: You can contact us for help and advice about family relationships, finance, housing, childcare, health, special educational needs and disabilies.
+  left_label: Get in touch
+
+  right_title: Report a concern about a child
+  right_lede: If you’re worried that a young person you know is being abused, tell us.
+  right_label: Make a report
