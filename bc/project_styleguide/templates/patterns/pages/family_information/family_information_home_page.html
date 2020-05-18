@@ -1,33 +1,30 @@
 {% extends "patterns/base_page.html" %}
 {% load wagtailcore_tags wagtailimages_tags static %}
 
-{% block header %}
-    {{ block.super }}
-
-    {% image page.hero_image min-1600x350 as hero_image %}
-    <div class="hero {% if alert %}hero--with-alert{% endif %} hero--family-info" style="background-image: url('{{ hero_image.url }}');">
-    <!-- <div class="hero"> -->
-        <div class="wrapper wrapper--large">
-            {% include "patterns/molecules/navigation/breadcrumbs.html" with custom_class="breadcrumb--family-info" %}
-            <h1 class="hero__strapline heading heading--xxxl">Family information service</h1>
-        </div>
-    </div>
-{% endblock %}
-
 {% block breadcrumbs %}{% endblock %}
 {% block alert_banner %}{% endblock %}
 
 {% block content %}
-    <section class=" family-info-search">
-        <h2 class="heading heading--l">Search in your area</h2>
-        <form action="https://scout-x.netlify.app" action="get" class="form form--search family-info-search__form">
-            <div class="family-info-search__field family-info-search__field--select">
-                <label for="service_type">What</label>
-                <select id="service_type" name="service_type">
-                    <option value="services">Activities, groups and services</option>
-                    <option value="childcare">Childcare</option>
-                    <option value="schools">Schools</option>
-                </select>
+    {% image page.hero_image min-1600x350 as hero_image %}
+    <div class="hero {% if alert %}hero--with-alert{% endif %} hero--family-info" style="background-image: url('{{ hero_image.url }}');">
+        <div class="wrapper wrapper--large">
+            {% include "patterns/molecules/navigation/breadcrumbs.html" with custom_class="breadcrumb--family-info" %}
+            <h1 class="hero__strapline heading heading--xxxl">{{ page.title }}</h1>
+        </div>
+    </div>
+
+    <div class="family-info-search">
+        <h2 class="heading heading--l" id="service-search-form-title">Search in your area</h2>
+        <form action="https://scout-x.netlify.app" aria-labelledby="service-search-form-title" role="search" action="get" class="form form--search family-info-search__form">
+            <div class="family-info-search__field">
+                <label for="service_type">What <span class="u-sr-only">kind of services are you looking for?</span></label>
+                <div class="form-item__custom-select">
+                    <select id="service_type" name="service_type" class="">
+                        <option value="services">Activities, groups and services</option>
+                        <option value="childcare">Childcare</option>
+                        <option value="schools">Schools</option>
+                    </select>
+                </div>
             </div>
             <div class="family-info-search__field">
                 <label for="coverage">Where</label>
@@ -35,17 +32,17 @@
             </div>
             <button class="button button--search button--hero">Search</button>
         </form>
-    </section>
+    </div>
 
-    <section class="useful-links">
+    <section class="useful-links" aria-labelledby="useful-links-title">
         <div class="wrapper wrapper--large">
             <div class="useful-links__inner">
-                <h2 class="useful-links__headline heading heading--xl">Things you might find useful</h2>
+                <h2 class="useful-links__headline heading heading--xl" id="useful-links-title">Things you might find useful</h2>
                 <hr class="useful-links__divider"/>
                 <div class="useful-links__list">
                     {% for link in self.useful_links.all %}
                         <div class="useful-links__item">
-                            <h3 class="heading heading--m"><a href="{{ lede.url }}">{{ link.title }}</a></h3>
+                            <h3 class="heading heading--m"><a href="{{ link.url }}">{{ link.title }}</a></h3>
                             <p>{{ link.lede }}</p>
                         </div>
                     {% endfor %}
@@ -56,7 +53,7 @@
         <div class="useful-links__image" style="background-image: url({{ img.url }})"></div>
     </section>
 
-    <h2 class="heading heading--l">Get information, advice and guidance</h2>
+    <h2 class="heading heading--l">Get information, advice and guidance<span class="u-sr-only">.</span></span></h2>
     <div class="grid grid--index">
         {% for subpage in self.get_children.specific %}
             <a class="card" href="{% pageurl subpage %}">
@@ -73,16 +70,16 @@
     {% include "patterns/molecules/cta/call_to_action.html" with call_to_action=page.call_to_action %}
 
     <div class="split-content wrapper wrapper--flex-small">
-        <aside class="split-content__section">
+        <div class="split-content__section">
             <h2 class="heading heading--l">{{ self.left_title }}</h2>
             <p>{{ self.left_lede }}</p>
-            <a class="button button--no-underline" href="{{ self.left_action.url }}">{{ self.left_label }}</a>
-        </aside>
-        <aside class="split-content__section">
+            <a class="button button--no-underline" href="{{ self.left_action.pageurl }}">{{ self.left_label }}</a>
+        </div>
+        <div class="split-content__section">
             <h2 class="heading heading--l">{{ self.right_title }}</h2>
             <p>{{ self.right_lede }}</p>
-            <a class="button button--skeleton" href="{{ self.right_action.url }}">{{ self.right_label }}</a>
-        </aside>
+            <a class="button button--skeleton" href="{{ self.right_action.pageurl }}">{{ self.right_label }}</a>
+        </div>
     </div>
 {% endblock %}
 

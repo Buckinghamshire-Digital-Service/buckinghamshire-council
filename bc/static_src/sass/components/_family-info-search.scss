@@ -21,22 +21,6 @@
             margin-right: 20px;
             flex: 1 1 0%;
         }
-
-        &--select::after {
-            content: '';
-            position: absolute;
-            height: 45px;
-            right: 0;
-            bottom: 0;
-            z-index: 2;
-            width: 50px;
-            margin: auto 0;
-            pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3Cpath fill='none' d='M0 0h24v24H0V0z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: 24px 24px;
-        }
     }
 
     label {
@@ -52,11 +36,6 @@
         padding: 10px 45px 10px 10px;
         height: 45px;
         min-height: inherit;
-    }
-
-    select {
-        position: relative;
-        appearance: none;
     }
 
     .button {
