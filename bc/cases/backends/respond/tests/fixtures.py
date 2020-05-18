@@ -2,13 +2,6 @@ from django.conf import settings
 
 from bs4 import BeautifulSoup
 
-from bc.cases.backends.respond.constants import CREATE_CASE_TYPE
-
-
-class MockClient:
-    def __init__(self):
-        self.services = {CREATE_CASE_TYPE: {}}
-
 
 def generate_webservice_xml(*args, **kwargs):
     """ The name of this function belies the fact that it's just hardcoded for now. """

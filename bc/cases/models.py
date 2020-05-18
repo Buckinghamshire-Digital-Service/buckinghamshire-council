@@ -1,5 +1,3 @@
-from django import forms
-from django.core.exceptions import ValidationError
 from django.db import models
 from django.shortcuts import render
 
@@ -10,11 +8,36 @@ from wagtail.search import index
 from bs4 import BeautifulSoup
 
 from bc.cases.backends.respond.client import RespondClientException, get_client
-from bc.cases.backends.respond.constants import CREATE_CASE_SERVICES, CREATE_CASE_TYPE
+from bc.cases.backends.respond.constants import (
+    APTEAN_FORM_CHOICES,
+    APTEAN_FORM_COMMENT,
+    APTEAN_FORM_COMPLAINT,
+    APTEAN_FORM_COMPLIMENT,
+    APTEAN_FORM_DISCLOSURE,
+    APTEAN_FORM_FOI,
+    APTEAN_FORM_SAR,
+)
 from bc.cases.utils import format_case_reference
 from bc.utils.constants import RICH_TEXT_FEATURES
 
 from ..utils.models import BasePage
+from .forms import (
+    CommentForm,
+    ComplaintForm,
+    ComplimentForm,
+    DisclosureForm,
+    FOIForm,
+    SARForm,
+)
+
+APTEAN_FORM_MAPPING = {
+    APTEAN_FORM_COMPLAINT: ComplaintForm,
+    APTEAN_FORM_FOI: FOIForm,
+    APTEAN_FORM_SAR: SARForm,
+    APTEAN_FORM_COMMENT: CommentForm,
+    APTEAN_FORM_COMPLIMENT: ComplimentForm,
+    APTEAN_FORM_DISCLOSURE: DisclosureForm,
+}
 
 
 class ApteanRespondCaseFormPage(BasePage):
@@ -22,9 +45,7 @@ class ApteanRespondCaseFormPage(BasePage):
     template = "patterns/pages/cases/form_page.html"
     landing_page_template = "patterns/pages/cases/form_page_landing.html"
 
-    web_service_definition = models.CharField(
-        max_length=255, help_text="The name of the CreateCase web service to use."
-    )
+    form = models.CharField(max_length=255, choices=APTEAN_FORM_CHOICES)
 
     introduction = models.TextField(blank=True)
     pre_submission_text = RichTextField(
@@ -52,10 +73,7 @@ class ApteanRespondCaseFormPage(BasePage):
     search_fields = BasePage.search_fields + [index.SearchField("introduction")]
 
     content_panels = BasePage.content_panels + [
-        FieldPanel(
-            "web_service_definition",
-            widget=forms.Select(choices=[(s, s) for s in CREATE_CASE_SERVICES]),
-        ),
+        FieldPanel("form"),
         FieldPanel("introduction"),
         FieldPanel("pre_submission_text"),
         FieldPanel("action_text"),
@@ -66,7 +84,7 @@ class ApteanRespondCaseFormPage(BasePage):
     ]
 
     def get_form_class(self):
-        return get_client().services[CREATE_CASE_TYPE][self.web_service_definition]
+        return APTEAN_FORM_MAPPING[self.form]
 
     def get_form(self, *args, **kwargs):
         form_class = self.get_form_class()
@@ -90,17 +108,23 @@ class ApteanRespondCaseFormPage(BasePage):
 
         context = self.get_context(request)
         context["form"] = form
+        context["form_template"] = form.template_name
         return render(request, self.get_template(request), context)
 
     def process_form_submission(self, form):
         case_xml = form.get_xml_string()
         client = get_client()
-        response = client.create_case(self.web_service_definition, case_xml)
+        response = client.create_case(form.webservice, case_xml)
         soup = BeautifulSoup(response.content, "xml")
         if response.status_code != 200:
+            reverse_schema_mapping = {
+                v: k for k, v in form.field_schema_name_mapping.items()
+            }
             for error in soup.find_all("failure"):
-                if error.attrs["schemaName"] in form.fields:
-                    form.add_error(error.attrs["schemaName"], error.text)
+                if error.attrs["schemaName"] in reverse_schema_mapping:
+                    form.add_error(
+                        reverse_schema_mapping[error.attrs["schemaName"]], error.text
+                    )
                 else:
                     form.add_error(None, error.text)
             return form, None
@@ -120,10 +144,3 @@ class ApteanRespondCaseFormPage(BasePage):
         context = self.get_context(request)
         context["case_reference"] = case_reference
         return render(request, self.get_landing_page_template(request), context)
-
-    def clean_fields(self, exclude=None):
-        if "web_service_definition" not in exclude:
-            if self.web_service_definition not in CREATE_CASE_SERVICES:
-                raise ValidationError(
-                    {"web_service_definition": "Choose one of the available options"}
-                )

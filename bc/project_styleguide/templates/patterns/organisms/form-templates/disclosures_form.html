@@ -1,0 +1,33 @@
+{% load wagtailcore_tags %}
+<form action="{% pageurl page %}" method="post" class="form form--standard">
+    <div class="form__container">
+        {% csrf_token %}
+
+        {% if form.errors %}
+            <div class="form__errors">
+                There were some errors with your form. Please amend the fields highlighted below.
+                {% if form.non_field_errors %}
+                    {{ form.non_field_errors }}
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% include "patterns/molecules/form_field.html" with field=form.organisation %}
+
+        <fieldset>
+            <legend class="form-item__label required">Request Details</legend>
+            {% include "patterns/molecules/form_field.html" with field=form.description %}
+        </fieldset>
+
+        <fieldset>
+            <legend class="form-item__label required">Why you need the information</legend>
+            {% include "patterns/molecules/form_field.html" with field=form.investigation %}
+            {% include "patterns/molecules/form_field.html" with field=form.reason %}
+            {% include "patterns/molecules/form_field.html" with field=form.act_of_parliament %}
+        </fieldset>
+
+        {% include "patterns/organisms/form-templates/contact_method_fieldset.html" %}
+
+        <input class="form__submit button" type="submit" value="Submit">
+    </div>
+</form>

@@ -22,7 +22,6 @@ class CaseFormPageTest(TestCase):
         mock_get_client.side_effect = RespondClientException
         resp = self.client.get(self.case_form_page.url)
         self.assertEqual(resp.status_code, 200)
-        self.assertContains(resp, "not available")
 
     @mock.patch("bc.cases.models.get_client")
     @mock.patch("bc.cases.models.ApteanRespondCaseFormPage.get_form")
