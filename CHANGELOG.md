@@ -3,6 +3,8 @@
 ## Unreleased
 
 - Change GitLab HTML syntax highlighter
+- Accessibility 37 Improve aria role of alert panel
+- Accessibility 61 Remove alt text for decorative images
 
 ## 16.0 (2020-05-07)
 
@@ -15,7 +17,6 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/15.1...16.0
 - Accessibility 16 Fix Jobs filter fieldset legends
 - Accessibility 18 Page content should be in a landmark
 - Accessibility 19 Remove nesting for landmarks
-- Accessibility 37 Improve aria role of alert panel
 - Accessibility 44 & 75 Pagination improvements
 - Accessibility 58 Add screen-reader-only text to filters’ item count
 - Accessibility 60 Fix typo in location field placeholder
