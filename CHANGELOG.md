@@ -4,6 +4,7 @@
 
 - Change GitLab HTML syntax highlighter
 - Accessibility 37 Improve aria role of alert panel
+- Accessibility 53 - Hide footer links landmark if there are none
 - Accessibility 61 Remove alt text for decorative images
 
 ## 16.0 (2020-05-07)
