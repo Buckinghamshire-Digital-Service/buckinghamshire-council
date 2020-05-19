@@ -3,6 +3,7 @@ import secrets
 from urllib.parse import urlsplit, urlunsplit
 
 from django import forms
+from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Count, F
@@ -338,7 +339,7 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
     @route(r"^apply/$")
     def apply(self, request):
         job_id = request.GET.get("jobId")
-        if job_id:
+        if job_id and "-" in job_id:
             talentlink_id = job_id.split("-")[1]
             page = get_object_or_404(TalentLinkJob, talentlink_id=talentlink_id)
         else:
@@ -346,7 +347,13 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
         return render(
             request,
             "patterns/pages/jobs/apply.html",
-            {"page": page, "show_apply_button": False},
+            {
+                "page": page,
+                "show_apply_button": False,
+                "apply_config_key": getattr(
+                    settings, "TALENTLINK_APPLY_CONFIG_KEY_" + self.job_board.upper()
+                ),  # Will throw AttributeError if not defined
+            },
         )
 
 

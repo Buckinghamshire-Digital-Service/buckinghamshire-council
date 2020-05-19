@@ -1,5 +1,13 @@
 # Release History
 
+## 16.1 (2020-05-20)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/16.0...16.1
+
+- Enable a job board-dependent template variable for the application page. This
+  fixes internal job applications.
+- Fix an error when job application URL query is badly formatted
+
 ## 16.0 (2020-05-07)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/15.1...16.0
