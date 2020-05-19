@@ -26,8 +26,8 @@
         text-decoration: none;
 
         #{$hover-states} {
-            background-color: $color--sky;
-            color: $color--white;
+            background-color: $color--white;
+            color: $color--river;
             cursor: pointer;
         }
 
