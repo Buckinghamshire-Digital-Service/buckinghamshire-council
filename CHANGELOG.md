@@ -7,6 +7,7 @@
 - Accessibility 53 Hide footer links landmark if there are none
 - Accessibility 55 Email alert subscription form improvements
 - Accessibility 56 Remove extra role="search" form from header on search page
+- Accessibility 57 Label complementary landmarks
 - Accessibility 61 Remove alt text for decorative images
 
 ## 16.0 (2020-05-07)
