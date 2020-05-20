@@ -13,6 +13,13 @@ class ConditionalField {
         );
 
         this.bindEvents();
+
+        // run once on page load
+        this.conditional
+            .querySelectorAll('[data-conditional-input]:checked')
+            .forEach((item) => {
+                this.handleInput(item);
+            });
     }
 
     handleInput(item) {
