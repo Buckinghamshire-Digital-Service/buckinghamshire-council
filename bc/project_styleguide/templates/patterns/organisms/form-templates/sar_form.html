@@ -15,11 +15,9 @@
         {% include "patterns/molecules/form_field.html" with field=form.your_involvement %}
 
         <fieldset>
-            <legend>Request details</legend>
-
+            <legend class="form-item__label">Request details</legend>
             {% include "patterns/molecules/form_field.html" with field=form.description %}
             {% include "patterns/molecules/form_field.html" with field=form.time_period %}
-
 
             <div class="form-item form-item--choice_field form-item--radio_select {% if form.buckinghamshire_council_employee.errors %}form-item--errors{% endif %}" data-conditional>
                 <fieldset>
@@ -49,22 +47,23 @@
         </fieldset>
 
         <fieldset>
-            <legend>Your contact details</legend>
+            <legend class="form-item__label">Your contact details</legend>
             {% include "patterns/molecules/form_field.html" with field=form.title %}
             {% include "patterns/molecules/form_field.html" with field=form.first_name %}
             {% include "patterns/molecules/form_field.html" with field=form.last_name %}
+
+            <fieldset>
+                <legend class="form-item__label">Your date of birth</legend>
+                <div class="form-item__help">For example, 23 05 1978</div>
+                {% include "patterns/molecules/form_field.html" with field=form.dob_day form_item_extra_class="form-item--inline" %}
+                {% include "patterns/molecules/form_field.html" with field=form.dob_month form_item_extra_class="form-item--inline" %}
+                {% include "patterns/molecules/form_field.html" with field=form.dob_year form_item_extra_class="form-item--inline" %}
+            </fieldset>
+
+            {% include "patterns/organisms/form-templates/contact_method_fieldset.html" %}
         </fieldset>
 
-        <fieldset>
-            <legend>Your date of birth</legend>
-            <div class="form-item__help">For example, 23 05 1978</div>
-            {% include "patterns/molecules/form_field.html" with field=form.dob_day form_item_extra_class="form-item--inline" %}
-            {% include "patterns/molecules/form_field.html" with field=form.dob_month form_item_extra_class="form-item--inline" %}
-            {% include "patterns/molecules/form_field.html" with field=form.dob_year form_item_extra_class="form-item--inline" %}
-        </fieldset>
-
-        {% include "patterns/organisms/form-templates/contact_method_fieldset.html" %}
-
+        {{ page.pre_submission_text|richtext }}
         <input class="form__submit button" type="submit" value="Submit">
     </div>
 </form>

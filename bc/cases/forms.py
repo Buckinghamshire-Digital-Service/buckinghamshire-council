@@ -168,12 +168,6 @@ class FOIForm(BaseCaseForm):
         "descriptions to enable us to identify and locate the required information",
     )
 
-    @property
-    def field_group_1(self):
-        return [
-            self[name] for name in ("description", "title", "first_name", "last_name",)
-        ]
-
     field_schema_name_mapping = {
         "your_involvement": "Contact.ContactType",
         "organisation": "Contact.Organisation",
