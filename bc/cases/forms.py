@@ -267,7 +267,6 @@ class SARForm(BaseCaseForm):
 
     field_schema_name_mapping = {
         "your_involvement": "Contact.ContactType",
-        "organisation": "Contact.Organisation",
         "dob": "Contact.DateOfBirth",
         "description": DESCRIPTION_SCHEMA_NAME,
     }
@@ -402,11 +401,11 @@ class DisclosureForm(BaseCaseForm):
             self[name] for name in ("description", "title", "first_name", "last_name",)
         ]
 
+    @property
     def append_to_description_fields(self):
         return [self[name] for name in ["investigation", "reason"]]
 
     field_schema_name_mapping = {
-        "your_involvement": "Contact.ContactType",
         "organisation": "Contact.Organisation",
         "description": DESCRIPTION_SCHEMA_NAME,
         "act_of_parliament": "Case.ActofParliament",

@@ -125,7 +125,7 @@ class ApteanRespondCaseFormPage(BasePage):
                 v: k for k, v in form.field_schema_name_mapping.items()
             }
             for error in soup.find_all("failure"):
-                if error.attrs["schemaName"] in reverse_schema_mapping:
+                if error.attrs.get("schemaName") in reverse_schema_mapping:
                     form.add_error(
                         reverse_schema_mapping[error.attrs["schemaName"]], error.text
                     )
