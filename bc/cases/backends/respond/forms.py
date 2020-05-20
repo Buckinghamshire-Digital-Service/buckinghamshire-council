@@ -46,7 +46,7 @@ class BaseCaseForm(django.forms.Form):
 
         description = cleaned_data.pop("description")
         for field in self.append_to_description_fields:
-            value = self.cleaned_data[field.name]
+            value = cleaned_data[field.name]
             value = self.cast(value)
             # Special case: append this type of field to the description, rather than
             # creating an XML element.
@@ -58,7 +58,7 @@ class BaseCaseForm(django.forms.Form):
             if schema_name == DESCRIPTION_SCHEMA_NAME:
                 # We've handled the description separately
                 continue
-            value = self.cleaned_data[key]
+            value = cleaned_data[key]
             value = self.cast(value)
             entity_name = schema_name.partition(".")[0]
             entities[entity_name].append(self.create_element(schema_name, value))
