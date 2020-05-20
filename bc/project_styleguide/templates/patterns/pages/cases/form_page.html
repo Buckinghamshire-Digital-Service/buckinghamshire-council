@@ -5,7 +5,7 @@
 
     <section class="section section--main">
         <h1 class="heading heading--xxl">{{ page.title }}</h1>
-        <p>{{ page.introduction }}</p>
+        {{ page.introduction|richtext }}
         <div class="container">
             {% include form.template_name %}
         </div>

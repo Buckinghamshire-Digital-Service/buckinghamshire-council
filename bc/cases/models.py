@@ -47,7 +47,11 @@ class ApteanRespondCaseFormPage(BasePage):
 
     form = models.CharField(max_length=255, choices=APTEAN_FORM_CHOICES)
 
-    introduction = models.TextField(blank=True)
+    introduction = RichTextField(
+        blank=True,
+        help_text="Text displayed before the form",
+        features=RICH_TEXT_FEATURES,
+    )
     pre_submission_text = RichTextField(
         blank=True,
         help_text="Text displayed after the form, above the submit button",
@@ -57,7 +61,7 @@ class ApteanRespondCaseFormPage(BasePage):
 
     completion_title = models.CharField(
         max_length=255,
-        help_text="Heading for the page show after successful form submission.",
+        help_text="Heading for the page shown after successful form submission.",
     )
     completion_content = RichTextField(
         blank=True,
