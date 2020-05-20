@@ -390,12 +390,13 @@ class DisclosureForm(BaseCaseForm):
         ]
 
     def append_to_description_fields(self):
-        return [self[name] for name in ["reason"]]
+        return [self[name] for name in ["investigation", "reason"]]
 
     field_schema_name_mapping = {
         "your_involvement": "Contact.ContactType",
         "organisation": "Contact.Organisation",
         "description": DESCRIPTION_SCHEMA_NAME,
+        "act_of_parliament": "Case.ActofParliament",
     }
     field_schema_name_mapping.update(BaseCaseForm.field_schema_name_mapping)
 
