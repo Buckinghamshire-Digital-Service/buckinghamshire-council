@@ -35,7 +35,7 @@ class ConditionalField {
         // if radio is checked, add is-checked class & aria-attributes to parent
         if (item.checked) {
             parentField.classList.add('is-checked');
-            this.setAttribute('aria-selected', 'true');
+            item.setAttribute('aria-selected', 'true');
             parentField.setAttribute('aria-expanded', 'true');
             parentField.setAttribute('aria-hidden', 'false');
         }
