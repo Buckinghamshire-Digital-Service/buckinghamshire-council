@@ -2,7 +2,12 @@ import datetime
 
 from django import forms
 from django.conf import settings
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import (
+    MaxLengthValidator,
+    MaxValueValidator,
+    MinLengthValidator,
+    MinValueValidator,
+)
 from django.utils.timezone import now
 
 from bc.cases.backends.respond.constants import (
@@ -16,7 +21,7 @@ from bc.cases.backends.respond.constants import (
 )
 from bc.cases.backends.respond.forms import BaseCaseForm as _BaseCaseForm
 from bc.utils.validators import get_current_year
-from bc.utils.widgets import CustomCheckboxSelectMultiple
+from bc.utils.widgets import CustomCheckboxSelectMultiple, TelephoneNumberInput
 
 
 class BaseCaseForm(_BaseCaseForm):
@@ -32,7 +37,15 @@ class BaseCaseForm(_BaseCaseForm):
     )
     email = forms.EmailField(required=False)
     email.widget.attrs.update({"autocomplete": "", "autocapitalize": "off"})
-    contact_number = forms.CharField(required=False)
+    contact_number = forms.CharField(
+        required=False,
+        widget=TelephoneNumberInput(),
+        # This duplicates the API validation, saving a round trip
+        validators=[
+            MinLengthValidator(11, "Enter 11 or 12 digits"),
+            MaxLengthValidator(12, "Enter 11 or 12 digits"),
+        ],
+    )
     address_01 = forms.CharField(label="Building and street address", required=False)
     town = forms.CharField(label="Town or city", required=False)
     county = forms.CharField(label="County", required=False)
@@ -66,7 +79,7 @@ class BaseCaseForm(_BaseCaseForm):
             for field_name in ["address_01", "town", "county", "postcode"]:
                 if not cleaned_data.get(field_name):
                     self.add_error(field_name, "This field is required")
-        if contact_method == CONTACT_METHOD_PHONE and not cleaned_data.get(
+        if contact_method == CONTACT_METHOD_PHONE and not self.data.get(
             "contact_number"
         ):
             self.add_error("contact_number", "This field is required")
