@@ -27,6 +27,11 @@
         </fieldset>
 
         <fieldset>
+            <legend class="form-item__label">Attach supporting documents</legend>
+            {% include "patterns/molecules/form_field.html" with field=form.attachments %}
+        </fieldset>
+
+        <fieldset>
             <legend class="form-item__label">Your contact details</legend>
             {% include "patterns/molecules/form_field.html" with field=form.title %}
             {% include "patterns/molecules/form_field.html" with field=form.first_name %}

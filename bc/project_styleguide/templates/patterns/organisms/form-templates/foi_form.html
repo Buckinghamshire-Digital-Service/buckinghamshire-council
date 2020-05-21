@@ -52,5 +52,10 @@
 
         {{ page.pre_submission_text|richtext }}
         <input class="form__submit button" type="submit" value="Submit">
+
+        <fieldset>
+            <legend class="form-item__label">Attach supporting documents</legend>
+            {% include "patterns/molecules/form_field.html" with field=form.attachments %}
+        </fieldset>
     </div>
 </form>
