@@ -1,5 +1,17 @@
 # Release History
 
+## 17.0 (2020-05-21)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/16.1...17.0
+
+- Change GitLab HTML syntax highlighter
+- Accessibility 37 Improve aria role of alert panel
+- Accessibility 53 Hide footer links landmark if there are none
+- Accessibility 55 Email alert subscription form improvements
+- Accessibility 56 Remove extra role="search" form from header on search page
+- Accessibility 57 Label complementary landmarks
+- Accessibility 61 Remove alt text for decorative images
+
 ## 16.1 (2020-05-20)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/16.0...16.1
