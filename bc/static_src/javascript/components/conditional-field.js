@@ -16,9 +16,9 @@ class ConditionalField {
         this.bindEvents();
     }
 
-    checkValidation(){
+    checkValidation() {
         this.allConditionalFields.forEach((item) => {
-            if (item.querySelector('.form-item--errors')){
+            if (item.querySelector('.form-item--errors')) {
                 item.classList.add('is-checked');
                 item.setAttribute('aria-expanded', 'true');
                 item.setAttribute('aria-hidden', 'false');
