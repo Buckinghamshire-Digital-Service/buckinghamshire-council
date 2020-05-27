@@ -11,12 +11,19 @@ class ConditionalField {
         this.allConditionalInputs = this.conditional.querySelectorAll(
             '[data-conditional-input]',
         );
+        this.allCheckedConditionalInputs = this.conditional.querySelectorAll(
+            '[data-conditional-input]:checked',
+        );
 
         this.checkValidation();
         this.bindEvents();
     }
 
     checkValidation() {
+        this.allCheckedConditionalInputs.forEach((item) => {
+            this.handleInput(item);
+        });
+
         this.allConditionalFields.forEach((item) => {
             if (item.querySelector('.form-item--errors')) {
                 item.classList.add('is-checked');
