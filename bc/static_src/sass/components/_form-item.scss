@@ -179,8 +179,8 @@
     }
 
     &__help {
-        @include font-size(s);
-        margin-top: 5px;
+        @include font-size(xs);
+        margin: 5px 0;
         color: $color--charcoal-75;
     }
 
