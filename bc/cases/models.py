@@ -108,6 +108,7 @@ class ApteanRespondCaseFormPage(BasePage):
                 soup.find("case")
                 .find(attrs={"schemaName": "Case.FeedbackTypeReferenceNumber"})
                 .get_text()
+                .strip()
             )
             return form, case_reference
 
