@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Subheading block (BE)
+- Sign up to council newsletter(s) from the homepage
 
 ## 14.0 (2020-04-22)
 
