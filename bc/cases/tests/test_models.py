@@ -5,7 +5,6 @@ from django.http.response import HttpResponse
 from django.test import TestCase
 
 from bc.cases.backends.respond.client import RespondClientException
-from bc.cases.utils import format_case_reference
 from bc.home.models import HomePage
 
 from .fixtures import ApteanRespondCaseFormPageFactory
@@ -37,6 +36,9 @@ class CaseFormPageTest(TestCase):
             """\
             <?xml version="1.0" encoding="utf-8"?> <caseResponse version="2" xmlns:="http://www.aptean.com/respond/caseresponse/2">
             <case Id="01fc3664f6194732a37f61222cca21bd" Name="DIS - 10028 Response Xml Test," Tag="">
+              <field name="Feedback Type &amp; Reference Number" schemaName="Case.FeedbackTypeReferenceNumber" type="ShortText">
+                <value>DIS 10028</value>
+              </field>
             </case>
             </caseResponse>
         """  # noqa
@@ -49,32 +51,5 @@ class CaseFormPageTest(TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertContains(resp, "10028")
         self.assertNotContains(resp, "Response Xml Test")
-        expected_case_reference = "DIS - 10028"
+        expected_case_reference = "DIS 10028"
         self.assertEqual(resp.context["case_reference"], expected_case_reference)
-
-
-class CaseNameFormattingTest(TestCase):
-    def test_compliant_values(self):
-        for reference, expected in [
-            ("ABC - 12345", "ABC - 12345"),  # trivial example
-            ("DIS - 10028 Response Xml Test,", "DIS - 10028"),
-            ("COR - 09849 Mänikkölahti", "COR - 09849"),
-            ("ABC - 123456", "ABC - 123456"),
-            ("ABC - 1234567890", "ABC - 1234567890"),
-            ("ABC - 1", "ABC - 1"),
-        ]:
-            with self.subTest(reference):
-                self.assertEqual(format_case_reference(reference), expected)
-
-    def test_extraterrestrial_values_are_not_reformatted(self):
-        for reference in [
-            "D2S - 10028 Response Xml Test,",
-            "This is a random sentence",
-            "123 - ABCDE Jones",
-            "COM - 1A Jones",
-            "COM - A1 Jones",
-            "ABCD - 12345",
-            "AB - 12345",
-        ]:
-            with self.subTest(reference):
-                self.assertEqual(format_case_reference(reference), reference)
