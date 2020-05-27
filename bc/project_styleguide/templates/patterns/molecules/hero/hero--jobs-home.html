@@ -7,12 +7,10 @@
 
         <div class="hero__search">
             <form action="{% url 'search' %}" method="get" role="search" class="form form--hero-search form--jobs-hero">
-                <input class="input" id="search--hero" type="text" placeholder="Search jobs, e.g. “Teacher in Aylesbury”" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
+                <input class="input" id="search--hero" type="text" placeholder="Search jobs, e.g. “Teacher in Aylesbury”" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
                 <label class="u-sr-only" for="search--hero">Search Jobs</label>
-                <button class="button button--search button--hero" type="submit">
-                    <svg class="button__icon icon icon--white icon--stroke" aria-hidden="true">
-                        <use xlink:href="#magnifying-glass"></use>
-                    </svg>
+                <button class="button button--search button--hero" type="submit" aria-label="Submit">
+                    {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke icon--white button__icon" %}
                     <span class="u-sr-only">Search</span>
                 </button>
             </form>

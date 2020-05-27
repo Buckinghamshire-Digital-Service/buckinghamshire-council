@@ -2,14 +2,12 @@
 
 <header class="header header--jobs">
     <div class="header__inner wrapper wrapper--large">
-        <a class="header__home-link" href="/" aria-label="Home">
-            <svg class="header__logo" aria-hidden="true">
-                <use xlink:href="#logo"></use>
-            </svg>
+        <a class="header__home-link" href="/" aria-label="Buckinghamshire Council">
+            {% include "patterns/atoms/icons/icon.html" with name="logo" classname="header__logo" %}
         </a>
 
         <div class="header__heading">
-            <h2 class="header__heading-title">Jobs and Careers</h2>
+            <a href="/" class="header__heading-title">Jobs and Careers</a>
 
             <img class="header__heading-logo" src="{% static 'images/dc-logo.png' %}" alt="Disability Confident Employer "/>
         </div>

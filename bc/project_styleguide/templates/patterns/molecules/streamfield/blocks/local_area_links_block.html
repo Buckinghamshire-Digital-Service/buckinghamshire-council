@@ -8,8 +8,7 @@
         {% include "patterns/molecules/area-links-list/area-links-list.html" %}
     {% endif %}
 
-
-    <div class="accordion" data-accordion>
+    <div class="accordion accordion--detail" data-accordion>
         <a
             href=""
             class="accordion__title accordion__title--area-search link--alt"
@@ -19,9 +18,7 @@
             aria-expanded="false"
             aria-selected="false"
             id="question-{{ forloop.counter }}">
-            <svg class="accordion__icon icon icon--stroke" aria-hidden="true">
-                <use xlink:href="#chevron"></use>
-            </svg>
+            {% include "patterns/atoms/icons/icon.html" with name="chevron" classname="icon--stroke accordion__icon" %}
             <h3 class="area-search__heading">Find your area based on your postcode</h3>
 
         </a>
@@ -35,10 +32,10 @@
             aria-hidden="false"
         >
             <div class="area-search">
-                <form 
-                    role="search" 
+                <form
+                    role="search"
                     class="form form--area-search"
-                    method="get" 
+                    method="get"
                     url="{% url 'area_finder' %}"
                     data-area-search
                     >
@@ -48,16 +45,16 @@
                     <div data-form-input-wrapper class="area-search__input-wrapper">
                         <label class="u-sr-only" for="postcode">Search postcode</label>
                         <input data-input-value id="postcode" type="text" placeholder="Search" name="postcode">
-                        <button 
+                        <button
                             data-submit-button
-                            class="button button--basic button--area-search" 
-                            type="submit" 
-                            aria-label="Search"
+                            class="button button--basic button--area-search"
+                            type="submit"
+                            aria-label="Submit"
                         >
                             Find
                         </button>
                     </div>
-                    <button 
+                    <button
                         data-find-another-button
                         type="button"
                         class="button button--link hide"

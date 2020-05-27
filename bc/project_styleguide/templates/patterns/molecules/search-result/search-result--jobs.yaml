@@ -5,11 +5,11 @@ context:
     title: Learning Support Assistant - King’s Wood School
     salary_range: '£23,742 – £28,426 '
     closing_date: 13th December
-    searchable_location: Aylesbury Vale
+    location: Aylesbury Vale
     short_description: 'Full time and part time (job share considered) MPS Start date: April 2020 St Peter’s Catholic Primary School are seeking enthusiastic KS1/…'
 
 tags:
   image:
-    result.logo fill-80x80 class="search-result__logo":
+    result.logo max-80x80 class="search-result__logo":
       raw: |
         <img src="http://via.placeholder.com/80x80" alt="Some alt" class="search-result__logo">

@@ -22,6 +22,10 @@
         padding: 0 $grid--min;
         margin-bottom: $grid--min;
 
+        &--active {
+            text-decoration: none;
+        }
+
         #{$hover-states} {
             #{$root}__icon {
                 stroke: $color--link-hover;

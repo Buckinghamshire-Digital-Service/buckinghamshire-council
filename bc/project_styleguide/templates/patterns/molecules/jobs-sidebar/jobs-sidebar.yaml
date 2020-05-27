@@ -22,6 +22,6 @@ context:
 
 tags:
   image:
-    page.logo fill-110x110 class="sidebar__job-detail-logo":
+    page.logo max-110x110 class="sidebar__job-detail-logo":
       raw: |
         <img src="http://via.placeholder.com/110x110" alt="Some alt" class="sidebar__job-detail-logo">

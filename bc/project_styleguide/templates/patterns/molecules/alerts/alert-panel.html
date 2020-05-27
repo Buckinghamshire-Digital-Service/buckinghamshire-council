@@ -1,0 +1,13 @@
+{% load wagtailcore_tags %}
+
+<div class="alert alert--message alert--panel" aria-labelledby="alert--panel-label">
+  <h1 class="alert__title" id="alert--panel-label">
+    {{ title }}
+  </h1>
+  <div class="alert__body">
+    {{ body }}
+    {% if ref %}
+        <div class="alert__ref">{{ ref }}</div>
+    {% endif %}
+  </div>
+</div>

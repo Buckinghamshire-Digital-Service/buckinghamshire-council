@@ -21,12 +21,20 @@ def get_attachment(
     }
 
 
+def get_logo(
+    id="abc", url="https://test.url/test.png",
+):
+    return {"id": id, "url": url, "position": "Logo"}
+
+
 def get_advertisement(
     job_number="FS11605",
     talentlink_id=164579,
     title="Higher Level Teaching Assistant - Elmhurst School ",
     description=None,
+    location=None,
     application_url="https://www.example.com/?jobId=QQPFK026203F3VBQBV7V779XA-167759&langCode=en_GB",
+    job_group="Schools & Early Years - Support",
 ):
     if description is None:
         description = [
@@ -199,26 +207,7 @@ def get_advertisement(
                     "parents": None,
                     "criteria": {
                         "criterion": [
-                            {
-                                "label": "Schools & Early Years - Support",
-                                "value": "Schools  Early Years  Support",
-                                "activators": [],
-                            }
-                        ]
-                    },
-                },
-                {
-                    "label": "Location",
-                    "value": "Location",
-                    "order": 2,
-                    "parents": None,
-                    "criteria": {
-                        "criterion": [
-                            {
-                                "label": "Aylesbury",
-                                "value": "Aylesbury",
-                                "activators": [],
-                            }
+                            {"label": job_group, "value": job_group, "activators": []}
                         ]
                     },
                 },
@@ -232,8 +221,8 @@ def get_advertisement(
                     },
                 },
                 {
-                    "label": "Salary Range - FTE",
-                    "value": "Salary Range  FTE",
+                    "label": "Salary Range",
+                    "value": "Salary Range",
                     "order": 10,
                     "parents": None,
                     "criteria": {
@@ -282,21 +271,6 @@ def get_advertisement(
                             {
                                 "label": "SchoolsPrimaryRed",
                                 "value": "SchoolsPrimaryRed",
-                                "activators": [],
-                            }
-                        ]
-                    },
-                },
-                {
-                    "label": "Searchable Location",
-                    "value": "Searchable Location",
-                    "order": 17,
-                    "parents": None,
-                    "criteria": {
-                        "criterion": [
-                            {
-                                "label": "Aylesbury Vale",
-                                "value": "Aylesbury Vale",
                                 "activators": [],
                             }
                         ]
@@ -391,7 +365,29 @@ def get_advertisement(
         "strapline": None,
         "assignedImages": None,
         "requisitionInternalJobNumber": None,
-        "jobLocations": None,
+        "jobLocations": {
+            "jobLocation": [
+                {
+                    "name": "Walton Street Offices",
+                    "departmentId": 153,
+                    "creationUserId": 1,
+                    "updateUserId": None,
+                    "creationDate": datetime.datetime(
+                        2020, 3, 5, 11, 40, 41, tzinfo=pytz.FixedOffset(60)
+                    ),
+                    "updateDate": None,
+                    "country": "United Kingdom",
+                    "region": "England",
+                    "city": location or "Aylesbury Vale",
+                    "street": None,
+                    "streetNumber": None,
+                    "zipCode": "HP20 1UA",
+                    "latitude": 51.814526,
+                    "longitude": -0.812337,
+                    "id": 61,
+                }
+            ]
+        },
         "sponsoredJobContext": None,
         "jobUpdateDate": datetime.datetime(
             2020, 1, 15, 14, 11, 39, tzinfo=pytz.FixedOffset(60)

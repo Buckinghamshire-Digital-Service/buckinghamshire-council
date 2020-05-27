@@ -1,10 +1,7 @@
 {% extends base_page_template %}
 {% load wagtailcore_tags wagtailimages_tags navigation_tags static %}
 
-
-{% block header %}
-    {{ block.super }}
-
+{% block hero %}
     {% include "patterns/molecules/hero/hero--jobs.html" %}
 {% endblock %}
 
@@ -17,16 +14,16 @@
             {% for subpage in subpages %}
                 <a class="card card--jobs" href="{% pageurl subpage %}">
                     <div class="card__image">
-                        {% image subpage.listing_image fill-530x530 %}
+                        {% image subpage.listing_image fill-530x530 alt="" %}
                     </div>
                     <div class="card__content">
-                        <h2 class="card__title heading heading--s" role="listitem">
+                        <h2 class="card__title heading heading--s">
                             {% firstof subpage.listing_title subpage.title %}
                         </h2>
                         {% if subpage.listing_summary %}
                             <p class="card__summary">{{ subpage.listing_summary }}</p>
                         {% endif %}
-                        <p class="card__more">Find out more</p>
+                        <p class="card__more" aria-hidden="true">Find out more</p>
                     </div>
                 </a>
             {% endfor %}

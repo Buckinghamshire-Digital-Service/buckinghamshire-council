@@ -8,6 +8,7 @@ from django.test import TestCase, override_settings
 import responses
 from lxml import etree
 
+from bc.recruitment.constants import JOB_BOARD_CHOICES
 from bc.recruitment_api.client import get_client
 from bc.recruitment_api.transports import ZeepAPIKeyTransport
 
@@ -15,10 +16,10 @@ wsdl_file_path = pathlib.Path(__file__).parent / "wsdl.xml"
 
 
 class ClientTestMixin:
-    def get_client(self):
+    def get_client(self, job_board=JOB_BOARD_CHOICES[0]):
         wsdl_file_path = pathlib.Path(__file__).parent / "wsdl.xml"
         wsdl_file_url = f"file://{wsdl_file_path}"
-        return get_client(wsdl=wsdl_file_url)
+        return get_client(wsdl=wsdl_file_url, job_board=job_board)
 
 
 @override_settings(TALENTLINK_API_WSDL="https://some.api.example.com/?WSDL")
@@ -34,7 +35,7 @@ class ClientTest(TestCase, ClientTestMixin):
             status=200,
             content_type="text/xml",
         )
-        get_client()
+        get_client(job_board=JOB_BOARD_CHOICES[0])
         self.assertEqual(len(responses.calls), 1)
 
     @responses.activate
@@ -76,7 +77,8 @@ class TransportTest(TestCase):
 
 @override_settings(
     TALENTLINK_API_KEY="spam_key",
-    TALENTLINK_API_USERNAME="eggs_username:ham:FO",
+    TALENTLINK_API_USERNAME_EXTERNAL="eggs_username:ham:FO",
+    TALENTLINK_API_USERNAME_INTERNAL="eggs_username:ham:FO",
     TALENTLINK_API_PASSWORD="sausage",
     TALENTLINK_API_WSDL="https://some.api.example.com/?WSDL",
 )
@@ -131,6 +133,9 @@ class AuthenticationTest(TestCase, ClientTestMixin):
             etree.tostring(etree.fromstring(self.expected.encode())),
         )
 
+    # TODO:
+    # Test job boards / API key settings
+
 
 @override_settings(
     CACHES={"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}},
@@ -157,22 +162,22 @@ class ZeepCacheTest(TestCase, ClientTestMixin):
 
     @responses.activate
     def test_cache_is_set(self):
-        get_client()  # NB the real one
+        get_client(job_board=JOB_BOARD_CHOICES[0])  # NB the real one
         self.assertNotEqual(self.cache.get(settings.TALENTLINK_API_WSDL), None)
 
     @responses.activate
     def test_cache_is_used(self):
-        get_client()  # NB the real one
+        get_client(job_board=JOB_BOARD_CHOICES[0])  # NB the real one
         self.assertEqual(len(responses.calls), 1)
 
-        get_client()  # NB the real one
+        get_client(job_board=JOB_BOARD_CHOICES[0])  # NB the real one
         self.assertEqual(len(responses.calls), 1)
 
     @responses.activate
     def test_cache_is_reused_once_expired(self):
-        get_client()  # NB the real one
+        get_client(job_board=JOB_BOARD_CHOICES[0])  # NB the real one
         self.assertEqual(len(responses.calls), 1)
 
         self.cache.clear()
-        get_client()  # NB the real one
+        get_client(job_board=JOB_BOARD_CHOICES[0])  # NB the real one
         self.assertEqual(len(responses.calls), 2)

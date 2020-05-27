@@ -28,10 +28,10 @@ def field_type(bound_field):
     return camelcase_to_underscore(bound_field.field.__class__.__name__)
 
 
-# Look up dictionary values
-@register.filter(name="lookup")
-def lookup(value, arg):
-    if isinstance(value[arg], list):
-        return (", ").join(value[arg])
+# Join lists, but not strings
+@register.filter(name="join_list")
+def join_list(value):
+    if isinstance(value, list):
+        return (", ").join(value)
 
-    return value[arg]
+    return value
