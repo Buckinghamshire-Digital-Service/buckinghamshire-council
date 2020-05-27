@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Improve the method for returning a formatted Aptean Respond case reference number
+
 ## 17.0 (2020-05-21)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/16.1...17.0
