@@ -1,197 +1,159 @@
+import pathlib
 import textwrap
-from collections import defaultdict
-from unittest import skip
 
-from django import forms
 from django.conf import settings
-from django.test import TestCase
+from django.test import TestCase, override_settings
 
-from bs4 import BeautifulSoup
-from lxml import etree
+import requests
+import responses
 
-from bc.cases.backends.respond.constants import (
-    APPEND_TO_DESCRIPTION,
-    DESCRIPTION_SCHEMA_NAME,
-    XML_ENTITY_MAPPING,
+from bc.cases.backends.respond.client import (
+    RespondClient,
+    RespondClientException,
+    get_client,
 )
-from bc.cases.backends.respond.forms import BaseCaseForm
+from bc.cases.backends.respond.constants import CREATE_CASE_SERVICES, CREATE_CASE_TYPE
 
 
-class SchemaTest(TestCase):
+@override_settings(
+    RESPOND_API_USERNAME="foo",
+    RESPOND_API_PASSWORD="bar",
+    RESPOND_API_BASE_URL="http://www.example.invalid/",
+)
+class TestNonMockedClient(TestCase):
+    def test_client_exception_raised_when_misconfigured(self):
+        with self.assertRaises(RespondClientException):
+            RespondClient()
 
-    known_xml = """<case Tag="" xmlns="http://www.aptean.com/respond/caserequest/1">
-  <field schemaName="Case.ActionTaken01">
-    <value></value>
-  </field>
-  <field schemaName="Case.AdditionalComments">
-    <value></value>
-  </field>
-  <field schemaName="Case.FeedbackType">
-    <value>Corporate</value>
-  </field>
-  <field schemaName="Case.HowReceived">
-    <value>Web Form</value>
-  </field>
-  <field schemaName="Case.Description">
-    <value>I don\'t like fish.</value>
-  </field>
-  <Contacts>
-    <contact Tag="">
-      <field schemaName="Contact.Clientis">
-        <value>212f3677-b4f5-4461-b62f-fd7f4fe2bdcc</value>
-      </field>
-      <field schemaName="Contact.OtherTitle">
-        <value>Kreivi</value>
-      </field>
-      <field schemaName="Contact.FirstName">
-        <value></value>
-      </field>
-      <field schemaName="Contact.Surname">
-        <value>M&#228;nnikk&#246;lahti</value>
-      </field>
-      <field schemaName="Contact.PreferredContactMethod">
-        <value></value>
-      </field>
-      <field schemaName="Contact.Email">
-        <value></value>
-      </field>
-      <field schemaName="Contact.Mobile">
-        <value></value>
-      </field>
-      <field schemaName="Contact.Address01">
-        <value></value>
-      </field>
-      <field schemaName="Contact.Town">
-        <value></value>
-      </field>
-      <field schemaName="Contact.County">
-        <value></value>
-      </field>
-      <field schemaName="Contact.ZipCode">
-        <value></value>
-      </field>
-      <field schemaName="Contact.ContactIs">
-        <value>Other</value>
-      </field>
-    </contact>
-  </Contacts>
-</case>
-"""
 
+@override_settings(
+    RESPOND_API_USERNAME="foo",
+    RESPOND_API_PASSWORD="bar",
+    RESPOND_API_BASE_URL="https://www.example.invalid/",
+    CACHES={"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}},
+)
+class TestClient(TestCase):
     def setUp(self):
-        with open("bc/cases/backends/respond/schemata/create_case.xsd", "r") as f:
-            schema = etree.XMLSchema(etree.XML(f.read().encode("utf-8")))
-        self.parser = etree.XMLParser(schema=schema)
-
-    def test_aptean_provided_example_submission(self):
+        self.post_xml = textwrap.dedent(
+            """\
+            <?xml version="1.0" encoding="utf-8"?>
+            <case Tag="" xmlns:="http://www.aptean.com/respond/caserequest/1">
+             <field schemaName="Case.FeedbackType">
+              <value>
+               SAR
+              </value>
+             </field>
+             <field schemaName="Case.HowReceived">
+              <value>
+               Web Form
+              </value>
+             </field>
+             <field schemaName="Case.Description">
+              <value>
+               Some description
+              </value>
+             </field>
+             <Contacts>
+              <contact Tag="">
+               <field schemaName="Contact.ContactIs">
+                <value>
+                 Other
+                </value>
+               </field>
+              </contact>
+             </Contacts>
+            </case>
+        """
+        )
+        with open(pathlib.Path(__file__).parent / "fixtures/getservices.xml", "r") as f:
+            services_xml = f.read()
+        with open(pathlib.Path(__file__).parent / "fixtures/getfields.xml", "r") as f:
+            fields_xml = f.read()
         with open(
-            "bc/cases/backends/respond/schemata/example_create_case_submission.xml", "r"
+            pathlib.Path(__file__).parent / "fixtures/getcategories.xml", "r"
         ) as f:
-            etree.fromstring(f.read().encode("utf-8"), self.parser)
-
-    def test_a_known_form_submission_validates(self):
-        etree.fromstring(self.known_xml, self.parser)
-
-    def test_form_converts_to_valid_xml(self):
-        form = BaseCaseForm()
-        cleaned_data = {
-            "Contact.Clientis": "212f3677-b4f5-4461-b62f-fd7f4fe2bdcc",
-            "Case.Description": "I don't like fish.",
-            "Case.ActionTaken01": "",
-            "Case.AdditionalComments": "",
-            "Contact.OtherTitle": "Kreivi",
-            "Contact.FirstName": "",
-            "Contact.Surname": "Männikkölahti",
-            "Contact.PreferredContactMethod": "",
-            "Contact.Email": "",
-            "Contact.Mobile": "",
-            "Contact.Address01": "",
-            "Contact.Town": "",
-            "Contact.County": "",
-            "Contact.ZipCode": "",
-            "service_name": settings.RESPOND_COMPLAINTS_WEBSERVICE,
-        }
-        generated = etree.tostring(
-            form.get_xml(cleaned_data), pretty_print=True
-        ).decode()
-        self.maxDiff = None
-        self.assertEqual(generated, self.known_xml)
-
-    # FIXME this needs to work
-    @skip
-    def test_building_xml(self):
-        def element(entity_name):
-            outer_container_name, container_name = XML_ENTITY_MAPPING[entity_name]
-            outer_container = etree.Element(outer_container_name)
-            etree.SubElement(outer_container, container_name, Tag="")
-            return outer_container
-
-        entities = defaultdict(element)  # noqa
-
-    def test_appending_a_custom_field_to_the_description(self):
-        extra_field_name = APPEND_TO_DESCRIPTION + ".time_period"
-
-        class TestCaseForm(BaseCaseForm):
-            def __init__(self, *args, **kwargs):
-                super().__init__(self, *args, **kwargs)
-                self.fields = {
-                    DESCRIPTION_SCHEMA_NAME: forms.CharField(label="Description"),
-                    extra_field_name: forms.CharField(
-                        label="Extra field to be appended"
-                    ),
-                }
-
-        form = TestCaseForm()
-
-        cleaned_data = {
-            DESCRIPTION_SCHEMA_NAME: "Some description",
-            extra_field_name: "Two weeks last Sunday",
-            "service_name": settings.RESPOND_SAR_WEBSERVICE,
-        }
-        soup = BeautifulSoup(etree.tostring(form.get_xml(cleaned_data)), "lxml")
-        self.assertEqual(
-            soup.find(schemaname=DESCRIPTION_SCHEMA_NAME).text,
-            textwrap.dedent(
-                """\
-                Some description
-
-                Extra field to be appended:
-                Two weeks last Sunday"""
+            categories_xml = f.read()
+        self.get_services_response_params = (
+            (
+                responses.GET,
+                settings.RESPOND_API_BASE_URL + "metadata.svc/getservices",
+                services_xml,
             ),
+            {"status": 200, "content_type": "text/xml"},
         )
-
-    def test_appending_two_custom_fields_to_the_description(self):
-        extra_field_one = APPEND_TO_DESCRIPTION + ".context"
-        extra_field_two = APPEND_TO_DESCRIPTION + ".song"
-
-        class TestCaseForm(BaseCaseForm):
-            def __init__(self, *args, **kwargs):
-                super().__init__(self, *args, **kwargs)
-                self.fields = {
-                    DESCRIPTION_SCHEMA_NAME: forms.CharField(label="Description"),
-                    extra_field_one: forms.CharField(label="First extra field"),
-                    extra_field_two: forms.CharField(label="Second extra field"),
-                }
-
-        form = TestCaseForm()
-
-        cleaned_data = {
-            DESCRIPTION_SCHEMA_NAME: "Some description",
-            extra_field_one: "Synthetic past",
-            extra_field_two: "Spider bite",
-            "service_name": settings.RESPOND_SAR_WEBSERVICE,
-        }
-        soup = BeautifulSoup(etree.tostring(form.get_xml(cleaned_data)), "lxml")
-        self.assertEqual(
-            soup.find(schemaname=DESCRIPTION_SCHEMA_NAME).text,
-            textwrap.dedent(
-                """\
-                Some description
-
-                First extra field:
-                Synthetic past
-
-                Second extra field:
-                Spider bite"""
+        self.get_fields_complaints_response_params = (
+            (
+                responses.GET,
+                settings.RESPOND_API_BASE_URL
+                + "metadata.svc/Fields/TestGetFieldsComplaints",
+                fields_xml,
             ),
+            {"status": 200, "content_type": "text/xml"},
         )
+        self.get_category_complaints_response_params = (
+            (
+                responses.GET,
+                settings.RESPOND_API_BASE_URL
+                + "metadata.svc/Categories/TestGetCategoryComplaints",
+                categories_xml,
+            ),
+            {"status": 200, "content_type": "text/xml"},
+        )
+        self.all_response_params = [
+            self.get_services_response_params,
+            self.get_fields_complaints_response_params,
+            self.get_category_complaints_response_params,
+        ]
+
+    def get_client(
+        self, responses_context_manager, response_params, force_refresh=True
+    ):
+        for args, kwargs in response_params:
+            responses_context_manager.add(*args, **kwargs)
+        return get_client(force_refresh)
+
+    def test_creating_client(self):
+        try:
+            with responses.RequestsMock() as rsps:
+                self.get_client(rsps, self.all_response_params)
+        except Exception:
+            self.fail("Creating test client failed unexpectedly")
+
+    def test_creating_client_again_uses_existing_client(self):
+        with responses.RequestsMock(assert_all_requests_are_fired=False) as rsps:
+            self.get_client(rsps, self.all_response_params)
+            self.assertEqual(len(rsps.calls), 3)
+            self.get_client(rsps, self.all_response_params, force_refresh=False)
+            self.assertEqual(len(rsps.calls), 3)  # NB unchanged
+
+    def test_creating_client_registers_create_case_services(self):
+        with responses.RequestsMock() as rsps:
+            client = self.get_client(rsps, self.all_response_params)
+        with override_settings(
+            RESPOND_COMPLAINTS_WEBSERVICE="TestCreateComplaints",
+            RESPOND_FOI_WEBSERVICE="TestCreateFOI",
+            RESPOND_SAR_WEBSERVICE="TestCreateSAR",
+            RESPOND_COMMENTS_WEBSERVICE="TestCreateComments",
+            RESPOND_COMPLIMENTS_WEBSERVICE="TestCreateCompliments",
+            RESPOND_DISCLOSURES_WEBSERVICE="TestCreateDisclosures",
+        ):
+            for key in CREATE_CASE_SERVICES.keys():
+                self.assertIn(key, client.services[CREATE_CASE_TYPE])
+
+    def test_exceptions_on_submission(self):
+        response_params = [
+            self.get_services_response_params,
+            self.get_fields_complaints_response_params,
+            self.get_category_complaints_response_params,
+            (
+                (
+                    responses.POST,
+                    settings.RESPOND_API_BASE_URL + "case.svc/TestCreateComplaints",
+                ),
+                {"body": requests.RequestException()},
+            ),
+        ]
+        with responses.RequestsMock() as rsps:
+            client = self.get_client(rsps, response_params)
+            with self.assertRaises(RespondClientException):
+                client.create_case("TestCreateComplaints", self.post_xml)

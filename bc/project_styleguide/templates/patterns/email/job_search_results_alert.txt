@@ -1,8 +1,11 @@
-Your search for "{{ search_term }}" has {{ results|length }} new match{{ results|pluralize:"es" }}.
+Your search
+
+{% include "patterns/email/search_criteria.txt" with search_criteria=search_criteria %}
+
+has {{ results|length }} new match{{ results|pluralize:"es" }}.
 {% for result in results %}
 {{ forloop.counter }}. [{{ result.title }}]({{ result.url }})
   {{ result.short_description }}
 {% endfor %}
 ---
 You can unsubscribe from this alert at {{ unsubscribe_url }}.
-<a href="something">test</a>

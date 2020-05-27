@@ -1,0 +1,5 @@
+context:
+  type: confirmation
+  title: Application complete
+  body: Your reference number
+  ref: CDR - 01112

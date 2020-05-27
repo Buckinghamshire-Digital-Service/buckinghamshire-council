@@ -30,8 +30,9 @@
 
         #{$root}__icon {
             height: 30px;
-            margin-right: 0;
-            width: 30px;
+            margin-right: $grid--min;
+            stroke-width: 4;
+            width: 15px;
         }
 
         #{$root}__header {
@@ -44,10 +45,10 @@
         }
 
         #{$root}__content {
-            border-left: 5px solid $color--grey-border;
+            border-left: 4px solid $color--grey-border;
             margin-bottom: 0;
             margin-left: 5px;
-            padding: 10px $grid--small;
+            padding: 10px 15px 10px 16px;
             margin-top: 10px;
         }
     }
@@ -72,6 +73,7 @@
 
         &--search-filters {
             @include font-size(s);
+            flex-wrap: wrap;
             left: 1px;
             position: relative;
             color: $color--charcoal;
@@ -96,33 +98,41 @@
     }
 
     &__title--area-search {
+        border-top: 1px solid $color--grey-border;
         color: $color--river;
+        padding-top: $grid--small;
         position: relative;
-        padding-left: 40px;
-        left: -6px;
     }
 
     &__icon {
-        width: 35px;
         height: 35px;
         margin-right: $grid--small;
         transition: transform, stroke, 0.2s ease;
         stroke: $color--lake;
+        stroke-width: 4;
         transform: rotate(-90deg);
+        width: 17px;
 
         &--search-filter {
             stroke: $color--charcoal;
-            width: 22px;
-            height: 22px;
+            stroke-width: 3;
+            width: 18px;
+            height: 20px;
             margin-bottom: 5px;
-            margin-right: 22px;
+            margin-right: 8px;
         }
+    }
+
+    &__icon--area-search {
+        stroke: $color--river;
+        width: 20px;
+        margin-left: 8px;
     }
 
     &__content {
         display: none;
-        margin-bottom: 15px;
-        margin-left: 35px + $grid--small;
+        margin-bottom: 10px;
+        margin-left: 20px + 17px; // icon's right margin + icon width
         margin-top: 15px;
 
         &--search-filters {
