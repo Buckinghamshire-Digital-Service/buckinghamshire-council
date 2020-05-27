@@ -19,7 +19,6 @@
 {% endblock %}
 
 {% block footer %}
-    {% comment %} {% include "patterns/molecules/subscribe/subscribe.html" %} {% endcomment %}
-
+    {% include "patterns/molecules/subscribe/subscribe.html" with heading='Sign up for our e-newsletter' text='Get the latest news about council services, consultations, projects and events in your area.' button_text='Subscribe' button_link='https://r1.dotdigital-pages.com/p/5438-2JW/newsletter' %}
     {{ block.super }}
 {% endblock %}

@@ -1,5 +1,6 @@
 context:
-  value:
-    heading: Stay up to date
-    text: Get the latest updates about your council services, including school closures and local development plans.
-    button_text: Subscribe
+  form: false
+  heading: Stay up to date
+  text: Get the latest updates about your council services, including school closures and local development plans.
+  button_text: Subscribe
+  button_link: https://r1.dotdigital-pages.com/p/5438-2JW/newsletter
