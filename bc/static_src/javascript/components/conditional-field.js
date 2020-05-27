@@ -12,14 +12,18 @@ class ConditionalField {
             '[data-conditional-input]',
         );
 
+        this.checkValidation();
         this.bindEvents();
+    }
 
-        // run once on page load
-        this.conditional
-            .querySelectorAll('[data-conditional-input]:checked')
-            .forEach((item) => {
-                this.handleInput(item);
-            });
+    checkValidation(){
+        this.allConditionalFields.forEach((item) => {
+            if (item.querySelector('.form-item--errors')){
+                item.classList.add('is-checked');
+                item.setAttribute('aria-expanded', 'true');
+                item.setAttribute('aria-hidden', 'false');
+            }
+        });
     }
 
     handleInput(item) {
