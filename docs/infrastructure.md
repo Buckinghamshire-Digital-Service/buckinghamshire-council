@@ -55,11 +55,10 @@ Steps for resetting the `staging` git branch, and deploying it with a clone of t
    Take note if any of the above are stale, not needing to be recreated.
 
 1. Are there any user accounts on staging only, which will need to be recreated? Check with the client, and record them.
-1. Take a backup of production
+1. Take a backup of staging
    ```bash
-   $ heroku pg:backups:capture -a buckinghamshire-production
+   $ heroku pg:backups:capture -a buckinghamshire-staging
    ```
-1. And staging `$ heroku pg:backups:capture -a buckinghamshire-staging`
 
 ### Git
 
@@ -84,14 +83,20 @@ Steps for resetting the `staging` git branch, and deploying it with a clone of t
 
 ### Database
 
-1. Duplicate the database from production to staging:
+1. List production database backups:
    ```bash
-   $ heroku pg:copy buckinghamshire-production::DATABASE_URL DATABASE_URL -a buckinghamshire-staging
+   $ heroku pg:backups -a buckinghamshire-production
+   ```
+1. Get a signed S3 URL of your chosen backup:
+   ```bash
+   $ heroku pg:backups:url {backup-name} -a buckinghamshire-production
+   ```
+1. Upload to staging:
+   ```bash
+   $ heroku pg:backups:restore {backup-url} DATABASE_URL -a buckinghamshire-staging
    ```
    This is a destructive action. Proofread it thoroughly.
 1. Delete any personally-identifying data from staging. See [Data protection](data-protection.md) for instructions.
-
-TODO: these steps do not currently use the Heroku backup from production; it would be better to.
 
 ### Media
 
