@@ -63,14 +63,9 @@ Steps for resetting the `staging` git branch, and deploying it with a clone of t
 
 ### Git
 
-1. Reset the branch
+1. Reset the staging branch
    ```bash
-   $ git checkout master
-   $ git pull
-   $ git branch -D staging
-   $ git push origin :staging
-   $ git checkout -b staging
-   $ git push --force --set-upstream origin staging
+   $ git checkout staging && git fetch && git reset --hard origin/master && git push --force
    ```
 1. Tell your colleagues
    > @here I have reset the staging branch. Please delete your local staging branches
