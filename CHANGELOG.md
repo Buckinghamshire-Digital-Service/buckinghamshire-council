@@ -5,6 +5,7 @@
 - Fix job alert emails
 - Permit subdomain sites to have different base templates, depending on homepage type
 - Sign up to council newsletter(s) from the homepage
+- Update documentation about personally-identifying data
 
 ## 17.0 (2020-05-21)
 
