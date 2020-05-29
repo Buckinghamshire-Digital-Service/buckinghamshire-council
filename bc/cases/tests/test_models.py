@@ -35,7 +35,7 @@ class CaseFormPageTest(TestCase):
         response_xml = textwrap.dedent(
             """\
             <?xml version="1.0" encoding="utf-8"?> <caseResponse version="2" xmlns:="http://www.aptean.com/respond/caseresponse/2">
-            <case Id="01fc3664f6194732a37f61222cca21bd" Name="DIS - 10028 Response Xml Test," Tag="">
+            <case Id="01fc3664f6194732a37f61222cca21bd" Name="DIS 10028 - Last Name,  First Name" Tag="">
               <field name="Feedback Type &amp; Reference Number" schemaName="Case.FeedbackTypeReferenceNumber" type="ShortText">
                 <value>DIS 10028</value>
               </field>
