@@ -749,7 +749,7 @@ COOKIE_DOMAIN = env.get("COOKIE_DOMAIN", "")
 
 
 # GOV.UK Notify service
-EMAIL_BACKEND = "bc.utils.email.NotifyEmailBackend"
+EMAIL_BACKEND = "django_gov_notify.backends.NotifyEmailBackend"
 GOVUK_NOTIFY_API_KEY = env.get("GOVUK_NOTIFY_API_KEY")
 GOVUK_NOTIFY_PLAIN_EMAIL_TEMPLATE_ID = env.get("GOVUK_NOTIFY_PLAIN_EMAIL_TEMPLATE_ID")
 

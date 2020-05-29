@@ -7,7 +7,7 @@ django-pattern-library==0.2.5
 bleach==3.1.0
 factory-boy==2.12.0
 freezegun==0.3.14
-notifications-python-client==5.7.1
+django_gov_notify==0.3.0
 responses==0.10.9
 tabulate==0.8.7
 wagtail-factories==2.0.0
