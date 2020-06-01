@@ -7,6 +7,14 @@
 
 {% block body_class %}template-404{% endblock %}
 
+{% block breadcrumbs %}{% endblock %}
+
 {% block content %}
-    {{ settings.utils.SystemMessagesSettings.body_404|richtext }}
+
+    <div class="wrapper wrapper--flex">
+        <section class="section section--main">
+            {{ settings.utils.SystemMessagesSettings.body_404|richtext }}
+        </section>
+    </div>
+
 {% endblock %}
