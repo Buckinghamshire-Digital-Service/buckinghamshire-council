@@ -1,9 +1,8 @@
 .cookie {
     $root: &;
-    padding: $grid--min $grid--small;
     position: relative;
     z-index: 13;
-    display: none; // Doesn't display unless there isn't a cookie
+    display: block; // Doesn't display unless there isn't a cookie
     width: 100%;
     transition: transform $transition 0s;
 
@@ -18,7 +17,7 @@
 
     &__container {
         @include font-size(xs);
-        padding: $grid--small;
+        padding: $grid 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
