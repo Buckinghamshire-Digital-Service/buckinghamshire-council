@@ -1,7 +1,4 @@
 .breadcrumb {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
     width: 100%;
     margin: $grid 0;
     grid-area: breadcrumbs;
@@ -21,12 +18,16 @@
     }
 
     &__item {
+        display: inline-block;
         width: auto;
+        vertical-align: middle;
 
         &::after {
             content: '/';
             color: $color--earth;
+            display: inline-block;
             margin: 0 8px;
+            vertical-align: middle;
         }
 
         &:last-child {
