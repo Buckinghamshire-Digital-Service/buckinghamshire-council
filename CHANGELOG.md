@@ -7,6 +7,7 @@
 - Sign up to council newsletter(s) from the homepage
 - Update documentation about personally-identifying data
 - Add documentation about the procedure for resetting the staging branch/server/db
+- Make the job application page return 404 status for bad IDs
 
 ## 17.0 (2020-05-21)
 

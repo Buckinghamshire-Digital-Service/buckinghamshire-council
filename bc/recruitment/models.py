@@ -338,12 +338,15 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
 
     @route(r"^apply/$")
     def apply(self, request):
-        job_id = request.GET.get("jobId")
-        if job_id and "-" in job_id:
-            talentlink_id = job_id.split("-")[1]
-            page = get_object_or_404(TalentLinkJob, talentlink_id=talentlink_id)
-        else:
-            raise Http404("Missing job details")
+        try:
+            job_id = request.GET.get("jobId")
+            if job_id and "-" in job_id:
+                talentlink_id = job_id.split("-")[1]
+                page = get_object_or_404(TalentLinkJob, talentlink_id=talentlink_id)
+            else:
+                raise Http404("Missing job details")
+        except ValueError:
+            raise Http404("Could not details")
         return render(
             request,
             "patterns/pages/jobs/apply.html",

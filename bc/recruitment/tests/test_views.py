@@ -99,6 +99,7 @@ class TestApplyConfigKey(TestCase):
             "abc",
             1,
             "abc-123",
+            "QQPFK026203F3VBQBV7V779XA-175679'A=0",  # a seen SQL injection attack
         ]:
             with self.subTest(job_id=job_id):
                 resp = self.client.get(
