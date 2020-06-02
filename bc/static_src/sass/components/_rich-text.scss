@@ -71,14 +71,16 @@
         @include font-size(s);
     }
 
-    h2 {
+    h2,
+    .heading--m {
         @include font-size(m);
         margin-bottom: $grid--min;
         margin-top: $grid--medium;
         font-weight: $weight--bold;
     }
 
-    h3 {
+    h3,
+    .heading--s {
         @include font-size(s);
         margin-bottom: $grid--min;
         margin-top: $grid--small * 1.75;
