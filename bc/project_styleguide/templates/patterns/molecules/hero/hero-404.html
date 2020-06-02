@@ -1,6 +1,6 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
-<div class="hero hero--404" style="background-image: url('https://buckinghamshire-gov-uk.s3.amazonaws.com/images/bcc-hero-windmill.original.min-1600x350.jpg');">
+<div class="hero hero--404" style="background-image: url('{% static 'images/bcc-hero-windmill.jpg' %}');">
     <div class="wrapper wrapper--large">
         <h1 class="hero__strapline heading heading--xxxl">{{ settings.utils.SystemMessagesSettings.title_404 }}</h1>
     </div>

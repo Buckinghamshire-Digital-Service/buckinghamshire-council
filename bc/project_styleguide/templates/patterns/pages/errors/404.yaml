@@ -1,6 +1,0 @@
-context:
-  settings:
-    utils:
-      SystemMessagesSettings:
-        title_404: Oops, sorry this page is missing
-        body_404: <p>You may be seeing this because:</p><ul><li>this page has been moved or re-named</li><li>this page has been deleted</li><li>this page is temporarily unavailable</li></ul><p>Please try <a href="/search">searching</a> or check our <a href="/">homepage</a> instead to find what you're after.</p>
