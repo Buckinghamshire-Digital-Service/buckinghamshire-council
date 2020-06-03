@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Upgrade Django to 2.2.13
 - Fix job alert emails
 - Permit subdomain sites to have different base templates, depending on homepage type
 - Sign up to council newsletter(s) from the homepage
