@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Upgrade Wagtail to 2.8.1
+- Upgrade Wagtail to 2.9
 - Fix job alert emails
 - Permit subdomain sites to have different base templates, depending on homepage type
 - Sign up to council newsletter(s) from the homepage
