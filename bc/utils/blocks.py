@@ -137,13 +137,11 @@ class NestedStoryBlock(BaseStoryBlock):
         # Bump down template for heading fields so headings don't clash with those outside the accordion
         self.child_blocks[
             "heading"
-        ].meta.template = (
-            "patterns/molecules/streamfield/blocks/subsubheading_block.html"
-        )
+        ].meta.template = "patterns/molecules/streamfield/blocks/subheading_block.html"
         self.child_blocks[
             "subheading"
         ].meta.template = (
-            "patterns/molecules/streamfield/blocks/subsubsubheading_block.html"
+            "patterns/molecules/streamfield/blocks/subsubheading_block.html"
         )
 
 
