@@ -9,9 +9,6 @@ from bc.recruitment.tests.fixtures import (
     TalentLinkJobFactory,
 )
 
-# Job category title to match dummy Job Group in get_advertisement() fixture
-FIXTURE_JOB_SUBCATEGORY_TITLE = "Schools & Early Years - Support"
-
 
 class SalaryFiltersTest(TestCase):
     salary_filter_index = 4  # just to DRY the changes if the filters ever change
