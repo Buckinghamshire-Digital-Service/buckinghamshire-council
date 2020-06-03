@@ -9,7 +9,7 @@ JOB_FILTERS = [
     },
     {"name": "contract", "filter_key": "contract_type"},
     {"name": "working_hours", "filter_key": "working_hours"},
-    {"name": "salary_range", "filter_key": "salary_range"},
+    {"name": "searchable_salary", "filter_key": "searchable_salary"},
 ]
 
 JOB_BOARD_DEFAULT = "external"
