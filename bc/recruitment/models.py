@@ -346,7 +346,8 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
             else:
                 raise Http404("Missing job details")
         except ValueError:
-            raise Http404("Could not details")
+            # This is raised if casting the job_id to an int fails in the query
+            raise Http404("Could not determine job details from URL")
         return render(
             request,
             "patterns/pages/jobs/apply.html",
