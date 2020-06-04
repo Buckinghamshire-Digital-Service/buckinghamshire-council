@@ -4,17 +4,22 @@ import ReactDOM from 'react-dom';
 import TestReact from './components/TestReact';
 import MobileMenu from './components/mobile-menu';
 import MobileSubMenu from './components/mobile-sub-menu';
-// import CookieWarning from './components/cookie-message';
+import CookieWarning from './components/cookie-message';
 import Accordion from './components/accordion';
 import AreaSearchForm from './components/area-search-form';
 import Carousel from './components/carousel';
 import ProgressBar from './components/progress-bar';
 import VideoModal from './components/video-modal';
 import FormSubmit from './components/form-submit';
+import Filters from './components/job-filters';
 
+// Add polyfill fix for forEach carousel
+import foreachPolyfill from './polyfills/foreach-polyfill';
 import 'whatwg-fetch';
 
 import '../sass/main.scss';
+
+foreachPolyfill();
 
 // Open the mobile menu callback
 function openMobileMenu() {
@@ -30,8 +35,8 @@ function closeMobileMenu() {
 
 document.addEventListener('DOMContentLoaded', () => {
     /* eslint-disable no-restricted-syntax, no-new */
-    // const cookie = document.querySelector(CookieWarning.selector());
-    // new CookieWarning(cookie);
+    const cookie = document.querySelector(CookieWarning.selector());
+    new CookieWarning(cookie);
 
     for (const accordion of document.querySelectorAll(Accordion.selector())) {
         new Accordion(accordion);
@@ -49,6 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (const formsubmit of document.querySelectorAll(FormSubmit.selector())) {
         new FormSubmit(formsubmit);
+    }
+
+    for (const filters of document.querySelectorAll(Filters.selector())) {
+        new Filters(filters);
     }
 
     for (const mobilemenu of document.querySelectorAll(MobileMenu.selector())) {

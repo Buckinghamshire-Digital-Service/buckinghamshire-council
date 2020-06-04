@@ -77,8 +77,8 @@ class TransportTest(TestCase):
 
 @override_settings(
     TALENTLINK_API_KEY="spam_key",
-    TALENTLINK_EXTERNAL_API_USERNAME="eggs_username:ham:FO",
-    TALENTLINK_INTERNAL_API_USERNAME="eggs_username:ham:FO",
+    TALENTLINK_API_USERNAME_EXTERNAL="eggs_username:ham:FO",
+    TALENTLINK_API_USERNAME_INTERNAL="eggs_username:ham:FO",
     TALENTLINK_API_PASSWORD="sausage",
     TALENTLINK_API_WSDL="https://some.api.example.com/?WSDL",
 )

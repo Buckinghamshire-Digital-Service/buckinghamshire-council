@@ -74,6 +74,10 @@ class TalentLinkJobFactory(factory.django.DjangoModelFactory):
         "date_time_this_month", tzinfo=datetime.timezone.utc
     )
 
+    @factory.lazy_attribute
+    def application_url_query(self):
+        return f"jobId=ABCDEFG-{self.talentlink_id}&langCode=en_GB"
+
 
 class JobAlertSubscriptionFactory(factory.django.DjangoModelFactory):
     class Meta:

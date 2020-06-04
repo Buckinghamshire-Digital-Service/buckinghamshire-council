@@ -135,7 +135,7 @@ class SearchView(View):
                 subscription.full_clean()
                 subscription.save()
 
-            subscription.send_confirmation_email(request)
+            subscription.send_confirmation_email()
             context.update(
                 {
                     "title": "Thank you",

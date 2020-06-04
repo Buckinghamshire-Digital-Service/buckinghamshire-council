@@ -2,20 +2,57 @@
 
 ## Unreleased
 
+- Upgrade Django to 2.2.13
+- Fix job alert emails
+- Permit subdomain sites to have different base templates, depending on homepage type
+- Sign up to council newsletter(s) from the homepage
+- Update documentation about personally-identifying data
+- Add documentation about the procedure for resetting the staging branch/server/db
+- Make the job application page return 404 status for bad IDs
 - Update job search salary filter to use searchable salary instead of salary range
+
+## 17.0 (2020-05-21)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/16.1...17.0
+
+- Change GitLab HTML syntax highlighter
+- Accessibility 37 Improve aria role of alert panel
+- Accessibility 53 Hide footer links landmark if there are none
+- Accessibility 55 Email alert subscription form improvements
+- Accessibility 56 Remove extra role="search" form from header on search page
+- Accessibility 57 Label complementary landmarks
+- Accessibility 61 Remove alt text for decorative images
+
+## 16.1 (2020-05-20)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/16.0...16.1
+
+- Enable a job board-dependent template variable for the application page. This
+  fixes internal job applications.
+- Fix an error when job application URL query is badly formatted
+
+## 16.0 (2020-05-07)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/15.1...16.0
+
 - Fix for employer logo sizes (FE)
+- Add active checkbox counter & reset filters button for job search (FE)
+- Progressive accordion styling update (including postcode search fix)
 - Accessibility 14 Increase contrast of Highlighted Content heading
 - Accessibility 16 Fix Jobs filter fieldset legends
 - Accessibility 18 Page content should be in a landmark
 - Accessibility 19 Remove nesting for landmarks
 - Accessibility 44 & 75 Pagination improvements
-- Accessibility 61 Hide "Find out more" for screen reader users (Jobs benefits)
+- Accessibility 58 Add screen-reader-only text to filters’ item count
+- Accessibility 60 Fix typo in location field placeholder
+- Accessibility 62 Hide "Find out more" for screen reader users (Jobs benefits)
 
 ## 15.1 (2020-05-01)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/15.0...15.1
 
 - Fix for breadcrumbs
+- Update cookie notice
 
 ## 15.0 (2020-05-01)
 
