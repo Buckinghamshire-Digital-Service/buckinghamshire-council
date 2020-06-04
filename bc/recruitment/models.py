@@ -338,12 +338,16 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
 
     @route(r"^apply/$")
     def apply(self, request):
-        job_id = request.GET.get("jobId")
-        if job_id and "-" in job_id:
-            talentlink_id = job_id.split("-")[1]
-            page = get_object_or_404(TalentLinkJob, talentlink_id=talentlink_id)
-        else:
-            raise Http404("Missing job details")
+        try:
+            job_id = request.GET.get("jobId")
+            if job_id and "-" in job_id:
+                talentlink_id = job_id.split("-")[1]
+                page = get_object_or_404(TalentLinkJob, talentlink_id=talentlink_id)
+            else:
+                raise Http404("Missing job details")
+        except ValueError:
+            # This is raised if casting the job_id to an int fails in the query
+            raise Http404("Could not determine job details from URL")
         return render(
             request,
             "patterns/pages/jobs/apply.html",
@@ -394,6 +398,21 @@ class JobAlertSubscription(models.Model):
     token = models.CharField(max_length=255, unique=True, editable=False)
 
     @cached_property
+    def prettified_search(self):
+        search_params = json.loads(self.search)
+        # Rename the key, 'query' to something nicer
+        if "query" in search_params:
+            search_params["search term"] = search_params.pop("query")
+        # Replace category slugs with category titles
+        if "category" in search_params:
+            search_params["category"] = list(
+                JobCategory.objects.filter(
+                    slug__in=search_params["category"]
+                ).values_list("title", flat=True)
+            )
+        return search_params
+
+    @cached_property
     def site_url(self):
         return self.homepage.url.rstrip("/")
 
@@ -413,13 +432,16 @@ class JobAlertSubscription(models.Model):
 
         super().full_clean(*args, **kwargs)
 
-    def send_confirmation_email(self, request):
-        template_name = "patterns/email/confirm_job_alert.txt"
+    def get_email_context(self):
         context = {}
-        context["search"] = json.loads(self.search)
-        context["confirmation_url"] = request.build_absolute_uri(self.confirmation_url)
-        context["unsubscribe_url"] = request.build_absolute_uri(self.unsubscribe_url)
+        context["search_criteria"] = self.prettified_search
+        context["confirmation_url"] = self.site_url + self.confirmation_url
+        context["unsubscribe_url"] = self.site_url + self.unsubscribe_url
+        return context
 
+    def send_confirmation_email(self):
+        template_name = "patterns/email/confirm_job_alert.txt"
+        context = self.get_email_context()
         content = render_to_string(template_name, context=context)
         email = NotifyEmailMessage(
             subject="Job alert subscription", body=content, to=[self.email]

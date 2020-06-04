@@ -1,5 +1,20 @@
 # Release History
 
+## 18.0 (2020-06-04)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/17.0...18.0
+
+- Upgrade Django to 2.2.13
+- Permit subdomain sites to have different base templates, depending on homepage type
+- Sign up to council newsletter(s) from the homepage
+- Update cookie notice
+- Fix job alert emails
+- Make the job application page return 404 status for bad IDs
+- Update job search salary filter to use searchable salary instead of salary range
+- Add documentation about CI deployments
+- Update documentation about personally-identifying data
+- Add documentation about the procedure for resetting the staging branch/server/db
+
 ## 17.0 (2020-05-21)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/16.1...17.0
