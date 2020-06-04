@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Fix for breadcrumbs
+- Update cookie notice
 
 ## 15.0 (2020-05-01)
 
