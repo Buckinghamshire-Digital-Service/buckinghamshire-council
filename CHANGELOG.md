@@ -51,6 +51,7 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/15.1...16.0
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/15.0...15.1
 
 - Fix for breadcrumbs
+- Update cookie notice
 
 ## 15.0 (2020-05-01)
 
