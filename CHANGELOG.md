@@ -9,6 +9,7 @@
 - Update documentation about personally-identifying data
 - Add documentation about the procedure for resetting the staging branch/server/db
 - Make the job application page return 404 status for bad IDs
+- Update job search salary filter to use searchable salary instead of salary range
 
 ## 17.0 (2020-05-21)
 
