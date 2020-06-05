@@ -5,7 +5,7 @@ from unittest import mock
 
 from django.core.management import call_command
 from django.http import QueryDict
-from django.test import RequestFactory, TestCase
+from django.test import RequestFactory, TestCase, override_settings
 
 from wagtail.core.models import Page, Site
 
@@ -78,6 +78,9 @@ class JobAlertTest(TestCase):
             new_alert.token, previous_token, msg="Token should be unique."
         )
 
+    @override_settings(
+        ALLOWED_HOSTS=["jobs.example", "internal-jobs.example", "main.example"]
+    )
     def test_utils_is_recruitment_site(self):
         factory = RequestFactory()
 
