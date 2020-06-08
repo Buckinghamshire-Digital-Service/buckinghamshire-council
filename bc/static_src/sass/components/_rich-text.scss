@@ -69,6 +69,7 @@
 
     p {
         @include font-size(s);
+        line-height: 1.35;
     }
 
     h2 {
