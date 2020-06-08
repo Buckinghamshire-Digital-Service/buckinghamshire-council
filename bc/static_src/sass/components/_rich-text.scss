@@ -72,14 +72,22 @@
     }
 
     h2,
-    .heading--m {
-        @include font-size(m);
+    .heading--l {
+        @include font-size(l);
         margin-bottom: $grid--min;
         margin-top: $grid--medium;
         font-weight: $weight--bold;
     }
 
     h3,
+    .heading--m {
+        @include font-size(m);
+        margin-bottom: $grid--min;
+        margin-top: $grid--small * 1.75;
+        font-weight: $weight--bold;
+    }
+
+    h4,
     .heading--s {
         @include font-size(s);
         margin-bottom: $grid--min;

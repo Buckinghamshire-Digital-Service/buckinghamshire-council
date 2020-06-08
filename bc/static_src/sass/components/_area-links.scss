@@ -24,6 +24,7 @@
     }
 
     &__heading {
+        @include font-size(s);
         margin-bottom: 5px;
     }
 
