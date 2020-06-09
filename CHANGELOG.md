@@ -7,6 +7,7 @@
 - Sign up to council newsletter(s) from the homepage
 - Update documentation about personally-identifying data
 - Add documentation about the procedure for resetting the staging branch/server/db
+- Fix search results font sizes / styling
 
 ## 17.0 (2020-05-21)
 
