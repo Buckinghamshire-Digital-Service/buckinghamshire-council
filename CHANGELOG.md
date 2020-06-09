@@ -7,6 +7,7 @@
 - Sign up to council newsletter(s) from the homepage
 - Update documentation about personally-identifying data
 - Add documentation about the procedure for resetting the staging branch/server/db
+- Adjust margins before / after buttons and other elements
 
 ## 17.0 (2020-05-21)
 
