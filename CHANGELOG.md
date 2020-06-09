@@ -5,6 +5,7 @@
 - 404 page
 - Fix search results font sizes / styling
 - Styling of label text on checkboxes and radio buttons
+- Remove current page from breadcrumbs
 
 ## 18.0 (2020-06-04)
 
