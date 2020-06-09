@@ -49,7 +49,6 @@ h6,
 html,
 .body-text {
     @include body-text();
-    line-height: 1.35;
 }
 
 blockquote {
