@@ -15,6 +15,8 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/17.0...18.0
 - Update documentation about personally-identifying data
 - Add documentation about the procedure for resetting the staging branch/server/db
 
+- 404 page
+
 ## 17.0 (2020-05-21)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/16.1...17.0
