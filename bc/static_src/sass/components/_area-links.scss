@@ -5,6 +5,16 @@
     background: $color--grey-light;
     border-left: $border--accent $color--leaf;
 
+    &__intro {
+        .search-result & {
+            .rich-text {
+                * {
+                    font-size: $base-font-size;
+                }
+            }
+        }
+    }
+
     &__list {
         margin: $grid--small 0;
 
@@ -24,7 +34,12 @@
     }
 
     &__heading {
+        @include font-size(s);
         margin-bottom: 5px;
+
+        .search-result & {
+            @include font-size(xs);
+        }
     }
 
     &__warning {
