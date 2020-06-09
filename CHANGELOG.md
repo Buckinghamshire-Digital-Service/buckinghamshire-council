@@ -3,6 +3,7 @@
 ## Unreleased
 
 - 404 page
+- Fix search results font sizes / styling
 
 ## 18.0 (2020-06-04)
 
@@ -18,7 +19,6 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/17.0...18.0
 - Add documentation about CI deployments
 - Update documentation about personally-identifying data
 - Add documentation about the procedure for resetting the staging branch/server/db
-- Fix search results font sizes / styling
 
 ## 17.0 (2020-05-21)
 
