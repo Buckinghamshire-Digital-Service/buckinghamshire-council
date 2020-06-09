@@ -4,6 +4,7 @@
 
 - 404 page
 - Fix search results font sizes / styling
+- Styling of label text on checkboxes and radio buttons
 
 ## 18.0 (2020-06-04)
 
@@ -19,7 +20,6 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/17.0...18.0
 - Add documentation about CI deployments
 - Update documentation about personally-identifying data
 - Add documentation about the procedure for resetting the staging branch/server/db
-- Styling of label text on checkboxes and radio buttons
 
 ## 17.0 (2020-05-21)
 
