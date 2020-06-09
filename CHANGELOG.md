@@ -3,9 +3,10 @@
 ## Unreleased
 
 - 404 page
-- Fix search results font sizes / styling
 - Styling of label text on checkboxes and radio buttons
 - Remove current page from breadcrumbs
+- Fix search results font sizes / styling
+- Fix incorrect heading levels for body text headings and subheadings
 
 ## 18.0 (2020-06-04)
 
