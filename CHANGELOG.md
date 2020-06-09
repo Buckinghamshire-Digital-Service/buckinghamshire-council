@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- Mobile-friendly tables
+
 ## 18.0 (2020-06-04)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/17.0...18.0
