@@ -184,7 +184,7 @@ class FOIForm(BaseCaseForm):
         # organisation is required if contact is secondary
         if your_involvement == CONTACT_TYPE_SECONDARY and not organisation:
             # Only do something if both fields are valid so far.
-            self.add_error("organisation", "This field is required")
+            self.add_error("organisation", "Enter the name of the organisation")
         return cleaned_data
 
 
@@ -276,9 +276,13 @@ class SARForm(BaseCaseForm):
 
         if buckinghamshire_council_employee == self.YES:
             # employment details are required
-            for field_name in ["employee_id", "employment_dates"]:
+            for field_name in ["employee_id"]:
                 if not cleaned_data.get(field_name):
-                    self.add_error(field_name, "This field is required")
+                    self.add_error(field_name, "Enter your employee number")
+
+            for field_name in ["employment_dates"]:
+                if not cleaned_data.get(field_name):
+                    self.add_error(field_name, "Enter your employment dates")
 
         day = cleaned_data.get("dob_day")
         month = cleaned_data.get("dob_month")
@@ -287,10 +291,10 @@ class SARForm(BaseCaseForm):
             try:
                 dob = datetime.date(year, month, day)
             except ValueError:
-                self.add_error(None, "Please enter a valid date")
+                self.add_error(None, "Enter a valid date")
             else:
                 if dob > now().date():
-                    self.add_error(None, "Please enter a date in the past")
+                    self.add_error(None, "Enter a date in the past")
                 else:
                     cleaned_data["dob"] = dob
 
