@@ -1,11 +1,14 @@
 # Release History
 
-## Unreleased
+## 19.0 (2020-06-11)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/18.0...19.0
 
 - Upgrade Wagtail to 2.9
 - 404 page
 - Styling of label text on checkboxes and radio buttons
 - Remove current page from breadcrumbs
+- Adjust margins before / after buttons and other elements
 - Fix search results font sizes / styling
 - Fix incorrect heading levels for body text headings and subheadings
 
@@ -23,7 +26,6 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/17.0...18.0
 - Add documentation about CI deployments
 - Update documentation about personally-identifying data
 - Add documentation about the procedure for resetting the staging branch/server/db
-- Adjust margins before / after buttons and other elements
 
 ## 17.0 (2020-05-21)
 
