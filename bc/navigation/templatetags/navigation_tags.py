@@ -23,6 +23,6 @@ def sidebar(context):
 def footerlinks(context):
     request = context["request"]
     return {
-        "footerlinks": NavigationSettings.for_site(request.site).footer_links,
+        "footerlinks": NavigationSettings.for_request(request).footer_links,
         "request": request,
     }

@@ -16,6 +16,10 @@
         align-items: baseline;
     }
 
+    &__header {
+        @include font-size(xl);
+    }
+
     &--message {
         background: $color--white;
         border: 4px solid $color--orange;

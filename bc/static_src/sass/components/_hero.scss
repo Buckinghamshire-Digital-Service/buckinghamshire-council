@@ -42,4 +42,8 @@
     &--no-search {
         padding: ($grid--large * 2) 0;
     }
+
+    &--404 {
+        margin-bottom: $grid;
+    }
 }

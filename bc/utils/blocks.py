@@ -1,3 +1,5 @@
+import copy
+
 from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
 
@@ -135,6 +137,8 @@ class NestedStoryBlock(BaseStoryBlock):
     def __init__(self, local_blocks=None, **kwargs):
         super().__init__(**kwargs)
         # Bump down template for heading fields so headings don't clash with those outside the accordion
+        self.child_blocks["heading"] = copy.deepcopy(self.child_blocks["heading"])
+        self.child_blocks["subheading"] = copy.deepcopy(self.child_blocks["subheading"])
         self.child_blocks[
             "heading"
         ].meta.template = "patterns/molecules/streamfield/blocks/subheading_block.html"

@@ -11,6 +11,7 @@
     }
 
     &__title {
+        @include font-size(s);
         margin: 0;
     }
 
