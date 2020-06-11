@@ -216,7 +216,7 @@ class SARForm(BaseCaseForm):
     )
 
     buckinghamshire_council_employee = forms.ChoiceField(
-        label="Do you work (or have worked in the past) for Buckinghamshire Council or "
+        label="Do you work (or have you worked in the past) for Buckinghamshire Council or "
         "previous Buckinghamshire district councils?",
         choices=[(YES, "Yes"), (NO, "No")],
         widget=forms.RadioSelect(attrs={"data-conditional-input": ""}),
@@ -418,7 +418,7 @@ class DisclosureForm(BaseCaseForm):
         if reason and self.ACT_OF_PARLIAMENT in reason and not act_of_parliament:
             self.add_error(
                 "act_of_parliament",
-                f"This field is required if you have selected '{self.ACT_OF_PARLIAMENT}' above",
+                f"This field is required if you have selected '{self.ACT_OF_PARLIAMENT}'",
             )
 
         return cleaned_data
