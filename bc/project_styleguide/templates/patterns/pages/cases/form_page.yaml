@@ -1,7 +1,7 @@
 context:
   page:
     title: Complain about our services
-    introduction: You will be asked to provide your contact details. If you want to stay anonymous, you can<a href="">leave a comment</a> instead. If you want to report a problem or give feedback about bin collections or another waste and recycling issue, or request a new or replacement bin or sacks, you should do this on the <a href="https://www.buckinghamshire.gov.uk/bin-collection-recycling-and-waste/">council website for your local area</a>. 
+    introduction: You will be asked to provide your contact details. If you want to stay anonymous, you can <a href="">leave a comment</a> instead. If you want to report a problem or give feedback about bin collections or another waste and recycling issue, or request a new or replacement bin or sacks, you should do this on the <a href="https://www.buckinghamshire.gov.uk/bin-collection-recycling-and-waste/">council website for your local area</a>.
     pre_submission_text: By completing this form, you are providing personal information about yourself. If you want to know more about how and why we collect this data, see our <a href="https://www.buckinghamshire.gov.uk/your-council/privacy/privacy-policy/">privacy policy</a>.
     action_text: Confirm and send
 

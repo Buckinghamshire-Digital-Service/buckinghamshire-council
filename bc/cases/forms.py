@@ -95,8 +95,8 @@ class ComplaintForm(BaseCaseForm):
         label="Who are you complaining for?",
         choices=[
             # NB the keys must match the Aptean Respond categories definitions
-            (CONTACT_TYPE_PRIMARY, "I am the person with the complaint"),
-            (CONTACT_TYPE_SECONDARY, "I am making the complaint for someone else"),
+            (CONTACT_TYPE_PRIMARY, "Myself"),
+            (CONTACT_TYPE_SECONDARY, "Someone else"),
         ],
         widget=forms.RadioSelect(),
     )
@@ -111,7 +111,7 @@ class ComplaintForm(BaseCaseForm):
     )
     additional_comments = forms.CharField(
         label=(
-            "If you have contacted us previously about this issue and you have a "
+            "If you have contacted us about this issue before and you have a "
             "reference number enter it here"
         ),
         required=False,
@@ -147,12 +147,13 @@ class FOIForm(BaseCaseForm):
     feedback_type = "FOI/EIR"
 
     your_involvement = forms.ChoiceField(
+        label="Who are you requesting information for?",
         choices=[
             # NB the keys must match the Aptean Respond categories definitions
-            (CONTACT_TYPE_PRIMARY, "I am making this request as an individual"),
+            (CONTACT_TYPE_PRIMARY, "Myself"),
             (
                 CONTACT_TYPE_SECONDARY,
-                "I am making this request on behalf of a company or organisation",
+                "For a company or organisation",
             ),
         ],
         widget=forms.RadioSelect(attrs={"data-conditional-input": ""}),
@@ -164,8 +165,8 @@ class FOIForm(BaseCaseForm):
     description = forms.CharField(
         label="What information do you need?",
         widget=forms.Textarea,
-        help_text="Where appropriate, include names, dates, references and "
-        "descriptions to enable us to identify and locate the required information",
+        help_text="Tell us in as much detail as you can to help us find it."
+        "For example, a description of the information, names, dates and any reference numbers.",
     )
 
     field_schema_name_mapping = {
@@ -195,18 +196,19 @@ class SARForm(BaseCaseForm):
     NO = "No"
 
     your_involvement = forms.ChoiceField(
+        label="Who are you requesting information for?",
         choices=[
             # NB the keys must match the Aptean Respond categories definitions
-            (CONTACT_TYPE_PRIMARY, "I am requesting information about myself"),
-            (CONTACT_TYPE_SECONDARY, "I represent someone else"),
+            (CONTACT_TYPE_PRIMARY, "Myself"),
+            (CONTACT_TYPE_SECONDARY, "Someone else"),
         ],
         widget=forms.RadioSelect(),
     )
     description = forms.CharField(
-        label="What personal information is required?",
+        label="What information do you need?",
         widget=forms.Textarea,
-        help_text="Include any known reference numbers or other unique identifiers to "
-        "help us locate your personal data (for example, a customer account number)",
+        help_text="Tell us in as much detail as you can to help us find it."
+        "For example, a description of the information, names and any reference numbers, like a customer account number.",
     )
     time_period = forms.CharField(
         label="Which time period does your request cover?",
@@ -215,7 +217,7 @@ class SARForm(BaseCaseForm):
 
     buckinghamshire_council_employee = forms.ChoiceField(
         label="Do you work (or have worked in the past) for Buckinghamshire Council or "
-        "previous Buckinghamshire District Councils?",
+        "previous Buckinghamshire district councils?",
         choices=[(YES, "Yes"), (NO, "No")],
         widget=forms.RadioSelect(attrs={"data-conditional-input": ""}),
     )
@@ -350,22 +352,23 @@ class DisclosureForm(BaseCaseForm):
     template_name = "patterns/organisms/form-templates/disclosures_form.html"
     webservice = settings.RESPOND_DISCLOSURES_WEBSERVICE
     feedback_type = "Disclosures"
-    ACT_OF_PARLIAMENT = "Disclosure is required by an Act of Parliament"
+    ACT_OF_PARLIAMENT = "Disclosure is required by an act of Parliament"
 
     organisation = forms.CharField(
-        label="Name of your organisation", help_text="e.g. Thames Valley Police",
+        label="Name of your organisation", help_text="For example, Thames Valley Police",
     )
     description = forms.CharField(
         label="What information do you need?",
         widget=forms.Textarea,
-        help_text="Where appropriate, include names, dates, references and "
-        "descriptions to enable us to identify and locate the required information",
+        help_text="
+        help_text="Tell us in as much detail as you can to help us find it."
+        "For example, a description of the information, names, dates and any reference numbers.",
     )
     investigation = forms.CharField(
-        label="What is the nature of the investigation?", widget=forms.Textarea,
+        label="What is the investigation?", widget=forms.Textarea,
     )
     reason = forms.MultipleChoiceField(
-        label="The Information is required because…",
+        label="Why do you need the information?",
         choices=[
             # Use a list comprehension to avoid repetition
             (x, x)
@@ -382,11 +385,11 @@ class DisclosureForm(BaseCaseForm):
                 ACT_OF_PARLIAMENT,
             ]
         ],
-        help_text="Tick all that apply",
+        help_text="Select all that apply",
         widget=CustomCheckboxSelectMultiple(),
     )
     act_of_parliament = forms.CharField(
-        label="Year / Act / Number of section in Act", required=False
+        label="The name of the act, the year and the number of the section", required=False
     )
 
     @property
