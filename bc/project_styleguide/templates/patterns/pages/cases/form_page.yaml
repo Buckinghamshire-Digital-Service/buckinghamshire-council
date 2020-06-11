@@ -1,8 +1,8 @@
 context:
   page:
     title: Complain about our services
-    introduction: You will be asked to provide contact details. If you wish to remain anonymous, please consider using <a href="#">our comments form</a>.
-    pre_submission_text: Please note that by completing this form you will be providing some personal information about yourself. If you would like to know more about how and why we collect this data, please see our <a href="#">corporate privacy notice</a>.
+    introduction: You will be asked to provide your contact details. If you want to stay anonymous, use our <a href="">comments form</a> instead.
+    pre_submission_text: By completing this form, you are providing personal information about yourself. If you want to know more about how and why we collect this data, see our <a href="#">privacy policy</a>.
     action_text: Confirm and send
 
 tags:
