@@ -279,7 +279,6 @@ class SARForm(BaseCaseForm):
             for field_name in ["employee_id"]:
                 if not cleaned_data.get(field_name):
                     self.add_error(field_name, "Enter your employee number")
-
             for field_name in ["employment_dates"]:
                 if not cleaned_data.get(field_name):
                     self.add_error(field_name, "Enter your employment dates")
@@ -337,7 +336,7 @@ class ComplimentForm(BaseCaseForm):
 
     service_name = forms.CharField(label="Which service is this about?",)
     description = forms.CharField(
-        label="Your comment or suggestion", widget=forms.Textarea,
+        label="Your compliment", widget=forms.Textarea,
     )
 
     @property
