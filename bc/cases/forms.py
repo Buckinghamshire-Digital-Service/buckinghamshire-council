@@ -42,8 +42,8 @@ class BaseCaseForm(_BaseCaseForm):
         widget=TelephoneNumberInput(),
         # This duplicates the API validation, saving a round trip
         validators=[
-            MinLengthValidator(11, "Enter 11 or 12 digits"),
-            MaxLengthValidator(12, "Enter 11 or 12 digits"),
+            MinLengthValidator(11, "Enter a telephone number that is 11 or 12 digits long"),
+            MaxLengthValidator(12, "Enter a telephone number that is 11 or 12 digits long"),
         ],
     )
     address_01 = forms.CharField(label="Building and street address", required=False)
@@ -307,7 +307,7 @@ class CommentForm(BaseCaseForm):
         label="Your comment or suggestion", widget=forms.Textarea,
     )
     response_needed = forms.ChoiceField(
-        label="Do you require a response from us?",
+        label="Do you need a response from us?",
         choices=[("Yes", "Yes"), ("No", "No")],
         widget=forms.RadioSelect(),
     )
