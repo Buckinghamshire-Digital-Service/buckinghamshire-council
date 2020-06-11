@@ -74,15 +74,15 @@ class BaseCaseForm(_BaseCaseForm):
         # Add conditional required field error messages
         contact_method = cleaned_data.get("contact_method")
         if contact_method == CONTACT_METHOD_EMAIL and not cleaned_data.get("email"):
-            self.add_error("email", "This field is required")
+            self.add_error("email", "Enter your email address")
         if contact_method == CONTACT_METHOD_POST:
             for field_name in ["address_01", "town", "county", "postcode"]:
                 if not cleaned_data.get(field_name):
-                    self.add_error(field_name, "This field is required")
+                    self.add_error(field_name, "Enter your address details")
         if contact_method == CONTACT_METHOD_PHONE and not self.data.get(
             "contact_number"
         ):
-            self.add_error("contact_number", "This field is required")
+            self.add_error("contact_number", "Enter your telephone number")
         return cleaned_data
 
 
