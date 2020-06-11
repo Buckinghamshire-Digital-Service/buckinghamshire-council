@@ -15,6 +15,7 @@
     }
 
     &__heading {
+        @include font-size(m);
         border-top: $border--accent $color--grey-dark;
         padding-top: $grid--small;
         margin-bottom: $grid--small;

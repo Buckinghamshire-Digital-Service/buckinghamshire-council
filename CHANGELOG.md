@@ -22,6 +22,7 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/17.0...18.0
 - Add documentation about CI deployments
 - Update documentation about personally-identifying data
 - Add documentation about the procedure for resetting the staging branch/server/db
+- Adjust margins before / after buttons and other elements
 
 ## 17.0 (2020-05-21)
 
