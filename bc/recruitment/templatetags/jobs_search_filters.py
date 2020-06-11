@@ -2,6 +2,8 @@ from django import template
 from django.db.models import F, Value
 from django.db.models.functions import StrIndex
 
+from wagtail.core.models import Site
+
 from bc.recruitment.models import JobCategory, TalentLinkJob
 from bc.recruitment.utils import get_school_and_early_years_count
 
@@ -11,7 +13,7 @@ register = template.Library()
 @register.inclusion_tag("patterns/molecules/search-filters/search-filters.html")
 def jobs_search_filters(request, unfiltered_results=None):
     search_postcode = request.GET.get("postcode", None)
-    homepage = request.site.root_page.specific
+    homepage = Site.find_for_request(request).root_page.specific
 
     if not unfiltered_results:
         # Provide a default queryset for Pattern Library

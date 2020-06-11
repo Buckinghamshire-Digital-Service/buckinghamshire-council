@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Upgrade Wagtail to 2.9
 - 404 page
 - Styling of label text on checkboxes and radio buttons
 - Remove current page from breadcrumbs

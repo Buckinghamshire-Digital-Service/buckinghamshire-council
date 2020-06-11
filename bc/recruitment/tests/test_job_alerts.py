@@ -5,7 +5,7 @@ from unittest import mock
 
 from django.core.management import call_command
 from django.http import QueryDict
-from django.test import RequestFactory, TestCase
+from django.test import RequestFactory, TestCase, override_settings
 
 from wagtail.core.models import Page, Site
 
@@ -38,7 +38,7 @@ class JobAlertTest(TestCase):
             )
         )
         self.site = Site.objects.create(
-            hostname="example.com", port=80, root_page=self.homepage
+            hostname="jobs.example", port=80, root_page=self.homepage
         )
 
         # Internal job site
@@ -48,7 +48,7 @@ class JobAlertTest(TestCase):
             )
         )
         self.site_internal = Site.objects.create(
-            hostname="example_internal.com", port=80, root_page=self.homepage_internal,
+            hostname="internal-jobs.example", port=80, root_page=self.homepage_internal,
         )
 
     def test_job_alert_token(self):
@@ -78,10 +78,23 @@ class JobAlertTest(TestCase):
             new_alert.token, previous_token, msg="Token should be unique."
         )
 
+    @override_settings(
+        ALLOWED_HOSTS=["jobs.example", "internal-jobs.example", "main.example"]
+    )
     def test_utils_is_recruitment_site(self):
-        request = RequestFactory().request()
-        request.site = self.site
-        self.assertTrue(is_recruitment_site(request))
+        factory = RequestFactory()
+
+        recruitment_site_request = factory.get("/", SERVER_NAME=self.site.hostname)
+        self.assertEqual(Site.find_for_request(recruitment_site_request), self.site)
+        self.assertTrue(is_recruitment_site(recruitment_site_request))
+
+        internal_recruitment_site_request = factory.get(
+            "/", SERVER_NAME=self.site_internal.hostname
+        )
+        self.assertEqual(
+            Site.find_for_request(internal_recruitment_site_request), self.site_internal
+        )
+        self.assertTrue(is_recruitment_site(internal_recruitment_site_request))
 
         # Create a main site (not recruitment site)
         hero_image = wagtail_factories.ImageFactory()
@@ -89,10 +102,10 @@ class JobAlertTest(TestCase):
             instance=HomePageFactory.build(hero_image=hero_image)
         )
         main_site = Site.objects.create(
-            hostname="main.com", port=80, root_page=main_site_homepage
+            hostname="main.example", port=80, root_page=main_site_homepage
         )
-        main_site_request = RequestFactory().request()
-        main_site_request.site = main_site
+        main_site_request = factory.get("/", SERVER_NAME=main_site.hostname)
+        self.assertEqual(Site.find_for_request(main_site_request), main_site)
         self.assertFalse(is_recruitment_site(main_site_request))
 
     def test_utils_get_current_search(self):

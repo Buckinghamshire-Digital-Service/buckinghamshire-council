@@ -1,4 +1,4 @@
-from django.test import TestCase, override_settings
+from django.test import RequestFactory, TestCase, override_settings
 from django.urls import reverse
 
 from wagtail.core.models import Page, Site
@@ -38,13 +38,13 @@ class BasePageTemplateTest(TestCase):
 
     def test_main_homepage_uses_main_site(self):
         """This is mainly a test that this test case is viable."""
-        response = self.client.get("/", SERVER_NAME=MAIN_HOSTNAME)
-        self.assertEqual(response.context["request"].site, self.main_site)
+        request = RequestFactory().get("/", SERVER_NAME=MAIN_HOSTNAME)
+        self.assertEqual(Site.find_for_request(request), self.main_site)
 
     def test_recruitment_homepage_uses_recruitment_site(self):
         """This is mainly a test that this test case is viable."""
-        response = self.client.get("/", SERVER_NAME=RECRUITMENT_HOSTNAME)
-        self.assertEqual(response.context["request"].site, self.recruitment_site)
+        request = RequestFactory().get("/", SERVER_NAME=RECRUITMENT_HOSTNAME)
+        self.assertEqual(Site.find_for_request(request), self.recruitment_site)
 
     def test_main_homepage_uses_main_base(self):
         response = self.client.get("/", SERVER_NAME=MAIN_HOSTNAME)
