@@ -42,8 +42,12 @@ class BaseCaseForm(_BaseCaseForm):
         widget=TelephoneNumberInput(),
         # This duplicates the API validation, saving a round trip
         validators=[
-            MinLengthValidator(11, "Enter a telephone number that is 11 or 12 digits long"),
-            MaxLengthValidator(12, "Enter a telephone number that is 11 or 12 digits long"),
+            MinLengthValidator(
+                11, "Enter a telephone number that is 11 or 12 digits long"
+            ),
+            MaxLengthValidator(
+                12, "Enter a telephone number that is 11 or 12 digits long"
+            ),
         ],
     )
     address_01 = forms.CharField(label="Building and street address", required=False)
@@ -151,10 +155,7 @@ class FOIForm(BaseCaseForm):
         choices=[
             # NB the keys must match the Aptean Respond categories definitions
             (CONTACT_TYPE_PRIMARY, "Myself"),
-            (
-                CONTACT_TYPE_SECONDARY,
-                "For a company or organisation",
-            ),
+            (CONTACT_TYPE_SECONDARY, "For a company or organisation",),
         ],
         widget=forms.RadioSelect(attrs={"data-conditional-input": ""}),
     )
@@ -207,8 +208,9 @@ class SARForm(BaseCaseForm):
     description = forms.CharField(
         label="What information do you need?",
         widget=forms.Textarea,
-        help_text="Tell us in as much detail as you can to help us find it."
-        "For example, a description of the information, names and any reference numbers, like a customer account number.",
+        help_text="Tell us in as much detail as you can to help us find it. For "
+        "example, a description of the information, names and any reference numbers, "
+        "like a customer account number.",
     )
     time_period = forms.CharField(
         label="Which time period does your request cover?",
@@ -276,12 +278,10 @@ class SARForm(BaseCaseForm):
 
         if buckinghamshire_council_employee == self.YES:
             # employment details are required
-            for field_name in ["employee_id"]:
-                if not cleaned_data.get(field_name):
-                    self.add_error(field_name, "Enter your employee number")
-            for field_name in ["employment_dates"]:
-                if not cleaned_data.get(field_name):
-                    self.add_error(field_name, "Enter your employment dates")
+            if not cleaned_data.get("employee_id"):
+                self.add_error("employee_id", "Enter your employee number")
+            if not cleaned_data.get("employment_dates"):
+                self.add_error("employment_dates", "Enter your employment dates")
 
         day = cleaned_data.get("dob_day")
         month = cleaned_data.get("dob_month")
@@ -335,9 +335,7 @@ class ComplimentForm(BaseCaseForm):
     feedback_type = "Compliment"
 
     service_name = forms.CharField(label="Which service is this about?",)
-    description = forms.CharField(
-        label="Your compliment", widget=forms.Textarea,
-    )
+    description = forms.CharField(label="Your compliment", widget=forms.Textarea,)
 
     @property
     def append_to_description_fields(self):
@@ -358,12 +356,12 @@ class DisclosureForm(BaseCaseForm):
     ACT_OF_PARLIAMENT = "Disclosure is required by an act of Parliament"
 
     organisation = forms.CharField(
-        label="Name of your organisation", help_text="For example, Thames Valley Police",
+        label="Name of your organisation",
+        help_text="For example, Thames Valley Police",
     )
     description = forms.CharField(
         label="What information do you need?",
         widget=forms.Textarea,
-        help_text="
         help_text="Tell us in as much detail as you can to help us find it."
         "For example, a description of the information, names, dates and any reference numbers.",
     )
@@ -392,7 +390,8 @@ class DisclosureForm(BaseCaseForm):
         widget=CustomCheckboxSelectMultiple(),
     )
     act_of_parliament = forms.CharField(
-        label="The name of the act, the year and the number of the section", required=False
+        label="The name of the act, the year and the number of the section",
+        required=False,
     )
 
     @property
