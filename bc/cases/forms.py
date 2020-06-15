@@ -35,9 +35,9 @@ class BaseCaseForm(_BaseCaseForm):
         choices=PREFERRED_CONTACT_METHOD_CHOICES,
         widget=forms.RadioSelect(attrs={"data-conditional-input": ""}),
     )
-    email = forms.EmailField(required=False)
+    email = forms.EmailField(label="Email address", required=False)
     email.widget.attrs.update({"autocomplete": "", "autocapitalize": "off"})
-    contact_number = forms.CharField(
+    contact_number = forms.CharField(label="Telephone number", require=False)
         required=False,
         widget=TelephoneNumberInput(),
         # This duplicates the API validation, saving a round trip
