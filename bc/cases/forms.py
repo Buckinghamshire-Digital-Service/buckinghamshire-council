@@ -37,7 +37,8 @@ class BaseCaseForm(_BaseCaseForm):
     )
     email = forms.EmailField(label="Email address", required=False)
     email.widget.attrs.update({"autocomplete": "", "autocapitalize": "off"})
-    contact_number = forms.CharField(label="Telephone number", require=False)
+    contact_number = forms.CharField(
+        label="Telephone number",
         required=False,
         widget=TelephoneNumberInput(),
         # This duplicates the API validation, saving a round trip
