@@ -116,7 +116,7 @@ class ComplaintForm(BaseCaseForm):
     additional_comments = forms.CharField(
         label=(
             "If you have contacted us about this issue before and you have a "
-            "reference number enter it here"
+            "reference number, enter it here"
         ),
         required=False,
     )
