@@ -44,6 +44,16 @@
             label {
                 padding-left: 44px;
             }
+
+            #{$root}__conditional-fields {
+                label {
+                    padding-left: 0;
+                }
+
+                input {
+                    margin: 0 $grid--min 0 0;
+                }
+            }
         }
 
         input {
