@@ -30,7 +30,7 @@ def area_finder(request):
                 )
 
             if formatted_postcode in BORDER_POSTCODES:
-                contact_us_page = ImportantPages.for_site(request.site).contact_us_page
+                contact_us_page = ImportantPages.for_request(request).contact_us_page
                 if contact_us_page:
                     contact_us_link = (
                         f"<a href='{contact_us_page.url}'>contact our customer service "

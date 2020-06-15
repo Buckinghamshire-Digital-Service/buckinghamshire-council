@@ -1,4 +1,4 @@
-{% extends "patterns/base_page.html" %}
+{% extends base_page_template %}
 {% load static wagtailcore_tags wagtailsearchpromotions_tags %}
 
 {% block body_class %}template-searchresults{% endblock %}
@@ -10,14 +10,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb__item">
-                    <a class="breadcrumb__link" href="/">
-                        Home
-                    </a>
-                </li>
-                <li class="breadcrumb__item">
-                    <a class="breadcrumb__link breadcrumb__link--current" href="#" aria-current="page">
-                        {{ page.title }}
-                    </a>
+                    <a class="breadcrumb__link" href="/">Home</a>
                 </li>
             </ol>
         </nav>

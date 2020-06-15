@@ -1,10 +1,14 @@
 .subscribe {
-    background: $color--primary;
+    background: $color--river;
     color: $color--white;
 
     &__inner {
         padding-top: $grid;
         padding-bottom: $grid--large;
+    }
+
+    &__heading {
+        @include font-size(xl);
     }
 
     &__text {

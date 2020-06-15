@@ -28,6 +28,7 @@
     }
 
     &__title {
+        @include font-size(xl);
         color: $color--leaf-dark;
     }
 }

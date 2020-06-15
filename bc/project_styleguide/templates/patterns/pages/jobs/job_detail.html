@@ -1,4 +1,4 @@
-{% extends "patterns/base_page--jobs.html" %}
+{% extends base_page_template %}
 {% load wagtailcore_tags static %}
 
 {% block breadcrumbs %}
@@ -9,14 +9,7 @@
                     <a class="breadcrumb__link" href="/">Home</a>
                 </li>
                 <li class="breadcrumb__item">
-                    <a class="breadcrumb__link" href="{% url 'search' %}">
-                        Search results
-                    </a>
-                </li>
-                <li class="breadcrumb__item">
-                    <a class="breadcrumb__link breadcrumb__link--current" href="#" aria-current="page">
-                        {{ page.title }}
-                    </a>
+                    <a class="breadcrumb__link" href="{% url 'search' %}">Search results</a>
                 </li>
             </ol>
         </nav>

@@ -1,0 +1,7 @@
+context:
+  value:
+    items:
+      - title: Accordion item one
+        content: '<p>Content paragraph</p>'
+      - title: Accordion item two
+        content: '<p>Content paragraph 2</p>'

@@ -338,6 +338,4 @@ class ImportantPages(BaseSetting):
         "wagtailcore.Page", null=True, on_delete=models.SET_NULL, related_name="+"
     )
 
-    panels = [
-        PageChooserPanel("contact_us_page"),
-    ]
+    panels = [PageChooserPanel("contact_us_page")]

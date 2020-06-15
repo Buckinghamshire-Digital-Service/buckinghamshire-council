@@ -1,3 +1,4 @@
 # Configure GitLab to use the JSX parser for all .js files.
 # https://docs.gitlab.com/ee/user/project/highlighting.html
 *.js gitlab-language=jsx
+*.html gitlab-language=jinja

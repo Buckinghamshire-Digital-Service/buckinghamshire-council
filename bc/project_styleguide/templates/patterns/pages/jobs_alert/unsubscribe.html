@@ -1,23 +1,16 @@
-{% extends "patterns/base_page--jobs.html" %}
+{% extends base_page_template %}
 {% load static wagtailcore_tags %}
 
 {% block body_class %}{{ block.super }} template-searchresults{% endblock %}
 
-{% block title %}{{title}}{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block breadcrumbs %}
     <div class="wrapper wrapper--large">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb__item">
-                    <a class="breadcrumb__link" href="/">
-                        Home
-                    </a>
-                </li>
-                <li class="breadcrumb__item">
-                    <a class="breadcrumb__link breadcrumb__link--current" href="#" aria-current="page">
-                        {{ page.title }}
-                    </a>
+                    <a class="breadcrumb__link" href="/">Home</a>
                 </li>
             </ol>
         </nav>
