@@ -362,7 +362,7 @@ class DisclosureForm(BaseCaseForm):
     description = forms.CharField(
         label="What information do you need?",
         widget=forms.Textarea,
-        help_text="Tell us in as much detail as you can to help us find it."
+        help_text="Tell us in as much detail as you can to help us find it. "
         "For example, a description of the information, names, dates and any reference numbers.",
     )
     investigation = forms.CharField(
