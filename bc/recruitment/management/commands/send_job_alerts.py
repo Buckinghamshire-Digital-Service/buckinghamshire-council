@@ -51,17 +51,11 @@ class Command(BaseCommand):
                         end_time=task.started,
                     ),
                 )
-
                 if results:
                     subject = "New job search results"
                     body = render_to_string(
                         "patterns/email/job_search_results_alert.txt",
-                        context={
-                            "site_url": alert.site_url,
-                            "results": results,
-                            "search_term": alert.search,
-                            "unsubscribe_url": alert.unsubscribe_url,
-                        },
+                        context={**alert.get_email_context(), "results": results},
                     )
                     messages.append(
                         NotifyEmailMessage(subject=subject, body=body, to=[alert.email])

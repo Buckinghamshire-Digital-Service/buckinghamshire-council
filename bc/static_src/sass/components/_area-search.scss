@@ -1,7 +1,6 @@
 .area-search {
     padding-bottom: 0;
     background: $color--grey-light;
-    margin-bottom: 30px;
 
     &__response-text {
         @include font-size(s);

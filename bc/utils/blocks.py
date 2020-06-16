@@ -1,3 +1,5 @@
+import copy
+
 from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
 
@@ -114,19 +116,21 @@ class DetailBlock(blocks.StructBlock):
         template = "patterns/molecules/streamfield/blocks/detail_block.html"
 
 
-# Main streamfield block to be inherited by Pages
-class StoryBlock(blocks.StreamBlock):
+class BaseStoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(
         classname="full title",
         icon="title",
         template="patterns/molecules/streamfield/blocks/heading_block.html",
+        group="Heading",
+        label="Main heading",
     )
     subheading = blocks.CharBlock(
         classname="full title",
         icon="title",
         template="patterns/molecules/streamfield/blocks/subheading_block.html",
+        group="Heading",
     )
-    paragraph = blocks.RichTextBlock(features=RICH_TEXT_FEATURES)
+    paragraph = blocks.RichTextBlock(features=RICH_TEXT_FEATURES,)
     image = ImageBlock()
     embed = EmbedBlock()
     local_area_links = LocalAreaLinksBlock()
@@ -135,4 +139,47 @@ class StoryBlock(blocks.StreamBlock):
     detail = DetailBlock()
 
     class Meta:
+        abstract = True
         template = "patterns/molecules/streamfield/stream_block.html"
+
+
+class NestedStoryBlock(BaseStoryBlock):
+    def __init__(self, local_blocks=None, **kwargs):
+        super().__init__(**kwargs)
+        # Bump down template for heading fields so headings don't clash with those outside the accordion
+        self.child_blocks["heading"] = copy.deepcopy(self.child_blocks["heading"])
+        self.child_blocks["subheading"] = copy.deepcopy(self.child_blocks["subheading"])
+        self.child_blocks[
+            "heading"
+        ].meta.template = "patterns/molecules/streamfield/blocks/subheading_block.html"
+        self.child_blocks[
+            "subheading"
+        ].meta.template = (
+            "patterns/molecules/streamfield/blocks/subsubheading_block.html"
+        )
+
+
+class Accordion(blocks.StructBlock):
+    items = blocks.ListBlock(
+        blocks.StructBlock(
+            [
+                (
+                    "title",
+                    blocks.CharBlock(
+                        classname="full title", icon="title", label="Accordion title"
+                    ),
+                ),
+                ("content", NestedStoryBlock(label="Accordion content")),
+            ]
+        ),
+        label="Accordion items",
+    )
+
+    class Meta:
+        icon = ("list-ul",)
+        template = ("patterns/molecules/streamfield/blocks/accordion.html",)
+
+
+# Main streamfield block to be inherited by Pages
+class StoryBlock(BaseStoryBlock):
+    accordion = Accordion()

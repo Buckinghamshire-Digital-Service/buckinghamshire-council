@@ -32,7 +32,7 @@ The version number is of the form `MAJOR.PATCH`. Planned releases which add feat
 1. Add a heading `# x.x (yyyy-mm-dd)` to `CHANGELOG.md`, detailing what is in this release.
 1. Add a comparison link below the `x.x` heading (see other releases for syntax; note that this will not work until the release is tagged, below)
 1. Merge `release` to `master`.
-1. Deploy to production (see [deployment documentation](deployment.md)).
+1. Deploy to production (see [continuous deployment documentation](continuous-deployment.md#deploying-to-production)).
 1. Tag the merge commit
    1. `git tag x.x`
    1. `git push --tags`

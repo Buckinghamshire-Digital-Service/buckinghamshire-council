@@ -4,6 +4,8 @@ from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.db.models import F
 from django.db.models.functions import ACos, Cos, Radians, Sin
 
+from wagtail.core.models import Site
+
 import requests
 
 from bc.recruitment.constants import JOB_FILTERS
@@ -11,7 +13,9 @@ from bc.recruitment.models import JobCategory, RecruitmentHomePage, TalentLinkJo
 
 
 def is_recruitment_site(request):
-    return isinstance(request.site.root_page.specific, RecruitmentHomePage)
+    return isinstance(
+        Site.find_for_request(request).root_page.specific, RecruitmentHomePage
+    )
 
 
 def get_current_search(querydict):

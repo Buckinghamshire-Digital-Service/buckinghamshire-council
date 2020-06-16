@@ -4,6 +4,53 @@
 
 - 273 progressive disclosure details (BE)
 
+## 19.0 (2020-06-11)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/18.0...19.0
+
+- Upgrade Wagtail to 2.9
+- 404 page
+- Styling of label text on checkboxes and radio buttons
+- Remove current page from breadcrumbs
+- Adjust margins before / after buttons and other elements
+- Fix search results font sizes / styling
+- Fix incorrect heading levels for body text headings and subheadings
+
+## 18.0 (2020-06-04)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/17.0...18.0
+
+- Upgrade Django to 2.2.13
+- Permit subdomain sites to have different base templates, depending on homepage type
+- Sign up to council newsletter(s) from the homepage
+- Update cookie notice
+- Fix job alert emails
+- Make the job application page return 404 status for bad IDs
+- Update job search salary filter to use searchable salary instead of salary range
+- Add documentation about CI deployments
+- Update documentation about personally-identifying data
+- Add documentation about the procedure for resetting the staging branch/server/db
+
+## 17.0 (2020-05-21)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/16.1...17.0
+
+- Change GitLab HTML syntax highlighter
+- Accessibility 37 Improve aria role of alert panel
+- Accessibility 53 Hide footer links landmark if there are none
+- Accessibility 55 Email alert subscription form improvements
+- Accessibility 56 Remove extra role="search" form from header on search page
+- Accessibility 57 Label complementary landmarks
+- Accessibility 61 Remove alt text for decorative images
+
+## 16.1 (2020-05-20)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/16.0...16.1
+
+- Enable a job board-dependent template variable for the application page. This
+  fixes internal job applications.
+- Fix an error when job application URL query is badly formatted
+
 ## 16.0 (2020-05-07)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/15.1...16.0
