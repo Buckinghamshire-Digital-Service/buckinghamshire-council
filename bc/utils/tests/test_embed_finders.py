@@ -25,43 +25,45 @@ class YouTubeNoCookieAndRelFinderTest(TestCase):
     @patch("urllib.request.urlopen")
     @patch("json.loads")
     @patch("bc.utils.embed_finders.OEmbedFinder.find_embed")
-    def test_youtubenocookieandrelfinder_requests(
-        self, mock_find_embed, loads, urlopen
-    ):
+    def test_plain_youtube_domain(self, mock_find_embed, loads, urlopen):
         mock_find_embed.return_value = {
             "html": '<iframe src="www.youtube.com/watch/123"></iframe>',
             "type": "video",
         }
-        result = YouTubeNoCookieAndRelFinder().find_embed(
-            "www.youtube.com/watch/123?rel=0"
-        )
-        self.assertEqual(result["type"], "video")
-        self.assertEqual(
-            result["html"],
-            '<iframe src="https://www.youtube-nocookie.com/watch/123?rel=0"></iframe>',
-        )
 
-        # test youtu.be domains
+        # test with and without ?rel=0 parameter
+        for input_url in [
+            "www.youtube.com/watch/123",
+            "www.youtube.com/watch/123?rel=0",
+        ]:
+            with self.subTest(input_url=input_url):
+                result = YouTubeNoCookieAndRelFinder().find_embed(
+                    "www.youtube.com/watch/123?rel=0"
+                )
+                self.assertEqual(result["type"], "video")
+                self.assertEqual(
+                    result["html"],
+                    '<iframe src="https://www.youtube-nocookie.com/watch/123?rel=0"></iframe>',
+                )
+
+    @patch("urllib.request.urlopen")
+    @patch("json.loads")
+    @patch("bc.utils.embed_finders.OEmbedFinder.find_embed")
+    def test_dot_be_domain(self, mock_find_embed, loads, urlopen):
         mock_find_embed.return_value = {
             "html": '<iframe src="https://youtu.be/-wtIMTCHWuI"></iframe>',
             "type": "video",
         }
-        result = YouTubeNoCookieAndRelFinder().find_embed("http://youtu.be/-wtIMTCHWuI")
-        self.assertEqual(result["type"], "video")
-        self.assertEqual(
-            result["html"],
-            '<iframe src="https://www.youtube-nocookie.com/-wtIMTCHWuI?rel=0"></iframe>',
-        )
-        # youtub.be with rel parameter
-        mock_find_embed.return_value = {
-            "html": '<iframe src="https://youtu.be/-wtIMTCHWuI"></iframe>',
-            "type": "video",
-        }
-        result = YouTubeNoCookieAndRelFinder().find_embed(
-            "http://youtu.be/-wtIMTCHWuI?rel=0"
-        )
-        self.assertEqual(result["type"], "video")
-        self.assertEqual(
-            result["html"],
-            '<iframe src="https://www.youtube-nocookie.com/-wtIMTCHWuI?rel=0"></iframe>',
-        )
+
+        # test with and without ?rel=0 parameter
+        for input_url in [
+            "http://youtu.be/-wtIMTCHWuI",
+            "http://youtu.be/-wtIMTCHWuI?rel=0",
+        ]:
+            with self.subTest(input_url=input_url):
+                result = YouTubeNoCookieAndRelFinder().find_embed(input_url)
+                self.assertEqual(result["type"], "video")
+                self.assertEqual(
+                    result["html"],
+                    '<iframe src="https://www.youtube-nocookie.com/-wtIMTCHWuI?rel=0"></iframe>',
+                )
