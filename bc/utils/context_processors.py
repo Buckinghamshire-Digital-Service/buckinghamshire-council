@@ -17,5 +17,5 @@ def global_vars(request):
         ),
         "FATHOM_SITE_ID": getattr(settings, "FATHOM_SITE_ID", None),
         "base_page_template": base_page_template,
-        "COOKIE_DOMAIN": '.buckinghamshire.gov.uk',
+        "COOKIE_DOMAIN": getattr(settings, "COOKIE_DOMAIN", None),
     }
