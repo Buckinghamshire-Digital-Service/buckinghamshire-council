@@ -74,11 +74,13 @@
     h2 {
         @include font-size(m);
         margin-bottom: $grid--min;
+        line-height: 1.25;
         font-weight: $weight--bold;
     }
 
     h3 {
         @include font-size(s);
+        line-height: 1.3;
         margin-bottom: $grid--min;
         font-weight: $weight--bold;
     }

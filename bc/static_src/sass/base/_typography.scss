@@ -78,10 +78,11 @@ small {
 
     &--xxxl {
         @include font-size(xl);
-        line-height: 1.2;
+        line-height: 1.25;
 
         @include media-query(mob-landscape) {
             @include font-size(xxl);
+            line-height: 1.2;
         }
 
         @include media-query(tablet-portrait) {
@@ -91,11 +92,12 @@ small {
 
     &--xxl {
         @include font-size(xl);
-        line-height: 1.2;
+        line-height: 1.25;
         margin-bottom: $grid;
 
         @include media-query(mob-landscape) {
             @include font-size(xxl);
+            line-height: 1.2;
         }
     }
 
