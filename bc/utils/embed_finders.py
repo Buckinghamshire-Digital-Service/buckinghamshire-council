@@ -31,7 +31,6 @@ class YouTubeNoCookieAndRelFinder(OEmbedFinder):
 
     def find_embed(self, url, max_width=None):
         embed = super().find_embed(url, max_width)
-        rel = parse_qs(urlparse(url).query).get("rel")
         soup = BeautifulSoup(embed["html"], "html.parser")
         iframe_url = soup.find("iframe").attrs["src"]
 
@@ -45,10 +44,7 @@ class YouTubeNoCookieAndRelFinder(OEmbedFinder):
         scheme, netloc, path, params, query, fragment = urlparse(iframe_url)
         netloc = "www.youtube-nocookie.com"
         querydict = parse_qs(query)
-        if rel is None:
-            rel = 0
-        if querydict.get("rel") != rel:
-            querydict["rel"] = rel
+        querydict["rel"] = 0
         query = urlencode(querydict, doseq=1)
         iframe_url = urlunparse((scheme, netloc, path, params, query, fragment))
         soup.find("iframe").attrs["src"] = iframe_url
