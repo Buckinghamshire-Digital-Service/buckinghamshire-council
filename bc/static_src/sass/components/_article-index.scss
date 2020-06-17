@@ -11,6 +11,10 @@
         }
     }
 
+    &__title {
+        @include font-size(m);
+    }
+
     &__content {
         order: 1;
         max-width: 580px;

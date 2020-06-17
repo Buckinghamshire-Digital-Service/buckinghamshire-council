@@ -104,15 +104,20 @@ small {
 
     &--l {
         @include font-size(l);
+        margin-bottom: $grid--min;
+        margin-top: $grid--medium;
     }
 
     &--m {
         @include font-size(m);
+        margin-top: $grid--small * 1.75;
         margin-bottom: 5px;
     }
 
     &--s {
         @include font-size(s);
+        margin-bottom: 5px;
+        margin-top: $grid--small * 1.75;
     }
 
     &--no-margin {

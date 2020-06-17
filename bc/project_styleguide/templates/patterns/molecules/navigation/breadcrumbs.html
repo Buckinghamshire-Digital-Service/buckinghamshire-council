@@ -7,6 +7,7 @@
                 {% if not ancestor_page.is_root %}
                     {% if ancestor_page.depth > 2 %}
                         <li class="breadcrumb__item">
+                            {# Keep links on one line to avoid accidental spaces being introduced #}
                             <a class="breadcrumb__link" href="{% pageurl ancestor_page %}">{{ ancestor_page.title }}</a>
                         </li>
                     {% else %}
@@ -16,11 +17,6 @@
                     {% endif %}
                 {% endif %}
             {% endfor %}
-            <li class="breadcrumb__item">
-                <a class="breadcrumb__link breadcrumb__link--current" href="#" aria-current="page">
-                    {{ page.title }}
-                </a>
-            </li>
         </ol>
     </nav>
 {% endif %}

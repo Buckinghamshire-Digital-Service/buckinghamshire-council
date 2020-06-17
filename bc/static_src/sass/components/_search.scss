@@ -4,6 +4,14 @@
         margin-bottom: $grid;
     }
 
+    &__results-title {
+        @include font-size(l);
+    }
+
+    &__filters-title {
+        @include font-size(m);
+    }
+
     &__results {
         margin-bottom: $grid;
         flex-basis: 100%;

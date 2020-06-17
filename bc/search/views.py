@@ -6,7 +6,7 @@ from django.utils.cache import add_never_cache_headers, patch_cache_control
 from django.utils.timezone import now
 from django.views.generic.base import View
 
-from wagtail.core.models import Page
+from wagtail.core.models import Page, Site
 from wagtail.search.models import Query
 
 from bc.recruitment.forms import SearchAlertSubscriptionForm
@@ -37,7 +37,7 @@ class SearchView(View):
         # Recruitment site search
         if is_recruitment_site(request):
             template_path = "patterns/pages/search/search--jobs.html"
-            homepage = request.site.root_page
+            homepage = Site.find_for_request(request).root_page
             search_results = get_job_search_results(
                 querydict=request.GET, homepage=homepage
             )
@@ -102,7 +102,7 @@ class SearchView(View):
             search = get_current_search(request.GET)
             email = form.cleaned_data["email"]
             context = {"STATUSES": JOB_ALERT_STATUSES}
-            homepage = request.site.root_page.specific
+            homepage = Site.find_for_request(request).root_page.specific
 
             # Search if already exists and confirmed:
             try:

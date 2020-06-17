@@ -1,4 +1,4 @@
-from django.test import RequestFactory, TestCase
+from django.test import RequestFactory, TestCase, override_settings
 
 from wagtail.core.models import Page, Site
 
@@ -9,24 +9,27 @@ from bc.recruitment.tests.fixtures import (
     TalentLinkJobFactory,
 )
 
+RECRUITMENT_HOSTNAME = "recruitment.example"
 
+
+@override_settings(ALLOWED_HOSTS=[RECRUITMENT_HOSTNAME])
 class SalaryFiltersTest(TestCase):
     salary_filter_index = 4  # just to DRY the changes if the filters ever change
 
     def setUp(self):
-        """
-        Set up 5 subcategories and 2 categories
-        """
         self.root_page = Page.objects.get(id=1)
         self.homepage = RecruitmentHomePageFactory.build_with_fk_objs_committed(
             job_board=JOB_BOARD_CHOICES[0]
         )
         self.root_page.add_child(instance=self.homepage)
-        self.site = Site.objects.create(root_page=self.homepage)
+        self.site = Site.objects.create(
+            hostname=RECRUITMENT_HOSTNAME, root_page=self.homepage
+        )
 
     def test_fifth_filter_is_salary(self):
-        request = RequestFactory().get(self.homepage.url)
-        request.site = self.site
+        request = RequestFactory().get(
+            self.homepage.url, SERVER_NAME=self.site.hostname
+        )
         context = jobs_search_filters(request)
 
         self.assertEqual(
@@ -40,8 +43,9 @@ class SalaryFiltersTest(TestCase):
         TalentLinkJobFactory(homepage=self.homepage, searchable_salary="£2")
         TalentLinkJobFactory(homepage=self.homepage, searchable_salary="Zero")
 
-        request = RequestFactory().get(self.homepage.url)
-        request.site = self.site
+        request = RequestFactory().get(
+            self.homepage.url, SERVER_NAME=self.site.hostname
+        )
         context = jobs_search_filters(request)
 
         self.assertEqual(
@@ -64,8 +68,9 @@ class SalaryFiltersTest(TestCase):
         )
         TalentLinkJobFactory(homepage=self.homepage, searchable_salary="Zero")
 
-        request = RequestFactory().get(self.homepage.url)
-        request.site = self.site
+        request = RequestFactory().get(
+            self.homepage.url, SERVER_NAME=self.site.hostname
+        )
         context = jobs_search_filters(request)
 
         self.assertEqual(

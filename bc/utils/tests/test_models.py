@@ -1,4 +1,4 @@
-from django.test import TestCase, override_settings
+from django.test import RequestFactory, TestCase, override_settings
 from django.urls import reverse
 
 from wagtail.core.models import Page, Site
@@ -38,32 +38,35 @@ class BasePageTemplateTest(TestCase):
 
     def test_main_homepage_uses_main_site(self):
         """This is mainly a test that this test case is viable."""
-        response = self.client.get("/", SERVER_NAME=MAIN_HOSTNAME)
-        self.assertEqual(response.context["request"].site, self.main_site)
+        request = RequestFactory().get("/", SERVER_NAME=MAIN_HOSTNAME)
+        self.assertEqual(Site.find_for_request(request), self.main_site)
 
     def test_recruitment_homepage_uses_recruitment_site(self):
         """This is mainly a test that this test case is viable."""
-        response = self.client.get("/", SERVER_NAME=RECRUITMENT_HOSTNAME)
-        self.assertEqual(response.context["request"].site, self.recruitment_site)
+        request = RequestFactory().get("/", SERVER_NAME=RECRUITMENT_HOSTNAME)
+        self.assertEqual(Site.find_for_request(request), self.recruitment_site)
 
     def test_main_homepage_uses_main_base(self):
-        with self.assertTemplateUsed(BASE_PAGE_TEMPLATE):
-            response = self.client.get("/", SERVER_NAME=MAIN_HOSTNAME)
-            self.assertEqual(response.status_code, 200)
+        response = self.client.get("/", SERVER_NAME=MAIN_HOSTNAME)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, BASE_PAGE_TEMPLATE)
+        self.assertTemplateNotUsed(response, BASE_PAGE_TEMPLATE_RECRUITMENT)
 
     def test_recruitment_homepage_uses_recruitment_base(self):
-        with self.assertTemplateUsed(BASE_PAGE_TEMPLATE_RECRUITMENT):
-            response = self.client.get("/", SERVER_NAME=RECRUITMENT_HOSTNAME)
-            self.assertEqual(response.status_code, 200)
+        response = self.client.get("/", SERVER_NAME=RECRUITMENT_HOSTNAME)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, BASE_PAGE_TEMPLATE_RECRUITMENT)
+        self.assertTemplateNotUsed(response, BASE_PAGE_TEMPLATE)
 
     def test_child_of_main_site_uses_main_base(self):
         for Factory in self.page_factories:
             with self.subTest(page_type=Factory._meta.model):
                 page = Factory.build()
                 self.homepage.add_child(instance=page)
-                with self.assertTemplateUsed(BASE_PAGE_TEMPLATE):
-                    response = self.client.get(page.url, SERVER_NAME=MAIN_HOSTNAME)
-                    self.assertEqual(response.status_code, 200)
+                response = self.client.get(page.url, SERVER_NAME=MAIN_HOSTNAME)
+                self.assertEqual(response.status_code, 200)
+                self.assertTemplateUsed(response, BASE_PAGE_TEMPLATE)
+                self.assertTemplateNotUsed(response, BASE_PAGE_TEMPLATE_RECRUITMENT)
                 self.assertEqual(
                     response.context["base_page_template"], BASE_PAGE_TEMPLATE
                 )
@@ -73,44 +76,45 @@ class BasePageTemplateTest(TestCase):
             with self.subTest(page_type=Factory._meta.model):
                 page = Factory.build()
                 self.recruitment_homepage.add_child(instance=page)
-                with self.assertTemplateUsed(BASE_PAGE_TEMPLATE_RECRUITMENT):
-                    response = self.client.get(
-                        page.url, SERVER_NAME=RECRUITMENT_HOSTNAME
-                    )
-                    self.assertEqual(response.status_code, 200)
+                response = self.client.get(page.url, SERVER_NAME=RECRUITMENT_HOSTNAME)
+                self.assertEqual(response.status_code, 200)
+                self.assertTemplateUsed(response, BASE_PAGE_TEMPLATE_RECRUITMENT)
+                self.assertTemplateNotUsed(response, BASE_PAGE_TEMPLATE)
                 self.assertEqual(
                     response.context["base_page_template"],
                     BASE_PAGE_TEMPLATE_RECRUITMENT,
                 )
 
     def test_main_404_uses_main_site(self):
-        with self.assertTemplateUsed(BASE_PAGE_TEMPLATE):
-            response = self.client.get("/this_should_404/", SERVER_NAME=MAIN_HOSTNAME)
+        response = self.client.get("/this_should_404/", SERVER_NAME=MAIN_HOSTNAME)
         self.assertEqual(response.status_code, 404)
+        self.assertTemplateUsed(response, BASE_PAGE_TEMPLATE)
+        self.assertTemplateNotUsed(response, BASE_PAGE_TEMPLATE_RECRUITMENT)
         self.assertEqual(response.context["base_page_template"], BASE_PAGE_TEMPLATE)
 
     def test_recruitment_404_uses_recruitment_site(self):
-        with self.assertTemplateUsed(BASE_PAGE_TEMPLATE_RECRUITMENT):
-            response = self.client.get(
-                "/this_should_404/", SERVER_NAME=RECRUITMENT_HOSTNAME
-            )
-            self.assertEqual(response.status_code, 404)
+        response = self.client.get(
+            "/this_should_404/", SERVER_NAME=RECRUITMENT_HOSTNAME
+        )
+        self.assertEqual(response.status_code, 404)
+        self.assertTemplateUsed(response, BASE_PAGE_TEMPLATE_RECRUITMENT)
+        self.assertTemplateNotUsed(response, BASE_PAGE_TEMPLATE)
         self.assertEqual(
             response.context["base_page_template"], BASE_PAGE_TEMPLATE_RECRUITMENT
         )
 
     def test_main_search_uses_main_site(self):
-        with self.assertTemplateUsed(BASE_PAGE_TEMPLATE):
-            response = self.client.get(reverse("search"), SERVER_NAME=MAIN_HOSTNAME)
+        response = self.client.get(reverse("search"), SERVER_NAME=MAIN_HOSTNAME)
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, BASE_PAGE_TEMPLATE)
+        self.assertTemplateNotUsed(response, BASE_PAGE_TEMPLATE_RECRUITMENT)
         self.assertEqual(response.context["base_page_template"], BASE_PAGE_TEMPLATE)
 
     def test_recruitment_search_uses_recruitment_site(self):
-        with self.assertTemplateUsed(BASE_PAGE_TEMPLATE_RECRUITMENT):
-            response = self.client.get(
-                reverse("search"), SERVER_NAME=RECRUITMENT_HOSTNAME
-            )
+        response = self.client.get(reverse("search"), SERVER_NAME=RECRUITMENT_HOSTNAME)
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, BASE_PAGE_TEMPLATE_RECRUITMENT)
+        self.assertTemplateNotUsed(response, BASE_PAGE_TEMPLATE)
         self.assertEqual(
             response.context["base_page_template"], BASE_PAGE_TEMPLATE_RECRUITMENT
         )

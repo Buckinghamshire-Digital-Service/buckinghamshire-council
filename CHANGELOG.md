@@ -4,6 +4,18 @@
 
 - Add cookie banner to recruitment / jobs site
 
+## 19.0 (2020-06-11)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/18.0...19.0
+
+- Upgrade Wagtail to 2.9
+- 404 page
+- Styling of label text on checkboxes and radio buttons
+- Remove current page from breadcrumbs
+- Adjust margins before / after buttons and other elements
+- Fix search results font sizes / styling
+- Fix incorrect heading levels for body text headings and subheadings
+
 ## 18.0 (2020-06-04)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/17.0...18.0
