@@ -670,7 +670,7 @@ FATHOM_SITE_ID = env.get("FATHOM_SITE_ID")
 YANDEX_VERIFICATION_STRING = env.get("YANDEX_VERIFICATION_STRING")
 
 # Current domain for setting cookies
-COOKIE_DOMAIN = env.get("COOKIE_DOMAIN")
+COOKIE_DOMAIN = env.get("COOKIE_DOMAIN", "")
 
 
 # GOV.UK Notify service
