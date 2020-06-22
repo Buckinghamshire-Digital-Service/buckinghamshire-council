@@ -421,7 +421,7 @@ class DisclosureForm(BaseCaseForm):
         if reason and self.ACT_OF_PARLIAMENT in reason and not act_of_parliament:
             self.add_error(
                 "act_of_parliament",
-                f"This field is required if you have selected '{self.ACT_OF_PARLIAMENT}'",
+                f"If you have selected '{self.ACT_OF_PARLIAMENT}', you need to tell us details about the act",
             )
 
         return cleaned_data
