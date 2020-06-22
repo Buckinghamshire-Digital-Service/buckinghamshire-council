@@ -2,7 +2,6 @@ table {
     @include font-size(s);
     border-collapse: collapse;
     border-spacing: 0;
-    display: block;
     margin-top: $grid--medium;
     margin-bottom: $grid--small;
     width: 100%;
