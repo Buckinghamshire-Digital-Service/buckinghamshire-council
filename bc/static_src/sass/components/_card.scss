@@ -10,6 +10,7 @@
         @include font-size(s);
         line-height: 1.3;
         transition: color $transition;
+        text-decoration: underline;
     }
 
     &__summary {

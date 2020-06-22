@@ -13,7 +13,7 @@
             <div class="grid grid--index">
                 {% for subpage in featured_pages %}
                     <a class="card" href="{% pageurl subpage %}">
-                        <h2 class="card__title heading heading--s">
+                        <h2 class="card__title heading">
                             {% firstof subpage.listing_title subpage.title %}
                         </h2>
                         {% if subpage.listing_summary %}
