@@ -139,6 +139,12 @@
             margin-bottom: 0;
             margin-left: 0;
         }
+
+        .rich-text {
+            p {
+                margin: 0;
+            }
+        }
     }
 
     &__content--area-link {
