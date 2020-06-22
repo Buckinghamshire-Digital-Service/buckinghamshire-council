@@ -358,7 +358,7 @@ class DisclosureForm(BaseCaseForm):
 
     organisation = forms.CharField(
         label="Name of your organisation",
-        help_text="For example, Thames Valley Police.",
+        help_text="For example, Thames Valley Police",
     )
     description = forms.CharField(
         label="What information do you need?",
