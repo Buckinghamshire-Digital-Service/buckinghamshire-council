@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Add cookie banner to recruitment / jobs site
+- Update newsletter signup URL
 
 ## 19.0 (2020-06-11)
 
