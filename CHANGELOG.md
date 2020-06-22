@@ -3,7 +3,6 @@
 ## Unreleased
 
 - Add cookie banner to recruitment / jobs site
-- Mobile-friendly tables
 
 ## 19.0 (2020-06-11)
 
