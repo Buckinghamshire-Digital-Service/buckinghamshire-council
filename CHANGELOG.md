@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Add cookie banner to recruitment / jobs site
+- Make max-width larger on main wrapper
 
 ## 19.1 (2020-06-23)
 
@@ -36,7 +37,6 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/17.0...18.0
 - Add documentation about CI deployments
 - Update documentation about personally-identifying data
 - Add documentation about the procedure for resetting the staging branch/server/db
-- Make max-width larger on main wrapper
 
 ## 17.0 (2020-05-21)
 
