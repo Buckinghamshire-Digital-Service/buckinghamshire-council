@@ -265,10 +265,11 @@ class SARForm(BaseCaseForm):
     )
 
     attachments = forms.FileField(
-        label="Upload files",
+        label="Upload proof of identity",
         required=False,
         validators=[FileExtensionValidator(allowed_extensions=VALID_FILE_EXTENSIONS)],
         widget=forms.ClearableFileInput(attrs={"multiple": True}),
+        help_text="Upload proof of identity to help us process your request quicker.",
     )
 
     @property
