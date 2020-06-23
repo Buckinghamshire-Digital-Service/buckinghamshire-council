@@ -1,11 +1,11 @@
 import textwrap
 from unittest import mock
 
-from django import forms
 from django.http.response import HttpResponse
 from django.test import TestCase
 
 from bc.cases.backends.respond.client import RespondClientException
+from bc.cases.forms import ComplaintForm
 from bc.cases.utils import format_case_reference
 from bc.home.models import HomePage
 
@@ -17,9 +17,6 @@ class CaseFormPageTest(TestCase):
         homepage = HomePage.objects.first()
         self.case_form_page = ApteanRespondCaseFormPageFactory.build()
         homepage.add_child(instance=self.case_form_page)
-
-    class NameRequiredForm(forms.Form):
-        name = forms.CharField()
 
     @mock.patch("bc.cases.models.get_client")
     def test_page_loads_when_client_not_configured(self, mock_get_client):
@@ -69,7 +66,7 @@ class CaseFormPageTest(TestCase):
     def test_error_page_has_cache_prevention_headers(
         self, mock_get_form, mock_get_client
     ):
-        mock_get_form.return_value = self.NameRequiredForm()
+        mock_get_form.return_value = ComplaintForm()
         resp = self.client.post(self.case_form_page.url)
         self.assertEqual(resp.status_code, 200)
         self.assertFalse(resp.context["form"].is_valid())
