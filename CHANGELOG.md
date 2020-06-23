@@ -3,6 +3,13 @@
 ## Unreleased
 
 - Refactor Aptean Respond API integration to give more control over form presentation
+- Add cookie banner to recruitment / jobs site
+
+## 19.1 (2020-06-23)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/19.0...19.1
+
+- Add cache prevention headers to Aptean Respond form pages
 
 ## 19.0 (2020-06-11)
 

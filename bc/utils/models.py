@@ -337,5 +337,11 @@ class ImportantPages(BaseSetting):
     contact_us_page = models.ForeignKey(
         "wagtailcore.Page", null=True, on_delete=models.SET_NULL, related_name="+"
     )
+    cookie_information_page = models.ForeignKey(
+        "wagtailcore.Page", null=True, on_delete=models.SET_NULL, related_name="+"
+    )
 
-    panels = [PageChooserPanel("contact_us_page")]
+    panels = [
+        PageChooserPanel("contact_us_page"),
+        PageChooserPanel("cookie_information_page"),
+    ]

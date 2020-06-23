@@ -1,8 +1,17 @@
+{% load wagtailcore_tags %}
 <div class="cookie wrapper wrapper--large" role="region" aria-label="cookie banner" data-cookie-message>
     <div class="cookie__container">
         <div class="cookie__message">
+            {% with settings.utils.ImportantPages.cookie_information_page as cookie_page %}
+            {% if cookie_page %}
+            <p>We use <a href="{% pageurl cookie_page %}">cookies to collect information</a> about how you use the Buckinghamshire Council website.</p>
+            <p>We use this information to improve the website and our services. <a class="cookie__link" href="{% pageurl cookie_page %}">How to manage cookies.</a></p>
+            {% else %}
             <p>We use <a href="/about/cookies/">cookies to collect information</a> about how you use the Buckinghamshire Council website.</p>
             <p>We use this information to improve the website and our services. <a class="cookie__link" href="/about/cookies/">How to manage cookies.</a></p>
+            {% endif %}
+            {% endwith %}
+
 
             <button class="cookie__button button button--basic" data-cookie-dismiss>
                 Accept all cookies
