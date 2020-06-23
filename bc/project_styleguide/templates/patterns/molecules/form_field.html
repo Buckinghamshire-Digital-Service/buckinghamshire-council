@@ -10,7 +10,7 @@
 
         {% if widget_type == 'hidden_input' %}
             {# HTML Validation: Hidden inputs must not have a `for` attribute #}
-            <label class="form-item__label {% if field.field.required %}required{% endif %}">{{ field.label }} {% if field.field.required %}<span class="form-item__required">*</span>{% endif %}</label>
+            <label class="form-item__label {% if field.field.required %}required{% endif %}">{{ field.label }} {% if field.field.required %}<span class="form-item__required" aria-hidden="true">*</span>{% endif %}</label>
                 {{ field }}
 
                 {% if field.help_text %}
@@ -19,7 +19,7 @@
                     </div>
                 {% endif %}
         {% elif widget_type == 'checkbox_input' %}
-            <label{% if field.id_for_label %} for="{{ field.id_for_label }}"{% endif %} class="form-item__label {% if field.field.required %}required{% endif %}">{{ field.label }} {% if field.field.required %}<span class="form-item__required">*</span>{% endif %}</label>
+            <label{% if field.id_for_label %} for="{{ field.id_for_label }}"{% endif %} class="form-item__label {% if field.field.required %}required{% endif %}">{{ field.label }} {% if field.field.required %}<span class="form-item__required" aria-hidden="true">*</span>{% endif %}</label>
                 {{ field }}
 
                 {% if field.help_text %}
@@ -28,7 +28,7 @@
                     </div>
                 {% endif %}
         {% else %}
-            <label{% if field.id_for_label %} for="{{ field.id_for_label }}"{% endif %} class="form-item__label {% if field.field.required %}required{% endif %}">{{ field.label }} {% if field.field.required %}<span class="form-item__required">*</span>{% endif %}</label>
+            <label{% if field.id_for_label %} for="{{ field.id_for_label }}"{% endif %} class="form-item__label {% if field.field.required %}required{% endif %}">{{ field.label }} {% if field.field.required %}<span class="form-item__required" aria-hidden="true">*</span>{% endif %}</label>
             {% if field.help_text %}
                 <div class="form-item__help">
                     {{ field.help_text }}
