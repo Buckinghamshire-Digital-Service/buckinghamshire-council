@@ -35,15 +35,20 @@ class BaseCaseForm(_BaseCaseForm):
         choices=PREFERRED_CONTACT_METHOD_CHOICES,
         widget=forms.RadioSelect(attrs={"data-conditional-input": ""}),
     )
-    email = forms.EmailField(required=False)
+    email = forms.EmailField(label="Email address", required=False)
     email.widget.attrs.update({"autocomplete": "", "autocapitalize": "off"})
     contact_number = forms.CharField(
+        label="Telephone number",
         required=False,
         widget=TelephoneNumberInput(),
         # This duplicates the API validation, saving a round trip
         validators=[
-            MinLengthValidator(11, "Enter 11 or 12 digits"),
-            MaxLengthValidator(12, "Enter 11 or 12 digits"),
+            MinLengthValidator(
+                11, "Enter a telephone number that is 11 or 12 digits long"
+            ),
+            MaxLengthValidator(
+                12, "Enter a telephone number that is 11 or 12 digits long"
+            ),
         ],
     )
     address_01 = forms.CharField(label="Building and street address", required=False)
@@ -74,15 +79,15 @@ class BaseCaseForm(_BaseCaseForm):
         # Add conditional required field error messages
         contact_method = cleaned_data.get("contact_method")
         if contact_method == CONTACT_METHOD_EMAIL and not cleaned_data.get("email"):
-            self.add_error("email", "This field is required")
+            self.add_error("email", "Enter your email address")
         if contact_method == CONTACT_METHOD_POST:
             for field_name in ["address_01", "town", "county", "postcode"]:
                 if not cleaned_data.get(field_name):
-                    self.add_error(field_name, "This field is required")
+                    self.add_error(field_name, "Enter your address details")
         if contact_method == CONTACT_METHOD_PHONE and not self.data.get(
             "contact_number"
         ):
-            self.add_error("contact_number", "This field is required")
+            self.add_error("contact_number", "Enter your telephone number")
         return cleaned_data
 
 
@@ -95,8 +100,8 @@ class ComplaintForm(BaseCaseForm):
         label="Who are you complaining for?",
         choices=[
             # NB the keys must match the Aptean Respond categories definitions
-            (CONTACT_TYPE_PRIMARY, "I am the person with the complaint"),
-            (CONTACT_TYPE_SECONDARY, "I am making the complaint for someone else"),
+            (CONTACT_TYPE_PRIMARY, "Myself"),
+            (CONTACT_TYPE_SECONDARY, "Someone else"),
         ],
         widget=forms.RadioSelect(),
     )
@@ -111,8 +116,8 @@ class ComplaintForm(BaseCaseForm):
     )
     additional_comments = forms.CharField(
         label=(
-            "If you have contacted us previously about this issue and you have a "
-            "reference number enter it here"
+            "If you have contacted us about this issue before and you have a "
+            "reference number, enter it here"
         ),
         required=False,
     )
@@ -147,13 +152,11 @@ class FOIForm(BaseCaseForm):
     feedback_type = "FOI/EIR"
 
     your_involvement = forms.ChoiceField(
+        label="Who are you requesting information for?",
         choices=[
             # NB the keys must match the Aptean Respond categories definitions
-            (CONTACT_TYPE_PRIMARY, "I am making this request as an individual"),
-            (
-                CONTACT_TYPE_SECONDARY,
-                "I am making this request on behalf of a company or organisation",
-            ),
+            (CONTACT_TYPE_PRIMARY, "Myself"),
+            (CONTACT_TYPE_SECONDARY, "For a company or organisation",),
         ],
         widget=forms.RadioSelect(attrs={"data-conditional-input": ""}),
     )
@@ -164,8 +167,8 @@ class FOIForm(BaseCaseForm):
     description = forms.CharField(
         label="What information do you need?",
         widget=forms.Textarea,
-        help_text="Where appropriate, include names, dates, references and "
-        "descriptions to enable us to identify and locate the required information",
+        help_text="Tell us in as much detail as you can to help us find it."
+        "For example, a description of the information, names, dates and any reference numbers.",
     )
 
     field_schema_name_mapping = {
@@ -183,7 +186,7 @@ class FOIForm(BaseCaseForm):
         # organisation is required if contact is secondary
         if your_involvement == CONTACT_TYPE_SECONDARY and not organisation:
             # Only do something if both fields are valid so far.
-            self.add_error("organisation", "This field is required")
+            self.add_error("organisation", "Enter the name of the organisation")
         return cleaned_data
 
 
@@ -195,18 +198,20 @@ class SARForm(BaseCaseForm):
     NO = "No"
 
     your_involvement = forms.ChoiceField(
+        label="Who are you requesting information for?",
         choices=[
             # NB the keys must match the Aptean Respond categories definitions
-            (CONTACT_TYPE_PRIMARY, "I am requesting information about myself"),
-            (CONTACT_TYPE_SECONDARY, "I represent someone else"),
+            (CONTACT_TYPE_PRIMARY, "Myself"),
+            (CONTACT_TYPE_SECONDARY, "Someone else"),
         ],
         widget=forms.RadioSelect(),
     )
     description = forms.CharField(
-        label="What personal information is required?",
+        label="What information do you need?",
         widget=forms.Textarea,
-        help_text="Include any known reference numbers or other unique identifiers to "
-        "help us locate your personal data (for example, a customer account number)",
+        help_text="Tell us in as much detail as you can to help us find it. For "
+        "example, a description of the information, names and any reference numbers, "
+        "like a customer account number.",
     )
     time_period = forms.CharField(
         label="Which time period does your request cover?",
@@ -214,8 +219,8 @@ class SARForm(BaseCaseForm):
     )
 
     buckinghamshire_council_employee = forms.ChoiceField(
-        label="Do you work (or have worked in the past) for Buckinghamshire Council or "
-        "previous Buckinghamshire District Councils?",
+        label="Do you work (or have you worked in the past) for Buckinghamshire Council or "
+        "previous Buckinghamshire district councils?",
         choices=[(YES, "Yes"), (NO, "No")],
         widget=forms.RadioSelect(attrs={"data-conditional-input": ""}),
     )
@@ -274,9 +279,10 @@ class SARForm(BaseCaseForm):
 
         if buckinghamshire_council_employee == self.YES:
             # employment details are required
-            for field_name in ["employee_id", "employment_dates"]:
-                if not cleaned_data.get(field_name):
-                    self.add_error(field_name, "This field is required")
+            if not cleaned_data.get("employee_id"):
+                self.add_error("employee_id", "Enter your employee number")
+            if not cleaned_data.get("employment_dates"):
+                self.add_error("employment_dates", "Enter your employment dates")
 
         day = cleaned_data.get("dob_day")
         month = cleaned_data.get("dob_month")
@@ -285,10 +291,10 @@ class SARForm(BaseCaseForm):
             try:
                 dob = datetime.date(year, month, day)
             except ValueError:
-                self.add_error(None, "Please enter a valid date")
+                self.add_error(None, "Enter a valid date")
             else:
                 if dob > now().date():
-                    self.add_error(None, "Please enter a date in the past")
+                    self.add_error(None, "Enter a date in the past")
                 else:
                     cleaned_data["dob"] = dob
 
@@ -305,7 +311,7 @@ class CommentForm(BaseCaseForm):
         label="Your comment or suggestion", widget=forms.Textarea,
     )
     response_needed = forms.ChoiceField(
-        label="Do you require a response from us?",
+        label="Do you need a response from us?",
         choices=[("Yes", "Yes"), ("No", "No")],
         widget=forms.RadioSelect(),
     )
@@ -330,9 +336,7 @@ class ComplimentForm(BaseCaseForm):
     feedback_type = "Compliment"
 
     service_name = forms.CharField(label="Which service is this about?",)
-    description = forms.CharField(
-        label="Your comment or suggestion", widget=forms.Textarea,
-    )
+    description = forms.CharField(label="Your compliment", widget=forms.Textarea,)
 
     @property
     def append_to_description_fields(self):
@@ -350,22 +354,23 @@ class DisclosureForm(BaseCaseForm):
     template_name = "patterns/organisms/form-templates/disclosures_form.html"
     webservice = settings.RESPOND_DISCLOSURES_WEBSERVICE
     feedback_type = "Disclosures"
-    ACT_OF_PARLIAMENT = "Disclosure is required by an Act of Parliament"
+    ACT_OF_PARLIAMENT = "Disclosure is required by an act of Parliament"
 
     organisation = forms.CharField(
-        label="Name of your organisation", help_text="e.g. Thames Valley Police",
+        label="Name of your organisation",
+        help_text="For example, Thames Valley Police",
     )
     description = forms.CharField(
         label="What information do you need?",
         widget=forms.Textarea,
-        help_text="Where appropriate, include names, dates, references and "
-        "descriptions to enable us to identify and locate the required information",
+        help_text="Tell us in as much detail as you can to help us find it. "
+        "For example, a description of the information, names, dates and any reference numbers.",
     )
     investigation = forms.CharField(
-        label="What is the nature of the investigation?", widget=forms.Textarea,
+        label="What is the investigation?", widget=forms.Textarea,
     )
     reason = forms.MultipleChoiceField(
-        label="The Information is required because…",
+        label="Why do you need the information?",
         choices=[
             # Use a list comprehension to avoid repetition
             (x, x)
@@ -382,11 +387,12 @@ class DisclosureForm(BaseCaseForm):
                 ACT_OF_PARLIAMENT,
             ]
         ],
-        help_text="Tick all that apply",
+        help_text="Select all that apply",
         widget=CustomCheckboxSelectMultiple(),
     )
     act_of_parliament = forms.CharField(
-        label="Year / Act / Number of section in Act", required=False
+        label="The name of the act, the year and the number of the section",
+        required=False,
     )
 
     @property
@@ -415,7 +421,7 @@ class DisclosureForm(BaseCaseForm):
         if reason and self.ACT_OF_PARLIAMENT in reason and not act_of_parliament:
             self.add_error(
                 "act_of_parliament",
-                f"This field is required if you have selected '{self.ACT_OF_PARLIAMENT}' above",
+                f"If you have selected '{self.ACT_OF_PARLIAMENT}', you need to tell us details about the act",
             )
 
         return cleaned_data
