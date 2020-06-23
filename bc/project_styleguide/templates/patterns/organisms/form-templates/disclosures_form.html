@@ -15,19 +15,19 @@
         {% include "patterns/molecules/form_field.html" with field=form.organisation %}
 
         <fieldset>
-            <legend class="form-item__label required">Request details</legend>
+            <legend class="form-item__label heading required">Request details</legend>
             {% include "patterns/molecules/form_field.html" with field=form.description %}
         </fieldset>
 
         <fieldset>
-            <legend class="form-item__label required">Why you need the information</legend>
+            <legend class="form-item__label heading required">Why you need the information</legend>
             {% include "patterns/molecules/form_field.html" with field=form.investigation %}
             {% include "patterns/molecules/form_field.html" with field=form.reason %}
             {% include "patterns/molecules/form_field.html" with field=form.act_of_parliament %}
         </fieldset>
 
         <fieldset>
-            <legend class="form-item__label">Your contact details</legend>
+            <legend class="form-item__label heading">Your contact details</legend>
             {% include "patterns/molecules/form_field.html" with field=form.title %}
             {% include "patterns/molecules/form_field.html" with field=form.first_name %}
             {% include "patterns/molecules/form_field.html" with field=form.last_name %}
