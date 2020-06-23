@@ -57,18 +57,20 @@
         #{$root}__title {
             @include font-size(xxl);
             font-weight: $weight--bold;
+            line-height: 1.2;
             margin-bottom: $grid--min;
         }
 
         #{$root}__body {
             @include font-size(xl);
-            line-height: 1.2;
+            line-height: 1.25;
         }
     }
 
     &__ref {
         @include font-size(xl);
         display: block;
+        line-height: 1.25;
         font-weight: $weight--bold;
     }
 
