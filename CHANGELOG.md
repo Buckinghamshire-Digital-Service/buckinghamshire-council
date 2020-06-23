@@ -1,5 +1,11 @@
 # Release History
 
+## 19.1 (2020-06-23)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/19.0...19.1
+
+- Add cache prevention headers to Aptean Respond form pages
+
 ## 19.0 (2020-06-11)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/18.0...19.0
