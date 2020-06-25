@@ -403,12 +403,15 @@ class DisclosureForm(BaseCaseForm):
 
     @property
     def append_to_description_fields(self):
-        return [self[name] for name in ["investigation", "reason"]]
+        return [
+            self[name]
+            for name in ["investigation", "reason", "act_of_parliament"]
+            if self.cleaned_data[name]
+        ]
 
     field_schema_name_mapping = {
         "organisation": "Contact.Organisation",
         "description": DESCRIPTION_SCHEMA_NAME,
-        "act_of_parliament": "Case.ActofParliament",
     }
     field_schema_name_mapping.update(BaseCaseForm.field_schema_name_mapping)
 

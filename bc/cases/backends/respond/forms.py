@@ -48,6 +48,8 @@ class BaseCaseForm(django.forms.Form):
         for field in self.append_to_description_fields:
             value = cleaned_data[field.name]
             value = self.cast(value)
+            if isinstance(value, list):
+                value = "\n".join(value)
             # Special case: append this type of field to the description, rather than
             # creating an XML element.
             description = description + f"\n\n{field.label}:\n{value}"
