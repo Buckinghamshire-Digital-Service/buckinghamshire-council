@@ -12,6 +12,7 @@
 - Fix 'no results found' message when there is no search query
 - Enable embedding YouTube videos without using cookies and without showing
   unrelated video links
+- Make the homepage child sections 'menu' respect the 'show_in_menus' property
 
 ## 19.1 (2020-06-23)
 
