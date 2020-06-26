@@ -5,6 +5,8 @@
 - Add cookie banner to recruitment / jobs site
 - Make max-width larger on main wrapper
 - Adjust line height of headings
+- Reinstate display of promoted search results
+- Fix 'no results found' message when there is no search query
 
 ## 19.1 (2020-06-23)
 
