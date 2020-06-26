@@ -29,6 +29,14 @@
             </button>
         </form>
 
+        {% get_search_promotions search_query as search_picks %}
+        {% if search_picks %}
+            <section class="search__results">
+                {% for pick in search_picks %}
+                    {% include "patterns/molecules/search-result/search-result.html" with result=pick.page.specific %}
+                {% endfor %}
+            </section>
+        {% endif %}
         {% if search_results %}
             <section class="search__results">
                 <header class="search__results-header">
@@ -44,7 +52,7 @@
                 {% include "patterns/molecules/pagination/pagination.html" with paginator_page=search_results %}
             </section>
 
-        {% else %}
+        {% elif search_query and not search_picks %}
             <p>No results found.</p>
         {% endif %}
     </div>
