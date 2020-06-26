@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import TestReact from './components/TestReact';
 import MobileMenu from './components/mobile-menu';
 import MobileSubMenu from './components/mobile-sub-menu';
-// import CookieWarning from './components/cookie-message';
+import CookieWarning from './components/cookie-message';
 import Accordion from './components/accordion';
 import AreaSearchForm from './components/area-search-form';
 import Carousel from './components/carousel';
@@ -36,8 +36,8 @@ function closeMobileMenu() {
 
 document.addEventListener('DOMContentLoaded', () => {
     /* eslint-disable no-restricted-syntax, no-new */
-    // const cookie = document.querySelector(CookieWarning.selector());
-    // new CookieWarning(cookie);
+    const cookie = document.querySelector(CookieWarning.selector());
+    new CookieWarning(cookie);
 
     for (const accordion of document.querySelectorAll(Accordion.selector())) {
         new Accordion(accordion);

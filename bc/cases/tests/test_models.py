@@ -5,6 +5,7 @@ from django.http.response import HttpResponse
 from django.test import TestCase
 
 from bc.cases.backends.respond.client import RespondClientException
+from bc.cases.forms import ComplaintForm
 from bc.cases.utils import format_case_reference
 from bc.home.models import HomePage
 
@@ -50,6 +51,53 @@ class CaseFormPageTest(TestCase):
         self.assertNotContains(resp, "Response Xml Test")
         expected_case_reference = "DIS - 10028"
         self.assertEqual(resp.context["case_reference"], expected_case_reference)
+
+    @mock.patch("bc.cases.models.get_client")
+    def test_initial_page_has_cache_prevention_headers(self, mock_get_client):
+        resp = self.client.get(self.case_form_page.url)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(
+            resp._headers["cache-control"],
+            ("Cache-Control", "max-age=0, no-cache, no-store, must-revalidate"),
+        )
+
+    @mock.patch("bc.cases.models.get_client")
+    @mock.patch("bc.cases.models.ApteanRespondCaseFormPage.get_form")
+    def test_error_page_has_cache_prevention_headers(
+        self, mock_get_form, mock_get_client
+    ):
+        mock_get_form.return_value = ComplaintForm()
+        resp = self.client.post(self.case_form_page.url)
+        self.assertEqual(resp.status_code, 200)
+        self.assertFalse(resp.context["form"].is_valid())
+        self.assertEqual(
+            resp._headers["cache-control"],
+            ("Cache-Control", "max-age=0, no-cache, no-store, must-revalidate"),
+        )
+
+    @mock.patch("bc.cases.models.get_client")
+    @mock.patch("bc.cases.models.ApteanRespondCaseFormPage.get_form")
+    def test_success_page_has_cache_prevention_headers(
+        self, mock_get_form, mock_get_client
+    ):
+        response_xml = textwrap.dedent(
+            """\
+            <?xml version="1.0" encoding="utf-8"?> <caseResponse version="2" xmlns:="http://www.aptean.com/respond/caseresponse/2">
+            <case Id="01fc3664f6194732a37f61222cca21bd" Name="DIS - 10028 Response Xml Test," Tag="">
+            </case>
+            </caseResponse>
+        """  # noqa
+        )
+        mock_get_client.return_value = mock.Mock(
+            **{"create_case.return_value": HttpResponse(response_xml)}
+        )
+        resp = self.client.post(self.case_form_page.url)
+        self.assertEqual(resp.status_code, 200)
+        self.assertNotIn("form", resp.context)
+        self.assertEqual(
+            resp._headers["cache-control"],
+            ("Cache-Control", "max-age=0, no-cache, no-store, must-revalidate"),
+        )
 
 
 class CaseNameFormattingTest(TestCase):

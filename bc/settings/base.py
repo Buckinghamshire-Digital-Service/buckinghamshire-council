@@ -120,7 +120,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "wagtail.core.middleware.SiteMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
 
@@ -670,6 +669,9 @@ FATHOM_SITE_ID = env.get("FATHOM_SITE_ID")
 # For Yandex search indexing verification
 YANDEX_VERIFICATION_STRING = env.get("YANDEX_VERIFICATION_STRING")
 
+# Current domain for setting cookies
+COOKIE_DOMAIN = env.get("COOKIE_DOMAIN", "")
+
 
 # GOV.UK Notify service
 EMAIL_BACKEND = "bc.utils.email.NotifyEmailBackend"
@@ -680,8 +682,10 @@ GOVUK_NOTIFY_PLAIN_EMAIL_TEMPLATE_ID = env.get("GOVUK_NOTIFY_PLAIN_EMAIL_TEMPLAT
 # Lumesse TalentLink API credentials
 TALENTLINK_API_KEY = env.get("TALENTLINK_API_KEY")
 TALENTLINK_API_PASSWORD = env.get("TALENTLINK_API_PASSWORD")
-TALENTLINK_EXTERNAL_API_USERNAME = env.get("TALENTLINK_EXTERNAL_API_USERNAME")
-TALENTLINK_INTERNAL_API_USERNAME = env.get("TALENTLINK_INTERNAL_API_USERNAME")
+TALENTLINK_API_USERNAME_EXTERNAL = env.get("TALENTLINK_API_USERNAME_EXTERNAL")
+TALENTLINK_API_USERNAME_INTERNAL = env.get("TALENTLINK_API_USERNAME_INTERNAL")
+TALENTLINK_APPLY_CONFIG_KEY_EXTERNAL = env.get("TALENTLINK_APPLY_CONFIG_KEY_EXTERNAL")
+TALENTLINK_APPLY_CONFIG_KEY_INTERNAL = env.get("TALENTLINK_APPLY_CONFIG_KEY_INTERNAL")
 TALENTLINK_API_WSDL = env.get("TALENTLINK_API_WSDL")
 
 # Aptean Respond API credentials

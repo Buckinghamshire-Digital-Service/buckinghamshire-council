@@ -1,12 +1,22 @@
-{% extends "patterns/base_page.html" %}
+{% extends base_page_template %}
 {% load wagtailcore_tags wagtailsettings_tags %}
 
-{% block title %}{{ settings.utils.SystemMessagesSettings.title_404 }}{% endblock %}
+{% block hero %}
+    {% include "patterns/molecules/hero/hero-404.html" %}
+{% endblock %}
+
+{% block alert_banner %}{% endblock %}
 
 {% block body_class %}template-404{% endblock %}
 
-{% block content %}
-    <h1>{{ settings.utils.SystemMessagesSettings.title_404 }}</h1>
+{% block breadcrumbs %}{% endblock %}
 
-    {{ settings.utils.SystemMessagesSettings.body_404|richtext }}
+{% block content %}
+
+    <div class="wrapper wrapper--flex">
+        <section class="section section--main">
+            {{ settings.utils.SystemMessagesSettings.body_404|richtext }}
+        </section>
+    </div>
+
 {% endblock %}

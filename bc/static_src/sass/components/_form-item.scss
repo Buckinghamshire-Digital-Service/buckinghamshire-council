@@ -35,8 +35,25 @@
     // stylelint-disable-next-line selector-class-pattern
     &--radio_select {
         label {
+            @include font-size(s);
             display: block;
             margin: $grid--min 0;
+        }
+
+        li {
+            label {
+                padding-left: 44px;
+            }
+
+            #{$root}__conditional-fields {
+                label {
+                    padding-left: 0;
+                }
+
+                input {
+                    margin: 0 $grid--min 0 0;
+                }
+            }
         }
 
         input {
@@ -46,7 +63,7 @@
             height: 30px;
             border: 2px solid $color--black;
             border-radius: 50%;
-            margin: 0 $grid--min 0 0;
+            margin: 0 $grid--min 0 -44px;
             background-color: $color--white;
             vertical-align: middle;
 
@@ -181,7 +198,7 @@
     &__help {
         @include font-size(s);
         margin-top: 5px;
-        color: rgba($color--default, 0.6);
+        color: $color--charcoal-75;
     }
 
     textarea {

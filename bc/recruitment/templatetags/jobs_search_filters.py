@@ -1,5 +1,8 @@
 from django import template
-from django.db.models import F
+from django.db.models import F, Value
+from django.db.models.functions import StrIndex
+
+from wagtail.core.models import Site
 
 from bc.recruitment.models import JobCategory, TalentLinkJob
 from bc.recruitment.utils import get_school_and_early_years_count
@@ -10,7 +13,7 @@ register = template.Library()
 @register.inclusion_tag("patterns/molecules/search-filters/search-filters.html")
 def jobs_search_filters(request, unfiltered_results=None):
     search_postcode = request.GET.get("postcode", None)
-    homepage = request.site.root_page.specific
+    homepage = Site.find_for_request(request).root_page.specific
 
     if not unfiltered_results:
         # Provide a default queryset for Pattern Library
@@ -66,13 +69,17 @@ def jobs_search_filters(request, unfiltered_results=None):
             },
             {
                 "title": "Salary range",
-                "options": unfiltered_results.exclude(salary_range__exact="")
-                .values("salary_range")
-                .annotate(key=F("salary_range"), label=F("salary_range"))
-                .order_by("salary_range")
+                "options": unfiltered_results.exclude(searchable_salary__exact="")
+                .values("searchable_salary")
+                .annotate(
+                    pound_index=StrIndex("searchable_salary", Value("£")),
+                    key=F("searchable_salary"),
+                    label=F("searchable_salary"),
+                )
+                .order_by("-pound_index", "searchable_salary")
                 .distinct(),
-                "selected": request.GET.getlist("salary_range"),
-                "key": "salary_range",
+                "selected": request.GET.getlist("searchable_salary"),
+                "key": "searchable_salary",
             },
         ],
         "search_postcode": search_postcode,

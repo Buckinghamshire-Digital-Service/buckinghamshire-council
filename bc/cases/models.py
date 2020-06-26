@@ -1,5 +1,7 @@
 from django.db import models
 from django.shortcuts import render
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import never_cache
 
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
 from wagtail.core.fields import RichTextField
@@ -42,6 +44,7 @@ APTEAN_FORM_MAPPING = {
 }
 
 
+@method_decorator(never_cache, name="serve")
 class ApteanRespondCaseFormPage(BasePage):
 
     template = "patterns/pages/cases/form_page.html"
