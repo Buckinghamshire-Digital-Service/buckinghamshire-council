@@ -5,6 +5,7 @@
 - Add cookie banner to recruitment / jobs site
 - Make max-width larger on main wrapper
 - Adjust line height of headings
+- Always show application forms front end component, even if the job ID is not imported
 
 ## 19.1 (2020-06-23)
 

@@ -98,7 +98,6 @@ class TestApplyConfigKey(TestCase):
             None,
             "abc",
             1,
-            "abc-123",
             "QQPFK026203F3VBQBV7V779XA-175679'A=0",  # a seen SQL injection attack
         ]:
             with self.subTest(job_id=job_id):
@@ -110,3 +109,26 @@ class TestApplyConfigKey(TestCase):
                     HTTP_HOST=self.site.hostname + ":80",
                 )
                 self.assertEqual(resp.status_code, 404)
+
+    @override_settings(
+        ALLOWED_HOSTS=[
+            "localhost",
+            "testserver",
+            INTERNAL_HOSTNAME,
+            EXTERNAL_HOSTNAME,
+        ],
+    )
+    def test_view_when_job_id_does_not_exist(self):
+        for job_id in [
+            "abc-123",
+            "LONGSTRING-123456",
+        ]:
+            with self.subTest(job_id=job_id):
+                resp = self.client.get(
+                    self.homepage.full_url
+                    + self.homepage.reverse_subpage("apply")
+                    + "?jobId="
+                    + str(job_id),
+                    HTTP_HOST=self.site.hostname + ":80",
+                )
+                self.assertEqual(resp.status_code, 200)

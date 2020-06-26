@@ -57,7 +57,9 @@
         </div>
     </section>
 
-    {% include "patterns/molecules/jobs-sidebar/jobs-sidebar.html" %}
+    {% if show_sidebar %}
+        {% include "patterns/molecules/jobs-sidebar/jobs-sidebar.html" %}
+    {% endif %}
 </div>
 {% comment %}
 <main class="container" id="vanillaApplyContent">
