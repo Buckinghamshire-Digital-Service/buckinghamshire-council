@@ -1,5 +1,5 @@
 {% extends base_page_template %}
-{% load static wagtailcore_tags wagtailsearchpromotions_tags %}
+{% load static wagtailcore_tags %}
 
 {% block body_class %}template-searchresults{% endblock %}
 
@@ -29,14 +29,6 @@
             </button>
         </form>
 
-        {% get_search_promotions search_query as search_picks %}
-        {% if search_picks %}
-            <section class="search__results">
-                {% for pick in search_picks %}
-                    {% include "patterns/molecules/search-result/search-result.html" with result=pick.page.specific %}
-                {% endfor %}
-            </section>
-        {% endif %}
         {% if search_results %}
             <section class="search__results">
                 <header class="search__results-header">
@@ -46,13 +38,18 @@
                 </header>
 
                 {% for result in search_results %}
-                    {% include "patterns/molecules/search-result/search-result.html" with result=result.specific %}
+                    {% if result.page %}
+                        {# search_promotion has attributes .page and .description #}
+                        {% include "patterns/molecules/search-result/search-result.html" with pick=result result=result.page.specific %}
+                    {% else %}
+                        {% include "patterns/molecules/search-result/search-result.html" with result=result.specific %}
+                    {% endif %}
                 {% endfor %}
 
                 {% include "patterns/molecules/pagination/pagination.html" with paginator_page=search_results %}
             </section>
 
-        {% elif search_query and not search_picks %}
+        {% elif search_query %}
             <p>No results found.</p>
         {% endif %}
     </div>
