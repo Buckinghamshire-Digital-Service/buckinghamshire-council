@@ -3,6 +3,10 @@
     border-top: 1px solid $color--grey-accessible;
     padding: 15px 0;
 
+    &:last-child {
+        border-bottom: 1px solid $color--grey-accessible;
+    }
+
     &.is-open {
         #{$root}__icon {
             transform: rotate(0deg);
@@ -28,6 +32,10 @@
         border: 0;
         padding: 10px 0;
 
+        &:last-child {
+            border-bottom: 0;
+        }
+
         #{$root}__icon {
             height: 30px;
             margin-right: $grid--min;
@@ -45,9 +53,10 @@
         }
 
         #{$root}__content {
+            display: block;
             border-left: 4px solid $color--grey-border;
             margin-bottom: 0;
-            margin-left: 5px;
+            margin-left: 2px;
             padding: 10px 15px 10px 16px;
             margin-top: 10px;
         }
