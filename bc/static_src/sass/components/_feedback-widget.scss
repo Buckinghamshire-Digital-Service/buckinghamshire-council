@@ -1,0 +1,9 @@
+.feedback-widget {
+    background-color: $color--river;
+    padding: $grid 0;
+    position: relative;
+
+    &__content {
+        color: $color--white;
+    }
+}
