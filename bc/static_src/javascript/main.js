@@ -88,7 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
         new VideoModal(videomodal);
     }
 
-    for (const feedbackwidget of document.querySelectorAll(FeedbackWidget.selector())) {
+    for (const feedbackwidget of document.querySelectorAll(
+        FeedbackWidget.selector(),
+    )) {
         new FeedbackWidget(feedbackwidget);
     }
 
