@@ -3,6 +3,10 @@
     border-top: 1px solid $color--grey-accessible;
     padding: 15px 0;
 
+    &:last-child {
+        border-bottom: 1px solid $color--grey-accessible;
+    }
+
     &.is-open {
         #{$root}__icon {
             transform: rotate(0deg);
@@ -27,6 +31,10 @@
     &--detail {
         border: 0;
         padding: 10px 0;
+
+        &:last-child {
+            border-bottom: 0;
+        }
 
         #{$root}__icon {
             height: 30px;
@@ -139,6 +147,12 @@
         &--search-filters {
             margin-bottom: 0;
             margin-left: 0;
+        }
+
+        .rich-text {
+            p {
+                margin: 0;
+            }
         }
     }
 

@@ -5,6 +5,7 @@
 - Add cookie banner to recruitment / jobs site
 - Make max-width larger on main wrapper
 - Adjust line height of headings
+- Progressive disclosure details (BE)
 
 ## 19.1 (2020-06-23)
 
