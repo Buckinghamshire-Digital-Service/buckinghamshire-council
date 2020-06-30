@@ -12,6 +12,7 @@ import ProgressBar from './components/progress-bar';
 import VideoModal from './components/video-modal';
 import FormSubmit from './components/form-submit';
 import Filters from './components/job-filters';
+import FeedbackWidget from './components/feedback-widget';
 
 // Add polyfill fix for forEach carousel
 import foreachPolyfill from './polyfills/foreach-polyfill';
@@ -85,6 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (const videomodal of document.querySelectorAll(VideoModal.selector())) {
         new VideoModal(videomodal);
+    }
+
+    for (const feedbackwidget of document.querySelectorAll(FeedbackWidget.selector())) {
+        new FeedbackWidget(feedbackwidget);
     }
 
     // Test react - add a div with a data attribute of `data-test-react` to test

@@ -1,12 +1,12 @@
 {% load wagtailcore_tags %}
 
-<div class="feedback-widget">
-    <div class="feedback-widget__content">
-        <h4>Is this page useful</h4>
+<div class="feedback-widget active" data-feedback-widget>
+    <div class="feedback-widget__content wrapper wrapper--large">
+        <h4 class="feedback-widget__heading heading" data-feedback-heading>Is this page useful?</h4>
 
-        <ul>
-            <li><a href="/" id="feedback-yes">Yes</a></li>
-            <li><a href="/" id="feedback-no">No</a></li>
-        </ul>
+        <div class="feedback-widget__buttons">
+            <button class="feedback-widget__link" id="page-feedback-yes" data-feedback-button>Yes</a>
+            <button class="feedback-widget__link" href="/" id="page-feedback-no" data-feedback-button>No</a>
+        </div>
     </div>
 </div>
