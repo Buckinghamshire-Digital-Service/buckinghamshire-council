@@ -9,11 +9,13 @@ JOB_FILTERS = [
     },
     {"name": "contract", "filter_key": "contract_type"},
     {"name": "working_hours", "filter_key": "working_hours"},
-    {"name": "salary_range", "filter_key": "salary_range"},
+    {"name": "searchable_salary", "filter_key": "searchable_salary"},
 ]
 
 JOB_BOARD_DEFAULT = "external"
 JOB_BOARD_CHOICES = [
     JOB_BOARD_DEFAULT,
     "internal",
-]  # Must define corresponding TALENTLINK_{job board}_API_USERNAME on settings/base.py and env var.
+]
+# We must define corresponding TALENTLINK_API_USERNAME_{job_board} and
+# TALENTLINK_APPLY_CONFIG_KEY_{job_board} in settings/base.py and env var.

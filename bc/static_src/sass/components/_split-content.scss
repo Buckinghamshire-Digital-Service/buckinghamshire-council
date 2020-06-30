@@ -18,4 +18,8 @@
             }
         }
     }
+
+    &__title {
+        @include font-size(xl);
+    }
 }

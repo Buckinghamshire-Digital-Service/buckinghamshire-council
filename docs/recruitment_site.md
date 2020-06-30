@@ -29,9 +29,12 @@ The following environment variables must be set to authenticate with the API (or
 
 - `TALENTLINK_API_KEY`
 - `TALENTLINK_API_PASSWORD`
-- `TALENTLINK_EXTERNAL_API_USERNAME`
-- `TALENTLINK_INTERNAL_API_USERNAME`
-- And potentially `TALENTLINK_{uppercase job board name}_API_USERNAME` for any new boards
+- `TALENTLINK_API_USERNAME_EXTERNAL`
+- `TALENTLINK_API_USERNAME_INTERNAL`
+- And potentially `TALENTLINK_API_USERNAME_{uppercase job board name}` for any new boards
+- `TALENTLINK_APPLY_CONFIG_KEY_EXTERNAL`
+- `TALENTLINK_APPLY_CONFIG_KEY_INTERNAL`
+- And potentially `TALENTLINK_APPLY_CONFIG_KEY_{uppercase job board name}` for any new boards
 - `TALENTLINK_API_WSDL`, this is configurable, but not secret, and should be set to "https://api3.lumesse-talenthub.com/CareerPortal/SOAP/FoAdvert?WSDL"
 
 ## SOAP
@@ -119,7 +122,7 @@ Each TalentLinkJob instance belongs to only one recruitment site.
 
 The import script loops through the instances of recruitment homepage on the system and import jobs for the job board defined on the instance.
 
-If a corresponding API_USERNANE for the job board (eg. `settings.TALENTLINK_EXTERNAL_API_USERNAME`) is not defined on settings, import will be skipped for the recruitment site.
+If a corresponding API_USERNANE for the job board (eg. `settings.TALENTLINK_API_USERNAME_EXTERNAL`) is not defined on settings, import will be skipped for the recruitment site.
 
 ### Imported fields
 

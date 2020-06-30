@@ -1,5 +1,6 @@
 .article-link-list {
     &__heading {
+        @include font-size(l);
         margin-bottom: $grid;
     }
 

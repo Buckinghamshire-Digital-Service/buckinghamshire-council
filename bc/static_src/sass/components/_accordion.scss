@@ -90,7 +90,7 @@
     }
 
     &__header {
-        @include font-size(m);
+        @include font-size(l);
         @include heading-text();
         color: $color--lake;
         margin: 0;

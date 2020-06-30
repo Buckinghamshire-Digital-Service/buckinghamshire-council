@@ -33,6 +33,7 @@
     }
 
     &__category-title {
+        @include font-size(s);
         margin: 0;
         margin-right: $grid--min;
         text-decoration: underline;

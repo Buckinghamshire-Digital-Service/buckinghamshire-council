@@ -28,6 +28,7 @@ nav:
   - 'Project conventions': 'project_conventions.md'
   - 'Hosting': 'hosting.md'
   - 'Front end tooling': 'front-end-tooling.md'
+  - 'Continuous deployment': 'continuous-deployment.md'
   - 'Continuous integration': 'continuous-integration.md'
   - 'Anonymised data': 'anonymised_data.md'
   - 'Data protection': 'data_protection.md'
