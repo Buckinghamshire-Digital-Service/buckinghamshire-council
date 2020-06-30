@@ -132,9 +132,6 @@ class ComplaintForm(BaseCaseForm):
                 "description",
                 "action_taken_01",
                 "additional_comments",
-                "title",
-                "first_name",
-                "last_name",
             )
         ]
 
@@ -395,12 +392,6 @@ class DisclosureForm(BaseCaseForm):
         label="The name of the act, the year and the number of the section",
         required=False,
     )
-
-    @property
-    def field_group_1(self):
-        return [
-            self[name] for name in ("description", "title", "first_name", "last_name",)
-        ]
 
     @property
     def append_to_description_fields(self):
