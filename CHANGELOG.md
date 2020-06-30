@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Add cookie banner to recruitment / jobs site
+- Add favicon to recruitment site
 
 ## 19.0 (2020-06-11)
 
