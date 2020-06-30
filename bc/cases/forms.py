@@ -28,6 +28,7 @@ from bc.utils.widgets import CustomCheckboxSelectMultiple, TelephoneNumberInput
 
 
 class BaseCaseForm(_BaseCaseForm):
+    use_required_attribute = False
 
     title = forms.CharField(label="Title", required=False)
     first_name = forms.CharField(label="First name")
