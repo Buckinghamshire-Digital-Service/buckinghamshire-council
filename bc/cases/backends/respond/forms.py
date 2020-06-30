@@ -126,6 +126,35 @@ class BaseCaseForm(django.forms.Form):
 
         return case
 
+    def _post_clean(self):
+        """Warn about cleared submitted file fields if there are any other errors."""
+        if self.errors:
+            for name, field in self.fields.items():
+                if isinstance(field, django.forms.FileField):
+                    if name in self.errors or not self.files:
+                        # Either there were no files attached, or there's already an
+                        # error associated with this field.
+                        continue
+                    files = self.files.getlist(self.add_prefix(name))
+                    if files:
+                        if len(files) > 1:
+                            file_list = "{}, and {}".format(
+                                ", ".join([f._name for f in files[:-1]]),
+                                files[-1]._name,
+                            )
+                            self.add_error(
+                                name,
+                                f"Your files {file_list} are no longer attached, due "
+                                "to errors with other fields; please reselect them",
+                            )
+                        else:
+                            self.add_error(
+                                name,
+                                f"Your file {files[0]._name} is no longer attached, "
+                                "due to errors with other fields; please reselect it",
+                            )
+        return super()._post_clean()
+
     def get_xml_string(self):
         return etree.tostring(self.get_xml(self.cleaned_data))
 

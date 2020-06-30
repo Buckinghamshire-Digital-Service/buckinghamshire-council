@@ -3,6 +3,7 @@ import textwrap
 from django import forms
 from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.core.validators import FileExtensionValidator
 from django.test import TestCase
 from django.utils.datastructures import MultiValueDict
 
@@ -13,6 +14,7 @@ from bc.cases.backends.respond.constants import (
     ATTACHMENT_SCHEMA_NAME,
     DESCRIPTION_SCHEMA_NAME,
     PREFERRED_CONTACT_METHOD_CHOICES,
+    VALID_FILE_EXTENSIONS,
 )
 from bc.cases.backends.respond.forms import BaseCaseForm
 from bc.cases.forms import ComplaintForm
@@ -427,3 +429,103 @@ class SchemaTest(TestCase):
             etree.fromstring(generated, self.parser)
         except etree.XMLSyntaxError:
             self.fail("XML failed to validate")
+
+
+class TestValidation(TestCase):
+    class NoFileForm(BaseCaseForm):
+        service_name = settings.RESPOND_SAR_WEBSERVICE
+        feedback_type = "SAR"
+
+        description = forms.CharField(label="Something")
+
+        field_schema_name_mapping = {"description": DESCRIPTION_SCHEMA_NAME}
+
+    class FileForm(NoFileForm):
+        attachments = forms.FileField(
+            label="Upload files",
+            required=False,
+            validators=[
+                FileExtensionValidator(allowed_extensions=VALID_FILE_EXTENSIONS)
+            ],
+            widget=forms.ClearableFileInput(attrs={"multiple": True}),
+        )
+        field_schema_name_mapping = {
+            "description": DESCRIPTION_SCHEMA_NAME,
+            "attachments": ATTACHMENT_SCHEMA_NAME,
+        }
+
+    def test_file_field_ordinarily_validates(self):
+        request_post = {
+            "description": "Please accept my resignation.",
+        }
+        request_files = MultiValueDict(
+            {
+                "attachments": [
+                    SimpleUploadedFile(
+                        "perfectly_normal_file.docx", b"There's nothing to see here."
+                    )
+                ]
+            }
+        )
+        form = self.FileForm(request_post, request_files)
+        self.assertTrue(form.is_valid())
+
+    def test_file_field_validates_if_blank(self):
+        request_post = {
+            "description": "Please accept my resignation.",
+        }
+        form = self.FileForm(request_post)
+        self.assertTrue(form.is_valid())
+
+        form_data = {
+            "description": "Some description",
+            "extra_field": "Two weeks last Sunday",
+        }
+        form = self.FileForm(form_data)
+        self.assertTrue(form.is_valid())
+
+    def test_populated_file_field_has_error_if_other_fields_do_not_validate(self):
+        request_post = {
+            "description": "",
+        }
+        filename = "perfectly_normal_file.docx"
+        request_files = MultiValueDict(
+            {
+                "attachments": [
+                    SimpleUploadedFile(filename, b"There's nothing to see here."),
+                ]
+            }
+        )
+        form = self.FileForm(request_post, request_files)
+        self.assertFalse(form.is_valid())
+        self.assertTrue("description" in form.errors)
+        self.assertTrue("attachments" in form.errors)
+        self.assertTrue(filename in form.errors["attachments"][0])
+
+    def test_unpopulated_file_field_is_fine_if_other_fields_do_not_validate(self):
+        request_post = {
+            "description": "",
+        }
+        form = self.FileForm(request_post)
+        self.assertFalse(form.is_valid())
+        self.assertTrue("description" in form.errors)
+        self.assertFalse("attachments" in form.errors)
+
+    def test_multiple_file_fields_error_lists_all_files(self):
+        attachments = [
+            SimpleUploadedFile(
+                "perfectly_normal_file.docx", b"There's nothing to see here."
+            ),
+            SimpleUploadedFile("password.txt", b"sensitive government secrets"),
+            SimpleUploadedFile("recipe.jpg", b"poor choice of data format"),
+        ]
+        request_post = {
+            "description": "",
+        }
+        request_files = MultiValueDict({"attachments": attachments})
+        form = self.FileForm(request_post, request_files)
+        self.assertFalse(form.is_valid())
+        self.assertTrue("description" in form.errors)
+        self.assertTrue("attachments" in form.errors)
+        for attachment in attachments:
+            self.assertTrue(attachment._name in form.errors["attachments"][0])
