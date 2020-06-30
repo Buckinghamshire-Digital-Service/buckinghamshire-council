@@ -5,9 +5,11 @@ class FeedbackWidget {
 
     constructor(node) {
         this.widget = node;
-        this.feedbackHeading = this.widget.querySelector('[data-feedback-heading]');
+        this.feedbackHeading = this.widget.querySelector(
+            '[data-feedback-heading]',
+        );
         this.feedbackButtons = this.widget.querySelectorAll(
-            '[data-feedback-button]'
+            '[data-feedback-button]',
         );
         this.bindEvents();
     }
@@ -16,9 +18,9 @@ class FeedbackWidget {
         this.feedbackButtons.forEach((feedbackButton) => {
             feedbackButton.addEventListener('click', () => {
                 this.widget.classList.remove('active');
-                this.feedbackHeading.innerText = "Thank you for your feedback!";
-           });
-       });
+                this.feedbackHeading.innerText = 'Thank you for your feedback!';
+            });
+        });
     }
 }
 
