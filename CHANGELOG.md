@@ -7,6 +7,7 @@
 - Adjust line height of headings
 - Progressive disclosure details (BE)
 - Update newsletter signup URL
+- Add favicon to recruitment site
 
 ## 19.1 (2020-06-23)
 
