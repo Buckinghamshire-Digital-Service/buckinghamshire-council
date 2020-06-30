@@ -8,6 +8,8 @@
 - Progressive disclosure details (BE)
 - Update newsletter signup URL
 - Add favicon to recruitment site
+- Reinstate display of promoted search results
+- Fix 'no results found' message when there is no search query
 
 ## 19.1 (2020-06-23)
 

@@ -7,8 +7,8 @@
         </a>
     </h3>
 
-    {% if result.listing_summary or result.search_description %}
-        <p class="search-result__description">{% firstof result.listing_summary result.search_description %}</p>
+    {% if pick.description or result.listing_summary or result.search_description %}
+        <p class="search-result__description">{% firstof pick.description result.listing_summary result.search_description %}</p>
     {% endif %}
 
     {% local_area_links result %}
