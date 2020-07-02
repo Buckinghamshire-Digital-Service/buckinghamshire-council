@@ -16,11 +16,14 @@ import Filters from './components/job-filters';
 
 // Add polyfill fix for forEach carousel
 import foreachPolyfill from './polyfills/foreach-polyfill';
+// Add polyfill fix for closest() method in conditional fields
+import closestPolyfill from './polyfills/closest-polyfill';
 import 'whatwg-fetch';
 
 import '../sass/main.scss';
 
 foreachPolyfill();
+closestPolyfill();
 
 // Open the mobile menu callback
 function openMobileMenu() {
