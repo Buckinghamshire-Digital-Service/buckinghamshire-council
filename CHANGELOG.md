@@ -16,6 +16,7 @@
 - Mobile-friendly tables
 - Accessibility 77 Remove horizontal scrolling for smaller mobile devices
 - Accessibility 78 Improve pagination link text (Silktide improvement)
+- Improve the method for returning a formatted Aptean Respond case reference number
 
 ## 19.1 (2020-06-23)
 
