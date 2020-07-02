@@ -168,7 +168,7 @@ DATABASES = {
 
 # Do not use the same Redis instance for other things like Celery!
 if "REDIS_URL" in env:
-    REDIS_FORCE_TLS = env.get("REDIS_FORCE_TLS", "true").lower() == "true"
+    REDIS_FORCE_TLS = env.get("REDIS_FORCE_TLS", "false").lower() == "true"
     REDIS_URL = env["REDIS_URL"]
     if REDIS_FORCE_TLS:
         REDIS_URL = REDIS_URL.replace("redis://", "rediss://")
