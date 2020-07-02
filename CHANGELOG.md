@@ -13,6 +13,9 @@
 - Enable embedding YouTube videos without using cookies and without showing
   unrelated video links
 - Make the homepage child sections 'menu' respect the 'show_in_menus' property
+- Mobile-friendly tables
+- Accessibility 77 Remove horizontal scrolling for smaller mobile devices
+- Accessibility 78 Improve pagination link text (Silktide improvement)
 
 ## 19.1 (2020-06-23)
 
@@ -46,7 +49,6 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/17.0...18.0
 - Add documentation about CI deployments
 - Update documentation about personally-identifying data
 - Add documentation about the procedure for resetting the staging branch/server/db
-- Accessibility 78 Improve pagination link text (Silktide improvement)
 
 ## 17.0 (2020-05-21)
 

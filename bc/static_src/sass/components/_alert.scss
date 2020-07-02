@@ -2,7 +2,7 @@
     $root: &;
 
     &__alpha {
-        display: block;
+        display: inline-block;
         background: $color--primary;
         color: $color--white;
         text-transform: uppercase;
@@ -12,8 +12,10 @@
     }
 
     &__inner {
-        display: flex;
-        align-items: baseline;
+        @include media-query(tablet-portrait) {
+            display: flex;
+            align-items: baseline;
+        }
     }
 
     &__header {
