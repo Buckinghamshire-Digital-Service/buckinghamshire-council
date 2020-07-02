@@ -10,5 +10,6 @@
 
     &__intro {
         @include font-size(m);
+        line-height: 1.3;
     }
 }

@@ -1,5 +1,25 @@
 # Release History
 
+## 20.0 (2020-07-02)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/19.1...20.0
+
+- Add cookie banner to recruitment / jobs site
+- Make max-width larger on main wrapper
+- Adjust line height of headings
+- Progressive disclosure details (BE)
+- Update newsletter signup URL
+- Add favicon to recruitment site
+- Reinstate display of promoted search results
+- Fix 'no results found' message when there is no search query
+- Enable embedding YouTube videos without using cookies and without showing
+  unrelated video links
+- Make the homepage child sections 'menu' respect the 'show_in_menus' property
+- Mobile-friendly tables
+- Accessibility 77 Remove horizontal scrolling for smaller mobile devices
+- Accessibility 78 Improve pagination link text (Silktide improvement)
+- Improve the method for returning a formatted Aptean Respond case reference number
+
 ## 19.1 (2020-06-23)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/19.0...19.1

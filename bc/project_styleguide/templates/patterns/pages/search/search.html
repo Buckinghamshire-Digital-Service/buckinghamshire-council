@@ -1,5 +1,5 @@
 {% extends base_page_template %}
-{% load static wagtailcore_tags wagtailsearchpromotions_tags %}
+{% load static wagtailcore_tags %}
 
 {% block body_class %}template-searchresults{% endblock %}
 
@@ -38,13 +38,18 @@
                 </header>
 
                 {% for result in search_results %}
-                    {% include "patterns/molecules/search-result/search-result.html" with result=result.specific %}
+                    {% if result.page %}
+                        {# search_promotion has attributes .page and .description #}
+                        {% include "patterns/molecules/search-result/search-result.html" with pick=result result=result.page.specific %}
+                    {% else %}
+                        {% include "patterns/molecules/search-result/search-result.html" with result=result.specific %}
+                    {% endif %}
                 {% endfor %}
 
                 {% include "patterns/molecules/pagination/pagination.html" with paginator_page=search_results %}
             </section>
 
-        {% else %}
+        {% elif search_query %}
             <p>No results found.</p>
         {% endif %}
     </div>

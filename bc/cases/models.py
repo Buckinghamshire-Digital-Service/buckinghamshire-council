@@ -13,7 +13,7 @@ from bs4 import BeautifulSoup
 
 from bc.cases.backends.respond.client import RespondClientException, get_client
 from bc.cases.backends.respond.constants import CREATE_CASE_SERVICES, CREATE_CASE_TYPE
-from bc.cases.utils import format_case_reference
+from bc.cases.utils import get_case_reference
 from bc.utils.constants import RICH_TEXT_FEATURES
 
 from ..utils.models import BasePage
@@ -108,7 +108,7 @@ class ApteanRespondCaseFormPage(BasePage):
                     form.add_error(None, error.text)
             return form, None
         else:
-            case_reference = format_case_reference(soup.find("case").attrs["Name"])
+            case_reference = get_case_reference(soup)
             return form, case_reference
 
     def get_landing_page_template(self, request, *args, **kwargs):

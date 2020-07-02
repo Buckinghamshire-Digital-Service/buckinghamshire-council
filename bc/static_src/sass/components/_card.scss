@@ -9,6 +9,8 @@
     &__title {
         @include font-size(s);
         transition: color $transition;
+        text-decoration: underline;
+        line-height: 1.3;
     }
 
     &__summary {

@@ -56,7 +56,13 @@ class HomePage(BasePage):
         Returns queryset of this page's live, public children that are of IndexPage class
         Ordered by Wagtail explorer custom sort (ie. path)
         """
-        return IndexPage.objects.child_of(self).live().public().order_by("path")
+        return (
+            IndexPage.objects.child_of(self)
+            .filter(show_in_menus=True)
+            .live()
+            .public()
+            .order_by("path")
+        )
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)

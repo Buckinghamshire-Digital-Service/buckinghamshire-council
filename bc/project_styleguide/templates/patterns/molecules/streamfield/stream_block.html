@@ -1,5 +1,11 @@
 {% load wagtailcore_tags %}
 
 {% for block in value %}
-    {% include_block block %}
+    {% if block.block_type == 'table' %}
+        <div class="table-container">
+            {% include_block block %}
+        </div>
+    {% else %}
+        {% include_block block %}
+    {% endif %}
 {% endfor %}

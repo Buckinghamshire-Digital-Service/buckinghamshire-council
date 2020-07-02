@@ -46,6 +46,7 @@
     // HEADER STYLES
     .apply-application-title-header {
         @include font-size(l);
+        line-height: 1.3;
         display: block;
         color: $color--grey-accessible;
         font-weight: $weight--normal;
@@ -58,10 +59,12 @@
         // info box below to align with the grey job details box in the sidebar
         @include font-size(xl);
         font-weight: $weight--bold;
+        line-height: 1.25;
         margin-bottom: 28px;
 
         @include media-query(mob-landscape) {
             @include font-size(xxl);
+            line-height: 1.2;
         }
     }
 
@@ -99,6 +102,7 @@
     .form-control,
     .text-input {
         @include font-size(m);
+        line-height: 1.3;
         border-radius: 0;
         padding: $grid--min;
         border: 2px solid $color--slate;
@@ -307,6 +311,7 @@
         h2 {
             @include font-size(l);
             font-weight: $weight--bold;
+            line-height: 1.3;
             color: $color--link;
         }
     }
@@ -355,6 +360,7 @@
     .sFontWeight-bold {
         @include font-size(m);
         font-weight: $weight--bold;
+        line-height: 1.3;
         margin-bottom: 5px;
     }
     /* stylelint-enable selector-class-pattern  */
@@ -366,7 +372,7 @@
 
         fieldset::before {
             @include font-size(xl);
-            line-height: 28px;
+            line-height: 1.25;
             content: '*';
             color: $color--purple;
             position: absolute;
