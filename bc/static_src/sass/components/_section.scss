@@ -6,11 +6,7 @@
         @include media-query(desktop) {
             max-width: $wrapper--small;
         }
-
-        @include media-query(desktop) {
-            max-width: $wrapper--small;
-        }
-
+        
         &:only-child {
             margin: 0 auto $grid--large;
             max-width: none;
