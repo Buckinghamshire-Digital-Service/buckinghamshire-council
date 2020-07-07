@@ -9,7 +9,7 @@
     &__content {
         color: $color--white;
         display: flex;
-        padding: $grid--small 0;
+        padding: ($grid / 2) 0;
     }
 
     &__heading {
