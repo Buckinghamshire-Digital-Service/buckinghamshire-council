@@ -1,0 +1,26 @@
+{% load wagtailcore_tags %}
+
+<div class="accordion accordion--detail" data-accordion>
+    <a
+        href=""
+        class="accordion__title"
+        data-accordion-question
+        role="tab"
+        aria-controls="answer-{{ value.title|slugify }}"
+        aria-expanded="false"
+        aria-selected="false"
+        id="question-{{ value.title|slugify }}">
+        {% include "patterns/atoms/icons/icon.html" with name="chevron" classname="icon--stroke accordion__icon" viewBox="0 0 51.8 103.7" %}
+        <p class="accordion__header">{{ value.title }}</p>
+    </a>
+    <div
+        aria-live="polite"
+        class="accordion__content"
+        data-accordion-answer
+        id="answer-{{ value.title|slugify }}"
+        role="tabpanel"
+        aria-labelledby="question-{{ value.title|slugify }}"
+        aria-hidden="false">
+        {{ value.content|richtext }}
+    </div>
+</div>

@@ -8,6 +8,7 @@ class CookieWarning {
     constructor(node) {
         this.dismissButton = document.querySelector('[data-cookie-dismiss]');
         this.messageContainer = node;
+        this.cookieDomain = window.COOKIE_DOMAIN;
         this.cookieName = 'client-cookie';
         this.cookieValue = 'agree to cookies';
         this.cookieDuration = 365;
@@ -37,6 +38,7 @@ class CookieWarning {
         this.messageContainer.classList.add(this.inactiveClass);
         // Set cookie
         Cookies.set(this.cookieName, this.cookieValue, {
+            domain: this.cookieDomain,
             expires: this.cookieDuration,
         });
     }

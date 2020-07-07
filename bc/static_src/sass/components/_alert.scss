@@ -2,7 +2,7 @@
     $root: &;
 
     &__alpha {
-        display: block;
+        display: inline-block;
         background: $color--primary;
         color: $color--white;
         text-transform: uppercase;
@@ -12,8 +12,14 @@
     }
 
     &__inner {
-        display: flex;
-        align-items: baseline;
+        @include media-query(tablet-portrait) {
+            display: flex;
+            align-items: baseline;
+        }
+    }
+
+    &__header {
+        @include font-size(xl);
     }
 
     &--message {
@@ -53,18 +59,20 @@
         #{$root}__title {
             @include font-size(xxl);
             font-weight: $weight--bold;
+            line-height: 1.2;
             margin-bottom: $grid--min;
         }
 
         #{$root}__body {
             @include font-size(xl);
-            line-height: 1.2;
+            line-height: 1.25;
         }
     }
 
     &__ref {
         @include font-size(xl);
         display: block;
+        line-height: 1.25;
         font-weight: $weight--bold;
     }
 

@@ -34,7 +34,7 @@
 
         <div class="search__results-wrapper wrapper wrapper--flex">
             <div class="search__filters" aria-labelledby="filter-jobs">
-                <h2 class="heading heading--m" id="filter-jobs">Filter jobs</h2>
+                <h2 class="search__filters-title heading" id="filter-jobs">Filter jobs</h2>
                 {# linked to the job search above - see 'molecules/search-filters/search-filters.html' #}
                 {% jobs_search_filters request unfiltered_results %}
             </div>
@@ -43,10 +43,10 @@
                     <header class="search__results-header">
                         {% with count=search_results.paginator.count %}
                             {% if search_query %}
-                                <h2 class="heading heading--l">{{ count }} job{{ count|pluralize }} found for ‘{{ search_query }}’</h2>
+                                <h2 class="search__results-title heading">{{ count }} job{{ count|pluralize }} found for ‘{{ search_query }}’</h2>
                                 <a href="/search">Clear</a>
                             {% else %}
-                                <h2 class="heading heading--l">{{ count }} job{{ count|pluralize }} found</h2>
+                                <h2 class="search__results-title heading">{{ count }} job{{ count|pluralize }} found</h2>
                             {% endif %}
                         {% endwith %}
 

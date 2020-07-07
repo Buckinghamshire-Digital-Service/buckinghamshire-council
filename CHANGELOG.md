@@ -2,9 +2,41 @@
 
 ## Unreleased
 
+## 20.0 (2020-07-02)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/19.1...20.0
+
+- Add cookie banner to recruitment / jobs site
+- Make max-width larger on main wrapper
+- Adjust line height of headings
+- Progressive disclosure details (BE)
+- Update newsletter signup URL
+- Add favicon to recruitment site
+- Reinstate display of promoted search results
+- Fix 'no results found' message when there is no search query
+- Enable embedding YouTube videos without using cookies and without showing
+  unrelated video links
+- Make the homepage child sections 'menu' respect the 'show_in_menus' property
+- Mobile-friendly tables
+- Accessibility 77 Remove horizontal scrolling for smaller mobile devices
+- Accessibility 78 Improve pagination link text (Silktide improvement)
+- Improve the method for returning a formatted Aptean Respond case reference number
+
+## 19.1 (2020-06-23)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/19.0...19.1
+
+- Add cache prevention headers to Aptean Respond form pages
+
+## 19.0 (2020-06-11)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/18.0...19.0
+
+- Upgrade Wagtail to 2.9
 - 404 page
 - Styling of label text on checkboxes and radio buttons
 - Remove current page from breadcrumbs
+- Adjust margins before / after buttons and other elements
 - Fix search results font sizes / styling
 - Fix incorrect heading levels for body text headings and subheadings
 - Accessibility 79 Hide sidebar when there are no related pages

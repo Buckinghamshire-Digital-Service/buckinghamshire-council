@@ -4,6 +4,8 @@ Django settings for bc project.
 import os
 import sys
 
+from wagtail.embeds.oembed_providers import youtube
+
 import dj_database_url
 import raven
 from raven.exceptions import InvalidGitRepository
@@ -120,7 +122,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "wagtail.core.middleware.SiteMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
 
@@ -169,11 +170,13 @@ DATABASES = {
 
 # Do not use the same Redis instance for other things like Celery!
 if "REDIS_URL" in env:
+    REDIS_FORCE_TLS = env.get("REDIS_FORCE_TLS", "false").lower() == "true"
+    REDIS_URL = env["REDIS_URL"]
+    if REDIS_FORCE_TLS:
+        REDIS_URL = REDIS_URL.replace("redis://", "rediss://")
+
     CACHES = {
-        "default": {
-            "BACKEND": "django_redis.cache.RedisCache",
-            "LOCATION": env["REDIS_URL"],
-        }
+        "default": {"BACKEND": "django_redis.cache.RedisCache", "LOCATION": REDIS_URL}
     }
 else:
     CACHES = {
@@ -190,6 +193,14 @@ WAGTAILSEARCH_BACKENDS = {
     "default": {"BACKEND": "wagtail.contrib.postgres_search.backend"}
 }
 
+
+WAGTAILEMBEDS_FINDERS = [
+    {
+        "class": "bc.utils.embed_finders.YouTubeNoCookieAndRelFinder",
+        "providers": [youtube],
+    },
+    {"class": "wagtail.embeds.finders.oembed"},
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/stable/ref/settings/#auth-password-validators
@@ -669,6 +680,9 @@ FATHOM_SITE_ID = env.get("FATHOM_SITE_ID")
 
 # For Yandex search indexing verification
 YANDEX_VERIFICATION_STRING = env.get("YANDEX_VERIFICATION_STRING")
+
+# Current domain for setting cookies
+COOKIE_DOMAIN = env.get("COOKIE_DOMAIN", "")
 
 
 # GOV.UK Notify service

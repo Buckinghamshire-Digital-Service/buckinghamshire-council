@@ -1,15 +1,11 @@
 .footer-links {
-    display: flex;
-    flex-wrap: wrap;
     width: 100%;
 
-    @include media-query(tablet-portrait) {
-        flex-direction: row;
-    }
-
     &__item {
-        margin-bottom: $grid--small;
+        display: inline-block;
+        margin-bottom: $grid--min;
         margin-right: $grid--small;
+        vertical-align: middle;
 
         @include media-query(tablet-portrait) {
             margin-right: $grid;
