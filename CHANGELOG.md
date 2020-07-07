@@ -7,6 +7,7 @@
 - Remove current page from breadcrumbs
 - Fix search results font sizes / styling
 - Fix incorrect heading levels for body text headings and subheadings
+- Accessibility 79 Hide sidebar when there are no related pages
 
 ## 18.0 (2020-06-04)
 
