@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Accessibility 79 Hide sidebar aria-labelledby attribute when there are no related pages
+
 ## 20.0 (2020-07-02)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/19.1...20.0
@@ -39,7 +41,6 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/18.0...19.0
 - Adjust margins before / after buttons and other elements
 - Fix search results font sizes / styling
 - Fix incorrect heading levels for body text headings and subheadings
-- Accessibility 79 Hide sidebar when there are no related pages
 
 ## 18.0 (2020-06-04)
 
