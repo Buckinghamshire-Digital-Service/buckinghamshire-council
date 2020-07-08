@@ -22,24 +22,24 @@ class AlertTest(TestCase):
 
     def test_non_cascading_alert_got_for_page(self):
         alert = AlertFactory(page=self.homepage, show_on=Alert.PAGE_ONLY)
-        alerts = get_alerts(self.homepage)
+        alerts = Alert.get_alerts_for_page(self.homepage)
         self.assertEqual(len(alerts), 1)
         self.assertEqual(alerts[0], alert)
 
     def test_non_cascading_alert_not_got_for_child_page(self):
         AlertFactory(page=self.homepage, show_on=Alert.PAGE_ONLY)
-        alerts = get_alerts(self.child)
+        alerts = Alert.get_alerts_for_page(self.child)
         self.assertEqual(len(alerts), 0)
 
     def test_cascading_alert_got_for_page(self):
         alert = AlertFactory(page=self.homepage, show_on=Alert.PAGE_AND_DESCENDANTS)
-        alerts = get_alerts(self.homepage)
+        alerts = Alert.get_alerts_for_page(self.homepage)
         self.assertEqual(len(alerts), 1)
         self.assertEqual(alerts[0], alert)
 
     def test_cascading_alert_got_for_child_page(self):
         alert = AlertFactory(page=self.homepage, show_on=Alert.PAGE_AND_DESCENDANTS)
-        alerts = get_alerts(self.child)
+        alerts = Alert.get_alerts_for_page(self.child)
         self.assertEqual(len(alerts), 1)
         self.assertEqual(alerts[0], alert)
 
@@ -48,7 +48,21 @@ class AlertTest(TestCase):
         homepage_alert = AlertFactory(
             page=self.homepage, show_on=Alert.PAGE_AND_DESCENDANTS
         )
-        alerts = get_alerts(self.child)
+        alerts = Alert.get_alerts_for_page(self.child)
         self.assertEqual(len(alerts), 2)
         self.assertEqual(alerts[0], homepage_alert)
         self.assertEqual(alerts[1], child_alert)
+
+    def test_template_tag_works_for_pages(self):
+        try:
+            get_alerts(self.homepage)
+        except Exception:
+            self.fail("get_alerts tag raised an error unexpectedly")
+
+    def test_template_tag_works_for_non_page_requests(self):
+        for page_arg in ["abc", None, {"foo": "bar"}]:
+            with self.subTest(page_arg=page_arg):
+                try:
+                    get_alerts(page_arg)
+                except Exception:
+                    self.fail("get_alerts tag raised an error unexpectedly")

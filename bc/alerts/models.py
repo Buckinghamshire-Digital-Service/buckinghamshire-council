@@ -3,6 +3,7 @@ from django.db import models
 
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, PageChooserPanel
 from wagtail.core.fields import RichTextField
+from wagtail.core.models import Page
 
 from bc.utils.constants import RICH_PARAGRAPH_FEATURES
 
@@ -47,3 +48,12 @@ class Alert(models.Model):
 
     def __str__(self):
         return self.title
+
+    @classmethod
+    def get_alerts_for_page(cls, page):
+        if not isinstance(page, Page):
+            return cls.objects.none()
+        return cls.objects.filter(
+            models.Q(page__in=page.get_ancestors(), show_on=cls.PAGE_AND_DESCENDANTS)
+            | models.Q(page=page)
+        ).order_by("page__path")

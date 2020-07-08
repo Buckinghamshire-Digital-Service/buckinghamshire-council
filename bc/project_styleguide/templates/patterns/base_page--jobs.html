@@ -1,6 +1,6 @@
 {% extends "patterns/base.html" %}
 
-{% load static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags %}
+{% load static wagtailuserbar wagtailcore_tags wagtailimages_tags alert_tags navigation_tags util_tags %}
 
 {% block meta_tags %}
     {% if GOOGLE_TAG_MANAGER_ID %}
@@ -83,6 +83,17 @@
 
     {% include "patterns/organisms/header/header-jobs.html" %}
 {% endblock header %}
+
+{% block alerts %}
+    {% get_alerts page as alerts %}
+    {% if alerts %}
+        <div class="wrapper wrapper--large">
+        {% for alert in alerts %}
+            {% include "patterns/molecules/alerts/alert-message-sitewide.html" %}
+        {% endfor %}
+        </div>
+    {% endif %}
+{% endblock alerts %}
 
 {% block footer %}
     {% include "patterns/organisms/footer/footer.html" %}
