@@ -1,6 +1,4 @@
 context:
-  title: Coronavirus
-  body: Local information on coronavirus including service changes and how to help.
-  link:
-    url: #
-    text: Read about coronavirus changes
+  alert:
+    title: Coronavirus
+    content: <p>Local information on coronavirus including <a href="#">service changes</a> and how to help.</p>

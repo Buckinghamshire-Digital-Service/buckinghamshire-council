@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Sitewide alert messages
+
 ## 20.0 (2020-07-02)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/19.1...20.0

@@ -265,27 +265,6 @@ class SystemMessagesSettings(BaseSetting):
     ]
 
 
-@register_setting
-class SiteBannerSettings(BaseSetting):
-    class Meta:
-        verbose_name = "Site banner"
-
-    show_banner = models.BooleanField(
-        default=False,
-        help_text="When set to True, the banner will be displayed on all pages of "
-        + "the site except for homepage. For homepage, please use the alert fields on homepage.",
-    )
-    label = models.CharField("Alert label", max_length=255)
-    body = RichTextField("Text", features=RICH_TEXT_FEATURES)
-
-    panels = [
-        MultiFieldPanel(
-            [FieldPanel("show_banner"), FieldPanel("label"), FieldPanel("body")],
-            "Banner",
-        )
-    ]
-
-
 # Apply default cache headers on this page model's serve method.
 @method_decorator(get_default_cache_control_decorator(), name="serve")
 class BasePage(SocialFields, ListingFields, Page):
