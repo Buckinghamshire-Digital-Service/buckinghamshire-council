@@ -1,5 +1,12 @@
 # Release History
 
+## 21.0 (2020-07-09)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/20.0...21.0
+
+- Accessibility 79 Hide sidebar aria-labelledby attribute when there are no related pages
+- Add page feedback widget
+
 ## 20.0 (2020-07-02)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/19.1...20.0
