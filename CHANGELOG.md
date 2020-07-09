@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Accessibility 79 Hide sidebar aria-labelledby attribute when there are no related pages
+- Add page feedback widget
 
 ## 20.0 (2020-07-02)
 
