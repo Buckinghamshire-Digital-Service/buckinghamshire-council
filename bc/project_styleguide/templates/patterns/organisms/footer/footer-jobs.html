@@ -1,0 +1,40 @@
+{% load static wagtailuserbar wagtailcore_tags navigation_tags util_tags %}
+
+{% include "patterns/molecules/feedback-widget/feedback-widget.html" %}
+
+<div class="footer">
+    <div class="footer__inner wrapper wrapper--large">
+        <div class="footer__nav-container">
+            <div>
+                {% footerlinks %}
+            </div>
+
+            {% if settings.utils.SocialMediaSettings.twitter_handle or settings.utils.SocialMediaSettings.facebook_app_id %}
+
+                <div class="footer__social-links">
+                    <p class="footer__social-links-text">Follow Buckinghamshire Council careers</p>
+
+                    {% if settings.utils.SocialMediaSettings.facebook_app_id %}
+                        <a href="https://www.facebook.com/{{ settings.utils.SocialMediaSettings.facebook_app_id }}">
+                            {% include "patterns/atoms/icons/icon.html" with name="facebook" classname="icon--footer-social" %}
+                        </a>
+                    {% endif %}
+                    {% if settings.utils.SocialMediaSettings.twitter_handle %}
+                        <a href="https://twitter.com/{{ settings.utils.SocialMediaSettings.twitter_handle }}">
+                            {% include "patterns/atoms/icons/icon.html" with name="twitter" classname="icon--footer-social" %}
+                        </a>
+                    {% endif %}
+                    {% if settings.utils.SocialMediaSettings.youtube_channel_url %}
+                        <a href="{{ settings.utils.SocialMediaSettings.youtube_channel_url }}">
+                            {% include "patterns/atoms/icons/icon.html" with name="youtube" classname="icon--footer-social" %}
+                        </a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="footer__credit">
+            <p>© {% now "Y" %} {{ settings.utils.SocialMediaSettings.site_name }}</p>
+        </div>
+    </div>
+</div>
