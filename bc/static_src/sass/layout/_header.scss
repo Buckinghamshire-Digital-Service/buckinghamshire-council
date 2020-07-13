@@ -56,6 +56,7 @@
     &__heading-title {
         @include font-size(xl);
         color: $color--white;
+        flex: 0 1 100%;
         font-weight: $weight--bold;
         line-height: 1.25;
         margin-top: $grid--min;
@@ -71,16 +72,28 @@
             @include font-size(xl);
             line-height: 1.25;
             margin-top: 0;
+            flex: auto;
         }
     }
-
     &__heading-logo {
         background-color: $color--white;
+        display: inline-block;
         max-height: 44px;
-        padding: 3px 3px 0 3px;
+        vertical-align: middle;
 
-        @include media-query(px550) {
-            align-self: flex-end;
+        &--padding {
+           padding: 3px 3px 0 3px;
+        }
+
+        &:first-child {
+            margin-right: 5px;
+            margin-bottom: 3px;
+        }
+
+        @include media-query(tablet) {
+            &:first-child {
+                margin-bottom: 0;
+            }
         }
     }
 }
