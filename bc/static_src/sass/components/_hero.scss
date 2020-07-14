@@ -16,12 +16,6 @@
         margin-bottom: $grid;
     }
 
-    &--with-alert {
-        @include media-query(tablet-portrait) {
-            padding-bottom: 60px;
-        }
-    }
-
     &--jobs {
         background-color: $color--earth;
         margin-bottom: $grid--large;

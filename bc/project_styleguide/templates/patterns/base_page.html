@@ -111,7 +111,7 @@
 {% block alerts %}
     {% get_alerts page as alerts %}
     {% if alerts %}
-        <div class="wrapper wrapper--large">
+        <div class="wrapper wrapper--large wrapper--margin">
         {% for alert in alerts %}
             {% include "patterns/molecules/alerts/alert-message-sitewide.html" %}
         {% endfor %}
