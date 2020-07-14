@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add Restless logo to jobs header
+
 ## 21.0 (2020-07-09)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/20.0...21.0
