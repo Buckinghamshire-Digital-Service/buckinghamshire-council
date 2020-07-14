@@ -2,15 +2,15 @@
 {% load wagtailcore_tags wagtailimages_tags navigation_tags static %}
 
 {% block content %}
-    <section class="section section--main" aria-labelledby="page-title">
-        <h1 class="heading heading--xxl" id="page-title">{{ page.title }}</h1>
+    <div class="section section--main">
+        <h1 class="heading heading--xxl">{{ page.title }}</h1>
 
         {% if page.introduction %}
             <p>{{ page.introduction }}</p>
         {% endif %}
 
         {% if featured_pages %}
-            <div class="grid grid--index">
+            <section class="grid grid--index" aria-label="Featured subpages">
                 {% for subpage in featured_pages %}
                     <a class="card" href="{% pageurl subpage %}">
                         <h2 class="card__title heading">
@@ -21,11 +21,11 @@
                         {% endif %}
                     </a>
                 {% endfor %}
-            </div>
+            </section>
         {% endif %}
 
         {% if ordinary_pages %}
-            <div class="listing">
+            <section class="listing" aria-label="Subpages">
                 {% for subpage in ordinary_pages %}
                     <article class="listing__item" aria-labelledby="listing__item--{{ forloop.counter }}">
                         <a class="listing__link" href="{% pageurl subpage %}">
@@ -38,8 +38,8 @@
                         {% endif %}
                     </article>
                 {% endfor %}
-            </div>
+            </section>
         {% endif %}
 
-    </section>
+    </div>
 {% endblock %}

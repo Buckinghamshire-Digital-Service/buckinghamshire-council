@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <section class="main-body">
+    <div class="main-body">
         <div class="container">
             {% if page.form_fields.exists %}
                     <form action="{% pageurl page %}" method="post" class="form form--standard" data-form>
@@ -64,6 +64,6 @@
                     </form>
                 {% endif %}
         </div>
-    </section>
+    </div>
 
 {% endblock %}

@@ -39,7 +39,7 @@
                 {% jobs_search_filters request unfiltered_results %}
             </div>
 
-                <section class="search__results">
+                <section class="search__results" aria-label="Search results">
                     <header class="search__results-header">
                         {% with count=search_results.paginator.count %}
                             {% if search_query %}

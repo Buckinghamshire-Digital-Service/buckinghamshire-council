@@ -30,7 +30,7 @@
         </form>
 
         {% if search_results %}
-            <section class="search__results">
+            <section class="search__results" aria-label="Search results">
                 <header class="search__results-header">
                     {% with count=search_results.paginator.count %}
                         <h2 class="heading heading--l">{{ count }} result{{ count|pluralize }} for ‘{{ search_query }}’</h2>
