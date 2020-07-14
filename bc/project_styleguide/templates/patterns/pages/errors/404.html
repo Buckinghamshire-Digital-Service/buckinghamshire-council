@@ -5,17 +5,6 @@
     {% include "patterns/molecules/hero/hero-404.html" %}
 {% endblock %}
 
-{% block alerts %}
-    {% get_alerts page as alerts %}
-    {% if alerts %}
-        <div class="wrapper wrapper--large wrapper--margin">
-        {% for alert in alerts %}
-            {% include "patterns/molecules/alerts/alert-message-sitewide.html" %}
-        {% endfor %}
-        </div>
-    {% endif %}
-{% endblock alerts %}
-
 {% block body_class %}template-404{% endblock %}
 
 {% block breadcrumbs %}{% endblock %}
