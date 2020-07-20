@@ -4,6 +4,7 @@
 
 - Add Restless logo to jobs header
 - Jobs 166 set up reuse application button
+- Fix for bottom of homepage displaying incorrectly on IE11
 
 ## 21.0 (2020-07-09)
 
