@@ -14,17 +14,17 @@
                     <p class="footer__social-links-text">Follow Buckinghamshire Council careers</p>
 
                     {% if settings.utils.SocialMediaSettings.facebook_app_id %}
-                        <a href="https://www.facebook.com/{{ settings.utils.SocialMediaSettings.facebook_app_id }}">
+                        <a href="https://www.facebook.com/{{ settings.utils.SocialMediaSettings.facebook_app_id }}" target="_blank" rel="nofollow noreferrer">
                             {% include "patterns/atoms/icons/icon.html" with name="facebook" classname="icon--footer-social" %}
                         </a>
                     {% endif %}
                     {% if settings.utils.SocialMediaSettings.twitter_handle %}
-                        <a href="https://twitter.com/{{ settings.utils.SocialMediaSettings.twitter_handle }}">
+                        <a href="https://twitter.com/{{ settings.utils.SocialMediaSettings.twitter_handle }}" target="_blank" rel="nofollow noreferrer">
                             {% include "patterns/atoms/icons/icon.html" with name="twitter" classname="icon--footer-social" %}
                         </a>
                     {% endif %}
                     {% if settings.utils.SocialMediaSettings.youtube_channel_url %}
-                        <a href="{{ settings.utils.SocialMediaSettings.youtube_channel_url }}">
+                        <a href="{{ settings.utils.SocialMediaSettings.youtube_channel_url }}" target="_blank" rel="nofollow noreferrer">
                             {% include "patterns/atoms/icons/icon.html" with name="youtube" classname="icon--footer-social" %}
                         </a>
                     {% endif %}
