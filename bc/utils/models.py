@@ -247,6 +247,11 @@ class SocialMediaSettings(BaseSetting):
         help_text="Site name, used by Open Graph.",
     )
 
+    def has_any_setting(self):
+        return any(
+            [self.twitter_handle, self.facebook_app_id, self.youtube_channel_url]
+        )
+
 
 @register_setting
 class SystemMessagesSettings(BaseSetting):

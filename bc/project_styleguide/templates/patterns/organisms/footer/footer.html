@@ -9,7 +9,7 @@
                 {% footerlinks %}
             </div>
 
-            {% if settings.utils.SocialMediaSettings.twitter_handle or settings.utils.SocialMediaSettings.facebook_app_id or settings.utils.SocialMediaSettings.youtube_channel_url %}
+            {% if settings.utils.SocialMediaSettings.has_any_setting %}
                 <div class="footer__social-links">
                     {% if settings.utils.SocialMediaSettings.facebook_app_id %}
                         <a href="https://www.facebook.com/{{ settings.utils.SocialMediaSettings.facebook_app_id }}" target="_blank" rel="nofollow noreferrer">
