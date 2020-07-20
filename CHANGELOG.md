@@ -4,6 +4,8 @@
 
 - Add Restless logo to jobs header
 - Jobs 166 set up reuse application button
+- Configure Wagtail's Cloudflare front end cache invalidation
+- Add to documentation about caching infrastructure
 
 ## 21.0 (2020-07-09)
 
