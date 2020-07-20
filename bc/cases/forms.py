@@ -272,7 +272,10 @@ class SARForm(BaseCaseForm):
         required=False,
         validators=[FileExtensionValidator(allowed_extensions=VALID_FILE_EXTENSIONS)],
         widget=forms.ClearableFileInput(attrs={"multiple": True}),
-        help_text="Upload proof of identity to help us process your request quicker.",
+        help_text="To help us process your request quicker, upload two "
+        "forms of ID that clearly show your name, date of birth and "
+        "current address. For example, your driving license and a utility "
+        "bill or birth certificate.",
     )
 
     @property
@@ -420,6 +423,9 @@ class DisclosureForm(BaseCaseForm):
     )
     attachments = forms.FileField(
         label="Upload files",
+        help_text="Upload a copy of your organisation’s disclosure request form. "
+        "If you do not upload this, there may be a delay in processing your request. "
+        "You can also upload any other relevant documents. ",
         required=False,
         validators=[FileExtensionValidator(allowed_extensions=VALID_FILE_EXTENSIONS)],
         widget=forms.ClearableFileInput(attrs={"multiple": True}),
