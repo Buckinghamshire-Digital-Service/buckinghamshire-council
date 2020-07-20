@@ -144,14 +144,14 @@ class BaseCaseForm(django.forms.Form):
                             )
                             self.add_error(
                                 name,
-                                f"Your files {file_list} are no longer attached, due "
-                                "to errors with other fields; please reselect them",
+                                f"Your files {file_list} are no longer attached due "
+                                "to errors with other fields, please add them again",
                             )
                         else:
                             self.add_error(
                                 name,
-                                f"Your file {files[0]._name} is no longer attached, "
-                                "due to errors with other fields; please reselect it",
+                                f"Your file {files[0]._name} is no longer attached "
+                                "due to errors with other fields, please add them again",
                             )
         return super()._post_clean()
 
