@@ -82,7 +82,7 @@ class BaseCaseForm(_BaseCaseForm):
 
         # Add conditional required field error messages
         contact_method = cleaned_data.get("contact_method")
-        if contact_method == CONTACT_METHOD_EMAIL and not cleaned_data.get("email"):
+        if contact_method == CONTACT_METHOD_EMAIL and not self.data["email"]:
             self.add_error("email", "Enter your email address")
         if contact_method == CONTACT_METHOD_POST:
             for field_name in ["address_01", "town", "county", "postcode"]:
