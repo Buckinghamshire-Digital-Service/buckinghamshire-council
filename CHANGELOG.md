@@ -7,6 +7,7 @@
 - Accessibility 47 Increase contrast of form help text
 - Accessibility 80 Improve landmark aria labelling
 - Accessibility 81 Content not included in landmarks
+- Jobs Search - Improve tabs in filter jobs
 
 ## 21.0 (2020-07-09)
 
