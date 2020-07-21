@@ -4,6 +4,7 @@
 
 - Add Restless logo to jobs header
 - Jobs 166 set up reuse application button
+- Accessibility 80 Improve landmark aria labelling
 
 ## 21.0 (2020-07-09)
 

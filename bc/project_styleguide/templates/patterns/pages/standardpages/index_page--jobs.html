@@ -9,7 +9,7 @@
 {% block breadcrumbs %}{% endblock %}
 
 {% block content %}
-    <section class="section section--main">
+    <section class="section section--main" aria-label="subpages">
         <div class="grid grid--index">
             {% for subpage in subpages %}
                 <a class="card card--jobs" href="{% pageurl subpage %}">

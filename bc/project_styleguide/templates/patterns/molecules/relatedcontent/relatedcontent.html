@@ -1,7 +1,7 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
 {% if related_documents or related_pages %}
-    <section class="grid">
+    <section class="grid" aria-label="Related content">
         {% if related_documents %}
             {% for related_document in related_documents %}
                 {% with document=related_document.document %}
@@ -31,7 +31,7 @@
                                 {% image specific_related_page.listing_image fill-450x300 %}
                             {% endif %}
                             <h2>
-				{% firstof specific_related_page.listing_title specific_related_page.title %}
+                                {% firstof specific_related_page.listing_title specific_related_page.title %}
                             </h2>
                             {% if specific_related_page.listing_summary or specific_related_page.introduction %}
                                 <p>{% firstof specific_related_page.listing_summary specific_related_page.introduction %}</p>
