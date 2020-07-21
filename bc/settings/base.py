@@ -477,22 +477,41 @@ if "SENTRY_DSN" in env:
 # This is a configuration of the CDN/front-end cache that is used to cache the
 # production websites.
 # https://docs.wagtail.io/en/latest/reference/contrib/frontendcache.html
-# You are required to set the following environment variables:
-#  * FRONTEND_CACHE_CLOUDFLARE_TOKEN
-#  * FRONTEND_CACHE_CLOUDFLARE_EMAIL
-#  * FRONTEND_CACHE_CLOUDFLARE_ZONEID
-# Can be obtained from a sysadmin.
+# The backend can be configured to use an account-wide API key, or an API token with
+# restricted access.
 
-if "FRONTEND_CACHE_CLOUDFLARE_TOKEN" in env:
+if (
+    "FRONTEND_CACHE_CLOUDFLARE_TOKEN" in env
+    or "FRONTEND_CACHE_CLOUDFLARE_BEARER_TOKEN" in env
+):
     INSTALLED_APPS.append("wagtail.contrib.frontend_cache")
     WAGTAILFRONTENDCACHE = {
         "default": {
             "BACKEND": "wagtail.contrib.frontend_cache.backends.CloudflareBackend",
-            "EMAIL": env["FRONTEND_CACHE_CLOUDFLARE_EMAIL"],
-            "TOKEN": env["FRONTEND_CACHE_CLOUDFLARE_TOKEN"],
             "ZONEID": env["FRONTEND_CACHE_CLOUDFLARE_ZONEID"],
         }
     }
+
+    if "FRONTEND_CACHE_CLOUDFLARE_TOKEN" in env:
+        # To use an account-wide API key, set the following environment variables:
+        #  * FRONTEND_CACHE_CLOUDFLARE_TOKEN
+        #  * FRONTEND_CACHE_CLOUDFLARE_EMAIL
+        #  * FRONTEND_CACHE_CLOUDFLARE_ZONEID
+        # These can be obtained from a sysadmin.
+        WAGTAILFRONTENDCACHE["default"].update(
+            {
+                "EMAIL": env["FRONTEND_CACHE_CLOUDFLARE_EMAIL"],
+                "TOKEN": env["FRONTEND_CACHE_CLOUDFLARE_TOKEN"],
+            }
+        )
+
+    elif "FRONTEND_CACHE_CLOUDFLARE_BEARER_TOKEN" in env:
+        # To use an API token with restricted access, set the following environment variables:
+        #  * FRONTEND_CACHE_CLOUDFLARE_BEARER_TOKEN
+        #  * FRONTEND_CACHE_CLOUDFLARE_ZONEID
+        WAGTAILFRONTENDCACHE["default"].update(
+            {"BEARER_TOKEN": env["FRONTEND_CACHE_CLOUDFLARE_BEARER_TOKEN"]}
+        )
 
 
 # Set s-max-age header that is used by reverse proxy/front end cache. See

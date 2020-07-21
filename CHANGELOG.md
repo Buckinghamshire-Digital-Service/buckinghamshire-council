@@ -4,6 +4,8 @@
 
 - Add Restless logo to jobs header
 - Jobs 166 set up reuse application button
+- Configure Wagtail's Cloudflare front end cache invalidation
+- Add to documentation about caching infrastructure
 - Accessibility 47 Increase contrast of form help text
 - Accessibility 80 Improve landmark aria labelling
 - Accessibility 81 Content not included in landmarks
