@@ -186,9 +186,9 @@
     }
 
     &__help {
-        @include font-size(s);
-        margin-top: 5px;
-        color: rgba($color--default, 0.6);
+        @include font-size(xs);
+        margin: -5px 0 5px 0;
+        color: $color--charcoal-75;
     }
 
     textarea {
