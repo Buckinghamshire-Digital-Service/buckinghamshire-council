@@ -22,8 +22,8 @@
         <div class="wrapper wrapper--page">
             <h1 class="heading heading--xxl">Search Jobs</h1>
 
-            <form action="{% url 'search' %}" method="get" role="search" class="form form--search">
-                <label class="u-sr-only" for="search--page">Search this website</label>
+            <form action="{% url 'search' %}" method="get" role="search" class="form form--search" aria-labelledby="website-search-label">
+                <label class="u-sr-only" for="search--page" id="website-search-label">Search this website</label>
                 {# Added form="" attribute to integrate this search with the job filters below - if the job filters are not on the same page, remove the form attribute here #}
                 <input form="job-filters" class="input" id="search--page" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
                 <button class="button button--search" type="submit" aria-label="Submit" form="job-filters">
@@ -33,30 +33,30 @@
         </div>
 
         <div class="search__results-wrapper wrapper wrapper--flex">
-            <div class="search__filters" aria-labelledby="filter-jobs">
-                <h2 class="search__filters-title heading" id="filter-jobs">Filter jobs</h2>
+            <div class="search__filters">
+                <h2 class="search__filters-title heading">Filter jobs</h2>
                 {# linked to the job search above - see 'molecules/search-filters/search-filters.html' #}
                 {% jobs_search_filters request unfiltered_results %}
             </div>
 
-                <section class="search__results" aria-label="Search results">
-                    <header class="search__results-header">
-                        {% with count=search_results.paginator.count %}
-                            {% if search_query %}
-                                <h2 class="search__results-title heading">{{ count }} job{{ count|pluralize }} found for ‘{{ search_query }}’</h2>
-                                <a href="/search">Clear</a>
-                            {% else %}
-                                <h2 class="search__results-title heading">{{ count }} job{{ count|pluralize }} found</h2>
-                            {% endif %}
-                        {% endwith %}
+            <section class="search__results" aria-label="Search results">
+                <header class="search__results-header">
+                    {% with count=search_results.paginator.count %}
+                        {% if search_query %}
+                            <h2 class="search__results-title heading">{{ count }} job{{ count|pluralize }} found for ‘{{ search_query }}’</h2>
+                            <a href="/search">Clear</a>
+                        {% else %}
+                            <h2 class="search__results-title heading">{{ count }} job{{ count|pluralize }} found</h2>
+                        {% endif %}
+                    {% endwith %}
 
-                        <form method="post" class="form form--job-alerts" aria-label="Subscribe to job alert">{% csrf_token %}
-                            <div class="form-item">
-                                {{ job_alert_form.as_p }}
-                            </div>
-                            <input type="submit" class="button button--basic" value="Subscribe to job alert">
-                        </form>
-                    </header>
+                    <form method="post" class="form form--job-alerts" aria-label="Subscribe to job alert">{% csrf_token %}
+                        <div class="form-item">
+                            {{ job_alert_form.as_p }}
+                        </div>
+                        <input type="submit" class="button button--basic" value="Subscribe to job alert">
+                    </form>
+                </header>
 
                 {% if search_results %}
                     {% for result in search_results %}
