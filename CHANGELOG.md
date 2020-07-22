@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Upgrade Wagtail to 2.9.3
 - Add Restless logo to jobs header
 - Jobs 166 set up reuse application button
 - Configure Wagtail's Cloudflare front end cache invalidation
