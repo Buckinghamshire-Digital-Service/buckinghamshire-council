@@ -5,7 +5,9 @@ from django.test import TestCase
 from wagtail.embeds import oembed_providers
 from wagtail.embeds.finders import get_finders
 
-from bc.utils.embed_finders import YouTubeNoCookieAndRelFinder
+from bs4 import BeautifulSoup
+
+from bc.utils.embed_finders import CustomOEmbedFinder, YouTubeNoCookieAndRelFinder
 
 
 class YouTubeNoCookieAndRelFinderTest(TestCase):
@@ -24,7 +26,7 @@ class YouTubeNoCookieAndRelFinderTest(TestCase):
 
     @patch("urllib.request.urlopen")
     @patch("json.loads")
-    @patch("bc.utils.embed_finders.OEmbedFinder.find_embed")
+    @patch("bc.utils.embed_finders.CustomOEmbedFinder.find_embed")
     def test_plain_youtube_domain(self, mock_find_embed, loads, urlopen):
         mock_find_embed.return_value = {
             "html": '<iframe src="www.youtube.com/watch/123"></iframe>',
@@ -48,7 +50,7 @@ class YouTubeNoCookieAndRelFinderTest(TestCase):
 
     @patch("urllib.request.urlopen")
     @patch("json.loads")
-    @patch("bc.utils.embed_finders.OEmbedFinder.find_embed")
+    @patch("bc.utils.embed_finders.CustomOEmbedFinder.find_embed")
     def test_dot_be_domain(self, mock_find_embed, loads, urlopen):
         mock_find_embed.return_value = {
             "html": '<iframe src="https://youtu.be/-wtIMTCHWuI"></iframe>',
@@ -67,3 +69,106 @@ class YouTubeNoCookieAndRelFinderTest(TestCase):
                     result["html"],
                     '<iframe src="https://www.youtube-nocookie.com/-wtIMTCHWuI?rel=0"></iframe>',
                 )
+
+
+@patch("bc.utils.embed_finders.OEmbedFinder.find_embed")
+class CustomOEmbedFinderTest(TestCase):
+    def test_video_iframe_classes(self, mock_find_embed):
+        mock_find_embed.return_value = {
+            "html": '<iframe src="www.example.com"></iframe>',
+            "type": "video",
+        }
+
+        finder = CustomOEmbedFinder()
+        finder.extra_classes = ["video_iframe_class"]
+        result = finder.find_embed("www.example.com")
+        soup = BeautifulSoup(result["html"], "html.parser")
+        self.assertEqual(soup.find("iframe").attrs.get("class"), ["video_iframe_class"])
+
+    def test_nonvideo_iframe_classes(self, mock_find_embed):
+        mock_find_embed.return_value = {
+            "html": '<iframe src="www.example.com"></iframe>',
+            "type": "not a video",
+        }
+
+        finder = CustomOEmbedFinder()
+        finder.extra_classes = ["video_iframe_class"]
+        result = finder.find_embed("www.example.com")
+        soup = BeautifulSoup(result["html"], "html.parser")
+        self.assertEqual(soup.find("iframe").attrs.get("class"), None)
+
+    def test_video_wrapper_classes(self, mock_find_embed):
+        mock_find_embed.return_value = {
+            "html": '<iframe src="www.example.com"></iframe>',
+            "type": "video",
+        }
+
+        finder = CustomOEmbedFinder()
+        finder.extra_wrapper_classes = ["video_wrapper_class"]
+        result = finder.find_embed("www.example.com")
+        soup = BeautifulSoup(result["html"], "html.parser")
+        self.assertEqual(soup.find("div").attrs.get("class"), ["video_wrapper_class"])
+
+    def test_nonvideo_wrapper_classes(self, mock_find_embed):
+        mock_find_embed.return_value = {
+            "html": '<iframe src="www.example.com"></iframe>',
+            "type": "not a video",
+        }
+
+        finder = CustomOEmbedFinder()
+        finder.extra_wrapper_classes = ["video_wrapper_class"]
+        result = finder.find_embed("www.example.com")
+        soup = BeautifulSoup(result["html"], "html.parser")
+        self.assertEqual(soup.find("div"), None)
+
+    def test_video_wrapper_wraps_iframe(self, mock_find_embed):
+        mock_find_embed.return_value = {
+            "html": '<iframe src="www.example.com"></iframe>',
+            "type": "video",
+        }
+
+        finder = CustomOEmbedFinder()
+        result = finder.find_embed("www.example.com")
+        soup = BeautifulSoup(result["html"], "html.parser")
+        self.assertEqual(soup.find("iframe").parent.name, "div")
+
+    def test_nonvideo_gets_no_wrapper(self, mock_find_embed):
+        mock_find_embed.return_value = {
+            "html": '<iframe src="www.example.com"></iframe>',
+            "type": "not a video",
+        }
+
+        finder = CustomOEmbedFinder()
+        result = finder.find_embed("www.example.com")
+        soup = BeautifulSoup(result["html"], "html.parser")
+        # it is at the top level
+        self.assertEqual(soup.find("iframe").parent.name, "[document]")
+
+    def test_video_output_html(self, mock_find_embed):
+        mock_find_embed.return_value = {
+            "html": '<iframe src="www.example.com"></iframe>',
+            "type": "video",
+        }
+
+        finder = CustomOEmbedFinder()
+        finder.extra_classes = ["foo", "bar"]
+        finder.extra_wrapper_classes = ["baz", "qux"]
+        result = finder.find_embed("www.example.com")
+        self.assertEqual(
+            result["html"],
+            '<div class="baz qux"><iframe class="foo bar" src="www.example.com"></iframe></div>',
+        )
+
+    def test_nonvideo_output_html(self, mock_find_embed):
+        mock_find_embed.return_value = {
+            "html": '<iframe src="www.example.com"></iframe>',
+            "type": "not a video",
+        }
+
+        finder = CustomOEmbedFinder()
+        finder.extra_classes = ["foo", "bar"]
+        finder.extra_wrapper_classes = ["baz", "qux"]
+        result = finder.find_embed("www.example.com")
+        self.assertEqual(
+            result["html"], '<iframe src="www.example.com"></iframe>',
+        )
