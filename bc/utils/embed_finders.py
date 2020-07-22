@@ -27,6 +27,12 @@ class CustomOEmbedFinder(OEmbedFinder):
                 soup.new_tag("div", attrs={"class": self.extra_wrapper_classes})
             )
 
+            # a11y: set iframe title
+            try:
+                iframe.attrs["title"] = embed["title"]
+            except KeyError:
+                pass
+
             embed["html"] = str(soup)
 
         return embed
