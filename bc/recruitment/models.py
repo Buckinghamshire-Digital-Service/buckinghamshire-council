@@ -230,7 +230,8 @@ class TalentLinkJob(models.Model):
 
     @property
     def application_url(self):
-        base_url = self.homepage.url + self.homepage.reverse_subpage("apply")
+        """Returns the full application URL including hostname"""
+        base_url = self.homepage.full_url + self.homepage.reverse_subpage("apply")
         scheme, netloc, path, query, fragment = urlsplit(base_url)
         return urlunsplit((scheme, netloc, path, self.application_url_query, fragment))
 
@@ -329,12 +330,7 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
             )
             if job.show_apply_button:
                 jobs_sitemap.append(
-                    {
-                        "location": self.full_url
-                        + self.reverse_subpage("apply")
-                        + job.application_url,
-                        "lastmod": job.last_modified,
-                    }
+                    {"location": job.application_url, "lastmod": job.last_modified}
                 )
 
         return sitemap + jobs_sitemap
