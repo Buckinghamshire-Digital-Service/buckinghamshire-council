@@ -56,7 +56,7 @@ class SearchView(View):
                 search_results = (
                     Page.objects.live()
                     .exclude(searchpromotion__in=promotions)
-                    .search(search_query, operator="and")
+                    .search(search_query, operator="or")
                 )
                 query = Query.get(search_query)
                 # Record hit
