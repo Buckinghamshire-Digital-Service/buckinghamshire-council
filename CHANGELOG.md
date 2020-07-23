@@ -1,5 +1,18 @@
 # Release History
 
+## 22.0 (2020-07-23)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/21.0...22.0
+
+- Upgrade Wagtail to 2.9.3
+- Configure Wagtail's Cloudflare front end cache invalidation
+- Add to documentation about caching infrastructure
+- Jobs: Add Restless logo to header
+- Jobs 166 set up reuse application button
+- Accessibility 47 Increase contrast of form help text
+- Accessibility 80 Improve landmark aria labelling
+- Accessibility 81 Content not included in landmarks
+
 ## 21.0 (2020-07-09)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/20.0...21.0

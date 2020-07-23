@@ -32,7 +32,7 @@
     </nav>
 
     <div class="wrapper wrapper--flex">
-        <section class="section section--main section--inline-index">
+        <div class="section section--main section--inline-index">
             <h2 class="heading heading--xl">
                 {% if page.is_inline_index %}
                     {{ page.subtitle }}
@@ -44,7 +44,7 @@
             <div class="main-body">
                 {{ page.body }}
 
-                <nav class="index-pagination">
+                <div class="index-pagination">
                     {% with next_sibling=page.get_next_page prev_sibling=page.get_prev_page %}
                         <ul class="index-pagination__list">
                             <li class="index-pagination__item index-pagination__item--previous">
@@ -72,9 +72,9 @@
                             </li>
                         </ul>
                     {% endwith %}
-                </nav>
+                </div>
             </div>
-        </section>
+        </div>
 
         {% sidebar %}
     </div>

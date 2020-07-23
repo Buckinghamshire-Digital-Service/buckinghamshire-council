@@ -33,14 +33,14 @@
         {% wagtailuserbar %}
 
         <div class="wrapper">
-            <div class="wrapper wrapper--header-space">
+            <header class="wrapper wrapper--header-space">
                 {% block header %}{% endblock %}
-            </div>
+            </header>
 
             <main class="wrapper wrapper--main">
                 {# All content must be in a landmark (main, nav, etc.) #}
                 {% block hero %}{% endblock %}
-                {% block alert_banner %}{% endblock %}
+                {% block alerts %}{% endblock %}
 
                 {% block breadcrumbs %}
                     <div class="wrapper wrapper--large">

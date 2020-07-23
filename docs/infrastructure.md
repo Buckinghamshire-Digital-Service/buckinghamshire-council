@@ -24,9 +24,17 @@ fab pull-production-media
 
 ## Cache
 
-What cache backend is used? What is it used for?
+### Front end
 
-What front-end cache is there on production? How is it configured?
+We use Cloudflare's front-end caching for the production site, according to request response headers.
+
+Cache purging is enabled as per https://docs.wagtail.io/en/stable/reference/contrib/frontendcache.html#cloudflare, using the limited-access API Token option, and a token with `Zone.Cache Purge` permission.
+
+### Back end
+
+We use Redis for back-end caching in Django.
+
+The Django low-level cache API is used by the recruitment API client to replace Zeep's default cache. See [Recruitment Site](recruitment-site.md) for details.
 
 ## File storage
 
