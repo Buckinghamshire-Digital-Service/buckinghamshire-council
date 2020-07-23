@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Accessibility 77 Further changes to prevent horizontal scrolling on smaller mobile devices
+
 ## 22.0 (2020-07-23)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/21.0...22.0

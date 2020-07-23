@@ -8,7 +8,37 @@ from wagtail.embeds.oembed_providers import youtube
 from bs4 import BeautifulSoup
 
 
-class YouTubeNoCookieAndRelFinder(OEmbedFinder):
+class CustomOEmbedFinder(OEmbedFinder):
+    """OEmbed finder to set video iframe titles and CSS classes."""
+
+    extra_classes = ["video__iframe"]
+    extra_wrapper_classes = ["video__container"]
+
+    def find_embed(self, url, max_width=None):
+        embed = super().find_embed(url, max_width)
+        if embed["type"] == "video":
+            soup = BeautifulSoup(embed["html"], "html.parser")
+            iframe = soup.find("iframe")
+
+            # add extra iframe classes
+            iframe["class"] = iframe.get("class", []) + self.extra_classes
+            # and wrap in a div
+            iframe.wrap(
+                soup.new_tag("div", attrs={"class": self.extra_wrapper_classes})
+            )
+
+            # a11y: set iframe title
+            try:
+                iframe.attrs["title"] = embed["title"]
+            except KeyError:
+                pass
+
+            embed["html"] = str(soup)
+
+        return embed
+
+
+class YouTubeNoCookieAndRelFinder(CustomOEmbedFinder):
     """OEmbed finder to add or preserve the rel=0 parameter and prevent cookies.
 
     This finder operates on the youtube provider only and adds or preserves the
