@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add an 'OGL' logo, statement and link to the footer
+
 ## 23.0 (2020-07-27)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/22.0...23.0

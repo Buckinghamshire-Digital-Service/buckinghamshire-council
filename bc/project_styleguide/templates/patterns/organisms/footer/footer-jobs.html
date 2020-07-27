@@ -5,8 +5,13 @@
 <div class="footer">
     <div class="footer__inner wrapper wrapper--large">
         <div class="footer__nav-container">
-            <div>
+            <div class="footer__links">
                 {% footerlinks %}
+            </div>
+
+            <div class="footer__ogl">
+                <img class="footer__credit-logo" src="{% static 'images/ogl-logo-white.png' %}" alt="Open Government Licence logo" />
+                <p>All content is available under the <a class="footer-links__link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" target="_blank" rel="nofollow noreferrer">Open Government Licence v.30</a>, except where otherwise stated</p>
             </div>
 
             {% if settings.utils.SocialMediaSettings.has_any_setting %}
