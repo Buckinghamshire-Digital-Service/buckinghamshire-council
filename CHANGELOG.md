@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Add social media text to footer
+- Add social media text & new icon/links to footer
 
 ## 21.0 (2020-07-09)
 
