@@ -1,5 +1,13 @@
 # Release History
 
+## 23.0 (2020-07-27)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/22.0...23.0
+
+- Accessibility 77 Further changes to prevent horizontal scrolling on smaller mobile devices
+- Add social media text & new icon/links to footer
+- Fix for bottom of homepage displaying incorrectly on IE11
+
 ## 22.0 (2020-07-23)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/21.0...22.0

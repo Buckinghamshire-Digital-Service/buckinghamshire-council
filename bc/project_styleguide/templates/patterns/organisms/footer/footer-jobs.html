@@ -11,6 +11,8 @@
 
             {% if settings.utils.SocialMediaSettings.has_any_setting %}
                 <div class="footer__social-links">
+                    <p class="footer__social-links-text">Follow Buckinghamshire Council careers</p>
+
                     {% if settings.utils.SocialMediaSettings.facebook_app_id %}
                         <a href="https://www.facebook.com/{{ settings.utils.SocialMediaSettings.facebook_app_id }}" target="_blank" rel="nofollow noreferrer">
                             {% include "patterns/atoms/icons/icon.html" with name="facebook" classname="icon--footer-social" %}

@@ -199,7 +199,7 @@ WAGTAILEMBEDS_FINDERS = [
         "class": "bc.utils.embed_finders.YouTubeNoCookieAndRelFinder",
         "providers": [youtube],
     },
-    {"class": "wagtail.embeds.finders.oembed"},
+    {"class": "bc.utils.embed_finders.CustomOEmbedFinder"},
 ]
 
 # Password validation

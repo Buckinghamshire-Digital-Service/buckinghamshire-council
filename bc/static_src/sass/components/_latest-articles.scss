@@ -8,6 +8,7 @@
 
         @include media-query(tablet-portrait) {
             flex-basis: 50%;
+            max-width: 50%;
         }
 
         &--news {

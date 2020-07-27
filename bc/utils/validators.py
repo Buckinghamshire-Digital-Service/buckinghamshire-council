@@ -12,3 +12,12 @@ def validate_youtube_domain(value):
                 f'{value} is not a YouTube URL. The domain part must be one of {", ".join(hostnames)}'
             )
         )
+
+
+def validate_linkedin_domain(value):
+    scheme, netloc, path, query, fragment = urlsplit(value)
+    hostname = "www.linkedin.com"
+    if netloc != hostname:
+        raise ValidationError(
+            f"{value} is not a LinkedIn URL. The domain part must be {hostname}"
+        )
