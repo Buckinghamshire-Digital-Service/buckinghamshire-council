@@ -287,15 +287,14 @@
             display: block;
         }
 
-        input[name="address_01"] {
+        input[name='address_01'] {
             max-width: 100%;
         }
 
-        input[name="postcode"] {
+        input[name='postcode'] {
             @include input-size(10);
         }
     }
-
 
     &--width {
         input {
@@ -304,37 +303,37 @@
 
         // gov.uk guideline fixed width input sizes
         &-2 {
-            input[type="text"] {
-               @include input-size(2);
+            input[type='text'] {
+                @include input-size(2);
             }
         }
 
         &-3 {
-            input[type="text"] {
+            input[type='text'] {
                 @include input-size(3);
             }
         }
 
         &-4 {
-            input[type="text"] {
+            input[type='text'] {
                 @include input-size(4);
             }
         }
 
         &-5 {
-            input[type="text"] {
+            input[type='text'] {
                 @include input-size(5);
             }
         }
 
         &-10 {
-            input[type="text"] {
+            input[type='text'] {
                 @include input-size(10);
             }
         }
 
         &-20 {
-            input[type="text"] {
+            input[type='text'] {
                 @include input-size(20);
             }
         }
