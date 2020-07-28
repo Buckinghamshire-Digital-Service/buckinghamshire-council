@@ -8,6 +8,13 @@
         border: 1px dotted $color--red;
     }
 
+    &--inline {
+        @include media-query(table-portrait) {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+
     // stylelint-disable-next-line selector-class-pattern
     &--checkbox_input {
         display: flex;
