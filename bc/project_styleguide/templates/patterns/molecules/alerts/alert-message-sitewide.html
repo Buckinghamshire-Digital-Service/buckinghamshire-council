@@ -1,7 +1,7 @@
 {% load wagtailcore_tags %}
 
-<section class="alert alert--message alert--condensed" aria-labelledby="alert--condensed-title">
-    <h2 class="alert__header heading" id="alert--condensed-title">{{ alert.title }}</h2>
+<section class="alert alert--message" aria-labelledby="alert-title">
+    <h2 class="alert__header heading" id="alert-title">{{ alert.title }}</h2>
 
     <div class="alert__content">{{ alert.content|richtext }}</div>
 </section>

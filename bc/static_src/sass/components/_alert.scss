@@ -1,16 +1,5 @@
 .alert {
     $root: &;
-
-    &__alpha {
-        display: inline-block;
-        background: $color--primary;
-        color: $color--white;
-        text-transform: uppercase;
-        font-weight: $weight--bold;
-        padding: 2px 12px 0;
-        margin-right: $grid--min;
-    }
-
     &__inner {
         @include media-query(tablet-portrait) {
             display: flex;
@@ -28,24 +17,22 @@
         color: $color--default;
         padding: $grid / 2;
 
-        * {
-            margin-bottom: 0;
-        }
-    }
-
-    &--condensed {
         #{$root}__header,
         #{$root}__content {
             display: inline;
         }
 
         #{$root}__header {
-            @include font-size(s);
+            @include font-size(l);
         }
 
         #{$root}__link {
             display: block;
             margin-top: $grid--min;
+        }
+
+        * {
+            margin-bottom: 0;
         }
     }
 
