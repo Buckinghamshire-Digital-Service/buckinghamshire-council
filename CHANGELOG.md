@@ -4,7 +4,7 @@
 
 - Refactor Aptean Respond API integration to give more control over form presentation
 - Add cookie banner to recruitment / jobs site
-- Styling of date input fields
+- Custom sizes for input fields
 
 ## 19.1 (2020-06-23)
 
