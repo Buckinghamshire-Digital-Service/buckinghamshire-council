@@ -9,7 +9,7 @@
     }
 
     &--inline {
-        @include media-query(table-portrait) {
+        @include media-query(tablet-portrait) {
             display: inline-block;
             vertical-align: middle;
         }
