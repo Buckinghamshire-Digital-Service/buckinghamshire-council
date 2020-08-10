@@ -46,7 +46,7 @@
                 <h2 class="useful-links__headline heading" id="useful-links-title">Things you might find useful</h2>
                 <hr class="useful-links__divider"/>
                 <div class="useful-links__list">
-                    {% for link in self.useful_links.all %}
+                    {% for link in page.useful_links.all %}
                         <div class="useful-links__item">
                             <h3 class="useful-links__item-heading heading"><a href="{{ link.url }}">{{ link.title }}</a></h3>
                             <p>{{ link.lede }}</p>
@@ -59,9 +59,9 @@
         <div class="useful-links__image" style="background-image: url({{ img.url }})"></div>
     </section>
 
-    <h2 class="heading heading--l">Get information, advice and guidance<span class="u-sr-only">.</span></span></h2>
+    <h2 class="heading heading--l">Get information, advice and guidance<span class="u-sr-only">.</span></h2>
     <div class="grid grid--index">
-        {% for subpage in self.get_children.specific %}
+        {% for subpage in page.get_children.specific %}
             <a class="card" href="{% pageurl subpage %}">
                 <h2 class="card__title heading">
                     {% firstof subpage.listing_title subpage.title %}
