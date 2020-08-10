@@ -1,10 +1,12 @@
 {% extends "patterns/base_page.html" %}
 {% load wagtailcore_tags wagtailimages_tags static %}
 
-{% block breadcrumbs %}{% endblock %}
-{% block alert_banner %}{% endblock %}
-
-{% block content %}
+{% block hero %}
+    <div class="family-info__banner">
+        <div class="wrapper wrapper--large">
+            <p class="family-info__banner-text">Delivered by the <b>Family Information Service</b></p>
+        </div>
+    </div>
     {% image page.hero_image min-1600x350 as hero_image %}
     <div class="hero {% if alert %}hero--with-alert{% endif %} hero--family-info" style="background-image: url('{{ hero_image.url }}');">
         <div class="wrapper wrapper--large">
@@ -12,11 +14,15 @@
             <h1 class="hero__strapline heading heading--xxxl">{{ page.title }}</h1>
         </div>
     </div>
+{% endblock %}
 
-    <div class="family-info-search">
-        <h2 class="heading heading--l" id="service-search-form-title">Search in your area</h2>
-        <form action="https://scout-x.netlify.app" aria-labelledby="service-search-form-title" role="search" action="get" class="form form--search family-info-search__form">
-            <div class="family-info-search__field">
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+    <div class="family-info__search">
+        <h2 class="heading family-info__search-heading" id="service-search-form-title">Search in your area</h2>
+        <form action="https://scout-x.netlify.app" aria-labelledby="service-search-form-title" role="search" action="get" class="form form--search family-info__search-form">
+            <div class="family-info__search-field">
                 <label for="service_type">What <span class="u-sr-only">kind of services are you looking for?</span></label>
                 <div class="form-item__custom-select">
                     <select id="service_type" name="service_type" class="">
@@ -26,7 +32,7 @@
                     </select>
                 </div>
             </div>
-            <div class="family-info-search__field">
+            <div class="family-info__search-field">
                 <label for="coverage">Where</label>
                 <input type="text" id="coverage" name="coverage" placeholder="Town or postcode"/>
             </div>
@@ -37,12 +43,12 @@
     <section class="useful-links" aria-labelledby="useful-links-title">
         <div class="wrapper wrapper--large">
             <div class="useful-links__inner">
-                <h2 class="useful-links__headline heading heading--xl" id="useful-links-title">Things you might find useful</h2>
+                <h2 class="useful-links__headline heading" id="useful-links-title">Things you might find useful</h2>
                 <hr class="useful-links__divider"/>
                 <div class="useful-links__list">
                     {% for link in self.useful_links.all %}
                         <div class="useful-links__item">
-                            <h3 class="heading heading--m"><a href="{{ link.url }}">{{ link.title }}</a></h3>
+                            <h3 class="useful-links__item-heading heading"><a href="{{ link.url }}">{{ link.title }}</a></h3>
                             <p>{{ link.lede }}</p>
                         </div>
                     {% endfor %}
@@ -57,7 +63,7 @@
     <div class="grid grid--index">
         {% for subpage in self.get_children.specific %}
             <a class="card" href="{% pageurl subpage %}">
-                <h2 class="card__title heading heading--s">
+                <h2 class="card__title heading">
                     {% firstof subpage.listing_title subpage.title %}
                 </h2>
                 {% if subpage.listing_summary %}
@@ -71,12 +77,12 @@
 
     <div class="split-content wrapper wrapper--flex-small">
         <div class="split-content__section">
-            <h2 class="heading heading--l">{{ self.left_title }}</h2>
+            <h2 class="split-content__title heading">{{ self.left_title }}</h2>
             <p>{{ self.left_lede }}</p>
             <a class="button button--no-underline" href="{{ self.left_action.pageurl }}">{{ self.left_label }}</a>
         </div>
         <div class="split-content__section">
-            <h2 class="heading heading--l">{{ self.right_title }}</h2>
+            <h2 class="split-content__title heading">{{ self.right_title }}</h2>
             <p>{{ self.right_lede }}</p>
             <a class="button button--skeleton" href="{{ self.right_action.pageurl }}">{{ self.right_label }}</a>
         </div>

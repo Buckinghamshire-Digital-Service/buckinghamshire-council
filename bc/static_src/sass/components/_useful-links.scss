@@ -17,6 +17,10 @@
         }
     }
 
+    &__headline {
+        @include font-size(xl);
+    }
+
     &__divider {
         border: none;
         border-bottom: 1px solid $color--white;
@@ -60,6 +64,11 @@
             }
         }
     }
+
+    &__item-heading {
+        @include font-size(l);
+    }
+
     a {
         color: $color--white;
         &:hover {
