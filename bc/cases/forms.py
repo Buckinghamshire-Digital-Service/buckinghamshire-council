@@ -117,8 +117,9 @@ class ComplaintForm(BaseCaseForm):
     )
     additional_comments = forms.CharField(
         label=(
-            "If you have contacted us about this issue before and you have a "
-            "reference number, enter it here"
+            "Provide a reference number relevant to your request if you have it. For "
+            "example, a comment reference number, a Council Tax reference number or a "
+            "previous complaint reference number."
         ),
         required=False,
     )
