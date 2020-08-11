@@ -59,10 +59,14 @@
         <div class="useful-links__image" style="background-image: url({{ img.url }})"></div>
     </section>
 
-    <h2 class="heading heading--l">Get information, advice and guidance<span class="u-sr-only">.</span></h2>
     <div class="grid grid--index">
         {% for subpage in page.get_children.specific %}
             <a class="card" href="{% pageurl subpage %}">
+                {% if subpage.listing_image %}
+                    <div class="card__image">
+                        {% image subpage.listing_image fill-530x330 alt="" %}
+                    </div>
+                {% endif %}
                 <h2 class="card__title heading">
                     {% firstof subpage.listing_title subpage.title %}
                 </h2>
@@ -78,12 +82,12 @@
     <div class="split-content wrapper wrapper--flex-small">
         <div class="split-content__section">
             <h2 class="split-content__title heading">{{ self.left_title }}</h2>
-            <p>{{ self.left_lede }}</p>
+            <p class="split-content__content">{{ self.left_lede }}</p>
             <a class="button button--no-underline" href="{{ self.left_action.pageurl }}">{{ self.left_label }}</a>
         </div>
         <div class="split-content__section">
             <h2 class="split-content__title heading">{{ self.right_title }}</h2>
-            <p>{{ self.right_lede }}</p>
+            <p class="split-content__content">{{ self.right_lede }}</p>
             <a class="button button--skeleton" href="{{ self.right_action.pageurl }}">{{ self.right_label }}</a>
         </div>
     </div>
