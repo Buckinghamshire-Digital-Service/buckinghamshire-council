@@ -20,8 +20,10 @@
     }
 
     &--footer-social {
-        margin-right: 15px;
+        margin-right: 10px;
         fill: $color--white;
+        height: 25px;
+        width: 25px;
 
         #{$hover-states} {
             fill: $color--grey-medium;
