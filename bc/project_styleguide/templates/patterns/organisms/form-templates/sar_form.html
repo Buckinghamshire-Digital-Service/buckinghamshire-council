@@ -48,16 +48,16 @@
 
         <fieldset>
             <legend class="form-item__label heading">Your contact details</legend>
-            {% include "patterns/molecules/form_field.html" with field=form.title %}
+            {% include "patterns/molecules/form_field.html" with field=form.title form_item_extra_class="form-item--width form-item--width-5" %}
             {% include "patterns/molecules/form_field.html" with field=form.first_name %}
             {% include "patterns/molecules/form_field.html" with field=form.last_name %}
 
             <fieldset>
                 <legend class="form-item__label heading">Your date of birth</legend>
                 <div class="form-item__help">For example, 23 05 1978</div>
-                {% include "patterns/molecules/form_field.html" with field=form.dob_day form_item_extra_class="form-item--inline" %}
-                {% include "patterns/molecules/form_field.html" with field=form.dob_month form_item_extra_class="form-item--inline" %}
-                {% include "patterns/molecules/form_field.html" with field=form.dob_year form_item_extra_class="form-item--inline" %}
+                {% include "patterns/molecules/form_field.html" with field=form.dob_day form_item_extra_class="form-item--date form-item--width form-item--width-2" %}
+                {% include "patterns/molecules/form_field.html" with field=form.dob_month form_item_extra_class="form-item--date form-item--width form-item--width-2" %}
+                {% include "patterns/molecules/form_field.html" with field=form.dob_year form_item_extra_class="form-item--date form-item--width form-item--width-4" %}
             </fieldset>
 
             {% include "patterns/organisms/form-templates/contact_method_fieldset.html" %}
