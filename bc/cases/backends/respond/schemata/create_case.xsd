@@ -110,6 +110,7 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element maxOccurs="unbounded" minOccurs="0" name="field" type="rsp:field" />
+                        <xs:element maxOccurs="1" minOccurs="0" name="Attachments" type="rsp:Attachments"/>
                     </xs:sequence>
                     <xs:attribute name="action" type="rsp:Action" use="optional"/>
                     <xs:attribute name="IsConfidential" type="xs:boolean" use="optional" />

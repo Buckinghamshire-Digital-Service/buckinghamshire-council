@@ -12,3 +12,8 @@
 @function stomp($value) {
     @return if($value, !important, null);
 }
+
+// Map field input sizes
+@function input-size($key) {
+    @return map-get($input-sizes, $key);
+}

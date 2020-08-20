@@ -8,6 +8,7 @@ import CookieWarning from './components/cookie-message';
 import Accordion from './components/accordion';
 import AreaSearchForm from './components/area-search-form';
 import Carousel from './components/carousel';
+import ConditionalField from './components/conditional-field';
 import ProgressBar from './components/progress-bar';
 import VideoModal from './components/video-modal';
 import FormSubmit from './components/form-submit';
@@ -16,11 +17,14 @@ import FeedbackWidget from './components/feedback-widget';
 
 // Add polyfill fix for forEach carousel
 import foreachPolyfill from './polyfills/foreach-polyfill';
+// Add polyfill fix for closest() method in conditional fields
+import closestPolyfill from './polyfills/closest-polyfill';
 import 'whatwg-fetch';
 
 import '../sass/main.scss';
 
 foreachPolyfill();
+closestPolyfill();
 
 // Open the mobile menu callback
 function openMobileMenu() {
@@ -51,6 +55,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (const carousel of document.querySelectorAll(Carousel.selector())) {
         new Carousel(carousel);
+    }
+
+    for (const conditionalfield of document.querySelectorAll(
+        ConditionalField.selector(),
+    )) {
+        new ConditionalField(conditionalfield);
     }
 
     for (const formsubmit of document.querySelectorAll(FormSubmit.selector())) {

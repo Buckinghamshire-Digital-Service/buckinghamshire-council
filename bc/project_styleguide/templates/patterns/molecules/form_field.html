@@ -1,0 +1,47 @@
+{% load util_tags %}
+{% with widget_type=field|widget_type field_type=field|field_type %}
+
+    <div class="form-item {% if field_type %}form-item--{{ field_type }}{% endif %} {% if widget_type %}form-item--{{ widget_type }}{% endif %} {% if field.errors %}form-item--errors{% endif %} {{ form_item_extra_class }}">
+        {% if field.errors %}
+            <div class="form-item__errors">
+                {{ field.errors }}
+            </div>
+        {% endif %}
+
+        {% if widget_type == 'hidden_input' %}
+            {# HTML Validation: Hidden inputs must not have a `for` attribute #}
+            <label class="form-item__label {% if field.field.required %}required{% endif %}">{{ field.label }} {% if field.field.required %}<span class="form-item__required" aria-hidden="true">*</span>{% endif %}</label>
+                {{ field }}
+
+                {% if field.help_text %}
+                    <div class="form-item__help">
+                        {{ field.help_text }}
+                    </div>
+                {% endif %}
+        {% elif widget_type == 'checkbox_input' %}
+            <label{% if field.id_for_label %} for="{{ field.id_for_label }}"{% endif %} class="form-item__label {% if field.field.required %}required{% endif %}">{{ field.label }} {% if field.field.required %}<span class="form-item__required" aria-hidden="true">*</span>{% endif %}</label>
+                {{ field }}
+
+                {% if field.help_text %}
+                    <div class="form-item__help">
+                        {{ field.help_text }}
+                    </div>
+                {% endif %}
+        {% else %}
+            <label{% if field.id_for_label %} for="{{ field.id_for_label }}"{% endif %} class="form-item__label {% if field.field.required %}required{% endif %}">{{ field.label }} {% if field.field.required %}<span class="form-item__required" aria-hidden="true">*</span>{% endif %}</label>
+            {% if field.help_text %}
+                <div class="form-item__help">
+                    {{ field.help_text }}
+                </div>
+            {% endif %}
+
+            {% if widget_type == 'date_input' or widget_type == 'date_time_input' %}
+                <div class="{{ widget_type }}">
+            {% endif %}
+                {{ field }}
+            {% if widget_type == 'date_input' or widget_type == 'date_time_input' %}
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endwith %}

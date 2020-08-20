@@ -43,19 +43,13 @@ We also define the names of the CreateCase-type services that we wish to 'regist
 - `RESPOND_COMPLIMENTS_WEBSERVICE`
 - `RESPOND_DISCLOSURES_WEBSERVICE`
 
-The client caches some responses, so for local development you should enable that:
-
-- `CACHES = {"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}}`
-
 ## API Client
 
-Constructing the client, and the forms.
+The API client is loaded when first needed by `bc.cases.backends.respond.client.get_client()` and remains in memory.
 
-1. The API client is loaded when first needed by `bc.cases.backends.respond.client.get_client()` and remains in memory.
-1. It parses the web services defined in Aptean Respond, registers CreateCase-type services defined in `bc.cases.backends.respond.constants.CREATE_CASE_SERVICES`, and uses the Django low-level cache (with no timeouts) to store _Get Fields Service_ and _Get Categories Service_ responses.
-1. It then uses `bc.cases.backends.respond.forms.CaseFormBuilder`, a class inspired by Wagtail's FormBuilder, to assemble a form, taking the registered create case service's XML definition as its input, and replaces the XML in `client.services[CREATE_CASE_TYPE]` with those forms instead.
+There is a page type `bc.cases.models.ApteanRespondFormPage`, which has a field `form`. This determines what form should load for the page.
 
-There is a page type `bc.cases.models.ApteanRespondFormPage`, which has a field `web_service_definition`. This again mimics `FormPage` from Wagtail's forms module, and uses the form stored at `client.services[CREATE_CASE_TYPE][self.web_service_definition]`.
+The form classes all inherit from `bc.cases.backends.respond.forms.BaseCaseForm`, which handles producing XML for the API.
 
 ### XML
 
@@ -63,10 +57,6 @@ Typically within the application, API XML responses are parsed with Beautiful So
 
 The `bc.cases.backends.respond.forms.BaseCaseForm` class has a method `self.get_xml(cleaned_data)` to return the payload for an API request.
 
-## Form customisation
-
-We can override the field properties of the generated forms. See `bc.cases.backends.respond.constants.CREATE_CASE_SERVICES`.
-
 ### Append-to-description fields
 
-All fields in the generated FormBuilder forms have names matching their XML SchemaName. One particular field type, generated only in our app, uses the schema name format `"append to description.some_unique_field_name"`. These fields do not exist in the API, and their label and cleaned value are appended to the description field before form submission.
+All form fields to be submitted to the API must either be mapped in the form's `.field_schema_name_mapping` attribute. If no suitable schema name exists in the API web service definition, the field name must be included in the form's `.append_to_description_fields` property. The label and cleaned value of these fields will be appended to the description field before form submission.

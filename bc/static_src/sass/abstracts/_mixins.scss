@@ -115,6 +115,14 @@
 }
 
 /* ============================================
+    Form input sizes
+*/
+
+@mixin input-size($key) {
+    max-width: input-size($key);
+}
+
+/* ============================================
    Gutter spacing
 
    description: Add dynamic padding values based on set gutter and breakpoint variables (_variables.scss)
