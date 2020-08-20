@@ -54,8 +54,9 @@ INSTALLED_APPS = [
     # According to the official docs, it's important that Scout is listed
     # first - http://help.apm.scoutapp.com/#django.
     "scout_apm.django",
-    "bc.cases",
+    "bc.alerts",
     "bc.area_finder",
+    "bc.cases",
     "bc.documents",
     "bc.events",
     "bc.forms",
@@ -732,6 +733,8 @@ RESPOND_SAR_WEBSERVICE = env.get("RESPOND_SAR_WEBSERVICE")
 RESPOND_COMMENTS_WEBSERVICE = env.get("RESPOND_COMMENTS_WEBSERVICE")
 RESPOND_COMPLIMENTS_WEBSERVICE = env.get("RESPOND_COMPLIMENTS_WEBSERVICE")
 RESPOND_DISCLOSURES_WEBSERVICE = env.get("RESPOND_DISCLOSURES_WEBSERVICE")
+RESPOND_GET_CATEGORIES_WEBSERVICE = env.get("RESPOND_GET_CATEGORIES_WEBSERVICE")
+RESPOND_GET_FIELDS_WEBSERVICE = env.get("RESPOND_GET_FIELDS_WEBSERVICE")
 
 # MapIt.MySociety API credentials
 MAPIT_API_KEY = env.get("MAPIT_API_KEY")

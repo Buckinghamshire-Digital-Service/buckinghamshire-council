@@ -3,7 +3,6 @@ from django.core.management.base import BaseCommand
 from tabulate import tabulate
 
 from bc.cases.backends.respond.client import get_client
-from bc.cases.backends.respond.constants import FIELD_INFO_TYPE
 
 
 class Command(BaseCommand):
@@ -12,8 +11,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         client = get_client()
 
-        service_name = client.services[FIELD_INFO_TYPE]
-        soup = client.get_fields(service_name)
+        soup = client.get_fields()
 
         fields = []
         for field in soup.find_all("field"):

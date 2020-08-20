@@ -1,0 +1,81 @@
+.conditional {
+    $root: &;
+    padding: $grid--small;
+    background-color: $color--earth-light;
+    transition: background-color $transition, border-color $transition;
+    border-bottom: 5px solid $color--lake;
+    text-decoration: none;
+
+    &__title {
+        transition: color $transition;
+    }
+
+    &__summary {
+        color: $color--default;
+    }
+
+    &__content {
+        background: $color--link;
+        padding: $grid--small;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: background $transition;
+    }
+
+    &__more {
+        @include font-size(xxs);
+        text-decoration: underline;
+        margin: 0;
+    }
+
+    #{$hover-states} {
+        border-color: $color--link-hover;
+        background-color: darken($color--earth-light, 5%);
+
+        #{$root}__title {
+            color: $color--link;
+        }
+    }
+
+    &--jobs {
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: $color--white;
+        display: flex;
+        flex-direction: column;
+
+        #{$root} {
+            &__summary {
+                color: $color--white;
+                flex-grow: 1;
+                margin-top: 0;
+                margin-bottom: $grid--small;
+            }
+
+            @include target-ie11() {
+                &__image,
+                &__content {
+                    flex: 0 0 auto;
+                }
+            }
+        }
+
+        #{$hover-states} {
+            background: transparent;
+            color: $color--white;
+
+            #{$root} {
+                &__title {
+                    color: $color--white;
+                }
+
+                &__content {
+                    background: $color--link-hover;
+                }
+            }
+        }
+    }
+}

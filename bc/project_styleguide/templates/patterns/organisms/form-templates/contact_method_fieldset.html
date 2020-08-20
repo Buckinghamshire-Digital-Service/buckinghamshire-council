@@ -1,0 +1,38 @@
+<div class="form-item form-item--choice_field form-item--radio_select {% if form.contact_method.errors %}form-item--errors{% endif %}" data-conditional>
+    <fieldset>
+        <legend class="form-item__label heading required">How would you prefer to be contacted? <span class="form-item__required" aria-hidden="true">*</span></legend>
+
+        {% if form.contact_method.errors %}
+            <div class="form-item__errors">
+                {{ form.contact_method.errors }}
+            </div>
+        {% endif %}
+
+        <ul id="{{ form.contact_method.id_for_label }}" >
+            <li data-conditional-field>
+                {{ form.contact_method.0 }}
+                <fieldset class="form-item__conditional-fields">
+                    {% with form.email as field %}
+                        {% include "patterns/molecules/form_field.html" %}
+                    {% endwith %}
+                </fieldset>
+            </li>
+            <li data-conditional-field>
+                {{ form.contact_method.1 }}
+                <fieldset class="form-item__conditional-fields">
+                    {% for field in form.address_field_group %}
+                        {% include "patterns/molecules/form_field.html" %}
+                    {% endfor %}
+                </fieldset>
+            </li>
+            <li data-conditional-field>
+                {{ form.contact_method.2 }}
+                <fieldset class="form-item__conditional-fields">
+                    {% with form.contact_number as field %}
+                        {% include "patterns/molecules/form_field.html" %}
+                    {% endwith %}
+                </fieldset>
+            </li>
+        </ul>
+    </fieldset>
+</div>

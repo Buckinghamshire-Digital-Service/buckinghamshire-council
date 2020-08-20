@@ -1,0 +1,46 @@
+{% load wagtailcore_tags %}
+<form action="{% pageurl page %}" method="post" class="form form--standard" enctype="multipart/form-data" novalidate data-form>
+    <div class="form__container">
+        {% csrf_token %}
+
+        {% if form.errors %}
+            <div class="form__errors">
+                There were some errors with your form. Please amend the fields highlighted below.
+                {% if form.non_field_errors %}
+                    {{ form.non_field_errors }}
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% include "patterns/molecules/form_field.html" with field=form.organisation %}
+
+        <fieldset>
+            <legend class="form-item__label heading required">Request details</legend>
+            {% include "patterns/molecules/form_field.html" with field=form.description %}
+        </fieldset>
+
+        <fieldset>
+            <legend class="form-item__label heading required">Why you need the information</legend>
+            {% include "patterns/molecules/form_field.html" with field=form.investigation %}
+            {% include "patterns/molecules/form_field.html" with field=form.reason %}
+            {% include "patterns/molecules/form_field.html" with field=form.act_of_parliament %}
+        </fieldset>
+
+        <fieldset>
+            <legend class="form-item__label">Attach supporting documents</legend>
+            {% include "patterns/molecules/form_field.html" with field=form.attachments %}
+        </fieldset>
+
+        <fieldset>
+            <legend class="form-item__label heading">Your contact details</legend>
+            {% include "patterns/molecules/form_field.html" with field=form.title form_item_extra_class="form-item--width form-item--width-5" %}
+            {% include "patterns/molecules/form_field.html" with field=form.first_name %}
+            {% include "patterns/molecules/form_field.html" with field=form.last_name %}
+
+            {% include "patterns/organisms/form-templates/contact_method_fieldset.html" %}
+        </fieldset>
+
+        {{ page.pre_submission_text|richtext }}
+        <input class="form__submit button" type="submit" value="Submit">
+    </div>
+</form>

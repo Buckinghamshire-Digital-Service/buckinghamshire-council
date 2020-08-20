@@ -1,6 +1,7 @@
 from urllib.parse import urlsplit
 
 from django.core.exceptions import ValidationError
+from django.utils.timezone import now
 
 
 def validate_youtube_domain(value):
@@ -21,3 +22,7 @@ def validate_linkedin_domain(value):
         raise ValidationError(
             f"{value} is not a LinkedIn URL. The domain part must be {hostname}"
         )
+
+
+def get_current_year():
+    return now().year

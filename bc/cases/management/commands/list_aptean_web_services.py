@@ -1,7 +1,7 @@
+from django.conf import settings
 from django.core.management.base import BaseCommand
 
 from bc.cases.backends.respond.client import get_client
-from bc.cases.backends.respond.constants import CREATE_CASE_TYPE
 
 
 class Command(BaseCommand):
@@ -10,19 +10,33 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         client = get_client()
 
-        self.stdout.write(self.style.NOTICE("All API-defined web services:"))
         soup = client.get_web_service_meta_data()
-        for webservice in soup.find_all("webservice"):
-            self.stdout.write(f"- {webservice.find('name').text.strip()}")
 
-        self.stdout.write(
-            self.style.NOTICE("Imported and registered CreateCase type web services:")
+        found_service_names = set(
+            [
+                webservice.find("name").text.strip()
+                for webservice in soup.find_all("webservice")
+            ]
         )
-        for service_name in client.services[CREATE_CASE_TYPE].keys():
+
+        expected_create_case_services = set(
+            [
+                settings.RESPOND_COMPLAINTS_WEBSERVICE,
+                settings.RESPOND_FOI_WEBSERVICE,
+                settings.RESPOND_SAR_WEBSERVICE,
+                settings.RESPOND_COMMENTS_WEBSERVICE,
+                settings.RESPOND_COMPLIMENTS_WEBSERVICE,
+                settings.RESPOND_DISCLOSURES_WEBSERVICE,
+            ]
+        )
+        found_create_case_services = found_service_names & expected_create_case_services
+        other_found_services = found_service_names - expected_create_case_services
+
+        self.stdout.write(self.style.NOTICE("All API-defined create case services:"))
+        for service_name in found_create_case_services:
             self.stdout.write(f"- {service_name}")
 
-        self.stdout.write(self.style.NOTICE("Other registered web services:"))
-        for service_name in client.services.keys():
-            if service_name != CREATE_CASE_TYPE:
-                self.stdout.write(f"- {service_name}")
+        self.stdout.write(self.style.NOTICE("Other API-reported web services:"))
+        for service_name in other_found_services:
+            self.stdout.write(f"- {service_name}")
         self.stdout.write(self.style.SUCCESS("Done"))

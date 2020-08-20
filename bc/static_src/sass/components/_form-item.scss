@@ -8,6 +8,12 @@
         border: 1px dotted $color--red;
     }
 
+    &--date {
+        display: inline-block;
+        margin-right: ($grid / 2);
+        vertical-align: middle;
+    }
+
     // stylelint-disable-next-line selector-class-pattern
     &--checkbox_input {
         display: flex;
@@ -43,6 +49,16 @@
         li {
             label {
                 padding-left: 44px;
+            }
+
+            #{$root}__conditional-fields {
+                label {
+                    padding-left: 0;
+                }
+
+                input {
+                    margin: 0 $grid--min 0 0;
+                }
             }
         }
 
@@ -254,6 +270,98 @@
             &:active,
             &:focus {
                 border-color: $color--primary;
+            }
+        }
+    }
+
+    &__conditional-fields {
+        border-left: 5px solid $color--grey-border;
+        display: none;
+        margin-bottom: 0;
+        margin-left: 10px;
+        padding: 10px $grid--small;
+        margin-top: 10px;
+        width: auto;
+
+        .is-checked & {
+            display: block;
+        }
+
+        input[name='address_01'] {
+            max-width: 100%;
+        }
+
+        input[name='postcode'] {
+            @include input-size(10);
+        }
+    }
+
+    &--width {
+        input {
+            width: 100%;
+        }
+
+        // gov.uk guideline fixed width input sizes
+        &-2 {
+            input[type='text'] {
+                @include input-size(2);
+            }
+        }
+
+        &-3 {
+            input[type='text'] {
+                @include input-size(3);
+            }
+        }
+
+        &-4 {
+            input[type='text'] {
+                @include input-size(4);
+            }
+        }
+
+        &-5 {
+            input[type='text'] {
+                @include input-size(5);
+            }
+        }
+
+        &-10 {
+            input[type='text'] {
+                @include input-size(10);
+            }
+        }
+
+        &-20 {
+            input[type='text'] {
+                @include input-size(20);
+            }
+        }
+
+        @include media-query(tablet-portrait) {
+            // gov.uk variable width input sizes
+            &-full {
+                width: 100%;
+            }
+
+            &-three-quarters {
+                width: 75%;
+            }
+
+            &-two-thirds {
+                width: 66.66%;
+            }
+
+            &-one-half {
+                width: 50%;
+            }
+
+            &-one-third {
+                width: 33.3%;
+            }
+
+            &-one-quarter {
+                width: 25%;
             }
         }
     }

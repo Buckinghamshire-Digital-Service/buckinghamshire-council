@@ -93,4 +93,10 @@
         margin-top: $grid--small * 1.75;
         font-weight: $weight--bold;
     }
+
+    .alert--message & {
+        p {
+            margin-top: 6px;
+        }
+    }
 }

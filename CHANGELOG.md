@@ -1,5 +1,15 @@
 # Release History
 
+## 24.0 (2020-08-20)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/23.0...24.0
+
+- Refactor Aptean Respond API integration to give more control over form presentation
+- Add file field support to Aptean Respond forms
+- Custom sizes for input fields
+- Sitewide alert messages
+- Always show application forms front end component, even if the job ID is not imported
+
 ## 23.0 (2020-07-27)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/22.0...23.0
