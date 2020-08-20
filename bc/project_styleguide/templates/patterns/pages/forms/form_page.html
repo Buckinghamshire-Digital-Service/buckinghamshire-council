@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <section class="main-body">
+    <div class="main-body">
         <div class="container">
             {% if page.form_fields.exists %}
                     <form action="{% pageurl page %}" method="post" class="form form--standard" data-form>
@@ -48,7 +48,7 @@
                                             {% if field.help_text %}<div class="form-item__help">{{ field.help_text }}</div>{% endif %}
                                         {% else %}
                                             <label{% if field.id_for_label %} for="{{ field.id_for_label }}"{% endif %} class="form-item__label {% if field.field.required %}required{% endif %}">{{ field.label }} {% if field.field.required %}<span class="form-item__required">*</span>{% endif %}</label>
-                                            <div class="form-item__help">{% if field.help_text %}{{ field.help_text }}{% endif %}</div>
+                                            {% if field.help_text %}<div class="form-item__help">{{ field.help_text }}</div>{% endif %}
 
                                             {% if widget_type == 'date_input' or widget_type == 'date_time_input' %}<div class="{{ widget_type }}">{% endif %}
                                             {{ field }}
@@ -64,6 +64,6 @@
                     </form>
                 {% endif %}
         </div>
-    </section>
+    </div>
 
 {% endblock %}

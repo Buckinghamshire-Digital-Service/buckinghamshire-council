@@ -54,9 +54,11 @@
     }
 
     &__heading-title {
-        @include font-size(xl);
+        @include font-size(l);
         color: $color--white;
+        flex: 0 1 100%;
         font-weight: $weight--bold;
+        line-height: 1.25;
         margin-top: $grid--min;
         margin-right: 10px;
         text-decoration: none;
@@ -66,19 +68,44 @@
             text-decoration: underline;
         }
 
+        @include media-query(mob-portrait) {
+            flex: 0 1 55%;
+        }
+
         @include media-query(px550) {
-            @include font-size(xl);
+            flex: 0 1 50%;
+            line-height: 1.25;
             margin-top: 0;
         }
-    }
 
+        @include media-query(tablet-landscape) {
+            @include font-size(xl);
+            flex: auto;
+        }
+    }
     &__heading-logo {
         background-color: $color--white;
-        max-height: 44px;
-        padding: 3px 3px 0 3px;
+        display: inline-block;
+        max-height: 38px;
+        vertical-align: middle;
+
+        &--padding {
+            padding: 3px 3px 0 3px;
+        }
+
+        &:first-child {
+            margin-bottom: 5px;
+        }
 
         @include media-query(px550) {
-            align-self: flex-end;
+            max-height: 44px;
+        }
+
+        @include media-query(tablet-portrait) {
+            &:first-child {
+                margin-right: 5px;
+                margin-bottom: 0;
+            }
         }
     }
 }

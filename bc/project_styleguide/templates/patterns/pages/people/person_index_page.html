@@ -11,12 +11,12 @@
         </div>
     </div>
 
-    <section class="main-body">
+    <section class="main-body" aria-label="People listing">
         <div class="container">
             {% if people %}
                 {% for person in people %}
-                    <article class="person">
-                        <h2><a href="{% pageurl person %}">{{ person.first_name }} {{ person.last_name }}</a></h2>
+                    <article class="person" aria-labelledby="person-{{ forloop.counter }}">
+                        <h2 id="person-{{ forloop.counter }}"><a href="{% pageurl person %}">{{ person.first_name }} {{ person.last_name }}</a></h2>
 
                         {% if person.listing_summary or person.introduction %}
                             <p>{% firstof person.listing_summary person.introduction %}</p>

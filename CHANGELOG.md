@@ -4,8 +4,57 @@
 
 - Refactor Aptean Respond API integration to give more control over form presentation
 - Add file field support to Aptean Respond forms
-- Add cookie banner to recruitment / jobs site
 - Custom sizes for input fields
+- Sitewide alert messages
+- Always show application forms front end component, even if the job ID is not imported
+
+## 23.0 (2020-07-27)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/22.0...23.0
+
+- Accessibility 77 Further changes to prevent horizontal scrolling on smaller mobile devices
+- Add social media text & new icon/links to footer
+- Fix for bottom of homepage displaying incorrectly on IE11
+
+## 22.0 (2020-07-23)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/21.0...22.0
+
+- Upgrade Wagtail to 2.9.3
+- Configure Wagtail's Cloudflare front end cache invalidation
+- Add to documentation about caching infrastructure
+- Jobs: Add Restless logo to header
+- Jobs 166 set up reuse application button
+- Accessibility 47 Increase contrast of form help text
+- Accessibility 80 Improve landmark aria labelling
+- Accessibility 81 Content not included in landmarks
+
+## 21.0 (2020-07-09)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/20.0...21.0
+
+- Accessibility 79 Hide sidebar aria-labelledby attribute when there are no related pages
+- Add page feedback widget
+
+## 20.0 (2020-07-02)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/19.1...20.0
+
+- Add cookie banner to recruitment / jobs site
+- Make max-width larger on main wrapper
+- Adjust line height of headings
+- Progressive disclosure details (BE)
+- Update newsletter signup URL
+- Add favicon to recruitment site
+- Reinstate display of promoted search results
+- Fix 'no results found' message when there is no search query
+- Enable embedding YouTube videos without using cookies and without showing
+  unrelated video links
+- Make the homepage child sections 'menu' respect the 'show_in_menus' property
+- Mobile-friendly tables
+- Accessibility 77 Remove horizontal scrolling for smaller mobile devices
+- Accessibility 78 Improve pagination link text (Silktide improvement)
+- Improve the method for returning a formatted Aptean Respond case reference number
 
 ## 19.1 (2020-06-23)
 

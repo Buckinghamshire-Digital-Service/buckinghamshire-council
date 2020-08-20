@@ -47,17 +47,19 @@
 
         <div class="row">
             <div id="apply-content" class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
-                <section>
+                <div>
                     <div data-lumesse-apply-resume class="hidden"></div>
                     <div data-lumesse-apply-container data-lumesse-apply-errors-placement="top"
                         data-lumesse-apply-description-placement="top" class="tsApplyContainer"></div>
                     <div data-lumesse-apply-submission-accepted class=""></div>
-                </section>
+                </div>
             </div>
         </div>
     </section>
 
-    {% include "patterns/molecules/jobs-sidebar/jobs-sidebar.html" %}
+    {% if show_sidebar %}
+        {% include "patterns/molecules/jobs-sidebar/jobs-sidebar.html" %}
+    {% endif %}
 </div>
 {% comment %}
 <main class="container" id="vanillaApplyContent">

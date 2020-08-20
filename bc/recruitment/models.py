@@ -342,18 +342,27 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
             job_id = request.GET.get("jobId")
             if job_id and "-" in job_id:
                 talentlink_id = job_id.split("-")[1]
-                page = get_object_or_404(TalentLinkJob, talentlink_id=talentlink_id)
+                page = TalentLinkJob.objects.get(talentlink_id=talentlink_id)
             else:
                 raise Http404("Missing job details")
         except ValueError:
             # This is raised if casting the job_id to an int fails in the query
             raise Http404("Could not determine job details from URL")
+        except TalentLinkJob.DoesNotExist:
+            # We don't have a job to display as a page title. The JavaScript application
+            # component independently fetches jobs from the API, so we display a generic
+            # title then defer to that to try to render a non-imported application form.
+            show_sidebar = False
+            page = {"title": "Application form"}
+        else:
+            show_sidebar = True
         return render(
             request,
             "patterns/pages/jobs/apply.html",
             {
                 "page": page,
                 "show_apply_button": False,
+                "show_sidebar": show_sidebar,
                 "apply_config_key": getattr(
                     settings, "TALENTLINK_APPLY_CONFIG_KEY_" + self.job_board.upper()
                 ),  # Will throw AttributeError if not defined

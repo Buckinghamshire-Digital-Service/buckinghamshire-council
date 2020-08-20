@@ -16,7 +16,6 @@ html {
 }
 
 body {
-    overflow-x: hidden;
     background-color: $color--white;
 
     &.no-scroll {
@@ -62,6 +61,9 @@ a,
     color: $color--link;
     transition: color $transition;
     cursor: pointer;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
 
     #{$hover-states} {
         color: $color--link-hover;

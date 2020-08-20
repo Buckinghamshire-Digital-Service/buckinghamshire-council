@@ -15,5 +15,14 @@ def validate_youtube_domain(value):
         )
 
 
+def validate_linkedin_domain(value):
+    scheme, netloc, path, query, fragment = urlsplit(value)
+    hostname = "www.linkedin.com"
+    if netloc != hostname:
+        raise ValidationError(
+            f"{value} is not a LinkedIn URL. The domain part must be {hostname}"
+        )
+
+
 def get_current_year():
     return now().year

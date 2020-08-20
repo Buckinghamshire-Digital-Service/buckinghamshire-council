@@ -1,5 +1,7 @@
 {% load static wagtailuserbar wagtailcore_tags navigation_tags util_tags %}
 
+{% include "patterns/molecules/feedback-widget/feedback-widget.html" %}
+
 <div class="footer">
     <div class="footer__inner wrapper wrapper--large">
         <div class="footer__nav-container">
@@ -7,21 +9,31 @@
                 {% footerlinks %}
             </div>
 
-            {% if settings.utils.SocialMediaSettings.twitter_handle or settings.utils.SocialMediaSettings.facebook_app_id %}
+            {% if settings.utils.SocialMediaSettings.has_any_setting %}
                 <div class="footer__social-links">
                     {% if settings.utils.SocialMediaSettings.facebook_app_id %}
-                        <a href="https://www.facebook.com/{{ settings.utils.SocialMediaSettings.facebook_app_id }}">
+                        <a href="https://www.facebook.com/{{ settings.utils.SocialMediaSettings.facebook_app_id }}" target="_blank" rel="nofollow noreferrer">
                             {% include "patterns/atoms/icons/icon.html" with name="facebook" classname="icon--footer-social" %}
                         </a>
                     {% endif %}
                     {% if settings.utils.SocialMediaSettings.twitter_handle %}
-                        <a href="https://twitter.com/{{ settings.utils.SocialMediaSettings.twitter_handle }}">
+                        <a href="https://twitter.com/{{ settings.utils.SocialMediaSettings.twitter_handle }}" target="_blank" rel="nofollow noreferrer">
                             {% include "patterns/atoms/icons/icon.html" with name="twitter" classname="icon--footer-social" %}
                         </a>
                     {% endif %}
                     {% if settings.utils.SocialMediaSettings.youtube_channel_url %}
-                        <a href="{{ settings.utils.SocialMediaSettings.youtube_channel_url }}">
+                        <a href="{{ settings.utils.SocialMediaSettings.youtube_channel_url }}" target="_blank" rel="nofollow noreferrer">
                             {% include "patterns/atoms/icons/icon.html" with name="youtube" classname="icon--footer-social" %}
+                        </a>
+                    {% endif %}
+                    {% if settings.utils.SocialMediaSettings.instagram_username %}
+                        <a href="https://www.instagram.com/{{ settings.utils.SocialMediaSettings.instagram_username }}" target="_blank" rel="nofollow noreferrer">
+                            {% include "patterns/atoms/icons/icon.html" with name="instagram" classname="icon--footer-social" %}
+                        </a>
+                    {% endif %}
+                    {% if settings.utils.SocialMediaSettings.linkedin_organisation_url %}
+                        <a href="{{ settings.utils.SocialMediaSettings.linkedin_organisation_url }}" target="_blank" rel="nofollow noreferrer">
+                            {% include "patterns/atoms/icons/icon.html" with name="linkedin" classname="icon--footer-social" %}
                         </a>
                     {% endif %}
                 </div>

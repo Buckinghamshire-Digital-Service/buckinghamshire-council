@@ -1,19 +1,11 @@
 .alert {
     $root: &;
 
-    &__alpha {
-        display: block;
-        background: $color--primary;
-        color: $color--white;
-        text-transform: uppercase;
-        font-weight: $weight--bold;
-        padding: 2px 12px 0;
-        margin-right: $grid--min;
-    }
-
     &__inner {
-        display: flex;
-        align-items: baseline;
+        @include media-query(tablet-portrait) {
+            display: flex;
+            align-items: baseline;
+        }
     }
 
     &__header {
@@ -24,27 +16,25 @@
         background: $color--white;
         border: 4px solid $color--orange;
         color: $color--default;
+        margin-bottom: $grid--small;
         padding: $grid / 2;
-        margin: $grid--small 0 0 0;
 
-        * {
-            margin-bottom: 0;
-        }
-    }
-
-    &--condensed {
         #{$root}__header,
         #{$root}__content {
             display: inline;
         }
 
         #{$root}__header {
-            @include font-size(s);
+            @include font-size(l);
         }
 
         #{$root}__link {
             display: block;
             margin-top: $grid--min;
+        }
+
+        * {
+            margin-bottom: 0;
         }
     }
 
@@ -57,18 +47,20 @@
         #{$root}__title {
             @include font-size(xxl);
             font-weight: $weight--bold;
+            line-height: 1.2;
             margin-bottom: $grid--min;
         }
 
         #{$root}__body {
             @include font-size(xl);
-            line-height: 1.2;
+            line-height: 1.25;
         }
     }
 
     &__ref {
         @include font-size(xl);
         display: block;
+        line-height: 1.25;
         font-weight: $weight--bold;
     }
 

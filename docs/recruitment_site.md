@@ -59,7 +59,7 @@ The Lumesse TalentLink API uses both WS-Security (the request body contains a us
 
 ### Use with Django cache
 
-Zeep caches WSDL schemata internally. We use a custom `ZeepDjangoBackendCache` to fit with the infrastructure Django already provides.
+Zeep caches WSDL schemata internally. We use a custom `ZeepDjangoBackendCache` to fit with the infrastructure Django already provides. See [Infrastructure](infrastructure.md) for details of the Django backend.
 
 ## Lumesse TalentLink API
 

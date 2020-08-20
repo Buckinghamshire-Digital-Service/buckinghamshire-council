@@ -1,0 +1,33 @@
+.feedback-widget {
+    $root: &;
+    background-color: $color--sky;
+    margin: 1px 0;
+    display: block;
+    position: relative;
+    width: 100%;
+
+    &__content {
+        color: $color--white;
+        display: flex;
+        padding: ($grid / 2) 0;
+    }
+
+    &__heading {
+        margin-bottom: 0;
+    }
+
+    &__buttons {
+        display: none;
+
+        .active & {
+            display: block;
+        }
+    }
+
+    &__link {
+        color: $color--white;
+        margin-left: $grid;
+        text-decoration: underline;
+        padding: 0;
+    }
+}

@@ -1,5 +1,5 @@
 {% load wagtailcore_tags %}
-<div class="cookie wrapper wrapper--large" role="region" aria-label="cookie banner" data-cookie-message>
+<section class="cookie wrapper wrapper--large" aria-label="cookie banner" data-cookie-message>
     <div class="cookie__container">
         <div class="cookie__message">
             {% with settings.utils.ImportantPages.cookie_information_page as cookie_page %}
@@ -18,4 +18,4 @@
             </button>
         </div>
     </div>
-</div>
+</section>

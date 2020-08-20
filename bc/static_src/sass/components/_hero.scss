@@ -11,15 +11,9 @@
 
     &__strapline {
         color: $color--white;
-        line-height: 1.3;
+        line-height: 1.2;
         max-width: 530px;
         margin-bottom: $grid;
-    }
-
-    &--with-alert {
-        @include media-query(tablet-portrait) {
-            padding-bottom: 60px;
-        }
     }
 
     &--jobs {

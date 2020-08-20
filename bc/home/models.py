@@ -1,13 +1,10 @@
 from django.db import models
 from django.utils.functional import cached_property
 
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
-from wagtail.core.fields import RichTextField
+from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
-
-from bc.utils.constants import RICH_TEXT_FEATURES
 
 from ..events.models import EventIndexPage
 from ..news.models import NewsIndex
@@ -34,8 +31,6 @@ class HomePage(BasePage):
         on_delete=models.SET_NULL,
         related_name="+",
     )
-    alert_title = models.CharField(max_length=255, blank=True,)
-    alert_message = RichTextField(blank=True, features=RICH_TEXT_FEATURES)
 
     search_fields = BasePage.search_fields + [index.SearchField("strapline")]
 
@@ -43,11 +38,6 @@ class HomePage(BasePage):
         FieldPanel("strapline"),
         ImageChooserPanel("hero_image"),
         SnippetChooserPanel("call_to_action"),
-        MultiFieldPanel(
-            [FieldPanel("alert_title"), FieldPanel("alert_message")],
-            "Temporary alert message",
-            help_text="This will only be displayed if both alert title and alert message are defined.",
-        ),
     ]
 
     @cached_property
@@ -56,7 +46,13 @@ class HomePage(BasePage):
         Returns queryset of this page's live, public children that are of IndexPage class
         Ordered by Wagtail explorer custom sort (ie. path)
         """
-        return IndexPage.objects.child_of(self).live().public().order_by("path")
+        return (
+            IndexPage.objects.child_of(self)
+            .filter(show_in_menus=True)
+            .live()
+            .public()
+            .order_by("path")
+        )
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)

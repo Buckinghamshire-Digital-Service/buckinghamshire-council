@@ -19,7 +19,7 @@ from wagtail.snippets.models import register_snippet
 from bc.utils.cache import get_default_cache_control_decorator
 from bc.utils.constants import RICH_TEXT_FEATURES
 
-from .validators import validate_youtube_domain
+from .validators import validate_linkedin_domain, validate_youtube_domain
 
 
 class LinkFields(models.Model):
@@ -235,6 +235,15 @@ class SocialMediaSettings(BaseSetting):
         help_text="Your YouTube channel URL.",
         validators=[validate_youtube_domain],
     )
+    instagram_username = models.CharField(
+        max_length=255, blank=True, help_text="Your Instagram username."
+    )
+    linkedin_organisation_url = models.CharField(
+        max_length=255,
+        blank=True,
+        help_text="Your LinkedIn organisation page URL.",
+        validators=[validate_linkedin_domain],
+    )
     default_sharing_text = models.CharField(
         max_length=255,
         blank=True,
@@ -246,6 +255,17 @@ class SocialMediaSettings(BaseSetting):
         default="Buckinghamshire Council",
         help_text="Site name, used by Open Graph.",
     )
+
+    def has_any_setting(self):
+        return any(
+            [
+                self.twitter_handle,
+                self.facebook_app_id,
+                self.youtube_channel_url,
+                self.instagram_username,
+                self.linkedin_organisation_url,
+            ]
+        )
 
 
 @register_setting
@@ -262,27 +282,6 @@ class SystemMessagesSettings(BaseSetting):
 
     panels = [
         MultiFieldPanel([FieldPanel("title_404"), FieldPanel("body_404")], "404 page")
-    ]
-
-
-@register_setting
-class SiteBannerSettings(BaseSetting):
-    class Meta:
-        verbose_name = "Site banner"
-
-    show_banner = models.BooleanField(
-        default=False,
-        help_text="When set to True, the banner will be displayed on all pages of "
-        + "the site except for homepage. For homepage, please use the alert fields on homepage.",
-    )
-    label = models.CharField("Alert label", max_length=255)
-    body = RichTextField("Text", features=RICH_TEXT_FEATURES)
-
-    panels = [
-        MultiFieldPanel(
-            [FieldPanel("show_banner"), FieldPanel("label"), FieldPanel("body")],
-            "Banner",
-        )
     ]
 
 

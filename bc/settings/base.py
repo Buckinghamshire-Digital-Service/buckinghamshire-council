@@ -4,6 +4,8 @@ Django settings for bc project.
 import os
 import sys
 
+from wagtail.embeds.oembed_providers import youtube
+
 import dj_database_url
 import raven
 from raven.exceptions import InvalidGitRepository
@@ -52,8 +54,9 @@ INSTALLED_APPS = [
     # According to the official docs, it's important that Scout is listed
     # first - http://help.apm.scoutapp.com/#django.
     "scout_apm.django",
-    "bc.cases",
+    "bc.alerts",
     "bc.area_finder",
+    "bc.cases",
     "bc.documents",
     "bc.events",
     "bc.forms",
@@ -168,11 +171,13 @@ DATABASES = {
 
 # Do not use the same Redis instance for other things like Celery!
 if "REDIS_URL" in env:
+    REDIS_FORCE_TLS = env.get("REDIS_FORCE_TLS", "false").lower() == "true"
+    REDIS_URL = env["REDIS_URL"]
+    if REDIS_FORCE_TLS:
+        REDIS_URL = REDIS_URL.replace("redis://", "rediss://")
+
     CACHES = {
-        "default": {
-            "BACKEND": "django_redis.cache.RedisCache",
-            "LOCATION": env["REDIS_URL"],
-        }
+        "default": {"BACKEND": "django_redis.cache.RedisCache", "LOCATION": REDIS_URL}
     }
 else:
     CACHES = {
@@ -189,6 +194,14 @@ WAGTAILSEARCH_BACKENDS = {
     "default": {"BACKEND": "wagtail.contrib.postgres_search.backend"}
 }
 
+
+WAGTAILEMBEDS_FINDERS = [
+    {
+        "class": "bc.utils.embed_finders.YouTubeNoCookieAndRelFinder",
+        "providers": [youtube],
+    },
+    {"class": "bc.utils.embed_finders.CustomOEmbedFinder"},
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/stable/ref/settings/#auth-password-validators
@@ -465,22 +478,41 @@ if "SENTRY_DSN" in env:
 # This is a configuration of the CDN/front-end cache that is used to cache the
 # production websites.
 # https://docs.wagtail.io/en/latest/reference/contrib/frontendcache.html
-# You are required to set the following environment variables:
-#  * FRONTEND_CACHE_CLOUDFLARE_TOKEN
-#  * FRONTEND_CACHE_CLOUDFLARE_EMAIL
-#  * FRONTEND_CACHE_CLOUDFLARE_ZONEID
-# Can be obtained from a sysadmin.
+# The backend can be configured to use an account-wide API key, or an API token with
+# restricted access.
 
-if "FRONTEND_CACHE_CLOUDFLARE_TOKEN" in env:
+if (
+    "FRONTEND_CACHE_CLOUDFLARE_TOKEN" in env
+    or "FRONTEND_CACHE_CLOUDFLARE_BEARER_TOKEN" in env
+):
     INSTALLED_APPS.append("wagtail.contrib.frontend_cache")
     WAGTAILFRONTENDCACHE = {
         "default": {
             "BACKEND": "wagtail.contrib.frontend_cache.backends.CloudflareBackend",
-            "EMAIL": env["FRONTEND_CACHE_CLOUDFLARE_EMAIL"],
-            "TOKEN": env["FRONTEND_CACHE_CLOUDFLARE_TOKEN"],
             "ZONEID": env["FRONTEND_CACHE_CLOUDFLARE_ZONEID"],
         }
     }
+
+    if "FRONTEND_CACHE_CLOUDFLARE_TOKEN" in env:
+        # To use an account-wide API key, set the following environment variables:
+        #  * FRONTEND_CACHE_CLOUDFLARE_TOKEN
+        #  * FRONTEND_CACHE_CLOUDFLARE_EMAIL
+        #  * FRONTEND_CACHE_CLOUDFLARE_ZONEID
+        # These can be obtained from a sysadmin.
+        WAGTAILFRONTENDCACHE["default"].update(
+            {
+                "EMAIL": env["FRONTEND_CACHE_CLOUDFLARE_EMAIL"],
+                "TOKEN": env["FRONTEND_CACHE_CLOUDFLARE_TOKEN"],
+            }
+        )
+
+    elif "FRONTEND_CACHE_CLOUDFLARE_BEARER_TOKEN" in env:
+        # To use an API token with restricted access, set the following environment variables:
+        #  * FRONTEND_CACHE_CLOUDFLARE_BEARER_TOKEN
+        #  * FRONTEND_CACHE_CLOUDFLARE_ZONEID
+        WAGTAILFRONTENDCACHE["default"].update(
+            {"BEARER_TOKEN": env["FRONTEND_CACHE_CLOUDFLARE_BEARER_TOKEN"]}
+        )
 
 
 # Set s-max-age header that is used by reverse proxy/front end cache. See
