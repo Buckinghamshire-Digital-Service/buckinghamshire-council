@@ -132,3 +132,40 @@ class TestApplyConfigKey(TestCase):
                     HTTP_HOST=self.site.hostname + ":80",
                 )
                 self.assertEqual(resp.status_code, 200)
+
+    @override_settings(
+        ALLOWED_HOSTS=[
+            "localhost",
+            "testserver",
+            INTERNAL_HOSTNAME,
+            EXTERNAL_HOSTNAME,
+        ],
+    )
+    def test_sidebar_normally_shown(self):
+        job = TalentLinkJobFactory.create(
+            title="puncture patcher", homepage=self.homepage
+        )
+        resp = self.client.get(
+            job.application_url, HTTP_HOST=self.site.hostname + ":80"
+        )
+
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.context["show_sidebar"], True)
+
+    @override_settings(
+        ALLOWED_HOSTS=[
+            "localhost",
+            "testserver",
+            INTERNAL_HOSTNAME,
+            EXTERNAL_HOSTNAME,
+        ],
+    )
+    def test_sidebar_not_shown_when_job_id_does_not_exist(self):
+        resp = self.client.get(
+            self.homepage.full_url
+            + self.homepage.reverse_subpage("apply")
+            + "?jobId=abc-123",
+            HTTP_HOST=self.site.hostname + ":80",
+        )
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.context["show_sidebar"], False)
