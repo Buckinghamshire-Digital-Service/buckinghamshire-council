@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 24.0 (2020-08-20)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/23.0...24.0
 
 - Refactor Aptean Respond API integration to give more control over form presentation
 - Add file field support to Aptean Respond forms
