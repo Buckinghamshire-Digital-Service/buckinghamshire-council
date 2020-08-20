@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Refactor Aptean Respond API integration to give more control over form presentation
+- Add file field support to Aptean Respond forms
 - Add cookie banner to recruitment / jobs site
 - Custom sizes for input fields
 

@@ -18,6 +18,8 @@ from bc.cases.backends.respond.constants import (
     APTEAN_FORM_DISCLOSURE,
     APTEAN_FORM_FOI,
     APTEAN_FORM_SAR,
+    ATTACHMENT_FAILURE_ERROR,
+    ATTACHMENT_SCHEMA_NAME,
 )
 from bc.cases.utils import format_case_reference
 from bc.utils.constants import RICH_TEXT_FEATURES
@@ -128,10 +130,18 @@ class ApteanRespondCaseFormPage(BasePage):
                 v: k for k, v in form.field_schema_name_mapping.items()
             }
             for error in soup.find_all("failure"):
-                if error.attrs.get("schemaName") in reverse_schema_mapping:
+                if (
+                    "schemaName" in error.attrs
+                    and error.attrs["schemaName"] in reverse_schema_mapping
+                ):
                     form.add_error(
                         reverse_schema_mapping[error.attrs["schemaName"]], error.text
                     )
+                elif (
+                    "type" in error.attrs
+                    and error.attrs["type"] == ATTACHMENT_FAILURE_ERROR
+                ):
+                    form.add_error(ATTACHMENT_SCHEMA_NAME, error.text)
                 else:
                     form.add_error(None, error.text)
             return form, None

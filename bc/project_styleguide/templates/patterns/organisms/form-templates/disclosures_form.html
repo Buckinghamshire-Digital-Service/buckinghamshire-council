@@ -1,5 +1,5 @@
 {% load wagtailcore_tags %}
-<form action="{% pageurl page %}" method="post" class="form form--standard" novalidate>
+<form action="{% pageurl page %}" method="post" class="form form--standard" enctype="multipart/form-data" novalidate>
     <div class="form__container">
         {% csrf_token %}
 
@@ -24,6 +24,11 @@
             {% include "patterns/molecules/form_field.html" with field=form.investigation %}
             {% include "patterns/molecules/form_field.html" with field=form.reason %}
             {% include "patterns/molecules/form_field.html" with field=form.act_of_parliament %}
+        </fieldset>
+
+        <fieldset>
+            <legend class="form-item__label">Attach supporting documents</legend>
+            {% include "patterns/molecules/form_field.html" with field=form.attachments %}
         </fieldset>
 
         <fieldset>

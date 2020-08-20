@@ -6,6 +6,11 @@ CATEGORY_INFO_TYPE = "CategoryInfo"
 
 APPEND_TO_DESCRIPTION = "append to description"
 DESCRIPTION_SCHEMA_NAME = "Case.Description"
+ACTIVITY_TITLE_SCHEMA_NAME = "Activity.Title"
+ATTACHMENT_SCHEMA_NAME = "Activity.Note"
+
+ATTACHMENT_FAILURE_ERROR = "AttachmentFailure"
+ATTACHMENT_ACTIVITY_TITLE = "Web form attachments"
 
 APTEAN_FORM_COMPLAINT = "complaint"
 APTEAN_FORM_FOI = "foi"
@@ -36,6 +41,32 @@ PREFERRED_CONTACT_METHOD_CHOICES = [
 
 CONTACT_TYPE_PRIMARY = "Primary"
 CONTACT_TYPE_SECONDARY = "Secondary"
+
+VALID_FILE_EXTENSIONS = [
+    "bmp",
+    "csv",
+    "doc",
+    "docx",
+    "dot",
+    "dotx",
+    "eml",
+    "gif",
+    "jpeg",
+    "jpg",
+    "m4a",
+    "mp3",
+    "msg",
+    "pdf",
+    "png",
+    "pptx",
+    "rtf",
+    "txt",
+    "wav",
+    "xls",
+    "xlsm",
+    "xlsx",
+    "zip",
+]
 
 # Stanagedicfixelds (system-managed static fixed fields) are fields to be hardcoded with
 # every form submission to the Aptean Respond create case web service endpoints.

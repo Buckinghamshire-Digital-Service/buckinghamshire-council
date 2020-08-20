@@ -1,5 +1,6 @@
 import datetime
 import logging
+from base64 import b64encode
 from collections import defaultdict
 
 import django.forms
@@ -7,6 +8,9 @@ import django.forms
 from lxml import etree
 
 from .constants import (
+    ACTIVITY_TITLE_SCHEMA_NAME,
+    ATTACHMENT_ACTIVITY_TITLE,
+    ATTACHMENT_SCHEMA_NAME,
     DEFAULT_STANAGEDICFIXELDS,
     DESCRIPTION_SCHEMA_NAME,
     XML_ENTITY_MAPPING,
@@ -22,6 +26,20 @@ class BaseCaseForm(django.forms.Form):
         element = etree.Element("field", schemaName=key)
         value_element = etree.SubElement(element, "value")
         value_element.text = value
+        return element
+
+    def create_attachments_element(self, files, location_type="Database"):
+        element = etree.Element("Attachments")
+        for file in files:
+            attachment_element = etree.SubElement(
+                element,
+                "attachment",
+                locationType=location_type,
+                summary=file.name,
+                location=file.name,
+                tag="",
+            )
+            attachment_element.text = b64encode(file.read())
         return element
 
     def cast(self, value):
@@ -60,9 +78,25 @@ class BaseCaseForm(django.forms.Form):
             if schema_name == DESCRIPTION_SCHEMA_NAME:
                 # We've handled the description separately
                 continue
+
+            entity_name = schema_name.partition(".")[0]
+            if schema_name == ATTACHMENT_SCHEMA_NAME:
+                if self.files:
+                    # The documentation tells only of the Activity.Note element, but we use
+                    # the undocumented Activity.Title field for fun, because it lands in a
+                    # more sensible place; we hardcode the title.
+                    entities[entity_name].append(
+                        self.create_element(
+                            ACTIVITY_TITLE_SCHEMA_NAME, ATTACHMENT_ACTIVITY_TITLE
+                        )
+                    )
+
+                    files = self.files.getlist("attachments")
+                    entities[entity_name].append(self.create_attachments_element(files))
+                continue
+
             value = cleaned_data[key]
             value = self.cast(value)
-            entity_name = schema_name.partition(".")[0]
             entities[entity_name].append(self.create_element(schema_name, value))
 
         # Finally, add the updated description
@@ -91,6 +125,35 @@ class BaseCaseForm(django.forms.Form):
                 parent.append(element)
 
         return case
+
+    def _post_clean(self):
+        """Warn about cleared submitted file fields if there are any other errors."""
+        if self.errors:
+            for name, field in self.fields.items():
+                if isinstance(field, django.forms.FileField):
+                    if name in self.errors or not self.files:
+                        # Either there were no files attached, or there's already an
+                        # error associated with this field.
+                        continue
+                    files = self.files.getlist(self.add_prefix(name))
+                    if files:
+                        if len(files) > 1:
+                            file_list = "{}, and {}".format(
+                                ", ".join([f._name for f in files[:-1]]),
+                                files[-1]._name,
+                            )
+                            self.add_error(
+                                name,
+                                f"Your files {file_list} are no longer attached due "
+                                "to errors with other fields, please add them again",
+                            )
+                        else:
+                            self.add_error(
+                                name,
+                                f"Your file {files[0]._name} is no longer attached "
+                                "due to errors with other fields, please add it again",
+                            )
+        return super()._post_clean()
 
     def get_xml_string(self):
         return etree.tostring(self.get_xml(self.cleaned_data))

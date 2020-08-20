@@ -3,6 +3,7 @@ import datetime
 from django import forms
 from django.conf import settings
 from django.core.validators import (
+    FileExtensionValidator,
     MaxLengthValidator,
     MaxValueValidator,
     MinLengthValidator,
@@ -11,6 +12,7 @@ from django.core.validators import (
 from django.utils.timezone import now
 
 from bc.cases.backends.respond.constants import (
+    ATTACHMENT_SCHEMA_NAME,
     CONTACT_METHOD_EMAIL,
     CONTACT_METHOD_PHONE,
     CONTACT_METHOD_POST,
@@ -18,6 +20,7 @@ from bc.cases.backends.respond.constants import (
     CONTACT_TYPE_SECONDARY,
     DESCRIPTION_SCHEMA_NAME,
     PREFERRED_CONTACT_METHOD_CHOICES,
+    VALID_FILE_EXTENSIONS,
 )
 from bc.cases.backends.respond.forms import BaseCaseForm as _BaseCaseForm
 from bc.utils.validators import get_current_year
@@ -123,6 +126,12 @@ class ComplaintForm(BaseCaseForm):
         ),
         required=False,
     )
+    attachments = forms.FileField(
+        label="Upload files",
+        required=False,
+        validators=[FileExtensionValidator(allowed_extensions=VALID_FILE_EXTENSIONS)],
+        widget=forms.ClearableFileInput(attrs={"multiple": True}),
+    )
 
     @property
     def field_group_1(self):
@@ -141,6 +150,7 @@ class ComplaintForm(BaseCaseForm):
         "description": DESCRIPTION_SCHEMA_NAME,
         "action_taken_01": "Case.ActionTaken01",
         "additional_comments": "Case.AdditionalComments",
+        "attachments": ATTACHMENT_SCHEMA_NAME,
     }
     field_schema_name_mapping.update(BaseCaseForm.field_schema_name_mapping)
 
@@ -169,11 +179,18 @@ class FOIForm(BaseCaseForm):
         help_text="Tell us in as much detail as you can to help us find it."
         "For example, a description of the information, names, dates and any reference numbers.",
     )
+    attachments = forms.FileField(
+        label="Upload files",
+        required=False,
+        validators=[FileExtensionValidator(allowed_extensions=VALID_FILE_EXTENSIONS)],
+        widget=forms.ClearableFileInput(attrs={"multiple": True}),
+    )
 
     field_schema_name_mapping = {
         "your_involvement": "Contact.ContactType",
         "organisation": "Contact.Organisation",
         "description": DESCRIPTION_SCHEMA_NAME,
+        "attachments": ATTACHMENT_SCHEMA_NAME,
     }
     field_schema_name_mapping.update(BaseCaseForm.field_schema_name_mapping)
 
@@ -251,6 +268,17 @@ class SARForm(BaseCaseForm):
         ],
     )
 
+    attachments = forms.FileField(
+        label="Upload proof of identity",
+        required=False,
+        validators=[FileExtensionValidator(allowed_extensions=VALID_FILE_EXTENSIONS)],
+        widget=forms.ClearableFileInput(attrs={"multiple": True}),
+        help_text="To help us process your request quicker, upload two "
+        "forms of ID that clearly show your name, date of birth and "
+        "current address. For example, your driving license and a utility "
+        "bill or birth certificate.",
+    )
+
     @property
     def append_to_description_fields(self):
         return [
@@ -267,6 +295,7 @@ class SARForm(BaseCaseForm):
         "your_involvement": "Contact.ContactType",
         "dob": "Contact.DateOfBirth",
         "description": DESCRIPTION_SCHEMA_NAME,
+        "attachments": ATTACHMENT_SCHEMA_NAME,
     }
     field_schema_name_mapping.update(BaseCaseForm.field_schema_name_mapping)
 
@@ -393,6 +422,15 @@ class DisclosureForm(BaseCaseForm):
         label="The name of the act, the year and the number of the section",
         required=False,
     )
+    attachments = forms.FileField(
+        label="Upload files",
+        help_text="Upload a copy of your organisation’s disclosure request form. "
+        "If you do not upload this, there may be a delay in processing your request. "
+        "You can also upload any other relevant documents. ",
+        required=False,
+        validators=[FileExtensionValidator(allowed_extensions=VALID_FILE_EXTENSIONS)],
+        widget=forms.ClearableFileInput(attrs={"multiple": True}),
+    )
 
     @property
     def append_to_description_fields(self):
@@ -405,6 +443,7 @@ class DisclosureForm(BaseCaseForm):
     field_schema_name_mapping = {
         "organisation": "Contact.Organisation",
         "description": DESCRIPTION_SCHEMA_NAME,
+        "attachments": ATTACHMENT_SCHEMA_NAME,
     }
     field_schema_name_mapping.update(BaseCaseForm.field_schema_name_mapping)
 

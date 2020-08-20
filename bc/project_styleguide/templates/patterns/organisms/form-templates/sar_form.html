@@ -1,5 +1,5 @@
 {% load wagtailcore_tags %}
-<form action="{% pageurl page %}" method="post" class="form form--standard" novalidate>
+<form action="{% pageurl page %}" method="post" class="form form--standard" enctype="multipart/form-data" novalidate>
     <div class="form__container">
         {% csrf_token %}
 
@@ -62,6 +62,14 @@
 
             {% include "patterns/organisms/form-templates/contact_method_fieldset.html" %}
         </fieldset>
+
+
+        <fieldset>
+            <legend class="form-item__label">Attach supporting documents</legend>
+            {% include "patterns/molecules/form_field.html" with field=form.attachments %}
+        </fieldset>
+
+
 
         {{ page.pre_submission_text|richtext }}
         <input class="form__submit button" type="submit" value="Submit">
