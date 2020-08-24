@@ -34,7 +34,6 @@
             margin-bottom: 5px;
             margin-top: 3px;
             position: relative;
-            @include font-size(s);
         }
     }
 
@@ -95,7 +94,7 @@
         }
 
         &:focus {
-            outline: 0;
+            outline-color: transparent;
         }
 
         &--search-filters {
@@ -132,7 +131,7 @@
         padding: 0;
 
         #{$root}__button:focus & {
-            background-color: yellow;
+            background-color: $color--mustard;
             border-bottom: 4px solid $color--off-black;
             color: $color--off-black;
         }
