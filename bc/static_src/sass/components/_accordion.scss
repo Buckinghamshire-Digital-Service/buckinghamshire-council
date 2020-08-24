@@ -93,9 +93,11 @@
             }
         }
 
+        /* stylelint-disable */
         &:focus {
-            outline-color: transparent;
+            outline: 0; // focus style implemented directly on text instead
         }
+        /* stylelint-enable */
 
         &--search-filters {
             @include font-size(s);
@@ -131,7 +133,7 @@
         padding: 0;
 
         #{$root}__button:focus & {
-            background-color: $color--mustard;
+            background-color: $color--yellow;
             border-bottom: 4px solid $color--off-black;
             color: $color--off-black;
         }
