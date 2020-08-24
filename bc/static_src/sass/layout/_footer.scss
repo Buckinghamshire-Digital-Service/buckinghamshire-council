@@ -31,7 +31,7 @@
         order: 1;
 
         @include media-query(tablet-landscape) {
-           margin-bottom: $grid--small;
+            margin-bottom: $grid--small;
         }
     }
 
