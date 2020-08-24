@@ -14,11 +14,6 @@
         @include font-size(s);
         display: block;
         margin-bottom: 20px;
-
-        &--accordion {
-            margin-bottom: $grid--min / 2;
-            position: relative;
-        }
     }
 
     &__fieldset {
@@ -39,6 +34,7 @@
     &__help {
         @include font-size(xs);
         color: $color--charcoal-75;
+        margin-top: 5px;
     }
 
     &__count {
@@ -61,7 +57,9 @@
             display: block;
             flex: 1 0 100%;
             color: $color--charcoal-75;
-            margin: -$grid--min / 2 0 $grid--min 26px;
+            margin-left: 26px;
+            margin-bottom: 5px;
+            text-align: left;
         }
     }
 
