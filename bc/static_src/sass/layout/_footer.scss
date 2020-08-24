@@ -29,7 +29,10 @@
 
     &__links {
         order: 1;
-        // margin-bottom: $grid--small;
+
+        @include media-query(tablet-landscape) {
+           margin-bottom: $grid--small;
+        }
     }
 
     &__social-links {
@@ -59,7 +62,11 @@
     &__ogl {
         flex: 1 0 auto;
         order: 3;
-        margin-top: $grid--small;
+        margin-top: $grid--small + 10px;
+
+        @include media-query(tablet-landscape) {
+            margin-top: $grid--small;
+        }
     }
 
     &__ogl-copy {
