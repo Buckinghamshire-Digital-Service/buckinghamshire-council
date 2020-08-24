@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Improve markup of feedback widget buttons and add aria-labels
+
 ## 24.0 (2020-08-20)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/23.0...24.0
