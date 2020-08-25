@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Accessibility 93 Add meaningful aria labels for pagination links
+- Accessibility 93 Add meaningful link text for pagination
 
 ## 24.0 (2020-08-20)
 
