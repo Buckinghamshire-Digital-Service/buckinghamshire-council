@@ -16,11 +16,11 @@
                 <li class="pagination__item">
                     {% if paginator_page.number == page_number %}
                         <a href="#" class="pagination__link pagination__link--active" aria-current="page">
-                            {{ page_number }}
+                            <span class="u-sr-only">Page </span>{{ page_number }}
                         </a>
                     {% else %}
                         <a class="pagination__link" href="{% pagination_link page_number %}">
-                            {{ page_number }}
+                            <span class="u-sr-only">Page </span>{{ page_number }}
                         </a>
                     {% endif %}
                 </li>
