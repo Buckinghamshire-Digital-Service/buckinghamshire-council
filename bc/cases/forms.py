@@ -13,6 +13,7 @@ from django.utils.timezone import now
 
 from bc.cases.backends.respond.constants import (
     ATTACHMENT_SCHEMA_NAME,
+    COMPLAINTS_CONTACT_METHOD_CHOICES,
     CONTACT_METHOD_EMAIL,
     CONTACT_METHOD_PHONE,
     CONTACT_METHOD_POST,
@@ -96,7 +97,7 @@ class BaseCaseForm(_BaseCaseForm):
 
 
 class ComplaintForm(BaseCaseForm):
-    template_name = "patterns/organisms/form-templates/generic_form.html"
+    template_name = "patterns/organisms/form-templates/complaint_form.html"
     webservice = settings.RESPOND_COMPLAINTS_WEBSERVICE
     feedback_type = "Corporate"
 
@@ -132,6 +133,10 @@ class ComplaintForm(BaseCaseForm):
         validators=[FileExtensionValidator(allowed_extensions=VALID_FILE_EXTENSIONS)],
         widget=forms.ClearableFileInput(attrs={"multiple": True}),
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["contact_method"].choices = COMPLAINTS_CONTACT_METHOD_CHOICES
 
     @property
     def field_group_1(self):
