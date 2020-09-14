@@ -86,7 +86,8 @@ class BaseCaseForm(_BaseCaseForm):
         if contact_method == CONTACT_METHOD_EMAIL and not self.data["email"]:
             self.add_error("email", "Enter your email address")
         if contact_method == CONTACT_METHOD_POST:
-            for field_name in ["address_01", "town", "county", "postcode"]:
+            # The Aptean backend only requires street address and postcode
+            for field_name in ["address_01", "postcode"]:
                 if not cleaned_data.get(field_name):
                     self.add_error(field_name, "Enter your address details")
         if contact_method == CONTACT_METHOD_PHONE and not self.data.get(
