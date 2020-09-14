@@ -286,14 +286,6 @@
         .is-checked & {
             display: block;
         }
-
-        input[name='address_01'] {
-            max-width: 100%;
-        }
-
-        input[name='postcode'] {
-            @include input-size(10);
-        }
     }
 
     &--width {
@@ -335,6 +327,12 @@
         &-20 {
             input[type='text'] {
                 @include input-size(20);
+            }
+        }
+
+        &-max {
+            input[type='text'] {
+                max-width: 100%;
             }
         }
 

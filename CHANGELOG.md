@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Fix string spacing issue in Aptean forms help text
+- Change complaints form contact fields
 
 ## 24.0 (2020-08-20)
 

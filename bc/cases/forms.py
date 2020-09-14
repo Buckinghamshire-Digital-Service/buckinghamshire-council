@@ -13,6 +13,7 @@ from django.utils.timezone import now
 
 from bc.cases.backends.respond.constants import (
     ATTACHMENT_SCHEMA_NAME,
+    COMPLAINTS_CONTACT_METHOD_CHOICES,
     CONTACT_METHOD_EMAIL,
     CONTACT_METHOD_PHONE,
     CONTACT_METHOD_POST,
@@ -85,7 +86,8 @@ class BaseCaseForm(_BaseCaseForm):
         if contact_method == CONTACT_METHOD_EMAIL and not self.data["email"]:
             self.add_error("email", "Enter your email address")
         if contact_method == CONTACT_METHOD_POST:
-            for field_name in ["address_01", "town", "county", "postcode"]:
+            # The Aptean backend only requires street address and postcode
+            for field_name in ["address_01", "postcode"]:
                 if not cleaned_data.get(field_name):
                     self.add_error(field_name, "Enter your address details")
         if contact_method == CONTACT_METHOD_PHONE and not self.data.get(
@@ -96,7 +98,7 @@ class BaseCaseForm(_BaseCaseForm):
 
 
 class ComplaintForm(BaseCaseForm):
-    template_name = "patterns/organisms/form-templates/generic_form.html"
+    template_name = "patterns/organisms/form-templates/complaint_form.html"
     webservice = settings.RESPOND_COMPLAINTS_WEBSERVICE
     feedback_type = "Corporate"
 
@@ -132,6 +134,10 @@ class ComplaintForm(BaseCaseForm):
         validators=[FileExtensionValidator(allowed_extensions=VALID_FILE_EXTENSIONS)],
         widget=forms.ClearableFileInput(attrs={"multiple": True}),
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["contact_method"].choices = COMPLAINTS_CONTACT_METHOD_CHOICES
 
     @property
     def field_group_1(self):
