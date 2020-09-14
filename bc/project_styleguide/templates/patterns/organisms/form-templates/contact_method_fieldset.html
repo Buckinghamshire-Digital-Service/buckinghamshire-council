@@ -21,7 +21,13 @@
                 {{ form.contact_method.1 }}
                 <fieldset class="form-item__conditional-fields">
                     {% for field in form.address_field_group %}
-                        {% include "patterns/molecules/form_field.html" %}
+                        {% if field.name == "address_01" %}
+                            {% include "patterns/molecules/form_field.html" with form_item_extra_class="form-item--width form-item--width-max" %}
+                        {% elif field.name == "postcode" %}
+                            {% include "patterns/molecules/form_field.html" with form_item_extra_class="form-item--width form-item--width-10" %}
+                        {% else %}
+                            {% include "patterns/molecules/form_field.html" %}
+                        {% endif %}
                     {% endfor %}
                 </fieldset>
             </li>
