@@ -1,0 +1,11 @@
+{% extends 'wagtailadmin/reports/listing/_list_page_report.html' %}
+
+{% block extra_columns %}
+    <th>Last Published</th>
+{% endblock %}
+
+{% block extra_page_data %}
+    <td valign="top">
+        {{ page.last_published_at }}
+    </td>
+{% endblock %}
