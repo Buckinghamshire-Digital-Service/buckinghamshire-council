@@ -14,6 +14,7 @@ from django.shortcuts import get_object_or_404, render
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.functional import cached_property
+from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
@@ -30,6 +31,7 @@ from ..utils.constants import RICH_TEXT_FEATURES
 from ..utils.email import NotifyEmailMessage
 from ..utils.models import BasePage
 from .constants import JOB_BOARD_CHOICES
+from .text_utils import extract_salary_range
 
 
 class JobSubcategory(models.Model):
@@ -249,6 +251,64 @@ class TalentLinkJob(models.Model):
             self.homepage = RecruitmentHomePage.objects.live().first()
 
         super().full_clean(*args, **kwargs)
+
+    @property
+    def schema_org_markup(self):
+        markup = {
+            "@context": "http://schema.org",
+            "@type": "JobPosting",
+            "datePosted": self.posting_start_date.isoformat(),
+            "description": self.short_description,
+            "title": self.title,
+            "validThrough": self.closing_date.isoformat(),
+            "employmentType": self.working_hours,
+            "hiringOrganization": {"@type": "Organization", "name": self.organisation},
+            "identifier": {
+                "@type": "PropertyValue",
+                "name": "Reference Number",
+                "value": self.job_number,
+            },
+            "jobLocation": {
+                "@type": "Place",
+                "name": self.location_name,
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": " ".join(
+                        [self.location_street_number, self.location_street]
+                    ),
+                    "addressLocality": self.location_city,
+                    "addressRegion": self.location_region,
+                    "postalCode": self.location_postcode,
+                    "addressCountry": self.location_country,
+                },
+            },
+        }
+
+        if self.logo:
+            markup["hiringOrganization"]["logo"] = self.logo.get_rendition(
+                "max-110x110"
+            ).url
+
+        try:
+            min_salary, max_salary = extract_salary_range(self.searchable_salary)
+        except TypeError:
+            pass
+        else:
+            markup["baseSalary"] = {
+                "@type": "MonetaryAmount",
+                "currency": "GBP",
+                "value": {"@type": "QuantitativeValue", "unitText": "YEAR"},
+            }
+            if min_salary:
+                markup["baseSalary"]["value"]["minValue"] = min_salary
+            if max_salary:
+                markup["baseSalary"]["value"]["maxValue"] = max_salary
+
+        if self.location_lat and self.location_lon:
+            markup["jobLocation"]["latitude"] = str(self.location_lat)
+            markup["jobLocation"]["longitude"] = str(self.location_lon)
+
+        return mark_safe(json.dumps(markup))
 
 
 @receiver(pre_delete, sender=TalentLinkJob)

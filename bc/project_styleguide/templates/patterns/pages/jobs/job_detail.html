@@ -31,3 +31,7 @@
         {% include "patterns/molecules/jobs-sidebar/jobs-sidebar.html" %}
     </div>
 {% endblock %}
+
+{% block extra_js %}
+    <script type = "application/ld+json" >{{ page.schema_org_markup }}</script>
+{% endblock %}
