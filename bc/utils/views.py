@@ -54,4 +54,6 @@ class MissingMetadataReportView(PageReportView):
         return context
 
     def get_queryset(self):
-        return Page.objects.filter(Q(seo_title="") | Q(search_description=""))
+        return Page.objects.exclude(depth=1).filter(
+            Q(seo_title="") | Q(search_description="")
+        )
