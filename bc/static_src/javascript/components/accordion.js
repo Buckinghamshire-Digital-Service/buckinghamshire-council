@@ -13,8 +13,7 @@ class Accordion {
     }
 
     bindEvents() {
-        this.question.addEventListener('click', (e) => {
-            e.preventDefault();
+        this.question.addEventListener('click', () => {
             let open = this.accordion.classList.contains('is-open');
             this.accordion.classList.toggle('is-open');
 
