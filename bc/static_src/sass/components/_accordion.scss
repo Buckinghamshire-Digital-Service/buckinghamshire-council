@@ -133,7 +133,7 @@
         padding: 0;
 
         #{$root}__button:focus & {
-            background-color: $color--yellow;
+            background-color: $color--mustard;
             border-bottom: 4px solid $color--off-black;
             color: $color--off-black;
         }
