@@ -78,7 +78,7 @@ def update_job_from_ad(job, ad, homepage, defaults=None, import_categories=False
 
     job.homepage = homepage
     job.job_number = ad["jobNumber"]
-    job.title = ad["jobTitle"]
+    job.title = ad["jobTitle"].strip()
     job.is_published = ad["postingTargetStatus"] == POSTING_TARGET_STATUS_PUBLISHED
     job.posting_start_date = ad["postingStartDate"]
     job.posting_end_date = ad["postingEndDate"]
