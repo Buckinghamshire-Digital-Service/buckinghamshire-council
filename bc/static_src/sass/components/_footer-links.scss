@@ -15,6 +15,7 @@
 
     &__link {
         color: $color--white;
+        text-decoration: underline;
 
         #{$hover-states} {
             color: $color--grey-medium;
