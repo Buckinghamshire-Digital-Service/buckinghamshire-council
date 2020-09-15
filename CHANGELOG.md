@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add schema.org markup to job detail page
+
 ## 25.0 (2020-09-14)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/24.0...25.0
