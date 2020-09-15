@@ -144,6 +144,16 @@ def update_job_from_ad(job, ad, homepage, defaults=None, import_categories=False
         elif location["name"]:
             job.location = location["name"]
 
+    job.organisation = " — ".join(
+        [
+            organisation["value"]
+            for organisation in sorted(
+                ad["organizations"]["organization"],
+                key=lambda organisation: organisation["level"],
+            )
+        ]
+    )
+
     job.save()
     return job
 

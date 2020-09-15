@@ -215,6 +215,7 @@ class TalentLinkJob(models.Model):
         "images.CustomImage", null=True, related_name="+", on_delete=models.SET_NULL,
     )
     application_url_query = models.CharField(max_length=255)
+    organisation = models.TextField(blank=True)
 
     def get_categories_list(self):
         if self.subcategory:
