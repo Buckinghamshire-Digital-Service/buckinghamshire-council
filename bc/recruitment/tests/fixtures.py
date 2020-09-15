@@ -5,6 +5,8 @@ import factory
 
 from bc.recruitment.constants import JOB_BOARD_DEFAULT
 
+factory.Faker._DEFAULT_LOCALE = "en_GB"
+
 
 class JobCategoryFactory(factory.django.DjangoModelFactory):
 
@@ -66,7 +68,13 @@ class TalentLinkJobFactory(factory.django.DjangoModelFactory):
     contact_email = factory.Faker("email")
 
     searchable_salary = factory.Faker("sentence", nb_words=2)
-    location = factory.Faker("city")
+    location_name = factory.Faker("sentence", nb_words=2)
+    location_street_number = factory.Faker("building_number")
+    location_street = factory.Faker("street_name")
+    location_city = factory.Faker("city")
+    location_region = factory.Faker("county")
+    location_country = factory.Faker("random_choices", elements=["England"])
+    location_postcode = factory.Faker("postcode")
     posting_start_date = factory.Faker(
         "date_time_this_month", tzinfo=datetime.timezone.utc
     )

@@ -32,7 +32,7 @@ def get_advertisement(
     talentlink_id=164579,
     title="Higher Level Teaching Assistant - Elmhurst School ",
     description=None,
-    location=None,
+    location_city=None,
     application_url="https://www.example.com/?jobId=QQPFK026203F3VBQBV7V779XA-167759&langCode=en_GB",
     job_group="Schools & Early Years - Support",
 ):
@@ -378,7 +378,7 @@ def get_advertisement(
                     "updateDate": None,
                     "country": "United Kingdom",
                     "region": "England",
-                    "city": location or "Aylesbury Vale",
+                    "city": location_city or "Aylesbury Vale",
                     "street": None,
                     "streetNumber": None,
                     "zipCode": "HP20 1UA",

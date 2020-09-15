@@ -23,6 +23,6 @@
         <dt class="search-result__meta-title">Closing date:</dt>
         <dd class="search-result__meta-description">{{ result.closing_date }}</dd>
         <dt class="search-result__meta-title">Location:</dt>
-        <dd class="search-result__meta-description">{{ result.location }}</dd>
+        <dd class="search-result__meta-description">{{ result.location_city|default:result.location_name }}</dd>
     </dl>
 </div>

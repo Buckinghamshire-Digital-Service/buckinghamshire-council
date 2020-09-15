@@ -178,17 +178,17 @@ class ImportTest(TestCase, ImportTestMixin):
             call_command("import_jobs", stdout=mock.MagicMock())
 
         job = TalentLinkJob.objects.get(talentlink_id=1)
-        self.assertEqual(job.location, "Aylesbury Vale")
+        self.assertEqual(job.location_city, "Aylesbury Vale")
 
-        # test new location updates existing job
-        new_location = "South Bucks"
+        # test new city updates existing job
+        new_city = "South Bucks"
         job = update_job_from_ad(
             job,
-            get_advertisement(talentlink_id=1, location=new_location),
+            get_advertisement(talentlink_id=1, location_city=new_city),
             homepage=self.homepage,
         )
 
-        self.assertEqual(job.location, new_location)
+        self.assertEqual(job.location_city, new_city)
 
     @mock.patch("bc.recruitment_api.management.commands.import_jobs.update_job_from_ad")
     def test_errors_are_reported(self, mock_update_fn, mock_get_client):
