@@ -67,7 +67,7 @@ class TalentLinkJobFactory(factory.django.DjangoModelFactory):
     # postcode = models.CharField(max_length=10)
     contact_email = factory.Faker("email")
 
-    searchable_salary = factory.Faker("sentence", nb_words=2)
+    searchable_salary = "£20,001 - £30,000"
     location_name = factory.Faker("sentence", nb_words=2)
     location_street_number = factory.Faker("building_number")
     location_street = factory.Faker("street_name")

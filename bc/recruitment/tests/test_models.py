@@ -26,8 +26,28 @@ class SalaryRangeExtractionTest(TestCase):
 
 
 class SchemaOrgTest(TestCase):
+    def test_salary_range_is_preferred(self):
+        job = TalentLinkJobFactory(
+            salary_range="£12345 - £23,456", searchable_salary="£56,789 - £67,890"
+        )
+
+        markup = json.loads(job.schema_org_markup)
+        self.assertTrue("baseSalary" in markup)
+        self.assertEqual(markup["baseSalary"]["value"]["minValue"], "12345")
+        self.assertEqual(markup["baseSalary"]["value"]["maxValue"], "23456")
+
+    def test_searchable_salary_is_used_as_a_fallback(self):
+        job = TalentLinkJobFactory(
+            salary_range="See ad for details", searchable_salary="£56,789 - £67,890"
+        )
+
+        markup = json.loads(job.schema_org_markup)
+        self.assertTrue("baseSalary" in markup)
+        self.assertEqual(markup["baseSalary"]["value"]["minValue"], "56789")
+        self.assertEqual(markup["baseSalary"]["value"]["maxValue"], "67890")
+
     def test_full_salary_range(self):
-        job = TalentLinkJobFactory(searchable_salary="£20,001 - £30,000")
+        job = TalentLinkJobFactory(salary_range="£20,001 - £30,000")
 
         markup = json.loads(job.schema_org_markup)
         self.assertTrue("baseSalary" in markup)
@@ -35,7 +55,7 @@ class SchemaOrgTest(TestCase):
         self.assertEqual(markup["baseSalary"]["value"]["maxValue"], "30000")
 
     def test_lower_bounded_salary(self):
-        job = TalentLinkJobFactory(searchable_salary="Up to £20,000")
+        job = TalentLinkJobFactory(salary_range="Up to £20,000")
 
         markup = json.loads(job.schema_org_markup)
         self.assertTrue("baseSalary" in markup)
@@ -43,7 +63,7 @@ class SchemaOrgTest(TestCase):
         self.assertEqual(markup["baseSalary"]["value"]["maxValue"], "20000")
 
     def test_upper_bounded_salary(self):
-        job = TalentLinkJobFactory(searchable_salary="£60,000+")
+        job = TalentLinkJobFactory(salary_range="£60,000+")
 
         markup = json.loads(job.schema_org_markup)
         self.assertTrue("baseSalary" in markup)
@@ -51,7 +71,9 @@ class SchemaOrgTest(TestCase):
         self.assertFalse("maxValue" in markup["baseSalary"]["value"])
 
     def test_nonnumeric_salary(self):
-        job = TalentLinkJobFactory(searchable_salary="Something else")
+        job = TalentLinkJobFactory(
+            salary_range="Something unparsable", searchable_salary="Something else"
+        )
 
         markup = json.loads(job.schema_org_markup)
         self.assertFalse("baseSalary" in markup)

@@ -289,20 +289,23 @@ class TalentLinkJob(models.Model):
                 "max-110x110"
             ).url
 
-        try:
-            min_salary, max_salary = extract_salary_range(self.searchable_salary)
-        except TypeError:
-            pass
-        else:
-            markup["baseSalary"] = {
-                "@type": "MonetaryAmount",
-                "currency": "GBP",
-                "value": {"@type": "QuantitativeValue", "unitText": "YEAR"},
-            }
-            if min_salary:
-                markup["baseSalary"]["value"]["minValue"] = min_salary
-            if max_salary:
-                markup["baseSalary"]["value"]["maxValue"] = max_salary
+        # Try to parse the salary_range, otherwise the searchable_salary.
+        for salary in (self.salary_range, self.searchable_salary):
+            try:
+                min_salary, max_salary = extract_salary_range(salary)
+            except TypeError:
+                pass
+            else:
+                markup["baseSalary"] = {
+                    "@type": "MonetaryAmount",
+                    "currency": "GBP",
+                    "value": {"@type": "QuantitativeValue", "unitText": "YEAR"},
+                }
+                if min_salary:
+                    markup["baseSalary"]["value"]["minValue"] = min_salary
+                if max_salary:
+                    markup["baseSalary"]["value"]["maxValue"] = max_salary
+                break
 
         if self.location_lat and self.location_lon:
             markup["jobLocation"]["latitude"] = str(self.location_lat)
