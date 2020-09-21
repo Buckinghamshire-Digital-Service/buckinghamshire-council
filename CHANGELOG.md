@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Add Wagtail admin report of pages missing SEO metadata, and those with unpublished changes
+- Accessibility 89 Form error handling - add explanatory text and supporting aria-labels for required fields
 - Accessibility 91 Add in missing fieldsets for radio input groups
 - Add schema.org markup to job detail page
 
