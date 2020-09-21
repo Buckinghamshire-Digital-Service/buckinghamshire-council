@@ -36,6 +36,12 @@ We use Redis for back-end caching in Django.
 
 The Django low-level cache API is used by the recruitment API client to replace Zeep's default cache. See [Recruitment Site](recruitment-site.md) for details.
 
+## Search engine
+
+The search backend on staging and production is Elasticsearch, provided by Bonsai. See `heroku addons -a buckinghamshire-staging` (or "production"). To view the admin UI, `heroku addons:open bonsai -a buckinghamshire-staging` (or "production").
+
+The recruitment site uses Postgres for search. See `bc.recruitment.utils.get_job_search_results()`.
+
 ## File storage
 
 Does this use AWS S3? Via Buckup? Is it open to the public?

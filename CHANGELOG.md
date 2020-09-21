@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Add support for Elasticsearch backend
 - Add Wagtail admin report of pages missing SEO metadata, and those with unpublished changes
 
 ## 26.0 (2020-09-22)
