@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Add an 'OGL' logo, statement and link to the footer
+- Accessibility 17 Add subpages to the Jobs sitemap
 - Accessibility 76 Improve accordion markup & styles (including job filters)
 - Accessibility 94 Add aria-labels to social links
 - Accessibility 87 Improve markup of feedback widget buttons and add aria-labels
