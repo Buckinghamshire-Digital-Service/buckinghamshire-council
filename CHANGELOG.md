@@ -7,6 +7,7 @@
 - Accessibility 76 Improve accordion markup & styles (including job filters)
 - Accessibility 94 Add aria-labels to social links
 - Accessibility 87 Improve markup of feedback widget buttons and add aria-labels
+- Silently ignore SQL injection attempts in job search
 
 ## 25.0 (2020-09-14)
 
