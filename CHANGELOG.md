@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Add an 'OGL' logo, statement and link to the footer
+- Accessibility 76 Improve accordion markup & styles (including job filters)
 - Accessibility 94 Add aria-labels to social links
 
 ## 25.0 (2020-09-14)

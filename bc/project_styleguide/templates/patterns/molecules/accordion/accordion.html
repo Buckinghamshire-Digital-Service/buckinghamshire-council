@@ -1,31 +1,29 @@
 {% load wagtailcore_tags %}
 
-<div role="tablist" aria-multiselectable="true">
+<div class="accordion__container">
     {% for accordion in accordions %}
         <div class="accordion" data-accordion>
-            <a
-                href=""
-                class="accordion__title"
-                data-accordion-question
-                role="tab"
-                aria-controls="answer-{{ forloop.counter }}"
-                aria-expanded="false"
-                aria-selected="false"
-                id="question-{{ forloop.counter }}">
-                {% include "patterns/atoms/icons/icon.html" with name="chevron" classname="icon--stroke accordion__icon" %}
-                <h2 class="accordion__header">{{ accordion.title }}</h2>
-            </a>
+            <h2 class="accordion__header">
+                <button
+                    id="question-{{ forloop.counter }}"
+                    class="accordion__button"
+                    data-accordion-question
+                    aria-controls="answer-{{ forloop.counter }}"
+                    aria-expanded="false">
+                    {% include "patterns/atoms/icons/icon.html" with name="chevron" classname="icon--stroke accordion__icon" %}
+                    <span class="accordion__title">
+                        {{ accordion.title }}
+                    </span>
+                </button>
+            </h2>
             <div
-                aria-live="polite"
-                class="accordion__content"
-                data-accordion-answer
                 id="answer-{{ forloop.counter }}"
-                role="tabpanel"
+                data-accordion-answer
+                class="accordion__content"
                 aria-labelledby="question-{{ forloop.counter }}"
-                aria-hidden="false">
+                aria-hidden="true">
                 {% include_block accordion.content %}
             </div>
-
         </div>
     {% endfor %}
 </div>
