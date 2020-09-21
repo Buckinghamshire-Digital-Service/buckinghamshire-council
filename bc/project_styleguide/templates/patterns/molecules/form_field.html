@@ -34,6 +34,17 @@
                     {{ field.help_text }}
                 </div>
             {% endif %}
+        {% elif widget_type == 'radio_select' %}
+            <fieldset>
+                <legend {% if field.id_for_label %} for="{{ field.id_for_label }}"{% endif %} class="form-item__label {% if field.field.required %}required{% endif %}">{{ field.label }} {% if field.field.required %}<span class="form-item__required" aria-hidden="true">*</span>{% endif %}</legend>
+                    {{ field }}
+
+                    {% if field.help_text %}
+                        <div class="form-item__help">
+                            {{ field.help_text }}
+                        </div>
+                    {% endif %}
+            </fieldset>
 
             {% if widget_type == 'date_input' or widget_type == 'date_time_input' %}
                 <div class="{{ widget_type }}">
