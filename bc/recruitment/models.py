@@ -1,5 +1,6 @@
 import json
 import secrets
+from datetime import date
 from urllib.parse import urlsplit, urlunsplit
 
 from django import forms
@@ -234,7 +235,8 @@ class TalentLinkJob(models.Model):
 
     @property
     def application_url(self):
-        base_url = self.homepage.url + self.homepage.reverse_subpage("apply")
+        """Returns the full application URL including hostname"""
+        base_url = self.homepage.full_url + self.homepage.reverse_subpage("apply")
         scheme, netloc, path, query, fragment = urlsplit(base_url)
         return urlunsplit((scheme, netloc, path, self.application_url_query, fragment))
 
@@ -326,6 +328,30 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
         context["job_categories"] = JobCategory.get_categories_summary(homepage=self)
 
         return context
+
+    def get_sitemap_urls(self, request=None):
+        sitemap = super().get_sitemap_urls(request)
+
+        today = date.today()
+        jobs = TalentLinkJob.objects.filter(
+            posting_start_date__lte=today, posting_end_date__gte=today,
+        )
+
+        jobs_sitemap = []
+        for job in jobs:
+            jobs_sitemap.append(
+                {
+                    "location": self.full_url
+                    + self.reverse_subpage("job_detail", args=(job.talentlink_id,),),
+                    "lastmod": job.last_modified,
+                }
+            )
+            if job.show_apply_button:
+                jobs_sitemap.append(
+                    {"location": job.application_url, "lastmod": job.last_modified}
+                )
+
+        return sitemap + jobs_sitemap
 
     @route(r"^job_detail/(\d+)/$")
     def job_detail(self, request, talentlink_id):

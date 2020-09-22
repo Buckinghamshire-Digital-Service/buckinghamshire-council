@@ -28,14 +28,6 @@ class Accordion {
                 open = true;
             }
         });
-
-        this.question.addEventListener('focus', () => {
-            this.question.setAttribute('aria-selected', 'true');
-        });
-
-        this.question.addEventListener('blur', () => {
-            this.question.setAttribute('aria-selected', 'false');
-        });
     }
 }
 

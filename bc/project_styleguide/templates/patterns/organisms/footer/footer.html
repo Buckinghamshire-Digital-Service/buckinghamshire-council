@@ -5,43 +5,63 @@
 <div class="footer">
     <div class="footer__inner wrapper wrapper--large">
         <div class="footer__nav-container">
-            <div>
+            <div class="footer__links">
                 {% footerlinks %}
+            </div>
+
+            <div class="footer__ogl">
+                <img class="footer__credit-logo" src="{% static 'images/OGL_logo.svg' %}" alt="Open Government Licence logo" />
+                <p class="footer__ogl-copy">All content is available under the <a class="footer-links__link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" target="_blank" rel="nofollow noreferrer">Open Government Licence v.30</a>, except where otherwise stated</p>
             </div>
 
             {% if settings.utils.SocialMediaSettings.has_any_setting %}
                 <div class="footer__social-links">
                     {% if settings.utils.SocialMediaSettings.facebook_app_id %}
-                        <a href="https://www.facebook.com/{{ settings.utils.SocialMediaSettings.facebook_app_id }}" target="_blank" rel="nofollow noreferrer">
+                        <a href="https://www.facebook.com/{{ settings.utils.SocialMediaSettings.facebook_app_id }}"
+                            target="_blank"
+                            rel="nofollow noreferrer"
+                            aria-label="Buckinghamshire Council Facebook">
                             {% include "patterns/atoms/icons/icon.html" with name="facebook" classname="icon--footer-social" %}
                         </a>
                     {% endif %}
                     {% if settings.utils.SocialMediaSettings.twitter_handle %}
-                        <a href="https://twitter.com/{{ settings.utils.SocialMediaSettings.twitter_handle }}" target="_blank" rel="nofollow noreferrer">
+                        <a href="https://twitter.com/{{ settings.utils.SocialMediaSettings.twitter_handle }}"
+                            target="_blank"
+                            rel="nofollow noreferrer"
+                            aria-label="Buckinghamshire Council Twitter">
                             {% include "patterns/atoms/icons/icon.html" with name="twitter" classname="icon--footer-social" %}
                         </a>
                     {% endif %}
                     {% if settings.utils.SocialMediaSettings.youtube_channel_url %}
-                        <a href="{{ settings.utils.SocialMediaSettings.youtube_channel_url }}" target="_blank" rel="nofollow noreferrer">
+                        <a href="{{ settings.utils.SocialMediaSettings.youtube_channel_url }}"
+                            target="_blank"
+                            rel="nofollow noreferrer"
+                            aria-label="Buckinghamshire Council Youtube">
                             {% include "patterns/atoms/icons/icon.html" with name="youtube" classname="icon--footer-social" %}
                         </a>
                     {% endif %}
                     {% if settings.utils.SocialMediaSettings.instagram_username %}
-                        <a href="https://www.instagram.com/{{ settings.utils.SocialMediaSettings.instagram_username }}" target="_blank" rel="nofollow noreferrer">
+                        <a href="https://www.instagram.com/{{ settings.utils.SocialMediaSettings.instagram_username }}"
+                            target="_blank"
+                            rel="nofollow noreferrer"
+                            aria-label="Buckinghamshire Council Instagram">
                             {% include "patterns/atoms/icons/icon.html" with name="instagram" classname="icon--footer-social" %}
                         </a>
                     {% endif %}
                     {% if settings.utils.SocialMediaSettings.linkedin_organisation_url %}
-                        <a href="{{ settings.utils.SocialMediaSettings.linkedin_organisation_url }}" target="_blank" rel="nofollow noreferrer">
+                        <a href="{{ settings.utils.SocialMediaSettings.linkedin_organisation_url }}"
+                            target="_blank"
+                            rel="nofollow noreferrer"
+                            aria-label="Buckinghamshire Council Linkedin">
                             {% include "patterns/atoms/icons/icon.html" with name="linkedin" classname="icon--footer-social" %}
                         </a>
                     {% endif %}
                 </div>
             {% endif %}
-        </div>
 
-        <div class="footer__credit">
-            <p>© {% now "Y" %} {{ settings.utils.SocialMediaSettings.site_name }}</p>
+            <div class="footer__credit">
+                <p>© {% now "Y" %} {{ settings.utils.SocialMediaSettings.site_name }}</p>
+            </div>
         </div>
     </div>
 </div>

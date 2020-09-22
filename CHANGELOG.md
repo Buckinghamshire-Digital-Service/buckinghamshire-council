@@ -1,5 +1,17 @@
 # Release History
 
+## 26.0 (2020-09-22)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/25.0...26.0
+
+- Add an 'OGL' logo, statement and link to the footer
+- Accessibility 17 Add subpages to the Jobs sitemap
+- Accessibility 76 Improve accordion markup & styles (including job filters)
+- Accessibility 93 Add meaningful link text for pagination
+- Accessibility 94 Add aria-labels to social links
+- Accessibility 87 Improve markup of feedback widget buttons and add aria-labels
+- Silently ignore SQL injection attempts in job search
+
 ## 25.0 (2020-09-14)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/24.0...25.0
