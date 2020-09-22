@@ -36,6 +36,7 @@ class SearchViewTest(TestCase):
         try:
             results.first()  # Evaluate the search results
         except ValueError:
+            # Invalid strings are silently discarded, rather than raise an exception.
             self.fail(
                 "SQL injection attempt caused an exception with job search results"
             )
