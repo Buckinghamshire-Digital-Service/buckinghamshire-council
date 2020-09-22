@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 26.0 (2020-09-22)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/25.0...26.0
 
 - Add an 'OGL' logo, statement and link to the footer
 - Accessibility 17 Add subpages to the Jobs sitemap
