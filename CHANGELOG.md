@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add Wagtail admin report of pages missing SEO metadata, and those with unpublished changes
+
 ## 26.0 (2020-09-22)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/25.0...26.0

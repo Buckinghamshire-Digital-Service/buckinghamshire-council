@@ -21,7 +21,8 @@ from bc.utils.constants import RICH_TEXT_FEATURES
 
 from .validators import validate_linkedin_domain, validate_youtube_domain
 
-SEARCH_DESCRIPTION_LABEL = "Meta description"
+SEARCH_DESCRIPTION_LABEL = "Meta description"  # NOTE changing this requires migrations
+SEO_TITLE_LABEL = "Title tag"
 
 
 class LinkFields(models.Model):
@@ -330,7 +331,7 @@ class BasePage(SocialFields, ListingFields, Page):
         return super().serve(request, *args, **kwargs)
 
 
-BasePage._meta.get_field("seo_title").verbose_name = "Title tag"
+BasePage._meta.get_field("seo_title").verbose_name = SEO_TITLE_LABEL
 BasePage._meta.get_field("search_description").verbose_name = SEARCH_DESCRIPTION_LABEL
 
 
