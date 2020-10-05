@@ -1,0 +1,9 @@
+context:
+  value:
+    introduction: 'Find out if you are in lockdown and what the restrictions are'
+    postscript: 'Or find your area based on your postcode'
+    aylesbury_vale_url: '#'
+    chiltern_url: '#'
+    south_bucks_url: '#'
+    wycombe_url: '#'
+  has_area_links: true

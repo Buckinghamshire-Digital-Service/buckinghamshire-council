@@ -10,6 +10,10 @@
             color: $color--red;
             font-weight: $weight--semibold;
         }
+
+        .area-links--lockdown & {
+            @include font-size(m);
+        }
     }
 
     &__input-wrapper {

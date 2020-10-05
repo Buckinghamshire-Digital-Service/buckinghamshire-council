@@ -5,6 +5,14 @@
     background: $color--grey-light;
     border-left: $border--accent $color--leaf;
 
+    &--lockdown {
+        #{$root}__intro {
+            display: block;
+            font-weight: $weight--bold;
+            margin-bottom: $grid;
+        }
+    }
+
     &__intro {
         .search-result & {
             .rich-text {
