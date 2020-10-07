@@ -68,6 +68,23 @@ def jobs_search_filters(request, unfiltered_results=None):
                 "key": "working_hours",
             },
             {
+                # Because these are database values, they're not ordered in code. The
+                # following code imposes ordering:
+                # - first, by the reverse string index of the first encountered "£"
+                #   character
+                # - then by the rest of the value alphabetically
+                #
+                # This gives the following ordering:
+                #
+                # 1. Bellerophon £
+                # 2. Aeneas £
+                # 3. £Aeneas
+                # 4. £Bellerophon
+                # 5. Aeneas
+                # 6. Bellerophon
+                #
+                # It works to order the currently seen API salary values meaningfully,
+                # but could be broken by future changes to those values.
                 "title": "Salary range",
                 "options": unfiltered_results.exclude(searchable_salary__exact="")
                 .values("searchable_salary")

@@ -1,6 +1,8 @@
 import json
 
+from django import forms
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
+from django.core.exceptions import ValidationError
 from django.db.models import F
 from django.db.models.functions import ACos, Cos, Radians, Sin
 
@@ -86,6 +88,12 @@ def get_job_search_results(querydict, homepage, queryset=None):
             selected = querydict.getlist(
                 filter["name"]
             )  # will return empty list if not found
+
+        try:
+            selected = [forms.CharField().clean(value) for value in selected]
+        except ValidationError:
+            # Abort any invalid string literals, e.g. SQL injection attempts
+            continue
 
         if selected:
             search_results = search_results.filter(

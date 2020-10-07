@@ -12,7 +12,7 @@
             transform: rotate(0deg);
         }
 
-        #{$root}__title {
+        #{$root}__button {
             margin-bottom: 10px;
         }
 
@@ -26,6 +26,15 @@
         border-bottom: 1px solid $color--grey-accessible;
         padding: 5px 0;
         margin-bottom: 10px;
+
+        #{$root}__title {
+            @include font-size(s);
+            display: block;
+            font-weight: $weight--normal;
+            margin-bottom: 5px;
+            margin-top: 3px;
+            position: relative;
+        }
     }
 
     &--detail {
@@ -43,13 +52,18 @@
             width: 15px;
         }
 
-        #{$root}__header {
+        #{$root}__title {
             @include font-size(s);
             font-weight: $weight--normal;
+            margin-top: 2px; // offset for bottom border & icon alignment
         }
 
-        #{$root}__title {
+        #{$root}__button {
             text-decoration: underline;
+
+            &:focus {
+                text-decoration: none;
+            }
         }
 
         #{$root}__content {
@@ -61,7 +75,7 @@
         }
     }
 
-    &__title {
+    &__button {
         display: flex;
         align-items: center;
         transition: color 0.2s ease;
@@ -74,14 +88,21 @@
                 stroke: $color--link-hover;
             }
 
-            #{$root}__title {
+            #{$root}__button {
                 color: $color--link-hover;
             }
         }
 
+        /* stylelint-disable */
+        &:focus {
+            outline: 0; // focus style implemented directly on text instead
+        }
+        /* stylelint-enable */
+
         &--search-filters {
             @include font-size(s);
             flex-wrap: wrap;
+            font-weight: $weight--normal;
             left: 1px;
             position: relative;
             color: $color--charcoal;
@@ -106,7 +127,19 @@
         padding: 0;
     }
 
-    &__title--area-search {
+    &__title {
+        border-bottom: 4px solid transparent;
+        margin: 5px 0 0; // offset for bottom border & icon alignment
+        padding: 0;
+
+        #{$root}__button:focus & {
+            background-color: $color--mustard;
+            border-bottom: 4px solid $color--off-black;
+            color: $color--off-black;
+        }
+    }
+
+    &__button--area-search {
         border-top: 1px solid $color--grey-border;
         color: $color--river;
         padding-top: $grid--small;

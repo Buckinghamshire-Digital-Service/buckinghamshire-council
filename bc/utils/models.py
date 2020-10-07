@@ -21,6 +21,9 @@ from bc.utils.constants import RICH_TEXT_FEATURES
 
 from .validators import validate_linkedin_domain, validate_youtube_domain
 
+SEARCH_DESCRIPTION_LABEL = "Meta description"  # NOTE changing this requires migrations
+SEO_TITLE_LABEL = "Title tag"
+
 
 class LinkFields(models.Model):
     """
@@ -152,8 +155,9 @@ class ListingFields(models.Model):
     listing_summary = models.CharField(
         max_length=255,
         blank=True,
-        help_text="The text summary used when this page appears in listings. It's also used as "
-        "the description for search engines if the 'Search description' field above is not defined.",
+        help_text="The text summary used when this page appears in listings. It's also "
+        "used as the description for search engines if the "
+        f"'{SEARCH_DESCRIPTION_LABEL}' field above is not defined.",
     )
 
     class Meta:
@@ -327,8 +331,8 @@ class BasePage(SocialFields, ListingFields, Page):
         return super().serve(request, *args, **kwargs)
 
 
-BasePage._meta.get_field("seo_title").verbose_name = "Title tag"
-BasePage._meta.get_field("search_description").verbose_name = "Meta description"
+BasePage._meta.get_field("seo_title").verbose_name = SEO_TITLE_LABEL
+BasePage._meta.get_field("search_description").verbose_name = SEARCH_DESCRIPTION_LABEL
 
 
 @register_setting
