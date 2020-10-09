@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Update margins between paragraphs in accordion blocks
+- Add an editable body that will show when there's no results in the Search page
 
 ## 27.0 (2020-10-15)
 
