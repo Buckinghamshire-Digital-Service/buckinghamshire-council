@@ -284,8 +284,19 @@ class SystemMessagesSettings(BaseSetting):
         features=RICH_TEXT_FEATURES,
     )
 
+    body_no_search_results = RichTextField(
+        "No Search Results Message",
+        default="<p>No results found.</p>",
+        features=RICH_TEXT_FEATURES,
+        help_text=(
+            "This message is shown to users on the search page when "
+            "the search engine returns no results."
+        ),
+    )
+
     panels = [
-        MultiFieldPanel([FieldPanel("title_404"), FieldPanel("body_404")], "404 page")
+        MultiFieldPanel([FieldPanel("title_404"), FieldPanel("body_404")], "404 page"),
+        MultiFieldPanel([FieldPanel("body_no_search_results")], "Search Results"),
     ]
 
 

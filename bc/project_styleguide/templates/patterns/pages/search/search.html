@@ -1,5 +1,5 @@
 {% extends base_page_template %}
-{% load static wagtailcore_tags %}
+{% load static wagtailcore_tags wagtailsettings_tags %}
 
 {% block body_class %}template-searchresults{% endblock %}
 
@@ -50,7 +50,7 @@
             </section>
 
         {% elif search_query %}
-            <p>No results found.</p>
+            {{ settings.utils.SystemMessagesSettings.body_no_search_results|richtext }}
         {% endif %}
     </div>
 {% endblock %}
