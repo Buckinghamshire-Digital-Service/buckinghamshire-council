@@ -184,8 +184,9 @@
 
         .rich-text {
             p {
-                margin-top: 0;
-                margin-bottom: $grid--min;
+                &:last-child {
+                    margin-bottom: 0;
+                }
             }
         }
     }
