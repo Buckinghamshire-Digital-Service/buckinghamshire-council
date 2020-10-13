@@ -35,13 +35,13 @@ class FamilyInformationHomePage(BasePage):
     left_lede = models.TextField(null=True)
     left_label = models.CharField(max_length=255, null=True, blank=True)
     left_action = models.ForeignKey(
-        "wagtailcore.Page", on_delete=models.CASCADE, related_name="+", null=True
+        "wagtailcore.Page", on_delete=models.SET_NULL, related_name="+", null=True
     )
     right_title = models.CharField(max_length=255, null=True)
     right_lede = models.TextField(null=True)
     right_label = models.CharField(max_length=255, null=True, blank=True)
     right_action = models.ForeignKey(
-        "wagtailcore.Page", on_delete=models.CASCADE, related_name="+", null=True
+        "wagtailcore.Page", on_delete=models.SET_NULL, related_name="+", null=True
     )
 
     content_panels = BasePage.content_panels + [
