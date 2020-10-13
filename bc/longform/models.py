@@ -63,6 +63,9 @@ class BaseLongformPage(BasePage):
     def next_chapter(self):
         return self.get_children().live().specific().first()
 
+    def get_index(self):
+        return [self] + list(self.get_children().specific())
+
 
 class BaseLongformChapterPage(BasePage):
     class Meta:

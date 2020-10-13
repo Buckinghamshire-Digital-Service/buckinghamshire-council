@@ -1,0 +1,85 @@
+{% extends base_page_template %}
+{% load wagtailcore_tags %}
+
+{% block body_class %}{{ block.super }} template-longform{% endblock %}
+
+{% block content %}
+
+    {% include "patterns/molecules/longform-title/longform-title.html" with original_page=page %}
+
+    <div class="wrapper wrapper--flex">
+
+        {# Table of Contents #}
+        <nav class="index-nav sidebar" aria-label="Pages in this section" id="contents">
+            <h2 class="index-nav__title">Contents</h2>
+            <ul class="index-nav__list">
+                {% for link in page.get_index %}
+                    {% if link.id == page.id %}
+                        <li class="index-nav__item index-nav__item--current" aria-current="Page">
+                            <span class="index-nav__link">{{ link.subtitle|default:link }}</span>
+                        </li>
+                    {% else %}
+                        <li class="index-nav__item">
+                            <a class="index-nav__link" href="{% pageurl link %}">{{ link.subtitle|default:link }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </nav>
+
+        {# Content proper #}
+        <div class="section section--main section--inline-index main-body">
+            <h2 class="heading heading--xl">
+                {% if page.is_chapter_page %}
+                    {{ page.title }}
+                {% else %}
+                    {{ page.chapter_heading }}
+                {% endif %}
+            </h2>
+
+            {{ page.body }}
+        </div>
+
+    </div>
+
+    {# Navigation #}
+    <div class="wrapper wrapper--flex longform-navigation">
+        <div class="sidebar">
+            {% include "patterns/molecules/back-to-contents/back-to-contents.html" %}
+        </div>
+
+        {% with next_page=page.next_chapter prev_page=page.prev_chapter %}
+            {% if next_page or prev_page %}
+                <div class="index-pagination">
+                    <ul class="index-pagination__list">
+                        <li class="index-pagination__item index-pagination__item--previous">
+                            {% if prev_page %}
+                                <a class="index-pagination__button link--alt" href="{% pageurl prev_page %}" rel="prev">
+                                    {% include "patterns/atoms/icons/icon.html" with name="arrow" classname="icon--stroke index-pagination__icon index-pagination__icon--previous" %}
+                                    <span class="index-pagination__text">
+                                        Previous
+                                        <span class="index-pagination__page-title">{{ prev_page }}</span>
+                                    </span>
+                                </a>
+                            {% endif %}
+                        </li>
+
+                        <li class="index-pagination__item index-pagination__item--next">
+                            {% if next_page %}
+                                <a class="index-pagination__button
+                                    index-pagination__button--next link--alt" href="{% pageurl next_page %}" rel="next">
+                                    {% include "patterns/atoms/icons/icon.html" with name="arrow" classname="icon--stroke index-pagination__icon index-pagination__icon--next" %}
+                                    <span class="index-pagination__text">
+                                        Next
+                                        <span class="index-pagination__page-title">{{ next_page }}</span>
+                                    </span>
+                                </a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+
+{% endblock %}

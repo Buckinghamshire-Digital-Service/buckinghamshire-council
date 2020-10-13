@@ -1,0 +1,18 @@
+.back-to-contents {
+    $root: &;
+
+    align-items: center;
+    display: inline-flex;
+    text-decoration: none;
+
+    #{$root}__icon {
+        height: 14px;
+        margin: 0 5px 5px 0;
+        transform: rotate(-90deg);
+        width: 16px;
+    }
+
+    &__text {
+        text-decoration: underline;
+    }
+}
