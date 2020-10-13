@@ -206,6 +206,7 @@ class DetailBlock(blocks.StructBlock):
 
 
 # Main streamfield block to be inherited by Pages
+# Consider if any new blocks are also needed on longform/blocks.py
 class StoryBlock(BaseStoryBlock):
     accordion = Accordion()
     detail = DetailBlock()
