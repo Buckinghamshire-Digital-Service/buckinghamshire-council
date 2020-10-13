@@ -1,0 +1,9 @@
+context:
+  original_page:
+    document:
+      file_extension: pdf
+      file_size: 1234
+      title: Lorem ipsum policy
+    document_link_text: Download this policy
+    last_updated: 2020-03-19
+    title: Policy about lorem ipsum dolor sit amet consectetuer adipiscing

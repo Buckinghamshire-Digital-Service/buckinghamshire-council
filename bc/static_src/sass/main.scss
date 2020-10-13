@@ -45,6 +45,7 @@
 @import 'components/latest-articles';
 @import 'components/link-block';
 @import 'components/listing';
+@import 'components/longform-title';
 @import 'components/pagination';
 @import 'components/responsive-object';
 @import 'components/rich-text';
@@ -74,4 +75,5 @@
 @import 'layout/sidebar';
 
 // Utilities
+@import 'utilities/text';
 @import 'utilities/utilities';
