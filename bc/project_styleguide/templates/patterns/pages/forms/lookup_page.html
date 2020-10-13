@@ -1,0 +1,70 @@
+{% extends base_page_template %}
+{% load wagtailcore_tags wagtailimages_tags form_tags util_tags static %}
+
+{% block content %}
+
+<div class="wrapper wrapper--flex">
+    <div class="section section--main">
+
+        <h1 class="heading heading--xxl">{{ page.title }}</h1>
+        <div class="main-body">
+            <div class="container">
+
+                <div class="area-links area-links--lockdown">
+                    <h2 class="u-sr-only">{{ page.title }}</h2>
+
+                    <div class="area-links__intro">{{ page.form_heading|richtext }}</div>
+
+                    <div class="area-search">
+                        <form 
+                            action="{% pageurl page %}"
+                            role="search"
+                            method="get"
+                            class="form form--area-search"
+                            data-form
+                            novalidate>
+
+                                {% if form.errors %}
+                                    <div class="form__errors">
+                                        There were some errors with your form. Please amend the fields highlighted below.
+                                    </div>
+                                {% endif %}
+
+                                {% for field in form %}
+
+                                    {% with widget_type=field|widget_type field_type=field|field_type %}
+                                        <div class="form-item {% if field_type %}form-item--{{ field_type }}{% endif %} {% if widget_type %}form-item--{{ widget_type }}{% endif %} {% if field.errors %}form-item--errors{% endif %}">
+
+                                            {% if field.errors %}
+                                                <div class="form-item__errors">
+                                                    {{ field.errors }}
+                                                </div>
+                                            {% endif %}
+
+                                            <label{% if field.id_for_label %} for="{{ field.id_for_label }}"{% endif %} class="form-item__label {% if field.field.required %}required{% endif %}">{{ field.label }}</label>
+                                            {% if field.help_text %}<div class="form-item__help">{{ field.help_text }}</div>{% endif %}
+
+                                            {{ field }}
+
+                                        </div>
+                                    {% endwith %}
+
+                                {% endfor %}
+                                <input class="form__submit button" type="submit" value="{% if page.action_text %}{{ page.action_text|safe }}{% else %}Submit{% endif %}" />
+                            <button
+                                type="button"
+                                class="button button--link hide"
+                            >
+                                Find another postcode
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include "patterns/molecules/navigation/sidebar.html" with related_pages=page.related_pages.all %}
+</div>
+
+
+{% endblock %}
