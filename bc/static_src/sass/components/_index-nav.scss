@@ -14,8 +14,13 @@
 
         &::before {
             content: '—';
+            font-weight: $weight--normal;
             position: absolute;
             left: 0;
+        }
+
+        &--current {
+            font-weight: $weight--bold;
         }
     }
 }

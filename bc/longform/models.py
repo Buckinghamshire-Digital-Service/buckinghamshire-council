@@ -83,17 +83,17 @@ class BaseLongformChapterPage(BasePage):
 
     @cached_property
     def previous_chapter(self):
-        previous = self.get_prev_siblings().specific().first()
+        previous = self.get_prev_siblings() or self.get_parent()
 
-        # Return parent as very first page
-        if previous is None:
-            previous = self.get_parent().specific()
-
-        return previous
+        if previous:
+            return previous.specific
 
     @cached_property
     def next_chapter(self):
         return self.get_next_siblings().specific().first()
+
+    def get_index(self):
+        return self.get_parent().specific.get_index()
 
 
 class LongformPage(BaseLongformPage):
@@ -105,7 +105,7 @@ class LongformPage(BaseLongformPage):
 
 
 class LongformChapterPage(BaseLongformChapterPage):
-    template = "patterns/pages/longform/longform_chapter_page.html"
+    template = "patterns/pages/longform/longform_page.html"
     subpage_types = []
     parent_page_types = ["LongformPage"]
 

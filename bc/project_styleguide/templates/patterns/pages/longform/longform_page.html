@@ -5,7 +5,11 @@
 
 {% block content %}
 
-    {% include "patterns/molecules/longform-title/longform-title.html" with original_page=page %}
+    {% if page.is_chapter_page %}
+        {% include "patterns/molecules/longform-title/longform-title.html" with original_page=page.get_parent.specific %}
+    {% else %}
+        {% include "patterns/molecules/longform-title/longform-title.html" with original_page=page %}
+    {% endif %}
 
     <div class="wrapper wrapper--flex">
 
@@ -48,38 +52,7 @@
             {% include "patterns/molecules/back-to-contents/back-to-contents.html" %}
         </div>
 
-        {% with next_page=page.next_chapter prev_page=page.prev_chapter %}
-            {% if next_page or prev_page %}
-                <div class="index-pagination">
-                    <ul class="index-pagination__list">
-                        <li class="index-pagination__item index-pagination__item--previous">
-                            {% if prev_page %}
-                                <a class="index-pagination__button link--alt" href="{% pageurl prev_page %}" rel="prev">
-                                    {% include "patterns/atoms/icons/icon.html" with name="arrow" classname="icon--stroke index-pagination__icon index-pagination__icon--previous" %}
-                                    <span class="index-pagination__text">
-                                        Previous
-                                        <span class="index-pagination__page-title">{{ prev_page }}</span>
-                                    </span>
-                                </a>
-                            {% endif %}
-                        </li>
-
-                        <li class="index-pagination__item index-pagination__item--next">
-                            {% if next_page %}
-                                <a class="index-pagination__button
-                                    index-pagination__button--next link--alt" href="{% pageurl next_page %}" rel="next">
-                                    {% include "patterns/atoms/icons/icon.html" with name="arrow" classname="icon--stroke index-pagination__icon index-pagination__icon--next" %}
-                                    <span class="index-pagination__text">
-                                        Next
-                                        <span class="index-pagination__page-title">{{ next_page }}</span>
-                                    </span>
-                                </a>
-                            {% endif %}
-                        </li>
-                    </ul>
-                </div>
-            {% endif %}
-        {% endwith %}
+        {% include "patterns/molecules/pagination/index-pagination.html" with next_page=page.next_chapter prev_page=page.previous_chapter %}
     </div>
 
 {% endblock %}
