@@ -69,6 +69,13 @@ class PostcodeLookupResponseTests(TestCase):
         self.assertTrue(form.is_valid())
         self.assertEqual(form.cleaned_data["postcode"], "HP20 1UY")
 
+    def test_postcodes_arrays_are_validated(self):
+        lookup_response = PostcodeLookupResponseFactory(
+            page=self.lookup_page, link_page=self.another_page, postcodes=["nothing"],
+        )
+        with self.assertRaises(ValidationError):
+            lookup_response.clean_fields()
+
     def test_postcodes_arrays_are_cleaned(self):
         lookup_response = PostcodeLookupResponseFactory(
             page=self.lookup_page, link_page=self.another_page, postcodes=["HP201UY"],
