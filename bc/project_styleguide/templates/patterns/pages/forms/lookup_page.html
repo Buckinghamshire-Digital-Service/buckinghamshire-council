@@ -32,8 +32,8 @@
 
                                 {% for field in form %}
 
-                                    {% with widget_type=field|widget_type field_type=field|field_type %}
-                                        <div class="form-item {% if field_type %}form-item--{{ field_type }}{% endif %} {% if widget_type %}form-item--{{ widget_type }}{% endif %} {% if field.errors %}form-item--errors{% endif %}">
+                                    {% with widget_type=field.field.widget.input_type %}
+                                        <div class="form-item {% if widget_type %}form-item--{{ widget_type }}{% endif %} {% if field.errors %}form-item--errors{% endif %}">
 
                                             {% if field.errors %}
                                                 <div class="form-item__errors">
