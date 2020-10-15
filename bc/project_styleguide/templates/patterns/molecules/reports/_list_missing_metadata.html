@@ -1,0 +1,15 @@
+{% extends 'wagtailadmin/reports/listing/_list_page_report.html' %}
+
+{% block extra_columns %}
+    <th>{{ seo_title_label }}</th>
+    <th>{{ search_description_label }}</th>
+{% endblock %}
+
+{% block extra_page_data %}
+    <td valign="top">
+        {{ page.seo_title }}
+    </td>
+    <td valign="top">
+        {{ page.search_description }}
+    </td>
+{% endblock %}

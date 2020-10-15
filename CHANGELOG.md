@@ -1,5 +1,14 @@
 # Release History
 
+## 27.0 (2020-10-15)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/26.0...27.0
+
+- Add Wagtail admin report of pages missing SEO metadata, and those with unpublished changes
+- Accessibility 89 Form error handling - add explanatory text and supporting aria-labels for required fields
+- Accessibility 91 Add in missing fieldsets for radio input groups
+- Add schema.org markup to job detail page
+
 ## 26.0 (2020-09-22)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/25.0...26.0

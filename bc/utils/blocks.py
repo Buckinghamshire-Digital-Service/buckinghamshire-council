@@ -63,7 +63,6 @@ class LocalAreaLinksBlock(blocks.StructBlock):
                 value["wycombe_url"],
             ]
         )
-        context["wu"] = value["wycombe_url"]
         return context
 
 

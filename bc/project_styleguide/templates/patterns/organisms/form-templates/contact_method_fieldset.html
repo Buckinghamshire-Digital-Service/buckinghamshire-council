@@ -1,6 +1,6 @@
 <div class="form-item form-item--choice_field form-item--radio_select {% if form.contact_method.errors %}form-item--errors{% endif %}" data-conditional>
     <fieldset>
-        <legend class="form-item__label heading required">How would you prefer to be contacted? <span class="form-item__required" aria-hidden="true">*</span></legend>
+        <legend class="form-item__label heading required">How would you prefer to be contacted? <span class="form-item__required" aria-hidden="true">*</span><span class="u-sr-only">Required</span></legend>
 
         {% if form.contact_method.errors %}
             <div class="form-item__errors">
@@ -12,6 +12,8 @@
             <li data-conditional-field>
                 {{ form.contact_method.0 }}
                 <fieldset class="form-item__conditional-fields">
+                    <legend class="u-sr-only">Email</legend>
+
                     {% with form.email as field %}
                         {% include "patterns/molecules/form_field.html" %}
                     {% endwith %}
@@ -20,6 +22,8 @@
             <li data-conditional-field>
                 {{ form.contact_method.1 }}
                 <fieldset class="form-item__conditional-fields">
+                    <legend class="u-sr-only">Address</legend>
+
                     {% for field in form.address_field_group %}
                         {% if field.name == "address_01" %}
                             {% include "patterns/molecules/form_field.html" with form_item_extra_class="form-item--width form-item--width-max" %}
@@ -34,6 +38,8 @@
             <li data-conditional-field>
                 {{ form.contact_method.2 }}
                 <fieldset class="form-item__conditional-fields">
+                    <legend class="u-sr-only">Telephone number</legend>
+
                     {% with form.contact_number as field %}
                         {% include "patterns/molecules/form_field.html" %}
                     {% endwith %}

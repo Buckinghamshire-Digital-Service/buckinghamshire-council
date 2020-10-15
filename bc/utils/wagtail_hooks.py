@@ -1,14 +1,20 @@
+from django.urls import path, reverse
+
+from wagtail.admin.menu import AdminOnlyMenuItem
 from wagtail.contrib.modeladmin.options import (
     ModelAdmin,
     ModelAdminGroup,
     modeladmin_register,
 )
+from wagtail.core import hooks
 
 from wagtailorderable.modeladmin.mixins import OrderableMixin
 
 from bc.events.models import EventType
 from bc.news.models import NewsType
 from bc.recruitment.models import JobCategory, JobSubcategory
+
+from .views import MissingMetadataReportView, UnpublishedChangesReportView
 
 # from bc.people.models import PersonType
 
@@ -59,3 +65,45 @@ class TaxonomiesModelAdminGroup(ModelAdminGroup):
 
 
 modeladmin_register(TaxonomiesModelAdminGroup)
+
+
+@hooks.register("register_reports_menu_item")
+def register_unpublished_changes_report_menu_item():
+    return AdminOnlyMenuItem(
+        "Pages with unpublished changes",
+        reverse("unpublished_changes_report"),
+        classnames="icon icon-" + UnpublishedChangesReportView.header_icon,
+        order=700,
+    )
+
+
+@hooks.register("register_admin_urls")
+def register_unpublished_changes_report_url():
+    return [
+        path(
+            "reports/unpublished-changes/",
+            UnpublishedChangesReportView.as_view(),
+            name="unpublished_changes_report",
+        ),
+    ]
+
+
+@hooks.register("register_reports_menu_item")
+def register_missing_metadata_report_menu_item():
+    return AdminOnlyMenuItem(
+        "Pages with missing metadata",
+        reverse("missing_metadata_report"),
+        classnames="icon icon-" + MissingMetadataReportView.header_icon,
+        order=700,
+    )
+
+
+@hooks.register("register_admin_urls")
+def register_missing_metadata_report_url():
+    return [
+        path(
+            "reports/missing-metadata/",
+            MissingMetadataReportView.as_view(),
+            name="missing_metadata_report",
+        ),
+    ]

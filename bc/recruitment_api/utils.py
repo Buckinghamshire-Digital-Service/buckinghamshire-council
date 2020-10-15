@@ -6,6 +6,7 @@ from django.utils.html import strip_tags
 from bleach.sanitizer import Cleaner
 from bs4 import BeautifulSoup
 from dateutil.parser import parse
+from zeep.helpers import serialize_object
 
 from bc.documents.models import CustomDocument
 from bc.recruitment_api.client import get_client
@@ -77,7 +78,7 @@ def update_job_from_ad(job, ad, homepage, defaults=None, import_categories=False
 
     job.homepage = homepage
     job.job_number = ad["jobNumber"]
-    job.title = ad["jobTitle"]
+    job.title = ad["jobTitle"].strip()
     job.is_published = ad["postingTargetStatus"] == POSTING_TARGET_STATUS_PUBLISHED
     job.posting_start_date = ad["postingStartDate"]
     job.posting_end_date = ad["postingEndDate"]
@@ -134,15 +135,34 @@ def update_job_from_ad(job, ad, homepage, defaults=None, import_categories=False
 
     # Get location data
     if ad["jobLocations"]:
-        location = ad["jobLocations"]["jobLocation"][0]
-        if location["zipCode"]:
-            job.location_postcode = location["zipCode"]
-            job.location_lat = location["latitude"]
-            job.location_lon = location["longitude"]
-        if location["city"]:
-            job.location = location["city"]
-        elif location["name"]:
-            job.location = location["name"]
+        # Unit tests provide dicts, the Zeep library provides Zeep objects. We convert
+        # Zeep instance to native Python OrderedDict, so we can use obj.get() for
+        # everything. NB this also serializes Python dicts to OrderedDicts.
+        location = serialize_object(ad["jobLocations"]["jobLocation"][0])
+        for ad_attr, job_attr in [
+            ("location_name", "location_name"),
+            ("streetNumber", "location_street_number"),
+            ("street", "location_street"),
+            ("city", "location_city"),
+            ("region", "location_region"),
+            ("country", "location_country"),
+            ("zipCode", "location_postcode"),
+            ("latitude", "location_lat"),
+            ("longitude", "location_lon"),
+        ]:
+            value = location.get(ad_attr)
+            if value:
+                setattr(job, job_attr, value)
+
+    job.organisation = " — ".join(
+        [
+            organisation["value"]
+            for organisation in sorted(
+                ad["organizations"]["organization"],
+                key=lambda organisation: organisation["level"],
+            )
+        ]
+    )
 
     job.save()
     return job
