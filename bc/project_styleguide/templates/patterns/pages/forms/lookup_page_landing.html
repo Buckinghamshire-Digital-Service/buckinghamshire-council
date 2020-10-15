@@ -21,6 +21,7 @@
                         </div>
                     </div>
 
+                    <div style="margin-top: 20px;"> {# FIXME temporary styling for demo #}
                     <a
                         href="{% pageurl lookup_response.link_page %}"
                         class="button button--basic"
@@ -29,6 +30,7 @@
                     >
                     {% firstof lookup_response.link_button_text lookup_response.link_page.title %}
                     </a>
+                    </div>
 
                     <a 
                         href="{% pageurl page %}"
