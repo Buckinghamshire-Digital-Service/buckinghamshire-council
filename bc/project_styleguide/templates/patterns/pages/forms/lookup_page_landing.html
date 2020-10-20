@@ -14,9 +14,7 @@
                     <div class="area-links__intro">{{ page.form_heading|richtext }}</div>
 
                     <div class="area-search__response-text">
-                        <div>
-                            <strong>{{ lookup_response.format_answer }}</strong>
-                        </div>
+                        <strong>{{ lookup_response.format_answer }}</strong>
                     </div>
 
                     <a
@@ -27,15 +25,13 @@
                     {% firstof lookup_response.link_button_text lookup_response.link_page.title %}
                     </a>
 
-                    <div>
-                        <a
-                            href="{% pageurl page %}"
-                            type="button"
-                            class="button button--link"
-                        >
-                            {{ page.start_again_text }}
-                        </a>
-                    </div>
+                    <a
+                        href="{% pageurl page %}"
+                        type="button"
+                        class="block button button--link"
+                    >
+                        {{ page.start_again_text }}
+                    </a>
                 </div>
             </div>
         </div>
