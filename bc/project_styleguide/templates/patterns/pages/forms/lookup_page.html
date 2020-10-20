@@ -11,52 +11,46 @@
             <div class="container">
 
                 <div class="area-links area-links--lockdown">
-                    <h2 class="u-sr-only">{{ page.title }}</h2>
-
                     <div class="area-links__intro">{{ page.form_heading|richtext }}</div>
 
                     <div class="area-search">
-                        <form 
+                        <form
                             action="{% pageurl page %}"
                             role="search"
                             method="get"
                             class="form form--area-search"
                             data-form
-                            novalidate>
+                            novalidate
+                        >
 
-                                {% if form.errors %}
-                                    <div class="form__errors">
-                                        There were some errors with your form. Please amend the fields highlighted below.
+                            {% if form.errors %}
+                                <div class="form__errors">
+                                    There were some errors with your form. Please amend the fields highlighted below.
+                                </div>
+                            {% endif %}
+
+                            {% for field in form %}
+
+                                {% with widget_type=field.field.widget.input_type %}
+                                    <div class="form-item {% if widget_type %}form-item--{{ widget_type }}{% endif %} {% if field.errors %}form-item--errors{% endif %}">
+
+                                        {% if field.errors %}
+                                            <div class="form-item__errors">
+                                                {{ field.errors }}
+                                            </div>
+                                        {% endif %}
+
+                                        <label{% if field.id_for_label %} for="{{ field.id_for_label }}"{% endif %} class="form-item__label {% if field.field.required %}required{% endif %}">{{ field.label }}</label>
+                                        {% if field.help_text %}<div class="form-item__help">{{ field.help_text }}</div>{% endif %}
+
+                                        {{ field }}
+
                                     </div>
-                                {% endif %}
+                                {% endwith %}
 
-                                {% for field in form %}
+                            {% endfor %}
 
-                                    {% with widget_type=field.field.widget.input_type %}
-                                        <div class="form-item {% if widget_type %}form-item--{{ widget_type }}{% endif %} {% if field.errors %}form-item--errors{% endif %}">
-
-                                            {% if field.errors %}
-                                                <div class="form-item__errors">
-                                                    {{ field.errors }}
-                                                </div>
-                                            {% endif %}
-
-                                            <label{% if field.id_for_label %} for="{{ field.id_for_label }}"{% endif %} class="form-item__label {% if field.field.required %}required{% endif %}">{{ field.label }}</label>
-                                            {% if field.help_text %}<div class="form-item__help">{{ field.help_text }}</div>{% endif %}
-
-                                            {{ field }}
-
-                                        </div>
-                                    {% endwith %}
-
-                                {% endfor %}
-                                <input class="form__submit button" type="submit" value="{% if page.action_text %}{{ page.action_text|safe }}{% else %}Submit{% endif %}" />
-                            <button
-                                type="button"
-                                class="button button--link hide"
-                            >
-                                Find another postcode
-                            </button>
+                            <input class="form__submit button" type="submit" value="{% if page.action_text %}{{ page.action_text|safe }}{% else %}Submit{% endif %}" />
                         </form>
                     </div>
                 </div>
