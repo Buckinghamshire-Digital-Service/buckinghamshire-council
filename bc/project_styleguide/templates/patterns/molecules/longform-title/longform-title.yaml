@@ -1,5 +1,5 @@
 context:
-  original_page:
+  origin_page:
     document:
       file_extension: pdf
       file_size: 1234

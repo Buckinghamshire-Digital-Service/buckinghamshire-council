@@ -1,17 +1,17 @@
 <div class="longform-title">
-    <h1 class="longform-title__title">{{ original_page.title }}</h1>
+    <h1 class="longform-title__title">{{ origin_page.title }}</h1>
     <div class="longform-title__meta">
         <span class="longform-title__meta-item">
-            Last updated: {{ original_page.last_updated|date:"j F Y" }}
+            Last updated: {{ origin_page.last_updated|date:"j F Y" }}
         </span>
-        {% if original_page.document %}
-            <a class="longform-title__meta-item" href="{{ original_page.document.url }}">
+        {% if origin_page.document %}
+            <a class="longform-title__meta-item" href="{{ origin_page.document.url }}">
                 <span class="u-bold">
-                    {% firstof original_page.document_link_text original_page.document.title %}
+                    {% firstof origin_page.document_link_text origin_page.document.title %}
                 </span>
                 <span>
-                    ({{ original_page.document.file_extension }},
-                     {{ original_page.document.file_size|filesizeformat }})
+                    ({{ origin_page.document.file_extension }},
+                     {{ origin_page.document.file_size|filesizeformat }})
                 </span>
             </a>
         {% endif %}

@@ -6,9 +6,9 @@
 {% block content %}
 
     {% if page.is_chapter_page %}
-        {% include "patterns/molecules/longform-title/longform-title.html" with original_page=page.get_parent.specific %}
+        {% include "patterns/molecules/longform-title/longform-title.html" with origin_page=page.get_parent.specific %}
     {% else %}
-        {% include "patterns/molecules/longform-title/longform-title.html" with original_page=page %}
+        {% include "patterns/molecules/longform-title/longform-title.html" with origin_page=page %}
     {% endif %}
 
     <div class="wrapper wrapper--flex">
