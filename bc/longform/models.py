@@ -90,10 +90,7 @@ class LongformChapterPage(BasePage):
 
     @cached_property
     def previous_chapter(self):
-        previous = self.get_prev_siblings().first() or self.get_parent()
-
-        if previous:
-            return previous.specific
+        return self.get_prev_siblings().specific().first() or self.get_parent().specific
 
     @cached_property
     def next_chapter(self):
