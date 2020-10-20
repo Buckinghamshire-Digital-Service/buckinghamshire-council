@@ -13,6 +13,7 @@
 
         .area-links--lockdown & {
             @include font-size(m);
+            margin-bottom: $grid;
         }
     }
 

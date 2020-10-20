@@ -21,24 +21,23 @@
                         </div>
                     </div>
 
-                    <div style="margin-top: 20px;"> {# FIXME temporary styling for demo #}
                     <a
                         href="{% pageurl lookup_response.link_page %}"
                         class="button button--basic"
                         type="submit"
-                        aria-label="Submit"
                     >
                     {% firstof lookup_response.link_button_text lookup_response.link_page.title %}
                     </a>
-                    </div>
 
-                    <a 
-                        href="{% pageurl page %}"
-                        type="button"
-                        class="button button--link"
-                    >
-                        {{ page.start_again_text }}
-                    </a>
+                    <div>
+                        <a
+                            href="{% pageurl page %}"
+                            type="button"
+                            class="button button--link"
+                        >
+                            {{ page.start_again_text }}
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
