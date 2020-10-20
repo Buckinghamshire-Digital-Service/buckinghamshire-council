@@ -19,7 +19,8 @@ class Migration(migrations.Migration):
                 verbose_name="No Search Results Message",
                 help_text=(
                     "This message is shown to users on the search page when "
-                    "the search engine returns no results."
+                    "the search engine returns no results. You can include "
+                    "the search terms in the message by writing {searchterms}."
                 ),
             ),
         ),

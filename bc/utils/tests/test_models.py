@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.test import RequestFactory, TestCase, override_settings
 from django.urls import reverse
 
@@ -9,6 +10,8 @@ from bc.home.tests.fixtures import HomePageFactory
 from bc.recruitment.tests.fixtures import RecruitmentHomePageFactory
 from bc.standardpages.tests.fixtures import IndexPageFactory, InformationPageFactory
 from bc.utils.constants import BASE_PAGE_TEMPLATE, BASE_PAGE_TEMPLATE_RECRUITMENT
+
+from .factories import SystemMessageFactory
 
 MAIN_HOSTNAME = "foo.example.com"
 RECRUITMENT_HOSTNAME = "bar.example.com"
@@ -118,3 +121,32 @@ class BasePageTemplateTest(TestCase):
         self.assertEqual(
             response.context["base_page_template"], BASE_PAGE_TEMPLATE_RECRUITMENT
         )
+
+
+class NoSearchResultsTemplateTest(TestCase):
+    def setUp(self):
+        root_page = Page.objects.get(id=1)
+
+        homepage = HomePageFactory.build_with_fk_objs_committed()
+        root_page.add_child(instance=homepage)
+        self.main_site = Site.objects.create(
+            hostname=MAIN_HOSTNAME, port=80, root_page=homepage
+        )
+
+    def test_valid_message_wildcard(self):
+        message_model = SystemMessageFactory(
+            site=self.main_site,
+            body_no_search_results="This includes {searchterms}, which is valid.",
+        )
+        try:
+            message_model.clean_fields()
+        except ValidationError:
+            self.fail("Including {searchterms} in the message failed validation")
+
+    def test_invalid_message_wildcard(self):
+        message_model = SystemMessageFactory(
+            site=self.main_site,
+            body_no_search_results="This includes an invalid {wildcard}.",
+        )
+        with self.assertRaises(ValidationError):
+            message_model.clean_fields()

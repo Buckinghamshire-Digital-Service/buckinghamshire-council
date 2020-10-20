@@ -289,10 +289,22 @@ class SystemMessagesSettings(BaseSetting):
         default="<p>No results found.</p>",
         features=RICH_TEXT_FEATURES,
         help_text=(
-            "This message is shown to users on the search page when "
-            "the search engine returns no results."
+            "This message is shown to users on the search page when the search engine "
+            "returns no results. You can include the search terms in the message by "
+            "writing {searchterms}."
         ),
     )
+
+    def clean_fields(self, exclude=None):
+        exclude = exclude or []
+        errors = {}
+        if "body_no_search_results" not in exclude:
+            try:
+                self.body_no_search_results.format(searchterms="test")
+            except KeyError:
+                errors["body_no_search_results"] = "Invalid template formatting"
+        if errors:
+            raise ValidationError(errors)
 
     panels = [
         MultiFieldPanel([FieldPanel("title_404"), FieldPanel("body_404")], "404 page"),

@@ -22,6 +22,7 @@ from bc.recruitment.utils import (
     is_recruitment_site,
 )
 from bc.utils.cache import get_default_cache_control_kwargs
+from bc.utils.models import SystemMessagesSettings
 
 JOB_ALERT_STATUSES = {
     "STATUS_ALREADY_SUBSCRIBED": "already_subscribed",
@@ -77,7 +78,17 @@ class SearchView(View):
         except EmptyPage:
             search_results = paginator.page(paginator.num_pages)
 
-        context.update({"search_query": search_query, "search_results": search_results})
+        no_result_text = SystemMessagesSettings.for_request(
+            request
+        ).body_no_search_results.format(searchterms=search_query)
+
+        context.update(
+            {
+                "no_result_text": no_result_text,
+                "search_query": search_query,
+                "search_results": search_results,
+            }
+        )
 
         if is_recruitment_site(request):
             context.update(
