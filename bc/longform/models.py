@@ -12,9 +12,12 @@ from bc.utils.models import BasePage
 from .blocks import LongformStoryBlock
 
 
-class BaseLongformPage(BasePage):
+class LongformPage(BasePage):
+    template = "patterns/pages/longform/longform_page.html"
+    subpage_types = ["LongformChapterPage"]
+
     class Meta:
-        abstract = True
+        verbose_name = "Long-form content page"
 
     is_chapter_page = False
 
@@ -67,9 +70,13 @@ class BaseLongformPage(BasePage):
         return [self] + list(self.get_children().specific())
 
 
-class BaseLongformChapterPage(BasePage):
+class LongformChapterPage(BasePage):
+    template = "patterns/pages/longform/longform_page.html"
+    subpage_types = []
+    parent_page_types = ["LongformPage"]
+
     class Meta:
-        abstract = True
+        verbose_name = "Long-form content chapter page"
 
     is_chapter_page = True
 
@@ -94,20 +101,3 @@ class BaseLongformChapterPage(BasePage):
 
     def get_index(self):
         return self.get_parent().specific.get_index()
-
-
-class LongformPage(BaseLongformPage):
-    template = "patterns/pages/longform/longform_page.html"
-    subpage_types = ["LongformChapterPage"]
-
-    class Meta:
-        verbose_name = "Long-form page"
-
-
-class LongformChapterPage(BaseLongformChapterPage):
-    template = "patterns/pages/longform/longform_page.html"
-    subpage_types = []
-    parent_page_types = ["LongformPage"]
-
-    class Meta:
-        verbose_name = "Long-form chapter page"
