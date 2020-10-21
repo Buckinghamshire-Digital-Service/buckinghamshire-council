@@ -211,6 +211,8 @@ class LookupPage(BasePage):
         InlinePanel("related_pages", label="Related pages"),
     ]
 
+    search_fields = BasePage.search_fields + [index.SearchField("form_heading")]
+
     @cached_property
     def lookup_response_class(self):
         return self.responses.first()._meta.model
