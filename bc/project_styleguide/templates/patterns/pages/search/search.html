@@ -1,5 +1,5 @@
 {% extends base_page_template %}
-{% load static wagtailcore_tags %}
+{% load static wagtailcore_tags wagtailsettings_tags %}
 
 {% block body_class %}template-searchresults{% endblock %}
 
@@ -49,7 +49,9 @@
                 {% include "patterns/molecules/pagination/pagination.html" with paginator_page=search_results %}
             </section>
 
-        {% elif search_query %}
+        {% elif no_result_text %}
+            {{ no_result_text|richtext }}
+        {% else %}
             <p>No results found.</p>
         {% endif %}
     </div>
