@@ -4,6 +4,7 @@
 
 - Update margins between paragraphs in accordion blocks
 - Add an editable body that will show when there's no results in the Search page
+- Accessibility 12 Fix HTML validation error for duplicated IDs when searching
 
 ## 27.0 (2020-10-15)
 
