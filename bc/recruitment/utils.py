@@ -15,9 +15,8 @@ from bc.recruitment.models import JobCategory, RecruitmentHomePage, TalentLinkJo
 
 
 def is_recruitment_site(request):
-    return isinstance(
-        Site.find_for_request(request).root_page.specific, RecruitmentHomePage
-    )
+    site = Site.find_for_request(request)
+    return site and isinstance(site.root_page.specific, RecruitmentHomePage)
 
 
 def get_current_search(querydict):
