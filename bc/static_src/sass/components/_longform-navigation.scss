@@ -4,12 +4,6 @@
 
     @include media-query(tablet-landscape) {
         margin-top: 0;
-
-        .back-to-contents {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-        }
     }
 
     .sidebar {

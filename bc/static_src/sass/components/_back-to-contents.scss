@@ -15,4 +15,12 @@
     &__text {
         text-decoration: underline;
     }
+
+    @include media-query(tablet-landscape) {
+        .longform-navigation & {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
 }
