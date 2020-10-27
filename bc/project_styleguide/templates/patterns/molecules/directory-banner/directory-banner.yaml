@@ -1,0 +1,13 @@
+context:
+  page:
+    directory_button_copy: Search our directory
+    directory_button_url: '#'
+    directory_copy: See services, support and things to do near you
+    directory_title: Find local activities and organisations
+
+tags:
+  image:
+    page.directory_image fill-1350x500 as directory_image:
+      target_var: directory_image
+      raw:
+        url: 'https://via.placeholder.com/1350x500'

@@ -1,0 +1,29 @@
+{% load wagtailimages_tags %}
+
+{# All fields required #}
+<div class="directory-banner{% if classes %} {{ classes }}{% endif %}">
+    <div class="directory-banner__text-container">
+        <div class="directory-banner__text-content">
+            <h2 class="directory-banner__title heading heading--l">
+                {{ page.directory_title }}
+            </h2>
+            <p class="directory-banner__summary">
+                {{ page.directory_copy }}
+            </p>
+
+            <div class="directory-banner__button-container">
+                <a
+                    class="directory-banner__button button button--subscribe"
+                    href="{{ page.directory_button_url }}"
+                >
+                    {{ page.directory_button_copy }}
+                </a>
+            </div>
+        </div>
+    </div>
+    {% image page.directory_image fill-1350x500 as directory_image %}
+    <div
+        class="directory-banner__image"
+        style="background-image: url('{{ directory_image.url }}')"
+    ></div>
+</div>
