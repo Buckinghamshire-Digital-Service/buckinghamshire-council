@@ -9,6 +9,14 @@
         margin: 0;
     }
 
+    &--fis {
+        margin-top: $grid--small;
+
+        @include media-query(tablet-portrait) {
+            margin-top: $grid;
+        }
+    }
+
     &--home {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 
