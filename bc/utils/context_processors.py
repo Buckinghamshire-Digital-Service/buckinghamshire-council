@@ -1,11 +1,14 @@
 from django.conf import settings
 
+from wagtail.core.models import Site
+
 from bc.recruitment.utils import is_recruitment_site
 from bc.utils.constants import BASE_PAGE_TEMPLATE, BASE_PAGE_TEMPLATE_RECRUITMENT
 
 
 def global_vars(request):
-    if is_recruitment_site(request):
+    site = Site.find_for_request(request)
+    if is_recruitment_site(site):
         base_page_template = BASE_PAGE_TEMPLATE_RECRUITMENT
     else:
         base_page_template = BASE_PAGE_TEMPLATE
