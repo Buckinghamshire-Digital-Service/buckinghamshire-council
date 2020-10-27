@@ -1,0 +1,34 @@
+context:
+  page:
+    title: Local offer for SEND
+  subpages:
+    - listing_title: Get started with SEND
+      listing_summary: What to do if you think your child has a special educational need or disability
+    - listing_title: About SEND local offer
+      listing_summary: What the local offer means and how it can help you
+    - listing_title: Education
+      listing_summary: Find support with schools, special schools and colleges
+    - listing_title: Money
+      listing_summary: Financial support for children and young people with SEND
+    - listing_title: Health
+      listing_summary: Find local specialised health services
+    - listing_title: Social care
+      listing_summary: Social care services for children and young people with SEND
+    - listing_title: Childcare and early years
+      listing_summary: Find local SEND childcare groups, childminders and pre-schools
+    - listing_title: Money
+      listing_summary: Financial support for children and young people with SEND
+    - listing_title: Health
+      listing_summary: Find local specialised health services
+    - listing_title: Social care
+      listing_summary: Social care services for children and young people with SEND
+    - listing_title: Childcare and early years
+      listing_summary: Find local SEND childcare groups, childminders and pre-schools
+
+tags:
+  image:
+    subpage.listing_image fill-600x500:
+      raw: '<img src="https://via.placeholder.com/600x500">'
+  pageurl:
+    subpage:
+      raw: '#'

@@ -1,0 +1,40 @@
+{# TODO Replace after with {% extends base_page_template %} #}
+{% extends "patterns/base_page--fis.html" %}
+{% load wagtailcore_tags wagtailimages_tags navigation_tags static %}
+
+{% block body_class %}template-fis-category-send {{ block.super }}{% endblock %}
+
+{% block content %}
+    <section>
+        <h1 class="heading heading--xxl">{{ page.title }}</h1>
+
+        {% if page.introduction %}
+            <p>{{ page.introduction }}</p>
+        {% endif %}
+
+        <div class="grid grid--fis-index grid--index grid--thirds" aria-label="Subpages">
+            {% for subpage in subpages %}
+                <a class="card card--fis-index" href="{% pageurl subpage %}">
+                    {% if forloop.counter0 < 3 %}
+                        <div class="card__image">
+                            {% image subpage.listing_image fill-600x500 %}
+                        </div>
+                    {% endif %}
+
+                    <div class="card__content">
+                        <h2 class="card__title heading">
+                            {% firstof subpage.listing_title subpage.title %}
+                        </h2>
+                        {% if subpage.listing_summary %}
+                            <p class="card__summary">{{ subpage.listing_summary }}</p>
+                        {% endif %}
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </section>
+
+    {% include "patterns/molecules/directory-banner/directory-banner.html" with classes="directory-banner--with-space" %}
+
+    {% include "patterns/molecules/search-prompt/search-prompt--fis.html" %}
+{% endblock %}
