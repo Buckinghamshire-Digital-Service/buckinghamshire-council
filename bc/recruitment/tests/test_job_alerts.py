@@ -86,7 +86,7 @@ class JobAlertTest(TestCase):
 
         recruitment_site_request = factory.get("/", SERVER_NAME=self.site.hostname)
         self.assertEqual(Site.find_for_request(recruitment_site_request), self.site)
-        self.assertTrue(is_recruitment_site(recruitment_site_request))
+        self.assertTrue(is_recruitment_site(self.site))
 
         internal_recruitment_site_request = factory.get(
             "/", SERVER_NAME=self.site_internal.hostname
@@ -94,7 +94,7 @@ class JobAlertTest(TestCase):
         self.assertEqual(
             Site.find_for_request(internal_recruitment_site_request), self.site_internal
         )
-        self.assertTrue(is_recruitment_site(internal_recruitment_site_request))
+        self.assertTrue(is_recruitment_site(self.site_internal))
 
         # Create a main site (not recruitment site)
         hero_image = wagtail_factories.ImageFactory()
@@ -106,7 +106,19 @@ class JobAlertTest(TestCase):
         )
         main_site_request = factory.get("/", SERVER_NAME=main_site.hostname)
         self.assertEqual(Site.find_for_request(main_site_request), main_site)
-        self.assertFalse(is_recruitment_site(main_site_request))
+        self.assertFalse(is_recruitment_site(main_site))
+
+    @override_settings(ALLOWED_HOSTS=["has-no-site-record.example"])
+    def test_utils_is_recruitment_site_when_no_match_and_no_default_site_is_set(self):
+        factory = RequestFactory()
+
+        Site.objects.all().delete()
+        self.assertFalse(Site.objects.filter(is_default_site=True).exists())
+
+        has_no_site_request = factory.get("/", SERVER_NAME="has-no-site-record.example")
+        site = Site.find_for_request(has_no_site_request)
+        self.assertEqual(site, None)
+        self.assertFalse(is_recruitment_site(site))
 
     def test_utils_get_current_search(self):
         query = QueryDict("query=school")

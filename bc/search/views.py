@@ -41,7 +41,9 @@ class SearchView(View):
         context = {}
 
         # Recruitment site search
-        if is_recruitment_site(request):
+        site = Site.find_for_request(request)
+        site_is_recruitment = is_recruitment_site(site)
+        if site_is_recruitment:
             template_path = "patterns/pages/search/search--jobs.html"
             homepage = Site.find_for_request(request).root_page
             search_results = get_job_search_results(
@@ -90,7 +92,7 @@ class SearchView(View):
             }
         )
 
-        if is_recruitment_site(request):
+        if site_is_recruitment:
             context.update(
                 {
                     "unfiltered_results": get_job_search_results(
@@ -115,7 +117,8 @@ class SearchView(View):
         """
         Job alert subscription
         """
-        if not is_recruitment_site(request):
+        site = Site.find_for_request(request)
+        if not is_recruitment_site(site):
             return
 
         form = SearchAlertSubscriptionForm(data=request.POST)
