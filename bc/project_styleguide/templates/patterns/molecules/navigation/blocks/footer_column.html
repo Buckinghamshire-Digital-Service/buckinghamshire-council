@@ -2,13 +2,7 @@
 <div>
     {% if value.heading %}
         <h5>{{ value.heading }}</h5>
+        {# FIXME Would a h5 be an issue for screen readers due to the jump in levels? #}
     {% endif %}
-    <ul class="nav nav--tertiary">
-        {% for item in value.links %}
-            <li class="nav__item nav__item--footer-column">
-                {% include_block item %}
-            </li>
-        {% endfor %}
-    </ul>
+    {{ value.content|richtext }}
 </div>
-
