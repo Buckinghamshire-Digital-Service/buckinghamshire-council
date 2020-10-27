@@ -1,0 +1,21 @@
+.search-prompt {
+    font-weight: $weight--bold;
+
+    &--with-space {
+        margin: $grid 0;
+    }
+
+    @include media-query(tablet-portrait) {
+        &--with-space {
+            margin: $grid--large 0;
+        }
+    }
+
+    .template-fis-home & {
+        display: none;
+
+        @include media-query(tablet-portrait) {
+            display: block;
+        }
+    }
+}
