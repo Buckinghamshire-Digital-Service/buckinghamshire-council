@@ -1,0 +1,46 @@
+{# TODO Replace after with {% extends base_page_template %} #}
+{% extends "patterns/base_page--fis.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block body_class %}template-fis-home {{ block.super }}{% endblock %}
+
+{% block hero %}
+    {% include "patterns/molecules/hero/hero--fis-home.html" %}
+{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+
+    {# Category cards #}
+    <section>
+        <h2 class="heading heading--xl">
+            Get information, advice and guidance
+        </h2>
+        <div class="grid grid--index grid--fis">
+        {% for subpage in page.category_pages %}
+            <a class="card card--fis" href="{% pageurl subpage %}">
+                <div class="card__image">
+                    {% image subpage.listing_image fill-600x500 %}
+                </div>
+
+                <div class="card__content">
+                    <h2 class="card__title heading">
+                        {% firstof subpage.listing_title subpage.title %}
+                    </h2>
+                    {% if subpage.listing_summary %}
+                        <p class="card__summary">{{ subpage.listing_summary }}</p>
+                    {% endif %}
+                </div>
+            </a>
+        {% endfor %}
+        </div>
+    </section>
+
+    {% include "patterns/molecules/directory-banner/directory-banner.html" with classes="directory-banner--with-space" %}
+
+    {% include "patterns/molecules/cta/call_to_action.html" with call_to_action=page.call_to_action %}
+
+    {% include "patterns/molecules/search-prompt/search-prompt--fis.html" %}
+
+{% endblock %}
