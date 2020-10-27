@@ -9,7 +9,7 @@
         margin: 0;
     }
 
-    &--fis {
+    &--fis-home {
         margin-top: $grid--small;
 
         @include media-query(tablet-portrait) {
