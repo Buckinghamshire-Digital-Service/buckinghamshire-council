@@ -1,0 +1,11 @@
+context:
+  page:
+    hero_strapline: Information, guidance and support for families in Buckinghamshire
+    hero_title: Buckinghamshire Family Information Service
+
+tags:
+  image:
+    page.hero_image min-1600x700 as hero_image:
+      target_var: hero_image
+      raw:
+        url: 'https://via.placeholder.com/1600x700'
