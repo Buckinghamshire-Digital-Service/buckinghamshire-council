@@ -13,7 +13,7 @@
         {% endif %}
 
         <div class="grid grid--fis-index grid--index grid--thirds" aria-label="Subpages">
-            {% for subpage in subpages %}
+            {% for subpage in page.child_pages %}
                 <a class="card card--fis-index" href="{% pageurl subpage %}">
                     {% if forloop.counter0 < 3 %}
                         <div class="card__image">
