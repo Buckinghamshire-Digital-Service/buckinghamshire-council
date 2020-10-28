@@ -123,7 +123,7 @@ class BaseCategoryPage(FISBannerFields, BasePage):
 
 
 class CategoryTypeOnePage(BaseCategoryPage):
-    template = "patterns/pages/family_information/category_type_1.html"
+    template = "patterns/pages/standardpages/index_page--fis-send.html"
 
 
 class CategoryTypeTwoPage(BaseCategoryPage):
