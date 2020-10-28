@@ -6,8 +6,11 @@
     style="background-image: url('{{ hero_image.url }}')"
 >
     <div class="wrapper wrapper--large">
-        <h1 class="hero__heading heading heading--xxxl">{{ page.hero_title }}</h1>
-        <p class="hero__strapline subheading">{{ page.hero_strapline }}</p>
+        <h1 class="hero__heading heading heading--xxxl">{{ page.title }}</h1>
+
+        {% if page.description %}
+            <p class="hero__strapline subheading">{{ page.description }}</p>
+        {% endif %}
 
         <div class="hero__search">
             <form
@@ -16,12 +19,14 @@
                 method="get"
                 role="search"
             >
-                <label class="u-sr-only" for="search--hero">Search our website</label>
+                <label class="u-sr-only" for="search--hero">
+                    {% firstof page.search_placeholder "Search our website" %}
+                </label>
                 <input
                     class="input"
                     id="search--hero"
                     name="query"
-                    placeholder="Search our website"
+                    placeholder="{% firstof page.search_placeholder "Search our website" %}"
                     type="text"
                 >
                 <button

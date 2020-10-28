@@ -1,7 +1,8 @@
 context:
   page:
-    hero_strapline: Information, guidance and support for families in Buckinghamshire
-    hero_title: Buckinghamshire Family Information Service
+    description: Information, guidance and support for families in Buckinghamshire
+    search_placeholder: Search our information pages
+    title: Buckinghamshire Family Information Service
 
 tags:
   image:
