@@ -43,7 +43,7 @@ class FISBannerFields(models.Model):
 
 
 class FamilyInformationHomePage(FISBannerFields, BasePage):
-    template = "patterns/pages/family_information/family_information_home_page.html"
+    template = "patterns/pages/home/home_page--fis.html"
 
     subpage_types = ["CategoryTypeOnePage", "CategoryTypeTwoPage"]
 
