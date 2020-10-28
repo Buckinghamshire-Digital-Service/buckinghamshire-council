@@ -11,9 +11,10 @@
             font-weight: $weight--semibold;
         }
 
-        .area-links--lockdown & {
-            @include font-size(m);
-            margin-bottom: $grid;
+        &--success {
+            .area-links--lockdown & {
+                margin-bottom: $grid;
+            }
         }
     }
 

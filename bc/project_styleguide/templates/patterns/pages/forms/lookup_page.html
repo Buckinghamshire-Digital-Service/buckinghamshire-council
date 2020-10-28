@@ -18,39 +18,39 @@
                             action="{% pageurl page %}"
                             role="search"
                             method="get"
-                            class="form form--area-search"
+                            class="form form--area-search{% if form.errors %} form--area-search-error{% endif %}"
                             data-form
                             novalidate
                         >
 
-                            {% if form.errors %}
+                            {% if form.non_field_errors %}
                                 <div class="form__errors">
-                                    There were some errors with your form. Please amend the fields highlighted below.
+                                    {{ form.non_field_errors }}
                                 </div>
                             {% endif %}
 
-                            {% for field in form %}
+                            {% with field=form.postcode %}
+                                <div class="area-search__title">
+                                    {{ field.label }}
+                                </div>
+                                <div class="area-search__info">
+                                    {{ field.help_text }}
+                                </div>
 
-                                {% with widget_type=field.field.widget.input_type %}
-                                    <div class="form-item {% if widget_type %}form-item--{{ widget_type }}{% endif %} {% if field.errors %}form-item--errors{% endif %}">
+                                <div class="area-search__response-text{% if field.errors %} area-search__response-text--error{% endif %}">
+                                    {{ field.errors }}
+                                </div>
 
-                                        {% if field.errors %}
-                                            <div class="form-item__errors">
-                                                {{ field.errors }}
-                                            </div>
-                                        {% endif %}
+                                <div class="area-search__input-wrapper">
+                                    {{ field }}
 
-                                        <label{% if field.id_for_label %} for="{{ field.id_for_label }}"{% endif %} class="form-item__label {% if field.field.required %}required{% endif %}">{{ field.label }}</label>
-                                        {% if field.help_text %}<div class="form-item__help">{{ field.help_text }}</div>{% endif %}
-
-                                        {{ field }}
-
-                                    </div>
-                                {% endwith %}
-
-                            {% endfor %}
-
-                            <input class="form__submit button" type="submit" value="{% if page.action_text %}{{ page.action_text|safe }}{% else %}Submit{% endif %}" />
+                                    <input
+                                        class="button button--basic button--area-search"
+                                        type="submit"
+                                        value="{% if page.action_text %}{{ page.action_text|safe }}{% else %}Submit{% endif %}"
+                                    />
+                                </div>
+                            {% endwith %}
                         </form>
                     </div>
                 </div>
