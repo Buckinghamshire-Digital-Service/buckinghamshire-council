@@ -42,7 +42,7 @@ class FISBannerFields(models.Model):
         abstract = True
 
 
-class FamilyInformationHomePage(BasePage, FISBannerFields):
+class FamilyInformationHomePage(FISBannerFields, BasePage):
     template = "patterns/pages/family_information/family_information_home_page.html"
 
     subpage_types = ["CategoryTypeOnePage", "CategoryTypeTwoPage"]
@@ -106,7 +106,7 @@ class FamilyInformationHomePage(BasePage, FISBannerFields):
         )
 
 
-class BaseCategoryPage(Page, FISBannerFields):
+class BaseCategoryPage(FISBannerFields, BasePage):
     parent_page_types = ["FamilyInformationHomePage"]
     subpage_types = ["inlineindex.InlineIndex"]
 
