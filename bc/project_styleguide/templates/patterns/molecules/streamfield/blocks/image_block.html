@@ -1,6 +1,6 @@
 {% load wagtailimages_tags %}
 
 <div class="image-block">
-    {% image value.image width-1000 %}
+    {% image value.image width-1000 alt=value.alt_text %}
     <p class="image-block__caption">{{ value.caption }}</p>
 </div>
