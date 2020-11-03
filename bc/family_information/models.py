@@ -102,6 +102,7 @@ class FamilyInformationHomePage(FISBannerFields, BasePage):
             .filter(show_in_menus=True)
             .live()
             .public()
+            .specific()
             .order_by("path")
         )
 
