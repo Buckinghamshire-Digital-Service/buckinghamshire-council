@@ -69,7 +69,7 @@
     <meta property="og:site_name" content="{{ settings.utils.SocialMediaSettings.site_name }}" />
 {% endblock meta_tags %}
 
-{% block body_class %}page--fis{% endblock %}
+{% block body_class %}{{ block.super }} page--fis{% endblock %}
 
 {% block body_top %}
     {% if GOOGLE_TAG_MANAGER_ID %}
