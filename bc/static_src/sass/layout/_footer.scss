@@ -16,6 +16,13 @@
         }
     }
 
+    &__columns {
+        @include media-query(tablet-landscape) {
+            display: flex;
+            margin-bottom: $grid--large;
+        }
+    }
+
     &__column {
         margin-bottom: $grid;
 
@@ -35,6 +42,26 @@
 
             li::before {
                 background-color: $color--charcoal-25;
+            }
+        }
+
+        @include media-query(tablet-landscape) {
+            flex-basis: 33.3333%;
+            flex-grow: 1;
+
+            &:not(:first-child) {
+                margin-left: $grid--small;
+                padding-left: $grid--small;
+                position: relative;
+
+                &::before {
+                    background-color: $color--charcoal-75;
+                    content: '';
+                    height: 100%;
+                    left: 0;
+                    position: absolute;
+                    width: 1px;
+                }
             }
         }
     }
