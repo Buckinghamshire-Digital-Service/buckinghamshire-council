@@ -47,6 +47,15 @@
         max-width: $wrapper--page;
     }
 
+    &--desktop-reverse {
+        display: flex;
+        flex-direction: column;
+
+        @include media-query(tablet-landscape) {
+            flex-direction: column-reverse;
+        }
+    }
+
     &--flex {
         display: flex;
         flex-direction: column;
