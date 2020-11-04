@@ -16,6 +16,34 @@
         }
     }
 
+    &__column {
+        margin-bottom: $grid;
+
+        .rich-text {
+            word-break: break-word;
+
+            a {
+                color: $color--white;
+                font-weight: $weight--bold;
+            }
+
+            p,
+            li {
+                @include font-size(xs);
+                color: $color--charcoal-25;
+            }
+
+            li::before {
+                background-color: $color--charcoal-25;
+            }
+        }
+    }
+
+    &__column-heading {
+        @include font-size(s);
+        font-weight: $weight--bold;
+    }
+
     &__nav-container {
         display: flex;
         flex-direction: column;
