@@ -14,7 +14,7 @@ import bc.utils.blocks
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("recruitment", "0036_update_listing_summary_help_text"),
+        ("recruitment", "0038_merge_20201007_1224"),
     ]
 
     operations = [
