@@ -4,7 +4,7 @@
 {% block body_class %}template-fis-category-regular {{ block.super }}{% endblock %}
 
 {% block content %}
-    <section>
+    <div>
         <h1 class="heading heading--xxl">{{ page.title }}</h1>
 
         {% if page.introduction %}
@@ -28,7 +28,7 @@
 
             {% include "patterns/molecules/directory-banner/directory-banner.html" %}
         </div>
-    </section>
+    </div>
 
     {% include "patterns/molecules/search-prompt/search-prompt--fis.html" %}
 {% endblock %}
