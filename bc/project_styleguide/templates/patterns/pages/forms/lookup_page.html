@@ -1,0 +1,64 @@
+{% extends base_page_template %}
+{% load wagtailcore_tags wagtailimages_tags form_tags util_tags static %}
+
+{% block content %}
+
+<div class="wrapper wrapper--flex">
+    <div class="section section--main">
+
+        <h1 class="heading heading--xxl">{{ page.title }}</h1>
+        <div class="main-body">
+            <div class="container">
+
+                <div class="area-links area-links--lockdown">
+                    <div class="area-links__intro">{{ page.form_heading|richtext }}</div>
+
+                    <div class="area-search">
+                        <form
+                            action="{% pageurl page %}"
+                            role="search"
+                            method="get"
+                            class="form form--area-search{% if form.errors %} form--area-search-error{% endif %}"
+                            data-form
+                            novalidate
+                        >
+
+                            {% if form.non_field_errors %}
+                                <div class="form__errors">
+                                    {{ form.non_field_errors }}
+                                </div>
+                            {% endif %}
+
+                            {% with field=form.postcode %}
+                                <div class="area-search__title">
+                                    {{ field.label }}
+                                </div>
+                                <div class="area-search__info">
+                                    {{ field.help_text }}
+                                </div>
+
+                                <div class="area-search__response-text{% if field.errors %} area-search__response-text--error{% endif %}">
+                                    {{ field.errors }}
+                                </div>
+
+                                <div class="area-search__input-wrapper">
+                                    {{ field }}
+
+                                    <input
+                                        class="button button--basic button--area-search"
+                                        type="submit"
+                                        value="{% if page.action_text %}{{ page.action_text|safe }}{% else %}Submit{% endif %}"
+                                    />
+                                </div>
+                            {% endwith %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include "patterns/molecules/navigation/sidebar.html" with related_pages=page.related_pages.all %}
+</div>
+
+
+{% endblock %}

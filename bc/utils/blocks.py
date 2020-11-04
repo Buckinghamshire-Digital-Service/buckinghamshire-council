@@ -39,6 +39,13 @@ class QuoteBlock(blocks.StructBlock):
         template = "patterns/molecules/streamfield/blocks/quote_block.html"
 
 
+class HighlightBlock(blocks.RichTextBlock):
+    class Meta:
+        icon = "pick"
+        features = RICH_TEXT_FEATURES
+        template = "patterns/molecules/streamfield/blocks/highlight_block.html"
+
+
 class LocalAreaLinksBlock(blocks.StructBlock):
     introduction = blocks.RichTextBlock(
         features=RICH_TEXT_FEATURES,
@@ -126,6 +133,7 @@ class BaseStoryBlock(blocks.StreamBlock):
     local_area_links = LocalAreaLinksBlock()
     table = TableBlock()
     button = ButtonBlock()
+    highlight = HighlightBlock()
 
     class Meta:
         abstract = True

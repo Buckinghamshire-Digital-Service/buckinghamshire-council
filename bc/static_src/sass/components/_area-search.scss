@@ -10,6 +10,12 @@
             color: $color--red;
             font-weight: $weight--semibold;
         }
+
+        &--success {
+            .area-links--lockdown & {
+                margin-bottom: $grid;
+            }
+        }
     }
 
     &__input-wrapper {
