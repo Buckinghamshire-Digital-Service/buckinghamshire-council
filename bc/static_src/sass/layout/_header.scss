@@ -41,6 +41,100 @@
         }
     }
 
+    &--fis {
+        #{$root}__heading,
+        #{$root}__heading-title {
+            display: block;
+        }
+
+        #{$root}__search {
+            margin-top: 0;
+            width: auto;
+        }
+
+        #{$root}__search-button {
+            align-items: center;
+            display: flex;
+            margin-left: auto;
+            padding: 5px;
+
+            &[data-active='true'] {
+                #{$root}__search-icon--rotate {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+
+        #{$root}__search-icon {
+            stroke: $color--white;
+            width: 21px;
+
+            &--rotate {
+                transition: transform $transition;
+                width: 10px;
+            }
+        }
+
+        #{$root}__search-text {
+            @include font-size(s);
+            color: $color--white;
+            margin: 0 $grid--min;
+        }
+
+        @include media-query(tablet-portrait) {
+            #{$root}__heading {
+                display: flex;
+            }
+
+            #{$root}__heading-title {
+                @include font-size(m);
+                flex-grow: 1;
+            }
+
+            #{$root}__search-button {
+                background-color: $color--white;
+                display: block;
+                padding: 5px $grid--small;
+                transition: background $transition;
+
+                #{$hover-states} {
+                    background-color: $color--link-hover;
+
+                    /* stylelint-disable max-nesting-depth */
+                    #{$root}__search-icon {
+                        stroke: $color--white;
+                    }
+
+                    #{$root}__search-text {
+                        color: $color--white;
+                    }
+                    /* stylelint-enable max-nesting-depth */
+                }
+            }
+
+            #{$root}__search-icon {
+                fill: transparent;
+                stroke: $color--charcoal;
+                transition: stroke $transition;
+
+                &--rotate {
+                    display: none;
+                }
+            }
+            #{$root}__search-text {
+                color: $color--charcoal;
+                margin-right: 0;
+                transition: color $transition;
+            }
+        }
+
+        @include media-query(tablet-landscape) {
+            #{$root}__heading-title {
+                @include font-size(l);
+            }
+        }
+    }
+
     &--jobs {
         #{$root}__inner {
             justify-content: flex-start;
@@ -84,6 +178,7 @@
             flex: auto;
         }
     }
+
     &__heading-logo {
         background-color: $color--white;
         display: inline-block;
@@ -106,6 +201,19 @@
             &:first-child {
                 margin-right: 5px;
                 margin-bottom: 0;
+            }
+        }
+    }
+
+    .template-fis-home & {
+        &__heading,
+        &__search {
+            display: none;
+        }
+
+        @include media-query(tablet-landscape) {
+            &__heading {
+                display: block;
             }
         }
     }
