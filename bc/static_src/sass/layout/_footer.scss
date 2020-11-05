@@ -20,30 +20,12 @@
         @include media-query(tablet-landscape) {
             display: flex;
             margin-bottom: $grid--large;
+            margin-top: $grid--small;
         }
     }
 
     &__column {
         margin-bottom: $grid;
-
-        .rich-text {
-            word-break: break-word;
-
-            a {
-                color: $color--white;
-                font-weight: $weight--bold;
-            }
-
-            p,
-            li {
-                @include font-size(xs);
-                color: $color--charcoal-25;
-            }
-
-            li::before {
-                background-color: $color--charcoal-25;
-            }
-        }
 
         @include media-query(tablet-landscape) {
             flex-basis: 33.3333%;
