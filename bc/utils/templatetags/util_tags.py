@@ -1,5 +1,6 @@
 from django import template
 
+from wagtail.core.models import Site
 from wagtail.core.utils import camelcase_to_underscore
 
 from bc.utils.models import SocialMediaSettings
@@ -35,3 +36,9 @@ def join_list(value):
         return (", ").join(value)
 
     return value
+
+
+# Get default site
+@register.simple_tag(name="get_default_site")
+def get_default_site():
+    return Site.objects.get(is_default_site=True)

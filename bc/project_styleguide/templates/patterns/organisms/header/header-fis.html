@@ -2,7 +2,8 @@
 
 <header class="header header--fis">
     <div class="header__inner wrapper wrapper--large">
-        <a class="header__home-link" href="/" aria-label="Buckinghamshire Council">
+        {% get_default_site as default_site %}
+        <a class="header__home-link" href="{% pageurl default_site.root_page %}" aria-label="Buckinghamshire Council">
             {% include "patterns/atoms/icons/icon.html" with name="logo" classname="header__logo" %}
         </a>
 
