@@ -5,7 +5,9 @@ class ToggleTarget {
 
     constructor(node) {
         this.node = node;
-        this.targetNode = document.querySelector(node.dataset.toggleTarget);
+
+        const target = `[data-toggle-destination="${node.dataset.toggleTarget}"]`;
+        this.targetNode = document.querySelector(target);
 
         this.bindEvents();
     }
