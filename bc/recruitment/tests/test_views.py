@@ -45,6 +45,7 @@ class TestApplyConfigKey(TestCase):
             INTERNAL_HOSTNAME,
             EXTERNAL_HOSTNAME,
         ],
+        BASE_URL="http://localhost/",
         TALENTLINK_APPLY_CONFIG_KEY_EXTERNAL="the-external-one",
         TALENTLINK_APPLY_CONFIG_KEY_INTERNAL="the-internal-one",
     )
@@ -68,6 +69,7 @@ class TestApplyConfigKey(TestCase):
             INTERNAL_HOSTNAME,
             EXTERNAL_HOSTNAME,
         ],
+        BASE_URL="http://localhost/",
         TALENTLINK_APPLY_CONFIG_KEY_EXTERNAL="the-external-one",
         TALENTLINK_APPLY_CONFIG_KEY_INTERNAL="the-internal-one",
     )
@@ -91,6 +93,7 @@ class TestApplyConfigKey(TestCase):
             INTERNAL_HOSTNAME,
             EXTERNAL_HOSTNAME,
         ],
+        BASE_URL="http://localhost/",
     )
     def test_404_when_job_id_is_badly_formatted(self):
         """This is mainly to ensure that IDs which previously raised a 500 don't."""
@@ -117,6 +120,7 @@ class TestApplyConfigKey(TestCase):
             INTERNAL_HOSTNAME,
             EXTERNAL_HOSTNAME,
         ],
+        BASE_URL="http://localhost/",
     )
     def test_view_when_job_id_does_not_exist(self):
         for job_id in [
@@ -140,6 +144,7 @@ class TestApplyConfigKey(TestCase):
             INTERNAL_HOSTNAME,
             EXTERNAL_HOSTNAME,
         ],
+        BASE_URL="http://localhost/",
     )
     def test_sidebar_normally_shown(self):
         job = TalentLinkJobFactory.create(
@@ -159,6 +164,7 @@ class TestApplyConfigKey(TestCase):
             INTERNAL_HOSTNAME,
             EXTERNAL_HOSTNAME,
         ],
+        BASE_URL="http://localhost/",
     )
     def test_sidebar_not_shown_when_job_id_does_not_exist(self):
         resp = self.client.get(
