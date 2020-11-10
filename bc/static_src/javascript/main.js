@@ -9,6 +9,7 @@ import Accordion from './components/accordion';
 import AreaSearchForm from './components/area-search-form';
 import Carousel from './components/carousel';
 import ConditionalField from './components/conditional-field';
+import HeightEqualizer from './components/height-equalizer';
 import ProgressBar from './components/progress-bar';
 import VideoModal from './components/video-modal';
 import FormSubmit from './components/form-submit';
@@ -69,6 +70,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (const filters of document.querySelectorAll(Filters.selector())) {
         new Filters(filters);
+    }
+
+    for (const heightEqualizer of document.querySelectorAll(
+        HeightEqualizer.selector(),
+    )) {
+        new HeightEqualizer(heightEqualizer);
     }
 
     for (const mobilemenu of document.querySelectorAll(MobileMenu.selector())) {
