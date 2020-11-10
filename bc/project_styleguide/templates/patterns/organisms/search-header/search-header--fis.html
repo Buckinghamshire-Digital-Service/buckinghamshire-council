@@ -1,3 +1,4 @@
+{% load util_tags %}
 <div class="search-header search-header--fis" data-toggle-destination="search-header"{% if default_active %} data-active="true"{% endif %}>
     <div class="search-header__container">
         <div class="wrapper wrapper--large">
@@ -33,10 +34,13 @@
                 </form>
             </div>
 
-            <p class="search-header__outro">
-                If you are looking for services in your area,
-                <a href="#">search our directory</a>.
-            </p>
+            {% get_fis_directory as fis_directory_url %}
+            {% if fis_directory_url %}
+                <p class="search-header__outro">
+                    <a href="{{ fis_directory_url }}">Find local activities and organisations</a>
+                    in our directory.
+                </p>
+            {% endif %}
         </div>
     </div>
 </div>
