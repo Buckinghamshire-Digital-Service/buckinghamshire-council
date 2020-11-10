@@ -11,7 +11,11 @@
             <p>{{ page.introduction }}</p>
         {% endif %}
 
-        <div class="grid grid--fis-index grid--index grid--thirds" aria-label="Subpages">
+        <div
+            aria-label="Subpages"
+            class="grid grid--fis-index grid--index grid--thirds"
+            data-height-equalizer
+        >
             {% for subpage in page.child_pages %}
                 <a class="card card--fis-index" href="{% pageurl subpage %}">
                     {% if forloop.counter0 < 3 %}
@@ -20,7 +24,7 @@
                         </div>
                     {% endif %}
 
-                    <div class="card__content">
+                    <div class="card__content" data-height-equalizer-child>
                         <h2 class="card__title heading">
                             {% firstof subpage.listing_title subpage.title %}
                         </h2>
