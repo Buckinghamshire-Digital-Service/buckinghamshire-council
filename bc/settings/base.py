@@ -190,17 +190,37 @@ else:
 # Search
 # https://docs.wagtail.io/en/latest/topics/search/backends.html
 
-
 if "BONSAI_URL" in env:
     WAGTAILSEARCH_BACKENDS = {
         "default": {
-            "BACKEND": "wagtail.search.backends.elasticsearch7",
+            "BACKEND": "bc.search.elasticsearch7",
             "URLS": [env["BONSAI_URL"]],
             "INDEX": "wagtail",
             "TIMEOUT": 5,
             "OPTIONS": {},
             "INDEX_SETTINGS": {
-                "settings": {"index": {"number_of_shards": 1, "number_of_replicas": 0}}
+                "settings": {
+                    "index": {"number_of_shards": 1, "number_of_replicas": 0},
+                    "analysis": {
+                        "analyzer": {
+                            "default": {
+                                "tokenizer": "whitespace",
+                                "filter": [
+                                    "lowercase",
+                                    "synonym",  # see bc.search.elasticsearch7.SearchBackend
+                                    "porter_stem",
+                                    "english_stop_words",
+                                ],
+                            },
+                        },
+                        "filter": {
+                            "english_stop_words": {
+                                "type": "stop",
+                                "stopwords": "_english_",
+                            },
+                        },
+                    },
+                },
             },
         }
     }

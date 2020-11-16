@@ -13,6 +13,7 @@ from wagtailorderable.modeladmin.mixins import OrderableMixin
 from bc.events.models import EventType
 from bc.news.models import NewsType
 from bc.recruitment.models import JobCategory, JobSubcategory
+from bc.search.models import Term
 
 from .views import MissingMetadataReportView, UnpublishedChangesReportView
 
@@ -47,6 +48,12 @@ class NewsTypeModelAdmin(ModelAdmin):
     menu_icon = "tag"
 
 
+class TermModelAdmin(ModelAdmin):
+    model = Term
+    menu_icon = "search"
+    list_display = ("canonical_term", "synonyms")
+
+
 # class PersonTypeModelAdmin(ModelAdmin):
 #     model = PersonType
 #     menu_icon = "tag"
@@ -56,6 +63,7 @@ class TaxonomiesModelAdminGroup(ModelAdminGroup):
     menu_label = "Taxonomies"
     # items = (NewsTypeModelAdmin, EventTypeModelAdmin, PersonTypeModelAdmin)
     items = (
+        TermModelAdmin,
         NewsTypeModelAdmin,
         EventTypeModelAdmin,
         JobCategoryModelAdmin,
