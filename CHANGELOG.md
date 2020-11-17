@@ -9,6 +9,7 @@
 - Add new 'Am I in lockdown?' streamfields - FE styling
 - Add new Highlight StreamField block
 - Add LookupPage type to search for information about postcodes
+- Fix form errors in pattern library
 
 ## 27.0 (2020-10-15)
 
