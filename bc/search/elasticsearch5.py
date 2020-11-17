@@ -9,7 +9,6 @@ class SynonymSettingsMixin:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # print(get_synonyms())
         self.settings["settings"]["analysis"]["filter"]["synonym"] = {
             "type": "synonym",
             "synonyms": get_synonyms(),
