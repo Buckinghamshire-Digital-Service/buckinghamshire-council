@@ -5,5 +5,12 @@ context:
       file_size: 1234
       title: Lorem ipsum policy
     document_link_text: Download this policy
+    hero_image: True
     last_updated: 2020-03-19
     title: Policy about lorem ipsum dolor sit amet consectetuer adipiscing
+
+tags:
+  image:
+    origin_page.hero_image fill-1000x500 class="longform-title__image":
+      raw: |
+        <img src="https://placekitten.com/g/1000/500" class="longform-title__image">
