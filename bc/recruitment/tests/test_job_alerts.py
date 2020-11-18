@@ -97,9 +97,8 @@ class JobAlertTest(TestCase):
         self.assertTrue(is_recruitment_site(self.site_internal))
 
         # Create a main site (not recruitment site)
-        hero_image = wagtail_factories.ImageFactory()
         main_site_homepage = self.root_page.add_child(
-            instance=HomePageFactory.build(hero_image=hero_image)
+            instance=HomePageFactory.build_with_fk_objs_committed()
         )
         main_site = Site.objects.create(
             hostname="main.example", port=80, root_page=main_site_homepage
