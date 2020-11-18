@@ -3,8 +3,6 @@ from django.test import TestCase, override_settings
 
 from wagtail.core.models import Page, Site
 
-import wagtail_factories
-
 from bc.recruitment.constants import JOB_BOARD_CHOICES
 
 from .fixtures import RecruitmentHomePageFactory, TalentLinkJobFactory
@@ -16,12 +14,11 @@ EXTERNAL_HOSTNAME = "example.com"
 class TestApplyConfigKey(TestCase):
     def setUp(self):
         self.root_page = Page.objects.get(id=1)
-        hero_image = wagtail_factories.ImageFactory()
 
         # Job site (external)
         self.homepage = self.root_page.add_child(
-            instance=RecruitmentHomePageFactory.build(
-                hero_image=hero_image, job_board=JOB_BOARD_CHOICES[0]
+            instance=RecruitmentHomePageFactory.build_with_fk_objs_committed(
+                job_board=JOB_BOARD_CHOICES[0]
             )
         )
         self.site = Site.objects.create(
@@ -30,8 +27,8 @@ class TestApplyConfigKey(TestCase):
 
         # Internal job site
         self.homepage_internal = self.root_page.add_child(
-            instance=RecruitmentHomePageFactory.build(
-                hero_image=hero_image, job_board=JOB_BOARD_CHOICES[1]
+            instance=RecruitmentHomePageFactory.build_with_fk_objs_committed(
+                job_board=JOB_BOARD_CHOICES[1]
             )
         )
         self.site_internal = Site.objects.create(

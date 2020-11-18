@@ -5,8 +5,6 @@ from django.test import TestCase
 
 from wagtail.core.models import Page, Site
 
-import wagtail_factories
-
 from bc.recruitment.constants import JOB_BOARD_CHOICES
 from bc.recruitment.tests.fixtures import RecruitmentHomePageFactory
 from bc.recruitment.utils import get_job_search_results
@@ -17,10 +15,9 @@ class SearchViewTest(TestCase):
         self.root_page = Page.objects.get(id=1)
 
         # Job site (external)
-        hero_image = wagtail_factories.ImageFactory()
         self.homepage = self.root_page.add_child(
-            instance=RecruitmentHomePageFactory.build(
-                hero_image=hero_image, job_board=JOB_BOARD_CHOICES[0]
+            instance=RecruitmentHomePageFactory.build_with_fk_objs_committed(
+                job_board=JOB_BOARD_CHOICES[0]
             )
         )
         self.site = Site.objects.create(

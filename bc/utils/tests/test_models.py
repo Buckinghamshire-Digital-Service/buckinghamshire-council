@@ -4,8 +4,6 @@ from django.urls import reverse
 
 from wagtail.core.models import Page, Site
 
-import wagtail_factories
-
 from bc.home.tests.fixtures import HomePageFactory
 from bc.recruitment.tests.fixtures import RecruitmentHomePageFactory
 from bc.standardpages.tests.fixtures import IndexPageFactory, InformationPageFactory
@@ -28,10 +26,9 @@ class BasePageTemplateTest(TestCase):
             hostname=MAIN_HOSTNAME, port=80, root_page=self.homepage
         )
 
-        hero_image = wagtail_factories.ImageFactory()
         self.recruitment_homepage = root_page.add_child(
-            instance=RecruitmentHomePageFactory.build(
-                title="Jobs", hero_image=hero_image
+            instance=RecruitmentHomePageFactory.build_with_fk_objs_committed(
+                title="Jobs"
             )
         )
         self.recruitment_site = Site.objects.create(
