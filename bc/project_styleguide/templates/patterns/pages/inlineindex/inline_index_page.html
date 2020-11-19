@@ -76,7 +76,7 @@
             </div>
         </div>
 
-        {% include "patterns/molecules/navigation/sidebar.html" with related_pages=page.related_pages %}
+        {% include "patterns/molecules/navigation/sidebar.html" with related_pages=page.get_live_related_pages %}
     </div>
     {% endwith %}
 

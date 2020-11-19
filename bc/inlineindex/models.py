@@ -42,6 +42,12 @@ class InlineIndex(BasePage):
         InlinePanel("related_pages", label="Related pages"),
     ]
 
+    def get_live_related_pages(self):
+        return self.related_pages.annotate(
+            # Presence of a page restriction means it's private
+            restriction_count=models.Count("page__view_restrictions")
+        ).filter(page__live=True, restriction_count=0)
+
     def get_index(self):
         return [self] + list(self.get_children().specific())
 
@@ -78,9 +84,8 @@ class InlineIndexChild(BasePage):
         StreamFieldPanel("body"),
     ]
 
-    @property
-    def related_pages(self):
-        return self.get_parent().specific.related_pages
+    def get_live_related_pages(self):
+        return self.get_parent().specific.get_live_related_pages()
 
     def get_index(self):
         return self.get_parent().specific.get_index()
