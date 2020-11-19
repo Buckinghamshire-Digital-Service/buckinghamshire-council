@@ -38,7 +38,6 @@ def join_list(value):
     return value
 
 
-
 # Get default site
 @register.simple_tag(name="get_default_site")
 def get_default_site():
