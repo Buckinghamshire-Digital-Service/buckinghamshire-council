@@ -1,11 +1,16 @@
 from django.db import models
 
-from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
+from modelcluster.fields import ParentalKey
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
 from wagtail.core.fields import StreamField
 from wagtail.search import index
 
 from bc.utils.blocks import StoryBlock
-from bc.utils.models import BasePage
+from bc.utils.models import BasePage, RelatedPage
+
+
+class InlineIndexRelatedPage(RelatedPage):
+    source_page = ParentalKey("InlineIndex", related_name="related_pages")
 
 
 class InlineIndex(BasePage):
@@ -34,6 +39,7 @@ class InlineIndex(BasePage):
     content_panels = BasePage.content_panels + [
         FieldPanel("subtitle"),
         StreamFieldPanel("body"),
+        InlinePanel("related_pages", label="Related pages"),
     ]
 
     def get_index(self):
@@ -71,6 +77,10 @@ class InlineIndexChild(BasePage):
     content_panels = BasePage.content_panels + [
         StreamFieldPanel("body"),
     ]
+
+    @property
+    def related_pages(self):
+        return self.get_parent().specific.related_pages
 
     def get_index(self):
         return self.get_parent().specific.get_index()
