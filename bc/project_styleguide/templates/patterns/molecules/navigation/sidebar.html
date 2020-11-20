@@ -1,11 +1,12 @@
 {% load wagtailcore_tags %}
 
 
+{% with related_pages=related_pages.all %}
 <section
     class="sidebar {{ classes }}"
-    {% if related_pages.exists %} aria-labelledby="sidebar-heading"{% endif %}
+    {% if related_pages %} aria-labelledby="sidebar-heading"{% endif %}
 >
-    {% if related_pages.exists %}
+    {% if related_pages %}
         <h2 class="sidebar__heading heading" id="sidebar-heading">
             {% if sidebar_title %}
                 {{ sidebar_title }}
@@ -15,7 +16,7 @@
         </h2>
 
         <ul class="sidebar__link-list">
-            {% for related in related_pages.all %}
+            {% for related in related_pages %}
                 {% if related.page %}
                     {% with specific_related_page=related.page.specific %}
                         <li>
@@ -27,3 +28,4 @@
         </ul>
     {% endif %}
 </section>
+{% endwith %}
