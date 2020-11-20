@@ -72,6 +72,13 @@ class NewsPage(BasePage):
         else:
             return self.first_published_at
 
+    @cached_property
+    def live_related_pages(self):
+        return self.related_pages.annotate(
+            # Presence of a page restriction means it's private
+            restriction_count=models.Count("page__view_restrictions")
+        ).filter(page__live=True, restriction_count=0)
+
 
 class NewsIndex(BasePage):
     template = "patterns/pages/news/news_index.html"
