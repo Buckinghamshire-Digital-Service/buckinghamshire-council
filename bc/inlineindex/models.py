@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
 from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
@@ -43,7 +44,7 @@ class InlineIndex(BasePage):
     ]
 
     @cached_property
-    def get_live_related_pages(self):
+    def live_related_pages(self):
         return self.related_pages.annotate(
             # Presence of a page restriction means it's private
             restriction_count=models.Count("page__view_restrictions")
@@ -85,8 +86,9 @@ class InlineIndexChild(BasePage):
         StreamFieldPanel("body"),
     ]
 
-    def get_live_related_pages(self):
-        return self.get_parent().specific.get_live_related_pages()
+    @cached_property
+    def live_related_pages(self):
+        return self.get_parent().specific.live_related_pages
 
     def get_index(self):
         return self.get_parent().specific.get_index()
