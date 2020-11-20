@@ -42,6 +42,7 @@ class InlineIndex(BasePage):
         InlinePanel("related_pages", label="Related pages"),
     ]
 
+    @cached_property
     def get_live_related_pages(self):
         return self.related_pages.annotate(
             # Presence of a page restriction means it's private
