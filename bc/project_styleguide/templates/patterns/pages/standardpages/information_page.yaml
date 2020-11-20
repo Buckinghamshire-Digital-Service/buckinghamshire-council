@@ -1,5 +1,21 @@
 context:
+  base_page_template: 'patterns/base_page.html'
   page:
+    live_related_pages:
+      all:
+        - page:
+            live: true
+            specific:
+              title: Page title
+        - page:
+            live: true
+            specific:
+              title: Page title
+              listing_title: Listing title
+        - page:
+            live: true
+            specific:
+              title: Page title
     title: Test info page
 
 tags:
