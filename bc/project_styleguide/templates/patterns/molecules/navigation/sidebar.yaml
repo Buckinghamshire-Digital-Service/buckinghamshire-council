@@ -1,19 +1,18 @@
 context:
   related_pages:
-    all:
-      - page:
-          live: true
-          specific:
-            title: Page title
-      - page:
-          live: true
-          specific:
-            title: Page title
-            listing_title: Listing title
-      - page:
-          live: true
-          specific:
-            title: Page title
+    - page:
+        live: true
+        specific:
+          title: Page title
+    - page:
+        live: true
+        specific:
+          title: Page title
+          listing_title: Listing title
+    - page:
+        live: true
+        specific:
+          title: Page title
 
 tags:
   pageurl:
