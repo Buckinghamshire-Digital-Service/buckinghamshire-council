@@ -112,10 +112,13 @@ class EventPage(BasePage):
 
     @cached_property
     def live_related_pages(self):
-        return self.related_pages.annotate(
-            # Presence of a page restriction means it's private
-            restriction_count=models.Count("page__view_restrictions")
-        ).filter(page__live=True, restriction_count=0)
+        pages = self.related_pages.prefetch_related("page", "page__view_restrictions")
+        return [
+            related_page
+            for related_page in pages
+            if related_page.page.live
+            and len(related_page.page.view_restrictions.all()) == 0
+        ]
 
     @property
     def location(self):
