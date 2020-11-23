@@ -10,6 +10,6 @@
             {% include_block page.body %}
         </div>
 
-        {% include "patterns/molecules/navigation/sidebar.html" with related_pages=page.live_related_pages.all %}
+        {% include "patterns/molecules/navigation/sidebar.html" with related_pages=page.live_related_pages %}
     </div>
 {% endblock %}
