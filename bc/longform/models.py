@@ -22,8 +22,7 @@ class LongformPage(BasePage):
 
     is_chapter_page = False
     is_numbered = models.BooleanField(
-        default=False,
-        help_text='Adds numbers to each chapter, e.g. "1.1. My subheading"',
+        default=False, help_text='Adds numbers to each chapter, e.g. "1. Introduction"',
     )
 
     last_updated = models.DateField()
