@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ("wagtailcore", "0045_assign_unlock_grouppagepermission"),
-        ("inlineindex", "0014_update_listing_summary_help_text"),
+        ("inlineindex", "0015_add_highlight_block"),
     ]
 
     operations = [
