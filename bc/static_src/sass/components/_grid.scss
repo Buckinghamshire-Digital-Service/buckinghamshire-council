@@ -17,11 +17,29 @@
         }
     }
 
+    &--fis-index {
+        margin-top: $grid;
+
+        @include media-query(tablet-portrait) {
+            margin-top: $grid--large;
+        }
+    }
+
     &--home {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 
         @include media-query(tablet-portrait) {
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+    }
+
+    &--thirds {
+        @include media-query(tablet-portrait) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include media-query(tablet-landscape) {
+            grid-template-columns: repeat(3, 1fr);
         }
     }
 

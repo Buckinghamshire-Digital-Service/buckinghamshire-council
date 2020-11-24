@@ -40,7 +40,8 @@
         }
     }
 
-    &--fis-home {
+    &--fis-home,
+    &--fis-index {
         padding: 0;
 
         #{$root} {
@@ -59,11 +60,29 @@
             &__title {
                 @include font-size(m);
             }
+        }
+    }
 
-            @include media-query(tablet-portrait) {
-                &__image {
+    &--fis-home {
+        @include media-query(tablet-portrait) {
+            #{$root}__image {
+                display: block;
+            }
+        }
+    }
+
+    &--fis-index {
+        @include media-query(tablet-portrait) {
+            &:nth-child(-n + 2) {
+                #{$root}__image {
                     display: block;
                 }
+            }
+        }
+
+        @include media-query(tablet-landscape) {
+            #{$root}__image {
+                display: block;
             }
         }
     }

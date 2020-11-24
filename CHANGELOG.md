@@ -11,6 +11,7 @@
 - Add LookupPage type to search for information about postcodes
 - Fix form errors in pattern library
 - FIS Homepage: Style page and components
+- FIS Category Type 1 / SEND Page: Style page and components
 
 ## 27.0 (2020-10-15)
 
