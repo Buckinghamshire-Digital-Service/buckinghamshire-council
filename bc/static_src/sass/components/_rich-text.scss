@@ -99,4 +99,27 @@
             margin-top: 6px;
         }
     }
+
+    .footer__column & {
+        word-break: break-word;
+
+        a {
+            color: $color--white;
+            font-weight: $weight--bold;
+
+            #{$hover-states} {
+                color: $color--grey-medium;
+            }
+        }
+
+        p,
+        li {
+            @include font-size(xs);
+            color: $color--charcoal-25;
+        }
+
+        li::before {
+            background-color: $color--charcoal-25;
+        }
+    }
 }
