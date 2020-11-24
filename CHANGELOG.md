@@ -7,6 +7,10 @@
 - Accessibility 12 Fix HTML validation error for duplicated IDs when searching
 - Fix edge-case failure with middleware is_recruitment_site check
 - Add schema.org Organization markup to home page
+- Add new 'Am I in lockdown?' streamfields - FE styling
+- Add new Highlight StreamField block
+- Add LookupPage type to search for information about postcodes
+- Fix form errors in pattern library
 
 ## 27.0 (2020-10-15)
 

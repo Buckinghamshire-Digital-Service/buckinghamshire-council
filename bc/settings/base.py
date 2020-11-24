@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     "bc.forms",
     "bc.home",
     "bc.images",
+    "bc.inlineindex",
     "bc.navigation",
     "bc.news",
     # "bc.people",  To re-enable, also uncomment code in bc/utils/wagtail_hooks.py
@@ -71,7 +72,6 @@ INSTALLED_APPS = [
     "bc.standardpages",
     "bc.users",
     "bc.utils",
-    "bc.inlineindex",
     "rest_framework",
     "wagtailorderable",
     "wagtail.contrib.modeladmin",
