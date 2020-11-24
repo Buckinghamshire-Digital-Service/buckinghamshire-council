@@ -10,6 +10,34 @@ from ..blocks import (
 register = template.Library()
 
 
+def generate_block_number(
+    chapter_number, heading_number, subheading_number, paragraph_number
+):
+    block_number = ""
+
+    if paragraph_number:
+        block_number = f"{paragraph_number}"
+
+    if subheading_number:
+        if block_number:
+            block_number = f"{subheading_number}.{block_number}"
+        else:
+            block_number = f"{subheading_number}"
+
+    if chapter_number:
+        if block_number:
+            block_number = f"{chapter_number}.{block_number}"
+        else:
+            block_number = f"{chapter_number}"
+    elif heading_number:
+        if block_number:
+            block_number = f"{heading_number}.{block_number}"
+        else:
+            block_number = f"{heading_number}"
+
+    return block_number
+
+
 @register.filter
 def process_block_numbers(streamblock, chapter_number=0):
     heading_number = 0
@@ -34,12 +62,9 @@ def process_block_numbers(streamblock, chapter_number=0):
             subheading_number += 1
             paragraph_number = 0
 
-            if chapter_number:
-                block_number = f"{chapter_number}.{subheading_number}"
-            elif heading_number:
-                block_number = f"{heading_number}.{subheading_number}"
-            else:
-                block_number = subheading_number
+            block_number = generate_block_number(
+                chapter_number, heading_number, subheading_number, paragraph_number,
+            )
 
             rendered_child = child.block.render(
                 child.value, context={"block_number": block_number}
@@ -48,15 +73,9 @@ def process_block_numbers(streamblock, chapter_number=0):
             # Increase number
             paragraph_number += 1
 
-            if subheading_number:
-                block_number = f"{subheading_number}.{paragraph_number}"
-            else:
-                block_number = paragraph_number
-
-            if chapter_number:
-                block_number = f"{chapter_number}.{block_number}"
-            elif heading_number:
-                block_number = f"{heading_number}.{block_number}"
+            block_number = generate_block_number(
+                chapter_number, heading_number, subheading_number, paragraph_number,
+            )
 
             rendered_child = child.block.render(
                 child.value, context={"block_number": block_number}
