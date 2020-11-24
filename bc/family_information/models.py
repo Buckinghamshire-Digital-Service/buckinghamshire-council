@@ -127,4 +127,4 @@ class CategoryTypeOnePage(BaseCategoryPage):
 
 
 class CategoryTypeTwoPage(BaseCategoryPage):
-    template = "patterns/pages/family_information/category_type_2.html"
+    template = "patterns/pages/standardpages/index_page--fis.html"
