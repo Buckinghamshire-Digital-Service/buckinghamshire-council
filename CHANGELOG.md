@@ -15,6 +15,7 @@
 - FIS Category Type 2 / Regular Page: Style page and components
 - FIS Inline Index Page: Hide sidebar
 - FIS Footer: Style footer
+- FIS Header: Style header
 
 ## 27.0 (2020-10-15)
 

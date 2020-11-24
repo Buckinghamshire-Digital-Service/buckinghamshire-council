@@ -42,3 +42,9 @@ def join_list(value):
 @register.simple_tag(name="get_default_site")
 def get_default_site():
     return settings.BASE_URL
+
+
+# Get FIS directory base URL
+@register.simple_tag(name="get_fis_directory")
+def get_fis_directory():
+    return settings.FIS_DIRECTORY_BASE_URL

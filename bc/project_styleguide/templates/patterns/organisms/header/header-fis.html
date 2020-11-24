@@ -1,16 +1,25 @@
 {% load static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags %}
 
-<header class="header header--fis">
-    <div class="header__inner wrapper wrapper--large">
-        <a class="header__home-link" href="{% get_default_site %}" aria-label="Buckinghamshire Council">
-            {% include "patterns/atoms/icons/icon.html" with name="logo" classname="header__logo" %}
-        </a>
+<header>
+    <div class="header header--fis">
+        <div class="header__inner wrapper wrapper--large">
+            <a class="header__home-link" href="{% get_default_site %}" aria-label="Buckinghamshire Council">
+                {% include "patterns/atoms/icons/icon.html" with name="logo" classname="header__logo" %}
+            </a>
 
-        <div class="header__heading">
-            <a href="/" class="header__heading-title">Family Information Service</a>
+            <div class="header__heading">
+                <a href="/" class="header__heading-title">Family Information Service</a>
 
-            <div class="header__search">
+                <div class="header__search">
+                    <button data-toggle-target="search-header" class="header__search-button">
+                        {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="header__search-icon" %}
+                        <span class="header__search-text">Search</span>
+                        {% include "patterns/atoms/icons/icon.html" with name="chevron-small" classname="header__search-icon header__search-icon--rotate" %}
+                    </button>
+                </div>
             </div>
         </div>
     </div>
+
+    {% include "patterns/organisms/search-header/search-header--fis.html" %}
 </header>
