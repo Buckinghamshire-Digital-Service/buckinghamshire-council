@@ -9,7 +9,6 @@ from django.test import RequestFactory, TestCase, override_settings
 
 from wagtail.core.models import Page, Site
 
-import wagtail_factories
 from freezegun import freeze_time
 
 from bc.home.tests.fixtures import HomePageFactory
@@ -31,10 +30,9 @@ class JobAlertTest(TestCase):
         self.root_page = Page.objects.get(id=1)
 
         # Job site (external)
-        hero_image = wagtail_factories.ImageFactory()
         self.homepage = self.root_page.add_child(
-            instance=RecruitmentHomePageFactory.build(
-                hero_image=hero_image, job_board=JOB_BOARD_CHOICES[0]
+            instance=RecruitmentHomePageFactory.build_with_fk_objs_committed(
+                job_board=JOB_BOARD_CHOICES[0]
             )
         )
         self.site = Site.objects.create(
@@ -43,8 +41,8 @@ class JobAlertTest(TestCase):
 
         # Internal job site
         self.homepage_internal = self.root_page.add_child(
-            instance=RecruitmentHomePageFactory.build(
-                hero_image=hero_image, job_board=JOB_BOARD_CHOICES[1]
+            instance=RecruitmentHomePageFactory.build_with_fk_objs_committed(
+                job_board=JOB_BOARD_CHOICES[1]
             )
         )
         self.site_internal = Site.objects.create(
@@ -97,9 +95,8 @@ class JobAlertTest(TestCase):
         self.assertTrue(is_recruitment_site(self.site_internal))
 
         # Create a main site (not recruitment site)
-        hero_image = wagtail_factories.ImageFactory()
         main_site_homepage = self.root_page.add_child(
-            instance=HomePageFactory.build(hero_image=hero_image)
+            instance=HomePageFactory.build_with_fk_objs_committed()
         )
         main_site = Site.objects.create(
             hostname="main.example", port=80, root_page=main_site_homepage
