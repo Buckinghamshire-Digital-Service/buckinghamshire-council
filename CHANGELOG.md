@@ -14,6 +14,7 @@
 - FIS Category Type 1 / SEND Page: Style page and components
 - FIS Category Type 2 / Regular Page: Style page and components
 - FIS Inline Index Page: Hide sidebar
+- FIS Footer: Style footer
 
 ## 27.0 (2020-10-15)
 
