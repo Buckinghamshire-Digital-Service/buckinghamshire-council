@@ -1,4 +1,5 @@
-from django.test import RequestFactory, TestCase
+from django.conf import settings
+from django.test import RequestFactory, TestCase, override_settings
 from django.urls import reverse
 
 from wagtail.contrib.search_promotions.models import SearchPromotion
@@ -10,7 +11,10 @@ from bc.home.tests.fixtures import HomePageFactory
 from bc.search.views import SearchView
 from bc.standardpages.tests.fixtures import IndexPageFactory, InformationPageFactory
 
+SECOND_HOSTNAME = "second.example"
 
+
+@override_settings(ALLOWED_HOSTS=settings.ALLOWED_HOSTS + [SECOND_HOSTNAME])
 class SectionAnnotationsTest(TestCase):
     def setUp(self):
         """Test the following structure:
@@ -49,7 +53,7 @@ class SectionAnnotationsTest(TestCase):
         homepage_two = HomePageFactory.build_with_fk_objs_committed()
         root_page.add_child(instance=homepage_two)
         self.second_site = Site.objects.create(
-            root_page=homepage_two, site_name="second site", hostname="second.example",
+            root_page=homepage_two, site_name="second site", hostname=SECOND_HOSTNAME,
         )
 
         self.section_bee = IndexPageFactory.build(title="bee eggs")
