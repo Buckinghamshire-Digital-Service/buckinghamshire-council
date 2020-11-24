@@ -16,19 +16,44 @@
         {# Table of Contents #}
         <nav class="index-nav sidebar" aria-label="Pages in this section" id="contents">
             <h2 class="index-nav__title">Contents</h2>
-            <ul class="index-nav__list">
-                {% for link in page.get_index %}
-                    {% if link.id == page.id %}
-                        <li class="index-nav__item index-nav__item--current" aria-current="Page">
-                            <span class="index-nav__link">{{ link.subtitle|default:link }}</span>
-                        </li>
-                    {% else %}
-                        <li class="index-nav__item">
-                            <a class="index-nav__link" href="{% pageurl link %}">{{ link.subtitle|default:link }}</a>
-                        </li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
+
+            {% if page.chapter_number %}
+                <ol class="index-nav__list">
+            {% else %}
+                <ul class="index-nav__list">
+            {% endif %}
+
+            {% for link in page.get_index %}
+                {% if link.id == page.id %}
+                    <li class="index-nav__item index-nav__item--current" aria-current="Page">
+                        <span class="index-nav__prefix">
+                            {% if link.chapter_number %}
+                                {{ link.chapter_number }}.
+                            {% else %}
+                                —
+                            {% endif %}
+                        </span>
+                        <span class="index-nav__link">{{ link.subtitle|default:link }}</span>
+                    </li>
+                {% else %}
+                    <li class="index-nav__item">
+                        <span class="index-nav__prefix">
+                            {% if link.chapter_number %}
+                                {{ link.chapter_number }}.
+                            {% else %}
+                                —
+                            {% endif %}
+                        </span>
+                        <a class="index-nav__link" href="{% pageurl link %}">{{ link.subtitle|default:link }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if page.chapter_number %}
+                </ol>
+            {% else %}
+                </ul>
+            {% endif %}
         </nav>
 
         {# Content proper #}
