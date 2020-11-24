@@ -70,6 +70,7 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/27.0...28.0
 - Fix edge-case failure with middleware is_recruitment_site check
 - Fix form errors in pattern library
 - Upgrade Wagtail to 2.10.2
+- Annotate search results with section or site name
 
 ## 27.0 (2020-10-15)
 

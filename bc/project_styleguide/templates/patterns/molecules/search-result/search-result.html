@@ -1,6 +1,9 @@
 {% load static wagtailcore_tags wagtailsearchpromotions_tags wagtailimages_tags local_area_links_tags %}
 
 <div class="search-result">
+    {% if section_label %}
+        <span class="search-result__label">{{ section_label }}</span>
+    {% endif %}
     <h3 class="search-result__title heading heading--m">
         <a class="search-result__link" href="{% pageurl result %}">
             {% firstof result.listing_title result.title %}

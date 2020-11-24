@@ -2,15 +2,13 @@ from itertools import chain
 
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.db.models import Case, CharField, OuterRef, Subquery, When
 from django.http import QueryDict
 from django.template.response import TemplateResponse
 from django.utils.cache import add_never_cache_headers, patch_cache_control
 from django.utils.timezone import now
 from django.views.generic.base import View
 
-from wagtail.contrib.search_promotions.templatetags.wagtailsearchpromotions_tags import (
-    get_search_promotions,
-)
 from wagtail.core.models import Page, Site
 from wagtail.search.models import Query
 
@@ -55,13 +53,59 @@ class SearchView(View):
         # Main site search
         else:
             if search_query:
-                promotions = get_search_promotions(search_query)
-
-                search_sources = (
-                    Page.objects.live().public().exclude(searchpromotion__in=promotions)
+                promotions = (
+                    Query.get(search_query)
+                    .editors_picks.annotate(
+                        section_label=Case(
+                            When(
+                                page__path__startswith=site.root_page.path,
+                                then=Subquery(
+                                    Page.objects
+                                    # don't self-annotate section indexes
+                                    .exclude(pk=OuterRef("page__pk"))
+                                    .filter(
+                                        depth=3,
+                                        path__withinstart=OuterRef("page__path"),
+                                    )
+                                    .values("title")
+                                ),
+                            ),
+                            default=Subquery(
+                                Site.objects.filter(
+                                    root_page__path__withinstart=OuterRef("page__path")
+                                ).values("site_name")
+                            ),
+                            output_field=CharField(),
+                        )
+                    )
+                    .all()
                 )
-                search_sources = self.exclude_fis_pages(search_sources)
-                search_results = search_sources.search(search_query, operator="or")
+
+                search_results = (
+                    Page.objects.live()
+                    .exclude(searchpromotion__in=promotions)
+                    .annotate(
+                        section_label=Case(
+                            When(
+                                path__startswith=site.root_page.path,
+                                then=Subquery(
+                                    Page.objects
+                                    # don't self-annotate section indexes
+                                    .exclude(pk=OuterRef("pk"))
+                                    .filter(depth=3, path__withinstart=OuterRef("path"))
+                                    .values("title")
+                                ),
+                            ),
+                            default=Subquery(
+                                Site.objects.filter(
+                                    root_page__path__withinstart=OuterRef("path")
+                                ).values("site_name")
+                            ),
+                            output_field=CharField(),
+                        )
+                    )
+                    .search(search_query, operator="and")
+                ).get_queryset()
                 query = Query.get(search_query)
                 # Record hit
                 query.add_hit()
