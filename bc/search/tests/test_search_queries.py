@@ -11,69 +11,7 @@ from bc.search.views import SearchView
 from bc.standardpages.tests.fixtures import IndexPageFactory, InformationPageFactory
 
 
-class GetResultsMixin:
-    def get_results(self, query, hostname=None):
-        kwargs = {}
-        if hostname is not None:
-            kwargs["SERVER_NAME"] = hostname
-        factory = RequestFactory()
-        request = factory.get(reverse("search") + "?query=" + query, **kwargs)
-        response = SearchView.as_view()(request)
-
-        return response.context_data["search_results"].object_list
-
-
-class SearchPromotionsTest(GetResultsMixin, TestCase):
-    def setUp(self):
-        homepage = HomePage.objects.first()
-
-        section_index = IndexPageFactory.build(title="Growing turnips")
-        homepage.add_child(instance=section_index)
-        self.parking_page_one = InformationPageFactory.build(title="Parking")
-        section_index.add_child(instance=self.parking_page_one)
-        self.parking_page_two = InformationPageFactory.build(title="Parking fines")
-        section_index.add_child(instance=self.parking_page_two)
-        self.unrelated_page = InformationPageFactory.build(title="Scrambling eggs")
-        section_index.add_child(instance=self.unrelated_page)
-
-    def test_search_promotions_are_included(self):
-        promotion = SearchPromotion.objects.create(
-            query=Query.get("parking"), page=self.unrelated_page
-        )
-
-        results = self.get_results("parking")
-
-        self.assertEqual(Page.objects.filter(title__icontains="parking").count(), 2)
-        self.assertEqual(len(results), 3)  # more than before
-        self.assertIn(promotion, results)
-
-    def test_search_promotions_are_listed_first(self):
-        promotion = SearchPromotion.objects.create(
-            query=Query.get("parking"), page=self.unrelated_page
-        )
-
-        results = self.get_results("parking")
-
-        self.assertEqual(results[0], promotion)
-        self.assertEqual(results[0].page, Page.objects.get(pk=self.unrelated_page.pk))
-        self.assertEqual(results[0].page.specific, self.unrelated_page)
-
-    def test_search_promotions_are_not_counted_twice(self):
-        promotion = SearchPromotion.objects.create(
-            query=Query.get("parking"), page=self.parking_page_one
-        )
-
-        results = self.get_results("parking")
-
-        self.assertEqual(Page.objects.filter(title__icontains="parking").count(), 2)
-        self.assertEqual(len(results), 2)
-
-        self.assertEqual(results[0], promotion)
-        self.assertEqual(results[0].page, Page.objects.get(pk=self.parking_page_one.pk))
-        self.assertEqual(results[0].page.specific, self.parking_page_one)
-
-
-class SectionAnnotationsTest(GetResultsMixin, TestCase):
+class SectionAnnotationsTest(TestCase):
     def setUp(self):
         """Test the following structure:
 
@@ -118,6 +56,16 @@ class SectionAnnotationsTest(GetResultsMixin, TestCase):
         homepage_two.add_child(instance=self.section_bee)
         self.cee_page = InformationPageFactory.build(title="cee")
         self.section_bee.add_child(instance=self.cee_page)
+
+    def get_results(self, query, hostname=None):
+        kwargs = {}
+        if hostname is not None:
+            kwargs["SERVER_NAME"] = hostname
+        factory = RequestFactory()
+        request = factory.get(reverse("search") + "?query=" + query, **kwargs)
+        response = SearchView.as_view()(request)
+
+        return response.context_data["search_results"].object_list
 
     def test_section_label_is_annotated(self):
         results = self.get_results("Zuul")
