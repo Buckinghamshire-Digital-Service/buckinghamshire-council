@@ -1,5 +1,5 @@
 {% extends base_page_template %}
-{% load wagtailcore_tags %}
+{% load longform_tags wagtailcore_tags %}
 
 {% block body_class %}{{ block.super }} template-longform{% endblock %}
 
@@ -34,6 +34,9 @@
         {# Content proper #}
         <div class="section section--main section--inline-index main-body">
             <h2 class="heading heading--xl">
+                {% if page.chapter_number %}
+                    {{ page.chapter_number }}.
+                {% endif %}
                 {% if page.is_chapter_page %}
                     {{ page.title }}
                 {% else %}
@@ -41,7 +44,7 @@
                 {% endif %}
             </h2>
 
-            {{ page.body }}
+            {{ page.body|process_block_numbers:page.chapter_number }}
         </div>
 
     </div>

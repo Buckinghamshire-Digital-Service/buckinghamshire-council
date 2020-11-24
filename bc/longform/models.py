@@ -21,6 +21,10 @@ class LongformPage(BasePage):
         verbose_name = "Long-form content page"
 
     is_chapter_page = False
+    is_numbered = models.BooleanField(
+        default=False,
+        help_text='Adds numbers to each chapter, e.g. "1.1. My subheading"',
+    )
 
     last_updated = models.DateField()
     version_number = models.CharField(blank=True, max_length=100)
@@ -35,7 +39,10 @@ class LongformPage(BasePage):
     chapter_heading = models.CharField(
         blank=True,
         default="Introduction",
-        help_text='Optional, e.g. "Introduction", chapter heading that will appear before the body',
+        help_text=(
+            'Optional, e.g. "Introduction", chapter heading that will appear before the '
+            "body. Is the same level as a main heading"
+        ),
         max_length=255,
     )
     body = StreamField(LongformStoryBlock())
@@ -63,6 +70,7 @@ class LongformPage(BasePage):
             heading="Documents",
         ),
         ImageChooserPanel("hero_image"),
+        FieldPanel("is_numbered", heading="Enable chapter numbers"),
         FieldPanel("chapter_heading"),
         StreamFieldPanel("body"),
     ]
@@ -74,6 +82,10 @@ class LongformPage(BasePage):
     @cached_property
     def next_chapter(self):
         return self.get_children().live().specific().first()
+
+    @cached_property
+    def chapter_number(self):
+        return 1 if self.is_numbered else None
 
     def get_index(self):
         return [self] + list(self.get_children().specific())
@@ -104,6 +116,14 @@ class LongformChapterPage(BasePage):
     @cached_property
     def next_chapter(self):
         return self.get_next_siblings().specific().first()
+
+    @cached_property
+    def chapter_number(self):
+        return (
+            self.previous_chapter.chapter_number + 1
+            if self.get_parent().specific.is_numbered
+            else None
+        )
 
     def get_index(self):
         return self.get_parent().specific.get_index()
