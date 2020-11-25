@@ -1,0 +1,26 @@
+context:
+  page:
+    child_pages:
+      - listing_title: Choosing childcare
+        listing_summary: Read about the different types of childcare available
+      - listing_title: Paying for childcare
+        listing_summary: Benefits and allowances to help with childcare costs
+      - listing_title: Funded childcare for 2 year olds
+        listing_summary: See if your 2 year old is eligible for 15 hours childcare a week
+      - listing_title: Funded childcare for 3 and 4 year olds
+        listing_summary: Help for families with 3 or 4 year olds to get back to work
+      - listing_title: Holiday childcare
+        listing_summary: Find childcare during school holidays
+      - listing_title: Childcare and special education needs and disabilities
+        listing_summary: Support finding childcare for SEND children
+      - listing_title: COVID-19 childcare
+        listing_summary: Help to find childcare services during the pandemic
+    title: Childcare and early years
+
+tags:
+  image:
+    subpage.listing_image fill-600x500:
+      raw: '<img src="https://via.placeholder.com/600x500">'
+  pageurl:
+    subpage:
+      raw: '#'

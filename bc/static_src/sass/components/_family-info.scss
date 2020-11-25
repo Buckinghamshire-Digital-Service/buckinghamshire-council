@@ -1,0 +1,71 @@
+.family-info {
+    &__banner {
+        @include font-size(s);
+        background-color: $color--off-black;
+        color: $color--white;
+        padding: $grid--min 0;
+    }
+
+    &__banner-text {
+        margin: 0;
+    }
+
+    &__search {
+        padding: 60px 0;
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type='text'],
+        select {
+            width: 100%;
+            max-width: 100%;
+            font-size: 1rem;
+            padding: 10px 45px 10px 10px;
+            height: 45px;
+            min-height: inherit;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            @include media-query(tablet-landscape) {
+                width: 100px;
+                height: 45px;
+            }
+        }
+    }
+
+    &__search-form {
+        display: block;
+        margin-bottom: 0;
+        @include media-query(tablet-landscape) {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+        }
+    }
+
+    &__search-field {
+        display: block;
+        position: relative;
+        margin-bottom: 25px;
+        @include media-query(tablet-landscape) {
+            margin-bottom: 0;
+            margin-right: 20px;
+            flex: 1 1 0%;
+        }
+    }
+
+    &__search-heading {
+        @include font-size(l);
+        margin-top: 0;
+    }
+
+    &__links-heading {
+        @include font-size(xl);
+    }
+}

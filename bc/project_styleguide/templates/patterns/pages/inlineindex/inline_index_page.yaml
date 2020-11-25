@@ -1,4 +1,5 @@
 context:
+  base_page_template: 'patterns/base_page.html'
   page:
     id: 123
     is_inline_index: True
@@ -17,6 +18,21 @@ context:
       - Discounts for disabled people
     # get_prev_page: Test
     get_next_page: Working out your Council Tax
+    live_related_pages:
+      all:
+        - page:
+            live: true
+            specific:
+              title: Page title
+        - page:
+            live: true
+            specific:
+              title: Page title
+              listing_title: Listing title
+        - page:
+            live: true
+            specific:
+              title: Page title
 
 tags:
   sidebar:

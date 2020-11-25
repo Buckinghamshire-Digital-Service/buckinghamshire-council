@@ -32,4 +32,11 @@
         color: $color--leaf-dark;
         line-height: 1.25;
     }
+
+    .template-fis-home & {
+        @include media-query(tablet-portrait) {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
 }

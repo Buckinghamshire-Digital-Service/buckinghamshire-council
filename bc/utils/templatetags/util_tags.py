@@ -1,4 +1,5 @@
 from django import template
+from django.conf import settings
 
 from wagtail.core.utils import camelcase_to_underscore
 
@@ -35,3 +36,15 @@ def join_list(value):
         return (", ").join(value)
 
     return value
+
+
+# Get default site
+@register.simple_tag(name="get_default_site")
+def get_default_site():
+    return settings.BASE_URL
+
+
+# Get FIS directory base URL
+@register.simple_tag(name="get_fis_directory")
+def get_fis_directory():
+    return settings.FIS_DIRECTORY_BASE_URL

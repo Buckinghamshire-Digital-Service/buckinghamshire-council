@@ -1,0 +1,33 @@
+.search-header {
+    background-color: $color--earth-light;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height $transition;
+
+    &[data-active='true'] {
+        max-height: 400px;
+
+        @include media-query(tablet-portrait) {
+            max-height: 250px;
+        }
+    }
+
+    &__container {
+        padding: $grid--small 0 $grid--min;
+    }
+
+    &__heading {
+        @include font-size(l);
+        display: block;
+        font-weight: $weight--bold;
+        margin-bottom: $grid--min;
+    }
+
+    &__search {
+        margin-bottom: $grid;
+    }
+
+    .template-fis-home & {
+        display: none;
+    }
+}

@@ -17,6 +17,17 @@
         }
     }
 
+    &--family-info {
+        margin-bottom: 20px;
+        .breadcrumb__link {
+            color: $color--white;
+            &:hover {
+                color: $color--white;
+                text-decoration: none;
+            }
+        }
+    }
+
     &__item {
         display: inline-block;
         width: auto;
