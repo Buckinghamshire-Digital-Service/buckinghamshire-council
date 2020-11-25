@@ -69,7 +69,7 @@ INSTALLED_APPS = [
     # "bc.people",  To re-enable, also uncomment code in bc/utils/wagtail_hooks.py
     "bc.recruitment",
     "bc.recruitment_api",
-    "bc.search",
+    "bc.search.apps.SearchConfig",
     "bc.standardpages",
     "bc.users",
     "bc.utils",
@@ -191,9 +191,44 @@ else:
 # Search
 # https://docs.wagtail.io/en/latest/topics/search/backends.html
 
-WAGTAILSEARCH_BACKENDS = {
-    "default": {"BACKEND": "wagtail.contrib.postgres_search.backend"}
-}
+if "BONSAI_URL" in env:
+    WAGTAILSEARCH_BACKENDS = {
+        "default": {
+            "BACKEND": "bc.search.elasticsearch7",
+            "URLS": [env["BONSAI_URL"]],
+            "INDEX": "wagtail",
+            "TIMEOUT": 5,
+            "OPTIONS": {},
+            "INDEX_SETTINGS": {
+                "settings": {
+                    "index": {"number_of_shards": 1, "number_of_replicas": 0},
+                    "analysis": {
+                        "analyzer": {
+                            "default": {
+                                "tokenizer": "whitespace",
+                                "filter": [
+                                    "lowercase",
+                                    "synonym",  # see bc.search.elasticsearch7.SearchBackend
+                                    "porter_stem",
+                                    "english_stop_words",
+                                ],
+                            },
+                        },
+                        "filter": {
+                            "english_stop_words": {
+                                "type": "stop",
+                                "stopwords": "_english_",
+                            },
+                        },
+                    },
+                },
+            },
+        }
+    }
+else:
+    WAGTAILSEARCH_BACKENDS = {
+        "default": {"BACKEND": "wagtail.contrib.postgres_search.backend"}
+    }
 
 
 WAGTAILEMBEDS_FINDERS = [

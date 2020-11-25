@@ -36,6 +36,22 @@ We use Redis for back-end caching in Django.
 
 The Django low-level cache API is used by the recruitment API client to replace Zeep's default cache. See [Recruitment Site](recruitment-site.md) for details.
 
+## Search engine
+
+The search backend on staging and production is Elasticsearch, provided by Bonsai. See `heroku addons -a buckinghamshire-staging` (or "production"). To view the admin UI, `heroku addons:open bonsai -a buckinghamshire-staging` (or "production").
+
+The recruitment site uses Postgres for search. See `bc.recruitment.utils.get_job_search_results()`.
+
+### Synonyms
+
+Search synonyms can be edited in the Wagtail admin, where any terms in the `synonyms` field will match any records whose index contains the term in the `canonical_term` field. Changes to the configured synonyms will not take place until the search is reindexed.
+
+### Developing the Elasticsearch search engine configuration
+
+The Vagrant box will default to using Postgres for search, and ignoring some of the extra search features such as synonyms. However, it does have Elasticsearch5 installed. To use this, set the search backend in local settings to `bc.search.elasticsearch5` and the URL to "http://localhost:9200".
+
+Alternatively, use a free Bonsai sandbox Elasticsearch instance, and set these credentials locally, using the `bc.search.elasticsearch7` backend. An example of this configuration is in `bc/settings/local.py.example`.
+
 ## File storage
 
 Does this use AWS S3? Via Buckup? Is it open to the public?
