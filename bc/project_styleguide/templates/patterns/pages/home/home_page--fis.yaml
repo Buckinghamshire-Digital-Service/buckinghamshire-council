@@ -1,0 +1,35 @@
+context:
+  page:
+    call_to_action:
+      title: Stub content
+      summary: Check out our awesome stub content
+      link:
+        - block_type: external_link
+          value:
+            title: View plans for the new centre
+            url: '#'
+        - block_type: internal_link
+          value:
+            page:
+              title: Participate in the conversation
+    category_pages:
+      - listing_title: Things to do
+        listing_summary: Search our directory for activities and events near you
+      - listing_title: Special education needs and disabilities
+        listing_summary: Our local offer supports children and young people with SEND
+      - listing_title: Family centres and support
+        listing_summary: Find family centres and contact the Family Support Service
+      - listing_title: Young people (13 to 25 years old)
+        listing_summary: Support for young people, including work and education
+      - listing_title: Childcare and early years
+        listing_summary: Get help with finding childcare and early education funding
+      - listing_title: Information, advice and support
+        listing_summary: Parenting support, help for carers and other advice for families
+
+tags:
+  image:
+    subpage.listing_image fill-600x500:
+      raw: '<img src="https://via.placeholder.com/600x500">'
+  pageurl:
+    subpage:
+      raw: '#'

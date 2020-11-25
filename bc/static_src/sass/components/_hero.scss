@@ -16,6 +16,44 @@
         margin-bottom: $grid;
     }
 
+    &--with-alert {
+        @include media-query(tablet-portrait) {
+            padding-bottom: 60px;
+        }
+    }
+
+    &--fis {
+        background-color: $color--earth;
+        margin-bottom: $grid--large;
+
+        #{$root} {
+            &__heading {
+                color: $color--white;
+                margin-bottom: $grid;
+                max-width: 600px;
+            }
+
+            &__strapline {
+                @include font-size(m);
+                color: $color--white;
+                display: none;
+                line-height: 1.4;
+                margin-top: 0;
+                margin-bottom: $grid--small;
+            }
+
+            @include media-query(tablet-portrait) {
+                &__heading {
+                    margin-bottom: 0;
+                }
+
+                &__strapline {
+                    display: block;
+                }
+            }
+        }
+    }
+
     &--jobs {
         background-color: $color--earth;
         margin-bottom: $grid--large;

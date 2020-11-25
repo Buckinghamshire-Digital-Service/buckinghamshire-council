@@ -1,8 +1,24 @@
 context:
+  base_page_template: 'patterns/base_page.html'
   page:
     title: Some fake title
     display_date: 1 Oct 1970
     introduction: Some dummy text
+    live_related_pages:
+      all:
+        - page:
+            live: true
+            specific:
+              title: Page title
+        - page:
+            live: true
+            specific:
+              title: Page title
+              listing_title: Listing title
+        - page:
+            live: true
+            specific:
+              title: Page title
 
 tags:
   include_block:

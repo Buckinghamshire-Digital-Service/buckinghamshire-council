@@ -49,10 +49,12 @@
                 {% include "patterns/molecules/pagination/pagination.html" with paginator_page=search_results %}
             </section>
 
-        {% elif no_result_text %}
-            {{ no_result_text|richtext }}
-        {% else %}
-            <p>No results found.</p>
+        {% elif search_query %}
+            {% if no_result_text %}
+                {{ no_result_text|richtext }}
+            {% else %}
+                <p>No results found.</p>
+            {% endif %}
         {% endif %}
     </div>
 {% endblock %}

@@ -1,4 +1,4 @@
 tags:
-  footerlinks:
+  footernav:
     '':
-      template_name: 'patterns/molecules/navigation/footerlinks.html'
+      template_name: 'patterns/molecules/navigation/footernav.html'

@@ -11,6 +11,12 @@
 - Add new Highlight StreamField block
 - Add LookupPage type to search for information about postcodes
 - Fix form errors in pattern library
+- FIS Homepage: Style page and components
+- FIS Category Type 1 / SEND Page: Style page and components
+- FIS Category Type 2 / Regular Page: Style page and components
+- FIS Inline Index Page: Hide sidebar
+- FIS Footer: Style footer
+- FIS Header: Style header
 
 ## 27.0 (2020-10-15)
 

@@ -1,10 +1,7 @@
 context:
   value:
     heading: Column heading
-    links:
-      - dummy
-      - dummy
-      - dummy
+    content: <p>Column content</p>
 
 tags:
   include_block:

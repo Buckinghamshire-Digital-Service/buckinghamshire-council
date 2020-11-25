@@ -33,7 +33,7 @@
             {% include_block page.body %}
         </div>
 
-        {% include "patterns/molecules/navigation/sidebar.html" with related_pages=page.related_pages.all sidebar_title="Related resources"  classes="sidebar--narrow" %}
+        {% include "patterns/molecules/navigation/sidebar.html" with related_pages=page.live_related_pages sidebar_title="Related resources"  classes="sidebar--narrow" %}
     </div>
 
 {% endblock %}
