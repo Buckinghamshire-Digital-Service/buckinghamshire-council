@@ -58,6 +58,7 @@ class SearchView(View):
 
                 search_results = (
                     Page.objects.live()
+                    .public()
                     .exclude(searchpromotion__in=promotions)
                     .search(search_query, operator="and")
                 )
