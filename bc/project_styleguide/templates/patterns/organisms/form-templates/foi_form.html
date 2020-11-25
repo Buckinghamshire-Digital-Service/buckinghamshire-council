@@ -14,7 +14,7 @@
 
         <div class="form-item form-item--choice_field form-item--radio_select {% if form.your_involvement.errors %}form-item--errors{% endif %}" data-conditional>
             <fieldset>
-                <legend class="form-item__label heading required">{{ form.your_involvement.label }} <span class="form-item__required" aria-hidden="true">*</span></legend>
+                <legend class="form-item__label heading required">{{ form.your_involvement.label }} <span class="form-item__required" aria-hidden="true">*</span><span class="u-sr-only">Required</span></legend>
 
                 {% if form.your_involvement.errors %}
                     <div class="form-item__errors">

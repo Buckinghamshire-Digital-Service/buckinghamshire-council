@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.utils.html import escape
 
@@ -7,7 +8,11 @@ from rest_framework import status
 from rest_framework.decorators import api_view, authentication_classes
 
 from bc.area_finder.constants import BORDER_POSTCODES
-from bc.area_finder.utils import area_from_district, clean_escaped_html, format_postcode
+from bc.area_finder.utils import (
+    area_from_district,
+    clean_escaped_html,
+    validate_postcode,
+)
 from bc.utils.models import ImportantPages
 
 
@@ -22,8 +27,8 @@ def area_finder(request):
         if request.GET.get("postcode"):
             postcode = request.GET.get("postcode")
             try:
-                formatted_postcode = format_postcode(postcode)
-            except ValueError:
+                formatted_postcode = validate_postcode(postcode)
+            except ValidationError:
                 error = "Postcode {} is not valid.".format(escape(postcode))
                 return JsonResponse(
                     {"error": error}, status=status.HTTP_400_BAD_REQUEST,

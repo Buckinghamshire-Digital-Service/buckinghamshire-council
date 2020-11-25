@@ -17,4 +17,7 @@ tags:
     block.value.page:
       raw: '#'
   image:
-    url: http://via.placeholder.com/450x300
+    call_to_action.image min-1024x340 as image:
+      target_var: image
+      raw:
+        url: http://via.placeholder.com/1024x340

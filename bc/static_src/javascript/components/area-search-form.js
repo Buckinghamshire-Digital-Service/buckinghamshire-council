@@ -82,29 +82,30 @@ class AreaSearchForm {
         this.toggleForm();
         this.appendResponseHTML(html);
 
+        const block = this.form.closest('[data-area-links]');
         const bucksAreas = {
             'Aylesbury Vale': {
                 link:
-                    document.getElementById('aylesbury-vale-url').href ||
-                    'https://www.aylesburyvaledc.gov.uk/',
+                    block.querySelector('[data-area-link="aylesbury-vale-url"]')
+                        .href || 'https://www.aylesburyvaledc.gov.uk/',
                 shortname: 'Aylesbury Vale',
             },
             'Wycombe': {
                 link:
-                    document.getElementById('wycombe-url').href ||
-                    'https://www.wycombe.gov.uk/',
+                    block.querySelector('[data-area-link="wycombe-url"]')
+                        .href || 'https://www.wycombe.gov.uk/',
                 shortname: 'Wycombe',
             },
             'Chiltern': {
                 link:
-                    document.getElementById('chiltern-url').href ||
-                    'https://www.chiltern.gov.uk/',
+                    block.querySelector('[data-area-link="chiltern-url"]')
+                        .href || 'https://www.chiltern.gov.uk/',
                 shortname: 'Chiltern',
             },
             'South Bucks': {
                 link:
-                    document.getElementById('south-bucks-url').href ||
-                    'https://www.southbucks.gov.uk/',
+                    block.querySelector('[data-area-link="south-bucks-url"]')
+                        .href || 'https://www.southbucks.gov.uk/',
                 shortname: 'South Bucks',
             },
         };

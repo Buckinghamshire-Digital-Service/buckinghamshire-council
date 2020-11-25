@@ -62,7 +62,9 @@ INSTALLED_APPS = [
     "bc.forms",
     "bc.home",
     "bc.images",
+    "bc.inlineindex",
     "bc.navigation",
+    "bc.family_information",
     "bc.news",
     # "bc.people",  To re-enable, also uncomment code in bc/utils/wagtail_hooks.py
     "bc.recruitment",
@@ -71,7 +73,6 @@ INSTALLED_APPS = [
     "bc.standardpages",
     "bc.users",
     "bc.utils",
-    "bc.inlineindex",
     "rest_framework",
     "wagtailorderable",
     "wagtail.contrib.modeladmin",
@@ -744,6 +745,9 @@ COOKIE_DOMAIN = env.get("COOKIE_DOMAIN", "")
 EMAIL_BACKEND = "bc.utils.email.NotifyEmailBackend"
 GOVUK_NOTIFY_API_KEY = env.get("GOVUK_NOTIFY_API_KEY")
 GOVUK_NOTIFY_PLAIN_EMAIL_TEMPLATE_ID = env.get("GOVUK_NOTIFY_PLAIN_EMAIL_TEMPLATE_ID")
+
+# FIS directory
+FIS_DIRECTORY_BASE_URL = env.get("FIS_DIRECTORY_BASE_URL")
 
 
 # Lumesse TalentLink API credentials

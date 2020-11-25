@@ -1,8 +1,8 @@
 {% extends base_page_template %}
 
-{% load wagtailcore_tags navigation_tags %}
+{% load wagtailcore_tags %}
 
-{% block body_class %}template-inlineindex{% endblock body_class %}
+{% block body_class %}{{ block.super }} template-inlineindex{% endblock body_class %}
 
 {% block content %}
     <h1 class="heading heading--xxl">
@@ -76,7 +76,7 @@
             </div>
         </div>
 
-        {% sidebar %}
+        {% include "patterns/molecules/navigation/sidebar.html" with related_pages=page.live_related_pages %}
     </div>
     {% endwith %}
 

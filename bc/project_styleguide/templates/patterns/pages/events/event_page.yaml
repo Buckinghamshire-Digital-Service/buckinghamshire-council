@@ -1,4 +1,5 @@
 context:
+  base_page_template: 'patterns/base_page.html'
   page:
     title: Test event
     introduction: Event intro text
@@ -11,6 +12,21 @@ context:
     city: Bristol
     postcode: BS1 5AP
     country: UK
+    live_related_pages:
+      all:
+        - page:
+            live: true
+            specific:
+              title: Page title
+        - page:
+            live: true
+            specific:
+              title: Page title
+              listing_title: Listing title
+        - page:
+            live: true
+            specific:
+              title: Page title
 
 tags:
   include_block:

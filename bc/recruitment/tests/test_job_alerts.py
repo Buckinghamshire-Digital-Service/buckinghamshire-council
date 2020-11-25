@@ -9,7 +9,6 @@ from django.test import RequestFactory, TestCase, override_settings
 
 from wagtail.core.models import Page, Site
 
-import wagtail_factories
 from freezegun import freeze_time
 
 from bc.home.tests.fixtures import HomePageFactory
@@ -31,10 +30,9 @@ class JobAlertTest(TestCase):
         self.root_page = Page.objects.get(id=1)
 
         # Job site (external)
-        hero_image = wagtail_factories.ImageFactory()
         self.homepage = self.root_page.add_child(
-            instance=RecruitmentHomePageFactory.build(
-                hero_image=hero_image, job_board=JOB_BOARD_CHOICES[0]
+            instance=RecruitmentHomePageFactory.build_with_fk_objs_committed(
+                job_board=JOB_BOARD_CHOICES[0]
             )
         )
         self.site = Site.objects.create(
@@ -43,8 +41,8 @@ class JobAlertTest(TestCase):
 
         # Internal job site
         self.homepage_internal = self.root_page.add_child(
-            instance=RecruitmentHomePageFactory.build(
-                hero_image=hero_image, job_board=JOB_BOARD_CHOICES[1]
+            instance=RecruitmentHomePageFactory.build_with_fk_objs_committed(
+                job_board=JOB_BOARD_CHOICES[1]
             )
         )
         self.site_internal = Site.objects.create(
@@ -86,7 +84,7 @@ class JobAlertTest(TestCase):
 
         recruitment_site_request = factory.get("/", SERVER_NAME=self.site.hostname)
         self.assertEqual(Site.find_for_request(recruitment_site_request), self.site)
-        self.assertTrue(is_recruitment_site(recruitment_site_request))
+        self.assertTrue(is_recruitment_site(self.site))
 
         internal_recruitment_site_request = factory.get(
             "/", SERVER_NAME=self.site_internal.hostname
@@ -94,19 +92,30 @@ class JobAlertTest(TestCase):
         self.assertEqual(
             Site.find_for_request(internal_recruitment_site_request), self.site_internal
         )
-        self.assertTrue(is_recruitment_site(internal_recruitment_site_request))
+        self.assertTrue(is_recruitment_site(self.site_internal))
 
         # Create a main site (not recruitment site)
-        hero_image = wagtail_factories.ImageFactory()
         main_site_homepage = self.root_page.add_child(
-            instance=HomePageFactory.build(hero_image=hero_image)
+            instance=HomePageFactory.build_with_fk_objs_committed()
         )
         main_site = Site.objects.create(
             hostname="main.example", port=80, root_page=main_site_homepage
         )
         main_site_request = factory.get("/", SERVER_NAME=main_site.hostname)
         self.assertEqual(Site.find_for_request(main_site_request), main_site)
-        self.assertFalse(is_recruitment_site(main_site_request))
+        self.assertFalse(is_recruitment_site(main_site))
+
+    @override_settings(ALLOWED_HOSTS=["has-no-site-record.example"])
+    def test_utils_is_recruitment_site_when_no_match_and_no_default_site_is_set(self):
+        factory = RequestFactory()
+
+        Site.objects.all().delete()
+        self.assertFalse(Site.objects.filter(is_default_site=True).exists())
+
+        has_no_site_request = factory.get("/", SERVER_NAME="has-no-site-record.example")
+        site = Site.find_for_request(has_no_site_request)
+        self.assertEqual(site, None)
+        self.assertFalse(is_recruitment_site(site))
 
     def test_utils_get_current_search(self):
         query = QueryDict("query=school")

@@ -1,8 +1,18 @@
 {% load wagtailcore_tags %}
-{% if footerlinks %}
+
+{% if columns %}
+    <div class="footer__columns">
+        {% for column in columns %}
+            {% include_block column %}
+        {% endfor %}
+    </div>
+{% endif %}
+
+<div class="footer__links">
+{% if links %}
     <nav aria-label="Footer">
         <ul class="footer-links">
-            {% for link in footerlinks %}
+            {% for link in links %}
                 <li class="footer-links__item">
                     {% include_block link with classes="footer-links__link link--alt" %}
                 </li>
@@ -10,3 +20,4 @@
         </ul>
     </nav>
 {% endif %}
+</div>

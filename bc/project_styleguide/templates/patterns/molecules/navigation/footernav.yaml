@@ -1,0 +1,20 @@
+context:
+  columns:
+    - value:
+        heading: Contact us
+        content: <p>Get advice</p>
+    - value:
+        heading: Feedback
+        content: <p>Use our <a href="#">feedback form</a></p>
+    - value:
+        heading: More
+        content: <p>There is always more</p>
+  links:
+    - dummy
+    - dummy
+    - dummy
+
+tags:
+  include_block:
+    'link with class="footer"':
+      template_name: 'patterns/molecules/navigation/blocks/menu_item.html'

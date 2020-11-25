@@ -22,6 +22,7 @@ from bc.recruitment.utils import (
     is_recruitment_site,
 )
 from bc.utils.cache import get_default_cache_control_kwargs
+from bc.utils.models import SystemMessagesSettings
 
 JOB_ALERT_STATUSES = {
     "STATUS_ALREADY_SUBSCRIBED": "already_subscribed",
@@ -40,7 +41,9 @@ class SearchView(View):
         context = {}
 
         # Recruitment site search
-        if is_recruitment_site(request):
+        site = Site.find_for_request(request)
+        site_is_recruitment = is_recruitment_site(site)
+        if site_is_recruitment:
             template_path = "patterns/pages/search/search--jobs.html"
             homepage = Site.find_for_request(request).root_page
             search_results = get_job_search_results(
@@ -77,9 +80,19 @@ class SearchView(View):
         except EmptyPage:
             search_results = paginator.page(paginator.num_pages)
 
-        context.update({"search_query": search_query, "search_results": search_results})
+        no_result_text = SystemMessagesSettings.for_request(
+            request
+        ).body_no_search_results.format(searchterms=search_query)
 
-        if is_recruitment_site(request):
+        context.update(
+            {
+                "no_result_text": no_result_text,
+                "search_query": search_query,
+                "search_results": search_results,
+            }
+        )
+
+        if site_is_recruitment:
             context.update(
                 {
                     "unfiltered_results": get_job_search_results(
@@ -104,7 +117,8 @@ class SearchView(View):
         """
         Job alert subscription
         """
-        if not is_recruitment_site(request):
+        site = Site.find_for_request(request)
+        if not is_recruitment_site(site):
             return
 
         form = SearchAlertSubscriptionForm(data=request.POST)

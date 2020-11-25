@@ -1,0 +1,13 @@
+context:
+  page:
+    banner_description: See services, support and things to do near you
+    banner_link: '#'
+    banner_link_text: Search the FIS directory
+    banner_title: Find local activities and organisations
+
+tags:
+  image:
+    page.banner_image fill-1350x500 as banner_image:
+      target_var: banner_image
+      raw:
+        url: 'https://via.placeholder.com/1350x500'

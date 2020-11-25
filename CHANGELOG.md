@@ -6,7 +6,35 @@
 - Add configurable search synonyms
 - Use Porter stemming algorithm search filter, for English grammar
 - Add an English stop words search filter
+
+## 28.0 (2020-11-25)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/27.0...28.0
+
+- FIS Homepage: Style page and components
+- FIS Category Type 1 / SEND Page: Style page and components
+- FIS Category Type 2 / Regular Page: Style page and components
+- FIS Inline Index Page: Hide sidebar
+- FIS Footer: Style footer
+- FIS Header: Style header
+- Update margins between paragraphs in accordion blocks
+- Add an editable body that will show when there's no results in the Search page
+- Add schema.org Organization markup to home page
+- Add new 'Am I in lockdown?' streamfields - FE styling
+- Add new Highlight StreamField block
+- Add LookupPage type to search for information about postcodes
+- Accessibility 12 Fix HTML validation error for duplicated IDs when searching
+- Fix edge-case failure with middleware is_recruitment_site check
+- Fix form errors in pattern library
+
+## 27.0 (2020-10-15)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/26.0...27.0
+
 - Add Wagtail admin report of pages missing SEO metadata, and those with unpublished changes
+- Accessibility 89 Form error handling - add explanatory text and supporting aria-labels for required fields
+- Accessibility 91 Add in missing fieldsets for radio input groups
+- Add schema.org markup to job detail page
 
 ## 26.0 (2020-09-22)
 

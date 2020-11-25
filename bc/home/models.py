@@ -1,5 +1,8 @@
+import json
+
 from django.db import models
 from django.utils.functional import cached_property
+from django.utils.safestring import mark_safe
 
 from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
@@ -31,6 +34,13 @@ class HomePage(BasePage):
         on_delete=models.SET_NULL,
         related_name="+",
     )
+    logo = models.ForeignKey(
+        "images.CustomImage",
+        null=True,
+        related_name="+",
+        on_delete=models.SET_NULL,
+        help_text="For search engines and schema.org markup",
+    )
 
     search_fields = BasePage.search_fields + [index.SearchField("strapline")]
 
@@ -38,6 +48,10 @@ class HomePage(BasePage):
         FieldPanel("strapline"),
         ImageChooserPanel("hero_image"),
         SnippetChooserPanel("call_to_action"),
+    ]
+
+    promote_panels = BasePage.promote_panels + [
+        ImageChooserPanel("logo"),
     ]
 
     @cached_property
@@ -77,3 +91,38 @@ class HomePage(BasePage):
         context["sections"] = sections
 
         return context
+
+    @property
+    def schema_org_markup(self):
+        markup = {
+            "@context": "https://schema.org",
+            "@type": "GovernmentOrganization",
+            "name": "Buckinghamshire Council",
+            "legalName": "Buckinghamshire Council",
+            "url": "https://www.buckinghamshire.gov.uk/",
+            "foundingDate": "2020",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "The Gateway, Gatehouse Road",
+                "addressLocality": "Aylesbury",
+                "addressRegion": "Buckinghamshire",
+                "postalCode": "HP19 8FF",
+                "addressCountry": "UK",
+            },
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "Support",
+                "telephone": "[+443001316000]",
+            },
+            "areaServed": {"@type": "AdministrativeArea", "name": "Buckinghamshire"},
+            "sameAs": [
+                "https://www.facebook.com/BucksCouncil/",
+                "https://twitter.com/buckscouncil",
+                "https://www.linkedin.com/company/buckinghamshire-council",
+            ],
+        }
+
+        if self.logo:
+            markup["logo"] = self.logo.get_rendition("max-250x250").url
+
+        return mark_safe(json.dumps(markup))

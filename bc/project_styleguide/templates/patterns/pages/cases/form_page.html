@@ -6,6 +6,11 @@
     <div class="section section--main">
         <h1 class="heading heading--xxl">{{ page.title }}</h1>
         {{ page.introduction|richtext }}
+
+        <p aria-hidden="true">
+            <small>Fields denoted with an asterisk (*) are required.</small>
+        </p>
+
         <div class="container">
             {% include form.template_name %}
         </div>

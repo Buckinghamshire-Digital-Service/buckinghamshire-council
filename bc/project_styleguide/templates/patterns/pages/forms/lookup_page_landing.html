@@ -1,0 +1,41 @@
+{% extends base_page_template %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block content %}
+
+<div class="wrapper wrapper--flex">
+    <div class="section section--main">
+
+        <h1 class="heading heading--xxl">{{ page.title }}</h1>
+        <div class="main-body">
+            <div class="container">
+
+                <div class="area-links area-links--lockdown">
+                    <div class="area-links__intro">{{ page.form_heading|richtext }}</div>
+
+                    <div class="area-search__response-text area-search__response-text--success">
+                        <strong>{{ lookup_response.format_answer }}</strong>
+                    </div>
+
+                    <a
+                        href="{% pageurl lookup_response.link_page %}"
+                        class="button button--basic"
+                        type="submit"
+                    >
+                    {% firstof lookup_response.link_button_text lookup_response.link_page.title %}
+                    </a>
+
+                    <a
+                        href="{% pageurl page %}"
+                        type="button"
+                        class="block button button--link"
+                    >
+                        {{ page.start_again_text }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include "patterns/molecules/navigation/sidebar.html" with related_pages=page.related_pages.all %}
+</div>
+{% endblock %}

@@ -1,4 +1,6 @@
 .search {
+    margin-bottom: $grid * 2;
+
     &__results-header {
         border-bottom: 2px solid $color--earth;
         margin-bottom: $grid;

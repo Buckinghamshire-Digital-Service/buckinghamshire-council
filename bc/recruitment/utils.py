@@ -6,18 +6,14 @@ from django.core.exceptions import ValidationError
 from django.db.models import F
 from django.db.models.functions import ACos, Cos, Radians, Sin
 
-from wagtail.core.models import Site
-
 import requests
 
 from bc.recruitment.constants import JOB_FILTERS
 from bc.recruitment.models import JobCategory, RecruitmentHomePage, TalentLinkJob
 
 
-def is_recruitment_site(request):
-    return isinstance(
-        Site.find_for_request(request).root_page.specific, RecruitmentHomePage
-    )
+def is_recruitment_site(site):
+    return site and isinstance(site.root_page.specific, RecruitmentHomePage)
 
 
 def get_current_search(querydict):
@@ -55,7 +51,8 @@ def get_job_search_results(querydict, homepage, queryset=None):
             SearchVector("title", weight="A")
             + SearchVector("job_number", weight="A")
             # + SearchVector("short_description", weight="A")
-            + SearchVector("location", weight="B")
+            + SearchVector("location_name", weight="B")
+            + SearchVector("location_city", weight="B")
             + SearchVector("description", weight="C")
         )
         query = SearchQuery(search_query, search_type="phrase")
