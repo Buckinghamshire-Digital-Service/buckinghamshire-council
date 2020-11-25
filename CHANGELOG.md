@@ -1,5 +1,7 @@
 # Release History
 
+## Unreleased
+
 ## 28.0 (2020-11-25)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/27.0...28.0
