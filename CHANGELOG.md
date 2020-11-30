@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 29.0 (2020-11-30)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/28.0...29.0
 
 - Add support for Elasticsearch backend
 - Add configurable search synonyms
