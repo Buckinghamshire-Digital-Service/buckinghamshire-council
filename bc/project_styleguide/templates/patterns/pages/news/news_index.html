@@ -27,7 +27,8 @@
 
                             <div class="article-index__image {% if not n.listing_image %}article-index__image--empty{% endif %}">
                                 {% if n.listing_image %}
-                                    {% image n.listing_image fill-500x250 %}
+                                    {# A listing image is purely decorative. Set blank alt text. #}
+                                    {% image n.listing_image fill-500x250 alt="" %}
                                 {% endif %}
                             </div>
                         </li>

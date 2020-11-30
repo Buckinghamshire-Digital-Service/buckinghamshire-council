@@ -35,7 +35,8 @@
 
                                 <div class="article-index__image {% if not event.listing_image %}article-index__image--empty{% endif %}">
                                     {% if event.listing_image %}
-                                        {% image event.listing_image fill-500x250 %}
+                                        {# A listing image is purely decorative. Set blank alt text. #}
+                                        {% image event.listing_image fill-500x250 alt="" %}
                                     {% endif %}
                                 </div>
                             </li>

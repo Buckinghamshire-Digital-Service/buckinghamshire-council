@@ -2,7 +2,11 @@
 
 <div class="sidebar sidebar--jobs" aria-label="Job details">
     {% if page.logo %}
-        {% image page.logo max-110x110 class="sidebar__job-detail-logo" %}
+        {% comment %}
+        This is imported content. We have no reliable value for the alt text.
+        The image is mostly decorative. Set blank alt text.
+        {% endcomment %}
+        {% image page.logo max-110x110 class="sidebar__job-detail-logo" alt="" %}
     {% endif %}
 
     <div class="sidebar__inner">
