@@ -6,6 +6,7 @@
 - Add configurable search synonyms
 - Use Porter stemming algorithm search filter, for English grammar
 - Add an English stop words search filter
+- Prevent password-protected pages from appearing in search results
 
 ## 28.0 (2020-11-25)
 
