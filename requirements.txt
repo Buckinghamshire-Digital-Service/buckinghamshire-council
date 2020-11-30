@@ -14,6 +14,7 @@ wagtail-factories==2.0.0
 wagtail-orderable==1.0.3
 urllib3==1.25.11
 zeep==3.4.0
+wagtail-automatic-redirects==1.0.0
 
 # Production dependencies
 whitenoise[brotli]==4.1.2
