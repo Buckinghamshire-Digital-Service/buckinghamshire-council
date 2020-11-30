@@ -10,7 +10,8 @@
             <h2>{{ page.first_name }} {{ page.last_name }}</h2>
 
             {% if page.photo %}
-                {% image page.photo max-200x190 %}
+                {# The person's name is already on the page: alt text would be superfluous. #}
+                {% image page.photo max-200x190 alt="" %}
             {% endif %}
 
             {% if page.job_title %}

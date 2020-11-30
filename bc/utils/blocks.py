@@ -14,6 +14,11 @@ from .constants import RICH_TEXT_FEATURES
 
 class ImageBlock(blocks.StructBlock):
     image = ImageChooserBlock()
+    alt_text = blocks.CharBlock(
+        required=False,
+        help_text="Describe the information, not the picture. Leave blank if the image "
+        "is purely decorative. Do not repeat captions or content already on the page.",
+    )
     caption = blocks.CharBlock(required=False)
 
     class Meta:
