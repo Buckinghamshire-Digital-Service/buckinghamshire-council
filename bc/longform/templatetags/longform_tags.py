@@ -13,27 +13,24 @@ register = template.Library()
 def generate_block_number(
     chapter_number, heading_number, subheading_number, paragraph_number
 ):
-    block_number = ""
+    """
+    Returns chapter_number.subheading_number.paragraph_number if chapter_number is
+    available, or heading_number.subheading_number.paragraph_number if not.
 
-    if paragraph_number:
-        block_number = f"{paragraph_number}"
-
-    if subheading_number:
-        if block_number:
-            block_number = f"{subheading_number}.{block_number}"
-        else:
-            block_number = f"{subheading_number}"
-
-    if chapter_number:
-        if block_number:
-            block_number = f"{chapter_number}.{block_number}"
-        else:
-            block_number = f"{chapter_number}"
-    elif heading_number:
-        if block_number:
-            block_number = f"{heading_number}.{block_number}"
-        else:
-            block_number = f"{heading_number}"
+    Doesn't include any part that isn't available. (e.g. can also return
+    chapter_number.subheading_number only or heading_number.paragraph_number only)
+    """
+    block_number = ".".join(
+        [
+            f"{number}"
+            for number in (
+                chapter_number or heading_number,
+                subheading_number,
+                paragraph_number,
+            )
+            if number
+        ]
+    )
 
     return block_number
 
