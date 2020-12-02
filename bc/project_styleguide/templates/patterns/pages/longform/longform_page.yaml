@@ -19,9 +19,6 @@ context:
     title: Lorem ipsum
 
 tags:
-  image:
-    hero_image:
-      raw: '<image src="https://via.placeholder.com/600x400" alt="" />'
   pageurl:
     link:
       raw: '#'
