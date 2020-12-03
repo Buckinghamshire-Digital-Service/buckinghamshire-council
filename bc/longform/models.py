@@ -26,7 +26,11 @@ class LongformPage(BasePage):
     version_number = models.CharField(blank=True, max_length=100)
 
     hero_image = models.ForeignKey(
-        "images.CustomImage", null=True, related_name="+", on_delete=models.SET_NULL,
+        "images.CustomImage",
+        blank=True,
+        null=True,
+        related_name="+",
+        on_delete=models.SET_NULL,
     )
     chapter_heading = models.CharField(
         blank=True,
