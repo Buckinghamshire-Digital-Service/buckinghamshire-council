@@ -18,10 +18,6 @@ class IndexPageWagtailPageTests(WagtailPageTests):
     def test_can_create_indexpage_under_homepage(self):
         self.assertCanCreateAt(HomePage, IndexPage)
 
-    def test_can_create_indexpage_under_fis_category_pages(self):
-        self.assertCanCreateAt(CategoryTypeOnePage, IndexPage)
-        self.assertCanCreateAt(CategoryTypeTwoPage, IndexPage)
-
     def test_can_only_create_indexpage_under_homepage_and_fis_cat_pages(self):
         self.assertAllowedParentPageTypes(
             IndexPage,
