@@ -4,6 +4,7 @@
 
 - Add anchor links for streamfield heading blocks
 - FIS 475 Allow `IndexPage` as child page of `CategoryTypeOnePage` and `CategoryTypeTwoPage`
+- FIS 476 Allow `InformationPage` as child page of `CategoryTypeOnePage` and `CategoryTypeTwoPage`
 
 ## 29.0 (2020-11-30)
 
