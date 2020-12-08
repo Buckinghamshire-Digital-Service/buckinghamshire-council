@@ -4,6 +4,10 @@ from django.urls import reverse
 from wagtail.tests.utils import WagtailPageTests, WagtailTestUtils
 
 from bc.home.models import HomePage
+from bc.family_information.models import (
+    CategoryTypeOnePage,
+    CategoryTypeTwoPage,
+)
 
 from ..models import IndexPage, InformationPage
 from .fixtures import IndexPageFactory, InformationPageFactory
@@ -17,11 +21,19 @@ class IndexPageWagtailPageTests(WagtailPageTests):
     def test_can_create_indexpage_under_homepage(self):
         self.assertCanCreateAt(HomePage, IndexPage)
 
-    def test_can_only_create_indexpage_under_homepage(self):
+    def test_can_create_indexpage_under_fis_category_pages(self):
+        self.assertCanCreateAt(CategoryTypeOnePage, IndexPage)
+        self.assertCanCreateAt(CategoryTypeTwoPage, IndexPage)
+
+    def test_can_only_create_indexpage_under_homepage_and_fis_cat_pages(self):
         self.assertAllowedParentPageTypes(
             IndexPage,
-            {HomePage, IndexPage},
-            msg="IndexPage should only be added as child of HomePage and IndexPage.",
+            {HomePage, CategoryTypeOnePage, CategoryTypeTwoPage, IndexPage},
+            msg=(
+                "IndexPage should only be added as child of HomePage, "
+                "FIS CategortyTypeOnePage, FIS CategortyTypeTwoPage, "
+                "and IndexPage."
+            ),
         )
 
 
