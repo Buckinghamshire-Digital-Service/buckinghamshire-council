@@ -3,11 +3,8 @@ from django.urls import reverse
 
 from wagtail.tests.utils import WagtailPageTests, WagtailTestUtils
 
+from bc.family_information.models import CategoryTypeOnePage, CategoryTypeTwoPage
 from bc.home.models import HomePage
-from bc.family_information.models import (
-    CategoryTypeOnePage,
-    CategoryTypeTwoPage,
-)
 
 from ..models import IndexPage, InformationPage
 from .fixtures import IndexPageFactory, InformationPageFactory
