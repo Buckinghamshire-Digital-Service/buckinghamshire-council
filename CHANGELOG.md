@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- Upgrade Wagtail to 2.10 (Ticket: 472)
+
 ## 29.0 (2020-11-30)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/28.0...29.0
