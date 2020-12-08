@@ -109,7 +109,7 @@ class FamilyInformationHomePage(FISBannerFields, BasePage):
 
 class BaseCategoryPage(FISBannerFields, BasePage):
     parent_page_types = ["FamilyInformationHomePage"]
-    subpage_types = ["inlineindex.InlineIndex"]
+    subpage_types = ["inlineindex.InlineIndex", "standardpages.IndexPage"]
 
     content_panels = BasePage.content_panels + FISBannerFields.content_panels
     search_fields = BasePage.search_fields + FISBannerFields.search_fields
