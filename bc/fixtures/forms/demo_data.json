@@ -5,6 +5,7 @@
     "fields": {
       "sort_order": 0,
       "label": "Name",
+      "clean_name": "name",
       "field_type": "singleline",
       "required": true,
       "choices": "",
@@ -19,6 +20,7 @@
     "fields": {
       "sort_order": 1,
       "label": "Occupation",
+      "clean_name": "occupation",
       "field_type": "singleline",
       "required": true,
       "choices": "",
@@ -33,6 +35,7 @@
     "fields": {
       "sort_order": 2,
       "label": "Favourite Colour",
+      "clean_name": "favourite-colour",
       "field_type": "radio",
       "required": true,
       "choices": "red, blue, green, yellow, purple",
