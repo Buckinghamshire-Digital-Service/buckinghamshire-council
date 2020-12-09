@@ -1,33 +1,12 @@
 from django.test import TestCase, override_settings
 from django.urls import reverse
 
-from wagtail.tests.utils import WagtailPageTests, WagtailTestUtils
+from wagtail.tests.utils import WagtailTestUtils
 
-from bc.family_information.models import CategoryTypeOnePage, CategoryTypeTwoPage
 from bc.home.models import HomePage
 
-from ..models import IndexPage, InformationPage
+from ..models import InformationPage
 from .fixtures import IndexPageFactory, InformationPageFactory
-
-
-class IndexPageWagtailPageTests(WagtailPageTests):
-    """
-    Test page creation and infrastructure
-    """
-
-    def test_can_create_indexpage_under_homepage(self):
-        self.assertCanCreateAt(HomePage, IndexPage)
-
-    def test_can_only_create_indexpage_under_homepage_and_fis_cat_pages(self):
-        self.assertAllowedParentPageTypes(
-            IndexPage,
-            {HomePage, CategoryTypeOnePage, CategoryTypeTwoPage, IndexPage},
-            msg=(
-                "IndexPage should only be added as child of HomePage, "
-                "FIS CategortyTypeOnePage, FIS CategortyTypeTwoPage, "
-                "and IndexPage."
-            ),
-        )
 
 
 class IndexPageModelTests(TestCase, WagtailTestUtils):
