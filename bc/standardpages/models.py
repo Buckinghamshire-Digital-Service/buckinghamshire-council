@@ -42,7 +42,12 @@ class InformationPage(BasePage):
 class IndexPage(BasePage):
     template = "patterns/pages/standardpages/index_page.html"
 
-    parent_page_types = ["home.HomePage", "IndexPage"]
+    parent_page_types = [
+        "home.HomePage",
+        "family_information.CategoryTypeOnePage",
+        "family_information.CategoryTypeTwoPage",
+        "IndexPage",
+    ]
 
     introduction = models.TextField(blank=True)
 

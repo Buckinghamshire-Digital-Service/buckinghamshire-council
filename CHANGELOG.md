@@ -4,6 +4,8 @@
 
 - 402: Add anchor links for streamfield heading blocks
 - 472: Upgrade Wagtail to 2.10
+- 475: FIS Allow `IndexPage` as child page of `CategoryTypeOnePage` and `CategoryTypeTwoPage`
+- 476: FISAllow `InformationPage` as child page of `CategoryTypeOnePage` and `CategoryTypeTwoPage`
 
 ## 29.0 (2020-11-30)
 
