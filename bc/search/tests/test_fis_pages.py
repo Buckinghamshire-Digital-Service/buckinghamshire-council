@@ -15,8 +15,7 @@ class FISPagesExcludedTest(TestCase):
         image = ImageFactory()
         hit_page = self.fis_homepage.add_child(
             instance=fixtures.CategoryTypeOnePageFactory.build(
-                title="screwdrivers",
-                banner_image=image,
+                title="screwdrivers", banner_image=image,
             )
         )
 
@@ -25,4 +24,3 @@ class FISPagesExcludedTest(TestCase):
         self.assertNotIn(
             Page.objects.get(pk=hit_page.pk), response.context["search_results"]
         )
-

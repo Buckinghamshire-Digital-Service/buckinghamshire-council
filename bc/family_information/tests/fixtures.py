@@ -8,7 +8,7 @@ class FamilyInformationHomePageFactory(wagtail_factories.PageFactory):
     class Meta:
         model = models.FamilyInformationHomePage
 
-    title = lambda n: f"Familiy Information Service Home Page {n}"
+    title = factory.Sequence(lambda n: f"Familiy Information Service Home Page {n}")
 
     banner_image = factory.SubFactory("bc.images.tests.fixtures.ImageFactory")
     banner_title = "Banner title"
@@ -22,7 +22,7 @@ class CategoryTypeOnePageFactory(wagtail_factories.PageFactory):
     class Meta:
         model = models.CategoryTypeOnePage
 
-    title = lambda n: f"Category Type One Page {n}"
+    title = factory.Sequence(lambda n: f"Category Type One Page {n}")
 
     banner_image = factory.SubFactory("bc.images.tests.fixtures.ImageFactory")
     banner_title = "Banner title"
