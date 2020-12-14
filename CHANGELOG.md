@@ -2,7 +2,8 @@
 
 ## Unreleased
 
-- Upgrade Wagtail to 2.10 (Ticket: 472)
+- 402: Add anchor links for streamfield heading blocks
+- 472: Upgrade Wagtail to 2.10
 
 ## 29.0 (2020-11-30)
 
