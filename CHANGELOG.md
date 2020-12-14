@@ -2,6 +2,8 @@
 
 ## 30.0 (2020-12-14)
 
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/29.0...30.0
+
 - 402: Add anchor links for streamfield heading blocks
 - 472: Upgrade Wagtail to 2.10
 - 475: FIS Allow `IndexPage` as child page of `CategoryTypeOnePage` and `CategoryTypeTwoPage`
