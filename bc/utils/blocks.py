@@ -121,6 +121,11 @@ class ButtonBlock(blocks.StructBlock):
 class BaseStoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(
         classname="full title",
+        help_text=(
+            "The link to this heading uses the heading text in lowercase, with no"
+            " symbols, and with the spaces replaced with hyphens."
+            ' e.g. "Lorem @ 2 ipsum" becomes "lorem-2-ipsum"'
+        ),
         icon="title",
         template="patterns/molecules/streamfield/blocks/heading_block.html",
         group="Heading",
@@ -128,6 +133,11 @@ class BaseStoryBlock(blocks.StreamBlock):
     )
     subheading = blocks.CharBlock(
         classname="full title",
+        help_text=(
+            "The link to this subheading uses the subheading text in lowercase, with no"
+            " symbols, and with the spaces replaced with hyphens."
+            ' e.g. "Lorem @ 2 ipsum" becomes "lorem-2-ipsum"'
+        ),
         icon="title",
         template="patterns/molecules/streamfield/blocks/subheading_block.html",
         group="Heading",
