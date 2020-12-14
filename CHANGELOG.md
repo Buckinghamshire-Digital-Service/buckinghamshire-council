@@ -1,6 +1,6 @@
 # Release History
 
-## Unreleased
+## 30.0 (2020-12-14)
 
 - 402: Add anchor links for streamfield heading blocks
 - 472: Upgrade Wagtail to 2.10
