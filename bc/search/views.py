@@ -14,6 +14,7 @@ from wagtail.contrib.search_promotions.templatetags.wagtailsearchpromotions_tags
 from wagtail.core.models import Page, Site
 from wagtail.search.models import Query
 
+from bc.family_information.models import FamilyInformationHomePage
 from bc.recruitment.forms import SearchAlertSubscriptionForm
 from bc.recruitment.models import JobAlertSubscription
 from bc.recruitment.utils import (
@@ -56,12 +57,11 @@ class SearchView(View):
             if search_query:
                 promotions = get_search_promotions(search_query)
 
-                search_results = (
-                    Page.objects.live()
-                    .public()
-                    .exclude(searchpromotion__in=promotions)
-                    .search(search_query, operator="or")
+                search_sources = (
+                    Page.objects.live().public().exclude(searchpromotion__in=promotions)
                 )
+                search_sources = self.exclude_fis_pages(search_sources)
+                search_results = search_sources.search(search_query, operator="or")
                 query = Query.get(search_query)
                 # Record hit
                 query.add_hit()
@@ -175,6 +175,26 @@ class SearchView(View):
                 context,
             )
             return response
+
+    @staticmethod
+    def exclude_fis_pages(page_queryset):
+        """
+        Exclude FIS pages from the given page QuerySet.
+
+        Excluding these pages from the search is only a temporary fix and needs
+        to be reverted in a future update when the FIS content is ready for
+        publication.
+
+        TODO: Remove this method and calls of it.
+
+        See also:
+        https://trello.com/c/TryuPZ9J/478-update-search-configuration-to-exclude-fis-content
+
+        """
+        fis_homepage = FamilyInformationHomePage.objects.first()
+        if fis_homepage is not None:
+            page_queryset = page_queryset.exclude(path__startswith=fis_homepage.path)
+        return page_queryset
 
 
 class JobAlertConfirmView(View):
