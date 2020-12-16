@@ -68,6 +68,12 @@ class InlineIndex(BasePage):
         if first_child:
             return first_child.specific
 
+    def get_context(self, request):
+        context = super().get_context(request)
+        context["index"] = self.get_index()
+        context["next_page"] = self.get_next_page()
+        return context
+
 
 class InlineIndexChild(BasePage):
 
@@ -120,3 +126,10 @@ class InlineIndexChild(BasePage):
 
         if prev_sibling:
             return prev_sibling.specific
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        context["index"] = self.get_index()
+        context["next_page"] = self.get_next_page()
+        context["prev_page"] = self.get_prev_page()
+        return context
