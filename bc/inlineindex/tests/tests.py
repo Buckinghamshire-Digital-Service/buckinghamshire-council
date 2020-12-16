@@ -121,7 +121,10 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
         self.login()
 
         response = self.client.get(
-            reverse("wagtailadmin_pages:view_draft", args=(self.inline_index.id,))
+            reverse("wagtailadmin_pages:view_draft", args=(self.inline_index_child.id,))
         )
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, second_index_child.title)
+
+    # TODO: Add test for previous sibling being draft.
+    # TODO: Add test for draft sibling between live siblings.
