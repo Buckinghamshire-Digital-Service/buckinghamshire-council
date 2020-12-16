@@ -4,7 +4,7 @@ from django.urls import reverse
 from wagtail.tests.utils import WagtailTestUtils
 
 from bc.home.models import HomePage
-from bc.inlineindex.tests.fixtures import InlineIndexFactory, InlineIndexChildFactory
+from bc.inlineindex.tests.fixtures import InlineIndexChildFactory, InlineIndexFactory
 
 
 class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
