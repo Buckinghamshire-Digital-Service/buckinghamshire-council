@@ -11,6 +11,14 @@ from bc.utils.blocks import StoryBlock
 from bc.utils.models import BasePage, RelatedPage
 
 
+def draft_for_page_available(page):
+    return page.has_unpublished_changes or not page.live
+
+
+def viewing_page_draft(page, request):
+    return draft_for_page_available(page) and request.is_preview
+
+
 class InlineIndexRelatedPage(RelatedPage):
     source_page = ParentalKey("InlineIndex", related_name="related_pages")
 
@@ -54,10 +62,14 @@ class InlineIndex(BasePage):
             and len(related_page.page.view_restrictions.all()) == 0
         ]
 
-    def get_index(self):
+    def get_index(self, include_draft_children=False):
         index_queryset = Page.objects.page(self)
-        index_queryset = index_queryset.union(self.get_children().specific())
-        return index_queryset
+
+        children = self.get_children().specific()
+        if not include_draft_children:
+            children = children.live()
+
+        return index_queryset.union(children)
 
     def get_next_page(self):
         """ In fact returns the first child, instead, as this page acts as the
@@ -70,8 +82,12 @@ class InlineIndex(BasePage):
 
     def get_context(self, request):
         context = super().get_context(request)
-        context["index"] = self.get_index()
+
+        include_draft_children = viewing_page_draft(self, request)
+
+        context["index"] = self.get_index(include_draft_children)
         context["next_page"] = self.get_next_page()
+
         return context
 
 
@@ -102,8 +118,8 @@ class InlineIndexChild(BasePage):
     def live_related_pages(self):
         return self.get_parent().specific.live_related_pages
 
-    def get_index(self):
-        return self.get_parent().specific.get_index()
+    def get_index(self, include_draft_children=False):
+        return self.get_parent().specific.get_index(include_draft_children)
 
     def get_next_page(self):
         """ Return the next sibling, if there is one. NB this is implemented
@@ -129,7 +145,10 @@ class InlineIndexChild(BasePage):
 
     def get_context(self, request):
         context = super().get_context(request)
-        context["index"] = self.get_index()
+
+        include_draft_pages = viewing_page_draft(self, request)
+
+        context["index"] = self.get_index(include_draft_pages)
         context["next_page"] = self.get_next_page()
         context["prev_page"] = self.get_prev_page()
         return context
