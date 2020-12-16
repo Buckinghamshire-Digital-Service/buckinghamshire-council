@@ -53,34 +53,17 @@ class InlineIndex(BasePage):
             and len(related_page.page.view_restrictions.all()) == 0
         ]
 
-    def get_children_for_draft_status_and_request_type(self):
-        show_draft_children = getattr(self, "show_draft_children", True)
-        children = self.get_children()
-        if children and not show_draft_children:
-            children = children.live()
-        return children
-
     def get_index(self):
-        return [self] + list(
-            self.get_children_for_draft_status_and_request_type().specific()
-        )
+        return [self] + list(self.get_children().specific())
 
     def get_next_page(self):
         """ In fact returns the first child, instead, as this page acts as the
         first item in the index.
         """
-        first_child = self.get_children_for_draft_status_and_request_type().first()
+        first_child = self.get_children().first()
 
         if first_child:
             return first_child.specific
-
-    def get_context(self, request):
-        context = super().get_context(request)
-
-        page_is_draft = self.has_unpublished_changes or not self.live
-        self.show_draft_children = request.is_preview and page_is_draft
-
-        return context
 
 
 class InlineIndexChild(BasePage):
