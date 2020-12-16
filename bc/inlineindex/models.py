@@ -137,9 +137,6 @@ class InlineIndexChild(BasePage):
         if next_sibling:
             return next_sibling.specific
 
-    def get_template(self, request):
-        return InlineIndex().get_template(request)
-
     def get_prev_page(self):
         """ Return the previous sibling, or in the case of a first child, the
         parent. NB this method is not implemented on InlineIndex, so the
@@ -159,3 +156,6 @@ class InlineIndexChild(BasePage):
         context["next_page"] = self.get_next_page(include_draft_pages)
         context["prev_page"] = self.get_prev_page()
         return context
+
+    def get_template(self, request):
+        return InlineIndex().get_template(request)
