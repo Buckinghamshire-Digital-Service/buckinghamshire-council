@@ -164,4 +164,34 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, self.inline_index_child.title, count=2)
 
-    # TODO: Add tests for draft sibling between live siblings.
+    def test_live_request_to_live_child_skips_draft_next_sibling(self):
+        self.setup_inline_index(live=True)
+        self.setup_inline_index_child(live=True)
+        second_index_child = InlineIndexChildFactory(
+            parent=self.inline_index, title="The Second Child", live=False
+        )
+        third_index_child = InlineIndexChildFactory(
+            parent=self.inline_index, title="The Third Child", live=True
+        )
+
+        response = self.client.get(self.inline_index_child.url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, second_index_child.title)
+        self.assertContains(response, third_index_child.title, count=2)
+
+    def test_live_request_to_live_child_skips_draft_prev_sibling(self):
+        self.setup_inline_index(live=True)
+        self.setup_inline_index_child(live=True)
+        second_index_child = InlineIndexChildFactory(
+            parent=self.inline_index, title="The Second Child", live=False
+        )
+        third_index_child = InlineIndexChildFactory(
+            parent=self.inline_index, title="The Third Child", live=True
+        )
+
+        response = self.client.get(third_index_child.url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, second_index_child.title)
+        self.assertContains(response, self.inline_index_child.title, count=2)
