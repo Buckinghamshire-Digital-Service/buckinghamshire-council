@@ -71,11 +71,15 @@ class InlineIndex(BasePage):
 
         return index_queryset.union(children)
 
-    def get_next_page(self):
+    def get_next_page(self, include_draft_children=False):
         """ In fact returns the first child, instead, as this page acts as the
         first item in the index.
         """
-        first_child = self.get_children().first()
+        children = self.get_children()
+        if not include_draft_children:
+            children = children.live()
+
+        first_child = children.first()
 
         if first_child:
             return first_child.specific
@@ -86,7 +90,7 @@ class InlineIndex(BasePage):
         include_draft_children = viewing_page_draft(self, request)
 
         context["index"] = self.get_index(include_draft_children)
-        context["next_page"] = self.get_next_page()
+        context["next_page"] = self.get_next_page(include_draft_children)
 
         return context
 
@@ -121,12 +125,15 @@ class InlineIndexChild(BasePage):
     def get_index(self, include_draft_children=False):
         return self.get_parent().specific.get_index(include_draft_children)
 
-    def get_next_page(self):
+    def get_next_page(self, include_draft_pages=False):
         """ Return the next sibling, if there is one. NB this is implemented
         differently on InlineIndex.
         """
-        next_sibling = self.get_next_sibling()
+        next_siblings = self.get_next_siblings()
+        if not include_draft_pages:
+            next_siblings = next_siblings.live()
 
+        next_sibling = next_siblings.first()
         if next_sibling:
             return next_sibling.specific
 
@@ -149,6 +156,6 @@ class InlineIndexChild(BasePage):
         include_draft_pages = viewing_page_draft(self, request)
 
         context["index"] = self.get_index(include_draft_pages)
-        context["next_page"] = self.get_next_page()
+        context["next_page"] = self.get_next_page(include_draft_pages)
         context["prev_page"] = self.get_prev_page()
         return context
