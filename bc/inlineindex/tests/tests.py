@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from wagtail.tests.utils import WagtailTestUtils
@@ -70,6 +70,7 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
         self.assertEqual(response.status_code, 200)
         self.assertNotContains(response, self.first_index_child.title)
 
+    @override_settings(ALLOWED_HOSTS=["localhost", "testserver"])
     def test_draft_request_to_draft_index_success(self):
         self.setup_inline_index(live=False)
         self.login()
@@ -81,6 +82,7 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, self.inline_index.title)
 
+    @override_settings(ALLOWED_HOSTS=["localhost", "testserver"])
     def test_draft_request_to_draft_index_shows_draft_child(self):
         self.setup_inline_index(live=False)
         self.setup_first_index_child(live=False)
@@ -135,6 +137,7 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
         self.assertEqual(response.status_code, 200)
         self.assertNotContains(response, self.first_index_child.title)
 
+    @override_settings(ALLOWED_HOSTS=["localhost", "testserver"])
     def test_draft_request_to_draft_child_shows_draft_next_sibling(self):
         self.setup_inline_index(live=True)
         self.setup_first_index_child(live=False)
@@ -147,6 +150,7 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, self.second_index_child.title, count=2)
 
+    @override_settings(ALLOWED_HOSTS=["localhost", "testserver"])
     def test_draft_request_to_draft_child_shows_draft_prev_sibling(self):
         self.setup_inline_index(live=True)
         self.setup_first_index_child(live=False)
