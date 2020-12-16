@@ -54,7 +54,7 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
         response = self.client.get(self.inline_index.url)
 
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, self.inline_index.title)
+        self.assertContains(response, self.inline_index_child.title, count=2)
 
     def test_live_request_to_live_index_not_shows_draft_child(self):
         self.setup_inline_index(live=True)
@@ -86,9 +86,9 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, self.inline_index_child.title)
+        self.assertContains(response, self.inline_index_child.title, count=2)
 
-    def test_live_request_to_live_child_shows_live_sibling(self):
+    def test_live_request_to_live_child_shows_live_next_sibling(self):
         self.setup_inline_index(live=True)
         self.setup_inline_index_child(live=True)
         second_index_child = InlineIndexChildFactory(
@@ -98,7 +98,19 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
         response = self.client.get(self.inline_index_child.url)
 
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, second_index_child.title)
+        self.assertContains(response, second_index_child.title, count=2)
+
+    def test_live_request_to_live_child_shows_live_prev_sibling(self):
+        self.setup_inline_index(live=True)
+        self.setup_inline_index_child(live=True)
+        second_index_child = InlineIndexChildFactory(
+            parent=self.inline_index, title="The Second Child", live=True
+        )
+
+        response = self.client.get(second_index_child.url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.inline_index_child.title, count=2)
 
     def test_live_request_to_live_child_not_shows_draft_next_sibling(self):
         self.setup_inline_index(live=True)
@@ -136,7 +148,7 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
             reverse("wagtailadmin_pages:view_draft", args=(self.inline_index_child.id,))
         )
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, second_index_child.title)
+        self.assertContains(response, second_index_child.title, count=2)
 
     def test_draft_request_to_draft_child_shows_draft_prev_sibling(self):
         self.setup_inline_index(live=True)
@@ -150,6 +162,6 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
             reverse("wagtailadmin_pages:view_draft", args=(second_index_child.id,))
         )
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, self.inline_index_child.title)
+        self.assertContains(response, self.inline_index_child.title, count=2)
 
     # TODO: Add tests for draft sibling between live siblings.
