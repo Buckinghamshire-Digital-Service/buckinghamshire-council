@@ -779,3 +779,18 @@ RESPOND_GET_FIELDS_WEBSERVICE = env.get("RESPOND_GET_FIELDS_WEBSERVICE")
 
 # MapIt.MySociety API credentials
 MAPIT_API_KEY = env.get("MAPIT_API_KEY")
+
+# Wagtail transfer settings
+# See https://buckinghamshire-council.pages.torchbox.com/bc/infrastructure/#wagtail-transfer
+# Configure other site to import from
+wagtailtranfer_source_label = env.get("WAGTAILTRANSFER_SOURCE_LABEL", "source")
+if "WAGTAILTRANSFER_SOURCE_KEY" in env and "WAGTAILTRANSFER_SOURCE_URL" in env:
+    WAGTAILTRANSFER_SOURCES = {
+        wagtailtranfer_source_label: {
+            "BASE_URL": env.get("WAGTAILTRANSFER_SOURCE_URL"),
+            "SECRET_KEY": env.get("WAGTAILTRANSFER_SOURCE_KEY"),
+        },
+    }
+# Configure availability of this site as source for another site to import from
+if "WAGTAILTRANSFER_SECRET_KEY" in env:
+    WAGTAILTRANSFER_SECRET_KEY = env.get("WAGTAILTRANSFER_SECRET_KEY")
