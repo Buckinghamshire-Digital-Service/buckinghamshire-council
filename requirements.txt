@@ -14,6 +14,8 @@ wagtail-factories==2.0.0
 wagtail-orderable==1.0.3
 urllib3==1.25.11
 zeep==3.4.0
+# Installing `wagtail-automatic-redirect` from GitHub because the page move feature was merged in but not yet released on PyPI (https://pypi.org/project/wagtail-automatic-redirects/).
+# @tibor.leupold is following the project on GitHub and will update to the PyPI version when it is released.
 git+https://github.com/themotleyfool/wagtail-automatic-redirects.git@1.1.3#egg=wagtail-automatic-redirects
 
 # Production dependencies
