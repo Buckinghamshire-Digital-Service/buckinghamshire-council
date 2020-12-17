@@ -73,6 +73,7 @@ INSTALLED_APPS = [
     "bc.standardpages",
     "bc.users",
     "bc.utils",
+    "wagtail_transfer",
     "rest_framework",
     "wagtailorderable",
     "wagtail.contrib.modeladmin",
