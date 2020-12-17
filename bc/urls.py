@@ -1,7 +1,7 @@
 from django.apps import apps
 from django.conf import settings
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 from django.views.decorators.vary import vary_on_headers
 from django.views.generic import TemplateView
 
@@ -10,6 +10,8 @@ from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.utils.urlpatterns import decorate_urlpatterns
+
+from wagtail_transfer import urls as wagtailtransfer_urls
 
 from bc.area_finder.views import area_finder
 from bc.search.views import JobAlertConfirmView, JobAlertUnsubscribeView, SearchView
@@ -33,6 +35,7 @@ private_urlpatterns = [
         JobAlertUnsubscribeView.as_view(),
         name="unsubscribe_job_alert",
     ),
+    re_path(r"^wagtail-transfer/", include(wagtailtransfer_urls)),
 ]
 
 
