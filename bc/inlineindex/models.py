@@ -16,7 +16,7 @@ class InlineIndexDraftMixin(object):
         return self.has_unpublished_changes or not self.live
 
     def viewing_page_draft(self, request):
-        return self.draft_for_page_available() and request.is_preview
+        return request.is_preview and self.draft_for_page_available()
 
 
 class InlineIndexRelatedPage(RelatedPage):
