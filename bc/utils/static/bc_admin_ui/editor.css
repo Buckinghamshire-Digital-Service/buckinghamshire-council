@@ -1,0 +1,5 @@
+/* This is to force the leading number to be visible in long ordered lists */
+.DraftEditor-editorContainer
+    .public-DraftStyleDefault-depth0.public-DraftStyleDefault-listLTR {
+    margin-left: 2.25em;
+}
