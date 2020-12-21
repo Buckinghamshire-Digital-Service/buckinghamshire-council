@@ -138,9 +138,7 @@ def register_big_text_feature(features):
     }
 
     features.register_editor_plugin(
-        "draftail",
-        feature_name,
-        draftail_features.BlockFeature(control, css={"all": ["big-text.css"]}),
+        "draftail", feature_name, draftail_features.BlockFeature(control),
     )
     db_conversion = {
         "from_database_format": {"p[class=big-text]": BlockElementHandler(type_)},
