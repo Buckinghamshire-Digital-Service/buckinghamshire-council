@@ -3,6 +3,8 @@ from django.urls import path, reverse
 from django.utils.html import format_html
 
 from wagtail.admin.menu import AdminOnlyMenuItem
+from wagtail.admin.rich_text.converters.html_to_contentstate import BlockElementHandler
+from wagtail.admin.rich_text.editors.draftail import features as draftail_features
 from wagtail.contrib.modeladmin.options import (
     ModelAdmin,
     ModelAdminGroup,
@@ -117,6 +119,37 @@ def register_missing_metadata_report_url():
             name="missing_metadata_report",
         ),
     ]
+
+
+@hooks.register("register_rich_text_features")
+def register_big_text_feature(features):
+    """
+    Registering the `big-text` Draftail feature, which adds a paragraph around the
+    selected text with its classs set to `big-text`.
+    """
+    feature_name = "big-text"
+    type_ = "big-text"
+
+    control = {
+        "type": type_,
+        "label": "BT",
+        "description": "Big Text",
+        "element": "p",
+    }
+
+    features.register_editor_plugin(
+        "draftail",
+        feature_name,
+        draftail_features.BlockFeature(control, css={"all": ["big-text.css"]}),
+    )
+    db_conversion = {
+        "from_database_format": {"p[class=big-text]": BlockElementHandler(type_)},
+        "to_database_format": {
+            "block_map": {type_: {"element": "p", "props": {"class": "big-text"}}},
+        },
+    }
+
+    features.register_converter_rule("contentstate", feature_name, db_conversion)
 
 
 @hooks.register("insert_editor_css")
