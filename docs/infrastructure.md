@@ -68,14 +68,14 @@ To enable the transfer between the instances, a few environment variables need t
 
 If an instance is supposed to serve as a source (in our case the staging instance) for imports to another instance, you need to configure the `WAGTAILTRANSFER_SECRET_KEY`.
 The `WAGTAILTRANSFER_SECRET_KEY` setting is used to authenticate the communication between the source and destination instances.
-This environment variable only needs to be set on sources instances.
+This environment variable only needs to be set on source instances.
 
 On the destination site, you need to configure `WAGTAILTRANSFER_SOURCE_KEY` and `WAGTAILTRANSFER_SOURCE_URL`.
 `WAGTAILTRANSFER_SOURCE_KEY` on the destination instance needs to match the `WAGTAILTRANSFER_SECRET_KEY` used on the source instance.
 E.g. if on the staging instance you have used `WAGTAILTRANSFER_SECRET_KEY="abc123"` (which is not recommended), then you would set `WAGTAILTRANSFER_SOURCE_KEY="abc123` on the production instance.
 
-Additionally, you need to configure `WAGTAILTRANSFER_SOURCE_URL` on the destination instance, so it knows the endpoint to send its requests to.
-E.g. on the `WAGTAILTRANSFER_SOURCE_URL="https://staging.example.com/wagtail-transfer/"`
+Additionally, you need to configure `WAGTAILTRANSFER_SOURCE_URL` on the destination instance, so that Wagtail Transfer knows the endpoint to send its requests to.
+E.g. on production you might set: `WAGTAILTRANSFER_SOURCE_URL="https://staging.example.com/wagtail-transfer/"`
 
 Additionally, you can set the `WAGTAILTRANSFER_SOURCE_LABEL` on the destination instance.
 `WAGTAILTRANSFER_SOURCE_LABEL` defines the name that will show up in the admin to select the source instance.
