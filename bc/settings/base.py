@@ -794,3 +794,33 @@ if "WAGTAILTRANSFER_SOURCE_KEY" in env and "WAGTAILTRANSFER_SOURCE_URL" in env:
 # Configure availability of this site as source for another site to import from
 if "WAGTAILTRANSFER_SECRET_KEY" in env:
     WAGTAILTRANSFER_SECRET_KEY = env.get("WAGTAILTRANSFER_SECRET_KEY")
+# When a page points to a non-page object through some relationship (i.e.
+# foreignkey) then that object is imported on the first page transfer.
+# On subsequent update imports of the page, the related objects are typically
+# ignored. To also update the related object when the page is updated, the
+# models have to be listed below.
+WAGTAILTRANSFER_UPDATE_RELATED_MODELS = [
+    "wagtailimages.image",
+    "wagtaildocs.document",
+    "alerts.alert",
+    "image.customimage",
+    "documents.customdocument",
+    "events.eventtype",
+    "events.eventpageeventtype",
+    "news.newstype",
+    "news.newspagenewstype",
+    "recruitment.jobsubcategory",
+    "recruitment.jobcategory",
+    "recruitment.talentlinkjob",
+    "utils.relatedpage",
+]
+# Normally, imported objects will be assigned a random UUID known across all
+# sites, so that those objects can be recognised on subsequent imports and be
+# updated rather than creating a duplicate. This behaviour is less useful for
+# models that already have a uniquely identifying field, or set of fields.
+WAGTAILTRANSFER_LOOKUP_FIELDS = {
+    # I was experiencing issue in local testing where I had created users with
+    # the same username on both instances. Updating a page was causing errors
+    # because of the unique constraint of the username.
+    "users.user": ["username"],
+}
