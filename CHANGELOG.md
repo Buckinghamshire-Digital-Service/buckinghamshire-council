@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- 474: Add [`wagtail-transfer`](https://github.com/wagtail/wagtail-transfer) to code base to allow content transfer between staging and production to be enabled.
+
 ## 30.1 (2020-12-14)
 
 - 478: Exclude FIS pages from search (temporary fix until FIS content is ready)
