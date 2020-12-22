@@ -810,16 +810,6 @@ WAGTAILTRANSFER_UPDATE_RELATED_MODELS = [
     "news.newstype",
     "news.newspagenewstype",
 ]
-# Normally, imported objects will be assigned a random UUID known across all
-# sites, so that those objects can be recognised on subsequent imports and be
-# updated rather than creating a duplicate. This behaviour is less useful for
-# models that already have a uniquely identifying field, or set of fields.
-WAGTAILTRANSFER_LOOKUP_FIELDS = {
-    # I was experiencing issue in local testing where I had created users with
-    # the same username on both instances. Updating a page was causing errors
-    # because of the unique constraint of the username.
-    "users.user": ["username"],
-}
 # Specifies a list of models that should not be imported by association when
 # they are referenced from imported content.
 WAGTAILTRANSFER_NO_FOLLOW_MODELS = [
@@ -827,4 +817,5 @@ WAGTAILTRANSFER_NO_FOLLOW_MODELS = [
     "recruitment.talentlinkjob",
     "recruitment.jobsubcategory",
     "recruitment.jobcategory",
+    "users.user",  # Do not transfer staging users to production.
 ]
