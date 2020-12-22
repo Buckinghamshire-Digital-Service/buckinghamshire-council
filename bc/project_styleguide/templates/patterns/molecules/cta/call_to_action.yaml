@@ -13,11 +13,23 @@ context:
             title: Participate in the conversation
 
 tags:
+  image:
+    call_to_action.image fill-990x350 as desktop_image:
+      target_var: desktop_image
+      raw:
+        url: https://placekitten.com/g/990/350
+    call_to_action.image fill-450x350 as mobile_image:
+      target_var: mobile_image
+      raw:
+        url: https://placekitten.com/g/450/350
+    call_to_action.image fill-1980x700 as retina_desktop_image:
+      target_var: retina_desktop_image
+      raw:
+        url: https://placekitten.com/g/1980/700
+    call_to_action.image fill-900x700 as retina_mobile_image:
+      target_var: retina_mobile_image
+      raw:
+        url: https://placekitten.com/g/900/700
   pageurl:
     block.value.page:
       raw: '#'
-  image:
-    call_to_action.image min-1024x340 as image:
-      target_var: image
-      raw:
-        url: http://via.placeholder.com/1024x340
