@@ -783,10 +783,10 @@ MAPIT_API_KEY = env.get("MAPIT_API_KEY")
 # Wagtail transfer settings
 # See https://buckinghamshire-council.pages.torchbox.com/bc/infrastructure/#wagtail-transfer
 # Configure other site to import from
-wagtailtranfer_source_label = env.get("WAGTAILTRANSFER_SOURCE_LABEL", "source")
+wagtailtransfer_source_label = env.get("WAGTAILTRANSFER_SOURCE_LABEL", "source")
 if "WAGTAILTRANSFER_SOURCE_KEY" in env and "WAGTAILTRANSFER_SOURCE_URL" in env:
     WAGTAILTRANSFER_SOURCES = {
-        wagtailtranfer_source_label: {
+        wagtailtransfer_source_label: {
             "BASE_URL": env.get("WAGTAILTRANSFER_SOURCE_URL"),
             "SECRET_KEY": env.get("WAGTAILTRANSFER_SOURCE_KEY"),
         },
