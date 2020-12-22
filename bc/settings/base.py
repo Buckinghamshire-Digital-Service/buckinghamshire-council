@@ -809,7 +809,6 @@ WAGTAILTRANSFER_UPDATE_RELATED_MODELS = [
     "events.eventpageeventtype",
     "news.newstype",
     "news.newspagenewstype",
-    "utils.relatedpage",
 ]
 # Normally, imported objects will be assigned a random UUID known across all
 # sites, so that those objects can be recognised on subsequent imports and be
