@@ -7,7 +7,11 @@ context:
 
 tags:
   image:
-    page.banner_image fill-1350x500 as banner_image:
-      target_var: banner_image
+    page.banner_image fill-700x250 as desktop_image:
+      target_var: desktop_image
       raw:
-        url: 'https://via.placeholder.com/1350x500'
+        url: https://placekitten.com/g/700/250
+    page.banner_image fill-1400x500 as retina_desktop_image:
+      target_var: retina_desktop_image
+      raw:
+        url: https://placekitten.com/g/1400/500
