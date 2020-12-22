@@ -809,9 +809,6 @@ WAGTAILTRANSFER_UPDATE_RELATED_MODELS = [
     "events.eventpageeventtype",
     "news.newstype",
     "news.newspagenewstype",
-    "recruitment.jobsubcategory",
-    "recruitment.jobcategory",
-    "recruitment.talentlinkjob",
     "utils.relatedpage",
 ]
 # Normally, imported objects will be assigned a random UUID known across all
@@ -824,3 +821,11 @@ WAGTAILTRANSFER_LOOKUP_FIELDS = {
     # because of the unique constraint of the username.
     "users.user": ["username"],
 }
+# Specifies a list of models that should not be imported by association when
+# they are referenced from imported content.
+WAGTAILTRANSFER_NO_FOLLOW_MODELS = [
+    "wagtailcore.page",  # This is default
+    "recruitment.talentlinkjob",
+    "recruitment.jobsubcategory",
+    "recruitment.jobcategory",
+]
