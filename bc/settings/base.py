@@ -814,6 +814,7 @@ WAGTAILTRANSFER_UPDATE_RELATED_MODELS = [
 # they are referenced from imported content.
 WAGTAILTRANSFER_NO_FOLLOW_MODELS = [
     "wagtailcore.page",  # This is default
+    "forms.PostcodeLookupResponse",  # ArrayField can not be serialized for transfer."
     "recruitment.talentlinkjob",
     "recruitment.jobsubcategory",
     "recruitment.jobcategory",
