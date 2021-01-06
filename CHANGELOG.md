@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- 450: Prevent draft `InlineIndexChild` pages from being listed in index and navigation on live pages
+
 ## 30.1 (2020-12-14)
 
 - 478: Exclude FIS pages from search (temporary fix until FIS content is ready)
