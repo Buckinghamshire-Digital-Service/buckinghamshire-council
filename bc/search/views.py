@@ -113,6 +113,8 @@ class SearchView(View):
                 if promotions:
                     search_results = list(chain(promotions, search_results))
 
+                search_results = self.exclude_fis_pages(search_results)
+
             else:
                 search_results = Page.objects.none()
 
