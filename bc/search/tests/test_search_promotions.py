@@ -9,8 +9,8 @@ from bc.home.models import HomePage
 from bc.standardpages.tests.fixtures import InformationPageFactory
 
 from .utils import (
-    search_backend_settings,
     delete_test_indices_from_elasticsearch,
+    search_backend_settings,
     update_search_index,
 )
 

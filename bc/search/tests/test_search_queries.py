@@ -12,8 +12,8 @@ from bc.search.views import SearchView
 from bc.standardpages.tests.fixtures import IndexPageFactory, InformationPageFactory
 
 from .utils import (
-    search_backend_settings,
     delete_test_indices_from_elasticsearch,
+    search_backend_settings,
     update_search_index,
 )
 

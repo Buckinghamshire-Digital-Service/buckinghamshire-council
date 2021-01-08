@@ -3,7 +3,6 @@ from django.core.management import call_command
 
 from wagtail.search.backends import get_search_backend
 
-
 TESTSEARCH_INDEX_NAME = "bc_test"
 
 
