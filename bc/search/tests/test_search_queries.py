@@ -11,9 +11,16 @@ from bc.home.tests.fixtures import HomePageFactory
 from bc.search.views import SearchView
 from bc.standardpages.tests.fixtures import IndexPageFactory, InformationPageFactory
 
+from .utils import (
+    search_backend_settings,
+    delete_test_indices_from_elasticsearch,
+    update_search_index,
+)
+
 SECOND_HOSTNAME = "second.example"
 
 
+@override_settings(SEARCH_BACKEND=search_backend_settings)
 @override_settings(ALLOWED_HOSTS=settings.ALLOWED_HOSTS + [SECOND_HOSTNAME])
 class SectionAnnotationsTest(TestCase):
     def setUp(self):
@@ -60,6 +67,8 @@ class SectionAnnotationsTest(TestCase):
         homepage_two.add_child(instance=self.section_bee)
         self.cee_page = InformationPageFactory.build(title="cee")
         self.section_bee.add_child(instance=self.cee_page)
+
+        update_search_index()
 
     def get_results(self, query, hostname=None):
         kwargs = {}
@@ -151,3 +160,6 @@ class SectionAnnotationsTest(TestCase):
         self.assertEqual(results[0].page, Page.objects.get(pk=self.zuul_page.pk))
         self.assertEqual(results[0].page.specific, self.zuul_page)
         self.assertEqual(results[0].section_label, self.site.site_name)
+
+    def tearDown(self):
+        delete_test_indices_from_elasticsearch()

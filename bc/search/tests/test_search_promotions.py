@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from wagtail.contrib.search_promotions.models import SearchPromotion
@@ -8,7 +8,14 @@ from wagtail.search.models import Query
 from bc.home.models import HomePage
 from bc.standardpages.tests.fixtures import InformationPageFactory
 
+from .utils import (
+    search_backend_settings,
+    delete_test_indices_from_elasticsearch,
+    update_search_index,
+)
 
+
+@override_settings(SEARCH_BACKEND=search_backend_settings)
 class SearchPromotionsTest(TestCase):
     def setUp(self):
         self.homepage = HomePage.objects.first()
@@ -19,6 +26,8 @@ class SearchPromotionsTest(TestCase):
                 title="screwdrivers", listing_summary="abcdef",
             )
         )
+        update_search_index()
+
         response = self.client.get(reverse("search") + "?query=screwdrivers")
         self.assertContains(response, hit_page.listing_summary)
         self.assertEqual(len(response.context["search_results"]), 1)
@@ -32,6 +41,7 @@ class SearchPromotionsTest(TestCase):
                 title="spanners", listing_summary="ghijkl",
             )
         )
+        update_search_index()
         response = self.client.get(reverse("search") + "?query=screwdrivers")
         self.assertEqual(len(response.context["search_results"]), 0)
 
@@ -49,6 +59,7 @@ class SearchPromotionsTest(TestCase):
         hit_page = self.homepage.add_child(
             instance=InformationPageFactory.build(title="screwdrivers",)
         )
+        update_search_index()
         response = self.client.get(reverse("search") + "?query=screwdrivers")
         self.assertEqual(len(response.context["search_results"]), 1)
         self.assertIn(
@@ -58,6 +69,7 @@ class SearchPromotionsTest(TestCase):
         promoted_page = self.homepage.add_child(
             instance=InformationPageFactory.build(title="spanners",)
         )
+        update_search_index()
         query = Query.objects.get(query_string="screwdrivers")
         promotion = SearchPromotion.objects.create(
             query=query, page=promoted_page, description="",
@@ -76,6 +88,7 @@ class SearchPromotionsTest(TestCase):
                 title="spanners", listing_summary="mnopqr",
             )
         )
+        update_search_index()
         query = Query.objects.create(query_string="spanners")
         promotion = SearchPromotion.objects.create(
             query=query, page=promoted_page, description="stuvwx",
@@ -90,6 +103,7 @@ class SearchPromotionsTest(TestCase):
                 title="spanners", listing_summary="mnopqr",
             )
         )
+        update_search_index()
 
         query = Query.objects.create(query_string="spanners")
         SearchPromotion.objects.create(
@@ -103,6 +117,7 @@ class SearchPromotionsTest(TestCase):
         hit_page = self.homepage.add_child(
             instance=InformationPageFactory.build(title="hammers",)
         )
+        update_search_index()
         response = self.client.get(reverse("search") + "?query=hammers")
         self.assertEqual(len(response.context["search_results"]), 1)
 
@@ -114,3 +129,6 @@ class SearchPromotionsTest(TestCase):
         response = self.client.get(reverse("search") + "?query=hammers")
         self.assertEqual(len(response.context["search_results"]), 1)
         self.assertIn(promotion, response.context["search_results"])
+
+    def tearDown(self):
+        delete_test_indices_from_elasticsearch()
