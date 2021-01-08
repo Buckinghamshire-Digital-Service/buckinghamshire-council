@@ -81,7 +81,7 @@ class SearchView(View):
                     .all()
                 )
 
-                search_results = (
+                page_queryset_for_search = (
                     Page.objects.live()
                     .exclude(searchpromotion__in=promotions)
                     .annotate(
@@ -104,16 +104,20 @@ class SearchView(View):
                             output_field=CharField(),
                         )
                     )
-                    .search(search_query, operator="and")
-                ).get_queryset()
+                )
+                page_queryset_for_search = self.exclude_fis_pages(
+                    page_queryset_for_search
+                )
+                search_results = page_queryset_for_search.search(
+                    search_query, operator="and"
+                )
+
                 query = Query.get(search_query)
                 # Record hit
                 query.add_hit()
 
                 if promotions:
                     search_results = list(chain(promotions, search_results))
-
-                search_results = self.exclude_fis_pages(search_results)
 
             else:
                 search_results = Page.objects.none()
