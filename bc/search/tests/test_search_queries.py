@@ -13,14 +13,14 @@ from bc.standardpages.tests.fixtures import IndexPageFactory, InformationPageFac
 
 from .utils import (
     delete_test_indices_from_elasticsearch,
-    search_backend_settings,
+    get_search_settings_for_test,
     update_search_index,
 )
 
 SECOND_HOSTNAME = "second.example"
 
 
-@override_settings(SEARCH_BACKEND=search_backend_settings)
+@override_settings(SEARCH_BACKEND=get_search_settings_for_test())
 @override_settings(ALLOWED_HOSTS=settings.ALLOWED_HOSTS + [SECOND_HOSTNAME])
 class SectionAnnotationsTest(TestCase):
     def setUp(self):

@@ -10,12 +10,12 @@ from bc.standardpages.tests.fixtures import InformationPageFactory
 
 from .utils import (
     delete_test_indices_from_elasticsearch,
-    search_backend_settings,
+    get_search_settings_for_test,
     update_search_index,
 )
 
 
-@override_settings(SEARCH_BACKEND=search_backend_settings)
+@override_settings(SEARCH_BACKEND=get_search_settings_for_test())
 class SearchPromotionsTest(TestCase):
     def setUp(self):
         self.homepage = HomePage.objects.first()
