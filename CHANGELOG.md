@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- 381: Wagtail number list in the editor shouldn't be partially hidden for double digits+
 - 450: Prevent draft `InlineIndexChild` pages from being listed in index and navigation on live pages
 
 ## 30.1 (2020-12-14)
