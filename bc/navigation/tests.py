@@ -79,10 +79,12 @@ class NavigationSettingViewTest(TestCase, WagtailTestUtils):
     def test_edit_columns_and_links(self):
         # Test create navigation with links and column
         form_data = self.get_form_data(include_cloumns=True, include_links=True)
-        response = self.post(post_data=form_data, site_pk=self.default_site.pk,)
-        self.assertEqual(response.status_code, 302)
-        # self.assertEqual(response.status_code, 200)
 
+        response = self.post(post_data=form_data, site_pk=self.default_site.pk,)
+
+        self.assertEqual(
+            response.status_code, 302
+        )  # Reload the page with GET after receiving POST. Therefore its a redirect.
         nav_setting = NavigationSettings.objects.get(site=self.default_site)
         linked_info_page = InformationPage.objects.get(
             pk=nav_setting.footer_links[0].value["page"].id
