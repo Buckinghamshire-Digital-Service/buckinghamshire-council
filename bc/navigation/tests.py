@@ -40,6 +40,26 @@ class NavigationSettingViewTest(TestCase, WagtailTestUtils):
         args = [setting._meta.app_label, setting._meta.model_name, site_pk]
         return reverse("wagtailsettings:edit", args=args)
 
+    def get_form_data(self, include_cloumns, include_links):
+        column_data = (
+            "column",
+            {"heading": "Column Heading", "content": rich_text("Column Content")},
+        )
+        link_data = ("link", {"page": self.info_page.id, "title": "Link Title"})
+
+        included_column_data = []
+        if include_cloumns:
+            included_column_data.append(column_data)
+        included_link_data = []
+        if include_links:
+            included_link_data.append(link_data)
+
+        combined_data = {
+            "footer_columns": streamfield(included_column_data),
+            "footer_links": streamfield(included_link_data),
+        }
+        return nested_form_data(combined_data)
+
     def setUp(self):
         self.login()
 
@@ -58,24 +78,7 @@ class NavigationSettingViewTest(TestCase, WagtailTestUtils):
 
     def test_edit_columns_and_links(self):
         # Test create navigation with links and column
-        form_data = nested_form_data(
-            {
-                "footer_columns": streamfield(
-                    [
-                        (
-                            "column",
-                            {
-                                "heading": "Column Heading",
-                                "content": rich_text("Column Content"),
-                            },
-                        )
-                    ]
-                ),
-                "footer_links": streamfield(
-                    [("link", {"page": self.info_page.id, "title": "Link Title"})]
-                ),
-            }
-        )
+        form_data = self.get_form_data(include_cloumns=True, include_links=True)
         response = self.post(post_data=form_data, site_pk=self.default_site.pk,)
         self.assertEqual(response.status_code, 302)
         # self.assertEqual(response.status_code, 200)
