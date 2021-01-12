@@ -60,6 +60,9 @@ class NavigationSettingViewTest(TestCase, WagtailTestUtils):
         }
         return nested_form_data(combined_data)
 
+    def get_site_navigation_settings(self):
+        return NavigationSettings.objects.get(site=self.default_site)
+
     def setUp(self):
         self.login()
 
@@ -70,13 +73,17 @@ class NavigationSettingViewTest(TestCase, WagtailTestUtils):
 
         self.assertIsNotNone(self.info_page.id)
 
+    def test_initial_site_navigation_settings(self):
+        with self.assertRaises(NavigationSettings.DoesNotExist):
+            self.get_site_navigation_settings()
+
     def test_get_edit(self):
         response = self.get(site_pk=self.default_site.pk)
         self.assertEqual(response.status_code, 200)
         # there should be a menu item highlighted as active
         self.assertContains(response, "menu-active")
 
-    def test_edit_columns_and_links(self):
+    def test_create_navigation_settings_with_columns_and_links(self):
         # Test create navigation with links and column
         form_data = self.get_form_data(include_cloumns=True, include_links=True)
 
@@ -85,7 +92,9 @@ class NavigationSettingViewTest(TestCase, WagtailTestUtils):
         self.assertEqual(
             response.status_code, 302
         )  # Reload the page with GET after receiving POST. Therefore its a redirect.
-        nav_setting = NavigationSettings.objects.get(site=self.default_site)
+        nav_setting = self.get_site_navigation_settings()
+        self.assertNotEqual(nav_setting.footer_links.stream_data, [])
+        self.assertNotEqual(nav_setting.footer_columns.stream_data, [])
         linked_info_page = InformationPage.objects.get(
             pk=nav_setting.footer_links[0].value["page"].id
         )
@@ -99,8 +108,26 @@ class NavigationSettingViewTest(TestCase, WagtailTestUtils):
             "Column Content", nav_setting.footer_columns[0].value["content"].source
         )
 
+    def test_create_navigation_settings_with_columns_wo_links(self):
+        # Test create navigation with only columns
+        form_data = self.get_form_data(include_cloumns=True, include_links=False)
 
-# Test create navigation with only columns
+        response = self.post(post_data=form_data, site_pk=self.default_site.pk,)
+
+        self.assertEqual(
+            response.status_code, 302
+        )  # Reload the page with GET after receiving POST. Therefore its a redirect.
+        nav_setting = self.get_site_navigation_settings()
+        self.assertEqual(nav_setting.footer_links.stream_data, [])
+        self.assertNotEqual(nav_setting.footer_columns.stream_data, [])
+        self.assertEqual(
+            nav_setting.footer_columns[0].value["heading"], "Column Heading"
+        )
+        self.assertIn(
+            "Column Content", nav_setting.footer_columns[0].value["content"].source
+        )
+
+
 # Test create navigation with only links
 
 # Test link title on page for navigation with only links
