@@ -8,13 +8,44 @@ import wagtail.core.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('navigation', '0003_add_footer_columns'),
+        ("navigation", "0003_add_footer_columns"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='navigationsettings',
-            name='footer_columns',
-            field=wagtail.core.fields.StreamField([('column', wagtail.core.blocks.StructBlock([('heading', wagtail.core.blocks.CharBlock(help_text='Leave blank if no header required.', required=False)), ('content', wagtail.core.blocks.RichTextBlock(features=['bold', 'italic', 'ol', 'ul', 'link', 'document-link']))]))], blank=True),
+            model_name="navigationsettings",
+            name="footer_columns",
+            field=wagtail.core.fields.StreamField(
+                [
+                    (
+                        "column",
+                        wagtail.core.blocks.StructBlock(
+                            [
+                                (
+                                    "heading",
+                                    wagtail.core.blocks.CharBlock(
+                                        help_text="Leave blank if no header required.",
+                                        required=False,
+                                    ),
+                                ),
+                                (
+                                    "content",
+                                    wagtail.core.blocks.RichTextBlock(
+                                        features=[
+                                            "bold",
+                                            "italic",
+                                            "ol",
+                                            "ul",
+                                            "link",
+                                            "document-link",
+                                        ]
+                                    ),
+                                ),
+                            ]
+                        ),
+                    )
+                ],
+                blank=True,
+            ),
         ),
     ]

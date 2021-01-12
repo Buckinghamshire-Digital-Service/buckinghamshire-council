@@ -12,17 +12,17 @@ from bc.standardpages.tests.fixtures import InformationPageFactory
 
 class NavigationSettingViewTest(TestCase, WagtailTestUtils):
 
-    # From: https://github.com/wagtail/wagtail/blob/a726c93df489fc14a393047e8eb8f6b864fde089/wagtail/contrib/settings/tests/test_admin.py#L47
+    # From: https://github.com/wagtail/wagtail/blob/a726c93df489fc14a393047e8eb8f6b864fde089/wagtail/contrib/settings/tests/test_admin.py#L47  # noqa: E501
     def get(self, site_pk=1, params={}, setting=NavigationSettings):
         url = self.edit_url(setting=setting, site_pk=site_pk)
         return self.client.get(url, params)
 
-    # From: https://github.com/wagtail/wagtail/blob/a726c93df489fc14a393047e8eb8f6b864fde089/wagtail/contrib/settings/tests/test_admin.py#L47
+    # From: https://github.com/wagtail/wagtail/blob/a726c93df489fc14a393047e8eb8f6b864fde089/wagtail/contrib/settings/tests/test_admin.py#L47  # noqa: E501
     def post(self, site_pk=1, post_data={}, setting=NavigationSettings):
         url = self.edit_url(setting=setting, site_pk=site_pk)
         return self.client.post(url, post_data)
 
-    # From: https://github.com/wagtail/wagtail/blob/a726c93df489fc14a393047e8eb8f6b864fde089/wagtail/contrib/settings/tests/test_admin.py#L47
+    # From: https://github.com/wagtail/wagtail/blob/a726c93df489fc14a393047e8eb8f6b864fde089/wagtail/contrib/settings/tests/test_admin.py#L47  # noqa: E501
     def edit_url(self, setting, site_pk=1):
         args = [setting._meta.app_label, setting._meta.model_name, site_pk]
         return reverse("wagtailsettings:edit", args=args)
