@@ -2,11 +2,12 @@ from django.test import TestCase
 from django.urls import reverse
 from wagtail.core.models import Site
 from wagtail.tests.utils import WagtailTestUtils
-from wagtail.tests.utils.form_data import streamfield, nested_form_data
+from wagtail.tests.utils.form_data import streamfield, nested_form_data, rich_text
 
+from bc.standardpages.models import InformationPage
 from bc.standardpages.tests.fixtures import InformationPageFactory
 
-from bc.navigation.models import NavigationSettings, LinkBlock
+from bc.navigation.models import NavigationSettings
 
 
 class NavigationSettingsModelTest(TestCase):
@@ -55,21 +56,18 @@ class NavigationSettingViewTest(TestCase, WagtailTestUtils):
         # there should be a menu item highlighted as active
         self.assertContains(response, "menu-active")
 
-    def test_edit(self):
+    def test_edit_columns_and_links(self):
+        # Test create navigation with links and column
         form_data = nested_form_data(
             {
                 "footer_columns": streamfield(
                     [
-                        streamfield(
-                            [
-                                (
-                                    "column",
-                                    {
-                                        "heading": "Column Heading",
-                                        "content": "Column Content",
-                                    },
-                                )
-                            ]
+                        (
+                            "column",
+                            {
+                                "heading": "Column Heading",
+                                "content": rich_text("Column Content"),
+                            },
                         )
                     ]
                 ),
@@ -79,17 +77,27 @@ class NavigationSettingViewTest(TestCase, WagtailTestUtils):
             }
         )
         response = self.post(post_data=form_data, site_pk=self.default_site.pk,)
-        # self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
+        # self.assertEqual(response.status_code, 200)
 
-        setting = NavigationSettings.objects.get(site=self.default_site)
-        self.assertEqual(setting.footer_links[0].value["page"], self.info_page)
-        self.assertEqual(setting.footer_links[0].value["title"], "Link Title")
+        nav_setting = NavigationSettings.objects.get(site=self.default_site)
+        linked_info_page = InformationPage.objects.get(
+            pk=nav_setting.footer_links[0].value["page"].id
+        )
+        self.assertEqual(linked_info_page, self.info_page)
+        self.assertEqual(nav_setting.footer_links[0].value["title"], "Link Title")
+        self.assertEqual(linked_info_page, self.info_page)
+        self.assertEqual(
+            nav_setting.footer_columns[0].value["heading"], "Column Heading"
+        )
+        self.assertIn(
+            "Column Content", nav_setting.footer_columns[0].value["content"].source
+        )
 
+
+# Test create navigation with only columns
+# Test create navigation with only links
 
 # Test link title on page for navigation with only links
-# Test create navigation with only columns
 # Test column content on page for navigation with only column
-# Test create navigation with links and column
-# Test link title column content on page for navigation with only column
-# Test create navigation without links or column fails
+# Test link title and column content on page for navigation with column and links
