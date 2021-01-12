@@ -10,19 +10,6 @@ from bc.standardpages.models import InformationPage
 from bc.standardpages.tests.fixtures import InformationPageFactory
 
 
-class NavigationSettingsModelTest(TestCase):
-    def test_create_navigation_with_only_links(self):
-        site = Site.objects.first()
-        root_page = site.root_page
-        info_page = InformationPageFactory.build()
-        root_page.add_child(instance=info_page)
-        link_block = ("link", {"page": info_page, "title": "Link Title"})
-
-        nav_settings = NavigationSettings.objects.create(
-            footer_links=[link_block], site=site
-        )
-
-
 class NavigationSettingViewTest(TestCase, WagtailTestUtils):
 
     # From: https://github.com/wagtail/wagtail/blob/a726c93df489fc14a393047e8eb8f6b864fde089/wagtail/contrib/settings/tests/test_admin.py#L47
