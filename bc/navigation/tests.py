@@ -1,13 +1,13 @@
 from django.test import TestCase
 from django.urls import reverse
+
 from wagtail.core.models import Site
 from wagtail.tests.utils import WagtailTestUtils
-from wagtail.tests.utils.form_data import streamfield, nested_form_data, rich_text
-
-from bc.standardpages.models import InformationPage
-from bc.standardpages.tests.fixtures import InformationPageFactory
+from wagtail.tests.utils.form_data import nested_form_data, rich_text, streamfield
 
 from bc.navigation.models import NavigationSettings
+from bc.standardpages.models import InformationPage
+from bc.standardpages.tests.fixtures import InformationPageFactory
 
 
 class NavigationSettingsModelTest(TestCase):
@@ -145,7 +145,41 @@ class NavigationSettingViewTest(TestCase, WagtailTestUtils):
         self.assertEqual(linked_info_page, self.info_page)
         self.assertEqual(nav_setting.footer_links[0].value["title"], "Link Title")
 
+    def test_created_columns_and_links_displayed(self):
+        form_data = self.get_form_data(include_cloumns=True, include_links=True)
+        self.post(
+            post_data=form_data, site_pk=self.default_site.pk,
+        )
 
-# Test link title on page for navigation with only links
-# Test column content on page for navigation with only column
-# Test link title and column content on page for navigation with column and links
+        response = self.client.get(self.root_page.url)
+
+        self.assertContains(response, "Link Title")
+        self.assertContains(response, self.info_page.url)
+        self.assertContains(response, "Column Heading")
+        self.assertContains(response, "Column Content")
+
+    def test_created_columns_displayed(self):
+        form_data = self.get_form_data(include_cloumns=True, include_links=False)
+        self.post(
+            post_data=form_data, site_pk=self.default_site.pk,
+        )
+
+        response = self.client.get(self.root_page.url)
+
+        self.assertNotContains(response, "Link Title")
+        self.assertNotContains(response, self.info_page.url)
+        self.assertContains(response, "Column Heading")
+        self.assertContains(response, "Column Content")
+
+    def test_created_links_displayed(self):
+        form_data = self.get_form_data(include_cloumns=False, include_links=True)
+        self.post(
+            post_data=form_data, site_pk=self.default_site.pk,
+        )
+
+        response = self.client.get(self.root_page.url)
+
+        self.assertContains(response, "Link Title")
+        self.assertContains(response, self.info_page.url)
+        self.assertNotContains(response, "Column Heading")
+        self.assertNotContains(response, "Column Content")
