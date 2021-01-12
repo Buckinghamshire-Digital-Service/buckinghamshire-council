@@ -127,8 +127,24 @@ class NavigationSettingViewTest(TestCase, WagtailTestUtils):
             "Column Content", nav_setting.footer_columns[0].value["content"].source
         )
 
+    def test_create_navigation_settings_wo_columns_with_links(self):
+        # Test create navigation with only links
+        form_data = self.get_form_data(include_cloumns=False, include_links=True)
 
-# Test create navigation with only links
+        response = self.post(post_data=form_data, site_pk=self.default_site.pk,)
+
+        self.assertEqual(
+            response.status_code, 302
+        )  # Reload the page with GET after receiving POST. Therefore its a redirect.
+        nav_setting = self.get_site_navigation_settings()
+        self.assertNotEqual(nav_setting.footer_links.stream_data, [])
+        self.assertEqual(nav_setting.footer_columns.stream_data, [])
+        linked_info_page = InformationPage.objects.get(
+            pk=nav_setting.footer_links[0].value["page"].id
+        )
+        self.assertEqual(linked_info_page, self.info_page)
+        self.assertEqual(nav_setting.footer_links[0].value["title"], "Link Title")
+
 
 # Test link title on page for navigation with only links
 # Test column content on page for navigation with only column
