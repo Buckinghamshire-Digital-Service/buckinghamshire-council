@@ -12,8 +12,6 @@ Ticket URL:
 - [ ] Add tests, especially for bug fixes. If you don't, tell us why.
 - [ ] Tests and linting passes.
 - [ ] Update documentation. If you don't, tell us why.
-- [ ] Summarise your changes in CHANGELOG.md under a new `## x.x+1` section.
-- [ ] Add a 'comparison' line to show the diff for this release.
 
 Review and release process:
 
@@ -26,3 +24,10 @@ Review and release process:
 - [ ] QA on staging by client or DM, with a clone of production data if necessary.
 
 Okay, now you may merge.
+
+Post-release process (perform the following steps directly on `master`):
+
+- [ ] Tag the merge commit (`git tag x.(x+1); git push --tags`)
+- [ ] Summarise your changes in CHANGELOG.md under a new `## x.x+1` section.
+- [ ] Add a 'comparison' line to show the diff for this release in CHANGELOG.md.
+- [ ] Merge `master` into `release`
