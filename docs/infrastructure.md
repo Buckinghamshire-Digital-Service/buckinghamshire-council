@@ -48,9 +48,11 @@ Search synonyms can be edited in the Wagtail admin, where any terms in the `syno
 
 ### Developing the Elasticsearch search engine configuration
 
-The Vagrant box will default to using Postgres for search, and ignoring some of the extra search features such as synonyms. However, it does have Elasticsearch5 installed. To use this, set the search backend in local settings to `bc.search.elasticsearch5` and the URL to "http://localhost:9200".
+The Vagrant box will default to using Postgres for search, and ignoring some of the extra search features such as synonyms. However, it does have Elasticsearch5 installed. To use this, set the search backend in local settings to `bc.search.elasticsearch5` and the URL to "http://localhost:9200". You will also have to install the proper version of the Elasticsearch library that wagtail will use under the hood: `pip install "elasticsearch>=5.0.0,<6.0.0"  # for Elasticsearch 5.x`. 
 
 Alternatively, use a free Bonsai sandbox Elasticsearch instance, and set these credentials locally, using the `bc.search.elasticsearch7` backend. An example of this configuration is in `bc/settings/local.py.example`.
+
+Be sure to run `dj update_index` before manually testing search features. This command will create (or update) the necessary index in Elasticsearch and fill it with the current content. If this is not run when a fresh Elasticsearch instance is used, then the index does not exist and the search requests will fail. (On production and staging this command is run during deployment and on a daily schedule to update the index content.)
 
 ## File storage
 
