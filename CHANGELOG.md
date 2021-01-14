@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## 30.3 (2021-01-14)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/30.2...30.3
+
+- 490: Bump `notifications-python-client` to version 5.7.1 for `PyJWT` 2.0.0 compatibility (fix email send errors)
+
 ## 30.2 (2021-01-13)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/30.1...30.2
