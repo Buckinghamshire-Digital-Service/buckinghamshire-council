@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- 366: Annotate search results with section or site name
 - 467: Enable automatic creation of redirects for moving pages and slug changes.
 
 ## 31.0 (2021-01-19)
@@ -69,8 +70,7 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/27.0...28.0
 - Accessibility 12 Fix HTML validation error for duplicated IDs when searching
 - Fix edge-case failure with middleware is_recruitment_site check
 - Fix form errors in pattern library
-- Upgrade Wagtail to 2.10.2
-- Annotate search results with section or site name
+
 
 ## 27.0 (2020-10-15)
 
