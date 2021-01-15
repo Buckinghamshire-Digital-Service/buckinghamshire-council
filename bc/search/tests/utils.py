@@ -6,9 +6,7 @@ from wagtail.search.backends import get_search_backend
 ORIGINAL_INDEX_NAME = settings.WAGTAILSEARCH_BACKENDS["default"].get("INDEX")
 
 
-def is_elasticsearch_backend(backend=None):
-    if backend is None:
-        backend = get_search_backend()
+def is_elasticsearch_backend(backend):
     return hasattr(backend, "es")
 
 
@@ -26,7 +24,8 @@ def delete_test_indices_from_elasticsearch():
 
 def get_search_settings_for_test():
     search_backend_settings = settings.WAGTAILSEARCH_BACKENDS
-    if is_elasticsearch_backend():
+    backend = get_search_backend()
+    if is_elasticsearch_backend(backend):
         search_backend_settings["default"]["INDEX"] = get_index_name_for_test()
     return search_backend_settings
 
