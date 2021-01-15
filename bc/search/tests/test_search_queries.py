@@ -4,6 +4,7 @@ from django.urls import reverse
 
 from wagtail.contrib.search_promotions.models import SearchPromotion
 from wagtail.core.models import Page, Site
+from wagtail.search.backends import get_search_backend
 from wagtail.search.models import Query
 
 from bc.home.models import HomePage
@@ -14,6 +15,7 @@ from bc.standardpages.tests.fixtures import IndexPageFactory, InformationPageFac
 from .utils import (
     delete_test_indices_from_elasticsearch,
     get_search_settings_for_test,
+    is_elasticsearch_backend,
     update_search_index,
 )
 
@@ -122,8 +124,13 @@ class SectionAnnotationsTest(TestCase):
             self.assertEqual(result.section_label, expected_section_labels[result.pk])
 
     def test_queries(self):
+        """Test number of queries is O(1) not O(n)."""
+        expected_queries = 1
+        if is_elasticsearch_backend(get_search_backend()):
+            expected_queries = 2
         results = self.get_results("Zuul")
-        with self.assertNumQueries(1):
+
+        with self.assertNumQueries(expected_queries):
             for result in results:
                 result
                 result.section_label
