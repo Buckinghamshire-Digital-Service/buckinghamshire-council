@@ -71,7 +71,6 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/27.0...28.0
 - Fix edge-case failure with middleware is_recruitment_site check
 - Fix form errors in pattern library
 
-
 ## 27.0 (2020-10-15)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/26.0...27.0
