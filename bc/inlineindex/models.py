@@ -4,17 +4,26 @@ from django.utils.functional import cached_property
 from modelcluster.fields import ParentalKey
 from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
 from wagtail.core.fields import StreamField
+from wagtail.core.models import Page
 from wagtail.search import index
 
 from bc.utils.blocks import StoryBlock
 from bc.utils.models import BasePage, RelatedPage
 
 
+class InlineIndexDraftMixin(object):
+    def draft_for_page_available(self):
+        return self.has_unpublished_changes or not self.live
+
+    def viewing_page_draft(self, request):
+        return request.is_preview and self.draft_for_page_available()
+
+
 class InlineIndexRelatedPage(RelatedPage):
     source_page = ParentalKey("InlineIndex", related_name="related_pages")
 
 
-class InlineIndex(BasePage):
+class InlineIndex(InlineIndexDraftMixin, BasePage):
     template = "patterns/pages/inlineindex/inline_index_page.html"
 
     subtitle = models.CharField(
@@ -53,20 +62,40 @@ class InlineIndex(BasePage):
             and len(related_page.page.view_restrictions.all()) == 0
         ]
 
-    def get_index(self):
-        return [self] + list(self.get_children().specific())
+    def get_index(self, include_draft_children=False):
+        index_queryset = Page.objects.page(self)
 
-    def get_next_page(self):
+        children = self.get_children().specific()
+        if not include_draft_children:
+            children = children.live()
+
+        return index_queryset.union(children)
+
+    def get_next_page(self, include_draft_children=False):
         """ In fact returns the first child, instead, as this page acts as the
         first item in the index.
         """
-        first_child = self.get_children().first()
+        children = self.get_children()
+        if not include_draft_children:
+            children = children.live()
+
+        first_child = children.first()
 
         if first_child:
             return first_child.specific
 
+    def get_context(self, request):
+        context = super().get_context(request)
 
-class InlineIndexChild(BasePage):
+        include_draft_children = self.viewing_page_draft(request)
+
+        context["index"] = self.get_index(include_draft_children)
+        context["next_page"] = self.get_next_page(include_draft_children)
+
+        return context
+
+
+class InlineIndexChild(InlineIndexDraftMixin, BasePage):
 
     body = StreamField(StoryBlock())
 
@@ -93,27 +122,43 @@ class InlineIndexChild(BasePage):
     def live_related_pages(self):
         return self.get_parent().specific.live_related_pages
 
-    def get_index(self):
-        return self.get_parent().specific.get_index()
+    def get_index(self, include_draft_children=False):
+        return self.get_parent().specific.get_index(include_draft_children)
 
-    def get_next_page(self):
+    def get_next_page(self, include_draft_pages=False):
         """ Return the next sibling, if there is one. NB this is implemented
         differently on InlineIndex.
         """
-        next_sibling = self.get_next_sibling()
+        next_siblings = self.get_next_siblings()
+        if not include_draft_pages:
+            next_siblings = next_siblings.live()
 
+        next_sibling = next_siblings.first()
         if next_sibling:
             return next_sibling.specific
 
-    def get_template(self, request):
-        return InlineIndex().get_template(request)
-
-    def get_prev_page(self):
+    def get_prev_page(self, include_draft_pages=False):
         """ Return the previous sibling, or in the case of a first child, the
         parent. NB this method is not implemented on InlineIndex, so the
         template just gets None.
         """
-        prev_sibling = self.get_prev_sibling() or self.get_parent()
+        prev_siblings = self.get_prev_siblings()
+        if not include_draft_pages:
+            prev_siblings = prev_siblings.live()
 
+        prev_sibling = prev_siblings.first() or self.get_parent()
         if prev_sibling:
             return prev_sibling.specific
+
+    def get_context(self, request):
+        context = super().get_context(request)
+
+        include_draft_pages = self.viewing_page_draft(request)
+
+        context["index"] = self.get_index(include_draft_pages)
+        context["next_page"] = self.get_next_page(include_draft_pages)
+        context["prev_page"] = self.get_prev_page(include_draft_pages)
+        return context
+
+    def get_template(self, request):
+        return InlineIndex().get_template(request)

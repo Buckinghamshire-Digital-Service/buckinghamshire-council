@@ -13,7 +13,7 @@
         {% endif %}
     </h1>
 
-    {% with page_links=page.get_index %}
+    {% with page_links=index %}
     <nav class="index-nav" aria-label="Pages in this section">
         <h2 class="index-nav__title">Contents</h2>
         <ul class="index-nav__list">
@@ -45,7 +45,7 @@
                 {{ page.body }}
 
                 <div class="index-pagination">
-                    {% with next_sibling=page.get_next_page prev_sibling=page.get_prev_page %}
+                    {% with next_sibling=next_page prev_sibling=prev_page %}
                         <ul class="index-pagination__list">
                             <li class="index-pagination__item index-pagination__item--previous">
                                 {% if prev_sibling %}

@@ -1,6 +1,12 @@
 # Release History
 
-## Unreleased
+## 31.0 (2021-01-19)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/30.3...31.0
+
+- 381: Wagtail number list in the editor shouldn't be partially hidden for double digits+
+- 450: Prevent draft `InlineIndexChild` pages from being listed in index and navigation on live pages
+- 477: Upgrade Wagtail to 2.11
 
 ## 30.3 (2021-01-14)
 
