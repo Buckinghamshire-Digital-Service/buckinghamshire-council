@@ -2,9 +2,25 @@
 
 ## Unreleased
 
+- 381: Wagtail number list in the editor shouldn't be partially hidden for double digits+
+- 450: Prevent draft `InlineIndexChild` pages from being listed in index and navigation on live pages
 - 477: Upgrade Wagtail to 2.11
 
+## 30.3 (2021-01-14)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/30.2...30.3
+
+- 490: Bump `notifications-python-client` to version 5.7.1 for `PyJWT` 2.0.0 compatibility (fix email send errors)
+
+## 30.2 (2021-01-13)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/30.1...30.2
+
+- 464: Remove footer columns requirement in navigation settings
+
 ## 30.1 (2020-12-14)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/30.0...30.1
 
 - 478: Exclude FIS pages from search (temporary fix until FIS content is ready)
 

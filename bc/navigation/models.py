@@ -33,10 +33,11 @@ class NavigationSettings(BaseSetting, ClusterableModel):
     footer_columns = StreamField(
         StreamBlock(
             [("column", ColumnWithHeader())],
-            blank=True,
+            required=False,
             help_text="Columns of free text above the base footer.",
             max_num=3,
-        )
+        ),
+        blank=True,
     )
     footer_links = StreamField(
         [("link", LinkBlock())],
