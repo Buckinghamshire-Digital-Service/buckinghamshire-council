@@ -2,8 +2,6 @@ from urllib.parse import urlencode
 
 from django import template
 
-from bc.news.models import NewsPage
-
 register = template.Library()
 
 
@@ -35,12 +33,6 @@ def slice_pagination(page_range, current_page):
 
     # Show 4 pages before and 3 pages after the current page
     return page_range[current_page - 5 : current_page + 3]
-
-
-@register.filter
-def is_news_page(page):
-    """Return True if page is a news page."""
-    return isinstance(page, NewsPage)
 
 
 @register.simple_tag(takes_context=True)
