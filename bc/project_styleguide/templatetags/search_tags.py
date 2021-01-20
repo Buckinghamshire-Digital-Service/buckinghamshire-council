@@ -35,6 +35,11 @@ def slice_pagination(page_range, current_page):
     return page_range[current_page - 5 : current_page + 3]
 
 
+@register.filter
+def is_news_page(page):
+    """Return True if page is a news page."""
+
+
 @register.simple_tag(takes_context=True)
 def pagination_link(context, page_number, page_param_name="page"):
     """Returns a URL to the specified page, keeping the GET parameters intact"""
