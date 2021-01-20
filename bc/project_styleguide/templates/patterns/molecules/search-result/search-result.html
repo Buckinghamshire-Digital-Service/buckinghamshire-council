@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailsearchpromotions_tags wagtailimages_tags local_area_links_tags %}
+{% load static wagtailcore_tags wagtailsearchpromotions_tags wagtailimages_tags local_area_links_tags news_tags %}
 
 <div class="search-result">
     {% if section_label %}
@@ -12,6 +12,10 @@
 
     {% if pick.description or result.listing_summary or result.search_description %}
         <p class="search-result__description">{% firstof pick.description result.listing_summary result.search_description %}</p>
+    {% endif %}
+
+    {% if result|is_news_page %}
+        <span class="search-result__date">{{ result.display_date|date:"d M Y" }}</span>
     {% endif %}
 
     {% local_area_links result %}

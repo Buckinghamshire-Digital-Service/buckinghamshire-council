@@ -17,6 +17,12 @@
         margin: 5px 0;
     }
 
+    &__date {
+        @include font-size(xxs);
+        color: $color--grey-dark;
+        margin: 5px 0;
+    }
+
     &__meta-list {
         display: grid;
         grid-template-columns: minmax(min-content, max-content) 1fr;
