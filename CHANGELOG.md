@@ -4,6 +4,7 @@
 
 - 366: Annotate search results with section or site name
 - 467: Enable automatic creation of redirects for moving pages and slug changes.
+- 483: Add date to news pages in search results
 
 ## 31.0 (2021-01-19)
 
