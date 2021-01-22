@@ -15,7 +15,7 @@
     {% endif %}
 
     {% if result|is_news_page %}
-        <span class="search-result__date">{{ result.display_date|date:"d M Y" }}</span>
+        <time class="search-result__date" datetime="{{ result.display_date|date:'Y-m-d' }}">{{ result.display_date|date:"j M Y" }}</time>
     {% endif %}
 
     {% local_area_links result %}
