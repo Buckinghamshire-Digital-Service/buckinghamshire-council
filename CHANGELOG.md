@@ -70,10 +70,6 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/27.0...28.0
 - Accessibility 12 Fix HTML validation error for duplicated IDs when searching
 - Fix edge-case failure with middleware is_recruitment_site check
 - Fix form errors in pattern library
-<<<<<<< HEAD
-=======
-
->>>>>>> 6cb8da6a (Fix CHANGELOG)
 
 ## 27.0 (2020-10-15)
 
