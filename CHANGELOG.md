@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- 366: Annotate search results with section or site name
 - 467: Enable automatic creation of redirects for moving pages and slug changes.
 
 ## 31.0 (2021-01-19)

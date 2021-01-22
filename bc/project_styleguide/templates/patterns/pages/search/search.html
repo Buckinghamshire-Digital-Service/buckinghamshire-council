@@ -40,9 +40,9 @@
                 {% for result in search_results %}
                     {% if result.page %}
                         {# search_promotion has attributes .page and .description #}
-                        {% include "patterns/molecules/search-result/search-result.html" with pick=result result=result.page.specific %}
+                        {% include "patterns/molecules/search-result/search-result.html" with pick=result result=result.page.specific section_label=result.section_label %}
                     {% else %}
-                        {% include "patterns/molecules/search-result/search-result.html" with result=result.specific %}
+                        {% include "patterns/molecules/search-result/search-result.html" with result=result.specific section_label=result.section_label %}
                     {% endif %}
                 {% endfor %}
 

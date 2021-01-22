@@ -1,5 +1,6 @@
 .search-result {
     margin-bottom: $grid;
+    margin-top: $grid;
 
     &__logo {
         float: right;
@@ -8,6 +9,12 @@
 
     &__description {
         margin: 0;
+    }
+
+    &__label {
+        @include font-size(xxs);
+        color: $color--grey-dark;
+        margin: 5px 0;
     }
 
     &__meta-list {
@@ -23,5 +30,9 @@
 
     &__meta-description {
         margin: 0;
+    }
+
+    &__title {
+        margin-top: 0;
     }
 }
