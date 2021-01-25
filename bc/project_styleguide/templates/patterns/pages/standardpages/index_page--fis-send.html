@@ -21,8 +21,7 @@
                     {% if forloop.counter0 < 3 %}
                         <div class="card__image">
                             {% image subpage.listing_image fill-350x250 as desktop_image %}
-                            {% image subpage.listing_image fill-700x500 as retina_desktop_image %}
-                            {% include "patterns/atoms/image/image.html" with mobile_image=desktop_image retina_mobile_image=desktop_image desktop_image=desktop_image retina_desktop_image=retina_desktop_image alt=subpage.listing_image.alt_text %}
+                            {% include "patterns/atoms/image/image.html" with mobile_image=desktop_image retina_mobile_image=desktop_image desktop_image=desktop_image alt=subpage.listing_image.alt_text %}
                         </div>
                     {% endif %}
 

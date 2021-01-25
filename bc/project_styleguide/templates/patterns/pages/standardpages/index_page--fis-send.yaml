@@ -31,10 +31,6 @@ tags:
       target_var: desktop_image
       raw:
         url: https://placekitten.com/g/350/250
-    subpage.listing_image fill-700x500 as retina_desktop_image:
-      target_var: retina_desktop_image
-      raw:
-        url: https://placekitten.com/g/700/500
   pageurl:
     subpage:
       raw: '#'

@@ -11,7 +11,3 @@ tags:
       target_var: desktop_image
       raw:
         url: https://placekitten.com/g/700/250
-    page.banner_image fill-1400x500 as retina_desktop_image:
-      target_var: retina_desktop_image
-      raw:
-        url: https://placekitten.com/g/1400/500

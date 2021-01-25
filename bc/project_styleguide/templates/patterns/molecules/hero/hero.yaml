@@ -12,10 +12,6 @@ tags:
       target_var: mobile_image
       raw:
         url: https://placekitten.com/g/450/200
-    page.hero_image fill-2880x500 as retina_desktop_image:
-      target_var: retina_desktop_image
-      raw:
-        url: https://placekitten.com/g/2880/500
     page.hero_image fill-900x400 as retina_mobile_image:
       target_var: retina_mobile_image
       raw:
