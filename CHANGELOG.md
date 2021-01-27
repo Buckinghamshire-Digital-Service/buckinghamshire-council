@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 32.0 (2021-01-27)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/31.0...32.0
+
 - 335: Responsive images for mobile
 - 366: Annotate search results with section or site name
 - 392: Use default sharing text if no sharing text set on page
