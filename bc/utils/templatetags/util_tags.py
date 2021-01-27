@@ -12,9 +12,12 @@ register = template.Library()
 @register.filter(name="social_text")
 def social_text(page, site):
     try:
-        return page.social_text
+        if page.social_text:
+            return page.social_text
     except AttributeError:
-        return SocialMediaSettings.for_site(site).default_sharing_text
+        pass
+
+    return SocialMediaSettings.for_site(site).default_sharing_text
 
 
 # Get widget type of a field
