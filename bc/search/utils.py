@@ -21,4 +21,11 @@ def get_synonyms(force_update=False):
             for term in Term.objects.all()
         ]
         cache.set(SYNONYMS_CACHE_KEY, synonyms)
+
+    if not synonyms:
+        # Only necessary for Elasticsearch5 backend. The list can not be empty.
+        # An empty list with the Elasticsearch5 backend will result in:
+        # elasticsearch.exceptions.RequestError: RequestError(400, 'illegal_argument_exception', 'synonym requires either `synonyms` or `synonyms_path` to be configured')  # noqa: E501
+        synonyms = [""]
+
     return synonyms

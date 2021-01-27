@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     "bc.utils",
     "rest_framework",
     "wagtailorderable",
+    "wagtail_automatic_redirects",
     "wagtail.contrib.modeladmin",
     "wagtail.contrib.postgres_search",
     "wagtail.contrib.settings",

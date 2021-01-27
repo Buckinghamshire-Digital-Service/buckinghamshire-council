@@ -1,5 +1,17 @@
 # Release History
 
+## Unreleased
+
+## 32.0 (2021-01-27)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/31.0...32.0
+
+- 335: Responsive images for mobile
+- 366: Annotate search results with section or site name
+- 392: Use default sharing text if no sharing text set on page
+- 467: Enable automatic creation of redirects for moving pages and slug changes.
+- 483: Add date to news pages in search results
+
 ## 31.0 (2021-01-19)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/30.3...31.0

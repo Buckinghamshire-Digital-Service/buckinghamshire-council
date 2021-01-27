@@ -12,8 +12,10 @@ responses==0.10.9
 tabulate==0.8.7
 wagtail-factories==2.0.0
 wagtail-orderable==1.0.3
+wagtail-automatic-redirects==1.1.5
 urllib3==1.25.11
 zeep==3.4.0
+
 
 # Production dependencies
 whitenoise[brotli]==4.1.2

@@ -1,6 +1,9 @@
 {% load wagtailimages_tags %}
 
 <div class="image-block">
-    {% image value.image width-1000 alt=value.alt_text %}
+    {% image value.image width-400 as mobile_image %}
+    {% image value.image width-800 as retina_mobile_image %}
+    {% image value.image width-650 as desktop_image %}
+    {% include "patterns/atoms/image/image.html" with mobile_image=mobile_image retina_mobile_image=retina_mobile_image desktop_image=desktop_image alt=value.alt_text %}
     <p class="image-block__caption">{{ value.caption }}</p>
 </div>
