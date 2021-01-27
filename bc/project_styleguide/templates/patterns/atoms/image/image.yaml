@@ -1,0 +1,8 @@
+context:
+  alt: Lorem ipsum
+  desktop_image:
+    url: https://placekitten.com/g/650/300
+  mobile_image:
+    url: https://placekitten.com/g/400/250
+  retina_mobile_image:
+    url: https://placekitten.com/g/800/500

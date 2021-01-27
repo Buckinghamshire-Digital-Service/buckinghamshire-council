@@ -1,9 +1,13 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
-
-{% image call_to_action.image min-1024x340 as image %}
 {% if call_to_action %}
-    <div class="highlighted-content" style="background-image: url('{{ image.url }}');">
+
+    {% image call_to_action.image fill-450x350 as mobile_image %}
+    {% image call_to_action.image fill-900x700 as retina_mobile_image %}
+    {% image call_to_action.image fill-990x350 as desktop_image %}
+    {% include "patterns/atoms/image/background-image-style.html" with mobile_image=mobile_image retina_mobile_image=retina_mobile_image desktop_image=desktop_image %}
+
+    <div class="highlighted-content background-image-style">
         <div class="highlighted-content__content">
             <h2 class="highlighted-content__title heading">{{ call_to_action.title }}</h2>
 
@@ -18,4 +22,5 @@
             {% endfor %}
         </div>
     </div>
+
 {% endif %}

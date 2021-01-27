@@ -28,8 +28,10 @@ context:
 
 tags:
   image:
-    subpage.listing_image fill-600x500:
-      raw: '<img src="https://via.placeholder.com/600x500">'
+    subpage.listing_image fill-350x250 as desktop_image:
+      target_var: desktop_image
+      raw:
+        url: https://placekitten.com/g/350/250
   pageurl:
     subpage:
       raw: '#'
