@@ -3,6 +3,7 @@
 ## Unreleased
 
 - 366: Annotate search results with section or site name
+- 392: Use default sharing text if no sharing text set on page
 - 467: Enable automatic creation of redirects for moving pages and slug changes.
 - 483: Add date to news pages in search results
 
