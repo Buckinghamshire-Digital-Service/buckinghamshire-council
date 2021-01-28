@@ -3,8 +3,8 @@
 {% image page.hero_image fill-450x350 as mobile_image %}
 {% image page.hero_image fill-900x700 as retina_mobile_image %}
 {% image page.hero_image fill-1440x350 as desktop_image %}
-{% include "patterns/atoms/image/background-image-style.html" with id="hero" mobile_image=mobile_image retina_mobile_image=retina_mobile_image desktop_image=desktop_image %}
-<div id="hero" class="hero hero--jobs hero--with-search background-image-style">
+{% include "patterns/atoms/image/background-image-style.html" with class="hero" mobile_image=mobile_image retina_mobile_image=retina_mobile_image desktop_image=desktop_image %}
+<div class="hero hero--jobs hero--with-search background-image-style">
     <div class="wrapper wrapper--large">
         <h1 class="hero__strapline heading heading--xxxl">{{ page.hero_title }}</h1>
 

@@ -22,6 +22,6 @@
         </div>
     </div>
     {% image page.banner_image fill-700x250 as desktop_image %}
-    {% include "patterns/atoms/image/background-image-style.html" with id="directory-banner-image" mobile_image=desktop_image retina_mobile_image=desktop_image desktop_image=desktop_image alt=page.banner_image.alt_text %}
-    <div id="directory-banner-image" class="directory-banner__image background-image-style"></div>
+    {% include "patterns/atoms/image/background-image-style.html" with class="directory-banner__image" mobile_image=desktop_image retina_mobile_image=desktop_image desktop_image=desktop_image alt=page.banner_image.alt_text %}
+    <div class="directory-banner__image background-image-style"></div>
 </div>
