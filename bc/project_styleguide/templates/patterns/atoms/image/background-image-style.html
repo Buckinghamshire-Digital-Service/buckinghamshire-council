@@ -1,16 +1,16 @@
 <style>
-    .background-image-style {
+    {% if id %}#{{ id }}{% endif %}.background-image-style {
         background-image: url({{ mobile_image.url }});
     }
 
     @media only screen and ((-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)) {
-        .background-image-style {
+        {% if id %}#{{ id }}{% endif %}.background-image-style {
             background-image: url({{ retina_mobile_image.url }});
         }
     }
 
     @media only screen and (min-width: 768px) {
-        .background-image-style {
+        {% if id %}#{{ id }}{% endif %}.background-image-style {
             background-image: url({{ desktop_image.url }});
         }
     }
