@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+
+## 32.1 (2021-01-28)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/32.0...32.1
+
+- 335: Fix so that component images aren't overwritten
+
 ## 32.0 (2021-01-27)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/31.0...32.0
