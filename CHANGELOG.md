@@ -2,7 +2,6 @@
 
 ## Unreleased
 
-
 ## 32.1 (2021-01-28)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/32.0...32.1
