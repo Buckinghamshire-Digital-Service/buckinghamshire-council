@@ -56,8 +56,6 @@ Be sure to run `dj update_index` before manually testing search features. This c
 
 ## File storage
 
-Does this use AWS S3? Via Buckup? Is it open to the public?
-
 ## DNS
 
 ## TLS/SSL/HTTPS
