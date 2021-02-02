@@ -27,7 +27,7 @@ django-storages[boto3]==1.7.1
 django-referrer-policy==1.0
 django-csp==3.5
 scout-apm==2.0.2
-django-basic-auth-ip-whitelist==0.2.1
+git+https://github.com/tm-kn/django-basic-auth-ip-whitelist.git@318006b15b598c035cf52031c8fa63dbf241440f#egg=django-basic-auth-ip-whitelist
 
 # Fixing dependency of notifications-python-client
 PyJWT==2.0.0
