@@ -47,8 +47,13 @@ class QuoteBlock(blocks.StructBlock):
 class HighlightBlock(blocks.RichTextBlock):
     class Meta:
         icon = "pick"
-        features = RICH_TEXT_FEATURES
         template = "patterns/molecules/streamfield/blocks/highlight_block.html"
+
+    def __init__(self, *args, **kwargs):
+        # Setting features in class Meta doesn't work, so add it on init
+        default_features = ["h3", "big-text"] + RICH_TEXT_FEATURES
+        features = kwargs.get("features", default_features)
+        super().__init__(self, *args, features=features, **kwargs)
 
 
 class LocalAreaLinksBlock(blocks.StructBlock):

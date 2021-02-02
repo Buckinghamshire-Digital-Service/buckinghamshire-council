@@ -1,5 +1,5 @@
 {% extends base_page_template %}
-{% load wagtailcore_tags %}
+{% load longform_tags wagtailcore_tags %}
 
 {% block body_class %}{{ block.super }} template-longform{% endblock %}
 
@@ -16,24 +16,52 @@
         {# Table of Contents #}
         <nav class="index-nav sidebar" aria-label="Pages in this section" id="contents">
             <h2 class="index-nav__title">Contents</h2>
-            <ul class="index-nav__list">
-                {% for link in page.get_index %}
-                    {% if link.id == page.id %}
-                        <li class="index-nav__item index-nav__item--current" aria-current="Page">
-                            <span class="index-nav__link">{{ link.subtitle|default:link }}</span>
-                        </li>
-                    {% else %}
-                        <li class="index-nav__item">
-                            <a class="index-nav__link" href="{% pageurl link %}">{{ link.subtitle|default:link }}</a>
-                        </li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
+
+            {% if page.chapter_number %}
+                <ol class="index-nav__list">
+            {% else %}
+                <ul class="index-nav__list">
+            {% endif %}
+
+            {% for link in page.get_index %}
+                {% if link.id == page.id %}
+                    <li class="index-nav__item index-nav__item--current" aria-current="Page">
+                        <span class="index-nav__prefix">
+                            {% if link.chapter_number %}
+                                {{ link.chapter_number }}.
+                            {% else %}
+                                —
+                            {% endif %}
+                        </span>
+                        <span class="index-nav__link">{{ link.subtitle|default:link }}</span>
+                    </li>
+                {% else %}
+                    <li class="index-nav__item">
+                        <span class="index-nav__prefix">
+                            {% if link.chapter_number %}
+                                {{ link.chapter_number }}.
+                            {% else %}
+                                —
+                            {% endif %}
+                        </span>
+                        <a class="index-nav__link" href="{% pageurl link %}">{{ link.subtitle|default:link }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if page.chapter_number %}
+                </ol>
+            {% else %}
+                </ul>
+            {% endif %}
         </nav>
 
         {# Content proper #}
         <div class="section section--main section--inline-index main-body">
             <h2 class="heading heading--xl">
+                {% if page.chapter_number %}
+                    {{ page.chapter_number }}.
+                {% endif %}
                 {% if page.is_chapter_page %}
                     {{ page.title }}
                 {% else %}
@@ -41,7 +69,7 @@
                 {% endif %}
             </h2>
 
-            {{ page.body }}
+            {{ page.body|process_block_numbers:page.chapter_number }}
         </div>
 
     </div>

@@ -1,4 +1,6 @@
 .highlight {
     background-color: $color--grey-light;
-    padding: $grid;
+    border-left: 4px solid $color--leaf;
+    margin: $grid--small 0;
+    padding: $grid / 2;
 }
