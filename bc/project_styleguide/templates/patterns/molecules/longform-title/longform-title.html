@@ -1,0 +1,19 @@
+<div class="longform-title">
+    <h1 class="longform-title__title">{{ origin_page.title }}</h1>
+    <div class="longform-title__meta">
+        <span class="longform-title__meta-item">
+            Last updated: {{ origin_page.last_updated|date:"j F Y" }}
+        </span>
+        {% if origin_page.document %}
+            <a class="longform-title__meta-item" href="{{ origin_page.document.url }}">
+                <span class="u-bold">
+                    {% firstof origin_page.document_link_text origin_page.document.title %}
+                </span>
+                <span>
+                    ({{ origin_page.document.file_extension }},
+                     {{ origin_page.document.file_size|filesizeformat }})
+                </span>
+            </a>
+        {% endif %}
+    </div>
+</div>

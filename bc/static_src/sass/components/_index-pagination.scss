@@ -83,4 +83,24 @@
         font-weight: $weight--normal;
         display: block;
     }
+
+    // Long-form page adjustments
+
+    .longform-navigation & {
+        margin-top: $grid--small;
+        position: relative;
+
+        @include media-query(tablet-landscape) {
+            width: 100%;
+        }
+
+        &::before {
+            background-color: $color--grey-medium;
+            content: '';
+            height: 1px;
+            left: $grid--small;
+            position: absolute;
+            width: calc(100% - #{$grid--small} * 2);
+        }
+    }
 }

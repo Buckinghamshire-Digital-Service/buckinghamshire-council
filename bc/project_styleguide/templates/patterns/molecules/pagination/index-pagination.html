@@ -1,0 +1,41 @@
+{% load wagtailcore_tags %}
+
+{% if next_page or prev_page %}
+    <nav class="index-pagination" aria-label="Pagination">
+        <ul class="index-pagination__list">
+            <li class="index-pagination__item index-pagination__item--previous">
+                {% if prev_page %}
+                    <a
+                        aria-label="Goto previous page"
+                        class="index-pagination__button link--alt"
+                        href="{% pageurl prev_page %}"
+                        rel="prev"
+                    >
+                        {% include "patterns/atoms/icons/icon.html" with name="arrow" classname="icon--stroke index-pagination__icon index-pagination__icon--previous" %}
+                        <span class="index-pagination__text">
+                            Previous
+                            <span class="index-pagination__page-title">{{ prev_page }}</span>
+                        </span>
+                    </a>
+                {% endif %}
+            </li>
+
+            <li class="index-pagination__item index-pagination__item--next">
+                {% if next_page %}
+                    <a
+                        aria-label="Goto next page"
+                        class="index-pagination__button index-pagination__button--next link--alt"
+                        href="{% pageurl next_page %}"
+                        rel="next"
+                    >
+                        {% include "patterns/atoms/icons/icon.html" with name="arrow" classname="icon--stroke index-pagination__icon index-pagination__icon--next" %}
+                        <span class="index-pagination__text">
+                            Next
+                            <span class="index-pagination__page-title">{{ next_page }}</span>
+                        </span>
+                    </a>
+                {% endif %}
+            </li>
+        </ul>
+    </nav>
+{% endif %}
