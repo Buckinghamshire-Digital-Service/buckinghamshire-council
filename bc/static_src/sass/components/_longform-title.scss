@@ -1,11 +1,29 @@
 .longform-title {
     background-color: $color--leaf;
+    display: flex;
     border-bottom: 4px solid $color--off-black;
     margin-bottom: $grid--small;
-    padding: $grid--small;
 
     @include media-query(tablet-portrait) {
         margin-bottom: $grid--medium;
+    }
+
+    &__image-container {
+        display: none;
+        flex: 0 0 50%;
+        min-height: 200px;
+        position: relative;
+
+        @include media-query(tablet-landscape) {
+            display: block;
+        }
+    }
+
+    &__image {
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        width: 100%;
     }
 
     &__meta {
@@ -16,6 +34,11 @@
 
     &__meta-item {
         color: $color--default;
+    }
+
+    &__text-container {
+        flex: 1 0 50%;
+        padding: $grid--small;
     }
 
     &__title {

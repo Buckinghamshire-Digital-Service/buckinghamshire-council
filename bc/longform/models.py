@@ -5,6 +5,7 @@ from django.utils.functional import cached_property
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
 from wagtail.core.fields import StreamField
 from wagtail.documents.edit_handlers import DocumentChooserPanel
+from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 
 from bc.utils.models import BasePage
@@ -24,6 +25,13 @@ class LongformPage(BasePage):
     last_updated = models.DateField()
     version_number = models.CharField(blank=True, max_length=100)
 
+    hero_image = models.ForeignKey(
+        "images.CustomImage",
+        blank=True,
+        null=True,
+        related_name="+",
+        on_delete=models.SET_NULL,
+    )
     chapter_heading = models.CharField(
         blank=True,
         default="Introduction",
@@ -54,6 +62,7 @@ class LongformPage(BasePage):
             [DocumentChooserPanel("document"), FieldPanel("document_link_text")],
             heading="Documents",
         ),
+        ImageChooserPanel("hero_image"),
         FieldPanel("chapter_heading"),
         StreamFieldPanel("body"),
     ]

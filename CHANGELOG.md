@@ -3,6 +3,7 @@
 ## Unreleased
 
 - 466: [longform 9] Prepare base template for long-form content pages
+- 466: [longform 14] Add hero image to long-form content pages
 
 ## 32.1 (2021-01-28)
 

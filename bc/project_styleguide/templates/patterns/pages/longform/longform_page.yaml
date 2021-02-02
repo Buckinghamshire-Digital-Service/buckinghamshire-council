@@ -1,0 +1,24 @@
+context:
+  base_page_template: 'patterns/base_page.html'
+  page:
+    document:
+      file_extension: pdf
+      file_size: 10000
+      title: Original document title
+      url: '#'
+    document_link_text: Overwrite document title
+    hero_image: True
+    get_index:
+      - id: 1
+        subtitle: Lorem ipsum
+      - id: 2
+        subtitle: Dolor sit
+    id: 1
+    is_chapter_page: False
+    last_updated: 2020-11-11
+    title: Lorem ipsum
+
+tags:
+  pageurl:
+    link:
+      raw: '#'
