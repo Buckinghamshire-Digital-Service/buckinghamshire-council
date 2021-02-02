@@ -44,7 +44,7 @@
             <div class="main-body">
                 {{ page.body }}
 
-                {% include "patterns/molecules/pagination/index-pagination.html" with next_page=page.get_next_page prev_page=page.get_prev_page %}
+                {% include "patterns/molecules/pagination/index-pagination.html" with next_page=next_page prev_page=prev_page %}
             </div>
         </div>
 
