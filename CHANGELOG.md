@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- 466: [longform 9] Prepare base template for long-form content pages
+
 ## 32.1 (2021-01-28)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/32.0...32.1
