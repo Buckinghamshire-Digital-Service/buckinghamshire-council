@@ -19,7 +19,7 @@ The documentation will be available at: http://localhost:8001/
 
 The main convention for new developers to be aware of is the branching model: create new feature branches from the latest `release-x.x` branch, and make merge requests back to that branch. See https://buckinghamshire-council.pages.torchbox.com/bc/project_conventions/#git-branching-model for full details.
 
-# Setting up a local build
+## Setting up a local build
 
 This repository includes a Vagrantfile for running the project in a Debian VM and
 a fabfile for running common commands with Fabric.
