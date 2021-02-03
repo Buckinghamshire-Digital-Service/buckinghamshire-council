@@ -22,7 +22,7 @@ def generate_block_number(
     """
     block_number = ".".join(
         [
-            f"{number}"
+            str(number)
             for number in (
                 chapter_number or heading_number,
                 subheading_number,
