@@ -7,15 +7,20 @@
         font-weight: $weight--bold;
     }
 
+    &__prefix {
+        display: block;
+        font-weight: $weight--normal;
+        left: 0;
+        position: absolute;
+    }
+
     &__item {
         margin-bottom: $grid--min;
         padding-left: $grid;
         position: relative;
 
-        &::before {
-            content: '—';
-            position: absolute;
-            left: 0;
+        &--current {
+            font-weight: $weight--bold;
         }
     }
 }

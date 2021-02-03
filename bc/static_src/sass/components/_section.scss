@@ -16,5 +16,14 @@
     &--inline-index {
         border-top: 1px solid $color--grey-medium;
         padding-top: $grid--small;
+
+        // Long-form page adjustments
+
+        .template-longform & {
+            @include media-query(tablet-landscape) {
+                border-top: 0;
+                padding-top: 0;
+            }
+        }
     }
 }

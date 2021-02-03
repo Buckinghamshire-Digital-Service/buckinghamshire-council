@@ -1,0 +1,27 @@
+{% load wagtailimages_tags %}
+<div class="longform-title">
+    <div class="longform-title__text-container">
+        <h1 class="longform-title__title">{{ origin_page.title }}</h1>
+        <div class="longform-title__meta">
+            <span class="longform-title__meta-item">
+                Last updated: {{ origin_page.last_updated|date:"j F Y" }}
+            </span>
+            {% if origin_page.document %}
+                <a class="longform-title__meta-item" href="{{ origin_page.document.url }}">
+                    <span class="u-bold">
+                        {% firstof origin_page.document_link_text origin_page.document.title %}
+                    </span>
+                    <span>
+                        ({{ origin_page.document.file_extension }},
+                        {{ origin_page.document.file_size|filesizeformat }})
+                    </span>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    {% if origin_page.hero_image %}
+        <div class="longform-title__image-container">
+            {% image origin_page.hero_image fill-1000x500 class="longform-title__image" %}
+        </div>
+    {% endif %}
+</div>

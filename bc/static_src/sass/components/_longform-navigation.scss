@@ -1,0 +1,13 @@
+.longform-navigation {
+    margin: $grid--large 0;
+    position: relative;
+
+    @include media-query(tablet-landscape) {
+        margin-top: 0;
+    }
+
+    .sidebar {
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+}

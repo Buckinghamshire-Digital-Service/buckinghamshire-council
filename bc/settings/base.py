@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     "bc.home",
     "bc.images",
     "bc.inlineindex",
+    "bc.longform",
     "bc.navigation",
     "bc.family_information",
     "bc.news",

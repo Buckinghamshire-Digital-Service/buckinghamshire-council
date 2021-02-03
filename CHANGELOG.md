@@ -1,6 +1,14 @@
 # Release History
 
-## Unreleased
+## 33.0 (2021-02-02)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/32.1...33.0
+
+- 466: [longform 9] Prepare base template for long-form content pages
+- 466: [longform 14] Add hero image to long-form content pages
+- 466: [longform 10] Add numbered headings for long-form content pages
+- 489: Allow information page under FIS home page.
+- Upgrade `django-basic-auth-ip-whitelist` to avoid caching of 401 resonses.
 
 ## 32.1 (2021-01-28)
 
