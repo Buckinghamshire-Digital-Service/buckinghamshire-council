@@ -4,6 +4,7 @@ from django.utils.functional import cached_property
 from modelcluster.fields import ParentalKey
 from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
 from wagtail.core.fields import StreamField
+from wagtail.core.models import Page
 from wagtail.search import index
 
 from bc.utils.blocks import StoryBlock
@@ -62,11 +63,13 @@ class InlineIndex(InlineIndexDraftMixin, BasePage):
         ]
 
     def get_index(self, include_draft_children=False):
+        index_queryset = Page.objects.page(self)
+
         children = self.get_children().specific()
         if not include_draft_children:
             children = children.live()
 
-        return [self] + list(children)
+        return index_queryset.union(children).order_by("path")
 
     def get_next_page(self, include_draft_children=False):
         """ In fact returns the first child, instead, as this page acts as the
