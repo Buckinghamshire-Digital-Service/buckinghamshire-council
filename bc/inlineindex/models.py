@@ -1,3 +1,5 @@
+import itertools
+
 from django.db import models
 from django.utils.functional import cached_property
 
@@ -69,7 +71,7 @@ class InlineIndex(InlineIndexDraftMixin, BasePage):
         if not include_draft_children:
             children = children.live()
 
-        return index_queryset.union(children).order_by("path")
+        return itertools.chain(index_queryset, children)
 
     def get_next_page(self, include_draft_children=False):
         """ In fact returns the first child, instead, as this page acts as the
