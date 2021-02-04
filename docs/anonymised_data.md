@@ -1,4 +1,4 @@
-# Buckinghamshire Council — Anonymising data
+# Anonymising Data
 
 When pulling data from any hosted instance, take a cautious approach about whether you need full details of potentially personally-identifying, confidential or sensitive data.
 

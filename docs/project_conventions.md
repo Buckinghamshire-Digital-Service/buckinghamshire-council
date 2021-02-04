@@ -1,4 +1,4 @@
-# Buckinghamshire Council project conventions
+# Project Conventions
 
 ## Git branching model
 

@@ -1,4 +1,4 @@
-# Buckinghamshire Council — Continuous Integration
+# Continuous Integration
 
 Gitlab has built-in CI tests. These can be configured by editing `.gitlab-ci.yml`. By default, these are run on all pushes and merge requests.
 

@@ -1,4 +1,4 @@
-# Buckinghamshire Council — Continuous Deployment
+# Continuous Deployment
 
 Deployments can be triggered through GitLab's CI/CD. Currently `.gitlab-ci.yml` has a `deploy_site` stage which is configured to deploy to Heroku on pushes and merge requests to either master or staging.
 
