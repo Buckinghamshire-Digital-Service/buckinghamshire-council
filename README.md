@@ -1,6 +1,6 @@
 # Buckinghamshire Council Wagtail Site
 
-This is the repository for the [new website of the joint Buckinghamshire Council](https://www.buckinghamshire.gov.uk/). 
+This is the repository for the [new website of the joint Buckinghamshire Council](https://www.buckinghamshire.gov.uk/).
 
 ## Technical documentation
 
@@ -51,14 +51,15 @@ After any change to the CSS or Javascript, you will need to run the build comman
 ## Contributing
 
 This project is open source, but not really a collaborative project.
-The features of this project are specifically developed for the needs of the Buckinghamshire Council. 
-Additional features are unlikely to be added, unless they are specifically requested by the council. 
-Bugfixes are welcome and will be reviewed. 
+The features of this project are specifically developed for the needs of the Buckinghamshire Council.
+Additional features are unlikely to be added, unless they are specifically requested by the council.
+Bugfixes are welcome and will be reviewed.
 
 Please read and adhere to the guidlines outlined in the [technical documentation](docs/).
 
 The main convention for new developers to be aware of is the branching model.
-- Create new feature or fix branches from the `release` branch. 
-- Create  make merge/pull requests back to that branch. 
+
+- Create new feature or fix branches from the `release` branch.
+- Create make merge/pull requests back to that branch.
 
 See the [project conventions](docs/project_conventions.md) for full details.
