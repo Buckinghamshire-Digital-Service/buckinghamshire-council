@@ -2,9 +2,9 @@
 
 ## Database
 
-Postgres
+This project uses Postgres for its database.
 
-#### Pulling data
+### Pulling data
 
 To populate your local database with the content of staging/production:
 
@@ -34,7 +34,7 @@ Cache purging is enabled as per https://docs.wagtail.io/en/stable/reference/cont
 
 We use Redis for back-end caching in Django.
 
-The Django low-level cache API is used by the recruitment API client to replace Zeep's default cache. See [Recruitment Site](recruitment-site.md) for details.
+The Django low-level cache API is used by the recruitment API client to replace Zeep's default cache. See [Recruitment Site](recruitment_site.md) for details.
 
 ## Search engine
 
@@ -48,17 +48,20 @@ Search synonyms can be edited in the Wagtail admin, where any terms in the `syno
 
 ### Developing the Elasticsearch search engine configuration
 
-The Vagrant box will default to using Postgres for search, and ignoring some of the extra search features such as synonyms. However, it does have Elasticsearch5 installed. To use this, set the search backend in local settings to `bc.search.elasticsearch5` and the URL to "http://localhost:9200". You will also have to install the proper version of the Elasticsearch library that wagtail will use under the hood: `pip install "elasticsearch>=5.0.0,<6.0.0" # for Elasticsearch 5.x`.
+The Vagrant box will default to using Postgres for search, and ignoring some of the extra search features such as synonyms. However, it does have Elasticsearch5 installed. To use this, set the search backend in local settings to `bc.search.elasticsearch5` and the URL to "http://localhost:9200". You will also have to install the proper version of the Elasticsearch library that Wagtail will use under the hood: 
+```bash
+$ pip install "elasticsearch>=5.0.0,<6.0.0" # for Elasticsearch 5.x
+```
 
 Alternatively, use a free Bonsai sandbox Elasticsearch instance, and set these credentials locally, using the `bc.search.elasticsearch7` backend. An example of this configuration is in `bc/settings/local.py.example`.
 
 Be sure to run `dj update_index` before manually testing search features. This command will create (or update) the necessary index in Elasticsearch and fill it with the current content. If this is not run when a fresh Elasticsearch instance is used, then the index does not exist and the search requests will fail. (On production and staging this command is run during deployment and on a daily schedule to update the index content.)
 
-## File storage
+<!-- ## File storage -->
 
-## DNS
+<!-- ## DNS -->
 
-## TLS/SSL/HTTPS
+<!-- ## TLS/SSL/HTTPS -->
 
 ## Resetting the Staging site
 
@@ -68,28 +71,24 @@ Steps for resetting the `staging` git branch, and deploying it with a clone of t
 
 1. Is this okay with the client, and other developers?
 1. Is there any test content on staging that may need to be recreated, or be a reason to delay?
-1. What branches are currently merged to staging?
+1. What branches are currently merged to staging? 
+        
+        $ git branch -a --merged origin/staging > branches_on_staging.txt
+        $ git branch -a --merged origin/master > branches_on_master.txt
+        $ diff branches_on_{master,staging}.txt
 
-   ```bash
-   $ git branch -a --merged origin/staging > branches_on_staging.txt
-   $ git branch -a --merged origin/master > branches_on_master.txt
-   $ diff branches_on_{master,staging}.txt
-   ```
-
-   Take note if any of the above are stale, not needing to be recreated.
-
+1. Take note if any of the listed branches are stale. Stale branches do  not need to be recreated.
 1. Are there any user accounts on staging only, which will need to be recreated? Check with the client, and record them.
 1. Take a backup of staging
-   ```bash
-   $ heroku pg:backups:capture -a buckinghamshire-staging
-   ```
+
+        $ heroku pg:backups:capture -a buckinghamshire-staging
 
 ### Git
 
 1. Reset the staging branch
-   ```bash
-   $ git checkout staging && git fetch && git reset --hard origin/master && git push --force
-   ```
+
+        $ git checkout staging && git fetch && git reset --hard origin/master && git push --force
+
 1. Tell your colleagues
    > @here I have reset the staging branch. Please delete your local staging branches
    >
@@ -98,29 +97,35 @@ Steps for resetting the `staging` git branch, and deploying it with a clone of t
    > ```
    >
    > to avoid accidentally merging in the old version
-1. Force-push to Heroku, otherwise CI will later fail `$ git push --force heroku-staging master`
+1. Force-push to Heroku, otherwise CI will later fail 
+
+        $ git push --force heroku-staging master
+
 1. Merge in the relevant branches
-   ```bash
-   $ git merge --no-ff origin/feature/123-extra-spangles
-   ```
-1. Check for any newly necessary merge migrations `$ ./manage.py makemigrations --check`
+
+        $ git merge --no-ff origin/feature/123-extra-spangles
+
+1. Check for any newly necessary merge migrations 
+
+        $ ./manage.py makemigrations --check
 
 ### Database
 
 1. List production database backups:
-   ```bash
-   $ heroku pg:backups -a buckinghamshire-production
-   ```
+
+        $ heroku pg:backups -a buckinghamshire-production
+
 1. Get a signed S3 URL of your chosen backup:
-   ```bash
-   $ heroku pg:backups:url {backup-name} -a buckinghamshire-production
-   ```
-1. Upload to staging:
-   ```bash
-   $ heroku pg:backups:restore {backup-url} DATABASE_URL -a buckinghamshire-staging
-   ```
-   This is a destructive action. Proofread it thoroughly.
-1. Delete any personally-identifying data from staging. See [Data protection](data-protection.md) for instructions.
+
+        $ heroku pg:backups:url {backup-name} -a buckinghamshire-production
+
+1. Upload to staging. This is a **destructive action**. Proofread it thoroughly.
+
+        $ heroku pg:backups:restore {backup-url} DATABASE_URL -a buckinghamshire-staging
+
+
+
+1. Delete any personally-identifying data from staging. See [Data protection](data_protection.md) for instructions.
 
 ### Media
 
@@ -146,7 +151,8 @@ $ fab push-staging-media
 
 ### Comms
 
-1. Inform the client of the changes.
-   > - All user accounts have been copied across, so your old staging password will no longer work. Log in with your production password (and then change it), or use the 'forgot password' feature.
-   > - Any test content has been reset. This is probably the biggest inconvenience. Sorry.
-   > - I have deleted the personally-identifying data from form submissions and job alert subscriptions. If there's any more on production (there shouldn't be) then please let me know and I'll remove it from staging.
+Inform the client of the changes.
+
+> - All user accounts have been copied across, so your old staging password will no longer work. Log in with your production password (and then change it), or use the 'forgot password' feature.
+> - Any test content has been reset. This is probably the biggest inconvenience. Sorry.
+> - I have deleted the personally-identifying data from form submissions and job alert subscriptions. If there's any more on production (there shouldn't be) then please let me know and I'll remove it from staging.
