@@ -18,9 +18,7 @@ To work on this project, see the README.
 
 <!-- List here any external services this project uses. Preferably link to a separate documentation page for each. -->
 
-The jobs portal will work with Lumesse.
-
-See the README for details of what credentials are needed for deployments and local development.
+The jobs portal will work with Lumesse. Please see the [recruitment site documentation](./recruitment_site.md) for details.
 
 ## Adding documentation
 
