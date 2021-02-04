@@ -1,7 +1,5 @@
 # Buckinghamshire Council Technical Documentation
 
-[TOC]
-
 ## Project overview
 
 Buckinghamshire Council is a new unitary council formed from the five previous county and district councils in Buckinghamshire.
