@@ -22,4 +22,4 @@ The jobs portal will work with Lumesse. Please see the [recruitment site documen
 
 ## Adding documentation
 
-A navigational index of the documentation files is in the mkdocs.yml file. Add any new markdown files to that index. You can also link directly to files where necessary, using markdown formatting and relative URLs.
+The navigational index of the documentation files is defined in the `mkdocs.yml` file. Add any new markdown files to that index. You can also link directly to files where necessary, using markdown formatting and relative URLs.
