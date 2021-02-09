@@ -48,7 +48,8 @@ Search synonyms can be edited in the Wagtail admin, where any terms in the `syno
 
 ### Developing the Elasticsearch search engine configuration
 
-The Vagrant box will default to using Postgres for search, and ignoring some of the extra search features such as synonyms. However, it does have Elasticsearch5 installed. To use this, set the search backend in local settings to `bc.search.elasticsearch5` and the URL to "http://localhost:9200". You will also have to install the proper version of the Elasticsearch library that Wagtail will use under the hood: 
+The Vagrant box will default to using Postgres for search, and ignoring some of the extra search features such as synonyms. However, it does have Elasticsearch5 installed. To use this, set the search backend in local settings to `bc.search.elasticsearch5` and the URL to "http://localhost:9200". You will also have to install the proper version of the Elasticsearch library that Wagtail will use under the hood:
+
 ```bash
 $ pip install "elasticsearch>=5.0.0,<6.0.0" # for Elasticsearch 5.x
 ```
@@ -69,63 +70,63 @@ Steps for resetting the `staging` git branch, and deploying it with a clone of t
 
 ### Pre-flight checks
 
-1. Is this okay with the client, and other developers?
-1. Is there any test content on staging that may need to be recreated, or be a reason to delay?
-1. What branches are currently merged to staging? 
-        
-        $ git branch -a --merged origin/staging > branches_on_staging.txt
-        $ git branch -a --merged origin/master > branches_on_master.txt
-        $ diff branches_on_{master,staging}.txt
+1.  Is this okay with the client, and other developers?
+1.  Is there any test content on staging that may need to be recreated, or be a reason to delay?
+1.  What branches are currently merged to staging?
 
-1. Take note if any of the listed branches are stale. Stale branches do  not need to be recreated.
-1. Are there any user accounts on staging only, which will need to be recreated? Check with the client, and record them.
-1. Take a backup of staging
+    $ git branch -a --merged origin/staging > branches_on_staging.txt
+        $ git branch -a --merged origin/master > branches*on_master.txt
+    \$ diff branches_on*{master,staging}.txt
+
+1.  Take note if any of the listed branches are stale. Stale branches do not need to be recreated.
+1.  Are there any user accounts on staging only, which will need to be recreated? Check with the client, and record them.
+1.  Take a backup of staging
 
         $ heroku pg:backups:capture -a buckinghamshire-staging
 
 ### Git
 
-1. Reset the staging branch
+1.  Reset the staging branch
 
         $ git checkout staging && git fetch && git reset --hard origin/master && git push --force
 
-1. Tell your colleagues
-   > @here I have reset the staging branch. Please delete your local staging branches
-   >
-   > ```
-   > $ git branch -D staging
-   > ```
-   >
-   > to avoid accidentally merging in the old version
-1. Force-push to Heroku, otherwise CI will later fail 
+1.  Tell your colleagues
+
+    > @here I have reset the staging branch. Please delete your local staging branches
+    >
+    > ```
+    > $ git branch -D staging
+    > ```
+    >
+    > to avoid accidentally merging in the old version
+
+1.  Force-push to Heroku, otherwise CI will later fail
 
         $ git push --force heroku-staging master
 
-1. Merge in the relevant branches
+1.  Merge in the relevant branches
 
         $ git merge --no-ff origin/feature/123-extra-spangles
 
-1. Check for any newly necessary merge migrations 
+1.  Check for any newly necessary merge migrations
 
         $ ./manage.py makemigrations --check
 
 ### Database
 
-1. List production database backups:
+1.  List production database backups:
 
         $ heroku pg:backups -a buckinghamshire-production
 
-1. Get a signed S3 URL of your chosen backup:
+1.  Get a signed S3 URL of your chosen backup:
 
         $ heroku pg:backups:url {backup-name} -a buckinghamshire-production
 
-1. Upload to staging. This is a **destructive action**. Proofread it thoroughly.
+1.  Upload to staging. This is a **destructive action**. Proofread it thoroughly.
 
         $ heroku pg:backups:restore {backup-url} DATABASE_URL -a buckinghamshire-staging
 
-
-
-1. Delete any personally-identifying data from staging. See [Data protection](data_protection.md) for instructions.
+1.  Delete any personally-identifying data from staging. See [Data protection](data_protection.md) for instructions.
 
 ### Media
 
