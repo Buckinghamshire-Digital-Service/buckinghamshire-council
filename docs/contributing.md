@@ -4,7 +4,9 @@ Before contributing to the open source project on GitHub, please consider that t
 The features it includes are specifically designed to the needs of the Buckinghamshire Council.
 
 Feature submissions are unlikely to be included in the project, unless the feature is specifically desired by the council.
-Bug fixes will be reviewed and included accoring to the [process described below](#how-to-deal-with-contributions).
+Bugfixes will be reviewed and included accoring to the [process described below](#how-to-handle-contributions).
+Please be sure to follow the guidelines below on [how to contribute to this open source project](#how-to-contribute-to-the-open-source-project).
+
 
 ## Repository Setup
 
@@ -18,4 +20,29 @@ This setup may be changed in the future to remove the need of managing two repos
 
 ## How to Contribute to the Open Source Project
 
-## How to deal with contributions
+If you would like to contribute a bugfix to this project, just follow the normal flow for [contributions on GitHub](https://guides.github.com/activities/forking/).
+
+1.  Fork this repository on GitHub to create your own copy of it.
+1.  Clone your fork of the repository to your local development machine.
+
+        git clone [URL TO GIT REMOTE]
+
+1.  Create a new branch for the bugfix.
+
+        git checkout -b fix/something-broken
+
+1.  Create a [local setup](/#setting-up-a-local-build) and implement your changes.
+
+        git commit fixed_file.py
+
+1.  Push your local fix branch to your GitHub fork.
+
+        git push origin fix/something-broken
+
+1.  View you fork of the repository on GitHub and [create a Pull Request](https://guides.github.com/activities/forking/#making-a-pull-request) back to the `master` branch of the  main repository.
+    Please include a description of the bug your PR is fixing and why you solved it the way you did.
+
+## How to Handle Contributions
+
+_This section is for maintainers and reviewers of the internal project._
+
