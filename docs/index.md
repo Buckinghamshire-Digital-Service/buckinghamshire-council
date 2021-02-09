@@ -12,7 +12,7 @@ Other features include:
 
 To work on this project, see the README.
 
-### External integrations
+## External integrations
 
 <!-- List here any external services this project uses. Preferably link to a separate documentation page for each. -->
 
@@ -21,3 +21,7 @@ The jobs portal will work with Lumesse. Please see the [recruitment site documen
 ## Adding documentation
 
 The navigational index of the documentation files is defined in the `mkdocs.yml` file. Add any new markdown files to that index. You can also link directly to files where necessary, using markdown formatting and relative URLs.
+
+## Contributing
+
+To contribute to this project, please review the [notes on contributing](./contributing.md).
