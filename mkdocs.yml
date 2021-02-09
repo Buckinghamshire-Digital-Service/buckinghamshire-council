@@ -33,8 +33,9 @@ nav:
   - 'Anonymised data': 'anonymised_data.md'
   - 'Data protection': 'data_protection.md'
   - 'Cookies': 'cookies.md'
-  - 'Recruitment site': 'recruitment_site.md'
-  - 'Complaints and requests': 'complaints-and-requests.md'
-  - 'Live chat client': 'live-chat-client.md'
+  - 'External Integrations':
+    - 'Recruitment site': 'recruitment_site.md'
+    - 'Complaints and requests': 'complaints-and-requests.md'
+    - 'Live chat client': 'live-chat-client.md'
   - 'Contributing': 'contributing.md'
   - 'CHANGELOG': 'CHANGELOG.md'

@@ -8,7 +8,9 @@ This project is primarily a CMS. During the initial phase, when the council is f
 
 Other features include:
 
-- a job listings portal
+- a job listings portal,
+- a live chat client,
+- an integration for complaints and request forms.
 
 ## Setting Up a Local Build
 
@@ -47,7 +49,9 @@ The navigational index of the documentation files is defined in the `mkdocs.yml`
 
 <!-- List here any external services this project uses. Preferably link to a separate documentation page for each. -->
 
-The jobs portal will work with Lumesse. Please see the [recruitment site documentation](./recruitment_site.md) for details.
+- The jobs portal will work with Lumesse. Please see the [recruitment site documentation](./recruitment_site.md) for details.
+- The [live chat client](./live-chat-client.md) is provided by Client4Access.
+- [Complaints and request forms](complaints-and-requests.md) features is based on the Aptean Respond case management platform.
 
 ## Contributing
 
