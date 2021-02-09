@@ -10,17 +10,44 @@ Other features include:
 
 - a job listings portal
 
-To work on this project, see the README.
+## Setting Up a Local Build
 
-## External integrations
+This repository includes a Vagrantfile for running the project in a Debian VM and
+a fabfile for running common commands with Fabric.
 
-<!-- List here any external services this project uses. Preferably link to a separate documentation page for each. -->
+To set up a new build:
 
-The jobs portal will work with Lumesse. Please see the [recruitment site documentation](./recruitment_site.md) for details.
+```bash
+git clone [URL TO GIT REMOTE]
+cd bc
+vagrant up
+vagrant ssh
+```
+
+Then within the SSH session:
+
+```bash
+dj migrate
+dj createcachetable
+dj createsuperuser
+djrun
+```
+
+This will make the site available on the host machine at: http://127.0.0.1:8000/
+
+## Front-end Assets
+
+After any change to the CSS or Javascript, you will need to run the build command, either in the VM or on your host machine. See the [Front-end tooling docs](docs/front-end-tooling.md) for further details.
 
 ## Adding documentation
 
 The navigational index of the documentation files is defined in the `mkdocs.yml` file. Add any new markdown files to that index. You can also link directly to files where necessary, using markdown formatting and relative URLs.
+
+## External Integrations
+
+<!-- List here any external services this project uses. Preferably link to a separate documentation page for each. -->
+
+The jobs portal will work with Lumesse. Please see the [recruitment site documentation](./recruitment_site.md) for details.
 
 ## Contributing
 
