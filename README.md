@@ -25,6 +25,31 @@ mkdocs serve
 
 The documentation will be available at: http://localhost:8001/
 
+## Setting Up a Local Build
+
+This repository includes a Vagrantfile for running the project in a Debian VM and
+a fabfile for running common commands with Fabric.
+
+To set up a new build:
+
+```bash
+git clone [URL TO GIT REMOTE]
+cd bc
+vagrant up
+vagrant ssh
+```
+
+Then within the SSH session:
+
+```bash
+dj migrate
+dj createcachetable
+dj createsuperuser
+djrun
+```
+
+This will make the site available on the host machine at: http://127.0.0.1:8000/
+
 ## Contributing
 
 This project is open source, but not really a collaborative project.
