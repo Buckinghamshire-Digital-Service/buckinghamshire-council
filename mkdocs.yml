@@ -30,9 +30,10 @@ nav:
   - 'Front end tooling': 'front-end-tooling.md'
   - 'Continuous deployment': 'continuous-deployment.md'
   - 'Continuous integration': 'continuous-integration.md'
-  - 'Anonymised data': 'anonymised_data.md'
-  - 'Data protection': 'data_protection.md'
-  - 'Cookies': 'cookies.md'
+  - 'Data and Privacy':
+    - 'Anonymised data': 'anonymised_data.md'
+    - 'Data protection': 'data_protection.md'
+    - 'Cookies': 'cookies.md'
   - 'External Integrations':
     - 'Recruitment site': 'recruitment_site.md'
     - 'Complaints and requests': 'complaints-and-requests.md'
