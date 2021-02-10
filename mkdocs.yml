@@ -1,9 +1,9 @@
 site_name: Buckinghamshire Council
-repo_url: https://git.torchbox.com/buckinghamshire-council/bc
-site_url: https://buckinghamshire-council.pages.torchbox.com/bc/
+repo_url: https://github.com/Buckinghamshire-Digital-Service/buckinghamshire-council/
+site_url: https://Buckinghamshire-Digital-Service.github.io/buckinghamshire-council/
 edit_uri: 'edit/master/docs/'
 
-repo_name: Gitlab
+repo_name: GitHub
 dev_addr: 0.0.0.0:8001
 theme:
   name: material
