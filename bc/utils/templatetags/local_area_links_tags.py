@@ -7,11 +7,11 @@ register = template.Library()
 def local_area_links(page):
 
     try:
-        for data in page.body.stream_data:
-            if data["type"] == "local_area_links":
+        for block in page.body:
+            if block.block_type == "local_area_links":
                 return {
                     "show_intro": True,
-                    "value": data["value"],
+                    "value": block.value,
                 }
 
     except AttributeError:

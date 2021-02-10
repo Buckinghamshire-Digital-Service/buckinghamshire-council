@@ -80,8 +80,8 @@ class NavigationSettingViewTest(TestCase, WagtailTestUtils):
             response.status_code, 302
         )  # Reload the page with GET after receiving POST. Therefore its a redirect.
         nav_setting = self.get_site_navigation_settings()
-        self.assertNotEqual(nav_setting.footer_links.stream_data, [])
-        self.assertNotEqual(nav_setting.footer_columns.stream_data, [])
+        self.assertNotEqual(len(nav_setting.footer_links), 0)
+        self.assertNotEqual(len(nav_setting.footer_columns), 0)
         linked_info_page = InformationPage.objects.get(
             pk=nav_setting.footer_links[0].value["page"].id
         )
@@ -105,8 +105,8 @@ class NavigationSettingViewTest(TestCase, WagtailTestUtils):
             response.status_code, 302
         )  # Reload the page with GET after receiving POST. Therefore its a redirect.
         nav_setting = self.get_site_navigation_settings()
-        self.assertEqual(nav_setting.footer_links.stream_data, [])
-        self.assertNotEqual(nav_setting.footer_columns.stream_data, [])
+        self.assertEqual(len(nav_setting.footer_links), 0)
+        self.assertNotEqual(len(nav_setting.footer_columns), 0)
         self.assertEqual(
             nav_setting.footer_columns[0].value["heading"], "Column Heading"
         )
@@ -124,8 +124,8 @@ class NavigationSettingViewTest(TestCase, WagtailTestUtils):
             response.status_code, 302
         )  # Reload the page with GET after receiving POST. Therefore its a redirect.
         nav_setting = self.get_site_navigation_settings()
-        self.assertNotEqual(nav_setting.footer_links.stream_data, [])
-        self.assertEqual(nav_setting.footer_columns.stream_data, [])
+        self.assertNotEqual(len(nav_setting.footer_links), 0)
+        self.assertEqual(len(nav_setting.footer_columns), 0)
         linked_info_page = InformationPage.objects.get(
             pk=nav_setting.footer_links[0].value["page"].id
         )
