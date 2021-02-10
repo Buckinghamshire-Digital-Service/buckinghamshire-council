@@ -1,12 +1,22 @@
+import uuid
 from http import HTTPStatus
 
 from django.test import TestCase
 
+from wagtail.core.blocks import StreamValue
+
 import bs4
 
 from bc.home.models import HomePage
-from bc.longform.templatetags.longform_tags import generate_block_number
-from bc.longform.tests.fixtures import LongformChapterPageFactory, LongformPageFactory
+
+from ..blocks import (
+    NumberedHeadingBlock,
+    NumberedParagraphBlock,
+    NumberedSubheadingBlock,
+)
+from ..templatetags.longform_tags import generate_block_number, process_block_numbers
+
+from .fixtures import LongformChapterPageFactory, LongformPageFactory
 
 
 class BlockNumberTests(TestCase):
@@ -37,6 +47,46 @@ class BlockNumberTests(TestCase):
     def test_has_no_numbers(self):
         result = generate_block_number(None, None, None, None)
         self.assertEqual("", result)
+
+    def test_process_block_numbers(self):
+        """
+        Test that process_block_numbers does not repeat numbers and follows hierarchy.
+        """
+        streamblock = [
+            # 1. My paragraph 1
+            StreamValue.StreamChild(
+                NumberedParagraphBlock(), "My paragraph 1", id=str(uuid.uuid4),
+            ),
+            # 2. My subheading 1
+            StreamValue.StreamChild(
+                NumberedSubheadingBlock(), "My subheading 1", id=str(uuid.uuid4),
+            ),
+            # 3. My heading 1
+            StreamValue.StreamChild(
+                NumberedHeadingBlock(), "My heading 1", id=str(uuid.uuid4),
+            ),
+            # 3.1. My paragraph 2
+            StreamValue.StreamChild(
+                NumberedParagraphBlock(), "My paragraph 2", id=str(uuid.uuid4),
+            ),
+            # 3.2. My subheading 2
+            StreamValue.StreamChild(
+                NumberedSubheadingBlock(), "My subheading 2", id=str(uuid.uuid4),
+            ),
+            # 3.2.1. My paragraph 3
+            StreamValue.StreamChild(
+                NumberedParagraphBlock(), "My paragraph 3", id=str(uuid.uuid4),
+            ),
+        ]
+
+        rendered = process_block_numbers(streamblock)
+
+        self.assertIn("section-1", rendered)
+        self.assertIn("section-2", rendered)
+        self.assertIn("section-3", rendered)
+        self.assertIn("section-3.1", rendered)
+        self.assertIn("section-3.2", rendered)
+        self.assertIn("section-3.2.1", rendered)
 
 
 class TestLongformContentTitles(TestCase):
