@@ -45,6 +45,8 @@ def process_block_numbers(streamblock, chapter_number=0):
     for child in streamblock:
         if isinstance(child.block, NumberedHeadingBlock) and not chapter_number:
             # Increase and reset numbers
+            if (paragraph_number or subheading_number) and not heading_number:
+                heading_number = subheading_number or paragraph_number
             heading_number += 1
             subheading_number = 0
             paragraph_number = 0
