@@ -31,12 +31,12 @@ nav:
   - 'Continuous integration': 'continuous-integration.md'
   - 'Continuous deployment': 'continuous-deployment.md'
   - 'Data and Privacy':
-    - 'Anonymised data': 'anonymised-data.md'
-    - 'Data protection': 'data-protection.md'
-    - 'Cookies': 'cookies.md'
+      - 'Anonymised data': 'anonymised-data.md'
+      - 'Data protection': 'data-protection.md'
+      - 'Cookies': 'cookies.md'
   - 'External Integrations':
-    - 'Recruitment site': 'recruitment-site.md'
-    - 'Complaints and requests': 'complaints-and-requests.md'
-    - 'Live chat client': 'live-chat-client.md'
+      - 'Recruitment site': 'recruitment-site.md'
+      - 'Complaints and requests': 'complaints-and-requests.md'
+      - 'Live chat client': 'live-chat-client.md'
   - 'Contributing': 'contributing.md'
   - 'CHANGELOG': 'CHANGELOG.md'
