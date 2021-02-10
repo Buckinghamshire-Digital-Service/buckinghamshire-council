@@ -74,9 +74,9 @@ Steps for resetting the `staging` git branch, and deploying it with a clone of t
 1.  Is there any test content on staging that may need to be recreated, or be a reason to delay?
 1.  What branches are currently merged to staging?
 
-    $ git branch -a --merged origin/staging > branches_on_staging.txt
-        $ git branch -a --merged origin/master > branches*on_master.txt
-    \$ diff branches_on*{master,staging}.txt
+        $ git branch -a --merged origin/staging > branches_on_staging.txt
+        $ git branch -a --merged origin/master > branches_on_master.txt
+        $ diff branches_on_{master,staging}.txt
 
 1.  Take note if any of the listed branches are stale. Stale branches do not need to be recreated.
 1.  Are there any user accounts on staging only, which will need to be recreated? Check with the client, and record them.
