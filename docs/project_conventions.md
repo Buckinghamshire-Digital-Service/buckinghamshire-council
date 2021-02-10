@@ -4,6 +4,11 @@
 
 This project’s code formatting is enforced with [Prettier](https://prettier.io/) for supported languages. Make sure to have Prettier integrated with your editor to auto-format when saving files, or to manually run it before committing (`npm run format`).
 
+Python code is formatted with [Black](https://pypi.org/project/black/).
+Run automatic fomatting with `black .` in the VM or on you local machine.
+
+These style conventions are enforced through [CI pipelines](./continuous-integration.md).
+
 ## Git branching model
 
 We follow a loose version of the [Git flow branching model](https://nvie.com/posts/a-successful-git-branching-model/). A summary would be "like git-flow, but 'develop' is called 'release'".
