@@ -11,6 +11,8 @@ These style conventions are enforced through [CI pipelines](./continuous-integra
 
 ## Git branching model
 
+_The following resources are for internal project developers. Open source contributers please refer to the [contribution guidlines](./contributing.md)._
+
 We follow a loose version of the [Git flow branching model](https://nvie.com/posts/a-successful-git-branching-model/). A summary would be "like git-flow, but 'develop' is called 'release'".
 
 - Make pull requests against: `release`
@@ -20,6 +22,8 @@ We follow a loose version of the [Git flow branching model](https://nvie.com/pos
 - The client QA branch is: `staging`
 - The internal QA branch is: `staging`
 - Do not treat the following branches as merge sources: `staging`
+
+To create a new feature or bugfix, use the following process.
 
 1. Make changes on a new branch, including a broad category and the ticket number if relevant e.g. `feature/123-extra-squiggles`, `fix/newsletter-signup`.
 1. Summarise your changes in `CHANGELOG.md`. Sort lines by ticket number (this makes merge and deployment diffs simpler).
