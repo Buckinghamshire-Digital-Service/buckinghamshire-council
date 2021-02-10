@@ -1,5 +1,9 @@
 # Project Conventions
 
+## Code styleguide
+
+This project’s code formatting is enforced with [Prettier](https://prettier.io/) for supported languages. Make sure to have Prettier integrated with your editor to auto-format when saving files, or to manually run it before committing (`npm run format`).
+
 ## Git branching model
 
 We follow a loose version of the [Git flow branching model](https://nvie.com/posts/a-successful-git-branching-model/). A summary would be "like git-flow, but 'develop' is called 'release'".
