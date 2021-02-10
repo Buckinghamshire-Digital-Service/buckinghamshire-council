@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- 239: Prepare repository for open sourcing
 - 508: Upgrade Wagtail to version 2.12
 
 ## 33.0 (2021-02-02)
