@@ -39,7 +39,7 @@ This will make the site available on the host machine at: http://127.0.0.1:8000/
 
 ## Front-end Assets
 
-After any change to the CSS or Javascript, you will need to run the build command, either in the VM or on your host machine. See the [Front-end tooling docs](docs/front-end-tooling.md) for further details.
+After any change to the CSS or Javascript, you will need to run the build command, either in the VM or on your host machine. See the [Front-end tooling docs](./front-end-tooling.md) for further details.
 
 ## Adding documentation
 
