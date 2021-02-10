@@ -2,7 +2,7 @@
 
 Gitlab has built-in CI tests. These can be configured by editing `.gitlab-ci.yml`. By default, these are run on all pushes and merge requests.
 
-Currently, GitLab is configured to run all Python and JavaScript tests, as well as enforcing the [styleguide](./project_conventions.md#code-styleguide).
+Currently, GitLab is configured to run all Python and JavaScript tests, as well as enforcing the [styleguide](./project-conventions.md#code-styleguide).
 
 ## Automatic linting locally
 

@@ -34,7 +34,7 @@ Cache purging is enabled as per https://docs.wagtail.io/en/stable/reference/cont
 
 We use Redis for back-end caching in Django.
 
-The Django low-level cache API is used by the recruitment API client to replace Zeep's default cache. See [Recruitment Site](recruitment_site.md) for details.
+The Django low-level cache API is used by the recruitment API client to replace Zeep's default cache. See [Recruitment Site](recruitment-site.md) for details.
 
 ## Search engine
 
@@ -126,7 +126,7 @@ Steps for resetting the `staging` git branch, and deploying it with a clone of t
 
         $ heroku pg:backups:restore {backup-url} DATABASE_URL -a buckinghamshire-staging
 
-1.  Delete any personally-identifying data from staging. See [Data protection](data_protection.md) for instructions.
+1.  Delete any personally-identifying data from staging. See [Data protection](data-protection.md) for instructions.
 
 ### Media
 

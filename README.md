@@ -64,4 +64,4 @@ The main convention for new developers to be aware of is the branching model.
 - Create new feature or fix branches from the `release` branch.
 - Create make merge/pull requests back to that branch.
 
-See the [project conventions](docs/project_conventions.md) for full details.
+See the [project conventions](docs/project-conventions.md) for full details.

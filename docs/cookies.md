@@ -1,6 +1,6 @@
 # Cookies
 
-See also: [Data Protection](data_protection.md)
+See also: [Data Protection](data-protection.md)
 
 The website team values minimising cookies, and data protection. Examples include:
 

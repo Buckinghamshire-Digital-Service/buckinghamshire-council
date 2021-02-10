@@ -23,19 +23,19 @@ markdown_extensions:
 
 nav:
   - 'Home': 'index.md'
-  - 'Project conventions': 'project_conventions.md'
+  - 'Project conventions': 'project-conventions.md'
   - 'Front end tooling': 'front-end-tooling.md'
   - 'Hosting': 'hosting.md'
   - 'Infrastructure': 'infrastructure.md'
-  - 'Email and SMS': 'email_and_sms.md'
+  - 'Email and SMS': 'email-and-sms.md'
   - 'Continuous integration': 'continuous-integration.md'
   - 'Continuous deployment': 'continuous-deployment.md'
   - 'Data and Privacy':
-    - 'Anonymised data': 'anonymised_data.md'
-    - 'Data protection': 'data_protection.md'
+    - 'Anonymised data': 'anonymised-data.md'
+    - 'Data protection': 'data-protection.md'
     - 'Cookies': 'cookies.md'
   - 'External Integrations':
-    - 'Recruitment site': 'recruitment_site.md'
+    - 'Recruitment site': 'recruitment-site.md'
     - 'Complaints and requests': 'complaints-and-requests.md'
     - 'Live chat client': 'live-chat-client.md'
   - 'Contributing': 'contributing.md'

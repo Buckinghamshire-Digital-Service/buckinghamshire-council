@@ -49,7 +49,7 @@ The navigational index of the documentation files is defined in the `mkdocs.yml`
 
 <!-- List here any external services this project uses. Preferably link to a separate documentation page for each. -->
 
-- The jobs portal will work with Lumesse. Please see the [recruitment site documentation](./recruitment_site.md) for details.
+- The jobs portal will work with Lumesse. Please see the [recruitment site documentation](./recruitment-site.md) for details.
 - The [live chat client](./live-chat-client.md) is provided by Client4Access.
 - [Complaints and request forms](complaints-and-requests.md) features is based on the Aptean Respond case management platform.
 
