@@ -3,6 +3,7 @@
 ## Unreleased
 
 - 508: Upgrade Wagtail to version 2.12
+- Fix: Check page exists before calling pageurl in footer
 
 ## 33.0 (2021-02-02)
 

@@ -13,9 +13,11 @@
     <nav aria-label="Footer">
         <ul class="footer-links">
             {% for link in links %}
-                <li class="footer-links__item">
-                    {% include_block link with classes="footer-links__link link--alt" %}
-                </li>
+                {% if link.value.page %}
+                    <li class="footer-links__item">
+                        {% include_block link with classes="footer-links__link link--alt" %}
+                    </li>
+                {% endif %}
             {% endfor %}
         </ul>
     </nav>
