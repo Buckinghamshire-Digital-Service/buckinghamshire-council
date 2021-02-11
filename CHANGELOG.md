@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 34.0 (2021-02-11)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/33.0...34.0
 
 - 239: Prepare repository for open sourcing
 - 508: Upgrade Wagtail to version 2.12
