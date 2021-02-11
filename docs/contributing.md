@@ -76,4 +76,4 @@ To avoid loosing the just merged changes you need to integrate them into the Git
     If so, do this in your local branch and push the changes again.
 
 1.  Create a Merge Request on GitLab for the new branch to the `release` branch.
-    Proceed with the normal review and process to make sure we want to include these changes into the project.
+    Proceed with the normal review process to make sure we want to include these changes into the project.
