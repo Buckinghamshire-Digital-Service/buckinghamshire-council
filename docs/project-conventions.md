@@ -11,7 +11,7 @@ These style conventions are enforced through [CI pipelines](./continuous-integra
 
 ## Git branching model
 
-_The following resources are for internal project developers. Open source contributers please refer to the [contribution guidlines](./contributing.md)._
+_The following resources are for internal project developers. Open source contributors please refer to the [contribution guidelines](./contributing.md)._
 
 We follow a loose version of the [Git flow branching model](https://nvie.com/posts/a-successful-git-branching-model/). A summary would be "like git-flow, but 'develop' is called 'release'".
 
