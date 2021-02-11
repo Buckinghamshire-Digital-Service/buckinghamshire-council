@@ -1,6 +1,17 @@
-# Buckinghamshire Council project conventions
+# Project Conventions
+
+## Code styleguide
+
+This project’s code formatting is enforced with [Prettier](https://prettier.io/) for supported languages. Make sure to have Prettier integrated with your editor to auto-format when saving files, or to manually run it before committing (`npm run format`).
+
+Python code is formatted with [Black](https://pypi.org/project/black/).
+Run automatic fomatting with `black .` in the VM or on your host machine.
+
+These style conventions are enforced through [CI pipelines](./continuous-integration.md).
 
 ## Git branching model
+
+_The following resources are for internal project developers. Open source contributors please refer to the [contribution guidelines](./contributing.md)._
 
 We follow a loose version of the [Git flow branching model](https://nvie.com/posts/a-successful-git-branching-model/). A summary would be "like git-flow, but 'develop' is called 'release'".
 
@@ -11,6 +22,8 @@ We follow a loose version of the [Git flow branching model](https://nvie.com/pos
 - The client QA branch is: `staging`
 - The internal QA branch is: `staging`
 - Do not treat the following branches as merge sources: `staging`
+
+To create a new feature or bugfix, use the following process.
 
 1. Make changes on a new branch, including a broad category and the ticket number if relevant e.g. `feature/123-extra-squiggles`, `fix/newsletter-signup`.
 1. Summarise your changes in `CHANGELOG.md`. Sort lines by ticket number (this makes merge and deployment diffs simpler).

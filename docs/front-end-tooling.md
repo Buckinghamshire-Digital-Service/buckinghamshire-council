@@ -1,4 +1,4 @@
-# Front end tooling
+# Front End Tooling
 
 This set of tooling should form the basis for any new wagtail projects. It can also be used for custom django builds - simply copy the `static_src` directory from here to your build.
 

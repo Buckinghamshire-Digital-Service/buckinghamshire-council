@@ -1,4 +1,4 @@
-# Buckinghamshire Council — hosting
+# Hosting
 
 The VM comes preinstalled with Fabric, Heroku CLI and AWS CLI.
 

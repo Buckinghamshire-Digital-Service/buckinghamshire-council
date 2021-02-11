@@ -1,4 +1,4 @@
-# Buckinghamshire Council — Data Protection
+# Data Protection
 
 See also: [Cookies](cookies.md)
 
