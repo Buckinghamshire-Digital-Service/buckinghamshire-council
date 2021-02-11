@@ -54,7 +54,7 @@ Since CI has not been migrated to GitHub yet, automatic formatting, linting and 
 `master` on GitHub will be overriden by the next push from GitLab.
 To avoid loosing the just merged changes you need to integrate them into the GitLab repo.
 
-1.  Add the GitHub repo to you local development setup.
+1.  Add the GitHub repo to your local development setup.
 
         git remote add github [Github Repo URL]
 
