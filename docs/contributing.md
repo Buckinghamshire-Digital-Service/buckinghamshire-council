@@ -72,7 +72,7 @@ To avoid loosing the just merged changes you need to integrate them into the Git
 
         git push origin fix/fix-from-github
 
-1.  Check the CI pipline to see if any formatting/linting/tests need to be fixed.
+1.  Check the CI pipeline to see if any formatting/linting/tests need to be fixed.
     If so, do this in your local branch and push the changes again.
 
 1.  Create a Merge Request on GitLab for the new branch to the `release` branch.
