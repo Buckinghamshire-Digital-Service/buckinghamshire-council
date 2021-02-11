@@ -1,4 +1,5 @@
 import copy
+from django.conf import settings
 
 from wagtail.search.backends.elasticsearch5 import (
     Elasticsearch5SearchQueryCompiler,
@@ -18,7 +19,9 @@ class ReduceBoostSearchQueryCompilerMixin:
     https://torchbox.slack.com/archives/C0251P48T/p1613040022098500?thread_ts=1613039057.098200&cid=C0251P48T
 
     Currently the only content type that receives a negative boost is the
-    NewsPage content type. The type and the negative boost factor are hardcoded.
+    NewsPage content type. The content type is hard coded. The boost reduction
+    factor is pulled in from a setting. The setting allows to change the reduction
+    factor without the need to change code.
 
     If necessary, this could potentially be opened for extension or made more
     flexible.
@@ -32,7 +35,7 @@ class ReduceBoostSearchQueryCompilerMixin:
             "boosting": {
                 "positive": super().get_inner_query(),
                 "negative": {"term": {"content_type": "news.NewsPage"}},
-                "negative_boost": 0.5,
+                "negative_boost": settings.SEARCH_BOOST_REDUCTION_FACTOR_NEWS_PAGE,
             }
         }
 
