@@ -49,7 +49,7 @@ Since CI has not been migrated to GitHub yet, automatic formatting, linting and 
 
 1.  Review the GitHub Pull Request accoring to the project standards.
 1.  Be sure to check for undesired side-effects of the bugfix.
-1.  If your happy with the PR, merge it into `master` on GitHub.
+1.  If you're happy with the PR, merge it into `master` on GitHub.
 
 `master` on GitHub will be overriden by the next push from GitLab.
 To avoid loosing the just merged changes you need to integrate them into the GitLab repo.
