@@ -6,8 +6,8 @@ from wagtail.search.backends.elasticsearch7 import (
 )
 
 from bc.search.elasticsearch5 import (
-    SynonymSettingsMixin,
     ReduceBoostSearchQueryCompilerMixin,
+    SynonymSettingsMixin,
 )
 
 
