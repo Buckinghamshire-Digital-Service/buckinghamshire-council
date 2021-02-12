@@ -15,10 +15,6 @@ class ReduceBoostSearchQueryCompilerMixin:
     Mixin for Elasticsearch query compilers that reduce the boost of a given
     content type.
 
-    All credit for this goes to @karl.
-    See also:
-    https://torchbox.slack.com/archives/C0251P48T/p1613040022098500?thread_ts=1613039057.098200&cid=C0251P48T
-
     Currently the only content type that receives a negative boost is the
     NewsPage content type. The content type is hard coded. The boost reduction
     factor is pulled in from a setting. The setting allows to change the reduction
