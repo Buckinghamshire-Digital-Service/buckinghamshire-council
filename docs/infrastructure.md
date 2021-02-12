@@ -51,7 +51,7 @@ Search synonyms can be edited in the Wagtail admin, where any terms in the `syno
 It was observed, that pages of the `NewsPage` type have been ranking fairly high in search results.
 This was undesirable, because news can be outdated and in the worst case plain wrong with respect to the situation at the time of search.
 
-To address this issue, multiple approaches (separate news search, no news in search, order news by date in results) where discussed.
+To address this issue, multiple approaches (separate news search, no news in search, order news by date in results) were discussed.
 It was decided that news should still be discoverable through search but should rank much lower than other content, because of their time-limited value.
 
 To achieve a generally lower ranking of the `NewsPage` type, a query compiler mixin (`bc.search.elasticsearch5`) has been added that allows to apply a negative boost factor to search results with the content type `news.NewsPage`.
