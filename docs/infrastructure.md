@@ -54,7 +54,7 @@ This was undesirable, because news can be outdated and in the worst case plain w
 To address this issue, multiple approaches (separate news search, no news in search, order news by date in results) where discussed.
 It was decided that news should still be discoverable through search but should rank much lower than other content, because of their time-limited value.
 
-To achieve a generally lower ranking of the `NewsPage` type, a query compiler mixin (`bc.search.elasticsearch5`)  has been added that allows to apply a negative boost factor to search results with the content type `news.NewsPage`.
+To achieve a generally lower ranking of the `NewsPage` type, a query compiler mixin (`bc.search.elasticsearch5`) has been added that allows to apply a negative boost factor to search results with the content type `news.NewsPage`.
 This negative boost factor (which has to be a float between 0 and 1) can be defined throught the environment variable `SEARCH_BOOST_REDUCTION_FACTOR_NEWS_PAGE` but defaults to 0.5.
 The negative boost factor is used to multiply the relevance score of a given search result, if that search result matches the content type `news.NewsPage`.
 
