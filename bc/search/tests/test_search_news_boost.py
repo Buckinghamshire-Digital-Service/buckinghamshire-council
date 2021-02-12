@@ -18,7 +18,7 @@ from .utils import (
 
 @unittest.skipUnless(
     is_elasticsearch_backend(get_search_backend()),
-    "Boost reduction is only availalbe in Elasticsearch backends",
+    "Boost reduction is only available in Elasticsearch backends",
 )
 @override_settings(SEARCH_BACKEND=get_search_settings_for_test())
 class TestNewsSearchBoostReduction(TestCase):
