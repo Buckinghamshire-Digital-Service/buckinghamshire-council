@@ -46,6 +46,20 @@ The recruitment site uses Postgres for search. See `bc.recruitment.utils.get_job
 
 Search synonyms can be edited in the Wagtail admin, where any terms in the `synonyms` field will match any records whose index contains the term in the `canonical_term` field. Changes to the configured synonyms will not take place until the search is reindexed.
 
+### News in Search
+
+It was observed, that pages of the `NewsPage` type have been ranking fairly high in search results.
+This was undesirable, because news can be outdated and in the worst case plain wrong with respect to the situation at the time of search.
+
+To address this issue, multiple approaches (separate news search, no news in search, order news by date in results) where discussed.
+It was decided that news should still be discoverable through search but should rank much lower than other content, because of their time-limited value.
+
+To achieve a generally lower ranking of the `NewsPage` type, a query compiler mixin (`bc.search.elasticsearch5`)  has been added that allows to apply a negative boost factor to search results with the content type `news.NewsPage`.
+This negative boost factor (which has to be a float between 0 and 1) can be defined throught the environment variable `SEARCH_BOOST_REDUCTION_FACTOR_NEWS_PAGE` but defaults to 0.5.
+The negative boost factor is used to multiply the relevance score of a given search result, if that search result matches the content type `news.NewsPage`.
+
+See also: https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html
+
 ### Developing the Elasticsearch search engine configuration
 
 The Vagrant box will default to using Postgres for search, and ignoring some of the extra search features such as synonyms. However, it does have Elasticsearch5 installed. To use this, set the search backend in local settings to `bc.search.elasticsearch5` and the URL to "http://localhost:9200". You will also have to install the proper version of the Elasticsearch library that Wagtail will use under the hood:
