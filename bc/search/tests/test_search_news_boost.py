@@ -5,13 +5,14 @@ from django.test import TestCase, override_settings
 from wagtail.core.models import Page
 from wagtail.search.backends import get_search_backend
 
-from bc.news.tests.fixtures import NewsPageFactory
 from bc.home.models import HomePage
+from bc.news.tests.fixtures import NewsPageFactory
 from bc.standardpages.tests.fixtures import InformationPageFactory
+
 from .utils import (
     get_search_settings_for_test,
-    update_search_index,
     is_elasticsearch_backend,
+    update_search_index,
 )
 
 
