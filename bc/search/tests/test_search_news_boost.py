@@ -34,7 +34,7 @@ class TestNewsSearchBoostReduction(TestCase):
         is_elasticsearch_backend(get_search_backend()),
         "Boost reduction is only availalbe in Elasticsearch backends",
     )
-    @override_settings(SEARCH_BOOST_REDUCTION_FACTOR_NEWS_PAGE=1.0)
+    @override_settings(SEARCH_BOOST_FACTOR_NEWS_PAGE=1.0)
     def test_news_before_info_when_full_boost_factor(self):
         self.create_news_page()
         self.create_info_page()
@@ -49,7 +49,7 @@ class TestNewsSearchBoostReduction(TestCase):
         is_elasticsearch_backend(get_search_backend()),
         "Boost reduction is only availalbe in Elasticsearch backends",
     )
-    @override_settings(SEARCH_BOOST_REDUCTION_FACTOR_NEWS_PAGE=0.1)
+    @override_settings(SEARCH_BOOST_FACTOR_NEWS_PAGE=0.1)
     def test_info_before_news_despite_better_match_when_low_boost_factor(self):
         self.create_news_page()
         self.create_info_page()

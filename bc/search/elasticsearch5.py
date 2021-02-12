@@ -32,7 +32,7 @@ class ReduceBoostSearchQueryCompilerMixin:
             "boosting": {
                 "positive": super().get_inner_query(),
                 "negative": {"term": {"content_type": "news.NewsPage"}},
-                "negative_boost": settings.SEARCH_BOOST_REDUCTION_FACTOR_NEWS_PAGE,
+                "negative_boost": settings.SEARCH_BOOST_FACTOR_NEWS_PAGE,
             }
         }
 

@@ -234,9 +234,7 @@ else:
     }
 # Reduction factor between 0 and 1 to apply to the relevanve score of search
 # results with the NewsPage content type. See bc.search.elasticsearch5.
-SEARCH_BOOST_REDUCTION_FACTOR_NEWS_PAGE = float(
-    env.get("SEARCH_BOOST_REDUCTION_FACTOR_NEWS_PAGE", 0.5)
-)
+SEARCH_BOOST_FACTOR_NEWS_PAGE = float(env.get("SEARCH_BOOST_FACTOR_NEWS_PAGE", 0.5))
 
 
 WAGTAILEMBEDS_FINDERS = [
