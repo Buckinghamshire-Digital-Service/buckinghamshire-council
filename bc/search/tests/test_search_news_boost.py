@@ -15,6 +15,10 @@ from .utils import (
 )
 
 
+@unittest.skipUnless(
+    is_elasticsearch_backend(get_search_backend()),
+    "Boost reduction is only availalbe in Elasticsearch backends",
+)
 @override_settings(SEARCH_BACKEND=get_search_settings_for_test())
 class TestNewsSearchBoostReduction(TestCase):
     def setUp(self):
@@ -30,10 +34,6 @@ class TestNewsSearchBoostReduction(TestCase):
         self.homepage.add_child(instance=info_page)
         self.info_page = Page.objects.get(pk=info_page.id)
 
-    @unittest.skipUnless(
-        is_elasticsearch_backend(get_search_backend()),
-        "Boost reduction is only availalbe in Elasticsearch backends",
-    )
     @override_settings(SEARCH_BOOST_FACTOR_NEWS_PAGE=1.0)
     def test_news_before_info_when_full_boost_factor(self):
         self.create_news_page()
@@ -45,12 +45,8 @@ class TestNewsSearchBoostReduction(TestCase):
         self.assertEqual(self.news_page, list(search_results)[0])
         self.assertEqual(self.info_page, list(search_results)[1])
 
-    @unittest.skipUnless(
-        is_elasticsearch_backend(get_search_backend()),
-        "Boost reduction is only availalbe in Elasticsearch backends",
-    )
     @override_settings(SEARCH_BOOST_FACTOR_NEWS_PAGE=0.1)
-    def test_info_before_news_despite_better_match_when_low_boost_factor(self):
+    def test_info_before_news_despite_news_better_match_when_low_boost_factor(self):
         self.create_news_page()
         self.create_info_page()
         update_search_index()
