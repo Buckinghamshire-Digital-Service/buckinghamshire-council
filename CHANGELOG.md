@@ -1,5 +1,13 @@
 # Release History
 
+## 34.0 (2021-02-15)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/33.0...34.0
+
+- 239: Prepare repository for open sourcing
+- 508: Upgrade Wagtail to version 2.12
+- Fix: Check page exists before calling pageurl in footer
+
 ## 33.0 (2021-02-02)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/32.1...33.0
