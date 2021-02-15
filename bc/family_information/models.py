@@ -50,6 +50,7 @@ class FamilyInformationHomePage(FISBannerFields, BasePage):
         "CategoryTypeTwoPage",
         "standardpages.InformationPage",
     ]
+    parent_page_types = ["wagtailcore.Page"]
 
     max_count = 2
 
