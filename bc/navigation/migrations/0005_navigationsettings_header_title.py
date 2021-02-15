@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('navigation', '0004_footer_columns_not_required'),
+        ("navigation", "0004_footer_columns_not_required"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='navigationsettings',
-            name='header_title',
+            model_name="navigationsettings",
+            name="header_title",
             field=models.CharField(blank=True, max_length=250, null=True),
         ),
     ]

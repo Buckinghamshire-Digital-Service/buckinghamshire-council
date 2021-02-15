@@ -1,6 +1,7 @@
 from django.db import models
+
 from modelcluster.models import ClusterableModel
-from wagtail.admin.edit_handlers import StreamFieldPanel, FieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.core import blocks
 from wagtail.core.blocks import StreamBlock
