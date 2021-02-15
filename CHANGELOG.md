@@ -1,5 +1,11 @@
 # Release History
 
+## 34.1 (2021-02-15)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/33.0...34.1
+
+- Fix: Update GitHub Pages workflow to ensure publication of docs
+
 ## 34.0 (2021-02-15)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/33.0...34.0
