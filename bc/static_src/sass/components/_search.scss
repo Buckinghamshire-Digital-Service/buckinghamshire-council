@@ -1,6 +1,16 @@
 .search {
     margin-bottom: $grid * 2;
 
+    &__help-text {
+        margin-top: $grid--min * -1;
+        margin-bottom: $grid;
+
+        @include media-query(tablet-portrait) {
+            margin-top: $grid--small * -1;
+            margin-bottom: $grid--large;
+        }
+    }
+
     &__results-header {
         border-bottom: 2px solid $color--earth;
         margin-bottom: $grid;
