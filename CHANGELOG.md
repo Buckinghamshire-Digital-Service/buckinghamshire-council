@@ -6,6 +6,7 @@
 - 513: Allow second FIS homepage for Care Advice microsite
 - 517: Fix: Preview behind basic auth with new `baipw` version
 - 518: Include FIS pages in search results
+- 519: Fix: OGL below links and typo
 
 ## 34.1 (2021-02-15)
 
