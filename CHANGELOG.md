@@ -1,5 +1,10 @@
 # Release History
 
+## Unreleased
+
+- 498: Reduce news boost in search results
+- 513: Allow second FIS homepage for Care Advice microsite
+
 ## 34.1 (2021-02-15)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/33.0...34.1

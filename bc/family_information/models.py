@@ -50,8 +50,9 @@ class FamilyInformationHomePage(FISBannerFields, BasePage):
         "CategoryTypeTwoPage",
         "standardpages.InformationPage",
     ]
+    parent_page_types = ["wagtailcore.Page"]
 
-    max_count = 1
+    max_count = 2
 
     hero_image = models.ForeignKey(
         "images.CustomImage", null=True, related_name="+", on_delete=models.SET_NULL,
