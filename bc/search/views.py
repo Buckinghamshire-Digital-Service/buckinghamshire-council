@@ -12,7 +12,6 @@ from django.views.generic.base import View
 from wagtail.core.models import Page, Site
 from wagtail.search.models import Query
 
-from bc.family_information.models import FamilyInformationHomePage
 from bc.recruitment.forms import SearchAlertSubscriptionForm
 from bc.recruitment.models import JobAlertSubscription
 from bc.recruitment.utils import (
