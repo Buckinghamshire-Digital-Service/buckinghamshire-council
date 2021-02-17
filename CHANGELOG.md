@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- 498: Reduce news boost in search results
+
 ## 34.1 (2021-02-15)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/33.0...34.1
