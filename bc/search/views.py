@@ -105,9 +105,6 @@ class SearchView(View):
                         )
                     )
                 )
-                page_queryset_for_search = self.exclude_fis_pages(
-                    page_queryset_for_search
-                )
                 search_results = page_queryset_for_search.search(
                     search_query, operator="and"
                 )
@@ -225,26 +222,6 @@ class SearchView(View):
                 context,
             )
             return response
-
-    @staticmethod
-    def exclude_fis_pages(page_queryset):
-        """
-        Exclude FIS pages from the given page QuerySet.
-
-        Excluding these pages from the search is only a temporary fix and needs
-        to be reverted in a future update when the FIS content is ready for
-        publication.
-
-        TODO: Remove this method and calls of it.
-
-        See also:
-        https://trello.com/c/TryuPZ9J/478-update-search-configuration-to-exclude-fis-content
-
-        """
-        fis_homepage = FamilyInformationHomePage.objects.first()
-        if fis_homepage is not None:
-            page_queryset = page_queryset.exclude(path__startswith=fis_homepage.path)
-        return page_queryset
 
 
 class JobAlertConfirmView(View):
