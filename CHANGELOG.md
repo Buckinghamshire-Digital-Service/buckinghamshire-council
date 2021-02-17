@@ -3,6 +3,7 @@
 ## Unreleased
 
 - 498: Reduce news boost in search results
+- 513: Allow second FIS homepage for Care Advice microsite
 
 ## 34.1 (2021-02-15)
 
