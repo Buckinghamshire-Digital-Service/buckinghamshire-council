@@ -1,0 +1,10 @@
+context:
+  settings:
+    utils:
+      SocialMediaSettings:
+        has_any_setting: True
+        facebook_app_id: 'bucksfamilyinfo'
+        twitter_handle: 'bucksfamilyinfo'
+        youtube_channel_url: 'https://example.com'
+        instagram_username: 'bucksfamilyinfo'
+        linkedin_organisation_url: 'https://example.com'
