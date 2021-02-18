@@ -2,11 +2,11 @@
     margin-bottom: $grid * 2;
 
     &__help-text {
-        margin-top: $grid--min * -1;
+        margin-top: -($grid--min);
         margin-bottom: $grid;
 
         @include media-query(tablet-portrait) {
-            margin-top: $grid--small * -1;
+            margin-top: -($grid--small);
             margin-bottom: $grid--large;
         }
     }
