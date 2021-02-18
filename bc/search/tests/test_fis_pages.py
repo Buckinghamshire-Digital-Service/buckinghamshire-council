@@ -7,11 +7,11 @@ from bc.family_information.tests import fixtures
 from bc.images.tests.fixtures import ImageFactory
 
 
-class FISPagesExcludedTest(TestCase):
+class FISPagesIncludedTest(TestCase):
     def setUp(self):
         self.fis_homepage = fixtures.FamilyInformationHomePageFactory()
 
-    def test_fis_page_not_in_search_results(self):
+    def test_fis_page_in_search_results(self):
         image = ImageFactory()
         hit_page = self.fis_homepage.add_child(
             instance=fixtures.CategoryTypeOnePageFactory.build(
@@ -21,6 +21,6 @@ class FISPagesExcludedTest(TestCase):
 
         response = self.client.get(reverse("search") + "?query=screwdrivers")
 
-        self.assertNotIn(
+        self.assertIn(
             Page.objects.get(pk=hit_page.pk), response.context["search_results"]
         )
