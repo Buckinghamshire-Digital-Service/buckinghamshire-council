@@ -5,6 +5,7 @@
 - 498: Reduce news boost in search results
 - 513: Allow second FIS homepage for Care Advice microsite
 - 517: Fix: Preview behind basic auth with new `baipw` version
+- 518: Include FIS pages in search results
 
 ## 34.1 (2021-02-15)
 
