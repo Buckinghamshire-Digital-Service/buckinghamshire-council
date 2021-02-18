@@ -684,6 +684,7 @@ if env.get("BASIC_AUTH_ENABLED", "false").lower().strip() == "true":
             "BASIC_AUTH_WHITELISTED_HTTP_HOSTS"
         ].split(",")
 
+    BASIC_AUTH_DISABLE_CONSUMING_AUTHORIZATION_HEADER = True
 
 AUTH_USER_MODEL = "users.User"
 

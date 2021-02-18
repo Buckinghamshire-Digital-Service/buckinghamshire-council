@@ -12,7 +12,6 @@ from django.views.generic.base import View
 from wagtail.core.models import Page, Site
 from wagtail.search.models import Query
 
-from bc.family_information.models import FamilyInformationHomePage
 from bc.recruitment.forms import SearchAlertSubscriptionForm
 from bc.recruitment.models import JobAlertSubscription
 from bc.recruitment.utils import (
@@ -105,9 +104,6 @@ class SearchView(View):
                         )
                     )
                 )
-                page_queryset_for_search = self.exclude_fis_pages(
-                    page_queryset_for_search
-                )
                 search_results = page_queryset_for_search.search(
                     search_query, operator="and"
                 )
@@ -131,12 +127,16 @@ class SearchView(View):
         except EmptyPage:
             search_results = paginator.page(paginator.num_pages)
 
+        search_input_help_text = SystemMessagesSettings.for_site(
+            site
+        ).search_input_help_text
         no_result_text = SystemMessagesSettings.for_request(
             request
         ).body_no_search_results.format(searchterms=search_query)
 
         context.update(
             {
+                "search_input_help_text": search_input_help_text,
                 "no_result_text": no_result_text,
                 "search_query": search_query,
                 "search_results": search_results,
@@ -225,26 +225,6 @@ class SearchView(View):
                 context,
             )
             return response
-
-    @staticmethod
-    def exclude_fis_pages(page_queryset):
-        """
-        Exclude FIS pages from the given page QuerySet.
-
-        Excluding these pages from the search is only a temporary fix and needs
-        to be reverted in a future update when the FIS content is ready for
-        publication.
-
-        TODO: Remove this method and calls of it.
-
-        See also:
-        https://trello.com/c/TryuPZ9J/478-update-search-configuration-to-exclude-fis-content
-
-        """
-        fis_homepage = FamilyInformationHomePage.objects.first()
-        if fis_homepage is not None:
-            page_queryset = page_queryset.exclude(path__startswith=fis_homepage.path)
-        return page_queryset
 
 
 class JobAlertConfirmView(View):

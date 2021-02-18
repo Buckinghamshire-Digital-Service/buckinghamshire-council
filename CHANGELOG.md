@@ -1,9 +1,16 @@
 # Release History
 
-## Unreleased
+## 35.0 (2021-02-18)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/34.1...35.0
 
 - 498: Reduce news boost in search results
 - 513: Allow second FIS homepage for Care Advice microsite
+- 517: Fix: Preview behind basic auth with new `baipw` version
+- 518: Include FIS pages in search results
+- 519: Fix: OGL below links and typo
+- 520: Fix: Add `search_input_help_text` setting to allow directory link for FIS
+- 521: Fix: Upgrade Wagtail 2.12.2 to prevent migration issue in CI
 
 ## 34.1 (2021-02-15)
 
