@@ -1,5 +1,11 @@
 # Release History
 
+## 35.1 (2021-02-24)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/35.0...35.1
+
+- Upgrade Django to 2.2.19
+
 ## 35.0 (2021-02-18)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/34.1...35.0
