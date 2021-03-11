@@ -13,5 +13,8 @@
 {% include 'django/forms/widgets/hidden.html' %}
 
 <script>
-    window.initBarChart("{{ widget.attrs.id|escapejs }}", {{ widget.table_options_json|safe }});
+    // Give the JS time to load
+    setTimeout(() => {
+        window.initBarChart("{{ widget.attrs.id|escapejs }}", {{ widget.table_options_json|safe }});
+    }, 1000);
 </script>
