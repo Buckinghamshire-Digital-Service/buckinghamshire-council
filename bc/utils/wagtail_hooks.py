@@ -155,3 +155,10 @@ def editor_css():
     return format_html(
         '<link rel="stylesheet" href="{}">', static("bc_admin_ui/editor.css")
     )
+
+
+@hooks.register("insert_editor_js")
+def editor_js():
+    return format_html(
+        '<script src="{}"></script>', static("js/bc_admin_ui.js")
+    )
