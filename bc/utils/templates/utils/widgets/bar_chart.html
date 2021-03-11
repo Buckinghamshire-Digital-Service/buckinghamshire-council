@@ -1,0 +1,17 @@
+{% load i18n %}
+{% include "utils/widgets/partials/title.html" %}
+<br/>
+{% include "utils/widgets/partials/caption.html" %}
+<br/>
+{% include "utils/widgets/partials/table_first.html" %}
+<br/>
+{% include "utils/widgets/partials/direction.html" %}
+<br/>
+{% trans "First column will be considered as the base axis points. First row will be considered as the grouping labels." as data_help_text %}
+{% include "utils/widgets/partials/data.html" with help_text=data_help_text %}
+
+{% include 'django/forms/widgets/hidden.html' %}
+
+<script>
+    window.initBarChart("{{ widget.attrs.id|escapejs }}", {{ widget.table_options_json|safe }});
+</script>

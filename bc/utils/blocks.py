@@ -1,8 +1,11 @@
 import copy
 
+from django import forms
 from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
+from django.utils.functional import cached_property
 
+from wagtail.admin.staticfiles import versioned_static
 from wagtail.contrib.table_block.blocks import TableBlock
 from wagtail.core import blocks
 from wagtail.documents.blocks import DocumentChooserBlock
@@ -10,6 +13,7 @@ from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 
 from .constants import RICH_TEXT_FEATURES
+from .widgets import BarChartInput
 
 
 class ImageBlock(blocks.StructBlock):
@@ -121,6 +125,34 @@ class ButtonBlock(blocks.StructBlock):
     class Meta:
         icon = "success"
         template = "patterns/molecules/streamfield/blocks/button_block.html"
+
+
+class BaseChartBlock(TableBlock):
+    @property
+    def media(self):
+        return forms.Media(
+            css={'all': [
+                versioned_static('utils/css/vendor/handsontable-6.2.2.full.min.css')
+            ]},
+            js=[
+                versioned_static('utils/js/vendor/handsontable-6.2.2.full.min.js'),
+            ]
+        )
+
+    class Meta:
+        abstract = True
+
+
+class BarChartBlock(BaseChartBlock):
+    @cached_property
+    def field(self):
+        return forms.CharField(
+            widget=BarChartInput(table_options=self.table_options),
+            **self.field_options,
+        )
+
+    def render(self, value, context=None):
+        return super().render(value, context)
 
 
 class BaseStoryBlock(blocks.StreamBlock):

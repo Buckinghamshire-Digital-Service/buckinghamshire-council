@@ -1,0 +1,10 @@
+{% load i18n %}
+<div class="field">
+    <label for="{{ widget.attrs.id }}-handsontable-title">{% trans "Chart and table title" %}</label>
+    <div class="field-content">
+        <div class="input">
+          <input type="text" id="{{ widget.attrs.id }}-handsontable-title" name="handsontable-title" value="{{ widget.table_title }}"/>
+        </div>
+        <p class="help">{% trans "A heading that identifies the overall topic of the table, and is useful for screen reader users" %}</p>
+    </div>
+</div>

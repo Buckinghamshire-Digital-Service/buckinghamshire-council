@@ -1,0 +1,10 @@
+{% load i18n %}
+<div class="field">
+    <label for="{{ widget.attrs.id }}-handsontable-caption">{% trans "Chart and table caption" %}</label>
+    <div class="field-content">
+        <div class="input">
+          <input type="text" id="{{ widget.attrs.id }}-handsontable-caption" name="handsontable-caption" value="{{ widget.chart_caption }}"/>
+        </div>
+        <p class="help">{% trans "A caption about the data and its source or additional data" %}</p>
+    </div>
+</div>

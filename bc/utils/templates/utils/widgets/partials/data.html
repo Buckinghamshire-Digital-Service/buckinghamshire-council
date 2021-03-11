@@ -1,0 +1,13 @@
+{% load i18n %}
+<div class="field">
+    <label for="{{ widget.attrs.id }}-handsontable-container">{% trans "Data" %}</label>
+    <div class="field-content">
+        <p class="help">
+            {% if help_text %}{{ help_text }}{% endif %}
+            {% trans "Right-click on the table for more options" %}
+        </p>
+        <div id="{{ widget.attrs.id }}-handsontable-container"></div>
+        {% include 'django/forms/widgets/hidden.html' %}
+        <script>initTable("{{ widget.attrs.id|escapejs }}", {{ widget.table_options_json|safe }});</script>
+    </div>
+</div>
