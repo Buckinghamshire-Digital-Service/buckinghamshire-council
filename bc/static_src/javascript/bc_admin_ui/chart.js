@@ -1,11 +1,14 @@
-/* eslint-disable no-undef, no-console */
 // eslint-disable-next-line no-unused-vars
 class Chart {
     constructor(id, tableOptions) {
         this.id = id;
         const containerId = `${id}-handsontable-container`;
 
-        this.resizeTargets = ['.input > .handsontable', '.wtHider', '.wtHolder'];
+        this.resizeTargets = [
+            '.input > .handsontable',
+            '.wtHider',
+            '.wtHolder',
+        ];
         this.isInitialized = false;
 
         this.getFields();
@@ -27,16 +30,13 @@ class Chart {
     }
 
     _bindEvents(tableOptions) {
-        if (tableOptions &&
-            (!Object.prototype.hasOwnProperty.call('tableOptions', 'width') ||
-            !Object.prototype.hasOwnProperty.call('tableOptions', 'height'))
-        ) {
+        if (tableOptions && (tableOptions.width || tableOptions.height)) {
             // Size to parent .sequence-member-inner width if width is not given in tableOptions
             // eslint-disable-next-line func-names
             const resizeAction = function() {
                 this.hot.updateSettings({
                     width: this.getWidth(),
-                    height: this.getHeight()
+                    height: this.getHeight(),
                 });
                 this.resizeWidth('100%');
             };
@@ -65,26 +65,26 @@ class Chart {
 
     getCellsClassnames() {
         const meta = this.hot.getCellsMeta();
-        const cellsClassnames = []
+        const cellsClassnames = [];
         for (let i = 0; i < meta.length; i += 1) {
             const currentMeta = meta[i];
-            if (currentMeta && Object.prototype.hasOwnProperty.call('currentMeta', 'className')) {
+            if (currentMeta && currentMeta.className) {
                 cellsClassnames.push({
                     row: meta[i].row,
                     col: meta[i].col,
-                    className: meta[i].className
+                    className: meta[i].className,
                 });
             }
         }
         return cellsClassnames;
-    };
+    }
 
     getDefaultOptions() {
         const boundPersist = this.persist.bind(this);
 
         const cellEvent = (change, source) => {
             if (source === 'loadData') {
-                return;  // don't save this change
+                return; // don't save this change
             }
 
             boundPersist();
@@ -140,12 +140,17 @@ class Chart {
 
     getHeight() {
         const tableParent = $(`#${this.id}`).parent();
-        return tableParent.find('.htCore').height() + (tableParent.find('.input').height() * 2);
+        return (
+            tableParent.find('.htCore').height() +
+            tableParent.find('.input').height() * 2
+        );
     }
 
     /* eslint-disable class-methods-use-this */
     getWidth() {
-        return $('.widget-table_input').closest('.sequence-member-inner').width();
+        return $('.widget-table_input')
+            .closest('.sequence-member-inner')
+            .width();
     }
     /* eslint-enable class-methods-use-this */
 
@@ -154,37 +159,40 @@ class Chart {
 
         if (this.dataForForm !== null) {
             // Overrides default value from tableOptions (if given) with value from database
-            if (Object.prototype.hasOwnProperty.call('dataForForm', 'data')) {
+            if (this.dataForForm.data) {
                 defaultOptions.data = this.dataForForm.data;
             }
 
-            if (Object.prototype.hasOwnProperty.call('dataForForm', 'cell')) {
+            if (this.dataForForm.data.cell) {
                 defaultOptions.cell = this.dataForForm.cell;
             }
         }
 
         const finalOptions = {};
-        Object.keys(defaultOptions).forEach(key => {
+        Object.keys(defaultOptions).forEach((key) => {
             finalOptions[key] = defaultOptions[key];
         });
-        Object.keys(tableOptions).forEach(key => {
+        Object.keys(tableOptions).forEach((key) => {
             finalOptions[key] = tableOptions[key];
         });
 
-        this.hot = new Handsontable(document.getElementById(containerId), finalOptions);
+        this.hot = new Handsontable(
+            document.getElementById(containerId),
+            finalOptions,
+        );
         this.hot.render(); // Call to render removes 'null' literals from empty cells
     }
 
     // To Implement: Override with specific chart fields
     _loadFieldData() {
         if (this.dataForForm !== null) {
-            if (Object.prototype.hasOwnProperty.call('dataForForm', 'chart_caption')) {
+            if (this.dataForForm.chart_caption) {
                 this.chartCaption.prop('value', this.dataForForm.chart_caption);
             }
-            if (Object.prototype.hasOwnProperty.call('dataForForm', 'table_first')) {
-                this.tableFirst.prop('value', this.dataForForm.table_first);
+            if (this.dataForForm.table_first) {
+                this.tableFirst.attr('checked', this.dataForForm.table_first);
             }
-            if (Object.prototype.hasOwnProperty.call('dataForForm', 'table_title')) {
+            if (this.dataForForm.table_title) {
                 this.tableTitle.prop('value', this.dataForForm.table_title);
             }
         }
@@ -200,9 +208,9 @@ class Chart {
             data: this.hot.getData(),
             cell: this.getCellsClassnames(),
             chart_caption: this.chartCaption.val(),
-            table_first: this.tableFirst.val(),
+            table_first: this.tableFirst.is(':checked'),
             table_title: this.tableTitle.val(),
-        }
+        };
     }
 
     _persistData() {
@@ -213,7 +221,7 @@ class Chart {
     persist() {
         // eslint-disable-next-line no-underscore-dangle
         this.hiddenStreamInput.val(JSON.stringify(this._persistData()));
-    };
+    }
 
     readData() {
         try {
@@ -226,7 +234,10 @@ class Chart {
     resizeHeight(height) {
         const currTable = $(`#${this.id}`);
         $.each(this.resizeTargets, () => {
-            currTable.closest('.field-content').find(this).height(height);
+            currTable
+                .closest('.field-content')
+                .find(this)
+                .height(height);
         });
     }
 
@@ -236,7 +247,9 @@ class Chart {
         });
         const parentDiv = $('.widget-table_input').parent();
         parentDiv.find('.field-content').width(width);
-        parentDiv.find('.fieldname-table .field-content .field-content').width('80%');
+        parentDiv
+            .find('.fieldname-table .field-content .field-content')
+            .width('80%');
     }
 }
 

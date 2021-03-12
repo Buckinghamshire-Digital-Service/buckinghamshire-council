@@ -1,4 +1,4 @@
-import Chart from './chart'
+import Chart from './chart';
 
 class BarChart extends Chart {
     bindEvents(tableOptions) {
@@ -17,25 +17,30 @@ class BarChart extends Chart {
         this._getFields();
 
         const directionId = `${this.id}-handsontable-direction`;
-        // eslint-disable-next-line no-undef
-        this.direction = $(`#${directionId}`);
+        const verticalId = `${this.id}-handsontable-vertical`;
+        const horizontalId = `${this.id}-handsontable-horizontal`;
+        this.direction = $(`#${directionId} [name=handsontable-direction]`);
+        this.vertical = $(`#${verticalId}`);
+        this.horizontal = $(`#${horizontalId}`);
     }
 
     loadFieldData() {
         // eslint-disable-next-line no-underscore-dangle
         this._loadFieldData();
 
-        if (this.dataForForm !== null) {
-            if (Object.prototype.hasOwnProperty.call('dataForForm', 'direction')) {
-                this.direction.prop('value', this.dataForForm.direction);
-            }
+        if (this.dataForForm && this.dataForForm.direction) {
+            this.direction
+                .filter(`[value="${this.dataForForm.direction}"]`)
+                .attr('checked', true);
         }
     }
 
     _persistData() {
         // eslint-disable-next-line no-underscore-dangle
         const data = this._persistChartData();
-        data.direction = this.direction.val();
+        data.direction = this.horizontal.is(':checked')
+            ? 'horizontal'
+            : 'vertical';
         return data;
     }
 }
