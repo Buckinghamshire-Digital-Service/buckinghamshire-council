@@ -4,3 +4,6 @@ coverage
 venv
 env
 bc/static_src/vendor
+bc/utils/static/utils/js/vendor
+bc/utils/static/utils/css/vendor
+

@@ -5,5 +5,5 @@ document.addEventListener('DOMContentLoaded', () => {
     window.initBarChart = (id, tableOptions) => {
         // eslint-disable-next-line no-new
         new BarChart(id, tableOptions);
-    }
+    };
 });
