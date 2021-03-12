@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-unused-vars
+/* global $ Handsontable */
 class Chart {
     constructor(id, tableOptions) {
         this.id = id;

@@ -1,8 +1,9 @@
+/* global $ */
 import Chart from './chart';
 
 class BarChart extends Chart {
     bindEvents(tableOptions) {
-        // eslint-disable-next-line no-underscore-dangle, no-undef
+        // eslint-disable-next-line no-underscore-dangle
         this._bindEvents(tableOptions);
 
         const boundPersist = this.persist.bind(this);

@@ -2,4 +2,4 @@ node_modules
 coverage
 static_compiled
 venv
-utils/js/vendor
+bc/utils/static/utils/js/vendor
