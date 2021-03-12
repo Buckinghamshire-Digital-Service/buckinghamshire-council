@@ -7,7 +7,7 @@ class BaseChartInput(forms.HiddenInput):
     def __init__(self, table_options=None, attrs=None):
         self.table_options = table_options
         super().__init__(attrs=attrs)
-        self.table_options['language'] = 'en-us'
+        self.table_options["language"] = "en-us"
 
     def get_context(self, name, value, attrs=None):
         context = super().get_context(name, value, attrs)

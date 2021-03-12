@@ -131,12 +131,12 @@ class BaseChartBlock(TableBlock):
     @property
     def media(self):
         return forms.Media(
-            css={'all': [
-                versioned_static('utils/css/vendor/handsontable-6.2.2.full.min.css')
-            ]},
-            js=[
-                versioned_static('utils/js/vendor/handsontable-6.2.2.full.min.js'),
-            ]
+            css={
+                "all": [
+                    versioned_static("utils/css/vendor/handsontable-6.2.2.full.min.css")
+                ]
+            },
+            js=[versioned_static("utils/js/vendor/handsontable-6.2.2.full.min.js")],
         )
 
     class Meta:
