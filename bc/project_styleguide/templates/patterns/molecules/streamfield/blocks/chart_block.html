@@ -48,4 +48,6 @@
     {% endif %}
 </table>
 
+<div data-chart="{{ id }}" style="width:100%; height:400px;" id="chart-container-{{id}}"></div>
+
 {{ value|json_script:id }}
