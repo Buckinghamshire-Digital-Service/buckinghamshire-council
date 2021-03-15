@@ -139,8 +139,47 @@ class BaseChartBlock(TableBlock):
             js=[versioned_static("utils/js/vendor/handsontable-6.2.2.full.min.js")],
         )
 
+    def get_table_columns(self, table):
+        """
+        Return table as column headers and column values
+        e.g. { name: row 1, data: [row 2, row 3, ...] }
+        """
+        result = []
+        transposed_table = [*zip(*table)]
+        for col in transposed_table:
+            series = {
+                "name": col[0],
+                "data": [cell for cell in col[1:]],
+            }
+            result.append(series)
+
+        return result
+
+    def clean_table_values(self, table):
+        """
+        Remove empty rows and columns
+        """
+        import copy
+
+        cleaned_table = copy.deepcopy(table)
+
+        # Remove empty rows
+        for row in table:
+            if all([cell is None for cell in row]):
+                cleaned_table.remove(row)
+
+        # Remove empty columns
+        transposed_table = [*zip(*cleaned_table)]
+        for index, col in enumerate(transposed_table):
+            if all([cell is None for cell in col]):
+                for row in cleaned_table:
+                    del row[index]
+
+        return cleaned_table
+
     class Meta:
         abstract = True
+        template = "patterns/molecules/streamfield/blocks/chart_block.html"
 
 
 class BarChartBlock(BaseChartBlock):
@@ -151,8 +190,41 @@ class BarChartBlock(BaseChartBlock):
             **self.field_options,
         )
 
-    def render(self, value, context=None):
-        return super().render(value, context)
+    def render(self, value, context={}):
+        if context is None:
+            new_context = {}
+        else:
+            new_context = dict(context)
+
+        cleaned_data = self.clean_table_values(value["data"])
+        columns = self.get_table_columns(cleaned_data)
+
+        new_value = {
+            "chart": {"type": "bar"},
+            "plotOptions": {"series": {"stacking": "normal"}},
+            "series": columns[1:],
+            "title": {"text": value["table_title"]},
+        }
+
+        first_column = columns[0]
+        if value["direction"] == "horizontal":
+            new_value["xAxis"] = {"categories": first_column["data"]}
+            new_value["yAxis"] = {"title": {"text": first_column["name"]}}
+        else:
+            new_value["xAxis"] = {"title": {"text": first_column["name"]}}
+            new_value["yAxis"] = {"categories": first_column["data"]}
+
+        new_context.update(
+            {
+                "table_first": value["table_first"],
+                "table_headers": cleaned_data[0],
+                "table_data": cleaned_data[1:],
+                "title": value["table_title"],
+                "caption": value["chart_caption"],
+            }
+        )
+
+        return super().render(new_value, new_context)
 
 
 class BaseStoryBlock(blocks.StreamBlock):
