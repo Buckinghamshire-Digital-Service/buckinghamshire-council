@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     "scout_apm.django",
     "bc.alerts",
     "bc.area_finder",
+    "bc.campaigns",
     "bc.cases",
     "bc.documents",
     "bc.events",

@@ -1,0 +1,15 @@
+{% extends base_page_template %}
+{% load wagtailcore_tags navigation_tags reading_time_tags static %}
+
+{% block breadcrumbs %}{% endblock breadcrumbs %}
+
+{% block content %}
+    <div class="wrapper wrapper--flex">
+        <div class="section section--main">
+
+            <h1 class="heading heading--xxl">{{ page.title }}</h1>
+
+            {% comment %} {% include_block page.body %} {% endcomment %}
+        </div>
+    </div>
+{% endblock %}
