@@ -216,6 +216,7 @@ class BarChartBlock(BaseChartBlock):
 
         new_context.update(
             {
+                "id": value["id"],
                 "table_first": value["table_first"],
                 "table_headers": cleaned_data[0],
                 "table_data": cleaned_data[1:],

@@ -205,6 +205,7 @@ class Chart {
 
     _persistChartData() {
         return {
+            id: this.id,
             data: this.hot.getData(),
             cell: this.getCellsClassnames(),
             chart_caption: this.chartCaption.val(),
