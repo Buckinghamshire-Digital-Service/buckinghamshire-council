@@ -8,6 +8,15 @@
         <div class="section section--main">
 
             <h1 class="heading heading--xxl">{{ page.title }}</h1>
+            <div>{{ page.intro|richtext }}</div>
+            {% for block in page.sections %}
+                {% with block.value as section %}
+                    <section>
+                        <h2>{{ section.heading }}</h2>
+                        <div>{{ section.intro|richtext }}</div>
+                    </section>
+                {% endwith %}
+            {% endfor %}
 
             {% comment %} {% include_block page.body %} {% endcomment %}
         </div>
