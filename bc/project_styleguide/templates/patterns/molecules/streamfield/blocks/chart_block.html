@@ -11,11 +11,7 @@
             {% with col_index=forloop.counter0 row_index=0 %}
                 <th scope="col" {% cell_classname row_index col_index %}>
                     {% if column.strip %}
-                        {% if html_renderer %}
-                            {{ column.strip|safe|linebreaksbr }}
-                        {% else %}
-                            {{ column.strip|linebreaksbr }}
-                        {% endif %}
+                        {{ column.strip|linebreaksbr }}
                     {% endif %}
                 </th>
             {% endwith %}
@@ -31,21 +27,13 @@
                     {% if forloop.first %}
                         <th scope="row" {% cell_classname row_index col_index table_headers %}>
                             {% if column.strip %}
-                                {% if html_renderer %}
-                                    {{ column.strip|safe|linebreaksbr }}
-                                {% else %}
-                                    {{ column.strip|linebreaksbr }}
-                                {% endif %}
+                                {{ column.strip|linebreaksbr }}
                             {% endif %}
                         </th>
                     {% else %}
                         <td {% cell_classname row_index col_index table_headers %}>
                             {% if column.strip %}
-                                {% if html_renderer %}
-                                    {{ column.strip|safe|linebreaksbr }}
-                                {% else %}
-                                    {{ column.strip|linebreaksbr }}
-                                {% endif %}
+                                {{ column.strip|linebreaksbr }}
                             {% endif %}
                         </td>
                     {% endif %}
@@ -60,8 +48,4 @@
     {% endif %}
 </table>
 
-<script>
-    {% with title_slug=title|slugify %}
-        {{ value|json_script:title_slug }}
-    {% endwith %}
-</script>
+{{ value|json_script:id }}
