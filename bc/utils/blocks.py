@@ -220,3 +220,24 @@ class StoryBlock(BaseStoryBlock):
 class ImageOrEmbedBlock(blocks.StructBlock):
     image = ImageChooserBlock(required=False)
     embed = EmbedBlock(required=False)
+
+    def clean(self, value):
+        result = super().clean(value)
+        errors = {}
+
+        if not value["image"] and not value["embed"]:
+            errors["image"] = ErrorList(["You must specify an image or an embed URL."])
+            errors["embed"] = ErrorList(["You must specify an image or an embed URL."])
+
+        if value["image"] and value["embed"]:
+            errors["image"] = ErrorList(
+                ["You must specify an image or an embed URL — not both."]
+            )
+            errors["embed"] = ErrorList(
+                ["You must specify an image or an embed URL — not both."]
+            )
+
+        if errors:
+            raise ValidationError("Validation error in StructBlock", params=errors)
+
+        return result
