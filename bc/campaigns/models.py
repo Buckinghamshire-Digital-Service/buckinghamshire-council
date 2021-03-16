@@ -1,32 +1,12 @@
 from django.db import models
 
 from wagtail.admin import edit_handlers
-from wagtail.core import blocks
 from wagtail.core import fields
 from wagtail.images import edit_handlers as image_handlers
-from wagtail.images import blocks as image_blocks
 
 
 from bc.utils.models import BasePage
-
-
-class SectionContentBlock(blocks.StructBlock):
-    image = image_blocks.ImageChooserBlock()
-    subheading = blocks.CharBlock(
-        max_length=250,
-        template="patterns/molecules/streamfield/blocks/subheading_block.html",
-    )
-    paragraph = blocks.RichTextBlock(features=["link"])
-
-
-class SectionBlock(blocks.StructBlock):
-    heading = blocks.CharBlock(
-        form_classname="full title",
-        template="patterns/molecules/streamfield/blocks/heading_block.html",
-    )
-    intro = blocks.RichTextBlock(features=["link"])
-
-    content = blocks.ListBlock(SectionContentBlock())
+from bc.campaigns.blocks import SectionBlock
 
 
 class CampaignPage(BasePage):
