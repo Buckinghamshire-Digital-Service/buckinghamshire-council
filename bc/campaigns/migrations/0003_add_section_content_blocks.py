@@ -9,13 +9,62 @@ import wagtail.images.blocks
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('campaigns', '0002_campaignpage_sections'),
+        ("campaigns", "0002_campaignpage_sections"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='campaignpage',
-            name='sections',
-            field=wagtail.core.fields.StreamField([('section', wagtail.core.blocks.StructBlock([('heading', wagtail.core.blocks.CharBlock(form_classname='full title')), ('intro', wagtail.core.blocks.RichTextBlock(features=['link'])), ('content', wagtail.core.blocks.ListBlock(wagtail.core.blocks.StructBlock([('image', wagtail.images.blocks.ImageChooserBlock()), ('subheading', wagtail.core.blocks.CharBlock(max_length=250, template='patterns/molecules/streamfield/blocks/subheading_block.html')), ('paragraph', wagtail.core.blocks.RichTextBlock(features=['link']))])))]))], null=True),
+            model_name="campaignpage",
+            name="sections",
+            field=wagtail.core.fields.StreamField(
+                [
+                    (
+                        "section",
+                        wagtail.core.blocks.StructBlock(
+                            [
+                                (
+                                    "heading",
+                                    wagtail.core.blocks.CharBlock(
+                                        form_classname="full title"
+                                    ),
+                                ),
+                                (
+                                    "intro",
+                                    wagtail.core.blocks.RichTextBlock(
+                                        features=["link"]
+                                    ),
+                                ),
+                                (
+                                    "content",
+                                    wagtail.core.blocks.ListBlock(
+                                        wagtail.core.blocks.StructBlock(
+                                            [
+                                                (
+                                                    "image",
+                                                    wagtail.images.blocks.ImageChooserBlock(),
+                                                ),
+                                                (
+                                                    "subheading",
+                                                    wagtail.core.blocks.CharBlock(
+                                                        max_length=250,
+                                                        template="patterns/molecules/streamfield/blocks/subheading_block.html",
+                                                    ),
+                                                ),
+                                                (
+                                                    "paragraph",
+                                                    wagtail.core.blocks.RichTextBlock(
+                                                        features=["link"]
+                                                    ),
+                                                ),
+                                            ]
+                                        )
+                                    ),
+                                ),
+                            ]
+                        ),
+                    )
+                ],
+                null=True,
+            ),
         ),
     ]

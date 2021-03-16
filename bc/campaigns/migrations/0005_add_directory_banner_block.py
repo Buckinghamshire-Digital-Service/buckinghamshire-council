@@ -10,13 +10,133 @@ import wagtail.images.blocks
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('campaigns', '0004_image_or_embed_block'),
+        ("campaigns", "0004_image_or_embed_block"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='campaignpage',
-            name='sections',
-            field=wagtail.core.fields.StreamField([('section', wagtail.core.blocks.StructBlock([('heading', wagtail.core.blocks.CharBlock(form_classname='full title', template='patterns/molecules/streamfield/blocks/heading_block.html')), ('intro', wagtail.core.blocks.RichTextBlock(features=['link'])), ('content', wagtail.core.blocks.ListBlock(wagtail.core.blocks.StructBlock([('image_or_embed', wagtail.core.blocks.StructBlock([('image', wagtail.images.blocks.ImageChooserBlock(required=False)), ('embed', wagtail.embeds.blocks.EmbedBlock(required=False))], form_classname='struct-block c-sf-block c-sf-block__content-inner')), ('subheading', wagtail.core.blocks.CharBlock(max_length=250, template='patterns/molecules/streamfield/blocks/subheading_block.html')), ('paragraph', wagtail.core.blocks.RichTextBlock(features=['link']))]))), ('banners', wagtail.core.blocks.StreamBlock([('directory_banner', wagtail.core.blocks.StructBlock([('banner_image', wagtail.images.blocks.ImageChooserBlock()), ('banner_title', wagtail.core.blocks.TextBlock()), ('banner_description', wagtail.core.blocks.TextBlock()), ('banner_button', wagtail.core.blocks.StructBlock([('text', wagtail.core.blocks.CharBlock(form_classname='title')), ('link_url', wagtail.core.blocks.URLBlock(required=False)), ('link_page', wagtail.core.blocks.PageChooserBlock(required=False))], form_classname='struct-block c-sf-block c-sf-block__content-inner'))]))], max_num=1, required=False))]))], null=True),
+            model_name="campaignpage",
+            name="sections",
+            field=wagtail.core.fields.StreamField(
+                [
+                    (
+                        "section",
+                        wagtail.core.blocks.StructBlock(
+                            [
+                                (
+                                    "heading",
+                                    wagtail.core.blocks.CharBlock(
+                                        form_classname="full title",
+                                        template="patterns/molecules/streamfield/blocks/heading_block.html",
+                                    ),
+                                ),
+                                (
+                                    "intro",
+                                    wagtail.core.blocks.RichTextBlock(
+                                        features=["link"]
+                                    ),
+                                ),
+                                (
+                                    "content",
+                                    wagtail.core.blocks.ListBlock(
+                                        wagtail.core.blocks.StructBlock(
+                                            [
+                                                (
+                                                    "image_or_embed",
+                                                    wagtail.core.blocks.StructBlock(
+                                                        [
+                                                            (
+                                                                "image",
+                                                                wagtail.images.blocks.ImageChooserBlock(
+                                                                    required=False
+                                                                ),
+                                                            ),
+                                                            (
+                                                                "embed",
+                                                                wagtail.embeds.blocks.EmbedBlock(
+                                                                    required=False
+                                                                ),
+                                                            ),
+                                                        ],
+                                                        form_classname="struct-block c-sf-block c-sf-block__content-inner",
+                                                    ),
+                                                ),
+                                                (
+                                                    "subheading",
+                                                    wagtail.core.blocks.CharBlock(
+                                                        max_length=250,
+                                                        template="patterns/molecules/streamfield/blocks/subheading_block.html",
+                                                    ),
+                                                ),
+                                                (
+                                                    "paragraph",
+                                                    wagtail.core.blocks.RichTextBlock(
+                                                        features=["link"]
+                                                    ),
+                                                ),
+                                            ]
+                                        )
+                                    ),
+                                ),
+                                (
+                                    "banners",
+                                    wagtail.core.blocks.StreamBlock(
+                                        [
+                                            (
+                                                "directory_banner",
+                                                wagtail.core.blocks.StructBlock(
+                                                    [
+                                                        (
+                                                            "banner_image",
+                                                            wagtail.images.blocks.ImageChooserBlock(),
+                                                        ),
+                                                        (
+                                                            "banner_title",
+                                                            wagtail.core.blocks.TextBlock(),
+                                                        ),
+                                                        (
+                                                            "banner_description",
+                                                            wagtail.core.blocks.TextBlock(),
+                                                        ),
+                                                        (
+                                                            "banner_button",
+                                                            wagtail.core.blocks.StructBlock(
+                                                                [
+                                                                    (
+                                                                        "text",
+                                                                        wagtail.core.blocks.CharBlock(
+                                                                            form_classname="title"
+                                                                        ),
+                                                                    ),
+                                                                    (
+                                                                        "link_url",
+                                                                        wagtail.core.blocks.URLBlock(
+                                                                            required=False
+                                                                        ),
+                                                                    ),
+                                                                    (
+                                                                        "link_page",
+                                                                        wagtail.core.blocks.PageChooserBlock(
+                                                                            required=False
+                                                                        ),
+                                                                    ),
+                                                                ],
+                                                                form_classname="struct-block c-sf-block c-sf-block__content-inner",
+                                                            ),
+                                                        ),
+                                                    ]
+                                                ),
+                                            )
+                                        ],
+                                        max_num=1,
+                                        required=False,
+                                    ),
+                                ),
+                            ]
+                        ),
+                    )
+                ],
+                null=True,
+            ),
         ),
     ]

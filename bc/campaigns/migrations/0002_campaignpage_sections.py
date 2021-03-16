@@ -8,13 +8,31 @@ import wagtail.core.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('campaigns', '0001_campaign_page_model'),
+        ("campaigns", "0001_campaign_page_model"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='campaignpage',
-            name='sections',
-            field=wagtail.core.fields.StreamField([('section', wagtail.core.blocks.StructBlock([('heading', wagtail.core.blocks.CharBlock(form_classname='full title')), ('intro', wagtail.core.blocks.RichTextBlock())]))], null=True),
+            model_name="campaignpage",
+            name="sections",
+            field=wagtail.core.fields.StreamField(
+                [
+                    (
+                        "section",
+                        wagtail.core.blocks.StructBlock(
+                            [
+                                (
+                                    "heading",
+                                    wagtail.core.blocks.CharBlock(
+                                        form_classname="full title"
+                                    ),
+                                ),
+                                ("intro", wagtail.core.blocks.RichTextBlock()),
+                            ]
+                        ),
+                    )
+                ],
+                null=True,
+            ),
         ),
     ]
