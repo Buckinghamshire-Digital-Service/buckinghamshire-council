@@ -1,11 +1,6 @@
 from wagtail.core import blocks
-from wagtail.images import blocks as image_blocks
-from wagtail.embeds import blocks as embed_blocks
 
-
-class ImageOrEmbedBlock(blocks.StructBlock):
-    image = image_blocks.ImageChooserBlock(required=False)
-    embed = embed_blocks.EmbedBlock(required=False)
+from bc.utils.blocks import ImageOrEmbedBlock
 
 
 class SectionContentBlock(blocks.StructBlock):

@@ -215,3 +215,8 @@ class DetailBlock(blocks.StructBlock):
 class StoryBlock(BaseStoryBlock):
     accordion = Accordion()
     detail = DetailBlock()
+
+
+class ImageOrEmbedBlock(blocks.StructBlock):
+    image = ImageChooserBlock(required=False)
+    embed = EmbedBlock(required=False)
