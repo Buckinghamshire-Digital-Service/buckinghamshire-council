@@ -184,3 +184,10 @@ class TestImageOrEmbedBlock(TestCase):
 
         with self.assertRaises(ValidationError):
             block.clean(struct_value)
+
+    def test_adding_neither_throws_error(self):
+        block = ImageOrEmbedBlock()
+        struct_value = block.value_from_datadict(data={}, files={}, prefix="myblock",)
+
+        with self.assertRaises(ValidationError):
+            block.clean(struct_value)
