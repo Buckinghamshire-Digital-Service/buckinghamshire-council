@@ -4,7 +4,10 @@
         {% include_block section.bound_blocks.heading %}
         {% include_block section.intro %}
         {% for content_block in section.content %}
-            {% include_block content_block%}
+            {% include_block content_block %}
+        {% endfor %}
+        {% for banner in section.banners %}
+            {% include_block banner %}
         {% endfor %}
     </section>
 {% endwith %}

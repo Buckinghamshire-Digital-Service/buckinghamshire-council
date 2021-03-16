@@ -1,6 +1,7 @@
 from wagtail.core import blocks
+from wagtail.images import blocks as image_blocks
 
-from bc.utils.blocks import ImageOrEmbedBlock
+from bc.utils.blocks import ImageOrEmbedBlock, ButtonBlock
 
 
 class SectionContentBlock(blocks.StructBlock):
@@ -17,6 +18,58 @@ class SectionContentBlock(blocks.StructBlock):
         template = "patterns/molecules/campaigns/blocks/content-block.html"
 
 
+class ButtonBannerValue(blocks.StructValue):
+    def link(self):
+        button = self.get("button")
+        if button:
+            external_url = button.get("link_url")
+            page = button.get("link_page")
+            if external_url:
+                return external_url
+            elif page:
+                return page.url
+
+    def link_text(self):
+        button = self.get("button")
+        if button:
+            return button.get("text")
+
+
+class DirectoryBannerValue(ButtonBannerValue):
+    def to_dict(self):
+        return {
+            "banner_image": self.get("image"),
+            "banner_title": self.get("title"),
+            "banner_description": self.get("description"),
+            "banner_link": self.link(),
+            "banner_link_text": self.link_text(),
+        }
+
+
+class DirectoryBannerBlock(blocks.StructBlock):
+    image = image_blocks.ImageChooserBlock()
+    title = blocks.TextBlock()
+    description = blocks.TextBlock()
+    button = ButtonBlock(
+        form_classname="struct-block c-sf-block c-sf-block__content-inner"
+    )
+
+    class Meta:
+        value_class = DirectoryBannerValue
+        template = "patterns/molecules/campaigns/blocks/directory-banner.html"
+
+
+class FullWidthBanner(blocks.StructBlock):
+    description = blocks.TextBlock()
+    button = ButtonBlock(
+        form_classname="struct-block c-sf-block c-sf-block__content-inner"
+    )
+
+    class Meta:
+        value_class = ButtonBannerValue
+        template = "patterns/molecules/campaigns/blocks/full-width-banner.html"
+
+
 class SectionBlock(blocks.StructBlock):
     heading = blocks.CharBlock(
         form_classname="full title",
@@ -25,6 +78,15 @@ class SectionBlock(blocks.StructBlock):
     intro = blocks.RichTextBlock(features=["link"])
 
     content = blocks.ListBlock(SectionContentBlock())
+
+    banners = blocks.StreamBlock(
+        [
+            ("directory_banner", DirectoryBannerBlock()),
+            ("full_width_banner", FullWidthBanner()),
+        ],
+        required=False,
+        max_num=1,
+    )
 
     class Meta:
         template = "patterns/molecules/campaigns/blocks/campaign-section.html"

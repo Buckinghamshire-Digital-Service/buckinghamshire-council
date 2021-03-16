@@ -1,0 +1,8 @@
+{% with value as banner  %}
+    <div>
+        <hr>
+        <p>{{ banner.description}}</p>
+        <a href="{{ banner.link }}">{{ banner.link_text }}</a>
+        <hr>
+    </div>
+{% endwith %}
