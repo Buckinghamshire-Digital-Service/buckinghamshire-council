@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import redirect
 
 from wagtail.admin import edit_handlers
 from wagtail.core import fields
@@ -13,6 +14,10 @@ class CampaignIndexPage(wt_models.Page):
     parent_page_types = ["home.homepage"]
     subpage_types = ["campaigns.campaignpage"]
     max_count = 1
+
+    def serve(self, request, *args, **kwargs):
+        site = wt_models.Site.find_for_request(request)
+        return redirect(site.root_page.url)
 
 
 class CampaignPage(BasePage):
