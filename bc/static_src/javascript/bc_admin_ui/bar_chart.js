@@ -5,9 +5,7 @@ class BarChart extends Chart {
     bindEvents(tableOptions) {
         // eslint-disable-next-line no-underscore-dangle
         this._bindEvents(tableOptions);
-
         const boundPersist = this.persist.bind(this);
-
         this.direction.on('change', () => {
             boundPersist();
         });
@@ -17,10 +15,9 @@ class BarChart extends Chart {
         // eslint-disable-next-line no-underscore-dangle
         this._getFields();
 
-        const directionId = `${this.id}-handsontable-direction`;
         const verticalId = `${this.id}-handsontable-vertical`;
         const horizontalId = `${this.id}-handsontable-horizontal`;
-        this.direction = $(`#${directionId} [name=handsontable-direction]`);
+        this.direction = $(`[name=handsontable-direction-${this.id}]`);
         this.vertical = $(`#${verticalId}`);
         this.horizontal = $(`#${horizontalId}`);
     }
@@ -30,9 +27,12 @@ class BarChart extends Chart {
         this._loadFieldData();
 
         if (this.dataForForm && this.dataForForm.direction) {
+            this.direction.each(function() {
+                $(this).removeAttr('checked');
+            });
             this.direction
                 .filter(`[value="${this.dataForForm.direction}"]`)
-                .attr('checked', true);
+                .attr('checked', 'checked');
         }
     }
 
