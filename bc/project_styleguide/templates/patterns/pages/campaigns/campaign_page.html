@@ -6,7 +6,7 @@
 {% block content %}
     <div class="wrapper wrapper--flex">
         <div class="section section--main">
-
+            {% image page.hero_image fill-1024x380 %}
             <h1 class="heading heading--xxl">{{ page.title }}</h1>
             <div>{{ page.intro|richtext }}</div>
             {% for block in page.sections %}
