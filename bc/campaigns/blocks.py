@@ -13,6 +13,9 @@ class SectionContentBlock(blocks.StructBlock):
     )
     paragraph = blocks.RichTextBlock(features=["link"])
 
+    class Meta:
+        template = "patterns/molecules/campaigns/blocks/content-block.html"
+
 
 class SectionBlock(blocks.StructBlock):
     heading = blocks.CharBlock(
@@ -22,3 +25,6 @@ class SectionBlock(blocks.StructBlock):
     intro = blocks.RichTextBlock(features=["link"])
 
     content = blocks.ListBlock(SectionContentBlock())
+
+    class Meta:
+        template = "patterns/molecules/campaigns/blocks/campaign-section.html"

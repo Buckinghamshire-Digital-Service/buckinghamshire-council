@@ -1,0 +1,12 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+{% with value as content_block %}
+    <div>
+        {% if content_block.image_or_embed.image %}
+            {% image content_block.image_or_embed.image fill-606x380 %}
+        {% elif content_block.image_or_embed.embed %}
+            {% include_block content_block.image_or_embed.bound_blocks.embed %}
+        {% endif %}
+        {% include_block content_block.bound_blocks.subheading %}
+        {% include_block content_block.bound_blocks.paragraph %}
+    </div>
+{% endwith %}
