@@ -4,9 +4,8 @@ from wagtail.admin import edit_handlers
 from wagtail.core import fields
 from wagtail.images import edit_handlers as image_handlers
 
-
-from bc.utils.models import BasePage
 from bc.campaigns.blocks import SectionBlock
+from bc.utils.models import BasePage
 
 
 class CampaignPage(BasePage):

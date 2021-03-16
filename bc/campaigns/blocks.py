@@ -1,7 +1,7 @@
 from wagtail.core import blocks
 from wagtail.images import blocks as image_blocks
 
-from bc.utils.blocks import ImageOrEmbedBlock, ButtonBlock
+from bc.utils.blocks import ButtonBlock, ImageOrEmbedBlock
 
 
 class SectionContentBlock(blocks.StructBlock):

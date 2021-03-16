@@ -3,10 +3,10 @@ import json
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
-from bc.utils.blocks import ImageOrEmbedBlock
 from bc.home.models import HomePage
 from bc.images.tests.fixtures import ImageFactory
 from bc.standardpages.tests.fixtures import InformationPageFactory
+from bc.utils.blocks import ImageOrEmbedBlock
 
 
 class TestStreamfieldHeadingTemplates(TestCase):
