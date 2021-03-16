@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- 15: Add campaign page type
+
 ## 35.2 (2021-04-21)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/35.1...35.2
