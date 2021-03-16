@@ -14,10 +14,14 @@
                     <section>
                         {% include_block section.bound_blocks.heading %}
                         {% include_block section.intro %}
-                        {% for block in section.content %}
-                            {% image block.image width-600 %}
-                            {% include_block block.bound_blocks.subheading %}
-                            {% include_block block.paragraph %}
+                        {% for content_block in section.content %}
+                            {% if content_block.image_or_embed.image %}
+                                {% image content_block.image_or_embed.image fill-606x380 %}
+                            {% elif content_block.image_or_embed.embed %}
+                                {% include_block content_block.image_or_embed.bound_blocks.embed %}
+                            {% endif %}
+                            {% include_block content_block.bound_blocks.subheading %}
+                            {% include_block content_block.bound_blocks.paragraph %}
                         {% endfor %}
                     </section>
                 {% endwith %}
