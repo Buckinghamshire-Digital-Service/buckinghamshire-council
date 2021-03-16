@@ -12,12 +12,12 @@
             {% for block in page.sections %}
                 {% with block.value as section %}
                     <section>
-                        <h2>{{ section.heading }}</h2>
-                        <div>{{ section.intro|richtext }}</div>
+                        {% include_block section.bound_blocks.heading %}
+                        {% include_block section.intro %}
                         {% for block in section.content %}
                             {% image block.image width-600 %}
-                            <h3>{{ block.subheading }}</h3>
-                            {{ block.paragraph|richtext }}
+                            {% include_block block.bound_blocks.subheading %}
+                            {% include_block block.paragraph %}
                         {% endfor %}
                     </section>
                 {% endwith %}

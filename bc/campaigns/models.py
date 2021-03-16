@@ -20,7 +20,10 @@ class SectionContentBlock(blocks.StructBlock):
 
 
 class SectionBlock(blocks.StructBlock):
-    heading = blocks.CharBlock(form_classname="full title")
+    heading = blocks.CharBlock(
+        form_classname="full title",
+        template="patterns/molecules/streamfield/blocks/heading_block.html",
+    )
     intro = blocks.RichTextBlock(features=["link"])
 
     content = blocks.ListBlock(SectionContentBlock())
