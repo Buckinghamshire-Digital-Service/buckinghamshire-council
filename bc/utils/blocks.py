@@ -199,20 +199,22 @@ class BarChartBlock(BaseChartBlock):
         cleaned_data = self.clean_table_values(value["data"])
         columns = self.get_table_columns(cleaned_data)
 
-        new_value = {
-            "chart": {"type": "bar"},
-            "plotOptions": {"series": {"stacking": "normal"}},
-            "series": columns[1:],
-            "title": {"text": value["table_title"]},
-        }
+        if value["direction"] == "horizontal":
+            new_value = {
+                "chart": {"type": "bar"},
+                "plotOptions": {"series": {"stacking": "normal"}},
+                "series": columns[1:],
+            }
+        else:
+            new_value = {
+                "chart": {"type": "column"},
+                "plotOptions": {"column": {"stacking": "normal"}},
+                "series": columns[1:],
+            }
 
         first_column = columns[0]
-        if value["direction"] == "horizontal":
-            new_value["xAxis"] = {"categories": first_column["data"]}
-            new_value["yAxis"] = {"title": {"text": first_column["name"]}}
-        else:
-            new_value["xAxis"] = {"title": {"text": first_column["name"]}}
-            new_value["yAxis"] = {"categories": first_column["data"]}
+        new_value["xAxis"] = {"categories": first_column["data"]}
+        new_value["yAxis"] = {"title": {"text": first_column["name"]}}
 
         new_context.update(
             {

@@ -1,0 +1,29 @@
+.chart-block {
+    margin-bottom: $grid--large;
+    // awaiting confirmation from Sarah regarding background colour
+    // padding: $grid--min;
+    // background-color: $color--charcoal-10;
+
+    &__wrapper {
+        &--hidden {
+            display: none;
+        }
+    }
+
+    // this div is used by Highcharts to display the chart
+    &__chart {
+        width: 100%;
+        height: 400px;
+    }
+
+    &__link {
+        margin-top: 0; // override of button--link styling
+    }
+
+    &__caption {
+        @include font-size(xs);
+        display: block; // overrides the browser styling that positions the caption above the table
+        font-weight: normal;
+        margin-top: $grid--small;
+    }
+}

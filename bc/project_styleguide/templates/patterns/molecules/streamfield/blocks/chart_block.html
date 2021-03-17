@@ -1,53 +1,74 @@
 {% load table_block_tags %}
 
-<h2>
-    {{ title }}
-</h2>
+{% comment %} A chart block - will toggle between a table and a chart version of the data {% endcomment %}
+<div class="chart-block" data-chart-block>
+    <h2 class="heading heading--m">
+        {{ title }}
+    </h2>
 
-<table>
-    <thead>
-        <tr>
-            {% for column in table_headers %}
-            {% with col_index=forloop.counter0 row_index=0 %}
-                <th scope="col" {% cell_classname row_index col_index %}>
-                    {% if column.strip %}
-                        {{ column.strip|linebreaksbr }}
-                    {% endif %}
-                </th>
-            {% endwith %}
-            {% endfor %}
-        </tr>
-    </thead>
-    <tbody>
-        {% for row in table_data %}
-        {% with col_index=forloop.counter0 %}
-            <tr>
-                {% for column in row %}
-                {% with forloop.counter0 as col_index %}
-                    {% if forloop.first %}
-                        <th scope="row" {% cell_classname row_index col_index table_headers %}>
-                            {% if column.strip %}
-                                {{ column.strip|linebreaksbr }}
-                            {% endif %}
-                        </th>
-                    {% else %}
-                        <td {% cell_classname row_index col_index table_headers %}>
-                            {% if column.strip %}
-                                {{ column.strip|linebreaksbr }}
-                            {% endif %}
-                        </td>
-                    {% endif %}
-                {% endwith %}
-                {% endfor %}
-            </tr>
-        {% endwith %}
-        {% endfor %}
-    </tbody>
-    {% if caption %}
-       <caption>{{ caption }}</caption>
-    {% endif %}
-</table>
+    <div
+        class="chart-block__wrapper {% if not table_first%}chart-block__wrapper--hidden{% endif %}"
+        data-table-wrapper="{{ id }}"
+    >
+        <button class="button button--link chart-block__link" data-to-chart>Display as a chart</button>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        {% for column in table_headers %}
+                        {% with col_index=forloop.counter0 row_index=0 %}
+                            <th scope="col" {% cell_classname row_index col_index %}>
+                                {% if column.strip %}
+                                    {{ column.strip|linebreaksbr }}
+                                {% endif %}
+                            </th>
+                        {% endwith %}
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in table_data %}
+                        {% with col_index=forloop.counter0 %}
+                            <tr>
+                                {% for column in row %}
+                                {% with forloop.counter0 as col_index %}
+                                    {% if forloop.first %}
+                                        <th scope="row" {% cell_classname row_index col_index table_headers %}>
+                                            {% if column.strip %}
+                                                {{ column.strip|linebreaksbr }}
+                                            {% endif %}
+                                        </th>
+                                    {% else %}
+                                        <td {% cell_classname row_index col_index table_headers %}>
+                                            {% if column.strip %}
+                                                {{ column.strip|linebreaksbr }}
+                                            {% endif %}
+                                        </td>
+                                    {% endif %}
+                                {% endwith %}
+                                {% endfor %}
+                            </tr>
+                        {% endwith %}
+                    {% endfor %}
+                </tbody>
 
-<div data-chart="{{ id }}" style="width:100%; height:400px;" id="chart-container-{{id}}"></div>
+                {% if caption %}
+                    <caption class="chart-block__caption">{{ caption }}</caption>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+
+    <div
+        class="chart-block__wrapper {% if table_first%}chart-block__wrapper--hidden{% endif %}"
+        data-chart-wrapper="{{ id }}"
+    >
+        <button class="button button--link chart-block__link" data-to-table>Display as a table</button>
+        <div class="chart-block__chart" data-chart="{{ id }}" id="chart-container-{{ id }}"></div>
+        {% if caption %}
+            <p class="chart-block__caption">{{ caption }}</p>
+        {% endif %}
+    </div>
+</div>
 
 {{ value|json_script:id }}

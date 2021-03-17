@@ -1,29 +1,154 @@
 import Highcharts from 'highcharts';
 
+// Global highcharts settings
+Highcharts.setOptions({
+    colors: ['#2c2d84', '#4a8500', '#fcbc00', '#9fc63b', '#ed7004'],
+    lang: {
+        thousandsSep: ',',
+    },
+});
+
 class Chart {
     static selector() {
-        return '[data-chart]';
+        return '[data-chart-block]';
     }
 
     constructor(node) {
         this.node = node;
-        this.containerId = node.getAttribute('id');
-        this.scriptId = this.node.getAttribute('data-chart');
+        this.chart = node.querySelector('[data-chart]');
+        this.containerId = this.chart.getAttribute('id');
+        this.scriptId = this.chart.getAttribute('data-chart');
         this.chartData = JSON.parse(
             document.getElementById(this.scriptId).textContent,
         );
+        this.toggleToTable = node.querySelector('[data-to-table]');
+        this.toggleToChart = node.querySelector('[data-to-chart]');
+        this.tableWrapper = node.querySelector('[data-table-wrapper]');
+        this.chartWrapper = node.querySelector('[data-chart-wrapper]');
+        this.hiddenClass = 'chart-block__wrapper--hidden';
 
+        // Configure various highcharts options
+        this.configureOptions();
+
+        // Initialise chart
+        Highcharts.chart(this.containerId, this.chartData);
+
+        this.bindEvents();
+    }
+
+    bindEvents() {
+        this.toggleToTable.addEventListener('click', () => {
+            this.showTable();
+        });
+
+        this.toggleToChart.addEventListener('click', () => {
+            this.showChart();
+        });
+    }
+
+    showChart() {
+        this.tableWrapper.classList.add(this.hiddenClass);
+        this.chartWrapper.classList.remove(this.hiddenClass);
+    }
+
+    showTable() {
+        this.tableWrapper.classList.remove(this.hiddenClass);
+        this.chartWrapper.classList.add(this.hiddenClass);
+    }
+
+    configureOptions() {
+        // ensure series data is numeric not strings
         const updatedSeries = this.convertDataToNumbers();
         this.chartData.series = updatedSeries;
 
-        Highcharts.chart(this.containerId, this.chartData);
+        // Don't show the bar chart data the wrong way round
+        this.chartData.yAxis.reversedStacks = false;
+
+        // bar chart label options
+        const labelOptions = {
+            enabled: true,
+            crop: false,
+            overflow: 'none',
+            // hide the data label if the value is 0 or if the percentage width is less than 10
+            // conditionally set the colour of the label based on the background colour
+            // disabling warnings because following highcharts recommended syntax
+            // eslint-disable-next-line consistent-return, object-shorthand
+            formatter: function() {
+                if (this.y && this.percentage > 10) {
+                    let labelColour = 'white';
+                    if (this.color === '#fcbc00' || this.color === '#9fc63b') {
+                        labelColour = '#212121';
+                    }
+                    // add thousands separator by hand as returning this.y loses the
+                    // global option
+                    return `<span style="color: ${labelColour}">${this.y.toLocaleString()}</span>`;
+                }
+            },
+            style: {
+                textOutline: false,
+                fontFamily: 'Helvetica',
+                fontSize: '12px',
+                fontWeight: 'normal',
+            },
+        };
+
+        // Various options for series / columns
+        const barOptions = {
+            dataLabels: labelOptions,
+            groupPadding: 0,
+            borderWidth: 0,
+            stacking: 'normal',
+            // disable hover effects
+            states: {
+                hover: {
+                    halo: false,
+                    enabled: false,
+                },
+                inactive: {
+                    opacity: 1,
+                },
+            },
+        };
+
+        if (this.chartData.plotOptions.column) {
+            this.chartData.plotOptions.column = barOptions;
+        } else if (this.chartData.plotOptions.series) {
+            this.chartData.plotOptions.series = barOptions;
+        }
+
+        // General text styles for legend, axis labels and axis titles
+        const textStyles = {
+            color: '#212121',
+            fontFamily: 'Helvetica',
+            fontSize: '14px',
+            fontWeight: 'normal',
+        };
+
+        // Axis styling
+        const axisOptions = {
+            margin: 20,
+            style: textStyles,
+        };
+        this.chartData.xAxis.labels = axisOptions;
+        this.chartData.yAxis.labels = axisOptions;
+        this.chartData.xAxis.title = axisOptions;
+        this.chartData.yAxis.title = axisOptions;
+
+        // Legend styling
+        this.chartData.legend = {
+            margin: 20,
+            itemStyle: textStyles,
+        };
+
+        // Hide overall chart title as we add our own above
+        this.chartData.title = null;
     }
 
-    // chart data arrives as an array of numbers and we need it as integers for high charts
+    // chart data arrives as an array of strings and we need it as integers / floats for high charts
     convertDataToNumbers() {
         const updatedSeries = this.chartData.series.map((seriesItem) => {
             const updatedData = seriesItem.data.map((dataItem) =>
-                parseInt(dataItem, 10),
+                parseFloat(dataItem),
             );
             seriesItem.data = updatedData;
             return seriesItem;
