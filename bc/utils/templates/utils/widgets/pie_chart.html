@@ -9,8 +9,7 @@
 {% include "utils/widgets/partials/data.html" with help_text=data_help_text example="pie" %}
 
 <script>
-    // Give the JS time to load
-    setTimeout(() => {
+    document.addEventListener('DOMContentLoaded', () => {
         window.initPieChart("{{ widget.attrs.id|escapejs }}", {{ widget.table_options_json|safe }});
-    }, 1000);
+    });
 </script>
