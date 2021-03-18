@@ -27,6 +27,7 @@ class BarChart extends Chart {
         this._loadFieldData();
 
         if (this.dataForForm && this.dataForForm.direction) {
+            // eslint-disable-next-line func-names
             this.direction.each(function() {
                 $(this).removeAttr('checked');
             });

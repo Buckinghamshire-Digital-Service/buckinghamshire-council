@@ -185,6 +185,7 @@ class Chart {
     }
 
     initHandsonTable(containerId, tableOptions) {
+        // eslint-disable-next-line no-underscore-dangle
         this._initHandsonTable(containerId, tableOptions);
     }
 

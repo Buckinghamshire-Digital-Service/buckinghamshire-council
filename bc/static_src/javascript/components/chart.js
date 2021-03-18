@@ -41,7 +41,7 @@ class Chart {
         ) {
             // set up bar and column charts
             this.configureBarChartOptions();
-        } else if ((this.chartData.chart.type = 'pie')) {
+        } else if (this.chartData.chart.type === 'pie') {
             this.configurePieChartOptions();
         }
 
@@ -89,7 +89,7 @@ class Chart {
             // hide the data label if the value is 0 or if the percentage width is less than 10
             // conditionally set the colour of the label based on the background colour
             // disabling warnings because following highcharts recommended syntax
-            // eslint-disable-next-line consistent-return, object-shorthand
+            // eslint-disable-next-line consistent-return, object-shorthand, func-names
             formatter: function() {
                 if (this.y && this.percentage > 10) {
                     let labelColour = 'white';
