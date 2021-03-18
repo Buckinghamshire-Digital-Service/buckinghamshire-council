@@ -249,7 +249,7 @@ class PieChartBlock(BaseChartBlock):
         for row in cleaned_data:
             try:
                 data_as_number = float(row[1])
-            except:
+            except ValueError:
                 data_as_number = row[1]
             series = {
                 "name": row[0],
@@ -257,7 +257,7 @@ class PieChartBlock(BaseChartBlock):
             }
             data.append(series)
 
-        new_value = {"chart": {"type": "pie"}, "series": [{"data": data,}]}
+        new_value = {"chart": {"type": "pie"}, "series": [{"data": data}]}
 
         new_context.update(
             {
