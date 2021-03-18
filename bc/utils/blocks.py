@@ -13,7 +13,7 @@ from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 
 from .constants import RICH_TEXT_FEATURES
-from .widgets import BarChartInput
+from .widgets import BarChartInput, PieChartInput
 
 
 class ImageBlock(blocks.StructBlock):
@@ -218,7 +218,7 @@ class BarChartBlock(BaseChartBlock):
 
         new_context.update(
             {
-                "id": value["id"],
+                "id": "bar-" + value["id"],
                 "table_first": value["table_first"],
                 "table_headers": cleaned_data[0],
                 "table_data": cleaned_data[1:],
@@ -228,6 +228,53 @@ class BarChartBlock(BaseChartBlock):
         )
 
         return super().render(new_value, new_context)
+
+class PieChartBlock(BaseChartBlock):
+    @cached_property
+    def field(self):
+        return forms.CharField(
+            widget=PieChartInput(table_options=self.table_options),
+            **self.field_options,
+        )
+
+    def render(self, value, context={}):
+        if context is None:
+            new_context = {}
+        else:
+            new_context = dict(context)
+
+        cleaned_data = self.clean_table_values(value["data"])
+        data = []
+        for row in cleaned_data:
+            try:
+                data_as_number = float(row[1])
+            except:
+                data_as_number = row[1]
+            series = {
+                "name": row[0],
+                "y": data_as_number,
+            }
+            data.append(series)
+
+        new_value = {
+            "chart": {"type": "pie"},
+            "series": [{
+                "data": data,
+            }]
+        }
+
+        new_context.update(
+            {
+                "id": "pie" + value["id"],
+                "table_first": value["table_first"],
+                "table_data": cleaned_data,
+                "title": value["table_title"],
+                "caption": value["chart_caption"],
+            }
+        )
+
+        return super().render(new_value, new_context)
+
 
 
 class BaseStoryBlock(blocks.StreamBlock):

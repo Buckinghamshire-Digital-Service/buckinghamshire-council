@@ -1,0 +1,16 @@
+{% load i18n %}
+{% include "utils/widgets/partials/title.html" %}
+<br/>
+{% include "utils/widgets/partials/caption.html" %}
+<br/>
+{% include "utils/widgets/partials/table_first.html" %}
+<br/>
+{% trans "Enter labels in the first column and values in the second column. Values should be percentages that collectively total 100." as data_help_text %}
+{% include "utils/widgets/partials/data.html" with help_text=data_help_text example="pie" %}
+
+<script>
+    // Give the JS time to load
+    setTimeout(() => {
+        window.initPieChart("{{ widget.attrs.id|escapejs }}", {{ widget.table_options_json|safe }});
+    }, 1000);
+</script>

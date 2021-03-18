@@ -15,15 +15,17 @@
             <table>
                 <thead>
                     <tr>
-                        {% for column in table_headers %}
-                        {% with col_index=forloop.counter0 row_index=0 %}
-                            <th scope="col" {% cell_classname row_index col_index %}>
-                                {% if column.strip %}
-                                    {{ column.strip|linebreaksbr }}
-                                {% endif %}
-                            </th>
-                        {% endwith %}
-                        {% endfor %}
+                        {% if table_headers %}
+                            {% for column in table_headers %}
+                                {% with col_index=forloop.counter0 row_index=0 %}
+                                    <th scope="col" {% cell_classname row_index col_index %}>
+                                        {% if column.strip %}
+                                            {{ column.strip|linebreaksbr }}
+                                        {% endif %}
+                                    </th>
+                                {% endwith %}
+                            {% endfor %}
+                        {% endif %}
                     </tr>
                 </thead>
                 <tbody>

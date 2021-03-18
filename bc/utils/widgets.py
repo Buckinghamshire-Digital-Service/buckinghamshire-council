@@ -44,6 +44,21 @@ class BarChartInput(BaseChartInput):
 
         return context
 
+class PieChartInput(BaseChartInput):
+    template_name = "utils/widgets/pie_chart.html"
+
+    def get_context(self, name, value, attrs=None):
+        context = super().get_context(name, value, attrs)
+
+        # direction = ""
+
+        # if value and value != "null":
+        #     direction = json.loads(value).get("direction", "")
+
+        # context["widget"]["direction"] = direction
+
+        return context
+
 
 class CustomCheckboxSelectMultiple(forms.widgets.CheckboxSelectMultiple):
     template_name = (

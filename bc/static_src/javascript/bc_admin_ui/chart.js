@@ -154,7 +154,7 @@ class Chart {
     }
     /* eslint-enable class-methods-use-this */
 
-    initHandsonTable(containerId, tableOptions) {
+    _initHandsonTable(containerId, tableOptions) {
         const defaultOptions = this.getDefaultOptions();
 
         if (this.dataForForm !== null) {
@@ -169,6 +169,7 @@ class Chart {
         }
 
         const finalOptions = {};
+
         Object.keys(defaultOptions).forEach((key) => {
             finalOptions[key] = defaultOptions[key];
         });
@@ -181,6 +182,10 @@ class Chart {
             finalOptions,
         );
         this.hot.render(); // Call to render removes 'null' literals from empty cells
+    }
+
+    initHandsonTable(containerId, tableOptions) {
+        this._initHandsonTable(containerId, tableOptions);
     }
 
     // To Implement: Override with specific chart fields

@@ -4,7 +4,48 @@
     <div class="field-content">
         <p class="help">
             {% if help_text %}{{ help_text }}{% endif %}
-            {% trans "Right-click on the table for more options" %}
+            {% if example %}{% trans "Example of chart data:" %}{% endif %}
+        </p>
+            {% if example == "pie" %}
+                <table style="font-size: 0.85em;">
+                    <tr>
+                        <td style="padding-right:20px">{% trans "Apples" %}</td>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right:20px">{% trans "Pears" %}</td>
+                        <td>30</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right:20px">{% trans "Bananas" %}</td>
+                        <td>50</td>
+                    </tr>
+                </table>
+            {% elif example == "bar" %}
+                <table style="font-size: 0.85em;">
+                    <tr>
+                        <td style="padding-right:20px">{% trans "Fruit eaten" %}</td>
+                        <td style="padding-right:20px">{% trans "Orangutan" %}</td>
+                        <td style="padding-right:20px">{% trans "Spider monkey" %}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right:20px">{% trans "Apples" %}</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right:20px">{% trans "Pears" %}</td>
+                        <td>1</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right:20px">{% trans "Bananas" %}</td>
+                        <td>10</td>
+                        <td>2</td>
+                    </tr>
+                </table>
+            {% endif %}
+            <p class="help">{% trans "Right-click on the table for more options" %}</p>
         </p>
         <div id="{{ widget.attrs.id }}-handsontable-container"></div>
         {% include 'django/forms/widgets/hidden.html' %}

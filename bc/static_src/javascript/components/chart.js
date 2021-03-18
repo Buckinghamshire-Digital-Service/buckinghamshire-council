@@ -2,7 +2,7 @@ import Highcharts from 'highcharts';
 
 // Global highcharts settings
 Highcharts.setOptions({
-    colors: ['#2c2d84', '#4a8500', '#fcbc00', '#9fc63b', '#ed7004'],
+    colors: ['#2c2d84', '#4a8500', '#fcbc00', '#9fc63b', '#ed7004', '#c72833'],
     lang: {
         thousandsSep: ',',
     },
@@ -15,9 +15,9 @@ class Chart {
 
     constructor(node) {
         this.node = node;
-        this.chart = node.querySelector('[data-chart]');
-        this.containerId = this.chart.getAttribute('id');
-        this.scriptId = this.chart.getAttribute('data-chart');
+        this.chartNode = node.querySelector('[data-chart]');
+        this.containerId = this.chartNode.getAttribute('id');
+        this.scriptId = this.chartNode.getAttribute('data-chart');
         this.chartData = JSON.parse(
             document.getElementById(this.scriptId).textContent,
         );
@@ -26,9 +26,26 @@ class Chart {
         this.tableWrapper = node.querySelector('[data-table-wrapper]');
         this.chartWrapper = node.querySelector('[data-chart-wrapper]');
         this.hiddenClass = 'chart-block__wrapper--hidden';
+        // General text styles for legend, axis labels and axis titles
+        this.textStyles = {
+            color: '#212121',
+            fontFamily: 'Helvetica',
+            fontSize: '14px',
+            fontWeight: 'normal',
+        };
 
         // Configure various highcharts options
-        this.configureOptions();
+        if (
+            this.chartData.chart.type === 'bar' ||
+            this.chartData.chart.type === 'column'
+        ) {
+            // set up bar and column charts
+            this.configureBarChartOptions();
+        } else if ((this.chartData.chart.type = 'pie')) {
+            this.configurePieChartOptions();
+        }
+
+        this.configureCommonOptions();
 
         // Initialise chart
         Highcharts.chart(this.containerId, this.chartData);
@@ -56,7 +73,7 @@ class Chart {
         this.chartWrapper.classList.add(this.hiddenClass);
     }
 
-    configureOptions() {
+    configureBarChartOptions() {
         // ensure series data is numeric not strings
         const updatedSeries = this.convertDataToNumbers();
         this.chartData.series = updatedSeries;
@@ -116,18 +133,10 @@ class Chart {
             this.chartData.plotOptions.series = barOptions;
         }
 
-        // General text styles for legend, axis labels and axis titles
-        const textStyles = {
-            color: '#212121',
-            fontFamily: 'Helvetica',
-            fontSize: '14px',
-            fontWeight: 'normal',
-        };
-
         // Axis styling
         const axisOptions = {
             margin: 20,
-            style: textStyles,
+            style: this.textStyles,
         };
         this.chartData.xAxis.labels = axisOptions;
         this.chartData.yAxis.labels = axisOptions;
@@ -137,14 +146,11 @@ class Chart {
         // Legend styling
         this.chartData.legend = {
             margin: 20,
-            itemStyle: textStyles,
+            itemStyle: this.textStyles,
         };
-
-        // Hide overall chart title as we add our own above
-        this.chartData.title = null;
     }
 
-    // chart data arrives as an array of strings and we need it as integers / floats for high charts
+    // bar chart data arrives as an array of strings and we need it as integers / floats for high charts
     convertDataToNumbers() {
         const updatedSeries = this.chartData.series.map((seriesItem) => {
             const updatedData = seriesItem.data.map((dataItem) =>
@@ -154,6 +160,38 @@ class Chart {
             return seriesItem;
         });
         return updatedSeries;
+    }
+
+    configurePieChartOptions() {
+        this.chartData.plotOptions = {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b><br />{point.y} %',
+                    style: this.textStyles,
+                    connectorColor: '#6c6c6b',
+                    alignTo: 'plotEdges',
+                    connectorShape: 'crookedLine',
+                },
+                states: {
+                    hover: {
+                        halo: false,
+                        enabled: false,
+                    },
+                    inactive: {
+                        opacity: 1,
+                    },
+                },
+                borderWidth: 0,
+            },
+        };
+    }
+
+    configureCommonOptions() {
+        // Hide overall chart title as we add our own above
+        this.chartData.title = null;
     }
 }
 
