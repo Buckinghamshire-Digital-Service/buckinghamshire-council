@@ -44,6 +44,7 @@ class BarChartInput(BaseChartInput):
 
         return context
 
+
 class PieChartInput(BaseChartInput):
     template_name = "utils/widgets/pie_chart.html"
 

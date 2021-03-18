@@ -229,6 +229,7 @@ class BarChartBlock(BaseChartBlock):
 
         return super().render(new_value, new_context)
 
+
 class PieChartBlock(BaseChartBlock):
     @cached_property
     def field(self):
@@ -256,12 +257,7 @@ class PieChartBlock(BaseChartBlock):
             }
             data.append(series)
 
-        new_value = {
-            "chart": {"type": "pie"},
-            "series": [{
-                "data": data,
-            }]
-        }
+        new_value = {"chart": {"type": "pie"}, "series": [{"data": data,}]}
 
         new_context.update(
             {
@@ -274,7 +270,6 @@ class PieChartBlock(BaseChartBlock):
         )
 
         return super().render(new_value, new_context)
-
 
 
 class BaseStoryBlock(blocks.StreamBlock):
