@@ -222,7 +222,7 @@ class Chart {
 
     _persistData() {
         // eslint-disable-next-line no-underscore-dangle
-        return this.__persistChartData();
+        return this._persistChartData();
     }
 
     persist() {
