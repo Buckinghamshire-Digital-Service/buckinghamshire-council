@@ -260,11 +260,4 @@ class Chart {
     }
 }
 
-// To implement:
-// initChart will be called in the HTML so that the id can be provided
-// window.initChart = (id, tableOptions) => {
-//     new Chart(id, tableOptions);
-// }
-/* eslint-enable no-undef */
-
 export default Chart;

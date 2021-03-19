@@ -1,5 +1,6 @@
 import BarChart from './bc_admin_ui/bar_chart';
 import PieChart from './bc_admin_ui/pie_chart';
+import Chart from './bc_admin_ui/chart';
 
 document.addEventListener('DOMContentLoaded', () => {
     // initBarChart will be called in the HTML so that the id can be provided
@@ -10,5 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
     window.initPieChart = (id, tableOptions) => {
         // eslint-disable-next-line no-new
         new PieChart(id, tableOptions);
+    };
+    window.initLineChart = (id, tableOptions) => {
+        // eslint-disable-next-line no-new
+        new Chart(id, tableOptions);
     };
 });

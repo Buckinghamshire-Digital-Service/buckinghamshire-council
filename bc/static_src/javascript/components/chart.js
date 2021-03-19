@@ -43,6 +43,8 @@ class Chart {
             this.configureBarChartOptions();
         } else if (this.chartData.chart.type === 'pie') {
             this.configurePieChartOptions();
+        } else if (this.chartData.chart.type === 'line') {
+            this.configureLineChartOptions();
         }
 
         this.configureCommonOptions();
@@ -187,6 +189,10 @@ class Chart {
                 borderWidth: 0,
             },
         };
+    }
+
+    configureLineChartOptions() {
+        this.convertDataToNumbers();
     }
 
     configureCommonOptions() {

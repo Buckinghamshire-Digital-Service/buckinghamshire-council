@@ -51,12 +51,14 @@ class PieChartInput(BaseChartInput):
     def get_context(self, name, value, attrs=None):
         context = super().get_context(name, value, attrs)
 
-        # direction = ""
+        return context
 
-        # if value and value != "null":
-        #     direction = json.loads(value).get("direction", "")
 
-        # context["widget"]["direction"] = direction
+class LineChartInput(BaseChartInput):
+    template_name = "utils/widgets/line_chart.html"
+
+    def get_context(self, name, value, attrs=None):
+        context = super().get_context(name, value, attrs)
 
         return context
 

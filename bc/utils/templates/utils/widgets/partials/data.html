@@ -44,6 +44,29 @@
                         <td>2</td>
                     </tr>
                 </table>
+            {% elif example == "line" %}
+                <table style="font-size: 0.85em;">
+                    <tr>
+                        <td style="padding-right:20px">{% trans "Number of Employees" %}</td>
+                        <td style="padding-right:20px">{% trans "Waste management" %}</td>
+                        <td style="padding-right:20px">{% trans "Construction" %}</td>
+                    </tr>
+                    <tr>
+                        <td>2010</td>
+                        <td>43934</td>
+                        <td>24916</td>
+                    </tr>
+                    <tr>
+                        <td>2011</td>
+                        <td>52503</td>
+                        <td>24064</td>
+                    </tr>
+                    <tr>
+                        <td>2012</td>
+                        <td>57177</td>
+                        <td>29742</td>
+                    </tr>
+                </table>
             {% endif %}
             <p class="help">{% trans "Right-click on the table for more options" %}</p>
         </p>

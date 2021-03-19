@@ -13,7 +13,7 @@ from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 
 from .constants import RICH_TEXT_FEATURES
-from .widgets import BarChartInput, PieChartInput
+from .widgets import BarChartInput, PieChartInput, LineChartInput
 
 
 class ImageBlock(blocks.StructBlock):
@@ -261,9 +261,49 @@ class PieChartBlock(BaseChartBlock):
 
         new_context.update(
             {
-                "id": "pie" + value["id"],
+                "id": "pie-" + value["id"],
                 "table_first": value["table_first"],
                 "table_data": cleaned_data,
+                "title": value["table_title"],
+                "caption": value["chart_caption"],
+            }
+        )
+
+        return super().render(new_value, new_context)
+
+
+class LineChartBlock(BaseChartBlock):
+    @cached_property
+    def field(self):
+        return forms.CharField(
+            widget=LineChartInput(table_options=self.table_options),
+            **self.field_options,
+        )
+
+    def render(self, value, context={}):
+        if context is None:
+            new_context = {}
+        else:
+            new_context = dict(context)
+
+        cleaned_data = self.clean_table_values(value["data"])
+        columns = self.get_table_columns(cleaned_data)
+
+        new_value = {
+            "chart": {"type": "line"},
+            "series": columns[1:],
+        }
+
+        first_column = columns[0]
+        new_value["xAxis"] = {"categories": first_column["data"]}
+        new_value["yAxis"] = {"title": {"text": first_column["name"]}}
+
+        new_context.update(
+            {
+                "id": "line-" + value["id"],
+                "table_first": value["table_first"],
+                "table_headers": cleaned_data[0],
+                "table_data": cleaned_data[1:],
                 "title": value["table_title"],
                 "caption": value["chart_caption"],
             }

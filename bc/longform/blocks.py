@@ -1,6 +1,6 @@
 from wagtail.core import blocks
 
-from bc.utils.blocks import BarChartBlock, BaseStoryBlock, DetailBlock, PieChartBlock
+from bc.utils.blocks import BarChartBlock, BaseStoryBlock, DetailBlock, LineChartBlock, PieChartBlock
 from bc.utils.constants import RICH_TEXT_FEATURES
 
 
@@ -56,3 +56,4 @@ class LongformStoryBlock(BaseStoryBlock):
     detail = DetailBlock()
     bar_chart = BarChartBlock()
     pie_chart = PieChartBlock()
+    line_chart = LineChartBlock()
