@@ -1,6 +1,12 @@
 from wagtail.core import blocks
 
-from bc.utils.blocks import BarChartBlock, BaseStoryBlock, DetailBlock, LineChartBlock, PieChartBlock
+from bc.utils.blocks import (
+    BarChartBlock,
+    BaseStoryBlock,
+    DetailBlock,
+    LineChartBlock,
+    PieChartBlock,
+)
 from bc.utils.constants import RICH_TEXT_FEATURES
 
 

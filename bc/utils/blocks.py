@@ -13,7 +13,7 @@ from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 
 from .constants import RICH_TEXT_FEATURES
-from .widgets import BarChartInput, PieChartInput, LineChartInput
+from .widgets import BarChartInput, LineChartInput, PieChartInput
 
 
 class ImageBlock(blocks.StructBlock):
