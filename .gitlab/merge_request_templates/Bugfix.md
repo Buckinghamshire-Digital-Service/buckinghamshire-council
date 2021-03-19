@@ -27,7 +27,7 @@ Okay, now you may merge.
 
 Post-release process (perform the following steps directly on `master`):
 
-- [ ] Tag the merge commit (`git tag x.(x+1); git push --tags`)
 - [ ] Summarise your changes in CHANGELOG.md under a new `## x.x+1` section.
 - [ ] Add a 'comparison' line to show the diff for this release in CHANGELOG.md.
+- [ ] Tag the merge commit (`git tag x.(x+1); git push --tags`)
 - [ ] Merge `master` into `release`
