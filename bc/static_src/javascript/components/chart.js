@@ -45,6 +45,10 @@ class Chart {
         };
 
         // Configure various highcharts options
+        // options common to all charts
+        this.configureCommonOptions();
+
+        // options based on chart type
         if (
             this.chartData.chart.type === 'bar' ||
             this.chartData.chart.type === 'column'
@@ -56,8 +60,6 @@ class Chart {
         } else if (this.chartData.chart.type === 'line') {
             this.configureLineChartOptions();
         }
-
-        this.configureCommonOptions();
 
         // Initialise chart
         Highcharts.chart(this.containerId, this.chartData);
@@ -85,6 +87,28 @@ class Chart {
         this.chartWrapper.classList.add(this.hiddenClass);
     }
 
+    configureCommonOptions() {
+        // Hide overall chart title as we add our own above
+        this.chartData.title = null;
+        this.chartData.chart.backgroundColor = '#eee';
+        this.chartData.legend = {
+            margin: 20,
+            itemMarginBottom: 10,
+            itemStyle: this.textStyles,
+        };
+        // Initialise the responsive options - set individually on different chart types
+        this.chartData.responsive = {
+            rules: [
+                {
+                    condition: {
+                        minWidth: 500,
+                    },
+                    chartOptions: {},
+                },
+            ],
+        };
+    }
+
     configureBarChartOptions() {
         // Don't show the bar chart data the wrong way round
         this.chartData.yAxis.reversedStacks = false;
@@ -92,7 +116,8 @@ class Chart {
         this.chartData.plotOptions = {
             series: {
                 dataLabels: {
-                    enabled: true,
+                    // they become enabled above mobile breakpoint
+                    enabled: false,
                     crop: false,
                     overflow: 'none',
                     // hide the data label if the value is 0 or if the percentage width is less than 10
@@ -131,10 +156,13 @@ class Chart {
         // Axis styling
         this.configureAxisStyles();
 
-        // Legend styling
-        this.chartData.legend = {
-            margin: 20,
-            itemStyle: this.textStyles,
+        // Enable data labels for tablet and above
+        this.chartData.responsive.rules[0].chartOptions.plotOptions = {
+            series: {
+                dataLabels: {
+                    enabled: true,
+                },
+            },
         };
     }
 
@@ -144,7 +172,8 @@ class Chart {
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
-                    enabled: true,
+                    // enabled above mobile size
+                    enabled: false,
                     format: '<b>{point.name}</b><br />{point.y} %',
                     style: this.textStyles,
                     connectorColor: '#6c6c6b',
@@ -153,6 +182,19 @@ class Chart {
                 },
                 states: this.disbledHover,
                 borderWidth: 0,
+                showInLegend: true,
+            },
+        };
+
+        // Enable data labels and disable legend at tablet and above
+        this.chartData.responsive.rules[0].chartOptions = {
+            plotOptions: {
+                pie: {
+                    dataLabels: {
+                        enabled: true,
+                    },
+                    showInLegend: false,
+                },
             },
         };
     }
@@ -173,16 +215,10 @@ class Chart {
         this.configureAxisStyles();
     }
 
-    configureCommonOptions() {
-        // Hide overall chart title as we add our own above
-        this.chartData.title = null;
-        this.chartData.chart.backgroundColor = '#eee';
-    }
-
     configureAxisStyles() {
-        // Axis styling
+        // Axis styling (common to bar and line charts)
         const axisOptions = {
-            margin: 20,
+            margin: 10,
             style: this.textStyles,
         };
 
@@ -196,6 +232,20 @@ class Chart {
         this.chartData.yAxis.title = {
             ...axisOptions,
             ...this.chartData.yAxis.title,
+        };
+
+        // reset axis margins at tablet and above
+        this.chartData.responsive.rules[0].chartOptions = {
+            xAxis: {
+                title: {
+                    margin: 20,
+                },
+            },
+            yAxis: {
+                title: {
+                    margin: 20,
+                },
+            },
         };
     }
 }

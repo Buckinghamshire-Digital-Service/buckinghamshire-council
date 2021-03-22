@@ -1,7 +1,11 @@
 .chart-block {
     margin-bottom: $grid--large;
-    padding: $grid--small;
+    padding: $grid--min;
     background-color: $color--charcoal-10;
+
+    @include media-query(tablet-portrait) {
+        padding: $grid--small;
+    }
 
     &__wrapper {
         &--hidden {
