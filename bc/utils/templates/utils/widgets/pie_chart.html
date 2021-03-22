@@ -1,9 +1,5 @@
 {% load i18n %}
-{% include "utils/widgets/partials/title.html" %}
-<br/>
-{% include "utils/widgets/partials/caption.html" %}
-<br/>
-{% include "utils/widgets/partials/table_first.html" %}
+{% include "utils/widgets/base_chart.html" %}
 <br/>
 {% trans "Enter labels in the first column and values in the second column. Values should be percentages that collectively total 100." as data_help_text %}
 {% include "utils/widgets/partials/data.html" with help_text=data_help_text example="pie" %}

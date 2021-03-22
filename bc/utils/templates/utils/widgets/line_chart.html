@@ -1,9 +1,5 @@
 {% load i18n %}
-{% include "utils/widgets/partials/title.html" %}
-<br/>
-{% include "utils/widgets/partials/caption.html" %}
-<br/>
-{% include "utils/widgets/partials/table_first.html" %}
+{% include "utils/widgets/base_chart.html" %}
 <br/>
 {% trans "First column will be considered as the base axis points. First row will be considered as the labels for each line in the chart." as data_help_text %}
 {% include "utils/widgets/partials/data.html" with help_text=data_help_text example="line" %}
