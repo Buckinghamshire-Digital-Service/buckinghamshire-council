@@ -48,11 +48,6 @@ class BarChartInput(BaseChartInput):
 class PieChartInput(BaseChartInput):
     template_name = "utils/widgets/pie_chart.html"
 
-    def get_context(self, name, value, attrs=None):
-        context = super().get_context(name, value, attrs)
-
-        return context
-
 
 class LineChartInput(BaseChartInput):
     template_name = "utils/widgets/line_chart.html"
