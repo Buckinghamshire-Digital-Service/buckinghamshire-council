@@ -309,24 +309,31 @@ class PieChartBlock(BaseChartBlock):
             new_context = dict(context)
 
         cleaned_data = self.clean_table_values(value["data"])
-        data = []
-        for row in cleaned_data:
-            try:
-                data_as_number = float(row[1])
-            except ValueError:
-                data_as_number = row[1]
-            series = {
-                "name": row[0],
-                "y": data_as_number,
-            }
-            data.append(series)
 
-        new_value = {"chart": {"type": "pie"}, "series": [{"data": data}]}
+        # Get total value
+        total_value = 0
+        for row in cleaned_data:
+            if is_number(row[1]):
+                total_value += float(row[1])
+
+        # Use percentage values for the chart
+        series_data = []
+        for row in cleaned_data:
+            if is_number(row[1]):
+                series_value = round(float(row[1]) / total_value * 100, 1)
+            else:
+                series_value = row[1]
+            series = {"name": row[0], "y": series_value}
+            series_data.append(series)
+            row.append(f"{series_value}%")
+
+        new_value = {"chart": {"type": "pie"}, "series": [{"data": series_data}]}
 
         new_context.update(
             {
                 "id": "pie-" + value["id"],
                 "table_first": value["table_first"],
+                "table_headers": ["", "Values", "Percentage (%)"],
                 "table_data": cleaned_data,
                 "title": value["table_title"],
                 "caption": value["chart_caption"],
