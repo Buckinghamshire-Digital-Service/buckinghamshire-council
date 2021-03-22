@@ -48,6 +48,13 @@ class BarChartInput(BaseChartInput):
 class PieChartInput(BaseChartInput):
     template_name = "utils/widgets/pie_chart.html"
 
+    def __init__(self, table_options=None, attrs=None):
+        super().__init__(table_options=table_options, attrs=attrs)
+        self.table_options["startCols"] = 2
+        self.table_options["maxCols"] = 2
+        self.table_options["allowInsertColumn"] = False
+        self.table_options["allowRemoveColumn"] = False
+
 
 class LineChartInput(BaseChartInput):
     template_name = "utils/widgets/line_chart.html"
