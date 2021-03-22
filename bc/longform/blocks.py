@@ -61,5 +61,5 @@ class LongformStoryBlock(BaseStoryBlock):
     )
     detail = DetailBlock()
     bar_chart = BarChartBlock()
-    pie_chart = PieChartBlock()
     line_chart = LineChartBlock()
+    pie_chart = PieChartBlock()
