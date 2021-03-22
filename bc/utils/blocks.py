@@ -234,8 +234,9 @@ class BarChartBlock(BaseChartBlock):
         first_column = columns[0]
         new_value["xAxis"] = {
             "categories": first_column["data"],
+            "title": {"text": first_column["name"]},
         }
-        new_value["yAxis"] = {"title": {"text": first_column["name"]}}
+        new_value["yAxis"] = {}
 
         new_context.update(
             {

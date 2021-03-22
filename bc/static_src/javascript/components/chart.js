@@ -142,8 +142,14 @@ class Chart {
         };
         this.chartData.xAxis.labels = axisOptions;
         this.chartData.yAxis.labels = axisOptions;
-        this.chartData.xAxis.title = axisOptions;
-        this.chartData.yAxis.title = axisOptions;
+        this.chartData.xAxis.title = {
+            ...axisOptions,
+            ...this.chartData.xAxis.title,
+        };
+        this.chartData.yAxis.title = {
+            ...axisOptions,
+            ...this.chartData.yAxis.title,
+        };
 
         // Legend styling
         this.chartData.legend = {
