@@ -33,6 +33,16 @@ class Chart {
             fontSize: '14px',
             fontWeight: 'normal',
         };
+        // Disbled hover options
+        this.disbledHover = {
+            hover: {
+                halo: false,
+                enabled: false,
+            },
+            inactive: {
+                opacity: 1,
+            },
+        };
 
         // Configure various highcharts options
         if (
@@ -79,57 +89,44 @@ class Chart {
         // Don't show the bar chart data the wrong way round
         this.chartData.yAxis.reversedStacks = false;
 
-        // bar chart label options
-        const labelOptions = {
-            enabled: true,
-            crop: false,
-            overflow: 'none',
-            // hide the data label if the value is 0 or if the percentage width is less than 10
-            // conditionally set the colour of the label based on the background colour
-            // disabling warnings because following highcharts recommended syntax
-            // eslint-disable-next-line consistent-return, object-shorthand, func-names
-            formatter: function() {
-                if (this.y && this.percentage > 10) {
-                    let labelColour = 'white';
-                    if (this.color === '#fcbc00' || this.color === '#9fc63b') {
-                        labelColour = '#212121';
-                    }
-                    // add thousands separator by hand as returning this.y loses the
-                    // global option
-                    return `<span style="color: ${labelColour}">${this.y.toLocaleString()}</span>`;
-                }
-            },
-            style: {
-                textOutline: false,
-                fontFamily: 'Helvetica',
-                fontSize: '12px',
-                fontWeight: 'normal',
+        this.chartData.plotOptions = {
+            series: {
+                dataLabels: {
+                    enabled: true,
+                    crop: false,
+                    overflow: 'none',
+                    // hide the data label if the value is 0 or if the percentage width is less than 10
+                    // conditionally set the colour of the label based on the background colour
+                    // disabling warnings because following highcharts recommended syntax
+                    // eslint-disable-next-line consistent-return, object-shorthand, func-names
+                    formatter: function() {
+                        if (this.y && this.percentage > 10) {
+                            let labelColour = 'white';
+                            if (
+                                this.color === '#fcbc00' ||
+                                this.color === '#9fc63b'
+                            ) {
+                                labelColour = '#212121';
+                            }
+                            // add thousands separator by hand as returning this.y loses the
+                            // global option
+                            return `<span style="color: ${labelColour}">${this.y.toLocaleString()}</span>`;
+                        }
+                    },
+                    style: {
+                        textOutline: false,
+                        fontFamily: 'Helvetica',
+                        fontSize: '12px',
+                        fontWeight: 'normal',
+                    },
+                },
+                groupPadding: 0,
+                borderWidth: 0,
+                stacking: 'normal',
+                // disable hover effects
+                states: this.disbledHover,
             },
         };
-
-        // Various options for series / columns
-        const barOptions = {
-            dataLabels: labelOptions,
-            groupPadding: 0,
-            borderWidth: 0,
-            stacking: 'normal',
-            // disable hover effects
-            states: {
-                hover: {
-                    halo: false,
-                    enabled: false,
-                },
-                inactive: {
-                    opacity: 1,
-                },
-            },
-        };
-
-        if (this.chartData.plotOptions.column) {
-            this.chartData.plotOptions.column = barOptions;
-        } else if (this.chartData.plotOptions.series) {
-            this.chartData.plotOptions.series = barOptions;
-        }
 
         // Axis styling
         this.configureAxisStyles();
@@ -154,21 +151,21 @@ class Chart {
                     alignTo: 'plotEdges',
                     connectorShape: 'crookedLine',
                 },
-                states: {
-                    hover: {
-                        halo: false,
-                        enabled: false,
-                    },
-                    inactive: {
-                        opacity: 1,
-                    },
-                },
+                states: this.disbledHover,
                 borderWidth: 0,
             },
         };
     }
 
     configureLineChartOptions() {
+        this.chartData.plotOptions = {
+            series: {
+                label: {
+                    connectorAllowed: false,
+                },
+                states: this.disbledHover,
+            },
+        };
         // Axis styling
         this.configureAxisStyles();
     }

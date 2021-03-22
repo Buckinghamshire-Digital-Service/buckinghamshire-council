@@ -221,13 +221,11 @@ class BarChartBlock(BaseChartBlock):
         if value["direction"] == "horizontal":
             new_value = {
                 "chart": {"type": "bar"},
-                "plotOptions": {"series": {"stacking": "normal"}},
                 "series": data_columns,
             }
         else:
             new_value = {
                 "chart": {"type": "column"},
-                "plotOptions": {"column": {"stacking": "normal"}},
                 "series": data_columns,
             }
 
