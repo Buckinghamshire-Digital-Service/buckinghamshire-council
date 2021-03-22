@@ -7,7 +7,11 @@
 {% include "utils/widgets/partials/data.html" with help_text=data_help_text example="bar" %}
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    if( document.readyState !== 'loading' ) {
         window.initBarChart("{{ widget.attrs.id|escapejs }}", {{ widget.table_options_json|safe }});
-    });
+    } else {
+        document.addEventListener('DOMContentLoaded', () => {
+            window.initBarChart("{{ widget.attrs.id|escapejs }}", {{ widget.table_options_json|safe }});
+        });
+    }
 </script>
