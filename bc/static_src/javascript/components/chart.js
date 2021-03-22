@@ -76,10 +76,6 @@ class Chart {
     }
 
     configureBarChartOptions() {
-        // ensure series data is numeric not strings
-        const updatedSeries = this.convertDataToNumbers();
-        this.chartData.series = updatedSeries;
-
         // Don't show the bar chart data the wrong way round
         this.chartData.yAxis.reversedStacks = false;
 
@@ -136,38 +132,13 @@ class Chart {
         }
 
         // Axis styling
-        const axisOptions = {
-            margin: 20,
-            style: this.textStyles,
-        };
-        this.chartData.xAxis.labels = axisOptions;
-        this.chartData.yAxis.labels = axisOptions;
-        this.chartData.xAxis.title = {
-            ...axisOptions,
-            ...this.chartData.xAxis.title,
-        };
-        this.chartData.yAxis.title = {
-            ...axisOptions,
-            ...this.chartData.yAxis.title,
-        };
+        this.configureAxisStyles();
 
         // Legend styling
         this.chartData.legend = {
             margin: 20,
             itemStyle: this.textStyles,
         };
-    }
-
-    // bar chart data arrives as an array of strings and we need it as integers / floats for high charts
-    convertDataToNumbers() {
-        const updatedSeries = this.chartData.series.map((seriesItem) => {
-            const updatedData = seriesItem.data.map((dataItem) =>
-                parseFloat(dataItem),
-            );
-            seriesItem.data = updatedData;
-            return seriesItem;
-        });
-        return updatedSeries;
     }
 
     configurePieChartOptions() {
@@ -198,12 +169,33 @@ class Chart {
     }
 
     configureLineChartOptions() {
-        this.convertDataToNumbers();
+        // Axis styling
+        this.configureAxisStyles();
     }
 
     configureCommonOptions() {
         // Hide overall chart title as we add our own above
         this.chartData.title = null;
+    }
+
+    configureAxisStyles() {
+        // Axis styling
+        const axisOptions = {
+            margin: 20,
+            style: this.textStyles,
+        };
+
+        this.chartData.xAxis.labels = axisOptions;
+        this.chartData.yAxis.labels = axisOptions;
+        this.chartData.xAxis.title = {
+            ...axisOptions,
+            ...this.chartData.xAxis.title,
+        };
+
+        this.chartData.yAxis.title = {
+            ...axisOptions,
+            ...this.chartData.yAxis.title,
+        };
     }
 }
 

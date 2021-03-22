@@ -280,6 +280,7 @@ class LineChartBlock(BaseChartBlock):
             "categories": first_column["data"],
             "title": {"text": first_column["name"]},
         }
+        new_value["yAxis"] = {}
 
         new_context.update(
             {
