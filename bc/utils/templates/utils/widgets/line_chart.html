@@ -6,10 +6,10 @@
 
 <script>
     if( document.readyState !== 'loading' ) {
-        window.initBarChart("{{ widget.attrs.id|escapejs }}", {{ widget.table_options_json|safe }});
+        window.initLineChart("{{ widget.attrs.id|escapejs }}", {{ widget.table_options_json|safe }});
     } else {
         document.addEventListener('DOMContentLoaded', () => {
-            window.initBarChart("{{ widget.attrs.id|escapejs }}", {{ widget.table_options_json|safe }});
+            window.initLineChart("{{ widget.attrs.id|escapejs }}", {{ widget.table_options_json|safe }});
         });
     }
 </script>

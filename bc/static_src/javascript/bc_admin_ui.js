@@ -1,5 +1,4 @@
 import BarChart from './bc_admin_ui/bar_chart';
-import PieChart from './bc_admin_ui/pie_chart';
 import Chart from './bc_admin_ui/chart';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -10,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     window.initPieChart = (id, tableOptions) => {
         // eslint-disable-next-line no-new
-        new PieChart(id, tableOptions);
+        new Chart(id, tableOptions);
     };
     window.initLineChart = (id, tableOptions) => {
         // eslint-disable-next-line no-new
