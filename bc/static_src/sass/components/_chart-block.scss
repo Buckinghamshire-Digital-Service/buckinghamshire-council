@@ -1,8 +1,7 @@
 .chart-block {
     margin-bottom: $grid--large;
-    // awaiting confirmation from Sarah regarding background colour
-    // padding: $grid--min;
-    // background-color: $color--charcoal-10;
+    padding: $grid--small;
+    background-color: $color--charcoal-10;
 
     &__wrapper {
         &--hidden {
@@ -10,10 +9,19 @@
         }
     }
 
+    &__title {
+        margin-top: 0;
+    }
+
     // this div is used by Highcharts to display the chart
     &__chart {
         width: 100%;
         height: 400px;
+        margin-top: $grid--small; // matches table spacing
+    }
+
+    &__table {
+        margin-bottom: 0;
     }
 
     &__link {

@@ -164,6 +164,9 @@ class Chart {
                     connectorAllowed: false,
                 },
                 states: this.disbledHover,
+                marker: {
+                    enabled: false,
+                },
             },
         };
         // Axis styling
@@ -173,6 +176,7 @@ class Chart {
     configureCommonOptions() {
         // Hide overall chart title as we add our own above
         this.chartData.title = null;
+        this.chartData.chart.backgroundColor = '#eee';
     }
 
     configureAxisStyles() {

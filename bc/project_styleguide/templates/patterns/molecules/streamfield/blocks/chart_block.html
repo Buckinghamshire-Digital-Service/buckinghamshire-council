@@ -2,7 +2,7 @@
 
 {% comment %} A chart block - will toggle between a table and a chart version of the data {% endcomment %}
 <div class="chart-block" data-chart-block>
-    <h2 class="heading heading--m">
+    <h2 class="heading heading--m chart-block__title">
         {{ title }}
     </h2>
 
@@ -12,7 +12,7 @@
     >
         <button class="button button--link chart-block__link" data-to-chart>Display as a chart</button>
         <div class="table-container">
-            <table>
+            <table class="chart-block__table">
                 <thead>
                     <tr>
                         {% if table_headers %}
