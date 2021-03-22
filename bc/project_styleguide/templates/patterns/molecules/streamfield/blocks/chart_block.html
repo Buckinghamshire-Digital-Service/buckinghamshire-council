@@ -13,6 +13,9 @@
         <button class="button button--link chart-block__link" data-to-chart>Display as a chart</button>
         <div class="table-container">
             <table class="chart-block__table">
+                {% if caption %}
+                    <caption class="chart-block__caption">{{ caption }}</caption>
+                {% endif %}
                 <thead>
                     <tr>
                         {% if table_headers %}
@@ -53,10 +56,6 @@
                         {% endwith %}
                     {% endfor %}
                 </tbody>
-
-                {% if caption %}
-                    <caption class="chart-block__caption">{{ caption }}</caption>
-                {% endif %}
             </table>
         </div>
     </div>
@@ -68,7 +67,7 @@
         <button class="button button--link chart-block__link" data-to-table>Display as a table</button>
         <div class="chart-block__chart" data-chart="{{ id }}" id="chart-container-{{ id }}"></div>
         {% if caption %}
-            <p class="chart-block__caption">{{ caption }}</p>
+            <p class="chart-block__caption chart-block__caption--on-p">{{ caption }}</p>
         {% endif %}
     </div>
 </div>

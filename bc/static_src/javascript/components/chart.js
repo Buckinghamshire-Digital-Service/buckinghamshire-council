@@ -169,7 +169,6 @@ class Chart {
     configurePieChartOptions() {
         this.chartData.plotOptions = {
             pie: {
-                allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
                     // enabled above mobile size

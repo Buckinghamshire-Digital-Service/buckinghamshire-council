@@ -34,8 +34,13 @@
 
     &__caption {
         @include font-size(xs);
-        display: block; // overrides the browser styling that positions the caption above the table
+        caption-side: bottom;
         font-weight: normal;
-        margin-top: $grid--small;
+        width: 100%;
+        margin: $grid--small 0;
+
+        &--on-p {
+            display: block;
+        }
     }
 }
