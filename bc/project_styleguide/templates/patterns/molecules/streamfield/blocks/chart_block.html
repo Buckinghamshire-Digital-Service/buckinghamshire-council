@@ -1,4 +1,4 @@
-{% load table_block_tags %}
+{% load humanize table_block_tags %}
 
 {% comment %} A chart block - will toggle between a table and a chart version of the data {% endcomment %}
 <div class="chart-block" data-chart-block>
@@ -43,7 +43,7 @@
                                     {% else %}
                                         <td {% cell_classname row_index col_index table_headers %}>
                                             {% if column.strip %}
-                                                {{ column.strip|linebreaksbr }}
+                                                {{ column.strip|linebreaksbr|intcomma }}
                                             {% endif %}
                                         </td>
                                     {% endif %}
