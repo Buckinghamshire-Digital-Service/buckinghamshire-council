@@ -13,6 +13,7 @@ from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 
 from .constants import RICH_TEXT_FEATURES
+from .utils import is_number
 from .widgets import BarChartInput, LineChartInput, PieChartInput
 
 
@@ -139,6 +140,23 @@ class BaseChartBlock(TableBlock):
             js=[versioned_static("utils/js/vendor/handsontable-6.2.2.full.min.js")],
         )
 
+    def convert_column_data_to_numbers(self, columns):
+        """
+        Converts string data inside a column into its number/float equivalent
+        if applicable
+        """
+        result = []
+        for column in columns:
+            series = {
+                "name": column["name"],
+                "data": [
+                    float(cell) if is_number(cell) else cell for cell in column["data"]
+                ],
+            }
+            result.append(series)
+
+        return result
+
     def get_table_columns(self, table):
         """
         Return table as column headers and column values
@@ -199,21 +217,24 @@ class BarChartBlock(BaseChartBlock):
         cleaned_data = self.clean_table_values(value["data"])
         columns = self.get_table_columns(cleaned_data)
 
+        data_columns = self.convert_column_data_to_numbers(columns[1:])
         if value["direction"] == "horizontal":
             new_value = {
                 "chart": {"type": "bar"},
                 "plotOptions": {"series": {"stacking": "normal"}},
-                "series": columns[1:],
+                "series": data_columns,
             }
         else:
             new_value = {
                 "chart": {"type": "column"},
                 "plotOptions": {"column": {"stacking": "normal"}},
-                "series": columns[1:],
+                "series": data_columns,
             }
 
         first_column = columns[0]
-        new_value["xAxis"] = {"categories": first_column["data"]}
+        new_value["xAxis"] = {
+            "categories": first_column["data"],
+        }
         new_value["yAxis"] = {"title": {"text": first_column["name"]}}
 
         new_context.update(
@@ -247,14 +268,17 @@ class LineChartBlock(BaseChartBlock):
         cleaned_data = self.clean_table_values(value["data"])
         columns = self.get_table_columns(cleaned_data)
 
+        data_columns = self.convert_column_data_to_numbers(columns[1:])
         new_value = {
             "chart": {"type": "line"},
-            "series": columns[1:],
+            "series": data_columns,
         }
 
         first_column = columns[0]
-        new_value["xAxis"] = {"categories": first_column["data"]}
-        new_value["yAxis"] = {"title": {"text": first_column["name"]}}
+        new_value["xAxis"] = {
+            "categories": first_column["data"],
+            "title": {"text": first_column["name"]},
+        }
 
         new_context.update(
             {
