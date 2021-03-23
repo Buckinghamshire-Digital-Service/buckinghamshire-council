@@ -62,7 +62,7 @@ class Chart {
         }
 
         // Initialise chart
-        Highcharts.chart(this.containerId, this.chartData);
+        this.highChart = Highcharts.chart(this.containerId, this.chartData);
 
         this.bindEvents();
     }
@@ -80,6 +80,7 @@ class Chart {
     showChart() {
         this.tableWrapper.classList.add(this.hiddenClass);
         this.chartWrapper.classList.remove(this.hiddenClass);
+        this.highChart.reflow();
     }
 
     showTable() {
