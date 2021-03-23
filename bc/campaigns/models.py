@@ -2,6 +2,7 @@ from django.db import models
 from django.shortcuts import redirect
 
 from wagtail.admin import edit_handlers
+from wagtail.core import blocks
 from wagtail.core import fields
 from wagtail.core import models as wt_models
 from wagtail.images import edit_handlers as image_handlers
@@ -30,7 +31,9 @@ class CampaignPage(BasePage):
         "images.CustomImage", null=True, related_name="+", on_delete=models.SET_NULL,
     )
     sections = fields.StreamField(
-        block_types=[("section", SectionBlock())], null=True, blank=False,
+        blocks.StreamBlock([("section", SectionBlock())], max_num=3, min_num=3),
+        null=True,
+        blank=False,
     )
 
     content_panels = BasePage.content_panels + [
