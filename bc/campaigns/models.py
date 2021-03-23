@@ -2,8 +2,7 @@ from django.db import models
 from django.shortcuts import redirect
 
 from wagtail.admin import edit_handlers
-from wagtail.core import blocks
-from wagtail.core import fields
+from wagtail.core import blocks, fields
 from wagtail.core import models as wt_models
 from wagtail.images import edit_handlers as image_handlers
 
