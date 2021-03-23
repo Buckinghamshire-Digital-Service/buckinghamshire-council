@@ -77,15 +77,12 @@ class SectionBlock(blocks.StructBlock):
     )
     intro = blocks.RichTextBlock(features=["link"])
 
-    content = blocks.ListBlock(SectionContentBlock())
-
-    banners = blocks.StreamBlock(
+    content = blocks.StreamBlock(
         [
+            ("media_and_paragraph", SectionContentBlock()),
             ("directory_banner", DirectoryBannerBlock()),
             ("full_width_banner", FullWidthBanner()),
-        ],
-        required=False,
-        max_num=1,
+        ]
     )
 
     class Meta:
