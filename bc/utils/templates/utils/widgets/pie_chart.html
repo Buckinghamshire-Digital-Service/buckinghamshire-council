@@ -1,5 +1,5 @@
 {% load i18n %}
-{% include "utils/widgets/base_chart.html" %}
+{% include "utils/widgets/base_chart.html" with chart_type="Pie" %}
 <br/>
 {% trans "Enter labels in the first column and values in the second column (the values will be automatically converted to percentages)." as data_help_text %}
 {% include "utils/widgets/partials/data.html" with help_text=data_help_text example="pie" %}

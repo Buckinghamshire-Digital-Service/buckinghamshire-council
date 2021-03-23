@@ -244,6 +244,7 @@ class BarChartBlock(BaseChartBlock):
                 "table_data": cleaned_data[1:],
                 "title": value["table_title"],
                 "caption": value["chart_caption"],
+                "default_title": "Bar chart",
             }
         )
 
@@ -288,6 +289,7 @@ class LineChartBlock(BaseChartBlock):
                 "table_data": cleaned_data[1:],
                 "title": value["table_title"],
                 "caption": value["chart_caption"],
+                "default_title": "Line chart",
             }
         )
 
@@ -337,6 +339,7 @@ class PieChartBlock(BaseChartBlock):
                 "table_data": cleaned_data,
                 "title": value["table_title"],
                 "caption": value["chart_caption"],
+                "default_title": "Pie chart",
             }
         )
 

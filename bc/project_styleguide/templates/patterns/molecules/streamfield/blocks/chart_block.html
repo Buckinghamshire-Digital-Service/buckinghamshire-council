@@ -3,7 +3,7 @@
 {% comment %} A chart block - will toggle between a table and a chart version of the data {% endcomment %}
 <div class="chart-block" data-chart-block>
     <h2 class="heading heading--m chart-block__title">
-        {{ title }}
+        {% if title %}{{ title }}{% else %}{{ default_title }}{% endif %}
     </h2>
 
     <div

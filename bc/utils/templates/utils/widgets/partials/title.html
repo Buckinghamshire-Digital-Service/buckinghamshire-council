@@ -5,6 +5,6 @@
         <div class="input">
           <input type="text" id="{{ widget.attrs.id }}-handsontable-title" name="handsontable-title" value="{{ widget.table_title }}"/>
         </div>
-        <p class="help">{% trans "A heading that identifies the overall topic of the table, and is useful for screen reader users" %}</p>
+        <p class="help">{% blocktrans %}A heading for your chart. A default value of "{{ chart_type }} chart" will be used if no value is entered{% endblocktrans %}</p>
     </div>
 </div>
