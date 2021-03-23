@@ -131,4 +131,10 @@
             }
         }
     }
+
+    &--campaign-contents {
+        display: flex;
+        min-height: 165px;
+        align-items: center;
+    }
 }

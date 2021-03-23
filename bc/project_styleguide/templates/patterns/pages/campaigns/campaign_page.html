@@ -15,6 +15,18 @@
     <div class="wrapper wrapper--flex">
         <div class="section section--main">
             <div>{{ page.intro|richtext }}</div>
+
+            <!-- table of contents -->
+            <section class="grid" aria-label="Table of contents">
+                {% for section in page.sections %}
+                    <div class="card card--campaign-contents">
+                        <a href="#{{ section.value.heading|slugify }}">
+                            <h2 class="card__title">{{ section.value.heading }}</h2>
+                        </a>
+                    </div>
+                {% endfor %}
+            </section>
+
             {% for section in page.sections %}
                 {% include_block section  %}
             {% endfor %}
