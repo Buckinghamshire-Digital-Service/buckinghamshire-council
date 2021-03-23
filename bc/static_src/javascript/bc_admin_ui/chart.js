@@ -58,6 +58,7 @@ class Chart {
         });
     }
 
+    // To Implement: Override with specific chart fields
     bindEvents(tableOptions) {
         // eslint-disable-next-line no-underscore-dangle
         this._bindEvents(tableOptions);
@@ -133,6 +134,7 @@ class Chart {
         this.tableTitle = $(`#${tableTitleId}`);
     }
 
+    // To Implement: Override with specific chart fields
     getFields() {
         // eslint-disable-next-line no-underscore-dangle
         this._getFields();
@@ -154,7 +156,7 @@ class Chart {
     }
     /* eslint-enable class-methods-use-this */
 
-    _initHandsonTable(containerId, tableOptions) {
+    initHandsonTable(containerId, tableOptions) {
         const defaultOptions = this.getDefaultOptions();
 
         if (this.dataForForm !== null) {
@@ -184,12 +186,6 @@ class Chart {
         this.hot.render(); // Call to render removes 'null' literals from empty cells
     }
 
-    initHandsonTable(containerId, tableOptions) {
-        // eslint-disable-next-line no-underscore-dangle
-        this._initHandsonTable(containerId, tableOptions);
-    }
-
-    // To Implement: Override with specific chart fields
     _loadFieldData() {
         if (this.dataForForm !== null) {
             if (this.dataForForm.chart_caption) {
@@ -204,6 +200,7 @@ class Chart {
         }
     }
 
+    // To Implement: Override with specific chart fields
     loadFieldData() {
         // eslint-disable-next-line no-underscore-dangle
         this._loadFieldData();
@@ -220,6 +217,7 @@ class Chart {
         };
     }
 
+    // To Implement: Override with specific chart fields
     _persistData() {
         // eslint-disable-next-line no-underscore-dangle
         return this._persistChartData();
