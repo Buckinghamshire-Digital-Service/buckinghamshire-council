@@ -15,6 +15,7 @@ class SectionContentBlock(blocks.StructBlock):
     paragraph = blocks.RichTextBlock(features=["link"])
 
     class Meta:
+        icon = "pilcrow"
         template = "patterns/molecules/campaigns/blocks/content-block.html"
 
 
@@ -55,6 +56,7 @@ class DirectoryBannerBlock(blocks.StructBlock):
     )
 
     class Meta:
+        icon = "tag"
         value_class = DirectoryBannerValue
         template = "patterns/molecules/campaigns/blocks/directory-banner.html"
 
@@ -67,6 +69,7 @@ class FullWidthBanner(blocks.StructBlock):
     )
 
     class Meta:
+        icon = "arrow-right"
         value_class = ButtonBannerValue
         template = "patterns/molecules/campaigns/blocks/full-width-banner.html"
 
