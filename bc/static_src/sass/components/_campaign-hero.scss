@@ -1,0 +1,18 @@
+.campaign-hero {
+    position: relative;
+    margin-bottom: -$grid--medium;
+
+    &__image {
+        width: 100%;
+        height: auto;
+    }
+
+    &__title {
+        text-align: center;
+        position: relative;
+        top: -$grid--medium;
+        background-color: $color--white;
+        padding: $grid--small;
+        margin-bottom: 0;
+    }
+}

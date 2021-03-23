@@ -3,11 +3,17 @@
 
 {% block breadcrumbs %}{% endblock breadcrumbs %}
 
+{% block hero %}
+    <div class="campaign-hero">
+        {% image page.hero_image fill-1024x380 class="campaign-hero__image" %}
+        <div class="wrapper wrapper--large">
+            <h1 class="heading heading--xxl campaign-hero__title">{{ page.title }}</h1>
+        </div>
+    </div>
+{% endblock %}
 {% block content %}
     <div class="wrapper wrapper--flex">
         <div class="section section--main">
-            {% image page.hero_image fill-1024x380 %}
-            <h1 class="heading heading--xxl">{{ page.title }}</h1>
             <div>{{ page.intro|richtext }}</div>
             {% for section in page.sections %}
                 {% include_block section  %}
