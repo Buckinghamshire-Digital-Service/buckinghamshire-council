@@ -60,7 +60,8 @@ class DirectoryBannerBlock(blocks.StructBlock):
 
 
 class FullWidthBanner(blocks.StructBlock):
-    description = blocks.TextBlock()
+    heading = blocks.CharBlock(max_length=250)
+    text = blocks.TextBlock()
     button = ButtonBlock(
         form_classname="struct-block c-sf-block c-sf-block__content-inner"
     )
