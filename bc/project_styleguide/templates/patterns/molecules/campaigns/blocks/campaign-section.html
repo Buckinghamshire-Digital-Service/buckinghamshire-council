@@ -1,14 +1,11 @@
 {% load wagtailcore_tags %}
 {% with value as section %}
 
-    <section>
+    <section class="campaign-section">
         {% include_block section.bound_blocks.heading with class="heading heading--xl" %}
         {% include_block section.intro %}
         {% for content_block in section.content %}
             {% include_block content_block %}
-        {% endfor %}
-        {% for banner in section.banners %}
-            {% include_block banner %}
         {% endfor %}
     </section>
 {% endwith %}
