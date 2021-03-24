@@ -177,21 +177,22 @@ class BaseChartBlock(TableBlock):
         """
         Remove empty rows and columns
         """
-        import copy
 
         cleaned_table = copy.deepcopy(table)
 
         # Remove empty rows
         for row in table:
-            if all([cell is None for cell in row]):
+            if all([cell is None or not cell.strip() for cell in row]):
                 cleaned_table.remove(row)
 
         # Remove empty columns
         transposed_table = [*zip(*cleaned_table)]
+        removed_count = 0
         for index, col in enumerate(transposed_table):
-            if all([cell is None for cell in col]):
+            if all([cell is None or not cell.strip() for cell in col]):
                 for row in cleaned_table:
-                    del row[index]
+                    del row[index - removed_count]
+                removed_count += 1
 
         return cleaned_table
 
