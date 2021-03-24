@@ -60,4 +60,27 @@
             }
         }
     }
+
+    // alternating two plus one then one plus two
+    &--two-one-swap {
+        @include media-query(tablet-portrait) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include media-query(tablet-landscape) {
+            grid-template-columns: 2fr 1fr;
+        }
+
+        &:nth-child(even) {
+            @include media-query(tablet-landscape) {
+                grid-template-columns: 1fr 2fr;
+            }
+
+            div:first-child {
+                @include media-query(tablet-portrait) {
+                    order: 2;
+                }
+            }
+        }
+    }
 }

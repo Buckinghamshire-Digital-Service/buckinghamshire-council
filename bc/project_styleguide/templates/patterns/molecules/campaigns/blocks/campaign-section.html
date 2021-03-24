@@ -2,7 +2,7 @@
 {% with value as section %}
 
     <section>
-        {% include_block section.bound_blocks.heading %}
+        {% include_block section.bound_blocks.heading with class="heading heading--xl" %}
         {% include_block section.intro %}
         {% for content_block in section.content %}
             {% include_block content_block %}
