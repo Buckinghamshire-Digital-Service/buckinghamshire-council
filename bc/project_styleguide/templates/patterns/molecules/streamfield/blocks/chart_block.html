@@ -1,5 +1,7 @@
 {% load humanize table_block_tags %}
 
+{% if table_data %}
+
 {% comment %} A chart block - will toggle between a table and a chart version of the data {% endcomment %}
 <div class="chart-block" data-chart-block>
     <h2 class="heading heading--m chart-block__title">
@@ -73,3 +75,5 @@
 </div>
 
 {{ value|json_script:id }}
+
+{% endif %}

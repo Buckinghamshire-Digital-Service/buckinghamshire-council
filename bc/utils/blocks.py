@@ -215,8 +215,16 @@ class BarChartBlock(BaseChartBlock):
         else:
             new_context = dict(context)
 
+        # If no value at all, exit early
+        if not value:
+            return super().render(value, new_context)
+
         cleaned_data = self.clean_table_values(value["data"])
         columns = self.get_table_columns(cleaned_data)
+
+        # If no data found, exit early
+        if not columns:
+            return super().render(value, new_context)
 
         data_columns = self.convert_column_data_to_numbers(columns[1:])
         new_value = {
@@ -262,8 +270,16 @@ class LineChartBlock(BaseChartBlock):
         else:
             new_context = dict(context)
 
+        # If no value at all, exit early
+        if not value:
+            return super().render(value, new_context)
+
         cleaned_data = self.clean_table_values(value["data"])
         columns = self.get_table_columns(cleaned_data)
+
+        # If no data found, exit early
+        if not columns:
+            return super().render(value, new_context)
 
         data_columns = self.convert_column_data_to_numbers(columns[1:])
         new_value = {
@@ -306,6 +322,10 @@ class PieChartBlock(BaseChartBlock):
             new_context = {}
         else:
             new_context = dict(context)
+
+        # If no value at all, exit early
+        if not value:
+            return super().render(value, new_context)
 
         cleaned_data = self.clean_table_values(value["data"])
 
