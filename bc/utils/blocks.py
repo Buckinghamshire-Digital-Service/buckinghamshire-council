@@ -219,16 +219,12 @@ class BarChartBlock(BaseChartBlock):
         columns = self.get_table_columns(cleaned_data)
 
         data_columns = self.convert_column_data_to_numbers(columns[1:])
+        new_value = {
+            "chart": {"type": "column"},
+            "series": data_columns,
+        }
         if value["direction"] == "horizontal":
-            new_value = {
-                "chart": {"type": "bar"},
-                "series": data_columns,
-            }
-        else:
-            new_value = {
-                "chart": {"type": "column"},
-                "series": data_columns,
-            }
+            new_value["chart"]["type"] = "bar"
 
         first_column = columns[0]
         new_value["xAxis"] = {
