@@ -76,9 +76,23 @@
                 grid-template-columns: 1fr 2fr;
             }
 
-            div:first-child {
+            > div:first-child {
                 @include media-query(tablet-portrait) {
                     order: 2;
+                }
+            }
+        }
+
+        @include target-ie11() {
+            > div:first-child {
+                @media all and (min-width: 480px) {
+                    flex-basis: calc(66% - 20px);
+                }
+            }
+
+            > div:nth-child(2) {
+                @media all and (min-width: 480px) {
+                    flex-basis: calc(33% - 20px);
                 }
             }
         }
