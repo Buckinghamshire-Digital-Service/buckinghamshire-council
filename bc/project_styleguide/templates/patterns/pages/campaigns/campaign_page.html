@@ -3,6 +3,10 @@
 
 {% block breadcrumbs %}{% endblock breadcrumbs %}
 
+{# Hide alerts on the campaign template #}
+{% block alerts %}
+{% endblock %}
+
 {% block hero %}
     <div class="campaign-hero">
         {% image page.hero_image fill-1800x668 as hero_image_extra_large %}
