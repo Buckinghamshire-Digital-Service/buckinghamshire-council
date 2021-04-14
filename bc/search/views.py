@@ -107,7 +107,10 @@ class SearchView(View):
                     )
                 )
                 page_queryset_for_search = page_queryset_for_search.not_type(
-                    CampaignIndexPage, CampaignPage,
+                    CampaignIndexPage
+                )
+                page_queryset_for_search = page_queryset_for_search.not_type(
+                    CampaignPage
                 )
 
                 search_results = page_queryset_for_search.search(
