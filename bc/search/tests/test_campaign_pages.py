@@ -1,4 +1,4 @@
-from django import urls, test
+from django import test, urls
 
 from wagtail.core.models import Page
 
