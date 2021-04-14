@@ -13,7 +13,7 @@ from django.views.generic.base import View
 from wagtail.core.models import Page, Site
 from wagtail.search.models import Query
 
-from bc.campaigns.models import CampaignPage
+from bc.campaigns.models import CampaignIndexPage, CampaignPage
 from bc.recruitment.forms import SearchAlertSubscriptionForm
 from bc.recruitment.models import JobAlertSubscription
 from bc.recruitment.utils import (
@@ -107,7 +107,8 @@ class SearchView(View):
                     )
                 )
                 page_queryset_for_search = page_queryset_for_search.not_type(
-                    CampaignPage
+                    CampaignIndexPage,
+                    CampaignPage,
                 )
 
                 search_results = page_queryset_for_search.search(
