@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 35.2 (2021-04-21)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/35.1...35.2
 
 - Fix: XSS vulnerability in "no search results" page
 
