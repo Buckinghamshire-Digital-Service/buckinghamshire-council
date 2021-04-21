@@ -8,8 +8,6 @@ from bc.home.tests.fixtures import HomePageFactory
 from bc.standardpages.tests.fixtures import InformationPageFactory
 from bc.utils.tests.factories import SystemMessageFactory
 
-SECOND_HOSTNAME = "second.example"
-
 
 class QueryEscapingTest(TestCase):
     """Tests that query strings displayed in templates are escaped"""
