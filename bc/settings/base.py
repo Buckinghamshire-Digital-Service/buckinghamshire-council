@@ -783,14 +783,23 @@ MAPIT_API_KEY = env.get("MAPIT_API_KEY")
 # Wagtail transfer settings
 # See https://buckinghamshire-council.pages.torchbox.com/bc/infrastructure/#wagtail-transfer
 # Configure other site to import from
+WAGTAILTRANSFER_SOURCES = {}
+
 wagtailtransfer_source_label = env.get("WAGTAILTRANSFER_SOURCE_LABEL", "source")
 if "WAGTAILTRANSFER_SOURCE_KEY" in env and "WAGTAILTRANSFER_SOURCE_URL" in env:
-    WAGTAILTRANSFER_SOURCES = {
-        wagtailtransfer_source_label: {
-            "BASE_URL": env.get("WAGTAILTRANSFER_SOURCE_URL"),
-            "SECRET_KEY": env.get("WAGTAILTRANSFER_SOURCE_KEY"),
-        },
+    WAGTAILTRANSFER_SOURCES[wagtailtransfer_source_label] = {
+        "BASE_URL": env.get("WAGTAILTRANSFER_SOURCE_URL"),
+        "SECRET_KEY": env.get("WAGTAILTRANSFER_SOURCE_KEY"),
     }
+
+wagtailtransfer_source_label_2 = env.get("WAGTAILTRANSFER_SOURCE_LABEL_2", "source 2")
+if "WAGTAILTRANSFER_SOURCE_KEY_2" in env and "WAGTAILTRANSFER_SOURCE_URL_2" in env:
+    WAGTAILTRANSFER_SOURCES[wagtailtransfer_source_label_2] = {
+        "BASE_URL": env.get("WAGTAILTRANSFER_SOURCE_URL_2"),
+        "SECRET_KEY": env.get("WAGTAILTRANSFER_SOURCE_KEY_2"),
+    }
+
+
 # Configure availability of this site as source for another site to import from
 if "WAGTAILTRANSFER_SECRET_KEY" in env:
     WAGTAILTRANSFER_SECRET_KEY = env.get("WAGTAILTRANSFER_SECRET_KEY")
@@ -804,7 +813,7 @@ WAGTAILTRANSFER_UPDATE_RELATED_MODELS = [
     "wagtaildocs.document",
     "alerts.alert",
     "image.customimage",
-    "documents.customdocument",
+    WAGTAILDOCS_DOCUMENT_MODEL,  # Specified above
     "events.eventtype",
     "events.eventpageeventtype",
     "news.newstype",
@@ -818,5 +827,5 @@ WAGTAILTRANSFER_NO_FOLLOW_MODELS = [
     "recruitment.talentlinkjob",
     "recruitment.jobsubcategory",
     "recruitment.jobcategory",
-    "users.user",  # Do not transfer staging users to production.
+    "users.user",  # Do not transfer users between instances
 ]
