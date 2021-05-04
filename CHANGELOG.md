@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Update CI config to use the cache to store artefacts;:
+- Accessibility improvements
 
 ## 35.0 (2021-02-18)
 
