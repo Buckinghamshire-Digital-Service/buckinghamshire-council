@@ -6,7 +6,7 @@
             <li class="index-pagination__item index-pagination__item--previous">
                 {% if prev_page %}
                     <a
-                        aria-label="Goto previous page"
+                        aria-label="Goto previous page - {{ prev_page }}"
                         class="index-pagination__button link--alt"
                         href="{% pageurl prev_page %}"
                         rel="prev"
@@ -23,7 +23,7 @@
             <li class="index-pagination__item index-pagination__item--next">
                 {% if next_page %}
                     <a
-                        aria-label="Goto next page"
+                        aria-label="Goto next page - {{ next_page }}"
                         class="index-pagination__button index-pagination__button--next link--alt"
                         href="{% pageurl next_page %}"
                         rel="next"

@@ -77,9 +77,11 @@
 
     &__button {
         display: flex;
+        border-bottom: 4px solid transparent;
         align-items: center;
         transition: color 0.2s ease;
         text-decoration: none;
+        margin-bottom: -4px; // offset bottom border to avoid browser 'jump' on focus
 
         #{$hover-states} {
             cursor: pointer;
@@ -93,11 +95,12 @@
             }
         }
 
-        /* stylelint-disable */
         &:focus {
+            background-color: $color--mustard;
+            border-color: $color--off-black;
+            color: $color--off-black;
             outline: 0; // focus style implemented directly on text instead
         }
-        /* stylelint-enable */
 
         &--search-filters {
             @include font-size(s);
@@ -131,12 +134,6 @@
         border-bottom: 4px solid transparent;
         margin: 5px 0 0; // offset for bottom border & icon alignment
         padding: 0;
-
-        #{$root}__button:focus & {
-            background-color: $color--mustard;
-            border-bottom: 4px solid $color--off-black;
-            color: $color--off-black;
-        }
     }
 
     &__button--area-search {
@@ -154,6 +151,10 @@
         stroke-width: 4;
         transform: rotate(-90deg);
         width: 17px;
+
+        #{$root}__button:focus & {
+            stroke: $color--off-black;
+        }
 
         &--search-filter {
             stroke: $color--charcoal;
