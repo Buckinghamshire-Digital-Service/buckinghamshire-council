@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Update CI config to use the cache to store artefacts;:
+- Upgrade Django to 2.2.21
 
 ## 35.0 (2021-02-18)
 
