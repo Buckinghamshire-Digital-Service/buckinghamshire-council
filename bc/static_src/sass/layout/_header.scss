@@ -15,6 +15,10 @@
         display: block;
 
         @include media-query(px550) {
+            margin-right: $grid;
+        }
+
+        @include media-query(tablet-landscape) {
             margin-right: $grid * 2;
         }
     }
@@ -137,7 +141,34 @@
 
     &--jobs {
         #{$root}__inner {
+            flex-wrap: wrap;
             justify-content: flex-start;
+        }
+
+        #{$root}__heading {
+            flex-wrap: wrap;
+            flex: 1 0 100%;
+
+            @include media-query(tablet-portrait) {
+                flex: 1 0 auto;
+            }
+
+            @include media-query(tablet-landscape) {
+                flex: 1 0 0;
+            }
+        }
+
+        #{$root}__heading-title {
+            flex: 1 0 50%;
+            margin: 10px 0;
+
+            @include media-query(mob-landscape) {
+                flex: 0 0 auto;
+            }
+
+            @include media-query(px550) {
+                margin: 0;
+            }
         }
     }
 
@@ -189,18 +220,13 @@
             padding: 3px 3px 0 3px;
         }
 
-        &:first-child {
-            margin-bottom: 5px;
-        }
-
         @include media-query(px550) {
             max-height: 44px;
         }
 
         @include media-query(tablet-portrait) {
-            &:first-child {
+            &:not(:last-child) {
                 margin-right: 5px;
-                margin-bottom: 0;
             }
         }
     }

@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Update CI config to use the cache to store artefacts;:
+- Add ENEI logo to Jobs site header
 
 ## 35.0 (2021-02-18)
 
