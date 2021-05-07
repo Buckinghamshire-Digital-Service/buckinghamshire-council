@@ -26,6 +26,7 @@ class Chart {
         this.tableWrapper = node.querySelector('[data-table-wrapper]');
         this.chartWrapper = node.querySelector('[data-chart-wrapper]');
         this.hiddenClass = 'chart-block__wrapper--hidden';
+        this.inactiveClass = 'chart-block__link--inactive';
         // General text styles for legend, axis labels and axis titles
         this.textStyles = {
             color: '#212121',
@@ -80,12 +81,16 @@ class Chart {
     showChart() {
         this.tableWrapper.classList.add(this.hiddenClass);
         this.chartWrapper.classList.remove(this.hiddenClass);
+        this.toggleToChart.classList.add(this.inactiveClass);
+        this.toggleToTable.classList.remove(this.inactiveClass);
         this.highChart.reflow();
     }
 
     showTable() {
         this.tableWrapper.classList.remove(this.hiddenClass);
         this.chartWrapper.classList.add(this.hiddenClass);
+        this.toggleToChart.classList.remove(this.inactiveClass);
+        this.toggleToTable.classList.add(this.inactiveClass);
     }
 
     configureCommonOptions() {
