@@ -34,4 +34,12 @@ table {
             padding-right: 0;
         }
     }
+
+    td {
+        text-align: right;
+    }
+
+    th:not(:first-child) {
+        text-align: right;
+    }
 }
