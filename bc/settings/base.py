@@ -147,7 +147,6 @@ TEMPLATES = [
                 # This is a custom context processor that lets us add custom
                 # global variables to all the templates.
                 "bc.utils.context_processors.global_vars",
-                "bc.feedback.context_processors.feedback_forms",
             ],
             "builtins": ["pattern_library.loader_tags"],
         },
