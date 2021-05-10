@@ -15,10 +15,6 @@
         display: block;
 
         @include media-query(px550) {
-            margin-right: $grid;
-        }
-
-        @include media-query(tablet-landscape) {
             margin-right: $grid * 2;
         }
     }
@@ -143,6 +139,16 @@
         #{$root}__inner {
             flex-wrap: wrap;
             justify-content: flex-start;
+        }
+
+        #{$root}__home-link {
+            @include media-query(px550) {
+                margin-right: $grid;
+            }
+
+            @include media-query(tablet-landscape) {
+                margin-right: $grid * 2;
+            }
         }
 
         #{$root}__heading {
