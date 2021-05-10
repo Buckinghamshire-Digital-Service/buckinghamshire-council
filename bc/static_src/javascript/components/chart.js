@@ -126,12 +126,23 @@ class Chart {
                     enabled: false,
                     crop: false,
                     overflow: 'none',
-                    // hide the data label if the value is 0 or if the percentage width is less than 10
+                    // hide the data label if the value is 0
+                    // for column charts check if the height is less than 20 and hide the label if so
+                    // for horizontal bar charts check if the width is less than 50 and hide the label if so (note that the item to check is still called itemHeight)
                     // conditionally set the colour of the label based on the background colour
                     // disabling warnings because following highcharts recommended syntax
                     // eslint-disable-next-line consistent-return, object-shorthand, func-names
                     formatter: function() {
-                        if (this.y && this.percentage > 10) {
+                        let sizeComparitor = null;
+                        if (this.series.initialType === 'bar') {
+                            sizeComparitor = 50;
+                        } else {
+                            sizeComparitor = 20;
+                        }
+                        if (
+                            this.y &&
+                            this.point.shapeArgs.height > sizeComparitor
+                        ) {
                             let labelColour = 'white';
                             if (
                                 this.color === '#fcbc00' ||
