@@ -83,6 +83,8 @@ class Chart {
         this.chartWrapper.classList.remove(this.hiddenClass);
         this.toggleToChart.classList.add(this.inactiveClass);
         this.toggleToTable.classList.remove(this.inactiveClass);
+        this.toggleToChart.setAttribute('aria-hidden', 'true');
+        this.toggleToTable.setAttribute('aria-hidden', 'false');
         this.highChart.reflow();
     }
 
@@ -91,6 +93,8 @@ class Chart {
         this.chartWrapper.classList.add(this.hiddenClass);
         this.toggleToChart.classList.remove(this.inactiveClass);
         this.toggleToTable.classList.add(this.inactiveClass);
+        this.toggleToChart.setAttribute('aria-hidden', 'false');
+        this.toggleToTable.setAttribute('aria-hidden', 'true');
     }
 
     configureCommonOptions() {

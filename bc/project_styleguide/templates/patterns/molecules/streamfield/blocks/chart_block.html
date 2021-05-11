@@ -9,8 +9,8 @@
     </h2>
 
     <div class="chart-block__link-wrapper">
-        <button class="button button--link chart-block__link {% if table_first%}chart-block__link--inactive{% endif %}" data-to-table>Table</button>
-        <button class="button button--link chart-block__link {% if not table_first%}chart-block__link--inactive{% endif %}" data-to-chart>Chart</button>
+        <button aria-label="Display as table" class="button button--link chart-block__link {% if table_first%}chart-block__link--inactive{% endif %}" {% if table_first%}aria-hidden="true"{% endif %} data-to-table>Table</button>
+        <button aria-label="Display as chart" class="button button--link chart-block__link {% if not table_first%}chart-block__link--inactive{% endif %}" {% if not table_first%}aria-hidden="true"{% endif %} data-to-chart>Chart</button>
     </div>
 
     <div
