@@ -27,6 +27,10 @@ class UsefulnessFeedbackReportView(report_views.ReportView):
     title = "Usefulness feedback"
     header_icon = "help"
     template_name = "patterns/pages/reports/usefulness_feedback_report.html"
+    list_export = ["created", "page.title", "useful"]
+    export_headings = {
+        "page.title": "Page"
+    }
 
     def get_queryset(self):
         return UsefulnessFeedback.objects.all().order_by("-created")
