@@ -3,11 +3,23 @@ from django.views import generic
 
 from wagtail.admin.views import reports as report_views
 
-from bc.feedback.forms import UsefulnessFeedbackForm
-from bc.feedback.models import UsefulnessFeedback
+from bc.feedback.forms import FeedbackCommentForm, UsefulnessFeedbackForm
+from bc.feedback.models import FeedbackComment, UsefulnessFeedback
 
 
 class UsefulnessFeedbackCreateView(generic.CreateView):
+    """
+    Create UsefulnessFeedback from form submission.
+
+    The forms are pre-populated with either positive or negative feedback. The user
+    only submits one of the two forms displayed.
+
+    The current implementation still contains a success redirect. This allows these
+    feedback forms to be directly submitted without the need to be handled through JS.
+    This follows the idea of progressive enhancement.
+
+    """
+
     model = UsefulnessFeedback
     form_class = UsefulnessFeedbackForm
     http_method_names = ["post"]
@@ -34,3 +46,9 @@ class UsefulnessFeedbackReportView(report_views.ReportView):
 
     def get_queryset(self):
         return UsefulnessFeedback.objects.all().order_by("-created")
+
+
+class FeedbackCommentCreateView(generic.CreateView):
+    model = FeedbackComment
+    form_class = FeedbackCommentForm
+    http_method_names = ["post"]

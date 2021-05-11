@@ -1,6 +1,6 @@
 from django import template
 
-from bc.feedback.forms import UsefulnessFeedbackForm
+from bc.feedback.forms import FeedbackCommentForm, UsefulnessFeedbackForm
 
 register = template.Library()
 
@@ -20,6 +20,9 @@ def feedback_widget(context):
         })
         extra_context["no_form"] = UsefulnessFeedbackForm(initial={
             "useful": False,
+            "page": page,
+        })
+        extra_context["comment_form"] = FeedbackCommentForm(initial={
             "page": page,
         })
 

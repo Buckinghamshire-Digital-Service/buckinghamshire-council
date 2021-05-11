@@ -24,4 +24,11 @@
         <button type="submit">NO</button>
     </form>
 </p>
+<p>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ comment_form }}
+        <button type="submit">Submit</button>
+    </form>
+</p>
 {% endif %}

@@ -13,10 +13,9 @@ class TestUsefulnessFeedbackCreateView(test.TestCase):
         self.client = test.Client()
         self.url = urls.reverse("feedback:create_usefulness_feedback")
 
+    def create_info_page(self):
         self.default_site = wagtail_models.Site.objects.get(is_default_site=True)
         self.root_page = self.default_site.root_page
-
-    def create_info_page(self):
         self.info_page = InformationPageFactory.build()
         self.root_page.add_child(instance=self.info_page)
 
@@ -65,3 +64,14 @@ class TestUsefulnessFeedbackCreateView(test.TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertEqual(UsefulnessFeedback.objects.count(), 1)
+
+
+class TestFeedbackCommentCreateView(test.TestCase):
+    def setUp(self):
+        self.client = test.Client()
+        self.url = urls.reverse("feedback:feedback_comment_create")
+
+    def test_get_fails(self):
+        response = self.client.get(self.url)
+
+        self.assertEqual(response.status_code, HTTPStatus.METHOD_NOT_ALLOWED)

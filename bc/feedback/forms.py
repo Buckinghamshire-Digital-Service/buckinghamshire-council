@@ -1,6 +1,6 @@
 from django import forms
 
-from bc.feedback.models import UsefulnessFeedback
+from bc.feedback.models import FeedbackComment, UsefulnessFeedback
 
 
 class UsefulnessFeedbackForm(forms.ModelForm):
@@ -13,4 +13,13 @@ class UsefulnessFeedbackForm(forms.ModelForm):
         widgets = {
             "page": forms.HiddenInput(),
             "useful": forms.HiddenInput(),
+        }
+
+
+class FeedbackCommentForm(forms.ModelForm):
+    class Meta:
+        model = FeedbackComment
+        fields = ("page", "action", "issue")
+        widgets = {
+            "page": forms.HiddenInput(),
         }
