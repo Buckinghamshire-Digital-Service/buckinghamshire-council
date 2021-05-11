@@ -4,6 +4,7 @@ from django import test, urls
 
 from wagtail.core import models as wagtail_models
 
+from bc.feedback.models import UsefulnessFeedback
 from bc.standardpages.tests.fixtures import InformationPageFactory
 
 
@@ -51,3 +52,16 @@ class TestUsefulnessFeedbackCreateView(test.TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertContains(response, "Thank you for your feedback")
+
+    def test_post_creates_entry_in_db(self):
+        self.create_info_page()
+        payload = {
+            "page": self.info_page.id,
+            "useful": True,
+        }
+        self.assertEqual(UsefulnessFeedback.objects.count(), 0)
+
+        response = self.client.post(self.url, data=payload, follow=True)
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertEqual(UsefulnessFeedback.objects.count(), 1)
