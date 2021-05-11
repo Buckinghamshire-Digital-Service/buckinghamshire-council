@@ -191,7 +191,10 @@ class Chart {
             if (this.dataForForm.chart_caption) {
                 this.chartCaption.prop('value', this.dataForForm.chart_caption);
             }
-            if (this.dataForForm.table_first) {
+            if (this.dataForForm.table_first !== undefined) {
+                // remove the checked attribute set by default in the html if we
+                // have a value for it in the saved data
+                this.tableFirst.removeAttr('checked');
                 this.tableFirst.attr('checked', this.dataForForm.table_first);
             }
             if (this.dataForForm.table_title) {

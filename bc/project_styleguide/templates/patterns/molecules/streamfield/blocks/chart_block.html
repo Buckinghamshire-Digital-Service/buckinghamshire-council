@@ -8,11 +8,15 @@
         {% if title %}{{ title }}{% else %}{{ default_title }}{% endif %}
     </h2>
 
+    <div class="chart-block__link-wrapper">
+        <button aria-label="Display as table" class="button button--link chart-block__link {% if table_first%}chart-block__link--inactive{% endif %}" {% if table_first%}aria-hidden="true"{% endif %} data-to-table>Table</button>
+        <button aria-label="Display as chart" class="button button--link chart-block__link {% if not table_first%}chart-block__link--inactive{% endif %}" {% if not table_first%}aria-hidden="true"{% endif %} data-to-chart>Chart</button>
+    </div>
+
     <div
         class="chart-block__wrapper {% if not table_first%}chart-block__wrapper--hidden{% endif %}"
         data-table-wrapper="{{ id }}"
     >
-        <button class="button button--link chart-block__link" data-to-chart>Display as a chart</button>
         <div class="table-container">
             <table class="chart-block__table">
                 {% if caption %}
@@ -66,7 +70,6 @@
         class="chart-block__wrapper {% if table_first%}chart-block__wrapper--hidden{% endif %}"
         data-chart-wrapper="{{ id }}"
     >
-        <button class="button button--link chart-block__link" data-to-table>Display as a table</button>
         <div class="chart-block__chart" data-chart="{{ id }}" id="chart-container-{{ id }}"></div>
         {% if caption %}
             <p class="chart-block__caption chart-block__caption--on-p">{{ caption }}</p>

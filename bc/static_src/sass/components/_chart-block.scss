@@ -28,8 +28,28 @@
         margin-bottom: 0;
     }
 
+    &__link-wrapper {
+        float: right;
+    }
+
     &__link {
         margin-top: 0; // override of button--link styling
+
+        &--inactive {
+            color: $color--default;
+            text-decoration: none;
+            pointer-events: none;
+        }
+
+        &:first-child::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 1.2em;
+            border-right: 1px solid $color--default;
+            padding-right: 0.5em;
+            margin-right: 0.3em;
+        }
     }
 
     &__caption {

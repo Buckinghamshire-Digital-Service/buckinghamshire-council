@@ -26,6 +26,7 @@ class Chart {
         this.tableWrapper = node.querySelector('[data-table-wrapper]');
         this.chartWrapper = node.querySelector('[data-chart-wrapper]');
         this.hiddenClass = 'chart-block__wrapper--hidden';
+        this.inactiveClass = 'chart-block__link--inactive';
         // General text styles for legend, axis labels and axis titles
         this.textStyles = {
             color: '#212121',
@@ -80,12 +81,20 @@ class Chart {
     showChart() {
         this.tableWrapper.classList.add(this.hiddenClass);
         this.chartWrapper.classList.remove(this.hiddenClass);
+        this.toggleToChart.classList.add(this.inactiveClass);
+        this.toggleToTable.classList.remove(this.inactiveClass);
+        this.toggleToChart.setAttribute('aria-hidden', 'true');
+        this.toggleToTable.setAttribute('aria-hidden', 'false');
         this.highChart.reflow();
     }
 
     showTable() {
         this.tableWrapper.classList.remove(this.hiddenClass);
         this.chartWrapper.classList.add(this.hiddenClass);
+        this.toggleToChart.classList.remove(this.inactiveClass);
+        this.toggleToTable.classList.add(this.inactiveClass);
+        this.toggleToChart.setAttribute('aria-hidden', 'false');
+        this.toggleToTable.setAttribute('aria-hidden', 'true');
     }
 
     configureCommonOptions() {
@@ -121,12 +130,23 @@ class Chart {
                     enabled: false,
                     crop: false,
                     overflow: 'none',
-                    // hide the data label if the value is 0 or if the percentage width is less than 10
+                    // hide the data label if the value is 0
+                    // for column charts check if the height is less than 20 and hide the label if so
+                    // for horizontal bar charts check if the width is less than 50 and hide the label if so (note that the item to check is still called itemHeight)
                     // conditionally set the colour of the label based on the background colour
                     // disabling warnings because following highcharts recommended syntax
                     // eslint-disable-next-line consistent-return, object-shorthand, func-names
                     formatter: function() {
-                        if (this.y && this.percentage > 10) {
+                        let sizeComparitor = null;
+                        if (this.series.initialType === 'bar') {
+                            sizeComparitor = 50;
+                        } else {
+                            sizeComparitor = 20;
+                        }
+                        if (
+                            this.y &&
+                            this.point.shapeArgs.height > sizeComparitor
+                        ) {
                             let labelColour = 'white';
                             if (
                                 this.color === '#fcbc00' ||

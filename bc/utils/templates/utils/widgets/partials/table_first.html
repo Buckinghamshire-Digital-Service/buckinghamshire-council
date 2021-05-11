@@ -3,7 +3,11 @@
     <label for="{{ widget.attrs.id }}-handsontable-show-table-first">{% trans "Show table first" %}</label>
     <div class="field-content">
         <div class="input">
-            <input type="checkbox" id="{{ widget.attrs.id }}-handsontable-show-table-first" name="handsontable-show-table-first"/>
+            <input
+                type="checkbox"
+                id="{{ widget.attrs.id }}-handsontable-show-table-first" name="handsontable-show-table-first"
+                checked="checked"
+            />
         </div>
         <p class="help">{% trans "If enabled, the table will be displayed, and the chart can be shown by clicking a link. If disabled, the chart will be displayed first" %}</p>
     </div>
