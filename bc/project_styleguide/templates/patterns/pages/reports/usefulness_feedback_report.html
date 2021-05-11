@@ -1,0 +1,31 @@
+{% extends "wagtailadmin/reports/base_report.html" %}
+
+{% block results %}
+<div id="page-results">
+    <table class="listing">
+        <colgroup>
+            <col width="20%">
+            <col>
+            <col width="20%">
+        </colgroup>
+        <thead>
+            <th>Created</th>
+            <th>Page</th>
+            <th>Useful</th>
+        </thead>
+        <tbody>
+            {% for feedback in page_obj %}
+                <tr>
+                    <td>{{ feedback.created }}</td>
+                    <td>{{ feedback.page.title }}</td>
+                    <td>{{ feedback.useful|yesno|upper }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock results %}
+
+{% block no_results %}
+    <p>No feedback received yet.</p>
+{% endblock no_results %}
