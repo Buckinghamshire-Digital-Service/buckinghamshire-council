@@ -9,4 +9,11 @@
         </div>
     </div>
 </div>
-{{ usefulness_feedback_form }}
+{% if yes_form and no_form%}
+    <p>
+        {{ yes_form }}
+    </p>
+    <p>
+        {{ no_form }}
+    </p>
+{% endif %}
