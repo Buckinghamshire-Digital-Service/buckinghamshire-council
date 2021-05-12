@@ -2,7 +2,8 @@
 
 ## Unreleased
 
-- Update CI config to use the cache to store artefacts;:
+- Update CI config to use the cache to store artefacts
+- Upgrade Wagtail to version 2.13
 
 ## 35.0 (2021-02-18)
 
