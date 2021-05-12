@@ -41,9 +41,10 @@ class UsefulnessFeedbackReportView(report_views.ReportView):
     title = "Usefulness feedback"
     header_icon = "help"
     template_name = "patterns/pages/reports/usefulness_feedback_report.html"
-    list_export = ["created", "page.title", "useful"]
+    list_export = ["created", "page.title", "page.url", "useful"]
     export_headings = {
-        "page.title": "Page"
+        "page.title": "Page",
+        "page.url": "URL"
     }
 
     def get_queryset(self):

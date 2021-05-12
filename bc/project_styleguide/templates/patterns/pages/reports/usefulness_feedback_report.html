@@ -4,13 +4,15 @@
 <div id="page-results">
     <table class="listing">
         <colgroup>
-            <col width="20%">
-            <col>
-            <col width="20%">
+            <col width="15%">
+            <col width="30%">
+            <col width="30%">
+            <col width="15%">
         </colgroup>
         <thead>
             <th>Created</th>
             <th>Page</th>
+            <th>URL</th>
             <th>Useful</th>
         </thead>
         <tbody>
@@ -18,6 +20,7 @@
                 <tr>
                     <td>{{ feedback.created }}</td>
                     <td>{{ feedback.page.title }}</td>
+                    <td>{{ feedback.page.url }}</td>
                     <td>{{ feedback.useful|yesno|upper }}</td>
                 </tr>
             {% endfor %}
