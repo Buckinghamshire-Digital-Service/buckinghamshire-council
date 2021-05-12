@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Update CI config to use the cache to store artefacts;:
+- Use the newly released django-gov-notify library for GOV.UK Notify integration
 
 ## 35.0 (2021-02-18)
 
