@@ -51,6 +51,19 @@ class UsefulnessFeedbackReportView(report_views.ReportView):
 
 
 class FeedbackCommentCreateView(generic.CreateView):
+    """
+    Create FeedbackComment from posted forms.
+
+    The forms is not visible by default and only revealed through a previous action
+    (i.e. submitting a negative UsefulnessFeedbackForm). A redirect to a thank you page
+    is not necessary, as the thank you message is meant to be displayed through JS.
+
+    Progressive enhancement is not possible as simply as in the usefulness feedback
+    case. That is because the form is only supposed to be revealed through JS.
+
+    Because of the above, JsonResponse objects are used to respond to form submissions.
+
+    """
     model = FeedbackComment
     form_class = FeedbackCommentForm
     http_method_names = ["post"]
@@ -58,3 +71,13 @@ class FeedbackCommentCreateView(generic.CreateView):
     def form_valid(self, form):
         form.save()
         return http.JsonResponse(data={}, status=HTTPStatus.OK)
+
+    def form_invalid(self, form):
+        data = {
+            "form": {
+                "data": dict(form.data),
+                "errors": dict(form.errors),
+                "non_field_errors": form.non_field_errors(),
+            }
+        }
+        return http.JsonResponse(data=data, status=HTTPStatus.BAD_REQUEST)

@@ -91,3 +91,27 @@ class TestFeedbackCommentCreateView(CreateInfoPageMixin, test.TestCase):
         self.assertEqual(feedback_comment.action, payload["action"])
         self.assertEqual(feedback_comment.issue, payload["issue"])
         self.assertEqual(feedback_comment.page.id, self.info_page.id)
+
+    def test_post_empty_action(self):
+        payload = {
+            "page": self.info_page.id,
+            "action": "",
+            "issue": "Something went wrong.",
+        }
+
+        response = self.client.post(self.url, data=payload)
+
+        self.assertEqual(response.status_code, HTTPStatus.BAD_REQUEST)
+        self.assertIn("action", response.json()["form"]["errors"])
+
+    def test_post_too_long_action(self):
+        payload = {
+            "page": self.info_page.id,
+            "action": "A" * 501,
+            "issue": "Something went wrong.",
+        }
+
+        response = self.client.post(self.url, data=payload)
+
+        self.assertEqual(response.status_code, HTTPStatus.BAD_REQUEST)
+        self.assertIn("action", response.json()["form"]["errors"])
