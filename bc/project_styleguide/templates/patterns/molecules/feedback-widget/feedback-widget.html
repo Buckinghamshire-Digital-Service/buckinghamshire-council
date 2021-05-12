@@ -25,7 +25,7 @@
     </form>
 </p>
 <p>
-    <form action="" method="post">
+    <form action="{% url 'feedback:feedback_comment_create' %}" method="post">
         {% csrf_token %}
         {{ comment_form }}
         <button type="submit">Submit</button>
