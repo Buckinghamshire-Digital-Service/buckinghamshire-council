@@ -11,7 +11,7 @@ from bc.standardpages.tests.fixtures import InformationPageFactory
 class TestUsefulnessFeedbackCreateView(test.TestCase):
     def setUp(self):
         self.client = test.Client()
-        self.url = urls.reverse("feedback:create_usefulness_feedback")
+        self.url = urls.reverse("feedback:usefulness_feedback_create")
 
     def create_info_page(self):
         self.default_site = wagtail_models.Site.objects.get(is_default_site=True)

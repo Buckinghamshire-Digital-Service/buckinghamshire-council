@@ -11,14 +11,14 @@
     </div>
 </div>
 <p>
-    <form action="{% url "feedback:create_usefulness_feedback" %}" method="post">
+    <form action="{% url 'feedback:usefulness_feedback_create' %}" method="post">
         {% csrf_token %}
         {{ yes_form }}
         <button type="submit">YES</button>
     </form>
 </p>
 <p>
-    <form action="{% url "feedback:create_usefulness_feedback" %}" method="post">
+    <form action="{% url 'feedback:usefulness_feedback_create' %}" method="post">
         {% csrf_token %}
         {{ no_form }}
         <button type="submit">NO</button>

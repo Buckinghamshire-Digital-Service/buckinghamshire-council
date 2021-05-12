@@ -12,7 +12,7 @@ urlpatterns = [
     path(
         "submit-usefulness-feedback/",
         UsefulnessFeedbackCreateView.as_view(),
-        name="create_usefulness_feedback",
+        name="usefulness_feedback_create",
     ),
     path(
         "submit-comment/",
