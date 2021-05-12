@@ -44,7 +44,7 @@ class UsefulnessFeedbackReportView(report_views.ReportView):
     list_export = ["created", "page.title", "page.url", "useful"]
     export_headings = {
         "page.title": "Page",
-        "page.url": "URL"
+        "page.url": "URL",
     }
 
     def get_queryset(self):
@@ -82,3 +82,17 @@ class FeedbackCommentCreateView(generic.CreateView):
             }
         }
         return http.JsonResponse(data=data, status=HTTPStatus.BAD_REQUEST)
+
+
+class FeedbackCommentReportView(report_views.ReportView):
+    title = "Feedback comments"
+    header_icon = "edit"
+    template_name = "patterns/pages/reports/feedback_comment_report.html"
+    list_export = ["created", "page.title", "page.url", "action", "issue"]
+    export_headings = {
+        "page.title": "Page",
+        "page.url": "URL",
+    }
+
+    def get_queryset(self):
+        return FeedbackComment.objects.all().order_by("-created")
