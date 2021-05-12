@@ -9,17 +9,32 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('wagtailcore', '0060_fix_workflow_unique_constraint'),
+        ("wagtailcore", "0060_fix_workflow_unique_constraint"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='UsefulnessFeedback',
+            name="UsefulnessFeedback",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('useful', models.BooleanField()),
-                ('page', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='usefulness_feedback', to='wagtailcore.Page')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("useful", models.BooleanField()),
+                (
+                    "page",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="usefulness_feedback",
+                        to="wagtailcore.Page",
+                    ),
+                ),
             ],
         ),
     ]

@@ -6,24 +6,19 @@ register = template.Library()
 
 
 @register.inclusion_tag(
-    "patterns/molecules/feedback-widget/feedback-widget.html",
-    takes_context=True
+    "patterns/molecules/feedback-widget/feedback-widget.html", takes_context=True
 )
 def feedback_widget(context):
     page = context.get("page")
     extra_context = {}
 
     if page:
-        extra_context["yes_form"] = UsefulnessFeedbackForm(initial={
-            "useful": True,
-            "page": page,
-        })
-        extra_context["no_form"] = UsefulnessFeedbackForm(initial={
-            "useful": False,
-            "page": page,
-        })
-        extra_context["comment_form"] = FeedbackCommentForm(initial={
-            "page": page,
-        })
+        extra_context["yes_form"] = UsefulnessFeedbackForm(
+            initial={"useful": True, "page": page}
+        )
+        extra_context["no_form"] = UsefulnessFeedbackForm(
+            initial={"useful": False, "page": page}
+        )
+        extra_context["comment_form"] = FeedbackCommentForm(initial={"page": page})
 
     return extra_context

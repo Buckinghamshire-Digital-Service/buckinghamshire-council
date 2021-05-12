@@ -7,19 +7,42 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wagtailcore', '0060_fix_workflow_unique_constraint'),
-        ('feedback', '0001_initial'),
+        ("wagtailcore", "0060_fix_workflow_unique_constraint"),
+        ("feedback", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='FeedbackComment',
+            name="FeedbackComment",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('action', models.CharField(max_length=500, verbose_name='What where you doing?')),
-                ('issue', models.CharField(max_length=500, verbose_name='What went wrong?')),
-                ('page', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='feedback_comments', to='wagtailcore.Page')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                (
+                    "action",
+                    models.CharField(
+                        max_length=500, verbose_name="What where you doing?"
+                    ),
+                ),
+                (
+                    "issue",
+                    models.CharField(max_length=500, verbose_name="What went wrong?"),
+                ),
+                (
+                    "page",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="feedback_comments",
+                        to="wagtailcore.Page",
+                    ),
+                ),
             ],
         ),
     ]

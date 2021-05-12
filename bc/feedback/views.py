@@ -65,6 +65,7 @@ class FeedbackCommentCreateView(generic.CreateView):
     Because of the above, JsonResponse objects are used to respond to form submissions.
 
     """
+
     model = FeedbackComment
     form_class = FeedbackCommentForm
     http_method_names = ["post"]

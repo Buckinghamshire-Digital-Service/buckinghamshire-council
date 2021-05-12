@@ -11,18 +11,18 @@ def register_usefulness_feedback_report_menu_item():
     return menu.MenuItem(
         UsefulnessFeedbackReportView.title,
         urls.reverse("usefuleness_feedback_report"),
-        classnames='icon icon-' + UsefulnessFeedbackReportView.header_icon,
+        classnames="icon icon-" + UsefulnessFeedbackReportView.header_icon,
         order=300,
     )
 
 
-@hooks.register('register_admin_urls')
+@hooks.register("register_admin_urls")
 def register_usefulness_feedback_report_url():
     return [
         urls.path(
-            'reports/usefulness-feedback/',
+            "reports/usefulness-feedback/",
             UsefulnessFeedbackReportView.as_view(),
-            name="usefuleness_feedback_report"
+            name="usefuleness_feedback_report",
         ),
     ]
 
@@ -32,17 +32,17 @@ def register_feedback_comment_report_menu_item():
     return menu.MenuItem(
         FeedbackCommentReportView.title,
         urls.reverse("feedback_comment_report"),
-        classnames='icon icon-' + FeedbackCommentReportView.header_icon,
+        classnames="icon icon-" + FeedbackCommentReportView.header_icon,
         order=400,
     )
 
 
-@hooks.register('register_admin_urls')
+@hooks.register("register_admin_urls")
 def register_feedback_comment_report_url():
     return [
         urls.path(
-            'reports/feedback-comments/',
+            "reports/feedback-comments/",
             FeedbackCommentReportView.as_view(),
-            name="feedback_comment_report"
+            name="feedback_comment_report",
         ),
     ]
