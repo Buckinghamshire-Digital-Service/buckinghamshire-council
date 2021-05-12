@@ -4,22 +4,23 @@ from django import test, urls
 
 from wagtail.core import models as wagtail_models
 
-from bc.feedback.models import UsefulnessFeedback
+from bc.feedback.models import FeedbackComment, UsefulnessFeedback
 from bc.standardpages.tests.fixtures import InformationPageFactory
 
 
-class TestUsefulnessFeedbackCreateView(test.TestCase):
+class CreateInfoPageMixin:
+    @classmethod
+    def setUpTestData(cls):
+        cls.default_site = wagtail_models.Site.objects.get(is_default_site=True)
+        cls.root_page = cls.default_site.root_page
+        cls.info_page = InformationPageFactory.build()
+        cls.root_page.add_child(instance=cls.info_page)
+
+
+class TestUsefulnessFeedbackCreateView(CreateInfoPageMixin, test.TestCase):
     def setUp(self):
         self.client = test.Client()
         self.url = urls.reverse("feedback:usefulness_feedback_create")
-
-    def create_info_page(self):
-        self.default_site = wagtail_models.Site.objects.get(is_default_site=True)
-        self.root_page = self.default_site.root_page
-        self.info_page = InformationPageFactory.build()
-        self.root_page.add_child(instance=self.info_page)
-
-        self.assertIsNotNone(self.info_page.id)
 
     def test_get_fails(self):
         response = self.client.get(self.url)
@@ -41,7 +42,6 @@ class TestUsefulnessFeedbackCreateView(test.TestCase):
         form and have a somewhat logical behaviour.
 
         """
-        self.create_info_page()
         payload = {
             "page": self.info_page.id,
             "useful": True,
@@ -53,7 +53,6 @@ class TestUsefulnessFeedbackCreateView(test.TestCase):
         self.assertContains(response, "Thank you for your feedback")
 
     def test_post_creates_entry_in_db(self):
-        self.create_info_page()
         payload = {
             "page": self.info_page.id,
             "useful": True,
@@ -66,7 +65,7 @@ class TestUsefulnessFeedbackCreateView(test.TestCase):
         self.assertEqual(UsefulnessFeedback.objects.count(), 1)
 
 
-class TestFeedbackCommentCreateView(test.TestCase):
+class TestFeedbackCommentCreateView(CreateInfoPageMixin, test.TestCase):
     def setUp(self):
         self.client = test.Client()
         self.url = urls.reverse("feedback:feedback_comment_create")
@@ -75,3 +74,20 @@ class TestFeedbackCommentCreateView(test.TestCase):
         response = self.client.get(self.url)
 
         self.assertEqual(response.status_code, HTTPStatus.METHOD_NOT_ALLOWED)
+
+    def test_post_valid_data(self):
+        payload = {
+            "page": self.info_page.id,
+            "action": "I was trying something.",
+            "issue": "Something went wrong.",
+        }
+        self.assertEqual(FeedbackComment.objects.count(), 0)
+
+        response = self.client.post(self.url, data=payload)
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertEqual(FeedbackComment.objects.count(), 1)
+        feedback_comment = FeedbackComment.objects.last()
+        self.assertEqual(feedback_comment.action, payload["action"])
+        self.assertEqual(feedback_comment.issue, payload["issue"])
+        self.assertEqual(feedback_comment.page.id, self.info_page.id)

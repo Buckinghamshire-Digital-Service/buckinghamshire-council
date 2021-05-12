@@ -1,3 +1,5 @@
+from http import HTTPStatus
+
 from django import http, urls
 from django.views import generic
 
@@ -52,3 +54,7 @@ class FeedbackCommentCreateView(generic.CreateView):
     model = FeedbackComment
     form_class = FeedbackCommentForm
     http_method_names = ["post"]
+
+    def form_valid(self, form):
+        form.save()
+        return http.JsonResponse(data={}, status=HTTPStatus.OK)
