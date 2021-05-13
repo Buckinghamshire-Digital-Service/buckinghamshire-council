@@ -31,3 +31,11 @@
         padding: 0;
     }
 }
+
+.feedback-form {
+    display: none;
+
+    &.active {
+        display: block;
+    }
+}

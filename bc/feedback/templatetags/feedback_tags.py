@@ -20,5 +20,6 @@ def feedback_widget(context):
             initial={"useful": False, "page": page}
         )
         extra_context["comment_form"] = FeedbackCommentForm(initial={"page": page})
+        extra_context["site_name"] = page.get_site().site_name
 
     return extra_context

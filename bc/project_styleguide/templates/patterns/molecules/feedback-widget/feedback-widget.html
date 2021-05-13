@@ -1,7 +1,7 @@
 {% load wagtailcore_tags %}
 
-{% if yes_form and no_form%}
-<div class="feedback-widget active" data-feedback-widget>
+{% if yes_form and no_form %}
+{% comment %} <div class="feedback-widget active" data-feedback-widget>
     <div class="feedback-widget__content wrapper wrapper--large">
         <h4 class="feedback-widget__heading heading" data-feedback-heading>Is this page useful?</h4>
         <div class="feedback-widget__buttons">
@@ -9,26 +9,35 @@
             <button class="feedback-widget__link" id="page-feedback-no" aria-label="Feedback - No this page isn't useful" data-feedback-button type="submit">No</button>
         </div>
     </div>
-</div>
-<p>
-    <form action="{% url 'feedback:usefulness_feedback_create' %}" method="post">
-        {% csrf_token %}
-        {{ yes_form }}
-        <button type="submit">YES</button>
-    </form>
-</p>
-<p>
-    <form action="{% url 'feedback:usefulness_feedback_create' %}" method="post">
-        {% csrf_token %}
-        {{ no_form }}
-        <button type="submit">NO</button>
-    </form>
-</p>
-<p>
-    <form action="{% url 'feedback:feedback_comment_create' %}" method="post">
-        {% csrf_token %}
-        {{ comment_form }}
-        <button type="submit">Submit</button>
-    </form>
-</p>
+</div> {% endcomment %}
+    <div class="feedback-widget active" data-feedback-widget>
+        <div class="feedback-widget__content wrapper wrapper--large">
+            <h4 class="feedback-widget__heading heading" data-feedback-heading>Is this page useful?</h4>
+            <div class="feedback-widget__buttons">
+                <form action="{% url 'feedback:usefulness_feedback_create' %}" method="post" data-yes-form>
+                    {% csrf_token %}
+                    {{ yes_form }}
+                    <button class="feedback-widget__link" id="page-feedback-yes" aria-label="Feedback - yes this page is useful" type="submit">Yes</button>
+                </form>
+
+                <form action="{% url 'feedback:usefulness_feedback_create' %}" method="post" data-no-form>
+                    {% csrf_token %}
+                    {{ no_form }}
+                    <button class="feedback-widget__link" id="page-feedback-no" aria-label="Feedback - No this page isn't useful" type="submit">No</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="feedback-form" aria-hidden="true" data-extra-feedback-block id="extra-feedback-block">
+            <button aria-controls="extra-feedback-block" data-close-form>Close</button>
+            <h2>Help us improve {{ site_name }}</h2>
+            <form action="{% url 'feedback:feedback_comment_create' %}" method="post" data-extra-feedback-form >
+                {% csrf_token %}
+                {% for field in comment_form %}
+                    {% include "patterns/molecules/form_field.html" %}
+                {% endfor %}
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
 {% endif %}
