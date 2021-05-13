@@ -28,8 +28,9 @@ class FeedbackWidget {
     sendFormData(url, data, form) {
         const XHR = new XMLHttpRequest();
         XHR.addEventListener('error', () => {
+            this.setResponseClasses();
             this.feedbackHeading.innerText =
-                'Something went wrong submitting your feedback. Please try again.';
+                'Something went wrong submitting your feedback. Please refresh the page and try again.';
         });
 
         XHR.addEventListener('load', () => {
