@@ -28,14 +28,13 @@ class FeedbackWidget {
     sendFormData(url, data, form) {
         const XHR = new XMLHttpRequest();
         XHR.addEventListener('error', () => {
-            this.widget.classList.remove('active');
             this.feedbackHeading.innerText =
                 'Something went wrong submitting your feedback. Please try again.';
         });
 
         XHR.addEventListener('load', () => {
-            this.widget.classList.remove('active');
             if (form === 'yes') {
+                this.setResponseClasses();
                 this.feedbackHeading.innerText = 'Thank you for your feedback!';
             } else if (form === 'no') {
                 this.feedbackHeading.innerText = '';
@@ -51,13 +50,22 @@ class FeedbackWidget {
         XHR.send(data);
     }
 
+    setResponseClasses() {
+        this.widget.classList.remove('show-yes-no', 'show-feedback-form');
+    }
+
+    setFeedbackFormClasses() {
+        this.widget.classList.remove('show-yes-no');
+        this.widget.classList.add('show-feedback-form');
+    }
+
     showFeedbackForm() {
-        this.extraFeedbackBlock.classList.add('active');
+        this.setFeedbackFormClasses();
         this.extraFeedbackBlock.setAttribute('aria-hidden', false);
     }
 
     hideFeedbackForm() {
-        this.extraFeedbackBlock.classList.remove('active');
+        this.setResponseClasses();
         this.extraFeedbackBlock.setAttribute('aria-hidden', true);
         this.feedbackHeading.innerText = 'Thank you for your feedback!';
     }

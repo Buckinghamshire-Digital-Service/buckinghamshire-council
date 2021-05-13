@@ -5,11 +5,23 @@
     display: block;
     position: relative;
     width: 100%;
+    border-bottom: 1px solid $color--white;
+    padding: 25px;
+
+    &.show-feedback-form {
+        background-color: $color--white;
+        border-top: 10px solid $color--sky;
+        padding: 30px 0 25px;
+    }
 
     &__content {
         color: $color--white;
         display: flex;
-        padding: ($grid / 2) 0;
+        align-items: center;
+
+        .show-feedback-form & {
+            display: none;
+        }
     }
 
     &__heading {
@@ -19,23 +31,42 @@
     &__buttons {
         display: none;
 
-        .active & {
+        .show-yes-no & {
             display: block;
         }
     }
 
-    &__link {
+    &__button-form {
+        display: inline-block;
+    }
+
+    &__button {
         color: $color--white;
-        margin-left: $grid;
-        text-decoration: underline;
-        padding: 0;
+        line-height: 1.2;
+        min-width: 100px;
+        margin-left: 20px;
+        padding: 9px 10px 6px;
+        border: 1px solid $color--white;
+        border-bottom-width: 3px;
+    }
+
+    &__feedback-block {
+        display: none;
+        position: relative;
+
+        .show-feedback-form & {
+            display: block;
+        }
     }
 }
 
-.feedback-form {
-    display: none;
+.feedback-block {
+    &__heading {
+        margin-top: 0;
+    }
 
-    &.active {
-        display: block;
+    &__close {
+        position: absolute;
+        right: 0;
     }
 }
