@@ -18,11 +18,14 @@ class FeedbackWidget {
         this.extraFeedbackForm = this.widget.querySelector(
             '[data-extra-feedback-form]',
         );
+        this.extraFeedbackFormAction = this.extraFeedbackForm.getAttribute(
+            'action',
+        );
         this.closeButton = this.widget.querySelector('[data-close-form]');
         this.bindEvents();
     }
 
-    sendFormData(url, data, isNoForm) {
+    sendFormData(url, data, form) {
         const XHR = new XMLHttpRequest();
         XHR.addEventListener('error', () => {
             this.widget.classList.remove('active');
@@ -32,12 +35,15 @@ class FeedbackWidget {
 
         XHR.addEventListener('load', () => {
             this.widget.classList.remove('active');
-            if (!isNoForm) {
+            if (form === 'yes') {
                 this.feedbackHeading.innerText = 'Thank you for your feedback!';
-            }
-            if (isNoForm) {
+            } else if (form === 'no') {
                 this.feedbackHeading.innerText = '';
                 this.showFeedbackForm();
+            } else {
+                // feedback form
+                this.hideFeedbackForm();
+                this.feedbackHeading.innerText = 'Thank you for your feedback!';
             }
         });
 
@@ -60,13 +66,22 @@ class FeedbackWidget {
         this.yesForm.addEventListener('submit', (event) => {
             event.preventDefault();
             const formData = new FormData(this.yesForm);
-            this.sendFormData(this.yesFormAction, formData);
+            this.sendFormData(this.yesFormAction, formData, 'yes');
         });
 
         this.noForm.addEventListener('submit', (event) => {
             event.preventDefault();
             const formData = new FormData(this.noForm);
-            this.sendFormData(this.noFormAction, formData, true);
+            this.sendFormData(this.noFormAction, formData, 'no');
+        });
+        this.extraFeedbackForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const formData = new FormData(this.extraFeedbackForm);
+            this.sendFormData(
+                this.extraFeedbackFormAction,
+                formData,
+                'feedback',
+            );
         });
         this.closeButton.addEventListener('click', () => {
             this.hideFeedbackForm();
