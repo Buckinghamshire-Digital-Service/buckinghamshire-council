@@ -13,7 +13,14 @@
                 >
                     {% csrf_token %}
                     {{ yes_form }}
-                    <button class="feedback-widget__button" id="page-feedback-yes" aria-label="Feedback - yes this page is useful" type="submit">Yes</button>
+                    <button
+                        class="feedback-widget__button"
+                        id="page-feedback-yes"
+                        aria-label="Feedback - yes this page is useful"
+                        type="submit"
+                    >
+                        Yes
+                    </button>
                 </form>
 
                 <form
@@ -24,13 +31,21 @@
                 >
                     {% csrf_token %}
                     {{ no_form }}
-                    <button class="feedback-widget__button" id="page-feedback-no" aria-label="Feedback - No this page isn't useful" type="submit">No</button>
+                    <button
+                        class="feedback-widget__button"
+                        id="page-feedback-no"
+                        aria-label="Feedback - No this page isn't useful"
+                        type="submit"
+                    >
+                        No
+                    </button>
                 </form>
             </div>
         </div>
 
         <div class="feedback-widget__feedback-block feedback-block" aria-hidden="true" data-extra-feedback-block id="extra-feedback-block">
             <button
+                aria-label="Close feedback form"
                 aria-controls="extra-feedback-block"
                 data-close-form
                 class="button feedback-block__close"
@@ -46,7 +61,13 @@
                 {% for field in comment_form %}
                     {% include "patterns/molecules/form_field.html" %}
                 {% endfor %}
-                <button type="submit" class="form__submit">Send</button>
+                <button
+                    type="submit"
+                    class="form__submit"
+                    aria-label="Send feedback"
+                >
+                    Send
+                </button>
             </form>
         </div>
     </div>
