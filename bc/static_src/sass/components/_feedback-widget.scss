@@ -1,3 +1,7 @@
+.feedback-widget-wrapper {
+    border-bottom: 10px solid $color--sky;
+}
+
 .feedback-widget {
     $root: &;
     background-color: $color--sky;
