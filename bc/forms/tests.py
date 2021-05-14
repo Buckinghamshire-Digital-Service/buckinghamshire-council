@@ -1,12 +1,18 @@
+import copy
+
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
+from wagtail.admin.edit_handlers import get_form_for_model
+
 from bc.forms.fixtures import LookupPageFactory, PostcodeLookupResponseFactory
+from bc.forms.forms import LookupPageForm
+from bc.forms.models import LookupPage
 from bc.home.models import HomePage
 from bc.standardpages.tests.fixtures import InformationPageFactory
 
 
-class PostcodeLookupResponseTests(TestCase):
+class PostcodeLookupResponseRequestTests(TestCase):
     def setUp(self):
         homepage = HomePage.objects.first()
         self.lookup_page = LookupPageFactory.build()
@@ -69,6 +75,53 @@ class PostcodeLookupResponseTests(TestCase):
         self.assertTrue(form.is_valid())
         self.assertEqual(form.cleaned_data["postcode"], "HP20 1UY")
 
+    def test_formatting_answer(self):
+        lookup_response = PostcodeLookupResponseFactory(
+            page=self.lookup_page,
+            link_page=self.another_page,
+            answer="The postcode {postcode} is what you submitted.",
+        )
+        lookup_response.queried_postcode = "HP20 1UY"
+        self.assertEqual(
+            lookup_response.format_answer(),
+            "The postcode HP20 1UY is what you submitted.",
+        )
+
+
+class PostcodeLookupResponseAdminTests(TestCase):
+    page_form_data = {
+        "form_heading": '{"blocks":[{"key":"1dnij","text":"Look up a postcode",'
+        '"type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],'
+        '"data":{}}],"entityMap":{}}',
+        "input_help_text": "Test",
+        "input_label": "Enter a postcode",
+        "no_match_message": "No match",
+        "responses-INITIAL_FORMS": "1",
+        "slug": "duplicate-postcodes-test-page",
+        "start_again_text": "Have another go, because this is so fun.",
+        "title": "Duplicate postcodes test page",
+    }
+
+    def setUp(self):
+        homepage = HomePage.objects.first()
+        self.lookup_page = LookupPageFactory.build()
+        homepage.add_child(instance=self.lookup_page)
+        self.another_page = InformationPageFactory.build()
+        homepage.add_child(instance=self.another_page)
+
+    @staticmethod
+    def response_data(*, i: int, postcodes: str, **kwargs: str) -> dict:
+        prefix = f"responses-{i}-"
+        data = {
+            "DELETE": kwargs.get("DELETE", ""),
+            "answer": kwargs.get("answer", "some answer"),
+            "id": "",
+            "link_button_text": "",
+            "link_page": "3",
+            "postcodes": postcodes,
+        }
+        return {prefix + key: value for key, value in data.items()}
+
     def test_postcodes_arrays_are_validated(self):
         lookup_response = PostcodeLookupResponseFactory(
             page=self.lookup_page, link_page=self.another_page, postcodes=["nothing"],
@@ -103,14 +156,85 @@ class PostcodeLookupResponseTests(TestCase):
         with self.assertRaises(ValidationError):
             lookup_response.clean_fields()
 
-    def test_formatting_answer(self):
-        lookup_response = PostcodeLookupResponseFactory(
-            page=self.lookup_page,
-            link_page=self.another_page,
-            answer="The postcode {postcode} is what you submitted.",
+    def test_detecting_duplicate_postcodes(self):
+        data = copy.deepcopy(self.page_form_data)
+        data.update(
+            {
+                **self.response_data(i=0, postcodes="W1A 1AA, SW1A 1AA, BX4 7SB"),
+                **self.response_data(
+                    i=1, postcodes="DH99 1NS, DE99 3GG, XM4 5HQ, W1A 1AA"
+                ),
+                "responses-TOTAL_FORMS": "2",
+            }
         )
-        lookup_response.queried_postcode = "HP20 1UY"
+
+        MyLookupPageForm = get_form_for_model(LookupPage, form_class=LookupPageForm)
+        form = MyLookupPageForm(data)
+        self.assertFalse(form.is_valid())
         self.assertEqual(
-            lookup_response.format_answer(),
-            "The postcode HP20 1UY is what you submitted.",
+            form.errors["__all__"],
+            ["The postcode W1A 1AA appears in multiple responses"],
         )
+
+    def test_detecting_multiple_duplicate_postcodes(self):
+        data = copy.deepcopy(self.page_form_data)
+        data.update(
+            {
+                **self.response_data(i=0, postcodes="W1A 1AA, SW1A 1AA, BX4 7SB"),
+                **self.response_data(
+                    i=1, postcodes="DH99 1NS, DE99 3GG, XM4 5HQ, SW1A 1AA, W1A 1AA"
+                ),
+                "responses-TOTAL_FORMS": "2",
+            }
+        )
+
+        MyLookupPageForm = get_form_for_model(LookupPage, form_class=LookupPageForm)
+        form = MyLookupPageForm(data)
+        self.assertFalse(form.is_valid())
+        self.assertIn(
+            form.errors["__all__"],
+            [
+                # We don't sort the error message, because it might be long
+                ["The postcodes SW1A 1AA, W1A 1AA appear in multiple responses"],
+                ["The postcodes W1A 1AA, SW1A 1AA appear in multiple responses"],
+            ],
+        )
+
+    def test_detecting_duplicate_postcodes_across_multiple_entries(self):
+        data = copy.deepcopy(self.page_form_data)
+        data.update(
+            {
+                **self.response_data(i=0, postcodes="W1A 1AA, SW1A 1AA"),
+                **self.response_data(i=1, postcodes="DH99 1NS, DE99 3GG"),
+                **self.response_data(i=2, postcodes="XM4 5HQ, E17 1AA"),
+                **self.response_data(i=3, postcodes="N1 1AA, "),
+                **self.response_data(i=4, postcodes="EH99 1SP, G58 1SB"),
+                **self.response_data(i=5, postcodes="GIR 0AA, E17 1AA"),
+                **self.response_data(i=6, postcodes="SW1A 2AA, XM4 5HQ"),
+                "responses-TOTAL_FORMS": "7",
+            }
+        )
+        MyLookupPageForm = get_form_for_model(LookupPage, form_class=LookupPageForm)
+        form = MyLookupPageForm(data)
+        self.assertFalse(form.is_valid())
+        self.assertIn(
+            form.errors["__all__"],
+            [
+                # We don't sort the error message, because it might be long
+                ["The postcodes E17 1AA, XM4 5HQ appear in multiple responses"],
+                ["The postcodes XM4 5HQ, E17 1AA appear in multiple responses"],
+            ],
+        )
+
+    def test_duplicate_postcodes_in_deleted_formset_forms_are_ignored(self):
+        data = copy.deepcopy(self.page_form_data)
+        data.update(
+            {
+                **self.response_data(i=0, postcodes="W1A 1AA, SW1A 1AA"),
+                **self.response_data(i=1, postcodes="GIR 0AA, W1A 1AA", DELETE="1"),
+                "responses-TOTAL_FORMS": "2",
+            }
+        )
+        MyLookupPageForm = get_form_for_model(LookupPage, form_class=LookupPageForm)
+        form = MyLookupPageForm(data)
+        self.assertTrue(form.is_valid())

@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Update CI config to use the cache to store artefacts;:
+- Add validation of duplicate responses to LookupPage admin
 
 ## 35.0 (2021-02-18)
 

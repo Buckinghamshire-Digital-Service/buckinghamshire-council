@@ -25,6 +25,7 @@ from wagtail.search import index
 from wagtailcaptcha.models import WagtailCaptchaEmailForm
 
 from bc.area_finder.utils import validate_postcode
+from bc.forms.forms import LookupPageForm
 from bc.utils.constants import RICH_TEXT_FEATURES
 from bc.utils.models import BasePage, RelatedPage
 from bc.utils.widgets import CustomCheckboxSelectMultiple, CustomCheckboxSelectSingle
@@ -181,6 +182,7 @@ class LookupPage(BasePage):
 
     template = "patterns/pages/forms/lookup_page.html"
     landing_page_template = "patterns/pages/forms/lookup_page_landing.html"
+    base_form_class = LookupPageForm
 
     form_heading = RichTextField("Heading", features=RICH_TEXT_FEATURES)
     input_label = models.CharField(max_length=255)
