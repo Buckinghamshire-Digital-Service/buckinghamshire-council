@@ -43,7 +43,6 @@ class FeedbackWidget {
             } else {
                 // feedback form
                 this.hideFeedbackForm();
-                this.feedbackHeading.innerText = 'Thank you for your feedback!';
             }
         });
 
