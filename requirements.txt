@@ -12,7 +12,7 @@ responses==0.10.9
 tabulate==0.8.7
 wagtail-factories==2.0.0
 wagtail-orderable==1.0.3
-wagtail-transfer==0.6.0
+wagtail-transfer==0.8.0
 urllib3==1.25.11
 zeep==3.4.0
 
