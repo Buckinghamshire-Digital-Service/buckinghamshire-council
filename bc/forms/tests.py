@@ -1,5 +1,3 @@
-import copy
-
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
@@ -89,25 +87,28 @@ class PostcodeLookupResponseRequestTests(TestCase):
 
 
 class PostcodeLookupResponseAdminTests(TestCase):
-    page_form_data = {
-        "form_heading": '{"blocks":[{"key":"1dnij","text":"Look up a postcode",'
-        '"type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],'
-        '"data":{}}],"entityMap":{}}',
-        "input_help_text": "Test",
-        "input_label": "Enter a postcode",
-        "no_match_message": "No match",
-        "responses-INITIAL_FORMS": "1",
-        "slug": "duplicate-postcodes-test-page",
-        "start_again_text": "Have another go, because this is so fun.",
-        "title": "Duplicate postcodes test page",
-    }
-
     def setUp(self):
         homepage = HomePage.objects.first()
         self.lookup_page = LookupPageFactory.build()
         homepage.add_child(instance=self.lookup_page)
         self.another_page = InformationPageFactory.build()
         homepage.add_child(instance=self.another_page)
+
+    def get_page_form_data(self, updates):
+        data = {
+            "form_heading": '{"blocks":[{"key":"1dnij","text":"Look up a postcode",'
+            '"type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],'
+            '"data":{}}],"entityMap":{}}',
+            "input_help_text": "Test",
+            "input_label": "Enter a postcode",
+            "no_match_message": "No match",
+            "responses-INITIAL_FORMS": "1",
+            "slug": "duplicate-postcodes-test-page",
+            "start_again_text": "Have another go, because this is so fun.",
+            "title": "Duplicate postcodes test page",
+        }
+        data.update(updates)
+        return data
 
     @staticmethod
     def response_data(*, i: int, postcodes: str, **kwargs: str) -> dict:
@@ -157,8 +158,7 @@ class PostcodeLookupResponseAdminTests(TestCase):
             lookup_response.clean_fields()
 
     def test_detecting_duplicate_postcodes(self):
-        data = copy.deepcopy(self.page_form_data)
-        data.update(
+        data = self.get_page_form_data(
             {
                 **self.response_data(i=0, postcodes="W1A 1AA, SW1A 1AA, BX4 7SB"),
                 **self.response_data(
@@ -177,8 +177,7 @@ class PostcodeLookupResponseAdminTests(TestCase):
         )
 
     def test_detecting_multiple_duplicate_postcodes(self):
-        data = copy.deepcopy(self.page_form_data)
-        data.update(
+        data = self.get_page_form_data(
             {
                 **self.response_data(i=0, postcodes="W1A 1AA, SW1A 1AA, BX4 7SB"),
                 **self.response_data(
@@ -201,8 +200,7 @@ class PostcodeLookupResponseAdminTests(TestCase):
         )
 
     def test_detecting_duplicate_postcodes_across_multiple_entries(self):
-        data = copy.deepcopy(self.page_form_data)
-        data.update(
+        data = self.get_page_form_data(
             {
                 **self.response_data(i=0, postcodes="W1A 1AA, SW1A 1AA"),
                 **self.response_data(i=1, postcodes="DH99 1NS, DE99 3GG"),
@@ -227,8 +225,7 @@ class PostcodeLookupResponseAdminTests(TestCase):
         )
 
     def test_duplicate_postcodes_in_deleted_formset_forms_are_ignored(self):
-        data = copy.deepcopy(self.page_form_data)
-        data.update(
+        data = self.get_page_form_data(
             {
                 **self.response_data(i=0, postcodes="W1A 1AA, SW1A 1AA"),
                 **self.response_data(i=1, postcodes="GIR 0AA, W1A 1AA", DELETE="1"),
