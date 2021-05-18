@@ -19,7 +19,9 @@ class LookupPageForm(WagtailAdminPageForm):
             ):
                 continue
 
-            duplicates = duplicates | seen_values & set(form.cleaned_data["postcodes"])
+            duplicates = duplicates | (
+                seen_values & set(form.cleaned_data["postcodes"])
+            )
             seen_values = seen_values | set(form.cleaned_data["postcodes"])
 
         if duplicates:
