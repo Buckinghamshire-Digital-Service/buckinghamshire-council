@@ -6,6 +6,7 @@ from django.db.models import Case, CharField, OuterRef, Subquery, When
 from django.http import QueryDict
 from django.template.response import TemplateResponse
 from django.utils.cache import add_never_cache_headers, patch_cache_control
+from django.utils.html import escape
 from django.utils.timezone import now
 from django.views.generic.base import View
 
@@ -132,7 +133,7 @@ class SearchView(View):
         ).search_input_help_text
         no_result_text = SystemMessagesSettings.for_request(
             request
-        ).body_no_search_results.format(searchterms=search_query)
+        ).body_no_search_results.format(searchterms=escape(search_query))
 
         context.update(
             {

@@ -6,6 +6,18 @@
 - Update CI config to use the cache to store artefacts
 - Upgrade Django to 2.2.21
 
+## 35.2 (2021-04-21)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/35.1...35.2
+
+- Fix: XSS vulnerability in "no search results" page
+
+## 35.1 (2021-02-24)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/35.0...35.1
+
+- Upgrade Django to 2.2.19
+
 ## 35.0 (2021-02-18)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/34.1...35.0
