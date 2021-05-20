@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 36.0 (2021-05-20)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/35.2...36.0
 
 - Add ENEI logo to Jobs site header
 - Update CI config to use the cache to store artefacts
