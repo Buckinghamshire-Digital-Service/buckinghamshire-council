@@ -1,5 +1,5 @@
 {% load wagtailcore_tags %}
-<form action="{% pageurl page %}" method="post" class="form form--standard" novalidate data-form>
+<form action="{% pageurl page %}" method="post" class="form form--standard"{% if form.attachments %} enctype="multipart/form-data"{% endif %} novalidate data-form>
     <div class="form__container">
         {% csrf_token %}
 
