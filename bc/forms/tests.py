@@ -124,18 +124,34 @@ class PostcodeLookupResponseAdminTests(TestCase):
         return {prefix + key: value for key, value in data.items()}
 
     def test_postcodes_arrays_are_validated(self):
-        lookup_response = PostcodeLookupResponseFactory(
-            page=self.lookup_page, link_page=self.another_page, postcodes=["nothing"],
+        data = self.get_page_form_data(
+            {
+                **self.response_data(i=0, postcodes="nothing"),
+                "responses-TOTAL_FORMS": "1",
+            }
         )
-        with self.assertRaises(ValidationError):
-            lookup_response.clean_fields()
+
+        MyLookupPageForm = get_form_for_model(LookupPage, form_class=LookupPageForm)
+        form = MyLookupPageForm(data)
+        self.assertFalse(form.is_valid())
+        self.assertEqual(
+            form.formsets["responses"][0].errors["postcodes"], ["Invalid Postcode"]
+        )
 
     def test_postcodes_arrays_are_cleaned(self):
-        lookup_response = PostcodeLookupResponseFactory(
-            page=self.lookup_page, link_page=self.another_page, postcodes=["HP201UY"],
+        data = self.get_page_form_data(
+            {
+                **self.response_data(i=0, postcodes="HP201UY"),
+                "responses-TOTAL_FORMS": "1",
+            }
         )
-        lookup_response.clean_fields()
-        self.assertEqual(lookup_response.postcodes, ["HP20 1UY"])
+
+        MyLookupPageForm = get_form_for_model(LookupPage, form_class=LookupPageForm)
+        form = MyLookupPageForm(data)
+        self.assertTrue(form.is_valid())
+        self.assertEqual(
+            form.formsets["responses"][0].cleaned_data["postcodes"], ["HP20 1UY"]
+        )
 
     def test_valid_postcode_wildcard(self):
         lookup_response = PostcodeLookupResponseFactory(
@@ -164,6 +180,24 @@ class PostcodeLookupResponseAdminTests(TestCase):
                 **self.response_data(
                     i=1, postcodes="DH99 1NS, DE99 3GG, XM4 5HQ, W1A 1AA"
                 ),
+                "responses-TOTAL_FORMS": "2",
+            }
+        )
+
+        MyLookupPageForm = get_form_for_model(LookupPage, form_class=LookupPageForm)
+        form = MyLookupPageForm(data)
+        self.assertFalse(form.is_valid())
+        self.assertEqual(
+            form.errors["__all__"],
+            ["The postcode W1A 1AA appears in multiple responses"],
+        )
+
+    def test_detecting_duplicate_postcodes_with_different_formatting(self):
+        """E.g. W1A 1AA and W1A1AA should be treated as equal"""
+        data = self.get_page_form_data(
+            {
+                **self.response_data(i=0, postcodes="W1A 1AA, SW1A 1AA"),
+                **self.response_data(i=1, postcodes="DH99 1NS, W1A1AA"),
                 "responses-TOTAL_FORMS": "2",
             }
         )
@@ -205,9 +239,9 @@ class PostcodeLookupResponseAdminTests(TestCase):
                 **self.response_data(i=0, postcodes="W1A 1AA, SW1A 1AA"),
                 **self.response_data(i=1, postcodes="DH99 1NS, DE99 3GG"),
                 **self.response_data(i=2, postcodes="XM4 5HQ, E17 1AA"),
-                **self.response_data(i=3, postcodes="N1 1AA, "),
+                **self.response_data(i=3, postcodes="N1 1AA"),
                 **self.response_data(i=4, postcodes="EH99 1SP, G58 1SB"),
-                **self.response_data(i=5, postcodes="GIR 0AA, E17 1AA"),
+                **self.response_data(i=5, postcodes="BX4 7SB, E17 1AA"),
                 **self.response_data(i=6, postcodes="SW1A 2AA, XM4 5HQ"),
                 "responses-TOTAL_FORMS": "7",
             }

@@ -127,6 +127,7 @@ class PostcodeLookupResponse(models.Model):
 
     @staticmethod
     def get_form(*args, **kwargs):
+        """Returns the form that will be used in the front-end"""
         label = kwargs.pop("label")
         help_text = kwargs.pop("help_text")
 
@@ -152,11 +153,6 @@ class PostcodeLookupResponse(models.Model):
     def clean_fields(self, exclude=None):
         exclude = exclude or []
         errors = {}
-        if "postcodes" not in exclude:
-            self.postcodes = [
-                validate_postcode(postcode) for postcode in self.postcodes
-            ]
-
         if "answer" not in exclude:
             try:
                 self.answer.format(postcode="test")
