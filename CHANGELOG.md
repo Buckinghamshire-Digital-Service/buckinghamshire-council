@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- Use the newly released django-gov-notify library for GOV.UK Notify integration
+
 ## 36.1 (2021-05-25)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/36.0...36.1
