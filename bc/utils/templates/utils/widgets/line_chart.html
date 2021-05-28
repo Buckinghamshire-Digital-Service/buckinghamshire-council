@@ -1,7 +1,7 @@
 {% load i18n %}
-{% include "utils/widgets/base_chart.html" with chart_type="Line" %}
+{% include "utils/widgets/base_chart.html" with chart_type="Line graph" %}
 <br/>
-{% trans "First column will be considered as the base axis points. First row will be considered as the labels for each line in the chart." as data_help_text %}
+{% trans "The first column will be the x axis. The first row will be labels for each line on the chart." as data_help_text %}
 {% include "utils/widgets/partials/data.html" with help_text=data_help_text example="line" %}
 
 <script>

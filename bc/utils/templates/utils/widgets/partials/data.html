@@ -4,7 +4,7 @@
     <div class="field-content">
         <p class="help">
             {% if help_text %}{{ help_text }}{% endif %}
-            {% if example %}{% trans "Example of chart data:" %}{% endif %}
+            {% if example %}{% trans "An example of a chart data set:" %}{% endif %}
         </p>
             {% if example == "pie" %}
                 <table style="font-size: 0.85em;">
@@ -68,7 +68,7 @@
                     </tr>
                 </table>
             {% endif %}
-            <p class="help">{% trans "Right-click on the table for more options" %}</p>
+            <p class="help">{% trans "Right click anywhere on the table to change the table layout." %}</p>
         </p>
         <div id="{{ widget.attrs.id }}-handsontable-container"></div>
         {% include 'django/forms/widgets/hidden.html' %}

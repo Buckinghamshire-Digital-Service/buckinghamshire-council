@@ -302,7 +302,7 @@ class LineChartBlock(BaseChartBlock):
                 "table_data": cleaned_data[1:],
                 "title": value["table_title"],
                 "caption": value["chart_caption"],
-                "default_title": "Line chart",
+                "default_title": "Line graph",
             }
         )
 
