@@ -1,6 +1,3 @@
-import logging
-import sys
-
 from .base import *  # noqa
 
 # Debugging to be enabled locally only
@@ -44,11 +41,6 @@ INSTALLED_APPS += ["django_extensions"]  # noqa
 
 # Disable forcing HTTPS locally since development server supports HTTP only.
 SECURE_SSL_REDIRECT = False
-
-# Settings for during tests
-if len(sys.argv) > 1 and sys.argv[1] in ["test"]:
-    # Disable low-severity log entries during unit tests
-    logging.disable(logging.CRITICAL)
 
 
 # Adds Django Debug Toolbar, if preset
