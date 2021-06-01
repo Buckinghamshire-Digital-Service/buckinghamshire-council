@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Fix: StreamField typo causing RecursionError in Wagtail 2.13
 - Use the newly released django-gov-notify library for GOV.UK Notify integration
 
 ## 36.1 (2021-05-25)
