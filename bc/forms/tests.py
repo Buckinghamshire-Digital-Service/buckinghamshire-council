@@ -127,7 +127,11 @@ class PostcodeLookupResponseAdminTests(TestCase):
         data = self.get_page_form_data(
             {
                 **self.response_data(i=0, postcodes="nothing"),
-                "responses-TOTAL_FORMS": "1",
+                **self.response_data(i=1, postcodes="HP201UY, "),
+                **self.response_data(i=2, postcodes=", E17 1AA"),
+                **self.response_data(i=3, postcodes=""),
+                **self.response_data(i=4, postcodes=","),
+                "responses-TOTAL_FORMS": "5",
             }
         )
 
@@ -136,6 +140,25 @@ class PostcodeLookupResponseAdminTests(TestCase):
         self.assertFalse(form.is_valid())
         self.assertEqual(
             form.formsets["responses"][0].errors["postcodes"], ["Invalid Postcode"]
+        )
+        self.assertEqual(
+            form.formsets["responses"][1].errors["postcodes"],
+            ["Item 2 in the array did not validate: This field is required."],
+        )
+        self.assertEqual(
+            form.formsets["responses"][2].errors["postcodes"],
+            ["Item 1 in the array did not validate: This field is required."],
+        )
+        self.assertEqual(
+            form.formsets["responses"][3].errors["postcodes"],
+            ["This field is required."],
+        )
+        self.assertEqual(
+            form.formsets["responses"][4].errors["postcodes"],
+            [
+                "Item 1 in the array did not validate: This field is required.",
+                "Item 2 in the array did not validate: This field is required.",
+            ],
         )
 
     def test_postcodes_arrays_are_cleaned(self):
