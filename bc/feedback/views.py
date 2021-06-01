@@ -26,6 +26,13 @@ class UsefulnessFeedbackCreateView(generic.CreateView):
     form_class = UsefulnessFeedbackForm
     http_method_names = ["post"]
 
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        # Denormalise the URL, lest the page be deleted or moved.
+        self.object.original_url = self.object.page.url
+        self.object.save()
+        return http.HttpResponseRedirect(self.get_success_url())
+
     def form_invalid(self, form):
         return http.HttpResponseBadRequest()
 
@@ -41,10 +48,11 @@ class UsefulnessFeedbackReportView(report_views.ReportView):
     title = "Usefulness feedback"
     header_icon = "help"
     template_name = "patterns/pages/reports/usefulness_feedback_report.html"
-    list_export = ["created", "page.title", "page.url", "useful"]
+    list_export = ["created", "get_title", "get_current_url", "original_url", "useful"]
     export_headings = {
-        "page.title": "Page",
-        "page.url": "URL",
+        "get_title": "Page",
+        "get_current_url": "URL",
+        "original_url": "Original URL",
     }
 
     def get_queryset(self):
@@ -71,7 +79,10 @@ class FeedbackCommentCreateView(generic.CreateView):
     http_method_names = ["post"]
 
     def form_valid(self, form):
-        form.save()
+        self.object = form.save(commit=False)
+        # Denormalise the URL, lest the page be deleted or moved.
+        self.object.original_url = self.object.page.url
+        self.object.save()
         return http.JsonResponse(data={}, status=HTTPStatus.OK)
 
     def form_invalid(self, form):
@@ -89,10 +100,18 @@ class FeedbackCommentReportView(report_views.ReportView):
     title = "Feedback comments"
     header_icon = "edit"
     template_name = "patterns/pages/reports/feedback_comment_report.html"
-    list_export = ["created", "page.title", "page.url", "action", "issue"]
+    list_export = [
+        "created",
+        "get_title",
+        "get_current_url",
+        "original_url",
+        "action",
+        "issue",
+    ]
     export_headings = {
-        "page.title": "Page",
-        "page.url": "URL",
+        "get_title": "Page",
+        "get_current_url": "URL",
+        "original_url": "Original URL",
     }
 
     def get_queryset(self):

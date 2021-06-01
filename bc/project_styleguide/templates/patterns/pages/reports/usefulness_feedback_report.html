@@ -19,8 +19,8 @@
             {% for feedback in page_obj %}
                 <tr>
                     <td>{{ feedback.created }}</td>
-                    <td>{{ feedback.page.title }}</td>
-                    <td>{{ feedback.page.url }}</td>
+                    <td>{% firstof feedback.page.title "(deleted)" %}</td>
+                    <td>{% firstof feedback.page.url feedback.original_url %}</td>
                     <td>{{ feedback.useful|yesno|upper }}</td>
                 </tr>
             {% endfor %}

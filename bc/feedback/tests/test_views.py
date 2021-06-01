@@ -63,6 +63,10 @@ class TestUsefulnessFeedbackCreateView(CreateInfoPageMixin, test.TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertEqual(UsefulnessFeedback.objects.count(), 1)
+        feedback = UsefulnessFeedback.objects.last()
+
+        with self.subTest("Page URL is denormalised"):
+            self.assertEqual(feedback.original_url, feedback.page.url)
 
 
 class TestFeedbackCommentCreateView(CreateInfoPageMixin, test.TestCase):
@@ -88,9 +92,14 @@ class TestFeedbackCommentCreateView(CreateInfoPageMixin, test.TestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertEqual(FeedbackComment.objects.count(), 1)
         feedback_comment = FeedbackComment.objects.last()
-        self.assertEqual(feedback_comment.action, payload["action"])
-        self.assertEqual(feedback_comment.issue, payload["issue"])
-        self.assertEqual(feedback_comment.page.id, self.info_page.id)
+
+        with self.subTest("Submission is stored"):
+            self.assertEqual(feedback_comment.action, payload["action"])
+            self.assertEqual(feedback_comment.issue, payload["issue"])
+            self.assertEqual(feedback_comment.page.id, self.info_page.id)
+
+        with self.subTest("Page URL is denormalised"):
+            self.assertEqual(feedback_comment.original_url, feedback_comment.page.url)
 
     def test_post_empty_action(self):
         payload = {
