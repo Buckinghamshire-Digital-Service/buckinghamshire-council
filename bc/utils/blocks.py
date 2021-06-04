@@ -209,7 +209,7 @@ class BarChartBlock(BaseChartBlock):
             **self.field_options,
         )
 
-    def render(self, value, context={}):
+    def render(self, value, context=None):
         if context is None:
             new_context = {}
         else:
@@ -264,7 +264,7 @@ class LineChartBlock(BaseChartBlock):
             **self.field_options,
         )
 
-    def render(self, value, context={}):
+    def render(self, value, context=None):
         if context is None:
             new_context = {}
         else:
@@ -317,7 +317,7 @@ class PieChartBlock(BaseChartBlock):
             **self.field_options,
         )
 
-    def render(self, value, context={}):
+    def render(self, value, context=None):
         if context is None:
             new_context = {}
         else:
