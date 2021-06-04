@@ -1,6 +1,4 @@
-from django.templatetags.static import static
 from django.urls import path, reverse
-from django.utils.html import format_html
 
 from wagtail.admin.menu import AdminOnlyMenuItem
 from wagtail.admin.rich_text.converters.html_to_contentstate import BlockElementHandler
@@ -148,15 +146,3 @@ def register_big_text_feature(features):
     }
 
     features.register_converter_rule("contentstate", feature_name, db_conversion)
-
-
-@hooks.register("insert_editor_css")
-def editor_css():
-    return format_html(
-        '<link rel="stylesheet" href="{}">', static("bc_admin_ui/editor.css")
-    )
-
-
-@hooks.register("insert_editor_js")
-def editor_js():
-    return format_html('<script src="{}"></script>', static("js/bc_admin_ui.js"))
