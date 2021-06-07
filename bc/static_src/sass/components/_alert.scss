@@ -19,6 +19,14 @@
         margin-bottom: $grid--small;
         padding: $grid / 2;
 
+        &#{$root}--black {
+            border-color: $color--black;
+        }
+
+        &#{$root}--blue {
+            border-color: $color--sky;
+        }
+
         #{$root}__header,
         #{$root}__content {
             display: inline;

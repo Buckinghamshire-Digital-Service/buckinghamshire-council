@@ -420,6 +420,15 @@ LOGGING = {
     },
 }
 
+# Settings for during tests
+# This is in the base settings module, rather than the dev one, because tests are also
+# run in CI using production settings.
+if len(sys.argv) > 1 and sys.argv[1] in ["test"]:
+    # Disable low-severity log entries during unit tests
+    import logging
+
+    logging.disable(logging.CRITICAL)
+
 
 # Email settings
 # We use SMTP to send emails. We typically use transactional email services

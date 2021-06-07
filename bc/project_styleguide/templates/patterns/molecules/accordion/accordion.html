@@ -1,11 +1,11 @@
 {% load wagtailcore_tags %}
 
-<div class="accordion__container">
+<div class="accordion__container" id="{{ accordion_id }}">
     {% for accordion in accordions %}
         <div class="accordion" data-accordion>
             <h2 class="accordion__header">
                 <button
-                    id="question-{{ forloop.counter }}"
+                    id="question-{{ accordion_id }}-{{ forloop.counter }}"
                     class="accordion__button"
                     data-accordion-question
                     aria-controls="answer-{{ forloop.counter }}"
@@ -17,7 +17,7 @@
                 </button>
             </h2>
             <div
-                id="answer-{{ forloop.counter }}"
+                id="answer-{{ accordion_id }}-{{ forloop.counter }}"
                 data-accordion-answer
                 class="accordion__content"
                 aria-labelledby="question-{{ forloop.counter }}"

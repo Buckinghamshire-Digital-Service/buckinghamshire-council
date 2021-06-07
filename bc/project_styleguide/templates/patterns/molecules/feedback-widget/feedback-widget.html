@@ -3,7 +3,7 @@
 {% if yes_form and no_form %}
     <div class="feedback-widget show-yes-no" data-feedback-widget>
         <div class="feedback-widget__content">
-            <h4 class="feedback-widget__heading heading" data-feedback-heading>Is this page useful?</h4>
+            <h2 class="feedback-widget__heading heading" data-feedback-heading>Is this page useful?</h2>
             <div class="feedback-widget__buttons">
                 <form
                     action="{% url 'feedback:usefulness_feedback_create' %}"

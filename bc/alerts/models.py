@@ -16,9 +16,29 @@ class Alert(models.Model):
         (PAGE_AND_DESCENDANTS, "the selected page and all pages below it"),
     )
 
+    HIGH = 1
+    MEDIUM = 2
+    LOW = 3
+    LEVEL_CHOICES = (
+        (HIGH, "Alert 1"),
+        (MEDIUM, "Alert 2"),
+        (LOW, "Alert 3"),
+    )
+    LEVEL_CLASSES = {
+        HIGH: "black",
+        MEDIUM: "orange",
+        LOW: "blue",
+    }
+
     title = models.CharField(max_length=255)
     content = RichTextField(
         blank=True, max_length=255, features=RICH_PARAGRAPH_FEATURES
+    )
+    # Allows negative values in case we get an alert level lower than the default
+    alert_level = models.SmallIntegerField(
+        choices=LEVEL_CHOICES,
+        default=MEDIUM,
+        help_text="With Alert 1 as the highest alert",
     )
     show_on = models.CharField(
         max_length=20,
@@ -33,6 +53,7 @@ class Alert(models.Model):
     panels = [
         FieldPanel("title"),
         FieldPanel("content"),
+        FieldPanel("alert_level"),
         MultiFieldPanel(
             [
                 PageChooserPanel("page"),
@@ -49,6 +70,9 @@ class Alert(models.Model):
     def __str__(self):
         return self.title
 
+    def get_alert_level_class(self):
+        return self.LEVEL_CLASSES[self.alert_level]
+
     @classmethod
     def get_alerts_for_page(cls, page):
         if not isinstance(page, Page):
@@ -56,4 +80,4 @@ class Alert(models.Model):
         return cls.objects.filter(
             models.Q(page__in=page.get_ancestors(), show_on=cls.PAGE_AND_DESCENDANTS)
             | models.Q(page=page)
-        ).order_by("page__path")
+        ).order_by("alert_level", "page__path")[:3]

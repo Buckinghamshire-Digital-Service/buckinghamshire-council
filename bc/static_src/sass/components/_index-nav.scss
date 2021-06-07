@@ -1,4 +1,5 @@
 .index-nav {
+    $root: &;
     margin-bottom: $grid--large;
     max-width: $wrapper--small;
 
@@ -21,6 +22,14 @@
 
         &--current {
             font-weight: $weight--bold;
+        }
+    }
+
+    &__link {
+        #{$root}__item--current & {
+            color: $color--off-black;
+            font-weight: $weight--bold;
+            text-decoration: none;
         }
     }
 }
