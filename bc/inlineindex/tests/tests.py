@@ -1,4 +1,4 @@
-from django.test import TestCase, override_settings
+from django.test import RequestFactory, TestCase, override_settings
 from django.urls import reverse
 
 from wagtail.tests.utils import WagtailTestUtils
@@ -29,6 +29,7 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
         )
 
     def setUp(self):
+        self.request_factory = RequestFactory()
         self.setup_homepage()
 
     def test_live_request_to_live_index_success(self):
@@ -56,16 +57,33 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
         self.setup_inline_index(live=True)
         self.setup_first_index_child(live=True)
 
-        response = self.client.get(self.inline_index.url)
+        page = self.inline_index
+        request = self.request_factory.get(page.url)
+        request.is_preview = False
 
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, self.first_index_child.title, count=2)
+        context = page.get_context(request)
+        index = list(context["index"])
+        self.assertEqual(len(index), 2)
+        self.assertIn(self.first_index_child, index)
+        self.assertEqual(context["next_page"], self.first_index_child)
 
     def test_live_request_to_live_index_not_shows_draft_child(self):
         self.setup_inline_index(live=True)
         self.setup_first_index_child(live=False)
 
-        response = self.client.get(self.inline_index.url)
+        page = self.inline_index
+        url = page.url
+        request = self.request_factory.get(url)
+        request.is_preview = False
+
+        context = page.get_context(request)
+        index = list(context["index"])
+        self.assertEqual(len(index), 1)
+        self.assertNotIn(self.first_index_child, index)
+        self.assertNotIn("prev_page", context)  # Not included on the index page
+        self.assertEqual(context["next_page"], None)
+
+        response = self.client.get(url)
 
         self.assertEqual(response.status_code, 200)
         self.assertNotContains(response, self.first_index_child.title)
@@ -88,12 +106,17 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
         self.setup_first_index_child(live=False)
         self.login()
 
-        response = self.client.get(
-            reverse("wagtailadmin_pages:view_draft", args=(self.inline_index.id,))
-        )
+        page = self.inline_index
+        url = reverse("wagtailadmin_pages:view_draft", args=(page.id,))
+        request = self.request_factory.get(url)
+        request.is_preview = True
 
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, self.first_index_child.title, count=2)
+        context = page.get_context(request)
+        index = list(context["index"])
+        self.assertEqual(len(index), 2)
+        self.assertIn(self.first_index_child, index)
+        self.assertNotIn("prev_page", context)  # Not included on the index page
+        self.assertEqual(context["next_page"], self.first_index_child)
 
     def test_live_request_to_live_child_shows_live_next_sibling(self):
         self.setup_inline_index(live=True)
@@ -102,27 +125,53 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
             parent=self.inline_index, title="The Second Child", live=True
         )
 
-        response = self.client.get(self.first_index_child.url)
+        page = self.first_index_child
+        url = page.url
+        request = self.request_factory.get(url)
+        request.is_preview = False
 
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, self.second_index_child.title, count=2)
+        context = page.get_context(request)
+        index = list(context["index"])
+        self.assertEqual(len(index), 3)
+        self.assertIn(self.second_index_child, index)
+        self.assertEqual(context["prev_page"], self.inline_index)
+        self.assertEqual(context["next_page"], self.second_index_child)
 
     def test_live_request_to_live_child_shows_live_prev_sibling(self):
         self.setup_inline_index(live=True)
         self.setup_first_index_child(live=True)
         self.setup_second_index_child(live=True)
 
-        response = self.client.get(self.second_index_child.url)
+        page = self.second_index_child
+        url = page.url
+        request = self.request_factory.get(url)
+        request.is_preview = False
 
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, self.first_index_child.title, count=2)
+        context = page.get_context(request)
+        index = list(context["index"])
+        self.assertEqual(len(index), 3)
+        self.assertIn(self.first_index_child, index)
+        self.assertEqual(context["prev_page"], self.first_index_child)
+        self.assertEqual(context["next_page"], None)
 
     def test_live_request_to_live_child_not_shows_draft_next_sibling(self):
         self.setup_inline_index(live=True)
         self.setup_first_index_child(live=True)
         self.setup_second_index_child(live=False)
 
-        response = self.client.get(self.first_index_child.url)
+        page = self.first_index_child
+        url = page.url
+        request = self.request_factory.get(url)
+        request.is_preview = False
+
+        context = page.get_context(request)
+        index = list(context["index"])
+        self.assertEqual(len(index), 2)
+        self.assertNotIn(self.second_index_child, index)
+        self.assertEqual(context["prev_page"], self.inline_index)
+        self.assertEqual(context["next_page"], None)
+
+        response = self.client.get(url)
 
         self.assertEqual(response.status_code, 200)
         self.assertNotContains(response, self.second_index_child.title)
@@ -132,7 +181,19 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
         self.setup_first_index_child(live=False)
         self.setup_second_index_child(live=True)
 
-        response = self.client.get(self.second_index_child.url)
+        page = self.second_index_child
+        url = page.url
+        request = self.request_factory.get(url)
+        request.is_preview = False
+
+        context = page.get_context(request)
+        index = list(context["index"])
+        self.assertEqual(len(index), 2)
+        self.assertNotIn(self.first_index_child, index)
+        self.assertEqual(context["prev_page"], self.inline_index)
+        self.assertEqual(context["next_page"], None)
+
+        response = self.client.get(url)
 
         self.assertEqual(response.status_code, 200)
         self.assertNotContains(response, self.first_index_child.title)
@@ -144,11 +205,18 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
         self.setup_second_index_child(live=False)
         self.login()
 
-        response = self.client.get(
-            reverse("wagtailadmin_pages:view_draft", args=(self.first_index_child.id,))
+        page = self.first_index_child
+        request = self.request_factory.get(
+            reverse("wagtailadmin_pages:view_draft", args=(page.id,))
         )
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, self.second_index_child.title, count=2)
+        request.is_preview = True
+
+        context = page.get_context(request)
+        index = list(context["index"])
+        self.assertEqual(len(index), 3)
+        self.assertIn(self.second_index_child, index)
+        self.assertEqual(context["prev_page"], self.inline_index)
+        self.assertEqual(context["next_page"], self.second_index_child)
 
     @override_settings(ALLOWED_HOSTS=["localhost", "testserver"])
     def test_draft_request_to_draft_child_shows_draft_prev_sibling(self):
@@ -157,11 +225,18 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
         self.setup_second_index_child(live=False)
         self.login()
 
-        response = self.client.get(
-            reverse("wagtailadmin_pages:view_draft", args=(self.second_index_child.id,))
+        page = self.second_index_child
+        request = self.request_factory.get(
+            reverse("wagtailadmin_pages:view_draft", args=(page.id,))
         )
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, self.first_index_child.title, count=2)
+        request.is_preview = True
+
+        context = page.get_context(request)
+        index = list(context["index"])
+        self.assertEqual(len(index), 3)
+        self.assertIn(self.first_index_child, index)
+        self.assertEqual(context["prev_page"], self.first_index_child)
+        self.assertEqual(context["next_page"], None)
 
     def test_live_request_to_live_child_skips_draft_next_sibling(self):
         self.setup_inline_index(live=True)
@@ -171,11 +246,22 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
             parent=self.inline_index, title="The Third Child", live=True
         )
 
-        response = self.client.get(self.first_index_child.url)
+        page = self.first_index_child
+        url = page.url
+        request = self.request_factory.get(url)
+        request.is_preview = False
+
+        context = page.get_context(request)
+        index = list(context["index"])
+        self.assertEqual(len(index), 3)
+        self.assertNotIn(self.second_index_child, index)
+        self.assertEqual(context["prev_page"], self.inline_index)
+        self.assertEqual(context["next_page"], third_index_child)
+
+        response = self.client.get(url)
 
         self.assertEqual(response.status_code, 200)
         self.assertNotContains(response, self.second_index_child.title)
-        self.assertContains(response, third_index_child.title, count=2)
 
     def test_live_request_to_live_child_skips_draft_prev_sibling(self):
         self.setup_inline_index(live=True)
@@ -185,8 +271,19 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
             parent=self.inline_index, title="The Third Child", live=True
         )
 
-        response = self.client.get(third_index_child.url)
+        page = third_index_child
+        url = page.url
+        request = self.request_factory.get(url)
+        request.is_preview = False
+
+        context = page.get_context(request)
+        index = list(context["index"])
+        self.assertEqual(len(index), 3)
+        self.assertNotIn(self.second_index_child, index)
+        self.assertEqual(context["prev_page"], self.first_index_child)
+        self.assertEqual(context["next_page"], None)
+
+        response = self.client.get(url)
 
         self.assertEqual(response.status_code, 200)
         self.assertNotContains(response, self.second_index_child.title)
-        self.assertContains(response, self.first_index_child.title, count=2)

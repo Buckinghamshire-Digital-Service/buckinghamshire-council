@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     "bc.cases",
     "bc.documents",
     "bc.events",
+    "bc.feedback",
     "bc.forms",
     "bc.home",
     "bc.images",
@@ -419,6 +420,15 @@ LOGGING = {
     },
 }
 
+# Settings for during tests
+# This is in the base settings module, rather than the dev one, because tests are also
+# run in CI using production settings.
+if len(sys.argv) > 1 and sys.argv[1] in ["test"]:
+    # Disable low-severity log entries during unit tests
+    import logging
+
+    logging.disable(logging.CRITICAL)
+
 
 # Email settings
 # We use SMTP to send emails. We typically use transactional email services
@@ -749,7 +759,7 @@ COOKIE_DOMAIN = env.get("COOKIE_DOMAIN", "")
 
 
 # GOV.UK Notify service
-EMAIL_BACKEND = "bc.utils.email.NotifyEmailBackend"
+EMAIL_BACKEND = "django_gov_notify.backends.NotifyEmailBackend"
 GOVUK_NOTIFY_API_KEY = env.get("GOVUK_NOTIFY_API_KEY")
 GOVUK_NOTIFY_PLAIN_EMAIL_TEMPLATE_ID = env.get("GOVUK_NOTIFY_PLAIN_EMAIL_TEMPLATE_ID")
 

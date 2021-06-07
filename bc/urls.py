@@ -12,6 +12,7 @@ from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.utils.urlpatterns import decorate_urlpatterns
 
 from bc.area_finder.views import area_finder
+from bc.feedback import urls as feedback_urls
 from bc.search.views import JobAlertConfirmView, JobAlertUnsubscribeView, SearchView
 from bc.utils.cache import get_default_cache_control_decorator
 
@@ -20,6 +21,7 @@ private_urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
+    path("feedback/", include(feedback_urls, namespace="feedback")),
     # Search cache-control headers are set on the view itself.
     path("search/", SearchView.as_view(), name="search"),
     path("api/v1/area-finder/", area_finder, name="area_finder",),

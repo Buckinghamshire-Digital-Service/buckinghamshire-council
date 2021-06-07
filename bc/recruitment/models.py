@@ -25,11 +25,11 @@ from wagtail.core.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 
+from django_gov_notify.message import NotifyEmailMessage
 from wagtailorderable.models import Orderable
 
 from ..utils.blocks import StoryBlock
 from ..utils.constants import RICH_TEXT_FEATURES
-from ..utils.email import NotifyEmailMessage
 from ..utils.models import BasePage
 from .constants import JOB_BOARD_CHOICES
 from .text_utils import extract_salary_range
