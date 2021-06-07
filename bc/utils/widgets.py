@@ -1,5 +1,4 @@
 from django import forms
-from django.templatetags.static import static
 
 from wagtail.core.telepath import register
 from wagtail.core.widget_adapters import WidgetAdapter
@@ -38,8 +37,8 @@ class ChartInputAdapter(WidgetAdapter):
     js_constructor = "bc.utils.widgets.ChartInput"
 
     class Media:
-        js = [static("js/bc_admin_ui.js")]
-        css = {"all": [static("bc_admin_ui/editor.css")]}
+        js = ["js/bc_admin_ui.js"]
+        css = {"all": ["bc_admin_ui/editor.css"]}
 
     def js_args(self, widget):
         return [widget.table_options, widget.chart_type]
