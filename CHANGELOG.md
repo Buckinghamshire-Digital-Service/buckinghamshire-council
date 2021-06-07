@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Upgrade Wagtail to version 2.13.1
+
 ## 37.0 (2021-06-07)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/36.1...37.0
