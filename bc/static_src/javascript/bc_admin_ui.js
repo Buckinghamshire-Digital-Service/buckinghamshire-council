@@ -202,4 +202,6 @@ class ChartInput {
         return widget;
     }
 }
+// Register the constructor using the string to be used as a lookup in the
+// Python path bc.utils.widgets.ChartInputAdapter.js_constructor
 window.telepath.register('bc.utils.widgets.ChartInput', ChartInput);

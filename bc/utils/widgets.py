@@ -32,6 +32,9 @@ class LineChartInput(BaseChartInput):
 
 
 class ChartInputAdapter(WidgetAdapter):
+    # This attribute is not strictly a Python path, but a namespace to look up a
+    # matching JS constructor within Telepath. The JS constructor is registered in
+    # bc/static_src/javascript/bc_admin_ui.js
     js_constructor = "bc.utils.widgets.ChartInput"
 
     class Media:
