@@ -65,7 +65,6 @@ class ChartInput {
                     <div class="required">
                         <div class="required field typed_choice_field radio_select">
                             <label for="${id}-handsontable-direction">Chart direction</label>
-                            {# TODO Figure out how to add the required asterisk #}
                             <div class="field-content">
                                 <div class="input">
                                     <ul>
