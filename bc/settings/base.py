@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     "bc.cases",
     "bc.documents",
     "bc.events",
+    "bc.feedback",
     "bc.forms",
     "bc.home",
     "bc.images",

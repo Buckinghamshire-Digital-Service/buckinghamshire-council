@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- 40: Feedback forms and reports
 - Accessibility improvements
 - Add multiple severity levels to sitewide alert
 - Fix: StreamField typo causing RecursionError in Wagtail 2.13
