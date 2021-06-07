@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Update CI config to use the cache to store artefacts
+- Upgrade Wagtail to version 2.13
+
 ## 35.0 (2021-02-18)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/34.1...35.0
