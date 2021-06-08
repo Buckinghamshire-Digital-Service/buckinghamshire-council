@@ -14,12 +14,14 @@ def feedback_widget(context):
 
     if page:
         extra_context["yes_form"] = UsefulnessFeedbackForm(
-            initial={"useful": True, "page": page}
+            prefix="yes", initial={"useful": True, "page": page}
         )
         extra_context["no_form"] = UsefulnessFeedbackForm(
-            initial={"useful": False, "page": page}
+            prefix="no", initial={"useful": False, "page": page}
         )
-        extra_context["comment_form"] = FeedbackCommentForm(initial={"page": page})
+        extra_context["comment_form"] = FeedbackCommentForm(
+            prefix="comment_form", initial={"page": page}
+        )
         extra_context["site_name"] = page.get_site().site_name
 
     return extra_context

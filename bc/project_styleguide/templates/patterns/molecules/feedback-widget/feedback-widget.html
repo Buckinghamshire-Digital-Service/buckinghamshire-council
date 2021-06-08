@@ -18,6 +18,8 @@
                         id="page-feedback-yes"
                         aria-label="Feedback - yes this page is useful"
                         type="submit"
+                        name="form_prefix"
+                        value="{{ yes_form.prefix }}"
                     >
                         Yes
                     </button>
@@ -36,6 +38,8 @@
                         id="page-feedback-no"
                         aria-label="Feedback - No this page isn't useful"
                         type="submit"
+                        name="form_prefix"
+                        value="{{ no_form.prefix }}"
                     >
                         No
                     </button>

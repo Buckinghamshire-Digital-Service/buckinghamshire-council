@@ -32,6 +32,30 @@ class TestUsefulnessFeedbackCreateView(CreateInfoPageMixin, test.TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.BAD_REQUEST)
 
+    def test_form_prefix_in_post_data_is_used(self):
+        """
+        Test that the form is instantiated with the posted value of 'form_prefix'
+        """
+        payload = {
+            "form_prefix": "foo",
+            "foo-page": self.info_page.id,
+            "foo-useful": True,
+        }
+
+        response = self.client.post(self.url, data=payload, follow=True)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertContains(response, "Thank you for your feedback")
+
+    def test_bad_form_prefix_in_post_data_results_in_invalid_form(self):
+        payload = {
+            "form_prefix": "bar",
+            "foo-page": self.info_page.id,
+            "foo-useful": True,
+        }
+
+        response = self.client.post(self.url, data=payload, follow=True)
+        self.assertEqual(response.status_code, HTTPStatus.BAD_REQUEST)
+
     def test_post_shows_to_thank_you_page(self):
         """
         Test that successful post redirects to thank you page.
@@ -43,8 +67,9 @@ class TestUsefulnessFeedbackCreateView(CreateInfoPageMixin, test.TestCase):
 
         """
         payload = {
-            "page": self.info_page.id,
-            "useful": True,
+            "form_prefix": "foo",
+            "foo-page": self.info_page.id,
+            "foo-useful": True,
         }
 
         response = self.client.post(self.url, data=payload, follow=True)
@@ -54,8 +79,9 @@ class TestUsefulnessFeedbackCreateView(CreateInfoPageMixin, test.TestCase):
 
     def test_post_creates_entry_in_db(self):
         payload = {
-            "page": self.info_page.id,
-            "useful": True,
+            "form_prefix": "foo",
+            "foo-page": self.info_page.id,
+            "foo-useful": True,
         }
         self.assertEqual(UsefulnessFeedback.objects.count(), 0)
 
@@ -81,9 +107,9 @@ class TestFeedbackCommentCreateView(CreateInfoPageMixin, test.TestCase):
 
     def test_post_valid_data(self):
         payload = {
-            "page": self.info_page.id,
-            "action": "I was trying something.",
-            "issue": "Something went wrong.",
+            "comment_form-page": self.info_page.id,
+            "comment_form-action": "I was trying something.",
+            "comment_form-issue": "Something went wrong.",
         }
         self.assertEqual(FeedbackComment.objects.count(), 0)
 
@@ -94,8 +120,8 @@ class TestFeedbackCommentCreateView(CreateInfoPageMixin, test.TestCase):
         feedback_comment = FeedbackComment.objects.last()
 
         with self.subTest("Submission is stored"):
-            self.assertEqual(feedback_comment.action, payload["action"])
-            self.assertEqual(feedback_comment.issue, payload["issue"])
+            self.assertEqual(feedback_comment.action, payload["comment_form-action"])
+            self.assertEqual(feedback_comment.issue, payload["comment_form-issue"])
             self.assertEqual(feedback_comment.page.id, self.info_page.id)
 
         with self.subTest("Page URL is denormalised"):
@@ -103,9 +129,9 @@ class TestFeedbackCommentCreateView(CreateInfoPageMixin, test.TestCase):
 
     def test_post_empty_action(self):
         payload = {
-            "page": self.info_page.id,
-            "action": "",
-            "issue": "Something went wrong.",
+            "comment_form-page": self.info_page.id,
+            "comment_form-action": "",
+            "comment_form-issue": "Something went wrong.",
         }
 
         response = self.client.post(self.url, data=payload)
@@ -115,9 +141,9 @@ class TestFeedbackCommentCreateView(CreateInfoPageMixin, test.TestCase):
 
     def test_post_too_long_action(self):
         payload = {
-            "page": self.info_page.id,
-            "action": "A" * 501,
-            "issue": "Something went wrong.",
+            "comment_form-page": self.info_page.id,
+            "comment_form-action": "A" * 501,
+            "comment_form-issue": "Something went wrong.",
         }
 
         response = self.client.post(self.url, data=payload)
