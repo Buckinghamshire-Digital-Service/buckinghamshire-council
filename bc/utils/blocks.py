@@ -195,7 +195,7 @@ class Accordion(blocks.StructBlock):
     )
 
     class Meta:
-        icon = ("list-ul",)
+        icon = "list-ul"
         template = ("patterns/molecules/streamfield/blocks/accordion.html",)
 
 

@@ -4,6 +4,7 @@
 
 - Fix (Accessibility): Duplicate HTML element IDs in feedback form
 - Fix (Accessibility): Prevent duplicate h2 element IDs in alerts
+- Fix: Use a string to set the Accordion StreamField block icon
 - Upgrade Wagtail to version 2.13.1
 
 ## 37.0 (2021-06-07)
