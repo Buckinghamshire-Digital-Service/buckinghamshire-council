@@ -74,13 +74,17 @@ class FeedbackWidget {
         this.yesForm.addEventListener('submit', (event) => {
             event.preventDefault();
             const formData = new FormData(this.yesForm);
-            this.sendFormData(this.yesFormAction, formData, 'yes');
+            const form = 'yes';
+            formData.set('form_prefix', form);
+            this.sendFormData(this.yesFormAction, formData, form);
         });
 
         this.noForm.addEventListener('submit', (event) => {
             event.preventDefault();
             const formData = new FormData(this.noForm);
-            this.sendFormData(this.noFormAction, formData, 'no');
+            const form = 'no';
+            formData.set('form_prefix', form);
+            this.sendFormData(this.noFormAction, formData, form);
         });
         this.extraFeedbackForm.addEventListener('submit', (event) => {
             event.preventDefault();

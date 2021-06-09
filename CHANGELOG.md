@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Fix (Accessibility): Duplicate HTML element IDs in feedback form
 - Upgrade Wagtail to version 2.13.1
 
 ## 37.0 (2021-06-07)
