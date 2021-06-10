@@ -1,6 +1,19 @@
 # Release History
 
-## Unreleased
+## 37.2 (2021-06-10)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/37.1...37.2
+
+- Fix: Handle URLs longer than 200 characters in page feedback form
+
+## 37.1 (2021-06-09)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/37.0...37.1
+
+- Fix (Accessibility): Duplicate HTML element IDs in feedback form
+- Fix (Accessibility): Prevent duplicate h2 element IDs in alerts
+- Fix: StreamField typo causing missing block types in editor in Wagtail 2.13
+- Upgrade Wagtail to version 2.13.1
 
 ## 37.0 (2021-06-07)
 

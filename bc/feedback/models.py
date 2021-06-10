@@ -11,7 +11,7 @@ class UsefulnessFeedback(models.Model):
         on_delete=models.SET_NULL,
         related_name="usefulness_feedback",
     )
-    original_url = models.URLField()
+    original_url = models.URLField(max_length=2048)
     useful = models.BooleanField()
 
     def get_title(self):

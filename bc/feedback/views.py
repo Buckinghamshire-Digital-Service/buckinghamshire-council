@@ -26,10 +26,21 @@ class UsefulnessFeedbackCreateView(generic.CreateView):
     form_class = UsefulnessFeedbackForm
     http_method_names = ["post"]
 
+    def post(self, request, *args, **kwargs):
+        """ Set the form prefix based on the submitted data
+
+        To avoid duplicate HTML element IDs on the page, we prefix the forms. Both the
+        'yes' and 'no' form are POSTed to this view, but the data includes the form
+        prefix. Without matching the prefix to the submitted data, no form will be
+        valid.
+        """
+        self.prefix = request.POST.get("form_prefix")
+        return super().post(request, *args, **kwargs)
+
     def form_valid(self, form):
         self.object = form.save(commit=False)
         # Denormalise the URL, lest the page be deleted or moved.
-        self.object.original_url = self.object.page.url
+        self.object.original_url = self.object.page.url[:2048]
         self.object.save()
         return http.HttpResponseRedirect(self.get_success_url())
 
@@ -77,6 +88,7 @@ class FeedbackCommentCreateView(generic.CreateView):
     model = FeedbackComment
     form_class = FeedbackCommentForm
     http_method_names = ["post"]
+    prefix = "comment_form"
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
