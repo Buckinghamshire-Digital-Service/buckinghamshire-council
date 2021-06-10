@@ -1,6 +1,7 @@
-import json
-
 from django import forms
+
+from wagtail.core.telepath import register
+from wagtail.core.widget_adapters import WidgetAdapter
 
 
 class BaseChartInput(forms.HiddenInput):
@@ -9,44 +10,13 @@ class BaseChartInput(forms.HiddenInput):
         super().__init__(attrs=attrs)
         self.table_options["language"] = "en-us"
 
-    def get_context(self, name, value, attrs=None):
-        context = super().get_context(name, value, attrs)
-
-        chart_caption = ""
-        chart_title = ""
-        show_table_first = ""
-
-        if value and value != "null":
-            chart_caption = json.loads(value).get("chart_caption", "")
-            chart_title = json.loads(value).get("chart_title", "")
-            show_table_first = json.loads(value).get("show_table_first", "")
-
-        context["widget"]["table_options_json"] = json.dumps(self.table_options)
-        context["widget"]["chart_caption"] = chart_caption
-        context["widget"]["chart_title"] = chart_title
-        context["widget"]["show_table_first"] = show_table_first
-
-        return context
-
 
 class BarChartInput(BaseChartInput):
-    template_name = "utils/widgets/bar_chart.html"
-
-    def get_context(self, name, value, attrs=None):
-        context = super().get_context(name, value, attrs)
-
-        direction = ""
-
-        if value and value != "null":
-            direction = json.loads(value).get("direction", "")
-
-        context["widget"]["direction"] = direction
-
-        return context
+    chart_type = "Bar chart"
 
 
 class PieChartInput(BaseChartInput):
-    template_name = "utils/widgets/pie_chart.html"
+    chart_type = "Pie chart"
 
     def __init__(self, table_options=None, attrs=None):
         super().__init__(table_options=table_options, attrs=attrs)
@@ -57,7 +27,26 @@ class PieChartInput(BaseChartInput):
 
 
 class LineChartInput(BaseChartInput):
-    template_name = "utils/widgets/line_chart.html"
+    chart_type = "Line graph"
+
+
+class ChartInputAdapter(WidgetAdapter):
+    # This attribute is not strictly a Python path, but a namespace to look up a
+    # matching JS constructor within Telepath. The JS constructor is registered in
+    # bc/static_src/javascript/bc_admin_ui.js
+    js_constructor = "bc.utils.widgets.ChartInput"
+
+    class Media:
+        js = ["js/bc_admin_ui.js"]
+        css = {"all": ["bc_admin_ui/editor.css"]}
+
+    def js_args(self, widget):
+        return [widget.table_options, widget.chart_type]
+
+
+register(ChartInputAdapter(), BarChartInput)
+register(ChartInputAdapter(), PieChartInput)
+register(ChartInputAdapter(), LineChartInput)
 
 
 class CustomCheckboxSelectMultiple(forms.widgets.CheckboxSelectMultiple):
