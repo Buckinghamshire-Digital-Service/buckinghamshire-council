@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- Fix: Handle URLs longer than 200 characters in page feedback form
+
 ## 37.1 (2021-06-09)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/37.0...37.1
