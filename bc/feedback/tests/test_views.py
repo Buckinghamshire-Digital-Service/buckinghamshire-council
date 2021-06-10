@@ -9,16 +9,16 @@ from bc.standardpages.tests.fixtures import InformationPageFactory
 
 
 class CreateInfoPageMixin:
-    @classmethod
-    def setUpTestData(cls):
-        cls.default_site = wagtail_models.Site.objects.get(is_default_site=True)
-        cls.root_page = cls.default_site.root_page
-        cls.info_page = InformationPageFactory.build()
-        cls.root_page.add_child(instance=cls.info_page)
+    def setUp(self):
+        self.default_site = wagtail_models.Site.objects.get(is_default_site=True)
+        self.root_page = self.default_site.root_page
+        self.info_page = InformationPageFactory.build()
+        self.root_page.add_child(instance=self.info_page)
 
 
 class TestUsefulnessFeedbackCreateView(CreateInfoPageMixin, test.TestCase):
     def setUp(self):
+        super().setUp()
         self.client = test.Client()
         self.url = urls.reverse("feedback:usefulness_feedback_create")
 
@@ -94,9 +94,58 @@ class TestUsefulnessFeedbackCreateView(CreateInfoPageMixin, test.TestCase):
         with self.subTest("Page URL is denormalised"):
             self.assertEqual(feedback.original_url, feedback.page.url)
 
+    def test_page_with_permissible_long_url(self):
+        """Test that a URL longer than 200 characters can be saved."""
+        self.info_page.slug = "a" * 200
+        self.info_page.save()
+        self.assertGreater(len(self.info_page.url), 200)
+        payload = {
+            "form_prefix": "foo",
+            "foo-page": self.info_page.id,
+            "foo-useful": True,
+        }
+        self.assertEqual(UsefulnessFeedback.objects.count(), 0)
+
+        response = self.client.post(self.url, data=payload, follow=True)
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertEqual(UsefulnessFeedback.objects.count(), 1)
+        feedback = UsefulnessFeedback.objects.last()
+
+        with self.subTest("Page URL is saved as expected"):
+            self.assertEqual(feedback.original_url, feedback.page.url)
+
+    def test_truncation_of_urls(self):
+        """Test that a URL longer than 2048 characters can be saved, but truncated."""
+        parent_page = self.info_page
+        for _ in range(11):
+            child_page = InformationPageFactory.build(slug="a" * 200)
+            parent_page.add_child(instance=child_page)
+            parent_page = child_page
+
+        self.assertGreater(len(child_page.url), 2048)
+        payload = {
+            "form_prefix": "foo",
+            "foo-page": child_page.id,
+            "foo-useful": True,
+        }
+        self.assertEqual(UsefulnessFeedback.objects.count(), 0)
+
+        response = self.client.post(self.url, data=payload, follow=True)
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertEqual(UsefulnessFeedback.objects.count(), 1)
+        feedback = UsefulnessFeedback.objects.last()
+
+        with self.subTest("Denormalised URL is truncated"):
+            self.assertNotEqual(feedback.original_url, feedback.page.url)
+            self.assertTrue(feedback.page.url.startswith(feedback.original_url))
+            self.assertEqual(len(feedback.original_url), 2048)
+
 
 class TestFeedbackCommentCreateView(CreateInfoPageMixin, test.TestCase):
     def setUp(self):
+        super().setUp()
         self.client = test.Client()
         self.url = urls.reverse("feedback:feedback_comment_create")
 
