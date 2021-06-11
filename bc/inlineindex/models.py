@@ -14,6 +14,21 @@ from bc.utils.models import BasePage, RelatedPage
 
 
 class InlineIndexMixin(object):
+    """
+    Mixin to define shared functionality between the index and the child pages.
+
+    This could have been a base class for the other two page types as well. But, at the
+    time of creation of this mixin, the pages have already been used widely and I don't
+    want to go through the trouble messing with the model inheritance in the database.
+
+    Most of the methods here only raise the `NotImplementedError` to signal a missing
+    implementation in the derived classes. This is the case for the methods that should
+    be present in the derived classes, but that differs for index pages and child pages.
+    In that sense, this mixin acts like an interface. Other than an interface, it also
+    does define concrete implementations.
+
+    """
+
     def draft_for_page_available(self):
         return self.has_unpublished_changes or not self.live
 
