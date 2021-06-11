@@ -344,44 +344,40 @@ class TestInlineIndexTitles(TestCase):
 
         self.assertEqual(child_content_title, self.inline_child.title)
 
+    def test_inline_index_page_rendering(self):
+        response = self.client.get(self.inline_index.url)
 
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        soup = bs4.BeautifulSoup(response.content, "html.parser")
+        # Page heading
+        page_heading = soup.find("h1")
+        self.assertEqual(page_heading.get_text(strip=True), self.inline_index.title)
+        # Content heading
+        content_heading = soup.find(class_="section").find("h2")
+        self.assertEqual(content_heading.get_text(strip=True), self.inline_index.subtitle)
+        # Table of contents
+        table_of_contents = soup.find(class_="index-nav")
+        self.assertIsNotNone(table_of_contents)
+        first_toc_entry = table_of_contents.find(class_="index-nav__item")
+        self.assertEqual(first_toc_entry.get_text(strip=True), self.inline_index.subtitle)
 
+    def test_inline_child_page_rendering(self):
+        response = self.client.get(self.inline_child.url)
 
-    # def test_inline_index_page_rendering(self):
-    #     response = self.client.get(self.inline_index.url)
-
-    #     self.assertEqual(response.status_code, HTTPStatus.OK)
-    #     soup = bs4.BeautifulSoup(response.content, "html.parser")
-    #     # Page heading
-    #     page_heading = soup.find("h1")
-    #     self.assertEqual(page_heading.get_text(strip=True), self.inline_index.title)
-    #     # Content heading
-    #     content_heading = soup.find(class_="section").find("h2")
-    #     self.assertEqual(content_heading.get_text(strip=True), self.inline_index.subtitle)
-    #     # Table of contents
-    #     table_of_contents = soup.find(class_="index-nav")
-    #     self.assertIsNotNone(table_of_contents)
-    #     first_toc_entry = table_of_contents.find(class_="index-nav__item")
-    #     self.assertEqual(first_toc_entry.get_text(strip=True), self.inline_index.subtitle)
-
-
-    # def test_inline_child_page_rendering(self):
-    #     response = self.client.get(self.inline_child.url)
-
-    #     self.assertEqual(response.status_code, HTTPStatus.OK)
-    #     soup = bs4.BeautifulSoup(response.content, "html.parser")
-    #     # Page heading
-    #     page_heading = soup.find("h1")
-    #     self.assertEqual(page_heading.get_text(strip=True), self.inline_index.title)
-    #     # Content heading
-    #     content_heading = soup.find(class_="section").find("h2")
-    #     self.assertEqual(content_heading.get_text(strip=True), self.inline_child.title)
-    #     # Table of contents
-    #     table_of_contents = soup.find(class_="index-nav")
-    #     self.assertIsNotNone(table_of_contents)
-    #     first_toc_entry = table_of_contents.find(class_="index-nav__item")
-    #     self.assertEqual(first_toc_entry.get_text(strip=True), self.inline_index.subtitle)
-    #     # Previous page link
-    #     prev_page_link = soup.find(class_="index-pagination__page-title")
-    #     self.assertEqual(prev_page_link.get_text(strip=True), self.inline_index.subtitle)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        soup = bs4.BeautifulSoup(response.content, "html.parser")
+        # Page heading
+        page_heading = soup.find("h1")
+        self.assertEqual(page_heading.get_text(strip=True), self.inline_index.title)
+        # Content heading
+        content_heading = soup.find(class_="section").find("h2")
+        self.assertEqual(content_heading.get_text(strip=True), self.inline_child.title)
+        # Table of contents
+        table_of_contents = soup.find(class_="index-nav")
+        self.assertIsNotNone(table_of_contents)
+        first_toc_entry = table_of_contents.find(class_="index-nav__item")
+        self.assertEqual(first_toc_entry.get_text(strip=True), self.inline_index.subtitle)
+        # Previous page link
+        prev_page_link = soup.find(class_="index-pagination__page-title")
+        self.assertEqual(prev_page_link.get_text(strip=True), self.inline_index.subtitle)
 
