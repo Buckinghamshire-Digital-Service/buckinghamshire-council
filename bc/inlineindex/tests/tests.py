@@ -317,6 +317,10 @@ class TestInlineIndexTitleDisplayBehviour(TestCase):
             title="The inline index title",
             subtitle="The inline index subtitle",
         )
+        cls.inline_child = InlineIndexChildFactory(
+            parent=cls.inline_index,
+            title="The inline child title",
+        )
 
     def test_inline_index_page(self):
         response = self.client.get(self.inline_index.url)
@@ -326,12 +330,33 @@ class TestInlineIndexTitleDisplayBehviour(TestCase):
         # Page heading
         page_heading = soup.find("h1")
         self.assertEqual(page_heading.get_text(strip=True), self.inline_index.title)
+        # Content heading
+        content_heading = soup.find(class_="section").find("h2")
+        self.assertEqual(content_heading.get_text(strip=True), self.inline_index.subtitle)
         # Table of contents
         table_of_contents = soup.find(class_="index-nav")
         self.assertIsNotNone(table_of_contents)
         first_toc_entry = table_of_contents.find(class_="index-nav__item")
         self.assertEqual(first_toc_entry.get_text(strip=True), self.inline_index.subtitle)
+
+
+    def test_inline_child_page(self):
+        response = self.client.get(self.inline_child.url)
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        soup = bs4.BeautifulSoup(response.content, "html.parser")
+        # Page heading
+        page_heading = soup.find("h1")
+        self.assertEqual(page_heading.get_text(strip=True), self.inline_index.title)
         # Content heading
         content_heading = soup.find(class_="section").find("h2")
-        self.assertEqual(content_heading.get_text(strip=True), self.inline_index.subtitle)
+        self.assertEqual(content_heading.get_text(strip=True), self.inline_child.title)
+        # Table of contents
+        table_of_contents = soup.find(class_="index-nav")
+        self.assertIsNotNone(table_of_contents)
+        first_toc_entry = table_of_contents.find(class_="index-nav__item")
+        self.assertEqual(first_toc_entry.get_text(strip=True), self.inline_index.subtitle)
+        # Previous page link
+        prev_page_link = soup.find(class_="index-pagination__page-title")
+        self.assertEqual(prev_page_link.get_text(strip=True), self.inline_index.subtitle)
 
