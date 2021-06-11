@@ -1,7 +1,11 @@
+from http import HTTPStatus
+
 from django.test import RequestFactory, TestCase, override_settings
 from django.urls import reverse
 
 from wagtail.tests.utils import WagtailTestUtils
+
+import bs4
 
 from bc.home.models import HomePage
 from bc.inlineindex.tests.fixtures import InlineIndexChildFactory, InlineIndexFactory
@@ -292,3 +296,40 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
 
         self.assertEqual(response.status_code, 200)
         self.assertNotContains(response, self.second_index_child.title)
+
+
+class TestInlineIndexTitleDisplayBehviour(TestCase):
+    """
+    Test how inline index title and subtitle are used when displaying the section.
+
+    The title of the inline index page itself is the title to the whole section. It
+    should not show up in the table of content for the section. It should also not show
+    up in as the "previous" link that is displayed on the first child page. In either
+    of those cases the inline index subtitle should be used.
+
+    """
+
+    def test_inline_index_page(self):
+        homepage = HomePage.objects.first()
+        inline_index = InlineIndexFactory(
+            parent=homepage,
+            title="The inline index title",
+            subtitle="The inline index subtitle",
+        )
+
+        response = self.client.get(inline_index.url)
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        soup = bs4.BeautifulSoup(response.content, "html.parser")
+        # Page heading
+        page_heading = soup.find("h1")
+        self.assertEqual(page_heading.get_text(strip=True), inline_index.title)
+        # Table of contents
+        table_of_contents = soup.find(class_="index-nav")
+        self.assertIsNotNone(table_of_contents)
+        first_toc_entry = table_of_contents.find(class_="index-nav__item")
+        self.assertEqual(first_toc_entry.get_text(strip=True), inline_index.subtitle)
+        # Content heading
+        content_heading = soup.find(class_="section").find("h2")
+        self.assertEqual(content_heading.get_text(strip=True), inline_index.subtitle)
+
