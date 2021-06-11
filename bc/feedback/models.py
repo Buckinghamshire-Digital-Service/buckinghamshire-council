@@ -30,7 +30,7 @@ class FeedbackComment(models.Model):
         related_name="feedback_comments",
     )
     original_url = models.URLField()
-    action = models.CharField(verbose_name="What where you doing?", max_length=500,)
+    action = models.CharField(verbose_name="What were you doing?", max_length=500,)
     issue = models.CharField(verbose_name="What went wrong?", max_length=500,)
 
     def get_title(self):
