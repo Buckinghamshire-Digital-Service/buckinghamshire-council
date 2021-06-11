@@ -89,8 +89,7 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
         index = list(context["index"])
         self.assertEqual(len(index), 1)
         self.assertNotIn(self.first_index_child, index)
-        self.assertNotIn("prev_page", context)  # Not included on the index page
-        self.assertEqual(context["next_page"], None)
+        self.assertIsNone(context["next_page"])
 
         response = self.client.get(url)
 
@@ -124,7 +123,7 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
         index = list(context["index"])
         self.assertEqual(len(index), 2)
         self.assertIn(self.first_index_child, index)
-        self.assertNotIn("prev_page", context)  # Not included on the index page
+        self.assertIsNone(context["prev_page"])
         self.assertEqual(context["next_page"], self.first_index_child)
 
     def test_live_request_to_live_child_shows_live_next_sibling(self):

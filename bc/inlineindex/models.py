@@ -13,19 +13,30 @@ from bc.utils.blocks import StoryBlock
 from bc.utils.models import BasePage, RelatedPage
 
 
-class InlineIndexDraftMixin(object):
+class InlineIndexMixin(object):
     def draft_for_page_available(self):
         return self.has_unpublished_changes or not self.live
 
     def viewing_page_draft(self, request):
         return request.is_preview and self.draft_for_page_available()
 
+    def get_context(self, request):
+        context = super().get_context(request)
+
+        include_draft_pages = self.viewing_page_draft(request)
+
+        context["index"] = self.get_index(include_draft_pages)
+        context["next_page"] = self.get_next_page(include_draft_pages)
+        context["prev_page"] = self.get_prev_page(include_draft_pages)
+
+        return context
+
 
 class InlineIndexRelatedPage(RelatedPage):
     source_page = ParentalKey("InlineIndex", related_name="related_pages")
 
 
-class InlineIndex(InlineIndexDraftMixin, BasePage):
+class InlineIndex(InlineIndexMixin, BasePage):
     template = "patterns/pages/inlineindex/inline_index_page.html"
 
     subtitle = models.CharField(
@@ -65,7 +76,7 @@ class InlineIndex(InlineIndexDraftMixin, BasePage):
         ]
 
     def get_index(self, include_draft_children=False):
-        index_queryset = Page.objects.page(self)
+        index_queryset = Page.objects.page(self).specific()
 
         children = self.get_children().specific()
         if not include_draft_children:
@@ -86,18 +97,12 @@ class InlineIndex(InlineIndexDraftMixin, BasePage):
         if first_child:
             return first_child.specific
 
-    def get_context(self, request):
-        context = super().get_context(request)
-
-        include_draft_children = self.viewing_page_draft(request)
-
-        context["index"] = self.get_index(include_draft_children)
-        context["next_page"] = self.get_next_page(include_draft_children)
-
-        return context
+    def get_prev_page(self, *args, **kwargs):
+        """Always return None because the index does not have a previous page."""
+        return None
 
 
-class InlineIndexChild(InlineIndexDraftMixin, BasePage):
+class InlineIndexChild(InlineIndexMixin, BasePage):
 
     body = StreamField(StoryBlock())
 
@@ -135,9 +140,9 @@ class InlineIndexChild(InlineIndexDraftMixin, BasePage):
         if not include_draft_pages:
             next_siblings = next_siblings.live()
 
-        next_sibling = next_siblings.first()
-        if next_sibling:
-            return next_sibling.specific
+        next_page = next_siblings.first()
+        if next_page:
+            return next_page.specific
 
     def get_prev_page(self, include_draft_pages=False):
         """ Return the previous sibling, or in the case of a first child, the
@@ -148,19 +153,10 @@ class InlineIndexChild(InlineIndexDraftMixin, BasePage):
         if not include_draft_pages:
             prev_siblings = prev_siblings.live()
 
-        prev_sibling = prev_siblings.first() or self.get_parent()
-        if prev_sibling:
-            return prev_sibling.specific
+        prev_page = prev_siblings.first() or self.get_parent()
+        if prev_page:
+            return prev_page.specific
 
-    def get_context(self, request):
-        context = super().get_context(request)
-
-        include_draft_pages = self.viewing_page_draft(request)
-
-        context["index"] = self.get_index(include_draft_pages)
-        context["next_page"] = self.get_next_page(include_draft_pages)
-        context["prev_page"] = self.get_prev_page(include_draft_pages)
-        return context
 
     def get_template(self, request):
         return InlineIndex().get_template(request)
