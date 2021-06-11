@@ -8,10 +8,15 @@ from bc.inlineindex.tests.fixtures import InlineIndexChildFactory, InlineIndexFa
 
 
 class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
+    """
+    Test display behaviour of inline index child pages based on published/live state.
+
+    Live children should be shown, but draft pages should only be shown when previewing.
+
+    """
+
     def setup_homepage(self):
         self.homepage = HomePage.objects.first()
-        response = self.client.get(self.homepage.url)
-        self.assertEqual(response.status_code, 200)
 
     def setup_inline_index(self, live):
         self.inline_index = InlineIndexFactory(
