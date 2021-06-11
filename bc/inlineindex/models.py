@@ -20,6 +20,15 @@ class InlineIndexMixin(object):
     def viewing_page_draft(self, request):
         return request.is_preview and self.draft_for_page_available()
 
+    def get_index(self, include_draft_pages):
+        raise NotImplementedError
+
+    def get_prev_page(self, include_draft_pages):
+        raise NotImplementedError
+
+    def get_next_page(self, include_draft_pages):
+        raise NotImplementedError
+
     def get_context(self, request):
         context = super().get_context(request)
 
@@ -30,6 +39,17 @@ class InlineIndexMixin(object):
         context["prev_page"] = self.get_prev_page(include_draft_pages)
 
         return context
+
+    @property
+    def index_title(self):
+        raise NotImplementedError
+
+    @property
+    def content_title(self):
+        raise NotImplementedError
+
+    def __str__(self):
+        return self.content_title
 
 
 class InlineIndexRelatedPage(RelatedPage):
@@ -101,6 +121,14 @@ class InlineIndex(InlineIndexMixin, BasePage):
         """Always return None because the index does not have a previous page."""
         return None
 
+    @property
+    def index_title(self):
+        return self.title
+
+    @property
+    def content_title(self):
+        return self.subtitle
+
 
 class InlineIndexChild(InlineIndexMixin, BasePage):
 
@@ -157,6 +185,14 @@ class InlineIndexChild(InlineIndexMixin, BasePage):
         if prev_page:
             return prev_page.specific
 
-
     def get_template(self, request):
         return InlineIndex().get_template(request)
+
+    @property
+    def index_title(self):
+        return self.get_parent().specific.index_title
+
+    @property
+    def content_title(self):
+        return self.title
+
