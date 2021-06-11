@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 37.3 (2021-06-11)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/37.2...37.3
 
 - Fix: Field label typo in page feedback form
 
