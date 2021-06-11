@@ -317,8 +317,7 @@ class TestInlineIndexTitles(TestCase):
             subtitle="The inline index subtitle",
         )
         cls.inline_child = InlineIndexChildFactory(
-            parent=cls.inline_index,
-            title="The inline child title",
+            parent=cls.inline_index, title="The inline child title"
         )
 
     def test_index_title(self):
@@ -354,12 +353,16 @@ class TestInlineIndexTitles(TestCase):
         self.assertEqual(page_heading.get_text(strip=True), self.inline_index.title)
         # Content heading
         content_heading = soup.find(class_="section").find("h2")
-        self.assertEqual(content_heading.get_text(strip=True), self.inline_index.subtitle)
+        self.assertEqual(
+            content_heading.get_text(strip=True), self.inline_index.subtitle
+        )
         # Table of contents
         table_of_contents = soup.find(class_="index-nav")
         self.assertIsNotNone(table_of_contents)
         first_toc_entry = table_of_contents.find(class_="index-nav__item")
-        self.assertEqual(first_toc_entry.get_text(strip=True), self.inline_index.subtitle)
+        self.assertEqual(
+            first_toc_entry.get_text(strip=True), self.inline_index.subtitle
+        )
 
     def test_inline_child_page_rendering(self):
         response = self.client.get(self.inline_child.url)
@@ -376,8 +379,11 @@ class TestInlineIndexTitles(TestCase):
         table_of_contents = soup.find(class_="index-nav")
         self.assertIsNotNone(table_of_contents)
         first_toc_entry = table_of_contents.find(class_="index-nav__item")
-        self.assertEqual(first_toc_entry.get_text(strip=True), self.inline_index.subtitle)
+        self.assertEqual(
+            first_toc_entry.get_text(strip=True), self.inline_index.subtitle
+        )
         # Previous page link
         prev_page_link = soup.find(class_="index-pagination__page-title")
-        self.assertEqual(prev_page_link.get_text(strip=True), self.inline_index.subtitle)
-
+        self.assertEqual(
+            prev_page_link.get_text(strip=True), self.inline_index.subtitle
+        )

@@ -210,4 +210,3 @@ class InlineIndexChild(InlineIndexMixin, BasePage):
     @property
     def content_title(self):
         return self.title
-
