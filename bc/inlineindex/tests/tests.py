@@ -333,10 +333,7 @@ class TestInlineIndexTitles(TestCase):
     def test_inline_child_page_index_title(self):
         """The index title should be the same on the child and the index."""
 
-        child_index_title = self.inline_child.index_title
-        index_index_title = self.inline_index.index_title
-
-        self.assertEqual(child_index_title, index_index_title)
+        self.assertEqual(self.inline_child.index_title, self.inline_index.index_title)
 
     def test_inline_child_page_content_title(self):
         child_content_title = self.inline_child.content_title
