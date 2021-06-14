@@ -204,9 +204,7 @@ class InlineIndexChild(InlineIndexMixin, BasePage):
         if not include_draft_pages:
             prev_siblings = prev_siblings.live()
 
-        prev_page = prev_siblings.first() or self.get_parent()
-        if prev_page:
-            return prev_page.specific
+        return prev_siblings.specific().first() or self.get_parent().specific
 
     @cached_property
     def index_title(self):
