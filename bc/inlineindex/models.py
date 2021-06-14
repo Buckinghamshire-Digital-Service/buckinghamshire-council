@@ -193,9 +193,7 @@ class InlineIndexChild(InlineIndexMixin, BasePage):
         if not include_draft_pages:
             next_siblings = next_siblings.live()
 
-        next_page = next_siblings.first()
-        if next_page:
-            return next_page.specific
+        return next_siblings.specific().first()
 
     def get_prev_page(self, include_draft_pages=False):
         """ Return the previous sibling, or in the case of a first child, the
