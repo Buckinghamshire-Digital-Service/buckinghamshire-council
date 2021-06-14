@@ -117,7 +117,7 @@ class InlineIndex(InlineIndexMixin, BasePage):
             related_page
             for related_page in pages
             if related_page.page.live
-            and len(related_page.page.view_restrictions.all()) == 0
+            and self.related_pages.live().public()
         ]
 
     def get_index_page_and_children(self, include_draft_children=False):
