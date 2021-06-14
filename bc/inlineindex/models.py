@@ -55,11 +55,11 @@ class InlineIndexMixin(object):
 
         return context
 
-    @property
+    @cached_property
     def index_title(self):
         raise NotImplementedError
 
-    @property
+    @cached_property
     def content_title(self):
         raise NotImplementedError
 
@@ -136,11 +136,11 @@ class InlineIndex(InlineIndexMixin, BasePage):
         """Always return None because the index does not have a previous page."""
         return None
 
-    @property
+    @cached_property
     def index_title(self):
         return self.title
 
-    @property
+    @cached_property
     def content_title(self):
         return self.subtitle
 
@@ -203,10 +203,10 @@ class InlineIndexChild(InlineIndexMixin, BasePage):
     def get_template(self, request):
         return InlineIndex().get_template(request)
 
-    @property
+    @cached_property
     def index_title(self):
         return self.get_parent().specific.index_title
 
-    @property
+    @cached_property
     def content_title(self):
         return self.title
