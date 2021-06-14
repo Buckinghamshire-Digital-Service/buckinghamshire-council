@@ -82,6 +82,7 @@ class InlineIndex(InlineIndexMixin, BasePage):
     See e.g. https://www.gov.uk/attendance-allowance for the GDS pattern that this
     implements.
     """
+
     template = "patterns/pages/inlineindex/inline_index_page.html"
 
     subtitle = models.CharField(
