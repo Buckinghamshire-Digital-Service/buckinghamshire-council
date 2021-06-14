@@ -129,9 +129,10 @@ class InlineIndex(InlineIndexMixin, BasePage):
 
         return itertools.chain(index_queryset, children)
 
-    def get_next_page(self, include_draft_children=False):
-        """ In fact returns the first child, instead, as this page acts as the
-        first item in the index.
+        """Return the first child.
+
+        The index page is displayed as the first sibling in the table of contents. The
+        next page is actually the first child in the page tree.
         """
         children = self.get_children()
         if not include_draft_children:
