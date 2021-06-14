@@ -156,6 +156,7 @@ class InlineIndex(InlineIndexMixin, BasePage):
 
 
 class InlineIndexChild(InlineIndexMixin, BasePage):
+    template = InlineIndex.template
 
     body = StreamField(StoryBlock())
 
@@ -211,9 +212,6 @@ class InlineIndexChild(InlineIndexMixin, BasePage):
         prev_page = prev_siblings.first() or self.get_parent()
         if prev_page:
             return prev_page.specific
-
-    def get_template(self, request):
-        return InlineIndex().get_template(request)
 
     @cached_property
     def index_title(self):
