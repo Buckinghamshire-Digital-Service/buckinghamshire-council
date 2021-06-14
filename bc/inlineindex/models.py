@@ -130,6 +130,7 @@ class InlineIndex(InlineIndexMixin, BasePage):
 
         return itertools.chain(index_queryset, children)
 
+    def get_next_page(self,  include_draft_children=False):
         """Return the first child.
 
         The index page is displayed as the first sibling in the table of contents. The
