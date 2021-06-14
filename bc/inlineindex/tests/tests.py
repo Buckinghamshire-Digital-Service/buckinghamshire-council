@@ -302,8 +302,8 @@ class TestInlineIndexTitles(TestCase):
     Test how inline index title and subtitle are used when displaying the section.
 
     The title of the inline index page itself is the title to the whole section. It
-    should not show up in the table of content for the section. It should also not show
-    up in as the "previous" link that is displayed on the first child page. In either
+    should not show up in the table of contents for the section. It should also not show
+    up as the "previous" link that is displayed on the first child page. In either
     of those cases the inline index subtitle should be used.
 
     """
