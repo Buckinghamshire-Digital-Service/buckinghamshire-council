@@ -137,10 +137,7 @@ class InlineIndex(InlineIndexMixin, BasePage):
         if not include_draft_children:
             children = children.live()
 
-        first_child = children.first()
-
-        if first_child:
-            return first_child.specific
+        return children.specific().first()
 
     def get_prev_page(self, *args, **kwargs):
         """Always return None because the index does not have a previous page."""
