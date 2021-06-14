@@ -35,7 +35,7 @@ class InlineIndexMixin(object):
     def viewing_page_draft(self, request):
         return request.is_preview and self.draft_for_page_available()
 
-    def get_index(self, include_draft_pages):
+    def get_index_page_and_children(self, include_draft_pages):
         raise NotImplementedError
 
     def get_prev_page(self, include_draft_pages):
@@ -49,7 +49,7 @@ class InlineIndexMixin(object):
 
         include_draft_pages = self.viewing_page_draft(request)
 
-        context["index"] = self.get_index(include_draft_pages)
+        context["index"] = self.get_index_page_and_children(include_draft_pages)
         context["next_page"] = self.get_next_page(include_draft_pages)
         context["prev_page"] = self.get_prev_page(include_draft_pages)
 
@@ -110,7 +110,7 @@ class InlineIndex(InlineIndexMixin, BasePage):
             and len(related_page.page.view_restrictions.all()) == 0
         ]
 
-    def get_index(self, include_draft_children=False):
+    def get_index_page_and_children(self, include_draft_children=False):
         index_queryset = Page.objects.page(self).specific()
 
         children = self.get_children().specific()
@@ -172,8 +172,10 @@ class InlineIndexChild(InlineIndexMixin, BasePage):
     def live_related_pages(self):
         return self.get_parent().specific.live_related_pages
 
-    def get_index(self, include_draft_children=False):
-        return self.get_parent().specific.get_index(include_draft_children)
+    def get_index_page_and_children(self, include_draft_children=False):
+        return self.get_parent().specific.get_index_page_and_children(
+            include_draft_children,
+        )
 
     def get_next_page(self, include_draft_pages=False):
         """ Return the next sibling, if there is one. NB this is implemented
