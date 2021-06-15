@@ -25,7 +25,7 @@ class CampaignPage(BasePage):
 
     template = "patterns/pages/campaigns/campaign_page.html"
 
-    intro = fields.RichTextField(features=("link"))
+    intro = fields.RichTextField(features=("link", "bold", "italic"))
     hero_image = models.ForeignKey(
         "images.CustomImage", null=True, related_name="+", on_delete=models.SET_NULL,
     )
