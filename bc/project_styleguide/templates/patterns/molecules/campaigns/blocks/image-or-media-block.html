@@ -1,0 +1,10 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="campaign-content-block">
+    {% if value.image %}
+        {% image value.image fill-990x618 %}
+    {% elif value.embed %}
+        {% include_block value.bound_blocks.embed %}
+    {% endif %}
+</div>
+
