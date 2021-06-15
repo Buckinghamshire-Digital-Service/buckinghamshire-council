@@ -25,7 +25,19 @@ class MediaSubheadingParagraphBlock(blocks.StructBlock):
 
     class Meta:
         icon = "media"
-        template = "patterns/molecules/campaigns/blocks/content-block.html"
+        template = "patterns/molecules/campaigns/blocks/media-subheading-paragraph-block.html"
+
+
+class SubheadingParagraphBlock(blocks.StructBlock):
+    subheading = blocks.CharBlock(
+        max_length=250,
+        template="patterns/molecules/streamfield/blocks/subheading_block.html",
+    )
+    paragraph = CampaignRichTextBlock()
+
+    class Meta:
+        icon = "pilcrow"
+        template = "patterns/molecules/campaigns/blocks/subheading-paragraph-block.html"
 
 
 class ButtonBannerValue(blocks.StructValue):
@@ -92,6 +104,7 @@ class SectionBlock(blocks.StructBlock):
     content = blocks.StreamBlock(
         [
             ("media_with_subheading_and_paragraph", MediaSubheadingParagraphBlock()),
+            ("subheading_and_paragraph", SubheadingParagraphBlock()),
             ("directory_banner", DirectoryBannerBlock()),
             ("full_width_banner", FullWidthBanner()),
         ]
