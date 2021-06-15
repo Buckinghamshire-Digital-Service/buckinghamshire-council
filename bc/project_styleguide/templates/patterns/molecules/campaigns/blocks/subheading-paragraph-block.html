@@ -1,9 +1,7 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 {% with value as content_block %}
-    <div class="campaign-content-block">
-        <div class="campaign-content-block__text-wrapper">
-            {% include_block content_block.bound_blocks.subheading with class="heading heading--l heading--no-margin" %}
-            {% include_block content_block.bound_blocks.paragraph %}
-        </div>
+    <div class="campaign-content-block__text-wrapper">
+        {% include_block content_block.bound_blocks.subheading with class="heading heading--l heading--no-margin" %}
+        {% include_block content_block.bound_blocks.paragraph %}
     </div>
 {% endwith %}

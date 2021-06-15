@@ -4,7 +4,9 @@
     <section class="campaign-section">
         {% include_block section.bound_blocks.heading with class="heading heading--xl" %}
         {% for content_block in section.content %}
-            {% include_block content_block %}
+            <div class="campaign-content-block">
+                {% include_block content_block %}
+            </div>
         {% endfor %}
     </section>
 {% endwith %}

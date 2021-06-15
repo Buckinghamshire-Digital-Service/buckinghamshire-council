@@ -1,6 +1,6 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 {% with value as content_block %}
-    <div class="grid grid--two-one-swap campaign-content-block">
+    <div class="grid grid--two-one-swap">
         <div class="campaign-content-block__media-wrapper">
             {% if content_block.image_or_embed.image %}
                 {% image content_block.image_or_embed.image fill-660x412 class="campaign-content-block__image" %}
