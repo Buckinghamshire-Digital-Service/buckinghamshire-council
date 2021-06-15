@@ -9,7 +9,8 @@ from bc.utils.blocks import ButtonBlock, ImageOrEmbedBlock
 
 CampaignRichTextBlock = partial(
     blocks.RichTextBlock,
-    features=["link", "bold", "italic", "ul", "ol"]
+    features=["link", "bold", "italic", "ul", "ol"],
+    icon="pilcrow",
 )
 
 
@@ -105,6 +106,7 @@ class SectionBlock(blocks.StructBlock):
         [
             ("media_with_subheading_and_paragraph", MediaSubheadingParagraphBlock()),
             ("subheading_and_paragraph", SubheadingParagraphBlock()),
+            ("paragraph", CampaignRichTextBlock()),
             ("directory_banner", DirectoryBannerBlock()),
             ("full_width_banner", FullWidthBanner()),
         ]
