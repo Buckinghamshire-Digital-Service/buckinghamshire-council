@@ -1,7 +1,16 @@
+from functools import partial
+
+
 from wagtail.core import blocks
 from wagtail.images import blocks as image_blocks
 
 from bc.utils.blocks import ButtonBlock, ImageOrEmbedBlock
+
+
+CampaignRichTextBlock = partial(
+    blocks.RichTextBlock,
+    features=["link", "bold", "italic", "ul", "ol"]
+)
 
 
 class SectionContentBlock(blocks.StructBlock):
@@ -12,7 +21,7 @@ class SectionContentBlock(blocks.StructBlock):
         max_length=250,
         template="patterns/molecules/streamfield/blocks/subheading_block.html",
     )
-    paragraph = blocks.RichTextBlock(features=["link"])
+    paragraph = CampaignRichTextBlock()
 
     class Meta:
         icon = "pilcrow"
