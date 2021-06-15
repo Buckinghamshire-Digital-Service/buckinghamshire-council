@@ -13,7 +13,7 @@ CampaignRichTextBlock = partial(
 )
 
 
-class SectionContentBlock(blocks.StructBlock):
+class MediaSubheadingParagraphBlock(blocks.StructBlock):
     image_or_embed = ImageOrEmbedBlock(
         form_classname="struct-block c-sf-block c-sf-block__content-inner"
     )
@@ -24,7 +24,7 @@ class SectionContentBlock(blocks.StructBlock):
     paragraph = CampaignRichTextBlock()
 
     class Meta:
-        icon = "pilcrow"
+        icon = "media"
         template = "patterns/molecules/campaigns/blocks/content-block.html"
 
 
@@ -91,7 +91,7 @@ class SectionBlock(blocks.StructBlock):
 
     content = blocks.StreamBlock(
         [
-            ("media_and_paragraph", SectionContentBlock()),
+            ("media_with_subheading_and_paragraph", MediaSubheadingParagraphBlock()),
             ("directory_banner", DirectoryBannerBlock()),
             ("full_width_banner", FullWidthBanner()),
         ]
