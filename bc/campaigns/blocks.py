@@ -79,7 +79,6 @@ class SectionBlock(blocks.StructBlock):
         form_classname="full title",
         template="patterns/molecules/streamfield/blocks/heading_block.html",
     )
-    intro = blocks.RichTextBlock(features=["link"])
 
     content = blocks.StreamBlock(
         [
