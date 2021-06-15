@@ -241,3 +241,7 @@ class ImageOrEmbedBlock(blocks.StructBlock):
             raise ValidationError("Validation error in StructBlock", params=errors)
 
         return result
+
+    class Meta:
+        icon = "media"
+

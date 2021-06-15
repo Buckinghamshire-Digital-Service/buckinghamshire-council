@@ -1,11 +1,9 @@
 from functools import partial
 
-
 from wagtail.core import blocks
 from wagtail.images import blocks as image_blocks
 
 from bc.utils.blocks import ButtonBlock, ImageOrEmbedBlock
-
 
 CampaignRichTextBlock = partial(
     blocks.RichTextBlock,
@@ -26,7 +24,9 @@ class MediaSubheadingParagraphBlock(blocks.StructBlock):
 
     class Meta:
         icon = "media"
-        template = "patterns/molecules/campaigns/blocks/media-subheading-paragraph-block.html"
+        template = (
+            "patterns/molecules/campaigns/blocks/media-subheading-paragraph-block.html"
+        )
 
 
 class SubheadingParagraphBlock(blocks.StructBlock):
@@ -107,6 +107,12 @@ class SectionBlock(blocks.StructBlock):
             ("media_with_subheading_and_paragraph", MediaSubheadingParagraphBlock()),
             ("subheading_and_paragraph", SubheadingParagraphBlock()),
             ("paragraph", CampaignRichTextBlock()),
+            (
+                "media_or_image",
+                ImageOrEmbedBlock(
+                    template="patterns/molecules/campaigns/blocks/image_or_media_block.html"
+                ),
+            ),
             ("directory_banner", DirectoryBannerBlock()),
             ("full_width_banner", FullWidthBanner()),
         ]
