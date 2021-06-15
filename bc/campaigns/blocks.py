@@ -106,12 +106,7 @@ class SectionBlock(blocks.StructBlock):
         [
             ("media_with_subheading_and_paragraph", MediaSubheadingParagraphBlock()),
             ("subheading_and_paragraph", SubheadingParagraphBlock()),
-            (
-                "paragraph",
-                CampaignRichTextBlock(
-                    template="patterns/molecules/campaigns/blocks/paragraph-block.html"
-                ),
-            ),
+            ("paragraph", CampaignRichTextBlock()),
             (
                 "media_or_image",
                 ImageOrEmbedBlock(
