@@ -13,19 +13,76 @@ from bc.utils.blocks import StoryBlock
 from bc.utils.models import BasePage, RelatedPage
 
 
-class InlineIndexDraftMixin(object):
+class InlineIndexMixin(object):
+    """
+    Mixin to define shared functionality between the index and the child pages.
+
+    This could have been a base class for the other two page types as well. But, at the
+    time of creation of this mixin, the pages have already been used widely and I don't
+    want to go through the trouble messing with the model inheritance in the database.
+
+    Most of the methods here only raise the `NotImplementedError` to signal a missing
+    implementation in the derived classes. This is the case for the methods that should
+    be present in the derived classes, but that differs for index pages and child pages.
+    In that sense, this mixin acts like an interface. Other than an interface, it also
+    does define concrete implementations.
+
+    """
+
     def draft_for_page_available(self):
         return self.has_unpublished_changes or not self.live
 
     def viewing_page_draft(self, request):
         return request.is_preview and self.draft_for_page_available()
 
+    def get_index_page_and_children(self, include_draft_pages):
+        raise NotImplementedError
+
+    def get_prev_page(self, include_draft_pages):
+        raise NotImplementedError
+
+    def get_next_page(self, include_draft_pages):
+        raise NotImplementedError
+
+    def get_context(self, request):
+        context = super().get_context(request)
+
+        include_draft_pages = self.viewing_page_draft(request)
+
+        context["index"] = self.get_index_page_and_children(include_draft_pages)
+        context["next_page"] = self.get_next_page(include_draft_pages)
+        context["prev_page"] = self.get_prev_page(include_draft_pages)
+
+        return context
+
+    @property
+    def index_title(self):
+        raise NotImplementedError
+
+    @property
+    def content_title(self):
+        raise NotImplementedError
+
+    def __str__(self):
+        return self.content_title
+
 
 class InlineIndexRelatedPage(RelatedPage):
     source_page = ParentalKey("InlineIndex", related_name="related_pages")
 
 
-class InlineIndex(InlineIndexDraftMixin, BasePage):
+class InlineIndex(InlineIndexMixin, BasePage):
+    """A page with an included table of contents, listing this page and its children.
+
+    InlineIndex and InlineIndexChild can be used to build a "guide" to a service or
+    topic. All of the pages are shown together in a flat hierarchy in the table of
+    contents, with the index page shown as the first sibling. The "next" and "previous"
+    buttons navigate through the guide.
+
+    See e.g. https://www.gov.uk/attendance-allowance for the GDS pattern that this
+    implements.
+    """
+
     template = "patterns/pages/inlineindex/inline_index_page.html"
 
     subtitle = models.CharField(
@@ -64,8 +121,8 @@ class InlineIndex(InlineIndexDraftMixin, BasePage):
             and len(related_page.page.view_restrictions.all()) == 0
         ]
 
-    def get_index(self, include_draft_children=False):
-        index_queryset = Page.objects.page(self)
+    def get_index_page_and_children(self, include_draft_children=False):
+        index_queryset = Page.objects.page(self).specific()
 
         children = self.get_children().specific()
         if not include_draft_children:
@@ -74,30 +131,32 @@ class InlineIndex(InlineIndexDraftMixin, BasePage):
         return itertools.chain(index_queryset, children)
 
     def get_next_page(self, include_draft_children=False):
-        """ In fact returns the first child, instead, as this page acts as the
-        first item in the index.
+        """Return the first child.
+
+        The index page is displayed as the first sibling in the table of contents. The
+        next page is actually the first child in the page tree.
         """
         children = self.get_children()
         if not include_draft_children:
             children = children.live()
 
-        first_child = children.first()
+        return children.specific().first()
 
-        if first_child:
-            return first_child.specific
+    def get_prev_page(self, *args, **kwargs):
+        """Always return None because the index does not have a previous page."""
+        return None
 
-    def get_context(self, request):
-        context = super().get_context(request)
+    @property
+    def index_title(self):
+        return self.title
 
-        include_draft_children = self.viewing_page_draft(request)
-
-        context["index"] = self.get_index(include_draft_children)
-        context["next_page"] = self.get_next_page(include_draft_children)
-
-        return context
+    @property
+    def content_title(self):
+        return self.subtitle
 
 
-class InlineIndexChild(InlineIndexDraftMixin, BasePage):
+class InlineIndexChild(InlineIndexMixin, BasePage):
+    template = InlineIndex.template
 
     body = StreamField(StoryBlock())
 
@@ -124,8 +183,10 @@ class InlineIndexChild(InlineIndexDraftMixin, BasePage):
     def live_related_pages(self):
         return self.get_parent().specific.live_related_pages
 
-    def get_index(self, include_draft_children=False):
-        return self.get_parent().specific.get_index(include_draft_children)
+    def get_index_page_and_children(self, include_draft_children=False):
+        return self.get_parent().specific.get_index_page_and_children(
+            include_draft_children,
+        )
 
     def get_next_page(self, include_draft_pages=False):
         """ Return the next sibling, if there is one. NB this is implemented
@@ -135,9 +196,7 @@ class InlineIndexChild(InlineIndexDraftMixin, BasePage):
         if not include_draft_pages:
             next_siblings = next_siblings.live()
 
-        next_sibling = next_siblings.first()
-        if next_sibling:
-            return next_sibling.specific
+        return next_siblings.specific().first()
 
     def get_prev_page(self, include_draft_pages=False):
         """ Return the previous sibling, or in the case of a first child, the
@@ -148,19 +207,12 @@ class InlineIndexChild(InlineIndexDraftMixin, BasePage):
         if not include_draft_pages:
             prev_siblings = prev_siblings.live()
 
-        prev_sibling = prev_siblings.first() or self.get_parent()
-        if prev_sibling:
-            return prev_sibling.specific
+        return prev_siblings.specific().first() or self.get_parent().specific
 
-    def get_context(self, request):
-        context = super().get_context(request)
+    @cached_property
+    def index_title(self):
+        return self.get_parent().specific.index_title
 
-        include_draft_pages = self.viewing_page_draft(request)
-
-        context["index"] = self.get_index(include_draft_pages)
-        context["next_page"] = self.get_next_page(include_draft_pages)
-        context["prev_page"] = self.get_prev_page(include_draft_pages)
-        return context
-
-    def get_template(self, request):
-        return InlineIndex().get_template(request)
+    @property
+    def content_title(self):
+        return self.title

@@ -6,11 +6,7 @@
 
 {% block content %}
     <h1 class="heading heading--xxl">
-        {% if page.is_inline_index %}
-            {{ page.title }}
-        {% elif page.is_inline_index_child %}
-            {{ page.get_parent.title }}
-        {% endif %}
+        {{ page.index_title }}
     </h1>
 
     {% with page_links=index %}
@@ -20,11 +16,11 @@
             {% for link in page_links %}
                 {% if link.id == page.id %}
                     <li class="index-nav__item index-nav__item--current">
-                        <span class="index-nav__link">{{ link.subtitle|default:link }}</span>
+                        <span class="index-nav__link">{{ link.content_title }}</span>
                     </li>
                 {% else %}
                     <li class="index-nav__item">
-                        <a class="index-nav__link" href="{% pageurl link %}">{{ link.subtitle|default:link }}</a>
+                        <a class="index-nav__link" href="{% pageurl link %}">{{ link.content_title }}</a>
                     </li>
                 {% endif %}
             {% endfor %}
@@ -34,11 +30,7 @@
     <div class="wrapper wrapper--flex">
         <div class="section section--main section--inline-index">
             <h2 class="heading heading--xl">
-                {% if page.is_inline_index %}
-                    {{ page.subtitle }}
-                {% elif page.is_inline_index_child %}
-                    {{ page.title }}
-                {% endif %}
+                {{ page.content_title }}
             </h2>
 
             <div class="main-body">

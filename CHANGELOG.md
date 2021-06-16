@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Add validation of duplicate responses to LookupPage admin
+- Fix 128: Use inline index subtitle in table of contents and pagination
 
 ## 37.3 (2021-06-11)
 
