@@ -106,7 +106,7 @@ test_python:
     - static
   services:
     # Make sure this matches the Postgres version you run on your servers.
-    - postgres:9.6
+    - postgres:13.3
   variables:
     # Run tests with the production settings.
     DJANGO_SETTINGS_MODULE: bc.settings.production
