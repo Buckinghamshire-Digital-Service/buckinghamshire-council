@@ -142,6 +142,15 @@ Steps for resetting the `staging` git branch, and deploying it with a clone of t
 
 1.  Delete any personally-identifying data from staging. See [Data protection](data-protection.md) for instructions.
 
+The site is mostly read-only for end users. User actions which write to the site database include any actions in the Wagtail admin, plus on the site front end:
+
+- Search queries (Wagtail stores popular queries)
+- Subscribing to job search alerts
+- Wagtail FormPage instances
+- Page footer feedback form
+
+See [Data protection](data-protection.md) for details of which store PII.
+
 ### Media
 
 The fab commands are sufficient here. It's quicker just to copy original image files across (with no renditions):
