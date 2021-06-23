@@ -47,6 +47,9 @@ RESPOND_GET_FIELDS_WEBSERVICE = "TestGetFieldsComplaints"
 
 YANDEX_VERIFICATION_STRING = "test_string"
 
+# Feature flags
+# ENABLE_FEEDBACK_WIDGET = False  # Uncomment to disable
+
 
 # NB we're not overriding all of this, only the URL, but because of the order of imports
 # it's easier just to paste the lot
