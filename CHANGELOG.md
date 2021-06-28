@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 38.0 (2021-06-28)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/37.3...38.0
 
 - Add feature flags to disable page feedback and job alert forms
 - Add validation of duplicate responses to LookupPage admin
