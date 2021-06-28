@@ -142,6 +142,15 @@ Steps for resetting the `staging` git branch, and deploying it with a clone of t
 
 1.  Delete any personally-identifying data from staging. See [Data protection](data-protection.md) for instructions.
 
+The site is mostly read-only for end users. User actions which write to the site database include any actions in the Wagtail admin, plus on the site front end:
+
+- Search queries (Wagtail stores popular queries)
+- Subscribing to job search alerts — see [Feature flags](#feature-flags) below
+- Wagtail FormPage instances
+- Page footer feedback form — see [Feature flags](#feature-flags) below
+
+See [Data protection](data-protection.md) for details of which store PII.
+
 ### Media
 
 The fab commands are sufficient here. It's quicker just to copy original image files across (with no renditions):
@@ -171,3 +180,15 @@ Inform the client of the changes.
 > - All user accounts have been copied across, so your old staging password will no longer work. Log in with your production password (and then change it), or use the 'forgot password' feature.
 > - Any test content has been reset. This is probably the biggest inconvenience. Sorry.
 > - I have deleted the personally-identifying data from form submissions and job alert subscriptions. If there's any more on production (there shouldn't be) then please let me know and I'll remove it from staging.
+
+## Feature flags
+
+The following features can be deactivated with environment variables
+
+### Job search alerts
+
+Set `ENABLE_JOBS_SEARCH_ALERT_SUBSCRIPTIONS=false` in environment variables. This removes the form from the job search results page, but does not disable the corresponding view.
+
+### Feedback widget
+
+Set `ENABLE_FEEDBACK_WIDGET=false` in environment variables. This removes the form from the page footer, but does not disable the corresponding views.

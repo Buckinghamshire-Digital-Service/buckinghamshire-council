@@ -1,6 +1,7 @@
 from http import HTTPStatus
 
-from django import test, urls
+from django.test import TestCase, override_settings
+from django.urls import reverse
 
 from wagtail.core import models as wagtail_models
 
@@ -16,11 +17,10 @@ class CreateInfoPageMixin:
         self.root_page.add_child(instance=self.info_page)
 
 
-class TestUsefulnessFeedbackCreateView(CreateInfoPageMixin, test.TestCase):
+class TestUsefulnessFeedbackCreateView(CreateInfoPageMixin, TestCase):
     def setUp(self):
         super().setUp()
-        self.client = test.Client()
-        self.url = urls.reverse("feedback:usefulness_feedback_create")
+        self.url = reverse("feedback:usefulness_feedback_create")
 
     def test_get_fails(self):
         response = self.client.get(self.url)
@@ -143,11 +143,10 @@ class TestUsefulnessFeedbackCreateView(CreateInfoPageMixin, test.TestCase):
             self.assertEqual(len(feedback.original_url), 2048)
 
 
-class TestFeedbackCommentCreateView(CreateInfoPageMixin, test.TestCase):
+class TestFeedbackCommentCreateView(CreateInfoPageMixin, TestCase):
     def setUp(self):
         super().setUp()
-        self.client = test.Client()
-        self.url = urls.reverse("feedback:feedback_comment_create")
+        self.url = reverse("feedback:feedback_comment_create")
 
     def test_get_fails(self):
         response = self.client.get(self.url)
@@ -199,3 +198,41 @@ class TestFeedbackCommentCreateView(CreateInfoPageMixin, test.TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.BAD_REQUEST)
         self.assertIn("action", response.json()["form"]["errors"])
+
+
+class TestFeedbackFormFeatureFlags(CreateInfoPageMixin, TestCase):
+    expected_strings = [
+        "data-extra-feedback-block",
+        "data-no-form",
+        "data-yes-form",
+        'id="extra-feedback-block"',
+        'id="page-feedback-no"',
+    ]
+    expected_context_keys = [
+        "yes_form",
+        "no_form",
+        "comment_form",
+    ]
+
+    def test_form_is_displayed(self):
+        response = self.client.get(self.info_page.url)
+        rendered = response.content.decode()
+        for string in self.expected_strings:
+            with self.subTest(string=string):
+                self.assertIn(string, rendered)
+
+        for key in self.expected_context_keys:
+            with self.subTest(key=key):
+                self.assertIn(key, response.context)
+
+    @override_settings(ENABLE_FEEDBACK_WIDGET=False)
+    def test_form_can_be_disabled(self):
+        response = self.client.get(self.info_page.url)
+        rendered = response.content.decode()
+        for string in self.expected_strings:
+            with self.subTest(string=string):
+                self.assertNotIn(string, rendered)
+
+        for key in self.expected_context_keys:
+            with self.subTest(key=key):
+                self.assertNotIn(key, response.context)
