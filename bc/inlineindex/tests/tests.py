@@ -1,17 +1,26 @@
+from http import HTTPStatus
+
 from django.test import RequestFactory, TestCase, override_settings
 from django.urls import reverse
 
 from wagtail.tests.utils import WagtailTestUtils
+
+import bs4
 
 from bc.home.models import HomePage
 from bc.inlineindex.tests.fixtures import InlineIndexChildFactory, InlineIndexFactory
 
 
 class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
+    """
+    Test display behaviour of inline index child pages based on published/live state.
+
+    Live children should be shown, but draft pages should only be shown when previewing.
+
+    """
+
     def setup_homepage(self):
         self.homepage = HomePage.objects.first()
-        response = self.client.get(self.homepage.url)
-        self.assertEqual(response.status_code, 200)
 
     def setup_inline_index(self, live):
         self.inline_index = InlineIndexFactory(
@@ -80,8 +89,7 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
         index = list(context["index"])
         self.assertEqual(len(index), 1)
         self.assertNotIn(self.first_index_child, index)
-        self.assertNotIn("prev_page", context)  # Not included on the index page
-        self.assertEqual(context["next_page"], None)
+        self.assertIsNone(context["next_page"])
 
         response = self.client.get(url)
 
@@ -115,7 +123,7 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
         index = list(context["index"])
         self.assertEqual(len(index), 2)
         self.assertIn(self.first_index_child, index)
-        self.assertNotIn("prev_page", context)  # Not included on the index page
+        self.assertIsNone(context["prev_page"])
         self.assertEqual(context["next_page"], self.first_index_child)
 
     def test_live_request_to_live_child_shows_live_next_sibling(self):
@@ -287,3 +295,92 @@ class TestDisplayOfInlineIndexChildPages(TestCase, WagtailTestUtils):
 
         self.assertEqual(response.status_code, 200)
         self.assertNotContains(response, self.second_index_child.title)
+
+
+class TestInlineIndexTitles(TestCase):
+    """
+    Test how inline index title and subtitle are used when displaying the section.
+
+    The title of the inline index page itself is the title to the whole section. It
+    should not show up in the table of contents for the section. It should also not show
+    up as the "previous" link that is displayed on the first child page. In either
+    of those cases the inline index subtitle should be used.
+
+    """
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.homepage = HomePage.objects.first()
+        cls.inline_index = InlineIndexFactory(
+            parent=cls.homepage,
+            title="The inline index title",
+            subtitle="The inline index subtitle",
+        )
+        cls.inline_child = InlineIndexChildFactory(
+            parent=cls.inline_index, title="The inline child title"
+        )
+
+    def test_index_title(self):
+        index_title = self.inline_index.index_title
+
+        self.assertEqual(index_title, self.inline_index.title)
+
+    def test_inline_index_page_content_title(self):
+        index_title = self.inline_index.content_title
+
+        self.assertEqual(index_title, self.inline_index.subtitle)
+
+    def test_inline_child_page_index_title(self):
+        """The index title should be the same on the child and the index."""
+
+        self.assertEqual(self.inline_child.index_title, self.inline_index.index_title)
+
+    def test_inline_child_page_content_title(self):
+        child_content_title = self.inline_child.content_title
+
+        self.assertEqual(child_content_title, self.inline_child.title)
+
+    def test_inline_index_page_rendering(self):
+        response = self.client.get(self.inline_index.url)
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        soup = bs4.BeautifulSoup(response.content, "html.parser")
+        # Page heading
+        page_heading = soup.find("h1")
+        self.assertEqual(page_heading.get_text(strip=True), self.inline_index.title)
+        # Content heading
+        content_heading = soup.find(class_="section").find("h2")
+        self.assertEqual(
+            content_heading.get_text(strip=True), self.inline_index.subtitle
+        )
+        # Table of contents
+        table_of_contents = soup.find(class_="index-nav")
+        self.assertIsNotNone(table_of_contents)
+        first_toc_entry = table_of_contents.find(class_="index-nav__item")
+        self.assertEqual(
+            first_toc_entry.get_text(strip=True), self.inline_index.subtitle
+        )
+
+    def test_inline_child_page_rendering(self):
+        response = self.client.get(self.inline_child.url)
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        soup = bs4.BeautifulSoup(response.content, "html.parser")
+        # Page heading
+        page_heading = soup.find("h1")
+        self.assertEqual(page_heading.get_text(strip=True), self.inline_index.title)
+        # Content heading
+        content_heading = soup.find(class_="section").find("h2")
+        self.assertEqual(content_heading.get_text(strip=True), self.inline_child.title)
+        # Table of contents
+        table_of_contents = soup.find(class_="index-nav")
+        self.assertIsNotNone(table_of_contents)
+        first_toc_entry = table_of_contents.find(class_="index-nav__item")
+        self.assertEqual(
+            first_toc_entry.get_text(strip=True), self.inline_index.subtitle
+        )
+        # Previous page link
+        prev_page_link = soup.find(class_="index-pagination__page-title")
+        self.assertEqual(
+            prev_page_link.get_text(strip=True), self.inline_index.subtitle
+        )

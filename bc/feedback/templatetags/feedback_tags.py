@@ -1,4 +1,5 @@
 from django import template
+from django.conf import settings
 
 from bc.feedback.forms import FeedbackCommentForm, UsefulnessFeedbackForm
 
@@ -12,7 +13,7 @@ def feedback_widget(context):
     page = context.get("page")
     extra_context = {}
 
-    if page:
+    if settings.ENABLE_FEEDBACK_WIDGET and page:
         extra_context["yes_form"] = UsefulnessFeedbackForm(
             prefix="yes", initial={"useful": True, "page": page}
         )

@@ -50,6 +50,7 @@
                         {% endif %}
                     {% endwith %}
 
+                    {% if job_alert_form %}
                     <form method="post" class="form form--job-alerts" aria-label="Subscribe to job alert">
                         {% csrf_token %}
                         {% with field=job_alert_form.email %}
@@ -66,6 +67,7 @@
                         {% endwith %}
                         <input type="submit" class="button button--basic" value="Subscribe to job alert">
                     </form>
+                    {% endif %}
                 </header>
 
                 {% if search_results %}

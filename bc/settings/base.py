@@ -794,3 +794,11 @@ RESPOND_GET_FIELDS_WEBSERVICE = env.get("RESPOND_GET_FIELDS_WEBSERVICE")
 
 # MapIt.MySociety API credentials
 MAPIT_API_KEY = env.get("MAPIT_API_KEY")
+
+# Feature flags
+ENABLE_FEEDBACK_WIDGET = (  # Page usefulness and comment forms in the footer
+    env.get("ENABLE_FEEDBACK_WIDGET", "true").lower().strip() == "true"
+)
+ENABLE_JOBS_SEARCH_ALERT_SUBSCRIPTIONS = (
+    env.get("ENABLE_JOBS_SEARCH_ALERT_SUBSCRIPTIONS", "true").lower().strip() == "true"
+)

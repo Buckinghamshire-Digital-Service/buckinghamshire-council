@@ -1,5 +1,12 @@
 # Release History
 
+## Unreleased
+
+- Add feature flags to disable page feedback and job alert forms
+- Add validation of duplicate responses to LookupPage admin
+- Fix 128: Use inline index subtitle in table of contents and pagination
+- Use PostgreSQL 13.3 in Vagrant box and CI
+
 ## 37.3 (2021-06-11)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/37.2...37.3
