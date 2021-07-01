@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Enable content transfer between Wagtail instances using https://github.com/wagtail/wagtail-transfer
 - Upgrade Wagtail to version 2.13.2
 
 ## 38.0 (2021-06-28)
@@ -142,8 +143,6 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/30.2...30.3
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/30.1...30.2
 
 - 464: Remove footer columns requirement in navigation settings
-
-- 474: Add [`wagtail-transfer`](https://github.com/wagtail/wagtail-transfer) to code base to allow content transfer between staging and production to be enabled.
 
 ## 30.1 (2020-12-14)
 
