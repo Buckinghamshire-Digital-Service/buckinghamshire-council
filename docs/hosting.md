@@ -2,12 +2,22 @@
 
 The VM comes preinstalled with Fabric, Heroku CLI and AWS CLI.
 
-## Deployed environments
+## Deployed Instances
 
-| Environment | Branch    | URL                                                  | Heroku                       |
-| ----------- | --------- | ---------------------------------------------------- | ---------------------------- |
-| Production  | `master`  | e.g. https://buckinghamshire.org                     | `buckinghamshire-production` |
-| Staging     | `staging` | https://buckinghamshire-staging.staging.torchbox.com | `buckinghamshire-staging`    |
+| Instance     | Branch    | URL                                                           | Heroku                         |
+| ------------ | --------- | ------------------------------------------------------------- | ------------------------------ |
+| Production   | `master`  | https://www.buckinghamshire.gov.uk                            | `buckinghamshire-production`   |
+| Staging      | `staging` | https://buckinghamshire-staging.staging.torchbox.com          | `buckinghamshire-staging`      |
+| Content Prep | `master`  | https://buckinghamshire-content-prep.production.torchbox.com/ | `buckinghamshire-content-prep` |
+
+Each instance has several subdomain URLs for:
+
+- Recruitment site
+- Internal recruitment site
+- Family Information Service
+- Care Advice Bucks
+
+See the `ALLOWED_HOSTS` environment variable and the Wagtail Sites settings on each instance for up to date details.
 
 ## Log in to Heroku
 
@@ -20,9 +30,9 @@ host machine if you want to be able to use it in both places.
 To open the shell of the servers.
 
 ```bash
-fab dev-shell
 fab staging-shell
 fab production-shell
+fab content-prep-shell
 ```
 
 ## Scheduled tasks

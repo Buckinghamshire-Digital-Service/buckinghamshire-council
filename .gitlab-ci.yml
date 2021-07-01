@@ -224,6 +224,21 @@ deploy_production:
   when: manual
   <<: *heroku_deploy_job_definition
 
+# Deploy to the content prep site.
+deploy_content_prep:
+  # We use Debian image because Heroku has a lot of dependencies and is well
+  # supported on Debian based distributions.
+  image: debian:stretch
+  stage: deploy_site
+  variables:
+    # Your app's name.
+    #   $ heroku apps - t torchbox
+    HEROKU_APP: buckinghamshire-content-prep
+  only:
+    - master
+  when: manual
+  <<: *heroku_deploy_job_definition
+
 pages:
   image: python:3.6
   stage: pages

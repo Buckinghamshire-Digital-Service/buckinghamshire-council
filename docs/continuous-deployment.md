@@ -10,6 +10,8 @@ For information on hosting such as Heroku app names see [hosting documentation](
 
 After the `Deploy to production` stage of the [development life cycle](project-conventions.md#deployment-cycle) wait for the pipeline to pass, click on the `Manual job` dropdown and then click `deploy_production`. This will require `maintainer` permission for the project on GitLab.
 
+There is an additional manual task `deploy_content_prep`. This should generally be run whenever a production deployment is preformed, as it keeps the codebase and database on the Content Prep server in sync with production.
+
 ## Deploying to staging
 
 Unlike production, deployments to staging are done automatically through GitLab CI/CD, simply push to staging.
