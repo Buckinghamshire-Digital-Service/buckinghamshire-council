@@ -143,6 +143,8 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/30.1...30.2
 
 - 464: Remove footer columns requirement in navigation settings
 
+- 474: Add [`wagtail-transfer`](https://github.com/wagtail/wagtail-transfer) to code base to allow content transfer between staging and production to be enabled.
+
 ## 30.1 (2020-12-14)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/30.0...30.1
