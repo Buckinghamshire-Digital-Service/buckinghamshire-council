@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 39.0 (2021-07-01)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/38.0...39.0
 
 - Add CI job to deploy the master branch to Content Prep server
 - Enable content transfer between Wagtail instances using https://github.com/wagtail/wagtail-transfer
