@@ -1,0 +1,25 @@
+{% extends base_page_template %}
+
+{% block breadcrumbs %}
+    <div class="wrapper wrapper--large">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb__item">
+                    <a class="breadcrumb__link" href="/">Home</a>
+                </li>
+                <li class="breadcrumb__item">
+                    <a class="breadcrumb__link" href="{% url 'feedback:thank_you' %}">Thank you</a>
+                </li>
+            </ol>
+        </nav>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="wrapper wrapper--flex">
+        <div class="section section--main">
+            <h1 class="heading heading--xxl">Thank you for your feedback!</h1>
+            <p>Your feedback will help improve the Buckinghamshire Council website.</p>
+        </div>
+    </div>
+{% endblock content %}

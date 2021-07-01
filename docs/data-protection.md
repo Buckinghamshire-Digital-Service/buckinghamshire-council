@@ -1,4 +1,4 @@
-# Buckinghamshire Council — Data Protection
+# Data Protection
 
 See also: [Cookies](cookies.md)
 
@@ -40,7 +40,9 @@ PII is stored in the database, in the models:
 
 - `bc.recruitment.models.JobAlertSubscription`
 - `bc.users.models.User`
-- `wagtail.contrib.forms.models.FormSubmission`
+- `wagtail.contrib.forms.models.FormSubmission` (Wagtail FormPage instances)
+
+Potentially users submit feedback form responses which store personally identifying information in the model `bc.feedback.models.FeedbackComment`, though this is not invited.
 
 All backups, automated or otherwise, include this data.
 
@@ -77,5 +79,6 @@ If a request is received to purge or report the stored data for a given user, wh
 - For user account data, delete the user from the Wagtail admin https://www.buckinghamshire.gov.uk/admin/users/
 - For form submissions, ask the client to handle requests as a first option. Failing that, search the submissions and delete if necessary using the Django shell.
 - For JobAlertsSubscriptions, find and delete from https://www.buckinghamshire.gov.uk/admin/recruitment/jobalertsubscription/
+- For page feedback data, find either from the report in the Wagtail admin or via the Django shell, then delete using the Django shell.
 
 Note: this will not purge such data from backups.

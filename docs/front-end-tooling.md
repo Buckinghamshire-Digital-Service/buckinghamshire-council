@@ -1,4 +1,4 @@
-# Front end tooling
+# Front End Tooling
 
 This set of tooling should form the basis for any new wagtail projects. It can also be used for custom django builds - simply copy the `static_src` directory from here to your build.
 
@@ -50,8 +50,8 @@ Changes to the config files can be made directly in `/wagtail-kit/bc`.
 
 ## Developing with it
 
-- To start the development environment, run `npm start` - to stop this process press `ctrl + c`.
-- This will start Browsersync and make the project available at `http://localhost:3000/html/`. If another process is using this port, check terminal for an updated URL. You can change this configuation by modifying the `browsersync.config.js` file, documented here https://www.browsersync.io/docs/options.
+- To start the development environment, run `npm start` (or if that does not work `npm run serve`) - to stop this process press `ctrl + c`.
+- This will start Browsersync and make the project available at `http://localhost:3000/`. If another process is using this port, check terminal for an updated URL. You can change this configuation by modifying the `browsersync.config.js` file, documented here https://www.browsersync.io/docs/options.
 - Source files for developing your project are in `static_src` and the distribution folder for the compiled assets is `static_compiled`. Don't make direct changes to the `static_compiled` directory as they will be overwritten.
 
 ### Using npm

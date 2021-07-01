@@ -1,4 +1,5 @@
 context:
+  section_label: Section Label
   result:
     title: Page title
     listing_image: fake

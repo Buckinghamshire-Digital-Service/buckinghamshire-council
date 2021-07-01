@@ -89,7 +89,7 @@
     {% if alerts %}
         <div class="wrapper wrapper--large wrapper--margin">
         {% for alert in alerts %}
-            {% include "patterns/molecules/alerts/alert-message-sitewide.html" %}
+            {% include "patterns/molecules/alerts/alert-message-sitewide.html" with alert_id=forloop.counter %}
         {% endfor %}
         </div>
     {% endif %}

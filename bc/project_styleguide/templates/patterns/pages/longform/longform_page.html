@@ -1,0 +1,88 @@
+{% extends base_page_template %}
+{% load longform_tags wagtailcore_tags %}
+
+{% block body_class %}{{ block.super }} template-longform{% endblock %}
+
+{% block content %}
+
+    {% if page.is_chapter_page %}
+        {% include "patterns/molecules/longform-title/longform-title.html" with origin_page=page.get_parent.specific %}
+    {% else %}
+        {% include "patterns/molecules/longform-title/longform-title.html" with origin_page=page %}
+    {% endif %}
+
+    <div class="wrapper wrapper--flex">
+
+        {# Table of Contents #}
+        <nav class="index-nav sidebar" aria-label="Pages in this section" id="contents">
+            <h2 class="index-nav__title">Contents</h2>
+
+            {% if page.chapter_number %}
+                <ol class="index-nav__list">
+            {% else %}
+                <ul class="index-nav__list">
+            {% endif %}
+
+            {% for link in page.get_index %}
+                {% if link.id == page.id %}
+                    <li class="index-nav__item index-nav__item--current">
+                        <span class="index-nav__prefix">
+                            {% if link.chapter_number %}
+                                {{ link.chapter_number }}.
+                            {% else %}
+                                —
+                            {% endif %}
+                        </span>
+                        <a class="index-nav__link" href="{% pageurl link %}" aria-current="page">{{ link.subtitle|default:link }}</a>
+                    </li>
+                {% else %}
+                    <li class="index-nav__item">
+                        <span class="index-nav__prefix">
+                            {% if link.chapter_number %}
+                                {{ link.chapter_number }}.
+                            {% else %}
+                                —
+                            {% endif %}
+                        </span>
+                        <a class="index-nav__link" href="{% pageurl link %}">{{ link.subtitle|default:link }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if page.chapter_number %}
+                </ol>
+            {% else %}
+                </ul>
+            {% endif %}
+        </nav>
+
+        {# Content proper #}
+        <div class="section section--main section--inline-index main-body">
+            {% if page.chapter_number or page.is_chapter_page or page.chapter_heading %}
+                <h2 class="heading heading--xl">
+                    {% if page.chapter_number %}
+                        {{ page.chapter_number }}.
+                    {% endif %}
+                    {% if page.is_chapter_page %}
+                        {{ page.title }}
+                    {% else %}
+                        {{ page.chapter_heading }}
+                    {% endif %}
+                </h2>
+            {% endif %}
+
+            {{ page.body|process_block_numbers:page.chapter_number }}
+        </div>
+
+    </div>
+
+    {# Navigation #}
+    <div class="wrapper wrapper--flex longform-navigation">
+        <div class="sidebar">
+            {% include "patterns/molecules/back-to-contents/back-to-contents.html" %}
+        </div>
+
+        {% include "patterns/molecules/pagination/index-pagination.html" with next_page=page.next_chapter prev_page=page.previous_chapter %}
+    </div>
+
+{% endblock %}

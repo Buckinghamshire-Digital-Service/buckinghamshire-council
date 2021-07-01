@@ -59,10 +59,12 @@ INSTALLED_APPS = [
     "bc.cases",
     "bc.documents",
     "bc.events",
+    "bc.feedback",
     "bc.forms",
     "bc.home",
     "bc.images",
     "bc.inlineindex",
+    "bc.longform",
     "bc.navigation",
     "bc.family_information",
     "bc.news",
@@ -76,6 +78,7 @@ INSTALLED_APPS = [
     "wagtail_transfer",
     "rest_framework",
     "wagtailorderable",
+    "wagtail_automatic_redirects",
     "wagtail.contrib.modeladmin",
     "wagtail.contrib.postgres_search",
     "wagtail.contrib.settings",
@@ -231,6 +234,9 @@ else:
     WAGTAILSEARCH_BACKENDS = {
         "default": {"BACKEND": "wagtail.contrib.postgres_search.backend"}
     }
+# Reduction factor between 0 and 1 to apply to the relevanve score of search
+# results with the NewsPage content type. See bc.search.elasticsearch5.
+SEARCH_BOOST_FACTOR_NEWS_PAGE = float(env.get("SEARCH_BOOST_FACTOR_NEWS_PAGE", 0.5))
 
 
 WAGTAILEMBEDS_FINDERS = [
@@ -414,6 +420,15 @@ LOGGING = {
         },
     },
 }
+
+# Settings for during tests
+# This is in the base settings module, rather than the dev one, because tests are also
+# run in CI using production settings.
+if len(sys.argv) > 1 and sys.argv[1] in ["test"]:
+    # Disable low-severity log entries during unit tests
+    import logging
+
+    logging.disable(logging.CRITICAL)
 
 
 # Email settings
@@ -680,6 +695,7 @@ if env.get("BASIC_AUTH_ENABLED", "false").lower().strip() == "true":
             "BASIC_AUTH_WHITELISTED_HTTP_HOSTS"
         ].split(",")
 
+    BASIC_AUTH_DISABLE_CONSUMING_AUTHORIZATION_HEADER = True
 
 AUTH_USER_MODEL = "users.User"
 
@@ -744,7 +760,7 @@ COOKIE_DOMAIN = env.get("COOKIE_DOMAIN", "")
 
 
 # GOV.UK Notify service
-EMAIL_BACKEND = "bc.utils.email.NotifyEmailBackend"
+EMAIL_BACKEND = "django_gov_notify.backends.NotifyEmailBackend"
 GOVUK_NOTIFY_API_KEY = env.get("GOVUK_NOTIFY_API_KEY")
 GOVUK_NOTIFY_PLAIN_EMAIL_TEMPLATE_ID = env.get("GOVUK_NOTIFY_PLAIN_EMAIL_TEMPLATE_ID")
 
@@ -829,3 +845,12 @@ WAGTAILTRANSFER_NO_FOLLOW_MODELS = [
     "recruitment.jobcategory",
     "users.user",  # Do not transfer users between instances
 ]
+
+
+# Feature flags
+ENABLE_FEEDBACK_WIDGET = (  # Page usefulness and comment forms in the footer
+    env.get("ENABLE_FEEDBACK_WIDGET", "true").lower().strip() == "true"
+)
+ENABLE_JOBS_SEARCH_ALERT_SUBSCRIPTIONS = (
+    env.get("ENABLE_JOBS_SEARCH_ALERT_SUBSCRIPTIONS", "true").lower().strip() == "true"
+)

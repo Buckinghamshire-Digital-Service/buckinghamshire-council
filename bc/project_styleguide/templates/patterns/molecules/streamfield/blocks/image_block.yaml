@@ -1,9 +1,19 @@
 context:
   value:
+    alt_text: Some alt
     caption: Some caption
 
 tags:
   image:
-    value.image width-1000:
-      raw: |
-        <img src="http://via.placeholder.com/1000x300" width="1000" height="300" alt="Some alt">
+    value.image width-650 as desktop_image:
+      target_var: desktop_image
+      raw:
+        url: https://placekitten.com/g/650/400
+    value.image width-400 as mobile_image:
+      target_var: mobile_image
+      raw:
+        url: https://placekitten.com/g/400/200
+    value.image width-800 as retina_mobile_image:
+      target_var: retina_mobile_image
+      raw:
+        url: https://placekitten.com/g/800/400

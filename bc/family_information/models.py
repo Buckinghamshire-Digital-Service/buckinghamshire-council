@@ -45,9 +45,14 @@ class FISBannerFields(models.Model):
 class FamilyInformationHomePage(FISBannerFields, BasePage):
     template = "patterns/pages/home/home_page--fis.html"
 
-    subpage_types = ["CategoryTypeOnePage", "CategoryTypeTwoPage"]
+    subpage_types = [
+        "CategoryTypeOnePage",
+        "CategoryTypeTwoPage",
+        "standardpages.InformationPage",
+    ]
+    parent_page_types = ["wagtailcore.Page"]
 
-    max_count = 1
+    max_count = 2
 
     hero_image = models.ForeignKey(
         "images.CustomImage", null=True, related_name="+", on_delete=models.SET_NULL,

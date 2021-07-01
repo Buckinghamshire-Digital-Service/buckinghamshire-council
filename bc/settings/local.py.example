@@ -1,6 +1,7 @@
 CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    "default": {
+        "BACKEND": "django.core.cache.backends.db.DatabaseCache",
+        "LOCATION": "database_cache",
     }
 }
 
@@ -14,7 +15,7 @@ NOCAPTCHA = True
 
 # GOV.UK Notify service
 # Uncomment the EMAIL_BACKEND line for testing with the GOV.UK Notify service
-# EMAIL_BACKEND = "bc.utils.email.NotifyEmailBackend"
+# EMAIL_BACKEND = "django_gov_notify.backends.NotifyEmailBackend"
 GOVUK_NOTIFY_API_KEY = "not_a_real_key"  # pragma: allowlist secret
 GOVUK_NOTIFY_PLAIN_EMAIL_TEMPLATE_ID = "c370a02f-cae4-4606-bff4-fb4fc8e53347"
 
@@ -45,6 +46,10 @@ RESPOND_GET_CATEGORIES_WEBSERVICE = "TestGetCategoryComplaints"
 RESPOND_GET_FIELDS_WEBSERVICE = "TestGetFieldsComplaints"
 
 YANDEX_VERIFICATION_STRING = "test_string"
+
+# Feature flags
+# ENABLE_FEEDBACK_WIDGET = False  # Uncomment to disable
+# ENABLE_JOBS_SEARCH_ALERT_SUBSCRIPTIONS = False  # Uncomment to disable
 
 
 # NB we're not overriding all of this, only the URL, but because of the order of imports

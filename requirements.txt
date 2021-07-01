@@ -1,5 +1,5 @@
-Django==2.2.17
-wagtail==2.10.2
+Django==2.2.21
+wagtail==2.13.1
 psycopg2==2.7.7
 elasticsearch==7.9.0
 wagtail-django-recaptcha==1.0
@@ -7,14 +7,16 @@ django-pattern-library==0.2.5
 bleach==3.1.0
 factory-boy==2.12.0
 freezegun==0.3.14
-notifications-python-client==5.4.1
+django_gov_notify==0.3.0
 responses==0.10.9
 tabulate==0.8.7
 wagtail-factories==2.0.0
 wagtail-orderable==1.0.3
+wagtail-automatic-redirects==1.1.5
 wagtail-transfer==0.8.0
 urllib3==1.25.11
 zeep==3.4.0
+
 
 # Production dependencies
 whitenoise[brotli]==4.1.2
@@ -26,4 +28,7 @@ django-storages[boto3]==1.7.1
 django-referrer-policy==1.0
 django-csp==3.5
 scout-apm==2.0.2
-django-basic-auth-ip-whitelist==0.2.1
+git+https://github.com/tm-kn/django-basic-auth-ip-whitelist.git@318006b15b598c035cf52031c8fa63dbf241440f#egg=django-basic-auth-ip-whitelist
+
+# Fixing dependency of notifications-python-client
+PyJWT==2.0.0

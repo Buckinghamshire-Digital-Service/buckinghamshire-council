@@ -1,5 +1,7 @@
+from django.db import models
+
 from modelcluster.models import ClusterableModel
-from wagtail.admin.edit_handlers import StreamFieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.core import blocks
 from wagtail.core.blocks import StreamBlock
@@ -30,13 +32,15 @@ class ColumnWithHeader(blocks.StructBlock):
 
 @register_setting(icon="list-ul")
 class NavigationSettings(BaseSetting, ClusterableModel):
+    header_title = models.CharField(max_length=250, null=True, blank=True)
     footer_columns = StreamField(
         StreamBlock(
             [("column", ColumnWithHeader())],
-            blank=True,
+            required=False,
             help_text="Columns of free text above the base footer.",
             max_num=3,
-        )
+        ),
+        blank=True,
     )
     footer_links = StreamField(
         [("link", LinkBlock())],
@@ -45,6 +49,7 @@ class NavigationSettings(BaseSetting, ClusterableModel):
     )
 
     panels = [
+        FieldPanel("header_title"),
         StreamFieldPanel("footer_columns"),
         StreamFieldPanel("footer_links"),
     ]

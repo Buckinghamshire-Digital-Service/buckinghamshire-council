@@ -21,9 +21,7 @@
             </div>
         </div>
     </div>
-    {% image page.banner_image fill-1350x500 as banner_image %}
-    <div
-        class="directory-banner__image"
-        style="background-image: url('{{ banner_image.url }}')"
-    ></div>
+    {% image page.banner_image fill-700x250 as desktop_image %}
+    {% include "patterns/atoms/image/background-image-style.html" with class="directory-banner__image" mobile_image=desktop_image retina_mobile_image=desktop_image desktop_image=desktop_image alt=page.banner_image.alt_text %}
+    <div class="directory-banner__image background-image-style"></div>
 </div>

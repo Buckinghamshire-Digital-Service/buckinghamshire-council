@@ -1,7 +1,10 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
-{% image page.hero_image min-1600x350 as hero_image %}
-<div class="hero hero--jobs hero--no-padding-top" style="background-image: url('{{ hero_image.url }}');">
+{% image page.hero_image fill-450x350 as mobile_image %}
+{% image page.hero_image fill-900x700 as retina_mobile_image %}
+{% image page.hero_image fill-1440x350 as desktop_image %}
+{% include "patterns/atoms/image/background-image-style.html" with class="hero" mobile_image=mobile_image retina_mobile_image=retina_mobile_image desktop_image=desktop_image %}
+<div class="hero hero--jobs hero--no-padding-top background-image-style">
 
     <div class="wrapper wrapper--large">
         <nav aria-label="breadcrumb">

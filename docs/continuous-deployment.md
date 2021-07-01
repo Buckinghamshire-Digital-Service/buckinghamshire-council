@@ -1,4 +1,4 @@
-# Buckinghamshire Council — Continuous Deployment
+# Continuous Deployment
 
 Deployments can be triggered through GitLab's CI/CD. Currently `.gitlab-ci.yml` has a `deploy_site` stage which is configured to deploy to Heroku on pushes and merge requests to either master or staging.
 
@@ -8,7 +8,7 @@ For information on hosting such as Heroku app names see [hosting documentation](
 
 ## Deploying to production
 
-After the `Deploy to production` stage of the [development life cycle](project_conventions.md#deployment-cycle) wait for the pipeline to pass, click on the `Manual job` dropdown and then click `deploy_production`. This will require `maintainer` permission for the project on GitLab.
+After the `Deploy to production` stage of the [development life cycle](project-conventions.md#deployment-cycle) wait for the pipeline to pass, click on the `Manual job` dropdown and then click `deploy_production`. This will require `maintainer` permission for the project on GitLab.
 
 ## Deploying to staging
 

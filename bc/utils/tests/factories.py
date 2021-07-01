@@ -1,15 +1,6 @@
 import factory
 
-from bc.utils.email import NotifyEmailMessage
 from bc.utils.models import SystemMessagesSettings
-
-
-class NotifyEmailMessageFactory(factory.Factory):
-    class Meta:
-        model = NotifyEmailMessage
-
-    subject = "Test Subject"
-    body = "Test body content"
 
 
 class SystemMessageFactory(factory.django.DjangoModelFactory):

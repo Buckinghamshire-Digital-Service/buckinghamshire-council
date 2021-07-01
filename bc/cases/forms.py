@@ -281,7 +281,7 @@ class SARForm(BaseCaseForm):
         widget=forms.ClearableFileInput(attrs={"multiple": True}),
         help_text="To help us process your request quicker, upload two "
         "forms of ID that clearly show your name, date of birth and "
-        "current address. For example, your driving license and a utility "
+        "current address. For example, your driving licence and a utility "
         "bill or birth certificate.",
     )
 

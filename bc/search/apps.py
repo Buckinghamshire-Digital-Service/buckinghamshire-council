@@ -6,3 +6,4 @@ class SearchConfig(AppConfig):
 
     def ready(self):
         import bc.search.signal_handlers  # noqa
+        import bc.search.query  # noqa

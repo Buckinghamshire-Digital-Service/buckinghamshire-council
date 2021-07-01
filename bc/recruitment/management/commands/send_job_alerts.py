@@ -5,6 +5,8 @@ from django.http import QueryDict
 from django.template.loader import render_to_string
 from django.utils.timezone import now
 
+from django_gov_notify.message import NotifyEmailMessage
+
 from bc.recruitment.models import (
     JobAlertNotificationTask,
     JobAlertSubscription,
@@ -12,13 +14,12 @@ from bc.recruitment.models import (
     TalentLinkJob,
 )
 from bc.recruitment.utils import get_job_search_results
-from bc.utils.email import NotifyEmailMessage
 
 
 class Command(BaseCommand):
     """This checks job alert subscriptions, and sends messages about new matches.
 
-    Any further documentation for this feature is at docs/recruitment_site.md
+    Any further documentation for this feature is at docs/recruitment-site.md
     """
 
     help = "Notifies job alert subscribers of new matches"

@@ -1,10 +1,149 @@
 # Release History
 
-## Unreleased
+## 38.0 (2021-06-28)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/37.3...38.0
+
+- Add feature flags to disable page feedback and job alert forms
+- Add validation of duplicate responses to LookupPage admin
+- Fix 128: Use inline index subtitle in table of contents and pagination
+- Use PostgreSQL 13.3 in Vagrant box and CI
+
+## 37.3 (2021-06-11)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/37.2...37.3
+
+- Fix: Field label typo in page feedback form
+
+## 37.2 (2021-06-10)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/37.1...37.2
+
+- Fix: Handle URLs longer than 200 characters in page feedback form
+
+## 37.1 (2021-06-09)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/37.0...37.1
+
+- Fix (Accessibility): Duplicate HTML element IDs in feedback form
+- Fix (Accessibility): Prevent duplicate h2 element IDs in alerts
+- Fix: StreamField typo causing missing block types in editor in Wagtail 2.13
+- Upgrade Wagtail to version 2.13.1
+
+## 37.0 (2021-06-07)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/36.1...37.0
+
+- 40: Feedback forms and reports
+- Accessibility improvements
+- Add multiple severity levels to sitewide alert
+- Fix: StreamField typo causing RecursionError in Wagtail 2.13
+- Upgrade Wagtail to version 2.13
+- Use the newly released django-gov-notify library for GOV.UK Notify integration
+
+## 36.1 (2021-05-25)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/36.0...36.1
+
+- Fix: Include attachments in FOI form data
+
+## 36.0 (2021-05-20)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/35.2...36.0
+
+- Add ENEI logo to Jobs site header
+- Update CI config to use the cache to store artefacts
+- Upgrade Django to 2.2.21
+
+## 35.2 (2021-04-21)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/35.1...35.2
+
+- Fix: XSS vulnerability in "no search results" page
+
+## 35.1 (2021-02-24)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/35.0...35.1
+
+- Upgrade Django to 2.2.19
+
+## 35.0 (2021-02-18)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/34.1...35.0
+
+- 498: Reduce news boost in search results
+- 513: Allow second FIS homepage for Care Advice microsite
+- 517: Fix: Preview behind basic auth with new `baipw` version
+- 518: Include FIS pages in search results
+- 519: Fix: OGL below links and typo
+- 520: Fix: Add `search_input_help_text` setting to allow directory link for FIS
+- 521: Fix: Upgrade Wagtail 2.12.2 to prevent migration issue in CI
+
+## 34.1 (2021-02-15)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/33.0...34.1
+
+- Fix: Update GitHub Pages workflow to ensure publication of docs
+
+## 34.0 (2021-02-15)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/33.0...34.0
+
+- 239: Prepare repository for open sourcing
+- 508: Upgrade Wagtail to version 2.12
+- Fix: Check page exists before calling pageurl in footer
+
+## 33.0 (2021-02-02)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/32.1...33.0
+
+- 466: [longform 9] Prepare base template for long-form content pages
+- 466: [longform 14] Add hero image to long-form content pages
+- 466: [longform 10] Add numbered headings for long-form content pages
+- 489: Allow information page under FIS home page.
+- Upgrade `django-basic-auth-ip-whitelist` to avoid caching of 401 resonses.
+
+## 32.1 (2021-01-28)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/32.0...32.1
+
+- 335: Fix so that component images aren't overwritten
+
+## 32.0 (2021-01-27)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/31.0...32.0
+
+- 335: Responsive images for mobile
+- 366: Annotate search results with section or site name
+- 392: Use default sharing text if no sharing text set on page
+- 467: Enable automatic creation of redirects for moving pages and slug changes.
+- 483: Add date to news pages in search results
+
+## 31.0 (2021-01-19)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/30.3...31.0
+
+- 381: Wagtail number list in the editor shouldn't be partially hidden for double digits+
+- 450: Prevent draft `InlineIndexChild` pages from being listed in index and navigation on live pages
+- 477: Upgrade Wagtail to 2.11
+
+## 30.3 (2021-01-14)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/30.2...30.3
+
+- 490: Bump `notifications-python-client` to version 5.7.1 for `PyJWT` 2.0.0 compatibility (fix email send errors)
+
+## 30.2 (2021-01-13)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/30.1...30.2
+
+- 464: Remove footer columns requirement in navigation settings
 
 - 474: Add [`wagtail-transfer`](https://github.com/wagtail/wagtail-transfer) to code base to allow content transfer between staging and production to be enabled.
 
 ## 30.1 (2020-12-14)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/30.0...30.1
 
 - 478: Exclude FIS pages from search (temporary fix until FIS content is ready)
 

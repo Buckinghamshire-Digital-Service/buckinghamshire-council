@@ -1,0 +1,10 @@
+.Draftail-block--big-text {
+    font-size: 2.5em;
+    margin: 0.5em 0;
+}
+
+/* This is to force the leading number to be visible in long ordered lists */
+.DraftEditor-editorContainer
+    .public-DraftStyleDefault-depth0.public-DraftStyleDefault-listLTR {
+    margin-left: 2.25em;
+}

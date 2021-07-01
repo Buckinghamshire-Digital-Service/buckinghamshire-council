@@ -6,25 +6,21 @@
 
 {% block content %}
     <h1 class="heading heading--xxl">
-        {% if page.is_inline_index %}
-            {{ page.title }}
-        {% elif page.is_inline_index_child %}
-            {{ page.get_parent.title }}
-        {% endif %}
+        {{ page.index_title }}
     </h1>
 
-    {% with page_links=page.get_index %}
+    {% with page_links=index %}
     <nav class="index-nav" aria-label="Pages in this section">
         <h2 class="index-nav__title">Contents</h2>
         <ul class="index-nav__list">
             {% for link in page_links %}
                 {% if link.id == page.id %}
                     <li class="index-nav__item index-nav__item--current">
-                        <span class="index-nav__link">{{ link.subtitle|default:link }}</span>
+                        <span class="index-nav__link">{{ link.content_title }}</span>
                     </li>
                 {% else %}
                     <li class="index-nav__item">
-                        <a class="index-nav__link" href="{% pageurl link %}">{{ link.subtitle|default:link }}</a>
+                        <a class="index-nav__link" href="{% pageurl link %}">{{ link.content_title }}</a>
                     </li>
                 {% endif %}
             {% endfor %}
@@ -34,45 +30,13 @@
     <div class="wrapper wrapper--flex">
         <div class="section section--main section--inline-index">
             <h2 class="heading heading--xl">
-                {% if page.is_inline_index %}
-                    {{ page.subtitle }}
-                {% elif page.is_inline_index_child %}
-                    {{ page.title }}
-                {% endif %}
+                {{ page.content_title }}
             </h2>
 
             <div class="main-body">
                 {{ page.body }}
 
-                <div class="index-pagination">
-                    {% with next_sibling=page.get_next_page prev_sibling=page.get_prev_page %}
-                        <ul class="index-pagination__list">
-                            <li class="index-pagination__item index-pagination__item--previous">
-                                {% if prev_sibling %}
-                                    <a class="index-pagination__button link--alt" href="{% pageurl prev_sibling %}" rel="prev">
-                                        {% include "patterns/atoms/icons/icon.html" with name="arrow" classname="icon--stroke index-pagination__icon index-pagination__icon--previous" %}
-                                        <span class="index-pagination__text">
-                                            Previous
-                                            <span class="index-pagination__page-title">{{ prev_sibling }}</span>
-                                        </span>
-                                    </a>
-                                {% endif %}
-                            </li>
-
-                            <li class="index-pagination__item index-pagination__item--next">
-                                {% if next_sibling %}
-                                    <a class="index-pagination__button index-pagination__button--next link--alt" href="{% pageurl next_sibling %}" rel="next">
-                                        {% include "patterns/atoms/icons/icon.html" with name="arrow" classname="icon--stroke index-pagination__icon index-pagination__icon--next" %}
-                                        <span class="index-pagination__text">
-                                            Next
-                                            <span class="index-pagination__page-title">{{ next_sibling }}</span>
-                                        </span>
-                                    </a>
-                                {% endif %}
-                            </li>
-                        </ul>
-                    {% endwith %}
-                </div>
+                {% include "patterns/molecules/pagination/index-pagination.html" with next_page=next_page prev_page=prev_page %}
             </div>
         </div>
 

@@ -97,8 +97,6 @@
     }
 
     &__ogl {
-        flex: 1 0 auto;
-        order: 3;
         margin-top: $grid--small + 10px;
 
         @include media-query(tablet-landscape) {
@@ -111,10 +109,8 @@
     }
 
     &__credit {
-        flex: 0 0 100%;
         margin-top: $grid--small;
         margin-bottom: $grid--large;
-        order: 4;
     }
 
     &__credit-logo {

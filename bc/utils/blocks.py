@@ -36,7 +36,7 @@ class DocumentBlock(blocks.StructBlock):
 
 
 class QuoteBlock(blocks.StructBlock):
-    quote = blocks.CharBlock(classname="title")
+    quote = blocks.CharBlock(form_classname="title")
     attribution = blocks.CharBlock(required=False)
 
     class Meta:
@@ -47,8 +47,13 @@ class QuoteBlock(blocks.StructBlock):
 class HighlightBlock(blocks.RichTextBlock):
     class Meta:
         icon = "pick"
-        features = RICH_TEXT_FEATURES
         template = "patterns/molecules/streamfield/blocks/highlight_block.html"
+
+    def __init__(self, *args, **kwargs):
+        # Setting features in class Meta doesn't work, so add it on init
+        default_features = ["h3", "big-text"] + RICH_TEXT_FEATURES
+        features = kwargs.get("features", default_features)
+        super().__init__(*args, features=features, **kwargs)
 
 
 class LocalAreaLinksBlock(blocks.StructBlock):
@@ -79,7 +84,7 @@ class LocalAreaLinksBlock(blocks.StructBlock):
 
 
 class ButtonBlock(blocks.StructBlock):
-    text = blocks.CharBlock(classname="title")
+    text = blocks.CharBlock(form_classname="title")
     link_url = blocks.URLBlock(required=False)
     link_page = blocks.PageChooserBlock(required=False)
 
@@ -120,7 +125,7 @@ class ButtonBlock(blocks.StructBlock):
 
 class BaseStoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(
-        classname="full title",
+        form_classname="full title",
         help_text=(
             "The link to this heading uses the heading text in lowercase, with no"
             " symbols, and with the spaces replaced with hyphens."
@@ -132,7 +137,7 @@ class BaseStoryBlock(blocks.StreamBlock):
         label="Main heading",
     )
     subheading = blocks.CharBlock(
-        classname="full title",
+        form_classname="full title",
         help_text=(
             "The link to this subheading uses the subheading text in lowercase, with no"
             " symbols, and with the spaces replaced with hyphens."
@@ -178,7 +183,9 @@ class Accordion(blocks.StructBlock):
                 (
                     "title",
                     blocks.CharBlock(
-                        classname="full title", icon="title", label="Accordion title"
+                        form_classname="full title",
+                        icon="title",
+                        label="Accordion title",
                     ),
                 ),
                 ("content", NestedStoryBlock(label="Accordion content")),
@@ -188,12 +195,14 @@ class Accordion(blocks.StructBlock):
     )
 
     class Meta:
-        icon = ("list-ul",)
+        icon = "list-ul"
         template = ("patterns/molecules/streamfield/blocks/accordion.html",)
 
 
 class DetailBlock(blocks.StructBlock):
-    title = blocks.CharBlock(classname="full title", icon="title", label="Detail title")
+    title = blocks.CharBlock(
+        form_classname="full title", icon="title", label="Detail title"
+    )
     content = blocks.RichTextBlock(features=RICH_TEXT_FEATURES, label="Detail content")
 
     class Meta:
@@ -202,6 +211,7 @@ class DetailBlock(blocks.StructBlock):
 
 
 # Main streamfield block to be inherited by Pages
+# Consider if any new blocks are also needed on longform/blocks.py
 class StoryBlock(BaseStoryBlock):
     accordion = Accordion()
     detail = DetailBlock()

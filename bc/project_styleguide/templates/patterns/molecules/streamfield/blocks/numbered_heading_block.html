@@ -1,0 +1,7 @@
+<h2
+    class="heading heading--l"
+    {% if block_number %}id="section-{{ block_number }}"{% endif %}
+>
+    {% if block_number %}{{ block_number }}.{% endif %}
+    {{ value }}
+</h2>

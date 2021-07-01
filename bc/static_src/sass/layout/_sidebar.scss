@@ -6,6 +6,10 @@
     @include media-query(tablet-landscape) {
         flex: 0 0 290px;
         margin: 0 0 0 $grid--large;
+
+        &:first-child {
+            margin: 0 $grid--large 0 0;
+        }
     }
 
     &--narrow {

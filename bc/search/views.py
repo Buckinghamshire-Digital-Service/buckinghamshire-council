@@ -2,19 +2,17 @@ from itertools import chain
 
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.db.models import Case, CharField, OuterRef, Subquery, When
 from django.http import QueryDict
 from django.template.response import TemplateResponse
 from django.utils.cache import add_never_cache_headers, patch_cache_control
+from django.utils.html import escape
 from django.utils.timezone import now
 from django.views.generic.base import View
 
-from wagtail.contrib.search_promotions.templatetags.wagtailsearchpromotions_tags import (
-    get_search_promotions,
-)
 from wagtail.core.models import Page, Site
 from wagtail.search.models import Query
 
-from bc.family_information.models import FamilyInformationHomePage
 from bc.recruitment.forms import SearchAlertSubscriptionForm
 from bc.recruitment.models import JobAlertSubscription
 from bc.recruitment.utils import (
@@ -50,18 +48,68 @@ class SearchView(View):
             search_results = get_job_search_results(
                 querydict=request.GET, homepage=homepage
             )
-            context["job_alert_form"] = SearchAlertSubscriptionForm
+            if settings.ENABLE_JOBS_SEARCH_ALERT_SUBSCRIPTIONS:
+                context["job_alert_form"] = SearchAlertSubscriptionForm
 
         # Main site search
         else:
             if search_query:
-                promotions = get_search_promotions(search_query)
-
-                search_sources = (
-                    Page.objects.live().public().exclude(searchpromotion__in=promotions)
+                promotions = (
+                    Query.get(search_query)
+                    .editors_picks.annotate(
+                        section_label=Case(
+                            When(
+                                page__path__startswith=site.root_page.path,
+                                then=Subquery(
+                                    Page.objects
+                                    # don't self-annotate section indexes
+                                    .exclude(pk=OuterRef("page__pk"))
+                                    .filter(
+                                        depth=3,
+                                        path__withinstart=OuterRef("page__path"),
+                                    )
+                                    .values("title")
+                                ),
+                            ),
+                            default=Subquery(
+                                Site.objects.filter(
+                                    root_page__path__withinstart=OuterRef("page__path")
+                                ).values("site_name")
+                            ),
+                            output_field=CharField(),
+                        )
+                    )
+                    .all()
                 )
-                search_sources = self.exclude_fis_pages(search_sources)
-                search_results = search_sources.search(search_query, operator="or")
+
+                page_queryset_for_search = (
+                    Page.objects.live()
+                    .exclude(searchpromotion__in=promotions)
+                    .annotate(
+                        section_label=Case(
+                            When(
+                                path__startswith=site.root_page.path,
+                                then=Subquery(
+                                    Page.objects
+                                    # don't self-annotate section indexes
+                                    .exclude(pk=OuterRef("pk"))
+                                    .filter(depth=3, path__withinstart=OuterRef("path"))
+                                    .values("title")
+                                ),
+                            ),
+                            default=Subquery(
+                                Site.objects.filter(
+                                    root_page__path__withinstart=OuterRef("path")
+                                ).values("site_name")
+                            ),
+                            output_field=CharField(),
+                        )
+                    )
+                )
+                search_results = page_queryset_for_search.search(
+                    search_query, operator="and"
+                )
+
                 query = Query.get(search_query)
                 # Record hit
                 query.add_hit()
@@ -81,12 +129,16 @@ class SearchView(View):
         except EmptyPage:
             search_results = paginator.page(paginator.num_pages)
 
+        search_input_help_text = SystemMessagesSettings.for_site(
+            site
+        ).search_input_help_text
         no_result_text = SystemMessagesSettings.for_request(
             request
-        ).body_no_search_results.format(searchterms=search_query)
+        ).body_no_search_results.format(searchterms=escape(search_query))
 
         context.update(
             {
+                "search_input_help_text": search_input_help_text,
                 "no_result_text": no_result_text,
                 "search_query": search_query,
                 "search_results": search_results,
@@ -175,26 +227,6 @@ class SearchView(View):
                 context,
             )
             return response
-
-    @staticmethod
-    def exclude_fis_pages(page_queryset):
-        """
-        Exclude FIS pages from the given page QuerySet.
-
-        Excluding these pages from the search is only a temporary fix and needs
-        to be reverted in a future update when the FIS content is ready for
-        publication.
-
-        TODO: Remove this method and calls of it.
-
-        See also:
-        https://trello.com/c/TryuPZ9J/478-update-search-configuration-to-exclude-fis-content
-
-        """
-        fis_homepage = FamilyInformationHomePage.objects.first()
-        if fis_homepage is not None:
-            page_queryset = page_queryset.exclude(path__startswith=fis_homepage.path)
-        return page_queryset
 
 
 class JobAlertConfirmView(View):
