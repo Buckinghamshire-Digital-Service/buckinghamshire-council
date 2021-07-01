@@ -1,5 +1,11 @@
 # Release History
 
+## Unreleased
+
+- Add CI job to deploy the master branch to Content Prep server
+- Enable content transfer between Wagtail instances using https://github.com/wagtail/wagtail-transfer
+- Upgrade Wagtail to version 2.13.2
+
 ## 38.0 (2021-06-28)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/37.3...38.0

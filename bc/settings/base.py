@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     "bc.standardpages",
     "bc.users",
     "bc.utils",
+    "wagtail_transfer",
     "rest_framework",
     "wagtailorderable",
     "wagtail_automatic_redirects",
@@ -794,6 +795,57 @@ RESPOND_GET_FIELDS_WEBSERVICE = env.get("RESPOND_GET_FIELDS_WEBSERVICE")
 
 # MapIt.MySociety API credentials
 MAPIT_API_KEY = env.get("MAPIT_API_KEY")
+
+# Wagtail transfer settings
+# See https://buckinghamshire-council.pages.torchbox.com/bc/infrastructure/#wagtail-transfer
+# Configure other site to import from
+WAGTAILTRANSFER_SOURCES = {}
+
+wagtailtransfer_source_label = env.get("WAGTAILTRANSFER_SOURCE_LABEL", "source")
+if "WAGTAILTRANSFER_SOURCE_KEY" in env and "WAGTAILTRANSFER_SOURCE_URL" in env:
+    WAGTAILTRANSFER_SOURCES[wagtailtransfer_source_label] = {
+        "BASE_URL": env.get("WAGTAILTRANSFER_SOURCE_URL"),
+        "SECRET_KEY": env.get("WAGTAILTRANSFER_SOURCE_KEY"),
+    }
+
+wagtailtransfer_source_label_2 = env.get("WAGTAILTRANSFER_SOURCE_LABEL_2", "source 2")
+if "WAGTAILTRANSFER_SOURCE_KEY_2" in env and "WAGTAILTRANSFER_SOURCE_URL_2" in env:
+    WAGTAILTRANSFER_SOURCES[wagtailtransfer_source_label_2] = {
+        "BASE_URL": env.get("WAGTAILTRANSFER_SOURCE_URL_2"),
+        "SECRET_KEY": env.get("WAGTAILTRANSFER_SOURCE_KEY_2"),
+    }
+
+
+# Configure availability of this site as source for another site to import from
+if "WAGTAILTRANSFER_SECRET_KEY" in env:
+    WAGTAILTRANSFER_SECRET_KEY = env.get("WAGTAILTRANSFER_SECRET_KEY")
+# When a page points to a non-page object through some relationship (i.e.
+# foreignkey) then that object is imported on the first page transfer.
+# On subsequent update imports of the page, the related objects are typically
+# ignored. To also update the related object when the page is updated, the
+# models have to be listed below.
+WAGTAILTRANSFER_UPDATE_RELATED_MODELS = [
+    "wagtailimages.image",
+    "wagtaildocs.document",
+    "alerts.alert",
+    "image.customimage",
+    WAGTAILDOCS_DOCUMENT_MODEL,  # Specified above
+    "events.eventtype",
+    "events.eventpageeventtype",
+    "news.newstype",
+    "news.newspagenewstype",
+]
+# Specifies a list of models that should not be imported by association when
+# they are referenced from imported content.
+WAGTAILTRANSFER_NO_FOLLOW_MODELS = [
+    "wagtailcore.page",  # This is default
+    "forms.PostcodeLookupResponse",  # ArrayField can not be serialized for transfer."
+    "recruitment.talentlinkjob",
+    "recruitment.jobsubcategory",
+    "recruitment.jobcategory",
+    "users.user",  # Do not transfer users between instances
+]
+
 
 # Feature flags
 ENABLE_FEEDBACK_WIDGET = (  # Page usefulness and comment forms in the footer
