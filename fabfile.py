@@ -4,6 +4,7 @@ from invoke.tasks import task
 
 PRODUCTION_APP_INSTANCE = "buckinghamshire-production"
 STAGING_APP_INSTANCE = "buckinghamshire-staging"
+CONTENT_PREP_APP_INSTANCE = "buckinghamshire-content_prep"
 
 LOCAL_MEDIA_FOLDER = "/vagrant/media"
 LOCAL_IMAGES_FOLDER = "/vagrant/media/original_images"
@@ -31,6 +32,12 @@ def pull_production_data(c):
 def production_shell(c):
     """Spin up a one-time Heroku production dyno and connect to shell"""
     open_heroku_shell(c, PRODUCTION_APP_INSTANCE)
+
+
+@task
+def content_prep_shell(c):
+    """Spin up a one-time Heroku production dyno and connect to shell"""
+    open_heroku_shell(c, CONTENT_PREP_APP_INSTANCE)
 
 
 @task
