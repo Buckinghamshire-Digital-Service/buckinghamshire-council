@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Add CI job to deploy the master branch to Content Prep server
 - Enable content transfer between Wagtail instances using https://github.com/wagtail/wagtail-transfer
 - Upgrade Wagtail to version 2.13.2
 
