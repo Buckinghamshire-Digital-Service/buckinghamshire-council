@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- Upgrade Django to 2.2.24
+
 ## 39.0 (2021-07-01)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/38.0...39.0
