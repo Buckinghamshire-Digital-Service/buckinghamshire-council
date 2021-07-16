@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Add chart StreamField blocks to long-form content pages
 - Update CI config to use the cache to store artefacts
 - Upgrade Wagtail to version 2.13
 
