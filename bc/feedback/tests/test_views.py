@@ -1,11 +1,12 @@
 from http import HTTPStatus
 
-from django.test import TestCase, override_settings
+from django.test import Client, TestCase, override_settings
 from django.urls import reverse
 
 from wagtail.core import models as wagtail_models
 
 from bc.feedback.models import FeedbackComment, UsefulnessFeedback
+from bc.home.tests.fixtures import HomePageFactory
 from bc.standardpages.tests.fixtures import InformationPageFactory
 
 
@@ -142,6 +143,48 @@ class TestUsefulnessFeedbackCreateView(CreateInfoPageMixin, TestCase):
             self.assertTrue(feedback.page.url.startswith(feedback.original_url))
             self.assertEqual(len(feedback.original_url), 2048)
 
+    def test_csrf_exemption(self):
+        """Test that no CSRF token is required with the form"""
+        payload = {
+            "form_prefix": "foo",
+            "foo-page": self.info_page.id,
+            "foo-useful": True,
+        }
+
+        client = Client(enforce_csrf_checks=True)
+        response = client.post(self.url, data=payload, follow=True)
+
+        with self.subTest("Status code"):
+            # A CSRF-requiring view would return a 403 status code if the CSRF field
+            # were needed.
+            self.assertEqual(response.status_code, HTTPStatus.OK)
+        with self.subTest("response cookies"):
+            self.assertNotIn("csrftoken", response.cookies)
+
+
+class TestUsefulnessFeedbackFormTemplate(CreateInfoPageMixin, TestCase):
+    """Test that we do not set a CSRF token cookie.
+
+    There is no view associated with GET requests for the form. The form template is
+    included in the base page template. Therefore we test the request for a page, not a
+    view.
+    """
+
+    def _test_csrf_cookie_is_not_set(self, url):
+        response = self.client.get(url)
+        with self.subTest("The cookie is not in the response."):
+            self.assertNotIn("csrftoken", response.cookies)
+        with self.subTest("The cookie is not stored by the client."):
+            self.assertNotIn("csrftoken", self.client.cookies)
+
+    def test_csrf_cookie_is_not_set_on_info_page(self):
+        self._test_csrf_cookie_is_not_set(self.info_page.url)
+
+    def test_csrf_cookie_is_not_set_on_home_page(self):
+        home_page = HomePageFactory.build_with_fk_objs_committed()
+        self.root_page.add_child(instance=home_page)
+        self._test_csrf_cookie_is_not_set(home_page.url)
+
 
 class TestFeedbackCommentCreateView(CreateInfoPageMixin, TestCase):
     def setUp(self):
@@ -198,6 +241,23 @@ class TestFeedbackCommentCreateView(CreateInfoPageMixin, TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.BAD_REQUEST)
         self.assertIn("action", response.json()["form"]["errors"])
+
+    def test_csrf_exemption(self):
+        """Test that no CSRF token is required with the form"""
+        payload = {
+            "comment_form-page": self.info_page.id,
+            "comment_form-action": "I was trying something.",
+            "comment_form-issue": "Something went wrong.",
+        }
+        client = Client(enforce_csrf_checks=True)
+        response = client.post(self.url, data=payload)
+
+        with self.subTest("Status code"):
+            # A CSRF-requiring view would return a 403 status code if the CSRF field
+            # were needed.
+            self.assertEqual(response.status_code, HTTPStatus.OK)
+        with self.subTest("response cookies"):
+            self.assertNotIn("csrftoken", response.cookies)
 
 
 class TestFeedbackFormFeatureFlags(CreateInfoPageMixin, TestCase):
