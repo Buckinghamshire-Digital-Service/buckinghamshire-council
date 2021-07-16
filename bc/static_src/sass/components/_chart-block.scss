@@ -1,0 +1,66 @@
+.chart-block {
+    margin-bottom: $grid--large;
+    padding: $grid--min;
+    background-color: $color--charcoal-10;
+
+    @include media-query(tablet-portrait) {
+        padding: $grid--small;
+    }
+
+    &__wrapper {
+        &--hidden {
+            display: none;
+        }
+    }
+
+    &__title {
+        margin-top: 0;
+    }
+
+    // this div is used by Highcharts to display the chart
+    &__chart {
+        width: 100%;
+        height: 400px;
+        margin-top: $grid--small; // matches table spacing
+    }
+
+    &__table {
+        margin-bottom: 0;
+    }
+
+    &__link-wrapper {
+        float: right;
+    }
+
+    &__link {
+        margin-top: 0; // override of button--link styling
+
+        &--inactive {
+            color: $color--default;
+            text-decoration: none;
+            pointer-events: none;
+        }
+
+        &:first-child::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 1.2em;
+            border-right: 1px solid $color--default;
+            padding-right: 0.5em;
+            margin-right: 0.3em;
+        }
+    }
+
+    &__caption {
+        @include font-size(xs);
+        caption-side: bottom;
+        font-weight: normal;
+        width: 100%;
+        margin: $grid--small 0;
+
+        &--on-p {
+            display: block;
+        }
+    }
+}

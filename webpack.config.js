@@ -11,6 +11,7 @@ const projectRoot = 'bc';
 const options = {
     entry: {
         // nultiple entries can be added here
+        bc_admin_ui: `./${projectRoot}/static_src/javascript/bc_admin_ui.js`,
         main: `./${projectRoot}/static_src/javascript/main.js`,
     },
     output: {

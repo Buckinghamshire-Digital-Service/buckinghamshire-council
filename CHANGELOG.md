@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- Add chart StreamField blocks to long-form content pages
+
 ## 39.0 (2021-07-01)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/38.0...39.0

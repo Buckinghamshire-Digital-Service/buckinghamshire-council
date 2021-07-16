@@ -1,0 +1,82 @@
+{% load humanize table_block_tags %}
+
+{% if table_data %}
+
+{% comment %} A chart block - will toggle between a table and a chart version of the data {% endcomment %}
+<div class="chart-block" data-chart-block>
+    <h2 class="heading heading--m chart-block__title">
+        {% if title %}{{ title }}{% else %}{{ default_title }}{% endif %}
+    </h2>
+
+    <div class="chart-block__link-wrapper">
+        <button aria-label="Display as table" class="button button--link chart-block__link {% if table_first%}chart-block__link--inactive{% endif %}" {% if table_first%}aria-hidden="true"{% endif %} data-to-table>Table</button>
+        <button aria-label="Display as chart" class="button button--link chart-block__link {% if not table_first%}chart-block__link--inactive{% endif %}" {% if not table_first%}aria-hidden="true"{% endif %} data-to-chart>Chart</button>
+    </div>
+
+    <div
+        class="chart-block__wrapper {% if not table_first%}chart-block__wrapper--hidden{% endif %}"
+        data-table-wrapper="{{ id }}"
+    >
+        <div class="table-container">
+            <table class="chart-block__table">
+                {% if caption %}
+                    <caption class="chart-block__caption">{{ caption }}</caption>
+                {% endif %}
+                <thead>
+                    <tr>
+                        {% if table_headers %}
+                            {% for column in table_headers %}
+                                {% with col_index=forloop.counter0 row_index=0 %}
+                                    <th scope="col" {% cell_classname row_index col_index %}>
+                                        {% if column.strip %}
+                                            {{ column.strip|linebreaksbr }}
+                                        {% endif %}
+                                    </th>
+                                {% endwith %}
+                            {% endfor %}
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in table_data %}
+                        {% with col_index=forloop.counter0 %}
+                            <tr>
+                                {% for column in row %}
+                                {% with forloop.counter0 as col_index %}
+                                    {% if forloop.first %}
+                                        <th scope="row" {% cell_classname row_index col_index table_headers %}>
+                                            {% if column.strip %}
+                                                {{ column.strip|linebreaksbr }}
+                                            {% endif %}
+                                        </th>
+                                    {% else %}
+                                        <td {% cell_classname row_index col_index table_headers %}>
+                                            {% if column.strip %}
+                                                {{ column.strip|linebreaksbr|intcomma }}
+                                            {% endif %}
+                                        </td>
+                                    {% endif %}
+                                {% endwith %}
+                                {% endfor %}
+                            </tr>
+                        {% endwith %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div
+        class="chart-block__wrapper {% if table_first%}chart-block__wrapper--hidden{% endif %}"
+        data-chart-wrapper="{{ id }}"
+    >
+        <div class="chart-block__chart" data-chart="{{ id }}" id="chart-container-{{ id }}"></div>
+        {% if caption %}
+            <p class="chart-block__caption chart-block__caption--on-p">{{ caption }}</p>
+        {% endif %}
+    </div>
+</div>
+
+{{ value|json_script:id }}
+
+{% endif %}
