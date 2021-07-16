@@ -1,7 +1,9 @@
 from http import HTTPStatus
 
 from django import http, urls
+from django.utils.decorators import method_decorator
 from django.views import generic
+from django.views.decorators.csrf import csrf_exempt
 
 from wagtail.admin.views import reports as report_views
 
@@ -9,6 +11,7 @@ from bc.feedback.forms import FeedbackCommentForm, UsefulnessFeedbackForm
 from bc.feedback.models import FeedbackComment, UsefulnessFeedback
 
 
+@method_decorator(csrf_exempt, name="dispatch")
 class UsefulnessFeedbackCreateView(generic.CreateView):
     """
     Create UsefulnessFeedback from form submission.
@@ -70,6 +73,7 @@ class UsefulnessFeedbackReportView(report_views.ReportView):
         return UsefulnessFeedback.objects.all().order_by("-created")
 
 
+@method_decorator(csrf_exempt, name="dispatch")
 class FeedbackCommentCreateView(generic.CreateView):
     """
     Create FeedbackComment from posted forms.

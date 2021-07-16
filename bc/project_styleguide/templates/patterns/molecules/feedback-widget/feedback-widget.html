@@ -11,7 +11,6 @@
                     data-yes-form
                     class="feedback-widget__button-form"
                 >
-                    {% csrf_token %}
                     {{ yes_form }}
                     <button
                         class="feedback-widget__button"
@@ -31,7 +30,6 @@
                     data-no-form
                     class="feedback-widget__button-form"
                 >
-                    {% csrf_token %}
                     {{ no_form }}
                     <button
                         class="feedback-widget__button"
@@ -61,7 +59,6 @@
                 data-extra-feedback-form
                 class="form"
             >
-                {% csrf_token %}
                 {% for field in comment_form %}
                     {% include "patterns/molecules/form_field.html" %}
                 {% endfor %}
