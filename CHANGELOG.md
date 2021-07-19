@@ -1,5 +1,12 @@
 # Release History
 
+## 40.0 (2021-07-19)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/39.1...40.0
+
+- Add chart StreamField blocks to long-form content pages
+- Stop using CSRF tokens for feedback widget
+
 ## 39.1 (2021-07-07)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/39.0...39.1

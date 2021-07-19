@@ -1,8 +1,11 @@
 import copy
 
+from django import forms
 from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
+from django.utils.functional import cached_property
 
+from wagtail.admin.staticfiles import versioned_static
 from wagtail.contrib.table_block.blocks import TableBlock
 from wagtail.core import blocks
 from wagtail.documents.blocks import DocumentChooserBlock
@@ -10,6 +13,8 @@ from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 
 from .constants import RICH_TEXT_FEATURES
+from .utils import is_number
+from .widgets import BarChartInput, LineChartInput, PieChartInput
 
 
 class ImageBlock(blocks.StructBlock):
@@ -121,6 +126,241 @@ class ButtonBlock(blocks.StructBlock):
     class Meta:
         icon = "success"
         template = "patterns/molecules/streamfield/blocks/button_block.html"
+
+
+class BaseChartBlock(TableBlock):
+    @property
+    def media(self):
+        return forms.Media(
+            css={
+                "all": [
+                    versioned_static("utils/css/vendor/handsontable-6.2.2.full.min.css")
+                ]
+            },
+            js=[versioned_static("utils/js/vendor/handsontable-6.2.2.full.min.js")],
+        )
+
+    def convert_column_data_to_numbers(self, columns):
+        """
+        Converts string data inside a column into its number/float equivalent
+        if applicable
+        """
+        result = []
+        for column in columns:
+            series = {
+                "name": column["name"],
+                "data": [
+                    float(cell) if is_number(cell) else cell for cell in column["data"]
+                ],
+            }
+            result.append(series)
+
+        return result
+
+    def get_table_columns(self, table):
+        """
+        Return table as column headers and column values
+        e.g. { name: row 1, data: [row 2, row 3, ...] }
+        """
+        result = []
+        transposed_table = [*zip(*table)]
+        for col in transposed_table:
+            series = {
+                "name": col[0],
+                "data": [cell for cell in col[1:]],
+            }
+            result.append(series)
+
+        return result
+
+    def clean_table_values(self, table):
+        """
+        Remove empty rows and columns
+        """
+
+        cleaned_table = copy.deepcopy(table)
+
+        # Remove empty rows
+        for row in table:
+            if all([cell is None or not cell.strip() for cell in row]):
+                cleaned_table.remove(row)
+
+        # Remove empty columns
+        transposed_table = [*zip(*cleaned_table)]
+        removed_count = 0
+        for index, col in enumerate(transposed_table):
+            if all([cell is None or not cell.strip() for cell in col]):
+                for row in cleaned_table:
+                    del row[index - removed_count]
+                removed_count += 1
+
+        return cleaned_table
+
+    class Meta:
+        abstract = True
+        template = "patterns/molecules/streamfield/blocks/chart_block.html"
+
+
+class BarChartBlock(BaseChartBlock):
+    @cached_property
+    def field(self):
+        return forms.CharField(
+            widget=BarChartInput(table_options=self.table_options),
+            **self.field_options,
+        )
+
+    def render(self, value, context=None):
+        if context is None:
+            new_context = {}
+        else:
+            new_context = dict(context)
+
+        # If no value at all, exit early
+        if not value:
+            return super().render(value, new_context)
+
+        cleaned_data = self.clean_table_values(value["data"])
+        columns = self.get_table_columns(cleaned_data)
+
+        # If no data found, exit early
+        if not columns:
+            return super().render(value, new_context)
+
+        data_columns = self.convert_column_data_to_numbers(columns[1:])
+        new_value = {
+            "chart": {"type": "column"},
+            "series": data_columns,
+        }
+        if value["direction"] == "horizontal":
+            new_value["chart"]["type"] = "bar"
+
+        first_column = columns[0]
+        new_value["xAxis"] = {
+            "categories": first_column["data"],
+            "title": {"text": first_column["name"]},
+        }
+        new_value["yAxis"] = {}
+
+        new_context.update(
+            {
+                "id": "bar-{0}".format(value["id"]),
+                "table_first": value["table_first"],
+                "table_headers": cleaned_data[0],
+                "table_data": cleaned_data[1:],
+                "title": value["table_title"],
+                "caption": value["chart_caption"],
+                "default_title": "Bar chart",
+            }
+        )
+
+        return super().render(new_value, new_context)
+
+
+class LineChartBlock(BaseChartBlock):
+    @cached_property
+    def field(self):
+        return forms.CharField(
+            widget=LineChartInput(table_options=self.table_options),
+            **self.field_options,
+        )
+
+    def render(self, value, context=None):
+        if context is None:
+            new_context = {}
+        else:
+            new_context = dict(context)
+
+        # If no value at all, exit early
+        if not value:
+            return super().render(value, new_context)
+
+        cleaned_data = self.clean_table_values(value["data"])
+        columns = self.get_table_columns(cleaned_data)
+
+        # If no data found, exit early
+        if not columns:
+            return super().render(value, new_context)
+
+        data_columns = self.convert_column_data_to_numbers(columns[1:])
+        new_value = {
+            "chart": {"type": "line"},
+            "series": data_columns,
+        }
+
+        first_column = columns[0]
+        new_value["xAxis"] = {
+            "categories": first_column["data"],
+            "title": {"text": first_column["name"]},
+        }
+        new_value["yAxis"] = {}
+
+        new_context.update(
+            {
+                "id": "line-{0}".format(value["id"]),
+                "table_first": value["table_first"],
+                "table_headers": cleaned_data[0],
+                "table_data": cleaned_data[1:],
+                "title": value["table_title"],
+                "caption": value["chart_caption"],
+                "default_title": "Line graph",
+            }
+        )
+
+        return super().render(new_value, new_context)
+
+
+class PieChartBlock(BaseChartBlock):
+    @cached_property
+    def field(self):
+        return forms.CharField(
+            widget=PieChartInput(table_options=self.table_options),
+            **self.field_options,
+        )
+
+    def render(self, value, context=None):
+        if context is None:
+            new_context = {}
+        else:
+            new_context = dict(context)
+
+        # If no value at all, exit early
+        if not value:
+            return super().render(value, new_context)
+
+        cleaned_data = self.clean_table_values(value["data"])
+
+        # Get total value
+        total_value = 0
+        for row in cleaned_data:
+            if is_number(row[1]):
+                total_value += float(row[1])
+
+        # Use percentage values for the chart
+        series_data = []
+        for row in cleaned_data:
+            if is_number(row[1]):
+                series_value = round(float(row[1]) / total_value * 100, 1)
+            else:
+                series_value = row[1]
+            series = {"name": row[0], "y": series_value}
+            series_data.append(series)
+            row.append(f"{series_value}%")
+
+        new_value = {"chart": {"type": "pie"}, "series": [{"data": series_data}]}
+
+        new_context.update(
+            {
+                "id": "pie-{0}".format(value["id"]),
+                "table_first": value["table_first"],
+                "table_headers": ["", "Values", "Percentage (%)"],
+                "table_data": cleaned_data,
+                "title": value["table_title"],
+                "caption": value["chart_caption"],
+                "default_title": "Pie chart",
+            }
+        )
+
+        return super().render(new_value, new_context)
 
 
 class BaseStoryBlock(blocks.StreamBlock):
