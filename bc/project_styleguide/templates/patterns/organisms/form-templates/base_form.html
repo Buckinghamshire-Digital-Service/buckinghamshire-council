@@ -1,0 +1,23 @@
+{% load wagtailcore_tags wagtailroutablepage_tags %}
+
+<form action="{% routablepageurl page "form_route" %}" method="post" class="form form--standard"{% if form.attachments %} enctype="multipart/form-data"{% endif %} novalidate data-form>
+    <div class="form__container">
+        {% csrf_token %}
+
+        {% if form.errors %}
+            <div class="form__errors">
+                There were some errors with your form. Please amend the fields highlighted below.
+                {% if form.non_field_errors %}
+                    {{ form.non_field_errors }}
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% block fields %}
+        {% endblock fields %}
+
+        {{ page.pre_submission_text|richtext }}
+        <input class="form__submit button" type="submit" value="Submit">
+
+    </div>
+</form>
