@@ -1,6 +1,10 @@
 {% extends base_page_template %}
 {% load wagtailcore_tags wagtailimages_tags util_tags static %}
 
+{% block meta_tags %}
+        <meta name="robots" content="noindex">
+{% endblock %}
+
 {% block content %}
 
     <div class="section section--main">
