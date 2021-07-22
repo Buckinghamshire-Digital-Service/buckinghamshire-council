@@ -147,7 +147,10 @@ class AttachmentFieldTests(TestCase):
                 )
                 self.homepage.add_child(instance=self.case_form_page)
 
-                response = self.client.get(self.case_form_page.url)
+                response = self.client.get(
+                    self.case_form_page.url
+                    + self.case_form_page.reverse_subpage("form_route")
+                )
                 soup = BeautifulSoup(response.content.decode())
                 form = soup.find("form", class_="form form--standard")
                 self.assertIn("enctype", form.attrs)
@@ -161,7 +164,10 @@ class AttachmentFieldTests(TestCase):
                 )
                 self.homepage.add_child(instance=self.case_form_page)
 
-                response = self.client.get(self.case_form_page.url)
+                response = self.client.get(
+                    self.case_form_page.url
+                    + self.case_form_page.reverse_subpage("form_route")
+                )
                 soup = BeautifulSoup(response.content.decode())
                 form = soup.find("form", class_="form form--standard")
                 self.assertNotIn("enctype", form.attrs)
