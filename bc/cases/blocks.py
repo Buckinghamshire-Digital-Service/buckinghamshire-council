@@ -4,6 +4,8 @@ from bc.utils.blocks import StoryBlock
 
 
 class FormButtonBlock(blocks.StructBlock):
+    """A block to act as a hard-coded link to the form subpage route"""
+
     text = blocks.CharBlock(form_classname="title", help_text="The button label")
 
     def get_context(self, value, parent_context=None):
