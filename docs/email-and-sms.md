@@ -2,7 +2,7 @@
 
 We use the [GOV.UK Notify](https://www.notifications.service.gov.uk/) service for sending emails and SMS messages. [Python Client Documentation](https://docs.notifications.service.gov.uk/python.html).
 
-This is implemented as a custom Django email backend `bc.utils.email.NotifyEmailBackend`. It presents a similar internal API to standard Django email backends, but with some restrictions:
+This is implemented as a custom Django email backend, now split out to the separate open-sourced Django extension `django-gov-notify`. It presents a similar internal API to standard Django email backends, but with some restrictions:
 
 - GOV.UK Notify emails are sent to one recipient each. CC: and BCC: fields are not supported.
 - A single email 'message' with multiple recipients will result in multiple individual API calls to GOV.UK Notify, each message being sent to a single recipient. The backend will still report back `1`, as per Django's default behaviour.
@@ -32,7 +32,7 @@ Configure the template in the [GOV.UK Notify dashboard](https://www.notification
 Create an email message, supplying the template ID and a `personalisation` dictionary (this should also include variables in the subject as necessary):
 
 ```python
-from bc.utils.email import NotifyEmailMessage
+from django_gov_notify.message import NotifyEmailMessage
 
 message = NotifyEmailMessage(
     to=["recipient@example.com"],
@@ -56,7 +56,7 @@ This assumes you have configured a blank template with the parameters
 > Body: ((body))
 
 ```python
-from bc.utils.email import NotifyEmailMessage
+from django_gov_notify.message import NotifyEmailMessage
 
 message = NotifyEmailMessage(
     subject="Test subject", body="Test message content", to=["recipient@example.com"]

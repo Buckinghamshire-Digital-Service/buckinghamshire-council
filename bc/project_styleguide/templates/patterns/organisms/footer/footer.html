@@ -1,6 +1,14 @@
-{% load static wagtailuserbar wagtailcore_tags navigation_tags util_tags %}
+{% load static wagtailuserbar wagtailcore_tags navigation_tags util_tags feedback_tags %}
 
-{% include "patterns/molecules/feedback-widget/feedback-widget.html" %}
+<div class="feedback-widget-wrapper">
+    <div class="wrapper wrapper--large">
+        {% feedback_widget %}
+    </div>
+</div>
+
+{% if newsletter %}
+    {% include "patterns/molecules/subscribe/subscribe.html" with heading='Sign up for our e-newsletter' text='Get the latest news about council services, consultations, projects and events in your area.' button_text='Subscribe' button_link='https://enews.buckinghamshire.gov.uk/p/5438-3WI/signup' %}
+{% endif %}
 
 <div class="footer">
     <div class="footer__inner wrapper wrapper--large">

@@ -25,6 +25,7 @@ from wagtail.search import index
 from wagtailcaptcha.models import WagtailCaptchaEmailForm
 
 from bc.area_finder.utils import validate_postcode
+from bc.forms.forms import LookupPageForm
 from bc.utils.constants import RICH_TEXT_FEATURES
 from bc.utils.models import BasePage, RelatedPage
 from bc.utils.widgets import CustomCheckboxSelectMultiple, CustomCheckboxSelectSingle
@@ -126,6 +127,7 @@ class PostcodeLookupResponse(models.Model):
 
     @staticmethod
     def get_form(*args, **kwargs):
+        """Returns the form that will be used in the front-end"""
         label = kwargs.pop("label")
         help_text = kwargs.pop("help_text")
 
@@ -151,11 +153,6 @@ class PostcodeLookupResponse(models.Model):
     def clean_fields(self, exclude=None):
         exclude = exclude or []
         errors = {}
-        if "postcodes" not in exclude:
-            self.postcodes = [
-                validate_postcode(postcode) for postcode in self.postcodes
-            ]
-
         if "answer" not in exclude:
             try:
                 self.answer.format(postcode="test")
@@ -181,6 +178,7 @@ class LookupPage(BasePage):
 
     template = "patterns/pages/forms/lookup_page.html"
     landing_page_template = "patterns/pages/forms/lookup_page_landing.html"
+    base_form_class = LookupPageForm
 
     form_heading = RichTextField("Heading", features=RICH_TEXT_FEATURES)
     input_label = models.CharField(max_length=255)

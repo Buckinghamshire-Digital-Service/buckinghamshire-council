@@ -1,12 +1,75 @@
 {% load wagtailcore_tags %}
 
-<div class="feedback-widget active" data-feedback-widget>
-    <div class="feedback-widget__content wrapper wrapper--large">
-        <h4 class="feedback-widget__heading heading" data-feedback-heading>Is this page useful?</h4>
+{% if yes_form and no_form %}
+    <div class="feedback-widget show-yes-no" data-feedback-widget>
+        <div class="feedback-widget__content">
+            <h2 class="feedback-widget__heading heading" data-feedback-heading>Is this page useful?</h2>
+            <div class="feedback-widget__buttons">
+                <form
+                    action="{% url 'feedback:usefulness_feedback_create' %}"
+                    method="post"
+                    data-yes-form
+                    class="feedback-widget__button-form"
+                >
+                    {{ yes_form }}
+                    <button
+                        class="feedback-widget__button"
+                        id="page-feedback-yes"
+                        aria-label="Feedback - yes this page is useful"
+                        type="submit"
+                        name="form_prefix"
+                        value="{{ yes_form.prefix }}"
+                    >
+                        Yes
+                    </button>
+                </form>
 
-        <div class="feedback-widget__buttons">
-            <button class="feedback-widget__link" id="page-feedback-yes" aria-label="Feedback - yes this page is useful" data-feedback-button>Yes</button>
-            <button class="feedback-widget__link" id="page-feedback-no" aria-label="Feedback - No this page isn't useful" data-feedback-button>No</button>
+                <form
+                    action="{% url 'feedback:usefulness_feedback_create' %}"
+                    method="post"
+                    data-no-form
+                    class="feedback-widget__button-form"
+                >
+                    {{ no_form }}
+                    <button
+                        class="feedback-widget__button"
+                        id="page-feedback-no"
+                        aria-label="Feedback - No this page isn't useful"
+                        type="submit"
+                        name="form_prefix"
+                        value="{{ no_form.prefix }}"
+                    >
+                        No
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="feedback-widget__feedback-block feedback-block" aria-hidden="true" data-extra-feedback-block id="extra-feedback-block">
+            <button
+                aria-label="Close feedback form"
+                aria-controls="extra-feedback-block"
+                data-close-form
+                class="button feedback-block__close"
+            >Close</button>
+            <h2 class="heading heading--l feedback-block__heading">Help us improve {{ site_name }}</h2>
+            <form
+                action="{% url 'feedback:feedback_comment_create' %}"
+                method="post"
+                data-extra-feedback-form
+                class="form"
+            >
+                {% for field in comment_form %}
+                    {% include "patterns/molecules/form_field.html" %}
+                {% endfor %}
+                <button
+                    type="submit"
+                    class="form__submit"
+                    aria-label="Send feedback"
+                >
+                    Send
+                </button>
+            </form>
         </div>
     </div>
-</div>
+{% endif %}

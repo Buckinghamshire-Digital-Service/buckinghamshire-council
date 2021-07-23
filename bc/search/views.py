@@ -49,7 +49,8 @@ class SearchView(View):
             search_results = get_job_search_results(
                 querydict=request.GET, homepage=homepage
             )
-            context["job_alert_form"] = SearchAlertSubscriptionForm
+            if settings.ENABLE_JOBS_SEARCH_ALERT_SUBSCRIPTIONS:
+                context["job_alert_form"] = SearchAlertSubscriptionForm
 
         # Main site search
         else:

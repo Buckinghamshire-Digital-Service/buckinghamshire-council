@@ -45,7 +45,7 @@ The version number is of the form `MAJOR.PATCH`. Planned releases which add feat
 1. Add a heading `# x.x (yyyy-mm-dd)` to `CHANGELOG.md`, detailing what is in this release.
 1. Add a comparison link below the `x.x` heading (see other releases for syntax; note that this will not work until the release is tagged, below)
 1. Merge `release` to `master`.
-1. Deploy to production (see [continuous deployment documentation](continuous-deployment.md#deploying-to-production)).
+1. Deploy to Production and Content Prep (see [continuous deployment documentation](continuous-deployment.md#deploying-to-production)).
 1. Tag the merge commit
    1. `git tag x.x`
    1. `git push --tags`
@@ -64,7 +64,7 @@ Urgent bug fixes should be made against the latest-deployed release, i.e. x.x.
 1. If it needs client approval, or to be user-tested, deploy to staging.
 1. Make a merge request from `hotfix/mend-squiggles` to `master`.
 1. Once the change is approved, accept the merge request, and deploy to
-   Production
+   Production and Content Prep
 1. Tag the merge commit
    1. `git tag x.(x+1)`
    1. `git push --tags`

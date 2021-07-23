@@ -9,6 +9,22 @@ VIRTUALENV_DIR=/home/vagrant/.virtualenvs/$PROJECT_NAME
 PYTHON=$VIRTUALENV_DIR/bin/python
 PIP=$VIRTUALENV_DIR/bin/pip
 
+# PostgreSQL 13
+apt -y remove --purge postgresql-9.6
+# Add the PostgreSQL repository and signing key
+echo "deb http://apt.postgresql.org/pub/repos/apt stretch-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+apt update
+apt -y install postgresql-13
+# Create pgsql superuser
+PG_USER_EXISTS=$(
+    sudo su - postgres -c \
+    "psql postgres -tAc \"SELECT 'yes' FROM pg_roles WHERE rolname='vagrant' LIMIT 1\""
+)
+if [ "$PG_USER_EXISTS" != "yes" ];
+then
+    su - postgres -c "createuser -s vagrant"
+fi
 
 # Create database (let it fail because database may exist)
 set +e

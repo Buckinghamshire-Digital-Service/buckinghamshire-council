@@ -17,23 +17,36 @@ stages:
   - deploy_site
   - pages
 
+.cache_static:
+  cache:
+    key:
+      files:
+        - package-lock.json
+        - bc/static_src
+    paths:
+      - ./node_modules
+      - ./bc/static_compiled
+    policy: pull
+
+.node:
+  image: node:12-alpine
+  extends: .cache_static
+  needs:
+    - static
+
 # Test if static assets can be built succesfully.
 static:
-  image: node:12-alpine
+  extends: .node
+  needs: []
   stage: build
   before_script:
     - apk add --no-cache rsync
   script:
     - npm ci --no-optional --no-audit --progress=false
     - npm run build:prod
-  # Saving the job result as an artifact means that the files can be used by
-  # other jobs.
-  artifacts:
-    name: 'static-$CI_JOB_ID'
-    paths:
-      - ./node_modules
-      - ./bc/static_compiled
-    expire_in: 30 mins
+  cache:
+    # Here only we want to write to the cache.
+    policy: pull-push
 
 # Check python code style.
 flake8:
@@ -56,26 +69,20 @@ isort:
     - isort --check-only --diff --recursive bc
 
 lint_js:
-  image: node:12-alpine
+  extends: .node
   stage: test
-  dependencies:
-    - static
   script:
     - npm run lint:js
 
 lint_css:
-  image: node:12-alpine
+  extends: .node
   stage: test
-  dependencies:
-    - static
   script:
     - npm run lint:css
 
 lint_format:
-  image: node:12-alpine
+  extends: .node
   stage: test
-  dependencies:
-    - static
   script:
     - npm run lint:format
 
@@ -93,12 +100,13 @@ black:
 test_python:
   # Make sure this Python version matches the version in your Dockerfile.
   image: python:3.7.4
+  extends: .cache_static
   stage: test
+  needs:
+    - static
   services:
     # Make sure this matches the Postgres version you run on your servers.
-    - postgres:9.6
-  dependencies:
-    - static
+    - postgres:13.3
   variables:
     # Run tests with the production settings.
     DJANGO_SETTINGS_MODULE: bc.settings.production
@@ -149,10 +157,8 @@ test_python:
     - python manage.py test
 
 test_js:
-  image: node:12-alpine
+  extends: .node
   stage: test
-  dependencies:
-    - static
   script:
     # Run front-end tests
     - npm run test:coverage
@@ -213,6 +219,21 @@ deploy_production:
     # Your app's name.
     #   $ heroku apps - t torchbox
     HEROKU_APP: buckinghamshire-production
+  only:
+    - master
+  when: manual
+  <<: *heroku_deploy_job_definition
+
+# Deploy to the content prep site.
+deploy_content_prep:
+  # We use Debian image because Heroku has a lot of dependencies and is well
+  # supported on Debian based distributions.
+  image: debian:stretch
+  stage: deploy_site
+  variables:
+    # Your app's name.
+    #   $ heroku apps - t torchbox
+    HEROKU_APP: buckinghamshire-content-prep
   only:
     - master
   when: manual

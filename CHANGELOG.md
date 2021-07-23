@@ -4,6 +4,82 @@
 
 - 15: Add campaign page type
 
+## 40.0 (2021-07-19)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/39.1...40.0
+
+- Add chart StreamField blocks to long-form content pages
+- Stop using CSRF tokens for feedback widget
+
+## 39.1 (2021-07-07)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/39.0...39.1
+
+- Upgrade Django to 2.2.24
+
+## 39.0 (2021-07-01)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/38.0...39.0
+
+- Add CI job to deploy the master branch to Content Prep server
+- Enable content transfer between Wagtail instances using https://github.com/wagtail/wagtail-transfer
+- Upgrade Wagtail to version 2.13.2
+
+## 38.0 (2021-06-28)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/37.3...38.0
+
+- Add feature flags to disable page feedback and job alert forms
+- Add validation of duplicate responses to LookupPage admin
+- Fix 128: Use inline index subtitle in table of contents and pagination
+- Use PostgreSQL 13.3 in Vagrant box and CI
+
+## 37.3 (2021-06-11)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/37.2...37.3
+
+- Fix: Field label typo in page feedback form
+
+## 37.2 (2021-06-10)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/37.1...37.2
+
+- Fix: Handle URLs longer than 200 characters in page feedback form
+
+## 37.1 (2021-06-09)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/37.0...37.1
+
+- Fix (Accessibility): Duplicate HTML element IDs in feedback form
+- Fix (Accessibility): Prevent duplicate h2 element IDs in alerts
+- Fix: StreamField typo causing missing block types in editor in Wagtail 2.13
+- Upgrade Wagtail to version 2.13.1
+
+## 37.0 (2021-06-07)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/36.1...37.0
+
+- 40: Feedback forms and reports
+- Accessibility improvements
+- Add multiple severity levels to sitewide alert
+- Fix: StreamField typo causing RecursionError in Wagtail 2.13
+- Upgrade Wagtail to version 2.13
+- Use the newly released django-gov-notify library for GOV.UK Notify integration
+
+## 36.1 (2021-05-25)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/36.0...36.1
+
+- Fix: Include attachments in FOI form data
+
+## 36.0 (2021-05-20)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/35.2...36.0
+
+- Add ENEI logo to Jobs site header
+- Update CI config to use the cache to store artefacts
+- Upgrade Django to 2.2.21
+
 ## 35.2 (2021-04-21)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/35.1...35.2

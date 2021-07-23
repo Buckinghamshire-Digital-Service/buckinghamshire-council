@@ -1,5 +1,7 @@
 # Infrastructure
 
+See also [Hosting](hosting.md) for Heroku-specific documentation.
+
 ## Database
 
 This project uses Postgres for its database.
@@ -9,7 +11,6 @@ This project uses Postgres for its database.
 To populate your local database with the content of staging/production:
 
 ```bash
-fab pull-dev-data
 fab pull-staging-data
 fab pull-production-data
 ```
@@ -17,7 +18,6 @@ fab pull-production-data
 To fetch images and other media:
 
 ```bash
-fab pull-dev-media
 fab pull-staging-media
 fab pull-production-media
 ```
@@ -77,6 +77,34 @@ Be sure to run `dj update_index` before manually testing search features. This c
 <!-- ## DNS -->
 
 <!-- ## TLS/SSL/HTTPS -->
+
+## Wagtail Transfer
+
+This project uses [Wagtail Transfer](https://wagtail.github.io/wagtail-transfer/) to allow transferring content between site instances. To enable the transfer between the instances, a few environment variables need to be defined.
+
+If an instance is supposed to serve as a source (in our case the staging instance) for imports to another instance, you need to configure the `WAGTAILTRANSFER_SECRET_KEY`.
+The `WAGTAILTRANSFER_SECRET_KEY` setting is used to authenticate the communication between the source and destination instances.
+This environment variable only needs to be set on source instances.
+
+On the destination site, you need to configure `WAGTAILTRANSFER_SOURCE_KEY` and `WAGTAILTRANSFER_SOURCE_URL`.
+`WAGTAILTRANSFER_SOURCE_KEY` on the destination instance needs to match the `WAGTAILTRANSFER_SECRET_KEY` used on the source instance.
+E.g. if on the staging instance you have used `WAGTAILTRANSFER_SECRET_KEY="abc123"` (which is not recommended), then you would set `WAGTAILTRANSFER_SOURCE_KEY="abc123` on the production instance.
+
+Additionally, you need to configure `WAGTAILTRANSFER_SOURCE_URL` on the destination instance, so that Wagtail Transfer knows the endpoint to send its requests to.
+E.g. on production you might set: `WAGTAILTRANSFER_SOURCE_URL="https://staging.example.com/wagtail-transfer/"`
+
+Additionally, you can set the `WAGTAILTRANSFER_SOURCE_LABEL` on the destination instance.
+`WAGTAILTRANSFER_SOURCE_LABEL` defines the name that will show up in the admin to select the source instance.
+Use only valid Python variable names (i.e. no `-` is allowed.).
+E.g. on the production instance you might want to set this to "ContentPrep".
+
+You can configure a second source instance, by adding a second set of environment variables with a `_2` suffix, e.g. `WAGTAIL_TRANSFER_SOURCE_KEY_2` etc.
+
+### Configured Instances and Deployments
+
+The project has three Heroku instances: Staging, Production, and Content Prep. Wagtail Transfer is intended to be used between the Content Prep and Production instances. See [Deployed Instances](hosting.md#deployed-instances).
+
+Whenever deploying new features to Production, they should be deployed also to Content Prep, to keep the two sites in sync. See [Deploying to production](continuous-deployment.md#deploying-to-production).
 
 ## Resetting the Staging site
 
@@ -142,6 +170,15 @@ Steps for resetting the `staging` git branch, and deploying it with a clone of t
 
 1.  Delete any personally-identifying data from staging. See [Data protection](data-protection.md) for instructions.
 
+The site is mostly read-only for end users. User actions which write to the site database include any actions in the Wagtail admin, plus on the site front end:
+
+- Search queries (Wagtail stores popular queries)
+- Subscribing to job search alerts — see [Feature flags](#feature-flags) below
+- Wagtail FormPage instances
+- Page footer feedback form — see [Feature flags](#feature-flags) below
+
+See [Data protection](data-protection.md) for details of which store PII.
+
 ### Media
 
 The fab commands are sufficient here. It's quicker just to copy original image files across (with no renditions):
@@ -171,3 +208,15 @@ Inform the client of the changes.
 > - All user accounts have been copied across, so your old staging password will no longer work. Log in with your production password (and then change it), or use the 'forgot password' feature.
 > - Any test content has been reset. This is probably the biggest inconvenience. Sorry.
 > - I have deleted the personally-identifying data from form submissions and job alert subscriptions. If there's any more on production (there shouldn't be) then please let me know and I'll remove it from staging.
+
+## Feature flags
+
+The following features can be deactivated with environment variables
+
+### Job search alerts
+
+Set `ENABLE_JOBS_SEARCH_ALERT_SUBSCRIPTIONS=false` in environment variables. This removes the form from the job search results page, but does not disable the corresponding view.
+
+### Feedback widget
+
+Set `ENABLE_FEEDBACK_WIDGET=false` in environment variables. This removes the form from the page footer, but does not disable the corresponding views.
