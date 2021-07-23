@@ -19,6 +19,11 @@ class MediaSubheadingParagraphBlock(blocks.StructBlock):
     subheading = blocks.CharBlock(
         max_length=250,
         template="patterns/molecules/streamfield/blocks/subheading_block.html",
+        help_text=(
+            "The link to this subheading uses the subheading text in lowercase, with no"
+            " symbols, and with the spaces replaced with hyphens."
+            ' e.g. "Lorem @ 2 ipsum" becomes "lorem-2-ipsum"'
+        ),
     )
     paragraph = CampaignRichTextBlock()
 
@@ -27,18 +32,25 @@ class MediaSubheadingParagraphBlock(blocks.StructBlock):
         template = (
             "patterns/molecules/campaigns/blocks/media-subheading-paragraph-block.html"
         )
+        group = "Media"
 
 
 class SubheadingParagraphBlock(blocks.StructBlock):
     subheading = blocks.CharBlock(
         max_length=250,
         template="patterns/molecules/streamfield/blocks/subheading_block.html",
+        help_text=(
+            "The link to this subheading uses the subheading text in lowercase, with no"
+            " symbols, and with the spaces replaced with hyphens."
+            ' e.g. "Lorem @ 2 ipsum" becomes "lorem-2-ipsum"'
+        ),
     )
     paragraph = CampaignRichTextBlock()
 
     class Meta:
         icon = "pilcrow"
         template = "patterns/molecules/campaigns/blocks/subheading-paragraph-block.html"
+        group = "Text"
 
 
 class ButtonBannerValue(blocks.StructValue):
@@ -81,6 +93,7 @@ class DirectoryBannerBlock(blocks.StructBlock):
         icon = "tag"
         value_class = DirectoryBannerValue
         template = "patterns/molecules/campaigns/blocks/directory-banner.html"
+        group = "Banners"
 
 
 class FullWidthBanner(blocks.StructBlock):
@@ -94,28 +107,30 @@ class FullWidthBanner(blocks.StructBlock):
         icon = "arrow-right"
         value_class = ButtonBannerValue
         template = "patterns/molecules/campaigns/blocks/full-width-banner.html"
+        group = "Banners"
 
 
-class SectionBlock(blocks.StructBlock):
+class CampaignPageStoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(
         form_classname="full title",
+        help_text=(
+            "3 required. The link to this heading uses the heading text in lowercase, "
+            "with no symbols, and with the spaces replaced with hyphens."
+            ' e.g. "Lorem @ 2 ipsum" becomes "lorem-2-ipsum"'
+        ),
         template="patterns/molecules/streamfield/blocks/heading_block.html",
+        group="Text",
+        label="Section heading",
+        icon="title",
     )
-
-    content = blocks.StreamBlock(
-        [
-            ("media_with_subheading_and_paragraph", MediaSubheadingParagraphBlock()),
-            ("subheading_and_paragraph", SubheadingParagraphBlock()),
-            ("paragraph", CampaignRichTextBlock()),
-            (
-                "media_or_image",
-                ImageOrEmbedBlock(
-                    template="patterns/molecules/campaigns/blocks/image-or-media-block.html",
-                ),
-            ),
-            ("directory_banner", DirectoryBannerBlock()),
-            ("full_width_banner", FullWidthBanner()),
-        ]
+    media_with_subheading_and_paragraph = MediaSubheadingParagraphBlock()
+    directory_banner = DirectoryBannerBlock()
+    full_width_banner = FullWidthBanner()
+    subheading_and_paragraph = SubheadingParagraphBlock()
+    paragraph = CampaignRichTextBlock(group="Text")
+    media_or_image = ImageOrEmbedBlock(
+        template="patterns/molecules/campaigns/blocks/image-or-media-block.html",
+        group="Media",
     )
 
     class Meta:
