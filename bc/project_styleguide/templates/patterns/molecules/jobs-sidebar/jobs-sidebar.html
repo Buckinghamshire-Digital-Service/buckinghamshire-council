@@ -39,6 +39,10 @@
                     <dd class="sidebar__job-detail-description">{{ page.working_hours }}</dd>
                 </div>
             {% endif %}
+            <div>
+                <dt class="sidebar__job-detail-title">Does this role require a DBS check?</dt>
+                <dd class="sidebar__job-detail-description">{{ page.dbs_check|yesno|title }}</dd>
+            </div>
             {% if page.expected_start_date %}
                 <div>
                     <dt class="sidebar__job-detail-title">Expected start date</dt>
