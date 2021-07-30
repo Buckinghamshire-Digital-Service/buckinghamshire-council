@@ -1,11 +1,10 @@
 from urllib.parse import urlsplit
 
-from django.core.files.base import ContentFile
-from django.utils.html import strip_tags
-
 from bleach.sanitizer import Cleaner
 from bs4 import BeautifulSoup
 from dateutil.parser import parse
+from django.core.files.base import ContentFile
+from django.utils.html import strip_tags
 from zeep.helpers import serialize_object
 
 from bc.documents.models import CustomDocument
@@ -64,6 +63,9 @@ JOB_LOVS_MAPPING = {
     "Show Apply Button": ("show_apply_button", yesno_parser),
     "Working Hours Selection": ("working_hours", string_parser),
     "Contract Type": ("contract_type", string_parser),
+    # Label of DBS check according to example job. See also:
+    # https://trello.com/c/dm4XuwPh/66-the-recruitment-team-have-requested-a-change-to-the-front-end-presentation-within-the-jobsbuckinghamshiregovuk-page-to-show-whet#comment-60e850464897b75ea4e82323
+    "Does the role require a DBS check?": ("dbs_check", yesno_parser),
 }
 
 
@@ -206,7 +208,8 @@ def import_attachments_for_job(job, client=None):
                     attachment["description"] or attachment["fileName"].split(".")[0]
                 )
                 doc.file = ContentFile(
-                    attachment["content"], name=attachment["fileName"],
+                    attachment["content"],
+                    name=attachment["fileName"],
                 )
                 doc.save()
                 doc_imported += 1
