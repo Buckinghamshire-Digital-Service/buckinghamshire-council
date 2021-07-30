@@ -1,10 +1,11 @@
 from urllib.parse import urlsplit
 
+from django.core.files.base import ContentFile
+from django.utils.html import strip_tags
+
 from bleach.sanitizer import Cleaner
 from bs4 import BeautifulSoup
 from dateutil.parser import parse
-from django.core.files.base import ContentFile
-from django.utils.html import strip_tags
 from zeep.helpers import serialize_object
 
 from bc.documents.models import CustomDocument
@@ -208,8 +209,7 @@ def import_attachments_for_job(job, client=None):
                     attachment["description"] or attachment["fileName"].split(".")[0]
                 )
                 doc.file = ContentFile(
-                    attachment["content"],
-                    name=attachment["fileName"],
+                    attachment["content"], name=attachment["fileName"],
                 )
                 doc.save()
                 doc_imported += 1

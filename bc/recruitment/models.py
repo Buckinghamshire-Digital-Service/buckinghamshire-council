@@ -17,13 +17,15 @@ from django.urls import reverse
 from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify
-from django_gov_notify.message import NotifyEmailMessage
+
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.core import blocks
 from wagtail.core.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
+
+from django_gov_notify.message import NotifyEmailMessage
 from wagtailorderable.models import Orderable
 
 from ..utils.blocks import StoryBlock
