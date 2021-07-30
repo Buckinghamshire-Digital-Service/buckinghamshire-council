@@ -17,15 +17,13 @@ from django.urls import reverse
 from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify
-
+from django_gov_notify.message import NotifyEmailMessage
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.core import blocks
 from wagtail.core.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
-
-from django_gov_notify.message import NotifyEmailMessage
 from wagtailorderable.models import Orderable
 
 from ..utils.blocks import StoryBlock
@@ -85,10 +83,11 @@ class JobCategory(Orderable, models.Model):
 
     @staticmethod
     def get_categories_summary(queryset=None, homepage=None):
-        """Returns a QuerySet that returns dictionaries, when used as an iterable.
+        """
+        Returns a QuerySet that returns dictionaries, when used as an iterable.
 
-           The dictionary keys are: category (category id), count, title, description
-           This is ordered by highest count first.
+        The dictionary keys are: category (category id), count, title, description
+        This is ordered by highest count first.
         """
         if not homepage:
             homepage = RecruitmentHomePage.objects.live().first()
@@ -190,6 +189,9 @@ class TalentLinkJob(models.Model):
     salary_range = models.CharField(max_length=255)
     contract_type = models.CharField(max_length=255, blank=True)
     working_hours = models.CharField(max_length=255)
+    dbs_check = models.BooleanField(
+        default=False, verbose_name="Does this role require a DBS check?"
+    )
     closing_date = models.DateField()
     expected_start_date = models.DateField(null=True)
     interview_date = models.DateField(null=True)
