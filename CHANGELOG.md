@@ -1,5 +1,11 @@
 # Release History
 
+## 41.0 (2021-08-19)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/40.0...41.0
+
+- Add "DBS check" field to TalentLink jobs and display the information in the sidebar
+
 ## 40.0 (2021-07-19)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/39.1...40.0
