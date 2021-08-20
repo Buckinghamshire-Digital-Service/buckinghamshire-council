@@ -11,10 +11,11 @@
 
         {% comment %}
             Set "noindex" if the site is not being requested on a configured
-            domain to prevent search engines crawling admin domains.
+            domain, or if the domain is explicitly marked thus, to prevent
+            search engines crawling admin domains.:8000
             This ignores ports for simplicity.
         {% endcomment %}
-        {% if request.get_host != current_site.hostname %}
+        {% if request.get_host != current_site.hostname or request.get_host in NONINDEXED_HOSTS %}
             <meta name="robots" content="noindex" />
         {% endif %}
 
