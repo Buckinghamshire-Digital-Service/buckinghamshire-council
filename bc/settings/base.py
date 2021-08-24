@@ -41,6 +41,10 @@ if "SECRET_KEY" in env:
 if "ALLOWED_HOSTS" in env:
     ALLOWED_HOSTS = env["ALLOWED_HOSTS"].split(",")
 
+# Hosts where we always want to include a meta noindex tag.
+if "NONINDEXED_HOSTS" in env:
+    NONINDEXED_HOSTS = env["NONINDEXED_HOSTS"].split(",")
+
 
 # Application definition
 
