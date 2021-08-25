@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 42.0 (2021-08-25)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/41.0...42.0
 
 - 15: Add campaign page type
 - Permit configuring some host names never to be indexed by external search engines
