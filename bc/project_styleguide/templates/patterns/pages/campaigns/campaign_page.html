@@ -1,0 +1,55 @@
+{% extends base_page_template %}
+{% load wagtailcore_tags wagtailimages_tags navigation_tags reading_time_tags static %}
+
+{% block breadcrumbs %}{% endblock breadcrumbs %}
+
+{# Hide alerts on the campaign template #}
+{% block alerts %}
+{% endblock %}
+
+{% block hero %}
+    <div class="campaign-hero">
+        {% image page.hero_image fill-1800x668 as hero_image_extra_large %}
+        {% image page.hero_image fill-1024x380 as hero_image_large %}
+        {% image page.hero_image fill-800x297 as hero_image_medium %}
+        {% image page.hero_image fill-400x148 as hero_image_small %}
+        <img
+            class="campaign-hero__image"
+            srcset="
+                {{ hero_image_extra_large.url }} 1800w,
+                {{ hero_image_large.url }} 1024w,
+                {{ hero_image_medium.url }} 800w,
+                {{ hero_image_small.url }} 400w"
+            sizes="100vw"
+            src="{{ hero_image_medium.url }}"
+            alt="{{ hero_image_medium.alt }}"
+        >
+        <div class="wrapper wrapper--large">
+            <h1 class="heading heading--xxl campaign-hero__title">{{ page.title }}</h1>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="wrapper wrapper--flex">
+        <div class="section section--main">
+            <div>{{ page.intro|richtext }}</div>
+
+            <!-- table of contents -->
+            <section class="grid" aria-label="Table of contents">
+                {% for block in page.body %}
+                    {% if block.block_type == "heading" %}
+                        <div class="card card--campaign-toc">
+                            <a href="#{{ block.value|slugify }}">
+                                <h2 class="card__title">{{ block.value }}</h2>
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </section>
+
+            {% for block in page.body %}
+                {% include_block block  %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

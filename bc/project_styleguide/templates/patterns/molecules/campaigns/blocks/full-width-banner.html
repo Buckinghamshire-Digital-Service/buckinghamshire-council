@@ -1,0 +1,3 @@
+{% with value as banner  %}
+    {% include "patterns/molecules/subscribe/subscribe.html" with heading=banner.heading text=banner.text button_text=banner.link_text button_link=banner.link classes="subscribe--with-space subscribe--bust-out" %}
+{% endwith %}
