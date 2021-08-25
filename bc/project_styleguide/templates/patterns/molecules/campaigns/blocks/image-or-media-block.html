@@ -1,0 +1,8 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% if value.image %}
+    {% image value.image fill-990x618 %}
+{% elif value.embed %}
+    {% include_block value.bound_blocks.embed %}
+{% endif %}
+

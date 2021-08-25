@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- 15: Add campaign page type
 - Permit configuring some host names never to be indexed by external search engines
 
 ## 41.0 (2021-08-19)

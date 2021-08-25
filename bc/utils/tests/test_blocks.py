@@ -1,10 +1,12 @@
 import json
 
+from django.core.exceptions import ValidationError
 from django.test import TestCase
 
 from bc.home.models import HomePage
+from bc.images.tests.fixtures import ImageFactory
 from bc.standardpages.tests.fixtures import InformationPageFactory
-from bc.utils.blocks import BaseChartBlock
+from bc.utils.blocks import BaseChartBlock, ImageOrEmbedBlock
 
 
 class TestChartBlock(TestCase):
@@ -213,3 +215,52 @@ class TestStreamfieldHeadingTemplates(TestCase):
         self.assertTemplateNotUsed(
             response, "patterns/molecules/streamfield/blocks/subheading_block.html"
         )
+
+
+class TestImageOrEmbedBlock(TestCase):
+    def setUp(self):
+        self.test_image = ImageFactory.create()
+        self.test_image.refresh_from_db()
+
+    def test_adding_only_image_works(self):
+        block = ImageOrEmbedBlock()
+        struct_value = block.value_from_datadict(
+            data={"myblock-image": self.test_image.id}, files={}, prefix="myblock",
+        )
+
+        cleaned_value = block.clean(struct_value)
+
+        self.assertIsNotNone(cleaned_value["image"])
+
+    def test_adding_only_embed_works(self):
+        block = ImageOrEmbedBlock()
+        struct_value = block.value_from_datadict(
+            data={"myblock-embed": "https://youtu.be/ahcmNsNjQUw"},
+            files={},
+            prefix="myblock",
+        )
+
+        cleaned_value = block.clean(struct_value)
+
+        self.assertIsNotNone(cleaned_value["embed"])
+
+    def test_adding_both_throws_error(self):
+        block = ImageOrEmbedBlock()
+        struct_value = block.value_from_datadict(
+            data={
+                "myblock-image": self.test_image.id,
+                "myblock-embed": "https://youtu.be/ahcmNsNjQUw",
+            },
+            files={},
+            prefix="myblock",
+        )
+
+        with self.assertRaises(ValidationError):
+            block.clean(struct_value)
+
+    def test_adding_neither_throws_error(self):
+        block = ImageOrEmbedBlock()
+        struct_value = block.value_from_datadict(data={}, files={}, prefix="myblock",)
+
+        with self.assertRaises(ValidationError):
+            block.clean(struct_value)
