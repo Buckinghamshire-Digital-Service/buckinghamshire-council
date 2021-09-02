@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- No longer set CSRF cookies for FormPage forms and derivatives, or job search form
 - Use Longform Page chapter headings in the table of contents and pagination
 
 ## 42.0 (2021-08-25)
