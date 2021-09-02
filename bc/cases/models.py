@@ -1,7 +1,5 @@
 from django.db import models
 from django.shortcuts import render
-from django.utils.decorators import method_decorator
-from django.views.decorators.cache import never_cache
 
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
 from wagtail.core.fields import RichTextField
@@ -44,8 +42,12 @@ APTEAN_FORM_MAPPING = {
 }
 
 
-@method_decorator(never_cache, name="serve")
 class ApteanRespondCaseFormPage(BasePage):
+    """A page class with forms for anonymous users, integrated with a case tracking API.
+
+    We use custom CSRF middleware to exempt these pages from CSRF token checks.
+    Maintain this in bc.utils.middleware.
+    """
 
     template = "patterns/pages/cases/form_page.html"
     landing_page_template = "patterns/pages/cases/form_page_landing.html"
