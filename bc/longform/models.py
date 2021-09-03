@@ -74,7 +74,7 @@ class LongformPage(BasePage):
         StreamFieldPanel("body"),
     ]
 
-    @cached_property
+    @property
     def previous_chapter(self):
         return None
 
@@ -82,7 +82,7 @@ class LongformPage(BasePage):
     def next_chapter(self):
         return self.get_children().live().specific().first()
 
-    @cached_property
+    @property
     def chapter_number(self):
         return 1 if self.is_numbered else None
 
