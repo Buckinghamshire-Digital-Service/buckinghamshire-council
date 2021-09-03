@@ -123,3 +123,8 @@ class TestLongformContentTitles(TestCase):
             first_toc_entry.get_text(strip=True),
             "—" + self.longform_page.chapter_heading,
         )
+        # Previous page link
+        prev_page_link = soup.find(class_="index-pagination__page-title")
+        self.assertEqual(
+            prev_page_link.get_text(strip=True), self.longform_page.chapter_heading
+        )
