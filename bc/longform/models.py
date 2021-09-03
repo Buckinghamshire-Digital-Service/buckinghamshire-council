@@ -89,6 +89,10 @@ class LongformPage(BasePage):
     def get_index(self):
         return [self] + list(self.get_children().specific())
 
+    @property
+    def content_title(self):
+        return self.chapter_heading or self.title
+
 
 class LongformChapterPage(BasePage):
     template = "patterns/pages/longform/longform_page.html"
@@ -126,3 +130,7 @@ class LongformChapterPage(BasePage):
 
     def get_index(self):
         return self.get_parent().specific.get_index()
+
+    @property
+    def content_title(self):
+        return self.title

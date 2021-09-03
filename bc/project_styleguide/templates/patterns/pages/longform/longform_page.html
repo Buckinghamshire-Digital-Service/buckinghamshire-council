@@ -33,7 +33,7 @@
                                 —
                             {% endif %}
                         </span>
-                        <a class="index-nav__link" href="{% pageurl link %}" aria-current="page">{{ link.subtitle|default:link }}</a>
+                        <a class="index-nav__link" href="{% pageurl link %}" aria-current="page">{{ link.content_title }}</a>
                     </li>
                 {% else %}
                     <li class="index-nav__item">
@@ -44,7 +44,7 @@
                                 —
                             {% endif %}
                         </span>
-                        <a class="index-nav__link" href="{% pageurl link %}">{{ link.subtitle|default:link }}</a>
+                        <a class="index-nav__link" href="{% pageurl link %}">{{ link.content_title }}</a>
                     </li>
                 {% endif %}
             {% endfor %}
