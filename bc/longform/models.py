@@ -20,7 +20,6 @@ class LongformPage(BasePage):
     class Meta:
         verbose_name = "Long-form content page"
 
-    is_chapter_page = False
     is_numbered = models.BooleanField(
         default=False, help_text='Adds numbers to each chapter, e.g. "1. Introduction"',
     )
@@ -93,6 +92,9 @@ class LongformPage(BasePage):
     def content_title(self):
         return self.chapter_heading or self.title
 
+    def origin_page(self):
+        return self
+
 
 class LongformChapterPage(BasePage):
     template = "patterns/pages/longform/longform_page.html"
@@ -101,8 +103,6 @@ class LongformChapterPage(BasePage):
 
     class Meta:
         verbose_name = "Long-form content chapter page"
-
-    is_chapter_page = True
 
     body = StreamField(LongformStoryBlock())
 
@@ -138,3 +138,7 @@ class LongformChapterPage(BasePage):
     @property
     def chapter_heading(self):
         return self.title
+
+    @cached_property
+    def origin_page(self):
+        return self.get_parent().specific
