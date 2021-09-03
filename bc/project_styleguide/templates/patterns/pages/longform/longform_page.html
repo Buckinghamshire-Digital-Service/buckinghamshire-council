@@ -58,16 +58,12 @@
 
         {# Content proper #}
         <div class="section section--main section--inline-index main-body">
-            {% if page.chapter_number or page.is_chapter_page or page.chapter_heading %}
+            {% if page.chapter_number or page.chapter_heading %}
                 <h2 class="heading heading--xl">
                     {% if page.chapter_number %}
                         {{ page.chapter_number }}.
                     {% endif %}
-                    {% if page.is_chapter_page %}
-                        {{ page.title }}
-                    {% else %}
-                        {{ page.chapter_heading }}
-                    {% endif %}
+                    {{ page.chapter_heading }}
                 </h2>
             {% endif %}
 

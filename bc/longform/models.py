@@ -134,3 +134,7 @@ class LongformChapterPage(BasePage):
     @property
     def content_title(self):
         return self.title
+
+    @property
+    def chapter_heading(self):
+        return self.title
