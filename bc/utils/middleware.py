@@ -10,12 +10,17 @@ from bc.forms.models import FormPage
 class CustomCsrfViewMiddleware(CsrfViewMiddleware):
     """A middleware class to exempt pages of certain types from CSRF checks.
 
-    For Wagtail pages, decorating the 'view' function is not possible, as all are served
-    with `wagtail.core.views.serve`.
+    Normally this would be achieved with the `@csrf_exempt` decorator.
 
-    The pages' `.serve()` method can be decorated in some cases where a decorator acts
-    on the return value of the 'view' function. However the `@csrf_exempt` decorator
-    adds an attribute to the view function itself.
+    For Wagtail pages the page-level equivalent 'view' function is the `.serve()`
+    method. It can be decorated in some cases where a decorator acts on the return value
+    of the decorated function.
+
+    However, where a decorator acts on the function itself, such as the `@csrf_exempt`
+    decorator, which adds an attribute to the function that the usual CsrfViewMiddleware
+    checks for, such decoration is not possible. For Wagtail pages, the view registered
+    in the URLconf and passed to CsrfViewMiddleware is always
+    `wagtail.core.views.serve`.
 
     Ref https://github.com/wagtail/wagtail/issues/3066 for discussion and the source of
     the code below.
