@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Add and relabel heading blocks on longform pages
 - Use Longform Page chapter headings in the table of contents and pagination
 
 ## 42.0 (2021-08-25)

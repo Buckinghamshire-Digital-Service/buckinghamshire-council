@@ -38,6 +38,18 @@ class NumberedParagraphBlock(blocks.RichTextBlock):
 # Main streamfield block to be inherited by Longform Pages
 # Consider if any new blocks are also needed on utils/blocks.py
 class LongformStoryBlock(BaseStoryBlock):
+    subsubheading = blocks.CharBlock(
+        form_classname="full title",
+        help_text=(
+            "The link to this subsubheading uses the subsubheading text in lowercase, "
+            "with no symbols, and with the spaces replaced with hyphens."
+            ' e.g. "Lorem @ 2 ipsum" becomes "lorem-2-ipsum"'
+        ),
+        icon="title",
+        template="patterns/molecules/streamfield/blocks/subsubheading_block.html",
+        group="Heading",
+        label="H4",
+    )
     numbered_heading = NumberedHeadingBlock(
         help_text=(
             "Adds a number to the heading if is_numbered is not enabled on the long-form"
@@ -63,3 +75,8 @@ class LongformStoryBlock(BaseStoryBlock):
     bar_chart = BarChartBlock()
     line_graph = LineChartBlock()
     pie_chart = PieChartBlock()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.base_blocks["heading"].label = "H2"
+        self.base_blocks["subheading"].label = "H3"
