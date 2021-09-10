@@ -5,11 +5,7 @@
 
 {% block content %}
 
-    {% if page.is_chapter_page %}
-        {% include "patterns/molecules/longform-title/longform-title.html" with origin_page=page.get_parent.specific %}
-    {% else %}
-        {% include "patterns/molecules/longform-title/longform-title.html" with origin_page=page %}
-    {% endif %}
+    {% include "patterns/molecules/longform-title/longform-title.html" with origin_page=page.origin_page %}
 
     <div class="wrapper wrapper--flex">
 
@@ -33,7 +29,7 @@
                                 —
                             {% endif %}
                         </span>
-                        <a class="index-nav__link" href="{% pageurl link %}" aria-current="page">{{ link.subtitle|default:link }}</a>
+                        <a class="index-nav__link" href="{% pageurl link %}" aria-current="page">{{ link.content_title }}</a>
                     </li>
                 {% else %}
                     <li class="index-nav__item">
@@ -44,7 +40,7 @@
                                 —
                             {% endif %}
                         </span>
-                        <a class="index-nav__link" href="{% pageurl link %}">{{ link.subtitle|default:link }}</a>
+                        <a class="index-nav__link" href="{% pageurl link %}">{{ link.content_title }}</a>
                     </li>
                 {% endif %}
             {% endfor %}
@@ -58,16 +54,12 @@
 
         {# Content proper #}
         <div class="section section--main section--inline-index main-body">
-            {% if page.chapter_number or page.is_chapter_page or page.chapter_heading %}
+            {% if page.chapter_number or page.chapter_heading %}
                 <h2 class="heading heading--xl">
                     {% if page.chapter_number %}
                         {{ page.chapter_number }}.
                     {% endif %}
-                    {% if page.is_chapter_page %}
-                        {{ page.title }}
-                    {% else %}
-                        {{ page.chapter_heading }}
-                    {% endif %}
+                    {{ page.chapter_heading }}
                 </h2>
             {% endif %}
 

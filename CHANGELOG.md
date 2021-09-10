@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- Use Longform Page chapter headings in the table of contents and pagination
+
 ## 42.0 (2021-08-25)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/41.0...42.0
