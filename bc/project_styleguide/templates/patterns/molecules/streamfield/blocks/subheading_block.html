@@ -1,1 +1,1 @@
-<h3 class="heading heading--m" id="{{ value|slugify }}">{{ value }}</h3>
+<h3 class="{% if class %}{{ class }}{% else %}heading heading--m{% endif %}" id="{{ value|slugify }}">{{ value }}</h3>

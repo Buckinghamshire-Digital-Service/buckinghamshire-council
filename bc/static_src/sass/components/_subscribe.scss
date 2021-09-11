@@ -2,6 +2,35 @@
     background: $color--river;
     color: $color--white;
 
+    &--with-space {
+        margin: $grid 0;
+
+        @include media-query(tablet-portrait) {
+            margin: $grid--large 0;
+        }
+    }
+
+    // When in the footer the subscribe banner already spans full width
+    // On the campaign template it needs to alternate with other content but still flow full width, so it needs to bust out of its container
+    &--bust-out {
+        margin-left: -$grid--small;
+        margin-right: -$grid--small;
+
+        @include media-query(tablet-portrait) {
+            margin-left: -$grid--large;
+            margin-right: -$grid--large;
+        }
+
+        // custom media query to avoid a point just above 1024px
+        // with extra padding
+        @media only screen and (min-width: 1090px) {
+            // logic based on https://css-tricks.com/full-width-containers-limited-width-parents/#with-known-non-parent-width
+            $content-width: ($site-width - ($grid--large * 2));
+            margin-left: calc(-100vw / 2 + #{$content-width} / 2);
+            margin-right: calc(-100vw / 2 + #{$content-width} / 2);
+        }
+    }
+
     &__inner {
         padding-top: $grid;
         padding-bottom: $grid--large;

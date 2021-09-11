@@ -6,7 +6,6 @@ from django.http.response import HttpResponse
 from django.test import TestCase
 
 from bc.cases.backends.respond.client import RespondClientException
-from bc.cases.forms import ComplaintForm
 from bc.cases.utils import format_case_reference
 from bc.home.models import HomePage
 
@@ -108,47 +107,6 @@ class CaseFormPageTest(TestCase):
         self.assertEqual(resp.context["case_reference"], expected_case_reference)
 
     @mock.patch("bc.cases.models.get_client")
-    def test_initial_page_has_cache_prevention_headers(self, mock_get_client):
-        with self.assertTemplateUsed("patterns/pages/cases/form_page_initial.html"):
-            resp = self.client.get(self.case_form_page.url)
-        self.assertEqual(resp.status_code, 200)
-        self.assertEqual(
-            resp._headers["cache-control"],
-            ("Cache-Control", "max-age=0, no-cache, no-store, must-revalidate"),
-        )
-
-    @mock.patch("bc.cases.models.get_client")
-    def test_form_page_has_cache_prevention_headers(self, mock_get_client):
-        with self.assertTemplateUsed("patterns/pages/cases/form_page.html"):
-            resp = self.client.get(
-                self.case_form_page.url
-                + self.case_form_page.reverse_subpage("form_route")
-            )
-        self.assertEqual(resp.status_code, 200)
-        self.assertEqual(
-            resp._headers["cache-control"],
-            ("Cache-Control", "max-age=0, no-cache, no-store, must-revalidate"),
-        )
-
-    @mock.patch("bc.cases.models.get_client")
-    @mock.patch("bc.cases.models.ApteanRespondCaseFormPage.get_form")
-    def test_error_page_has_cache_prevention_headers(
-        self, mock_get_form, mock_get_client
-    ):
-        mock_get_form.return_value = ComplaintForm()
-        with self.assertTemplateUsed("patterns/pages/cases/form_page.html"):
-            resp = self.client.post(
-                self.case_form_page.url
-                + self.case_form_page.reverse_subpage("form_route")
-            )
-        self.assertEqual(resp.status_code, 200)
-        self.assertFalse(resp.context["form"].is_valid())
-        self.assertEqual(
-            resp._headers["cache-control"],
-            ("Cache-Control", "max-age=0, no-cache, no-store, must-revalidate"),
-        )
-
-    @mock.patch("bc.cases.models.get_client")
     @mock.patch("bc.cases.models.ApteanRespondCaseFormPage.get_form")
     def test_good_submission(self, mock_get_form, mock_get_client):
         response_xml = textwrap.dedent(
@@ -169,11 +127,6 @@ class CaseFormPageTest(TestCase):
             self.assertRedirects(
                 resp, self.case_form_page.url, fetch_redirect_response=False
             )
-        with self.subTest("Redirect response has no-cache headers"):
-            self.assertEqual(
-                resp._headers["cache-control"],
-                ("Cache-Control", "max-age=0, no-cache, no-store, must-revalidate"),
-            )
 
         with self.subTest("Session has 'show landing page' option set"):
             session = Session.objects.get(session_key=self.client.session.session_key)
@@ -189,15 +142,9 @@ class CaseFormPageTest(TestCase):
         session = self.client.session
         session[self.case_form_page.get_landing_page_session_key()] = True
         session.save()
-        with self.subTest("Landing page template is used"):
-            with self.assertTemplateUsed("patterns/pages/cases/form_page_landing.html"):
-                resp = self.client.get(self.case_form_page.url)
-            self.assertNotIn("form", resp.context)
-        with self.subTest("Landing page has no-cache headers"):
-            self.assertEqual(
-                resp._headers["cache-control"],
-                ("Cache-Control", "max-age=0, no-cache, no-store, must-revalidate"),
-            )
+        with self.assertTemplateUsed("patterns/pages/cases/form_page_landing.html"):
+            resp = self.client.get(self.case_form_page.url)
+        self.assertNotIn("form", resp.context)
 
 
 class CaseNameFormattingTest(TestCase):

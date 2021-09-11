@@ -6,13 +6,16 @@ from django.db.models import Case, CharField, OuterRef, Subquery, When
 from django.http import QueryDict
 from django.template.response import TemplateResponse
 from django.utils.cache import add_never_cache_headers, patch_cache_control
+from django.utils.decorators import method_decorator
 from django.utils.html import escape
 from django.utils.timezone import now
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View
 
 from wagtail.core.models import Page, Site
 from wagtail.search.models import Query
 
+from bc.campaigns.models import CampaignIndexPage, CampaignPage
 from bc.recruitment.forms import SearchAlertSubscriptionForm
 from bc.recruitment.models import JobAlertSubscription
 from bc.recruitment.utils import (
@@ -32,6 +35,7 @@ JOB_ALERT_STATUSES = {
 }
 
 
+@method_decorator(csrf_exempt, name="dispatch")
 class SearchView(View):
     def get(self, request, *args, **kwargs):
         search_query = request.GET.get("query", None)
@@ -106,6 +110,13 @@ class SearchView(View):
                         )
                     )
                 )
+                page_queryset_for_search = page_queryset_for_search.not_type(
+                    CampaignIndexPage
+                )
+                page_queryset_for_search = page_queryset_for_search.not_type(
+                    CampaignPage
+                )
+
                 search_results = page_queryset_for_search.search(
                     search_query, operator="and"
                 )

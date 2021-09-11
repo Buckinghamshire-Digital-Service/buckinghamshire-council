@@ -131,4 +131,18 @@
             }
         }
     }
+
+    &--campaign-toc {
+        display: flex;
+        min-height: 165px;
+        align-items: start;
+        padding-top: $grid--large;
+
+        #{$root} {
+            &__title {
+                @include font-size(m);
+                font-weight: $weight--bold;
+            }
+        }
+    }
 }

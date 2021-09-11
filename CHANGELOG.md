@@ -1,5 +1,23 @@
 # Release History
 
+## Unreleased
+
+- No longer set CSRF cookies for FormPage forms and derivatives, or job search form
+- Use Longform Page chapter headings in the table of contents and pagination
+
+## 42.0 (2021-08-25)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/41.0...42.0
+
+- 15: Add campaign page type
+- Permit configuring some host names never to be indexed by external search engines
+
+## 41.0 (2021-08-19)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/40.0...41.0
+
+- Add "DBS check" field to TalentLink jobs and display the information in the sidebar
+
 ## 40.0 (2021-07-19)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/39.1...40.0

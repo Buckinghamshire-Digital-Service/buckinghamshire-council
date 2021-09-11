@@ -1,8 +1,6 @@
 from django.db import models
 from django.shortcuts import redirect, render
-from django.utils.decorators import method_decorator
 from django.utils.functional import cached_property
-from django.views.decorators.cache import never_cache
 
 from modelcluster.fields import ParentalKey
 from wagtail.admin.edit_handlers import (
@@ -57,13 +55,15 @@ class ApteanRespondCaseFormPageRelatedPage(RelatedPage):
     source_page = ParentalKey("ApteanRespondCaseFormPage", related_name="related_pages")
 
 
-@method_decorator(never_cache, name="serve")
 class ApteanRespondCaseFormPage(RoutablePageMixin, BasePage):
-    """A form page using forms integrated with the Aptean Respond case management API.
+    """A page class with forms for anonymous users, integrated with a case tracking API.
 
     This uses routes to show an information page and a form page. After a successful
     form submission, the view redirects to the index route, but uses session data to
     show a 'thank you' message.
+
+    We use custom CSRF middleware to exempt these pages from CSRF token checks.
+    Maintain this in bc.utils.middleware.
     """
 
     template = "patterns/pages/cases/form_page_initial.html"

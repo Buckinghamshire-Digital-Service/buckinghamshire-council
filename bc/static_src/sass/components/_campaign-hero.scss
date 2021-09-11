@@ -1,0 +1,19 @@
+.campaign-hero {
+    position: relative;
+    margin-bottom: -$grid--medium;
+    z-index: -1; // ensures any content below overlays the negative margin area rather than sitting beneath it
+
+    &__image {
+        width: 100%;
+        height: auto;
+    }
+
+    &__title {
+        text-align: center;
+        position: relative;
+        top: -$grid--medium;
+        background-color: $color--white;
+        padding: $grid--small;
+        margin-bottom: 0;
+    }
+}
