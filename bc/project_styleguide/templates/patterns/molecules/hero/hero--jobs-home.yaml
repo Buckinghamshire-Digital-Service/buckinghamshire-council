@@ -3,18 +3,3 @@ context:
     strapline: Find a job in Buckinghamshire
   vacancies: 303
   search_url: '#'
-
-tags:
-  image:
-    page.hero_image fill-1440x350 as desktop_image:
-      target_var: desktop_image
-      raw:
-        url: https://placekitten.com/g/1440/350
-    page.hero_image fill-450x350 as mobile_image:
-      target_var: mobile_image
-      raw:
-        url: https://placekitten.com/g/450/350
-    page.hero_image fill-900x700 as retina_mobile_image:
-      target_var: retina_mobile_image
-      raw:
-        url: https://placekitten.com/g/900/700

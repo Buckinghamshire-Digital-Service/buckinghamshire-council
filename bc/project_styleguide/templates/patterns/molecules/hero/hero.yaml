@@ -1,18 +1,3 @@
 context:
   page:
     strapline: Welcome to Buckinghamshire
-
-tags:
-  image:
-    page.hero_image fill-1440x250 as desktop_image:
-      target_var: desktop_image
-      raw:
-        url: https://placekitten.com/g/1440/250
-    page.hero_image fill-450x200 as mobile_image:
-      target_var: mobile_image
-      raw:
-        url: https://placekitten.com/g/450/200
-    page.hero_image fill-900x400 as retina_mobile_image:
-      target_var: retina_mobile_image
-      raw:
-        url: https://placekitten.com/g/900/400
