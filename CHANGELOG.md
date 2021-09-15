@@ -1,5 +1,11 @@
 # Release History
 
+## Unreleased
+
+- Accessibility 250 Fix job search input placeholder text contrast
+- Accessibility 250 Fix HTML validation: element style not allowed as child of element main
+- Remove unused call to action StreamField block template
+
 ## 42.0 (2021-08-25)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/41.0...42.0
