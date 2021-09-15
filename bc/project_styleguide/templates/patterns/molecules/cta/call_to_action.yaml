@@ -11,21 +11,3 @@ context:
         value:
           page:
             title: Participate in the conversation
-
-tags:
-  image:
-    call_to_action.image fill-990x350 as desktop_image:
-      target_var: desktop_image
-      raw:
-        url: https://placekitten.com/g/990/350
-    call_to_action.image fill-450x350 as mobile_image:
-      target_var: mobile_image
-      raw:
-        url: https://placekitten.com/g/450/350
-    call_to_action.image fill-900x700 as retina_mobile_image:
-      target_var: retina_mobile_image
-      raw:
-        url: https://placekitten.com/g/900/700
-  pageurl:
-    block.value.page:
-      raw: '#'

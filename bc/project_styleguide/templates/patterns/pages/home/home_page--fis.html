@@ -1,6 +1,22 @@
 {% extends base_page_template %}
 {% load wagtailcore_tags wagtailimages_tags static %}
 
+{% block extra_css %}
+    {# Hero image background images #}
+    {% image page.hero_image fill-450x200 as mobile_image %}
+    {% image page.hero_image fill-900x400 as retina_mobile_image %}
+    {% image page.hero_image fill-1440x250 as desktop_image %}
+    {% include "patterns/atoms/image/background-image-style.html" with class="hero" mobile_image=mobile_image retina_mobile_image=retina_mobile_image desktop_image=desktop_image %}
+
+    {# CTA image background images #}
+    {% if page.call_to_action %}
+        {% image page.call_to_action.image fill-450x350 as mobile_image %}
+        {% image page.call_to_action.image fill-900x700 as retina_mobile_image %}
+        {% image page.call_to_action.image fill-990x350 as desktop_image %}
+        {% include "patterns/atoms/image/background-image-style.html" with class="highlighted-content" mobile_image=mobile_image retina_mobile_image=retina_mobile_image desktop_image=desktop_image %}
+    {% endif %}
+{% endblock %}
+
 {% block body_class %}template-fis-home {{ block.super }}{% endblock %}
 
 {% block hero %}

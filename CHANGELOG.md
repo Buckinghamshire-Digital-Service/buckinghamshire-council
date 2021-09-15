@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Accessibility 250 Fix HTML validation: element style not allowed as child of element main
+- Accessibility 250 Fix job search input placeholder text contrast
+- Remove unused call to action StreamField block template
 - Use Longform Page chapter headings in the table of contents and pagination
 
 ## 42.0 (2021-08-25)
