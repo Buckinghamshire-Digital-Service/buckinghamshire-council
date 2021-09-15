@@ -1,8 +1,8 @@
 {% load wagtailcore_tags %}
 
-<div class="search-filters" aria-multiselectable="true">
+<div class="search-filters" aria-multiselectable="true" aria-labelledby="jobs_filter_title">
     {# Form ID is used to link the filters with the job search field - see 'pages/search/search--jobs.html' #}
-    <form id="job-filters" action="#" method="get" role="search" aria-label="filter jobs" class="form">
+    <form id="job-filters" action="#" method="get" role="search" class="form">
         <fieldset class="search-filters__fieldset" data-filters>
             <legend class="u-sr-only">Hide schools and early years</legend>
             <div class="search-filters__option form-item--custom_checkbox_select_single">
