@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- 333 Fix to accordion alignment
+
 ## 42.0 (2021-08-25)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/41.0...42.0
