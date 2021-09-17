@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- Accessibility 321 Fix job search results validation issues
+
 ## 43.0 (2021-09-17)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/42.0...43.0
