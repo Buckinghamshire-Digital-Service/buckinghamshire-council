@@ -63,9 +63,6 @@ class InlineIndexMixin(object):
     def content_title(self):
         raise NotImplementedError
 
-    def __str__(self):
-        return self.content_title
-
 
 class InlineIndexRelatedPage(RelatedPage):
     source_page = ParentalKey("InlineIndex", related_name="related_pages")

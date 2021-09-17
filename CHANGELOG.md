@@ -1,5 +1,15 @@
 # Release History
 
+## 43.0 (2021-09-17)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/42.0...43.0
+
+- Accessibility 250 Fix HTML validation: element style not allowed as child of element main
+- Accessibility 250 Fix job search input placeholder text contrast
+- Remove unused call to action StreamField block template
+- Use "or" search operator
+- Use Longform Page chapter headings in the table of contents and pagination
+
 ## 42.0 (2021-08-25)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/41.0...42.0
