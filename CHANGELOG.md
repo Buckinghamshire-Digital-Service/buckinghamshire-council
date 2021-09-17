@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 43.0 (2021-09-17)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/42.0...43.0
 
 - Accessibility 250 Fix HTML validation: element style not allowed as child of element main
 - Accessibility 250 Fix job search input placeholder text contrast
