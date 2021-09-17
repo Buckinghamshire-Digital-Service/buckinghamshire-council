@@ -115,7 +115,7 @@ class SearchView(View):
                 )
 
                 search_results = page_queryset_for_search.search(
-                    search_query, operator="and"
+                    search_query, operator="or"
                 )
 
                 query = Query.get(search_query)
