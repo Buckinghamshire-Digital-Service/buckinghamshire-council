@@ -41,7 +41,7 @@ class BaseCaseForm(_BaseCaseForm):
         widget=forms.RadioSelect(attrs={"data-conditional-input": ""}),
     )
     email = forms.EmailField(label="Email address", required=False)
-    email.widget.attrs.update({"autocomplete": "", "autocapitalize": "off"})
+    email.widget.attrs.update({"autocomplete": "off", "autocapitalize": "off"})
     contact_number = forms.CharField(
         label="Telephone number",
         required=False,
