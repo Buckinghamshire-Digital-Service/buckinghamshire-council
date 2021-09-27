@@ -1,5 +1,11 @@
 # Release History
 
+## 43.1 (2021-09-27)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/43.0...43.1
+
+- Make settings.DATA_UPLOAD_MAX_NUMBER_FIELDS configurable
+
 ## 43.0 (2021-09-17)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/42.0...43.0
