@@ -4,64 +4,36 @@
 
     <div class="area-links__intro">{{ value.introduction|richtext }}</div>
 
-    {% if has_area_links %}
-        {% include "patterns/molecules/area-links-list/area-links-list.html" %}
-    {% endif %}
-
-    <div class="accordion__container">
-        <div class="accordion accordion--detail" data-accordion>
-            <h3 class="accordion__header">
+    <div class="area-search">
+        <form
+            role="search"
+            class="form form--area-search"
+            method="get"
+            url="{% url 'area_finder' %}"
+            data-area-search
+        >
+            <label for="postcode">Postcode</label>
+            <div data-form-info class="area-search__info">For example HP20 1UY</div>
+            <div data-response-text class="area-search__response-text"></div>
+            <div data-form-input-wrapper class="area-search__input-wrapper">
+                <input data-input-value id="postcode" type="text" name="postcode">
                 <button
-                    id="question"
-                    class="accordion__button"
-                    data-accordion-question
-                    aria-controls="answer"
-                    aria-expanded="false">
-                    {% include "patterns/atoms/icons/icon.html" with name="chevron" classname="icon--stroke accordion__icon" %}
-                    <span class="accordion__title area-search__title">Find your area based on your postcode</span>
+                    data-submit-button
+                    class="button button--basic button--area-search"
+                    type="submit"
+                    aria-label="Submit"
+                >
+                    Find
                 </button>
-            </h3>
-            <div
-                data-accordion-answer
-                id="answer"
-                class="accordion__content accordion__content--area-link"
-                aria-labelledby="question"
-                aria-hidden="true">
-
-                <div class="area-search">
-                    <form
-                        role="search"
-                        class="form form--area-search"
-                        method="get"
-                        url="{% url 'area_finder' %}"
-                        data-area-search
-                        >
-                        <div data-form-title class="area-search__title">Enter your postcode</div>
-                        <div data-form-info class="area-search__info">For example HP20 1UY</div>
-                        <div data-response-text class="area-search__response-text"></div>
-                        <div data-form-input-wrapper class="area-search__input-wrapper">
-                            <label class="u-sr-only" for="postcode">Search postcode</label>
-                            <input data-input-value id="postcode" type="text" placeholder="Search" name="postcode">
-                            <button
-                                data-submit-button
-                                class="button button--basic button--area-search"
-                                type="submit"
-                                aria-label="Submit"
-                            >
-                                Find
-                            </button>
-                        </div>
-                        <button
-                            data-find-another-button
-                            type="button"
-                            class="button button--link hide"
-                        >
-                            Find another postcode
-                        </button>
-                    </form>
-                </div>
             </div>
-        </div>
+            <button
+                data-find-another-button
+                type="button"
+                class="button button--link hide"
+            >
+                Find another postcode
+            </button>
+        </form>
     </div>
 
 </div>

@@ -1,9 +1,7 @@
 context:
   value:
-    introduction: 'Select your local area for information about bin collections:'
-    postscript: 'Or find your area based on your postcode'
+    introduction: 'Enter your postcode to find information for your local area:'
     aylesbury_vale_url: '#'
     chiltern_url: '#'
     south_bucks_url: '#'
     wycombe_url: '#'
-  has_area_links: true

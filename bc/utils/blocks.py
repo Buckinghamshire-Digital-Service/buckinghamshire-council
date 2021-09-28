@@ -64,28 +64,16 @@ class HighlightBlock(blocks.RichTextBlock):
 class LocalAreaLinksBlock(blocks.StructBlock):
     introduction = blocks.RichTextBlock(
         features=RICH_TEXT_FEATURES,
-        default="<p>Select your local area for information:</p>",
+        default="<p>Enter your postcode to find information for your area:</p>",
     )
-    aylesbury_vale_url = blocks.URLBlock(required=False, label="Aylesbury Vale URL")
-    chiltern_url = blocks.URLBlock(required=False, label="Chiltern URL")
-    south_bucks_url = blocks.URLBlock(required=False, label="South Bucks URL")
-    wycombe_url = blocks.URLBlock(required=False, label="Wycombe URL")
+    aylesbury_vale_url = blocks.URLBlock(label="Aylesbury Vale URL")
+    chiltern_url = blocks.URLBlock(label="Chiltern URL")
+    south_bucks_url = blocks.URLBlock(label="South Bucks URL")
+    wycombe_url = blocks.URLBlock(label="Wycombe URL")
 
     class Meta:
         icon = ""
         template = "patterns/molecules/streamfield/blocks/local_area_links_block.html"
-
-    def get_context(self, value, parent_context=None):
-        context = super().get_context(value, parent_context=parent_context)
-        context["has_area_links"] = any(
-            [
-                value["aylesbury_vale_url"],
-                value["chiltern_url"],
-                value["south_bucks_url"],
-                value["wycombe_url"],
-            ]
-        )
-        return context
 
 
 class ButtonBlock(blocks.StructBlock):

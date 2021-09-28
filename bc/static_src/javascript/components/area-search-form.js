@@ -10,7 +10,6 @@ class AreaSearchForm {
             '[data-find-another-button]',
         );
         this.input = this.form.querySelector('[data-input-value]');
-        this.formTitle = this.form.querySelector('[data-form-title]');
         this.formInfo = this.form.querySelector('[data-form-info]');
         this.responseText = this.form.querySelector('[data-response-text]');
         this.formInputWrapper = this.form.querySelector(
@@ -47,12 +46,10 @@ class AreaSearchForm {
 
         if (this.formInputWrapper.classList.contains('hide')) {
             this.formInputWrapper.classList.remove('hide');
-            this.formTitle.classList.remove('hide');
             this.formInfo.classList.remove('hide');
             this.findAnotherButton.classList.add('hide');
         } else {
             this.formInputWrapper.classList.add('hide');
-            this.formTitle.classList.add('hide');
             this.formInfo.classList.add('hide');
             this.findAnotherButton.classList.remove('hide');
         }
