@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Postcode Lookup — Update the area links block UI to permit only querying by postcode
+- Postcode Lookup — Remove local area links lists from search results
 
 ## 46.0 (2021-11-29)
 
