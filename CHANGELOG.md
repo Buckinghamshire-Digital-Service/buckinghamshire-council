@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Accessibility 321 Fix job search results validation issues
+- Add and relabel heading blocks on longform pages
 
 ## 43.1 (2021-09-27)
 
