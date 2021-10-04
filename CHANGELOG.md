@@ -3,6 +3,24 @@
 ## Unreleased
 
 - 333 Fix to accordion alignment
+- Accessibility 321 Fix job search results validation issues
+- Add and relabel heading blocks on longform pages
+
+## 43.1 (2021-09-27)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/43.0...43.1
+
+- Make settings.DATA_UPLOAD_MAX_NUMBER_FIELDS configurable
+
+## 43.0 (2021-09-17)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/42.0...43.0
+
+- Accessibility 250 Fix HTML validation: element style not allowed as child of element main
+- Accessibility 250 Fix job search input placeholder text contrast
+- Remove unused call to action StreamField block template
+- Use "or" search operator
+- Use Longform Page chapter headings in the table of contents and pagination
 
 ## 42.0 (2021-08-25)
 

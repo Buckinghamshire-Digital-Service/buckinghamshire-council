@@ -594,6 +594,11 @@ CACHE_CONTROL_STALE_WHILE_REVALIDATE = int(
 # You can test it using https://securityheaders.com/
 # https://docs.djangoproject.com/en/stable/ref/middleware/#module-django.middleware.security
 
+# The Django default for the maximum number of GET or POST parameters is 1000. For large
+# Wagtail pages with many fields, we need to override this. See
+# https://docs.djangoproject.com/en/2.2/ref/settings/
+DATA_UPLOAD_MAX_NUMBER_FIELDS = int(env.get("DATA_UPLOAD_MAX_NUMBER_FIELDS", 1000))
+
 # When set to True, client-side JavaScript will not to be able to access the CSRF cookie.
 # https://docs.djangoproject.com/en/stable/ref/settings/#csrf-cookie-httponly
 CSRF_COOKIE_HTTPONLY = True

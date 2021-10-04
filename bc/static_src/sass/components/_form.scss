@@ -44,6 +44,11 @@
         max-width: 540px;
         min-height: $grid--medium;
 
+        &::placeholder {
+            opacity: 1;
+            color: $color--charcoal-75;
+        }
+
         &:focus,
         &:focus-within {
             outline: 0;

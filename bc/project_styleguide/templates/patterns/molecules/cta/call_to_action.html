@@ -1,11 +1,8 @@
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags %}
 
 {% if call_to_action %}
 
-    {% image call_to_action.image fill-450x350 as mobile_image %}
-    {% image call_to_action.image fill-900x700 as retina_mobile_image %}
-    {% image call_to_action.image fill-990x350 as desktop_image %}
-    {% include "patterns/atoms/image/background-image-style.html" with class="highlighted-content" mobile_image=mobile_image retina_mobile_image=retina_mobile_image desktop_image=desktop_image %}
+    {# Note that the background image is set in the parent page template using the background-image-style.html include #}
 
     <div class="highlighted-content background-image-style">
         <div class="highlighted-content__content">
