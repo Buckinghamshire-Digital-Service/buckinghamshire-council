@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- 333 Fix to accordion alignment
 - Accessibility 321 Fix job search results validation issues
 - Add and relabel heading blocks on longform pages
 

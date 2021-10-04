@@ -50,6 +50,7 @@
             margin-right: $grid--min;
             stroke-width: 4;
             width: 15px;
+            margin-top: 0;
         }
 
         #{$root}__title {
@@ -78,10 +79,11 @@
     &__button {
         display: flex;
         border-bottom: 4px solid transparent;
-        align-items: center;
+        align-items: flex-start;
         transition: color 0.2s ease;
         text-decoration: none;
         margin-bottom: -4px; // offset bottom border to avoid browser 'jump' on focus
+        text-align: left;
 
         #{$hover-states} {
             cursor: pointer;
@@ -109,6 +111,7 @@
             left: 1px;
             position: relative;
             color: $color--charcoal;
+            align-items: center;
 
             #{$hover-states} {
                 cursor: pointer;
@@ -151,6 +154,9 @@
         stroke-width: 4;
         transform: rotate(-90deg);
         width: 17px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        margin-top: 2px; // compensates for line-height to visually line up with first line of text better
 
         #{$root}__button:focus & {
             stroke: $color--off-black;
