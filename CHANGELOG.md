@@ -1,10 +1,12 @@
 # Release History
 
-## Unreleased
+## 44.0 (2021-10-04)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/43.0...44.0
 
 - 333 Fix to accordion alignment
 - Accessibility 321 Fix job search results validation issues
-- Add and relabel heading blocks on longform pages
+- Relabel heading blocks on longform pages, and add H4 block
 
 ## 43.1 (2021-09-27)
 
