@@ -1,5 +1,11 @@
 # Release History
 
+## 44.1 (2021-10-06)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/44.0...44.1
+
+- Upgrade Wagtail Transfer to 0.8.2
+
 ## 44.0 (2021-10-04)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/43.0...44.0
