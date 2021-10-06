@@ -13,7 +13,7 @@ tabulate==0.8.7
 wagtail-factories==2.0.0
 wagtail-orderable==1.0.3
 wagtail-automatic-redirects==1.1.5
-wagtail-transfer==0.8.0
+wagtail-transfer==0.8.2
 urllib3==1.25.11
 zeep==3.4.0
 
