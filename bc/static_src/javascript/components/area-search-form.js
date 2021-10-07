@@ -19,6 +19,9 @@ class AreaSearchForm {
         this.areaLinkUrls = JSON.parse(
             document.getElementById('area-link-urls').textContent,
         );
+        this.postcodeErrorWrapper = this.form.querySelector(
+            '[data-postcode-error-wrapper]',
+        );
         this.bindEvents();
     }
 
@@ -41,8 +44,8 @@ class AreaSearchForm {
 
     responseClear() {
         this.responseText.innerHTML = '';
-        this.form.classList.remove('form--area-search-error');
-        this.responseText.classList.remove('area-search__response-text--error');
+        this.postcodeErrorWrapper.innerHTML = '';
+        this.postcodeWrapper.classList.remove('form-item--errors');
     }
 
     hideForm() {
@@ -57,13 +60,6 @@ class AreaSearchForm {
         this.postcodeWrapper.classList.remove('hide');
         this.submitButton.classList.remove('hide');
         this.findAnotherButton.classList.add('hide');
-    }
-
-    responseError() {
-        this.form.classList.add('form--area-search');
-        this.form.classList.add('form--area-search-error');
-        this.responseText.classList.add('area-search__response-text');
-        this.responseText.classList.add('area-search__response-text--error');
     }
 
     appendResponseText(text) {
@@ -114,48 +110,44 @@ class AreaSearchForm {
 
     updateResponseError(message) {
         this.responseClear();
-        this.responseError();
-        this.appendResponseText(message);
+
+        const errorListElement = document.createElement('ul');
+        errorListElement.classList.add('errorlist');
+        const errorMessageElement = document.createElement('li');
+        errorMessageElement.innerText = message;
+        errorListElement.appendChild(errorMessageElement);
+        this.postcodeErrorWrapper.replaceChildren(errorListElement);
+        this.postcodeWrapper.classList.add('form-item--errors');
     }
 
     submitForm() {
         const url = this.form.getAttribute('url');
         const postcodeValue = this.postcodeInput.value;
 
-        // Regex for UK postcodes https://stackoverflow.com/a/164994
-        const UKPostCodePattern = /^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/;
-        const isUKPostCodeValid = UKPostCodePattern.test(postcodeValue);
-
-        if (!isUKPostCodeValid) {
-            this.updateResponseError('Invalid postcode');
-        } else {
-            fetch(`${url}?postcode=${postcodeValue}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json; charset=utf-8',
-                    'Accept': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest',
-                },
+        fetch(`${url}?postcode=${postcodeValue}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+        })
+            .then((response) => response.json())
+            .then((response) => {
+                if (response.area) {
+                    this.updateResponseArea(response.area);
+                } else if (response.border_overlap) {
+                    this.updateResponseBorderOverlap(response.border_overlap);
+                } else if (response.message) {
+                    this.updateResponseMessage(response.message);
+                } else if (response.error) {
+                    this.updateResponseError(response.error);
+                }
             })
-                .then((response) => response.json())
-                .then((response) => {
-                    if (response.area) {
-                        this.updateResponseArea(response.area);
-                    } else if (response.border_overlap) {
-                        this.updateResponseBorderOverlap(
-                            response.border_overlap,
-                        );
-                    } else if (response.message) {
-                        this.updateResponseMessage(response.message);
-                    } else if (response.error) {
-                        this.updateResponseError(response.error);
-                    }
-                })
-                .catch((error) => {
-                    const parsedError = JSON.parse(error.responseText);
-                    this.updateResponseError(parsedError.message || error);
-                });
-        }
+            .catch((error) => {
+                const parsedError = JSON.parse(error.responseText);
+                this.updateResponseError(parsedError.message || error);
+            });
     }
 }
 

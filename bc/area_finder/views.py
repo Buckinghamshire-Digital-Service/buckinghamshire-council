@@ -74,19 +74,19 @@ def area_finder(request):
             # If postcode is not in Buckinghamshire
             if json_response["shortcuts"]["council"] == 2217:
                 return JsonResponse(
-                    {"message": "No area found for this postcode."},
+                    {"error": "No area found for this postcode."},
                     status=status.HTTP_200_OK,
                 )
 
             else:
                 return JsonResponse(
-                    {"message": "Please enter a Buckinghamshire postcode."},
+                    {"error": "Please enter a Buckinghamshire postcode."},
                     status=status.HTTP_200_OK,
                 )
         # If postcode is not in Buckinghamshire
         if json_response["shortcuts"]["council"]["county"] != 2217:
             return JsonResponse(
-                {"message": "Please enter a Buckinghamshire postcode"},
+                {"error": "Please enter a Buckinghamshire postcode."},
                 status=status.HTTP_200_OK,
             )
 
