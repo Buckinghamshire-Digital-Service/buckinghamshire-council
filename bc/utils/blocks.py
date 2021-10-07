@@ -75,6 +75,16 @@ class LocalAreaLinksBlock(blocks.StructBlock):
         icon = ""
         template = "patterns/molecules/streamfield/blocks/local_area_links_block.html"
 
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context=parent_context)
+        context["link_urls"] = {
+            "Aylesbury Vale": value["aylesbury_vale_url"],
+            "Chiltern": value["chiltern_url"],
+            "South Bucks": value["south_bucks_url"],
+            "Wycombe": value["wycombe_url"],
+        }
+        return context
+
 
 class ButtonBlock(blocks.StructBlock):
     text = blocks.CharBlock(form_classname="title")

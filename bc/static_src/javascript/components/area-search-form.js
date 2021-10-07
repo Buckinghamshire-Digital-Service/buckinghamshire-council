@@ -9,11 +9,15 @@ class AreaSearchForm {
         this.findAnotherButton = this.form.querySelector(
             '[data-find-another-button]',
         );
-        this.input = this.form.querySelector('[data-input-value]');
-        this.formInfo = this.form.querySelector('[data-form-info]');
+
+        this.postcodeInput = this.form.querySelector('[data-postcode-input]');
+        this.postcodeWrapper = this.form.querySelector(
+            '[data-postcode-wrapper]',
+        );
+
         this.responseText = this.form.querySelector('[data-response-text]');
-        this.formInputWrapper = this.form.querySelector(
-            '[data-form-input-wrapper]',
+        this.areaLinkUrls = JSON.parse(
+            document.getElementById('area-link-urls').textContent,
         );
         this.bindEvents();
     }
@@ -31,7 +35,7 @@ class AreaSearchForm {
 
         this.findAnotherButton.addEventListener('click', (e) => {
             e.preventDefault();
-            this.toggleForm();
+            this.showForm();
         });
     }
 
@@ -41,18 +45,18 @@ class AreaSearchForm {
         this.responseText.classList.remove('area-search__response-text--error');
     }
 
-    toggleForm() {
+    hideForm() {
         this.responseClear();
+        this.postcodeWrapper.classList.add('hide');
+        this.submitButton.classList.add('hide');
+        this.findAnotherButton.classList.remove('hide');
+    }
 
-        if (this.formInputWrapper.classList.contains('hide')) {
-            this.formInputWrapper.classList.remove('hide');
-            this.formInfo.classList.remove('hide');
-            this.findAnotherButton.classList.add('hide');
-        } else {
-            this.formInputWrapper.classList.add('hide');
-            this.formInfo.classList.add('hide');
-            this.findAnotherButton.classList.remove('hide');
-        }
+    showForm() {
+        this.responseClear();
+        this.postcodeWrapper.classList.remove('hide');
+        this.submitButton.classList.remove('hide');
+        this.findAnotherButton.classList.add('hide');
     }
 
     responseError() {
@@ -75,60 +79,36 @@ class AreaSearchForm {
         }
     }
 
-    updateResponseArea(html, name) {
-        this.toggleForm();
-        this.appendResponseHTML(html);
+    updateResponseArea(name) {
+        this.hideForm();
 
-        const block = this.form.closest('[data-area-links]');
-        const bucksAreas = {
-            'Aylesbury Vale': {
-                link:
-                    block.querySelector('[data-area-link="aylesbury-vale-url"]')
-                        .href || 'https://www.aylesburyvaledc.gov.uk/',
-                shortname: 'Aylesbury Vale',
-            },
-            'Wycombe': {
-                link:
-                    block.querySelector('[data-area-link="wycombe-url"]')
-                        .href || 'https://www.wycombe.gov.uk/',
-                shortname: 'Wycombe',
-            },
-            'Chiltern': {
-                link:
-                    block.querySelector('[data-area-link="chiltern-url"]')
-                        .href || 'https://www.chiltern.gov.uk/',
-                shortname: 'Chiltern',
-            },
-            'South Bucks': {
-                link:
-                    block.querySelector('[data-area-link="south-bucks-url"]')
-                        .href || 'https://www.southbucks.gov.uk/',
-                shortname: 'South Bucks',
-            },
-        };
         const areaName = name;
 
-        if (areaName in bucksAreas === true) {
+        if (areaName in this.areaLinkUrls === true) {
+            const targetUrl = this.areaLinkUrls[areaName];
+            // window.location.href = targetUrl;
+
+            // this.responseText.appendChild(buttonElement);
             const buttonElement = document.createElement('button');
-            buttonElement.innerText = `Go to ${bucksAreas[name].shortname}`;
+            buttonElement.innerText = 'Go to information';
             buttonElement.classList.add('button');
             buttonElement.classList.add('button--basic');
             buttonElement.classList.add('button--area-search');
             buttonElement.type = 'button';
             buttonElement.onclick = () => {
-                location.href = `${bucksAreas[name].link}`; // eslint-disable-line
+                window.location.href = targetUrl;
             };
             this.responseText.appendChild(buttonElement);
         }
     }
 
     updateResponseBorderOverlap(html) {
-        this.toggleForm();
+        this.hideForm();
         this.appendResponseHTML(html);
     }
 
     updateResponseMessage(message) {
-        this.toggleForm();
+        this.hideForm();
         this.appendResponseText(message);
     }
 
@@ -140,7 +120,7 @@ class AreaSearchForm {
 
     submitForm() {
         const url = this.form.getAttribute('url');
-        const postcodeValue = this.input.value;
+        const postcodeValue = this.postcodeInput.value;
 
         // Regex for UK postcodes https://stackoverflow.com/a/164994
         const UKPostCodePattern = /^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/;
@@ -160,7 +140,7 @@ class AreaSearchForm {
                 .then((response) => response.json())
                 .then((response) => {
                     if (response.area) {
-                        this.updateResponseArea(response.html, response.area);
+                        this.updateResponseArea(response.area);
                     } else if (response.border_overlap) {
                         this.updateResponseBorderOverlap(
                             response.border_overlap,
