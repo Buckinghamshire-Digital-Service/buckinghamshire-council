@@ -13,7 +13,7 @@ PIP=$VIRTUALENV_DIR/bin/pip
 apt -y remove --purge postgresql-9.6
 # Add the PostgreSQL repository and signing key
 echo "deb http://apt.postgresql.org/pub/repos/apt stretch-pgdg main" > /etc/apt/sources.list.d/pgdg.list
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+apt-key add /vagrant/vagrant/ACCC4CF8.asc
 apt update
 apt -y install postgresql-13
 # Create pgsql superuser
@@ -68,7 +68,7 @@ rm -rf /tmp/awscli-bundle || true
 rm -rf /tmp/awscli-bundle.zip || true
 curl -sSL "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "/tmp/awscli-bundle.zip"
 unzip -q /tmp/awscli-bundle.zip -d /tmp
-/tmp/awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+python3 /tmp/awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
 
 # Add a couple of aliases to manage.py into .bashrc
 cat << EOF >> /home/vagrant/.bashrc
