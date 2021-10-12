@@ -5,9 +5,7 @@ from django.contrib.postgres.fields import ArrayField
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.template.response import TemplateResponse
-from django.utils.decorators import method_decorator
 from django.utils.functional import cached_property
-from django.views.decorators.cache import never_cache
 
 from modelcluster.fields import ParentalKey
 from wagtail.admin.edit_handlers import (
@@ -57,9 +55,13 @@ class CustomFormBuilder(FormBuilder):
         return forms.MultipleChoiceField(widget=CustomCheckboxSelectMultiple, **options)
 
 
-# Never cache form pages since they include CSRF tokens.
-@method_decorator(never_cache, name="serve")
 class FormPage(WagtailCaptchaEmailForm, BasePage):
+    """A page with editorially controlled forms for anonymous users.
+
+    We use custom CSRF middleware to exempt form pages from CSRF token checks.
+    Maintain this in bc.utils.middleware.
+    """
+
     template = "patterns/pages/forms/form_page.html"
     landing_page_template = "patterns/pages/forms/form_page_landing.html"
 
