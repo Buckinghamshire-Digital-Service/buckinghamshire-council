@@ -1,9 +1,12 @@
 # Release History
 
-## Unreleased
+## 45.0 (2021-10-12)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/44.1...45.0
 
 - No longer set CSRF cookies for FormPage forms and derivatives, or job search form
 - Update job category and subcategory filtering documentation
+- Use RoutablePageMixin and redirects to show Aptean Respond instruction, form, and success pages
 
 ## 44.1 (2021-10-06)
 
@@ -34,7 +37,6 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/42.0...43.0
 - Remove unused call to action StreamField block template
 - Use "or" search operator
 - Use Longform Page chapter headings in the table of contents and pagination
-- Use RoutablePageMixin and redirects to show Aptean Respond instruction, form, and success pages
 
 ## 42.0 (2021-08-25)
 
