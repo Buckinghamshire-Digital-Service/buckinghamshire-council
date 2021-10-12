@@ -18,7 +18,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         for form_page in ApteanRespondCaseFormPage.objects.all():
             parent = form_page.get_parent().specific
-            if isinstance(parent, InformationPage):
+            if not form_page.body and isinstance(parent, InformationPage):
                 # Clone the parent body and related pages to the form page
 
                 self.stdout.write(
@@ -30,7 +30,7 @@ class Command(BaseCommand):
                                 page.get_children().count(),
                                 (
                                     [
-                                        block["type"]
+                                        block["value"]["text"]
                                         for block in page.body.stream_data
                                         if block["type"] == "button"
                                     ]
