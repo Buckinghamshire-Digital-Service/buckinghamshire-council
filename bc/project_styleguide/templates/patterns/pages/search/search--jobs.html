@@ -52,7 +52,6 @@
 
                     {% if job_alert_form %}
                     <form method="post" class="form form--job-alerts" aria-label="Subscribe to job alert">
-                        {% csrf_token %}
                         {% with field=job_alert_form.email %}
                             <div class="form-item">
                                 <label for="{{ field.id_for_label }}">

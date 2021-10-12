@@ -6,8 +6,10 @@ from django.db.models import Case, CharField, OuterRef, Subquery, When
 from django.http import QueryDict
 from django.template.response import TemplateResponse
 from django.utils.cache import add_never_cache_headers, patch_cache_control
+from django.utils.decorators import method_decorator
 from django.utils.html import escape
 from django.utils.timezone import now
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View
 
 from wagtail.core.models import Page, Site
@@ -33,6 +35,7 @@ JOB_ALERT_STATUSES = {
 }
 
 
+@method_decorator(csrf_exempt, name="dispatch")
 class SearchView(View):
     def get(self, request, *args, **kwargs):
         search_query = request.GET.get("query", None)

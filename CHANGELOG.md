@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- No longer set CSRF cookies for FormPage forms and derivatives, or job search form
+
 ## 44.1 (2021-10-06)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/44.0...44.1
