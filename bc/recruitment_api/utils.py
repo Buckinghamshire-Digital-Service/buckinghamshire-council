@@ -64,6 +64,9 @@ JOB_LOVS_MAPPING = {
     "Show Apply Button": ("show_apply_button", yesno_parser),
     "Working Hours Selection": ("working_hours", string_parser),
     "Contract Type": ("contract_type", string_parser),
+    # Label of DBS check according to example job. See also:
+    # https://trello.com/c/dm4XuwPh/66-the-recruitment-team-have-requested-a-change-to-the-front-end-presentation-within-the-jobsbuckinghamshiregovuk-page-to-show-whet#comment-60e850464897b75ea4e82323
+    "Does the role require a DBS check?": ("dbs_check", yesno_parser),
 }
 
 
