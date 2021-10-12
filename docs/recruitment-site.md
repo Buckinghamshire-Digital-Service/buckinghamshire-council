@@ -112,7 +112,7 @@ If the `--import_categories` option is specified when running the `import_jobs` 
 
 `JobSubcategory` objects are unique by title, but looked up case-insensitively by the importer. This is due to similar entries like "Schools secondary" and "Schools Secondary" in the source data.
 
-Note that the filtering performed by users is on the `JobCategory` model, whereas the imported `Job Group` attribute from the API is mapped to the `JobSubcategory` model in Django. The relationship between categories and their subcategories can be edited in the Wagtail admin.
+Note that the imported `Job Group` attribute from the API is mapped to the `JobSubcategory` model in Django, but that users can filter by either category or subcategory. The relationship between categories and their subcategories can be edited in the Wagtail admin.
 
 ### Job Boards (ie. External and Internal job sites)
 

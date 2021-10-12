@@ -3,6 +3,7 @@
 ## Unreleased
 
 - No longer set CSRF cookies for FormPage forms and derivatives, or job search form
+- Update job category and subcategory filtering documentation
 
 ## 44.1 (2021-10-06)
 
