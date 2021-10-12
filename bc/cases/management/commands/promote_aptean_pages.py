@@ -17,7 +17,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         for form_page in ApteanRespondCaseFormPage.objects.all():
-            parent = form_page.get_parent().specific
+            form_page.refresh_from_db()
+            parent = form_page.get_parent(update=True).specific
             if not form_page.body and isinstance(parent, InformationPage):
                 # Clone the parent body and related pages to the form page
 
@@ -25,6 +26,8 @@ class Command(BaseCommand):
                     tabulate(
                         [
                             (
+                                page.id,
+                                page.path,
                                 page,
                                 page.url,
                                 page.get_children().count(),
@@ -38,7 +41,14 @@ class Command(BaseCommand):
                             )
                             for page in (parent, form_page)
                         ],
-                        headers=["Title", "URL", "Children", "Button blocks"],
+                        headers=[
+                            "ID",
+                            "Path",
+                            "Title",
+                            "URL",
+                            "Children",
+                            "Button blocks",
+                        ],
                         tablefmt="github",
                     )
                 )
