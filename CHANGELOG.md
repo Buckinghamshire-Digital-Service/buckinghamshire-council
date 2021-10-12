@@ -34,6 +34,7 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/42.0...43.0
 - Remove unused call to action StreamField block template
 - Use "or" search operator
 - Use Longform Page chapter headings in the table of contents and pagination
+- Use RoutablePageMixin and redirects to show Aptean Respond instruction, form, and success pages
 
 ## 42.0 (2021-08-25)
 

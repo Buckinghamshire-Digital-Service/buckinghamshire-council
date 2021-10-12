@@ -1,8 +1,16 @@
 from django.db import models
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.utils.functional import cached_property
 
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
-from wagtail.core.fields import RichTextField
+from modelcluster.fields import ParentalKey
+from wagtail.admin.edit_handlers import (
+    FieldPanel,
+    InlinePanel,
+    MultiFieldPanel,
+    StreamFieldPanel,
+)
+from wagtail.contrib.routable_page.models import RoutablePageMixin, route
+from wagtail.core.fields import RichTextField, StreamField
 from wagtail.search import index
 
 from bs4 import BeautifulSoup
@@ -19,10 +27,11 @@ from bc.cases.backends.respond.constants import (
     ATTACHMENT_FAILURE_ERROR,
     ATTACHMENT_SCHEMA_NAME,
 )
+from bc.cases.blocks import CaseFormStoryBlock
 from bc.cases.utils import get_case_reference
 from bc.utils.constants import RICH_TEXT_FEATURES
+from bc.utils.models import BasePage, RelatedPage
 
-from ..utils.models import BasePage
 from .forms import (
     CommentForm,
     ComplaintForm,
@@ -42,17 +51,30 @@ APTEAN_FORM_MAPPING = {
 }
 
 
-class ApteanRespondCaseFormPage(BasePage):
+class ApteanRespondCaseFormPageRelatedPage(RelatedPage):
+    source_page = ParentalKey("ApteanRespondCaseFormPage", related_name="related_pages")
+
+
+class ApteanRespondCaseFormPage(RoutablePageMixin, BasePage):
     """A page class with forms for anonymous users, integrated with a case tracking API.
+
+    This uses routes to show an information page and a form page. After a successful
+    form submission, the view redirects to the index route, but uses session data to
+    show a 'thank you' message.
 
     We use custom CSRF middleware to exempt these pages from CSRF token checks.
     Maintain this in bc.utils.middleware.
     """
 
-    template = "patterns/pages/cases/form_page.html"
+    template = "patterns/pages/cases/form_page_initial.html"
+    form_page_template = "patterns/pages/cases/form_page.html"
     landing_page_template = "patterns/pages/cases/form_page_landing.html"
 
     form = models.CharField(max_length=255, choices=APTEAN_FORM_CHOICES)
+
+    body = StreamField(
+        CaseFormStoryBlock(block_counts={"form_link_button": {"min_num": 1}})
+    )
 
     introduction = RichTextField(
         blank=True,
@@ -81,18 +103,43 @@ class ApteanRespondCaseFormPage(BasePage):
         help_text='Form action button text. Defaults to "Submit"',
     )
 
-    search_fields = BasePage.search_fields + [index.SearchField("introduction")]
+    search_fields = BasePage.search_fields + [
+        index.SearchField("body"),
+        index.SearchField("introduction"),
+    ]
 
     content_panels = BasePage.content_panels + [
-        FieldPanel("form"),
-        FieldPanel("introduction"),
-        FieldPanel("pre_submission_text"),
-        FieldPanel("action_text"),
+        MultiFieldPanel(
+            [
+                StreamFieldPanel("body"),
+                InlinePanel("related_pages", label="Related pages"),
+            ],
+            "Intro page",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("form"),
+                FieldPanel("introduction"),
+                FieldPanel("pre_submission_text"),
+                FieldPanel("action_text"),
+            ],
+            "Form page",
+        ),
         MultiFieldPanel(
             [FieldPanel("completion_title"), FieldPanel("completion_content")],
             "Confirmation page",
         ),
     ]
+
+    @cached_property
+    def live_related_pages(self):
+        pages = self.related_pages.prefetch_related("page", "page__view_restrictions")
+        return [
+            related_page
+            for related_page in pages
+            if related_page.page.live
+            and len(related_page.page.view_restrictions.all()) == 0
+        ]
 
     def get_form_class(self):
         return APTEAN_FORM_MAPPING[self.form]
@@ -101,7 +148,24 @@ class ApteanRespondCaseFormPage(BasePage):
         form_class = self.get_form_class()
         return form_class(*args, **kwargs)
 
-    def serve(self, request, *args, **kwargs):
+    def get_case_reference_session_key(self):
+        return f"case_reference-{self.pk}"
+
+    def get_landing_page_session_key(self):
+        return f"landing_page-{self.pk}"
+
+    @route(r"^$")
+    def index_route(self, request, *args, **kwargs):
+        context = self.get_context(request)
+        if request.session.pop(self.get_landing_page_session_key(), False):
+            context["case_reference"] = request.session.pop(
+                self.get_case_reference_session_key(), None
+            )
+            return render(request, self.landing_page_template, context)
+        return super().index_route(request, *args, **kwargs)
+
+    @route(r"^form/$")
+    def form_route(self, request, *args, **kwargs):
         try:
             if request.method == "POST":
                 form = self.get_form(request.POST, request.FILES)
@@ -109,9 +173,12 @@ class ApteanRespondCaseFormPage(BasePage):
                 if form.is_valid():
                     form, case_reference = self.process_form_submission(form)
                     if form.is_valid():  # still
-                        return self.render_landing_page(
-                            request, case_reference, *args, **kwargs
-                        )
+                        # store the case_reference in the session for the thank you page
+                        request.session[
+                            self.get_case_reference_session_key()
+                        ] = case_reference
+                        request.session[self.get_landing_page_session_key()] = True
+                        return redirect(self.url, permanent=False)
             else:
                 form = self.get_form()
         except RespondClientException:
@@ -120,7 +187,7 @@ class ApteanRespondCaseFormPage(BasePage):
         context = self.get_context(request)
         context["form"] = form
         context["form_template"] = form.template_name
-        return render(request, self.get_template(request), context)
+        return render(request, self.form_page_template, context)
 
     def process_form_submission(self, form):
         case_xml = form.get_xml_string()
@@ -150,16 +217,3 @@ class ApteanRespondCaseFormPage(BasePage):
         else:
             case_reference = get_case_reference(soup)
             return form, case_reference
-
-    def get_landing_page_template(self, request, *args, **kwargs):
-        return self.landing_page_template
-
-    def render_landing_page(self, request, case_reference=None, *args, **kwargs):
-        """
-        Renders the landing page.
-        You can override this method to return a different HttpResponse as
-        landing page. E.g. you could return a redirect to a separate page.
-        """
-        context = self.get_context(request)
-        context["case_reference"] = case_reference
-        return render(request, self.get_landing_page_template(request), context)

@@ -1,15 +1,6 @@
-{% load wagtailcore_tags %}
-<form action="{% pageurl page %}" method="post" class="form form--standard"{% if form.attachments %} enctype="multipart/form-data"{% endif %} novalidate data-form>
-    <div class="form__container">
-        {% if form.errors %}
-            <div class="form__errors">
-                There were some errors with your form. Please amend the fields highlighted below.
-                {% if form.non_field_errors %}
-                    {{ form.non_field_errors }}
-                {% endif %}
-            </div>
-        {% endif %}
+{% extends "patterns/organisms/form-templates/base_form.html" %}
 
+{% block fields %}
         <div class="form-item form-item--choice_field form-item--radio_select {% if form.your_involvement.errors %}form-item--errors{% endif %}" data-conditional>
             <fieldset>
                 <legend class="form-item__label heading required">{{ form.your_involvement.label }} <span class="form-item__required" aria-hidden="true">*</span><span class="u-sr-only">Required</span></legend>
@@ -52,10 +43,4 @@
 
             {% include "patterns/organisms/form-templates/contact_method_fieldset.html" %}
         </fieldset>
-
-        {{ page.pre_submission_text|richtext }}
-        <input class="form__submit button" type="submit" value="Submit">
-
-
-    </div>
-</form>
+{% endblock fields %}

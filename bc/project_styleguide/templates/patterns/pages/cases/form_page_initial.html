@@ -1,0 +1,15 @@
+{% extends base_page_template %}
+{% load wagtailcore_tags navigation_tags reading_time_tags static %}
+
+{% block content %}
+    <div class="wrapper wrapper--flex">
+        <div class="section section--main">
+
+            <h1 class="heading heading--xxl">{{ page.title }}</h1>
+
+            {% include_block page.body %}
+        </div>
+
+        {% include "patterns/molecules/navigation/sidebar.html" with related_pages=page.live_related_pages %}
+    </div>
+{% endblock %}
