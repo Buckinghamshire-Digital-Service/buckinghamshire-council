@@ -4,6 +4,7 @@
 
 - No longer set CSRF cookies for FormPage forms and derivatives, or job search form
 - Use Longform Page chapter headings in the table of contents and pagination
+- Use RoutablePageMixin and redirects to show Aptean Respond instruction, form, and success pages
 
 ## 42.0 (2021-08-25)
 
