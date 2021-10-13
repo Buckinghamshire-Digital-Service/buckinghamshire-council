@@ -98,14 +98,7 @@ def area_finder(request):
                 {"message": "No area found for this postcode."},
                 status=status.HTTP_200_OK,
             )
-        html = (
-            "<div data-response-text class='area-search__response-text'>"
-            "<div>The postcode <strong>{}</strong> "
-            "is in the <strong>{}</strong> area.".format(escape(postcode), area_name)
-        )
-        return JsonResponse(
-            {"html": html, "area": area_name}, status=status.HTTP_200_OK
-        )
+        return JsonResponse({"area": area_name}, status=status.HTTP_200_OK)
     else:
         if json_response["error"]:
             error = json_response["error"]

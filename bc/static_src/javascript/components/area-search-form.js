@@ -75,27 +75,8 @@ class AreaSearchForm {
         }
     }
 
-    updateResponseArea(name) {
-        this.hideForm();
-
-        const areaName = name;
-
-        if (areaName in this.areaLinkUrls === true) {
-            const targetUrl = this.areaLinkUrls[areaName];
-            // window.location.href = targetUrl;
-
-            // this.responseText.appendChild(buttonElement);
-            const buttonElement = document.createElement('button');
-            buttonElement.innerText = 'Go to information';
-            buttonElement.classList.add('button');
-            buttonElement.classList.add('button--basic');
-            buttonElement.classList.add('button--area-search');
-            buttonElement.type = 'button';
-            buttonElement.onclick = () => {
-                window.location.href = targetUrl;
-            };
-            this.responseText.appendChild(buttonElement);
-        }
+    redirectToLocalAreaLink(area) {
+        window.location.href = this.areaLinkUrls[area];
     }
 
     updateResponseBorderOverlap(html) {
@@ -135,7 +116,7 @@ class AreaSearchForm {
             .then((response) => response.json())
             .then((response) => {
                 if (response.area) {
-                    this.updateResponseArea(response.area);
+                    this.redirectToLocalAreaLink(response.area);
                 } else if (response.border_overlap) {
                     this.updateResponseBorderOverlap(response.border_overlap);
                 } else if (response.message) {

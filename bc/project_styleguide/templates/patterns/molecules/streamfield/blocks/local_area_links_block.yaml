@@ -5,3 +5,8 @@ context:
     chiltern_url: '#'
     south_bucks_url: '#'
     wycombe_url: '#'
+  link_urls:
+    Aylesbury Vale: '#'
+    Chiltern: '#'
+    South Bucks: '#'
+    Wycombe: '#'
