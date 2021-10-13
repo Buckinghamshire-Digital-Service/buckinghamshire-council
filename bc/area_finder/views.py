@@ -1,13 +1,12 @@
-from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.utils.html import escape
 
-import requests
+# import requests
 from rest_framework import status
 from rest_framework.decorators import api_view, authentication_classes
 
-from bc.area_finder.constants import BORDER_POSTCODES
+from bc.area_finder.client import BucksMapsClient
 from bc.area_finder.utils import (
     area_from_district,
     clean_escaped_html,
@@ -19,29 +18,42 @@ from bc.utils.models import ImportantPages
 @api_view(["GET"])
 @authentication_classes([])
 def area_finder(request):
-    """
-    Search for district council by postcode using the mapit.mysociety API
-    https://mapit.mysociety.org/
-    """
-    if (
-        request.method != "GET"
-        or request.headers.get("x-requested-with") != "XMLHttpRequest"
-    ):
-        return JsonResponse(
-            {"error": "Method not allowed"}, status=status.HTTP_400_BAD_REQUEST
-        )
-    if not request.GET.get("postcode"):
+    """Map a postcode to a local area website, using maps.buckscc.gov.uk API"""
+    postcode = request.GET.get("postcode")
+
+    if not postcode:
         return JsonResponse(
             {"message": "Must specify a postcode."}, status=status.HTTP_200_OK
         )
-    postcode = request.GET.get("postcode")
     try:
         formatted_postcode = validate_postcode(postcode)
     except ValidationError:
         error = "Postcode {} is not valid.".format(escape(postcode))
         return JsonResponse({"error": error}, status=status.HTTP_400_BAD_REQUEST,)
 
-    if formatted_postcode in BORDER_POSTCODES:
+    client = BucksMapsClient()
+    resp = client.query_postcode(formatted_postcode)
+
+    json_response = resp.json()
+
+    if resp.status_code != 200:
+        if "error" in json_response:
+            return JsonResponse(
+                {"error": clean_escaped_html(escape(json_response["error"]))},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        return JsonResponse(
+            {"message": "Request failed, try again"}, status=status.HTTP_400_BAD_REQUEST
+        )
+
+    areas = {feature["attributes"]["NAME"] for feature in resp.json()["features"]}
+    if not areas:
+        return JsonResponse(
+            {"error": "Please enter a Buckinghamshire postcode."},
+            status=status.HTTP_200_OK,
+        )
+
+    if len(areas) > 1:
         contact_us_page = ImportantPages.for_request(request).contact_us_page
         if contact_us_page:
             contact_us_link = (
@@ -59,54 +71,6 @@ def area_finder(request):
             "</p></div>"
         )
         return JsonResponse({"border_overlap": html}, status=status.HTTP_200_OK)
-    # parameter `generation=38` keeps historic data on districts
-    api_url = "https://mapit.mysociety.org/postcode/{}?api_key={}&generation=38".format(
-        formatted_postcode, settings.MAPIT_API_KEY
-    )
-    response = requests.get(api_url, timeout=5)
-    json_response = response.json()
-    if response.status_code == 200:
-        try:
-            district_id = json_response["shortcuts"]["council"]["district"]
-        except KeyError:
-            return JsonResponse(
-                {"message": "No area found for this postcode."},
-                status=status.HTTP_200_OK,
-            )
-        except TypeError:
-            # If postcode is not in Buckinghamshire
-            if json_response["shortcuts"]["council"] == 2217:
-                return JsonResponse(
-                    {"error": "No area found for this postcode."},
-                    status=status.HTTP_200_OK,
-                )
 
-            else:
-                return JsonResponse(
-                    {"error": "Please enter a Buckinghamshire postcode."},
-                    status=status.HTTP_200_OK,
-                )
-        # If postcode is not in Buckinghamshire
-        if json_response["shortcuts"]["council"]["county"] != 2217:
-            return JsonResponse(
-                {"error": "Please enter a Buckinghamshire postcode."},
-                status=status.HTTP_200_OK,
-            )
-
-        try:
-            district_name = json_response["areas"][str(district_id)]["name"]
-            area_name = escape(area_from_district(district_name))
-        except KeyError:
-            return JsonResponse(
-                {"message": "No area found for this postcode."},
-                status=status.HTTP_200_OK,
-            )
-        return JsonResponse({"area": area_name}, status=status.HTTP_200_OK)
-    else:
-        if json_response["error"]:
-            error = json_response["error"]
-            error = clean_escaped_html(escape(error))
-            return JsonResponse({"error": error}, status=status.HTTP_400_BAD_REQUEST,)
-    return JsonResponse(
-        {"message": "Request failed, try again"}, status=status.HTTP_400_BAD_REQUEST
-    )
+    area_name = escape(area_from_district(areas.pop()))
+    return JsonResponse({"area": area_name}, status=status.HTTP_200_OK)
