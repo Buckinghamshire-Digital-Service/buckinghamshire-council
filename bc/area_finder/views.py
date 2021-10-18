@@ -23,7 +23,10 @@ def area_finder(request):
     Search for district council by postcode using the mapit.mysociety API
     https://mapit.mysociety.org/
     """
-    if request.method != "GET" or not request.is_ajax():
+    if (
+        request.method != "GET"
+        or request.headers.get("x-requested-with") != "XMLHttpRequest"
+    ):
         return JsonResponse(
             {"error": "Method not allowed"}, status=status.HTTP_400_BAD_REQUEST
         )
