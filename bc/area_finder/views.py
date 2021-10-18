@@ -46,7 +46,7 @@ def area_finder(request):
             {"message": "Request failed, try again"}, status=status.HTTP_400_BAD_REQUEST
         )
 
-    areas = {feature["attributes"]["NAME"] for feature in resp.json()["features"]}
+    areas = {feature["attributes"]["NAME"] for feature in json_response["features"]}
     if not areas:
         return JsonResponse(
             {"error": "Please enter a Buckinghamshire postcode."},
