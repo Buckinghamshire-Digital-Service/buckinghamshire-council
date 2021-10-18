@@ -84,6 +84,61 @@ class AreaSearchForm {
         this.appendResponseHTML(html);
     }
 
+    updateAddresses(addresses) {
+        const addressSelectDiv = document.createElement('div');
+        const addressSelectElement = document.createElement('select');
+        const errorDiv = document.createElement('div');
+        errorDiv.classList.add('form-item__errors');
+
+        addressSelectElement.addEventListener('change', (e) => {
+            // stop propagration to prevent firing the form's onchange method
+            e.stopPropagation();
+        });
+
+        let numAddresses = 0;
+        Object.values(addresses).forEach((addressArray) => {
+            numAddresses += addressArray.length;
+        });
+
+        const numAddressesOption = document.createElement('option');
+        numAddressesOption.textContent = `${numAddresses} addresses found`;
+        addressSelectElement.appendChild(numAddressesOption);
+
+        Object.keys(addresses).forEach((district) => {
+            const addressArray = addresses[district];
+            addressArray.forEach((address) => {
+                const option = document.createElement('option');
+                option.setAttribute('value', district);
+                option.textContent = address;
+                addressSelectElement.appendChild(option);
+            });
+        });
+
+        const furtherInfoButton = document.createElement('button');
+        furtherInfoButton.textContent = 'Find further information';
+        furtherInfoButton.classList.add(
+            'button',
+            'button--basic',
+            'button--area-search',
+        );
+
+        furtherInfoButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (addressSelectElement.value in this.areaLinkUrls) {
+                this.redirectToLocalAreaLink(addressSelectElement.value);
+            } else {
+                // if option 'x addresses found' is selected
+                errorDiv.innerText = 'Select a valid address';
+            }
+        });
+
+        addressSelectDiv.appendChild(addressSelectElement);
+        addressSelectDiv.appendChild(furtherInfoButton);
+        addressSelectDiv.appendChild(errorDiv);
+
+        this.responseText.appendChild(addressSelectDiv);
+    }
+
     updateResponseMessage(message) {
         this.hideForm();
         this.appendResponseText(message);
@@ -117,8 +172,12 @@ class AreaSearchForm {
             .then((response) => {
                 if (response.area) {
                     this.redirectToLocalAreaLink(response.area);
-                } else if (response.border_overlap) {
-                    this.updateResponseBorderOverlap(response.border_overlap);
+                } else if (response.border_overlap_html) {
+                    this.updateResponseBorderOverlap(
+                        response.border_overlap_html,
+                    );
+                    this.updateAddresses(response.addresses);
+                    this.appendResponseHTML(response.contact_us_html);
                 } else if (response.message) {
                     this.updateResponseMessage(response.message);
                 } else if (response.error) {

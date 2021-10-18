@@ -2,7 +2,6 @@ from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.utils.html import escape
 
-# import requests
 from rest_framework import status
 from rest_framework.decorators import api_view, authentication_classes
 
@@ -63,14 +62,31 @@ def area_finder(request):
         else:
             contact_us_link = "contact our customer service centre."
 
-        html = (
-            "<div data-response-text class='area-search__response-text'>"
-            f"<div>The postcode <strong>{escape(postcode)}</strong> is on the <strong>"
-            "border between two areas.</strong></div><p>If you wish to know"
-            f" the local area for your address, please {contact_us_link}"
-            "</p></div>"
+        contact_us_html = (
+            "<p>If you wish to know the local area for your address, please"
+            f" {contact_us_link}</p>"
         )
-        return JsonResponse({"border_overlap": html}, status=status.HTTP_200_OK)
+
+        addresses = dict()
+        for feature in json_response["features"]:
+            district = escape(area_from_district(feature["attributes"]["NAME"]))
+            addresses.setdefault(district, [])
+            address = escape(feature["attributes"]["FULL_ADDRESS"])
+            addresses[district].append(address)
+
+        border_overlap_html = (
+            f"<div>The postcode <strong>{escape(postcode)}</strong> is on the border"
+            " between two areas. Select an address to help us redirect you the right"
+            f" place.</div>"
+        )
+        return JsonResponse(
+            {
+                "border_overlap_html": border_overlap_html,
+                "contact_us_html": contact_us_html,
+                "addresses": addresses,
+            },
+            status=status.HTTP_200_OK,
+        )
 
     area_name = escape(area_from_district(areas.pop()))
     return JsonResponse({"area": area_name}, status=status.HTTP_200_OK)

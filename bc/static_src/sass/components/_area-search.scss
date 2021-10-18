@@ -6,6 +6,10 @@
         @include font-size(s);
         margin-top: 5px;
 
+        div {
+            margin: 20px 0;
+        }
+
         &--error {
             color: $color--red;
             font-weight: $weight--semibold;
