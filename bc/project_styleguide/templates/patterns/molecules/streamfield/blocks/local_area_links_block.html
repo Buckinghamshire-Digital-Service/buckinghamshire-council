@@ -4,6 +4,8 @@
 <div class="area-links" data-area-links>
     <h2 class="u-sr-only">Local Area Links</h2>
 
+    <div class="area-links__heading">{{ value.heading|richtext }}</div>
+
     <div class="area-links__intro">{{ value.introduction|richtext }}</div>
 
     <div class="area-search">
@@ -17,7 +19,7 @@
             <div data-response-text class="area-search__response-text"></div>
             <div data-postcode-wrapper class="area-search__input-wrapper">
                 <div data-postcode-error-wrapper class="form-item__errors"></div>
-                <label class="area-search__title" for="postcode">Postcode</label>
+                <label class="area-search__title" for="postcode" data-postcode-lookup-text>{{ value.postcode_lookup_text|richtext }}</label>
                 <div class="area-search__info">For example HP20 1UY</div>
                 <input data-postcode-input id="postcode" type="text" name="postcode">
             </div>
@@ -30,7 +32,7 @@
                 Find further information
             </button>
             <div class="area-search__local-links" hidden data-local-links>
-                <p class="area-search__local-links-intro">Select your local area to help us direct you to the right place:</p>
+                <div class="area-links__area-lookup-text" hidden data-address-lookup-text>{{ value.area_lookup_text|richtext }}</div>
                 <ol>
                     {% for district, link in link_urls.items %}
                         <li>
@@ -41,10 +43,10 @@
                 </ol>
             </div>
 
-            <div class="area-search__more-info" data-postcode-unknown-text>
+            <div class="area-search__more-info" data-postcode-lookup-text>
                 If you don’t know your postcode, follow this link for <button class="area-search__more-info-button" data-more-info-button>more information</button>.
             </div>
-            <div class="area-search__more-info" data-address-unknown-text hidden>
+            <div class="area-search__more-info" data-address-lookup-text hidden>
                 If your address is not listed, follow this link for <button class="area-search__more-info-button" data-more-info-button>more information</button>.
             </div>
         </form>

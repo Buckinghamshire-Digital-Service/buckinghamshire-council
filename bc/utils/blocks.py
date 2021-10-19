@@ -62,9 +62,25 @@ class HighlightBlock(blocks.RichTextBlock):
 
 
 class LocalAreaLinksBlock(blocks.StructBlock):
+    heading = blocks.RichTextBlock(
+        features=RICH_TEXT_FEATURES, default="<p><b>Find local information</b></p>",
+    )
     introduction = blocks.RichTextBlock(
         features=RICH_TEXT_FEATURES,
-        default="<p>Enter your postcode to find information for your area:</p>",
+        default=(
+            "<p>While we finish building this new website, we’re keeping some local"
+            " information on our old council websites</p>"
+        ),
+    )
+    postcode_lookup_text = blocks.RichTextBlock(
+        features=RICH_TEXT_FEATURES,
+        default="<p>Enter your postcode to help us redirect you to the right place.</p>",
+        help_text="The text that appears on top of the postcode lookup input",
+    )
+    area_lookup_text = blocks.RichTextBlock(
+        features=RICH_TEXT_FEATURES,
+        default="<p>Select your local area to help us direct you to the right place:</p>",
+        help_text="The text that appears on top of the list of local area links",
     )
     aylesbury_vale_url = blocks.URLBlock(label="Aylesbury Vale URL")
     chiltern_url = blocks.URLBlock(label="Chiltern URL")

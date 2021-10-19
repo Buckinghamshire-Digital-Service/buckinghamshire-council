@@ -22,11 +22,11 @@ class AreaSearchForm {
         this.moreInfoButtons = this.form.querySelectorAll(
             '[data-more-info-button]',
         );
-        this.postcodeUnknownText = this.form.querySelector(
-            '[data-postcode-unknown-text]',
+        this.postcodeLookupTexts = this.form.querySelectorAll(
+            '[data-postcode-lookup-text]',
         );
-        this.addressUnknownText = this.form.querySelector(
-            '[data-address-unknown-text]',
+        this.addressLookupTexts = this.form.querySelectorAll(
+            '[data-address-lookup-text]',
         );
         this.areaLinksDiv = this.form.querySelector('[data-local-links]');
         this.bindEvents();
@@ -48,6 +48,12 @@ class AreaSearchForm {
                 e.preventDefault();
                 this.hideForm();
                 this.showAreaLinks();
+                this.postcodeLookupTexts.forEach((el) =>
+                    el.setAttribute('hidden', ''),
+                );
+                this.addressLookupTexts.forEach((el) =>
+                    el.removeAttribute('hidden'),
+                );
             });
         });
     }
@@ -98,8 +104,8 @@ class AreaSearchForm {
     revertFormState() {
         this.showForm();
         this.hideAreaLinks();
-        this.postcodeUnknownText.removeAttribute('hidden');
-        this.addressUnknownText.setAttribute('hidden', '');
+        this.addressLookupTexts.forEach((el) => el.setAttribute('hidden', ''));
+        this.postcodeLookupTexts.forEach((el) => el.removeAttribute('hidden'));
     }
 
     updateResponsePostcode(postcode) {
@@ -178,8 +184,9 @@ class AreaSearchForm {
         addressSelectDiv.appendChild(errorDiv);
 
         this.responseText.appendChild(addressSelectDiv);
-        this.postcodeUnknownText.setAttribute('hidden', '');
-        this.addressUnknownText.removeAttribute('hidden');
+
+        this.postcodeLookupTexts.forEach((el) => el.setAttribute('hidden', ''));
+        this.addressLookupTexts.forEach((el) => el.removeAttribute('hidden'));
     }
 
     updateResponseMessage(message) {
