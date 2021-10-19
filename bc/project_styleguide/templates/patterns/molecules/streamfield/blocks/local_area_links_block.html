@@ -27,15 +27,26 @@
                 type="submit"
                 aria-label="Submit"
             >
-                Find
+                Find further information
             </button>
-            <button
-                data-find-another-button
-                type="button"
-                class="button button--link hide"
-            >
-                Find another postcode
-            </button>
+            <div class="area-search__local-links" hidden data-local-links>
+                <p class="area-search__local-links-intro">Select your local area to help us direct you to the right place:</p>
+                <ol>
+                    {% for district, link in link_urls.items %}
+                        <li>
+                            {% include "patterns/atoms/icons/icon.html" with name="list-style-arrow" %}
+                            <a href="{{ link }}">{{ district }}</a>
+                        </li>
+                    {% endfor %}
+                </ol>
+            </div>
+
+            <div class="area-search__more-info" data-postcode-unknown-text>
+                If you don’t know your postcode, follow this link for <button class="area-search__more-info-button" data-more-info-button>more information</button>.
+            </div>
+            <div class="area-search__more-info" data-address-unknown-text hidden>
+                If your address is not listed, follow this link for <button class="area-search__more-info-button" data-more-info-button>more information</button>.
+            </div>
         </form>
     </div>
 

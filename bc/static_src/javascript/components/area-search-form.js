@@ -6,9 +6,6 @@ class AreaSearchForm {
     constructor(node) {
         this.form = node;
         this.submitButton = this.form.querySelector('[data-submit-button]');
-        this.findAnotherButton = this.form.querySelector(
-            '[data-find-another-button]',
-        );
 
         this.postcodeInput = this.form.querySelector('[data-postcode-input]');
         this.postcodeWrapper = this.form.querySelector(
@@ -22,6 +19,16 @@ class AreaSearchForm {
         this.postcodeErrorWrapper = this.form.querySelector(
             '[data-postcode-error-wrapper]',
         );
+        this.moreInfoButtons = this.form.querySelectorAll(
+            '[data-more-info-button]',
+        );
+        this.postcodeUnknownText = this.form.querySelector(
+            '[data-postcode-unknown-text]',
+        );
+        this.addressUnknownText = this.form.querySelector(
+            '[data-address-unknown-text]',
+        );
+        this.areaLinksDiv = this.form.querySelector('[data-local-links]');
         this.bindEvents();
     }
 
@@ -36,10 +43,21 @@ class AreaSearchForm {
             this.submitForm();
         });
 
-        this.findAnotherButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            this.showForm();
+        this.moreInfoButtons.forEach((button) => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.hideForm();
+                this.showAreaLinks();
+            });
         });
+    }
+
+    showAreaLinks() {
+        this.areaLinksDiv.removeAttribute('hidden');
+    }
+
+    hideAreaLinks() {
+        this.areaLinksDiv.setAttribute('hidden', '');
     }
 
     responseClear() {
@@ -52,14 +70,12 @@ class AreaSearchForm {
         this.responseClear();
         this.postcodeWrapper.classList.add('hide');
         this.submitButton.classList.add('hide');
-        this.findAnotherButton.classList.remove('hide');
     }
 
     showForm() {
         this.responseClear();
         this.postcodeWrapper.classList.remove('hide');
         this.submitButton.classList.remove('hide');
-        this.findAnotherButton.classList.add('hide');
     }
 
     appendResponseText(text) {
@@ -79,9 +95,27 @@ class AreaSearchForm {
         window.location.href = this.areaLinkUrls[area];
     }
 
-    updateResponseBorderOverlap(html) {
-        this.hideForm();
-        this.appendResponseHTML(html);
+    revertFormState() {
+        this.showForm();
+        this.hideAreaLinks();
+        this.postcodeUnknownText.removeAttribute('hidden');
+        this.addressUnknownText.setAttribute('hidden', '');
+    }
+
+    updateResponsePostcode(postcode) {
+        const div = document.createElement('div');
+        div.innerHTML = `<strong>${postcode}</strong>`;
+        const changePostcodeButton = document.createElement('button');
+        changePostcodeButton.classList.add(
+            'area-search__button--change-postcode',
+        );
+        changePostcodeButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.revertFormState();
+        });
+        changePostcodeButton.innerText = 'Change';
+        div.appendChild(changePostcodeButton);
+        this.responseText.appendChild(div);
     }
 
     updateAddresses(addresses) {
@@ -137,6 +171,8 @@ class AreaSearchForm {
         addressSelectDiv.appendChild(errorDiv);
 
         this.responseText.appendChild(addressSelectDiv);
+        this.postcodeUnknownText.setAttribute('hidden', '');
+        this.addressUnknownText.removeAttribute('hidden');
     }
 
     updateResponseMessage(message) {
@@ -173,11 +209,10 @@ class AreaSearchForm {
                 if (response.area) {
                     this.redirectToLocalAreaLink(response.area);
                 } else if (response.border_overlap_html) {
-                    this.updateResponseBorderOverlap(
-                        response.border_overlap_html,
-                    );
+                    this.hideForm();
+                    this.updateResponsePostcode(postcodeValue);
+                    this.appendResponseHTML(response.border_overlap_html);
                     this.updateAddresses(response.addresses);
-                    this.appendResponseHTML(response.contact_us_html);
                 } else if (response.message) {
                     this.updateResponseMessage(response.message);
                 } else if (response.error) {
