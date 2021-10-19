@@ -69,4 +69,35 @@
         color: $color--river;
         border-bottom: 2px solid $color--river;
     }
+
+    &__response-select-wrapper {
+        position: relative;
+        width: fit-content;
+
+        &::before,
+        &::after {
+            color: $color--charcoal;
+            padding: 0 0 2px;
+            position: absolute;
+            pointer-events: none;
+            right: 10px;
+            transform: scale(0.8);
+        }
+
+        &::before {
+            content: '\25B2';
+        }
+
+        &::after {
+            content: '\25BC';
+            bottom: 0;
+        }
+
+        .form & {
+            select {
+                appearance: none;
+                padding-right: 40px;
+            }
+        }
+    }
 }

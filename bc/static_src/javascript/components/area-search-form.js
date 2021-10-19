@@ -136,6 +136,7 @@ class AreaSearchForm {
 
         const numAddressesOption = document.createElement('option');
         numAddressesOption.textContent = `${numAddresses} addresses found`;
+        numAddressesOption.setAttribute('hidden', '');
         addressSelectElement.appendChild(numAddressesOption);
 
         Object.keys(addresses).forEach((district) => {
@@ -166,7 +167,13 @@ class AreaSearchForm {
             }
         });
 
-        addressSelectDiv.appendChild(addressSelectElement);
+        const addressSelectWrapper = document.createElement('div');
+        addressSelectWrapper.classList.add(
+            'area-search__response-select-wrapper',
+        );
+        addressSelectWrapper.appendChild(addressSelectElement);
+
+        addressSelectDiv.appendChild(addressSelectWrapper);
         addressSelectDiv.appendChild(furtherInfoButton);
         addressSelectDiv.appendChild(errorDiv);
 
