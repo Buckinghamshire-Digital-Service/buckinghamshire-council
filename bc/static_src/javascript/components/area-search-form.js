@@ -135,24 +135,16 @@ class AreaSearchForm {
             e.stopPropagation();
         });
 
-        let numAddresses = 0;
-        Object.values(addresses).forEach((addressArray) => {
-            numAddresses += addressArray.length;
-        });
-
         const numAddressesOption = document.createElement('option');
-        numAddressesOption.textContent = `${numAddresses} addresses found`;
+        numAddressesOption.textContent = `${addresses.length} addresses found`;
         numAddressesOption.setAttribute('hidden', '');
         addressSelectElement.appendChild(numAddressesOption);
 
-        Object.keys(addresses).forEach((district) => {
-            const addressArray = addresses[district];
-            addressArray.forEach((address) => {
-                const option = document.createElement('option');
-                option.setAttribute('value', district);
-                option.textContent = address;
-                addressSelectElement.appendChild(option);
-            });
+        addresses.forEach(([district, address]) => {
+            const option = document.createElement('option');
+            option.setAttribute('value', district);
+            option.textContent = address;
+            addressSelectElement.appendChild(option);
         });
 
         const furtherInfoButton = document.createElement('button');
