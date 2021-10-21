@@ -1,4 +1,4 @@
-{% load wagtailcore_tags %}
+{% load util_tags wagtailcore_tags %}
 {{ link_urls|json_script:"area-link-urls" }}
 
 <div class="area-links" data-area-links>
@@ -32,7 +32,7 @@
                 Find further information
             </button>
             <div class="area-search__local-links" hidden data-local-links>
-                <div class="area-links__area-lookup-text" hidden data-address-lookup-text>{{ value.area_lookup_text|richtext }}</div>
+                <div class="area-links__area-lookup-text" hidden data-area-lookup-text>{{ value.area_lookup_text|richtext }}</div>
                 <ol>
                     {% for district, link in link_urls.items %}
                         <li>
@@ -41,6 +41,20 @@
                         </li>
                     {% endfor %}
                 </ol>
+                <p>
+                    If are unsure what local area you are in 
+                    {% if CONTACT_US_PAGE %}
+                    <a href="{{ CONTACT_US_PAGE.get_url }}">contact us.</a>
+                    {% else %}
+                    contact us.
+                    {% endif %}
+                </p>
+                <div>
+                    Find local more local information based on 
+                    <button class="area-search__more-info-button" data-change-postcode>
+                        your postcode
+                    </button>
+                </div>
             </div>
 
             <div class="area-search__more-info" data-postcode-lookup-text>

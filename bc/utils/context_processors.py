@@ -9,6 +9,7 @@ from bc.utils.constants import (
     BASE_PAGE_TEMPLATE_FAMILY_INFORMATION,
     BASE_PAGE_TEMPLATE_RECRUITMENT,
 )
+from bc.utils.models import ImportantPages
 
 
 def global_vars(request):
@@ -29,4 +30,5 @@ def global_vars(request):
         "base_page_template": base_page_template,
         "COOKIE_DOMAIN": getattr(settings, "COOKIE_DOMAIN", None),
         "NONINDEXED_HOSTS": getattr(settings, "NONINDEXED_HOSTS", []),
+        "CONTACT_US_PAGE": ImportantPages.for_request(request).contact_us_page,
     }

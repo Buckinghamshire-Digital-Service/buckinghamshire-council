@@ -11,7 +11,6 @@ from bc.area_finder.utils import (
     clean_escaped_html,
     validate_postcode,
 )
-from bc.utils.models import ImportantPages
 
 
 @api_view(["GET"])
@@ -60,31 +59,13 @@ def area_finder(request):
         )
 
     if len(areas) > 1:
-        contact_us_page = ImportantPages.for_request(request).contact_us_page
-        if contact_us_page:
-            contact_us_link = (
-                f"<a href='{contact_us_page.url}'>contact our customer service "
-                "centre.</a>"
-            )
-        else:
-            contact_us_link = "contact our customer service centre."
-
-        contact_us_html = (
-            "<p>If you wish to know the local area for your address, please"
-            f" {contact_us_link}</p>"
-        )
-
         border_overlap_html = (
             f"<div>The postcode <strong>{escape(postcode)}</strong> is on the border"
             " between two areas. Select an address to help us redirect you the right"
             f" place.</div>"
         )
         return JsonResponse(
-            {
-                "border_overlap_html": border_overlap_html,
-                "contact_us_html": contact_us_html,
-                "addresses": addresses,
-            },
+            {"border_overlap_html": border_overlap_html, "addresses": addresses},
             status=status.HTTP_200_OK,
         )
 
