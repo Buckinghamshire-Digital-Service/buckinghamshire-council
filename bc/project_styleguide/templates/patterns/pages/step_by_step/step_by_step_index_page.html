@@ -1,0 +1,58 @@
+{% extends "patterns/base_page.html" %}
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-stepbystepindex{% endblock %}
+
+{% block content %}
+    <div class="section section--main">
+        <h1 class="heading heading--xxl">{{ page.heading }}</h1>
+
+        {% if page.introduction %}
+            <p class="introduction">{{ page.introduction|richtext }}</p>
+        {% endif %}
+        
+        <div class="steps-nav" data-steps-container>
+            <div class="steps-nav__controls" data-steps-toggle>
+                <span class="steps-nav__controls-text--show">Show all steps</span>
+                <span class="steps-nav__controls-text--hide">Hide all steps</span>
+            </div>
+            <ol class="steps-nav__steps">
+                {% for step in page.steps  %}
+                    <li class="steps-nav__step" data-step-accordion>
+                        <div class="steps-nav__heading">
+                            <h2 class="steps-nav__title-section">
+                                <span class="steps-nav__circle">
+                                    {{ forloop.counter }}
+                                </span>
+                                <span class="steps-nav__title">
+                                    <button class="steps-nav__button" data-accordion-question>
+                                        <span class="steps-nav__title-text">
+                                            {{ step.value.heading }}
+                                        </span>
+                                        <span class="steps-nav__button-text steps-nav__button-text--show">Show</span>
+                                        <span class="steps-nav__button-text steps-nav__button-text--hide">Hide</span>
+                                    </button>
+                                </span>
+                            </h2>
+                        </div>
+                        <div class="steps-nav__panel" data-accordion-answer>
+                            {% for block in step.value.information %}
+                                {% if block.block_type == 'paragraph' %}
+                                    <p>{{ block.value }}</p>
+                                {% elif block.block_type == 'internal_link' %}
+                                    <a href="{{ block.value.page.get_url }}">
+                                        {{ block.value.title|default:block.value.page.title }}
+                                    </a>
+                                {% elif block.block_type == 'external_link' %}
+                                    <a href="{{ block.value.url }}">
+                                        {{ block.value.title }}
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+{% endblock %}
