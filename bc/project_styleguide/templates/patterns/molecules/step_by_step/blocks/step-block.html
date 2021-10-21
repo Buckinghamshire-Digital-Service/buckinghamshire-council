@@ -1,0 +1,25 @@
+{% load wagtailcore_tags %}
+
+<li class="steps-nav__step" data-step-accordion>
+    <div class="steps-nav__heading">
+        <h2 class="steps-nav__title-section">
+            <span class="steps-nav__circle">
+                {{ forloop.counter }}
+            </span>
+            <span class="steps-nav__title">
+                <button class="steps-nav__button" data-accordion-question>
+                    <span class="steps-nav__title-text">
+                        {{ step.value.heading }}
+                    </span>
+                    <span class="steps-nav__button-text steps-nav__button-text--show">Show</span>
+                    <span class="steps-nav__button-text steps-nav__button-text--hide">Hide</span>
+                </button>
+            </span>
+        </h2>
+    </div>
+    <div class="steps-nav__panel" data-accordion-answer>
+        {% for block in step.value.information %}
+            {% include_block block %}
+        {% endfor %}
+    </div>
+</li>
