@@ -138,4 +138,17 @@ small {
         line-height: 1.35;
         margin: 0 0 $grid--large;
     }
+
+    .template-stepbystepindex & {
+        color: $color--river;
+        max-width: 630px;
+    }
+}
+
+.introduction {
+    @include font-size(s);
+
+    .template-stepbystepindex & {
+        max-width: 630px;
+    }
 }
