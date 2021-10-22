@@ -13,6 +13,7 @@ from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 
 from .constants import RICH_TEXT_FEATURES
+from .models import ImportantPages
 from .utils import is_number
 from .widgets import BarChartInput, LineChartInput, PieChartInput
 
@@ -99,6 +100,10 @@ class LocalAreaLinksBlock(blocks.StructBlock):
             "South Bucks": value["south_bucks_url"],
             "Wycombe": value["wycombe_url"],
         }
+        request = None
+        if parent_context is not None:
+            request = parent_context.get("request", None)
+        context["contact_us_page"] = ImportantPages.for_request(request).contact_us_page
         return context
 
 

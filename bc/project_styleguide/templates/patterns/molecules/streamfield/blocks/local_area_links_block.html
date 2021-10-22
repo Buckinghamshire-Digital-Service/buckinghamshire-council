@@ -43,14 +43,14 @@
                 </ol>
                 <p>
                     If are unsure what local area you are in 
-                    {% if CONTACT_US_PAGE %}
-                    <a href="{{ CONTACT_US_PAGE.get_url }}">contact us.</a>
+                    {% if contact_us_page %}
+                    <a href="{{ contact_us_page.get_url }}">contact us.</a>
                     {% else %}
                     contact us.
                     {% endif %}
                 </p>
                 <div>
-                    Find local more local information based on 
+                    Find more local information based on 
                     <button class="area-search__more-info-button" data-change-postcode>
                         your postcode
                     </button>
