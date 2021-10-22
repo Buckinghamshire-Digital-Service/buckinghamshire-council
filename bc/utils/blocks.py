@@ -100,10 +100,11 @@ class LocalAreaLinksBlock(blocks.StructBlock):
             "South Bucks": value["south_bucks_url"],
             "Wycombe": value["wycombe_url"],
         }
-        request = None
-        if parent_context is not None:
-            request = parent_context.get("request", None)
-        context["contact_us_page"] = ImportantPages.for_request(request).contact_us_page
+        if parent_context is not None and parent_context.get("request"):
+            request = parent_context["request"]
+            context["contact_us_page"] = ImportantPages.for_request(
+                request
+            ).contact_us_page
         return context
 
 
