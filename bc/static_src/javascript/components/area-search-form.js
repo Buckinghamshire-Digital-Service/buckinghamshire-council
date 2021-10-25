@@ -126,7 +126,7 @@ class AreaSearchForm {
     updateResponsePostcode(postcode) {
         const div = document.createElement('div');
         div.innerHTML = `<strong>${postcode}</strong>`;
-        const changePostcodeButton = document.createElement('button');
+        const changePostcodeButton = document.createElement('a');
         changePostcodeButton.classList.add(
             'area-search__button--change-postcode',
         );

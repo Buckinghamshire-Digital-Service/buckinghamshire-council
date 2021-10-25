@@ -33,7 +33,7 @@
             </button>
             <div class="area-search__local-links" hidden data-local-links>
                 <div class="area-links__area-lookup-text" hidden data-area-lookup-text>{{ value.area_lookup_text|richtext }}</div>
-                <ol>
+                <ol class="area-search__local-links-list">
                     {% for district, link in link_urls.items %}
                         <li>
                             {% include "patterns/atoms/icons/icon.html" with name="arrow" %}
@@ -51,17 +51,17 @@
                 </p>
                 <div>
                     Find more local information based on 
-                    <button class="area-search__more-info-button" data-change-postcode>
+                    <a class="area-search__more-info-button" data-change-postcode>
                         your postcode
-                    </button>
+                    </a>
                 </div>
             </div>
 
             <div class="area-search__more-info" data-postcode-lookup-text>
-                If you don’t know your postcode, follow this link for <button class="area-search__more-info-button" data-more-info-button>more information</button>.
+                If you don’t know your postcode, follow this link for <a class="area-search__more-info-button" data-more-info-button>more information</a>.
             </div>
             <div class="area-search__more-info" data-address-lookup-text hidden>
-                If your address is not listed, follow this link for <button class="area-search__more-info-button" data-more-info-button>more information</button>.
+                If your address is not listed, follow this link for <a class="area-search__more-info-button" data-more-info-button>more information</a>.
             </div>
         </form>
     </div>

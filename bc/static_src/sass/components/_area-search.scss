@@ -45,11 +45,14 @@
     }
 
     &__more-info-button {
-        color: $color--river;
-        border-bottom: 2px solid $color--river;
+        text-decoration: underline;
     }
 
     &__local-links {
+        @include font-size(s);
+    }
+
+    &__local-links-list {
         @include font-size(s);
 
         a {
