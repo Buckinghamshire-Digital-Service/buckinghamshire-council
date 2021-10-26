@@ -1,0 +1,7 @@
+context:
+  block:
+    value:
+      title: 'An internal link'
+      page:
+        get_url: '#'
+        title: 'Page title'
