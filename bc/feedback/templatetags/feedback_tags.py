@@ -13,7 +13,11 @@ def feedback_widget(context):
     page = context.get("page")
     extra_context = {}
 
-    if settings.ENABLE_FEEDBACK_WIDGET and page:
+    if (
+        settings.ENABLE_FEEDBACK_WIDGET
+        and page
+        and callable(getattr(page, "get_site", None))
+    ):
         extra_context["yes_form"] = UsefulnessFeedbackForm(
             prefix="yes", initial={"useful": True, "page": page}
         )
