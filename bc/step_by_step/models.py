@@ -1,6 +1,4 @@
-from django.db import models
-
-from wagtail.admin.edit_handlers import FieldPanel, RichTextFieldPanel, StreamFieldPanel
+from wagtail.admin.edit_handlers import RichTextFieldPanel, StreamFieldPanel
 from wagtail.core.blocks import (
     CharBlock,
     PageChooserBlock,
@@ -45,13 +43,11 @@ class StepBlock(StructBlock):
 class StepByStepIndexPage(BasePage):
     template = "patterns/pages/step_by_step/step_by_step_index_page.html"
 
-    heading = models.TextField()
     introduction = RichTextField()
 
     steps = StreamField([("step", StepBlock())])
 
     content_panels = BasePage.content_panels + [
-        FieldPanel("heading"),
         RichTextFieldPanel("introduction"),
         StreamFieldPanel("steps"),
     ]
