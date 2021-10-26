@@ -1,4 +1,5 @@
 context:
+  index: 1
   step:
     value:
       heading: 'Understand what you’ll need to do'

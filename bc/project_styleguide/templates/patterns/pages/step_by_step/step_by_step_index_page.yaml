@@ -1,7 +1,7 @@
 context:
   base_page_template: 'patterns/base_page.html'
   page:
-    heading: 'Moving up to secondary school: step by step'
+    title: 'Moving up to secondary school: step by step'
     introduction: 'Use this step by step guide to understand how the secondary school application process works, to find the right school, to apply and to help with the transition from primary school to secondary school'
     steps:
       - step:
@@ -10,5 +10,5 @@ context:
 
 tags:
   include_block:
-    'step':
+    'step with index=forloop.counter':
       template_name: 'patterns/molecules/step_by_step/blocks/step-block.html'

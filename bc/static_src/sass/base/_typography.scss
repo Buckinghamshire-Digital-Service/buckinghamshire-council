@@ -142,4 +142,5 @@ small {
 
 .introduction {
     @include font-size(s);
+    margin: 1.5rem 0;
 }
