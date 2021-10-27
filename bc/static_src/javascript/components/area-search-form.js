@@ -34,6 +34,7 @@ class AreaSearchForm {
         this.changePostcodeButton = this.form.querySelector(
             '[data-change-postcode]',
         );
+        this.introText = this.form.querySelector('[data-intro-text]');
         this.areaLinksDiv = this.form.querySelector('[data-local-links]');
         this.bindEvents();
     }
@@ -63,6 +64,7 @@ class AreaSearchForm {
                 this.areaLookupTexts.forEach((el) =>
                     el.removeAttribute('hidden'),
                 );
+                this.introText.removeAttribute('hidden');
             });
         });
 
@@ -121,6 +123,7 @@ class AreaSearchForm {
         this.addressLookupTexts.forEach((el) => el.setAttribute('hidden', ''));
         this.postcodeLookupTexts.forEach((el) => el.removeAttribute('hidden'));
         this.areaLookupTexts.forEach((el) => el.setAttribute('hidden', ''));
+        this.introText.removeAttribute('hidden');
     }
 
     updateResponsePostcode(postcode) {
@@ -186,15 +189,17 @@ class AreaSearchForm {
         );
         addressSelectWrapper.appendChild(addressSelectElement);
 
+        addressSelectDiv.appendChild(errorDiv);
+
         addressSelectDiv.appendChild(addressSelectWrapper);
         addressSelectDiv.appendChild(furtherInfoButton);
-        addressSelectDiv.appendChild(errorDiv);
 
         this.responseText.appendChild(addressSelectDiv);
 
         this.postcodeLookupTexts.forEach((el) => el.setAttribute('hidden', ''));
         this.addressLookupTexts.forEach((el) => el.removeAttribute('hidden'));
         this.areaLookupTexts.forEach((el) => el.setAttribute('hidden', ''));
+        this.introText.setAttribute('hidden', '');
     }
 
     updateResponseMessage(message) {

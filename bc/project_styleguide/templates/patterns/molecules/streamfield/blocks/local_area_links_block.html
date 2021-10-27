@@ -6,8 +6,6 @@
 
     <div class="area-links__heading">{{ value.heading|richtext }}</div>
 
-    <div class="area-links__intro">{{ value.introduction|richtext }}</div>
-
     <div class="area-search">
         <form
             role="search"
@@ -16,11 +14,12 @@
             url="{% url 'area_finder' %}"
             data-area-search
         >
+            <div data-intro-text class="area-links__intro">{{ value.introduction|richtext }}</div>
             <div data-response-text class="area-search__response-text"></div>
             <div data-postcode-wrapper class="area-search__input-wrapper">
-                <div data-postcode-error-wrapper class="form-item__errors"></div>
                 <label class="area-search__title" for="postcode" data-postcode-lookup-text>{{ value.postcode_lookup_text|richtext }}</label>
-                <div class="area-search__info">For example HP20 1UY</div>
+                <div data-postcode-error-wrapper class="form-item__errors"></div>
+                <div class="area-search__info">For example HP19 8FF</div>
                 <input data-postcode-input id="postcode" type="text" name="postcode">
             </div>
             <button
