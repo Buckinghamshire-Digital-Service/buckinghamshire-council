@@ -19,16 +19,16 @@
                 display: inline;
             }
 
-            &::after {
-                transform: rotateZ(-90deg) scaleX(2) scaleY(1.5);
+            .after {
+                transform: rotateZ(180deg) scale(0.5);
             }
         }
 
-        &::after {
-            content: '\203A';
+        .after {
             position: absolute;
-            right: -20px;
-            transform: rotateZ(90deg) scaleX(2) scaleY(1.5);
+            right: -25px;
+            transform: scale(0.5);
+            bottom: -4px;
         }
 
         &:hover {
@@ -83,12 +83,6 @@
             #{$root}__button-text--hide {
                 display: inline;
             }
-
-            #{$root}__button-text {
-                &::after {
-                    transform: rotateZ(-90deg) scaleX(2) scaleY(1.5);
-                }
-            }
         }
 
         &:last-child::before {
@@ -127,14 +121,6 @@
         }
     }
 
-    &__button-text--hide {
-        display: none;
-    }
-
-    &__button-text--show {
-        display: inline;
-    }
-
     &__title-text {
         @include font-size(l);
         line-height: 1.3;
@@ -155,11 +141,25 @@
             border-bottom-color: $color--river;
         }
 
-        &::after {
-            content: '\203A';
+        .after {
             position: absolute;
-            right: -20px;
-            transform: rotateZ(90deg) scaleX(2) scaleY(1.5);
+            right: -25px;
+        }
+
+        &--show {
+            display: inline;
+            .after {
+                transform: scale(0.5);
+                bottom: -2px;
+            }
+        }
+
+        &--hide {
+            display: none;
+            .after {
+                transform: scale(0.5) rotateZ(180deg);
+                bottom: 0;
+            }
         }
     }
 

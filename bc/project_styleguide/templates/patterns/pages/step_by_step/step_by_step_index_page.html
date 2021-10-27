@@ -13,8 +13,14 @@
         
         <div class="steps-nav" data-steps-container>
             <div class="steps-nav__controls" data-steps-toggle>
-                <span class="steps-nav__controls-text--show">Show all steps</span>
-                <span class="steps-nav__controls-text--hide">Hide all steps</span>
+                <span class="steps-nav__controls-text--show">
+                    Show all steps
+                    {% include "patterns/atoms/icons/icon.html" with name="chevron-small" classname="icon--stroke after" %}
+                </span>
+                <span class="steps-nav__controls-text--hide">
+                    Hide all steps
+                    {% include "patterns/atoms/icons/icon.html" with name="chevron-small" classname="icon--stroke after" %}
+                </span>
             </div>
             <ol class="steps-nav__steps">
                 {% for step in page.steps  %}

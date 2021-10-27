@@ -11,8 +11,14 @@
                     <span class="steps-nav__title-text">
                         {{ step.value.heading }}
                     </span>
-                    <span class="steps-nav__button-text steps-nav__button-text--show">Show</span>
-                    <span class="steps-nav__button-text steps-nav__button-text--hide">Hide</span>
+                    <span class="steps-nav__button-text steps-nav__button-text--show">
+                        Show
+                        {% include "patterns/atoms/icons/icon.html" with name="chevron-small" classname="icon--stroke after" %}
+                    </span>
+                    <span class="steps-nav__button-text steps-nav__button-text--hide">
+                        Hide
+                        {% include "patterns/atoms/icons/icon.html" with name="chevron-small" classname="icon--stroke after" %}
+                    </span>
                 </button>
             </span>
         </h2>
