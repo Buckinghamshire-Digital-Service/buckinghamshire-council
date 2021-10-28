@@ -192,7 +192,7 @@ class AreaFinderTest(TestCase):
         )
         json_response = resp.json()
         self.assertIn("error", json_response)
-        self.assertEqual(json_response["error"], "Postcode foo is not valid.")
+        self.assertEqual(json_response["error"], "Please enter a valid postcode")
 
     @responses.activate
     def test_unmatched_postcode(self):

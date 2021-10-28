@@ -26,8 +26,9 @@ def area_finder(request):
     try:
         formatted_postcode = validate_postcode(postcode)
     except ValidationError:
-        error = "Postcode {} is not valid.".format(escape(postcode))
-        return JsonResponse({"error": error}, status=status.HTTP_200_OK,)
+        return JsonResponse(
+            {"error": "Please enter a valid postcode"}, status=status.HTTP_200_OK,
+        )
 
     client = BucksMapsClient()
     resp = client.query_postcode(formatted_postcode)
