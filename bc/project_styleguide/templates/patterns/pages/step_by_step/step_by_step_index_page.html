@@ -1,0 +1,26 @@
+{% extends "patterns/base_page.html" %}
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-stepbystepindex{% endblock %}
+
+{% block content %}
+    <div class="section section--main">
+        <h1 class="heading heading--xxl">{{ page.title }}</h1>
+
+        {% if page.introduction %}
+            <div class="introduction">{{ page.introduction|richtext }}</div>
+        {% endif %}
+        
+        <div class="steps-nav" data-steps-container>
+            <div class="steps-nav__controls" data-steps-toggle>
+                <span class="steps-nav__controls-text--show">Show all steps</span>
+                <span class="steps-nav__controls-text--hide">Hide all steps</span>
+            </div>
+            <ol class="steps-nav__steps">
+                {% for step in page.steps  %}
+                    {% include_block step %}
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+{% endblock %}
