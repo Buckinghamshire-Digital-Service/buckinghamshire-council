@@ -1,0 +1,8 @@
+<div class="contact">
+    {% if contact.telephone %}
+        <span>Telephone: <a href="tel:{{ contact.telephone }}">{{ contact.telephone }}</a></span>
+    {% endif %}
+    {% if contact.email_address %}
+        <span>Email: <a href="mailto:{{ contact.email_address }}">{{ contact.email_address }}</a></span>
+    {% endif %}
+</div>

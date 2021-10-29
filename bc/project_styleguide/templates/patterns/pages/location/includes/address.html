@@ -1,0 +1,17 @@
+<div class="address">
+    {% if address.street_address_1 %}
+        <span>{{ address.street_address_1 }}</span>
+    {% endif %}
+    {% if address.street_address_2 %}
+        <span>{{ address.street_address_2 }}</span>
+    {% endif %}
+    {% if address.city %}
+        <span>{{ address.city }}</span>
+    {% endif %}
+    {% if address.region %}
+        <span>{{ address.region }}</span>
+    {% endif %}
+    {% if address.postcode %}
+        <span>{{ address.postcode }}</span>
+    {% endif %}
+</div>
