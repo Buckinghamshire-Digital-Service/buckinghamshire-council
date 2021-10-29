@@ -9,12 +9,18 @@
         position: relative;
         margin: 20px 0;
         display: block;
-        border-bottom: 1px solid transparent;
+
+        #{$root}__controls-label {
+            border-bottom: 2px solid transparent;
+        }
 
         &:focus {
             background-color: $color--mustard;
             box-shadow: 0 4px #0b0c0c;
-            border-bottom-color: transparent;
+
+            #{$root}__controls-label {
+                border-bottom-color: transparent;
+            }
         }
 
         &.is-open {
@@ -37,7 +43,12 @@
 
         &:hover {
             cursor: pointer;
-            border-bottom-color: $color--river;
+
+            &:not(:focus) {
+                #{$root}__controls-label {
+                    border-bottom-color: $color--river;
+                }
+            }
         }
     }
 
@@ -108,7 +119,7 @@
             height: 100%;
             border-left: 2px solid $color--charcoal-25;
             background: $color--white;
-            left: 2px;
+            left: 1px;
             margin-left: 1em;
             top: 1em;
         }
@@ -185,7 +196,6 @@
         a {
             display: block;
             width: fit-content;
-            color: $color--river;
             text-decoration: underline;
         }
     }
