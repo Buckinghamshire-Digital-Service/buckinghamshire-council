@@ -1,17 +1,18 @@
-<div class="address">
+<section>
+    <h2 class="heading heading--l">Address</h2>
     {% if address.street_address_1 %}
-        <span>{{ address.street_address_1 }}</span>
+        <div>{{ address.street_address_1 }}</div>
     {% endif %}
     {% if address.street_address_2 %}
-        <span>{{ address.street_address_2 }}</span>
+        <div>{{ address.street_address_2 }}</div>
     {% endif %}
     {% if address.city %}
-        <span>{{ address.city }}</span>
+        <div>{{ address.city }}</div>
     {% endif %}
     {% if address.region %}
-        <span>{{ address.region }}</span>
+        <div>{{ address.region }}</div>
     {% endif %}
     {% if address.postcode %}
-        <span>{{ address.postcode }}</span>
+        <div>{{ address.postcode }}</div>
     {% endif %}
-</div>
+</section>

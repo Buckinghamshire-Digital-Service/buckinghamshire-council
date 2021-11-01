@@ -1,1 +1,6 @@
 context:
+  address:
+    street_address_1: Aylesbury Library
+    street_address_2: Walton Street
+    city: Aylesbury
+    postcode: HP20 1UU
