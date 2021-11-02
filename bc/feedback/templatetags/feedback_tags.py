@@ -1,6 +1,8 @@
 from django import template
 from django.conf import settings
 
+from wagtail.core.models import Page
+
 from bc.feedback.forms import FeedbackCommentForm, UsefulnessFeedbackForm
 
 register = template.Library()
@@ -16,7 +18,7 @@ def feedback_widget(context):
     if (
         settings.ENABLE_FEEDBACK_WIDGET
         and page
-        and callable(getattr(page, "get_site", None))
+        and isinstance(page, Page)  # needed for pattern library compatibility only
     ):
         extra_context["yes_form"] = UsefulnessFeedbackForm(
             prefix="yes", initial={"useful": True, "page": page}
