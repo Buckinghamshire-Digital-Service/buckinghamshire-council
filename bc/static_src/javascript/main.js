@@ -17,6 +17,7 @@ import FormSubmit from './components/form-submit';
 import Filters from './components/job-filters';
 import FeedbackWidget from './components/feedback-widget';
 import Chart from './components/chart';
+import Steps from './components/steps';
 
 // Add polyfill fix for forEach carousel
 import foreachPolyfill from './polyfills/foreach-polyfill';
@@ -121,6 +122,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (const chart of document.querySelectorAll(Chart.selector())) {
         new Chart(chart);
+    }
+
+    for (const stepsContainer of document.querySelectorAll(Steps.selector())) {
+        new Steps(stepsContainer);
     }
 
     // Test react - add a div with a data attribute of `data-test-react` to test
