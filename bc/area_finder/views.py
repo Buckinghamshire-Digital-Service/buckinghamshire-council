@@ -63,7 +63,7 @@ def area_finder(request):
         border_overlap_html = (
             f"<div>The postcode <strong>{escape(formatted_postcode)}</strong> is on "
             "the border between two areas. Select an address to help us redirect you "
-            "the right place.</div>"
+            "to the right place.</div>"
         )
         return JsonResponse(
             {
