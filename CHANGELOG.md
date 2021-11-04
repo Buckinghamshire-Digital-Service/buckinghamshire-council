@@ -4,6 +4,9 @@
 
 - Postcode Lookup — Update the area links block UI to permit only querying by postcode
 - Postcode Lookup — Remove local area links lists from search results
+- Postcode Lookup — Use the internal Buckinghamshire maps API
+- Postcode Lookup — Query additional address data for border postcodes
+- Postcode Lookup — Update documentation
 
 ## 46.0 (2021-11-29)
 
