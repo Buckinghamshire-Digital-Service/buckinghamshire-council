@@ -61,12 +61,16 @@ def area_finder(request):
 
     if len(areas) > 1:
         border_overlap_html = (
-            f"<div>The postcode <strong>{escape(postcode)}</strong> is on the border"
-            " between two areas. Select an address to help us redirect you the right"
-            f" place.</div>"
+            f"<div>The postcode <strong>{escape(formatted_postcode)}</strong> is on "
+            "the border between two areas. Select an address to help us redirect you "
+            "the right place.</div>"
         )
         return JsonResponse(
-            {"border_overlap_html": border_overlap_html, "addresses": addresses},
+            {
+                "border_overlap_html": border_overlap_html,
+                "addresses": addresses,
+                "formatted_postcode": formatted_postcode,
+            },
             status=status.HTTP_200_OK,
         )
 

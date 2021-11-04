@@ -1,4 +1,5 @@
 from typing import List
+from unittest import mock
 
 from django.test import TestCase
 from django.urls import reverse
@@ -287,3 +288,38 @@ class AreaFinderTest(TestCase):
                 ],
             ],
         )
+
+    @mock.patch("bc.area_finder.views.BucksMapsClient")
+    def test_formatted_postcode_is_queried_from_api(self, mock_client):
+        raw_postcode = "w1a1aa"
+        formatted_postcode = "W1A 1AA"
+        self.client.get(self.url + "?postcode=" + raw_postcode)
+        mock_client().query_postcode.assert_called_once_with(formatted_postcode)
+
+    @responses.activate
+    def test_formatted_postcode_is_shown_to_user(self):
+        raw_postcode = "w1a1aa"
+        formatted_postcode = "W1A 1AA"
+        responses.add(
+            responses.POST,
+            self.api_client.base_url,
+            json=get_response(
+                get_features(
+                    formatted_postcode,
+                    feature_count=2,
+                    districts=[DISTRICT_WYCOMBE, DISTRICT_SOUTH_BUCKS],
+                )
+            ),
+        )
+        resp = self.client.get(self.url + "?postcode=" + raw_postcode)
+        self.assertEqual(len(responses.calls), 1)
+        self.assertEqual(resp.status_code, 200)
+        json_response = resp.json()
+        self.assertIn("border_overlap_html", json_response)
+        # The formatted postcode is in the JSON
+        self.assertIn("formatted_postcode", json_response)
+        self.assertEqual(json_response["formatted_postcode"], formatted_postcode)
+        # The formatted postcode is in the display text
+        self.assertIn(formatted_postcode, json_response["border_overlap_html"])
+        # And the user's input is not.
+        self.assertNotIn(raw_postcode, json_response["border_overlap_html"])

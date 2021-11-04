@@ -237,7 +237,7 @@ class AreaSearchForm {
                     this.redirectToLocalAreaLink(response.area);
                 } else if (response.border_overlap_html) {
                     this.hideForm();
-                    this.updateResponsePostcode(postcodeValue);
+                    this.updateResponsePostcode(response.formatted_postcode);
                     this.appendResponseHTML(response.border_overlap_html);
                     this.updateAddresses(response.addresses);
                 } else if (response.message) {
