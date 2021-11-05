@@ -3,6 +3,8 @@ import json
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
+from bs4 import BeautifulSoup
+
 from bc.home.models import HomePage
 from bc.images.tests.fixtures import ImageFactory
 from bc.standardpages.tests.fixtures import InformationPageFactory
@@ -264,3 +266,67 @@ class TestImageOrEmbedBlock(TestCase):
 
         with self.assertRaises(ValidationError):
             block.clean(struct_value)
+
+
+class TestAccordionTemplate(TestCase):
+    def setUp(self):
+        self.homepage = HomePage.objects.first()
+
+    def test_aria_controls_attribute(self):
+        page = self.homepage.add_child(
+            instance=InformationPageFactory.build(
+                body=json.dumps(
+                    [
+                        {
+                            "type": "accordion",
+                            "value": {
+                                "items": [
+                                    {
+                                        "title": "Question 1",
+                                        "content": [
+                                            {"type": "paragraph", "value": "Answer 1"},
+                                        ],
+                                    },
+                                    {
+                                        "title": "Question 2",
+                                        "content": [
+                                            {"type": "paragraph", "value": "Answer 2"},
+                                        ],
+                                    },
+                                ]
+                            },
+                        }
+                    ]
+                )
+            )
+        )
+        response = self.client.get(page.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "patterns/molecules/accordion/accordion.html")
+        soup = BeautifulSoup(response.content, "html.parser")
+
+        accordions = soup.find_all("div", class_="accordion")
+        for accordion in accordions:
+            button = accordion.find("button", class_="accordion__button")
+            answer = accordion.find("div", class_="accordion__content")
+
+            with self.subTest("The button controls the answer"):
+                self.assertEqual(button.attrs["aria-controls"], answer.attrs["id"])
+            with self.subTest("The answer is labelled by the button"):
+                self.assertEqual(button.attrs["id"], answer.attrs["aria-labelledby"])
+
+        with self.subTest("There are two accordions"):
+            self.assertEqual(len(accordions), 2)
+
+        with self.subTest("accordion IDs are unique"):
+            question_ids = {
+                el.attrs["id"]
+                for el in soup.find_all("button", class_="accordion__button")
+            }
+            self.assertEqual(len(question_ids), 2)
+
+            answer_ids = {
+                el.attrs["id"]
+                for el in soup.find_all("div", class_="accordion__content")
+            }
+            self.assertEqual(len(answer_ids), 2)
