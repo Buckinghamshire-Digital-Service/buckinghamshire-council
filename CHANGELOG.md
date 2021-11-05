@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 45.1 (2021-11-05)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/45.0...45.1
 
 - Fix accordion element IDs and aria roles mismatch
 
