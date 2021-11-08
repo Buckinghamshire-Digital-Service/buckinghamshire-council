@@ -1,7 +1,9 @@
 {% load util_tags wagtailcore_tags %}
-{{ link_urls|json_script:"area-link-urls" }}
 
 <div class="area-links" data-area-links>
+    {% with "area-link-urls-"|add:block.id as script_id %}
+    {{ link_urls|json_script:script_id }}
+    {% endwith %}
     <h2 class="u-sr-only">Local Area Links</h2>
 
     <div class="area-links__heading">{{ value.heading|richtext }}</div>
@@ -17,10 +19,12 @@
             <div data-intro-text class="area-links__intro">{{ value.introduction|richtext }}</div>
             <div data-response-text class="area-search__response-text"></div>
             <div data-postcode-wrapper class="area-search__input-wrapper">
-                <label class="area-search__title" for="postcode" data-postcode-lookup-text>{{ value.postcode_lookup_text|richtext }}</label>
+                {% with "postcode-"|add:block.id as input_id %}
+                <label class="area-search__title" for="{{ input_id }}" data-postcode-lookup-text>{{ value.postcode_lookup_text|richtext }}</label>
                 <div data-postcode-error-wrapper class="form-item__errors"></div>
                 <div class="area-search__info">For example HP19 8FF</div>
-                <input data-postcode-input id="postcode" type="text" name="postcode">
+                <input data-postcode-input id="{{ input_id }}" type="text" name="postcode">
+                {% endwith %}
             </div>
             <button
                 data-submit-button

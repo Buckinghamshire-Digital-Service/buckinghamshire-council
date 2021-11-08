@@ -1,10 +1,10 @@
 class AreaSearchForm {
     static selector() {
-        return '[data-area-search]';
+        return '[data-area-links]';
     }
 
     constructor(node) {
-        this.form = node;
+        this.form = node.querySelector('form');
         this.submitButton = this.form.querySelector('[data-submit-button]');
 
         this.postcodeInput = this.form.querySelector('[data-postcode-input]');
@@ -14,7 +14,7 @@ class AreaSearchForm {
 
         this.responseText = this.form.querySelector('[data-response-text]');
         this.areaLinkUrls = JSON.parse(
-            document.getElementById('area-link-urls').textContent,
+            node.querySelector('script').textContent,
         );
         this.postcodeErrorWrapper = this.form.querySelector(
             '[data-postcode-error-wrapper]',
