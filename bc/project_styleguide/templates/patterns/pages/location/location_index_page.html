@@ -13,7 +13,7 @@
         <ul class="location-pages-list">
             {% for location_page in page.child_pages %}
                 <li>
-                    <a href="{{ location_page.get_url }}">{{ location_page.title }}</a>
+                    <a href="{% pageurl location_page %}">{{ location_page.display_title }}</a>
                 </li>
             {% endfor %}
         </ul>

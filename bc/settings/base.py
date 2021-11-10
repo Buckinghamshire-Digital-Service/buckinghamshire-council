@@ -812,6 +812,12 @@ MAPIT_API_KEY = env.get("MAPIT_API_KEY")
 # Google maps API credentials
 GOOGLE_MAPS_V3_APIKEY = env.get("GOOGLE_MAPS_V3_APIKEY")
 
+# Geo widget settings
+GEO_WIDGET_DEFAULT_LOCATION = {
+    "lat": 51.814698,
+    "lng": -0.811697,
+}  # Coordinates of County hall
+
 # Wagtail transfer settings
 # See https://buckinghamshire-council.pages.torchbox.com/bc/infrastructure/#wagtail-transfer
 # Configure other site to import from

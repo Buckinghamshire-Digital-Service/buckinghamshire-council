@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.expressions import Case, When
 from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
@@ -16,6 +17,7 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtailgeowidget.edit_handlers import GeoPanel
 from wagtailgeowidget.helpers import geosgeometry_str_to_struct
 
+from bc.area_finder.utils import validate_postcode
 from bc.utils.blocks import StoryBlock
 from bc.utils.models import BasePage, RelatedPage
 
@@ -30,7 +32,18 @@ class LocationIndexPage(BasePage):
 
     @cached_property
     def child_pages(self):
-        pages = self.get_children().live().public().specific()  # TODO: ordering
+        pages = (
+            LocationPage.objects.child_of(self)
+            .live()
+            .public()
+            .annotate(
+                display_title=Case(
+                    When(listing_title="", then="title"), default="listing_title"
+                )
+            )
+            .order_by("display_title")
+        )
+
         return pages
 
 
@@ -53,7 +66,9 @@ class LocationPage(BasePage):
     street_address_1 = models.CharField(blank=True, max_length=255)
     street_address_2 = models.CharField(blank=True, max_length=255)
     city = models.CharField(blank=True, max_length=255)
-    postcode = models.CharField(blank=True, max_length=255)
+    postcode = models.CharField(
+        blank=True, max_length=255, validators=[validate_postcode]
+    )
 
     telephone = models.CharField(
         blank=True,
@@ -72,7 +87,7 @@ class LocationPage(BasePage):
                     [FieldPanel("street_address_1"), FieldPanel("street_address_2")]
                 ),
                 FieldRowPanel([FieldPanel("city"), FieldPanel("postcode")]),
-                GeoPanel("map_location", hide_latlng=True),
+                GeoPanel("map_location"),
             ],
             "Address",
         ),
@@ -101,7 +116,6 @@ class LocationPage(BasePage):
             "street_address_1": self.street_address_1,
             "street_address_2": self.street_address_2,
             "city": self.city,
-            "region": self.region,
             "postcode": self.postcode,
         }
 
