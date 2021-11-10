@@ -46,6 +46,12 @@ class LocationIndexPage(BasePage):
 
         return pages
 
+    def child_lats(self):
+        return [page.lat for page in self.child_pages]
+
+    def child_lngs(self):
+        return [page.lng for page in self.child_pages]
+
 
 class LocationPageRelatedPage(RelatedPage):
     source_page = ParentalKey("LocationPage", related_name="related_pages")
@@ -111,11 +117,11 @@ class LocationPage(BasePage):
 
     @property
     def lat(self):
-        return self.point["y"] if self.point else None
+        return self.point["y"] if self.point else ""
 
     @property
     def lng(self):
-        return self.point["x"] if self.point else None
+        return self.point["x"] if self.point else ""
 
     @cached_property
     def address(self):

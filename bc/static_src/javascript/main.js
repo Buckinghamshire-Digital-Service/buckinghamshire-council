@@ -17,6 +17,7 @@ import FormSubmit from './components/form-submit';
 import Filters from './components/job-filters';
 import FeedbackWidget from './components/feedback-widget';
 import Chart from './components/chart';
+import GoogleMap from './components/map';
 
 // Add polyfill fix for forEach carousel
 import foreachPolyfill from './polyfills/foreach-polyfill';
@@ -121,6 +122,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (const chart of document.querySelectorAll(Chart.selector())) {
         new Chart(chart);
+    }
+
+    for (const googlemap of document.querySelectorAll(GoogleMap.selector())) {
+        new GoogleMap(googlemap);
     }
 
     // Test react - add a div with a data attribute of `data-test-react` to test

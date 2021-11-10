@@ -10,6 +10,7 @@
         <div class="introduction">
             {{ page.body|richtext }}
         </div>
+        {% include 'patterns/molecules/map/map.html' with lats=page.child_lats lngs=page.child_lngs %}
         <ul class="location-pages-list">
             {% for location_page in page.child_pages %}
                 <li>
@@ -19,4 +20,9 @@
         </ul>
     </div>
 </div>
+{% endblock %}
+
+
+{% block extra_js %}
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_V3_APIKEY }}"></script>
 {% endblock %}

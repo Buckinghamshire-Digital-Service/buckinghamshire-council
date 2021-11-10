@@ -14,9 +14,16 @@
             {% include 'patterns/pages/location/includes/address.html' with address=page.address %}
             {% include 'patterns/pages/location/includes/contact.html' with contact=page.contact %}
 
+            {% include 'patterns/molecules/map/map.html' with lats=page.lat lngs=page.lng %}
+
             {% include_block page.body %}
         </div>
 
         {% include "patterns/molecules/navigation/sidebar.html" with related_pages=page.live_related_pages %}
     </div>
+{% endblock %}
+
+
+{% block extra_js %}
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_V3_APIKEY }}"></script>
 {% endblock %}
