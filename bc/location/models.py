@@ -62,7 +62,8 @@ class LocationPage(BasePage):
         blank=True,
     )
 
-    map_location = models.CharField(max_length=250, blank=True)
+    map_location = models.TextField(blank=True)
+    latlng = models.CharField(max_length=250, blank=True)
     street_address_1 = models.CharField(blank=True, max_length=255)
     street_address_2 = models.CharField(blank=True, max_length=255)
     city = models.CharField(blank=True, max_length=255)
@@ -83,11 +84,17 @@ class LocationPage(BasePage):
         ImageChooserPanel("image"),
         MultiFieldPanel(
             [
+                GeoPanel("latlng", address_field="map_location", hide_latlng=True),
+                FieldPanel("map_location"),
+            ],
+            "Map",
+        ),
+        MultiFieldPanel(
+            [
                 FieldRowPanel(
                     [FieldPanel("street_address_1"), FieldPanel("street_address_2")]
                 ),
                 FieldRowPanel([FieldPanel("city"), FieldPanel("postcode")]),
-                GeoPanel("map_location"),
             ],
             "Address",
         ),
@@ -100,7 +107,7 @@ class LocationPage(BasePage):
 
     @cached_property
     def point(self):
-        return geosgeometry_str_to_struct(self.map_location)
+        return geosgeometry_str_to_struct(self.latlng)
 
     @property
     def lat(self):
