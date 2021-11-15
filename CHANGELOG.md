@@ -1,5 +1,10 @@
 # Release History
 
+## Unreleased
+
+- Add LocationIndex and Location pages
+- Update documentation to summarise use of wagtail-geo-widget for maps
+
 ## 45.0 (2021-10-12)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/44.1...45.0
