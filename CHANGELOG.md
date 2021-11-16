@@ -5,6 +5,8 @@
 - Add Step-by-Step page type
 - Add accordion block to long-form content pages
 - Fix process_block_numbers to consider non-heading numbers
+- Change search result label & date colour to meet WCAG AA standard
+- Change paragraph number to meet WCAG AA standard
 
 ## 45.1 (2021-11-05)
 
