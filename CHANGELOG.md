@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- Add accordion block to long-form content pages
+
 ## 45.1 (2021-11-05)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/45.0...45.1
