@@ -17,7 +17,6 @@ from ..blocks import (
     NumberedSubheadingBlock,
 )
 from ..templatetags.longform_tags import generate_block_number, process_block_numbers
-
 from .fixtures import LongformChapterPageFactory, LongformPageFactory
 
 
