@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Add accordion block to long-form content pages
+- Fix process_block_numbers to consider non-heading numbers
 
 ## 45.1 (2021-11-05)
 
