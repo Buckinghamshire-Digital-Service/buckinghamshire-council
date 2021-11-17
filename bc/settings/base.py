@@ -86,7 +86,6 @@ INSTALLED_APPS = [
     "wagtailorderable",
     "wagtail_automatic_redirects",
     "wagtail.contrib.modeladmin",
-    "wagtail.contrib.postgres_search",
     "wagtail.contrib.settings",
     "wagtail.contrib.search_promotions",
     "wagtail.contrib.forms",
@@ -239,7 +238,7 @@ if "BONSAI_URL" in env:
     }
 else:
     WAGTAILSEARCH_BACKENDS = {
-        "default": {"BACKEND": "wagtail.contrib.postgres_search.backend"}
+        "default": {"BACKEND": "wagtail.search.backends.database"}
     }
 # Reduction factor between 0 and 1 to apply to the relevanve score of search
 # results with the NewsPage content type. See bc.search.elasticsearch5.
