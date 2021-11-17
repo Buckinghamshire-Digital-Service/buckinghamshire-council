@@ -22,7 +22,7 @@ class Rendition(AbstractRendition):
     )
 
     class Meta:
-        unique_together = (("image", "filter_spec", "focal_point_key"),)
+        unique_together = [["image", "filter_spec", "focal_point_key"]]
 
 
 def import_image_from_url(
