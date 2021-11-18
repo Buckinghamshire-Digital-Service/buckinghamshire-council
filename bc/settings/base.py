@@ -746,6 +746,11 @@ WAGTAILDOCS_DOCUMENT_MODEL = "documents.CustomDocument"
 PASSWORD_REQUIRED_TEMPLATE = "patterns/pages/wagtail/password_required.html"
 
 
+# Default field for automatic primary keys. (Introduced in Django 3.2)
+# https://docs.djangoproject.com/en/3.2/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
+
 # Default size of the pagination used on the front-end.
 DEFAULT_PER_PAGE = 10
 
