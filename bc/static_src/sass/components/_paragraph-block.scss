@@ -1,7 +1,7 @@
 .paragraph-block {
     &__number {
         @include font-size(xxs);
-        color: $color--grey-dark;
+        color: $color--grey-accessible;
     }
 
     &__content {
