@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Add Step-by-Step page types
+- Add Step-by-Step page type
 
 ## 45.0 (2021-10-12)
 
