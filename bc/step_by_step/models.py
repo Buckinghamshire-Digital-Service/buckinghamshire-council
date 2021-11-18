@@ -40,8 +40,8 @@ class StepBlock(StructBlock):
         template = "patterns/molecules/step_by_step/blocks/step-block.html"
 
 
-class StepByStepIndexPage(BasePage):
-    template = "patterns/pages/step_by_step/step_by_step_index_page.html"
+class StepByStepPage(BasePage):
+    template = "patterns/pages/step_by_step/step_by_step_page.html"
 
     introduction = RichTextField()
 
