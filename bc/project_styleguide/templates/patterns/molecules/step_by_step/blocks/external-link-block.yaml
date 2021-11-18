@@ -1,0 +1,5 @@
+context:
+  block:
+    value:
+      title: 'An external link'
+      url: 'https://www.youtube.com/'

@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Add Step-by-Step page type
 - Add accordion block to long-form content pages
 - Fix process_block_numbers to consider non-heading numbers
 
