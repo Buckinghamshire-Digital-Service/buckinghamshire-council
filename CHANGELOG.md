@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- Add Step-by-Step page types
+
 ## 45.0 (2021-10-12)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/44.1...45.0
