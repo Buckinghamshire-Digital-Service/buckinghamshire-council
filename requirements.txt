@@ -6,9 +6,9 @@ wagtail-django-recaptcha==1.0
 django-pattern-library==0.5
 bleach==3.1.0
 factory-boy==3.2.1
-freezegun==0.3.14
+freezegun==1.1.0
 django_gov_notify==0.3.0
-responses==0.10.9
+responses==0.16.0
 tabulate==0.8.7
 wagtail-factories==2.0.1
 wagtail-orderable==1.0.3
