@@ -24,9 +24,9 @@ dj-database-url==0.5.0
 raven==6.10.0
 django-redis==4.11.0
 redis==2.10.6
-django-storages[boto3]==1.7.1
+django-storages[boto3]==1.9.1
 django-referrer-policy==1.0
-django-csp==3.5
+django-csp==3.7
 scout-apm==2.0.2
 git+https://github.com/tm-kn/django-basic-auth-ip-whitelist.git@318006b15b598c035cf52031c8fa63dbf241440f#egg=django-basic-auth-ip-whitelist
 
