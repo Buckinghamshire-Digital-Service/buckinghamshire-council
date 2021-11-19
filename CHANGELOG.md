@@ -31,8 +31,10 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/45.1...46.0
 - Fix process_block_numbers to consider non-heading numbers
 - Change search result label & date colour to meet WCAG AA standard
 - Change paragraph number to meet WCAG AA standard
-- Upgrade Wagtail to 2.15.1, Django to 3.2.9, django-pattern-library to 0.5, and
-  whitenoise to 5.0 and replace deprecated & removed functions & fields
+- Upgrade Wagtail to 2.15.1, Django to 3.2.9, django-pattern-library to 0.5,
+  django-redis to 4.11.0, factory-boy to 3.2.1, freezegun to 1.1.0, responses to 0.16.0,
+  wagtail-factories to 2.0.1, and whitenoise to 5.0; and replace deprecated & removed
+  functions & fields
 
 ## 45.1 (2021-11-05)
 
