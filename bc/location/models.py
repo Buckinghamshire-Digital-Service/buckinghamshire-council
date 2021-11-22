@@ -12,6 +12,7 @@ from wagtail.admin.edit_handlers import (
     StreamFieldPanel,
 )
 from wagtail.core.fields import RichTextField, StreamField
+from wagtail.core.rich_text import expand_db_html
 from wagtail.images.edit_handlers import ImageChooserPanel
 
 from wagtailgeowidget.edit_handlers import GeoPanel
@@ -46,11 +47,8 @@ class LocationIndexPage(BasePage):
 
         return pages
 
-    def child_lats(self):
-        return [page.lat for page in self.child_pages]
-
-    def child_lngs(self):
-        return [page.lng for page in self.child_pages]
+    def map_markers(self):
+        return [page.map_info for page in self.child_pages]
 
 
 class LocationPageRelatedPage(RelatedPage):
@@ -70,6 +68,11 @@ class LocationPage(BasePage):
 
     map_location = models.TextField(blank=True)
     latlng = models.CharField(max_length=250, blank=True)
+    map_info_text = RichTextField(
+        blank=False,
+        null=True,
+        help_text="Content to display in popup window above the map",
+    )
     street_address_1 = models.CharField(blank=True, max_length=255)
     street_address_2 = models.CharField(blank=True, max_length=255)
     city = models.CharField(blank=True, max_length=255)
@@ -92,6 +95,7 @@ class LocationPage(BasePage):
             [
                 GeoPanel("latlng", address_field="map_location", hide_latlng=True),
                 FieldPanel("map_location"),
+                RichTextFieldPanel("map_info_text"),
             ],
             "Map",
         ),
@@ -116,12 +120,12 @@ class LocationPage(BasePage):
         return geosgeometry_str_to_struct(self.latlng)
 
     @property
-    def lat(self):
-        return self.point["y"] if self.point else ""
-
-    @property
-    def lng(self):
-        return self.point["x"] if self.point else ""
+    def map_info(self):
+        return {
+            "lat": self.point["y"] if self.point else "",
+            "lng": self.point["x"] if self.point else "",
+            "map_info_text": expand_db_html(self.map_info_text),
+        }
 
     @cached_property
     def address(self):
