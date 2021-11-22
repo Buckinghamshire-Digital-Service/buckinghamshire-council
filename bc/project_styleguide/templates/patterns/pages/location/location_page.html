@@ -14,7 +14,7 @@
             {% include 'patterns/pages/location/includes/address.html' with address=page.address %}
             {% include 'patterns/pages/location/includes/contact.html' with contact=page.contact %}
 
-            {% include 'patterns/molecules/map/map.html' with lats=page.lat lngs=page.lng %}
+            {% include 'patterns/molecules/map/map.html' %}
 
             {% include_block page.body %}
         </div>
@@ -25,5 +25,6 @@
 
 
 {% block extra_js %}
+    {{ page.map_info|json_script:"markers" }}
     <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_V3_APIKEY }}"></script>
 {% endblock %}

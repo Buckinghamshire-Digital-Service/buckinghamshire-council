@@ -1,17 +1,9 @@
 /* global google */
 
-const strip = (str) => {
-    let strippedStr = str;
-    if (strippedStr.startsWith('[')) {
-        strippedStr = strippedStr.substr(1);
-    }
-
-    if (strippedStr.endsWith(']')) {
-        strippedStr = strippedStr.slice(0, -1);
-    }
-
-    return strippedStr;
-};
+const getLatLng = (location) => ({
+    lat: parseFloat(location.lat),
+    lng: parseFloat(location.lng),
+});
 
 class GoogleMap {
     static selector() {
@@ -20,21 +12,16 @@ class GoogleMap {
 
     constructor(node) {
         this.node = node;
+        this.locations = JSON.parse(
+            document.getElementById('markers').textContent,
+        );
 
-        // remove the [ and ] characters from the strings
-        this.latitudes = strip(this.node.dataset.latitudes).split(',');
-        this.longitudes = strip(this.node.dataset.longitudes).split(',');
-
-        this.locations = [];
-        this.latitudes.forEach((latitude, ind) => {
-            const longitude = this.longitudes[ind];
-            if (latitude.length === 0 || longitude.length === 0) return;
-            this.locations.push({
-                lat: parseFloat(latitude),
-                lng: parseFloat(longitude),
-            });
-        });
+        // if there's only 1 location, convert it to array for further processing
+        if (!Array.isArray(this.locations)) {
+            this.locations = [this.locations];
+        }
         this.zoom = parseInt(this.node.dataset.zoomLevel, 10);
+        this.markerImageURL = this.node.dataset.markerImageUrl;
 
         // populated in mapLoad();
         this.googleMap = null;
@@ -51,15 +38,26 @@ class GoogleMap {
             streetViewControl: false,
             mapTypeControl: false,
             fullscreenControl: true,
-            center: this.locations[0],
+            center: getLatLng(this.locations[0]),
         });
-        this.markers = this.locations.map(
-            (location) =>
-                new google.maps.Marker({
-                    position: location,
+        this.markers = this.locations.map((location) => {
+            const marker = new google.maps.Marker({
+                position: getLatLng(location),
+                map: this.googleMap,
+                icon: this.markerImageURL,
+            });
+            const infowindow = new google.maps.InfoWindow({
+                content: location.map_info_text,
+            });
+            marker.addListener('click', () => {
+                infowindow.open({
+                    anchor: marker,
                     map: this.googleMap,
-                }),
-        );
+                    shouldFocus: false,
+                });
+            });
+            return marker;
+        });
     }
 }
 
