@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 46.0 (2021-11-29)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/45.1...46.0
 
 - Add Step-by-Step page type
 - Add accordion block to long-form content pages
