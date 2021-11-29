@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     "bc.recruitment_api",
     "bc.search.apps.SearchConfig",
     "bc.standardpages",
+    "bc.step_by_step",
     "bc.users",
     "bc.utils",
     "wagtail_transfer",

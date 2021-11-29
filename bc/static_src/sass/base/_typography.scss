@@ -139,3 +139,9 @@ small {
         margin: 0 0 $grid--large;
     }
 }
+
+.introduction {
+    @include font-size(s);
+    margin: 1.5rem 0;
+    max-width: 630px;
+}

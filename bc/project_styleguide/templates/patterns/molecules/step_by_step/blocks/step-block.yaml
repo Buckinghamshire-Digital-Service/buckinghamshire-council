@@ -1,0 +1,32 @@
+context:
+  index: 1
+  step:
+    value:
+      heading: 'Understand what you’ll need to do'
+      information:
+        - block:
+          block_type: 'paragraph'
+          value: 'For each section there can be introductory text'
+        - block:
+          block_type: 'external_link'
+          value:
+            url: '#'
+            title: 'External Link'
+        - block:
+          block_type: internal_link
+          value:
+            page:
+              get_url: '#'
+              title: 'Page title'
+        - block:
+          block_type: internal_link
+          value:
+            page:
+              get_url: '#'
+              title: 'Page title'
+            title: 'Custom internal title'
+
+tags:
+  include_block:
+    'block':
+      template_name: 'patterns/molecules/step_by_step/blocks/external-link-block.html'

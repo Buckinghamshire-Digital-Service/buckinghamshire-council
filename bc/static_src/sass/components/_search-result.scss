@@ -13,13 +13,13 @@
 
     &__label {
         @include font-size(xxs);
-        color: $color--grey-dark;
+        color: $color--grey-accessible;
         margin: 5px 0;
     }
 
     &__date {
         @include font-size(xxs);
-        color: $color--grey-dark;
+        color: $color--grey-accessible;
         margin: 5px 0;
     }
 

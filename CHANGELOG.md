@@ -1,5 +1,15 @@
 # Release History
 
+## 46.0 (2021-11-29)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/45.1...46.0
+
+- Add Step-by-Step page type
+- Add accordion block to long-form content pages
+- Fix process_block_numbers to consider non-heading numbers
+- Change search result label & date colour to meet WCAG AA standard
+- Change paragraph number to meet WCAG AA standard
+
 ## 45.1 (2021-11-05)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/45.0...45.1
