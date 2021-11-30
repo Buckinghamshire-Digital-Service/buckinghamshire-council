@@ -38,5 +38,6 @@ nav:
       - 'Recruitment site': 'recruitment-site.md'
       - 'Complaints and requests': 'complaints-and-requests.md'
       - 'Live chat client': 'live-chat-client.md'
+      - 'Postcode lookup': 'postcode-lookup.md'
   - 'Contributing': 'contributing.md'
   - 'CHANGELOG': 'CHANGELOG.md'

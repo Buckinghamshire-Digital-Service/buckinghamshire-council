@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailsearchpromotions_tags wagtailimages_tags local_area_links_tags news_tags %}
+{% load static wagtailcore_tags wagtailsearchpromotions_tags wagtailimages_tags news_tags %}
 
 <div class="search-result">
     {% if section_label %}
@@ -17,6 +17,4 @@
     {% if result|is_news_page %}
         <time class="search-result__date" datetime="{{ result.display_date|date:'Y-m-d' }}">{{ result.display_date|date:"j M Y" }}</time>
     {% endif %}
-
-    {% local_area_links result %}
 </div>

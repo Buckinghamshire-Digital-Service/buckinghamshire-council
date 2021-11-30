@@ -34,7 +34,7 @@
             </h2>
 
             <div class="main-body">
-                {{ page.body }}
+                {% include_block page.body %}
 
                 {% include "patterns/molecules/pagination/index-pagination.html" with next_page=next_page prev_page=prev_page %}
             </div>

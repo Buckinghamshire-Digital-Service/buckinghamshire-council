@@ -23,8 +23,8 @@ def validate_postcode(postcode):
 
 
 def area_from_district(district_name):
-    """Strip a trailing " District Council" from a string."""
-    return district_name.strip().split(" District Council")[0]
+    """Strip a trailing " District" from a string."""
+    return district_name.strip().split(" District")[0]
 
 
 def clean_escaped_html(s):

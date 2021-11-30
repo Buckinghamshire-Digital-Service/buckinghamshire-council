@@ -1,21 +1,41 @@
 class AreaSearchForm {
     static selector() {
-        return '[data-area-search]';
+        return '[data-area-links]';
     }
 
     constructor(node) {
-        this.form = node;
+        this.form = node.querySelector('form');
         this.submitButton = this.form.querySelector('[data-submit-button]');
-        this.findAnotherButton = this.form.querySelector(
-            '[data-find-another-button]',
+
+        this.postcodeInput = this.form.querySelector('[data-postcode-input]');
+        this.postcodeWrapper = this.form.querySelector(
+            '[data-postcode-wrapper]',
         );
-        this.input = this.form.querySelector('[data-input-value]');
-        this.formTitle = this.form.querySelector('[data-form-title]');
-        this.formInfo = this.form.querySelector('[data-form-info]');
+
         this.responseText = this.form.querySelector('[data-response-text]');
-        this.formInputWrapper = this.form.querySelector(
-            '[data-form-input-wrapper]',
+        this.areaLinkUrls = JSON.parse(
+            node.querySelector('script').textContent,
         );
+        this.postcodeErrorWrapper = this.form.querySelector(
+            '[data-postcode-error-wrapper]',
+        );
+        this.moreInfoButtons = this.form.querySelectorAll(
+            '[data-more-info-button]',
+        );
+        this.postcodeLookupTexts = this.form.querySelectorAll(
+            '[data-postcode-lookup-text]',
+        );
+        this.addressLookupTexts = this.form.querySelectorAll(
+            '[data-address-lookup-text]',
+        );
+        this.areaLookupTexts = this.form.querySelectorAll(
+            '[data-area-lookup-text]',
+        );
+        this.changePostcodeButton = this.form.querySelector(
+            '[data-change-postcode]',
+        );
+        this.introText = this.form.querySelector('[data-intro-text]');
+        this.areaLinksDiv = this.form.querySelector('[data-local-links]');
         this.bindEvents();
     }
 
@@ -30,39 +50,54 @@ class AreaSearchForm {
             this.submitForm();
         });
 
-        this.findAnotherButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            this.toggleForm();
+        this.moreInfoButtons.forEach((button) => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.hideForm();
+                this.showAreaLinks();
+                this.postcodeLookupTexts.forEach((el) =>
+                    el.setAttribute('hidden', ''),
+                );
+                this.addressLookupTexts.forEach((el) =>
+                    el.setAttribute('hidden', ''),
+                );
+                this.areaLookupTexts.forEach((el) =>
+                    el.removeAttribute('hidden'),
+                );
+                this.introText.removeAttribute('hidden');
+            });
         });
+
+        this.changePostcodeButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.revertFormState();
+        });
+    }
+
+    showAreaLinks() {
+        this.areaLinksDiv.removeAttribute('hidden');
+    }
+
+    hideAreaLinks() {
+        this.areaLinksDiv.setAttribute('hidden', '');
     }
 
     responseClear() {
         this.responseText.innerHTML = '';
-        this.form.classList.remove('form--area-search-error');
-        this.responseText.classList.remove('area-search__response-text--error');
+        this.postcodeErrorWrapper.innerHTML = '';
+        this.postcodeWrapper.classList.remove('form-item--errors');
     }
 
-    toggleForm() {
+    hideForm() {
         this.responseClear();
-
-        if (this.formInputWrapper.classList.contains('hide')) {
-            this.formInputWrapper.classList.remove('hide');
-            this.formTitle.classList.remove('hide');
-            this.formInfo.classList.remove('hide');
-            this.findAnotherButton.classList.add('hide');
-        } else {
-            this.formInputWrapper.classList.add('hide');
-            this.formTitle.classList.add('hide');
-            this.formInfo.classList.add('hide');
-            this.findAnotherButton.classList.remove('hide');
-        }
+        this.postcodeWrapper.classList.add('hide');
+        this.submitButton.classList.add('hide');
     }
 
-    responseError() {
-        this.form.classList.add('form--area-search');
-        this.form.classList.add('form--area-search-error');
-        this.responseText.classList.add('area-search__response-text');
-        this.responseText.classList.add('area-search__response-text--error');
+    showForm() {
+        this.responseClear();
+        this.postcodeWrapper.classList.remove('hide');
+        this.submitButton.classList.remove('hide');
     }
 
     appendResponseText(text) {
@@ -78,107 +113,143 @@ class AreaSearchForm {
         }
     }
 
-    updateResponseArea(html, name) {
-        this.toggleForm();
-        this.appendResponseHTML(html);
-
-        const block = this.form.closest('[data-area-links]');
-        const bucksAreas = {
-            'Aylesbury Vale': {
-                link:
-                    block.querySelector('[data-area-link="aylesbury-vale-url"]')
-                        .href || 'https://www.aylesburyvaledc.gov.uk/',
-                shortname: 'Aylesbury Vale',
-            },
-            'Wycombe': {
-                link:
-                    block.querySelector('[data-area-link="wycombe-url"]')
-                        .href || 'https://www.wycombe.gov.uk/',
-                shortname: 'Wycombe',
-            },
-            'Chiltern': {
-                link:
-                    block.querySelector('[data-area-link="chiltern-url"]')
-                        .href || 'https://www.chiltern.gov.uk/',
-                shortname: 'Chiltern',
-            },
-            'South Bucks': {
-                link:
-                    block.querySelector('[data-area-link="south-bucks-url"]')
-                        .href || 'https://www.southbucks.gov.uk/',
-                shortname: 'South Bucks',
-            },
-        };
-        const areaName = name;
-
-        if (areaName in bucksAreas === true) {
-            const buttonElement = document.createElement('button');
-            buttonElement.innerText = `Go to ${bucksAreas[name].shortname}`;
-            buttonElement.classList.add('button');
-            buttonElement.classList.add('button--basic');
-            buttonElement.classList.add('button--area-search');
-            buttonElement.type = 'button';
-            buttonElement.onclick = () => {
-                location.href = `${bucksAreas[name].link}`; // eslint-disable-line
-            };
-            this.responseText.appendChild(buttonElement);
-        }
+    redirectToLocalAreaLink(area) {
+        window.location.href = this.areaLinkUrls[area];
     }
 
-    updateResponseBorderOverlap(html) {
-        this.toggleForm();
-        this.appendResponseHTML(html);
+    revertFormState() {
+        this.showForm();
+        this.hideAreaLinks();
+        this.addressLookupTexts.forEach((el) => el.setAttribute('hidden', ''));
+        this.postcodeLookupTexts.forEach((el) => el.removeAttribute('hidden'));
+        this.areaLookupTexts.forEach((el) => el.setAttribute('hidden', ''));
+        this.introText.removeAttribute('hidden');
+    }
+
+    updateResponsePostcode(postcode) {
+        const div = document.createElement('div');
+        div.innerHTML = `<strong>${postcode}</strong>`;
+        const changePostcodeButton = document.createElement('a');
+        changePostcodeButton.classList.add(
+            'area-search__button--change-postcode',
+        );
+        changePostcodeButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.revertFormState();
+        });
+        changePostcodeButton.innerText = 'Change';
+        div.appendChild(changePostcodeButton);
+        this.responseText.appendChild(div);
+    }
+
+    updateAddresses(addresses) {
+        const addressSelectDiv = document.createElement('div');
+        const addressSelectElement = document.createElement('select');
+        const errorDiv = document.createElement('div');
+        errorDiv.classList.add('form-item__errors');
+
+        addressSelectElement.addEventListener('change', (e) => {
+            // stop propagration to prevent firing the form's onchange method
+            e.stopPropagation();
+        });
+
+        const numAddressesOption = document.createElement('option');
+        numAddressesOption.textContent = `${addresses.length} addresses found`;
+        numAddressesOption.setAttribute('hidden', '');
+        addressSelectElement.appendChild(numAddressesOption);
+
+        addresses.forEach(([district, address]) => {
+            const option = document.createElement('option');
+            option.setAttribute('value', district);
+            option.textContent = address;
+            addressSelectElement.appendChild(option);
+        });
+
+        const furtherInfoButton = document.createElement('button');
+        furtherInfoButton.textContent = 'Find further information';
+        furtherInfoButton.classList.add(
+            'button',
+            'button--basic',
+            'button--area-search',
+        );
+
+        furtherInfoButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (addressSelectElement.value in this.areaLinkUrls) {
+                this.redirectToLocalAreaLink(addressSelectElement.value);
+            } else {
+                // if option 'x addresses found' is selected
+                errorDiv.innerText = 'Select a valid address';
+            }
+        });
+
+        const addressSelectWrapper = document.createElement('div');
+        addressSelectWrapper.classList.add(
+            'area-search__response-select-wrapper',
+        );
+        addressSelectWrapper.appendChild(addressSelectElement);
+
+        addressSelectDiv.appendChild(errorDiv);
+
+        addressSelectDiv.appendChild(addressSelectWrapper);
+        addressSelectDiv.appendChild(furtherInfoButton);
+
+        this.responseText.appendChild(addressSelectDiv);
+
+        this.postcodeLookupTexts.forEach((el) => el.setAttribute('hidden', ''));
+        this.addressLookupTexts.forEach((el) => el.removeAttribute('hidden'));
+        this.areaLookupTexts.forEach((el) => el.setAttribute('hidden', ''));
+        this.introText.setAttribute('hidden', '');
     }
 
     updateResponseMessage(message) {
-        this.toggleForm();
+        this.hideForm();
         this.appendResponseText(message);
     }
 
     updateResponseError(message) {
         this.responseClear();
-        this.responseError();
-        this.appendResponseText(message);
+
+        const errorListElement = document.createElement('ul');
+        errorListElement.classList.add('errorlist');
+        const errorMessageElement = document.createElement('li');
+        errorMessageElement.innerText = message;
+        errorListElement.appendChild(errorMessageElement);
+        this.postcodeErrorWrapper.replaceChildren(errorListElement);
+        this.postcodeWrapper.classList.add('form-item--errors');
     }
 
     submitForm() {
         const url = this.form.getAttribute('url');
-        const postcodeValue = this.input.value;
+        const postcodeValue = this.postcodeInput.value;
 
-        // Regex for UK postcodes https://stackoverflow.com/a/164994
-        const UKPostCodePattern = /^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/;
-        const isUKPostCodeValid = UKPostCodePattern.test(postcodeValue);
-
-        if (!isUKPostCodeValid) {
-            this.updateResponseError('Invalid postcode');
-        } else {
-            fetch(`${url}?postcode=${postcodeValue}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json; charset=utf-8',
-                    'Accept': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest',
-                },
+        fetch(`${url}?postcode=${postcodeValue}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+        })
+            .then((response) => response.json())
+            .then((response) => {
+                if (response.area) {
+                    this.redirectToLocalAreaLink(response.area);
+                } else if (response.border_overlap_html) {
+                    this.hideForm();
+                    this.updateResponsePostcode(response.formatted_postcode);
+                    this.appendResponseHTML(response.border_overlap_html);
+                    this.updateAddresses(response.addresses);
+                } else if (response.message) {
+                    this.updateResponseMessage(response.message);
+                } else if (response.error) {
+                    this.updateResponseError(response.error);
+                }
             })
-                .then((response) => response.json())
-                .then((response) => {
-                    if (response.area) {
-                        this.updateResponseArea(response.html, response.area);
-                    } else if (response.border_overlap) {
-                        this.updateResponseBorderOverlap(
-                            response.border_overlap,
-                        );
-                    } else if (response.message) {
-                        this.updateResponseMessage(response.message);
-                    } else if (response.error) {
-                        this.updateResponseError(response.error);
-                    }
-                })
-                .catch((error) => {
-                    const parsedError = JSON.parse(error.responseText);
-                    this.updateResponseError(parsedError.message || error);
-                });
-        }
+            .catch((error) => {
+                const parsedError = JSON.parse(error.responseText);
+                this.updateResponseError(parsedError.message || error);
+            });
     }
 }
 

@@ -13,6 +13,7 @@ from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 
 from .constants import RICH_TEXT_FEATURES
+from .models import ImportantPages
 from .utils import is_number
 from .widgets import BarChartInput, LineChartInput, PieChartInput
 
@@ -62,14 +63,30 @@ class HighlightBlock(blocks.RichTextBlock):
 
 
 class LocalAreaLinksBlock(blocks.StructBlock):
+    heading = blocks.RichTextBlock(
+        features=RICH_TEXT_FEATURES, default="<p><b>Find local information</b></p>",
+    )
     introduction = blocks.RichTextBlock(
         features=RICH_TEXT_FEATURES,
-        default="<p>Select your local area for information:</p>",
+        default=(
+            "<p>While we finish building this new website, we’re keeping some local"
+            " information on our old council websites</p>"
+        ),
     )
-    aylesbury_vale_url = blocks.URLBlock(required=False, label="Aylesbury Vale URL")
-    chiltern_url = blocks.URLBlock(required=False, label="Chiltern URL")
-    south_bucks_url = blocks.URLBlock(required=False, label="South Bucks URL")
-    wycombe_url = blocks.URLBlock(required=False, label="Wycombe URL")
+    postcode_lookup_text = blocks.RichTextBlock(
+        features=RICH_TEXT_FEATURES,
+        default="<p>Enter your postcode to help us redirect you to the right place.</p>",
+        help_text="The text that appears on top of the postcode lookup input",
+    )
+    area_lookup_text = blocks.RichTextBlock(
+        features=RICH_TEXT_FEATURES,
+        default="<p>Select your local area to help us direct you to the right place:</p>",
+        help_text="The text that appears on top of the list of local area links",
+    )
+    aylesbury_vale_url = blocks.URLBlock(label="Aylesbury Vale URL")
+    chiltern_url = blocks.URLBlock(label="Chiltern URL")
+    south_bucks_url = blocks.URLBlock(label="South Bucks URL")
+    wycombe_url = blocks.URLBlock(label="Wycombe URL")
 
     class Meta:
         icon = ""
@@ -77,14 +94,17 @@ class LocalAreaLinksBlock(blocks.StructBlock):
 
     def get_context(self, value, parent_context=None):
         context = super().get_context(value, parent_context=parent_context)
-        context["has_area_links"] = any(
-            [
-                value["aylesbury_vale_url"],
-                value["chiltern_url"],
-                value["south_bucks_url"],
-                value["wycombe_url"],
-            ]
-        )
+        context["link_urls"] = {
+            "Aylesbury Vale": value["aylesbury_vale_url"],
+            "Chiltern": value["chiltern_url"],
+            "South Bucks": value["south_bucks_url"],
+            "Wycombe": value["wycombe_url"],
+        }
+        if parent_context is not None and parent_context.get("request"):
+            request = parent_context["request"]
+            context["contact_us_page"] = ImportantPages.for_request(
+                request
+            ).contact_us_page
         return context
 
 
