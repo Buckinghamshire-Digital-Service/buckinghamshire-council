@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 47.0 (2021-12-01)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/46.0...47.0
 
 - Postcode Lookup — Update the area links block UI to permit only querying by postcode
 - Postcode Lookup — Remove local area links lists from search results
