@@ -1,3 +1,5 @@
+from django.db import models
+
 from wagtail.admin.edit_handlers import RichTextFieldPanel, StreamFieldPanel
 from wagtail.core.blocks import StructBlock, TextBlock
 from wagtail.core.blocks.field_block import RichTextBlock
@@ -25,3 +27,14 @@ class StepByStepPage(BasePage):
         RichTextFieldPanel("introduction"),
         StreamFieldPanel("steps"),
     ]
+
+
+class StepByStepReference(models.Model):
+    step_by_step_page = models.ForeignKey(
+        StepByStepPage, on_delete=models.CASCADE, related_name="referenced_pages"
+    )
+    referenced_page = models.ForeignKey(
+        "wagtailcore.Page",
+        on_delete=models.CASCADE,
+        related_name="referenced_step_by_step_pages",
+    )
