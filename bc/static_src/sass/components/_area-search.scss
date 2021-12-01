@@ -6,6 +6,10 @@
         @include font-size(s);
         margin-top: 5px;
 
+        div {
+            margin: 20px 0;
+        }
+
         &--error {
             color: $color--red;
             font-weight: $weight--semibold;
@@ -33,5 +37,71 @@
     &__info {
         @include font-size(xs);
         color: $color--grey-accessible;
+    }
+
+    &__more-info {
+        @include font-size(s);
+        margin: 20px 0;
+    }
+
+    &__more-info-button {
+        text-decoration: underline;
+    }
+
+    &__local-links {
+        @include font-size(s);
+    }
+
+    &__local-links-list {
+        @include font-size(s);
+
+        a {
+            color: $color--river;
+            font-weight: $weight--bold;
+        }
+
+        .icon--arrow {
+            width: 20px;
+            margin: 0 10px;
+            stroke: $color--charcoal-25;
+        }
+    }
+
+    &__button--change-postcode {
+        margin-top: 0;
+        margin-left: 20px;
+        color: $color--river;
+        border-bottom: 2px solid $color--river;
+    }
+
+    &__response-select-wrapper {
+        position: relative;
+        width: fit-content;
+
+        &::before,
+        &::after {
+            color: $color--charcoal;
+            padding: 0 0 2px;
+            position: absolute;
+            pointer-events: none;
+            right: 10px;
+            transform: scale(0.8);
+        }
+
+        &::before {
+            content: '\25B2';
+        }
+
+        &::after {
+            content: '\25BC';
+            bottom: 0;
+        }
+
+        .form & {
+            select {
+                appearance: none;
+                padding-right: 40px;
+            }
+        }
     }
 }

@@ -805,9 +805,6 @@ RESPOND_DISCLOSURES_WEBSERVICE = env.get("RESPOND_DISCLOSURES_WEBSERVICE")
 RESPOND_GET_CATEGORIES_WEBSERVICE = env.get("RESPOND_GET_CATEGORIES_WEBSERVICE")
 RESPOND_GET_FIELDS_WEBSERVICE = env.get("RESPOND_GET_FIELDS_WEBSERVICE")
 
-# MapIt.MySociety API credentials
-MAPIT_API_KEY = env.get("MAPIT_API_KEY")
-
 # Wagtail transfer settings
 # See https://buckinghamshire-council.pages.torchbox.com/bc/infrastructure/#wagtail-transfer
 # Configure other site to import from
