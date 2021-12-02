@@ -1,0 +1,18 @@
+.contents-list {
+    &__list {
+        list-style-type: none;
+
+        li {
+            position: relative;
+            padding-left: 25px;
+
+            &::before {
+                content: '—';
+                position: absolute;
+                left: 5px;
+                width: 10px;
+                overflow: hidden;
+            }
+        }
+    }
+}

@@ -7,6 +7,17 @@
 
             <h1 class="heading heading--xxl">{{ page.title }}</h1>
 
+            {% if page.display_contents and page.h2_blocks %}
+            <div class="contents-list">
+                <h2>Contents</h2>
+                <ul class="contents-list__list">
+                    {% for block in page.h2_blocks %}
+                        <li> <a href="#{{ block.value|slugify }}">{{ block.value }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
             {% include_block page.body %}
         </div>
 
