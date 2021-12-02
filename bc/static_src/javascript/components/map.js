@@ -33,13 +33,12 @@ class GoogleMap {
     mapLoad() {
         if (this.locations.length === 0) return;
         this.googleMap = new google.maps.Map(this.node, {
-            zoom: this.zoom,
-            scrollwheel: false,
+            scrollwheel: true,
             streetViewControl: false,
             mapTypeControl: false,
             fullscreenControl: true,
-            center: getLatLng(this.locations[0]),
         });
+        const bounds = new google.maps.LatLngBounds();
         this.markers = this.locations.map((location) => {
             const marker = new google.maps.Marker({
                 position: getLatLng(location),
@@ -56,8 +55,20 @@ class GoogleMap {
                     shouldFocus: false,
                 });
             });
+            bounds.extend(marker.position);
             return marker;
         });
+
+        this.googleMap.fitBounds(bounds);
+
+        const listener = google.maps.event.addListener(
+            this.googleMap,
+            'idle',
+            () => {
+                this.googleMap.setZoom(this.zoom);
+                google.maps.event.removeListener(listener);
+            },
+        );
     }
 }
 

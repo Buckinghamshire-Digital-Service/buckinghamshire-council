@@ -26,5 +26,9 @@
 
 {% block extra_js %}
     {{ page.map_info|json_script:"markers" }}
+    {% if GOOGLE_MAPS_V3_APIKEY %}
     <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_V3_APIKEY }}"></script>
+    {% else %}
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    {% endif %}
 {% endblock %}
