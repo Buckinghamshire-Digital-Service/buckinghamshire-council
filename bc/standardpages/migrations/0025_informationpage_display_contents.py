@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("standardpages", "0022_heading_subheading_helptext"),
+        ("standardpages", "0024_add_area_links_block_fields"),
     ]
 
     operations = [
