@@ -1,21 +1,4 @@
 .contents-list {
-    &__list {
-        list-style-type: none;
-
-        li {
-            position: relative;
-            padding-left: 25px;
-
-            &::before {
-                content: '—';
-                position: absolute;
-                left: 5px;
-                width: 10px;
-                overflow: hidden;
-            }
-        }
-    }
-
     &__scroller {
         position: relative;
         display: none;
@@ -32,13 +15,6 @@
             width: 100%;
             height: 60px;
             padding: 15px 20px;
-
-            .icon--arrow {
-                width: 15px;
-                height: 20px;
-                transform: rotateZ(-90deg);
-                margin-right: 10px;
-            }
 
             @include media-query(tablet-portrait) {
                 padding: 15px 50px;
