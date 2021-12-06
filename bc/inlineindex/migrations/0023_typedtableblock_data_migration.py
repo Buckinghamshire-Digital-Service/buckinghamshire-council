@@ -1,3 +1,4 @@
+from itertools import chain
 import json
 
 from django.db import migrations
@@ -141,10 +142,12 @@ def handle_revision(revision, attrs, mapper):
 
 
 def migrate(apps, mapper):
-    RecruitmentIndexPage = apps.get_model("recruitment", "RecruitmentIndexPage")
+    InlineIndex = apps.get_model("inlineindex", "InlineIndex")
+    InlineIndexChild = apps.get_model("inlineindex", "InlineIndexChild")
 
-    pages = RecruitmentIndexPage.objects.all()
-    for page in pages:
+    longform_pages = InlineIndex.objects.all()
+    chapter_pages = InlineIndexChild.objects.all()
+    for page in chain(longform_pages, chapter_pages):
         handle_page(page, ["body"], mapper)
 
         for revision in page.revisions.all():
@@ -162,7 +165,7 @@ def backward(apps, schema):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("recruitment", "0044_use_typedtableblock"),
+        ("inlineindex", "0022_use_typedtableblock"),
     ]
 
     operations = [

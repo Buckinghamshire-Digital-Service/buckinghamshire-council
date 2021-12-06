@@ -141,9 +141,9 @@ def handle_revision(revision, attrs, mapper):
 
 
 def migrate(apps, mapper):
-    ApteanRespondCaseFormPage = apps.get_model("cases", "ApteanRespondCaseFormPage")
+    EventPage = apps.get_model("events", "EventPage")
 
-    pages = ApteanRespondCaseFormPage.objects.all()
+    pages = EventPage.objects.all()
     for page in pages:
         handle_page(page, ["body"], mapper)
 
@@ -162,7 +162,7 @@ def backward(apps, schema):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("cases", "0011_use_typedtableblock"),
+        ("events", "0021_use_typedtableblock"),
     ]
 
     operations = [

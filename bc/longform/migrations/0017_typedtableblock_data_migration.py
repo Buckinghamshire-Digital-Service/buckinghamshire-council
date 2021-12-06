@@ -142,11 +142,11 @@ def handle_revision(revision, attrs, mapper):
 
 
 def migrate(apps, mapper):
-    InlineIndex = apps.get_model("inlineindex", "InlineIndex")
-    InlineIndexChild = apps.get_model("inlineindex", "InlineIndexChild")
+    LongformPage = apps.get_model("longform", "LongformPage")
+    LongformChapterPage = apps.get_model("longform", "LongformChapterPage")
 
-    longform_pages = InlineIndex.objects.all()
-    chapter_pages = InlineIndexChild.objects.all()
+    longform_pages = LongformPage.objects.all()
+    chapter_pages = LongformChapterPage.objects.all()
     for page in chain(longform_pages, chapter_pages):
         handle_page(page, ["body"], mapper)
 
@@ -165,7 +165,7 @@ def backward(apps, schema):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("inlineindex", "0020_use_typedtableblock"),
+        ("longform", "0016_use_typedtableblock"),
     ]
 
     operations = [

@@ -12,12 +12,12 @@ import wagtail.images.blocks
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("recruitment", "0043_talentlinkjob_dbs_check"),
+        ("news", "0020_add_area_links_block_fields"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name="recruitmentindexpage",
+            model_name="newspage",
             name="body",
             field=wagtail.core.fields.StreamField(
                 [
@@ -80,9 +80,9 @@ class Migration(migrations.Migration):
                         wagtail.core.blocks.StructBlock(
                             [
                                 (
-                                    "introduction",
+                                    "heading",
                                     wagtail.core.blocks.RichTextBlock(
-                                        default="<p>Select your local area for information:</p>",
+                                        default="<p><b>Find local information</b></p>",
                                         features=[
                                             "bold",
                                             "italic",
@@ -94,28 +94,68 @@ class Migration(migrations.Migration):
                                     ),
                                 ),
                                 (
+                                    "introduction",
+                                    wagtail.core.blocks.RichTextBlock(
+                                        default="<p>While we finish building this new website, we’re keeping some local information on our old council websites</p>",
+                                        features=[
+                                            "bold",
+                                            "italic",
+                                            "ol",
+                                            "ul",
+                                            "link",
+                                            "document-link",
+                                        ],
+                                    ),
+                                ),
+                                (
+                                    "postcode_lookup_text",
+                                    wagtail.core.blocks.RichTextBlock(
+                                        default="<p>Enter your postcode to help us redirect you to the right place.</p>",
+                                        features=[
+                                            "bold",
+                                            "italic",
+                                            "ol",
+                                            "ul",
+                                            "link",
+                                            "document-link",
+                                        ],
+                                        help_text="The text that appears on top of the postcode lookup input",
+                                    ),
+                                ),
+                                (
+                                    "area_lookup_text",
+                                    wagtail.core.blocks.RichTextBlock(
+                                        default="<p>Select your local area to help us direct you to the right place:</p>",
+                                        features=[
+                                            "bold",
+                                            "italic",
+                                            "ol",
+                                            "ul",
+                                            "link",
+                                            "document-link",
+                                        ],
+                                        help_text="The text that appears on top of the list of local area links",
+                                    ),
+                                ),
+                                (
                                     "aylesbury_vale_url",
                                     wagtail.core.blocks.URLBlock(
-                                        label="Aylesbury Vale URL", required=False
+                                        label="Aylesbury Vale URL"
                                     ),
                                 ),
                                 (
                                     "chiltern_url",
-                                    wagtail.core.blocks.URLBlock(
-                                        label="Chiltern URL", required=False
-                                    ),
+                                    wagtail.core.blocks.URLBlock(label="Chiltern URL"),
                                 ),
                                 (
                                     "south_bucks_url",
                                     wagtail.core.blocks.URLBlock(
-                                        label="South Bucks URL", required=False
+                                        label="South Bucks URL"
                                     ),
                                 ),
                                 (
                                     "wycombe_url",
-                                    wagtail.core.blocks.URLBlock(
-                                        label="Wycombe URL", required=False
-                                    ),
+                                    wagtail.core.blocks.URLBlock(label="Wycombe URL"),
                                 ),
                             ]
                         ),
@@ -258,9 +298,9 @@ class Migration(migrations.Migration):
                                                                 wagtail.core.blocks.StructBlock(
                                                                     [
                                                                         (
-                                                                            "introduction",
+                                                                            "heading",
                                                                             wagtail.core.blocks.RichTextBlock(
-                                                                                default="<p>Select your local area for information:</p>",
+                                                                                default="<p><b>Find local information</b></p>",
                                                                                 features=[
                                                                                     "bold",
                                                                                     "italic",
@@ -272,31 +312,71 @@ class Migration(migrations.Migration):
                                                                             ),
                                                                         ),
                                                                         (
+                                                                            "introduction",
+                                                                            wagtail.core.blocks.RichTextBlock(
+                                                                                default="<p>While we finish building this new website, we’re keeping some local information on our old council websites</p>",
+                                                                                features=[
+                                                                                    "bold",
+                                                                                    "italic",
+                                                                                    "ol",
+                                                                                    "ul",
+                                                                                    "link",
+                                                                                    "document-link",
+                                                                                ],
+                                                                            ),
+                                                                        ),
+                                                                        (
+                                                                            "postcode_lookup_text",
+                                                                            wagtail.core.blocks.RichTextBlock(
+                                                                                default="<p>Enter your postcode to help us redirect you to the right place.</p>",
+                                                                                features=[
+                                                                                    "bold",
+                                                                                    "italic",
+                                                                                    "ol",
+                                                                                    "ul",
+                                                                                    "link",
+                                                                                    "document-link",
+                                                                                ],
+                                                                                help_text="The text that appears on top of the postcode lookup input",
+                                                                            ),
+                                                                        ),
+                                                                        (
+                                                                            "area_lookup_text",
+                                                                            wagtail.core.blocks.RichTextBlock(
+                                                                                default="<p>Select your local area to help us direct you to the right place:</p>",
+                                                                                features=[
+                                                                                    "bold",
+                                                                                    "italic",
+                                                                                    "ol",
+                                                                                    "ul",
+                                                                                    "link",
+                                                                                    "document-link",
+                                                                                ],
+                                                                                help_text="The text that appears on top of the list of local area links",
+                                                                            ),
+                                                                        ),
+                                                                        (
                                                                             "aylesbury_vale_url",
                                                                             wagtail.core.blocks.URLBlock(
-                                                                                label="Aylesbury Vale URL",
-                                                                                required=False,
+                                                                                label="Aylesbury Vale URL"
                                                                             ),
                                                                         ),
                                                                         (
                                                                             "chiltern_url",
                                                                             wagtail.core.blocks.URLBlock(
-                                                                                label="Chiltern URL",
-                                                                                required=False,
+                                                                                label="Chiltern URL"
                                                                             ),
                                                                         ),
                                                                         (
                                                                             "south_bucks_url",
                                                                             wagtail.core.blocks.URLBlock(
-                                                                                label="South Bucks URL",
-                                                                                required=False,
+                                                                                label="South Bucks URL"
                                                                             ),
                                                                         ),
                                                                         (
                                                                             "wycombe_url",
                                                                             wagtail.core.blocks.URLBlock(
-                                                                                label="Wycombe URL",
-                                                                                required=False,
+                                                                                label="Wycombe URL"
                                                                             ),
                                                                         ),
                                                                     ]
@@ -400,8 +480,7 @@ class Migration(migrations.Migration):
                             ]
                         ),
                     ),
-                ],
-                blank=True,
+                ]
             ),
         ),
     ]

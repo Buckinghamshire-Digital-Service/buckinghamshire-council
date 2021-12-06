@@ -1,4 +1,3 @@
-from itertools import chain
 import json
 
 from django.db import migrations
@@ -142,12 +141,10 @@ def handle_revision(revision, attrs, mapper):
 
 
 def migrate(apps, mapper):
-    LongformPage = apps.get_model("longform", "LongformPage")
-    LongformChapterPage = apps.get_model("longform", "LongformChapterPage")
+    ApteanRespondCaseFormPage = apps.get_model("cases", "ApteanRespondCaseFormPage")
 
-    longform_pages = LongformPage.objects.all()
-    chapter_pages = LongformChapterPage.objects.all()
-    for page in chain(longform_pages, chapter_pages):
+    pages = ApteanRespondCaseFormPage.objects.all()
+    for page in pages:
         handle_page(page, ["body"], mapper)
 
         for revision in page.revisions.all():
@@ -165,7 +162,7 @@ def backward(apps, schema):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("longform", "0012_use_typedtableblock"),
+        ("cases", "0013_use_typedtableblock"),
     ]
 
     operations = [

@@ -141,9 +141,9 @@ def handle_revision(revision, attrs, mapper):
 
 
 def migrate(apps, mapper):
-    EventPage = apps.get_model("events", "EventPage")
+    RecruitmentIndexPage = apps.get_model("recruitment", "RecruitmentIndexPage")
 
-    pages = EventPage.objects.all()
+    pages = RecruitmentIndexPage.objects.all()
     for page in pages:
         handle_page(page, ["body"], mapper)
 
@@ -162,7 +162,7 @@ def backward(apps, schema):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("events", "0019_use_typedtableblock"),
+        ("recruitment", "0046_use_typedtableblock"),
     ]
 
     operations = [

@@ -162,7 +162,7 @@ def backward(apps, schema):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("standardpages", "0023_use_typedtableblock"),
+        ("standardpages", "0025_use_typedtableblock"),
     ]
 
     operations = [
