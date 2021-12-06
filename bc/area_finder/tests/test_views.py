@@ -180,7 +180,7 @@ class AreaFinderTest(TestCase):
         resp = self.client.get(self.url)
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(
-            resp._headers["content-type"], ("Content-Type", "application/json")
+            resp.headers["content-type"], "application/json"
         )
         json_response = resp.json()
         self.assertIn("error", json_response)
@@ -189,7 +189,7 @@ class AreaFinderTest(TestCase):
         resp = self.client.get(self.url + "?postcode=foo")
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(
-            resp._headers["content-type"], ("Content-Type", "application/json")
+            resp.headers["content-type"], "application/json"
         )
         json_response = resp.json()
         self.assertIn("error", json_response)
@@ -206,7 +206,7 @@ class AreaFinderTest(TestCase):
         self.assertEqual(len(responses.calls), 1)
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(
-            resp._headers["content-type"], ("Content-Type", "application/json")
+            resp.headers["content-type"], "application/json"
         )
         json_response = resp.json()
         self.assertIn("error", json_response)
@@ -229,7 +229,7 @@ class AreaFinderTest(TestCase):
         self.assertEqual(len(responses.calls), 1)
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(
-            resp._headers["content-type"], ("Content-Type", "application/json")
+            resp.headers["content-type"], "application/json"
         )
         json_response = resp.json()
         self.assertEqual(json_response, {"area": "Aylesbury Vale"})
@@ -256,7 +256,7 @@ class AreaFinderTest(TestCase):
         self.assertEqual(len(responses.calls), 1)
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(
-            resp._headers["content-type"], ("Content-Type", "application/json")
+            resp.headers["content-type"], "application/json"
         )
         json_response = resp.json()
         self.assertIn("border_overlap_html", json_response)
