@@ -9,7 +9,10 @@ from wagtail.core.blocks.stream_block import StreamValue
 
 def tableblock_to_typedtableblock(block):
     if not (block and block.get("value")):
-        return block
+        return {
+            "type": "table",
+            "value": {"caption": "", "table": {"columns": [], "rows": []},},
+        }
 
     has_table_header = block["value"]["first_row_is_table_header"]
 
@@ -52,7 +55,7 @@ def tableblock_to_typedtableblock(block):
 
 def typedtableblock_to_tableblock(block):
     if not (block and block.get("value")):
-        return block
+        return {"type": "table", "value": None}
 
     old_table = block["value"]["table"]
 
