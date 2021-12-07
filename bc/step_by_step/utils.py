@@ -13,7 +13,7 @@ def record_internal_links(page):
     for step in steps:
         information = step.value["information"].source
         linked_pages = linked_pages + FIND_INTERNAL_LINK.findall(information)
-    linked_pages = list(set(linked_pages))
+    linked_pages = set(linked_pages)
     references_to_create = [
         StepByStepReference(step_by_step_page=page, referenced_page_id=page_id)
         for page_id in linked_pages
