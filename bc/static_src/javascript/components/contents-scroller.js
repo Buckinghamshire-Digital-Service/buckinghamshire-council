@@ -8,9 +8,9 @@ class ContentsScroller {
     }
 
     constructor(node) {
-        this.topThreshold = node.offsetTop + node.scrollHeight;
+        this.topThreshold = node.offsetTop + node.scrollHeight; // bottom of contents panel
         const footer = document.querySelector('footer');
-        this.bottomThreshold = footer.offsetTop;
+        this.bottomThreshold = footer.offsetTop; // top of footer
         this.scroller = document.querySelector(
             ContentsScroller.scrollSelector(),
         );
@@ -24,6 +24,7 @@ class ContentsScroller {
     toggleScroller() {
         const { scrollY } = window;
         const winHeight = window.innerHeight;
+        // hide scroller if either contents panel or footer or both are on screen
         if (
             scrollY > this.topThreshold &&
             scrollY + winHeight < this.bottomThreshold

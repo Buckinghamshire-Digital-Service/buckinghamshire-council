@@ -2,12 +2,7 @@ from django.db import models
 from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
-from wagtail.admin.edit_handlers import (
-    FieldPanel,
-    InlinePanel,
-    MultiFieldPanel,
-    StreamFieldPanel,
-)
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
 from wagtail.core.fields import StreamField
 from wagtail.search import index
 
@@ -31,10 +26,12 @@ class InformationPage(BasePage):
     ]
 
     content_panels = BasePage.content_panels + [
-        MultiFieldPanel([FieldPanel("display_contents")]),
+        FieldPanel("display_contents"),
         StreamFieldPanel("body"),
         InlinePanel("related_pages", label="Related pages"),
     ]
+
+    CONTENT_PANEL_BLOCKTYPES = ["heading"]
 
     @cached_property
     def live_related_pages(self):
@@ -48,7 +45,11 @@ class InformationPage(BasePage):
 
     @cached_property
     def h2_blocks(self):
-        return [block for block in self.body if block.block_type == "heading"]
+        return [
+            block
+            for block in self.body
+            if block.block_type in InformationPage.CONTENT_PANEL_BLOCKTYPES
+        ]
 
 
 class IndexPage(BasePage):
