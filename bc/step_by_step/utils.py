@@ -2,9 +2,21 @@ import re
 
 from django.db import transaction
 
+from wagtail.contrib.frontend_cache.utils import PurgeBatch
+from wagtail.core.models import Page
+
 from .models import StepByStepReference
 
 FIND_INTERNAL_LINK = re.compile(r'<a id="(\d+)" linktype="page">')
+
+
+def step_by_step_page_changed(page_ids):
+    # Find all the live pages to purge
+    batch = PurgeBatch()
+    for page in Page.objects.filter(pk__in=page_ids).live():
+        batch.add_page(page)
+
+    batch.purge()
 
 
 def record_internal_links(page):
@@ -21,3 +33,5 @@ def record_internal_links(page):
     with transaction.atomic():
         StepByStepReference.objects.filter(step_by_step_page=page).delete()
         StepByStepReference.objects.bulk_create(references_to_create)
+
+    step_by_step_page_changed(linked_pages)
