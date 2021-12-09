@@ -125,6 +125,8 @@ class LocationPage(BasePage):
             "lat": self.point["y"] if self.point else "",
             "lng": self.point["x"] if self.point else "",
             "map_info_text": expand_db_html(self.map_info_text),
+            "title": self.title,
+            "url": self.url,
         }
 
     @cached_property

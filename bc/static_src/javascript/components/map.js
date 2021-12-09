@@ -46,7 +46,12 @@ class GoogleMap {
                 icon: this.markerImageURL,
             });
             const infowindow = new google.maps.InfoWindow({
-                content: location.map_info_text,
+                content: `
+                <section>
+                    <h2><a href="${location.url}">${location.title}</a></h2>
+                    <div>${location.map_info_text}</div>
+                </section
+                `,
             });
             marker.addListener('click', () => {
                 infowindow.open({
