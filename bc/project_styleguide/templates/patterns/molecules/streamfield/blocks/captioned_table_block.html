@@ -1,5 +1,5 @@
 {% load wagtailcore_tags %}
-{% if value and value.table and value.columns %} {# Don't show if table is empty. #}
+{% if value and value.table and value.table.columns %} {# Don't show if table is empty. #}
 <table class="table-block">
     {% if value.caption %}<caption>{{ value.caption }}</caption>{% endif %}
     <thead>
