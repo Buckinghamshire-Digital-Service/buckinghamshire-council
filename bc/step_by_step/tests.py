@@ -15,6 +15,14 @@ def create_page_with_references(homepage):
     info_page_2 = InformationPageFactory.build()
     homepage.add_child(instance=info_page_2)
 
+    return (
+        create_step_by_step_page(homepage, info_page_1, info_page_2),
+        info_page_1,
+        info_page_2,
+    )
+
+
+def create_step_by_step_page(homepage, page_1, page_2, slug=None):
     step_by_step_page = StepByStepPageFactory.build(
         steps=json.dumps(
             [
@@ -23,8 +31,8 @@ def create_page_with_references(homepage):
                     "value": {
                         "heading": "heading",
                         "information": f"""
-                            <a id="{info_page_1.pk}" linktype="page">First page page</a>
-                            <a id="{info_page_2.pk}" linktype="page">Another page</a>
+                            <a id="{page_1.pk}" linktype="page">First page page</a>
+                            <a id="{page_2.pk}" linktype="page">Another page</a>
                         """,
                     },
                 }
@@ -32,9 +40,12 @@ def create_page_with_references(homepage):
         )
     )
 
+    if slug is not None:
+        step_by_step_page.slug = slug
+
     homepage.add_child(instance=step_by_step_page)
 
-    return step_by_step_page, info_page_1, info_page_2
+    return step_by_step_page
 
 
 class InternalLinkRegexTests(SimpleTestCase):
@@ -63,7 +74,7 @@ class InternalLinkRegexTests(SimpleTestCase):
     def test_html_with_page_anchor_tags(self):
         html = """
         <div>
-            This html has only document anchor tags.
+            This html has document and page anchor tags.
             <a id="1" linktype="page">Page link</a>
             <a id="2" linktype="document">Document link</a>
             <a href="www.example.com">External link</a>
@@ -172,32 +183,42 @@ class LiveRelatedStepByStepPagesTest(TestCase):
         )
         record_internal_links(step_by_step_page)
 
-        step_by_step_page_2 = StepByStepPageFactory.build(
-            steps=json.dumps(
-                [
-                    {
-                        "type": "step",
-                        "value": {
-                            "heading": "heading",
-                            "information": f"""
-                                <a id="{info_page_1.pk}" linktype="page">First page page</a>
-                                <a id="{info_page_2.pk}" linktype="page">Another page</a>
-                            """,
-                        },
-                    }
-                ]
-            )
+        step_by_step_page_2 = create_step_by_step_page(
+            self.homepage, info_page_1, info_page_2, "a" * 200
         )
-        step_by_step_page_2.slug = "a" * 200
-
-        self.homepage.add_child(instance=step_by_step_page_2)
         record_internal_links(step_by_step_page_2)
 
-        with self.assertNumQueries(4):
-            # 1 query for getting the referenced pages, 1 to get details of all referenced pages,
-            # and 1 each to get the view_restricitions for each referenced page (2 referenced pages, hence 2)
-            related_pages = info_page_1.live_related_stepbysteppages
+        with self.assertNumQueries(1):
+            related_pages = info_page_2.live_related_stepbysteppages
             self.assertCountEqual(
                 [related_page.step_by_step_page for related_page in related_pages],
                 [step_by_step_page, step_by_step_page_2],
+            )
+
+        step_by_step_page_3 = create_step_by_step_page(
+            self.homepage, info_page_1, info_page_2, "a" * 20
+        )
+        record_internal_links(step_by_step_page_3)
+
+        step_by_step_page_4 = create_step_by_step_page(
+            self.homepage, info_page_1, info_page_2, "a" * 2
+        )
+        record_internal_links(step_by_step_page_4)
+
+        step_by_step_page_5 = create_step_by_step_page(
+            self.homepage, info_page_1, info_page_2, "a" * 10
+        )
+        record_internal_links(step_by_step_page_5)
+
+        with self.assertNumQueries(1):
+            related_pages = info_page_1.live_related_stepbysteppages
+            self.assertCountEqual(
+                [related_page.step_by_step_page for related_page in related_pages],
+                [
+                    step_by_step_page,
+                    step_by_step_page_2,
+                    step_by_step_page_3,
+                    step_by_step_page_4,
+                    step_by_step_page_5,
+                ],
             )

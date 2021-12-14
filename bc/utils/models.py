@@ -373,17 +373,19 @@ class BasePage(SocialFields, ListingFields, Page):
 
     @cached_property
     def live_related_stepbysteppages(self):
-        pages = self.referenced_step_by_step_pages.prefetch_related("step_by_step_page")
+        pages = (
+            self.referenced_step_by_step_pages.select_related("step_by_step_page")
+            .annotate(
+                restrictions_count=models.Count("step_by_step_page__view_restrictions")
+            )
+            .filter(step_by_step_page__live=True, restrictions_count=0)
+        )
+        # pages = self.specific.referenced_step_by_step_pages.all()
         for page in pages:
             page.page = (
                 page.step_by_step_page
             )  # for uniformity in sidebar template rendering
-        return [
-            related_page
-            for related_page in pages
-            if related_page.page.live
-            and len(related_page.page.view_restrictions.all()) == 0
-        ]
+        return pages
 
 
 BasePage._meta.get_field("seo_title").verbose_name = SEO_TITLE_LABEL
