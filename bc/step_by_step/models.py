@@ -38,3 +38,7 @@ class StepByStepReference(models.Model):
         on_delete=models.CASCADE,
         related_name="referenced_step_by_step_pages",
     )
+
+    @property
+    def page(self):
+        return self.step_by_step_page

@@ -380,11 +380,6 @@ class BasePage(SocialFields, ListingFields, Page):
             )
             .filter(step_by_step_page__live=True, restrictions_count=0)
         )
-        # pages = self.specific.referenced_step_by_step_pages.all()
-        for page in pages:
-            page.page = (
-                page.step_by_step_page
-            )  # for uniformity in sidebar template rendering
         return pages
 
 
