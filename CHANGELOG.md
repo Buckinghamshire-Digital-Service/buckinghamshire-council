@@ -1,5 +1,11 @@
 # Release History
 
+## 48.0 (2021-12-14)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/47.0...48.0
+
+- Add TIDE winners logo to Jobs site header
+
 ## 47.0 (2021-12-01)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/46.0...47.0
