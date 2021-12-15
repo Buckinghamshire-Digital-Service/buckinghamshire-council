@@ -19,9 +19,17 @@ from .utils import is_number
 from .widgets import BarChartInput, LineChartInput, PieChartInput
 
 
+class AlignedBlock(blocks.StreamBlock):
+    numeric = blocks.DecimalBlock()
+    rich_text = blocks.RichTextBlock()
+
+
 class CaptionedTableBlock(blocks.StructBlock):
     table = TypedTableBlock(
-        [("numeric", blocks.DecimalBlock()), ("rich_text", blocks.RichTextBlock())],
+        [
+            ("left_aligned_column", AlignedBlock()),
+            ("right_aligned_column", AlignedBlock()),
+        ],
     )
     caption = blocks.TextBlock(required=False)
 
