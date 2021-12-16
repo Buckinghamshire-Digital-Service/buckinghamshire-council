@@ -25,9 +25,11 @@ def typedtableblock_to_alignedtypedtableblock(block):
         new_rows.append(new_row_values)
 
     for column in block["value"]["table"]["columns"]:
-        new_columns.append(
-            {"type": "left_aligned_column", "heading": column["heading"]}
-        )
+        if column["type"] == "numeric":
+            new_column_type = "right_aligned_column"
+        else:
+            new_column_type = "left_aligned_column"
+        new_columns.append({"type": new_column_type, "heading": column["heading"]})
 
     return {
         "type": "table",

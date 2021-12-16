@@ -5,7 +5,7 @@
     <thead>
         <tr>
             {% for col in value.table.columns %}
-            <th scope="col" class="{% if col.block.name == 'left_aligned_column' %}left-align{% else %}right-align{% endif %}">{{ col.heading }}</th>
+            <th scope="col" class="{% if col.block.name == 'right_aligned_column' %}right-align{% else %}left-align{% endif %}">{{ col.heading }}</th>
             {% endfor %}
         </tr>
     </thead>
@@ -13,7 +13,7 @@
         {% for row in value.table.rows %}
         <tr>
             {% for block in row %}
-            <td class="{% if block.block.name == 'left_aligned_column' %}left-align{% else %}right-align{% endif %}">{% include_block block %}</td>
+            <td class="{% if block.block.name == 'right_aligned_column' %}right-align{% else %}left-align{% endif %}">{% include_block block %}</td>
             {% endfor %}
         </tr>
         {% endfor %}

@@ -2,7 +2,6 @@ import json
 
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import migrations
-from django.utils.html import strip_tags
 
 from wagtail.core.blocks.stream_block import StreamValue
 
@@ -18,16 +17,20 @@ def typedtableblock_to_alignedtypedtableblock(block):
     new_rows = []
     column_types = [column["type"] for column in block["value"]["table"]["columns"]]
 
-    for row in block["value"]["table"]["rows"]:
+    for ind in range(len(block["value"]["table"]["columns"])):
         new_row_values = []
-        for ind, row_value in enumerate(row["values"]):
-            new_row_values.append({"type": column_types[ind], "value": row_value})
+        for row in block["value"]["table"]["rows"]:
+            new_row_values.append(
+                {"type": column_types[ind], "value": row["values"][ind]}
+            )
         new_rows.append(new_row_values)
 
     for column in block["value"]["table"]["columns"]:
-        new_columns.append(
-            {"type": "left_aligned_column", "heading": column["heading"]}
-        )
+        if column["type"] == "numeric":
+            new_column_type = "right_aligned_column"
+        else:
+            new_column_type = "left_aligned_column"
+        new_columns.append({"type": new_column_type, "heading": column["heading"]})
 
     return {
         "type": "table",
@@ -48,8 +51,8 @@ def alignedtypedtableblock_to_typedtableblock(block):
         }
 
     column_types = [
-        row_value["type"]
-        for row_value in block["value"]["table"]["rows"][0]["values"][0]
+        row_value[0]["type"]
+        for row_value in block["value"]["table"]["rows"][0]["values"]
     ]
 
     new_columns = []
@@ -58,17 +61,18 @@ def alignedtypedtableblock_to_typedtableblock(block):
     for ind, column in enumerate(block["value"]["table"]["columns"]):
         new_columns.append({"type": column_types[ind], "heading": column["heading"]})
 
-    for row in block["value"]["table"]["rows"][0]["values"]:
+    for ind in range(len(block["value"]["table"]["rows"][0]["values"][0])):
         new_row_values = []
-        for row_value in row:
-            new_row_values.append(row_value)
+        for row in block["value"]["table"]["rows"][0]["values"]:
+            # here row is the values in each column
+            new_row_values.append(row[ind]["value"])
         new_rows.append({"values": new_row_values})
 
     return {
         "type": "table",
         "value": {
             "caption": block["value"]["caption"],
-            "table": {"columns": new_columns, "rows": [{"values": new_rows}]},
+            "table": {"columns": new_columns, "rows": new_rows},
         },
     }
 
@@ -126,6 +130,7 @@ def handle_revision(revision, attrs, mapper):
         if mapped:
             revision_content[attr] = json.dumps(stream_data)
             revision.content_json = json.dumps(revision_content)
+            should_save = True
 
     if should_save:
         revision.save()
@@ -157,5 +162,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(forward, backward),
+        migrations.RunPython(forward, reverse_code=backward),
     ]
