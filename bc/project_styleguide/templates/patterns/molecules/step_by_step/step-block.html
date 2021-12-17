@@ -24,8 +24,6 @@
         </h2>
     </div>
     <div class="steps-nav__panel" data-accordion-answer>
-        {% for block in step.value.information %}
-            {% include_block block %}
-        {% endfor %}
+        {{ step.value.information|richtext }}
     </div>
 </li>

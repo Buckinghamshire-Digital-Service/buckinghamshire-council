@@ -1,43 +1,17 @@
 from wagtail.admin.edit_handlers import RichTextFieldPanel, StreamFieldPanel
-from wagtail.core.blocks import (
-    CharBlock,
-    PageChooserBlock,
-    StreamBlock,
-    StructBlock,
-    TextBlock,
-    URLBlock,
-)
+from wagtail.core.blocks import StructBlock, TextBlock
+from wagtail.core.blocks.field_block import RichTextBlock
 from wagtail.core.fields import RichTextField, StreamField
 
 from bc.utils.models import BasePage
 
 
-class StepInformationBlock(StreamBlock):
-    paragraph = TextBlock(
-        template="patterns/molecules/step_by_step/blocks/paragraph-block.html",
-    )
-    external_link = StructBlock(
-        [("url", URLBlock()), ("title", CharBlock())],
-        icon="link",
-        template="patterns/molecules/step_by_step/blocks/external-link-block.html",
-    )
-
-    internal_link = StructBlock(
-        [("page", PageChooserBlock()), ("title", CharBlock(required=False))],
-        icon="link",
-        template="patterns/molecules/step_by_step/blocks/internal-link-block.html",
-    )
-
-    class Meta:
-        template = "patterns/molecules/step_by_step/blocks/step-block.html"
-
-
 class StepBlock(StructBlock):
     heading = TextBlock()
-    information = StepInformationBlock()
+    information = RichTextBlock()
 
     class Meta:
-        template = "patterns/molecules/step_by_step/blocks/step-block.html"
+        template = "patterns/molecules/step_by_step/step-block.html"
 
 
 class StepByStepPage(BasePage):
