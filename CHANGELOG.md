@@ -1,5 +1,11 @@
 # Release History
 
+## 49.0 (2021-12-17)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/48.0...49.0
+
+- StepByStepPage — Change body of each step to a RichTextField
+
 ## 48.0 (2021-12-14)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/47.0...48.0
