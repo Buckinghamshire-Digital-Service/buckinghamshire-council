@@ -19,7 +19,10 @@ def format_time(time):
             else:
                 time_str += f"{time.hour - 12}"
             if time.minute:
-                time_str += f" {time.minute}"
+                if time.minute < 10:
+                    time_str += f":0{time.minute}"
+                else:
+                    time_str += f":{time.minute}"
             time_str += "pm"
         else:
             if time.hour == 0:  # 12am
@@ -27,7 +30,10 @@ def format_time(time):
             else:
                 time_str += f"{time.hour}"
             if time.minute:
-                time_str += f" {time.minute}"
+                if time.minute < 10:
+                    time_str += f":0{time.minute}"
+                else:
+                    time_str += f":{time.minute}"
             time_str += "am"
     return time_str
 
@@ -38,9 +44,11 @@ def format_event_date(start_date, start_time=None, end_date=None, end_time=None)
     start_time_str = format_time(start_time)
     end_date_str = format_date(end_date)
     end_time_str = format_time(end_time)
+    start_datetime_str = f"{start_date_str} {start_time_str}".strip(" ")
+    end_datetime_str = f"{end_date_str} {end_time_str}".strip(" ")
     if end_date and not end_date == start_date:
-        return f"{start_date_str} {start_time_str} to {end_date_str} {end_time_str}"
+        return f"{start_datetime_str} to {end_datetime_str}"
     elif end_time:
-        return f"{start_date_str} {start_time_str} to {end_time_str}"
+        return f"{start_datetime_str} to {end_time_str}".strip(" ")
     else:
-        return f"{start_date_str} {start_time_str}"
+        return start_datetime_str
