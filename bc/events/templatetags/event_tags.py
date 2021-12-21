@@ -11,31 +11,11 @@ def format_date(date):
 
 
 def format_time(time):
-    time_str = ""
-    if time is not None:
-        if time.hour >= 12:
-            if time.hour == 12:  # 12pm
-                time_str += f"{12}"
-            else:
-                time_str += f"{time.hour - 12}"
-            if time.minute:
-                if time.minute < 10:
-                    time_str += f":0{time.minute}"
-                else:
-                    time_str += f":{time.minute}"
-            time_str += "pm"
-        else:
-            if time.hour == 0:  # 12am
-                time_str += f"{12}"
-            else:
-                time_str += f"{time.hour}"
-            if time.minute:
-                if time.minute < 10:
-                    time_str += f":0{time.minute}"
-                else:
-                    time_str += f":{time.minute}"
-            time_str += "am"
-    return time_str
+    if not time:
+        return ""
+    if time.minute:
+        return time.strftime("%I:%M%p").lstrip("0").lower()
+    return time.strftime("%I%p").lstrip("0").lower()
 
 
 @register.simple_tag
