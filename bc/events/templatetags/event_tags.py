@@ -13,6 +13,10 @@ def format_date(date):
 def format_time(time):
     if not time:
         return ""
+    if time.hour == 0 and time.minute == 0:
+        return "midnight"
+    if time.hour == 12 and time.minute == 0:
+        return "midday"
     if time.minute:
         return time.strftime("%I:%M%p").lstrip("0").lower()
     return time.strftime("%I%p").lstrip("0").lower()

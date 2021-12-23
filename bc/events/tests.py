@@ -21,19 +21,17 @@ class TestEventDateTimeFormat(SimpleTestCase):
 
     def test_has_start_date__start_time__midnight(self):
         start_date = date(2021, 12, 1)
-        start_time = time(0, 12)
+        start_time = time(0, 0)
 
         self.assertEqual(
-            format_event_date(start_date, start_time), "1 Dec 2021 12:12am"
+            format_event_date(start_date, start_time), "1 Dec 2021 midnight"
         )
 
-    def test_has_start_date__start_time__afternoon(self):
+    def test_has_start_date__start_time__noon(self):
         start_date = date(2021, 12, 1)
-        start_time = time(12, 12)
+        start_time = time(12, 0)
 
-        self.assertEqual(
-            format_event_date(start_date, start_time), "1 Dec 2021 12:12pm"
-        )
+        self.assertEqual(format_event_date(start_date, start_time), "1 Dec 2021 midday")
 
     def test_has_start_date__end_date(self):
         start_date = date(2021, 12, 1)
