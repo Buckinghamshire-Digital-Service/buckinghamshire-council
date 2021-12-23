@@ -23,11 +23,15 @@
         border-top: $border--accent $color--grey-dark;
         padding-top: $grid--small;
         margin-bottom: $grid--small;
+
+        .sidebar--part-of & {
+            border-top: $border--accent $color--river;
+        }
     }
 
     &__link {
         display: block;
-        margin-bottom: $grid--min;
+        margin-bottom: $grid--small;
         line-height: 1.3;
     }
 
