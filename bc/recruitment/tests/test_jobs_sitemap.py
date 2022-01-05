@@ -76,7 +76,7 @@ class JobAlertTest(TestCase):
             )
 
             # check that internal urls dont show up on external sitemap
-            job_urls = [
+            external_job_urls = [
                 f"{self.site.root_url}/",
                 *get_job_urls(self.site, job_1),
                 *get_job_urls(self.site, job_2),
@@ -85,11 +85,11 @@ class JobAlertTest(TestCase):
                 "/sitemap.xml", SERVER_NAME=self.site.hostname
             )
             response = ET.fromstring(recruitment_site_request.content)
-            for child in response:
-                self.assertIn(child[0].text, job_urls)
+            external_sitemap_urls = [child[0].text for child in response]
+            self.assertCountEqual(external_sitemap_urls, external_job_urls)
 
             # check that external urls dont show up on internal sitemap
-            job_urls = [
+            internal_job_urls = [
                 f"{self.site_internal.root_url}/",
                 *get_job_urls(self.site_internal, job_3),
             ]
@@ -97,5 +97,5 @@ class JobAlertTest(TestCase):
                 "/sitemap.xml", SERVER_NAME=self.site_internal.hostname
             )
             response = ET.fromstring(recruitment_site_request.content)
-            for child in response:
-                self.assertIn(child[0].text, job_urls)
+            internal_sitemap_urls = [child[0].text for child in response]
+            self.assertCountEqual(internal_sitemap_urls, internal_job_urls)
