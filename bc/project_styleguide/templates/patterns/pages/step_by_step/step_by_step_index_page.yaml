@@ -11,4 +11,4 @@ context:
 tags:
   include_block:
     'step with index=forloop.counter':
-      template_name: 'patterns/molecules/step_by_step/blocks/step-block.html'
+      template_name: 'patterns/molecules/step_by_step/step-block.html'

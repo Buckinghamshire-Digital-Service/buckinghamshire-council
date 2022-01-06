@@ -7,6 +7,7 @@ from django.utils.functional import cached_property
 
 from wagtail.admin.staticfiles import versioned_static
 from wagtail.contrib.table_block.blocks import TableBlock
+from wagtail.contrib.typed_table_block.blocks import TypedTableBlock
 from wagtail.core import blocks
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
@@ -16,6 +17,17 @@ from .constants import RICH_TEXT_FEATURES
 from .models import ImportantPages
 from .utils import is_number
 from .widgets import BarChartInput, LineChartInput, PieChartInput
+
+
+class CaptionedTableBlock(blocks.StructBlock):
+    table = TypedTableBlock(
+        [("numeric", blocks.DecimalBlock()), ("rich_text", blocks.RichTextBlock())],
+    )
+    caption = blocks.TextBlock(required=False)
+
+    class Meta:
+        icon = "table"
+        template = "patterns/molecules/streamfield/blocks/captioned_table_block.html"
 
 
 class ImageBlock(blocks.StructBlock):
@@ -411,7 +423,7 @@ class BaseStoryBlock(blocks.StreamBlock):
     image = ImageBlock()
     embed = EmbedBlock()
     local_area_links = LocalAreaLinksBlock()
-    table = TableBlock()
+    table = CaptionedTableBlock()
     button = ButtonBlock()
     highlight = HighlightBlock()
 

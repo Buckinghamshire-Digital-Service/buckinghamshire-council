@@ -86,13 +86,13 @@ INSTALLED_APPS = [
     "wagtailorderable",
     "wagtail_automatic_redirects",
     "wagtail.contrib.modeladmin",
-    "wagtail.contrib.postgres_search",
     "wagtail.contrib.settings",
     "wagtail.contrib.search_promotions",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.routable_page",
     "wagtail.contrib.table_block",
+    "wagtail.contrib.typed_table_block",
     "wagtail.contrib.legacy.richtext",
     "wagtail.embeds",
     "wagtail.sites",
@@ -239,7 +239,7 @@ if "BONSAI_URL" in env:
     }
 else:
     WAGTAILSEARCH_BACKENDS = {
-        "default": {"BACKEND": "wagtail.contrib.postgres_search.backend"}
+        "default": {"BACKEND": "wagtail.search.backends.database"}
     }
 # Reduction factor between 0 and 1 to apply to the relevanve score of search
 # results with the NewsPage content type. See bc.search.elasticsearch5.
@@ -745,6 +745,11 @@ WAGTAILDOCS_DOCUMENT_MODEL = "documents.CustomDocument"
 
 
 PASSWORD_REQUIRED_TEMPLATE = "patterns/pages/wagtail/password_required.html"
+
+
+# Default field for automatic primary keys. (Introduced in Django 3.2)
+# https://docs.djangoproject.com/en/3.2/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 
 # Default size of the pagination used on the front-end.

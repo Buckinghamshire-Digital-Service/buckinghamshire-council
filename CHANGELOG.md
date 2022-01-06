@@ -4,6 +4,18 @@
 
 - Update data protection docs with an extra table to anonymise
 
+## 49.0 (2021-12-17)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/48.0...49.0
+
+- StepByStepPage — Change body of each step to a RichTextField
+
+## 48.0 (2021-12-14)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/47.0...48.0
+
+- Add TIDE winners logo to Jobs site header
+
 ## 47.0 (2021-12-01)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/46.0...47.0
@@ -23,6 +35,10 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/45.1...46.0
 - Fix process_block_numbers to consider non-heading numbers
 - Change search result label & date colour to meet WCAG AA standard
 - Change paragraph number to meet WCAG AA standard
+- Upgrade Wagtail to 2.15.1, Django to 3.2.9, django-pattern-library to 0.5,
+  django-redis to 4.11.0, factory-boy to 3.2.1, freezegun to 1.1.0, responses to 0.16.0,
+  wagtail-factories to 2.0.1, and whitenoise to 5.0; and replace deprecated & removed
+  functions & fields
 
 ## 45.1 (2021-11-05)
 
