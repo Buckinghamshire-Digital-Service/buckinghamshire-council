@@ -308,16 +308,15 @@ class TestInlineIndexTitles(TestCase):
 
     """
 
-    @classmethod
-    def setUpTestData(cls):
-        cls.homepage = HomePage.objects.first()
-        cls.inline_index = InlineIndexFactory(
-            parent=cls.homepage,
+    def setUp(self):
+        self.homepage = HomePage.objects.first()
+        self.inline_index = InlineIndexFactory(
+            parent=self.homepage,
             title="The inline index title",
             subtitle="The inline index subtitle",
         )
-        cls.inline_child = InlineIndexChildFactory(
-            parent=cls.inline_index, title="The inline child title"
+        self.inline_child = InlineIndexChildFactory(
+            parent=self.inline_index, title="The inline child title"
         )
 
     def test_index_title(self):

@@ -1,0 +1,10 @@
+context:
+  value:
+    caption: Some caption
+    table:
+      cols:
+        - heading: 'Description'
+          type: 'rich_text'
+        - heading: 'Value'
+          type: 'numeric'
+      rows:

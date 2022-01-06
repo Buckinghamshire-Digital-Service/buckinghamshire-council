@@ -179,18 +179,14 @@ class AreaFinderTest(TestCase):
     def test_missing_postcode(self):
         resp = self.client.get(self.url)
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(
-            resp._headers["content-type"], ("Content-Type", "application/json")
-        )
+        self.assertEqual(resp.headers["content-type"], "application/json")
         json_response = resp.json()
         self.assertIn("error", json_response)
 
     def test_bad_postcode(self):
         resp = self.client.get(self.url + "?postcode=foo")
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(
-            resp._headers["content-type"], ("Content-Type", "application/json")
-        )
+        self.assertEqual(resp.headers["content-type"], "application/json")
         json_response = resp.json()
         self.assertIn("error", json_response)
         self.assertEqual(json_response["error"], "Please enter a valid postcode")
@@ -205,9 +201,7 @@ class AreaFinderTest(TestCase):
         resp = self.client.get(self.url + "?postcode=W1A+1AA")
         self.assertEqual(len(responses.calls), 1)
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(
-            resp._headers["content-type"], ("Content-Type", "application/json")
-        )
+        self.assertEqual(resp.headers["content-type"], "application/json")
         json_response = resp.json()
         self.assertIn("error", json_response)
         self.assertEqual(
@@ -228,9 +222,7 @@ class AreaFinderTest(TestCase):
         resp = self.client.get(self.url + "?postcode=W1A+1AA")
         self.assertEqual(len(responses.calls), 1)
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(
-            resp._headers["content-type"], ("Content-Type", "application/json")
-        )
+        self.assertEqual(resp.headers["content-type"], "application/json")
         json_response = resp.json()
         self.assertEqual(json_response, {"area": "Aylesbury Vale"})
 
@@ -255,9 +247,7 @@ class AreaFinderTest(TestCase):
         resp = self.client.get(self.url + "?postcode=W1A+1AA")
         self.assertEqual(len(responses.calls), 1)
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(
-            resp._headers["content-type"], ("Content-Type", "application/json")
-        )
+        self.assertEqual(resp.headers["content-type"], "application/json")
         json_response = resp.json()
         self.assertIn("border_overlap_html", json_response)
         # NB the following is a list of lists, but in the view we assemble a list of

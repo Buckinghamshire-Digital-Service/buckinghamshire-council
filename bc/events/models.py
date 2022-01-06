@@ -8,7 +8,7 @@ from django.db.models.functions import Coalesce
 from django.utils import timezone
 from django.utils.functional import cached_property
 from django.utils.http import urlencode
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from modelcluster.fields import ParentalKey
 from wagtail.admin.edit_handlers import (
