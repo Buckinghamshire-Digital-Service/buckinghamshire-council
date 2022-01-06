@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- Update data protection docs with an extra table to anonymise
+
 ## 49.0 (2021-12-17)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/48.0...49.0
