@@ -19,3 +19,5 @@ JOB_BOARD_CHOICES = [
 ]
 # We must define corresponding TALENTLINK_API_USERNAME_{job_board} and
 # TALENTLINK_APPLY_CONFIG_KEY_{job_board} in settings/base.py and env var.
+
+POSTCODES_API_BASE_URL = "https://api.postcodes.io/postcodes/"

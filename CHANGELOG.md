@@ -1,5 +1,11 @@
 # Release History
 
+## 50.1 (2022-01-07)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/50.0...50.1
+
+- Fix an issue with job searches by postcode, due to a query expression change in Django 3.2
+
 ## 50.0 (2022-01-07)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/49.0...50.0
