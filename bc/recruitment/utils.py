@@ -8,7 +8,7 @@ from django.db.models.functions import ACos, Cos, Radians, Sin
 
 import requests
 
-from bc.recruitment.constants import JOB_FILTERS
+from bc.recruitment.constants import JOB_FILTERS, POSTCODES_API_BASE_URL
 from bc.recruitment.models import JobCategory, RecruitmentHomePage, TalentLinkJob
 
 
@@ -101,9 +101,7 @@ def get_job_search_results(querydict, homepage, queryset=None):
     # Process postcode search
     search_postcode = querydict.get("postcode", None)
     if search_postcode:
-        postcode_response = requests.get(
-            "https://api.postcodes.io/postcodes/" + search_postcode
-        )
+        postcode_response = requests.get(POSTCODES_API_BASE_URL + search_postcode)
         if postcode_response.status_code == 200:
             postcode_response_json = postcode_response.json()
             search_lon = postcode_response_json["result"]["longitude"]

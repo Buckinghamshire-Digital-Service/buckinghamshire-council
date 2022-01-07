@@ -1,12 +1,15 @@
 from urllib.parse import unquote
 
+from django.core.exceptions import FieldError
 from django.http import QueryDict
 from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from wagtail.core.models import Page, Site
 
-from bc.recruitment.constants import JOB_BOARD_CHOICES
+import responses
+
+from bc.recruitment.constants import JOB_BOARD_CHOICES, POSTCODES_API_BASE_URL
 from bc.recruitment.forms import SearchAlertSubscriptionForm
 from bc.recruitment.tests.fixtures import RecruitmentHomePageFactory
 from bc.recruitment.utils import get_job_search_results
@@ -38,6 +41,31 @@ class SearchViewTest(TestCase):
             # Invalid strings are silently discarded, rather than raise an exception.
             self.fail(
                 "SQL injection attempt caused an exception with job search results"
+            )
+
+    @responses.activate
+    def test_postcode_search(self):
+        """Test searches ordered by distance from a postcode.
+
+        This is a test for a change introduced in Django 3.2, whereby Value() query
+        expressions no longer silently handle resolving mixed input types.
+        https://docs.djangoproject.com/en/4.0/releases/3.2/#models
+        """
+        responses.add(
+            responses.GET,
+            POSTCODES_API_BASE_URL + "W1A 1AA",
+            json={"result": {"latitude": 51.518561, "longitude": -0.143799}},
+        )
+
+        querydict = QueryDict("query=&postcode=W1A+1AA")
+        results = get_job_search_results(querydict, self.homepage)
+        try:
+            results.first()  # Evaluate the search results
+        except FieldError:
+            # This was raised when not specifying the output_field kwarg for the
+            # trigonometry query.
+            self.fail(
+                "An error occurred fetching job search results ordered by distance."
             )
 
 
