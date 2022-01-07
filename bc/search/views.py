@@ -85,10 +85,11 @@ class SearchView(View):
                     )
                     .all()
                 )
+                promotion_page_ids = promotions.values_list("page_id", flat=True)
 
                 page_queryset_for_search = (
                     Page.objects.live()
-                    .exclude(searchpromotion__in=promotions)
+                    .exclude(pk__in=promotion_page_ids)
                     .annotate(
                         section_label=Case(
                             When(

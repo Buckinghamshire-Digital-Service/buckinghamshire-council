@@ -1,5 +1,16 @@
 # Release History
 
+## 50.0 (2022-01-07)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/49.0...50.0
+
+- Upgrade Wagtail to 2.15.1, Django to 3.2.9, django-pattern-library to 0.5,
+  django-redis to 4.11.0, factory-boy to 3.2.1, freezegun to 1.1.0, responses to 0.16.0,
+  wagtail-factories to 2.0.1, and whitenoise to 5.0; and replace deprecated & removed
+  functions & fields
+- Upgrade TableBlock to TypedTableBlock
+- Update data protection docs with an extra table to anonymise
+
 ## 49.0 (2021-12-17)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/48.0...49.0

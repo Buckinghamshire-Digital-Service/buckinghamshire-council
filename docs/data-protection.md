@@ -54,6 +54,7 @@ All exports include the above data. The first steps when downloading a copy of t
 $ python manage.py shell_plus
 >>> JobAlertSubscription.objects.all().delete()
 >>> FormSubmission.objects.all().delete()
+>>> FeedbackComment.objects.all().delete()
 ```
 
 When copying the data to staging, you probably want to leave user accounts intact, as users are not members of the public and will still want to access the staging site. If using the data locally, you should anonymise user accounts:
