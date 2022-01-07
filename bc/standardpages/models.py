@@ -17,6 +17,7 @@ class InformationPageRelatedPage(RelatedPage):
 class InformationPage(BasePage):
     template = "patterns/pages/standardpages/information_page.html"
 
+    intro_text = models.TextField(blank=True)
     body = StreamField(StoryBlock())
 
     search_fields = BasePage.search_fields + [
@@ -24,6 +25,7 @@ class InformationPage(BasePage):
     ]
 
     content_panels = BasePage.content_panels + [
+        FieldPanel("intro_text"),
         StreamFieldPanel("body"),
         InlinePanel("related_pages", label="Related pages"),
     ]
