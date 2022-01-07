@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- Prefix Sentry release variable with environment name, for easier debugging
+
 ## 52.1 (2022-01-25)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/52.0...52.1
