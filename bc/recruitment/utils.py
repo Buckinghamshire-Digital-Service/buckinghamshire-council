@@ -3,7 +3,7 @@ import json
 from django import forms
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.core.exceptions import ValidationError
-from django.db.models import F
+from django.db.models import DecimalField, F
 from django.db.models.functions import ACos, Cos, Radians, Sin
 
 import requests
@@ -126,7 +126,8 @@ def GetDistance(point_latitude, point_longitude):
             Sin(Radians(F("location_lat"))) * Sin(Radians(point_latitude))
             + Cos(Radians(F("location_lat")))
             * Cos(Radians(point_latitude))
-            * Cos(Radians(F("location_lon") - point_longitude))
+            * Cos(Radians(F("location_lon") - point_longitude)),
+            output_field=DecimalField(),
         )
         * 6371
         * 1000
