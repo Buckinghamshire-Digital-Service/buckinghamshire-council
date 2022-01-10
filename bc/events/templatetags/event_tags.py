@@ -6,7 +6,7 @@ register = template.Library()
 def format_date(date):
     date_str = ""
     if date is not None:
-        date_str = f'{date.day} {date.strftime("%b")} {date.year}'
+        date_str = f'{date.day} {date.strftime("%B")} {date.year}'
     return date_str
 
 
