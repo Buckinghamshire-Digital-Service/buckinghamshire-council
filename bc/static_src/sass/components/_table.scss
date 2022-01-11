@@ -42,4 +42,9 @@ table {
     th:not(:first-child) {
         text-align: right;
     }
+
+    // support for pre-2.15 tables
+    .row-header {
+        text-align: left;
+    }
 }
