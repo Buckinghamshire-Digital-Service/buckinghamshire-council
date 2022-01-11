@@ -1,5 +1,11 @@
 # Release History
 
+## 50.2 (2022-01-11)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/50.1...50.2
+
+- Fix alignment issue for tables where first column is a header
+
 ## 50.1 (2022-01-07)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/50.0...50.1
