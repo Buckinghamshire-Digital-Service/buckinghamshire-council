@@ -1,5 +1,5 @@
 {% extends base_page_template %}
-{% load wagtailcore_tags wagtailimages_tags static %}
+{% load wagtailcore_tags wagtailimages_tags static event_tags %}
 
 {% block content %}
 
@@ -19,13 +19,7 @@
                                     </a>
 
                                     <div class="article-index__meta">
-                                        {% if event.end_date and not event.end_date == event.start_date %}
-                                            {{ event.start_time|date:"hA"|default:"" }} {{ event.start_date|date }} to {{ event.end_time|date:"hA"|default:"" }} {{ event.end_date|date }}
-                                        {% elif event.end_time %}
-                                            {{ event.start_date|date }} {{ event.start_time|date:"hA" }} – {{ event.end_time|date:"hA" }}
-                                        {% else %}
-                                            {{ event.start_date|date }} {{ event.start_time|date:"hA"|default:"" }}
-                                        {% endif %}
+                                        {% format_event_date event.start_date event.start_time event.end_date event.end_time %}
                                     </div>
 
                                     {% if event.listing_summary or event.introduction %}
