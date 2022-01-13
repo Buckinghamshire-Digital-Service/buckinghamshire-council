@@ -42,6 +42,9 @@
             {% endif %}
         </section>
 
-        {% include "patterns/molecules/navigation/sidebar.html" with related_pages=page.related_pages.all sidebar_title="Related resources" classes="sidebar--narrow" %}
+        <div class="sidebar sidebar--narrow">
+            {% include "patterns/molecules/navigation/sidebar-section.html" with related_pages=page.live_related_stepbysteppages sidebar_title="Part of" classes="sidebar--part-of" %}
+            {% include "patterns/molecules/navigation/sidebar-section.html" with related_pages=page.related_pages.all sidebar_title="Related resources" %}
+        </div>
     </div>
 {% endblock %}

@@ -40,7 +40,10 @@
             </div>
         </div>
 
-        {% include "patterns/molecules/navigation/sidebar.html" with related_pages=page.live_related_pages %}
+        <div class="sidebar">
+            {% include "patterns/molecules/navigation/sidebar-section.html" with related_pages=page.live_related_stepbysteppages sidebar_title="Part of" classes="sidebar--part-of" %}
+            {% include "patterns/molecules/navigation/sidebar-section.html" with related_pages=page.live_related_pages %}
+        </div>
     </div>
     {% endwith %}
 

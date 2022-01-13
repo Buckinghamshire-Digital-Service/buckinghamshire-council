@@ -2,6 +2,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
+from django.utils.functional import cached_property
 
 from wagtail.admin.edit_handlers import (
     FieldPanel,
@@ -369,6 +370,17 @@ class BasePage(SocialFields, ListingFields, Page):
             return HttpResponseRedirect(self.redirect_to)
 
         return super().serve(request, *args, **kwargs)
+
+    @cached_property
+    def live_related_stepbysteppages(self):
+        pages = (
+            self.referenced_step_by_step_pages.select_related("step_by_step_page")
+            .annotate(
+                restrictions_count=models.Count("step_by_step_page__view_restrictions")
+            )
+            .filter(step_by_step_page__live=True, restrictions_count=0)
+        )
+        return pages
 
 
 BasePage._meta.get_field("seo_title").verbose_name = SEO_TITLE_LABEL
