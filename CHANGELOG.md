@@ -1,5 +1,11 @@
 # Release History
 
+## 50.3 (2022-01-11)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/50.2...50.3
+
+- Fix: Treat 'table' block values as TableBlock instances when nested in Accordion
+
 ## 50.2 (2022-01-11)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/50.1...50.2
