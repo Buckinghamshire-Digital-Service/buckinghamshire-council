@@ -74,6 +74,17 @@ class HighlightBlock(blocks.RichTextBlock):
         super().__init__(*args, features=features, **kwargs)
 
 
+class InsetTextBlock(blocks.RichTextBlock):
+    class Meta:
+        template = "patterns/molecules/streamfield/blocks/inset_block.html"
+
+    def __init__(self, *args, **kwargs):
+        # Setting features in class Meta doesn't work, so add it on init
+        default_features = ["link", "document-link"]
+        features = kwargs.get("features", default_features)
+        super().__init__(*args, features=features, **kwargs)
+
+
 class LocalAreaLinksBlock(blocks.StructBlock):
     heading = blocks.RichTextBlock(
         features=RICH_TEXT_FEATURES, default="<p><b>Find local information</b></p>",
@@ -426,6 +437,7 @@ class BaseStoryBlock(blocks.StreamBlock):
     table = CaptionedTableBlock()
     button = ButtonBlock()
     highlight = HighlightBlock()
+    inset_text = InsetTextBlock()
 
     class Meta:
         abstract = True
