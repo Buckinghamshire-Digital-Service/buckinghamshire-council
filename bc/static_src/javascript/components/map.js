@@ -30,6 +30,30 @@ class GoogleMap {
         this.mapLoad();
     }
 
+    openInfoWindow(marker) {
+        if (marker.isOpen) return;
+        marker.isOpen = true;
+        marker.infowindow.open({
+            anchor: marker.marker,
+            map: this.googleMap,
+            shouldFocus: false,
+        });
+    }
+
+    static closeInfoWindow(marker) {
+        if (!marker.isOpen) return;
+        marker.isOpen = false;
+        marker.infowindow.close();
+    }
+
+    toggleInfoWindow(marker) {
+        if (marker.isOpen) {
+            GoogleMap.closeInfoWindow(marker);
+        } else {
+            this.openInfoWindow(marker);
+        }
+    }
+
     mapLoad() {
         if (this.locations.length === 0) return;
         this.googleMap = new google.maps.Map(this.node, {
@@ -39,7 +63,7 @@ class GoogleMap {
             fullscreenControl: true,
         });
         const bounds = new google.maps.LatLngBounds();
-        this.markers = this.locations.map((location) => {
+        this.markers = this.locations.map((location, index) => {
             const marker = new google.maps.Marker({
                 position: getLatLng(location),
                 map: this.googleMap,
@@ -53,15 +77,13 @@ class GoogleMap {
                 </section
                 `,
             });
-            marker.addListener('click', () => {
-                infowindow.open({
-                    anchor: marker,
-                    map: this.googleMap,
-                    shouldFocus: false,
-                });
-            });
             bounds.extend(marker.position);
-            return marker;
+            return {
+                marker,
+                infowindow,
+                index,
+                isOpen: false,
+            };
         });
 
         this.googleMap.fitBounds(bounds);
@@ -74,6 +96,30 @@ class GoogleMap {
                 google.maps.event.removeListener(listener);
             },
         );
+
+        this.markers.forEach((marker) => {
+            marker.marker.addListener('click', () =>
+                this.toggleInfoWindow(marker),
+            );
+        });
+
+        google.maps.event.addListener(this.googleMap, 'click', () => {
+            this.markers.forEach((marker) => {
+                marker.marker.addListener('click', () =>
+                    GoogleMap.closeInfoWindow(marker),
+                );
+            });
+        });
+
+        this.markers.forEach((marker) => {
+            marker.marker.addListener('click', () => {
+                this.markers.forEach((_marker) => {
+                    if (_marker.index !== marker.index) {
+                        GoogleMap.closeInfoWindow(_marker);
+                    }
+                });
+            });
+        });
     }
 }
 
