@@ -1,0 +1,10 @@
+{% load static %}
+
+{% static 'images/map-marker.png' as default_map_marker_url %}
+
+<div
+    class="js-map"
+    data-zoom-level="10"
+    data-marker-image-url="{{ map_marker_url|default:default_map_marker_url }}"
+>
+</div>
