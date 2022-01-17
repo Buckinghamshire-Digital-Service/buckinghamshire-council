@@ -1,0 +1,14 @@
+context:
+  base_page_template: 'patterns/base_page.html'
+  page:
+    title: 'Find a library'
+    body: '<p>Select your local library for from the map or list belofe for information about opening hours, contact details and facilities.</p><a href="#">You can also find information on communities libraries.</a>'
+    child_pages:
+      - location_page:
+        title: 'Amersham'
+      - location_page:
+        title: 'Amersham'
+      - location_page:
+        title: 'Amersham'
+      - location_page:
+        title: 'Amersham'

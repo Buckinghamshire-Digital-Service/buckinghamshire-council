@@ -1,0 +1,15 @@
+<section>
+    <h2 class="heading heading--l">Address</h2>
+    {% if address.street_address_1 %}
+        <div>{{ address.street_address_1 }}</div>
+    {% endif %}
+    {% if address.street_address_2 %}
+        <div>{{ address.street_address_2 }}</div>
+    {% endif %}
+    {% if address.city %}
+        <div>{{ address.city }}</div>
+    {% endif %}
+    {% if address.postcode %}
+        <div>{{ address.postcode }}</div>
+    {% endif %}
+</section>
