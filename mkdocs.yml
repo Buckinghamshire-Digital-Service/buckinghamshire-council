@@ -39,5 +39,6 @@ nav:
       - 'Complaints and requests': 'complaints-and-requests.md'
       - 'Live chat client': 'live-chat-client.md'
       - 'Location maps widget': 'location-maps-widget.md'
+      - 'Postcode lookup': 'postcode-lookup.md'
   - 'Contributing': 'contributing.md'
   - 'CHANGELOG': 'CHANGELOG.md'

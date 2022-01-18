@@ -1,0 +1,29 @@
+{% load wagtailcore_tags %}
+
+
+<section
+    {% if related_pages %} aria-labelledby="sidebar-heading"{% endif %}
+    {% if classes %}class="{{classes}}"{% endif %}
+>
+    {% if related_pages %}
+        <h2 class="sidebar__heading heading" id="sidebar-heading">
+            {% if sidebar_title %}
+                {{ sidebar_title }}
+            {% else %}
+                Related content
+            {% endif %}
+        </h2>
+
+        <ul class="sidebar__link-list">
+            {% for related in related_pages %}
+                {% if related.page %}
+                    {% with specific_related_page=related.page.specific %}
+                        <li>
+                            <a class="sidebar__link" href="{% pageurl specific_related_page %}">{% firstof specific_related_page.listing_title specific_related_page.title %}</a>
+                        </li>
+                    {% endwith %}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+</section>

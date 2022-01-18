@@ -34,13 +34,16 @@
             </h2>
 
             <div class="main-body">
-                {{ page.body }}
+                {% include_block page.body %}
 
                 {% include "patterns/molecules/pagination/index-pagination.html" with next_page=next_page prev_page=prev_page %}
             </div>
         </div>
 
-        {% include "patterns/molecules/navigation/sidebar.html" with related_pages=page.live_related_pages %}
+        <div class="sidebar">
+            {% include "patterns/molecules/navigation/sidebar-section.html" with related_pages=page.live_related_stepbysteppages sidebar_title="Part of" classes="sidebar--part-of" %}
+            {% include "patterns/molecules/navigation/sidebar-section.html" with related_pages=page.live_related_pages %}
+        </div>
     </div>
     {% endwith %}
 

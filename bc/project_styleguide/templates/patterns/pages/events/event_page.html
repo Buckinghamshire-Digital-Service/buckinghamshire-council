@@ -1,5 +1,5 @@
 {% extends base_page_template %}
-{% load wagtailcore_tags wagtailimages_tags static %}
+{% load wagtailcore_tags wagtailimages_tags static event_tags %}
 
 {% block content %}
 
@@ -10,10 +10,7 @@
 
             <div class="article__meta">
                 <p class="article__date">
-                    {{ page.start_date }} {{ page.start_time|default:""|date:"hA" }}
-                    {% if page.end_date or page.end_time %}
-                        – {{ page.end_date|default:"" }} {{ page.end_time|default:""|date:"hA" }}
-                    {% endif %}
+                    {% format_event_date page.start_date page.start_time page.end_date page.end_time %}
                 </p>
                 <p class="article__types">{{ page.event_types.all|join:", " }}</p>
                 <p class="article__address">
@@ -33,7 +30,10 @@
             {% include_block page.body %}
         </div>
 
-        {% include "patterns/molecules/navigation/sidebar.html" with related_pages=page.live_related_pages sidebar_title="Related resources"  classes="sidebar--narrow" %}
+        <div class="sidebar sidebar--narrow">
+            {% include "patterns/molecules/navigation/sidebar-section.html" with related_pages=page.live_related_stepbysteppages sidebar_title="Part of" classes="sidebar--part-of" %}
+            {% include "patterns/molecules/navigation/sidebar-section.html" with related_pages=page.live_related_pages sidebar_title="Related resources" %}
+        </div>
     </div>
 
 {% endblock %}

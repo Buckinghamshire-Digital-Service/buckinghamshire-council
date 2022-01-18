@@ -8,7 +8,7 @@
                     id="question-{{ accordion_id }}-{{ forloop.counter }}"
                     class="accordion__button"
                     data-accordion-question
-                    aria-controls="answer-{{ forloop.counter }}"
+                    aria-controls="answer-{{ accordion_id }}-{{ forloop.counter }}"
                     aria-expanded="false">
                     {% include "patterns/atoms/icons/icon.html" with name="chevron" classname="icon--stroke accordion__icon" %}
                     <span class="accordion__title">
@@ -20,7 +20,7 @@
                 id="answer-{{ accordion_id }}-{{ forloop.counter }}"
                 data-accordion-answer
                 class="accordion__content"
-                aria-labelledby="question-{{ forloop.counter }}"
+                aria-labelledby="question-{{ accordion_id }}-{{ forloop.counter }}"
                 aria-hidden="true">
                 {% include_block accordion.content %}
             </div>

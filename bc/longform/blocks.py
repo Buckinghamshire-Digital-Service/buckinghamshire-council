@@ -1,6 +1,7 @@
 from wagtail.core import blocks
 
 from bc.utils.blocks import (
+    Accordion,
     BarChartBlock,
     BaseStoryBlock,
     DetailBlock,
@@ -71,6 +72,7 @@ class LongformStoryBlock(BaseStoryBlock):
             " number, y is the subheading number, and z is the paragraph number."
         ),
     )
+    accordion = Accordion()
     detail = DetailBlock()
     bar_chart = BarChartBlock()
     line_graph = LineChartBlock()

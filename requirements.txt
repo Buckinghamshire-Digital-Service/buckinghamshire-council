@@ -1,16 +1,16 @@
-Django==2.2.24
-wagtail==2.13.2
+Django==3.2.9
+wagtail==2.15.1
 psycopg2==2.7.7
 elasticsearch==7.9.0
 wagtail-django-recaptcha==1.0
-django-pattern-library==0.2.5
+django-pattern-library==0.5
 bleach==3.1.0
-factory-boy==2.12.0
-freezegun==0.3.14
+factory-boy==3.2.1
+freezegun==1.1.0
 django_gov_notify==0.3.0
-responses==0.10.9
+responses==0.16.0
 tabulate==0.8.7
-wagtail-factories==2.0.0
+wagtail-factories==2.0.1
 wagtail-orderable==1.0.3
 wagtail-automatic-redirects==1.1.5
 wagtail-transfer==0.8.2
@@ -20,14 +20,14 @@ wagtailgeowidget==5.1.0
 
 
 # Production dependencies
-whitenoise[brotli]==4.1.2
+whitenoise[brotli]==5.0
 dj-database-url==0.5.0
 raven==6.10.0
-django-redis==4.10.0
+django-redis==4.11.0
 redis==2.10.6
-django-storages[boto3]==1.7.1
+django-storages[boto3]==1.9.1
 django-referrer-policy==1.0
-django-csp==3.5
+django-csp==3.7
 scout-apm==2.0.2
 git+https://github.com/tm-kn/django-basic-auth-ip-whitelist.git@318006b15b598c035cf52031c8fa63dbf241440f#egg=django-basic-auth-ip-whitelist
 

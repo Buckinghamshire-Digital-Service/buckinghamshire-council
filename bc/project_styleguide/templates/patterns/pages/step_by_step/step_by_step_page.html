@@ -1,0 +1,33 @@
+{% extends "patterns/base_page.html" %}
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-stepbystep{% endblock %}
+
+{% block content %}
+    <div class="wrapper wrapper--flex">
+        <div class="section section--main">
+            <h1 class="heading template-stepbystep__heading heading--xxl">{{ page.title }}</h1>
+
+            <div class="introduction">{{ page.introduction|richtext }}</div>
+            
+            <div class="steps-nav" data-steps-container>
+                <button class="steps-nav__controls" data-steps-toggle>
+                    <span class="steps-nav__controls-text steps-nav__controls-text--show">
+                        <span class="steps-nav__controls-label">Show all steps</span>
+                        {% include "patterns/atoms/icons/icon.html" with name="chevron-small" classname="icon--stroke after" %}
+                    </span>
+                    <span class="steps-nav__controls-text steps-nav__controls-text--hide">
+                        <span class="steps-nav__controls-label">Hide all steps</span>
+                        {% include "patterns/atoms/icons/icon.html" with name="chevron-small" classname="icon--stroke after" %}
+                    </span>
+                </button>
+                <ol class="steps-nav__steps">
+                    {% for step in page.steps  %}
+                        {% include_block step with index=forloop.counter %}
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+        <section class="sidebar"></section>
+    </div>
+{% endblock %}

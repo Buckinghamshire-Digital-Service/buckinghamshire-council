@@ -5,6 +5,81 @@
 - Add LocationIndex and Location pages
 - Update documentation to summarise use of wagtail-geo-widget for maps
 
+## 51.0 (2022-01-13)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/50.3...51.0
+
+- Add 'Part of' section to sidebar for pages referenced by StepByStepPage
+- Fix event datetime formats
+- Add contents section with 'Scroll to top' feature for InformationPage
+
+## 50.3 (2022-01-11)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/50.2...50.3
+
+- Fix: Treat 'table' block values as TableBlock instances when nested in Accordion
+
+## 50.2 (2022-01-11)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/50.1...50.2
+
+- Fix alignment issue for tables where first column is a header
+
+## 50.1 (2022-01-07)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/50.0...50.1
+
+- Fix an issue with job searches by postcode, due to a query expression change in Django 3.2
+
+## 50.0 (2022-01-07)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/49.0...50.0
+
+- Upgrade Wagtail to 2.15.1, Django to 3.2.9, django-pattern-library to 0.5,
+  django-redis to 4.11.0, factory-boy to 3.2.1, freezegun to 1.1.0, responses to 0.16.0,
+  wagtail-factories to 2.0.1, and whitenoise to 5.0; and replace deprecated & removed
+  functions & fields
+- Upgrade TableBlock to TypedTableBlock
+- Update data protection docs with an extra table to anonymise
+
+## 49.0 (2021-12-17)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/48.0...49.0
+
+- StepByStepPage — Change body of each step to a RichTextField
+
+## 48.0 (2021-12-14)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/47.0...48.0
+
+- Add TIDE winners logo to Jobs site header
+
+## 47.0 (2021-12-01)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/46.0...47.0
+
+- Postcode Lookup — Update the area links block UI to permit only querying by postcode
+- Postcode Lookup — Remove local area links lists from search results
+- Postcode Lookup — Use the internal Buckinghamshire maps API
+- Postcode Lookup — Query additional address data for border postcodes
+- Postcode Lookup — Update documentation
+
+## 46.0 (2021-11-29)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/45.1...46.0
+
+- Add Step-by-Step page type
+- Add accordion block to long-form content pages
+- Fix process_block_numbers to consider non-heading numbers
+- Change search result label & date colour to meet WCAG AA standard
+- Change paragraph number to meet WCAG AA standard
+
+## 45.1 (2021-11-05)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/45.0...45.1
+
+- Fix accordion element IDs and aria roles mismatch
+
 ## 45.0 (2021-10-12)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/44.1...45.0
