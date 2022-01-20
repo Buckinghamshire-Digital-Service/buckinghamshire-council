@@ -1,6 +1,6 @@
 # Release History
 
-## 51.0 (2022-01-13)
+## 51.0 (2022-01-20)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/50.3...51.0
 
