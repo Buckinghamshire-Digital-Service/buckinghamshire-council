@@ -2,8 +2,8 @@
 
 
 <section
-    class="sidebar {{ classes }}"
     {% if related_pages %} aria-labelledby="sidebar-heading"{% endif %}
+    {% if classes %}class="{{classes}}"{% endif %}
 >
     {% if related_pages %}
         <h2 class="sidebar__heading heading" id="sidebar-heading">

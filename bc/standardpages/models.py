@@ -17,6 +17,8 @@ class InformationPageRelatedPage(RelatedPage):
 class InformationPage(BasePage):
     template = "patterns/pages/standardpages/information_page.html"
 
+    display_contents = models.BooleanField(default=False)
+
     body = StreamField(StoryBlock())
 
     search_fields = BasePage.search_fields + [
@@ -24,9 +26,12 @@ class InformationPage(BasePage):
     ]
 
     content_panels = BasePage.content_panels + [
+        FieldPanel("display_contents"),
         StreamFieldPanel("body"),
         InlinePanel("related_pages", label="Related pages"),
     ]
+
+    CONTENT_PANEL_BLOCKTYPES = ["heading"]
 
     @cached_property
     def live_related_pages(self):
@@ -36,6 +41,14 @@ class InformationPage(BasePage):
             for related_page in pages
             if related_page.page.live
             and len(related_page.page.view_restrictions.all()) == 0
+        ]
+
+    @cached_property
+    def h2_blocks(self):
+        return [
+            block
+            for block in self.body
+            if block.block_type in InformationPage.CONTENT_PANEL_BLOCKTYPES
         ]
 
 

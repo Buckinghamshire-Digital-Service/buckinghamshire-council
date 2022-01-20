@@ -1,5 +1,13 @@
 # Release History
 
+## 51.0 (2022-01-20)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/50.3...51.0
+
+- Add 'Part of' section to sidebar for pages referenced by StepByStepPage
+- Fix event datetime formats
+- Add contents section with 'Scroll to top' feature for InformationPage
+
 ## 50.3 (2022-01-11)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/50.2...50.3
