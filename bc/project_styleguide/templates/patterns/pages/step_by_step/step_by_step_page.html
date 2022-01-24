@@ -8,9 +8,7 @@
         <div class="section section--main">
             <h1 class="heading template-stepbystep__heading heading--xxl">{{ page.title }}</h1>
 
-            {% if page.intro_text %}
-                <h2 class="heading--l">{{ page.intro_text }}</h2>
-            {% endif %}
+            {% include 'patterns/molecules/intro-text/intro-text.html' %}
 
             <div class="introduction">{{ page.introduction|richtext }}</div>
             

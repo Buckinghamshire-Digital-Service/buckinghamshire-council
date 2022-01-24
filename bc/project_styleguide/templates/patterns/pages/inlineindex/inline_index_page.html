@@ -33,9 +33,7 @@
                 {{ page.content_title }}
             </h2>
 
-            {% if page.intro_text %}
-                <h2 class="heading--l">{{ page.intro_text }}</h2>
-            {% endif %}
+            {% include 'patterns/molecules/intro-text/intro-text.html' %}
 
             <div class="main-body">
                 {% include_block page.body %}

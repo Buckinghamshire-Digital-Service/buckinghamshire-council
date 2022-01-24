@@ -63,9 +63,7 @@
                 </h2>
             {% endif %}
 
-            {% if page.intro_text %}
-                <h2 class="heading--l">{{ page.intro_text }}</h2>
-            {% endif %}
+            {% include 'patterns/molecules/intro-text/intro-text.html' %}
 
             {{ page.body|process_block_numbers:page.chapter_number }}
         </div>
