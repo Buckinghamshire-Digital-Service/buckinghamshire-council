@@ -52,6 +52,7 @@ The navigational index of the documentation files is defined in the `mkdocs.yml`
 - The jobs portal will work with Lumesse. Please see the [recruitment site documentation](./recruitment-site.md) for details.
 - The [live chat client](./live-chat-client.md) is provided by Client4Access.
 - [Complaints and request forms](complaints-and-requests.md) features is based on the Aptean Respond case management platform.
+- [Location maps widget](location-maps-widget.md) is based on the Google Maps API.
 
 ## Contributing
 

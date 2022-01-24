@@ -16,6 +16,7 @@ wagtail-automatic-redirects==1.1.5
 wagtail-transfer==0.8.2
 urllib3==1.25.11
 zeep==3.4.0
+wagtailgeowidget==5.1.0
 
 
 # Production dependencies
