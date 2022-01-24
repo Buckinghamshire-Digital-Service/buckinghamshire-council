@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     "bc.home",
     "bc.images",
     "bc.inlineindex",
+    "bc.location",
     "bc.longform",
     "bc.navigation",
     "bc.family_information",
@@ -117,6 +118,7 @@ INSTALLED_APPS = [
     "django.contrib.sitemaps",
     "pattern_library",
     "bc.project_styleguide.apps.ProjectStyleguideConfig",
+    "wagtailgeowidget",
 ]
 
 
@@ -809,6 +811,15 @@ RESPOND_COMPLIMENTS_WEBSERVICE = env.get("RESPOND_COMPLIMENTS_WEBSERVICE")
 RESPOND_DISCLOSURES_WEBSERVICE = env.get("RESPOND_DISCLOSURES_WEBSERVICE")
 RESPOND_GET_CATEGORIES_WEBSERVICE = env.get("RESPOND_GET_CATEGORIES_WEBSERVICE")
 RESPOND_GET_FIELDS_WEBSERVICE = env.get("RESPOND_GET_FIELDS_WEBSERVICE")
+
+# Google maps API credentials
+GOOGLE_MAPS_V3_APIKEY = env.get("GOOGLE_MAPS_V3_APIKEY")
+
+# Geo widget settings
+GEO_WIDGET_DEFAULT_LOCATION = {
+    "lat": 51.814698,
+    "lng": -0.811697,
+}  # Coordinates of County hall
 
 # Wagtail transfer settings
 # See https://buckinghamshire-council.pages.torchbox.com/bc/infrastructure/#wagtail-transfer

@@ -17,6 +17,7 @@ import FormSubmit from './components/form-submit';
 import Filters from './components/job-filters';
 import FeedbackWidget from './components/feedback-widget';
 import Chart from './components/chart';
+import GoogleMap from './components/map';
 import Steps from './components/steps';
 import ContentsScroller from './components/contents-scroller';
 
@@ -123,6 +124,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (const chart of document.querySelectorAll(Chart.selector())) {
         new Chart(chart);
+    }
+
+    for (const googlemap of document.querySelectorAll(GoogleMap.selector())) {
+        new GoogleMap(googlemap);
     }
 
     for (const stepsContainer of document.querySelectorAll(Steps.selector())) {

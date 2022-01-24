@@ -1,0 +1,33 @@
+{% extends base_page_template %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+<div class="wrapper wrapper--flex">
+    <div class="section section--main">
+
+        <h1 class="heading heading--xxl">{{ page.title }}</h1>
+
+        <div class="introduction">
+            {{ page.body|richtext }}
+        </div>
+        {% include 'patterns/molecules/map/map.html' %}
+        <ul class="location-pages-list">
+            {% for location_page in page.child_pages %}
+                <li>
+                    <a href="{% pageurl location_page %}">{{ location_page.display_title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block extra_js %}
+    {{ page.map_markers|json_script:"markers" }}
+    {% if GOOGLE_MAPS_V3_APIKEY %}
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_V3_APIKEY }}"></script>
+    {% else %}
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    {% endif %}
+{% endblock %}
