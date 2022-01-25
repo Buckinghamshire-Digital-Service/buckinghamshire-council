@@ -1,5 +1,11 @@
 # Release History
 
+## 52.1 (2022-01-25)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/52.0...52.1
+
+- Fix location page referencing deleted sidebar template
+
 ## 52.0 (2022-01-24)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/51.0...52.0
