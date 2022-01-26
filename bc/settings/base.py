@@ -527,7 +527,14 @@ if "SENTRY_DSN" in env:
         except KeyError:
             try:
                 # Assume this is a Heroku-hosted app with the "runtime-dyno-metadata" lab enabled
-                RAVEN_CONFIG["release"] = env["HEROKU_RELEASE_VERSION"]
+                if "SENTRY_ENVIRONMENT" in env:
+                    # Format the release number prefixed with the environment, for
+                    # easier debugging in Sentry
+                    RAVEN_CONFIG["release"] = "-".join(
+                        [env["SENTRY_ENVIRONMENT"], env["HEROKU_RELEASE_VERSION"]]
+                    )
+                else:
+                    RAVEN_CONFIG["release"] = env["HEROKU_RELEASE_VERSION"]
             except KeyError:
                 # If there's no commit hash, we do not set a specific release.
                 pass
