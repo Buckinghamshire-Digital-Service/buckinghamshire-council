@@ -407,7 +407,7 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
 
         today = date.today()
         jobs = TalentLinkJob.objects.filter(
-            posting_start_date__lte=today, posting_end_date__gte=today,
+            posting_start_date__lte=today, posting_end_date__gte=today, homepage=self
         )
 
         jobs_sitemap = []
