@@ -1,5 +1,13 @@
 # Release History
 
+## 53.0 (2022-01-31)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/52.1...53.0
+
+- Prefix Sentry release variable with environment name, for easier debugging
+- Add inset text component to StoryBlock
+- Fix issues with job sitemap displaying jobs from other domains
+
 ## 52.1 (2022-01-25)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/52.0...52.1
