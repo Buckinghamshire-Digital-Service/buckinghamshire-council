@@ -62,7 +62,7 @@ See also: https://www.elastic.co/guide/en/elasticsearch/reference/current/query-
 
 ### Developing the Elasticsearch search engine configuration
 
-The Vagrant box will default to using Postgres for search, and ignoring some of the extra search features such as synonyms. However, it does have Elasticsearch5 installed. To use this, set the search backend in local settings to `bc.search.elasticsearch5` and the URL to "http://localhost:9200". You will also have to install the proper version of the Elasticsearch library that Wagtail will use under the hood:
+The Docker container will default to using Postgres for search, and ignoring some of the extra search features such as synonyms. However, it does have Elasticsearch5 installed. To use this, set the search backend in local settings to `bc.search.elasticsearch5` and the URL to "http://localhost:9200". You will also have to install the proper version of the Elasticsearch library that Wagtail will use under the hood:
 
 ```bash
 $ pip install "elasticsearch>=5.0.0,<6.0.0" # for Elasticsearch 5.x
