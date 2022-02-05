@@ -1,4 +1,5 @@
 /bc/static_compiled
+/database_dumps
 
 __pycache__
 *.pyc
@@ -8,13 +9,12 @@ __pycache__
 /static/
 /media/
 /tmp/
-/.vagrant/
-/Vagrantfile.local
 node_modules/
 /npm-debug.log
 /.idea/
 .vscode
 coverage
+.env
 
 # Distribution / packaging
 .Python
