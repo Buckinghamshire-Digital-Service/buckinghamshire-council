@@ -243,12 +243,19 @@ pages:
   image: python:3.6
   stage: pages
   only:
-    - master
+    refs:
+      - master
+    changes:
+      - docs/**/*
   script:
     # Include CHANGELOG in the docs
     - cp CHANGELOG.md docs/changelog.md
     - pip install -r requirements-docs.txt
     - mkdocs build
+    # Clear out the public/ folder before moving the built docs site there.
+    # We're also using public/ for WHITENOISE_ROOT, so this this prevents us
+    # inadvertently deploying robots.txt etc. to Gitlab Pages.
+    - rm -rf public/*
     - mv site/* public
   artifacts:
     paths:
