@@ -46,7 +46,9 @@ class JobAlertTest(TestCase):
             )
         )
         self.site_internal = Site.objects.create(
-            hostname="internal-jobs.example", port=80, root_page=self.homepage_internal,
+            hostname="internal-jobs.example",
+            port=80,
+            root_page=self.homepage_internal,
         )
 
     def test_job_alert_token(self):
@@ -213,7 +215,8 @@ class JobAlertTest(TestCase):
                 call_command("send_job_alerts", stdout=out)
 
                 mock_get_queryset.assert_called_once_with(
-                    start_time=instant, end_time=instant + datetime.timedelta(days=1),
+                    start_time=instant,
+                    end_time=instant + datetime.timedelta(days=1),
                 )
 
     def test_queryset_search_with_new_alert(self):
@@ -272,7 +275,8 @@ class JobAlertTest(TestCase):
         instant = datetime.datetime(2020, 1, 29, 0, 0, tzinfo=datetime.timezone.utc)
         with freeze_time(instant) as frozen_datetime:
             JobAlertSubscriptionFactory(
-                search=json.dumps({"query": "cycling"}), homepage=self.homepage,
+                search=json.dumps({"query": "cycling"}),
+                homepage=self.homepage,
             )
             subscription_2 = JobAlertSubscriptionFactory(
                 search=json.dumps({"query": "cycling"}),

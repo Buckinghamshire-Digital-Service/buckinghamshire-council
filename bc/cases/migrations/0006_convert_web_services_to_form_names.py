@@ -15,7 +15,7 @@ CHOICES = [
 def set_form_name_from_web_service_definition(apps, schema_editor):
     """Set a form value based on the web service name.
 
-    This relies on the existing values (got from the API) being one of 
+    This relies on the existing values (got from the API) being one of
 
     - CreateCase
     - CreateComplaints

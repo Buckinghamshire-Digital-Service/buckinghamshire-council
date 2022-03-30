@@ -223,7 +223,7 @@ class ImportTest(TestCase, ImportTestMixin):
         error_message = "This is a test error message"
 
         def error_or_original(job, ad, homepage, defaults, import_categories):
-            """ Raise an error for id 1 only"""
+            """Raise an error for id 1 only"""
             if job.talentlink_id == 1:
                 raise KeyError(error_message)
             else:
@@ -1207,10 +1207,12 @@ class LogoTest(TestCase, ImportTestMixin):
         self.assertIn("1 existing jobs updated", output)
         self.assertIn("0 new images imported", output)
         self.assertEqual(
-            TalentLinkJob.objects.get(talentlink_id=1).logo, None,
+            TalentLinkJob.objects.get(talentlink_id=1).logo,
+            None,
         )
         self.assertEqual(
-            CustomImage.objects.filter(talentlink_image_id="aaa").count(), 0,
+            CustomImage.objects.filter(talentlink_image_id="aaa").count(),
+            0,
         )
 
     def test_used_job_logo_is_not_removed_if_removed_in_import(
@@ -1243,13 +1245,16 @@ class LogoTest(TestCase, ImportTestMixin):
         self.assertIn("2 existing jobs updated", output)
         self.assertIn("0 new images imported", output)
         self.assertEqual(
-            CustomImage.objects.filter(talentlink_image_id="aaa").count(), 1,
+            CustomImage.objects.filter(talentlink_image_id="aaa").count(),
+            1,
         )
         self.assertEqual(
-            TalentLinkJob.objects.get(talentlink_id=1).logo, logo,
+            TalentLinkJob.objects.get(talentlink_id=1).logo,
+            logo,
         )
         self.assertEqual(
-            TalentLinkJob.objects.get(talentlink_id=2).logo, None,
+            TalentLinkJob.objects.get(talentlink_id=2).logo,
+            None,
         )
 
     def test_logo_is_deleted_when_the_job_is(

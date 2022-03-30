@@ -11,7 +11,9 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RenameField(
-            model_name="talentlinkjob", old_name="location", new_name="location_name",
+            model_name="talentlinkjob",
+            old_name="location",
+            new_name="location_name",
         ),
         migrations.AddField(
             model_name="talentlinkjob",

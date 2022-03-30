@@ -62,7 +62,10 @@ def process_block_numbers(streamblock, chapter_number=0):
             paragraph_number = 0
 
             block_number = generate_block_number(
-                chapter_number, heading_number, subheading_number, paragraph_number,
+                chapter_number,
+                heading_number,
+                subheading_number,
+                paragraph_number,
             )
 
             rendered_child = child.block.render(
@@ -73,7 +76,10 @@ def process_block_numbers(streamblock, chapter_number=0):
             paragraph_number += 1
 
             block_number = generate_block_number(
-                chapter_number, heading_number, subheading_number, paragraph_number,
+                chapter_number,
+                heading_number,
+                subheading_number,
+                paragraph_number,
             )
 
             rendered_child = child.block.render(

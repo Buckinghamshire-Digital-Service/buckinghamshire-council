@@ -26,7 +26,9 @@ class Migration(migrations.Migration):
                 ("title", models.CharField(max_length=128)),
                 ("description", models.TextField(blank=True)),
             ],
-            options={"verbose_name_plural": "Job categories",},
+            options={
+                "verbose_name_plural": "Job categories",
+            },
         ),
         migrations.AlterField(
             model_name="talentlinkjob",

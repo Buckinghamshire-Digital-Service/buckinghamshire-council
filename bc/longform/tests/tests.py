@@ -51,7 +51,8 @@ class BlockNumberTests(TestCase):
 
 
 SectionTestCase = namedtuple(
-    "SectionTestCase", ["case", "id", "tagname", "css_class", "content", "number"],
+    "SectionTestCase",
+    ["case", "id", "tagname", "css_class", "content", "number"],
 )
 
 
@@ -89,39 +90,57 @@ class RenderedBlockNumberTests(TestCase):
         streamblock = [
             # 1. My heading 1
             StreamValue.StreamChild(
-                NumberedHeadingBlock(), "My heading 1", id=str(uuid.uuid4),
+                NumberedHeadingBlock(),
+                "My heading 1",
+                id=str(uuid.uuid4),
             ),
             # 1.1. My subheading 1
             StreamValue.StreamChild(
-                NumberedSubheadingBlock(), "My subheading 1", id=str(uuid.uuid4),
+                NumberedSubheadingBlock(),
+                "My subheading 1",
+                id=str(uuid.uuid4),
             ),
             # 1.1.1. My paragraph 1
             StreamValue.StreamChild(
-                NumberedParagraphBlock(), "My paragraph 1", id=str(uuid.uuid4),
+                NumberedParagraphBlock(),
+                "My paragraph 1",
+                id=str(uuid.uuid4),
             ),
             # 1.1.2 My paragraph 2
             StreamValue.StreamChild(
-                NumberedParagraphBlock(), "My paragraph 2", id=str(uuid.uuid4),
+                NumberedParagraphBlock(),
+                "My paragraph 2",
+                id=str(uuid.uuid4),
             ),
             # 1.2. My subheading 2
             StreamValue.StreamChild(
-                NumberedSubheadingBlock(), "My subheading 2", id=str(uuid.uuid4),
+                NumberedSubheadingBlock(),
+                "My subheading 2",
+                id=str(uuid.uuid4),
             ),
             # 1.2.1. My paragraph 3
             StreamValue.StreamChild(
-                NumberedParagraphBlock(), "My paragraph 3", id=str(uuid.uuid4),
+                NumberedParagraphBlock(),
+                "My paragraph 3",
+                id=str(uuid.uuid4),
             ),
             # 2. My heading 2
             StreamValue.StreamChild(
-                NumberedHeadingBlock(), "My heading 2", id=str(uuid.uuid4),
+                NumberedHeadingBlock(),
+                "My heading 2",
+                id=str(uuid.uuid4),
             ),
             # 2.1. My subheading 3
             StreamValue.StreamChild(
-                NumberedSubheadingBlock(), "My subheading 3", id=str(uuid.uuid4),
+                NumberedSubheadingBlock(),
+                "My subheading 3",
+                id=str(uuid.uuid4),
             ),
             # 2.1.1. My paragraph 3
             StreamValue.StreamChild(
-                NumberedParagraphBlock(), "My paragraph 4", id=str(uuid.uuid4),
+                NumberedParagraphBlock(),
+                "My paragraph 4",
+                id=str(uuid.uuid4),
             ),
         ]
 
@@ -208,11 +227,15 @@ class RenderedBlockNumberTests(TestCase):
         streamblock = [
             # 1. My paragraph 1
             StreamValue.StreamChild(
-                NumberedParagraphBlock(), "My paragraph 1", id=str(uuid.uuid4),
+                NumberedParagraphBlock(),
+                "My paragraph 1",
+                id=str(uuid.uuid4),
             ),
             # 2. My heading 1
             StreamValue.StreamChild(
-                NumberedHeadingBlock(), "My heading 1", id=str(uuid.uuid4),
+                NumberedHeadingBlock(),
+                "My heading 1",
+                id=str(uuid.uuid4),
             ),
         ]
 
@@ -243,11 +266,15 @@ class RenderedBlockNumberTests(TestCase):
         streamblock = [
             # 1. My subheading 1
             StreamValue.StreamChild(
-                NumberedSubheadingBlock(), "My subheading 1", id=str(uuid.uuid4),
+                NumberedSubheadingBlock(),
+                "My subheading 1",
+                id=str(uuid.uuid4),
             ),
             # 2. My heading 1
             StreamValue.StreamChild(
-                NumberedHeadingBlock(), "My heading 1", id=str(uuid.uuid4),
+                NumberedHeadingBlock(),
+                "My heading 1",
+                id=str(uuid.uuid4),
             ),
         ]
 
@@ -278,11 +305,15 @@ class RenderedBlockNumberTests(TestCase):
         streamblock = [
             # 1. My paragraph 1
             StreamValue.StreamChild(
-                NumberedParagraphBlock(), "My paragraph 1", id=str(uuid.uuid4),
+                NumberedParagraphBlock(),
+                "My paragraph 1",
+                id=str(uuid.uuid4),
             ),
             # 2. My subheading 1
             StreamValue.StreamChild(
-                NumberedSubheadingBlock(), "My subheading 1", id=str(uuid.uuid4),
+                NumberedSubheadingBlock(),
+                "My subheading 1",
+                id=str(uuid.uuid4),
             ),
         ]
 
@@ -316,27 +347,39 @@ class RenderedBlockNumberTests(TestCase):
         streamblock = [
             # 1. My paragraph 1
             StreamValue.StreamChild(
-                NumberedParagraphBlock(), "My paragraph 1", id=str(uuid.uuid4),
+                NumberedParagraphBlock(),
+                "My paragraph 1",
+                id=str(uuid.uuid4),
             ),
             # 2. My subheading 1
             StreamValue.StreamChild(
-                NumberedSubheadingBlock(), "My subheading 1", id=str(uuid.uuid4),
+                NumberedSubheadingBlock(),
+                "My subheading 1",
+                id=str(uuid.uuid4),
             ),
             # 3. My heading 1
             StreamValue.StreamChild(
-                NumberedHeadingBlock(), "My heading 1", id=str(uuid.uuid4),
+                NumberedHeadingBlock(),
+                "My heading 1",
+                id=str(uuid.uuid4),
             ),
             # 3.1. My paragraph 2
             StreamValue.StreamChild(
-                NumberedParagraphBlock(), "My paragraph 2", id=str(uuid.uuid4),
+                NumberedParagraphBlock(),
+                "My paragraph 2",
+                id=str(uuid.uuid4),
             ),
             # 3.2. My subheading 2
             StreamValue.StreamChild(
-                NumberedSubheadingBlock(), "My subheading 2", id=str(uuid.uuid4),
+                NumberedSubheadingBlock(),
+                "My subheading 2",
+                id=str(uuid.uuid4),
             ),
             # 3.2.1. My paragraph 3
             StreamValue.StreamChild(
-                NumberedParagraphBlock(), "My paragraph 3", id=str(uuid.uuid4),
+                NumberedParagraphBlock(),
+                "My paragraph 3",
+                id=str(uuid.uuid4),
             ),
         ]
 
@@ -399,15 +442,21 @@ class RenderedBlockNumberTests(TestCase):
         streamblock = [
             # 1. My subheading 1
             StreamValue.StreamChild(
-                NumberedSubheadingBlock(), "My subheading 1", id=str(uuid.uuid4),
+                NumberedSubheadingBlock(),
+                "My subheading 1",
+                id=str(uuid.uuid4),
             ),
             # 1.1 My paragraph 1
             StreamValue.StreamChild(
-                NumberedParagraphBlock(), "My paragraph 1", id=str(uuid.uuid4),
+                NumberedParagraphBlock(),
+                "My paragraph 1",
+                id=str(uuid.uuid4),
             ),
             # 2. My heading 1
             StreamValue.StreamChild(
-                NumberedHeadingBlock(), "My heading 1", id=str(uuid.uuid4),
+                NumberedHeadingBlock(),
+                "My heading 1",
+                id=str(uuid.uuid4),
             ),
         ]
 

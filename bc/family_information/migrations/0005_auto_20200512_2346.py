@@ -11,6 +11,8 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name="usefullinks", name="lede", field=models.TextField(),
+            model_name="usefullinks",
+            name="lede",
+            field=models.TextField(),
         ),
     ]

@@ -171,7 +171,10 @@ class FOIForm(BaseCaseForm):
         choices=[
             # NB the keys must match the Aptean Respond categories definitions
             (CONTACT_TYPE_PRIMARY, "Myself"),
-            (CONTACT_TYPE_SECONDARY, "For a company or organisation",),
+            (
+                CONTACT_TYPE_SECONDARY,
+                "For a company or organisation",
+            ),
         ],
         widget=forms.RadioSelect(attrs={"data-conditional-input": ""}),
     )
@@ -340,9 +343,12 @@ class CommentForm(BaseCaseForm):
     webservice = settings.RESPOND_COMMENTS_WEBSERVICE
     feedback_type = "Corporate"
 
-    service_name = forms.CharField(label="Which service is this about?",)
+    service_name = forms.CharField(
+        label="Which service is this about?",
+    )
     description = forms.CharField(
-        label="Your comment or suggestion", widget=forms.Textarea,
+        label="Your comment or suggestion",
+        widget=forms.Textarea,
     )
     response_needed = forms.ChoiceField(
         label="Do you need a response from us?",
@@ -357,7 +363,12 @@ class CommentForm(BaseCaseForm):
     @property
     def field_group_1(self):
         return [
-            self[name] for name in ("service_name", "description", "response_needed",)
+            self[name]
+            for name in (
+                "service_name",
+                "description",
+                "response_needed",
+            )
         ]
 
     field_schema_name_mapping = {"description": DESCRIPTION_SCHEMA_NAME}
@@ -369,8 +380,13 @@ class ComplimentForm(BaseCaseForm):
     webservice = settings.RESPOND_COMPLIMENTS_WEBSERVICE
     feedback_type = "Compliment"
 
-    service_name = forms.CharField(label="Which service is this about?",)
-    description = forms.CharField(label="Your compliment", widget=forms.Textarea,)
+    service_name = forms.CharField(
+        label="Which service is this about?",
+    )
+    description = forms.CharField(
+        label="Your compliment",
+        widget=forms.Textarea,
+    )
 
     @property
     def append_to_description_fields(self):
@@ -378,7 +394,13 @@ class ComplimentForm(BaseCaseForm):
 
     @property
     def field_group_1(self):
-        return [self[name] for name in ("service_name", "description",)]
+        return [
+            self[name]
+            for name in (
+                "service_name",
+                "description",
+            )
+        ]
 
     field_schema_name_mapping = {"description": DESCRIPTION_SCHEMA_NAME}
     field_schema_name_mapping.update(BaseCaseForm.field_schema_name_mapping)
@@ -401,7 +423,8 @@ class DisclosureForm(BaseCaseForm):
         "For example, a description of the information, names, dates and any reference numbers.",
     )
     investigation = forms.CharField(
-        label="What is the investigation?", widget=forms.Textarea,
+        label="What is the investigation?",
+        widget=forms.Textarea,
     )
     reason = forms.MultipleChoiceField(
         label="Why do you need the information?",

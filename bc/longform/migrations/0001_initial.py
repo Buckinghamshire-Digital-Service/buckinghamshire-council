@@ -275,7 +275,9 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"verbose_name": "Long-form content page",},
+            options={
+                "verbose_name": "Long-form content page",
+            },
             bases=("wagtailcore.page", models.Model),
         ),
         migrations.CreateModel(
@@ -504,7 +506,9 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"verbose_name": "Long-form content chapter page",},
+            options={
+                "verbose_name": "Long-form content chapter page",
+            },
             bases=("wagtailcore.page", models.Model),
         ),
     ]

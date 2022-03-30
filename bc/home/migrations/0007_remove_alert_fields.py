@@ -10,6 +10,12 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(model_name="homepage", name="alert_message",),
-        migrations.RemoveField(model_name="homepage", name="alert_title",),
+        migrations.RemoveField(
+            model_name="homepage",
+            name="alert_message",
+        ),
+        migrations.RemoveField(
+            model_name="homepage",
+            name="alert_title",
+        ),
     ]

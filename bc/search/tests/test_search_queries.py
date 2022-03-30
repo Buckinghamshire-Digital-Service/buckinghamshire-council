@@ -62,7 +62,9 @@ class SectionAnnotationsTest(TestCase):
         homepage_two = HomePageFactory.build_with_fk_objs_committed()
         root_page.add_child(instance=homepage_two)
         self.second_site = Site.objects.create(
-            root_page=homepage_two, site_name="second site", hostname=SECOND_HOSTNAME,
+            root_page=homepage_two,
+            site_name="second site",
+            hostname=SECOND_HOSTNAME,
         )
 
         self.section_bee = IndexPageFactory.build(title="bee eggs")

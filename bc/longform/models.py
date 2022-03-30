@@ -21,7 +21,8 @@ class LongformPage(BasePage):
         verbose_name = "Long-form content page"
 
     is_numbered = models.BooleanField(
-        default=False, help_text='Adds numbers to each chapter, e.g. "1. Introduction"',
+        default=False,
+        help_text='Adds numbers to each chapter, e.g. "1. Introduction"',
     )
 
     last_updated = models.DateField()

@@ -30,7 +30,7 @@ class UsefulnessFeedbackCreateView(generic.CreateView):
     http_method_names = ["post"]
 
     def post(self, request, *args, **kwargs):
-        """ Set the form prefix based on the submitted data
+        """Set the form prefix based on the submitted data
 
         To avoid duplicate HTML element IDs on the page, we prefix the forms. Both the
         'yes' and 'no' form are POSTed to this view, but the data includes the form

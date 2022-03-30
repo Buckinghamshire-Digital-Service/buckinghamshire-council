@@ -20,7 +20,9 @@ class PostcodeLookupResponseRequestTests(TestCase):
 
     def test_initial_page(self):
         PostcodeLookupResponseFactory(
-            page=self.lookup_page, link_page=self.another_page, postcodes=["HP20 1UY"],
+            page=self.lookup_page,
+            link_page=self.another_page,
+            postcodes=["HP20 1UY"],
         )
         with self.assertTemplateUsed("patterns/pages/forms/lookup_page.html"):
             response = self.client.get(self.lookup_page.url)
@@ -39,7 +41,9 @@ class PostcodeLookupResponseRequestTests(TestCase):
 
     def test_query_not_found(self):
         PostcodeLookupResponseFactory(
-            page=self.lookup_page, link_page=self.another_page, postcodes=["HP20 1UY"],
+            page=self.lookup_page,
+            link_page=self.another_page,
+            postcodes=["HP20 1UY"],
         )
 
         with self.assertTemplateUsed("patterns/pages/forms/lookup_page.html"):
@@ -51,10 +55,14 @@ class PostcodeLookupResponseRequestTests(TestCase):
 
     def test_multiple_hits_error(self):
         PostcodeLookupResponseFactory(
-            page=self.lookup_page, link_page=self.another_page, postcodes=["HP20 1UY"],
+            page=self.lookup_page,
+            link_page=self.another_page,
+            postcodes=["HP20 1UY"],
         )
         PostcodeLookupResponseFactory(
-            page=self.lookup_page, link_page=self.another_page, postcodes=["HP20 1UY"],
+            page=self.lookup_page,
+            link_page=self.another_page,
+            postcodes=["HP20 1UY"],
         )
 
         with self.assertTemplateUsed("patterns/pages/forms/lookup_page.html"):
@@ -66,7 +74,9 @@ class PostcodeLookupResponseRequestTests(TestCase):
 
     def test_postcodes_are_cleaned_on_search_input(self):
         PostcodeLookupResponseFactory(
-            page=self.lookup_page, link_page=self.another_page, postcodes=["HP201UY"],
+            page=self.lookup_page,
+            link_page=self.another_page,
+            postcodes=["HP201UY"],
         )
 
         form = self.lookup_page.get_form({"postcode": "hp201uy"})

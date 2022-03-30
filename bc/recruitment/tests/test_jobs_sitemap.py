@@ -15,7 +15,10 @@ from .fixtures import RecruitmentHomePageFactory, TalentLinkJobFactory
 def get_job_urls(site, job):
     urls = [
         site.root_page.full_url
-        + site.root_page.reverse_subpage("job_detail", args=(job.talentlink_id,),)
+        + site.root_page.reverse_subpage(
+            "job_detail",
+            args=(job.talentlink_id,),
+        )
     ]
     if job.show_apply_button:
         urls.append(job.application_url)
@@ -43,7 +46,9 @@ class JobAlertTest(TestCase):
             )
         )
         self.site_internal = Site.objects.create(
-            hostname="internal-jobs.example", port=80, root_page=self.homepage_internal,
+            hostname="internal-jobs.example",
+            port=80,
+            root_page=self.homepage_internal,
         )
 
     @override_settings(

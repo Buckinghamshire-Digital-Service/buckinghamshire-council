@@ -23,7 +23,8 @@ class SearchPromotionsTest(TestCase):
     def test_basic_search_behaviour(self):
         hit_page = self.homepage.add_child(
             instance=InformationPageFactory.build(
-                title="screwdrivers", listing_summary="abcdef",
+                title="screwdrivers",
+                listing_summary="abcdef",
             )
         )
         update_search_index()
@@ -38,7 +39,8 @@ class SearchPromotionsTest(TestCase):
     def test_search_promotions_shown(self):
         promoted_page = self.homepage.add_child(
             instance=InformationPageFactory.build(
-                title="spanners", listing_summary="ghijkl",
+                title="spanners",
+                listing_summary="ghijkl",
             )
         )
         update_search_index()
@@ -47,7 +49,9 @@ class SearchPromotionsTest(TestCase):
 
         query = Query.objects.get(query_string="screwdrivers")
         promotion = SearchPromotion.objects.create(
-            query=query, page=promoted_page, description="",
+            query=query,
+            page=promoted_page,
+            description="",
         )
 
         response = self.client.get(reverse("search") + "?query=screwdrivers")
@@ -57,7 +61,9 @@ class SearchPromotionsTest(TestCase):
 
     def test_search_promotions_included_in_total_shown(self):
         hit_page = self.homepage.add_child(
-            instance=InformationPageFactory.build(title="screwdrivers",)
+            instance=InformationPageFactory.build(
+                title="screwdrivers",
+            )
         )
         update_search_index()
         response = self.client.get(reverse("search") + "?query=screwdrivers")
@@ -67,12 +73,16 @@ class SearchPromotionsTest(TestCase):
         )
 
         promoted_page = self.homepage.add_child(
-            instance=InformationPageFactory.build(title="spanners",)
+            instance=InformationPageFactory.build(
+                title="spanners",
+            )
         )
         update_search_index()
         query = Query.objects.get(query_string="screwdrivers")
         promotion = SearchPromotion.objects.create(
-            query=query, page=promoted_page, description="",
+            query=query,
+            page=promoted_page,
+            description="",
         )
 
         response = self.client.get(reverse("search") + "?query=screwdrivers")
@@ -85,13 +95,16 @@ class SearchPromotionsTest(TestCase):
     def test_search_promotions_show_custom_descriptions(self):
         promoted_page = self.homepage.add_child(
             instance=InformationPageFactory.build(
-                title="spanners", listing_summary="mnopqr",
+                title="spanners",
+                listing_summary="mnopqr",
             )
         )
         update_search_index()
         query = Query.objects.create(query_string="spanners")
         promotion = SearchPromotion.objects.create(
-            query=query, page=promoted_page, description="stuvwx",
+            query=query,
+            page=promoted_page,
+            description="stuvwx",
         )
 
         response = self.client.get(reverse("search") + "?query=spanners")
@@ -100,14 +113,17 @@ class SearchPromotionsTest(TestCase):
     def test_search_promotions_default_to_usual_descriptions(self):
         promoted_page = self.homepage.add_child(
             instance=InformationPageFactory.build(
-                title="spanners", listing_summary="mnopqr",
+                title="spanners",
+                listing_summary="mnopqr",
             )
         )
         update_search_index()
 
         query = Query.objects.create(query_string="spanners")
         SearchPromotion.objects.create(
-            query=query, page=promoted_page, description="",
+            query=query,
+            page=promoted_page,
+            description="",
         )
 
         response = self.client.get(reverse("search") + "?query=spanners")
@@ -115,7 +131,9 @@ class SearchPromotionsTest(TestCase):
 
     def test_search_promotions_not_listed_twice(self):
         hit_page = self.homepage.add_child(
-            instance=InformationPageFactory.build(title="hammers",)
+            instance=InformationPageFactory.build(
+                title="hammers",
+            )
         )
         update_search_index()
         response = self.client.get(reverse("search") + "?query=hammers")
@@ -123,7 +141,9 @@ class SearchPromotionsTest(TestCase):
 
         query = Query.objects.get(query_string="hammers")
         promotion = SearchPromotion.objects.create(
-            query=query, page=hit_page, description="foo",
+            query=query,
+            page=hit_page,
+            description="foo",
         )
 
         response = self.client.get(reverse("search") + "?query=hammers")

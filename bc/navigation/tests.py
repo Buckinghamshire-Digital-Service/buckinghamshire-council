@@ -74,7 +74,10 @@ class NavigationSettingViewTest(TestCase, WagtailTestUtils):
         # Test create navigation with links and column
         form_data = self.get_form_data(include_cloumns=True, include_links=True)
 
-        response = self.post(post_data=form_data, site_pk=self.default_site.pk,)
+        response = self.post(
+            post_data=form_data,
+            site_pk=self.default_site.pk,
+        )
 
         self.assertEqual(
             response.status_code, 302
@@ -99,7 +102,10 @@ class NavigationSettingViewTest(TestCase, WagtailTestUtils):
         # Test create navigation with only columns
         form_data = self.get_form_data(include_cloumns=True, include_links=False)
 
-        response = self.post(post_data=form_data, site_pk=self.default_site.pk,)
+        response = self.post(
+            post_data=form_data,
+            site_pk=self.default_site.pk,
+        )
 
         self.assertEqual(
             response.status_code, 302
@@ -118,7 +124,10 @@ class NavigationSettingViewTest(TestCase, WagtailTestUtils):
         # Test create navigation with only links
         form_data = self.get_form_data(include_cloumns=False, include_links=True)
 
-        response = self.post(post_data=form_data, site_pk=self.default_site.pk,)
+        response = self.post(
+            post_data=form_data,
+            site_pk=self.default_site.pk,
+        )
 
         self.assertEqual(
             response.status_code, 302
@@ -135,7 +144,8 @@ class NavigationSettingViewTest(TestCase, WagtailTestUtils):
     def test_created_columns_and_links_displayed(self):
         form_data = self.get_form_data(include_cloumns=True, include_links=True)
         self.post(
-            post_data=form_data, site_pk=self.default_site.pk,
+            post_data=form_data,
+            site_pk=self.default_site.pk,
         )
 
         response = self.client.get(self.root_page.url)
@@ -148,7 +158,8 @@ class NavigationSettingViewTest(TestCase, WagtailTestUtils):
     def test_created_columns_displayed(self):
         form_data = self.get_form_data(include_cloumns=True, include_links=False)
         self.post(
-            post_data=form_data, site_pk=self.default_site.pk,
+            post_data=form_data,
+            site_pk=self.default_site.pk,
         )
 
         response = self.client.get(self.root_page.url)
@@ -161,7 +172,8 @@ class NavigationSettingViewTest(TestCase, WagtailTestUtils):
     def test_created_links_displayed(self):
         form_data = self.get_form_data(include_cloumns=False, include_links=True)
         self.post(
-            post_data=form_data, site_pk=self.default_site.pk,
+            post_data=form_data,
+            site_pk=self.default_site.pk,
         )
 
         response = self.client.get(self.root_page.url)

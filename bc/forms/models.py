@@ -135,7 +135,9 @@ class PostcodeLookupResponse(models.Model):
 
         class PostcodeForm(forms.Form):
             postcode = forms.CharField(
-                label=label, help_text=help_text, validators=[validate_postcode],
+                label=label,
+                help_text=help_text,
+                validators=[validate_postcode],
             )
 
             def clean_postcode(self):
@@ -218,7 +220,7 @@ class LookupPage(BasePage):
         return self.responses.first()._meta.model
 
     def get_form(self, *args, **kwargs):
-        """ Get the form that is defined by the LookupResponse class, so that we can do
+        """Get the form that is defined by the LookupResponse class, so that we can do
         type-specific validation.
         """
         form_kwargs = {"label": self.input_label, "help_text": self.input_help_text}
@@ -226,7 +228,7 @@ class LookupPage(BasePage):
         return self.lookup_response_class.get_form(*args, **form_kwargs)
 
     def process_form_submission(self, form):
-        """ Defer to the LookupResponse class to process responses, so that different
+        """Defer to the LookupResponse class to process responses, so that different
         response types can be used in future.
         """
         return self.lookup_response_class.process_form_submission(self, form)

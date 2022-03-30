@@ -13,7 +13,10 @@ from ..utils.models import BasePage
 
 class FISBannerFields(models.Model):
     banner_image = models.ForeignKey(
-        "images.CustomImage", null=True, related_name="+", on_delete=models.SET_NULL,
+        "images.CustomImage",
+        null=True,
+        related_name="+",
+        on_delete=models.SET_NULL,
     )
     banner_title = models.TextField()
     banner_description = models.TextField()
@@ -55,7 +58,10 @@ class FamilyInformationHomePage(FISBannerFields, BasePage):
     max_count = 2
 
     hero_image = models.ForeignKey(
-        "images.CustomImage", null=True, related_name="+", on_delete=models.SET_NULL,
+        "images.CustomImage",
+        null=True,
+        related_name="+",
+        on_delete=models.SET_NULL,
     )
     description = models.TextField(blank=True)
     search_placeholder = models.CharField(max_length=100, blank=True)

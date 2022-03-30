@@ -27,7 +27,10 @@ class CampaignPage(BasePage):
 
     intro = fields.RichTextField(features=("link", "bold", "italic"))
     hero_image = models.ForeignKey(
-        "images.CustomImage", null=True, related_name="+", on_delete=models.SET_NULL,
+        "images.CustomImage",
+        null=True,
+        related_name="+",
+        on_delete=models.SET_NULL,
     )
     body = fields.StreamField(
         CampaignPageStoryBlock(block_counts={"heading": {"min_num": 3, "max_num": 3}})

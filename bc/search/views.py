@@ -167,7 +167,11 @@ class SearchView(View):
                 }
             )
 
-        response = TemplateResponse(request, template_path, context,)
+        response = TemplateResponse(
+            request,
+            template_path,
+            context,
+        )
 
         # Instruct FE cache to not cache when the search query is present.
         # It's so hits get added to the database and results include newly
@@ -266,7 +270,9 @@ class JobAlertConfirmView(View):
             )
 
         response = TemplateResponse(
-            request, "patterns/pages/jobs_alert/subscription_processed.html", context,
+            request,
+            "patterns/pages/jobs_alert/subscription_processed.html",
+            context,
         )
         return response
 
@@ -297,6 +303,8 @@ class JobAlertUnsubscribeView(View):
             )
 
         response = TemplateResponse(
-            request, "patterns/pages/jobs_alert/unsubscribe.html", context,
+            request,
+            "patterns/pages/jobs_alert/unsubscribe.html",
+            context,
         )
         return response

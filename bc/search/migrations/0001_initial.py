@@ -40,6 +40,8 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"verbose_name": "Search synonym",},
+            options={
+                "verbose_name": "Search synonym",
+            },
         ),
     ]

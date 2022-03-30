@@ -41,7 +41,9 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"abstract": False,},
+            options={
+                "abstract": False,
+            },
             bases=("wagtailcore.page", models.Model),
         ),
         migrations.CreateModel(
@@ -72,35 +74,46 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"abstract": False,},
+            options={
+                "abstract": False,
+            },
             bases=("wagtailcore.page", models.Model),
         ),
         migrations.RemoveField(
-            model_name="familyinformationhomepage", name="left_action",
+            model_name="familyinformationhomepage",
+            name="left_action",
         ),
         migrations.RemoveField(
-            model_name="familyinformationhomepage", name="left_label",
+            model_name="familyinformationhomepage",
+            name="left_label",
         ),
         migrations.RemoveField(
-            model_name="familyinformationhomepage", name="left_lede",
+            model_name="familyinformationhomepage",
+            name="left_lede",
         ),
         migrations.RemoveField(
-            model_name="familyinformationhomepage", name="left_title",
+            model_name="familyinformationhomepage",
+            name="left_title",
         ),
         migrations.RemoveField(
-            model_name="familyinformationhomepage", name="links_image",
+            model_name="familyinformationhomepage",
+            name="links_image",
         ),
         migrations.RemoveField(
-            model_name="familyinformationhomepage", name="right_action",
+            model_name="familyinformationhomepage",
+            name="right_action",
         ),
         migrations.RemoveField(
-            model_name="familyinformationhomepage", name="right_label",
+            model_name="familyinformationhomepage",
+            name="right_label",
         ),
         migrations.RemoveField(
-            model_name="familyinformationhomepage", name="right_lede",
+            model_name="familyinformationhomepage",
+            name="right_lede",
         ),
         migrations.RemoveField(
-            model_name="familyinformationhomepage", name="right_title",
+            model_name="familyinformationhomepage",
+            name="right_title",
         ),
         migrations.AddField(
             model_name="familyinformationhomepage",
@@ -154,5 +167,7 @@ class Migration(migrations.Migration):
                 max_length=255,
             ),
         ),
-        migrations.DeleteModel(name="UsefulLinks",),
+        migrations.DeleteModel(
+            name="UsefulLinks",
+        ),
     ]
