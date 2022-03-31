@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- Update Black to a newer version to fix \_unicodefun linting issue. Also applied formatting on existing files.
+
 ## 53.0 (2022-01-31)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/52.1...53.0
