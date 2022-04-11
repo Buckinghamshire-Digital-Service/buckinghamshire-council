@@ -94,6 +94,28 @@ If you only wish to run the frontend or backend tooling, the commands `honcho` r
 
 Upon first starting the container, the static files may not exist, or may be out of date. To resolve this, simply run `npm run build`.
 
+### Frontend tooling
+
+Here are the common commands:
+
+```bash
+# Install front-end dependencies.
+npm install
+# Start the Webpack build in watch mode, without live-reload.
+npm run start
+# Do a one-off Webpack development build.
+npm run build
+# Do a one-off Webpack production build.
+npm run build:prod
+```
+
+There are two ways to run the frontend tooling:
+
+- In Docker. This is the default, most portable and secure, but much slower on macOS.
+- Or run npm commands from a terminal on your local machine. Create a `.env` file in the project root (see `.env.example`) with `FRONTEND=local`. `fab start` will no longer start a `frontend` container. Now, when running `fab start`, Docker won't attempt to bind to the ports needed for the frontend dev server, meaning they can be run locally. All the tooling still remains available in the container.
+
+
+
 ## Contributing
 
 This project is open source, but not really a collaborative project.
