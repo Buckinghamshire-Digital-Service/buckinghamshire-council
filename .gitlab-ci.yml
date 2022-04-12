@@ -110,13 +110,12 @@ lint_format:
 
 # Run black and check for changes
 black:
-  image: python:3.7
+  image: python:3.7.4
   stage: test
   dependencies:
     - poetry
   before_script:
-    # Remember to update a version in requirements-dev.txt
-    - pip install black==22.3.0 Click==8.0.4
+    - source venv/bin/activate
   script:
     - black --check ./
 
