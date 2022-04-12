@@ -291,7 +291,8 @@ def pull_media_from_s3(
     local_media_dir=LOCAL_MEDIA_DIR,
 ):
     aws_cmd = "s3 sync --delete s3://{bucket_name} {local_media}".format(
-        bucket_name=aws_storage_bucket_name, local_media=local_media_dir,
+        bucket_name=aws_storage_bucket_name,
+        local_media=local_media_dir,
     )
     aws(c, aws_cmd, aws_access_key_id, aws_secret_access_key)
 
@@ -316,8 +317,10 @@ def pull_images_from_s3(
     aws_storage_bucket_name,
     local_images_dir=LOCAL_IMAGES_DIR,
 ):
-    aws_cmd = "s3 sync --delete s3://{bucket_name}/original_images {local_media}".format(
-        bucket_name=aws_storage_bucket_name, local_media=local_images_dir
+    aws_cmd = (
+        "s3 sync --delete s3://{bucket_name}/original_images {local_media}".format(
+            bucket_name=aws_storage_bucket_name, local_media=local_images_dir
+        )
     )
     aws(c, aws_cmd, aws_access_key_id, aws_secret_access_key)
     # The above command just syncs the original images, so we need to drop the wagtailimages_renditions
@@ -356,14 +359,21 @@ def pull_database_from_heroku(c, app_instance):
 
     local(
         "rm {dump_folder}/{datestamp}.dump".format(
-            dump_folder=LOCAL_DUMP_DIR, datestamp=datestamp,
+            dump_folder=LOCAL_DUMP_DIR,
+            datestamp=datestamp,
         ),
     )
 
 
 def open_heroku_shell(c, app_instance, shell_command="bash"):
     subprocess.call(
-        ["heroku", "run", shell_command, "-a", app_instance,]
+        [
+            "heroku",
+            "run",
+            shell_command,
+            "-a",
+            app_instance,
+        ]
     )
 
 
@@ -426,7 +436,15 @@ def run_test(c):
     Run python tests in the web container
     """
     subprocess.call(
-        ["docker-compose", "exec", "web", "python", "manage.py", "test", "--parallel",]
+        [
+            "docker-compose",
+            "exec",
+            "web",
+            "python",
+            "manage.py",
+            "test",
+            "--parallel",
+        ]
     )
 
 
