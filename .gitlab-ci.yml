@@ -92,7 +92,7 @@ black:
   stage: test
   before_script:
     # Remember to update a version in requirements-dev.txt
-    - pip install black==22.3.0
+    - pip install black==22.3.0 Click==8.0.4
   script:
     - black --check ./
 
