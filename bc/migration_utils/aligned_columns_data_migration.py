@@ -1,9 +1,16 @@
+from bc.migration_utils.typedtable_data_migration import tableblock_to_typedtableblock
+
+
 def typedtableblock_to_alignedtypedtableblock(block):
     if not (block and block.get("value")):
         return {
             "type": "table",
             "value": {"caption": "", "table": {"columns": [], "rows": []}},
         }
+
+    if "data" in block["value"]:
+        # for revisions which haven't migrated from table to typedtable
+        block = tableblock_to_typedtableblock(block)
 
     new_columns = []
     new_rows = []
