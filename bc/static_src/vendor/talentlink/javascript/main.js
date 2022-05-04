@@ -17,6 +17,9 @@
     function hideMenuOnSubmit() {
         $('#apply-nav').remove();
         $('#apply-content').removeClass('col-lg-offset-3 col-sm-offset-4 col-sm-7');
+        $('[data-apply-content]').append(
+            createBeacon('https://beacon.adcourier.com/98392bd3-9df8-43fb-83aa-b1ec77c6f7bd.gif?type=confirm')
+        );
     }
 
     function widgetsLoaded() {
@@ -27,10 +30,20 @@
         return typeof lumesse != 'undefined' && 'require' in lumesse;
     }
 
+    function createBeacon(url) {
+        const img = document.createElement('img');
+        img.src = url;
+        return img;
+    }
+
     $(document).ready(function () {
         if (!widgetsLoaded()) {
             onError();
         } else {
+            // add tracking beacon here
+            $('[data-apply-content]').append(
+                createBeacon('https://beacon.adcourier.com/98392bd3-9df8-43fb-83aa-b1ec77c6f7bd.gif?type=apply')
+            );
             var requireFunction = widgetsNamespaced() ? lumesse.require : require;
             requireFunction([
                 "jquery-noConflict",
