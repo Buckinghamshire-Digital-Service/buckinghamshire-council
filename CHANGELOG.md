@@ -1,11 +1,14 @@
 # Release History
 
-## 54.0 (2022-05-05)
+## 54.0 (2022-05-12)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/53.0...54.0
 
 - Update Black to a newer version to fix \_unicodefun linting issue. Also applied formatting on existing files.
-- Add aligned columns to typedtable
+- Add intro text field to several page types
+- Make alert length 255 characters long (text only)
+- Fix issues with hidden content being focusable
+- Fix issues with form field not being labelled
 
 ## 53.0 (2022-01-31)
 
