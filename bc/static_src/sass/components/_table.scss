@@ -23,7 +23,6 @@ table {
     th {
         border-bottom: 1px solid $color--grey-medium;
         padding: 10px;
-        text-align: left;
         vertical-align: top;
 
         &:first-child {
@@ -33,14 +32,14 @@ table {
         &:last-child {
             padding-right: 0;
         }
-    }
 
-    td {
-        text-align: right;
-    }
+        &.left-align {
+            text-align: left;
+        }
 
-    th:not(:first-child) {
-        text-align: right;
+        &.right-align {
+            text-align: right;
+        }
     }
 
     // support for pre-2.15 tables

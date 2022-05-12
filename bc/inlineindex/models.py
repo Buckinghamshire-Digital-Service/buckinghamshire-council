@@ -87,6 +87,7 @@ class InlineIndex(InlineIndexMixin, BasePage):
         help_text="Title that appears on the index. (e.g. Introduction)",
         default="Introduction",
     )
+    intro_text = models.TextField(blank=True)
 
     body = StreamField(StoryBlock())
 
@@ -104,6 +105,7 @@ class InlineIndex(InlineIndexMixin, BasePage):
 
     content_panels = BasePage.content_panels + [
         FieldPanel("subtitle"),
+        FieldPanel("intro_text"),
         StreamFieldPanel("body"),
         InlinePanel("related_pages", label="Related pages"),
     ]
@@ -186,7 +188,7 @@ class InlineIndexChild(InlineIndexMixin, BasePage):
         )
 
     def get_next_page(self, include_draft_pages=False):
-        """ Return the next sibling, if there is one. NB this is implemented
+        """Return the next sibling, if there is one. NB this is implemented
         differently on InlineIndex.
         """
         next_siblings = self.get_next_siblings()
@@ -196,7 +198,7 @@ class InlineIndexChild(InlineIndexMixin, BasePage):
         return next_siblings.specific().first()
 
     def get_prev_page(self, include_draft_pages=False):
-        """ Return the previous sibling, or in the case of a first child, the
+        """Return the previous sibling, or in the case of a first child, the
         parent. NB this method is not implemented on InlineIndex, so the
         template just gets None.
         """

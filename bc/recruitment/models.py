@@ -224,7 +224,10 @@ class TalentLinkJob(models.Model):
         "documents.CustomDocument", blank=True, related_name="jobs"
     )
     logo = models.ForeignKey(
-        "images.CustomImage", null=True, related_name="+", on_delete=models.SET_NULL,
+        "images.CustomImage",
+        null=True,
+        related_name="+",
+        on_delete=models.SET_NULL,
     )
     application_url_query = models.CharField(max_length=255)
     organisation = models.TextField(blank=True)
@@ -347,10 +350,14 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
         max_length=255, help_text="e.g. Finding a job in Buckinghamshire"
     )
     hero_image = models.ForeignKey(
-        "images.CustomImage", null=True, related_name="+", on_delete=models.SET_NULL,
+        "images.CustomImage",
+        null=True,
+        related_name="+",
+        on_delete=models.SET_NULL,
     )
     search_box_placeholder = models.CharField(
-        max_length=255, help_text="eg. Search jobs, e.g. “Teacher in Aylesbury”",
+        max_length=255,
+        help_text="eg. Search jobs, e.g. “Teacher in Aylesbury”",
     )
     hero_link_text = models.CharField(max_length=255, help_text="e.g. Browse jobs")
     body = StreamField(
@@ -392,7 +399,9 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
     settings_panels = BasePage.settings_panels + [
         FieldPanel(
             "job_board",
-            widget=forms.Select(choices=[(s, s) for s in JOB_BOARD_CHOICES],),
+            widget=forms.Select(
+                choices=[(s, s) for s in JOB_BOARD_CHOICES],
+            ),
         ),
     ]
 
@@ -415,7 +424,10 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
             jobs_sitemap.append(
                 {
                     "location": self.full_url
-                    + self.reverse_subpage("job_detail", args=(job.talentlink_id,),),
+                    + self.reverse_subpage(
+                        "job_detail",
+                        args=(job.talentlink_id,),
+                    ),
                     "lastmod": job.last_modified,
                 }
             )
@@ -473,7 +485,10 @@ class RecruitmentIndexPage(BasePage):
     template = "patterns/pages/standardpages/index_page--jobs.html"
 
     hero_image = models.ForeignKey(
-        "images.CustomImage", null=True, related_name="+", on_delete=models.SET_NULL,
+        "images.CustomImage",
+        null=True,
+        related_name="+",
+        on_delete=models.SET_NULL,
     )
     body = StreamField(StoryBlock(required=False), blank=True)
 

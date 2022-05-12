@@ -25,7 +25,10 @@ class HomePage(BasePage):
         max_length=255, help_text="eg. Welcome to Buckinghamshire"
     )
     hero_image = models.ForeignKey(
-        "images.CustomImage", null=True, related_name="+", on_delete=models.SET_NULL,
+        "images.CustomImage",
+        null=True,
+        related_name="+",
+        on_delete=models.SET_NULL,
     )
     call_to_action = models.ForeignKey(
         "utils.CallToActionSnippet",

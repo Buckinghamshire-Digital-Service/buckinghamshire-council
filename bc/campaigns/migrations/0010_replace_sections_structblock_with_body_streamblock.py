@@ -15,7 +15,10 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(model_name="campaignpage", name="sections",),
+        migrations.RemoveField(
+            model_name="campaignpage",
+            name="sections",
+        ),
         migrations.AddField(
             model_name="campaignpage",
             name="body",

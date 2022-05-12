@@ -22,6 +22,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RenameModel(
-            old_name="StepByStepIndexPage", new_name="StepByStepPage",
+            old_name="StepByStepIndexPage",
+            new_name="StepByStepPage",
         ),
     ]

@@ -11,7 +11,8 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RemoveField(
-            model_name="apteanrespondcaseformpage", name="web_service_definition",
+            model_name="apteanrespondcaseformpage",
+            name="web_service_definition",
         ),
         migrations.AlterField(
             model_name="apteanrespondcaseformpage",

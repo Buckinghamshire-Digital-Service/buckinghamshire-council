@@ -12,7 +12,10 @@ def tableblock_to_typedtableblock(block):
     if not (block and block.get("value")):
         return {
             "type": "table",
-            "value": {"caption": "", "table": {"columns": [], "rows": []},},
+            "value": {
+                "caption": "",
+                "table": {"columns": [], "rows": []},
+            },
         }
 
     has_table_header = block["value"]["first_row_is_table_header"]

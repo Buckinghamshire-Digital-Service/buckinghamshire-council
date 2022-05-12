@@ -55,8 +55,10 @@ class JobCategoryAndJobSubcategoryGroupingTest(TestCase):
             job_board=JOB_BOARD_CHOICES[0]
         )
         self.root_page.add_child(instance=self.homepage)
-        self.homepage_internal = RecruitmentHomePageFactory.build_with_fk_objs_committed(
-            job_board=JOB_BOARD_CHOICES[1]
+        self.homepage_internal = (
+            RecruitmentHomePageFactory.build_with_fk_objs_committed(
+                job_board=JOB_BOARD_CHOICES[1]
+            )
         )
         self.root_page.add_child(instance=self.homepage_internal)
 

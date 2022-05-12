@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 
 def generate_webservice_xml(*args, **kwargs):
-    """ The name of this function belies the fact that it's just hardcoded for now. """
+    """The name of this function belies the fact that it's just hardcoded for now."""
     xml = (
         """
 <webservice type="CaseCreate">

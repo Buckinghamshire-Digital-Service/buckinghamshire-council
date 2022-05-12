@@ -44,6 +44,8 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"verbose_name": "Site banner",},
+            options={
+                "verbose_name": "Site banner",
+            },
         ),
     ]

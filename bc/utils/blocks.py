@@ -19,9 +19,17 @@ from .utils import is_number
 from .widgets import BarChartInput, LineChartInput, PieChartInput
 
 
+class AlignedBlock(blocks.StreamBlock):
+    numeric = blocks.DecimalBlock()
+    rich_text = blocks.RichTextBlock()
+
+
 class CaptionedTableBlock(blocks.StructBlock):
     table = TypedTableBlock(
-        [("numeric", blocks.DecimalBlock()), ("rich_text", blocks.RichTextBlock())],
+        [
+            ("left_aligned_column", AlignedBlock()),
+            ("right_aligned_column", AlignedBlock()),
+        ],
     )
     caption = blocks.TextBlock(required=False)
 
@@ -87,7 +95,8 @@ class InsetTextBlock(blocks.RichTextBlock):
 
 class LocalAreaLinksBlock(blocks.StructBlock):
     heading = blocks.RichTextBlock(
-        features=RICH_TEXT_FEATURES, default="<p><b>Find local information</b></p>",
+        features=RICH_TEXT_FEATURES,
+        default="<p><b>Find local information</b></p>",
     )
     introduction = blocks.RichTextBlock(
         features=RICH_TEXT_FEATURES,
@@ -430,7 +439,9 @@ class BaseStoryBlock(blocks.StreamBlock):
         template="patterns/molecules/streamfield/blocks/subheading_block.html",
         group="Heading",
     )
-    paragraph = blocks.RichTextBlock(features=RICH_TEXT_FEATURES,)
+    paragraph = blocks.RichTextBlock(
+        features=RICH_TEXT_FEATURES,
+    )
     image = ImageBlock()
     embed = EmbedBlock()
     local_area_links = LocalAreaLinksBlock()

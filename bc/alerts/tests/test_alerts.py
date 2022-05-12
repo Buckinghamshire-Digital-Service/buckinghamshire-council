@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.test import TestCase
 
 from bc.alerts.models import Alert
@@ -66,3 +67,23 @@ class AlertTest(TestCase):
                     get_alerts(page_arg)
                 except Exception:
                     self.fail("get_alerts tag raised an error unexpectedly")
+
+    def test_alert_content_text_can_be_less_than_255_characters(self):
+        link = "https://example.com/?q=" + ("a" * 255)
+        text = "The text content is less than 255 characters"
+        content = f'<a href="{link}">{text}</a>'
+
+        self.assertGreater(len(content), 255)
+        self.assertLessEqual(len(text), 255)
+        try:
+            Alert(title="Some alert", page=self.homepage, content=content).full_clean()
+        except ValidationError:
+            self.fail("Alert creation raised an error unexpectedly")
+
+    def test_alert_content_text_cannot_be_more_than_255_characters(self):
+        text = "The text content is greater than 255 characters" * 20
+        content = f"<p>{text}</p>"
+
+        self.assertGreater(len(text), 255)
+        with self.assertRaises(ValidationError):
+            Alert(title="Some page", page=self.homepage, content=content).full_clean()

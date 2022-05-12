@@ -33,7 +33,8 @@ class SalaryFiltersTest(TestCase):
         context = jobs_search_filters(request)
 
         self.assertEqual(
-            context["filters"][self.salary_filter_index]["key"], "searchable_salary",
+            context["filters"][self.salary_filter_index]["key"],
+            "searchable_salary",
         )
 
     def test_pound_sign_values_ordered_first(self):

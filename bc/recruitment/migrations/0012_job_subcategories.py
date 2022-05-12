@@ -30,7 +30,10 @@ class Migration(migrations.Migration):
                 "ordering": ["title"],
             },
         ),
-        migrations.RemoveField(model_name="talentlinkjob", name="category",),
+        migrations.RemoveField(
+            model_name="talentlinkjob",
+            name="category",
+        ),
         migrations.AddField(
             model_name="jobcategory",
             name="subcategories",

@@ -43,7 +43,10 @@ def jobs_search_filters(request, unfiltered_results=None):
             {
                 "title": "Job subcategories",
                 "options": unfiltered_results.values("subcategory__title")
-                .annotate(key=F("subcategory__title"), label=F("subcategory__title"),)
+                .annotate(
+                    key=F("subcategory__title"),
+                    label=F("subcategory__title"),
+                )
                 .order_by("subcategory__title")
                 .distinct(),
                 "selected": request.GET.getlist("subcategory"),
@@ -61,7 +64,10 @@ def jobs_search_filters(request, unfiltered_results=None):
             {
                 "title": "Working hours",
                 "options": unfiltered_results.values("working_hours")
-                .annotate(key=F("working_hours"), label=F("working_hours"),)
+                .annotate(
+                    key=F("working_hours"),
+                    label=F("working_hours"),
+                )
                 .order_by("working_hours")
                 .distinct(),
                 "selected": request.GET.getlist("working_hours"),

@@ -32,7 +32,9 @@ class TestApplyConfigKey(TestCase):
             )
         )
         self.site_internal = Site.objects.create(
-            hostname="example-internal.com", port=80, root_page=self.homepage_internal,
+            hostname="example-internal.com",
+            port=80,
+            root_page=self.homepage_internal,
         )
 
     @override_settings(

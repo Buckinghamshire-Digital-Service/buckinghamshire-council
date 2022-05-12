@@ -1,9 +1,12 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from django.db import models
 
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, PageChooserPanel
 from wagtail.core.fields import RichTextField
 from wagtail.core.models import Page
+
+from bs4 import BeautifulSoup
 
 from bc.utils.constants import RICH_PARAGRAPH_FEATURES
 
@@ -31,9 +34,7 @@ class Alert(models.Model):
     }
 
     title = models.CharField(max_length=255)
-    content = RichTextField(
-        blank=True, max_length=255, features=RICH_PARAGRAPH_FEATURES
-    )
+    content = RichTextField(blank=True, features=RICH_PARAGRAPH_FEATURES)
     # Allows negative values in case we get an alert level lower than the default
     alert_level = models.SmallIntegerField(
         choices=LEVEL_CHOICES,
@@ -81,3 +82,13 @@ class Alert(models.Model):
             models.Q(page__in=page.get_ancestors(), show_on=cls.PAGE_AND_DESCENDANTS)
             | models.Q(page=page)
         ).order_by("alert_level", "page__path")[:3]
+
+    def clean(self):
+        super().clean()
+
+        content = BeautifulSoup(self.content, "html.parser")
+
+        if len(content.text) > 255:
+            raise ValidationError(
+                {"content": "Text of content can be up to 255 characters"}
+            )

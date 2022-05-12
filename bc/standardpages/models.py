@@ -19,6 +19,7 @@ class InformationPage(BasePage):
 
     display_contents = models.BooleanField(default=False)
 
+    intro_text = models.TextField(blank=True)
     body = StreamField(StoryBlock())
 
     search_fields = BasePage.search_fields + [
@@ -27,6 +28,7 @@ class InformationPage(BasePage):
 
     content_panels = BasePage.content_panels + [
         FieldPanel("display_contents"),
+        FieldPanel("intro_text"),
         StreamFieldPanel("body"),
         InlinePanel("related_pages", label="Related pages"),
     ]

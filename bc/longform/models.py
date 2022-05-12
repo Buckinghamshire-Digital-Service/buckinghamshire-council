@@ -21,7 +21,8 @@ class LongformPage(BasePage):
         verbose_name = "Long-form content page"
 
     is_numbered = models.BooleanField(
-        default=False, help_text='Adds numbers to each chapter, e.g. "1. Introduction"',
+        default=False,
+        help_text='Adds numbers to each chapter, e.g. "1. Introduction"',
     )
 
     last_updated = models.DateField()
@@ -43,6 +44,7 @@ class LongformPage(BasePage):
         ),
         max_length=255,
     )
+    intro_text = models.TextField(blank=True)
     body = StreamField(LongformStoryBlock())
 
     document = models.ForeignKey(
@@ -61,6 +63,7 @@ class LongformPage(BasePage):
     search_fields = BasePage.search_fields + [index.SearchField("body")]
 
     content_panels = BasePage.content_panels + [
+        FieldPanel("intro_text"),
         FieldPanel("last_updated"),
         FieldPanel("version_number"),
         MultiFieldPanel(

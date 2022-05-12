@@ -227,7 +227,9 @@ class TestImageOrEmbedBlock(TestCase):
     def test_adding_only_image_works(self):
         block = ImageOrEmbedBlock()
         struct_value = block.value_from_datadict(
-            data={"myblock-image": self.test_image.id}, files={}, prefix="myblock",
+            data={"myblock-image": self.test_image.id},
+            files={},
+            prefix="myblock",
         )
 
         cleaned_value = block.clean(struct_value)
@@ -262,7 +264,11 @@ class TestImageOrEmbedBlock(TestCase):
 
     def test_adding_neither_throws_error(self):
         block = ImageOrEmbedBlock()
-        struct_value = block.value_from_datadict(data={}, files={}, prefix="myblock",)
+        struct_value = block.value_from_datadict(
+            data={},
+            files={},
+            prefix="myblock",
+        )
 
         with self.assertRaises(ValidationError):
             block.clean(struct_value)

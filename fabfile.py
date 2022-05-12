@@ -250,8 +250,10 @@ def pull_images_from_s3(
     aws_storage_bucket_name,
     local_images_folder=LOCAL_IMAGES_FOLDER,
 ):
-    aws_cmd = "s3 sync --delete s3://{bucket_name}/original_images {local_media}".format(
-        bucket_name=aws_storage_bucket_name, local_media=local_images_folder
+    aws_cmd = (
+        "s3 sync --delete s3://{bucket_name}/original_images {local_media}".format(
+            bucket_name=aws_storage_bucket_name, local_media=local_images_folder
+        )
     )
     aws(c, aws_cmd, aws_access_key_id, aws_secret_access_key)
     # The above command just syncs the original images, so we need to drop the wagtailimages_renditions

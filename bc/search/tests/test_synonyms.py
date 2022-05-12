@@ -17,7 +17,8 @@ class SynonymTest(TestCase):
             synonyms=["haircuts arguments", "small things", "rabbits"],
         )
         self.assertListEqual(
-            get_synonyms(), ["foo, haircuts arguments, small things, rabbits"],
+            get_synonyms(),
+            ["foo, haircuts arguments, small things, rabbits"],
         )
 
     def test_multi_word_canonical_term(self):
@@ -25,7 +26,8 @@ class SynonymTest(TestCase):
             canonical_term="people with noses", synonyms=["more jam", "soot", "flies"]
         )
         self.assertListEqual(
-            get_synonyms(), ["people with noses, more jam, soot, flies"],
+            get_synonyms(),
+            ["people with noses, more jam, soot, flies"],
         )
 
     def test_multiple_synonyms(self):
@@ -34,7 +36,8 @@ class SynonymTest(TestCase):
             canonical_term="bar", synonyms=["tobogganing", "showers", "toasters"]
         )
         self.assertListEqual(
-            get_synonyms(), ["foo, fish, jam", "bar, tobogganing, showers, toasters"],
+            get_synonyms(),
+            ["foo, fish, jam", "bar, tobogganing, showers, toasters"],
         )
 
     def test_synonyms_are_lower_cased(self):

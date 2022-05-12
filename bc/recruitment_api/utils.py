@@ -209,7 +209,8 @@ def import_attachments_for_job(job, client=None):
                     attachment["description"] or attachment["fileName"].split(".")[0]
                 )
                 doc.file = ContentFile(
-                    attachment["content"], name=attachment["fileName"],
+                    attachment["content"],
+                    name=attachment["fileName"],
                 )
                 doc.save()
                 doc_imported += 1

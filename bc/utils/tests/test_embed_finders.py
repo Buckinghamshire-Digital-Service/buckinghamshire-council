@@ -196,5 +196,6 @@ class CustomOEmbedFinderTest(TestCase):
         finder.extra_wrapper_classes = ["baz", "qux"]
         result = finder.find_embed("www.example.com")
         self.assertEqual(
-            result["html"], '<iframe src="www.example.com"></iframe>',
+            result["html"],
+            '<iframe src="www.example.com"></iframe>',
         )

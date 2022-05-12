@@ -66,7 +66,8 @@ class Command(BaseCommand):
                 form_page.save()
                 for related_page in parent.related_pages.all():
                     ApteanRespondCaseFormPageRelatedPage.objects.create(
-                        source_page=form_page, page=related_page.page,
+                        source_page=form_page,
+                        page=related_page.page,
                     )
                 # Store the child and parent URLs for creating redirects
                 old_form_page_url = form_page.url
