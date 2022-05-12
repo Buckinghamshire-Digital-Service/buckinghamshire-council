@@ -84,7 +84,9 @@ class Chart {
         this.toggleToChart.classList.add(this.inactiveClass);
         this.toggleToTable.classList.remove(this.inactiveClass);
         this.toggleToChart.setAttribute('aria-hidden', 'true');
+        this.toggleToChart.setAttribute('tabindex', -1); // cannot be focused using sequential keyboard navigation
         this.toggleToTable.setAttribute('aria-hidden', 'false');
+        this.toggleToTable.removeAttribute('tabindex');
         this.highChart.reflow();
     }
 
@@ -94,7 +96,9 @@ class Chart {
         this.toggleToChart.classList.remove(this.inactiveClass);
         this.toggleToTable.classList.add(this.inactiveClass);
         this.toggleToChart.setAttribute('aria-hidden', 'false');
+        this.toggleToChart.removeAttribute('tabindex');
         this.toggleToTable.setAttribute('aria-hidden', 'true');
+        this.toggleToTable.setAttribute('tabindex', -1); // cannot be focused using sequential keyboard navigation
     }
 
     configureCommonOptions() {
