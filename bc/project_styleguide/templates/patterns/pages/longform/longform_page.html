@@ -63,6 +63,8 @@
                 </h2>
             {% endif %}
 
+            {% include 'patterns/molecules/intro-text/intro-text.html' %}
+
             {{ page.body|process_block_numbers:page.chapter_number }}
         </div>
 

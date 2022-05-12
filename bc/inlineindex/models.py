@@ -87,6 +87,7 @@ class InlineIndex(InlineIndexMixin, BasePage):
         help_text="Title that appears on the index. (e.g. Introduction)",
         default="Introduction",
     )
+    intro_text = models.TextField(blank=True)
 
     body = StreamField(StoryBlock())
 
@@ -104,6 +105,7 @@ class InlineIndex(InlineIndexMixin, BasePage):
 
     content_panels = BasePage.content_panels + [
         FieldPanel("subtitle"),
+        FieldPanel("intro_text"),
         StreamFieldPanel("body"),
         InlinePanel("related_pages", label="Related pages"),
     ]

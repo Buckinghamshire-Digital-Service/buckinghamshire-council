@@ -8,6 +8,8 @@
         <div class="section section--main">
             <h1 class="heading template-stepbystep__heading heading--xxl">{{ page.title }}</h1>
 
+            {% include 'patterns/molecules/intro-text/intro-text.html' %}
+
             <div class="introduction">{{ page.introduction|richtext }}</div>
             
             <div class="steps-nav" data-steps-container>

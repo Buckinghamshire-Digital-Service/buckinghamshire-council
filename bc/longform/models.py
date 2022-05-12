@@ -44,6 +44,7 @@ class LongformPage(BasePage):
         ),
         max_length=255,
     )
+    intro_text = models.TextField(blank=True)
     body = StreamField(LongformStoryBlock())
 
     document = models.ForeignKey(
@@ -62,6 +63,7 @@ class LongformPage(BasePage):
     search_fields = BasePage.search_fields + [index.SearchField("body")]
 
     content_panels = BasePage.content_panels + [
+        FieldPanel("intro_text"),
         FieldPanel("last_updated"),
         FieldPanel("version_number"),
         MultiFieldPanel(
