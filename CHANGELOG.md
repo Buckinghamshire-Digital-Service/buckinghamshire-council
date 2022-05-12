@@ -1,8 +1,11 @@
 # Release History
 
-## Unreleased
+## 54.0 (2022-05-05)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/53.0...54.0
 
 - Update Black to a newer version to fix \_unicodefun linting issue. Also applied formatting on existing files.
+- Add aligned columns to typedtable
 
 ## 53.0 (2022-01-31)
 
