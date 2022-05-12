@@ -9,6 +9,7 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/53.0...54.0
 - Make alert length 255 characters long (text only)
 - Fix issues with hidden content being focusable
 - Fix issues with form field not being labelled
+- Migrate to heroku-deploy
 
 ## 53.0 (2022-01-31)
 
