@@ -30,9 +30,9 @@
                             {% endif %}
 
                             {% with field=form.postcode %}
-                                <div class="area-search__title">
+                                <label class="area-search__title" for="{{ field.id_for_label  }}">
                                     {{ field.label }}
-                                </div>
+                                </label>
                                 <div class="area-search__info">
                                     {{ field.help_text }}
                                 </div>
