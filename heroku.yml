@@ -2,7 +2,7 @@ build:
   docker:
     web:
       dockerfile: Dockerfile
-      target: production
+      target: backend
 release:
   image: web
   command:
