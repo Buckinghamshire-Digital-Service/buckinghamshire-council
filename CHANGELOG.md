@@ -1,5 +1,12 @@
 # Release History
 
+## 54.1 (2022-05-23)
+
+Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/54.0...54.1
+
+- Fix tables not showing horizontal lines between rows
+- Add rich text and numeric options to typedtable
+
 ## 54.0 (2022-05-12)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/53.0...54.0

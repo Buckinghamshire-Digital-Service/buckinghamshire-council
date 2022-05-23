@@ -10,10 +10,10 @@
         </tr>
     </thead>
     <tbody>
-        {% for row in value.table.rows %}
+        {% for row in value.rows %}
         <tr>
             {% for block in row %}
-            <td class="{% if block.block.name == 'right_aligned_column' %}right-align{% else %}left-align{% endif %}">{% include_block block %}</td>
+            <td class="{% if block.block_name == 'right_aligned_column' %}right-align{% else %}left-align{% endif %}">{% include_block block.value %}</td>
             {% endfor %}
         </tr>
         {% endfor %}

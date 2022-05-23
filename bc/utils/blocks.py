@@ -37,6 +37,27 @@ class CaptionedTableBlock(blocks.StructBlock):
         icon = "table"
         template = "patterns/molecules/streamfield/blocks/captioned_table_block.html"
 
+    def get_context(self, value, parent_context=None):
+        ctx = super().get_context(value, parent_context)
+
+        rows = []
+        columns = next(ctx["value"]["table"].rows)
+        num_rows = 0
+
+        for column_data in columns:
+            # column_data.value contains the cells of a single column
+            block_name = column_data.block.name
+            curr_row = 0
+            for row_data in column_data.value:
+                if num_rows <= curr_row:
+                    rows.append([])
+                    num_rows += 1
+                rows[curr_row].append({"block_name": block_name, "value": row_data})
+                curr_row += 1
+
+        ctx["value"]["rows"] = rows
+        return ctx
+
 
 class ImageBlock(blocks.StructBlock):
     image = ImageChooserBlock()
