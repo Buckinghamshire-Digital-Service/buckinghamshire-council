@@ -17,13 +17,75 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 
 from bc.utils.blocks import StoryBlock
 from bc.utils.models import BasePage, RelatedPage
+from bc.utils.validators import (
+    validate_facebook_domain,
+    validate_linkedin_domain,
+    validate_youtube_domain,
+)
 
 
 class BlogHomePageRelatedPage(RelatedPage):
     source_page = ParentalKey("blogs.BlogHomePage", related_name="related_pages")
 
 
-class BlogHomePage(BasePage):
+class SocialMediaLinks(models.Model):
+    twitter_handle = models.CharField(
+        max_length=255,
+        blank=True,
+        help_text="The Twitter username without the @, e.g. katyperry",
+    )
+    facebook_page_url = models.CharField(
+        max_length=255, blank=True, validators=[validate_facebook_domain]
+    )
+    youtube_channel_url = models.URLField(
+        blank=True,
+        validators=[validate_youtube_domain],
+    )
+    linkedin_url = models.CharField(
+        max_length=255,
+        blank=True,
+        validators=[validate_linkedin_domain],
+    )
+
+    content_panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel("twitter_handle"),
+                FieldPanel("facebook_page_url"),
+                FieldPanel("youtube_channel_url", heading="YouTube channel URL"),
+                FieldPanel(
+                    "linkedin_url",
+                    heading="LinkedIn URL",
+                ),
+            ],
+            heading="Social media URLs",
+        )
+    ]
+
+    class Meta:
+        abstract = True
+
+    def has_any_social_setting(self):
+        return any(
+            [
+                self.twitter_handle,
+                self.facebook_page_url,
+                self.youtube_channel_url,
+                self.linkedin_url,
+            ]
+        )
+
+    @property
+    def socials(self):
+        return {
+            "twitter_handle": self.twitter_handle,
+            "facebook_page_url": self.facebook_page_url,
+            "youtube_channel_url": self.youtube_channel_url,
+            "linkedin_url": self.linkedin_url,
+        }
+
+
+class BlogHomePage(SocialMediaLinks, BasePage):
     parent_page_types = ["home.homepage"]
     subpage_types = ["blogs.blogpostpage"]
 
@@ -57,24 +119,28 @@ class BlogHomePage(BasePage):
 
     # add social media links
 
-    content_panels = BasePage.content_panels + [
-        MultiFieldPanel(
-            [
-                FieldPanel("about_title", heading="Title"),
-                FieldPanel("about_description", heading="Description"),
-                PageChooserPanel("about_page"),
-            ],
-            heading="About section",
-        ),
-        MultiFieldPanel(
-            [
-                PageChooserPanel("featured_blogpost_page"),
-                ImageChooserPanel("featured_blogpost_image", heading="Image"),
-            ],
-            heading="Featured blogpost",
-        ),
-        InlinePanel("related_pages", label="Related pages"),
-    ]
+    content_panels = (
+        BasePage.content_panels
+        + [
+            MultiFieldPanel(
+                [
+                    FieldPanel("about_title", heading="Title"),
+                    FieldPanel("about_description", heading="Description"),
+                    PageChooserPanel("about_page"),
+                ],
+                heading="About section",
+            ),
+            MultiFieldPanel(
+                [
+                    PageChooserPanel("featured_blogpost_page"),
+                    ImageChooserPanel("featured_blogpost_image", heading="Image"),
+                ],
+                heading="Featured blogpost",
+            ),
+            InlinePanel("related_pages", label="Related pages"),
+        ]
+        + SocialMediaLinks.content_panels
+    )
 
     def clean(self):
         super().clean()
