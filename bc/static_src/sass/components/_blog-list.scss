@@ -2,9 +2,9 @@
     list-style: none;
 
     &__item {
-        margin-bottom: $grid--medium;
-        padding-bottom: $grid--medium;
-        border-bottom: 2px solid $color--charcoal-50;
+        padding: $grid--medium 0;
+        border-bottom: 1px solid $color--charcoal-50;
+        border-top: 1px solid $color--charcoal-50;
     }
 
     &__item-title {
