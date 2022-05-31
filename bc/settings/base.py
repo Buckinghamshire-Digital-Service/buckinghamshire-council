@@ -381,6 +381,12 @@ if "AWS_STORAGE_BUCKET_NAME" in env:
     # https://github.com/jschneier/django-storages/blob/10d1929de5e0318dbd63d715db4bebc9a42257b5/storages/backends/s3boto3.py#L217
     AWS_S3_URL_PROTOCOL = env.get("AWS_S3_URL_PROTOCOL", "https:")
 
+    # When signing URLs is facilitated, the region must be set, because the
+    # global S3 endpoint does not seem to support that. Set this only if
+    # necessary.
+    if "AWS_S3_REGION_NAME" in env:
+        AWS_S3_REGION_NAME = env["AWS_S3_REGION_NAME"]
+
 
 # Logging
 # This logging is configured to be used with Sentry and console logs. Console
