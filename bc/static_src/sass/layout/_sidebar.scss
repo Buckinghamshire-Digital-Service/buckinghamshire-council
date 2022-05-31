@@ -18,6 +18,13 @@
         }
     }
 
+    &--blog-hero {
+        padding-bottom: $grid--large;
+        border-bottom: 4px solid $color--charcoal-75;
+        margin-top: 13px;
+        padding-bottom: 73px;
+    }
+
     &__heading {
         @include font-size(m);
         border-top: $border--accent $color--grey-dark;

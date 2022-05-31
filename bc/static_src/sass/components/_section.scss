@@ -13,6 +13,11 @@
         }
     }
 
+    &--blog-hero {
+        padding-bottom: $grid--large;
+        border-bottom: 2px solid $color--charcoal-50;
+    }
+
     &--inline-index {
         border-top: 1px solid $color--grey-medium;
         padding-top: $grid--small;
