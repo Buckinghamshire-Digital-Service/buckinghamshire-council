@@ -1,4 +1,8 @@
 .blog-hero {
+    &__title {
+        color: $color--slate;
+    }
+
     &__form {
         display: flex;
         align-self: self-start;

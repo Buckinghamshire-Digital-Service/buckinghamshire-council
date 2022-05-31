@@ -1,0 +1,22 @@
+.blog-page {
+    &__title {
+        color: $color--slate;
+    }
+
+    &__meta {
+        color: $color--slate;
+    }
+
+    &__content {
+        margin-bottom: $grid--large * 4;
+        padding-bottom: $grid--large * 2;
+        border-bottom: 2px solid $color--charcoal-50;
+
+        &,
+        p,
+        h2,
+        h3 {
+            color: $color--slate;
+        }
+    }
+}

@@ -1,0 +1,22 @@
+{% extends base_page_template %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block content %}
+    {% include "patterns/molecules/hero/hero--blog.html" %}
+
+    <div class="wrapper wrapper--flex blog-page">
+        <div class="section section--main">
+            <h2 class="heading heading--xxl blog-page__title">{{ page.sub_title }}</h2>
+            <p class="blog-page__meta">
+                {{ page.author }}, {{ page.date }} - <a href="">Tag one</a>, <a href="">Tag two</a>
+            </p>
+            <div class="blog-page__content">
+                {{ page.content }}
+            </div>
+        </div>
+
+        <div class="sidebar">
+            [Sidebar content]
+        </div>
+    </div>
+{% endblock %}

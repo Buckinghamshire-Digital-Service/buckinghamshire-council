@@ -2,23 +2,16 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-<div class="wrapper wrapper--flex blog-hero">
-    <div class="section section--main section--blog-hero">
-        <h1 class="heading heading--xxl">{{ page.title }}</h1>
-    </div>
     {% include "patterns/molecules/hero/hero--blog.html" %}
-</div>
 
-<div class="wrapper wrapper--flex">
-    <div class="section section--main">
-        {% include "patterns/molecules/blog-list/blog-list.html" %}
-        {% include "patterns/molecules/pagination/pagination.html" with modifier="pagination--centred" %}
+    <div class="wrapper wrapper--flex">
+        <div class="section section--main">
+            {% include "patterns/molecules/blog-list/blog-list.html" %}
+            {% include "patterns/molecules/pagination/pagination.html" with modifier="pagination--centred" %}
+        </div>
+
+        <div class="sidebar">
+            [Sidebar content]
+        </div>
     </div>
-
-    <div class="sidebar">
-        [Sidebar content]
-    </div>
-</div>
-
-
 {% endblock %}
