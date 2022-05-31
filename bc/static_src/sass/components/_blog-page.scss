@@ -1,6 +1,12 @@
 .blog-page {
     &__title {
         color: $color--slate;
+
+        &--search {
+            margin-bottom: $grid--medium;
+            padding-bottom: $grid--medium;
+            border-bottom: 2px solid $color--charcoal-50;
+        }
     }
 
     &__meta {

@@ -1,0 +1,18 @@
+{% extends base_page_template %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block content %}
+    {% include "patterns/molecules/hero/hero--blog.html" %}
+
+    <div class="wrapper wrapper--flex blog-page">
+        <div class="section section--main">
+            <h2 class="heading heading--xl blog-page__title blog-page__title--search">{{ page.sub_title }}</h2>
+            {% include "patterns/molecules/blog-list/blog-list.html" %}
+            {% include "patterns/molecules/pagination/pagination.html" with modifier="pagination--centred" %}
+        </div>
+
+        <div class="sidebar">
+            [Sidebar content]
+        </div>
+    </div>
+{% endblock %}
