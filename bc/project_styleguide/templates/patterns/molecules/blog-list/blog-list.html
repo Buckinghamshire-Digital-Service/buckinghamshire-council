@@ -1,0 +1,17 @@
+<ul class="blog-list">
+    {% for item in items %}
+        <li class="blog-list__item">
+            <a href="">
+                <h2 class="heading heading--l blog-list__item-title ">{{ item.value.title }}</h2>
+            </a>
+            <p class="blog-list__item-meta">
+                {{ item.value.author }}, {{ item.value.date }} - <a href="">Tag one</a>, <a href="">Tag two</a>
+            </p>
+            <img src="http://via.placeholder.com/650x400" alt="">
+            <p class="blog-list__item-content">
+                {{ item.value.description }}
+            </p>
+            <a class="blog-list__item-read-more" href="">Read more</a>
+        </li>
+    {% endfor %}
+</ul>

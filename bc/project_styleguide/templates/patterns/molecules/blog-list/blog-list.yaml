@@ -1,0 +1,17 @@
+context:
+  items:
+    - value:
+        title: Tips for talking to your child about fostering
+        author: Jane Campbell
+        date: !!timestamp '2022-05-31'
+        description: The decision to foster is one that takes a lot of thought and consideration. You may have questions and concerns about how fostering will impact your family life, and in particular, how it will impact your own children.
+    - value:
+        title: The adventure of newly approved foster carers Steven and John
+        author: Sally Dixon
+        date: !!timestamp '2022-03-15'
+        description: Steven and John were approved as foster carers late last year, and open up about how they’ve found the experience so far.
+    - value:
+        title: Q&A with Long-Term Buckinghamshire Council Foster Carer
+        author: Joe Bloggs
+        date: !!timestamp '2021-12-03'
+        description: With Foster Care Fortnight well underway in these very strange times, we caught up with one of our current respite and emergency foster carers to ask some key questions that may be of interest to anyone looking for a first-hand account of Fostering with Bucks.

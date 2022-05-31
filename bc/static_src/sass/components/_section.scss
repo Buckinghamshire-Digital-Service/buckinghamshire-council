@@ -14,8 +14,11 @@
     }
 
     &--blog-hero {
-        padding-bottom: $grid--large;
         border-bottom: 2px solid $color--charcoal-50;
+
+        @include media-query(tablet-landscape) {
+            padding-bottom: $grid--large;
+        }
     }
 
     &--inline-index {
