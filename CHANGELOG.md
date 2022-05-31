@@ -1,5 +1,10 @@
 # Release History
 
+## UNRELEASED
+
+- Fix location pages, by migrating data to aligned table structure
+- Docker for development work https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/522
+
 ## 54.1 (2022-05-23)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/54.0...54.1
@@ -12,6 +17,7 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/54.0...54.1
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/53.0...54.0
 
 - Update Black to a newer version to fix \_unicodefun linting issue. Also applied formatting on existing files.
+- Add aligned columns to typedtable
 - Add intro text field to several page types
 - Make alert length 255 characters long (text only)
 - Fix issues with hidden content being focusable
