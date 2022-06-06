@@ -1,0 +1,12 @@
+{% load wagtailimages_tags %}
+
+<div class="featured-blog-post">
+    <div class="featured-blog-post__content">
+        {# BE TODO: Add link #}
+        <a href=""><h2 class="heading heading--l featured-blog-post__title">{{ page.title }}</h2></a>
+        <p class="featured-blog-post__description">{{ page.description }}</p>
+        {# BE TODO: Add link #}
+        <a href="" class="featured-blog-post__read-more">Read more</a>
+    </div>
+    {% image listing_image fill-650x410 %}
+</div>
