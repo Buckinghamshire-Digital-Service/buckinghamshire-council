@@ -1,3 +1,5 @@
+{% load wagtailimages_tags static %}
+
 <ul class="blog-list">
     {% for item in items %}
         <li class="blog-list__item">
@@ -8,7 +10,7 @@
             <p class="blog-list__item-meta">
                 {{ item.value.author }}, {{ item.value.date }} - <a href="">Tag one</a>, <a href="">Tag two</a>
             </p>
-            <img src="http://via.placeholder.com/650x400" alt="">
+            {% image listing_image fill-650x400 %}
             <p class="blog-list__item-content">
                 {{ item.value.description }}
             </p>

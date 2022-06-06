@@ -5,9 +5,11 @@ context:
     sub_title: Tips for talking to your child about fostering
     author: Jane Campbell
     date: !!timestamp '2022-05-31'
-    content: '<div class="rich-text"><img src="http://via.placeholder.com/650x400" alt=""><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam magna justo, sollicitudin sit amet laoreet id, sodales vel metus. Etiam bibendum, augue in porta ultricies, elit sapien fringilla nisl, sit amet fermentum ligula augue nec sapien. Aliquam eu aliquet metus. Donec quis dolor at tellus viverra molestie.</p><h3>Lorem ipsum dolor sit amet.</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam magna justo, sollicitudin sit amet laoreet id, sodales vel metus. Etiam bibendum, augue in porta ultricies, elit sapien fringilla nisl, sit amet fermentum ligula augue nec sapien. Aliquam eu aliquet metus. Donec quis dolor at tellus viverra molestie.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam magna justo, sollicitudin sit amet laoreet id, sodales vel metus. Etiam bibendum, augue in porta ultricies, elit sapien fringilla nisl, sit amet fermentum ligula augue nec sapien. Aliquam eu aliquet metus. Donec quis dolor at tellus viverra molestie.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam magna justo, sollicitudin sit amet laoreet id, sodales vel metus. Etiam bibendum, augue in porta ultricies, elit sapien fringilla nisl, sit amet fermentum ligula augue nec sapien. Aliquam eu aliquet metus. Donec quis dolor at tellus viverra molestie.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam magna justo, sollicitudin sit amet laoreet id, sodales vel metus. Etiam bibendum, augue in porta ultricies, elit sapien fringilla nisl, sit amet fermentum ligula augue nec sapien. Aliquam eu aliquet metus. Donec quis dolor at tellus viverra molestie.</p></div>'
 
 tags:
   sidebar:
     '':
       template_name: 'patterns/molecules/navigation/sidebar.html'
+  include_block:
+    page.content:
+      template_name: 'patterns/molecules/streamfield/stream_block.html'

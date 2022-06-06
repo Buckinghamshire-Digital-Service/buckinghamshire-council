@@ -11,7 +11,7 @@
                 {{ page.author }}, {{ page.date }} - <a href="">Tag one</a>, <a href="">Tag two</a>
             </p>
             <div class="blog-page__content">
-                {{ page.content }}
+                {% include_block page.content %}
             </div>
         </div>
 
