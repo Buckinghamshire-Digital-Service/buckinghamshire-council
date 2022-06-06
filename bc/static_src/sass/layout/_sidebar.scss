@@ -18,6 +18,18 @@
         }
     }
 
+    &--blog-hero {
+        padding-bottom: $grid--large;
+        margin-top: 0;
+        border-bottom: 2px solid $color--charcoal-50;
+
+        @include media-query(tablet-landscape) {
+            margin-top: 13px;
+            padding-bottom: 73px;
+            border-bottom: 4px solid $color--charcoal-75;
+        }
+    }
+
     &__heading {
         @include font-size(m);
         border-top: $border--accent $color--grey-dark;

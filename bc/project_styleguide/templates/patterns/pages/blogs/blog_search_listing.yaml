@@ -1,0 +1,16 @@
+context:
+  base_page_template: 'patterns/base_page.html'
+  page:
+    title: Fostering blog
+    sub_title: Search results for <i>&apos;fostering tips&apos;</i>
+  items:
+    - value:
+        title: Tips for talking to your child about fostering
+        author: Jane Campbell
+        date: !!timestamp '2022-05-31'
+        description: The decision to foster is one that takes a lot of thought and consideration. You may have questions and concerns about how fostering will impact your family life, and in particular, how it will impact your own children.
+
+tags:
+  sidebar:
+    '':
+      template_name: 'patterns/molecules/navigation/sidebar.html'

@@ -1,7 +1,7 @@
 {% load search_tags %}
 
 {% if paginator_page.paginator.num_pages > 1 %}
-    <nav class="pagination" aria-label="Pagination">
+    <nav class="pagination {% if modifier %}{{ modifier }}{% endif %}" aria-label="Pagination">
         <ul class="pagination__list">
             {% if paginator_page.has_previous %}
                 <li class="pagination__item">

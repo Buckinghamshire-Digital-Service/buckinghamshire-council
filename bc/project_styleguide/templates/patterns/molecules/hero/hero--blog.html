@@ -1,0 +1,14 @@
+<div class="wrapper wrapper--flex blog-hero">
+    <div class="section section--main section--blog-hero">
+        <h1 class="heading heading--xxl blog-hero__title">{{ page.title }}</h1>
+    </div>
+    <div class="sidebar sidebar--blog-hero">
+        <form action="" method="get" role="search" class="form blog-hero__form">
+            <input class="input" type="text" placeholder="Search the {{ page.title|lower }}">
+            <label class="u-sr-only">Search the {{ page.title|lower }}</label>
+            <button class="button button--blog-search" type="submit" aria-label="Submit">
+                {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke icon--white button__icon" %}
+            </button>
+        </form>
+    </div>
+</div>

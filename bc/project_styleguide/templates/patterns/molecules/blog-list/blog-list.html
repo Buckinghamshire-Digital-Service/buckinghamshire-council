@@ -1,0 +1,21 @@
+{% load wagtailimages_tags static %}
+
+<ul class="blog-list">
+    {% for item in items %}
+        <li class="blog-list__item">
+            {# BE TODO: Add link #}
+            <a href="">
+                <h2 class="heading heading--l blog-list__item-title ">{{ item.value.title }}</h2>
+            </a>
+            <p class="blog-list__item-meta">
+                {{ item.value.author }}, {{ item.value.date }} - <a href="">Tag one</a>, <a href="">Tag two</a>
+            </p>
+            {% image listing_image fill-650x400 %}
+            <p class="blog-list__item-content">
+                {{ item.value.description }}
+            </p>
+            {# BE TODO: Add link #}
+            <a class="blog-list__item-read-more" href="">Read more</a>
+        </li>
+    {% endfor %}
+</ul>
