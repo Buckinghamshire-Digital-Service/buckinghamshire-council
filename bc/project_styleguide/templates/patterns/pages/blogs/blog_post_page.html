@@ -1,0 +1,27 @@
+{% extends base_page_template %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block content %}
+<h1>
+    {{ page.homepage.title }}
+</h1>
+
+    <h2>
+        {{ page.homepage.about_title }}
+    </h2>
+    <p>
+        {{ page.homepage.about_description }}
+    </p>
+
+    <a href="{% pageurl page.homepage.about_page %}">Find out more</a>
+
+<h1>
+    {{ page.title }}
+</h1>
+        <span>{{ page.author }}, {{ page.date_published|date:"d F Y" }}</span>
+        {% if page.image %}
+        {% include "patterns/molecules/streamfield/blocks/image_block.html" with value=page  %}
+        {% endif %}
+        {% include_block page.body %}
+        {% include "patterns/molecules/navigation/sidebar-section.html" with related_pages=page.related_pages.all %}
+{% endblock %}
