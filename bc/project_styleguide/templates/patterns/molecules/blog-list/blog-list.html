@@ -12,9 +12,11 @@
                 - <a href="">Tag one</a>, <a href="">Tag two</a>
                 {% endcomment %}
             </p>
-            {% image listing_image fill-650x400 %}
+            {% if item.image %}
+                {% image item.image fill-650x400 %}
+            {% endif %}
             <p class="blog-list__item-content">
-                {{ item.value.description }}
+                {{ item.listing_summary }}
             </p>
             <a class="blog-list__item-read-more" href="{% pageurl item %}">Read more</a>
         </li>
