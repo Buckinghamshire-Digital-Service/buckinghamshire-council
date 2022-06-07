@@ -1,0 +1,41 @@
+{% extends base_page_template %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block content %}
+    {% include "patterns/molecules/hero/hero--blog.html" with page=page.homepage %}
+
+    <div class="wrapper wrapper--flex blog-page">
+        <div class="section section--main">
+            <h2 class="heading heading--xxl blog-page__title">{{ page.title }}</h2>
+            <div class="blog-page__content">
+                <div class="rich-text">
+                    <p><b>Subscription options for test@example.com</b></p>
+                    <form action="" method="get"class="form form--subscribe-page">
+                        <label class="radio-inline">
+                            <input class="input" type="radio">
+                            Receive all updates
+                        </label>
+                        <label class="radio-inline">
+                            <input class="input" type="radio">
+                            Un-subscribe
+                        </label>
+                        <button class="button button--subscribe-submit">Save</button>
+                    </form>
+                    <br>
+                    <p><a href="">Read our privacy policy</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <section>
+                <h1>{{ page.homepage.title }}</h1>
+                <h2>{{ page.homepage.about_title }}</h2>
+                <p>{{ page.homepage.about_description }}</p>
+                <a href="{% pageurl page.homepage.about_page %}">Find out more</a>
+            </section>
+            {% include "patterns/molecules/navigation/sidebar-section.html" with related_pages=page.homepage.related_pages.all %}
+            [Sidebar content]
+        </div>
+    </div>
+{% endblock %}
