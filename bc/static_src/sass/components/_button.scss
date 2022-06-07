@@ -135,11 +135,11 @@
         color: $color--charcoal;
         min-width: 180px;
         margin-top: $grid;
-        border-bottom: 2px solid #82a04d;
+        border-bottom: 2px solid $color--leaf-mid;
 
         &:hover,
         &:focus {
-            background-color: #82a04d;
+            background-color: $color--leaf-mid;
         }
     }
 }
