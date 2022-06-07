@@ -180,9 +180,10 @@ class BlogHomePage(SocialMediaLinks, BasePage):
 
 class BlogPostPage(BasePage):
     parent_page_types = ["blogs.bloghomepage"]
-    # define subpage types as blogpost page
 
     template = "patterns/pages/blogs/blog_post_page.html"
+
+    intro_text = models.TextField()
 
     image = models.ForeignKey(
         "images.CustomImage",
@@ -198,6 +199,7 @@ class BlogPostPage(BasePage):
     body = StreamField(StoryBlock())
 
     content_panels = BasePage.content_panels + [
+        FieldPanel("intro_text"),
         ImageChooserPanel("image"),
         FieldPanel("author"),
         FieldPanel("date_published"),

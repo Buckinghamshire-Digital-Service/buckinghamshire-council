@@ -16,9 +16,12 @@
                 {% image item.image fill-650x400 class="blog-list__item-image" %}
             {% endif %}
             <p class="blog-list__item-content">
-                {{ item.listing_summary }}
+                {{ item.intro_text|truncatewords:50 }}
             </p>
-            <a class="blog-list__item-read-more" href="{% pageurl item %}">Read more</a>
+            <a class="blog-list__item-read-more" href="{% pageurl item %}">
+                <strong>Read more</strong>
+                <span class="visually-hidden-content">of {{ item.title }}</span>
+            </a>
         </li>
     {% endfor %}
 </ul>
