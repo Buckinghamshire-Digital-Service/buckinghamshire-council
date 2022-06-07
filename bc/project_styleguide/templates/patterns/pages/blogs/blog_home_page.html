@@ -4,7 +4,9 @@
 {% block content %}
     {% include "patterns/molecules/hero/hero--blog.html" %}
 
-    {% include 'patterns/molecules/featured_blog_post/featured_blog_post.html' with page=page.featured_blogpost_page listing_image=page.featured_image %}
+    {% if page.featured_blogpost_page %}
+        {% include 'patterns/molecules/featured_blog_post/featured_blog_post.html' with page=page.featured_blogpost_page listing_image=page.featured_image %}
+    {% endif %}
 
     <div class="wrapper wrapper--flex">
         <div class="section section--main">
