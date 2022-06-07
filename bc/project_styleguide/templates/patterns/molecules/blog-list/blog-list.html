@@ -1,6 +1,6 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
-<ul class="blog-list">
+<ul class="blog-list {% if not page.featured_blogpost_page %}blog-list--no-border{% endif %}">
     {% for item in items %}
         <li class="blog-list__item">
             <a href="{% pageurl item %}">

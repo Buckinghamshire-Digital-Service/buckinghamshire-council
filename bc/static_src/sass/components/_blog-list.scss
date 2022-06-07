@@ -1,5 +1,15 @@
 .blog-list {
+    $root: &;
     list-style: none;
+
+    &--no-border {
+        #{$root}__item {
+            &:first-of-type {
+                padding-top: 0;
+                border-top: 0;
+            }
+        }
+    }
 
     &__item {
         padding: $grid--medium 0;
