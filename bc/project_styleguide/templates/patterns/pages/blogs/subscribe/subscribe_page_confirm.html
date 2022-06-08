@@ -15,15 +15,6 @@
             </div>
         </div>
 
-        <div class="sidebar">
-            <section>
-                <h1>{{ page.homepage.title }}</h1>
-                <h2>{{ page.homepage.about_title }}</h2>
-                <p>{{ page.homepage.about_description }}</p>
-                <a href="{% pageurl page.homepage.about_page %}">Find out more</a>
-            </section>
-            {% include "patterns/molecules/navigation/sidebar-section.html" with related_pages=page.homepage.related_pages.all %}
-            [Sidebar content]
-        </div>
+        {% include 'patterns/organisms/blogs-sidebar/blogs-sidebar.html' %}
     </div>
 {% endblock %}
