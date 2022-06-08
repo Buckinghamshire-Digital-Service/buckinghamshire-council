@@ -27,8 +27,8 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from django_gov_notify.message import NotifyEmailMessage
 
 from bc.blogs.forms import BlogHomePageForm, BlogPostPageForm
-from bc.search.views import JOB_ALERT_STATUSES
 from bc.utils.blocks import StoryBlock
+from bc.utils.constants import ALERT_SUBSCRIPTION_STATUSES
 from bc.utils.models import BasePage, RelatedPage
 from bc.utils.validators import (
     validate_facebook_domain,
@@ -267,14 +267,14 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
     def category_url(self, category):
         return self.url + self.reverse_subpage("blog-category", args=[category])
 
-    @route(r"^subscribe_to_alert/$", name="subscribe_to_alert")
+    @route(r"^subscribe-to-alert/$", name="subscribe_to_alert")
     def subscribe_to_alert(self, request):
         from bc.blogs.views import BlogSubscribeView
 
         return BlogSubscribeView.as_view()(request, blog_home_page=self)
 
     @route(
-        r"^manage_subscription/(?P<token>[a-zA-Z0-9_-]+)/$", name="manage_subscription"
+        r"^manage-subscription/(?P<token>[a-zA-Z0-9_-]+)/$", name="manage_subscription"
     )
     def manage_subscription(self, request, token):
         from bc.blogs.views import BlogManageSubscribeView
@@ -284,7 +284,7 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
         )
 
     @route(
-        r"^confirm_blog_alert/(?P<token>[a-zA-Z0-9_-]+)/$", name="confirm_blog_alert"
+        r"^confirm-blog-alert/(?P<token>[a-zA-Z0-9_-]+)/$", name="confirm_blog_alert"
     )
     def confirm_blog_alert(self, request, token):
         from bc.blogs.views import BlogAlertConfirmView
@@ -292,7 +292,7 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
         return BlogAlertConfirmView.as_view()(request, blog_home_page=self, token=token)
 
     @route(
-        r"^unsubscribe_blog_alert/(?P<token>[a-zA-Z0-9_-]+)/$",
+        r"^unsubscribe-blog-alert/(?P<token>[a-zA-Z0-9_-]+)/$",
         name="unsubscribe_blog_alert",
     )
     def unsubscribe_blog_alert(self, request, token):
@@ -307,8 +307,8 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
         return TemplateView.as_view(
             template_name="patterns/pages/blogs/subscribe/subscribe_page_confirm.html",
             extra_context={
-                "status": JOB_ALERT_STATUSES["STATUS_EMAIL_SENT"],
-                "STATUSES": JOB_ALERT_STATUSES,
+                "status": ALERT_SUBSCRIPTION_STATUSES["STATUS_EMAIL_SENT"],
+                "STATUSES": ALERT_SUBSCRIPTION_STATUSES,
                 "page": self,
             },
         )(request)
@@ -407,8 +407,6 @@ class BlogAlertSubscription(models.Model):
     def full_clean(self, *args, **kwargs):
         if not self.token:
             self.token = secrets.token_urlsafe(32)
-        if not self.homepage:
-            self.homepage = BlogHomePage.objects.live().first()
 
         super().full_clean(*args, **kwargs)
 

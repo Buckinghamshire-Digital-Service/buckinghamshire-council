@@ -10,7 +10,7 @@ from django.views.generic import FormView, ListView
 from bc.blogs.forms import BlogAlertSubscriptionForm, BlogSubscriptionManageForm
 from bc.blogs.models import BlogAlertSubscription, BlogHomePageCategories
 from bc.blogs.utils import get_blogs_search_results
-from bc.search.views import JOB_ALERT_STATUSES
+from bc.utils.constants import ALERT_SUBSCRIPTION_STATUSES
 
 
 class BlogListView(ListView):
@@ -114,7 +114,7 @@ class BlogSubscribeView(FormView):
 
 class BlogAlertConfirmView(View):
     def get(self, request, blog_home_page, token):
-        context = {"STATUSES": JOB_ALERT_STATUSES, "page": blog_home_page}
+        context = {"STATUSES": ALERT_SUBSCRIPTION_STATUSES, "page": blog_home_page}
 
         try:
             subscription = BlogAlertSubscription.objects.get(token=token)
@@ -145,7 +145,7 @@ class BlogAlertConfirmView(View):
 
 class BlogAlertUnsubscribeView(View):
     def get(self, request, blog_home_page, token):
-        context = {"STATUSES": JOB_ALERT_STATUSES, "page": blog_home_page}
+        context = {"STATUSES": ALERT_SUBSCRIPTION_STATUSES, "page": blog_home_page}
 
         try:
             subscription = BlogAlertSubscription.objects.get(token=token)

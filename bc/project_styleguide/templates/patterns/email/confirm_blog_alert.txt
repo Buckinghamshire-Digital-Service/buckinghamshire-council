@@ -1,10 +1,10 @@
 You have asked to get updates from the {{ homepage.title }}.
 
-Once you have confirmed your subscription, you'll get an email each time a new blog post is published
+Once you have confirmed your subscription, you'll get an email each time a new blog post is published.
 
-Confirm your subscription by clicking on this link: {{ confirmation_url }}
+[Confirm your subscription]({{ confirmation_url }}).
 
-Thanks for subscribing
+Thanks for subscribing!
 
 ---
 
