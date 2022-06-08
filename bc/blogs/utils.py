@@ -1,10 +1,6 @@
 from bc.blogs.models import BlogPostPage
 
 
-def is_blogs_search(request):
-    return "blog" in request.GET
-
-
 def get_blogs_search_results(search_query, homepage):
     if search_query:
         queryset = BlogPostPage.objects.live().child_of(homepage)
