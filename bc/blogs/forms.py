@@ -1,3 +1,4 @@
+from django import forms
 from django.forms import ValidationError
 from django.template.defaultfilters import slugify
 
@@ -51,3 +52,24 @@ class BlogHomePageForm(WagtailAdminPageForm):
                     categories.append((slug, name))
 
         return cleaned_data
+
+
+class BlogAlertSubscriptionForm(forms.Form):
+    email = forms.EmailField()
+    email.widget.attrs.update(
+        {
+            "autocomplete": "off",
+            "autocapitalize": "off",
+            "placeholder": "Enter your email address",
+        }
+    )
+
+
+class BlogSubscriptionManageForm(forms.Form):
+    subscribe = forms.ChoiceField(
+        choices=[
+            (True, "Subscribe for all updates"),
+            (False, "Unsubscribe"),
+        ],
+        widget=forms.RadioSelect,
+    )

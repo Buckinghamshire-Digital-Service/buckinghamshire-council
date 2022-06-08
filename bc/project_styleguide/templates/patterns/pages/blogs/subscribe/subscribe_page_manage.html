@@ -1,24 +1,23 @@
-{% extends base_page_template %}
+{% extends 'patterns/base_page--blogs.html' %}
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-    {% include "patterns/molecules/hero/hero--blog.html" with page=page.homepage %}
+    {% include "patterns/molecules/hero/hero--blog.html" %}
 
     <div class="wrapper wrapper--flex blog-page">
         <div class="section section--main">
-            <h2 class="heading heading--xxl blog-page__title">{{ page.title }}</h2>
+            <h2 class="heading heading--xxl blog-page__title">Subscribe</h2>
             <div class="blog-page__content">
                 <div class="rich-text">
-                    <p><b>Subscription options for test@example.com</b></p>
-                    <form action="" method="get"class="form form--subscribe-page">
+                    <p><b>Subscription options for {{ subscription.email }}</b></p>
+                    <form method="post"class="form form--subscribe-page">
+                        {% csrf_token %}
+                        {% for value, label in form.fields.subscribe.choices %}
                         <label class="radio-inline">
-                            <input class="input" type="radio">
-                            Receive all updates
-                        </label>
-                        <label class="radio-inline">
-                            <input class="input" type="radio">
-                            Un-subscribe
-                        </label>
+                            <input class="input" type="radio" name="subscribe" value="{{ value }}" required id="id_subscribe_{{ forloop.counter0 }}" {% if value == True %}checked{% endif %}>
+                            {{ label }}
+                        </label>    
+                        {% endfor %}
                         <button class="button button--subscribe-submit">Save</button>
                     </form>
                     <br>

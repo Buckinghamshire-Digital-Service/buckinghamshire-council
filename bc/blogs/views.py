@@ -1,9 +1,16 @@
 from django.conf import settings
 from django.http import Http404
-from django.views.generic import ListView
 
-from bc.blogs.models import BlogHomePageCategories
+from django.shortcuts import get_object_or_404, redirect
+from django.template.response import TemplateResponse
+from django.utils.timezone import now
+from django.views import View
+from django.views.generic import FormView, ListView
+
+from bc.blogs.forms import BlogAlertSubscriptionForm, BlogSubscriptionManageForm
+from bc.blogs.models import BlogAlertSubscription, BlogHomePageCategories
 from bc.blogs.utils import get_blogs_search_results
+from bc.search.views import JOB_ALERT_STATUSES
 
 
 class BlogListView(ListView):
@@ -61,3 +68,145 @@ class CategoryView(BlogListView):
 
     def get_queryset(self):
         return self.category.related_posts.live().order_by("-date_published")
+
+
+class BlogSubscribeView(FormView):
+    form_class = BlogAlertSubscriptionForm
+    template_name = "patterns/pages/blogs/subscribe/subscribe_page.html"
+
+    def get(self, request, blog_home_page):
+        return self.render_to_response(
+            self.get_context_data(blog_home_page=blog_home_page)
+        )
+
+    def get_context_data(self, **kwargs):
+        return {**super().get_context_data(**kwargs), "page": kwargs["blog_home_page"]}
+
+    def post(self, request, blog_home_page):
+        self.blog_home_page = blog_home_page
+        return super().post(request, blog_home_page)
+
+    def form_valid(self, form):
+        email = form.cleaned_data["email"]
+        try:
+            subscription = BlogAlertSubscription.objects.get(
+                email=email, homepage=self.blog_home_page
+            )
+            if subscription.confirmed:
+                return super().form_valid(form)
+            else:
+                # Treat this as a new subscription request
+                subscription.created = now()
+
+        except BlogAlertSubscription.DoesNotExist:
+            subscription = BlogAlertSubscription(
+                email=email, homepage=self.blog_home_page
+            )
+            subscription.full_clean()
+            subscription.save()
+
+        subscription.send_confirmation_email()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return self.blog_home_page.confirmation_mail_alert_url
+
+
+class BlogAlertConfirmView(View):
+    def get(self, request, blog_home_page, token):
+        context = {"STATUSES": JOB_ALERT_STATUSES, "page": blog_home_page}
+
+        try:
+            subscription = BlogAlertSubscription.objects.get(token=token)
+        except BlogAlertSubscription.DoesNotExist:
+            context.update(
+                {
+                    "title": "Subscription not found",
+                    "status": context["STATUSES"]["STATUS_LINK_EXPIRED"],
+                }
+            )
+        else:
+            subscription.confirmed = True
+            subscription.save()
+            context.update(
+                {
+                    "title": "Blog alert subscription confirmed",
+                    "status": context["STATUSES"]["STATUS_CONFIRMED"],
+                }
+            )
+
+        response = TemplateResponse(
+            request,
+            "patterns/pages/blogs/subscribe/subscribe_page_confirm.html",
+            context,
+        )
+        return response
+
+
+class BlogAlertUnsubscribeView(View):
+    def get(self, request, blog_home_page, token):
+        context = {"STATUSES": JOB_ALERT_STATUSES, "page": blog_home_page}
+
+        try:
+            subscription = BlogAlertSubscription.objects.get(token=token)
+        except BlogAlertSubscription.DoesNotExist:
+            context.update(
+                {
+                    "title": "Subscription not found",
+                    "status": context["STATUSES"]["STATUS_LINK_EXPIRED"],
+                }
+            )
+        else:
+            subscription.delete()
+            context.update(
+                {
+                    "title": "Blog alert unsubscribed",
+                    "status": context["STATUSES"]["STATUS_UNSUBSCRIBED"],
+                }
+            )
+
+        response = TemplateResponse(
+            request,
+            "patterns/pages/blogs/blog_confirmation_mail_alert_page.html",
+            context,
+        )
+        return response
+
+
+class BlogManageSubscribeView(FormView):
+    form_class = BlogSubscriptionManageForm
+    template_name = "patterns/pages/blogs/subscribe/subscribe_page_manage.html"
+
+    def get(self, request, blog_home_page, token):
+        subscription = get_object_or_404(BlogAlertSubscription, token=token)
+        return self.render_to_response(
+            {
+                **self.get_context_data(),
+                "subscription": subscription,
+                "page": blog_home_page,
+            }
+        )
+
+    def get_initial(self):
+        return {
+            **super().get_initial(),
+            "subscribe": True,  # since self.subscription didn't raise 404, subscription must exist,
+            # because while unsubscribing, record is deleted from db
+        }
+
+    def post(self, request, blog_home_page, token):
+        self.subscription = get_object_or_404(BlogAlertSubscription, token=token)
+        self.blog_home_page = blog_home_page
+        return super().post(request, blog_home_page)
+
+    def get_success_url(self):
+        return self.blog_home_page.manage_subscription_alert_url(
+            self.subscription.token
+        )
+
+    def form_valid(self, form):
+        subscribe = form.cleaned_data["subscribe"]
+        if subscribe == "False":
+            self.subscription.delete()
+            return redirect(self.blog_home_page.full_url)
+        return super().form_valid(form)

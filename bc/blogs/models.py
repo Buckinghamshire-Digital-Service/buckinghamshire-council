@@ -1,10 +1,15 @@
+import secrets
+
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
 from django.db import models
 from django.forms.widgets import CheckboxSelectMultiple
+from django.shortcuts import redirect
 from django.template.defaultfilters import slugify
+from django.template.loader import render_to_string
 from django.utils.functional import cached_property
+from django.views.generic import TemplateView
 
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from wagtail.admin.edit_handlers import (
@@ -19,7 +24,10 @@ from wagtail.core import models as wt_models
 from wagtail.core.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 
+from django_gov_notify.message import NotifyEmailMessage
+
 from bc.blogs.forms import BlogHomePageForm, BlogPostPageForm
+from bc.search.views import JOB_ALERT_STATUSES
 from bc.utils.blocks import StoryBlock
 from bc.utils.models import BasePage, RelatedPage
 from bc.utils.validators import (
@@ -259,6 +267,65 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
     def category_url(self, category):
         return self.url + self.reverse_subpage("blog-category", args=[category])
 
+    @route(r"^subscribe_to_alert/$", name="subscribe_to_alert")
+    def subscribe_to_alert(self, request):
+        from bc.blogs.views import BlogSubscribeView
+
+        return BlogSubscribeView.as_view()(request, blog_home_page=self)
+
+    @route(
+        r"^manage_subscription/(?P<token>[a-zA-Z0-9_-]+)/$", name="manage_subscription"
+    )
+    def manage_subscription(self, request, token):
+        from bc.blogs.views import BlogManageSubscribeView
+
+        return BlogManageSubscribeView.as_view()(
+            request, blog_home_page=self, token=token
+        )
+
+    @route(
+        r"^confirm_blog_alert/(?P<token>[a-zA-Z0-9_-]+)/$", name="confirm_blog_alert"
+    )
+    def confirm_blog_alert(self, request, token):
+        from bc.blogs.views import BlogAlertConfirmView
+
+        return BlogAlertConfirmView.as_view()(request, blog_home_page=self, token=token)
+
+    @route(
+        r"^unsubscribe_blog_alert/(?P<token>[a-zA-Z0-9_-]+)/$",
+        name="unsubscribe_blog_alert",
+    )
+    def unsubscribe_blog_alert(self, request, token):
+        from bc.blogs.views import BlogAlertUnsubscribeView
+
+        return BlogAlertUnsubscribeView.as_view()(
+            request, blog_home_page=self, token=token
+        )
+
+    @route(r"^confirmation_mail_alert/$", name="confirmation_mail_alert")
+    def confirmation_mail_alert(self, request):
+        return TemplateView.as_view(
+            template_name="patterns/pages/blogs/subscribe/subscribe_page_confirm.html",
+            extra_context={
+                "status": JOB_ALERT_STATUSES["STATUS_EMAIL_SENT"],
+                "STATUSES": JOB_ALERT_STATUSES,
+                "page": self,
+            },
+        )(request)
+
+    @property
+    def confirmation_mail_alert_url(self):
+        return self.url + self.reverse_subpage("confirmation_mail_alert")
+
+    def manage_subscription_alert_url(self, token):
+        return self.url + self.reverse_subpage("manage_subscription", args=[token])
+
+    def alert_confirmation_url(self, token):
+        return self.url + self.reverse_subpage("confirm_blog_alert", args=[token])
+
+    def alert_unsubscribe_url(self, token):
+        return self.url + self.reverse_subpage("unsubscribe_blog_alert", args=[token])
+
 
 class BlogPostPage(BasePage):
     parent_page_types = ["blogs.bloghomepage"]
@@ -323,3 +390,42 @@ class BlogGlobalHomePage(BasePage):
         context["recent_posts"] = self.recent_posts
 
         return context
+
+class BlogAlertSubscription(models.Model):
+    email = models.EmailField()
+    homepage = models.ForeignKey(
+        "BlogHomePage", on_delete=models.CASCADE, blank=True, null=True
+    )
+    confirmed = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True)
+    token = models.CharField(max_length=255, unique=True, editable=False)
+
+    @cached_property
+    def site_url(self):
+        return self.homepage.url.rstrip("/")
+
+    def full_clean(self, *args, **kwargs):
+        if not self.token:
+            self.token = secrets.token_urlsafe(32)
+        if not self.homepage:
+            self.homepage = BlogHomePage.objects.live().first()
+
+        super().full_clean(*args, **kwargs)
+
+    def get_email_context(self):
+        return {
+            "confirmation_url": self.site_url
+            + self.homepage.alert_confirmation_url(self.token),
+            "unsubscribe_url": self.site_url
+            + self.homepage.alert_unsubscribe_url(self.token),
+            "homepage": self.homepage,
+        }
+
+    def send_confirmation_email(self):
+        template_name = "patterns/email/confirm_blog_alert.txt"
+        context = self.get_email_context()
+        content = render_to_string(template_name, context=context)
+        email = NotifyEmailMessage(
+            subject="Blog alert subscription", body=content, to=[self.email]
+        )
+        email.send()

@@ -1,0 +1,11 @@
+You have asked to get updates from the {{ homepage.title }}.
+
+Once you have confirmed your subscription, you'll get an email each time a new blog post is published
+
+Confirm your subscription by clicking on this link: {{ confirmation_url }}
+
+Thanks for subscribing
+
+---
+
+If you haven't subscribed to this list, you can ignore this email or remove your details at {{ unsubscribe_url }}.
