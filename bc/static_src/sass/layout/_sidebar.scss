@@ -18,27 +18,9 @@
         }
     }
 
-    &--blog-hero {
-        padding-bottom: $grid--large;
-        margin-top: 0;
-        border-bottom: 2px solid $color--charcoal-50;
-
-        @include media-query(tablet-landscape) {
-            margin-top: 13px;
-            padding-bottom: 73px;
-            border-bottom: 4px solid $color--charcoal-75;
-        }
-    }
-
     &__heading {
         @include font-size(m);
-        border-top: $border--accent $color--grey-dark;
-        padding-top: $grid--small;
         margin-bottom: $grid--small;
-
-        .sidebar--part-of & {
-            border-top: $border--accent $color--sky;
-        }
     }
 
     &__link {
@@ -105,6 +87,19 @@
         #{$root}__inner {
             background: $color--grey-light;
             padding: $grid $grid--small;
+        }
+    }
+
+    section {
+        padding: $grid--small 0;
+        border-top: $border--accent $color--grey-dark;
+
+        &.sidebar--part-of {
+            border-top: $border--accent $color--sky;
+        }
+
+        &:last-child {
+            border-bottom: $border--accent $color--grey-dark;
         }
     }
 }

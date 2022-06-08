@@ -1,6 +1,6 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
-<ul class="blog-list {% if not page.featured_blogpost_page %}blog-list--no-border{% endif %}">
+<ul class="blog-list">
     {% for item in items %}
         <li class="blog-list__item">
             <a href="{% pageurl item %}">
@@ -13,7 +13,7 @@
                 {% endcomment %}
             </p>
             {% if item.image %}
-                {% image item.image fill-650x400 %}
+                {% image item.image fill-650x400 class="blog-list__item-image" %}
             {% endif %}
             <p class="blog-list__item-content">
                 {{ item.listing_summary }}

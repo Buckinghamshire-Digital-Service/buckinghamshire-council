@@ -2,15 +2,6 @@
     $root: &;
     list-style: none;
 
-    &--no-border {
-        #{$root}__item {
-            &:first-of-type {
-                padding-top: 0;
-                border-top: 0;
-            }
-        }
-    }
-
     &__item {
         padding: $grid--medium 0;
         border-bottom: 1px solid $color--charcoal-50;
@@ -34,5 +25,9 @@
     &__item-read-more {
         @include font-size(s);
         margin-top: $grid--small;
+    }
+
+    &__item-image {
+        width: 100%;
     }
 }

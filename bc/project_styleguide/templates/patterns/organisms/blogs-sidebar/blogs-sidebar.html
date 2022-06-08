@@ -1,0 +1,12 @@
+{% load wagtailcore_tags %}
+
+<div class="sidebar">
+    <section>
+        <h2 class="sidebar__heading heading">{{ page.about_title }}</h2>
+        <p>{{ page.about_description }}</p>
+        <a href="{% pageurl page.about_page %}">Find out more</a>
+    </section>
+    {% include 'patterns/molecules/blog-recent-posts/blog-recent-posts.html' with recent_posts=page.recent_posts %}
+    {% include "patterns/molecules/navigation/sidebar-section.html" with related_pages=page.related_pages.all %}
+    {% include 'patterns/molecules/blogs-social-section/blogs-social-section.html' %}
+</div>

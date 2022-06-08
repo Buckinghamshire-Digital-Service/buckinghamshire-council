@@ -1,0 +1,16 @@
+{% load wagtailcore_tags %}
+
+{% if recent_posts %}
+    <section>
+        <h2 class="sidebar__heading heading">Recent posts</h2>
+        <ul class="sidebar__link-list">
+            {% for post in recent_posts %}
+                <li>
+                    <span class="sidebar__link">
+                        <a href="{% pageurl post %}">{{ post.title }}</a> - {{ post.date_published|date:"d F Y" }}
+                    </span>                    
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endif %}
