@@ -3,7 +3,7 @@
 <div class="featured-blog-post">
     <div class="featured-blog-post__content">
         <a href="{% pageurl page %}"><h2 class="heading heading--l featured-blog-post__title">{{ page.title }}</h2></a>
-        <p class="featured-blog-post__description">{{ page.listing_summary }}</p>
+        <p class="featured-blog-post__description">{{ page.intro_text|truncatewords:50 }}</p>
         <a href="{% pageurl page %}" class="featured-blog-post__read-more">Read more</a>
     </div>
     {% image listing_image fill-650x410 %}
