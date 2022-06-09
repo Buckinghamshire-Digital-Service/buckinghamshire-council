@@ -87,7 +87,7 @@ class SocialMediaLinks(models.Model):
 
 class BlogHomePage(SocialMediaLinks, BasePage):
     parent_page_types = ["home.homepage"]
-    subpage_types = ["blogs.blogpostpage"]
+    subpage_types = ["blogs.blogpostpage", "standardpages.informationpage"]
 
     template = "patterns/pages/blogs/blog_home_page.html"
 
@@ -117,8 +117,6 @@ class BlogHomePage(SocialMediaLinks, BasePage):
         help_text="If the page has its own image, it will override any image set here.",
     )
 
-    # add social media links
-
     content_panels = (
         BasePage.content_panels
         + [
@@ -126,7 +124,9 @@ class BlogHomePage(SocialMediaLinks, BasePage):
                 [
                     FieldPanel("about_title", heading="Title"),
                     FieldPanel("about_description", heading="Description"),
-                    PageChooserPanel("about_page"),
+                    PageChooserPanel(
+                        "about_page", page_type="standardpages.informationpage"
+                    ),
                 ],
                 heading="About section",
             ),
