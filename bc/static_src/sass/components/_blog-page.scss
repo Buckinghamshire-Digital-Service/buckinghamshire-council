@@ -1,6 +1,8 @@
 .blog-page {
     &__title {
         color: $color--slate;
+        border-top: 1px solid $color--charcoal-50;
+        padding-top: $grid--small;
 
         &--search {
             margin-bottom: $grid--medium;

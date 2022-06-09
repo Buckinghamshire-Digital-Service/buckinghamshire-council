@@ -2,7 +2,7 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-    {% include "patterns/molecules/hero/hero--blog.html" with page=page.homepage %}
+    {% include "patterns/molecules/hero/hero--blog.html" with page=page.homepage link_back=True %}
 
     <div class="wrapper wrapper--flex blog-page">
         <div class="section section--main">

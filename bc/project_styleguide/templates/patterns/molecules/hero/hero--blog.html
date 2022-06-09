@@ -1,7 +1,15 @@
-<div class="hero">
+{% load wagtailcore_tags %}
+
+<div class="blog-hero">
     <div class="wrapper wrapper--flex">
         <div class="section section--main">
-            <h1 class="heading heading--xxl blog-hero__title">{{ page.title }}</h1>
+            <h1 class="heading heading--xxl blog-hero__title">
+                {% if link_back %}
+                <a href="{% pageurl page %}">{{ page.title }}</a>
+                {% else %}
+                {{ page.title }}
+                {% endif %}
+            </h1>
         </div>
         <div class="sidebar">
             <form action="" method="get" role="search" class="form blog-hero__form">

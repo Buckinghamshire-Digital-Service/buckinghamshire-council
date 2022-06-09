@@ -1,6 +1,11 @@
 .blog-hero {
+    padding: $grid--large 0 0;
     &__title {
         color: $color--slate;
+
+        a {
+            color: $color--slate;
+        }
     }
 
     &__form {
