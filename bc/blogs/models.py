@@ -173,6 +173,10 @@ class BlogHomePage(SocialMediaLinks, BasePage):
                 return self.featured_blogpost_page.image
         return self.featured_blogpost_image
 
+    @property
+    def recent_posts(self):
+        return BlogPostPage.objects.child_of(self).live().order_by("date_published")[:3]
+
 
 class BlogPostPage(BasePage):
     parent_page_types = ["blogs.bloghomepage"]
