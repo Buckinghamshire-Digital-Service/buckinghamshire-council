@@ -326,6 +326,14 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
     def alert_unsubscribe_url(self, token):
         return self.url + self.reverse_subpage("unsubscribe_blog_alert", args=[token])
 
+    def alert_confirmation_full_url(self, token):
+        return self.full_url + self.reverse_subpage("confirm_blog_alert", args=[token])
+
+    def alert_unsubscribe_full_url(self, token):
+        return self.full_url + self.reverse_subpage(
+            "unsubscribe_blog_alert", args=[token]
+        )
+
 
 class BlogPostPage(BasePage):
     parent_page_types = ["blogs.bloghomepage"]
@@ -400,22 +408,24 @@ class BlogAlertSubscription(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     token = models.CharField(max_length=255, unique=True, editable=False)
 
-    @cached_property
-    def site_url(self):
-        return self.homepage.url.rstrip("/")
-
     def full_clean(self, *args, **kwargs):
         if not self.token:
             self.token = secrets.token_urlsafe(32)
 
         super().full_clean(*args, **kwargs)
 
+    @property
+    def unsubscribe_url(self):
+        return self.homepage.alert_unsubscribe_full_url(self.token)
+
+    @property
+    def confirmation_url(self):
+        return self.homepage.alert_confirmation_full_url(self.token)
+
     def get_email_context(self):
         return {
-            "confirmation_url": self.site_url
-            + self.homepage.alert_confirmation_url(self.token),
-            "unsubscribe_url": self.site_url
-            + self.homepage.alert_unsubscribe_url(self.token),
+            "confirmation_url": self.confirmation_url,
+            "unsubscribe_url": self.unsubscribe_url,
             "homepage": self.homepage,
         }
 

@@ -1,0 +1,12 @@
+A new post, "{{ blog_post_page.title }}" has just been published on the {{ blog_home_page.title }}.
+
+{{ blog_post_page.intro|truncatewords:50 }}
+
+Read the new post:
+{{ blog_post_page.full_url }}
+
+---
+
+You are getting this email because you are subscribed to updates from the {{ blog_home_page.title }}.
+
+Unsubscribe from the {{ blog_home_page.title }} at {{ alert_unsubscribe_url }}.
