@@ -98,6 +98,8 @@ class BlogHomePage(SocialMediaLinks, BasePage):
         on_delete=models.PROTECT,
         related_name="+",
         verbose_name="Page link",
+        null=True,
+        blank=True,
     )
 
     featured_blogpost_page = models.ForeignKey(

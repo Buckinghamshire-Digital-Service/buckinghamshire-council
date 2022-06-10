@@ -16,8 +16,7 @@
     }
 
     &__content {
-        margin-bottom: $grid--large * 4;
-        padding-bottom: $grid--large * 2;
+        padding-bottom: $grid--large;
         border-bottom: 2px solid $color--charcoal-50;
     }
 }
