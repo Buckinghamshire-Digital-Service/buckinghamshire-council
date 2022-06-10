@@ -158,7 +158,7 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
 
     def get_context(self, request, *args, **kwargs):
         page = request.GET.get("page", 1)
-        blogs = BlogPostPage.objects.child_of(self)
+        blogs = BlogPostPage.objects.child_of(self).order_by("-date_published")
 
         paginator = Paginator(blogs, settings.DEFAULT_PER_PAGE)
         blogs = paginator.get_page(page)
@@ -171,14 +171,15 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
 
     @property
     def featured_image(self):
-        if self.featured_blogpost_page:
-            if self.featured_blogpost_page.image:
-                return self.featured_blogpost_page.image
-        return self.featured_blogpost_image
+        if self.featured_blogpost_image:
+            return self.featured_blogpost_image
+        return self.featured_blogpost_page.image
 
     @property
     def recent_posts(self):
-        return BlogPostPage.objects.child_of(self).live().order_by("date_published")[:3]
+        return (
+            BlogPostPage.objects.child_of(self).live().order_by("-date_published")[:3]
+        )
 
     @route(r"^search/$", name="blog-search")
     def search(self, request):
