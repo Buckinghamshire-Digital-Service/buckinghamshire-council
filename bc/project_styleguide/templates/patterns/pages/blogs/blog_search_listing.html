@@ -1,4 +1,4 @@
-{% extends base_page_template %}
+{% extends 'patterns/base_page--blogs.html' %}
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
@@ -6,13 +6,11 @@
 
     <div class="wrapper wrapper--flex blog-page">
         <div class="section section--main">
-            <h2 class="heading heading--xl blog-page__title blog-page__title--search">{{ page.sub_title }}</h2>
-            {% include "patterns/molecules/blog-list/blog-list.html" %}
-            {% include "patterns/molecules/pagination/pagination.html" with modifier="pagination--centred" %}
+            <h2 class="heading heading--xl blog-page__title blog-page__title--search">Search results for {{ page.title|lower }}</h2>
+            {% include "patterns/molecules/blog-list/blog-list.html" with items=search_results.object_list %}
+            {% include "patterns/molecules/pagination/pagination.html" with modifier="pagination--centred" paginator_page=search_results %}
         </div>
 
-        <div class="sidebar">
-            [Sidebar content]
-        </div>
+        {% include 'patterns/organisms/blogs-sidebar/blogs-sidebar.html' %}
     </div>
 {% endblock %}

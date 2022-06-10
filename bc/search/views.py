@@ -15,6 +15,7 @@ from django.views.generic.base import View
 from wagtail.core.models import Page, Site
 from wagtail.search.models import Query
 
+from bc.blogs.models import BlogHomePage, BlogPostPage
 from bc.campaigns.models import CampaignIndexPage, CampaignPage
 from bc.recruitment.forms import SearchAlertSubscriptionForm
 from bc.recruitment.models import JobAlertSubscription
@@ -54,7 +55,6 @@ class SearchView(View):
             )
             if settings.ENABLE_JOBS_SEARCH_ALERT_SUBSCRIPTIONS:
                 context["job_alert_form"] = SearchAlertSubscriptionForm
-
         # Main site search
         else:
             if search_query:
@@ -116,6 +116,12 @@ class SearchView(View):
                 )
                 page_queryset_for_search = page_queryset_for_search.not_type(
                     CampaignPage
+                )
+                page_queryset_for_search = page_queryset_for_search.not_type(
+                    BlogHomePage
+                )
+                page_queryset_for_search = page_queryset_for_search.not_type(
+                    BlogPostPage
                 )
 
                 search_results = page_queryset_for_search.search(

@@ -12,6 +12,7 @@ from wagtail.admin.edit_handlers import (
     PageChooserPanel,
     StreamFieldPanel,
 )
+from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.core.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 
@@ -85,7 +86,7 @@ class SocialMediaLinks(models.Model):
         }
 
 
-class BlogHomePage(SocialMediaLinks, BasePage):
+class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
     parent_page_types = ["home.homepage"]
     subpage_types = ["blogs.blogpostpage", "standardpages.informationpage"]
 
@@ -178,6 +179,16 @@ class BlogHomePage(SocialMediaLinks, BasePage):
     @property
     def recent_posts(self):
         return BlogPostPage.objects.child_of(self).live().order_by("date_published")[:3]
+
+    @route(r"^search/$", name="blog-search")
+    def search(self, request):
+        from bc.blogs.views import SearchView
+
+        return SearchView.as_view()(request, blog_home_page=self)
+
+    @property
+    def search_url(self):
+        return self.url + self.reverse_subpage("blog-search")
 
 
 class BlogPostPage(BasePage):
