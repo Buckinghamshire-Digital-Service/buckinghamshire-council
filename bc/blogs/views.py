@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.http import Http404
 from django.views.generic import ListView
 
 from bc.blogs.utils import get_blogs_search_results
@@ -8,13 +9,18 @@ class SearchView(ListView):
     paginate_by = settings.DEFAULT_PER_PAGE
     template_name = "patterns/pages/blogs/blog_search_listing.html"
 
+    def paginate_queryset(self, queryset, page_size):
+        try:
+            return super().paginate_queryset(queryset, page_size)
+        except Http404:
+            self.kwargs[self.page_kwarg] = "last"
+            return super().paginate_queryset(queryset, page_size)
+
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
         return {
-            **context,
+            **super().get_context_data(**kwargs),
             "page": self.blog_home_page,
             "search_query": self.search_query,
-            "search_results": context["paginator"],
         }
 
     def get(self, request, blog_home_page):

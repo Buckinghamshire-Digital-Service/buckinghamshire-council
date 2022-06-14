@@ -7,8 +7,8 @@
     <div class="wrapper wrapper--flex blog-page">
         <div class="section section--main">
             <h2 class="heading heading--xl blog-page__title blog-page__title--search">Search results for {{ page.title|lower }}</h2>
-            {% include "patterns/molecules/blog-list/blog-list.html" with items=search_results.object_list %}
-            {% include "patterns/molecules/pagination/pagination.html" with modifier="pagination--centred" paginator_page=search_results %}
+            {% include "patterns/molecules/blog-list/blog-list.html" with items=page_obj.object_list %}
+            {% include "patterns/molecules/pagination/pagination.html" with modifier="pagination--centred" paginator_page=page_obj %}
         </div>
 
         {% include 'patterns/organisms/blogs-sidebar/blogs-sidebar.html' %}
