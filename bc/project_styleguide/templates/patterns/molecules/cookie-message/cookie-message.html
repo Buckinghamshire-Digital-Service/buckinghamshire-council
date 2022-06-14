@@ -2,25 +2,25 @@
 <section class="cookie wrapper wrapper--large" aria-label="cookie banner" data-cookie-message>
     <div class="cookie__container">
         <div class="cookie__message">
-            <h2 class="cookie__heading heading heading--l">Cookies on buckinghamshire.gov.uk</h2>
+            <h2 class="cookie__heading heading heading--l">This site uses cookies</h2>
             <p>We use some essential cookies to make this website work.</p>
             <p>We’d like to set additional cookies to understand how you use the website, remember your settings and improve our services.</p>
-            <p>We also use cookies set by other sites to help us deliver content from their services.</p>
-
-            <button class="cookie__button button button--basic" data-cookie-accept>
-                Accept additional cookies
-            </button>
-            <button class="cookie__decline button button--basic" data-cookie-decline>
-                Reject additional cookies
-            </button>
-
-            {% with settings.utils.ImportantPages.cookie_information_page as cookie_page %}
-            {% if cookie_page %}
-            <a href="{% pageurl cookie_page %}">View cookies</a>
-            {% else %}
-            <a href="/about/cookies/">View cookies</a>
-            {% endif %}
-            {% endwith %}
+            <div class="cookie__buttons">
+                <button class="cookie__button button button--basic" data-cookie-accept>
+                    Accept additional cookies
+                </button>
+                <button class="cookie__decline button button--basic" data-cookie-decline>
+                    Reject additional cookies
+                </button>
+    
+                {% with settings.utils.ImportantPages.cookie_information_page as cookie_page %}
+                {% if cookie_page %}
+                <a class="cookie__view" href="{% pageurl cookie_page %}">View cookies</a>
+                {% else %}
+                <a class="cookie__view" href="/about/cookies/">View cookies</a>
+                {% endif %}
+                {% endwith %}
+            </div>
         </div>
     </div>
 </section>

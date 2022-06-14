@@ -59,21 +59,17 @@ class CookieWarning {
     }
 
     bindEvents() {
-        if (!this.acceptButton) {
-            return;
+        if (this.acceptButton) {
+            this.acceptButton.addEventListener('click', (event) =>
+                this.applyCookie(event),
+            );
         }
 
-        this.acceptButton.addEventListener('click', (event) =>
-            this.applyCookie(event),
-        );
-
-        if (!this.declineButton) {
-            return;
+        if (this.declineButton) {
+            this.declineButton.addEventListener('click', (event) => {
+                this.declineCookie(event);
+            });
         }
-
-        this.declineButton.addEventListener('click', (event) => {
-            this.declineCookie(event);
-        });
     }
 }
 

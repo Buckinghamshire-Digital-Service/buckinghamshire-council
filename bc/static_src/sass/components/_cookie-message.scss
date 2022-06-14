@@ -44,9 +44,26 @@
         margin-bottom: $grid--small;
     }
 
-    &__button,
-    &__decline {
-        // separate class for decline because gtm looks for cookie__button in classname
+    &__buttons {
+        display: flex;
+        flex-direction: column;
         margin-top: $grid--small;
+
+        @include media-query(mob-landscape) {
+            flex-direction: row;
+            align-items: center;
+        }
+
+        > *:not(:first-child) {
+            margin-top: $grid--small;
+
+            @include media-query(mob-landscape) {
+                margin: 0 0 0 $grid--small;
+            }
+        }
+    }
+
+    &__view {
+        text-align: center;
     }
 }
