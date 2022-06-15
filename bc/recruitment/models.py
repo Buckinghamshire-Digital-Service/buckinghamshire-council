@@ -191,8 +191,8 @@ class TalentLinkJob(models.Model):
     salary_range = models.CharField(max_length=255)
     contract_type = models.CharField(max_length=255, blank=True)
     working_hours = models.CharField(max_length=255)
-    dbs_check = models.BooleanField(
-        default=False, verbose_name="Does this role require a DBS check?"
+    dbs_check = models.TextField(
+        default="No", verbose_name="Does the role require a DBS check?"
     )
     closing_date = models.DateField()
     expected_start_date = models.DateField(null=True)
