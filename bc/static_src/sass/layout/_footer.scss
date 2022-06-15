@@ -7,12 +7,17 @@
 
     &--jobs {
         #{$root}__social-links {
-            order: 3;
+            order: 4;
         }
 
         #{$root}__ogl {
-            order: 2;
+            order: 3;
             margin-top: 0;
+        }
+
+        #{$root}__safe-space {
+            order: 2;
+            flex-basis: 100%;
         }
     }
 
@@ -94,6 +99,10 @@
 
     &__social-links-text {
         margin-top: 0;
+    }
+
+    &__safe-space {
+        margin: 0 0 $grid--small;
     }
 
     &__ogl {
