@@ -7,10 +7,10 @@
                 <h2 class="heading heading--l blog-list__item-title ">{{ item.title }}</h2>
             </a>
             <p class="blog-list__item-meta">
-                {{ item.author }}, {{ item.date_published|date:"d F Y" }}
-                {% comment %}
-                - <a href="">Tag one</a>, <a href="">Tag two</a>
-                {% endcomment %}
+                {{ item.author }}, {{ item.date_published|date:"d F Y" }} - 
+                {% for category in item.categories.all  %}
+                    {% if forloop.counter0  > 0 %}, {% endif %}<a href=""> {{ category.name }}</a>
+                {% endfor %}
             </p>
             {% if item.image %}
                 {% image item.image fill-650x400 class="blog-list__item-image" %}

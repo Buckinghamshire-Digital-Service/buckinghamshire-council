@@ -2,10 +2,12 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
 from django.db import models
+from django.forms.widgets import CheckboxSelectMultiple
 from django.shortcuts import redirect
+from django.template.defaultfilters import slugify
 from django.utils.functional import cached_property
 
-from modelcluster.fields import ParentalKey
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from wagtail.admin.edit_handlers import (
     FieldPanel,
     InlinePanel,
@@ -18,6 +20,7 @@ from wagtail.core import models as wt_models
 from wagtail.core.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 
+from bc.blogs.forms import BlogPostPageForm
 from bc.utils.blocks import StoryBlock
 from bc.utils.models import BasePage, RelatedPage
 from bc.utils.validators import (
@@ -88,6 +91,21 @@ class SocialMediaLinks(models.Model):
         }
 
 
+class RelatedCategories(models.Model):
+    source_page = ParentalKey("blogs.BlogHomePage", related_name="related_categories")
+    name = models.TextField()
+    slug = models.SlugField()
+
+    class Meta:
+        unique_together = ["source_page", "slug"]
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        return super().save(*args, *kwargs)
+
+    panels = [FieldPanel("name")]
+
+
 class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
     parent_page_types = ["blogs.blogglobalhomepage"]
     subpage_types = ["blogs.blogpostpage", "standardpages.informationpage"]
@@ -135,6 +153,7 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
                 ],
                 heading="About section",
             ),
+            InlinePanel("related_categories", label="Related categories", min_num=1),
             MultiFieldPanel(
                 [
                     PageChooserPanel("featured_blogpost_page"),
@@ -178,6 +197,14 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
         return self.featured_blogpost_page.image
 
     @property
+    def categories(self):
+        return (
+            self.related_categories.prefetch_related("related_posts")
+            .annotate(num_related_posts=models.Count("related_posts"))
+            .values("name", "num_related_posts")
+        )
+
+    @property
     def recent_posts(self):
         return (
             BlogPostPage.objects.child_of(self).live().order_by("-date_published")[:3]
@@ -196,8 +223,13 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
 
 class BlogPostPage(BasePage):
     parent_page_types = ["blogs.bloghomepage"]
+    base_form_class = BlogPostPageForm
 
     template = "patterns/pages/blogs/blog_post_page.html"
+
+    categories = ParentalManyToManyField(
+        "blogs.RelatedCategories", related_name="related_posts"
+    )
 
     intro_text = models.TextField()
 
@@ -215,6 +247,7 @@ class BlogPostPage(BasePage):
     body = StreamField(StoryBlock())
 
     content_panels = BasePage.content_panels + [
+        FieldPanel("categories", widget=CheckboxSelectMultiple),
         FieldPanel("intro_text"),
         ImageChooserPanel("image"),
         FieldPanel("author"),
