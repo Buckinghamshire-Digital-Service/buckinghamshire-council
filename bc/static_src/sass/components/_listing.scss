@@ -13,9 +13,18 @@
     &__title {
         @include font-size(s);
         margin: 0;
+
+        &--blog {
+            color: $color--river;
+        }
     }
 
     &__summary {
         margin: 0;
+
+        &--blog {
+            @include font-size(s);
+            color: $color--slate;
+        }
     }
 }

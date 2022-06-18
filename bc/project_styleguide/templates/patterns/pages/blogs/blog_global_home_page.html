@@ -1,0 +1,52 @@
+{% extends base_page_template %}
+{% load wagtailcore_tags wagtailimages_tags navigation_tags static %}
+{% block breadcrumbs %}
+    <div class="blog-hero"></div>
+{% endblock %}
+{% block content %}
+<div class="wrapper wrapper--flex">
+    <div class="section section--main">
+        <h1 class="heading heading--xxl">{{ page.title }}</h1>
+
+        {% if recent_posts %}
+        <h2 class="heading heading--xl blog-page__title">Recent blog posts from around the council</h2>
+        <section class="grid grid--index" aria-label="Recent blogs">
+            {% for subpage in recent_posts %}
+            <a class="card card--blog" href="{% pageurl subpage %}">
+                {% if subpage.image %}
+                {% image subpage.image fill-650x400 class="card__image" %}
+                {% endif %}
+                <p class="card__summary">{{ subpage.date_published|date:"d F Y" }} - {{ subpage.get_parent.title }}</p>
+                <h2 class="card__title heading">
+                    {% firstof subpage.listing_title subpage.title %}
+                </h2>
+                <p class="card__summary">{{ subpage.intro_text }}</p>
+            </a>
+            {% endfor %}
+        </section>
+        {% endif %}
+    </div>
+</div>
+{% if blog_home_pages %}
+<div class="wrapper wrapper--flex">
+    <div class="sidebar">
+        <h1 class="heading heading--xxl">All our blogs</h1>
+    </div>
+    <div class="section section--main">
+        <h1 class="heading heading--xxl">{{ blog_home_pages|length }} <sup class="heading--m">Blogs</sup></h1>
+        <section class="listing" aria-label="Subpages">
+            {% for subpage in blog_home_pages %}
+            <article class="listing__item" aria-labelledby="listing__item--{{ forloop.counter }}">
+                <a class="listing__link" href="{% pageurl subpage %}">
+                    <h2 class="heading heading--l listing__title--blog blog-page__title" id="listing__item--{{ forloop.counter }}">
+                        {% firstof subpage.listing_title subpage.title %}
+                    </h2>
+                </a>
+                <p class="listing__summary--blog">{{ subpage.about_description }}</p>
+            </article>
+            {% endfor %}
+        </section>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
