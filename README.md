@@ -74,6 +74,7 @@ Starting a local build can be done by running:
 ```bash
 git clone git@git.torchbox.com:buckinghamshire-council/bc.git
 cd bc
+cp bc/settings/local.py.example bc/settings/local.py
 fab build
 fab migrate
 fab start
