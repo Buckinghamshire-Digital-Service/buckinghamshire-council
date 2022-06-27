@@ -443,7 +443,7 @@ def run_test(c):
             "python",
             "manage.py",
             "test",
-            "--parallel",
+            "--settings=bc.settings.production",
         ]
     )
 
