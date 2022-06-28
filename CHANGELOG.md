@@ -2,6 +2,7 @@
 
 ## UNRELEASED
 
+- Add beacons for different steps throughout a job application
 - Fix location pages, by migrating data to aligned table structure
 - Docker for development work https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/522
 
