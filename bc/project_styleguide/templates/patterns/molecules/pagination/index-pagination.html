@@ -5,8 +5,9 @@
         <ul class="index-pagination__list">
             <li class="index-pagination__item index-pagination__item--previous">
                 {% if prev_page %}
+                    {% firstof prev_page.content_title prev_page as prev_page_title %}
                     <a
-                        aria-label="Goto previous page - {{ prev_page }}"
+                        aria-label="Previous {{ prev_page_title }}"
                         class="index-pagination__button link--alt"
                         href="{% pageurl prev_page %}"
                         rel="prev"
@@ -14,7 +15,7 @@
                         {% include "patterns/atoms/icons/icon.html" with name="arrow" classname="icon--stroke index-pagination__icon index-pagination__icon--previous" %}
                         <span class="index-pagination__text">
                             Previous
-                            <span class="index-pagination__page-title">{% firstof prev_page.content_title prev_page %}</span>
+                            <span class="index-pagination__page-title">{{ prev_page_title }}</span>
                         </span>
                     </a>
                 {% endif %}
@@ -22,8 +23,9 @@
 
             <li class="index-pagination__item index-pagination__item--next">
                 {% if next_page %}
+                {% firstof next_page.content_title next_page as next_page_title %}
                     <a
-                        aria-label="Goto next page - {{ next_page }}"
+                        aria-label="Next {{ next_page_title }}"
                         class="index-pagination__button index-pagination__button--next link--alt"
                         href="{% pageurl next_page %}"
                         rel="next"
@@ -31,7 +33,7 @@
                         {% include "patterns/atoms/icons/icon.html" with name="arrow" classname="icon--stroke index-pagination__icon index-pagination__icon--next" %}
                         <span class="index-pagination__text">
                             Next
-                            <span class="index-pagination__page-title">{% firstof next_page.content_title next_page %}</span>
+                            <span class="index-pagination__page-title">{{ next_page_title }}</span>
                         </span>
                     </a>
                 {% endif %}
