@@ -1,0 +1,8 @@
+context:
+  recent_posts:
+    - title: 'Title 1'
+
+tags:
+  pageurl:
+    post:
+      raw: '#'

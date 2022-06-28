@@ -1,0 +1,8 @@
+tags:
+  image:
+    item.image fill-650x400:
+      raw: |
+        <img src="https://via.placeholder.com/650x400" width="650" height="400">
+  pageurl:
+    item:
+      raw: '#'

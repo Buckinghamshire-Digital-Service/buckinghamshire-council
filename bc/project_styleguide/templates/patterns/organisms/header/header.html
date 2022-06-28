@@ -6,6 +6,7 @@
             {% include "patterns/atoms/icons/icon.html" with name="logo" classname="header__logo" %}
         </a>
 
+        {% if show_search %}
         <div class="header__search">
             <form action="{% url 'search' %}" method="get" role="search" class="form form--header-search">
                 <label class="u-sr-only" for="search">Search this website</label>
@@ -15,5 +16,6 @@
                 </button>
             </form>
         </div>
+        {% endif %}
     </div>
 </div>

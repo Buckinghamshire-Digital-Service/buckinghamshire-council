@@ -1,0 +1,15 @@
+context:
+  base_page_template: 'patterns/base_page.html'
+  page:
+    title: Fostering blog
+    sub_title: Tips for talking to your child about fostering
+    author: Jane Campbell
+    date: !!timestamp '2022-05-31'
+
+tags:
+  sidebar:
+    '':
+      template_name: 'patterns/molecules/navigation/sidebar.html'
+  include_block:
+    page.content:
+      template_name: 'patterns/molecules/streamfield/stream_block.html'

@@ -1,0 +1,62 @@
+context:
+  base_page_template: 'patterns/base_page.html'
+  page:
+    title: Fostering blog
+    about_title: About the fostering service
+    about_description: The fostering service provides advice, support and information for those looking to foster.
+    related_pages:
+      all:
+        - page:
+            live: true
+            specific:
+              title: The fostering network
+        - page:
+            live: true
+            specific:
+              title: Come to a fostering event
+        - page:
+            live: true
+            specific:
+              title: Already looking after someone else's child?
+        - page:
+            live: true
+            specific:
+              title: Sign up to our fostering mailing list
+    has_any_social_setting: True
+    socials:
+      twitter_handle: '@test'
+      facebook_page_url: 'https://facebook.com/bucksfamilyinfo'
+      linkedin_url: https://example.com
+      youtube_channel_url: 'https://example.com'
+    recent_posts:
+      - title: 'Tips for talking to your child about fostering'
+        date_published: !!timestamp '2021-12-17'
+      - title: 'The adventure of newly approved foster carers Steven and John'
+        date_published: !!timestamp '2021-11-21'
+      - title: 'Sheila, a Buckinghamshire Foster Carer, shares her experience of fostering teenagers'
+        date_published: !!timestamp '2021-11-10'
+      - title: 'Q&A with Long-Term Buckinghamshire Council Foster Carer Debbie Armstrong'
+        date_published: !!timestamp '2021-10-14'
+      - title: 'Foster with Bucks Celebrates LGBTQ+ Fostering and Adoption Week'
+        date_published: !!timestamp '2021-10-03'
+  blogs:
+    object_list:
+      - title: Tips for talking to your child about fostering
+        author: Jane Campbell
+        date: !!timestamp '2022-05-31'
+        image: True
+        description: The decision to foster is one that takes a lot of thought and consideration. You may have questions and concerns about how fostering will impact your family life, and in particular, how it will impact your own children.
+      - title: The adventure of newly approved foster carers Steven and John
+        author: Sally Dixon
+        date: !!timestamp '2022-03-15'
+        description: Steven and John were approved as foster carers late last year, and open up about how they’ve found the experience so far.
+      - title: Q&A with Long-Term Buckinghamshire Council Foster Carer
+        author: Joe Bloggs
+        date: !!timestamp '2021-12-03'
+        image: True
+        description: With Foster Care Fortnight well underway in these very strange times, we caught up with one of our current respite and emergency foster carers to ask some key questions that may be of interest to anyone looking for a first-hand account of Fostering with Bucks.
+
+tags:
+  sidebar:
+    '':
+      template_name: 'patterns/molecules/navigation/sidebar.html'
