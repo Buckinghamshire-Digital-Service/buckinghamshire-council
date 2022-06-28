@@ -5,6 +5,23 @@
 - Fix location pages, by migrating data to aligned table structure
 - Docker for development work https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/522
 
+## 55.0 (2022-06-28)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/54.2...55.0>
+
+- Add model for `BlogHomePage` and corresponding template
+- Add model and UI for `BlogPostPage`
+- Add backend for blogs search
+- Add recent posts block to blog sidebar
+- Add social media links to blog sidebars
+- Add search bar for the blog site
+- Add blogs list UI component
+- Add filtered view - search results
+- Add pagination on blog homepage
+- Add featured blog post UI
+- Fix blog listing border
+- Add intro text to be displayed in blog home page listings
+
 ## 54.2 (2022-06-28)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/54.1...54.2>
