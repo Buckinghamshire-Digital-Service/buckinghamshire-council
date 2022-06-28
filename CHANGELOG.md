@@ -1,5 +1,11 @@
 # Release History
 
+## 54.2 (2022-06-28)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/54.1...54.2>
+
+- Fix aria labels of buttons in pagination and local area link blocks
+
 ## 54.1 (2022-05-23)
 
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/54.0...54.1
