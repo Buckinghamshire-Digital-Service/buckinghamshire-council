@@ -1,0 +1,18 @@
+{% extends 'patterns/base_page--blogs.html' %}
+
+{% block content %}
+    {% include "patterns/molecules/hero/hero--blog.html" %}
+
+    {% if page.featured_blogpost_page %}
+        {% include 'patterns/molecules/featured_blog_post/featured_blog_post.html' with page=page.featured_blogpost_page listing_image=page.featured_image %}
+    {% endif %}
+
+    <div class="wrapper wrapper--flex">
+        <div class="section section--main">
+            {% include "patterns/molecules/blog-list/blog-list.html" with items=blogs.object_list %}
+            {% include "patterns/molecules/pagination/pagination.html" with modifier="pagination--centred" paginator_page=blogs %}
+        </div>
+
+        {% include 'patterns/organisms/blogs-sidebar/blogs-sidebar.html' %}
+    </div>
+{% endblock %}

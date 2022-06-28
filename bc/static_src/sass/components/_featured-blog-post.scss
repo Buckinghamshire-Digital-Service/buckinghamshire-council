@@ -1,0 +1,40 @@
+.featured-blog-post {
+    background-color: $color--charcoal-10;
+    padding: $grid;
+    margin-bottom: $grid--medium;
+    display: grid;
+    grid-gap: $grid;
+
+    @include media-query(tablet-landscape) {
+        grid-template-columns: 1.3fr 3fr;
+        grid-gap: 70px;
+    }
+
+    &__content {
+        order: 1;
+
+        @include media-query(tablet-landscape) {
+            order: initial;
+        }
+    }
+
+    &__title {
+        margin-top: 0;
+    }
+
+    &__description {
+        @include font-size(s);
+        line-height: 1.35;
+        color: $color--slate;
+    }
+
+    &__read-more {
+        @include font-size(s);
+        line-height: 1.35;
+        margin-top: 15px;
+    }
+
+    img {
+        width: 100%;
+    }
+}

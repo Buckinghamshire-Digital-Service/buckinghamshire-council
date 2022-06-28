@@ -1,0 +1,33 @@
+.blog-list {
+    $root: &;
+    list-style: none;
+
+    &__item {
+        padding: $grid--medium 0;
+        border-bottom: 1px solid $color--charcoal-50;
+        border-top: 1px solid $color--charcoal-50;
+    }
+
+    &__item-title {
+        font-weight: $weight--bold;
+        margin: 0;
+    }
+
+    &__item-meta {
+        color: $color--slate;
+    }
+
+    &__item-content {
+        @include font-size(s);
+        color: $color--slate;
+    }
+
+    &__item-read-more {
+        @include font-size(s);
+        margin-top: $grid--small;
+    }
+
+    &__item-image {
+        width: 100%;
+    }
+}

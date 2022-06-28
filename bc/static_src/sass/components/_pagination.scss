@@ -9,6 +9,16 @@
         margin-top: 0;
     }
 
+    &--centred {
+        border-top: 0;
+        padding-top: 0;
+        margin: $grid 0;
+
+        #{$root}__list {
+            justify-content: center;
+        }
+    }
+
     &__list {
         display: flex;
         flex-wrap: wrap;

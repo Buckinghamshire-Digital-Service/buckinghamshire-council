@@ -1,0 +1,27 @@
+{% extends 'patterns/base_page--blogs.html' %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block content %}
+    {% include "patterns/molecules/hero/hero--blog.html" with page=page.homepage link_back=True %}
+
+    <div class="wrapper wrapper--flex blog-page">
+        <div class="section section--main">
+            <h2 class="heading heading--xxl blog-page__title">{{ page.title }}</h2>
+            <p class="blog-page__meta">
+                {{ page.author }}, {{ page.date_published|date:"d F Y" }}
+                {% comment %}
+                - <a href="">Tag one</a>, <a href="">Tag two</a>
+                {% endcomment %}
+            </p>
+            {% if page.image %}
+                {% include "patterns/molecules/streamfield/blocks/image_block.html" with value=page  %}
+            {% endif %}
+            <p class="article__intro">{{ page.intro_text }}</p>
+            <div class="blog-page__content">
+                {% include_block page.body %}
+            </div>
+        </div>
+
+        {% include 'patterns/organisms/blogs-sidebar/blogs-sidebar.html' with page=page.homepage %}
+    </div>
+{% endblock %}

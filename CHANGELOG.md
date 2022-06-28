@@ -1,5 +1,27 @@
 # Release History
 
+## UNRELEASED
+
+- Fix location pages, by migrating data to aligned table structure
+- Docker for development work https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/522
+
+## 55.0 (2022-06-28)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/54.2...55.0>
+
+- Add model for `BlogHomePage` and corresponding template
+- Add model and UI for `BlogPostPage`
+- Add backend for blogs search
+- Add recent posts block to blog sidebar
+- Add social media links to blog sidebars
+- Add search bar for the blog site
+- Add blogs list UI component
+- Add filtered view - search results
+- Add pagination on blog homepage
+- Add featured blog post UI
+- Fix blog listing border
+- Add intro text to be displayed in blog home page listings
+
 ## 54.2 (2022-06-28)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/54.1...54.2>
@@ -18,6 +40,7 @@ Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/54.0...54.1
 Compare: https://git.torchbox.com/buckinghamshire-council/bc/compare/53.0...54.0
 
 - Update Black to a newer version to fix \_unicodefun linting issue. Also applied formatting on existing files.
+- Add aligned columns to typedtable
 - Add intro text field to several page types
 - Make alert length 255 characters long (text only)
 - Fix issues with hidden content being focusable

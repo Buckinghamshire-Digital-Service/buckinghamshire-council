@@ -1,0 +1,41 @@
+context:
+  page:
+    about_title: About the fostering service
+    about_description: The fostering service provides advice, support and information for those looking to foster.
+    related_pages:
+      all:
+        - page:
+            live: true
+            specific:
+              title: Page title
+        - page:
+            live: true
+            specific:
+              title: Page title
+              listing_title: Listing title
+        - page:
+            live: true
+            specific:
+              title: Page title
+    has_any_social_setting: True
+    socials:
+      twitter_handle: '@test'
+      facebook_page_url: 'https://facebook.com/bucksfamilyinfo'
+      linkedin_url: https://example.com
+      youtube_channel_url: 'https://example.com'
+    recent_posts:
+      - title: 'Tips for talking to your child about fostering'
+        date_published: !!timestamp '2021-12-17'
+      - title: 'The adventure of newly approved foster carers Steven and John'
+        date_published: !!timestamp '2021-11-21'
+      - title: 'Sheila, a Buckinghamshire Foster Carer, shares her experience of fostering teenagers'
+        date_published: !!timestamp '2021-11-10'
+      - title: 'Q&A with Long-Term Buckinghamshire Council Foster Carer Debbie Armstrong'
+        date_published: !!timestamp '2021-10-14'
+      - title: 'Foster with Bucks Celebrates LGBTQ+ Fostering and Adoption Week'
+        date_published: !!timestamp '2021-10-03'
+
+tags:
+  pageurl:
+    page.about_page:
+      raw: '#'
