@@ -1,10 +1,10 @@
 # Release History
 
-## UNRELEASED
+## 56.0 (2022-06-28)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/55.0...56.0>
 
 - Add beacons for different steps throughout a job application
-- Fix location pages, by migrating data to aligned table structure
-- Docker for development work https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/522
 
 ## 55.0 (2022-06-28)
 
