@@ -31,6 +31,9 @@ modeladmin_register(BlogModelAdminGroup)
 @hooks.register("after_publish_page")
 def send_emails(request, page):
     # only send notifications when a page is first published
-    if PageLogEntry.objects.filter(page=page, action__exact="wagtail.publish").count() == 1:
+    if (
+        PageLogEntry.objects.filter(page=page, action__exact="wagtail.publish").count()
+        == 1
+    ):
         if request.method == "POST" and page.specific_class == BlogPostPage:
             django_rq.enqueue(alert_subscribed_users, page.pk)
