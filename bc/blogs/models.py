@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
 from django.db import models
+from django.shortcuts import redirect
 from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
@@ -13,6 +14,7 @@ from wagtail.admin.edit_handlers import (
     StreamFieldPanel,
 )
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
+from wagtail.core import models as wt_models
 from wagtail.core.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 
@@ -87,7 +89,7 @@ class SocialMediaLinks(models.Model):
 
 
 class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
-    parent_page_types = ["home.homepage"]
+    parent_page_types = ["blogs.blogglobalhomepage"]
     subpage_types = ["blogs.blogpostpage", "standardpages.informationpage"]
 
     template = "patterns/pages/blogs/blog_home_page.html"
@@ -223,3 +225,13 @@ class BlogPostPage(BasePage):
     @cached_property
     def homepage(self):
         return self.get_parent().specific
+
+
+class BlogGlobalHomePage(BasePage):
+    parent_page_types = ["home.homepage"]
+    subpage_types = ["blogs.bloghomepage"]
+    max_count = 1
+
+    def serve(self, request, *args, **kwargs):
+        site = wt_models.Site.find_for_request(request)
+        return redirect(site.root_page.url)
