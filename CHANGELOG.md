@@ -1,5 +1,11 @@
 # Release History
 
+## 57.0 (2022-06-30)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/56.0...57.0>
+
+- Add placeholder blog global homepage
+
 ## 56.0 (2022-06-28)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/55.0...56.0>
