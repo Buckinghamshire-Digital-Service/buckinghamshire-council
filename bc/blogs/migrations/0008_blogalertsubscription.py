@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("blogs", "0003_featured_blogpost"),
+        ("blogs", "0007_blogglobalhomepage"),
     ]
 
     operations = [
