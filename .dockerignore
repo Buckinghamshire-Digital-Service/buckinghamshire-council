@@ -1,6 +1,9 @@
 /bc/static_compiled
 /bc/settings/local.py
 
+/Dockerfile
+/docker/Dockerfile*
+
 .git
 **/__pycache__
 *.pyc
@@ -10,12 +13,11 @@
 /static/
 /media/
 /tmp/
-/.vagrant/
-/Vagrantfile.local
 node_modules/
 coverage
 /npm-debug.log
 /.idea/
+.env
 
 # Distribution / packaging
 .Python
