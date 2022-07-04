@@ -75,7 +75,7 @@
     "//[ Tasks ]//": "",
     "build": "npm-run-all clean create_dirs sync compile:dev",
     "build:prod": "npm-run-all clean create_dirs sync compile:prod",
-    "start": "npm-run-all clean create_dirs sync compile:dev -p compile:watch watch --silent"
+    "start": "npm-run-all clean create_dirs sync compile:dev -p compile:watch serve --silent"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",

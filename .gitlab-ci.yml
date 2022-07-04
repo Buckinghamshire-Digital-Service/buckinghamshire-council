@@ -48,13 +48,34 @@ static:
     # Here only we want to write to the cache.
     policy: pull-push
 
+poetry:
+  # If you update the python image version here, make sure you update all jobs that depend on this
+  # and the version in the Dockerfile and provision scripts as well
+  image: python:3.7.4
+  stage: build
+  variables:
+    POETRY_VERSION: 1.1.8
+  script:
+    - pip install poetry==$POETRY_VERSION
+    - python -m venv venv
+    - source venv/bin/activate
+    - pip install -U pip setuptools wheel
+    - poetry install
+  artifacts:
+    name: 'poetry-$CI_JOB_ID'
+    paths:
+      - ./venv/
+    expire_in: 30 mins
+
 # Check python code style.
 flake8:
   image: python:3.7.4
   stage: test
+  dependencies:
+    - poetry
+  before_script:
+    - source venv/bin/activate
   script:
-    # Remember to update a version in requirements-dev.txt
-    - pip install flake8==3.7.7
     - flake8 bc
 
 # Check imports sort order, i.e. check whether they are in an alphabetical
@@ -62,9 +83,10 @@ flake8:
 isort:
   image: python:3.7.4
   stage: test
+  dependencies:
+    - poetry
   before_script:
-    # Remember to update a version in requirements-dev.txt
-    - pip install isort==4.3.15
+    - source venv/bin/activate
   script:
     - isort --check-only --diff --recursive bc
 
@@ -88,11 +110,12 @@ lint_format:
 
 # Run black and check for changes
 black:
-  image: python:3.7
+  image: python:3.7.4
   stage: test
+  dependencies:
+    - poetry
   before_script:
-    # Remember to update a version in requirements-dev.txt
-    - pip install black==22.3.0
+    - source venv/bin/activate
   script:
     - black --check ./
 
@@ -104,6 +127,7 @@ test_python:
   stage: test
   needs:
     - static
+    - poetry
   services:
     # Make sure this matches the Postgres version you run on your servers.
     - postgres:13.3
@@ -136,9 +160,7 @@ test_python:
     # Don't redirect to HTTPS in tests.
     SECURE_SSL_REDIRECT: 'false'
   before_script:
-    # Install requirements
-    - pip install wheel
-    - pip install -r requirements.txt
+    - source venv/bin/activate
   script:
     # We need to run the collectstatic command, because we use ManifestStaticFilesStorage.
     # Otherwise the check command will fail
@@ -219,10 +241,13 @@ pages:
   stage: pages
   only:
     - master
+  dependencies:
+    - poetry
+  before_script:
+    - source venv/bin/activate
   script:
     # Include CHANGELOG in the docs
     - cp CHANGELOG.md docs/changelog.md
-    - pip install -r requirements-docs.txt
     - mkdocs build
     - mv site/* public
   artifacts:

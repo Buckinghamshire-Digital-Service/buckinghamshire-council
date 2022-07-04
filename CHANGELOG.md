@@ -1,5 +1,11 @@
 # Release History
 
+## 58.0 (2022-07-04)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/57.0...58.0>
+
+- Docker for development work https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/522
+
 ## 57.0 (2022-06-30)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/56.0...57.0>
