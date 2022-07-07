@@ -437,3 +437,15 @@ class BlogAlertSubscription(models.Model):
             subject="Blog alert subscription", body=content, to=[self.email]
         )
         email.send()
+
+
+class NotificationRecord(models.Model):
+    was_sent = models.BooleanField(default=False)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    blog_post = models.ForeignKey(
+        "BlogPostPage",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name="+",
+    )

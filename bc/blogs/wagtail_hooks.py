@@ -6,10 +6,7 @@ from wagtail.contrib.modeladmin.options import (
 from wagtail.core import hooks
 from wagtail.core.models import PageLogEntry
 
-import django_rq
-
-from bc.blogs.models import BlogAlertSubscription, BlogPostPage
-from bc.blogs.utils import alert_subscribed_users
+from bc.blogs.models import BlogAlertSubscription, BlogPostPage, NotificationRecord
 
 
 class BlogAlertSubscriptionModelAdmin(ModelAdmin):
@@ -36,4 +33,4 @@ def send_emails(request, page):
         == 1
     ):
         if request.method == "POST" and page.specific_class == BlogPostPage:
-            django_rq.enqueue(alert_subscribed_users, page.pk)
+            NotificationRecord(blog_post=page).save()
