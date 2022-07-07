@@ -23,4 +23,4 @@ class Command(BaseCommand):
                 record.was_sent = True
                 record.save()
         else:
-            self.stdout.write(f"There are no pending subscription alert notifications")
+            self.stdout.write("There are no pending subscription alert notifications")
