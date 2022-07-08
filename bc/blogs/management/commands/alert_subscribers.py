@@ -13,8 +13,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        pending_notifications = NotificationRecord.objects.select_related(
-            "blog_post"
+        pending_notifications = NotificationRecord.objects.select_for_update(
+            skip_locked=True
         ).filter(was_sent=False)
         if pending_notifications:
             for record in pending_notifications:
