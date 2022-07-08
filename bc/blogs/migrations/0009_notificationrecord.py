@@ -28,9 +28,7 @@ class Migration(migrations.Migration):
                 (
                     "blog_post",
                     models.ForeignKey(
-                        blank=True,
-                        null=True,
-                        on_delete=django.db.models.deletion.SET_NULL,
+                        on_delete=django.db.models.deletion.CASCADE,
                         related_name="+",
                         to="blogs.blogpostpage",
                     ),

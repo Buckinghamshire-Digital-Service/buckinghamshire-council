@@ -11,7 +11,6 @@ from django.template.loader import render_to_string
 from django.utils.functional import cached_property
 from django.views.generic import TemplateView
 
-from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from wagtail.admin.edit_handlers import (
     FieldPanel,
     InlinePanel,
@@ -24,6 +23,7 @@ from wagtail.core import models as wt_models
 from wagtail.core.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from django_gov_notify.message import NotifyEmailMessage
 
 from bc.blogs.forms import BlogHomePageForm, BlogPostPageForm
@@ -444,8 +444,6 @@ class NotificationRecord(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     blog_post = models.ForeignKey(
         "BlogPostPage",
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
+        on_delete=models.CASCADE,
         related_name="+",
     )
