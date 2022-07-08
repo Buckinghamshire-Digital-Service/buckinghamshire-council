@@ -7,9 +7,9 @@
                 <h2 class="heading heading--l blog-list__item-title ">{{ item.title }}</h2>
             </a>
             <p class="blog-list__item-meta">
-                {{ item.author }}, {{ item.date_published|date:"d F Y" }} - 
+                {{ item.author }}, {{ item.date_published|date:"d F Y" }} -
                 {% for category in item.categories.all  %}
-                    {% if forloop.counter0  > 0 %}, {% endif %}<a href=""> {{ category.name }}</a>
+                    {% if not forloop.first %}, {% endif %}<a href=""> {{ category.name }}</a>
                 {% endfor %}
             </p>
             {% if item.image %}
