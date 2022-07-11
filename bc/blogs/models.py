@@ -20,7 +20,7 @@ from wagtail.core import models as wt_models
 from wagtail.core.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 
-from bc.blogs.forms import BlogPostPageForm
+from bc.blogs.forms import BlogHomePageForm, BlogPostPageForm
 from bc.utils.blocks import StoryBlock
 from bc.utils.models import BasePage, RelatedPage
 from bc.utils.validators import (
@@ -91,22 +91,46 @@ class SocialMediaLinks(models.Model):
         }
 
 
-class RelatedCategories(models.Model):
-    source_page = ParentalKey("blogs.BlogHomePage", related_name="related_categories")
+class Category(models.Model):
     name = models.TextField()
-    slug = models.SlugField()
-
-    class Meta:
-        unique_together = ["source_page", "slug"]
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        return super().save(*args, *kwargs)
+    slug = models.SlugField(editable=False)
 
     panels = [FieldPanel("name")]
 
+    class Meta:
+        abstract = True
+        verbose_name_plural = "Categories"
+
+    def __str__(self):
+        return self.name
+
+
+class BlogHomePageCategories(wt_models.Orderable, Category):
+    page = ParentalKey(
+        "blogs.BlogHomePage",
+        on_delete=models.CASCADE,
+        related_name="related_categories",
+    )
+
+    class Meta(Category.Meta):
+        constraints = [
+            models.UniqueConstraint(fields=["page", "slug"], name="unique_page_slug"),
+        ]
+
+    def clean(self):
+        self.slug = slugify(self.name)
+        super().clean()
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.full_clean()
+        self.validate_unique()
+        super().save(*args, *kwargs)
+
 
 class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
+    base_form_class = BlogHomePageForm
+
     parent_page_types = ["blogs.blogglobalhomepage"]
     subpage_types = ["blogs.blogpostpage", "standardpages.informationpage"]
 
@@ -153,7 +177,9 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
                 ],
                 heading="About section",
             ),
-            InlinePanel("related_categories", label="Related categories", min_num=1),
+            InlinePanel(
+                "related_categories", heading="Categories", label="Category", min_num=1
+            ),
             MultiFieldPanel(
                 [
                     PageChooserPanel("featured_blogpost_page"),
@@ -228,7 +254,7 @@ class BlogPostPage(BasePage):
     template = "patterns/pages/blogs/blog_post_page.html"
 
     categories = ParentalManyToManyField(
-        "blogs.RelatedCategories", related_name="related_posts"
+        "blogs.BlogHomePageCategories", related_name="related_posts"
     )
 
     intro_text = models.TextField()
