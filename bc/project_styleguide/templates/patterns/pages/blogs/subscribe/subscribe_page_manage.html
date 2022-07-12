@@ -2,7 +2,7 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-    {% include "patterns/molecules/hero/hero--blog.html" %}
+    {% include "patterns/molecules/hero/hero--blog.html" with link_back=True %}
 
     <div class="wrapper wrapper--flex blog-page">
         <div class="section section--main">
@@ -21,7 +21,7 @@
                         <button class="button button--subscribe-submit">Save</button>
                     </form>
                     <br>
-                    <p><a href="">Read our privacy policy</a></p>
+                    <p><a href="https://www.buckinghamshire.gov.uk/your-council/privacy/privacy-policy/">Read our privacy policy</a></p>
                 </div>
             </div>
         </div>

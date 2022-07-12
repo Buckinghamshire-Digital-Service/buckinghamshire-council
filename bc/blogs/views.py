@@ -166,7 +166,7 @@ class BlogAlertUnsubscribeView(View):
 
         response = TemplateResponse(
             request,
-            "patterns/pages/blogs/blog_confirmation_mail_alert_page.html",
+            "patterns/pages/blogs/subscribe/subscribe_page_confirm.html",
             context,
         )
         return response
