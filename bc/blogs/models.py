@@ -224,11 +224,9 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
 
     @property
     def categories(self):
-        return (
-            self.related_categories.prefetch_related("related_posts")
-            .annotate(num_related_posts=models.Count("related_posts"))
-            .values("name", "num_related_posts")
-        )
+        return self.related_categories.annotate(
+            num_related_posts=models.Count("related_posts")
+        ).values("name", "num_related_posts")
 
     @property
     def recent_posts(self):
