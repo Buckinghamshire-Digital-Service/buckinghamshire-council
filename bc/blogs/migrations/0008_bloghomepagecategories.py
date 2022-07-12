@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
                     "page",
                     modelcluster.fields.ParentalKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        related_name="related_categories",
+                        related_name="blog_categories",
                         to="blogs.bloghomepage",
                     ),
                 ),

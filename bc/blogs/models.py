@@ -113,7 +113,7 @@ class BlogHomePageCategories(wt_models.Orderable, Category):
     page = ParentalKey(
         "blogs.BlogHomePage",
         on_delete=models.CASCADE,
-        related_name="related_categories",
+        related_name="blog_categories",
     )
 
     class Meta(Category.Meta):
@@ -182,7 +182,7 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
                 heading="About section",
             ),
             InlinePanel(
-                "related_categories", heading="Categories", label="Category", min_num=1
+                "blog_categories", heading="Categories", label="Category", min_num=1
             ),
             MultiFieldPanel(
                 [
@@ -228,7 +228,7 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
 
     @property
     def categories(self):
-        categories = self.related_categories.annotate(
+        categories = self.blog_categories.annotate(
             num_related_posts=models.Count("related_posts")
         ).values("name", "num_related_posts", "slug")
         for category in categories:

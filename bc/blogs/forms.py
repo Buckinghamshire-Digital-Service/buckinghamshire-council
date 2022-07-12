@@ -17,7 +17,7 @@ class BlogPostPageForm(WagtailAdminPageForm):
         super().__init__(data, files, parent_page, subscription, *args, **kwargs)
         self.fields["categories"].choices = [
             (category.pk, category.name)
-            for category in parent_page.specific.related_categories.all()
+            for category in parent_page.specific.blog_categories.all()
         ]
 
 
@@ -27,7 +27,7 @@ class BlogHomePageForm(WagtailAdminPageForm):
 
         categories = []
 
-        for form in self.formsets["related_categories"].forms:
+        for form in self.formsets["blog_categories"].forms:
 
             if form.is_valid():
                 cleaned_form_data = form.clean()
