@@ -5,7 +5,7 @@
             {% for category in categories %}
                 <li>
                     <span>
-                        <a href="">{{ category.name }}</a> ({{ category.num_related_posts }})
+                        <a href="{{ category.url }}">{{ category.name }}</a> ({{ category.num_related_posts }})
                     </span>                    
                 </li>
             {% endfor %}

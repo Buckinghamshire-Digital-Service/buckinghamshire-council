@@ -10,7 +10,7 @@
             <p class="blog-page__meta">
                 {{ page.author }}, {{ page.date_published|date:"d F Y" }} -
                 {% for category in page.categories.all  %}
-                    {% if not forloop.first %}, {% endif %}<a href=""> {{ category.name }}</a>
+                    {% if not forloop.first %}, {% endif %}<a href="{{ category.url }}"> {{ category.name }}</a>
                 {% endfor %}
             </p>
             {% if page.image %}

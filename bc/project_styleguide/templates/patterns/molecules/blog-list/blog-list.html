@@ -9,7 +9,7 @@
             <p class="blog-list__item-meta">
                 {{ item.author }}, {{ item.date_published|date:"d F Y" }} -
                 {% for category in item.categories.all  %}
-                    {% if not forloop.first %}, {% endif %}<a href=""> {{ category.name }}</a>
+                    {% if not forloop.first %}, {% endif %}<a href="{{ category.url }}"> {{ category.name }}</a>
                 {% endfor %}
             </p>
             {% if item.image %}

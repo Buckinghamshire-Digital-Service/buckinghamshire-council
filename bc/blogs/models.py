@@ -95,6 +95,10 @@ class Category(models.Model):
     name = models.TextField()
     slug = models.SlugField(editable=False)
 
+    @cached_property
+    def url(self):
+        return self.source_page.category_url(self.slug)
+
     panels = [FieldPanel("name")]
 
     class Meta:
@@ -224,9 +228,12 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
 
     @property
     def categories(self):
-        return self.related_categories.annotate(
+        categories = self.related_categories.annotate(
             num_related_posts=models.Count("related_posts")
-        ).values("name", "num_related_posts")
+        ).values("name", "num_related_posts", "slug")
+        for category in categories:
+            category["url"] = self.category_url(category=category["slug"])
+        return categories
 
     @property
     def recent_posts(self):
@@ -240,9 +247,18 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
 
         return SearchView.as_view()(request, blog_home_page=self)
 
+    @route(r"^category/(?P<category>[\w-]+)/$", name="blog-category")
+    def category(self, request, category):
+        from bc.blogs.views import CategoryView
+
+        return CategoryView.as_view()(request, blog_home_page=self, category=category)
+
     @property
     def search_url(self):
         return self.url + self.reverse_subpage("blog-search")
+
+    def category_url(self, category):
+        return self.url + self.reverse_subpage("blog-category", args=[category])
 
 
 class BlogPostPage(BasePage):
