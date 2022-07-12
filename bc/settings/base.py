@@ -120,7 +120,6 @@ INSTALLED_APPS = [
     "pattern_library",
     "bc.project_styleguide.apps.ProjectStyleguideConfig",
     "wagtailgeowidget",
-    "django_rq",
 ]
 
 
@@ -894,8 +893,3 @@ ENABLE_FEEDBACK_WIDGET = (  # Page usefulness and comment forms in the footer
 ENABLE_JOBS_SEARCH_ALERT_SUBSCRIPTIONS = (
     env.get("ENABLE_JOBS_SEARCH_ALERT_SUBSCRIPTIONS", "true").lower().strip() == "true"
 )
-
-
-RQ_QUEUES = {
-    "default": {"URL": os.getenv("RQ_QUEUE", "redis://localhost:6379/0")},
-}

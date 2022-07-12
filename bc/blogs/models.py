@@ -314,6 +314,10 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
         )(request)
 
     @property
+    def subscribe_to_alert_url(self):
+        return self.url + self.reverse_subpage("subscribe_to_alert")
+
+    @property
     def confirmation_mail_alert_url(self):
         return self.url + self.reverse_subpage("confirmation_mail_alert")
 
