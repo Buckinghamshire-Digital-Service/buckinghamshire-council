@@ -95,10 +95,6 @@ class Category(models.Model):
     name = models.TextField()
     slug = models.SlugField(editable=False)
 
-    @cached_property
-    def url(self):
-        return self.source_page.category_url(self.slug)
-
     panels = [FieldPanel("name")]
 
     class Meta:
@@ -120,6 +116,10 @@ class BlogHomePageCategories(wt_models.Orderable, Category):
         constraints = [
             models.UniqueConstraint(fields=["page", "slug"], name="unique_page_slug"),
         ]
+
+    @cached_property
+    def url(self):
+        return self.page.category_url(self.slug)
 
     def clean(self):
         self.slug = slugify(self.name)
