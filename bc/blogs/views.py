@@ -2,7 +2,7 @@ from django.conf import settings
 from django.http import Http404
 from django.views.generic import ListView
 
-from bc.blogs.models import RelatedCategories
+from bc.blogs.models import BlogHomePageCategories
 from bc.blogs.utils import get_blogs_search_results
 
 
@@ -48,8 +48,8 @@ class CategoryView(BlogListView):
     template_name = "patterns/pages/blogs/blog_category_listing.html"
 
     def get(self, request, blog_home_page, category):
-        self.category = RelatedCategories.objects.get(
-            slug=category, source_page=blog_home_page
+        self.category = BlogHomePageCategories.objects.get(
+            slug=category, page=blog_home_page
         )
         return super().get(request, blog_home_page)
 
