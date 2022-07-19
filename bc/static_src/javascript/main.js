@@ -28,6 +28,7 @@ import closestPolyfill from './polyfills/closest-polyfill';
 import 'whatwg-fetch';
 
 import '../sass/main.scss';
+import SafeSpace from './components/safe-space';
 
 foreachPolyfill();
 closestPolyfill();
@@ -48,6 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
     /* eslint-disable no-restricted-syntax, no-new */
     const cookie = document.querySelector(CookieWarning.selector());
     new CookieWarning(cookie);
+
+    const sso = document.querySelector(SafeSpace.selector());
+    new SafeSpace(sso);
 
     for (const accordion of document.querySelectorAll(Accordion.selector())) {
         new Accordion(accordion);
