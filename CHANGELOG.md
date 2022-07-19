@@ -1,5 +1,11 @@
 # Release History
 
+## 59.0 (2022-07-19)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/58.0...59.0>
+
+- Add safe spaces banner to site footer
+
 ## 58.0 (2022-07-04)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/57.0...58.0>
