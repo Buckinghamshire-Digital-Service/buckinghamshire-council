@@ -1,4 +1,4 @@
-{% extends base_page_template %}
+{% extends 'patterns/base_page--blogs.html' %}
 {% load wagtailcore_tags wagtailimages_tags navigation_tags static %}
 {% block breadcrumbs %}
     <div class="blog-hero"></div>
@@ -29,14 +29,14 @@
 </div>
 {% if blog_home_pages %}
 <div class="wrapper wrapper--flex">
-    <div class="sidebar">
+    <div class="sidebar sidebar--no-margin">
         <h1 class="heading heading--xxl">All our blogs</h1>
     </div>
     <div class="section section--main">
-        <h1 class="heading heading--xxl">{{ blog_home_pages|length }} <sup class="heading--m">Blogs</sup></h1>
-        <section class="listing" aria-label="Subpages">
+        <h1 class="heading heading--xxl blog-global-home-page__heading">{{ blog_home_pages|length }} <sup class="heading--m">Blogs</sup></h1>
+        <section class="listing listing--blog" aria-label="Subpages">
             {% for subpage in blog_home_pages %}
-            <article class="listing__item" aria-labelledby="listing__item--{{ forloop.counter }}">
+            <article class="listing__item listing__item--blog" aria-labelledby="listing__item--{{ forloop.counter }}">
                 <a class="listing__link" href="{% pageurl subpage %}">
                     <h2 class="heading heading--l listing__title--blog blog-page__title" id="listing__item--{{ forloop.counter }}">
                         {% firstof subpage.listing_title subpage.title %}

@@ -8,6 +8,10 @@
     &__item {
         margin-bottom: $grid;
         max-width: $wrapper--small;
+
+        &--blog {
+            margin-bottom: $grid--small;
+        }
     }
 
     &__title {
@@ -16,6 +20,7 @@
 
         &--blog {
             color: $color--river;
+            margin-top: $grid--small;
         }
     }
 
@@ -26,5 +31,9 @@
             @include font-size(s);
             color: $color--slate;
         }
+    }
+
+    &--blog {
+        margin: 0;
     }
 }
