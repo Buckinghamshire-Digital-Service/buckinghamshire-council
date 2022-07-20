@@ -60,4 +60,4 @@ class CategoryView(BlogListView):
         }
 
     def get_queryset(self):
-        return self.category.related_posts.live()
+        return self.category.related_posts.live().order_by("-date_published")
