@@ -8,4 +8,4 @@ Thanks for subscribing!
 
 ---
 
-If you haven't subscribed to this list, you can ignore this email or remove your details at {{ unsubscribe_url }}.
+If you haven't subscribed to this list, you can ignore this email or remove your details at {{ manage_url }}.

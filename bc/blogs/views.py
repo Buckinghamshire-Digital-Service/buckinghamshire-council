@@ -91,10 +91,7 @@ class BlogSubscribeView(FormView):
             subscription = BlogAlertSubscription.objects.get(
                 email=email, homepage=self.blog_home_page
             )
-            if subscription.confirmed:
-                return super().form_valid(form)
-            else:
-                # Treat this as a new subscription request
+            if not subscription.confirmed:
                 subscription.created = now()
 
         except BlogAlertSubscription.DoesNotExist:

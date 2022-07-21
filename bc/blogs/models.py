@@ -321,14 +321,14 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
     def confirmation_mail_alert_url(self):
         return self.url + self.reverse_subpage("confirmation_mail_alert")
 
-    def manage_subscription_alert_url(self, token):
-        return self.url + self.reverse_subpage("manage_subscription", args=[token])
-
     def alert_confirmation_url(self, token):
         return self.url + self.reverse_subpage("confirm_blog_alert", args=[token])
 
     def alert_unsubscribe_url(self, token):
         return self.url + self.reverse_subpage("unsubscribe_blog_alert", args=[token])
+
+    def manage_subscription_alert_url(self, token):
+        return self.full_url + self.reverse_subpage("manage_subscription", args=[token])
 
     def alert_confirmation_full_url(self, token):
         return self.full_url + self.reverse_subpage("confirm_blog_alert", args=[token])
@@ -426,10 +426,14 @@ class BlogAlertSubscription(models.Model):
     def confirmation_url(self):
         return self.homepage.alert_confirmation_full_url(self.token)
 
+    @property
+    def manage_url(self):
+        return self.homepage.manage_subscription_alert_url(self.token)
+
     def get_email_context(self):
         return {
             "confirmation_url": self.confirmation_url,
-            "unsubscribe_url": self.unsubscribe_url,
+            "manage_url": self.manage_url,
             "homepage": self.homepage,
         }
 
