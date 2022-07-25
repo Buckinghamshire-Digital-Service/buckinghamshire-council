@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.http import Http404
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404
 from django.template.response import TemplateResponse
 from django.utils.timezone import now
 from django.views import View
@@ -139,36 +139,6 @@ class BlogAlertConfirmView(View):
         return response
 
 
-class BlogAlertUnsubscribeView(View):
-    def get(self, request, blog_home_page, token):
-        context = {"STATUSES": ALERT_SUBSCRIPTION_STATUSES, "page": blog_home_page}
-
-        try:
-            subscription = BlogAlertSubscription.objects.get(token=token)
-        except BlogAlertSubscription.DoesNotExist:
-            context.update(
-                {
-                    "title": "Subscription not found",
-                    "status": context["STATUSES"]["STATUS_LINK_EXPIRED"],
-                }
-            )
-        else:
-            subscription.delete()
-            context.update(
-                {
-                    "title": "Blog alert unsubscribed",
-                    "status": context["STATUSES"]["STATUS_UNSUBSCRIBED"],
-                }
-            )
-
-        response = TemplateResponse(
-            request,
-            "patterns/pages/blogs/subscribe/subscribe_page_confirm.html",
-            context,
-        )
-        return response
-
-
 class BlogManageSubscribeView(FormView):
     form_class = BlogSubscriptionManageForm
     template_name = "patterns/pages/blogs/subscribe/subscribe_page_manage.html"
@@ -204,5 +174,15 @@ class BlogManageSubscribeView(FormView):
         subscribe = form.cleaned_data["subscribe"]
         if subscribe == "False":
             self.subscription.delete()
-            return redirect(self.blog_home_page.full_url)
+
+            return TemplateResponse(
+                self.request,
+                "patterns/pages/blogs/subscribe/subscribe_page_confirm.html",
+                {
+                    "STATUSES": ALERT_SUBSCRIPTION_STATUSES,
+                    "page": self.blog_home_page,
+                    "title": "Blog alert unsubscribed",
+                    "status": ALERT_SUBSCRIPTION_STATUSES["STATUS_UNSUBSCRIBED"],
+                },
+            )
         return super().form_valid(form)

@@ -9,4 +9,4 @@ Read the new post:
 
 You are getting this email because you are subscribed to updates from the {{ blog_home_page.title }}.
 
-Unsubscribe from the {{ blog_home_page.title }} at {{ alert_unsubscribe_url }}.
+Manage your subscription for the {{ blog_home_page.title }} at {{ alert_manage_url }}.

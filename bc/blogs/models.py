@@ -291,17 +291,6 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
 
         return BlogAlertConfirmView.as_view()(request, blog_home_page=self, token=token)
 
-    @route(
-        r"^unsubscribe-blog-alert/(?P<token>[a-zA-Z0-9_-]+)/$",
-        name="unsubscribe_blog_alert",
-    )
-    def unsubscribe_blog_alert(self, request, token):
-        from bc.blogs.views import BlogAlertUnsubscribeView
-
-        return BlogAlertUnsubscribeView.as_view()(
-            request, blog_home_page=self, token=token
-        )
-
     @route(r"^confirmation_mail_alert/$", name="confirmation_mail_alert")
     def confirmation_mail_alert(self, request):
         return TemplateView.as_view(
@@ -321,22 +310,11 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
     def confirmation_mail_alert_url(self):
         return self.url + self.reverse_subpage("confirmation_mail_alert")
 
-    def alert_confirmation_url(self, token):
-        return self.url + self.reverse_subpage("confirm_blog_alert", args=[token])
-
-    def alert_unsubscribe_url(self, token):
-        return self.url + self.reverse_subpage("unsubscribe_blog_alert", args=[token])
-
     def manage_subscription_alert_url(self, token):
         return self.full_url + self.reverse_subpage("manage_subscription", args=[token])
 
     def alert_confirmation_full_url(self, token):
         return self.full_url + self.reverse_subpage("confirm_blog_alert", args=[token])
-
-    def alert_unsubscribe_full_url(self, token):
-        return self.full_url + self.reverse_subpage(
-            "unsubscribe_blog_alert", args=[token]
-        )
 
 
 class BlogPostPage(BasePage):
@@ -417,10 +395,6 @@ class BlogAlertSubscription(models.Model):
             self.token = secrets.token_urlsafe(32)
 
         super().full_clean(*args, **kwargs)
-
-    @property
-    def unsubscribe_url(self):
-        return self.homepage.alert_unsubscribe_full_url(self.token)
 
     @property
     def confirmation_url(self):

@@ -29,7 +29,7 @@ def alert_subscribed_users(blog_post_page_pk):
     for subscription in subscriptions:
         content = render_to_string(
             "patterns/email/new_blog_alert.txt",
-            context={**context, "alert_unsubscribe_url": subscription.unsubscribe_url},
+            context={**context, "alert_manage_url": subscription.manage_url},
         )
         emails.append(
             NotifyEmailMessage(subject=subject, body=content, to=[subscription.email])
