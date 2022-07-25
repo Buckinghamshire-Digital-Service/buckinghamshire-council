@@ -5,12 +5,12 @@ from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
 from django.db import models
 from django.forms.widgets import CheckboxSelectMultiple
-from django.shortcuts import redirect
 from django.template.defaultfilters import slugify
 from django.template.loader import render_to_string
 from django.utils.functional import cached_property
 from django.views.generic import TemplateView
 
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from wagtail.admin.edit_handlers import (
     FieldPanel,
     InlinePanel,
@@ -23,7 +23,6 @@ from wagtail.core import models as wt_models
 from wagtail.core.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 
-from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from django_gov_notify.message import NotifyEmailMessage
 
 from bc.blogs.forms import BlogHomePageForm, BlogPostPageForm
@@ -235,9 +234,13 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
 
     @property
     def categories(self):
-        categories = self.blog_categories.annotate(
-            num_related_posts=models.Count("related_posts")
-        ).values("name", "num_related_posts", "slug")
+        categories = (
+            self.blog_categories.annotate(
+                num_related_posts=models.Count("related_posts")
+            )
+            .filter(num_related_posts__gt=0)
+            .values("name", "num_related_posts", "slug")
+        )
         for category in categories:
             category["url"] = self.category_url(category=category["slug"])
         return categories
@@ -380,6 +383,7 @@ class BlogGlobalHomePage(BasePage):
         context["recent_posts"] = self.recent_posts
 
         return context
+
 
 class BlogAlertSubscription(models.Model):
     email = models.EmailField()
