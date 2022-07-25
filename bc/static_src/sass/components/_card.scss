@@ -17,6 +17,12 @@
         color: $color--default;
     }
 
+    &__image {
+        .card--blog & {
+            margin-bottom: $grid--small / 4;
+        }
+    }
+
     &__content {
         padding: $grid--small;
         flex-grow: 1;
@@ -144,5 +150,11 @@
                 font-weight: $weight--bold;
             }
         }
+    }
+
+    &--blog {
+        background-color: transparent;
+        border-bottom: 0;
+        padding: $grid--small / 2;
     }
 }

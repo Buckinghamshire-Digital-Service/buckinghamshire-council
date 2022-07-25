@@ -4,6 +4,9 @@
     <div class="wrapper wrapper--flex">
         <div class="section section--main">
             <h1 class="heading heading--xxl blog-hero__title">
+                <span>
+                    <a href="{% pageurl page.get_parent %}">{{ page.get_parent.title }}</a>
+                </span>
                 {% if link_back %}
                 <a href="{% pageurl page %}">{{ page.title }}</a>
                 {% else %}

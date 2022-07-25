@@ -3,7 +3,6 @@ from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
 from django.db import models
 from django.forms.widgets import CheckboxSelectMultiple
-from django.shortcuts import redirect
 from django.template.defaultfilters import slugify
 from django.utils.functional import cached_property
 
@@ -304,7 +303,23 @@ class BlogGlobalHomePage(BasePage):
     parent_page_types = ["home.homepage"]
     subpage_types = ["blogs.bloghomepage"]
     max_count = 1
+    template = "patterns/pages/blogs/blog_global_home_page.html"
 
-    def serve(self, request, *args, **kwargs):
-        site = wt_models.Site.find_for_request(request)
-        return redirect(site.root_page.url)
+    @property
+    def blog_home_pages(self):
+        return BlogHomePage.objects.child_of(self).live().order_by("path")
+
+    @property
+    def recent_posts(self):
+        return (
+            BlogPostPage.objects.descendant_of(self)
+            .live()
+            .order_by("-date_published")[:3]
+        )
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context["blog_home_pages"] = self.blog_home_pages
+        context["recent_posts"] = self.recent_posts
+
+        return context

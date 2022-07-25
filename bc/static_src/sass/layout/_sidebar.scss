@@ -90,6 +90,15 @@
         }
     }
 
+    &--no-margin {
+        margin: 0;
+        padding-bottom: 0;
+
+        @include media-query(tablet-landscape) {
+            margin: 0 0 $grid;
+        }
+    }
+
     section {
         padding: $grid--small 0;
         border-top: $border--accent $color--grey-dark;

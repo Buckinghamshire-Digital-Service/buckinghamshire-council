@@ -8,14 +8,32 @@
     &__item {
         margin-bottom: $grid;
         max-width: $wrapper--small;
+
+        &--blog {
+            margin-bottom: $grid--small;
+        }
     }
 
     &__title {
         @include font-size(s);
         margin: 0;
+
+        &--blog {
+            color: $color--river;
+            margin-top: $grid--small;
+        }
     }
 
     &__summary {
+        margin: 0;
+
+        &--blog {
+            @include font-size(s);
+            color: $color--slate;
+        }
+    }
+
+    &--blog {
         margin: 0;
     }
 }
