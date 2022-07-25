@@ -1,5 +1,16 @@
 # Release History
 
+## 60.0 (2022-07-26)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/59.0...60.0>
+
+- Remove bottom border from last section on sidebar
+- Add button to decline cookies
+- Change dbs_check from booleanfield to a textfield
+- Add categories to blogs
+- Add subscriptions to blogs
+- Add Blog global homepage
+
 ## 59.0 (2022-07-19)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/58.0...59.0>
