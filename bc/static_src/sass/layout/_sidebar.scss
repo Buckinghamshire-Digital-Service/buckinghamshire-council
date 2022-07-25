@@ -97,9 +97,5 @@
         &.sidebar--part-of {
             border-top: $border--accent $color--sky;
         }
-
-        &:last-child {
-            border-bottom: $border--accent $color--grey-dark;
-        }
     }
 }
