@@ -1,0 +1,30 @@
+{% extends 'patterns/base_page--blogs.html' %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block content %}
+    {% include "patterns/molecules/hero/hero--blog.html" with link_back=True %}
+
+    <div class="wrapper wrapper--flex blog-page">
+        <div class="section section--main">
+            <h2 class="heading heading--xxl blog-page__title">Subscribe</h2>
+            <div class="blog-page__content">
+                <div class="rich-text">
+                    <p><b>Enter your address below to:</b></p>
+                    <ul>
+                        <li>Subscribe for updates when new posts are published for this blog</li>
+                        <li>Manage your existing subscription</li>
+                    </ul>
+                    <form method="post"class="form form--subscribe-page">
+                        {% csrf_token %}
+                        {{ form.email }}
+                        <label class="u-sr-only">Enter your email address</label>
+                        <button class="button button--subscribe-submit">Submit</button>
+                    </form>
+                    <p><a href="https://www.buckinghamshire.gov.uk/your-council/privacy/privacy-policy/">Read our privacy policy</a></p>
+                </div>
+            </div>
+        </div>
+
+        {% include 'patterns/organisms/blogs-sidebar/blogs-sidebar.html' %}
+    </div>
+{% endblock %}

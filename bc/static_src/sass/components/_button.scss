@@ -128,4 +128,18 @@
             background: none;
         }
     }
+
+    &--subscribe-submit {
+        display: inline-block;
+        background-color: $color--leaf;
+        color: $color--charcoal;
+        min-width: 180px;
+        margin-top: $grid;
+        border-bottom: 2px solid $color--leaf-mid;
+
+        &:hover,
+        &:focus {
+            background-color: $color--leaf-mid;
+        }
+    }
 }
