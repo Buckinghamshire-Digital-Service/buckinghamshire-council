@@ -7,6 +7,14 @@
         a {
             color: $color--slate;
         }
+
+        span {
+            @include font-size(m);
+            display: block;
+            color: $color--charcoal-75;
+            font-weight: $weight--normal;
+            margin-bottom: $grid--small / 4;
+        }
     }
 
     &__form {

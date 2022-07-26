@@ -6,7 +6,7 @@ describe('CookieWarning', () => {
 
     beforeEach(() => {
         document.body.innerHTML =
-            '<div class="cookie" data-cookie-message><button data-cookie-dismiss>Dismiss</button></div>';
+            '<div class="cookie" data-cookie-message><button data-cookie-accept>Accept</button><button data-cookie-decline>Decline</button></div>';
         Cookies.remove('client-cookie');
     });
 
@@ -33,19 +33,35 @@ describe('CookieWarning', () => {
         );
     });
 
-    it('can be dismissed', () => {
+    it('can be accepted', () => {
         new CookieWarning(document.querySelector(CookieWarning.selector()));
         expect(document.querySelector('[data-cookie-message]').className).toBe(
             'cookie active',
         );
 
-        const dismiss = document.querySelector('[data-cookie-dismiss]');
+        const accept = document.querySelector('[data-cookie-accept]');
 
-        dismiss.dispatchEvent(new Event('click'));
+        accept.dispatchEvent(new Event('click'));
 
         expect(document.querySelector('[data-cookie-message]').className).toBe(
             'cookie inactive',
         );
         expect(Cookies.get('client-cookie')).toBe('agree to cookies');
+    });
+
+    it('can be declined', () => {
+        new CookieWarning(document.querySelector(CookieWarning.selector()));
+        expect(document.querySelector('[data-cookie-message]').className).toBe(
+            'cookie active',
+        );
+
+        const decline = document.querySelector('[data-cookie-decline]');
+
+        decline.dispatchEvent(new Event('click'));
+
+        expect(document.querySelector('[data-cookie-message]').className).toBe(
+            'cookie inactive',
+        );
+        expect(Cookies.get('client-cookie')).toBe('decline cookies');
     });
 });

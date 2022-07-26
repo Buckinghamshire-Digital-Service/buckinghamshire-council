@@ -1,0 +1,14 @@
+{% if categories %}
+    <section>
+        <h2 class="sidebar__heading heading">Categories</h2>
+        <ul class="blog-categories__list">
+            {% for category in categories %}
+                <li>
+                    <span>
+                        <a href="{{ category.url }}">{{ category.name }}</a> ({{ category.num_related_posts }})
+                    </span>                    
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endif %}

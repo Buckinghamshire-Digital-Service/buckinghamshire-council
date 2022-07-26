@@ -39,7 +39,31 @@
         }
     }
 
-    &__button {
+    &__heading {
+        margin-top: 0;
+        margin-bottom: $grid--small;
+    }
+
+    &__buttons {
+        display: flex;
+        flex-direction: column;
         margin-top: $grid--small;
+
+        @include media-query(mob-landscape) {
+            flex-direction: row;
+            align-items: center;
+        }
+
+        > *:not(:first-child) {
+            margin-top: $grid--small;
+
+            @include media-query(mob-landscape) {
+                margin: 0 0 0 $grid--small;
+            }
+        }
+    }
+
+    &__view {
+        text-align: center;
     }
 }

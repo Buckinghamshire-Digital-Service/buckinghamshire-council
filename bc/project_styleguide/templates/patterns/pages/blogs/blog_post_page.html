@@ -8,10 +8,10 @@
         <div class="section section--main">
             <h2 class="heading heading--xxl blog-page__title">{{ page.title }}</h2>
             <p class="blog-page__meta">
-                {{ page.author }}, {{ page.date_published|date:"d F Y" }}
-                {% comment %}
-                - <a href="">Tag one</a>, <a href="">Tag two</a>
-                {% endcomment %}
+                {{ page.author }}, {{ page.date_published|date:"d F Y" }} -
+                {% for category in page.categories.all  %}
+                    {% if not forloop.first %}, {% endif %}<a href="{{ category.url }}"> {{ category.name }}</a>
+                {% endfor %}
             </p>
             {% if page.image %}
                 {% include "patterns/molecules/streamfield/blocks/image_block.html" with value=page  %}

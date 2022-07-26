@@ -1,0 +1,9 @@
+context:
+  base_page_template: 'patterns/base_page.html'
+  page:
+    title: Subscribe
+
+tags:
+  sidebar:
+    '':
+      template_name: 'patterns/molecules/navigation/sidebar.html'

@@ -25,15 +25,8 @@ from bc.recruitment.utils import (
     is_recruitment_site,
 )
 from bc.utils.cache import get_default_cache_control_kwargs
+from bc.utils.constants import ALERT_SUBSCRIPTION_STATUSES
 from bc.utils.models import SystemMessagesSettings
-
-JOB_ALERT_STATUSES = {
-    "STATUS_ALREADY_SUBSCRIBED": "already_subscribed",
-    "STATUS_EMAIL_SENT": "email_sent",
-    "STATUS_CONFIRMED": "confirmed",
-    "STATUS_LINK_EXPIRED": "link_expired",
-    "STATUS_UNSUBSCRIBED": "unsubscribed",
-}
 
 
 @method_decorator(csrf_exempt, name="dispatch")
@@ -202,7 +195,7 @@ class SearchView(View):
             # e.g. query=school&category=work-experiencetraineeshipinternship&category=transport-economy-environment
             search = get_current_search(request.GET)
             email = form.cleaned_data["email"]
-            context = {"STATUSES": JOB_ALERT_STATUSES}
+            context = {"STATUSES": ALERT_SUBSCRIPTION_STATUSES}
             homepage = Site.find_for_request(request).root_page.specific
 
             # Search if already exists and confirmed:
@@ -254,7 +247,7 @@ class SearchView(View):
 class JobAlertConfirmView(View):
     def get(self, request, *args, **kwargs):
         token = self.kwargs["token"]
-        context = {"STATUSES": JOB_ALERT_STATUSES}
+        context = {"STATUSES": ALERT_SUBSCRIPTION_STATUSES}
 
         try:
             subscription = JobAlertSubscription.objects.get(token=token)
@@ -288,7 +281,7 @@ class JobAlertUnsubscribeView(View):
     # allow user to unsubscribe from all or selected.
     def get(self, request, *args, **kwargs):
         token = self.kwargs["token"]
-        context = {"STATUSES": JOB_ALERT_STATUSES}
+        context = {"STATUSES": ALERT_SUBSCRIPTION_STATUSES}
 
         try:
             subscription = JobAlertSubscription.objects.get(token=token)

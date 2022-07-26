@@ -165,4 +165,36 @@
             border: $border--error;
         }
     }
+
+    &--subscribe-page {
+        max-width: 300px;
+
+        input[type='radio'] {
+            appearance: none;
+            width: 30px;
+            height: 30px;
+            border: 2px solid $color--black;
+            border-radius: 50%;
+            margin: 0 $grid--min 0 0;
+            background-color: $color--white;
+
+            &:checked {
+                background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 14 14' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='7' cy='7' r='7'/%3E%3C/svg%3E");
+                background-size: 12px 12px;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+
+            &:focus {
+                @include focus();
+            }
+        }
+
+        .radio-inline {
+            display: flex;
+            margin-top: $grid--min;
+            align-items: center;
+            cursor: pointer;
+        }
+    }
 }

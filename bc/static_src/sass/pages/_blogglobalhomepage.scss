@@ -1,0 +1,13 @@
+.blog-global-home-page {
+    &__heading {
+        margin-bottom: 0;
+
+        sup {
+            @include font-size(xs);
+
+            @include media-query(tablet-landscape) {
+                @include font-size(m);
+            }
+        }
+    }
+}

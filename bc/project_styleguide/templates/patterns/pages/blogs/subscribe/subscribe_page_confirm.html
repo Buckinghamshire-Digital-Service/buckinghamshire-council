@@ -1,0 +1,28 @@
+{% extends 'patterns/base_page--blogs.html' %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block content %}
+    {% include "patterns/molecules/hero/hero--blog.html" with link_back=True %}
+
+    <div class="wrapper wrapper--flex blog-page">
+        <div class="section section--main">
+            <h2 class="heading heading--xxl blog-page__title">Subscribe</h2>
+            <div class="blog-page__content">
+                <div class="rich-text">
+                    {% if status == STATUSES.STATUS_EMAIL_SENT %}
+                    <p>You have been sent a confirmation email, please follow the link in the email to confirm your subscription.</p>
+                    {% elif status == STATUSES.STATUS_UNSUBSCRIBED %}
+                    <p>You've been unsubscribed from the blog alert.</p>
+                    {% elif status == STATUSES.STATUS_CONFIRMED %}
+                    <p><b>Success:</b> Thank you, your email address has been confirmed</p>
+                    {% elif status == STATUSES.STATUS_LINK_EXPIRED %}
+                    <p>Sorry we could not find a matching subscription. The link you used may have expired.</p>
+                    {% endif %}
+                    <p><a href="https://www.buckinghamshire.gov.uk/your-council/privacy/privacy-policy/">Read our privacy policy</a></p>
+                </div>
+            </div>
+        </div>
+
+        {% include 'patterns/organisms/blogs-sidebar/blogs-sidebar.html' %}
+    </div>
+{% endblock %}

@@ -6,11 +6,13 @@ class CookieWarning {
     }
 
     constructor(node) {
-        this.dismissButton = document.querySelector('[data-cookie-dismiss]');
+        this.acceptButton = document.querySelector('[data-cookie-accept]');
+        this.declineButton = document.querySelector('[data-cookie-decline]');
         this.messageContainer = node;
         this.cookieDomain = window.COOKIE_DOMAIN;
         this.cookieName = 'client-cookie';
-        this.cookieValue = 'agree to cookies';
+        this.acceptValue = 'agree to cookies';
+        this.declineValue = 'decline cookies';
         this.cookieDuration = 365;
         this.activeClass = 'active';
         this.inactiveClass = 'inactive';
@@ -37,20 +39,37 @@ class CookieWarning {
         this.messageContainer.classList.remove(this.activeClass);
         this.messageContainer.classList.add(this.inactiveClass);
         // Set cookie
-        Cookies.set(this.cookieName, this.cookieValue, {
+        Cookies.set(this.cookieName, this.acceptValue, {
+            domain: this.cookieDomain,
+            expires: this.cookieDuration,
+        });
+    }
+
+    declineCookie(event) {
+        // prevent default link action
+        event.preventDefault();
+        // Add classes
+        this.messageContainer.classList.remove(this.activeClass);
+        this.messageContainer.classList.add(this.inactiveClass);
+        // Set cookie
+        Cookies.set(this.cookieName, this.declineValue, {
             domain: this.cookieDomain,
             expires: this.cookieDuration,
         });
     }
 
     bindEvents() {
-        if (!this.dismissButton) {
-            return;
+        if (this.acceptButton) {
+            this.acceptButton.addEventListener('click', (event) =>
+                this.applyCookie(event),
+            );
         }
 
-        this.dismissButton.addEventListener('click', (event) =>
-            this.applyCookie(event),
-        );
+        if (this.declineButton) {
+            this.declineButton.addEventListener('click', (event) => {
+                this.declineCookie(event);
+            });
+        }
     }
 }
 
