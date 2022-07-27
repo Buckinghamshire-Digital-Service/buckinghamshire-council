@@ -1,5 +1,11 @@
 # Release History
 
+## 60.1 (2022-07-27)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/60.0...60.1>
+
+- Change dbs field label on jobs sidebar
+
 ## 60.0 (2022-07-26)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/59.0...60.0>
