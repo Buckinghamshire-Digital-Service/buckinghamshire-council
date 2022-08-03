@@ -16,6 +16,7 @@ stages:
   - test
   - deploy_site
   - pages
+  - copy
 
 .cache_static:
   cache:
@@ -159,6 +160,9 @@ test_python:
 
     # Don't redirect to HTTPS in tests.
     SECURE_SSL_REDIRECT: 'false'
+
+    # Don't run birdbath in tests.
+    BIRDBATH_REQUIRED: 'false'
   before_script:
     - source venv/bin/activate
   script:
@@ -253,3 +257,29 @@ pages:
   artifacts:
     paths:
       - public
+
+# Sync data and media from production to staging
+# requires FLIGHTPATH_* keys below to be added to repository secrets
+# https://git.torchbox.com/sysadmin/flightpath#app-copy
+copy_prod_to_staging:
+  stage: copy
+  when: manual
+  only:
+    - staging
+  variables:
+    SOURCE_APP: buckinghamshire-production
+    DESTINATION_APP: buckinghamshire-staging
+    SOURCE_KEY: $FLIGHTPATH_SOURCE_KEY
+    DESTINATION_KEY: $FLIGHTPATH_DESTINATION_KEY
+    AUTH_KEY: $FLIGHTPATH_AUTH_KEY
+  before_script:
+    - apt-get update -y
+    - apt-get install -y curl jq
+  script:
+    - >
+      export JOB_STATUS=$(curl -f -X POST -m 900
+      -H "Authorization: Token $AUTH_KEY" -d "source_key=$SOURCE_KEY&destination_key=$DESTINATION_KEY"
+      "https://flightpath.torchbox.com/copy/$SOURCE_APP/$DESTINATION_APP/")
+    - echo $JOB_STATUS
+    - export JOB_ID=$(echo $JOB_STATUS | jq -r '.job_id')
+    - echo $JOB_ID
