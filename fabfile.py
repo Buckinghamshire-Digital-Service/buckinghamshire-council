@@ -187,7 +187,7 @@ def pull_production_images(c):
 
 @task
 def pull_production_data(c):
-    """Pull database from production Heroku Postgres"""
+    """Pull database from production Heroku Postgres. Production data will be anonymized using django-birdbath"""
     pull_database_from_heroku(c, PRODUCTION_APP_INSTANCE, anonymise=True)
 
 
