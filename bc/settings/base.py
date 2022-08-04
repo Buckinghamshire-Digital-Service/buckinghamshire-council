@@ -909,4 +909,6 @@ BIRDBATH_PROCESSORS = [
     "birdbath.processors.users.UserPasswordAnonymiser",
     "birdbath.processors.contrib.wagtail.FormSubmissionCleaner",
     "birdbath.processors.contrib.wagtail.SearchQueryCleaner",
+    "bc.blogs.birdbath.DeleteAllBlogAlertSubscriptionProcessor",
+    "bc.recruitment.birdbath.DeleteAllRecruitmentAlertSubscriptionProcessor",
 ]
