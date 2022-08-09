@@ -466,7 +466,8 @@ class BaseStoryBlock(blocks.StreamBlock):
     image = ImageBlock()
     embed = EmbedBlock()
     local_area_links = LocalAreaLinksBlock()
-    table = CaptionedTableBlock()
+    plain_text_table = TableBlock(group="Table")
+    table = CaptionedTableBlock(group="Table")
     button = ButtonBlock()
     highlight = HighlightBlock()
     inset_text = InsetTextBlock()
@@ -477,8 +478,6 @@ class BaseStoryBlock(blocks.StreamBlock):
 
 
 class NestedStoryBlock(BaseStoryBlock):
-    table = TableBlock()
-
     def __init__(self, local_blocks=None, **kwargs):
         super().__init__(**kwargs)
         # Bump down template for heading fields so headings don't clash with those outside the accordion
@@ -533,7 +532,6 @@ class DetailBlock(blocks.StructBlock):
 class StoryBlock(BaseStoryBlock):
     accordion = Accordion()
     detail = DetailBlock()
-    table = CaptionedTableBlock()
 
 
 class ImageOrEmbedBlock(blocks.StructBlock):

@@ -6,61 +6,67 @@ authors = ["Torchbox <hello@torchbox.com>"]
 
 [tool.poetry.dependencies]
 python = "~3.7"
-Django = "3.2.13"
-wagtail = "2.15.1"
-psycopg2 = "2.7.7"
-elasticsearch = "7.9.0"
-wagtail-django-recaptcha = "1.0"
-django-pattern-library = "0.5"
 bleach = "3.1.0"
+dj-database-url = "0.5.0"
+Django = "3.2.13"
+django-basic-auth-ip-whitelist = "^0.3.4"
+django-csp = "3.7"
+django-gov-notify = "^0.3.0"
+django-pattern-library = "0.5"
+django-redis = "4.11.0"
+django-referrer-policy = "1.0"
+django-storages = {version = "1.9.1", extras = ["boto3"]}
+elasticsearch = "7.9.0"
 factory-boy = "3.2.1"
 freezegun = "1.1.0"
+gunicorn = {version = "19.9.0", optional = true}
+psycopg2 = "2.7.7"
+PyJWT = "2.0.0"
+raven = "6.10.0"
+redis = "2.10.6"
 responses = "0.16.0"
+scout-apm = "2.0.2"
 tabulate = "0.8.7"
+urllib3 = "1.25.11"
+wagtail = "2.15.1"
+wagtail-automatic-redirects = "1.1.5"
+wagtail-django-recaptcha = "1.0"
 wagtail-factories = "2.0.1"
 wagtail-orderable = "1.0.3"
-wagtail-automatic-redirects = "1.1.5"
 wagtail-transfer = "0.8.2"
-urllib3 = "1.25.11"
-zeep = "3.4.0"
-whitenoise = "5.0"
-dj-database-url = "0.5.0"
-raven = "6.10.0"
-django-redis = "4.11.0"
-redis = "2.10.6"
-django-storages = {version = "1.9.1", extras = ["boto3"]}
-django-referrer-policy = "1.0"
-django-csp = "3.7"
-django-basic-auth-ip-whitelist = "^0.3.4"
-scout-apm = "2.0.2"
-PyJWT = "2.0.0"
-django-gov-notify = "^0.3.0"
 wagtailgeowidget = "5.1.0"
-gunicorn = {version = "19.9.0", optional = true}
+whitenoise = "5.0"
+zeep = "3.4.0"
 
 [tool.poetry.extras]
 gunicorn = ["gunicorn"]
 
 [tool.poetry.dev-dependencies]
-# Development dependencies
-django-extensions = "2.1.6"
-Werkzeug = "0.14.1"
-stellar = "0.4.5"
-flake8 = "3.7.7"
-seed-isort-config = "1.9.0"
-isort = "4.3.18"
-pre-commit = "1.16.1"
-black = "22.3.0"
-detect-secrets = "0.13.0"
-SQLAlchemy = "1.2.5"
-SQLAlchemy-Utils = "0.33.1"
-
 # Docs dependencies
 mkdocs = "1.0.4"
 mkdocs-material = "3.3.0"
 pymdown-extensions = "6.1"
-honcho = "^1.1.0"
 
+# Linting
+black = "22.3.0"
+detect-secrets = "0.13.0"
+flake8 = "3.7.7"
+isort = "4.3.18"
+seed-isort-config = "1.9.0"
+
+# Database snapshots
+DSLR = "0.2.0"
+stellar = "0.4.5"
+
+# Pinned for stellar 0.4.5
+SQLAlchemy = "1.2.5"
+SQLAlchemy-Utils = "0.33.1"
+
+# Development dependencies
+django-extensions = "2.1.6"
+honcho = "^1.1.0"
+pre-commit = "1.16.1"
+Werkzeug = "0.14.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

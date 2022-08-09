@@ -16,6 +16,11 @@ node_modules/
 coverage
 .env
 
+# Dev environment
+/.vim/
+.python-version
+/tags
+
 # Distribution / packaging
 .Python
 env/
