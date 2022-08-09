@@ -4,6 +4,7 @@
 
 - Add `BlogAboutPage`
 - Prevent more `InformationPage`s from being added to the `BlogHomePage`
+- Allow the use of formatted table blocks and plain text table blocks in most pages
 
 ## 60.1 (2022-07-27)
 

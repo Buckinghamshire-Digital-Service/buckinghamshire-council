@@ -3,17 +3,17 @@ repos:
     rev: v4.3.15
     hooks:
       - id: isort
-        language_version: python3.6
+        language_version: python3
   - repo: https://gitlab.com/pycqa/flake8
     rev: 3.7.7
     hooks:
       - id: flake8
-        language_version: python3.6
+        language_version: python3
   - repo: https://github.com/python/black
     rev: 22.3.0
     hooks:
       - id: black
-        language_version: python3.6
+        language_version: python3
   - repo: https://github.com/pre-commit/mirrors-eslint
     rev: v6.5.1
     hooks:
@@ -36,7 +36,7 @@ repos:
     hooks:
       - id: prettier
   - repo: https://github.com/awebdeveloper/pre-commit-stylelint
-    sha: c4c991cd38b0218735858716b09924f8b20e3812
+    rev: c4c991cd38b0218735858716b09924f8b20e3812
     hooks:
       - id: stylelint
         additional_dependencies:
@@ -47,4 +47,9 @@ repos:
     hooks:
       - id: detect-secrets
         args: ['--baseline', '.secrets.baseline']
-        exclude: .*/tests/.*
+        exclude: >
+          (?x)^(
+              .*/tests/.*|
+              package-lock.json|
+              poetry.lock
+          )$
