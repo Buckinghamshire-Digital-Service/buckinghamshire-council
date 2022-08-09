@@ -1,5 +1,10 @@
 # Release History
 
+## Unreleased
+
+- Add `BlogAboutPage`
+- Prevent more `InformationPage`s from being added to the `BlogHomePage`
+
 ## 60.1 (2022-07-27)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/60.0...60.1>

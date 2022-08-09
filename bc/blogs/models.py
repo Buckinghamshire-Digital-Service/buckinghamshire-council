@@ -142,7 +142,7 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
     base_form_class = BlogHomePageForm
 
     parent_page_types = ["blogs.blogglobalhomepage"]
-    subpage_types = ["blogs.blogpostpage", "standardpages.informationpage"]
+    subpage_types = ["blogs.blogpostpage", "blogs.blogaboutpage"]
 
     template = "patterns/pages/blogs/blog_home_page.html"
 
@@ -181,9 +181,7 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
                 [
                     FieldPanel("about_title", heading="Title"),
                     FieldPanel("about_description", heading="Description"),
-                    PageChooserPanel(
-                        "about_page", page_type="standardpages.informationpage"
-                    ),
+                    PageChooserPanel("about_page", page_type="blogs.blogaboutpage"),
                 ],
                 heading="About section",
             ),
@@ -318,6 +316,35 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
 
     def alert_confirmation_full_url(self, token):
         return self.full_url + self.reverse_subpage("confirm_blog_alert", args=[token])
+
+
+class BlogAboutPage(BasePage):
+    parent_page_types = ["blogs.bloghomepage"]
+    max_count_per_parent = 1
+
+    template = "patterns/pages/blogs/blog_about_page.html"
+
+    intro_text = models.TextField()
+
+    image = models.ForeignKey(
+        "images.CustomImage",
+        on_delete=models.SET_NULL,
+        related_name="+",
+        null=True,
+        blank=True,
+    )
+
+    body = StreamField(StoryBlock())
+
+    content_panels = BasePage.content_panels + [
+        FieldPanel("intro_text"),
+        ImageChooserPanel("image"),
+        StreamFieldPanel("body"),
+    ]
+
+    @cached_property
+    def homepage(self):
+        return self.get_parent().specific
 
 
 class BlogPostPage(BasePage):

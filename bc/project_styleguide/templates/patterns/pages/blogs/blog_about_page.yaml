@@ -1,0 +1,10 @@
+context:
+  base_page_template: 'patterns/base_page.html'
+  page:
+    title: Fostering blog
+    sub_title: Tips for talking to your child about fostering
+
+tags:
+  include_block:
+    page.content:
+      template_name: 'patterns/molecules/streamfield/stream_block.html'
