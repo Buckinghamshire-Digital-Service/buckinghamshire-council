@@ -4,7 +4,7 @@
     <section>
         <h2 class="sidebar__heading heading">{{ page.about_title }}</h2>
         <p>{{ page.about_description }}</p>
-        {% if page.about_page %}
+        {% if page.about_page and request.build_absolute_uri != page.about_page.url %}
             <a href="{% pageurl page.about_page %}">Find out more</a>
         {% endif %}
     </section>
