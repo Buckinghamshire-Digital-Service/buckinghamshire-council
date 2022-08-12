@@ -16,6 +16,21 @@ As and when models/fields are added that may be populated with sensitive data (s
 
 For full documentation see https://git.torchbox.com/internal/django-birdbath/-/blob/master/README.md.
 
+### Data processors
+
+The data processors can be found in [base.py](../bc/settings/base.py)
+
+```python
+BIRDBATH_PROCESSORS = [
+    "birdbath.processors.users.UserEmailAnonymiser",
+    "birdbath.processors.users.UserPasswordAnonymiser",
+    "birdbath.processors.contrib.wagtail.FormSubmissionCleaner",
+    "birdbath.processors.contrib.wagtail.SearchQueryCleaner",
+    "bc.blogs.birdbath.DeleteAllBlogAlertSubscriptionProcessor",
+    "bc.recruitment.birdbath.DeleteAllRecruitmentAlertSubscriptionProcessor",
+]
+```
+
 The `flightpath` tool can be used to copy production data (and media) from the production environment to staging. It will automatically `run_birdbath` immediately following this sync operation. A manual CI action is included that will trigger flightpath to sync the environments.
 
 Intended workflow:
