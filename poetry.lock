@@ -362,13 +362,14 @@ notifications-python-client = ">=6.1.0,<7.0.0"
 
 [[package]]
 name = "django-modelcluster"
-version = "5.3"
+version = "6.0"
 description = "Django extension to allow working with 'clusters' of models as a single unit, independently of the database"
 category = "main"
 optional = false
-python-versions = ">=3.5"
+python-versions = ">=3.7"
 
 [package.dependencies]
+django = ">=2.2"
 pytz = ">=2015.2"
 
 [package.extras]
@@ -386,6 +387,20 @@ python-versions = ">=3.6,<4.0"
 Django = ">=2.2,<4.0"
 Markdown = ">=3.1,<4.0"
 PyYAML = ">=5.1,<6.0"
+
+[[package]]
+name = "django-permissionedforms"
+version = "0.1"
+description = "Django extension for creating forms that vary according to user permissions"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+Django = "*"
+
+[package.extras]
+testing = ["django-modelcluster"]
 
 [[package]]
 name = "django-recaptcha"
@@ -1411,7 +1426,7 @@ testing = ["coverage (>=6.2)", "coverage-enable-subprocess (>=1)", "flaky (>=3.7
 
 [[package]]
 name = "wagtail"
-version = "2.16.2"
+version = "3.0.1"
 description = "A Django content management system."
 category = "main"
 optional = false
@@ -1422,7 +1437,8 @@ anyascii = ">=0.1.5"
 beautifulsoup4 = ">=4.8,<4.10"
 Django = ">=3.2,<4.1"
 django-filter = ">=2.2,<22"
-django-modelcluster = ">=5.2,<6.0"
+django-modelcluster = ">=6.0,<7.0"
+django-permissionedforms = ">=0.1,<1.0"
 django-taggit = ">=2.0,<3.0"
 django-treebeard = ">=4.5.1,<5.0"
 djangorestframework = ">=3.11.1,<4.0"
@@ -1438,12 +1454,17 @@ xlsxwriter = ">=1.2.8,<4.0"
 
 [package.extras]
 <<<<<<< HEAD
+<<<<<<< HEAD
 docs = ["Sphinx (>=1.5.2)", "pyenchant (>=3.1.1,<4)", "recommonmark (>=0.7.1)", "sphinx-autobuild (>=0.6.0)", "sphinx-wagtail-theme (==5.0.4)", "sphinxcontrib-spelling (>=5.4.0,<6)"]
 testing = ["Jinja2 (>=2.11,<3.0)", "Unidecode (>=0.04.14,<2.0)", "boto3 (>=1.16,<1.17)", "coverage (>=3.7.0)", "django-taggit (>=1.3.0,<2.0)", "doc8 (==0.8.1)", "docutils (==0.15)", "elasticsearch (>=5.0,<6.0)", "flake8 (>=3.6.0)", "flake8-blind-except (==0.1.1)", "flake8-print (==2.0.2)", "freezegun (>=0.3.8)", "isort (==5.6.4)", "jinjalint (>=0.5)", "openpyxl (>=2.6.4)", "polib (>=1.1,<2.0)", "python-dateutil (>=2.7)", "pytz (>=2014.7)"]
 =======
 docs = ["pyenchant (>=3.1.1,<4)", "sphinxcontrib-spelling (>=5.4.0,<6)", "Sphinx (>=1.5.2)", "sphinx-autobuild (>=0.6.0)", "sphinx-wagtail-theme (==5.0.4)", "recommonmark (>=0.7.1)"]
 testing = ["python-dateutil (>=2.7)", "pytz (>=2014.7)", "elasticsearch (>=5.0,<6.0)", "Jinja2 (>=3.0,<3.1)", "boto3 (>=1.16,<1.17)", "freezegun (>=0.3.8)", "openpyxl (>=2.6.4)", "Unidecode (>=0.04.14,<2.0)", "azure-mgmt-cdn (>=5.1,<6.0)", "azure-mgmt-frontdoor (>=0.3,<0.4)", "coverage (>=3.7.0)", "flake8 (>=3.6.0)", "isort (==5.6.4)", "flake8-blind-except (==0.1.1)", "flake8-print (==2.0.2)", "doc8 (==0.8.1)", "jinjalint (>=0.5)", "docutils (==0.15)", "polib (>=1.1,<2.0)"]
 >>>>>>> Upgrade to Wagtail 2.16
+=======
+docs = ["pyenchant (>=3.1.1,<4)", "sphinxcontrib-spelling (>=5.4.0,<6)", "Sphinx (>=1.5.2)", "sphinx-autobuild (>=0.6.0)", "sphinx-wagtail-theme (==5.1.1)", "myst-parser (==0.17.0)"]
+testing = ["python-dateutil (>=2.7)", "pytz (>=2014.7)", "elasticsearch (>=5.0,<6.0)", "Jinja2 (>=3.0,<3.2)", "boto3 (>=1.16,<1.17)", "freezegun (>=0.3.8)", "openpyxl (>=2.6.4)", "azure-mgmt-cdn (>=5.1,<6.0)", "azure-mgmt-frontdoor (>=0.3,<0.4)", "django-pattern-library (>=0.7,<0.8)", "coverage (>=3.7.0)", "black (==22.3.0)", "flake8 (>=3.6.0)", "isort (==5.6.4)", "flake8-blind-except (==0.1.1)", "flake8-comprehensions (==3.8.0)", "flake8-print (==2.0.2)", "doc8 (==0.8.1)", "flake8-assertive (==2.0.0)", "curlylint (==0.13.1)", "djhtml (==1.4.13)", "polib (>=1.1,<2.0)"]
+>>>>>>> Upgrade Wagtail 3 and dependencies
 
 [[package]]
 name = "wagtail-automatic-redirects"
@@ -1479,56 +1500,62 @@ testing = ["coverage (>=4.1.0,<4.2)", "flake8 (>=3.2.0,<3.3)", "isort (==4.2.5)"
 
 [[package]]
 name = "wagtail-factories"
-version = "2.0.1"
+version = "3.1.0"
 description = "Factory boy classes for wagtail"
 category = "main"
 optional = false
 python-versions = "*"
 
 [package.dependencies]
-factory-boy = ">=2.8.0"
-wagtail = ">=2.0"
+factory-boy = ">=3.2"
+wagtail = ">=2.15"
 
 [package.extras]
-test = ["flake8-debugger (==3.1.0)", "flake8-blind-except (==0.1.1)", "flake8 (==3.7.8)", "isort (==4.3.21)", "coverage (==4.5.3)", "psycopg2 (>=2.3.1)", "pytest-pythonpath (==0.7.3)", "pytest-cov (==2.7.1)", "pytest-django (==3.9.0)", "pytest (==6.0.1)"]
 docs = ["sphinx (>=1.4.0)"]
+<<<<<<< HEAD
 <<<<<<< HEAD
 test = ["coverage (==4.5.3)", "flake8 (==3.7.8)", "flake8-blind-except (==0.1.1)", "flake8-debugger (==3.1.0)", "isort (==4.3.21)", "psycopg2 (>=2.3.1)", "pytest (==6.0.1)", "pytest-cov (==2.7.1)", "pytest-django (==3.9.0)", "pytest-pythonpath (==0.7.3)"]
 =======
 >>>>>>> Upgrade to Wagtail 2.16
+=======
+test = ["pytest (==6.2.5)", "pytest-django (==4.5.0)", "pytest-cov (==3.0.0)", "pytest-pythonpath (==0.7.3)", "psycopg2 (>=2.3.1)", "coverage (==6.0)", "isort (==5.10.0)", "flake8 (==4.0.0)", "flake8-blind-except (==0.1.1)", "flake8-debugger (==4.1.2)"]
+>>>>>>> Upgrade Wagtail 3 and dependencies
 
 [[package]]
 name = "wagtail-orderable"
-version = "1.0.3"
+version = "1.0.4"
 description = "Orderable support for Wagtail"
 category = "main"
 optional = false
 python-versions = "*"
 
 [package.dependencies]
-wagtail = ">=2.0,<3.0"
+wagtail = ">=2.15,<4.0"
 
 [[package]]
 name = "wagtail-transfer"
-version = "0.8.2"
+version = "0.8.5"
 description = "Content transfer for Wagtail"
 category = "main"
 optional = false
-python-versions = "*"
+python-versions = ">=3.6"
 
 [package.extras]
 docs = ["mkdocs (>=1.0,<1.1)", "mkdocs-material (>=4.6,<4.7)"]
 
 [[package]]
 name = "wagtailgeowidget"
-version = "5.1.0"
+version = "6.2.0"
 description = "Wagtail-Geo-Widget is the complete map solution for your Wagtail site."
 category = "main"
 optional = false
 python-versions = "*"
 
 [package.dependencies]
-Django = ">=1.11"
+Wagtail = ">=2.15"
+
+[package.extras]
+test = ["pytest", "pytest-django", "factory-boy"]
 
 [[package]]
 name = "webencodings"
@@ -1656,6 +1683,7 @@ gunicorn = ["gunicorn"]
 [metadata]
 lock-version = "1.1"
 python-versions = "~3.7"
+<<<<<<< HEAD
 <<<<<<< HEAD
 content-hash = "cadbc7c7f851984d283dea8c8e590d37ded8fe613d272c9a7d16ff069fe28a41"
 
@@ -2467,6 +2495,9 @@ zipp = [
 ]
 =======
 content-hash = "8dccb2e34c2d3776ad32027549010780253bef32076b2977fdc86fa8ea81850a"
+=======
+content-hash = "bd482ea133a2a51152d5fa61167af8ce578412d6fcde24962db1923627f30318"
+>>>>>>> Upgrade Wagtail 3 and dependencies
 
 [metadata.files]
 anyascii = []
@@ -2500,6 +2531,7 @@ django-filter = []
 django-gov-notify = []
 django-modelcluster = []
 django-pattern-library = []
+django-permissionedforms = []
 django-recaptcha = []
 django-redis = []
 django-referrer-policy = []
