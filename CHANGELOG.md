@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 61.0 (2022-08-09)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/60.1...61.0>
+
 - Add `BlogAboutPage`
 - Prevent more `InformationPage`s from being added to the `BlogHomePage`
 - Allow the use of formatted table blocks and plain text table blocks in most pages
