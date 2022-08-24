@@ -2,7 +2,7 @@ from django.db.models import Q
 from django.views import defaults
 
 from wagtail.admin.views.reports import PageReportView
-from wagtail.core.models import Page
+from wagtail.models import Page
 
 from .models import SEARCH_DESCRIPTION_LABEL, SEO_TITLE_LABEL
 

@@ -3,7 +3,7 @@ from django.test import RequestFactory, TestCase, override_settings
 from django.urls import reverse
 
 from wagtail.contrib.search_promotions.models import SearchPromotion
-from wagtail.core.models import Page, Site
+from wagtail.models import Page, Site
 from wagtail.search.backends import get_search_backend
 from wagtail.search.models import Query
 

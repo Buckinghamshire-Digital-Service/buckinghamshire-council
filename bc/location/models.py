@@ -3,7 +3,7 @@ from django.db.models.expressions import Case, When
 from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
-from wagtail.admin.edit_handlers import (
+from wagtail.admin.panels import (
     FieldPanel,
     FieldRowPanel,
     InlinePanel,
@@ -11,9 +11,9 @@ from wagtail.admin.edit_handlers import (
     RichTextFieldPanel,
     StreamFieldPanel,
 )
-from wagtail.core.fields import RichTextField, StreamField
-from wagtail.core.rich_text import expand_db_html
+from wagtail.fields import RichTextField, StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.rich_text import expand_db_html
 
 from wagtailgeowidget.edit_handlers import GeoPanel
 from wagtailgeowidget.helpers import geosgeometry_str_to_struct

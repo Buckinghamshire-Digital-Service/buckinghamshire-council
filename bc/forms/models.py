@@ -8,7 +8,7 @@ from django.template.response import TemplateResponse
 from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
-from wagtail.admin.edit_handlers import (
+from wagtail.admin.panels import (
     FieldPanel,
     FieldRowPanel,
     InlinePanel,
@@ -17,7 +17,7 @@ from wagtail.admin.edit_handlers import (
 )
 from wagtail.contrib.forms.forms import FormBuilder
 from wagtail.contrib.forms.models import AbstractFormField
-from wagtail.core.fields import RichTextField
+from wagtail.fields import RichTextField
 from wagtail.search import index
 
 from wagtailcaptcha.models import WagtailCaptchaEmailForm

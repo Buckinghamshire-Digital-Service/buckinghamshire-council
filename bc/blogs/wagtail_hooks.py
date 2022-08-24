@@ -1,10 +1,10 @@
+from wagtail import hooks
 from wagtail.contrib.modeladmin.options import (
     ModelAdmin,
     ModelAdminGroup,
     modeladmin_register,
 )
-from wagtail.core import hooks
-from wagtail.core.models import PageLogEntry
+from wagtail.models import PageLogEntry
 
 from bc.blogs.models import BlogAlertSubscription, BlogPostPage, NotificationRecord
 

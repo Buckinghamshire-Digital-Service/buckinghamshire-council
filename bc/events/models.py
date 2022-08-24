@@ -11,14 +11,14 @@ from django.utils.http import urlencode
 from django.utils.translation import gettext_lazy as _
 
 from modelcluster.fields import ParentalKey
-from wagtail.admin.edit_handlers import (
+from wagtail.admin.panels import (
     FieldPanel,
     FieldRowPanel,
     InlinePanel,
     MultiFieldPanel,
     StreamFieldPanel,
 )
-from wagtail.core.fields import StreamField
+from wagtail.fields import StreamField
 from wagtail.search import index
 
 from bc.utils.blocks import StoryBlock

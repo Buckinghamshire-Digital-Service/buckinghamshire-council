@@ -2,10 +2,10 @@
 
 from django.db import migrations
 
+import wagtail.blocks
 import wagtail.contrib.typed_table_block.blocks
-import wagtail.core.blocks
-import wagtail.core.fields
 import wagtail.embeds.blocks
+import wagtail.fields
 import wagtail.images.blocks
 
 import bc.longform.blocks
@@ -22,11 +22,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="longformchapterpage",
             name="body",
-            field=wagtail.core.fields.StreamField(
+            field=wagtail.fields.StreamField(
                 [
                     (
                         "heading",
-                        wagtail.core.blocks.CharBlock(
+                        wagtail.blocks.CharBlock(
                             form_classname="full title",
                             group="Heading",
                             help_text='The link to this heading uses the heading text in lowercase, with no symbols, and with the spaces replaced with hyphens. e.g. "Lorem @ 2 ipsum" becomes "lorem-2-ipsum"',
@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
                     ),
                     (
                         "subheading",
-                        wagtail.core.blocks.CharBlock(
+                        wagtail.blocks.CharBlock(
                             form_classname="full title",
                             group="Heading",
                             help_text='The link to this subheading uses the subheading text in lowercase, with no symbols, and with the spaces replaced with hyphens. e.g. "Lorem @ 2 ipsum" becomes "lorem-2-ipsum"',
@@ -47,7 +47,7 @@ class Migration(migrations.Migration):
                     ),
                     (
                         "paragraph",
-                        wagtail.core.blocks.RichTextBlock(
+                        wagtail.blocks.RichTextBlock(
                             features=[
                                 "bold",
                                 "italic",
@@ -60,19 +60,19 @@ class Migration(migrations.Migration):
                     ),
                     (
                         "image",
-                        wagtail.core.blocks.StructBlock(
+                        wagtail.blocks.StructBlock(
                             [
                                 ("image", wagtail.images.blocks.ImageChooserBlock()),
                                 (
                                     "alt_text",
-                                    wagtail.core.blocks.CharBlock(
+                                    wagtail.blocks.CharBlock(
                                         help_text="Describe the information, not the picture. Leave blank if the image is purely decorative. Do not repeat captions or content already on the page.",
                                         required=False,
                                     ),
                                 ),
                                 (
                                     "caption",
-                                    wagtail.core.blocks.CharBlock(required=False),
+                                    wagtail.blocks.CharBlock(required=False),
                                 ),
                             ]
                         ),
@@ -80,11 +80,11 @@ class Migration(migrations.Migration):
                     ("embed", wagtail.embeds.blocks.EmbedBlock()),
                     (
                         "local_area_links",
-                        wagtail.core.blocks.StructBlock(
+                        wagtail.blocks.StructBlock(
                             [
                                 (
                                     "heading",
-                                    wagtail.core.blocks.RichTextBlock(
+                                    wagtail.blocks.RichTextBlock(
                                         default="<p><b>Find local information</b></p>",
                                         features=[
                                             "bold",
@@ -98,7 +98,7 @@ class Migration(migrations.Migration):
                                 ),
                                 (
                                     "introduction",
-                                    wagtail.core.blocks.RichTextBlock(
+                                    wagtail.blocks.RichTextBlock(
                                         default="<p>While we finish building this new website, we’re keeping some local information on our old council websites</p>",
                                         features=[
                                             "bold",
@@ -112,7 +112,7 @@ class Migration(migrations.Migration):
                                 ),
                                 (
                                     "postcode_lookup_text",
-                                    wagtail.core.blocks.RichTextBlock(
+                                    wagtail.blocks.RichTextBlock(
                                         default="<p>Enter your postcode to help us redirect you to the right place.</p>",
                                         features=[
                                             "bold",
@@ -127,7 +127,7 @@ class Migration(migrations.Migration):
                                 ),
                                 (
                                     "area_lookup_text",
-                                    wagtail.core.blocks.RichTextBlock(
+                                    wagtail.blocks.RichTextBlock(
                                         default="<p>Select your local area to help us direct you to the right place:</p>",
                                         features=[
                                             "bold",
@@ -142,30 +142,26 @@ class Migration(migrations.Migration):
                                 ),
                                 (
                                     "aylesbury_vale_url",
-                                    wagtail.core.blocks.URLBlock(
-                                        label="Aylesbury Vale URL"
-                                    ),
+                                    wagtail.blocks.URLBlock(label="Aylesbury Vale URL"),
                                 ),
                                 (
                                     "chiltern_url",
-                                    wagtail.core.blocks.URLBlock(label="Chiltern URL"),
+                                    wagtail.blocks.URLBlock(label="Chiltern URL"),
                                 ),
                                 (
                                     "south_bucks_url",
-                                    wagtail.core.blocks.URLBlock(
-                                        label="South Bucks URL"
-                                    ),
+                                    wagtail.blocks.URLBlock(label="South Bucks URL"),
                                 ),
                                 (
                                     "wycombe_url",
-                                    wagtail.core.blocks.URLBlock(label="Wycombe URL"),
+                                    wagtail.blocks.URLBlock(label="Wycombe URL"),
                                 ),
                             ]
                         ),
                     ),
                     (
                         "table",
-                        wagtail.core.blocks.StructBlock(
+                        wagtail.blocks.StructBlock(
                             [
                                 (
                                     "table",
@@ -173,30 +169,30 @@ class Migration(migrations.Migration):
                                         [
                                             (
                                                 "left_aligned_column",
-                                                wagtail.core.blocks.StreamBlock(
+                                                wagtail.blocks.StreamBlock(
                                                     [
                                                         (
                                                             "numeric",
-                                                            wagtail.core.blocks.DecimalBlock(),
+                                                            wagtail.blocks.DecimalBlock(),
                                                         ),
                                                         (
                                                             "rich_text",
-                                                            wagtail.core.blocks.RichTextBlock(),
+                                                            wagtail.blocks.RichTextBlock(),
                                                         ),
                                                     ]
                                                 ),
                                             ),
                                             (
                                                 "right_aligned_column",
-                                                wagtail.core.blocks.StreamBlock(
+                                                wagtail.blocks.StreamBlock(
                                                     [
                                                         (
                                                             "numeric",
-                                                            wagtail.core.blocks.DecimalBlock(),
+                                                            wagtail.blocks.DecimalBlock(),
                                                         ),
                                                         (
                                                             "rich_text",
-                                                            wagtail.core.blocks.RichTextBlock(),
+                                                            wagtail.blocks.RichTextBlock(),
                                                         ),
                                                     ]
                                                 ),
@@ -206,30 +202,26 @@ class Migration(migrations.Migration):
                                 ),
                                 (
                                     "caption",
-                                    wagtail.core.blocks.TextBlock(required=False),
+                                    wagtail.blocks.TextBlock(required=False),
                                 ),
                             ]
                         ),
                     ),
                     (
                         "button",
-                        wagtail.core.blocks.StructBlock(
+                        wagtail.blocks.StructBlock(
                             [
                                 (
                                     "text",
-                                    wagtail.core.blocks.CharBlock(
-                                        form_classname="title"
-                                    ),
+                                    wagtail.blocks.CharBlock(form_classname="title"),
                                 ),
                                 (
                                     "link_url",
-                                    wagtail.core.blocks.URLBlock(required=False),
+                                    wagtail.blocks.URLBlock(required=False),
                                 ),
                                 (
                                     "link_page",
-                                    wagtail.core.blocks.PageChooserBlock(
-                                        required=False
-                                    ),
+                                    wagtail.blocks.PageChooserBlock(required=False),
                                 ),
                             ]
                         ),
@@ -237,7 +229,7 @@ class Migration(migrations.Migration):
                     ("highlight", bc.utils.blocks.HighlightBlock()),
                     (
                         "subsubheading",
-                        wagtail.core.blocks.CharBlock(
+                        wagtail.blocks.CharBlock(
                             form_classname="full title",
                             group="Heading",
                             help_text='The link to this subsubheading uses the subsubheading text in lowercase, with no symbols, and with the spaces replaced with hyphens. e.g. "Lorem @ 2 ipsum" becomes "lorem-2-ipsum"',
@@ -266,16 +258,16 @@ class Migration(migrations.Migration):
                     ),
                     (
                         "accordion",
-                        wagtail.core.blocks.StructBlock(
+                        wagtail.blocks.StructBlock(
                             [
                                 (
                                     "items",
-                                    wagtail.core.blocks.ListBlock(
-                                        wagtail.core.blocks.StructBlock(
+                                    wagtail.blocks.ListBlock(
+                                        wagtail.blocks.StructBlock(
                                             [
                                                 (
                                                     "title",
-                                                    wagtail.core.blocks.CharBlock(
+                                                    wagtail.blocks.CharBlock(
                                                         form_classname="full title",
                                                         icon="title",
                                                         label="Accordion title",
@@ -283,11 +275,11 @@ class Migration(migrations.Migration):
                                                 ),
                                                 (
                                                     "content",
-                                                    wagtail.core.blocks.StreamBlock(
+                                                    wagtail.blocks.StreamBlock(
                                                         [
                                                             (
                                                                 "heading",
-                                                                wagtail.core.blocks.CharBlock(
+                                                                wagtail.blocks.CharBlock(
                                                                     form_classname="full title",
                                                                     group="Heading",
                                                                     help_text='The link to this heading uses the heading text in lowercase, with no symbols, and with the spaces replaced with hyphens. e.g. "Lorem @ 2 ipsum" becomes "lorem-2-ipsum"',
@@ -298,7 +290,7 @@ class Migration(migrations.Migration):
                                                             ),
                                                             (
                                                                 "subheading",
-                                                                wagtail.core.blocks.CharBlock(
+                                                                wagtail.blocks.CharBlock(
                                                                     form_classname="full title",
                                                                     group="Heading",
                                                                     help_text='The link to this subheading uses the subheading text in lowercase, with no symbols, and with the spaces replaced with hyphens. e.g. "Lorem @ 2 ipsum" becomes "lorem-2-ipsum"',
@@ -308,7 +300,7 @@ class Migration(migrations.Migration):
                                                             ),
                                                             (
                                                                 "paragraph",
-                                                                wagtail.core.blocks.RichTextBlock(
+                                                                wagtail.blocks.RichTextBlock(
                                                                     features=[
                                                                         "bold",
                                                                         "italic",
@@ -321,7 +313,7 @@ class Migration(migrations.Migration):
                                                             ),
                                                             (
                                                                 "image",
-                                                                wagtail.core.blocks.StructBlock(
+                                                                wagtail.blocks.StructBlock(
                                                                     [
                                                                         (
                                                                             "image",
@@ -329,14 +321,14 @@ class Migration(migrations.Migration):
                                                                         ),
                                                                         (
                                                                             "alt_text",
-                                                                            wagtail.core.blocks.CharBlock(
+                                                                            wagtail.blocks.CharBlock(
                                                                                 help_text="Describe the information, not the picture. Leave blank if the image is purely decorative. Do not repeat captions or content already on the page.",
                                                                                 required=False,
                                                                             ),
                                                                         ),
                                                                         (
                                                                             "caption",
-                                                                            wagtail.core.blocks.CharBlock(
+                                                                            wagtail.blocks.CharBlock(
                                                                                 required=False
                                                                             ),
                                                                         ),
@@ -349,11 +341,11 @@ class Migration(migrations.Migration):
                                                             ),
                                                             (
                                                                 "local_area_links",
-                                                                wagtail.core.blocks.StructBlock(
+                                                                wagtail.blocks.StructBlock(
                                                                     [
                                                                         (
                                                                             "heading",
-                                                                            wagtail.core.blocks.RichTextBlock(
+                                                                            wagtail.blocks.RichTextBlock(
                                                                                 default="<p><b>Find local information</b></p>",
                                                                                 features=[
                                                                                     "bold",
@@ -367,7 +359,7 @@ class Migration(migrations.Migration):
                                                                         ),
                                                                         (
                                                                             "introduction",
-                                                                            wagtail.core.blocks.RichTextBlock(
+                                                                            wagtail.blocks.RichTextBlock(
                                                                                 default="<p>While we finish building this new website, we’re keeping some local information on our old council websites</p>",
                                                                                 features=[
                                                                                     "bold",
@@ -381,7 +373,7 @@ class Migration(migrations.Migration):
                                                                         ),
                                                                         (
                                                                             "postcode_lookup_text",
-                                                                            wagtail.core.blocks.RichTextBlock(
+                                                                            wagtail.blocks.RichTextBlock(
                                                                                 default="<p>Enter your postcode to help us redirect you to the right place.</p>",
                                                                                 features=[
                                                                                     "bold",
@@ -396,7 +388,7 @@ class Migration(migrations.Migration):
                                                                         ),
                                                                         (
                                                                             "area_lookup_text",
-                                                                            wagtail.core.blocks.RichTextBlock(
+                                                                            wagtail.blocks.RichTextBlock(
                                                                                 default="<p>Select your local area to help us direct you to the right place:</p>",
                                                                                 features=[
                                                                                     "bold",
@@ -411,25 +403,25 @@ class Migration(migrations.Migration):
                                                                         ),
                                                                         (
                                                                             "aylesbury_vale_url",
-                                                                            wagtail.core.blocks.URLBlock(
+                                                                            wagtail.blocks.URLBlock(
                                                                                 label="Aylesbury Vale URL"
                                                                             ),
                                                                         ),
                                                                         (
                                                                             "chiltern_url",
-                                                                            wagtail.core.blocks.URLBlock(
+                                                                            wagtail.blocks.URLBlock(
                                                                                 label="Chiltern URL"
                                                                             ),
                                                                         ),
                                                                         (
                                                                             "south_bucks_url",
-                                                                            wagtail.core.blocks.URLBlock(
+                                                                            wagtail.blocks.URLBlock(
                                                                                 label="South Bucks URL"
                                                                             ),
                                                                         ),
                                                                         (
                                                                             "wycombe_url",
-                                                                            wagtail.core.blocks.URLBlock(
+                                                                            wagtail.blocks.URLBlock(
                                                                                 label="Wycombe URL"
                                                                             ),
                                                                         ),
@@ -438,7 +430,7 @@ class Migration(migrations.Migration):
                                                             ),
                                                             (
                                                                 "table",
-                                                                wagtail.core.blocks.StructBlock(
+                                                                wagtail.blocks.StructBlock(
                                                                     [
                                                                         (
                                                                             "table",
@@ -446,30 +438,30 @@ class Migration(migrations.Migration):
                                                                                 [
                                                                                     (
                                                                                         "left_aligned_column",
-                                                                                        wagtail.core.blocks.StreamBlock(
+                                                                                        wagtail.blocks.StreamBlock(
                                                                                             [
                                                                                                 (
                                                                                                     "numeric",
-                                                                                                    wagtail.core.blocks.DecimalBlock(),
+                                                                                                    wagtail.blocks.DecimalBlock(),
                                                                                                 ),
                                                                                                 (
                                                                                                     "rich_text",
-                                                                                                    wagtail.core.blocks.RichTextBlock(),
+                                                                                                    wagtail.blocks.RichTextBlock(),
                                                                                                 ),
                                                                                             ]
                                                                                         ),
                                                                                     ),
                                                                                     (
                                                                                         "right_aligned_column",
-                                                                                        wagtail.core.blocks.StreamBlock(
+                                                                                        wagtail.blocks.StreamBlock(
                                                                                             [
                                                                                                 (
                                                                                                     "numeric",
-                                                                                                    wagtail.core.blocks.DecimalBlock(),
+                                                                                                    wagtail.blocks.DecimalBlock(),
                                                                                                 ),
                                                                                                 (
                                                                                                     "rich_text",
-                                                                                                    wagtail.core.blocks.RichTextBlock(),
+                                                                                                    wagtail.blocks.RichTextBlock(),
                                                                                                 ),
                                                                                             ]
                                                                                         ),
@@ -479,7 +471,7 @@ class Migration(migrations.Migration):
                                                                         ),
                                                                         (
                                                                             "caption",
-                                                                            wagtail.core.blocks.TextBlock(
+                                                                            wagtail.blocks.TextBlock(
                                                                                 required=False
                                                                             ),
                                                                         ),
@@ -488,23 +480,23 @@ class Migration(migrations.Migration):
                                                             ),
                                                             (
                                                                 "button",
-                                                                wagtail.core.blocks.StructBlock(
+                                                                wagtail.blocks.StructBlock(
                                                                     [
                                                                         (
                                                                             "text",
-                                                                            wagtail.core.blocks.CharBlock(
+                                                                            wagtail.blocks.CharBlock(
                                                                                 form_classname="title"
                                                                             ),
                                                                         ),
                                                                         (
                                                                             "link_url",
-                                                                            wagtail.core.blocks.URLBlock(
+                                                                            wagtail.blocks.URLBlock(
                                                                                 required=False
                                                                             ),
                                                                         ),
                                                                         (
                                                                             "link_page",
-                                                                            wagtail.core.blocks.PageChooserBlock(
+                                                                            wagtail.blocks.PageChooserBlock(
                                                                                 required=False
                                                                             ),
                                                                         ),
@@ -529,11 +521,11 @@ class Migration(migrations.Migration):
                     ),
                     (
                         "detail",
-                        wagtail.core.blocks.StructBlock(
+                        wagtail.blocks.StructBlock(
                             [
                                 (
                                     "title",
-                                    wagtail.core.blocks.CharBlock(
+                                    wagtail.blocks.CharBlock(
                                         form_classname="full title",
                                         icon="title",
                                         label="Detail title",
@@ -541,7 +533,7 @@ class Migration(migrations.Migration):
                                 ),
                                 (
                                     "content",
-                                    wagtail.core.blocks.RichTextBlock(
+                                    wagtail.blocks.RichTextBlock(
                                         features=[
                                             "bold",
                                             "italic",
@@ -565,11 +557,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="longformpage",
             name="body",
-            field=wagtail.core.fields.StreamField(
+            field=wagtail.fields.StreamField(
                 [
                     (
                         "heading",
-                        wagtail.core.blocks.CharBlock(
+                        wagtail.blocks.CharBlock(
                             form_classname="full title",
                             group="Heading",
                             help_text='The link to this heading uses the heading text in lowercase, with no symbols, and with the spaces replaced with hyphens. e.g. "Lorem @ 2 ipsum" becomes "lorem-2-ipsum"',
@@ -580,7 +572,7 @@ class Migration(migrations.Migration):
                     ),
                     (
                         "subheading",
-                        wagtail.core.blocks.CharBlock(
+                        wagtail.blocks.CharBlock(
                             form_classname="full title",
                             group="Heading",
                             help_text='The link to this subheading uses the subheading text in lowercase, with no symbols, and with the spaces replaced with hyphens. e.g. "Lorem @ 2 ipsum" becomes "lorem-2-ipsum"',
@@ -590,7 +582,7 @@ class Migration(migrations.Migration):
                     ),
                     (
                         "paragraph",
-                        wagtail.core.blocks.RichTextBlock(
+                        wagtail.blocks.RichTextBlock(
                             features=[
                                 "bold",
                                 "italic",
@@ -603,19 +595,19 @@ class Migration(migrations.Migration):
                     ),
                     (
                         "image",
-                        wagtail.core.blocks.StructBlock(
+                        wagtail.blocks.StructBlock(
                             [
                                 ("image", wagtail.images.blocks.ImageChooserBlock()),
                                 (
                                     "alt_text",
-                                    wagtail.core.blocks.CharBlock(
+                                    wagtail.blocks.CharBlock(
                                         help_text="Describe the information, not the picture. Leave blank if the image is purely decorative. Do not repeat captions or content already on the page.",
                                         required=False,
                                     ),
                                 ),
                                 (
                                     "caption",
-                                    wagtail.core.blocks.CharBlock(required=False),
+                                    wagtail.blocks.CharBlock(required=False),
                                 ),
                             ]
                         ),
@@ -623,11 +615,11 @@ class Migration(migrations.Migration):
                     ("embed", wagtail.embeds.blocks.EmbedBlock()),
                     (
                         "local_area_links",
-                        wagtail.core.blocks.StructBlock(
+                        wagtail.blocks.StructBlock(
                             [
                                 (
                                     "heading",
-                                    wagtail.core.blocks.RichTextBlock(
+                                    wagtail.blocks.RichTextBlock(
                                         default="<p><b>Find local information</b></p>",
                                         features=[
                                             "bold",
@@ -641,7 +633,7 @@ class Migration(migrations.Migration):
                                 ),
                                 (
                                     "introduction",
-                                    wagtail.core.blocks.RichTextBlock(
+                                    wagtail.blocks.RichTextBlock(
                                         default="<p>While we finish building this new website, we’re keeping some local information on our old council websites</p>",
                                         features=[
                                             "bold",
@@ -655,7 +647,7 @@ class Migration(migrations.Migration):
                                 ),
                                 (
                                     "postcode_lookup_text",
-                                    wagtail.core.blocks.RichTextBlock(
+                                    wagtail.blocks.RichTextBlock(
                                         default="<p>Enter your postcode to help us redirect you to the right place.</p>",
                                         features=[
                                             "bold",
@@ -670,7 +662,7 @@ class Migration(migrations.Migration):
                                 ),
                                 (
                                     "area_lookup_text",
-                                    wagtail.core.blocks.RichTextBlock(
+                                    wagtail.blocks.RichTextBlock(
                                         default="<p>Select your local area to help us direct you to the right place:</p>",
                                         features=[
                                             "bold",
@@ -685,30 +677,26 @@ class Migration(migrations.Migration):
                                 ),
                                 (
                                     "aylesbury_vale_url",
-                                    wagtail.core.blocks.URLBlock(
-                                        label="Aylesbury Vale URL"
-                                    ),
+                                    wagtail.blocks.URLBlock(label="Aylesbury Vale URL"),
                                 ),
                                 (
                                     "chiltern_url",
-                                    wagtail.core.blocks.URLBlock(label="Chiltern URL"),
+                                    wagtail.blocks.URLBlock(label="Chiltern URL"),
                                 ),
                                 (
                                     "south_bucks_url",
-                                    wagtail.core.blocks.URLBlock(
-                                        label="South Bucks URL"
-                                    ),
+                                    wagtail.blocks.URLBlock(label="South Bucks URL"),
                                 ),
                                 (
                                     "wycombe_url",
-                                    wagtail.core.blocks.URLBlock(label="Wycombe URL"),
+                                    wagtail.blocks.URLBlock(label="Wycombe URL"),
                                 ),
                             ]
                         ),
                     ),
                     (
                         "table",
-                        wagtail.core.blocks.StructBlock(
+                        wagtail.blocks.StructBlock(
                             [
                                 (
                                     "table",
@@ -716,30 +704,30 @@ class Migration(migrations.Migration):
                                         [
                                             (
                                                 "left_aligned_column",
-                                                wagtail.core.blocks.StreamBlock(
+                                                wagtail.blocks.StreamBlock(
                                                     [
                                                         (
                                                             "numeric",
-                                                            wagtail.core.blocks.DecimalBlock(),
+                                                            wagtail.blocks.DecimalBlock(),
                                                         ),
                                                         (
                                                             "rich_text",
-                                                            wagtail.core.blocks.RichTextBlock(),
+                                                            wagtail.blocks.RichTextBlock(),
                                                         ),
                                                     ]
                                                 ),
                                             ),
                                             (
                                                 "right_aligned_column",
-                                                wagtail.core.blocks.StreamBlock(
+                                                wagtail.blocks.StreamBlock(
                                                     [
                                                         (
                                                             "numeric",
-                                                            wagtail.core.blocks.DecimalBlock(),
+                                                            wagtail.blocks.DecimalBlock(),
                                                         ),
                                                         (
                                                             "rich_text",
-                                                            wagtail.core.blocks.RichTextBlock(),
+                                                            wagtail.blocks.RichTextBlock(),
                                                         ),
                                                     ]
                                                 ),
@@ -749,30 +737,26 @@ class Migration(migrations.Migration):
                                 ),
                                 (
                                     "caption",
-                                    wagtail.core.blocks.TextBlock(required=False),
+                                    wagtail.blocks.TextBlock(required=False),
                                 ),
                             ]
                         ),
                     ),
                     (
                         "button",
-                        wagtail.core.blocks.StructBlock(
+                        wagtail.blocks.StructBlock(
                             [
                                 (
                                     "text",
-                                    wagtail.core.blocks.CharBlock(
-                                        form_classname="title"
-                                    ),
+                                    wagtail.blocks.CharBlock(form_classname="title"),
                                 ),
                                 (
                                     "link_url",
-                                    wagtail.core.blocks.URLBlock(required=False),
+                                    wagtail.blocks.URLBlock(required=False),
                                 ),
                                 (
                                     "link_page",
-                                    wagtail.core.blocks.PageChooserBlock(
-                                        required=False
-                                    ),
+                                    wagtail.blocks.PageChooserBlock(required=False),
                                 ),
                             ]
                         ),
@@ -780,7 +764,7 @@ class Migration(migrations.Migration):
                     ("highlight", bc.utils.blocks.HighlightBlock()),
                     (
                         "subsubheading",
-                        wagtail.core.blocks.CharBlock(
+                        wagtail.blocks.CharBlock(
                             form_classname="full title",
                             group="Heading",
                             help_text='The link to this subsubheading uses the subsubheading text in lowercase, with no symbols, and with the spaces replaced with hyphens. e.g. "Lorem @ 2 ipsum" becomes "lorem-2-ipsum"',
@@ -809,16 +793,16 @@ class Migration(migrations.Migration):
                     ),
                     (
                         "accordion",
-                        wagtail.core.blocks.StructBlock(
+                        wagtail.blocks.StructBlock(
                             [
                                 (
                                     "items",
-                                    wagtail.core.blocks.ListBlock(
-                                        wagtail.core.blocks.StructBlock(
+                                    wagtail.blocks.ListBlock(
+                                        wagtail.blocks.StructBlock(
                                             [
                                                 (
                                                     "title",
-                                                    wagtail.core.blocks.CharBlock(
+                                                    wagtail.blocks.CharBlock(
                                                         form_classname="full title",
                                                         icon="title",
                                                         label="Accordion title",
@@ -826,11 +810,11 @@ class Migration(migrations.Migration):
                                                 ),
                                                 (
                                                     "content",
-                                                    wagtail.core.blocks.StreamBlock(
+                                                    wagtail.blocks.StreamBlock(
                                                         [
                                                             (
                                                                 "heading",
-                                                                wagtail.core.blocks.CharBlock(
+                                                                wagtail.blocks.CharBlock(
                                                                     form_classname="full title",
                                                                     group="Heading",
                                                                     help_text='The link to this heading uses the heading text in lowercase, with no symbols, and with the spaces replaced with hyphens. e.g. "Lorem @ 2 ipsum" becomes "lorem-2-ipsum"',
@@ -841,7 +825,7 @@ class Migration(migrations.Migration):
                                                             ),
                                                             (
                                                                 "subheading",
-                                                                wagtail.core.blocks.CharBlock(
+                                                                wagtail.blocks.CharBlock(
                                                                     form_classname="full title",
                                                                     group="Heading",
                                                                     help_text='The link to this subheading uses the subheading text in lowercase, with no symbols, and with the spaces replaced with hyphens. e.g. "Lorem @ 2 ipsum" becomes "lorem-2-ipsum"',
@@ -851,7 +835,7 @@ class Migration(migrations.Migration):
                                                             ),
                                                             (
                                                                 "paragraph",
-                                                                wagtail.core.blocks.RichTextBlock(
+                                                                wagtail.blocks.RichTextBlock(
                                                                     features=[
                                                                         "bold",
                                                                         "italic",
@@ -864,7 +848,7 @@ class Migration(migrations.Migration):
                                                             ),
                                                             (
                                                                 "image",
-                                                                wagtail.core.blocks.StructBlock(
+                                                                wagtail.blocks.StructBlock(
                                                                     [
                                                                         (
                                                                             "image",
@@ -872,14 +856,14 @@ class Migration(migrations.Migration):
                                                                         ),
                                                                         (
                                                                             "alt_text",
-                                                                            wagtail.core.blocks.CharBlock(
+                                                                            wagtail.blocks.CharBlock(
                                                                                 help_text="Describe the information, not the picture. Leave blank if the image is purely decorative. Do not repeat captions or content already on the page.",
                                                                                 required=False,
                                                                             ),
                                                                         ),
                                                                         (
                                                                             "caption",
-                                                                            wagtail.core.blocks.CharBlock(
+                                                                            wagtail.blocks.CharBlock(
                                                                                 required=False
                                                                             ),
                                                                         ),
@@ -892,11 +876,11 @@ class Migration(migrations.Migration):
                                                             ),
                                                             (
                                                                 "local_area_links",
-                                                                wagtail.core.blocks.StructBlock(
+                                                                wagtail.blocks.StructBlock(
                                                                     [
                                                                         (
                                                                             "heading",
-                                                                            wagtail.core.blocks.RichTextBlock(
+                                                                            wagtail.blocks.RichTextBlock(
                                                                                 default="<p><b>Find local information</b></p>",
                                                                                 features=[
                                                                                     "bold",
@@ -910,7 +894,7 @@ class Migration(migrations.Migration):
                                                                         ),
                                                                         (
                                                                             "introduction",
-                                                                            wagtail.core.blocks.RichTextBlock(
+                                                                            wagtail.blocks.RichTextBlock(
                                                                                 default="<p>While we finish building this new website, we’re keeping some local information on our old council websites</p>",
                                                                                 features=[
                                                                                     "bold",
@@ -924,7 +908,7 @@ class Migration(migrations.Migration):
                                                                         ),
                                                                         (
                                                                             "postcode_lookup_text",
-                                                                            wagtail.core.blocks.RichTextBlock(
+                                                                            wagtail.blocks.RichTextBlock(
                                                                                 default="<p>Enter your postcode to help us redirect you to the right place.</p>",
                                                                                 features=[
                                                                                     "bold",
@@ -939,7 +923,7 @@ class Migration(migrations.Migration):
                                                                         ),
                                                                         (
                                                                             "area_lookup_text",
-                                                                            wagtail.core.blocks.RichTextBlock(
+                                                                            wagtail.blocks.RichTextBlock(
                                                                                 default="<p>Select your local area to help us direct you to the right place:</p>",
                                                                                 features=[
                                                                                     "bold",
@@ -954,25 +938,25 @@ class Migration(migrations.Migration):
                                                                         ),
                                                                         (
                                                                             "aylesbury_vale_url",
-                                                                            wagtail.core.blocks.URLBlock(
+                                                                            wagtail.blocks.URLBlock(
                                                                                 label="Aylesbury Vale URL"
                                                                             ),
                                                                         ),
                                                                         (
                                                                             "chiltern_url",
-                                                                            wagtail.core.blocks.URLBlock(
+                                                                            wagtail.blocks.URLBlock(
                                                                                 label="Chiltern URL"
                                                                             ),
                                                                         ),
                                                                         (
                                                                             "south_bucks_url",
-                                                                            wagtail.core.blocks.URLBlock(
+                                                                            wagtail.blocks.URLBlock(
                                                                                 label="South Bucks URL"
                                                                             ),
                                                                         ),
                                                                         (
                                                                             "wycombe_url",
-                                                                            wagtail.core.blocks.URLBlock(
+                                                                            wagtail.blocks.URLBlock(
                                                                                 label="Wycombe URL"
                                                                             ),
                                                                         ),
@@ -981,7 +965,7 @@ class Migration(migrations.Migration):
                                                             ),
                                                             (
                                                                 "table",
-                                                                wagtail.core.blocks.StructBlock(
+                                                                wagtail.blocks.StructBlock(
                                                                     [
                                                                         (
                                                                             "table",
@@ -989,30 +973,30 @@ class Migration(migrations.Migration):
                                                                                 [
                                                                                     (
                                                                                         "left_aligned_column",
-                                                                                        wagtail.core.blocks.StreamBlock(
+                                                                                        wagtail.blocks.StreamBlock(
                                                                                             [
                                                                                                 (
                                                                                                     "numeric",
-                                                                                                    wagtail.core.blocks.DecimalBlock(),
+                                                                                                    wagtail.blocks.DecimalBlock(),
                                                                                                 ),
                                                                                                 (
                                                                                                     "rich_text",
-                                                                                                    wagtail.core.blocks.RichTextBlock(),
+                                                                                                    wagtail.blocks.RichTextBlock(),
                                                                                                 ),
                                                                                             ]
                                                                                         ),
                                                                                     ),
                                                                                     (
                                                                                         "right_aligned_column",
-                                                                                        wagtail.core.blocks.StreamBlock(
+                                                                                        wagtail.blocks.StreamBlock(
                                                                                             [
                                                                                                 (
                                                                                                     "numeric",
-                                                                                                    wagtail.core.blocks.DecimalBlock(),
+                                                                                                    wagtail.blocks.DecimalBlock(),
                                                                                                 ),
                                                                                                 (
                                                                                                     "rich_text",
-                                                                                                    wagtail.core.blocks.RichTextBlock(),
+                                                                                                    wagtail.blocks.RichTextBlock(),
                                                                                                 ),
                                                                                             ]
                                                                                         ),
@@ -1022,7 +1006,7 @@ class Migration(migrations.Migration):
                                                                         ),
                                                                         (
                                                                             "caption",
-                                                                            wagtail.core.blocks.TextBlock(
+                                                                            wagtail.blocks.TextBlock(
                                                                                 required=False
                                                                             ),
                                                                         ),
@@ -1031,23 +1015,23 @@ class Migration(migrations.Migration):
                                                             ),
                                                             (
                                                                 "button",
-                                                                wagtail.core.blocks.StructBlock(
+                                                                wagtail.blocks.StructBlock(
                                                                     [
                                                                         (
                                                                             "text",
-                                                                            wagtail.core.blocks.CharBlock(
+                                                                            wagtail.blocks.CharBlock(
                                                                                 form_classname="title"
                                                                             ),
                                                                         ),
                                                                         (
                                                                             "link_url",
-                                                                            wagtail.core.blocks.URLBlock(
+                                                                            wagtail.blocks.URLBlock(
                                                                                 required=False
                                                                             ),
                                                                         ),
                                                                         (
                                                                             "link_page",
-                                                                            wagtail.core.blocks.PageChooserBlock(
+                                                                            wagtail.blocks.PageChooserBlock(
                                                                                 required=False
                                                                             ),
                                                                         ),
@@ -1072,11 +1056,11 @@ class Migration(migrations.Migration):
                     ),
                     (
                         "detail",
-                        wagtail.core.blocks.StructBlock(
+                        wagtail.blocks.StructBlock(
                             [
                                 (
                                     "title",
-                                    wagtail.core.blocks.CharBlock(
+                                    wagtail.blocks.CharBlock(
                                         form_classname="full title",
                                         icon="title",
                                         label="Detail title",
@@ -1084,7 +1068,7 @@ class Migration(migrations.Migration):
                                 ),
                                 (
                                     "content",
-                                    wagtail.core.blocks.RichTextBlock(
+                                    wagtail.blocks.RichTextBlock(
                                         features=[
                                             "bold",
                                             "italic",

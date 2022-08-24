@@ -1,6 +1,6 @@
 from functools import partial
 
-from wagtail.core import blocks
+from wagtail import blocks
 from wagtail.images import blocks as image_blocks
 
 from bc.utils.blocks import ButtonBlock, ImageOrEmbedBlock

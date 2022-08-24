@@ -1,4 +1,4 @@
-from wagtail.tests.utils import WagtailPageTests
+from wagtail.test.utils import WagtailPageTests
 
 from bc.family_information.models import FamilyInformationHomePage
 from bc.standardpages.models import InformationPage
@@ -18,6 +18,6 @@ class TestFISHomePage(WagtailPageTests):
         it becomes a deliberate decision to prevent the creation, this test
         should be updated to `assertCanNotCreateAt`.
 
-        See also: https://docs.wagtail.io/en/stable/advanced_topics/testing.html#wagtail.tests.utils.WagtailPageTests.assertCanNotCreateAt  # noqa: E501
+        See also: https://docs.wagtail.io/en/stable/advanced_topics/testing.html#wagtail.test.utils.WagtailPageTests.assertCanNotCreateAt  # noqa: E501
         """
         self.assertCanCreateAt(FamilyInformationHomePage, InformationPage)

@@ -2,7 +2,7 @@ from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from wagtail.contrib.search_promotions.models import SearchPromotion
-from wagtail.core.models import Page
+from wagtail.models import Page
 from wagtail.search.models import Query
 
 from bc.home.models import HomePage

@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.test import RequestFactory, TestCase, override_settings
 from django.urls import reverse
 
-from wagtail.core.models import Page, Site
+from wagtail.models import Page, Site
 
 from bc.home.tests.fixtures import HomePageFactory
 from bc.recruitment.tests.fixtures import RecruitmentHomePageFactory

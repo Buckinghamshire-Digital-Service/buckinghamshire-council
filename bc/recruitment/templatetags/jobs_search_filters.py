@@ -2,7 +2,7 @@ from django import template
 from django.db.models import F, Value
 from django.db.models.functions import StrIndex
 
-from wagtail.core.models import Site
+from wagtail.models import Site
 
 from bc.recruitment.models import JobCategory, TalentLinkJob
 from bc.recruitment.utils import get_school_and_early_years_count

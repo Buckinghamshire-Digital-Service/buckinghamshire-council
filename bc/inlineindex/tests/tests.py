@@ -3,7 +3,7 @@ from http import HTTPStatus
 from django.test import RequestFactory, TestCase, override_settings
 from django.urls import reverse
 
-from wagtail.tests.utils import WagtailTestUtils
+from wagtail.test.utils import WagtailTestUtils
 
 import bs4
 

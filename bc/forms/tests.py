@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
-from wagtail.admin.edit_handlers import get_form_for_model
+from wagtail.admin.panels import get_form_for_model
 
 from bc.forms.fixtures import LookupPageFactory, PostcodeLookupResponseFactory
 from bc.forms.forms import LookupPageForm

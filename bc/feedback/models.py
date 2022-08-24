@@ -1,6 +1,6 @@
 from django.db import models
 
-from wagtail.core import models as wt_models
+from wagtail import models as wt_models
 
 
 class UsefulnessFeedback(models.Model):

@@ -5,8 +5,8 @@ from django.db.models.functions import Coalesce
 from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
-from wagtail.core.fields import StreamField
+from wagtail.admin.panels import FieldPanel, InlinePanel, StreamFieldPanel
+from wagtail.fields import StreamField
 from wagtail.search import index
 
 from bc.utils.blocks import StoryBlock

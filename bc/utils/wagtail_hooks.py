@@ -1,5 +1,6 @@
 from django.urls import path, reverse
 
+from wagtail import hooks
 from wagtail.admin.menu import AdminOnlyMenuItem
 from wagtail.admin.rich_text.converters.html_to_contentstate import BlockElementHandler
 from wagtail.admin.rich_text.editors.draftail import features as draftail_features
@@ -8,7 +9,6 @@ from wagtail.contrib.modeladmin.options import (
     ModelAdminGroup,
     modeladmin_register,
 )
-from wagtail.core import hooks
 
 from wagtailorderable.modeladmin.mixins import OrderableMixin
 

@@ -7,7 +7,7 @@ from django.core.management import call_command
 from django.test import TestCase
 from django.utils import timezone
 
-from wagtail.core.models import Page
+from wagtail.models import Page
 
 from freezegun import freeze_time
 

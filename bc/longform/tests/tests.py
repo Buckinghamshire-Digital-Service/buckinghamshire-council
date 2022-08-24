@@ -5,7 +5,7 @@ from http import HTTPStatus
 
 from django.test import TestCase
 
-from wagtail.core.blocks import StreamValue
+from wagtail.blocks import StreamValue
 
 from bs4 import BeautifulSoup
 

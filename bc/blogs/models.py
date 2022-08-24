@@ -11,7 +11,8 @@ from django.utils.functional import cached_property
 from django.views.generic import TemplateView
 
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
-from wagtail.admin.edit_handlers import (
+from wagtail import models as wt_models
+from wagtail.admin.panels import (
     FieldPanel,
     InlinePanel,
     MultiFieldPanel,
@@ -19,8 +20,7 @@ from wagtail.admin.edit_handlers import (
     StreamFieldPanel,
 )
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
-from wagtail.core import models as wt_models
-from wagtail.core.fields import StreamField
+from wagtail.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 
 from django_gov_notify.message import NotifyEmailMessage

@@ -1,6 +1,6 @@
 from django.dispatch import receiver
 
-from wagtail.core.signals import page_published
+from wagtail.signals import page_published
 
 from .models import StepByStepPage
 from .utils import record_internal_links

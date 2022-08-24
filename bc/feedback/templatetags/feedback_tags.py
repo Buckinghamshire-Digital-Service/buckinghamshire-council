@@ -1,7 +1,7 @@
 from django import template
 from django.conf import settings
 
-from wagtail.core.models import Page
+from wagtail.models import Page
 
 from bc.feedback.forms import FeedbackCommentForm, UsefulnessFeedbackForm
 

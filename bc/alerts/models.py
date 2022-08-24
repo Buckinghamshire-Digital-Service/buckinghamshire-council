@@ -2,9 +2,9 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.db import models
 
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, PageChooserPanel
-from wagtail.core.fields import RichTextField
-from wagtail.core.models import Page
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel, PageChooserPanel
+from wagtail.fields import RichTextField
+from wagtail.models import Page
 
 from bs4 import BeautifulSoup
 

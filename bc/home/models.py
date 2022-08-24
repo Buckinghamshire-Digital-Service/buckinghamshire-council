@@ -4,7 +4,7 @@ from django.db import models
 from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
 
-from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.admin.panels import FieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wagtail.snippets.edit_handlers import SnippetChooserPanel

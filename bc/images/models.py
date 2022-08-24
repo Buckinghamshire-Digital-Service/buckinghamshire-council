@@ -4,8 +4,8 @@ from mimetypes import guess_extension
 from django.core.files.images import ImageFile
 from django.db import models
 
-from wagtail.core.models import Collection
 from wagtail.images.models import AbstractImage, AbstractRendition, Image
+from wagtail.models import Collection
 
 import requests
 

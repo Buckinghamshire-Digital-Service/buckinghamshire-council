@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.test import TestCase, override_settings
 
-from wagtail.core.models import Page, Site
+from wagtail.models import Page, Site
 
 from bc.recruitment.constants import JOB_BOARD_CHOICES
 

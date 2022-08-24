@@ -1,6 +1,6 @@
 from django import test, urls
 
-from wagtail.core.models import Page
+from wagtail.models import Page
 
 from bc.campaigns.tests.fixtures import CampaignPageFactory
 from bc.standardpages.tests.fixtures import InformationPageFactory
