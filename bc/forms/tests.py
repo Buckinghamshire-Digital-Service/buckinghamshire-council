@@ -145,7 +145,9 @@ class PostcodeLookupResponseAdminTests(TestCase):
             }
         )
 
-        MyLookupPageForm = get_form_for_model(LookupPage, form_class=LookupPageForm)
+        MyLookupPageForm = get_form_for_model(
+            LookupPage, form_class=LookupPageForm, formsets=["responses"]
+        )
         form = MyLookupPageForm(data)
         self.assertFalse(form.is_valid())
         self.assertEqual(
@@ -179,7 +181,9 @@ class PostcodeLookupResponseAdminTests(TestCase):
             }
         )
 
-        MyLookupPageForm = get_form_for_model(LookupPage, form_class=LookupPageForm)
+        MyLookupPageForm = get_form_for_model(
+            LookupPage, form_class=LookupPageForm, formsets=["responses"]
+        )
         form = MyLookupPageForm(data)
         self.assertTrue(form.is_valid())
         self.assertEqual(
@@ -217,7 +221,9 @@ class PostcodeLookupResponseAdminTests(TestCase):
             }
         )
 
-        MyLookupPageForm = get_form_for_model(LookupPage, form_class=LookupPageForm)
+        MyLookupPageForm = get_form_for_model(
+            LookupPage, form_class=LookupPageForm, formsets=["responses"]
+        )
         form = MyLookupPageForm(data)
         self.assertFalse(form.is_valid())
         self.assertEqual(
@@ -235,7 +241,9 @@ class PostcodeLookupResponseAdminTests(TestCase):
             }
         )
 
-        MyLookupPageForm = get_form_for_model(LookupPage, form_class=LookupPageForm)
+        MyLookupPageForm = get_form_for_model(
+            LookupPage, form_class=LookupPageForm, formsets=["responses"]
+        )
         form = MyLookupPageForm(data)
         self.assertFalse(form.is_valid())
         self.assertEqual(
@@ -254,7 +262,9 @@ class PostcodeLookupResponseAdminTests(TestCase):
             }
         )
 
-        MyLookupPageForm = get_form_for_model(LookupPage, form_class=LookupPageForm)
+        MyLookupPageForm = get_form_for_model(
+            LookupPage, form_class=LookupPageForm, formsets=["responses"]
+        )
         form = MyLookupPageForm(data)
         self.assertFalse(form.is_valid())
         self.assertIn(
@@ -279,7 +289,9 @@ class PostcodeLookupResponseAdminTests(TestCase):
                 "responses-TOTAL_FORMS": "7",
             }
         )
-        MyLookupPageForm = get_form_for_model(LookupPage, form_class=LookupPageForm)
+        MyLookupPageForm = get_form_for_model(
+            LookupPage, form_class=LookupPageForm, formsets=["responses"]
+        )
         form = MyLookupPageForm(data)
         self.assertFalse(form.is_valid())
         self.assertIn(
@@ -299,6 +311,8 @@ class PostcodeLookupResponseAdminTests(TestCase):
                 "responses-TOTAL_FORMS": "2",
             }
         )
-        MyLookupPageForm = get_form_for_model(LookupPage, form_class=LookupPageForm)
+        MyLookupPageForm = get_form_for_model(
+            LookupPage, form_class=LookupPageForm, formsets=["responses"]
+        )
         form = MyLookupPageForm(data)
         self.assertTrue(form.is_valid())
