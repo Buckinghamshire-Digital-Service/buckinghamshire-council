@@ -13,7 +13,7 @@ from wagtail.admin.panels import (
 from wagtail.fields import RichTextField, StreamField
 from wagtail.rich_text import expand_db_html
 
-from wagtailgeowidget.edit_handlers import GeoPanel
+from wagtailgeowidget.edit_handlers import GeoAddressPanel, GoogleMapsPanel
 from wagtailgeowidget.helpers import geosgeometry_str_to_struct
 
 from bc.area_finder.utils import validate_postcode
@@ -91,8 +91,11 @@ class LocationPage(BasePage):
         FieldPanel("image"),
         MultiFieldPanel(
             [
-                GeoPanel("latlng", address_field="map_location", hide_latlng=True),
-                FieldPanel("map_location"),
+                # The GeoAddressPanel needs to come before the GoogleMapsPanel.
+                GeoAddressPanel("map_location"),
+                GoogleMapsPanel(
+                    "latlng", address_field="map_location", hide_latlng=True
+                ),
                 RichTextFieldPanel("map_info_text"),
             ],
             "Map",
