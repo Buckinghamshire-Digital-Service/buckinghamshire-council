@@ -278,7 +278,7 @@ copy_prod_to_staging:
   script:
     - >
       export JOB_STATUS=$(curl -f -X POST -m 900
-      -H "Authorization: Token $AUTH_KEY" -d "source_key=$SOURCE_KEY&destination_key=$DESTINATION_KEY"
+      -H "Authorization: Token $AUTH_KEY" -d "source_key=$SOURCE_KEY&destination_key=$DESTINATION_KEY&copy_media=1&from_backup=1"
       "https://flightpath.torchbox.com/copy/$SOURCE_APP/$DESTINATION_APP/")
     - echo $JOB_STATUS
     - export JOB_ID=$(echo $JOB_STATUS | jq -r '.job_id')
