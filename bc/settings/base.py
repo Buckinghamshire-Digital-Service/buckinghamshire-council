@@ -86,7 +86,6 @@ INSTALLED_APPS = [
     "wagtail_transfer",
     "rest_framework",
     "wagtailorderable",
-    "wagtail_automatic_redirects",
     "wagtail.contrib.modeladmin",
     "wagtail.contrib.settings",
     "wagtail.contrib.search_promotions",
