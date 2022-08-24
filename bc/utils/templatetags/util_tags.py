@@ -44,7 +44,7 @@ def join_list(value):
 # Get default site
 @register.simple_tag(name="get_default_site")
 def get_default_site():
-    return settings.BASE_URL
+    return settings.WAGTAILADMIN_BASE_URL
 
 
 # Get FIS directory base URL

@@ -11,13 +11,7 @@ from django.utils.http import urlencode
 from django.utils.translation import gettext_lazy as _
 
 from modelcluster.fields import ParentalKey
-from wagtail.admin.panels import (
-    FieldPanel,
-    FieldRowPanel,
-    InlinePanel,
-    MultiFieldPanel,
-    StreamFieldPanel,
-)
+from wagtail.admin.panels import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel
 from wagtail.fields import StreamField
 from wagtail.search import index
 
@@ -71,7 +65,7 @@ class EventPage(BasePage):
     country = models.CharField(_("Country"), blank=True, max_length=255)
 
     introduction = models.TextField(blank=True)
-    body = StreamField(StoryBlock())
+    body = StreamField(StoryBlock(), use_json_field=True)
 
     search_fields = BasePage.search_fields + [
         index.SearchField("introduction"),
@@ -101,7 +95,7 @@ class EventPage(BasePage):
             _("Location"),
         ),
         FieldPanel("introduction"),
-        StreamFieldPanel("body"),
+        FieldPanel("body"),
         InlinePanel("related_pages", label="Related pages"),
     ]
 

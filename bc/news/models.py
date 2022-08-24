@@ -5,7 +5,7 @@ from django.db.models.functions import Coalesce
 from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
-from wagtail.admin.panels import FieldPanel, InlinePanel, StreamFieldPanel
+from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.fields import StreamField
 from wagtail.search import index
 
@@ -50,7 +50,7 @@ class NewsPage(BasePage):
         "news item appears to have been published.",
     )
     introduction = models.TextField(blank=True)
-    body = StreamField(StoryBlock())
+    body = StreamField(StoryBlock(), use_json_field=True)
 
     search_fields = BasePage.search_fields + [
         index.SearchField("introduction"),
@@ -60,7 +60,7 @@ class NewsPage(BasePage):
     content_panels = BasePage.content_panels + [
         FieldPanel("publication_date"),
         FieldPanel("introduction"),
-        StreamFieldPanel("body"),
+        FieldPanel("body"),
         InlinePanel("news_types", label="News types"),
         InlinePanel("related_pages", label="Related pages"),
     ]

@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.db import models
 
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel, PageChooserPanel
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.fields import RichTextField
 from wagtail.models import Page
 
@@ -57,7 +57,7 @@ class Alert(models.Model):
         FieldPanel("alert_level"),
         MultiFieldPanel(
             [
-                PageChooserPanel("page"),
+                FieldPanel("page"),
                 FieldPanel(
                     "show_on",
                     widget=forms.RadioSelect(attrs={"class": "no-float"}),

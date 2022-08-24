@@ -3,12 +3,7 @@ from django.shortcuts import redirect, render
 from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
-from wagtail.admin.panels import (
-    FieldPanel,
-    InlinePanel,
-    MultiFieldPanel,
-    StreamFieldPanel,
-)
+from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.fields import RichTextField, StreamField
 from wagtail.search import index
@@ -73,7 +68,8 @@ class ApteanRespondCaseFormPage(RoutablePageMixin, BasePage):
     form = models.CharField(max_length=255, choices=APTEAN_FORM_CHOICES)
 
     body = StreamField(
-        CaseFormStoryBlock(block_counts={"form_link_button": {"min_num": 1}})
+        CaseFormStoryBlock(block_counts={"form_link_button": {"min_num": 1}}),
+        use_json_field=True,
     )
 
     introduction = RichTextField(
@@ -111,7 +107,7 @@ class ApteanRespondCaseFormPage(RoutablePageMixin, BasePage):
     content_panels = BasePage.content_panels + [
         MultiFieldPanel(
             [
-                StreamFieldPanel("body"),
+                FieldPanel("body"),
                 InlinePanel("related_pages", label="Related pages"),
             ],
             "Intro page",

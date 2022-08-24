@@ -5,9 +5,7 @@ from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
 
 from wagtail.admin.panels import FieldPanel
-from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
-from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
 from ..events.models import EventIndexPage
 from ..news.models import NewsIndex
@@ -49,12 +47,12 @@ class HomePage(BasePage):
 
     content_panels = BasePage.content_panels + [
         FieldPanel("strapline"),
-        ImageChooserPanel("hero_image"),
-        SnippetChooserPanel("call_to_action"),
+        FieldPanel("hero_image"),
+        FieldPanel("call_to_action"),
     ]
 
     promote_panels = BasePage.promote_panels + [
-        ImageChooserPanel("logo"),
+        FieldPanel("logo"),
     ]
 
     @cached_property

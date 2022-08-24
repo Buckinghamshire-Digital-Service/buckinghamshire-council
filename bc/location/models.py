@@ -9,10 +9,8 @@ from wagtail.admin.panels import (
     InlinePanel,
     MultiFieldPanel,
     RichTextFieldPanel,
-    StreamFieldPanel,
 )
 from wagtail.fields import RichTextField, StreamField
-from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.rich_text import expand_db_html
 
 from wagtailgeowidget.edit_handlers import GeoPanel
@@ -87,10 +85,10 @@ class LocationPage(BasePage):
     )
     email_address = models.EmailField(blank=True)
 
-    body = StreamField(StoryBlock())
+    body = StreamField(StoryBlock(), use_json_field=True)
 
     content_panels = BasePage.content_panels + [
-        ImageChooserPanel("image"),
+        FieldPanel("image"),
         MultiFieldPanel(
             [
                 GeoPanel("latlng", address_field="map_location", hide_latlng=True),
@@ -111,7 +109,7 @@ class LocationPage(BasePage):
         FieldRowPanel(
             [FieldPanel("telephone"), FieldPanel("email_address")], "Contact info"
         ),
-        StreamFieldPanel("body"),
+        FieldPanel("body"),
         InlinePanel("related_pages", label="Related pages"),
     ]
 

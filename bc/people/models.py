@@ -4,14 +4,8 @@ from django.db import models
 from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
-from wagtail.admin.panels import (
-    FieldPanel,
-    InlinePanel,
-    MultiFieldPanel,
-    StreamFieldPanel,
-)
+from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.fields import StreamField
-from wagtail.images.edit_handlers import ImageChooserPanel
 
 from bc.utils.blocks import StoryBlock
 from bc.utils.models import BasePage
@@ -80,14 +74,14 @@ class PersonPage(BasePage):
     job_title = models.CharField(max_length=255)
     introduction = models.TextField(blank=True)
     website = models.URLField(blank=True, max_length=255)
-    biography = StreamField(StoryBlock(), blank=True)
+    biography = StreamField(StoryBlock(), blank=True, use_json_field=True)
     email = models.EmailField(blank=True)
 
     content_panels = BasePage.content_panels + [
         MultiFieldPanel(
             [FieldPanel("first_name"), FieldPanel("last_name")], heading="Name"
         ),
-        ImageChooserPanel("photo"),
+        FieldPanel("photo"),
         FieldPanel("job_title"),
         InlinePanel("social_media_profile", label="Social accounts"),
         FieldPanel("website"),
@@ -97,7 +91,7 @@ class PersonPage(BasePage):
         ),
         InlinePanel("person_types", label="Person types"),
         FieldPanel("introduction"),
-        StreamFieldPanel("biography"),
+        FieldPanel("biography"),
     ]
 
 

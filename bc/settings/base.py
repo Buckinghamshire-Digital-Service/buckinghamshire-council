@@ -738,7 +738,7 @@ WAGTAIL_SITE_NAME = "Buckinghamshire Council"
 # This is used by Wagtail's email notifications for constructing absolute
 # URLs. Please set to the domain that users will access the admin site.
 if "PRIMARY_HOST" in env:
-    BASE_URL = "https://{}".format(env["PRIMARY_HOST"])
+    WAGTAILADMIN_BASE_URL = "https://{}".format(env["PRIMARY_HOST"])
 
 # Custom image model
 # https://docs.wagtail.io/en/stable/advanced_topics/images/custom_image_model.html

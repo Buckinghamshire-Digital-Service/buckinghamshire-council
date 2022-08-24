@@ -2,7 +2,7 @@ from django.db import models
 
 from modelcluster.models import ClusterableModel
 from wagtail import blocks
-from wagtail.admin.panels import FieldPanel, StreamFieldPanel
+from wagtail.admin.panels import FieldPanel
 from wagtail.blocks import StreamBlock
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.fields import StreamField
@@ -41,15 +41,17 @@ class NavigationSettings(BaseSetting, ClusterableModel):
             max_num=3,
         ),
         blank=True,
+        use_json_field=True,
     )
     footer_links = StreamField(
         [("link", LinkBlock())],
         blank=True,
         help_text="Single list of elements at the base of the page.",
+        use_json_field=True,
     )
 
     panels = [
         FieldPanel("header_title"),
-        StreamFieldPanel("footer_columns"),
-        StreamFieldPanel("footer_links"),
+        FieldPanel("footer_columns"),
+        FieldPanel("footer_links"),
     ]

@@ -3,10 +3,8 @@ from django.db import models
 from django.utils.functional import cached_property
 
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
-from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.models import Page
 from wagtail.search import index
-from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
 from ..utils.models import BasePage
 
@@ -31,7 +29,7 @@ class FISBannerFields(models.Model):
     content_panels = [
         MultiFieldPanel(
             [
-                ImageChooserPanel("banner_image"),
+                FieldPanel("banner_image"),
                 FieldPanel("banner_title"),
                 FieldPanel("banner_description"),
                 FieldPanel("banner_link"),
@@ -85,7 +83,7 @@ class FamilyInformationHomePage(FISBannerFields, BasePage):
         + [
             MultiFieldPanel(
                 [
-                    ImageChooserPanel("hero_image"),
+                    FieldPanel("hero_image"),
                     FieldPanel("description"),
                     FieldPanel("search_placeholder"),
                 ],
@@ -93,7 +91,7 @@ class FamilyInformationHomePage(FISBannerFields, BasePage):
             ),
         ]
         + FISBannerFields.content_panels
-        + [SnippetChooserPanel("call_to_action")]
+        + [FieldPanel("call_to_action")]
     )
 
     @cached_property

@@ -2,10 +2,8 @@ from django.conf import settings
 from django.db import models
 from django.utils.functional import cached_property
 
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel, StreamFieldPanel
-from wagtail.documents.edit_handlers import DocumentChooserPanel
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.fields import StreamField
-from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 
 from bc.utils.models import BasePage
@@ -45,7 +43,7 @@ class LongformPage(BasePage):
         max_length=255,
     )
     intro_text = models.TextField(blank=True)
-    body = StreamField(LongformStoryBlock())
+    body = StreamField(LongformStoryBlock(), use_json_field=True)
 
     document = models.ForeignKey(
         settings.WAGTAILDOCS_DOCUMENT_MODEL,
@@ -67,13 +65,13 @@ class LongformPage(BasePage):
         FieldPanel("last_updated"),
         FieldPanel("version_number"),
         MultiFieldPanel(
-            [DocumentChooserPanel("document"), FieldPanel("document_link_text")],
+            [FieldPanel("document"), FieldPanel("document_link_text")],
             heading="Documents",
         ),
-        ImageChooserPanel("hero_image"),
+        FieldPanel("hero_image"),
         FieldPanel("is_numbered", heading="Enable chapter numbers"),
         FieldPanel("chapter_heading"),
-        StreamFieldPanel("body"),
+        FieldPanel("body"),
     ]
 
     @property
@@ -107,12 +105,12 @@ class LongformChapterPage(BasePage):
     class Meta:
         verbose_name = "Long-form content chapter page"
 
-    body = StreamField(LongformStoryBlock())
+    body = StreamField(LongformStoryBlock(), use_json_field=True)
 
     search_fields = BasePage.search_fields + [index.SearchField("body")]
 
     content_panels = BasePage.content_panels + [
-        StreamFieldPanel("body"),
+        FieldPanel("body"),
     ]
 
     @cached_property
