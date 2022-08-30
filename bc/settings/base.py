@@ -120,6 +120,7 @@ INSTALLED_APPS = [
     "pattern_library",
     "bc.project_styleguide.apps.ProjectStyleguideConfig",
     "wagtailgeowidget",
+    "birdbath",
 ]
 
 
@@ -893,3 +894,21 @@ ENABLE_FEEDBACK_WIDGET = (  # Page usefulness and comment forms in the footer
 ENABLE_JOBS_SEARCH_ALERT_SUBSCRIPTIONS = (
     env.get("ENABLE_JOBS_SEARCH_ALERT_SUBSCRIPTIONS", "true").lower().strip() == "true"
 )
+
+# Birdbath - Database anonymisation
+# Configure django-birdbath to anonymise data when syncing database
+BIRDBATH_USER_ANONYMISER_EXCLUDE_SUPERUSERS = True
+BIRDBATH_USER_ANONYMISER_EXCLUDE_EMAIL_RE = r"(torchbox\.com|buckinghamshire\.gov\.uk)$"
+# Do not anonymise data on any heroku app containing 'production' in app name
+BIRDBATH_CHECKS = ["birdbath.checks.contrib.heroku.HerokuNotProductionCheck"]
+BIRDBATH_REQUIRED = env.get("BIRDBATH_REQUIRED", "true").lower() == "true"
+# Add project specific processors here to anonymise or delete sensitive data.
+# See https://git.torchbox.com/internal/django-birdbath/#processors
+BIRDBATH_PROCESSORS = [
+    "birdbath.processors.users.UserEmailAnonymiser",
+    "birdbath.processors.users.UserPasswordAnonymiser",
+    "birdbath.processors.contrib.wagtail.FormSubmissionCleaner",
+    "birdbath.processors.contrib.wagtail.SearchQueryCleaner",
+    "bc.blogs.birdbath.DeleteAllBlogAlertSubscriptionProcessor",
+    "bc.recruitment.birdbath.DeleteAllRecruitmentAlertSubscriptionProcessor",
+]
