@@ -1,9 +1,9 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from wagtail.core.models import Site
-from wagtail.tests.utils import WagtailTestUtils
-from wagtail.tests.utils.form_data import nested_form_data, rich_text, streamfield
+from wagtail.models import Site
+from wagtail.test.utils import WagtailTestUtils
+from wagtail.test.utils.form_data import nested_form_data, rich_text, streamfield
 
 from bc.navigation.models import NavigationSettings
 from bc.standardpages.models import InformationPage
@@ -67,8 +67,8 @@ class NavigationSettingViewTest(TestCase, WagtailTestUtils):
     def test_get_edit(self):
         response = self.get(site_pk=self.default_site.pk)
         self.assertEqual(response.status_code, 200)
-        # there should be a menu item highlighted as active
-        self.assertContains(response, "menu-active")
+        # there should be a title of "Navigation settings"
+        self.assertContains(response, "Navigation settings")
 
     def test_create_navigation_settings_with_columns_and_links(self):
         # Test create navigation with links and column

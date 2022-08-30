@@ -2,8 +2,8 @@
 
 from django.db import migrations
 
-import wagtail.core.blocks
-import wagtail.core.fields
+import wagtail.blocks
+import wagtail.fields
 
 
 class Migration(migrations.Migration):
@@ -16,22 +16,22 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="navigationsettings",
             name="footer_columns",
-            field=wagtail.core.fields.StreamField(
+            field=wagtail.fields.StreamField(
                 [
                     (
                         "column",
-                        wagtail.core.blocks.StructBlock(
+                        wagtail.blocks.StructBlock(
                             [
                                 (
                                     "heading",
-                                    wagtail.core.blocks.CharBlock(
+                                    wagtail.blocks.CharBlock(
                                         help_text="Leave blank if no header required.",
                                         required=False,
                                     ),
                                 ),
                                 (
                                     "content",
-                                    wagtail.core.blocks.RichTextBlock(
+                                    wagtail.blocks.RichTextBlock(
                                         features=[
                                             "bold",
                                             "italic",

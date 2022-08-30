@@ -3,8 +3,8 @@
 import django.db.models.deletion
 from django.db import migrations, models
 
-import wagtail.core.blocks
-import wagtail.core.fields
+import wagtail.blocks
+import wagtail.fields
 
 
 class Migration(migrations.Migration):
@@ -71,16 +71,16 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "body",
-                    wagtail.core.fields.StreamField(
+                    wagtail.fields.StreamField(
                         [
                             (
                                 "content_block",
-                                wagtail.core.blocks.StructBlock(
+                                wagtail.blocks.StructBlock(
                                     [
-                                        ("title", wagtail.core.blocks.CharBlock()),
+                                        ("title", wagtail.blocks.CharBlock()),
                                         (
                                             "paragraph",
-                                            wagtail.core.blocks.RichTextBlock(
+                                            wagtail.blocks.RichTextBlock(
                                                 features=[
                                                     "bold",
                                                     "italic",

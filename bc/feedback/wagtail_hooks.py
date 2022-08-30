@@ -1,7 +1,7 @@
 from django import urls
 
+from wagtail import hooks
 from wagtail.admin import menu
-from wagtail.core import hooks
 
 from bc.feedback.views import FeedbackCommentReportView, UsefulnessFeedbackReportView
 

@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 import django.db.models.deletion
 from django.db import migrations, models
 
-import wagtail.core.fields
+import wagtail.fields
 
 
 class Migration(migrations.Migration):
@@ -33,31 +33,29 @@ class Migration(migrations.Migration):
                 ("title", models.CharField(max_length=255)),
                 (
                     "link",
-                    wagtail.core.fields.StreamField(
+                    wagtail.fields.StreamField(
                         (
                             (
                                 "external_link",
-                                wagtail.core.blocks.StructBlock(
+                                wagtail.blocks.StructBlock(
                                     (
-                                        ("url", wagtail.core.blocks.URLBlock()),
-                                        ("title", wagtail.core.blocks.CharBlock()),
+                                        ("url", wagtail.blocks.URLBlock()),
+                                        ("title", wagtail.blocks.CharBlock()),
                                     ),
                                     icon="link",
                                 ),
                             ),
                             (
                                 "internal_link",
-                                wagtail.core.blocks.StructBlock(
+                                wagtail.blocks.StructBlock(
                                     (
                                         (
                                             "page",
-                                            wagtail.core.blocks.PageChooserBlock(),
+                                            wagtail.blocks.PageChooserBlock(),
                                         ),
                                         (
                                             "title",
-                                            wagtail.core.blocks.CharBlock(
-                                                required=False
-                                            ),
+                                            wagtail.blocks.CharBlock(required=False),
                                         ),
                                     ),
                                     icon="link",
@@ -69,7 +67,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "summary",
-                    wagtail.core.fields.RichTextField(blank=True, max_length=255),
+                    wagtail.fields.RichTextField(blank=True, max_length=255),
                 ),
                 (
                     "image",
@@ -158,7 +156,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "body_404",
-                    wagtail.core.fields.RichTextField(
+                    wagtail.fields.RichTextField(
                         default="<p>You may be trying to find a page that doesn&rsquo;t exist or has been moved.</p>",
                         verbose_name="Text",
                     ),

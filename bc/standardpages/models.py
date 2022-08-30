@@ -2,8 +2,8 @@ from django.db import models
 from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
-from wagtail.core.fields import StreamField
+from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.fields import StreamField
 from wagtail.search import index
 
 from bc.utils.blocks import StoryBlock
@@ -20,7 +20,7 @@ class InformationPage(BasePage):
     display_contents = models.BooleanField(default=False)
 
     intro_text = models.TextField(blank=True)
-    body = StreamField(StoryBlock())
+    body = StreamField(StoryBlock(), use_json_field=True)
 
     search_fields = BasePage.search_fields + [
         index.SearchField("body"),
@@ -29,7 +29,7 @@ class InformationPage(BasePage):
     content_panels = BasePage.content_panels + [
         FieldPanel("display_contents"),
         FieldPanel("intro_text"),
-        StreamFieldPanel("body"),
+        FieldPanel("body"),
         InlinePanel("related_pages", label="Related pages"),
     ]
 

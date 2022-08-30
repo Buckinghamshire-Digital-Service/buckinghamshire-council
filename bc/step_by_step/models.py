@@ -1,9 +1,9 @@
 from django.db import models
 
-from wagtail.admin.edit_handlers import FieldPanel, RichTextFieldPanel, StreamFieldPanel
-from wagtail.core.blocks import StructBlock, TextBlock
-from wagtail.core.blocks.field_block import RichTextBlock
-from wagtail.core.fields import RichTextField, StreamField
+from wagtail.admin.panels import FieldPanel, RichTextFieldPanel
+from wagtail.blocks import StructBlock, TextBlock
+from wagtail.blocks.field_block import RichTextBlock
+from wagtail.fields import RichTextField, StreamField
 
 from bc.utils.models import BasePage
 
@@ -22,12 +22,12 @@ class StepByStepPage(BasePage):
     intro_text = models.TextField(blank=True)
     introduction = RichTextField()
 
-    steps = StreamField([("step", StepBlock())])
+    steps = StreamField([("step", StepBlock())], use_json_field=True)
 
     content_panels = BasePage.content_panels + [
         FieldPanel("intro_text"),
         RichTextFieldPanel("introduction"),
-        StreamFieldPanel("steps"),
+        FieldPanel("steps"),
     ]
 
 

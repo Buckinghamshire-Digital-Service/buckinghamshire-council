@@ -2,7 +2,7 @@ import json
 
 from django.core.serializers.json import DjangoJSONEncoder
 
-from wagtail.core.blocks.stream_block import StreamValue
+from wagtail.blocks.stream_block import StreamValue
 
 
 def get_stream_data(old_stream_data, mapper):

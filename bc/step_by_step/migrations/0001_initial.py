@@ -3,8 +3,8 @@
 import django.db.models.deletion
 from django.db import migrations, models
 
-import wagtail.core.blocks
-import wagtail.core.fields
+import wagtail.blocks
+import wagtail.fields
 
 
 class Migration(migrations.Migration):
@@ -63,37 +63,37 @@ class Migration(migrations.Migration):
                         help_text="Show live chat support client on this page",
                     ),
                 ),
-                ("introduction", wagtail.core.fields.RichTextField()),
+                ("introduction", wagtail.fields.RichTextField()),
                 (
                     "steps",
-                    wagtail.core.fields.StreamField(
+                    wagtail.fields.StreamField(
                         [
                             (
                                 "step",
-                                wagtail.core.blocks.StructBlock(
+                                wagtail.blocks.StructBlock(
                                     [
-                                        ("heading", wagtail.core.blocks.TextBlock()),
+                                        ("heading", wagtail.blocks.TextBlock()),
                                         (
                                             "information",
-                                            wagtail.core.blocks.StreamBlock(
+                                            wagtail.blocks.StreamBlock(
                                                 [
                                                     (
                                                         "paragraph",
-                                                        wagtail.core.blocks.TextBlock(
+                                                        wagtail.blocks.TextBlock(
                                                             template="patterns/molecules/step_by_step/blocks/paragraph-block.html"
                                                         ),
                                                     ),
                                                     (
                                                         "external_link",
-                                                        wagtail.core.blocks.StructBlock(
+                                                        wagtail.blocks.StructBlock(
                                                             [
                                                                 (
                                                                     "url",
-                                                                    wagtail.core.blocks.URLBlock(),
+                                                                    wagtail.blocks.URLBlock(),
                                                                 ),
                                                                 (
                                                                     "title",
-                                                                    wagtail.core.blocks.CharBlock(),
+                                                                    wagtail.blocks.CharBlock(),
                                                                 ),
                                                             ],
                                                             icon="link",
@@ -102,15 +102,15 @@ class Migration(migrations.Migration):
                                                     ),
                                                     (
                                                         "internal_link",
-                                                        wagtail.core.blocks.StructBlock(
+                                                        wagtail.blocks.StructBlock(
                                                             [
                                                                 (
                                                                     "page",
-                                                                    wagtail.core.blocks.PageChooserBlock(),
+                                                                    wagtail.blocks.PageChooserBlock(),
                                                                 ),
                                                                 (
                                                                     "title",
-                                                                    wagtail.core.blocks.CharBlock(
+                                                                    wagtail.blocks.CharBlock(
                                                                         required=False
                                                                     ),
                                                                 ),

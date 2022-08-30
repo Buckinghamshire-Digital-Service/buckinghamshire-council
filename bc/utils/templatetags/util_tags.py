@@ -1,7 +1,7 @@
 from django import template
 from django.conf import settings
 
-from wagtail.core.utils import camelcase_to_underscore
+from wagtail.coreutils import camelcase_to_underscore
 
 from bc.utils.models import SocialMediaSettings
 
@@ -44,7 +44,7 @@ def join_list(value):
 # Get default site
 @register.simple_tag(name="get_default_site")
 def get_default_site():
-    return settings.BASE_URL
+    return settings.WAGTAILADMIN_BASE_URL
 
 
 # Get FIS directory base URL

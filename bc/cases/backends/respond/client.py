@@ -23,7 +23,7 @@ class RespondClient:
     authentication_method = FORMS
 
     def __init__(self):
-        self.BASE_URL = settings.RESPOND_API_BASE_URL
+        self.WAGTAILADMIN_BASE_URL = settings.RESPOND_API_BASE_URL
 
     def get_respond_headers(self, url, data=""):
         db = settings.RESPOND_API_DATABASE
@@ -40,7 +40,7 @@ class RespondClient:
         return {"RespondAuthentication": header}
 
     def make_request(self, path, method="get", data="", **kwargs):
-        url = self.BASE_URL + path
+        url = self.WAGTAILADMIN_BASE_URL + path
         headers = self.get_respond_headers(url)
         if data:
             headers["Content-Type"] = "application/xml"

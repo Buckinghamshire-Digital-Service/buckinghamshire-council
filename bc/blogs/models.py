@@ -11,17 +11,15 @@ from django.utils.functional import cached_property
 from django.views.generic import TemplateView
 
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
-from wagtail.admin.edit_handlers import (
+from wagtail import models as wt_models
+from wagtail.admin.panels import (
     FieldPanel,
     InlinePanel,
     MultiFieldPanel,
     PageChooserPanel,
-    StreamFieldPanel,
 )
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
-from wagtail.core import models as wt_models
-from wagtail.core.fields import StreamField
-from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.fields import StreamField
 
 from django_gov_notify.message import NotifyEmailMessage
 
@@ -190,8 +188,8 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
             ),
             MultiFieldPanel(
                 [
-                    PageChooserPanel("featured_blogpost_page"),
-                    ImageChooserPanel("featured_blogpost_image", heading="Image"),
+                    FieldPanel("featured_blogpost_page"),
+                    FieldPanel("featured_blogpost_image", heading="Image"),
                 ],
                 heading="Featured blogpost",
             ),
@@ -334,12 +332,12 @@ class BlogAboutPage(BasePage):
         blank=True,
     )
 
-    body = StreamField(StoryBlock())
+    body = StreamField(StoryBlock(), use_json_field=True)
 
     content_panels = BasePage.content_panels + [
         FieldPanel("intro_text"),
-        ImageChooserPanel("image"),
-        StreamFieldPanel("body"),
+        FieldPanel("image"),
+        FieldPanel("body"),
     ]
 
     @cached_property
@@ -370,15 +368,15 @@ class BlogPostPage(BasePage):
     author = models.TextField()
     date_published = models.DateField()
 
-    body = StreamField(StoryBlock())
+    body = StreamField(StoryBlock(), use_json_field=True)
 
     content_panels = BasePage.content_panels + [
         FieldPanel("categories", widget=CheckboxSelectMultiple),
         FieldPanel("intro_text"),
-        ImageChooserPanel("image"),
+        FieldPanel("image"),
         FieldPanel("author"),
         FieldPanel("date_published"),
-        StreamFieldPanel("body"),
+        FieldPanel("body"),
     ]
 
     @cached_property

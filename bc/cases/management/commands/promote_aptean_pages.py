@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 
+from wagtail.blocks import StreamValue
 from wagtail.contrib.redirects.models import Redirect
-from wagtail.core.blocks import StreamValue
 
 from tabulate import tabulate
 

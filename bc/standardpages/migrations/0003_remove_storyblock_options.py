@@ -2,8 +2,8 @@
 
 from django.db import migrations
 
-import wagtail.core.blocks
-import wagtail.core.fields
+import wagtail.blocks
+import wagtail.fields
 
 
 class Migration(migrations.Migration):
@@ -16,17 +16,17 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="informationpage",
             name="body",
-            field=wagtail.core.fields.StreamField(
+            field=wagtail.fields.StreamField(
                 [
                     (
                         "heading",
-                        wagtail.core.blocks.CharBlock(
+                        wagtail.blocks.CharBlock(
                             classname="full title",
                             icon="title",
                             template="patterns/molecules/streamfield/blocks/heading_block.html",
                         ),
                     ),
-                    ("paragraph", wagtail.core.blocks.RichTextBlock()),
+                    ("paragraph", wagtail.blocks.RichTextBlock()),
                 ]
             ),
         ),

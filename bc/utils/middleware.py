@@ -1,7 +1,7 @@
 from django.middleware.csrf import CsrfViewMiddleware
 
-from wagtail.core.models import Page
-from wagtail.core.views import serve
+from wagtail.models import Page
+from wagtail.views import serve
 
 from bc.cases.models import ApteanRespondCaseFormPage
 from bc.forms.models import FormPage
@@ -20,7 +20,7 @@ class CustomCsrfViewMiddleware(CsrfViewMiddleware):
     decorator, which adds an attribute to the function that the usual CsrfViewMiddleware
     checks for, such decoration is not possible. For Wagtail pages, the view registered
     in the URLconf and passed to CsrfViewMiddleware is always
-    `wagtail.core.views.serve`.
+    `wagtail.views.serve`.
 
     Ref https://github.com/wagtail/wagtail/issues/3066 for discussion and the source of
     the code below.

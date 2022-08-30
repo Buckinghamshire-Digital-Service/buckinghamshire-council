@@ -3,7 +3,7 @@
 import django.db.models.deletion
 from django.db import migrations, models
 
-import wagtail.core.fields
+import wagtail.fields
 
 
 class Migration(migrations.Migration):
@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
                 ("title", models.CharField(max_length=255)),
                 (
                     "content",
-                    wagtail.core.fields.RichTextField(blank=True, max_length=255),
+                    wagtail.fields.RichTextField(blank=True, max_length=255),
                 ),
                 (
                     "show_on",

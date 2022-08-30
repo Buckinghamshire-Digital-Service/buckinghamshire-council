@@ -3,7 +3,7 @@ import re
 from django.db import transaction
 
 from wagtail.contrib.frontend_cache.utils import PurgeBatch
-from wagtail.core.models import Page
+from wagtail.models import Page
 
 from .models import StepByStepReference
 

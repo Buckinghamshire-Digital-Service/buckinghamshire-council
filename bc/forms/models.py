@@ -8,16 +8,10 @@ from django.template.response import TemplateResponse
 from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
-from wagtail.admin.edit_handlers import (
-    FieldPanel,
-    FieldRowPanel,
-    InlinePanel,
-    MultiFieldPanel,
-    PageChooserPanel,
-)
+from wagtail.admin.panels import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel
 from wagtail.contrib.forms.forms import FormBuilder
 from wagtail.contrib.forms.models import AbstractFormField
-from wagtail.core.fields import RichTextField
+from wagtail.fields import RichTextField
 from wagtail.search import index
 
 from wagtailcaptcha.models import WagtailCaptchaEmailForm
@@ -117,7 +111,7 @@ class PostcodeLookupResponse(models.Model):
 
     panels = [
         FieldPanel("answer"),
-        PageChooserPanel("link_page"),
+        FieldPanel("link_page"),
         FieldPanel("link_button_text"),
         FieldPanel("postcodes"),
     ]

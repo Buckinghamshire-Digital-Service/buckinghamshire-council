@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from wagtail.core.models import Page
+from wagtail.models import Page
 
 from bc.family_information.tests import fixtures
 from bc.images.tests.fixtures import ImageFactory
