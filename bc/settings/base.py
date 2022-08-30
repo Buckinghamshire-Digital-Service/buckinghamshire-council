@@ -86,7 +86,6 @@ INSTALLED_APPS = [
     "wagtail_transfer",
     "rest_framework",
     "wagtailorderable",
-    "wagtail_automatic_redirects",
     "wagtail.contrib.modeladmin",
     "wagtail.contrib.settings",
     "wagtail.contrib.search_promotions",
@@ -104,7 +103,7 @@ INSTALLED_APPS = [
     "wagtail.images",
     "wagtail.search",
     "wagtail.admin",
-    "wagtail.core",
+    "wagtail",
     "modelcluster",
     "taggit",
     "captcha",
@@ -120,6 +119,7 @@ INSTALLED_APPS = [
     "pattern_library",
     "bc.project_styleguide.apps.ProjectStyleguideConfig",
     "wagtailgeowidget",
+    "birdbath",
 ]
 
 
@@ -737,7 +737,7 @@ WAGTAIL_SITE_NAME = "Buckinghamshire Council"
 # This is used by Wagtail's email notifications for constructing absolute
 # URLs. Please set to the domain that users will access the admin site.
 if "PRIMARY_HOST" in env:
-    BASE_URL = "https://{}".format(env["PRIMARY_HOST"])
+    WAGTAILADMIN_BASE_URL = "https://{}".format(env["PRIMARY_HOST"])
 
 # Custom image model
 # https://docs.wagtail.io/en/stable/advanced_topics/images/custom_image_model.html
@@ -893,3 +893,21 @@ ENABLE_FEEDBACK_WIDGET = (  # Page usefulness and comment forms in the footer
 ENABLE_JOBS_SEARCH_ALERT_SUBSCRIPTIONS = (
     env.get("ENABLE_JOBS_SEARCH_ALERT_SUBSCRIPTIONS", "true").lower().strip() == "true"
 )
+
+# Birdbath - Database anonymisation
+# Configure django-birdbath to anonymise data when syncing database
+BIRDBATH_USER_ANONYMISER_EXCLUDE_SUPERUSERS = True
+BIRDBATH_USER_ANONYMISER_EXCLUDE_EMAIL_RE = r"(torchbox\.com|buckinghamshire\.gov\.uk)$"
+# Do not anonymise data on any heroku app containing 'production' in app name
+BIRDBATH_CHECKS = ["birdbath.checks.contrib.heroku.HerokuNotProductionCheck"]
+BIRDBATH_REQUIRED = env.get("BIRDBATH_REQUIRED", "true").lower() == "true"
+# Add project specific processors here to anonymise or delete sensitive data.
+# See https://git.torchbox.com/internal/django-birdbath/#processors
+BIRDBATH_PROCESSORS = [
+    "birdbath.processors.users.UserEmailAnonymiser",
+    "birdbath.processors.users.UserPasswordAnonymiser",
+    "birdbath.processors.contrib.wagtail.FormSubmissionCleaner",
+    "birdbath.processors.contrib.wagtail.SearchQueryCleaner",
+    "bc.blogs.birdbath.DeleteAllBlogAlertSubscriptionProcessor",
+    "bc.recruitment.birdbath.DeleteAllRecruitmentAlertSubscriptionProcessor",
+]

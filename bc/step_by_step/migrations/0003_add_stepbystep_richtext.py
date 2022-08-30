@@ -2,8 +2,8 @@
 
 from django.db import migrations
 
-import wagtail.core.blocks
-import wagtail.core.fields
+import wagtail.blocks
+import wagtail.fields
 
 
 class Migration(migrations.Migration):
@@ -16,14 +16,14 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="stepbysteppage",
             name="steps",
-            field=wagtail.core.fields.StreamField(
+            field=wagtail.fields.StreamField(
                 [
                     (
                         "step",
-                        wagtail.core.blocks.StructBlock(
+                        wagtail.blocks.StructBlock(
                             [
-                                ("heading", wagtail.core.blocks.TextBlock()),
-                                ("information", wagtail.core.blocks.RichTextBlock()),
+                                ("heading", wagtail.blocks.TextBlock()),
+                                ("information", wagtail.blocks.RichTextBlock()),
                             ]
                         ),
                     )

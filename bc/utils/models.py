@@ -4,17 +4,11 @@ from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.utils.functional import cached_property
 
-from wagtail.admin.edit_handlers import (
-    FieldPanel,
-    MultiFieldPanel,
-    PageChooserPanel,
-    StreamFieldPanel,
-)
+from wagtail import blocks
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.contrib.settings.models import BaseSetting, register_setting
-from wagtail.core import blocks
-from wagtail.core.fields import RichTextField, StreamField
-from wagtail.core.models import Orderable, Page
-from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.fields import RichTextField, StreamField
+from wagtail.models import Orderable, Page
 from wagtail.snippets.models import register_snippet
 
 from bc.utils.cache import get_default_cache_control_decorator
@@ -94,7 +88,7 @@ class LinkFields(models.Model):
     panels = [
         MultiFieldPanel(
             [
-                PageChooserPanel("link_page"),
+                FieldPanel("link_page"),
                 FieldPanel("link_url"),
                 FieldPanel("link_text"),
             ],
@@ -113,7 +107,7 @@ class RelatedPage(Orderable, models.Model):
         abstract = True
         ordering = ["sort_order"]
 
-    panels = [PageChooserPanel("page")]
+    panels = [FieldPanel("page")]
 
 
 # Generic social fields abstract class to add social image/text to any new content type easily.
@@ -132,7 +126,7 @@ class SocialFields(models.Model):
 
     promote_panels = [
         MultiFieldPanel(
-            [ImageChooserPanel("social_image"), FieldPanel("social_text")],
+            [FieldPanel("social_image"), FieldPanel("social_text")],
             "Social networks",
         )
     ]
@@ -167,7 +161,7 @@ class ListingFields(models.Model):
     promote_panels = [
         MultiFieldPanel(
             [
-                ImageChooserPanel("listing_image"),
+                FieldPanel("listing_image"),
                 FieldPanel("listing_title"),
                 FieldPanel("listing_summary"),
             ],
@@ -212,13 +206,14 @@ class CallToActionSnippet(models.Model):
             required=True,
         ),
         blank=True,
+        use_json_field=True,
     )
 
     panels = [
         FieldPanel("title"),
         FieldPanel("summary"),
-        ImageChooserPanel("image"),
-        StreamFieldPanel("link"),
+        FieldPanel("image"),
+        FieldPanel("link"),
     ]
 
     def __str__(self):
@@ -397,6 +392,6 @@ class ImportantPages(BaseSetting):
     )
 
     panels = [
-        PageChooserPanel("contact_us_page"),
-        PageChooserPanel("cookie_information_page"),
+        FieldPanel("contact_us_page"),
+        FieldPanel("cookie_information_page"),
     ]

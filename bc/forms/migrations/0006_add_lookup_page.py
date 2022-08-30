@@ -5,7 +5,7 @@ import django.db.models.deletion
 from django.db import migrations, models
 
 import modelcluster.fields
-import wagtail.core.fields
+import wagtail.fields
 
 import bc.area_finder.utils
 
@@ -67,7 +67,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "form_heading",
-                    wagtail.core.fields.RichTextField(verbose_name="Heading"),
+                    wagtail.fields.RichTextField(verbose_name="Heading"),
                 ),
                 ("input_label", models.CharField(max_length=255)),
                 ("input_help_text", models.CharField(max_length=255)),

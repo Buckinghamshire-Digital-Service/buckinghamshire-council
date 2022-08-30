@@ -3,7 +3,7 @@
 import django.db.models.deletion
 from django.db import migrations, models
 
-import wagtail.core.fields
+import wagtail.fields
 
 
 class Migration(migrations.Migration):
@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("label", models.CharField(max_length=255, verbose_name="Alert label")),
-                ("body", wagtail.core.fields.RichTextField(verbose_name="Text")),
+                ("body", wagtail.fields.RichTextField(verbose_name="Text")),
                 (
                     "site",
                     models.OneToOneField(

@@ -1,6 +1,6 @@
 from django.conf import settings
 
-from wagtail.core.models import Site
+from wagtail.models import Site
 
 from bc.family_information.utils import is_family_information_site
 from bc.recruitment.utils import is_recruitment_site

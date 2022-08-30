@@ -4,9 +4,9 @@ from django.db import models
 from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
-from wagtail.core.fields import StreamField
-from wagtail.core.models import Page
+from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.fields import StreamField
+from wagtail.models import Page
 from wagtail.search import index
 
 from bc.utils.blocks import StoryBlock
@@ -89,7 +89,7 @@ class InlineIndex(InlineIndexMixin, BasePage):
     )
     intro_text = models.TextField(blank=True)
 
-    body = StreamField(StoryBlock())
+    body = StreamField(StoryBlock(), use_json_field=True)
 
     is_inline_index = True
     is_inline_index_child = False
@@ -106,7 +106,7 @@ class InlineIndex(InlineIndexMixin, BasePage):
     content_panels = BasePage.content_panels + [
         FieldPanel("subtitle"),
         FieldPanel("intro_text"),
-        StreamFieldPanel("body"),
+        FieldPanel("body"),
         InlinePanel("related_pages", label="Related pages"),
     ]
 
@@ -157,7 +157,7 @@ class InlineIndex(InlineIndexMixin, BasePage):
 class InlineIndexChild(InlineIndexMixin, BasePage):
     template = InlineIndex.template
 
-    body = StreamField(StoryBlock())
+    body = StreamField(StoryBlock(), use_json_field=True)
 
     is_inline_index = False
     is_inline_index_child = True
@@ -175,7 +175,7 @@ class InlineIndexChild(InlineIndexMixin, BasePage):
     ]
 
     content_panels = BasePage.content_panels + [
-        StreamFieldPanel("body"),
+        FieldPanel("body"),
     ]
 
     @cached_property

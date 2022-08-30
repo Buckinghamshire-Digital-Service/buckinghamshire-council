@@ -2,7 +2,7 @@
 
 from django.db import migrations
 
-import wagtail.core.fields
+import wagtail.fields
 
 
 class Migration(migrations.Migration):
@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="locationpage",
             name="map_info_text",
-            field=wagtail.core.fields.RichTextField(
+            field=wagtail.fields.RichTextField(
                 help_text="Content to display in popup window above the map", null=True
             ),
         ),

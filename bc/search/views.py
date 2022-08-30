@@ -12,7 +12,7 @@ from django.utils.timezone import now
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View
 
-from wagtail.core.models import Page, Site
+from wagtail.models import Page, Site
 from wagtail.search.models import Query
 
 from bc.blogs.models import BlogGlobalHomePage, BlogHomePage, BlogPostPage

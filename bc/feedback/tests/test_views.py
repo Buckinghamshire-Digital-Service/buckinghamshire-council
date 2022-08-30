@@ -3,7 +3,7 @@ from http import HTTPStatus
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
 
-from wagtail.core import models as wagtail_models
+from wagtail import models as wagtail_models
 
 from bc.feedback.models import FeedbackComment, UsefulnessFeedback
 from bc.home.tests.fixtures import HomePageFactory

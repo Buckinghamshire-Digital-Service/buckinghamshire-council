@@ -1,6 +1,11 @@
 # Release History
 
-## Unreleased
+## 62.0 (2022-08-30)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/574/diffs>
+
+- [Wagtail 3.0 upgrade](https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/548)
+- [Support/birdbath flightpath](https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/573)
 
 ## 61.0 (2022-08-09)
 

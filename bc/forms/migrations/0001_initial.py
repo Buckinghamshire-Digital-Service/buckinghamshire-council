@@ -6,7 +6,7 @@ import django.db.models.deletion
 from django.db import migrations, models
 
 import modelcluster.fields
-import wagtail.core.fields
+import wagtail.fields
 
 
 class Migration(migrations.Migration):
@@ -150,7 +150,7 @@ class Migration(migrations.Migration):
                 ("introduction", models.TextField(blank=True)),
                 (
                     "thank_you_text",
-                    wagtail.core.fields.RichTextField(
+                    wagtail.fields.RichTextField(
                         blank=True,
                         help_text="Text displayed to the user on successful submission of the form",
                     ),

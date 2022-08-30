@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils.html import escape
 
-from wagtail.core.models import Page, Site
+from wagtail.models import Page, Site
 
 from bc.home.tests.fixtures import HomePageFactory
 from bc.standardpages.tests.fixtures import InformationPageFactory

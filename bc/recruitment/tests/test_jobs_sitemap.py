@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ET
 
 from django.test import Client, TestCase, override_settings
 
-from wagtail.core.models import Page, Site
+from wagtail.models import Page, Site
 
 from freezegun import freeze_time
 

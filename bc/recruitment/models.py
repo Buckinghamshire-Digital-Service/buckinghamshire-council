@@ -18,11 +18,10 @@ from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
+from wagtail import blocks
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
-from wagtail.core import blocks
-from wagtail.core.fields import StreamField
-from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.fields import StreamField
 from wagtail.search import index
 
 from django_gov_notify.message import NotifyEmailMessage
@@ -381,6 +380,7 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
             required=False,
         ),
         blank=True,
+        use_json_field=True,
     )
     search_fields = BasePage.search_fields + [index.SearchField("hero_title")]
 
@@ -388,13 +388,13 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
         MultiFieldPanel(
             [
                 FieldPanel("hero_title"),
-                ImageChooserPanel("hero_image"),
+                FieldPanel("hero_image"),
                 FieldPanel("search_box_placeholder"),
                 FieldPanel("hero_link_text"),
             ],
             "Hero",
         ),
-        StreamFieldPanel("body"),
+        FieldPanel("body"),
     ]
     settings_panels = BasePage.settings_panels + [
         FieldPanel(
@@ -490,11 +490,11 @@ class RecruitmentIndexPage(BasePage):
         related_name="+",
         on_delete=models.SET_NULL,
     )
-    body = StreamField(StoryBlock(required=False), blank=True)
+    body = StreamField(StoryBlock(required=False), blank=True, use_json_field=True)
 
     content_panels = BasePage.content_panels + [
-        ImageChooserPanel("hero_image"),
-        StreamFieldPanel("body"),
+        FieldPanel("hero_image"),
+        FieldPanel("body"),
     ]
 
     @cached_property

@@ -1,6 +1,6 @@
 from django.test import RequestFactory, TestCase, override_settings
 
-from wagtail.core.models import Page, Site
+from wagtail.models import Page, Site
 
 from bc.recruitment.constants import JOB_BOARD_CHOICES
 from bc.recruitment.templatetags.jobs_search_filters import jobs_search_filters

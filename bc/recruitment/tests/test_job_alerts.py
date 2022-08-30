@@ -7,7 +7,7 @@ from django.core.management import call_command
 from django.http import QueryDict
 from django.test import RequestFactory, TestCase, override_settings
 
-from wagtail.core.models import Page, Site
+from wagtail.models import Page, Site
 
 from freezegun import freeze_time
 

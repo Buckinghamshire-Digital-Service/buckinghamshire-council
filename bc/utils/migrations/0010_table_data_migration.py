@@ -30,7 +30,7 @@ from itertools import chain
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import migrations
 
-from wagtail.core.blocks import StreamValue
+from wagtail.blocks import StreamValue
 
 
 def rename_table_to_plaintexttable(block):

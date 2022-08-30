@@ -5,7 +5,7 @@ from django.http import QueryDict
 from django.test import TestCase, override_settings
 from django.urls import reverse
 
-from wagtail.core.models import Page, Site
+from wagtail.models import Page, Site
 
 import responses
 

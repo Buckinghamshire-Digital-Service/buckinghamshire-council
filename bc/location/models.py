@@ -3,19 +3,17 @@ from django.db.models.expressions import Case, When
 from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
-from wagtail.admin.edit_handlers import (
+from wagtail.admin.panels import (
     FieldPanel,
     FieldRowPanel,
     InlinePanel,
     MultiFieldPanel,
     RichTextFieldPanel,
-    StreamFieldPanel,
 )
-from wagtail.core.fields import RichTextField, StreamField
-from wagtail.core.rich_text import expand_db_html
-from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.fields import RichTextField, StreamField
+from wagtail.rich_text import expand_db_html
 
-from wagtailgeowidget.edit_handlers import GeoPanel
+from wagtailgeowidget.edit_handlers import GeoAddressPanel, GoogleMapsPanel
 from wagtailgeowidget.helpers import geosgeometry_str_to_struct
 
 from bc.area_finder.utils import validate_postcode
@@ -87,14 +85,17 @@ class LocationPage(BasePage):
     )
     email_address = models.EmailField(blank=True)
 
-    body = StreamField(StoryBlock())
+    body = StreamField(StoryBlock(), use_json_field=True)
 
     content_panels = BasePage.content_panels + [
-        ImageChooserPanel("image"),
+        FieldPanel("image"),
         MultiFieldPanel(
             [
-                GeoPanel("latlng", address_field="map_location", hide_latlng=True),
-                FieldPanel("map_location"),
+                # The GeoAddressPanel needs to come before the GoogleMapsPanel.
+                GeoAddressPanel("map_location"),
+                GoogleMapsPanel(
+                    "latlng", address_field="map_location", hide_latlng=True
+                ),
                 RichTextFieldPanel("map_info_text"),
             ],
             "Map",
@@ -111,7 +112,7 @@ class LocationPage(BasePage):
         FieldRowPanel(
             [FieldPanel("telephone"), FieldPanel("email_address")], "Contact info"
         ),
-        StreamFieldPanel("body"),
+        FieldPanel("body"),
         InlinePanel("related_pages", label="Related pages"),
     ]
 

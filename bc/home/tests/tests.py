@@ -1,8 +1,8 @@
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
-from wagtail.core.models import Page
-from wagtail.tests.utils import WagtailPageTests
+from wagtail.models import Page
+from wagtail.test.utils import WagtailPageTests
 
 from bc.standardpages.tests.fixtures import IndexPageFactory, InformationPageFactory
 
