@@ -503,7 +503,6 @@ if "SENTRY_DSN" in env and not is_in_shell:
 
     # There's a chooser to toggle between environments at the top right corner on sentry.io
     # Values are typically 'staging' or 'production' but can be set to anything else if needed.
-    # dokku config:set gosh SENTRY_ENVIRONMENT=staging
     # heroku config:set SENTRY_ENVIRONMENT=production
     if "SENTRY_ENVIRONMENT" in env:
         sentry_kwargs.update({"environment": env["SENTRY_ENVIRONMENT"]})
