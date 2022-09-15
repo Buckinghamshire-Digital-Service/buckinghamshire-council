@@ -20,7 +20,7 @@ class StepByStepPage(BasePage):
     template = "patterns/pages/step_by_step/step_by_step_page.html"
 
     intro_text = models.TextField(blank=True)
-    introduction = RichTextField()
+    introduction = RichTextField(editor="with_h2")
 
     steps = StreamField([("step", StepBlock())], use_json_field=True)
 
