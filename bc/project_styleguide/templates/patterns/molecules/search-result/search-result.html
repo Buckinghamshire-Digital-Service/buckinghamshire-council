@@ -17,4 +17,18 @@
     {% if result|is_news_page %}
         <time class="search-result__date" datetime="{{ result.display_date|date:'Y-m-d' }}">{{ result.display_date|date:"j M Y" }}</time>
     {% endif %}
+
+    {% if result.is_inline_index %}
+        <ul class="link-block__list">
+            {% for child in result.get_children %}
+                {% with child.specific as page %}
+                <li class="link-block__list-item">
+                    <a href="{% pageurl page %}" class="link-block__link link--alt">{{ page.title }}</a>
+                    <p class="search-result__description--child-page">{% firstof page.description page.listing_summary page.search_description %}</p>
+                </li>
+                {% endwith %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+
 </div>
