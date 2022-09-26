@@ -18,6 +18,7 @@ from wagtail.search.models import Query
 from bc.blogs.models import BlogGlobalHomePage, BlogHomePage, BlogPostPage
 from bc.campaigns.models import CampaignIndexPage, CampaignPage
 from bc.inlineindex.models import InlineIndexChild
+from bc.longform.models import LongformChapterPage
 from bc.recruitment.forms import SearchAlertSubscriptionForm
 from bc.recruitment.models import JobAlertSubscription
 from bc.recruitment.utils import (
@@ -112,6 +113,7 @@ class SearchView(View):
                     BlogHomePage,
                     BlogPostPage,
                     InlineIndexChild,
+                    LongformChapterPage,
                 ]
 
                 for page_to_exclude in excluded_page_types:
