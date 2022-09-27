@@ -752,7 +752,13 @@ WAGTAILADMIN_RICH_TEXT_EDITORS = {
     "default": {
         "WIDGET": "wagtail.admin.rich_text.DraftailRichTextArea",
         "OPTIONS": {"features": ["bold", "italic", "h3", "h4", "ol", "ul", "link"]},
-    }
+    },
+    "with_h2": {  # same as default, but includes h2 heading
+        "WIDGET": "wagtail.admin.rich_text.DraftailRichTextArea",
+        "OPTIONS": {
+            "features": ["bold", "italic", "h2", "h3", "h4", "ol", "ul", "link"]
+        },
+    },
 }
 
 # Custom document model
