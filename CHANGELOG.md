@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- **A11y**: Fix accessibility on Blog Home Page template by adding `listitem` role to `<span>` elements in unordered lists
+
 ## 62.0 (2022-08-30)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/574/diffs>
