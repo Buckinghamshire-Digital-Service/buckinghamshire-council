@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- **A11y**: Add `<h2>` headings to the `introduction` RichTextField in the StepByStepPage model, thus allowing for creation of an accessible heading order.
+
 ## 62.0 (2022-08-30)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/574/diffs>
