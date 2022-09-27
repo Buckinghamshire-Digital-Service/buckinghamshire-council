@@ -4,20 +4,20 @@
     <h2 class="sidebar__heading heading">Follow us</h2>
     <ul class="sidebar__link-list">
         {% if page.socials.twitter_handle %}
-        <span class="sidebar__link sidebar__link--flex">
+        <span role="listitem" class="sidebar__link sidebar__link--flex">
             {% include "patterns/atoms/icons/icon.html" with name="twitter" classname="icon--blog-social" %}
-            <a href="https://twitter.com/{{ page.socials.twitter_handle }}" 
+            <a href="https://twitter.com/{{ page.socials.twitter_handle }}"
                 aria-label="{{ page.title }} Twitter"
                 target="_blank"
                 rel="nofollow noreferrer">
-                Twitter 
+                Twitter
             </a>
         </span>
         {% endif %}
         {% if page.socials.facebook_page_url %}
-        <span class="sidebar__link sidebar__link--flex">
+        <span role="listitem" class="sidebar__link sidebar__link--flex">
             {% include "patterns/atoms/icons/icon.html" with name="facebook" classname="icon--blog-social" %}
-            <a href="{{ page.socials.facebook_page_url }}" 
+            <a href="{{ page.socials.facebook_page_url }}"
                 aria-label="{{ page.title }} Facebook"
                 target="_blank"
                 rel="nofollow noreferrer">
@@ -26,18 +26,18 @@
         </span>
         {% endif %}
         {% if page.socials.linkedin_url %}
-        <span class="sidebar__link sidebar__link--flex">
+        <span role="listitem" class="sidebar__link sidebar__link--flex">
             {% include "patterns/atoms/icons/icon.html" with name="linkedin" classname="icon--blog-social" %}
             <a href="{{ page.socials.linkedin_url }}"
                 aria-label="{{ page.title }} LinkedIn"
                 target="_blank"
                 rel="nofollow noreferrer">
-                LinkedIn 
+                LinkedIn
             </a>
         </span>
         {% endif %}
         {% if page.socials.youtube_channel_url %}
-        <span class="sidebar__link sidebar__link--flex">
+        <span role="listitem" class="sidebar__link sidebar__link--flex">
             {% include "patterns/atoms/icons/icon.html" with name="youtube" classname="icon--blog-social" %}
             <a href="{{ page.socials.youtube_channel_url }}"
                 aria-label="{{ page.title }} YouTube"
