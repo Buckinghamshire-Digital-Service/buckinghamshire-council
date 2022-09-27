@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- **A11y**: Add `overflow-wrap` & `word-break` CSS properties to `<ul>` & `<ol>` elements to prevent text from overflowing its line box, causing problems particularly on smaller devices.
+
 ## 62.0 (2022-08-30)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/574/diffs>
