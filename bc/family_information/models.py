@@ -46,11 +46,6 @@ class FISBannerFields(models.Model):
 class SubsiteHomePage(FISBannerFields, BasePage):
     template = "patterns/pages/home/home_page--fis.html"
 
-    subpage_types = [
-        "CategoryTypeOnePage",
-        "CategoryTypeTwoPage",
-        "standardpages.InformationPage",
-    ]
     parent_page_types = ["wagtailcore.Page"]
 
     max_count = 2
