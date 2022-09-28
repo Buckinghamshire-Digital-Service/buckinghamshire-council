@@ -1,5 +1,12 @@
 # Release History
 
+## Unreleased
+
+- Rename Family Information Service Homepage to Subsite Homepage
+- Allow all subpage types to be created under Subsite Homepages
+- Allow index pages to be displayed from the homepage
+- Small fix to postcode validation on area finder
+
 ## 62.0 (2022-08-30)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/574/diffs>
