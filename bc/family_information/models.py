@@ -50,8 +50,6 @@ class SubsiteHomePage(FISBannerFields, BasePage):
 
     parent_page_types = ["wagtailcore.Page"]
 
-    max_count = 2
-
     hero_image = models.ForeignKey(
         "images.CustomImage",
         null=True,
