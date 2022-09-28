@@ -1,6 +1,6 @@
 from wagtail.test.utils import WagtailPageTests
 
-from bc.family_information.models import FamilyInformationHomePage
+from bc.family_information.models import SubsiteHomePage
 from bc.standardpages.models import InformationPage
 
 
@@ -11,7 +11,7 @@ class TestFISHomePage(WagtailPageTests):
 
         This is only a regression test. From the current status of the staging
         server, it used to be possible to create InformationPage under
-        FamilyInformationHomepage. At some point this has been prevented
+        SubsiteHomePage. At some point this has been prevented
         accidentally, making another update necessary to fix this.
 
         This test is added to prevent the accidental change in the future. If
@@ -20,4 +20,4 @@ class TestFISHomePage(WagtailPageTests):
 
         See also: https://docs.wagtail.io/en/stable/advanced_topics/testing.html#wagtail.test.utils.WagtailPageTests.assertCanNotCreateAt  # noqa: E501
         """
-        self.assertCanCreateAt(FamilyInformationHomePage, InformationPage)
+        self.assertCanCreateAt(SubsiteHomePage, InformationPage)

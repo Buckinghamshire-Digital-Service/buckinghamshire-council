@@ -4,9 +4,9 @@ import wagtail_factories
 from bc.family_information import models
 
 
-class FamilyInformationHomePageFactory(wagtail_factories.PageFactory):
+class SubsiteHomePageFactory(wagtail_factories.PageFactory):
     class Meta:
-        model = models.FamilyInformationHomePage
+        model = models.SubsiteHomePage
 
     title = factory.Sequence(lambda n: f"Familiy Information Service Home Page {n}")
 
