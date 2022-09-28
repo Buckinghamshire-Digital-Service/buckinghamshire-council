@@ -8,6 +8,8 @@ from wagtail.search import index
 
 from ..utils.models import BasePage
 
+from ..standardpages.models import IndexPage
+
 
 class FISBannerFields(models.Model):
     banner_image = models.ForeignKey(
@@ -100,7 +102,7 @@ class SubsiteHomePage(FISBannerFields, BasePage):
             Page.objects.child_of(self)
             .filter(
                 content_type__in=ContentType.objects.get_for_models(
-                    CategoryTypeOnePage, CategoryTypeTwoPage
+                    CategoryTypeOnePage, CategoryTypeTwoPage, IndexPage
                 ).values()
             )
             .filter(show_in_menus=True)

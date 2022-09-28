@@ -62,6 +62,7 @@ class IndexPage(BasePage):
         "family_information.CategoryTypeOnePage",
         "family_information.CategoryTypeTwoPage",
         "IndexPage",
+        "family_information.SubsiteHomePage",
     ]
 
     introduction = models.TextField(blank=True)
