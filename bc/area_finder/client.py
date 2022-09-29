@@ -1,3 +1,5 @@
+from django.conf import settings
+
 import requests
 
 
@@ -36,7 +38,13 @@ class BucksMapsClient:
     }
 
     def _post(self, data):
-        return requests.post(self.base_url, data=data)
+        response = requests.post(
+            self.base_url,
+            data=data,
+            timeout=settings.BUCKS_MAPS_CLIENT_API_TIMEOUT_SECONDS,
+        )
+        response.raise_for_status()
+        return response
 
     def query_postcode(self, postcode):
         data = self.base_data
