@@ -6,9 +6,8 @@ from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.models import Page
 from wagtail.search import index
 
-from ..utils.models import BasePage
-
 from ..standardpages.models import IndexPage
+from ..utils.models import BasePage
 
 
 class FISBannerFields(models.Model):
