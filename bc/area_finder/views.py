@@ -28,8 +28,7 @@ def area_finder(request):
         formatted_postcode = validate_postcode(postcode)
     except ValidationError:
         return JsonResponse(
-            {"error": "Please enter a valid postcode"},
-            status=status.HTTP_200_OK,
+            {"error": "Please enter a valid postcode"}, status=status.HTTP_200_OK,
         )
 
     client = BucksMapsClient()
@@ -38,7 +37,7 @@ def area_finder(request):
         resp = client.query_postcode(formatted_postcode)
     except (HTTPError, Timeout):
         return JsonResponse(
-            {"message": "Request failed, try again"}, status=status.HTTP_400_BAD_REQUEST
+            {"error": "Request failed, try again"}, status=status.HTTP_400_BAD_REQUEST
         )
 
     json_response = resp.json()
@@ -50,7 +49,7 @@ def area_finder(request):
                 status=status.HTTP_400_BAD_REQUEST,
             )
         return JsonResponse(
-            {"message": "Request failed, try again"}, status=status.HTTP_400_BAD_REQUEST
+            {"error": "Request failed, try again"}, status=status.HTTP_400_BAD_REQUEST
         )
 
     addresses = []
