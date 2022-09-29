@@ -107,7 +107,9 @@ class FixturesTest(TestCase):
             "W1A 1AA", feature_count=1, districts=[DISTRICT_WYCOMBE]
         )
         responses.add(
-            responses.POST, self.api_client.base_url, json=get_response(features),
+            responses.POST,
+            self.api_client.base_url,
+            json=get_response(features),
         )
         resp = self.api_client.query_postcode("W1A 1AA")
         self.assertIsInstance(resp, Response)
@@ -196,7 +198,9 @@ class AreaFinderTest(TestCase):
         responses.add(
             responses.POST,
             self.api_client.base_url,
-            json=get_response(get_features("W1A 1AA", feature_count=0, districts=[]),),
+            json=get_response(
+                get_features("W1A 1AA", feature_count=0, districts=[]),
+            ),
         )
         resp = self.client.get(self.url + "?postcode=W1A+1AA")
         self.assertEqual(len(responses.calls), 1)
@@ -242,7 +246,9 @@ class AreaFinderTest(TestCase):
             get_feature("8", street, city, postcode, DISTRICT_SOUTH_BUCKS),
         ]
         responses.add(
-            responses.POST, self.api_client.base_url, json=get_response(features),
+            responses.POST,
+            self.api_client.base_url,
+            json=get_response(features),
         )
         resp = self.client.get(self.url + "?postcode=W1A+1AA")
         self.assertEqual(len(responses.calls), 1)
