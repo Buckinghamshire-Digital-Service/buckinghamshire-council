@@ -4,8 +4,8 @@
 
 - Rename Family Information Service Homepage to Subsite Homepage
 - Allow all subpage types to be created under Subsite Homepages
-- Allow index pages to be displayed from the homepage
-- Small fix to postcode validation on area finder
+- Display child index pages on rendered Subsite home pages
+
 
 ## 62.0 (2022-08-30)
 

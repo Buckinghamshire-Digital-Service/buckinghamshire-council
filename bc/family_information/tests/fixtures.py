@@ -8,7 +8,7 @@ class SubsiteHomePageFactory(wagtail_factories.PageFactory):
     class Meta:
         model = models.SubsiteHomePage
 
-    title = factory.Sequence(lambda n: f"Familiy Information Service Home Page {n}")
+    title = factory.Sequence(lambda n: f"Subsite Home Page {n}")
 
     banner_image = factory.SubFactory("bc.images.tests.fixtures.ImageFactory")
     banner_title = "Banner title"
