@@ -20,6 +20,6 @@ class Command(BaseCommand):
             if model.get_verbose_name() == "Page":
                 # Don't include the bare Page model
                 continue
-            print(model.get_verbose_name())
+            print(f" - {model.get_verbose_name()}")
             for child_type in model.creatable_subpage_models():
-                print(f" - {child_type.get_verbose_name()}")
+                print(f"   - {child_type.get_verbose_name()}")
