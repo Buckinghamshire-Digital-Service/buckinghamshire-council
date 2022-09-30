@@ -6,7 +6,6 @@
 - Allow all subpage types to be created under Subsite Homepages
 - Display child index pages on rendered Subsite home pages
 
-
 ## 62.0 (2022-08-30)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/574/diffs>
