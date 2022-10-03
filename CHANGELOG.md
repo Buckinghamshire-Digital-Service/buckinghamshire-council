@@ -1,5 +1,11 @@
 # Release History
 
+## 63.1 (2022-10-03)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/63.1...63.0>
+
+- Add configurable timeout to Python client for maps.buckscc.gov.uk API
+
 ## 63.0 (2022-09-27)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/63.0...62.0>
