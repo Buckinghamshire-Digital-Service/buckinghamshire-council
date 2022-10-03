@@ -4,6 +4,11 @@ import requests
 
 
 class BucksMapsClient:
+    """Python client for the upstream API maps.buckscc.gov.uk.
+
+    See documentation at docs/postcode-lookup.md.
+    """
+
     base_url = "https://maps.buckscc.gov.uk/arcgis/rest/services/Corporate/NLPG_Districts/FeatureServer/0/query"
     base_data = {
         "objectIds": "",

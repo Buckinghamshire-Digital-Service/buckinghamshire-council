@@ -11,3 +11,9 @@ There is an HTML interface for testing available at https://maps.buckscc.gov.uk/
 This is used By the LocalAreaLinksBlock StreamField block to match a submitted postcode to one of the four areas of Buckinghamshire Council, matching those served by the former district councils. A postcode query returns a list of street addresses, and a corresponding 'District Council' parameter.
 
 If all the results for a query match a single district council (most queries), we redirect the user to the correct site. Otherwise we ask the user to give their street address.
+
+## Configuration
+
+The Python client is at `bc.area_finder.client.BucksMapsClient`. The timeout for the upstream API can be configured with the environment variable:
+
+- `BUCKS_MAPS_CLIENT_API_TIMEOUT_SECONDS` (must be parsable as a `float`; defaults to `10`)
