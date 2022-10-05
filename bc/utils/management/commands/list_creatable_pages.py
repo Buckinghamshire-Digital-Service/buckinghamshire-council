@@ -1,14 +1,6 @@
-from dataclasses import dataclass
-
 from django.core.management.base import BaseCommand
 
 from wagtail.models import get_page_models
-
-
-@dataclass
-class Result:
-    page_id: int
-    block_type: str
 
 
 class Command(BaseCommand):
