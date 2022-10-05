@@ -10,8 +10,11 @@ class Command(BaseCommand):
 
         for model in get_page_models():
             if model.get_verbose_name() == "Page":
-                # Don't include the bare Page model
-                continue
-            print(f" - {model.get_verbose_name()}")
+                # Describe the bare Page model more verbosely
+                section_title = "Pages creatable at the site root"
+            else:
+                section_title = model.get_verbose_name()
+
+            print(f" - {section_title}")
             for child_type in model.creatable_subpage_models():
                 print(f"   - {child_type.get_verbose_name()}")
