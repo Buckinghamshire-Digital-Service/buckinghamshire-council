@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- Synchronise docker-compose file version numbers
+
 ## 63.1 (2022-10-03)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/63.1...63.0>
