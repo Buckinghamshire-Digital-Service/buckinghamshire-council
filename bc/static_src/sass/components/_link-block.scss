@@ -1,4 +1,5 @@
 .link-block {
+    $root: &;
     line-height: 1.3;
 
     &__heading {
@@ -27,6 +28,16 @@
             position: absolute;
             left: 0;
             top: 5px;
+        }
+
+        #{$root}--inlineindex & {
+            margin: 15px 0;
+        }
+    }
+
+    &__link {
+        #{$root}--inlineindex & {
+            font-weight: $weight--bold;
         }
     }
 }

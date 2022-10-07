@@ -19,6 +19,7 @@
     {% endif %}
 
     {% if result.is_inline_index %}
+    <div class="link-block link-block--inlineindex">
         <ul class="link-block__list">
             {% for child in result.get_children %}
                 {% with child.specific as page %}
@@ -29,6 +30,7 @@
                 {% endwith %}
             {% endfor %}
         </ul>
+    </div>
     {% endif %}
 
 </div>
