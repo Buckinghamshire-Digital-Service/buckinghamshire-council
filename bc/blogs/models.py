@@ -211,7 +211,7 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
 
     def get_context(self, request, *args, **kwargs):
         page = request.GET.get("page", 1)
-        blogs = BlogPostPage.objects.child_of(self).order_by("-date_published")
+        blogs = BlogPostPage.objects.child_of(self).live().order_by("-date_published")
 
         paginator = Paginator(blogs, settings.DEFAULT_PER_PAGE)
         blogs = paginator.get_page(page)
