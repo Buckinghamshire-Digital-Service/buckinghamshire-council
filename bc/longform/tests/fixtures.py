@@ -11,6 +11,7 @@ class LongformPageFactory(wagtail_factories.PageFactory):
         model = models.LongformPage
 
     title = factory.Sequence(lambda n: f"Longform Page {n}")
+    listing_summary = "Longform Page"
     last_updated = datetime.date(2021, 1, 1)
 
 
@@ -19,3 +20,4 @@ class LongformChapterPageFactory(wagtail_factories.PageFactory):
         model = models.LongformChapterPage
 
     title = factory.Sequence(lambda n: f"Longform Chapter {n}")
+    listing_summary = "Longform Chapter"
