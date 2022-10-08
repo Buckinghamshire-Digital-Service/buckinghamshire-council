@@ -10,14 +10,21 @@
         <div class="introduction">
             {{ page.body|richtext }}
         </div>
-        {% include 'patterns/molecules/map/map.html' %}
-        <ul class="location-pages-list">
-            {% for location_page in page.child_pages %}
-                <li>
-                    <a href="{% pageurl location_page %}">{{ location_page.display_title }}</a>
-                </li>
-            {% endfor %}
-        </ul>
+        <div data-map-list-switcher class="map-switcher">
+            <div class="map-switcher__controls">
+                <a href="#" data-map-list-switcher-control="list" class="map-switcher__control">List</a>
+                /
+                <a href="#" data-map-list-switcher-control="map" class="map-switcher__control is-active">Map</a>
+            </div>
+            {% include 'patterns/molecules/map/map.html' %}
+            <ul class="location-pages-list" data-list hidden>
+                {% for location_page in page.child_pages %}
+                    <li>
+                        <a href="{% pageurl location_page %}">{{ location_page.display_title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
         {% if page.additional_info %}
             {% include_block page.additional_info %}
         {% endif %}
