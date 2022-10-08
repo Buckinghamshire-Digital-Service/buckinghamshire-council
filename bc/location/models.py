@@ -64,6 +64,8 @@ class LocationPage(BasePage):
         blank=True,
     )
 
+    additional_info = StreamField(StoryBlock(), use_json_field=True, blank=True)
+
     map_location = models.TextField(blank=True)
     latlng = models.CharField(max_length=250, blank=True)
     map_info_text = RichTextField(
@@ -89,6 +91,7 @@ class LocationPage(BasePage):
 
     content_panels = BasePage.content_panels + [
         FieldPanel("image"),
+        FieldPanel("additional_info"),
         MultiFieldPanel(
             [
                 # The GeoAddressPanel needs to come before the GoogleMapsPanel.
