@@ -18,6 +18,9 @@
                 </li>
             {% endfor %}
         </ul>
+        {% if page.additional_info %}
+            {% include_block page.additional_info %}
+        {% endif %}
     </div>
 </div>
 {% endblock %}

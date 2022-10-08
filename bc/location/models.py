@@ -26,8 +26,12 @@ class LocationIndexPage(BasePage):
     subpage_types = ["location.LocationPage"]
 
     body = RichTextField()
+    additional_info = StreamField(StoryBlock(), use_json_field=True, blank=True)
 
-    content_panels = BasePage.content_panels + [RichTextFieldPanel("body")]
+    content_panels = BasePage.content_panels + [
+        RichTextFieldPanel("body"),
+        FieldPanel("additional_info"),
+    ]
 
     @cached_property
     def child_pages(self):
