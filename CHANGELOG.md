@@ -21,7 +21,6 @@ Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/63.0...62.
 - **A11y**: Add `overflow-wrap` & `word-break` CSS properties to `<ul>` & `<ol>` elements to prevent text from overflowing its line box, causing problems particularly on smaller devices.
 - **A11y**: Fix accessibility on Blog Home Page template by adding `listitem` role to `<span>` elements in unordered lists
 - **A11y**: Add `<h2>` headings to the `introduction` RichTextField in the StepByStepPage model, thus allowing for creation of an accessible heading order.
->>>>>>> CHANGELOG.md
 
 ## 62.0 (2022-08-30)
 
