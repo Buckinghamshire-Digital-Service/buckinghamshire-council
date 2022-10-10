@@ -39,7 +39,7 @@
     <meta name="twitter:title" content="{{ page.title }}" />
     <meta name="twitter:description" content="{{ page|social_text:current_site }}">
 
-    {% static 'images/buck-council.png' as logo_image %}
+    {% static 'images/bc-logo-high-res.png' as logo_image %}
     {% image page.social_image original as social_image %}
     {% firstof social_image.url logo_image as social_image_url %}
     {% with social_image_url=current_site.root_url|add:social_image_url %}
@@ -50,7 +50,7 @@
         <meta property="og:type" content="website" />
         <meta property="og:url" content="{{ page.url }}" />
         <meta property="og:title" content="{{ page.title }}" />
-        <meta name="twitter:image" content="{{ social_image_url }}">
+        <meta property="og:image" content="{{ social_image_url }}">
     {% endwith %}
     <meta property="og:description" content="{{ page|social_text:current_site }}" />
     <meta property="og:site_name" content="{{ settings.utils.SocialMediaSettings.site_name }}" />
