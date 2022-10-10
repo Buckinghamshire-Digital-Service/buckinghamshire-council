@@ -64,7 +64,15 @@ class LocationPage(BasePage):
         blank=True,
     )
 
-    additional_info = StreamField(StoryBlock(), use_json_field=True, blank=True)
+    additional_info = StreamField(
+        StoryBlock(),
+        use_json_field=True,
+        blank=True,
+        help_text=(
+            "Additional information about this location like opening times, facilities, etc. "
+            "This will appear above the map in the template."
+        ),
+    )
 
     map_location = models.TextField(blank=True)
     latlng = models.CharField(max_length=250, blank=True)
@@ -87,7 +95,11 @@ class LocationPage(BasePage):
     )
     email_address = models.EmailField(blank=True)
 
-    body = StreamField(StoryBlock(), use_json_field=True)
+    body = StreamField(
+        StoryBlock(),
+        use_json_field=True,
+        help_text="Generic body content. This will appear after the map in the template.",
+    )
 
     content_panels = BasePage.content_panels + [
         FieldPanel("image"),
