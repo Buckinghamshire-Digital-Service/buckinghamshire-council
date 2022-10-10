@@ -2,6 +2,7 @@ from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.utils.html import escape
 
+from requests import HTTPError, Timeout
 from rest_framework import status
 from rest_framework.decorators import api_view, authentication_classes
 
@@ -32,7 +33,13 @@ def area_finder(request):
         )
 
     client = BucksMapsClient()
-    resp = client.query_postcode(formatted_postcode)
+
+    try:
+        resp = client.query_postcode(formatted_postcode)
+    except (HTTPError, Timeout):
+        return JsonResponse(
+            {"error": "Request failed, try again"}, status=status.HTTP_400_BAD_REQUEST
+        )
 
     json_response = resp.json()
 
@@ -43,7 +50,7 @@ def area_finder(request):
                 status=status.HTTP_400_BAD_REQUEST,
             )
         return JsonResponse(
-            {"message": "Request failed, try again"}, status=status.HTTP_400_BAD_REQUEST
+            {"error": "Request failed, try again"}, status=status.HTTP_400_BAD_REQUEST
         )
 
     addresses = []

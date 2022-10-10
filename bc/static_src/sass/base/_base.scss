@@ -83,6 +83,9 @@ ol {
     padding: 0;
     margin: 0;
     list-style: none;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 
 .hidden {

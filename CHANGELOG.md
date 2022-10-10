@@ -5,6 +5,23 @@
 - Rename Family Information Service Homepage to Subsite Homepage
 - Allow all subpage types to be created under Subsite Homepages
 - Display child index pages on rendered Subsite home pages
+- Synchronise docker-compose file version numbers
+- Add list_creatable_pages management command
+
+## 63.1 (2022-10-03)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/63.1...63.0>
+
+- Add configurable timeout to Python client for maps.buckscc.gov.uk API
+
+## 63.0 (2022-09-27)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/63.0...62.0>
+
+- **A11y**: Add `overflow-wrap` & `word-break` CSS properties to `<ul>` & `<ol>` elements to prevent text from overflowing its line box, causing problems particularly on smaller devices.
+- **A11y**: Fix accessibility on Blog Home Page template by adding `listitem` role to `<span>` elements in unordered lists
+- **A11y**: Add `<h2>` headings to the `introduction` RichTextField in the StepByStepPage model, thus allowing for creation of an accessible heading order.
+>>>>>>> CHANGELOG.md
 
 ## 62.0 (2022-08-30)
 

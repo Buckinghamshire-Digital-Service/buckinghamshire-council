@@ -1,7 +1,14 @@
+from django.conf import settings
+
 import requests
 
 
 class BucksMapsClient:
+    """Python client for the upstream API maps.buckscc.gov.uk.
+
+    See documentation at docs/postcode-lookup.md.
+    """
+
     base_url = "https://maps.buckscc.gov.uk/arcgis/rest/services/Corporate/NLPG_Districts/FeatureServer/0/query"
     base_data = {
         "objectIds": "",
@@ -36,7 +43,13 @@ class BucksMapsClient:
     }
 
     def _post(self, data):
-        return requests.post(self.base_url, data=data)
+        response = requests.post(
+            self.base_url,
+            data=data,
+            timeout=settings.BUCKS_MAPS_CLIENT_API_TIMEOUT_SECONDS,
+        )
+        response.raise_for_status()
+        return response
 
     def query_postcode(self, postcode):
         data = self.base_data

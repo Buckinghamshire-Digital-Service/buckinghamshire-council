@@ -6,7 +6,7 @@ from django.urls import reverse
 
 import responses
 from faker import Faker
-from requests import Response
+from requests import ReadTimeout, Response
 
 from bc.area_finder.client import BucksMapsClient
 
@@ -319,3 +319,47 @@ class AreaFinderTest(TestCase):
         self.assertIn(formatted_postcode, json_response["border_overlap_html"])
         # And the user's input is not.
         self.assertNotIn(raw_postcode, json_response["border_overlap_html"])
+
+    @responses.activate
+    def test_error_response(self):
+        responses.add(
+            responses.POST,
+            self.api_client.base_url,
+            json={"error": "some message"},
+            status=400,
+        )
+        resp = self.client.get(self.url + "?postcode=W1A+1AA")
+        self.assertEqual(len(responses.calls), 1)
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.headers["content-type"], "application/json")
+        json_response = resp.json()
+        self.assertIn("error", json_response)
+
+    @responses.activate
+    def test_non_200_non_error_response(self):
+        """Test non-200 responses that don't raise an error, and contain "error".
+
+        In this case, the message from the API should be forwarded to the user.
+        """
+        responses.add(
+            responses.POST,
+            self.api_client.base_url,
+            json={"error": "some message"},
+            status=201,
+        )
+        resp = self.client.get(self.url + "?postcode=W1A+1AA")
+        self.assertEqual(len(responses.calls), 1)
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.headers["content-type"], "application/json")
+        json_response = resp.json()
+        self.assertIn("error", json_response)
+        self.assertEqual(json_response["error"], "some message")
+
+    @mock.patch("bc.area_finder.views.BucksMapsClient")
+    def test_timeout(self, mock_client):
+        mock_client().query_postcode.side_effect = ReadTimeout
+        resp = self.client.get(self.url + "?postcode=W1A+1AA")
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.headers["content-type"], "application/json")
+        json_response = resp.json()
+        self.assertIn("error", json_response)

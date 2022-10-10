@@ -752,7 +752,13 @@ WAGTAILADMIN_RICH_TEXT_EDITORS = {
     "default": {
         "WIDGET": "wagtail.admin.rich_text.DraftailRichTextArea",
         "OPTIONS": {"features": ["bold", "italic", "h3", "h4", "ol", "ul", "link"]},
-    }
+    },
+    "with_h2": {  # same as default, but includes h2 heading
+        "WIDGET": "wagtail.admin.rich_text.DraftailRichTextArea",
+        "OPTIONS": {
+            "features": ["bold", "italic", "h2", "h3", "h4", "ol", "ul", "link"]
+        },
+    },
 }
 
 # Custom document model
@@ -828,6 +834,9 @@ RESPOND_GET_FIELDS_WEBSERVICE = env.get("RESPOND_GET_FIELDS_WEBSERVICE")
 
 # Google maps API credentials
 GOOGLE_MAPS_V3_APIKEY = env.get("GOOGLE_MAPS_V3_APIKEY")
+BUCKS_MAPS_CLIENT_API_TIMEOUT_SECONDS = float(
+    env.get("BUCKS_MAPS_CLIENT_API_TIMEOUT_SECONDS", 10)
+)
 
 # Geo widget settings
 GEO_WIDGET_DEFAULT_LOCATION = {
