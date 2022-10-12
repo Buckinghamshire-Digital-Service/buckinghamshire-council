@@ -15,7 +15,7 @@ import bc.utils.blocks
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("location", "0009_wagtail_3_upgrade"),
+        ("location", "0011_locationpage_additional_info"),
     ]
 
     operations = [
