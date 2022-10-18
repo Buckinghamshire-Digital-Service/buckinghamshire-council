@@ -6,7 +6,7 @@
     {% endif %}
     <h3 class="search-result__title heading heading--m">
         <a class="search-result__link" href="{% pageurl result %}">
-            {% firstof result.listing_title result.title %}
+            {{ result.title }}
         </a>
     </h3>
 
