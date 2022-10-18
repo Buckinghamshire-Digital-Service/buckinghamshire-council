@@ -112,11 +112,6 @@ class SubsiteHomePage(FISBannerFields, BasePage):
 
 class BaseCategoryPage(FISBannerFields, BasePage):
     parent_page_types = ["SubsiteHomePage"]
-    subpage_types = [
-        "inlineindex.InlineIndex",
-        "standardpages.IndexPage",
-        "standardpages.InformationPage",
-    ]
 
     content_panels = BasePage.content_panels + FISBannerFields.content_panels
     search_fields = BasePage.search_fields + FISBannerFields.search_fields

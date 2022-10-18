@@ -483,6 +483,7 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
 
 class RecruitmentIndexPage(BasePage):
     template = "patterns/pages/standardpages/index_page--jobs.html"
+    parent_page_types = ["recruitment.recruitmenthomepage"]
 
     hero_image = models.ForeignKey(
         "images.CustomImage",

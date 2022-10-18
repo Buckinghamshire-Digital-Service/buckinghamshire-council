@@ -22,6 +22,7 @@ class CampaignIndexPage(wt_models.Page):
 
 class CampaignPage(BasePage):
     parent_page_types = ["campaigns.campaignindexpage"]
+    subpage_types = ["forms.formpage", "standardpages.informationpage"]
 
     template = "patterns/pages/campaigns/campaign_page.html"
 

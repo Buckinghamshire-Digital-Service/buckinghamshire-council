@@ -59,6 +59,7 @@ class IndexPage(BasePage):
 
     parent_page_types = [
         "home.HomePage",
+        "family_information.familyinformationhomepage",
         "family_information.CategoryTypeOnePage",
         "family_information.CategoryTypeTwoPage",
         "IndexPage",

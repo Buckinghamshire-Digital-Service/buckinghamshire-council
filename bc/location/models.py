@@ -55,6 +55,7 @@ class LocationPageRelatedPage(RelatedPage):
 
 class LocationPage(BasePage):
     template = "patterns/pages/location/location_page.html"
+    subpage_types = []
 
     image = models.ForeignKey(
         "images.CustomImage",
