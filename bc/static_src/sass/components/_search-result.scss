@@ -9,6 +9,11 @@
 
     &__description {
         margin: 0;
+
+        &--child-page {
+            @include font-size(xxs);
+            margin: 0;
+        }
     }
 
     &__label {
