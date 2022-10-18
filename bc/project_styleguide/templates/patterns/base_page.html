@@ -38,33 +38,20 @@
     <meta name="twitter:site" content="@{{ settings.utils.SocialMediaSettings.twitter_handle }}" />
     <meta name="twitter:title" content="{{ page.title }}" />
     <meta name="twitter:description" content="{{ page|social_text:current_site }}">
-    {% if page.social_image  %}
-        {% image page.social_image width-1000 as social_img %}
-        {# This will give a full path to the image when on staging or production because S3 storage is used. If testing locally, make sure you use the default localhost:8000 url. Testing via :3000 will give peculiar results. #}
-        <meta name="twitter:image" content="{{ social_img.url }}">
-    {% else %}
-        {% comment %}
-        An example of how to add a default image to use for social sharing in case one is not provided on the page.
-        Note that you need to explicitly add the root url here as the static path will not include it
-        <meta name="twitter:image" content="{{ current_site.root_url }}{% static 'images/social-image.png' %}">
-        {% endcomment %}
-    {% endif %}
 
-    {# facebook opengraph tags #}
-    <meta property="fb:app_id" content="{{ settings.utils.SocialMediaSettings.facebook_app_id }}" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="{{ page.url }}" />
-    <meta property="og:title" content="{{ page.title }}" />
-    {% if page.social_image %}
-        {# This will give a full path to the image when on staging or production because S3 storage is used. If testing locally, make sure you use the default localhost:8000 url. Testing via :3000 will give peculiar results. #}
-        <meta property="og:image" content="{{ social_img.url }}" />
-    {% else %}
-        {% comment %}
-        An example of how to add a default image to use for social sharing in case one is not provided on the page.
-        Note that you need to explicitly add the root url here as the static path will not include it
-        <meta name="twitter:image" content="{{ current_site.root_url }}{% static 'images/social-image.png' %}">
-        {% endcomment %}
-    {% endif %}
+    {% static 'images/bc-logo-high-res.png' as logo_image %}
+    {% image page.social_image original as social_image %}
+    {% firstof social_image.url logo_image as social_image_url %}
+    {% with social_image_url=current_site.root_url|add:social_image_url %}
+        <meta name="twitter:image" content="{{ social_image_url }}">
+
+        {# facebook opengraph tags #}
+        <meta property="fb:app_id" content="{{ settings.utils.SocialMediaSettings.facebook_app_id }}" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="{{ page.url }}" />
+        <meta property="og:title" content="{{ page.title }}" />
+        <meta property="og:image" content="{{ social_image_url }}">
+    {% endwith %}
     <meta property="og:description" content="{{ page|social_text:current_site }}" />
     <meta property="og:site_name" content="{{ settings.utils.SocialMediaSettings.site_name }}" />
 {% endblock meta_tags %}
