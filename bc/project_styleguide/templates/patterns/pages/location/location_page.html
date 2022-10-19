@@ -11,6 +11,8 @@
             {% include "patterns/molecules/streamfield/blocks/image_block.html" with value=page %}
             {% endif %}
 
+            {% include_block page.additional_info %}
+
             {% include 'patterns/pages/location/includes/address.html' with address=page.address %}
             {% include 'patterns/pages/location/includes/contact.html' with contact=page.contact %}
 
