@@ -10,3 +10,4 @@ class CampaignPageFactory(wagtail_factories.PageFactory):
 
     intro = "Some intro text."
     hero_image = factory.SubFactory("bc.images.tests.fixtures.ImageFactory")
+    listing_summary = "Campaign Page"

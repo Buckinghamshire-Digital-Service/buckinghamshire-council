@@ -177,6 +177,13 @@ class LookupPage(BasePage):
     template = "patterns/pages/forms/lookup_page.html"
     landing_page_template = "patterns/pages/forms/lookup_page_landing.html"
     base_form_class = LookupPageForm
+    subpage_types = [
+        "standardpages.informationpage",
+        "inlineindex.inlineindex",
+        "location.locationindexpage",
+        "longform.longformpage",
+        "step_by_step.stepbysteppage",
+    ]
 
     form_heading = RichTextField("Heading", features=RICH_TEXT_FEATURES)
     input_label = models.CharField(max_length=255)

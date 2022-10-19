@@ -6,6 +6,7 @@ from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.models import Page
 from wagtail.search import index
 
+from ..standardpages.models import IndexPage
 from ..utils.models import BasePage
 
 
@@ -43,17 +44,10 @@ class FISBannerFields(models.Model):
         abstract = True
 
 
-class FamilyInformationHomePage(FISBannerFields, BasePage):
+class SubsiteHomePage(FISBannerFields, BasePage):
     template = "patterns/pages/home/home_page--fis.html"
 
-    subpage_types = [
-        "CategoryTypeOnePage",
-        "CategoryTypeTwoPage",
-        "standardpages.InformationPage",
-    ]
     parent_page_types = ["wagtailcore.Page"]
-
-    max_count = 2
 
     hero_image = models.ForeignKey(
         "images.CustomImage",
@@ -105,7 +99,7 @@ class FamilyInformationHomePage(FISBannerFields, BasePage):
             Page.objects.child_of(self)
             .filter(
                 content_type__in=ContentType.objects.get_for_models(
-                    CategoryTypeOnePage, CategoryTypeTwoPage
+                    CategoryTypeOnePage, CategoryTypeTwoPage, IndexPage
                 ).values()
             )
             .filter(show_in_menus=True)
@@ -117,12 +111,7 @@ class FamilyInformationHomePage(FISBannerFields, BasePage):
 
 
 class BaseCategoryPage(FISBannerFields, BasePage):
-    parent_page_types = ["FamilyInformationHomePage"]
-    subpage_types = [
-        "inlineindex.InlineIndex",
-        "standardpages.IndexPage",
-        "standardpages.InformationPage",
-    ]
+    parent_page_types = ["SubsiteHomePage"]
 
     content_panels = BasePage.content_panels + FISBannerFields.content_panels
     search_fields = BasePage.search_fields + FISBannerFields.search_fields

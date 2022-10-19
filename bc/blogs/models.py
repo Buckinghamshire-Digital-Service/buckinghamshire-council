@@ -318,6 +318,7 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
 
 class BlogAboutPage(BasePage):
     parent_page_types = ["blogs.bloghomepage"]
+    subpage_types = []
     max_count_per_parent = 1
 
     template = "patterns/pages/blogs/blog_about_page.html"
@@ -347,6 +348,7 @@ class BlogAboutPage(BasePage):
 
 class BlogPostPage(BasePage):
     parent_page_types = ["blogs.bloghomepage"]
+    subpage_types = []
     base_form_class = BlogPostPageForm
 
     template = "patterns/pages/blogs/blog_post_page.html"

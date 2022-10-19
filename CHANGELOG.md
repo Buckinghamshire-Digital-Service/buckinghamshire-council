@@ -2,8 +2,12 @@
 
 ## Unreleased
 
+- Rename Family Information Service Homepage to Subsite Homepage
+- Allow all subpage types to be created under Subsite Homepages
+- Display child index pages on rendered Subsite home pages
 - Synchronise docker-compose file version numbers
 - Add list_creatable_pages management command
+- Update parent_page_types and subpage_types attrs for many models
 
 ## 63.1 (2022-10-03)
 

@@ -149,7 +149,6 @@ class ListingFields(models.Model):
     )
     listing_summary = models.CharField(
         max_length=255,
-        blank=True,
         help_text="The text summary used when this page appears in listings. It's also "
         "used as the description for search engines if the "
         f"'{SEARCH_DESCRIPTION_LABEL}' field above is not defined.",

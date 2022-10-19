@@ -9,7 +9,7 @@ from bc.images.tests.fixtures import ImageFactory
 
 class FISPagesIncludedTest(TestCase):
     def setUp(self):
-        self.fis_homepage = fixtures.FamilyInformationHomePageFactory()
+        self.fis_homepage = fixtures.SubsiteHomePageFactory()
 
     def test_fis_page_in_search_results(self):
         image = ImageFactory()
