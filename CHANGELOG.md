@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 64.0 (2022-10-19)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/64.0...63.1>
 
 - Rename Family Information Service Homepage to Subsite Homepage
 - Allow all subpage types to be created under Subsite Homepages
@@ -8,6 +10,13 @@
 - Synchronise docker-compose file version numbers
 - Add list_creatable_pages management command
 - Update parent_page_types and subpage_types attrs for many models
+- Change functionality of listing title
+- Make listing summary mandatory
+- Remove draft blog pages from listing
+- Modify location index and location page to have additional content
+- Remove child policy pages from search
+- Show child index pages as part of a larger section in search
+- Add default social image for pages
 
 ## 63.1 (2022-10-03)
 
