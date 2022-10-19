@@ -29,6 +29,7 @@ import 'whatwg-fetch';
 
 import '../sass/main.scss';
 import SafeSpace from './components/safe-space';
+import MapListSwitcher from './components/map-list-switcher';
 
 foreachPolyfill();
 closestPolyfill();
@@ -142,6 +143,12 @@ document.addEventListener('DOMContentLoaded', () => {
         ContentsScroller.selector(),
     )) {
         new ContentsScroller(contentsComponent);
+    }
+
+    for (const element of document.querySelectorAll(
+        MapListSwitcher.selector(),
+    )) {
+        new MapListSwitcher(element);
     }
 
     // Test react - add a div with a data attribute of `data-test-react` to test

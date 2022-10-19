@@ -26,8 +26,12 @@ class LocationIndexPage(BasePage):
     subpage_types = ["location.LocationPage"]
 
     body = RichTextField()
+    additional_info = StreamField(StoryBlock(), use_json_field=True, blank=True)
 
-    content_panels = BasePage.content_panels + [RichTextFieldPanel("body")]
+    content_panels = BasePage.content_panels + [
+        RichTextFieldPanel("body"),
+        FieldPanel("additional_info"),
+    ]
 
     @cached_property
     def child_pages(self):
@@ -55,6 +59,7 @@ class LocationPageRelatedPage(RelatedPage):
 
 class LocationPage(BasePage):
     template = "patterns/pages/location/location_page.html"
+    subpage_types = []
 
     image = models.ForeignKey(
         "images.CustomImage",
@@ -62,6 +67,16 @@ class LocationPage(BasePage):
         related_name="+",
         on_delete=models.SET_NULL,
         blank=True,
+    )
+
+    additional_info = StreamField(
+        StoryBlock(),
+        use_json_field=True,
+        blank=True,
+        help_text=(
+            "Additional information about this location like opening times, facilities, etc. "
+            "This will appear above the map in the template."
+        ),
     )
 
     map_location = models.TextField(blank=True)
@@ -85,10 +100,15 @@ class LocationPage(BasePage):
     )
     email_address = models.EmailField(blank=True)
 
-    body = StreamField(StoryBlock(), use_json_field=True)
+    body = StreamField(
+        StoryBlock(),
+        use_json_field=True,
+        help_text="Generic body content. This will appear after the map in the template.",
+    )
 
     content_panels = BasePage.content_panels + [
         FieldPanel("image"),
+        FieldPanel("additional_info"),
         MultiFieldPanel(
             [
                 # The GeoAddressPanel needs to come before the GoogleMapsPanel.

@@ -64,6 +64,8 @@ class ApteanRespondCaseFormPage(RoutablePageMixin, BasePage):
     template = "patterns/pages/cases/form_page_initial.html"
     form_page_template = "patterns/pages/cases/form_page.html"
     landing_page_template = "patterns/pages/cases/form_page_landing.html"
+    parent_page_types = []
+    subpage_types = []
 
     form = models.CharField(max_length=255, choices=APTEAN_FORM_CHOICES)
 

@@ -7,6 +7,7 @@ class HomePageFactory(factory.django.DjangoModelFactory):
 
     title = factory.Sequence(lambda n: f"Homepage {n}")
     strapline = "Welcome to Buckinghamshire"
+    listing_summary = "Welcome to Buckinghamshire"
     hero_image = factory.SubFactory("bc.images.tests.fixtures.ImageFactory")
     logo = factory.SubFactory("bc.images.tests.fixtures.ImageFactory")
 
