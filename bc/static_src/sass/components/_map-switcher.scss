@@ -1,0 +1,12 @@
+.map-switcher {
+    &__controls {
+        display: flex;
+        column-gap: 15px;
+    }
+
+    &__control {
+        &.is-active {
+            text-decoration: none;
+        }
+    }
+}

@@ -7,6 +7,7 @@ class IndexPageFactory(wagtail_factories.PageFactory):
         model = "standardpages.IndexPage"
 
     title = factory.Sequence(lambda n: f"Section Index {n}")
+    listing_summary = "Section Index"
 
 
 class InformationPageFactory(wagtail_factories.PageFactory):
@@ -14,3 +15,4 @@ class InformationPageFactory(wagtail_factories.PageFactory):
         model = "standardpages.InformationPage"
 
     title = factory.Sequence(lambda n: f"Information Index {n}")
+    listing_summary = "Information Page"

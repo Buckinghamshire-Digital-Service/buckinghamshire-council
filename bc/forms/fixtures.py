@@ -14,6 +14,7 @@ class LookupPageFactory(factory.django.DjangoModelFactory):
         model = "forms.LookupPage"
 
     title = factory.Sequence(lambda n: f"Lookup Response Page")
+    listing_summary = "Lookup Response Page"
     form_heading = "Look something up"
     input_label = "Submit this query"
     input_help_text = "This tells you to submit this query"

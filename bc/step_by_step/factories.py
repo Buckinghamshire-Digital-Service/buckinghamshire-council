@@ -6,3 +6,4 @@ class StepByStepPageFactory(wagtail_factories.PageFactory):
         model = "step_by_step.StepByStepPage"
 
     introduction = "<p>Introduction</p>"
+    listing_summary = "Step by step page"
