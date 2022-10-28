@@ -87,7 +87,7 @@ class NewsIndex(BasePage):
     template = "patterns/pages/news/news_index.html"
 
     subpage_types = ["NewsPage"]
-    parent_page_types = ["home.HomePage"]
+    parent_page_types = ["home.HomePage", "family_information.SubsiteHomePage"]
 
     @cached_property
     def news_pages(self):
