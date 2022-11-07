@@ -49,12 +49,14 @@ class FISBannerFields(models.Model):
         super().clean()
         # either all are filled, or none are filled
         if (
-            self.banner_title
+            self.banner_image
+            or self.banner_title
             or self.banner_description
             or self.banner_link
             or self.banner_link_text
         ) and not (
-            self.banner_title
+            self.banner_image
+            and self.banner_title
             and self.banner_description
             and self.banner_link
             and self.banner_link_text

@@ -14,7 +14,7 @@ class FISPagesIncludedTest(TestCase):
     def test_fis_page_in_search_results(self):
         image = ImageFactory()
         hit_page = self.fis_homepage.add_child(
-            instance=fixtures.CategoryTypeOnePageFactory.build(
+            instance=fixtures.CategoryPageFactory.build(
                 title="screwdrivers",
                 banner_image=image,
             )
