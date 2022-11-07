@@ -11,7 +11,9 @@
             <p>{{ page.introduction }}</p>
         {% endif %}
 
-        <div class="wrapper wrapper--desktop-reverse">
+        {% if page.display_banner_at_top %}
+            <div class="wrapper wrapper--desktop-reverse">
+        {% endif %}
 
             <div
                 aria-label="Subpages"
@@ -31,8 +33,10 @@
             </div>
 
             {% include "patterns/molecules/directory-banner/directory-banner.html" %}
-        </div>
+        {% if page.display_banner_at_top %}
+            </div>
+        {% endif %}
     </div>
 
-    {% include "patterns/molecules/search-prompt/search-prompt--fis.html" %}
+    {% include "patterns/molecules/search-prompt/search-prompt--fis.html" with search_prompt_text=page.get_parent.specific.search_prompt_text %}
 {% endblock %}

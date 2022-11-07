@@ -1,0 +1,38 @@
+{% extends base_page_template %}
+{% load wagtailcore_tags wagtailimages_tags navigation_tags static %}
+
+{% block body_class %}template-fis-category-regular {{ block.super }}{% endblock %}
+
+{% block content %}
+    <div>
+        <h1 class="heading heading--xxl">{{ page.title }}</h1>
+
+        {% if page.introduction %}
+            <p>{{ page.introduction }}</p>
+        {% endif %}
+
+        <div class="wrapper wrapper--desktop-reverse">
+
+            <div
+                aria-label="Subpages"
+                class="grid grid--fis-index grid--index grid--thirds"
+                data-height-equalizer
+            >
+                {% for subpage in page.child_pages %}
+                    <a class="card" href="{% pageurl subpage %}" data-height-equalizer-child>
+                        <h2 class="card__title heading">
+                            {% firstof subpage.listing_title subpage.title %}
+                        </h2>
+                        {% if subpage.listing_summary %}
+                            <p class="card__summary">{{ subpage.listing_summary }}</p>
+                        {% endif %}
+                    </a>
+                {% endfor %}
+            </div>
+
+            {% include "patterns/molecules/directory-banner/directory-banner.html" %}
+        </div>
+    </div>
+
+    {% include "patterns/molecules/search-prompt/search-prompt--fis.html" with search_prompt_text=page.get_parent.specific.search_prompt_text %}
+{% endblock %}
