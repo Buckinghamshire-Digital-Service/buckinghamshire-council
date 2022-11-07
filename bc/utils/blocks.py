@@ -274,6 +274,15 @@ class BaseChartBlock(TableBlock):
         template = "patterns/molecules/streamfield/blocks/chart_block.html"
 
 
+class WasteWizardSnippetBlock(blocks.StaticBlock):
+    class Meta:
+        admin_text = "This will be replaced by the Waste Wizard widget"
+        icon = "placeholder"
+        template = (
+            "patterns/molecules/streamfield/blocks/waste_wizard_snippet_block.html"
+        )
+
+
 class BarChartBlock(BaseChartBlock):
     @cached_property
     def field(self):
@@ -470,11 +479,13 @@ class BaseStoryBlock(blocks.StreamBlock):
     table = CaptionedTableBlock(group="Table")
     button = ButtonBlock()
     highlight = HighlightBlock()
+    waste_wizard = WasteWizardSnippetBlock()
     inset_text = InsetTextBlock()
 
     class Meta:
         abstract = True
         template = "patterns/molecules/streamfield/stream_block.html"
+        block_counts = {"waste_wizard": {"max_num": 1}}
 
 
 class NestedStoryBlock(BaseStoryBlock):
