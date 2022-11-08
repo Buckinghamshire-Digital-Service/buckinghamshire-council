@@ -21,7 +21,9 @@
             {% endif %}
             {% include 'patterns/molecules/intro-text/intro-text.html' %}
 
-            {% include_block page.body %}
+            <div class="section--inline-index">
+                {% include_block page.body %}
+            </div>
             <div class="contents-list__scroller" data-contents-scroller>
                 <a href="#contents-list" class="back-to-contents">
                     {% include "patterns/atoms/icons/icon.html" with name="arrow" classname="icon--stroke back-to-contents__icon" %}
