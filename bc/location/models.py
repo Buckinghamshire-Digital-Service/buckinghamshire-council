@@ -25,7 +25,7 @@ class LocationIndexPage(BasePage):
     template = "patterns/pages/location/location_index_page.html"
     subpage_types = ["location.LocationPage"]
 
-    body = RichTextField()
+    body = RichTextField(editor="with_h2")
     additional_info = StreamField(StoryBlock(), use_json_field=True, blank=True)
 
     content_panels = BasePage.content_panels + [
