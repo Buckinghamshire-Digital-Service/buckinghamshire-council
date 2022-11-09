@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
             model_name="subsitehomepage",
             name="search_prompt_text",
             field=models.TextField(
-                blank=True, help_text="Text to promppt user to search"
+                blank=True, help_text="Text to prompt user to search"
             ),
         ),
     ]

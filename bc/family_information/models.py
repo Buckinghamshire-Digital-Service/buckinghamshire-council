@@ -67,6 +67,14 @@ class FISBannerFields(models.Model):
                 }
             )
 
+    def has_banner_fields(self):
+        return (
+            self.banner_image
+            and self.banner_title
+            and self.banner_description
+            and self.banner_link
+        )
+
 
 class SubsiteHomePage(FISBannerFields, BasePage):
     template = "patterns/pages/home/home_page--fis.html"
@@ -93,7 +101,7 @@ class SubsiteHomePage(FISBannerFields, BasePage):
     )
 
     search_prompt_text = models.TextField(
-        blank=True, help_text="Text to promppt user to search"
+        blank=True, help_text="Text to prompt user to search"
     )
 
     search_fields = (

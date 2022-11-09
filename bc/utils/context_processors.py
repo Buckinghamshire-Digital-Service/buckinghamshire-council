@@ -2,7 +2,7 @@ from django.conf import settings
 
 from wagtail.models import Site
 
-from bc.family_information.utils import is_family_information_site
+from bc.family_information.utils import is_subsite
 from bc.recruitment.utils import is_recruitment_site
 from bc.utils.constants import (
     BASE_PAGE_TEMPLATE,
@@ -13,7 +13,7 @@ from bc.utils.constants import (
 
 def global_vars(request):
     site = Site.find_for_request(request)
-    if is_family_information_site(site):
+    if is_subsite(site):
         base_page_template = BASE_PAGE_TEMPLATE_FAMILY_INFORMATION
     elif is_recruitment_site(site):
         base_page_template = BASE_PAGE_TEMPLATE_RECRUITMENT
