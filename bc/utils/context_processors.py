@@ -20,6 +20,10 @@ def global_vars(request):
     else:
         base_page_template = BASE_PAGE_TEMPLATE
 
+    is_pensions_site = (
+        base_page_template == BASE_PAGE_TEMPLATE_FAMILY_INFORMATION
+    ) and site.root_page.specific.is_pensions_site
+
     return {
         "GOOGLE_TAG_MANAGER_ID": getattr(settings, "GOOGLE_TAG_MANAGER_ID", None),
         "YANDEX_VERIFICATION_STRING": getattr(
@@ -27,6 +31,7 @@ def global_vars(request):
         ),
         "FATHOM_SITE_ID": getattr(settings, "FATHOM_SITE_ID", None),
         "base_page_template": base_page_template,
+        "is_pensions_site": is_pensions_site,
         "COOKIE_DOMAIN": getattr(settings, "COOKIE_DOMAIN", None),
         "NONINDEXED_HOSTS": getattr(settings, "NONINDEXED_HOSTS", []),
         "GOOGLE_MAPS_V3_APIKEY": getattr(settings, "GOOGLE_MAPS_V3_APIKEY", ""),

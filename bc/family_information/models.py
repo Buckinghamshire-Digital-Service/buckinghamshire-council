@@ -182,3 +182,9 @@ class CategoryPage(BaseCategoryPage):
         + [FieldPanel("display_banner_at_top")]
         + FISBannerFields.content_panels
     )
+
+    def get_template(self, request, *args, **kwargs):
+        if self.display_banner_at_top:
+            return "patterns/pages/standardpages/index_page--fis-cat2.html"
+        else:
+            return "patterns/pages/standardpages/index_page--fis-cat1.html"
