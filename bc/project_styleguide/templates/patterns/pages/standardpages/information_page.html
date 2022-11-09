@@ -21,7 +21,7 @@
             {% endif %}
             {% include 'patterns/molecules/intro-text/intro-text.html' %}
 
-            <div class="section--inline-index">
+            <div {% if page.display_contents and page.h2_blocks %}class="section--inline-index"{% endif %}>
                 {% include_block page.body %}
             </div>
             <div class="contents-list__scroller" data-contents-scroller>
