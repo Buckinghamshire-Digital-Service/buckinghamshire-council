@@ -1,6 +1,6 @@
 # Release History
 
-## Unreleased 
+## Unreleased
 
 - Change Homepage FieldPanels to MultiFieldPanels
 
