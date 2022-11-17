@@ -1,5 +1,5 @@
 {% load wagtailcore_tags %}
-<section class="cookie wrapper wrapper--large" aria-label="cookie banner" data-cookie-message>
+<section class="cookie wrapper wrapper--large" aria-label="cookie banner" data-cookie-message {% if page.rc_consent_required %}data-rc-consent-required{% endif %}>
     <div class="cookie__container">
         <div class="cookie__message">
             <h2 class="cookie__heading heading heading--l">This site uses cookies</h2>
@@ -12,7 +12,6 @@
                 <button class="cookie__decline button button--basic" data-cookie-decline>
                     Reject additional cookies
                 </button>
-    
                 {% with settings.utils.ImportantPages.cookie_information_page as cookie_page %}
                 {% if cookie_page %}
                 <a class="cookie__view" href="{% pageurl cookie_page %}">View cookies</a>

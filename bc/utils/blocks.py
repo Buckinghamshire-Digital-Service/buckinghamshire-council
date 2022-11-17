@@ -282,6 +282,13 @@ class WasteWizardSnippetBlock(blocks.StaticBlock):
             "patterns/molecules/streamfield/blocks/waste_wizard_snippet_block.html"
         )
 
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context)
+        context["has_rc_consent"] = parent_context["page"].has_rc_consent(
+            parent_context["request"]
+        )
+        return context
+
 
 class BarChartBlock(BaseChartBlock):
     @cached_property
@@ -479,13 +486,11 @@ class BaseStoryBlock(blocks.StreamBlock):
     table = CaptionedTableBlock(group="Table")
     button = ButtonBlock()
     highlight = HighlightBlock()
-    waste_wizard = WasteWizardSnippetBlock()
     inset_text = InsetTextBlock()
 
     class Meta:
         abstract = True
         template = "patterns/molecules/streamfield/stream_block.html"
-        block_counts = {"waste_wizard": {"max_num": 1}}
 
 
 class NestedStoryBlock(BaseStoryBlock):
