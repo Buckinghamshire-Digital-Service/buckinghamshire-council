@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased 
+
+- Change Homepage FieldPanels to MultiFieldPanels
+
 ## 64.0 (2022-10-19)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/64.0...63.1>
