@@ -21,6 +21,11 @@
         border-top: 1px solid $color--grey-medium;
         padding-top: $grid--small;
 
+        // first child of section should not have a top border
+        > *:first-child {
+            margin-top: 0;
+        }
+
         // Long-form page adjustments
 
         .template-longform & {
