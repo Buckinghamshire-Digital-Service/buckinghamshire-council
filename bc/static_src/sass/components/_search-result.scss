@@ -13,6 +13,11 @@
         &--child-page {
             @include font-size(xxs);
             margin: 0;
+            display: none;
+
+            @include media-query(px550) {
+                display: block;
+            }
         }
     }
 
