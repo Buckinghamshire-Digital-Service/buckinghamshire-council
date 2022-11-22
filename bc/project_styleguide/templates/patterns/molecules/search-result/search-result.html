@@ -21,6 +21,9 @@
     {% if result.is_inline_index %}
     <div class="link-block link-block--inlineindex">
         <ul class="link-block__list">
+            <li class="link-block__list-item">
+                <a href="{% pageurl result %}" class="link-block__link link--alt">{{ result.subtitle }}</a>
+            </li>
             {% for child in result.get_children %}
                 {% with child.specific as page %}
                 <li class="link-block__list-item">
