@@ -1,8 +1,18 @@
 # Release History
 
-## Unreleased
+## 65.0 (2022-11-29)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/65.0...64.0>
 
 - Change Homepage FieldPanels to MultiFieldPanels
+- Add EventIndexPage and NewsIndex as child of SubsiteHomePage
+- Display child pages of Inlineindex pages in search on mobile devices
+- Add line between contents and body in InformationPage
+- Allow alert page to be null, and add search fields for alert modeladmin
+- Add RedirectPage type
+- Add WasteWizardPage type and WasteWizardSnippet
+- Add h2 to body rich text field
+- Make banner fields optional, and editable search prompt text, and new category page with banner position setting
 
 ## 64.0 (2022-10-19)
 
