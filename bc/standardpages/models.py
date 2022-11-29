@@ -1,5 +1,6 @@
 from urllib.parse import unquote
 
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.functional import cached_property
 
@@ -130,3 +131,41 @@ class IndexPage(BasePage):
         context["ordinary_pages"] = self.ordinary_pages
 
         return context
+
+
+class RedirectPage(BasePage):
+    internal_page = models.ForeignKey(
+        "wagtailcore.Page",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+    external_url = models.URLField(blank=True)
+
+    content_panels = BasePage.content_panels + [
+        FieldPanel("internal_page"),
+        FieldPanel("external_url"),
+    ]
+
+    def clean(self):
+        super().clean()
+        # only one of both internal and external links can't be set
+        if self.internal_page and self.external_url:
+            raise ValidationError(
+                {
+                    "internal_page": "Redirect page can not have both internal and external links set."
+                }
+            )
+        if not self.internal_page and not self.external_url:
+            raise ValidationError(
+                {
+                    "internal_page": "Redirect page must have either an internal or external link set."
+                }
+            )
+
+    def relative_url(self, current_site, request=None):
+        if self.internal_page:
+            return self.internal_page.relative_url(current_site, request)
+        else:
+            return self.external_url
