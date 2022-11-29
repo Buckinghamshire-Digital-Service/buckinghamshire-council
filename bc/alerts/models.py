@@ -48,7 +48,11 @@ class Alert(models.Model):
         choices=SHOW_ON_CHOICES,
     )
     page = models.ForeignKey(
-        "wagtailcore.Page", on_delete=models.CASCADE, related_name="alerts"
+        "wagtailcore.Page",
+        on_delete=models.SET_NULL,
+        related_name="alerts",
+        null=True,
+        blank=True,
     )
 
     panels = [
