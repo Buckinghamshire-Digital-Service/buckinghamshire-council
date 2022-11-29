@@ -31,10 +31,11 @@
                 </a>
             </div>
         </div>
-
+        {% if not page.is_waste_wizard_page %}
         <div class="sidebar">
             {% include "patterns/molecules/navigation/sidebar-section.html" with related_pages=page.live_related_stepbysteppages sidebar_title="Part of" classes="sidebar--part-of" %}
             {% include "patterns/molecules/navigation/sidebar-section.html" with related_pages=page.live_related_pages %}
         </div>
+        {% endif %}
     </div>
 {% endblock %}

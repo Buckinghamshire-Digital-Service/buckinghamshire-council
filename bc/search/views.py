@@ -26,6 +26,7 @@ from bc.recruitment.utils import (
     get_job_search_results,
     is_recruitment_site,
 )
+from bc.standardpages.models import RedirectPage
 from bc.utils.cache import get_default_cache_control_kwargs
 from bc.utils.constants import ALERT_SUBSCRIPTION_STATUSES
 from bc.utils.models import SystemMessagesSettings
@@ -114,6 +115,7 @@ class SearchView(View):
                     BlogPostPage,
                     InlineIndexChild,
                     LongformChapterPage,
+                    RedirectPage,
                 ]
 
                 for page_to_exclude in excluded_page_types:

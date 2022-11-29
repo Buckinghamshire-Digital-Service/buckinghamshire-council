@@ -274,6 +274,22 @@ class BaseChartBlock(TableBlock):
         template = "patterns/molecules/streamfield/blocks/chart_block.html"
 
 
+class WasteWizardSnippetBlock(blocks.StaticBlock):
+    class Meta:
+        admin_text = "This will be replaced by the Waste Wizard widget"
+        icon = "placeholder"
+        template = (
+            "patterns/molecules/streamfield/blocks/waste_wizard_snippet_block.html"
+        )
+
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context)
+        context["has_rc_consent"] = parent_context["page"].has_rc_consent(
+            parent_context["request"]
+        )
+        return context
+
+
 class BarChartBlock(BaseChartBlock):
     @cached_property
     def field(self):
