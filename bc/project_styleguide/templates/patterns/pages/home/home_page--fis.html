@@ -57,6 +57,6 @@
 
     {% include "patterns/molecules/cta/call_to_action.html" with call_to_action=page.call_to_action %}
 
-    {% include "patterns/molecules/search-prompt/search-prompt--fis.html" %}
+    {% include "patterns/molecules/search-prompt/search-prompt--fis.html" with search_prompt_text=page.search_prompt_text %}
 
 {% endblock %}

@@ -2,6 +2,8 @@
 
 {% load alert_tags static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags %}
 
+{% wagtail_site as current_site %}
+
 {% block meta_tags %}
     {% if GOOGLE_TAG_MANAGER_ID %}
         {# To enable GTM code you need to specify GOOGLE_TAG_MANAGER_ID in Django settings #}
@@ -15,8 +17,6 @@
     {% if YANDEX_VERIFICATION_STRING %}
         <meta name="yandex-verification" content="{{ YANDEX_VERIFICATION_STRING }}" />
     {% endif %}
-
-    {% wagtail_site as current_site %}
 
     {# favicons #}
     {% comment %}
@@ -107,6 +107,7 @@
     {% include "patterns/molecules/cookie-message/cookie-message.html" %}
 
     {% include "patterns/organisms/header/header-fis.html" %}
+
 {% endblock header %}
 
 {% block alerts %}
