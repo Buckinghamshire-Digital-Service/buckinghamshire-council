@@ -9,6 +9,10 @@
     &__list {
         display: none;
 
+        #{$root}--inlineindex & {
+            display: block;
+        }
+
         @include media-query(px550) {
             display: block;
         }

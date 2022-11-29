@@ -153,7 +153,7 @@ class EventIndexPage(BasePage):
     template = "patterns/pages/events/event_index_page.html"
 
     subpage_types = ["EventPage"]
-    parent_page_types = ["home.HomePage"]
+    parent_page_types = ["home.HomePage", "family_information.SubsiteHomePage"]
 
     def _annotated_descendant_events(self):
         return (

@@ -34,5 +34,5 @@
         </div>
     </div>
 
-    {% include "patterns/molecules/search-prompt/search-prompt--fis.html" %}
+    {% include "patterns/molecules/search-prompt/search-prompt--fis.html" with search_prompt_text=page.get_parent.specific.search_prompt_text %}
 {% endblock %}

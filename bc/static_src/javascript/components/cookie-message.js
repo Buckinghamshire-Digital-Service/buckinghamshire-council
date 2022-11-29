@@ -6,12 +6,16 @@ class CookieWarning {
     }
 
     constructor(node) {
+        if (!node) {
+            return;
+        }
+        this.rcConsentRequired = node.hasAttribute('data-rc-consent-required');
         this.acceptButton = document.querySelector('[data-cookie-accept]');
         this.declineButton = document.querySelector('[data-cookie-decline]');
         this.messageContainer = node;
         this.cookieDomain = window.COOKIE_DOMAIN;
         this.cookieName = 'client-cookie';
-        this.acceptValue = 'agree to cookies';
+        this.acceptValue = 'agree to cookies, agree to rc';
         this.declineValue = 'decline cookies';
         this.cookieDuration = 365;
         this.activeClass = 'active';
@@ -26,10 +30,25 @@ class CookieWarning {
             return;
         }
 
-        // If cookie doesn't exists
-        if (!Cookies.get(this.cookieName)) {
+        // If consent is required and not given, show the cookie message
+        if (!this.hasConsent()) {
             this.messageContainer.classList.add(this.activeClass);
         }
+    }
+
+    hasConsent() {
+        const cookieValue = Cookies.get(this.cookieName) || '';
+        const hasGeneralCookieConsent = cookieValue.includes(
+            'agree to cookies',
+        );
+        const hasRCCookieConsent = this.rcConsentRequired
+            ? cookieValue.includes('agree to rc')
+            : true;
+
+        if (hasGeneralCookieConsent && hasRCCookieConsent) {
+            return true;
+        }
+        return false;
     }
 
     applyCookie(event) {
@@ -39,10 +58,17 @@ class CookieWarning {
         this.messageContainer.classList.remove(this.activeClass);
         this.messageContainer.classList.add(this.inactiveClass);
         // Set cookie
-        Cookies.set(this.cookieName, this.acceptValue, {
-            domain: this.cookieDomain,
-            expires: this.cookieDuration,
-        });
+        Cookies.set(
+            this.cookieName,
+            this.rcConsentRequired ? this.acceptValue : 'agree to cookies',
+            {
+                domain: this.cookieDomain,
+                expires: this.cookieDuration,
+            },
+        );
+        if (this.rcConsentRequired) {
+            window.location.reload();
+        }
     }
 
     declineCookie(event) {

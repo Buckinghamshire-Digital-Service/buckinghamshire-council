@@ -1,6 +1,7 @@
 {% load wagtailimages_tags %}
 
 {# All fields required #}
+{% if page.has_banner_fields %}
 <div class="directory-banner{% if classes %} {{ classes }}{% endif %}">
     <div class="directory-banner__text-container">
         <div class="directory-banner__text-content">
@@ -24,3 +25,4 @@
     {% image page.banner_image fill-700x250 as desktop_image %}
     <div class="directory-banner__image" style="background-image:url({{desktop_image.url}})"></div>
 </div>
+{% endif %}

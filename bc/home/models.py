@@ -4,7 +4,7 @@ from django.db import models
 from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
 
-from wagtail.admin.panels import FieldPanel
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.search import index
 
 from ..events.models import EventIndexPage
@@ -46,9 +46,14 @@ class HomePage(BasePage):
     search_fields = BasePage.search_fields + [index.SearchField("strapline")]
 
     content_panels = BasePage.content_panels + [
-        FieldPanel("strapline"),
-        FieldPanel("hero_image"),
-        FieldPanel("call_to_action"),
+        MultiFieldPanel(
+            [
+                FieldPanel("strapline"),
+                FieldPanel("hero_image"),
+                FieldPanel("call_to_action"),
+            ],
+            heading="Hero",
+        ),
     ]
 
     promote_panels = BasePage.promote_panels + [

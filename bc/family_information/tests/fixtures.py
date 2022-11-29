@@ -15,13 +15,14 @@ class SubsiteHomePageFactory(wagtail_factories.PageFactory):
     banner_title = "Banner title"
     banner_description = "Banner description"
     banner_link = "https://example.com"
+    banner_link_text = "Banner link text"
 
     hero_image = factory.SubFactory("bc.images.tests.fixtures.ImageFactory")
 
 
-class CategoryTypeOnePageFactory(wagtail_factories.PageFactory):
+class CategoryPageFactory(wagtail_factories.PageFactory):
     class Meta:
-        model = models.CategoryTypeOnePage
+        model = models.CategoryPage
 
     title = factory.Sequence(lambda n: f"Category Type One Page {n}")
     listing_summary = "Category Type One Page"
@@ -30,3 +31,4 @@ class CategoryTypeOnePageFactory(wagtail_factories.PageFactory):
     banner_title = "Banner title"
     banner_description = "Banner description"
     banner_link = "https://example.com"
+    banner_link_text = "Banner link text"

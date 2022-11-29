@@ -39,6 +39,10 @@
         .template-searchresults & {
             display: none;
         }
+
+        #{$root}--fis & {
+            width: auto;
+        }
     }
 
     &--fis {

@@ -1,4 +1,5 @@
 from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.functional import cached_property
 
@@ -15,11 +16,12 @@ class FISBannerFields(models.Model):
         "images.CustomImage",
         null=True,
         related_name="+",
+        blank=True,
         on_delete=models.SET_NULL,
     )
-    banner_title = models.TextField()
-    banner_description = models.TextField()
-    banner_link = models.URLField()
+    banner_title = models.TextField(blank=True)
+    banner_description = models.TextField(blank=True)
+    banner_link = models.URLField(blank=True)
     banner_link_text = models.CharField(max_length=100, blank=True)
 
     search_fields = [
@@ -43,11 +45,43 @@ class FISBannerFields(models.Model):
     class Meta:
         abstract = True
 
+    def clean(self):
+        super().clean()
+        # either all are filled, or none are filled
+        if (
+            self.banner_image
+            or self.banner_title
+            or self.banner_description
+            or self.banner_link
+            or self.banner_link_text
+        ) and not (
+            self.banner_image
+            and self.banner_title
+            and self.banner_description
+            and self.banner_link
+            and self.banner_link_text
+        ):
+            raise ValidationError(
+                {
+                    "banner_image": "Either all or none of the banner fields must be filled"
+                }
+            )
+
+    def has_banner_fields(self):
+        return (
+            self.banner_image
+            and self.banner_title
+            and self.banner_description
+            and self.banner_link
+        )
+
 
 class SubsiteHomePage(FISBannerFields, BasePage):
     template = "patterns/pages/home/home_page--fis.html"
 
     parent_page_types = ["wagtailcore.Page"]
+
+    is_pensions_site = models.BooleanField(default=False)
 
     hero_image = models.ForeignKey(
         "images.CustomImage",
@@ -66,6 +100,10 @@ class SubsiteHomePage(FISBannerFields, BasePage):
         related_name="+",
     )
 
+    search_prompt_text = models.TextField(
+        blank=True, help_text="Text to prompt user to search"
+    )
+
     search_fields = (
         BasePage.search_fields
         + FISBannerFields.search_fields
@@ -75,6 +113,7 @@ class SubsiteHomePage(FISBannerFields, BasePage):
     content_panels = (
         BasePage.content_panels
         + [
+            FieldPanel("is_pensions_site"),
             MultiFieldPanel(
                 [
                     FieldPanel("hero_image"),
@@ -85,7 +124,7 @@ class SubsiteHomePage(FISBannerFields, BasePage):
             ),
         ]
         + FISBannerFields.content_panels
-        + [FieldPanel("call_to_action")]
+        + [FieldPanel("search_prompt_text"), FieldPanel("call_to_action")]
     )
 
     @cached_property
@@ -99,7 +138,7 @@ class SubsiteHomePage(FISBannerFields, BasePage):
             Page.objects.child_of(self)
             .filter(
                 content_type__in=ContentType.objects.get_for_models(
-                    CategoryTypeOnePage, CategoryTypeTwoPage, IndexPage
+                    CategoryPage, CategoryTypeOnePage, CategoryTypeTwoPage, IndexPage
                 ).values()
             )
             .filter(show_in_menus=True)
@@ -125,8 +164,27 @@ class BaseCategoryPage(FISBannerFields, BasePage):
 
 
 class CategoryTypeOnePage(BaseCategoryPage):
-    template = "patterns/pages/standardpages/index_page--fis-send.html"
+    template = "patterns/pages/standardpages/index_page--fis-cat1.html"
+    is_creatable = False
 
 
 class CategoryTypeTwoPage(BaseCategoryPage):
-    template = "patterns/pages/standardpages/index_page--fis.html"
+    template = "patterns/pages/standardpages/index_page--fis-cat2.html"
+    is_creatable = False
+
+
+class CategoryPage(BaseCategoryPage):
+    template = "patterns/pages/standardpages/index_page--fis-cat.html"
+    display_banner_at_top = models.BooleanField(default=False)
+
+    content_panels = (
+        BasePage.content_panels
+        + [FieldPanel("display_banner_at_top")]
+        + FISBannerFields.content_panels
+    )
+
+    def get_template(self, request, *args, **kwargs):
+        if self.display_banner_at_top:
+            return "patterns/pages/standardpages/index_page--fis-cat2.html"
+        else:
+            return "patterns/pages/standardpages/index_page--fis-cat1.html"
