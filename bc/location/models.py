@@ -3,13 +3,7 @@ from django.db.models.expressions import Case, When
 from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
-from wagtail.admin.panels import (
-    FieldPanel,
-    FieldRowPanel,
-    InlinePanel,
-    MultiFieldPanel,
-    RichTextFieldPanel,
-)
+from wagtail.admin.panels import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel
 from wagtail.fields import RichTextField, StreamField
 from wagtail.rich_text import expand_db_html
 
@@ -29,7 +23,7 @@ class LocationIndexPage(BasePage):
     additional_info = StreamField(StoryBlock(), use_json_field=True, blank=True)
 
     content_panels = BasePage.content_panels + [
-        RichTextFieldPanel("body"),
+        FieldPanel("body"),
         FieldPanel("additional_info"),
     ]
 
@@ -116,7 +110,7 @@ class LocationPage(BasePage):
                 GoogleMapsPanel(
                     "latlng", address_field="map_location", hide_latlng=True
                 ),
-                RichTextFieldPanel("map_info_text"),
+                FieldPanel("map_info_text"),
             ],
             "Map",
         ),
