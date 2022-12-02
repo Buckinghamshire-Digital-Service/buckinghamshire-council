@@ -8,7 +8,9 @@
         <title>{% block title_prefix %}{% if current_site and page.pk == current_site.root_page.pk and current_site.site_name %}{{ current_site.site_name }} | {% endif %}{% endblock %}{% block title %}{% firstof page.seo_title page.title %}{% endblock %}{% block title_suffix %}{% if current_site and page.pk != current_site.root_page.pk and current_site.site_name %} | {{ current_site.site_name }}{% endif %}{% endblock %}</title>
         <meta name="description" content="{% if page.search_description %}{{ page.search_description }}{% else %}{{ page.listing_summary }}{% endif %}" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+        {% if request.in_preview_panel %}
+            <base target="_blank">
+        {% endif %}
         {% comment %}
             Set "noindex" if the site is not being requested on a configured
             domain, or if the domain is explicitly marked thus, to prevent
