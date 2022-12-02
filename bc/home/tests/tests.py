@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.test import TestCase
 
 from wagtail.models import Page
-from wagtail.test.utils import WagtailPageTests
+from wagtail.test.utils import WagtailPageTestCase
 
 from bc.standardpages.tests.fixtures import IndexPageFactory, InformationPageFactory
 
@@ -11,7 +11,7 @@ from ..models import HomePage
 from .fixtures import HomePageFactory
 
 
-class HomepageWagtailPageTests(WagtailPageTests):
+class HomepageWagtailPageTestCase(WagtailPageTestCase):
     """
     Test page creation and infrastructure
     """
