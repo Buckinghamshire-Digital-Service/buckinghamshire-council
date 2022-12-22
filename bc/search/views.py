@@ -2,7 +2,7 @@ from itertools import chain
 
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.db.models import Case, CharField, OuterRef, Subquery, When
+from django.db.models import Case, CharField, OuterRef, Q, Subquery, When
 from django.http import QueryDict
 from django.template.response import TemplateResponse
 from django.utils.cache import add_never_cache_headers, patch_cache_control
@@ -17,6 +17,7 @@ from wagtail.search.models import Query
 
 from bc.blogs.models import BlogGlobalHomePage, BlogHomePage, BlogPostPage
 from bc.campaigns.models import CampaignIndexPage, CampaignPage
+from bc.family_information.models import SubsiteHomePage
 from bc.inlineindex.models import InlineIndexChild
 from bc.longform.models import LongformChapterPage
 from bc.recruitment.forms import SearchAlertSubscriptionForm
@@ -83,9 +84,37 @@ class SearchView(View):
                 )
                 promotion_page_ids = promotions.values_list("page_id", flat=True)
 
+                exclude_page_ids = set(promotion_page_ids)
+
+                # Exclude Pages from pensions site if there are any
+                pensions_subsite_pages = SubsiteHomePage.objects.filter(
+                    is_pensions_site=True
+                ).all()
+
+                if pensions_subsite_pages:
+                    pensions_paths = pensions_subsite_pages.values_list(
+                        "path", flat=True
+                    )
+
+                    # Create a list of Q objects, one for each string in `parent_paths`
+                    q_objects = [Q(path__startswith=s) for s in pensions_paths]
+
+                    # Combine the Q objects using the `|` (or) operator
+                    query = q_objects and q_objects.pop()
+                    for q in q_objects:
+                        query |= q
+
+                    # Use the `filter` function to return all pages that match the combined Q object
+                    pensions_pages = Page.objects.filter(query)
+
+                    # This will be of type <class 'wagtail.query.PageQuerySet'>
+                    pensions_page_ids = pensions_pages.values_list("pk", flat=True)
+
+                    exclude_page_ids = exclude_page_ids.union(pensions_page_ids)
+
                 page_queryset_for_search = (
                     Page.objects.live()
-                    .exclude(pk__in=promotion_page_ids)
+                    .exclude(pk__in=exclude_page_ids)
                     .annotate(
                         section_label=Case(
                             When(

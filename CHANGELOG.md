@@ -1,5 +1,10 @@
 # Release History
 
+## Unreleased
+
+- LGPS pages excluded from BC council search results
+- Add tests for exclusion of LGPS pages from BC council search results
+
 ## 65.0 (2022-11-29)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/65.0...64.0>
