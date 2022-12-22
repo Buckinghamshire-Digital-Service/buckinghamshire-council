@@ -1,4 +1,5 @@
 from itertools import chain
+from typing import Type
 
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
@@ -13,6 +14,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View
 
 from wagtail.models import Page, Site
+from wagtail.query import PageQuerySet
 from wagtail.search.models import Query
 
 from bc.blogs.models import BlogGlobalHomePage, BlogHomePage, BlogPostPage
@@ -31,6 +33,7 @@ from bc.standardpages.models import RedirectPage
 from bc.utils.cache import get_default_cache_control_kwargs
 from bc.utils.constants import ALERT_SUBSCRIPTION_STATUSES
 from bc.utils.models import SystemMessagesSettings
+from bc.utils.utils import get_pk_list
 
 
 @method_decorator(csrf_exempt, name="dispatch")
@@ -86,31 +89,14 @@ class SearchView(View):
 
                 exclude_page_ids = set(promotion_page_ids)
 
-                # Exclude Pages from pensions site if there are any
-                pensions_subsite_pages = SubsiteHomePage.objects.filter(
+                # Exclude Pages from pensions site
+                pension_homepages = SubsiteHomePage.objects.filter(
                     is_pensions_site=True
                 ).all()
-
-                if pensions_subsite_pages:
-                    pensions_paths = pensions_subsite_pages.values_list(
-                        "path", flat=True
-                    )
-
-                    # Create a list of Q objects, one for each string in `parent_paths`
-                    q_objects = [Q(path__startswith=s) for s in pensions_paths]
-
-                    # Combine the Q objects using the `|` (or) operator
-                    query = q_objects and q_objects.pop()
-                    for q in q_objects:
-                        query |= q
-
-                    # Use the `filter` function to return all pages that match the combined Q object
-                    pensions_pages = Page.objects.filter(query)
-
-                    # This will be of type <class 'wagtail.query.PageQuerySet'>
-                    pensions_page_ids = pensions_pages.values_list("pk", flat=True)
-
-                    exclude_page_ids = exclude_page_ids.union(pensions_page_ids)
+                pensions_page_ids = self.extract_subsite_pages(
+                    pension_homepages, pk_only=True
+                )
+                exclude_page_ids = exclude_page_ids.union(pensions_page_ids)
 
                 page_queryset_for_search = (
                     Page.objects.live()
@@ -277,6 +263,33 @@ class SearchView(View):
                 context,
             )
             return response
+
+    @staticmethod
+    def extract_subsite_pages(homepage_queryset: Type[PageQuerySet], pk_only=False):
+        """
+        Extracts all pages from a given subsite.
+
+        :param subsite_page
+        """
+        if not homepage_queryset:
+            return Page.objects.none()
+
+        paths = get_pk_list(homepage_queryset, "path")
+
+        # Create a list of Q objects, one for each string in `paths`
+        q_objects = [Q(path__startswith=s) for s in paths]
+
+        # Combine the Q objects using the `|` (or) operator
+        query = q_objects and q_objects.pop()
+        for q in q_objects:
+            query |= q
+
+        pages = Page.objects.filter(query)
+
+        if pk_only:
+            return get_pk_list(pages)
+
+        return pages
 
 
 class JobAlertConfirmView(View):

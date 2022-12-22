@@ -27,11 +27,11 @@ class FISPagesIncludedTest(TestCase):
         )
 
 
-class FISPagesExcludedTest(TestCase):
+class LGPSPagesExcludedTest(TestCase):
     def setUp(self):
         self.fis_homepage = fixtures.SubsiteHomePageFactory()
 
-    def test_fis_page_not_in_search_results(self):
+    def test_lgps_page_not_in_search_results(self):
         image = ImageFactory()
         hit_page = self.fis_homepage.add_child(
             instance=fixtures.SubsiteHomePageFactory.build(
