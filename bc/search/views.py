@@ -1,9 +1,8 @@
 from itertools import chain
-from typing import Type
 
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.db.models import Case, CharField, OuterRef, Q, Subquery, When
+from django.db.models import Case, CharField, OuterRef, Subquery, When
 from django.http import QueryDict
 from django.template.response import TemplateResponse
 from django.utils.cache import add_never_cache_headers, patch_cache_control
@@ -14,12 +13,12 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View
 
 from wagtail.models import Page, Site
-from wagtail.query import PageQuerySet
 from wagtail.search.models import Query
 
 from bc.blogs.models import BlogGlobalHomePage, BlogHomePage, BlogPostPage
 from bc.campaigns.models import CampaignIndexPage, CampaignPage
 from bc.family_information.models import SubsiteHomePage
+from bc.family_information.utils import is_pension_subsite
 from bc.inlineindex.models import InlineIndexChild
 from bc.longform.models import LongformChapterPage
 from bc.recruitment.forms import SearchAlertSubscriptionForm
@@ -33,7 +32,6 @@ from bc.standardpages.models import RedirectPage
 from bc.utils.cache import get_default_cache_control_kwargs
 from bc.utils.constants import ALERT_SUBSCRIPTION_STATUSES
 from bc.utils.models import SystemMessagesSettings
-from bc.utils.utils import get_pk_list
 
 
 @method_decorator(csrf_exempt, name="dispatch")
@@ -47,6 +45,7 @@ class SearchView(View):
         # Recruitment site search
         site = Site.find_for_request(request)
         site_is_recruitment = is_recruitment_site(site)
+        site_is_pensions = is_pension_subsite(site)
         if site_is_recruitment:
             template_path = "patterns/pages/search/search--jobs.html"
             homepage = Site.find_for_request(request).root_page
@@ -55,7 +54,6 @@ class SearchView(View):
             )
             if settings.ENABLE_JOBS_SEARCH_ALERT_SUBSCRIPTIONS:
                 context["job_alert_form"] = SearchAlertSubscriptionForm
-        # Main site search
         else:
             if search_query:
                 promotions = (
@@ -89,37 +87,46 @@ class SearchView(View):
 
                 exclude_page_ids = set(promotion_page_ids)
 
-                # Exclude Pages from pensions site
-                pension_homepages = SubsiteHomePage.objects.filter(
-                    is_pensions_site=True
-                ).all()
-                pensions_page_ids = self.extract_subsite_pages(
-                    pension_homepages, pk_only=True
-                )
-                exclude_page_ids = exclude_page_ids.union(pensions_page_ids)
+                # This assumes that the only subsite that is not a recruitment
+                # site is the pensions site.
+                try:
+                    pension_pages = (
+                        SubsiteHomePage.objects.get(is_pensions_site=True)
+                        .get_descendants(inclusive=True)
+                        .live()
+                    )
+                except SubsiteHomePage.DoesNotExist:
+                    pension_pages = Page.objects.none()
 
-                page_queryset_for_search = (
-                    Page.objects.live()
-                    .exclude(pk__in=exclude_page_ids)
-                    .annotate(
-                        section_label=Case(
-                            When(
-                                path__startswith=site.root_page.path,
-                                then=Subquery(
-                                    Page.objects
-                                    # don't self-annotate section indexes
-                                    .exclude(pk=OuterRef("pk"))
-                                    .filter(depth=3, path__withinstart=OuterRef("path"))
-                                    .values("title")
-                                ),
+                if site_is_pensions and pension_pages:
+                    page_queryset_for_search = pension_pages
+                else:
+                    page_queryset_for_search = Page.objects.live()
+
+                    # Exclude Pages from pensions site
+                    pensions_page_ids = pension_pages.values_list("pk", flat=True)
+                    exclude_page_ids = exclude_page_ids.union(pensions_page_ids)
+
+                page_queryset_for_search = page_queryset_for_search.exclude(
+                    pk__in=exclude_page_ids
+                ).annotate(
+                    section_label=Case(
+                        When(
+                            path__startswith=site.root_page.path,
+                            then=Subquery(
+                                Page.objects
+                                # don't self-annotate section indexes
+                                .exclude(pk=OuterRef("pk"))
+                                .filter(depth=3, path__withinstart=OuterRef("path"))
+                                .values("title")
                             ),
-                            default=Subquery(
-                                Site.objects.filter(
-                                    root_page__path__withinstart=OuterRef("path")
-                                ).values("site_name")
-                            ),
-                            output_field=CharField(),
-                        )
+                        ),
+                        default=Subquery(
+                            Site.objects.filter(
+                                root_page__path__withinstart=OuterRef("path")
+                            ).values("site_name")
+                        ),
+                        output_field=CharField(),
                     )
                 )
                 excluded_page_types = [
@@ -263,33 +270,6 @@ class SearchView(View):
                 context,
             )
             return response
-
-    @staticmethod
-    def extract_subsite_pages(homepage_queryset: Type[PageQuerySet], pk_only=False):
-        """
-        Extracts all pages from a given subsite.
-
-        :param subsite_page
-        """
-        if not homepage_queryset:
-            return Page.objects.none()
-
-        paths = get_pk_list(homepage_queryset, "path")
-
-        # Create a list of Q objects, one for each string in `paths`
-        q_objects = [Q(path__startswith=s) for s in paths]
-
-        # Combine the Q objects using the `|` (or) operator
-        query = q_objects and q_objects.pop()
-        for q in q_objects:
-            query |= q
-
-        pages = Page.objects.filter(query)
-
-        if pk_only:
-            return get_pk_list(pages)
-
-        return pages
 
 
 class JobAlertConfirmView(View):
