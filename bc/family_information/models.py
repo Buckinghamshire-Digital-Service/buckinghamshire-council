@@ -4,6 +4,7 @@ from django.db import models
 from django.utils.functional import cached_property
 
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.coreutils import resolve_model_string
 from wagtail.models import Page
 from wagtail.search import index
 
@@ -157,6 +158,12 @@ class BaseCategoryPage(FISBannerFields, BasePage):
 
     class Meta:
         abstract = True
+
+    @classmethod
+    def allowed_subpage_models(cls):
+        return super().allowed_subpage_models() + [
+            resolve_model_string("standardpages.IndexPage")
+        ]
 
     @cached_property
     def child_pages(self):
