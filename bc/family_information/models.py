@@ -92,7 +92,9 @@ class SubsiteHomePage(FISBannerFields, BasePage):
     description = models.TextField(blank=True)
     search_placeholder = models.CharField(max_length=100, blank=True)
 
-    intro = models.TextField(blank=True, default="Get information, advice and guidance")
+    heading = models.CharField(
+        blank=True, default="Get information, advice and guidance", max_length=255
+    )
 
     call_to_action = models.ForeignKey(
         "utils.CallToActionSnippet",
@@ -124,7 +126,7 @@ class SubsiteHomePage(FISBannerFields, BasePage):
                 ],
                 heading="Hero",
             ),
-            FieldPanel("intro"),
+            FieldPanel("heading"),
         ]
         + FISBannerFields.content_panels
         + [FieldPanel("search_prompt_text"), FieldPanel("call_to_action")]
