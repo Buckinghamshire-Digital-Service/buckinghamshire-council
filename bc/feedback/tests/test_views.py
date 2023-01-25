@@ -242,6 +242,59 @@ class TestFeedbackCommentCreateView(CreateInfoPageMixin, TestCase):
         self.assertEqual(response.status_code, HTTPStatus.BAD_REQUEST)
         self.assertIn("action", response.json()["form"]["errors"])
 
+    def test_page_with_permissible_long_url(self):
+        """Test that a URL longer than 200 characters can be saved."""
+        self.info_page.slug = "a" * 200
+        self.info_page.save()
+        self.assertGreater(len(self.info_page.url), 200)
+        payload = {
+            "comment_form-page": self.info_page.id,
+            "comment_form-action": "I was trying something.",
+            "comment_form-issue": "Something went wrong.",
+        }
+        self.assertEqual(FeedbackComment.objects.count(), 0)
+
+        response = self.client.post(self.url, data=payload, follow=True)
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertEqual(FeedbackComment.objects.count(), 1)
+        feedback_comment = FeedbackComment.objects.last()
+
+        with self.subTest("Page URL is saved as expected"):
+            self.assertEqual(feedback_comment.original_url, feedback_comment.page.url)
+
+    def test_truncation_of_urls(self):
+        """Test that a URL longer than 2048 characters can be saved, but truncated."""
+        parent_page = self.info_page
+        for _ in range(11):
+            child_page = InformationPageFactory.build(slug="a" * 200)
+            parent_page.add_child(instance=child_page)
+            parent_page = child_page
+
+        self.assertGreater(len(child_page.url), 2048)
+        payload = {
+            # "comment_form-page": self.info_page.id,
+            "comment_form-page": child_page.id,
+            "comment_form-action": "I was trying something.",
+            "comment_form-issue": "Something went wrong.",
+        }
+        self.assertEqual(FeedbackComment.objects.count(), 0)
+
+        response = self.client.post(self.url, data=payload, follow=True)
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertEqual(FeedbackComment.objects.count(), 1)
+        feedback_comment = FeedbackComment.objects.last()
+
+        with self.subTest("Denormalised URL is truncated"):
+            self.assertNotEqual(
+                feedback_comment.original_url, feedback_comment.page.url
+            )
+            self.assertTrue(
+                feedback_comment.page.url.startswith(feedback_comment.original_url)
+            )
+            self.assertEqual(len(feedback_comment.original_url), 2048)
+
     def test_csrf_exemption(self):
         """Test that no CSRF token is required with the form"""
         payload = {
