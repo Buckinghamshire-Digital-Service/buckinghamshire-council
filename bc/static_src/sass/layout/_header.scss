@@ -141,13 +141,22 @@
 
     &--jobs {
         #{$root}__inner {
+            display: flex;
+            align-items: center;
             flex-wrap: wrap;
             justify-content: flex-start;
+            flex-direction: column;
+
+            @include media-query(px900) {
+                flex-direction: row;
+            }
         }
 
         #{$root}__home-link {
-            @include media-query(px550) {
-                margin-right: $grid;
+            margin: 0 0 15px;
+
+            @include media-query(px900) {
+                margin: 0 $grid 0 0;
             }
 
             @include media-query(tablet-landscape) {
@@ -170,7 +179,7 @@
 
         #{$root}__heading-title {
             flex: 1 0 50%;
-            margin: 10px 0;
+            margin: 0;
 
             @include media-query(mob-landscape) {
                 flex: 0 0 auto;
@@ -220,24 +229,28 @@
         }
     }
 
-    &__heading-logo {
-        background-color: $color--white;
-        display: inline-block;
-        max-height: 38px;
-        vertical-align: middle;
+    &__social-icons {
+        display: flex;
+        margin-top: 15px;
 
-        &--padding {
-            padding: 3px 3px 0 3px;
+        @include media-query(px900) {
+            margin-top: 0;
         }
+    }
 
-        @include media-query(px550) {
-            max-height: 44px;
+    &__social-item {
+        margin-right: 30px;
+
+        &:last-child {
+            margin-right: 0;
         }
+    }
 
-        @include media-query(tablet-portrait) {
-            &:not(:last-child) {
-                margin-right: 5px;
-            }
+    &__social-icon {
+        color: $color--white;
+
+        #{$hover-states} {
+            color: $color--grey-light;
         }
     }
 

@@ -19,6 +19,7 @@
         }
     }
 
+    &--header-social,
     &--footer-social {
         margin-right: 10px;
         fill: $color--white;
@@ -28,6 +29,10 @@
         #{$hover-states} {
             fill: $color--grey-medium;
         }
+    }
+
+    &--header-social {
+        margin-right: 0;
     }
 
     &--blog-social {

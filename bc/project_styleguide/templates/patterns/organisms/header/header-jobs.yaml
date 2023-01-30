@@ -1,0 +1,9 @@
+context:
+  settings:
+    utils:
+      SocialMediaSettings:
+        has_any_setting: True
+        facebook_app_id: BucksCareers
+        twitter_handle: bucks_careers
+        instagram_username: bucks_careers
+        linkedin_organisation_url: https://www.linkedin.com/company/buckinghamshire-council/
