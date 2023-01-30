@@ -43,7 +43,7 @@ Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/66.0...67.
 - Change card content alignment from space-between to start
 - Add index page as child page of all category page types
 
-## 66.0 (2023-01-31)
+## 66.0
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/65.1...66.0>
 
