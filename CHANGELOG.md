@@ -2,7 +2,12 @@
 
 ## Unreleased
 
+## 67.1 (2023-01-31)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/67.1...67.0>
+
 - Fix pages deployment <https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/555>
+- Update sentry <https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/575>
 
 ## 67.0 (2023-01-31)
 
