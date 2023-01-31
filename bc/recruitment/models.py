@@ -27,13 +27,13 @@ from wagtail.search import index
 from django_gov_notify.message import NotifyEmailMessage
 from wagtailorderable.models import Orderable
 
+from bc.utils.choices import IconChoice
+
 from ..utils.blocks import StoryBlock
 from ..utils.constants import RICH_TEXT_FEATURES
 from ..utils.models import BasePage
 from .constants import JOB_BOARD_CHOICES
 from .text_utils import extract_salary_range
-
-from bc.utils.choices import IconChoice
 
 
 class JobSubcategory(models.Model):
