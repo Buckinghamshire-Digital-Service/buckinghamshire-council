@@ -7,6 +7,7 @@ from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.models import Page
 from wagtail.search import index
 
+from ..news.models import NewsIndex
 from ..standardpages.models import IndexPage
 from ..utils.models import BasePage
 
@@ -133,17 +134,22 @@ class SubsiteHomePage(FISBannerFields, BasePage):
     )
 
     @cached_property
-    def category_pages(self):
-        """Get category pages for the homepage listing.
+    def child_pages(self):
+        """Get child pages for the homepage listing.
 
-        Returns a queryset of this page's live, public children of either of the two
-        CategoryTypeX classes, ordered by Wagtail explorer custom sort (ie. path).
+        Returns a queryset of this page's live, public children, of the following page types
+        - CategoryPage, CategoryTypeOnePage, CategoryTypeTwoPage, IndexPage, NewsIndex
+        ordered by Wagtail explorer custom sort (ie. path).
         """
         return (
             Page.objects.child_of(self)
             .filter(
                 content_type__in=ContentType.objects.get_for_models(
-                    CategoryPage, CategoryTypeOnePage, CategoryTypeTwoPage, IndexPage
+                    CategoryPage,
+                    CategoryTypeOnePage,
+                    CategoryTypeTwoPage,
+                    IndexPage,
+                    NewsIndex,
                 ).values()
             )
             .filter(show_in_menus=True)
