@@ -4,7 +4,7 @@ from modelcluster.models import ClusterableModel
 from wagtail import blocks
 from wagtail.admin.panels import FieldPanel
 from wagtail.blocks import StreamBlock
-from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.fields import StreamField
 
 from bc.utils.constants import RICH_TEXT_FEATURES
@@ -31,7 +31,7 @@ class ColumnWithHeader(blocks.StructBlock):
 
 
 @register_setting(icon="list-ul")
-class NavigationSettings(BaseSetting, ClusterableModel):
+class NavigationSettings(BaseSiteSetting, ClusterableModel):
     header_title = models.CharField(max_length=250, null=True, blank=True)
     footer_columns = StreamField(
         StreamBlock(
