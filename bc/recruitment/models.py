@@ -33,6 +33,8 @@ from ..utils.models import BasePage
 from .constants import JOB_BOARD_CHOICES
 from .text_utils import extract_salary_range
 
+from bc.utils.choices import IconChoice
+
 
 class JobSubcategory(models.Model):
     """
@@ -58,6 +60,11 @@ class JobSubcategory(models.Model):
 
 class JobCategory(Orderable, models.Model):
     title = models.CharField(max_length=128)
+    icon = models.CharField(
+        max_length=20,
+        blank=True,
+        choices=IconChoice,
+    )
     description = models.TextField(blank=True)
     subcategories = models.ManyToManyField(JobSubcategory, related_name="categories")
     is_schools_and_early_years = models.BooleanField(default=False)
