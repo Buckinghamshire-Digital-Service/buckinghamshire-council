@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- [Wagtail transfer modal dialog adjustments](https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/625)
+
 ## 67.1 (2023-01-31)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/67.1...67.0>
