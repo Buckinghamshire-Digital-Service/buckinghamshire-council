@@ -2,7 +2,17 @@
 
 ## Unreleased
 
-## 66.0
+## 67.0 (2023-01-31)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/67.0...66.0>
+
+- Add optional intro field to subsite home page
+- Fix/Remove LGPS pages from BC council search results
+- Add newsindex page to child pages list for display
+- Change card content alignment from space-between to start
+- Add index page as child page of all category page types
+
+## 66.0 (2023-01-31)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/66.0...65.1>
 
