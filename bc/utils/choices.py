@@ -2,10 +2,10 @@ from django.db import models
 
 
 class IconChoice(models.TextChoices):
-    BRIEFCASE = "BRIEFCASE", "Briefcase"
-    CITY_DRIVE = "CITY_DRIVE", "City drive"
-    GIVE_LOVE = "GIVE_LOVE", "Give love"
-    GRADUATE_CAP = "GRADUATE_CAP", "Graduate cap"
-    GROUP = "GROUP", "Group"
-    HANDSHAKE = "HANDSHAKE", "Handshake"
-    LIGHTBULB = "LIGHTBULB", "Light bulb"
+    BRIEFCASE = "briefcase", "Briefcase"
+    CITY_DRIVE = "city-drive", "City drive"
+    GIVE_LOVE = "give-love", "Give love"
+    GRADUATE_CAP = "graduate-cap", "Graduate cap"
+    GROUP = "group", "Group"
+    HANDSHAKE = "handshake", "Handshake"
+    LIGHTBULB = "light-bulb", "Light bulb"
