@@ -63,7 +63,7 @@ class JobCategory(Orderable, models.Model):
     icon = models.CharField(
         max_length=20,
         blank=True,
-        choices=IconChoice,
+        choices=IconChoice.choices,
     )
     description = models.TextField(blank=True)
     subcategories = models.ManyToManyField(JobSubcategory, related_name="categories")
