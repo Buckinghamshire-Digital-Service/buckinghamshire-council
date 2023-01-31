@@ -37,6 +37,7 @@ class JobCategoryModelAdmin(OrderableMixin, ModelAdmin):
     list_display = (
         "title",
         "slug",
+        "icon",
         "get_subcategories_list",
         "is_schools_and_early_years",
     )
