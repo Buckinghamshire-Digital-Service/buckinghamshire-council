@@ -23,6 +23,7 @@ from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.fields import StreamField
 from wagtail.search import index
+from wagtail.snippets.models import register_snippet
 
 from django_gov_notify.message import NotifyEmailMessage
 from wagtailorderable.models import Orderable
@@ -32,6 +33,7 @@ from bc.utils.choices import IconChoice
 from ..utils.blocks import StoryBlock
 from ..utils.constants import RICH_TEXT_FEATURES
 from ..utils.models import BasePage
+from .blocks import AwardBlock
 from .constants import JOB_BOARD_CHOICES
 from .text_utils import extract_salary_range
 
@@ -345,6 +347,20 @@ def callback_talentlinkjob_delete_attachments_and_logo(
         instance.logo.delete()
 
 
+@register_snippet
+class AwardsSnippet(models.Model):
+    heading = models.CharField(max_length=255)
+    awards = StreamField([("award", AwardBlock())], use_json_field=True)
+
+    panels = [
+        FieldPanel("heading"),
+        FieldPanel("awards"),
+    ]
+
+    def __str__(self):
+        return self.heading
+
+
 class RecruitmentHomePage(RoutablePageMixin, BasePage):
     template = "patterns/pages/home/home_page--jobs.html"
 
@@ -366,6 +382,15 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
         help_text="eg. Search jobs, e.g. “Teacher in Aylesbury”",
     )
     hero_link_text = models.CharField(max_length=255, help_text="e.g. Browse jobs")
+    awards = models.ForeignKey(
+        "recruitment.AwardsSnippet",
+        verbose_name="Awards snippet",
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+
     body = StreamField(
         blocks.StreamBlock(
             [
@@ -401,6 +426,7 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
             ],
             "Hero",
         ),
+        FieldPanel("awards"),
         FieldPanel("body"),
     ]
     settings_panels = BasePage.settings_panels + [
