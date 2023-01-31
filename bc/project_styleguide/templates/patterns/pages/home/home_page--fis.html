@@ -29,9 +29,11 @@
 
     {# Category cards #}
     <div>
+        {% if page.heading %}
         <h2 class="heading heading--xl">
-            Get information, advice and guidance
+            {{ page.heading }}
         </h2>
+        {% endif %}
         <div class="grid grid--index grid--fis-home" data-height-equalizer>
         {% for subpage in page.category_pages %}
             <a class="card card--fis-home" href="{% pageurl subpage %}">
