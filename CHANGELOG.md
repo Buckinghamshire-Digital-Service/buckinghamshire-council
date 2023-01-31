@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Fix pages deployment <https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/555>
+
 ## 67.0 (2023-01-31)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/67.0...66.0>
@@ -76,6 +78,14 @@ Compare: <https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/5
 
 - [Wagtail 3.0 upgrade](https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/548)
 - [Support/birdbath flightpath](https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/573)
+
+## 61.0 (2022-08-09)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/60.1...61.0>
+
+- Add `BlogAboutPage`
+- Prevent more `InformationPage`s from being added to the `BlogHomePage`
+- Allow the use of formatted table blocks and plain text table blocks in most pages
 
 ## 61.0 (2022-08-09)
 
