@@ -1,6 +1,6 @@
 from django.db import models
 
-from wagtail.admin.panels import FieldPanel, RichTextFieldPanel
+from wagtail.admin.panels import FieldPanel
 from wagtail.blocks import StructBlock, TextBlock
 from wagtail.blocks.field_block import RichTextBlock
 from wagtail.fields import RichTextField, StreamField
@@ -26,7 +26,7 @@ class StepByStepPage(BasePage):
 
     content_panels = BasePage.content_panels + [
         FieldPanel("intro_text"),
-        RichTextFieldPanel("introduction"),
+        FieldPanel("introduction"),
         FieldPanel("steps"),
     ]
 
