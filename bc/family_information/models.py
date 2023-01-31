@@ -4,9 +4,11 @@ from django.db import models
 from django.utils.functional import cached_property
 
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.coreutils import resolve_model_string
 from wagtail.models import Page
 from wagtail.search import index
 
+from ..news.models import NewsIndex
 from ..standardpages.models import IndexPage
 from ..utils.models import BasePage
 
@@ -92,6 +94,10 @@ class SubsiteHomePage(FISBannerFields, BasePage):
     description = models.TextField(blank=True)
     search_placeholder = models.CharField(max_length=100, blank=True)
 
+    heading = models.CharField(
+        blank=True, default="Get information, advice and guidance", max_length=255
+    )
+
     call_to_action = models.ForeignKey(
         "utils.CallToActionSnippet",
         blank=True,
@@ -122,23 +128,29 @@ class SubsiteHomePage(FISBannerFields, BasePage):
                 ],
                 heading="Hero",
             ),
+            FieldPanel("heading"),
         ]
         + FISBannerFields.content_panels
         + [FieldPanel("search_prompt_text"), FieldPanel("call_to_action")]
     )
 
     @cached_property
-    def category_pages(self):
-        """Get category pages for the homepage listing.
+    def child_pages(self):
+        """Get child pages for the homepage listing.
 
-        Returns a queryset of this page's live, public children of either of the two
-        CategoryTypeX classes, ordered by Wagtail explorer custom sort (ie. path).
+        Returns a queryset of this page's live, public children, of the following page types
+        - CategoryPage, CategoryTypeOnePage, CategoryTypeTwoPage, IndexPage, NewsIndex
+        ordered by Wagtail explorer custom sort (ie. path).
         """
         return (
             Page.objects.child_of(self)
             .filter(
                 content_type__in=ContentType.objects.get_for_models(
-                    CategoryPage, CategoryTypeOnePage, CategoryTypeTwoPage, IndexPage
+                    CategoryPage,
+                    CategoryTypeOnePage,
+                    CategoryTypeTwoPage,
+                    IndexPage,
+                    NewsIndex,
                 ).values()
             )
             .filter(show_in_menus=True)
@@ -157,6 +169,12 @@ class BaseCategoryPage(FISBannerFields, BasePage):
 
     class Meta:
         abstract = True
+
+    @classmethod
+    def allowed_subpage_models(cls):
+        return super().allowed_subpage_models() + [
+            resolve_model_string("standardpages.IndexPage")
+        ]
 
     @cached_property
     def child_pages(self):
