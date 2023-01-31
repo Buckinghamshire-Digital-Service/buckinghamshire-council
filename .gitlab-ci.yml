@@ -241,7 +241,7 @@ deploy_content_prep:
   <<: *heroku_deployment_template
 
 pages:
-  image: python:3.6
+  image: python:3.7.4
   stage: pages
   only:
     - master
