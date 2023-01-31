@@ -4,6 +4,12 @@
 
 - [Upgrade wagtail v4.1](https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/605)
 
+## 65.1 (2023-01-25)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/65.1...65.0>
+
+- Fix: Handle URLs longer than 200 characters in feedback comment form
+
 ## 65.0 (2022-11-29)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/65.0...64.0>

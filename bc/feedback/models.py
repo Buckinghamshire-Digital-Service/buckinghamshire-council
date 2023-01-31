@@ -29,7 +29,7 @@ class FeedbackComment(models.Model):
         on_delete=models.SET_NULL,
         related_name="feedback_comments",
     )
-    original_url = models.URLField()
+    original_url = models.URLField(max_length=2048)
     action = models.CharField(
         verbose_name="What were you doing?",
         max_length=500,

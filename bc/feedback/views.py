@@ -97,7 +97,7 @@ class FeedbackCommentCreateView(generic.CreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         # Denormalise the URL, lest the page be deleted or moved.
-        self.object.original_url = self.object.page.url
+        self.object.original_url = self.object.page.url[:2048]
         self.object.save()
         return http.JsonResponse(data={}, status=HTTPStatus.OK)
 
