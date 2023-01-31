@@ -1,0 +1,34 @@
+.awards-block {
+    &__list {
+        margin-top: 30px;
+
+        @include media-query(px550) {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        @include media-query(px900) {
+            margin-bottom: 90px;
+        }
+    }
+
+    &__list-item {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+
+        @include media-query(px550) {
+            width: calc(33% - 20px);
+            margin: 0 10px 30px;
+        }
+
+        @include media-query(tablet-portrait) {
+            width: calc(25% - 20px);
+        }
+    }
+
+    &__link {
+        text-decoration: none;
+    }
+}

@@ -1,0 +1,28 @@
+context:
+  award_block_title: Our Awards
+  award_blocks:
+    - url: '#'
+      title: enei
+    - url: '#'
+      title: disability confident
+    - url: '#'
+      title: enei tide
+    - title: disability confident
+    - url: '#'
+      title: enei tide
+    - url: '#'
+      title: enei tide
+    - url: '#'
+      title: enei tide
+    - url: '#'
+      title: enei tide
+    - url: '#'
+      title: enei tide
+    - title: enei tide
+    - title: enei tide
+
+tags:
+  image:
+    award_block.image max-185x90:
+      raw: |
+        <img src="http://via.placeholder.com/185x90" width="185" height="90" alt="Some alt">
