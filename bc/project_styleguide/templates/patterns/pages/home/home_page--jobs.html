@@ -18,7 +18,10 @@
 {% block breadcrumbs %}{% endblock %}
 
 {% block content %}
-    {% include "patterns/molecules/split-content/split-content.html" with content_block=page.body %}
+
+    {% if page.benefits_list %}
+        {% include "patterns/molecules/benefits-list/benefits-list.html" with benefits_list=page.benefits_list %}
+    {% endif %}
 
     <section class="categories" aria-labelledby="job-cat-title">
         <h2 class="heading heading--xl" id="job-cat-title">Top job categories</h2>

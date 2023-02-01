@@ -1,0 +1,21 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<section aria-labelledby="working-at-buckinghamshire-title">
+    <h2 class="heading heading--xxl" id="working-at-buckinghamshire-title">Working at Buckinghamshire</h2>
+
+    <ul class="benefits-list">
+        {% for benefit in benefits_list %}
+            <li class="benefits-list__item{% if not benefit.image %} benefits-list__item--no-image{% endif %}">
+                <a class="benefits-list__card" href="{{ benefit.url }}">
+                    {% if benefit.image %}
+                        {% image benefit.image fill-310x240 class="benefits-list__image" %}
+                    {% endif %}
+                    <div class="benefits-list__content">
+                        <h3 class="benefits-list__title">{{ benefit.title }}</h3>
+                        {% include "patterns/atoms/icons/icon.html" with name="arrow" classname="icon--benefit-arrow benefits-list__icon" %}
+                    </div>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</section>

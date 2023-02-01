@@ -41,4 +41,10 @@
         width: 25px;
         border-radius: 50%;
     }
+
+    &--benefit-arrow {
+        transform: translate3d(0, 0, 10px);
+        transition: transform $transition;
+        stroke: $color--white;
+    }
 }

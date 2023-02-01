@@ -1,0 +1,17 @@
+context:
+  benefits_list:
+    - title: Generous Leave Entitlement
+      image: True
+      url: '#'
+    - title: Career Development
+      image: True
+      url: '#'
+    - title: Our Culture
+      image: True
+      url: '#'
+
+tags:
+  image:
+    benefit.image fill-310x240 class="benefits-list__image":
+      raw: |
+        <img src="https://via.placeholder.com/310x240" width="310" height="240">
