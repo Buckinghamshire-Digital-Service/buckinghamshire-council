@@ -8,9 +8,12 @@
             <li class="benefits-list__item{% if not benefit.image %} benefits-list__item--no-image{% endif %}">
                 <a class="benefits-list__card" href="{{ benefit.url }}">
                     {% if benefit.image %}
-                        {% image benefit.image fill-310x240 class="benefits-list__image" %}
+                    {% image benefit.image fill-310x240 class="benefits-list__image" %}
                     {% endif %}
                     <div class="benefits-list__content">
+                        <svg class="benefits-list__wave" aria-hidden="true" focusable="false">
+                            <use xlink:href="#wave"></use>
+                        </svg>
                         <h3 class="benefits-list__title">{{ benefit.title }}</h3>
                         {% include "patterns/atoms/icons/icon.html" with name="arrow" classname="icon--benefit-arrow benefits-list__icon" %}
                     </div>

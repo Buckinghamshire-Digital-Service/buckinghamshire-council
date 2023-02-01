@@ -22,13 +22,37 @@
 
         @include media-query(tablet-portrait) {
             width: calc(33% - 30px);
-            margin: 0 30px 30px 0;
+            margin: 0 30px 50px 0;
         }
 
         &--no-image {
+            position: relative;
+
             #{$root}__content {
                 border-top-left-radius: 3px;
                 border-top-right-radius: 3px;
+            }
+
+            #{$root}__card {
+                &::before {
+                    content: '';
+                    background-color: $color--teal-light;
+                    position: absolute;
+                    inset: -24px 0 20px 0;
+                    border-top-right-radius: 3px;
+                    border-top-left-radius: 3px;
+                }
+
+                &::after {
+                    content: '';
+                    background-color: $color--teal;
+                    position: absolute;
+                    top: -24px;
+                    border-top-left-radius: 3px;
+                    width: 50px;
+                    height: 100%;
+                    transition: background-color $transition;
+                }
             }
         }
     }
@@ -37,8 +61,12 @@
         text-decoration: none;
 
         #{$hover-states} {
-            #{$root}__content {
+            &::after {
                 background-color: $color--teal-dark;
+            }
+
+            #{$root}__content {
+                color: $color--teal-dark;
             }
 
             #{$root}__icon {
@@ -57,6 +85,8 @@
         line-height: 30px;
         color: $color--white;
         font-weight: $weight--bold;
+        position: relative;
+        z-index: 2;
 
         @include media-query(tablet-portrait) {
             @include font-size(l);
@@ -64,12 +94,12 @@
     }
 
     &__content {
-        background-color: $color--teal;
+        color: $color--teal;
         border-bottom-left-radius: 3px;
         border-bottom-right-radius: 3px;
         padding: 25px;
         position: relative;
-        transition: background-color $transition;
+        transition: background-color $transition, color $transition;
 
         @include media-query(tablet-portrait) {
             min-height: 125px;
@@ -78,8 +108,9 @@
 
     &__icon {
         position: absolute;
-        bottom: 20px;
+        bottom: 30px;
         right: 20px;
+        z-index: 2;
     }
 
     &__link-wrap {
@@ -90,5 +121,11 @@
         @include font-size(s);
         font-weight: $weight--bold;
         color: $color--river;
+    }
+
+    &__wave {
+        position: absolute;
+        inset: -40px 0;
+        width: 100%;
     }
 }
