@@ -47,4 +47,9 @@
         transition: transform $transition;
         stroke: $color--white;
     }
+
+    &--categories-blob {
+        width: 60px;
+        height: 56px;
+    }
 }

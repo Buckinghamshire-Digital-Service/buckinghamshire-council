@@ -3,69 +3,67 @@
     margin-bottom: $grid--large * 2;
 
     &__card {
-        background: $color--earth-light;
+        background: $color--white;
         display: flex;
-        flex-direction: column;
+        border: 1px solid $color--light-blue;
+        border-radius: 3px;
+        padding: 15px;
+        align-items: center;
 
         #{$hover-states} {
             #{$root} {
-                &__header {
-                    background: $color--link-hover;
+                &__category-title-label {
+                    border-bottom: 1px solid $color--charcoal;
                 }
             }
         }
     }
 
-    &__header {
-        background: $color--link;
-        padding: $grid--small;
-        display: flex;
-        align-items: baseline;
-        flex-wrap: wrap;
-        flex-direction: column;
-        justify-content: space-between;
-        color: $color--white;
-        transition: background $transition;
-
-        @include media-query(tablet-portrait) {
-            min-height: 125px;
-        }
+    &__category-title {
+        @include font-size(m);
+        line-height: 28px;
+        color: $color--charcoal;
+        margin: 0 0 5px;
     }
 
-    &__category-title {
-        @include font-size(s);
-        margin: 0;
-        margin-right: $grid--min;
-        text-decoration: underline;
+    &__category-title-label {
+        border-bottom: 1px solid transparent;
+        transition: border $transition;
     }
 
     &__job-count {
-        opacity: 0.8;
+        color: $color--slate;
         margin: 0;
     }
 
-    &__content {
-        padding: $grid--small;
+    &__all-vacancies-wrap {
+        text-align: center;
+    }
+
+    &__all-vacancies-link {
+        @include font-size(s);
+        font-weight: $weight--bold;
+        color: $color--river;
+    }
+
+    &__card-icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    &__card-icon-wrap {
+        width: 60px;
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 100%;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        flex-shrink: 0;
     }
 
-    &__description {
-        color: $color--default;
-        margin: 0;
-    }
-
-    &__jobs-link {
-        @include font-size(xxs);
-        text-decoration: underline;
-        font-weight: $weight--bold;
-        margin-bottom: 0;
-    }
-
-    &__all-vacancies {
-        font-weight: $weight--bold;
+    &__icon-blob {
+        color: $color--sky;
+        opacity: 0.05;
+        position: absolute;
     }
 
     @include target-ie11() {

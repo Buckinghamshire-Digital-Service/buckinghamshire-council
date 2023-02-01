@@ -24,28 +24,34 @@
     {% endif %}
 
     <section class="categories" aria-labelledby="job-cat-title">
-        <h2 class="heading heading--xl" id="job-cat-title">Top job categories</h2>
+        <h2 class="heading heading--xl" id="job-cat-title">Search top job categories</h2>
 
         <div class="categories__grid grid grid--categories">
             {% for cat in job_categories|slice:":6" %}
                 {% if cat.count %}
                     <a class="categories__card link--alt" href="search/?category={{cat.key}}">
-                        <header class="categories__header">
-                            <h3 class="categories__category-title heading">{{ cat.label }}</h3>
-                            <p class="categories__job-count">({{ cat.count }} jobs)</p>
-                        </header>
-                        <div class="categories__content">
-                            {% if cat.description %}
-                                <p class="categories__description">{{ cat.description }}</p>
-                            {% endif %}
-                            <p class="categories__jobs-link">See jobs</p>
+                        <div class="categories__card-icon-wrap">
+                            <div class="categories__icon-blob">
+                                {% include "patterns/atoms/icons/icon.html" with name="blob" classname="icon--categories-blob" %}
+                            </div>
+
+                            {% include "patterns/atoms/icons/icon.html" with name="briefcase" classname="categories__card-icon" %}
+                        </div>
+
+                        <div>
+                            <h3 class="categories__category-title heading">
+                                <span class="categories__category-title-label">{{ cat.label }}</span>
+                            </h3>
+                            <p class="categories__job-count">{{ cat.count }} jobs</p>
                         </div>
                     </a>
                 {% endif %}
             {% endfor %}
         </div>
 
-        <a class="categories__all-vacancies" href="search/">See all {{ vacancies }} current vacancies</a>
+        <p class="categories__all-vacancies-wrap">
+           <a class="categories__all-vacancies-link" href="search/">See all {{ vacancies }} current vacancies</a>
+        </p>
     </section>
 
     {% if page.awards %}
