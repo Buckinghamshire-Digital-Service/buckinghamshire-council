@@ -20,6 +20,8 @@ Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/67.1...68.
 - Fix issue of import page function close button missing after wagtail upgrade to 4.x.x
 - Add backoff to search view
 
+- Define an **IconChoice** [TextChoices](https://docs.djangoproject.com/en/3.2/ref/models/fields/#enumeration-types) model and update **JobCategory** with an `icon` field whose choices are `IconChoice.choices`
+- Update the `delete_docker_database` task in `fabfile.py` to create a `heroku_ext` schema. See [Migrating Extensions to `heroku_ext` schema](https://help.heroku.com/Y1FIZ0MA/migrating-extensions-to-heroku_ext-schema) for more details.
 - Replace awards with social media icons in Jobs page header
 - Add FE for awards block
 
