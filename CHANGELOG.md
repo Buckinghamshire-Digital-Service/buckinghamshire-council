@@ -20,6 +20,8 @@ Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/67.1...68.
 - Fix issue of import page function close button missing after wagtail upgrade to 4.x.x
 - Add backoff to search view
 
+- Replace awards with social media icons in Jobs page header
+
 ## 67.1 (2023-01-31)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/67.0...67.1>
