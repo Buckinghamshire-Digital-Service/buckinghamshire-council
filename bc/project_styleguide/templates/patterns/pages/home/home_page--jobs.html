@@ -34,9 +34,7 @@
                             <div class="categories__icon-blob">
                                 {% include "patterns/atoms/icons/icon.html" with name="blob" classname="icon--categories-blob" %}
                             </div>
-
-                            {# TODO: replace icon name with variable #}
-                            {% include "patterns/atoms/icons/icon.html" with name="briefcase" classname="categories__card-icon" %}
+                            {% include "patterns/atoms/icons/icon.html" with name=cat.icon classname="categories__card-icon" %}
                         </div>
 
                         <div>
