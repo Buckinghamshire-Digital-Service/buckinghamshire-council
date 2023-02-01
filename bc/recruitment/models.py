@@ -111,6 +111,7 @@ class JobCategory(Orderable, models.Model):
             .exclude(category=None)
             .values("category")
             .annotate(key=F("subcategory__categories__slug"))
+            .annotate(icon=F("subcategory__categories__icon"))
             .annotate(count=Count("category"))
             .annotate(label=F("subcategory__categories__title"))
             .annotate(description=F("subcategory__categories__description"))
