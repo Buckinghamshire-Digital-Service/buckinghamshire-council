@@ -1,13 +1,15 @@
 .benefits-list {
     $root: &;
 
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    flex-direction: column;
+    &__grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        flex-direction: column;
 
-    @include media-query(tablet-portrait) {
-        flex-direction: row;
+        @include media-query(tablet-portrait) {
+            flex-direction: row;
+        }
     }
 
     &__item {
@@ -78,5 +80,15 @@
         position: absolute;
         bottom: 20px;
         right: 20px;
+    }
+
+    &__link-wrap {
+        text-align: center;
+    }
+
+    &__bottom-link {
+        @include font-size(s);
+        font-weight: $weight--bold;
+        color: $color--river;
     }
 }
