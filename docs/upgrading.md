@@ -6,7 +6,7 @@ This document describes aspects of the system which should be given particular a
 
 Wagtail transfer isn't currently completely compatible with the wagtail version use here. v4.1
 
-There is an overridden templated use here: bc/utils/templates/wagtail_transfer/choose_page.html where some custom css has been added.
+There is a admin hook in place bc/utils/wagtail_hooks.py (wagtail_transfer_admin_fix_css) to inject some temporary css.
 
 Once Wagtail transfer is made compatible the template can be removed.
 
