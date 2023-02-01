@@ -7,7 +7,7 @@
         {% for award_block in award_blocks %}
             <li class="awards-block__list-item">
                 {% if award_block.url %}
-                    <a class="awards-block__link" href="{{ award_block.url }}" aria-label="Link to {{ award_block.title }}">
+                    <a class="awards-block__link" href="{{ award_block.url }}" aria-label="{{ award_block.title }}">
                 {% endif %}
 
                     {% image award_block.image max-185x90 %}
