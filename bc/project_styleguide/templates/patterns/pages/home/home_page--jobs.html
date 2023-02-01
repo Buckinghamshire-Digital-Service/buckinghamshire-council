@@ -45,7 +45,7 @@
         <a class="categories__all-vacancies" href="search/">See all {{ vacancies }} current vacancies</a>
     </section>
 
-    {% if page.award_blocks %}
-        {% include "patterns/molecules/awards-block/awards-block.html" with award_blocks=page.award_blocks %}
+    {% if page.awards %}
+        {% include "patterns/molecules/awards-block/awards-block.html" with awards_snippet=page.awards %}
     {% endif %}
 {% endblock %}
