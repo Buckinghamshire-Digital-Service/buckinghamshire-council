@@ -9,9 +9,15 @@ context:
     - title: Our Culture
       image: True
       url: '#'
+    - title: Work-life balance
+      url: '#'
+    - title: Pay and Financial Benefits
+      url: '#'
+    - title: Contribute to your local community
+      url: '#'
 
 tags:
   image:
     benefit.image fill-310x240 class="benefits-list__image":
       raw: |
-        <img src="https://via.placeholder.com/310x240" width="310" height="240">
+        <img src="https://via.placeholder.com/310x240" width="310" height="240" class="benefits-list__image">
