@@ -38,7 +38,10 @@
                     content: '';
                     background-color: $color--teal-light;
                     position: absolute;
-                    inset: -24px 0 20px 0;
+                    top: -24px;
+                    right: 0;
+                    bottom: 20px;
+                    left: 0;
                     border-top-right-radius: 3px;
                     border-top-left-radius: 3px;
                 }
@@ -100,10 +103,7 @@
         padding: 25px;
         position: relative;
         transition: background-color $transition, color $transition;
-
-        @include media-query(tablet-portrait) {
-            min-height: 125px;
-        }
+        min-height: 125px;
     }
 
     &__icon {
@@ -125,7 +125,13 @@
 
     &__wave {
         position: absolute;
-        inset: -40px 0;
+        top: -40px;
+        left: 0;
         width: 100%;
+
+        @include target-ie11() {
+            top: -30px;
+            height: 130px;
+        }
     }
 }
