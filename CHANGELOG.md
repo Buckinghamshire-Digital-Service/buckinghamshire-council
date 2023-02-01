@@ -25,6 +25,7 @@ Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/67.1...68.
 - Update the `delete_docker_database` task in `fabfile.py` to create a `heroku_ext` schema. See [Migrating Extensions to `heroku_ext` schema](https://help.heroku.com/Y1FIZ0MA/migrating-extensions-to-heroku_ext-schema) for more details.
 - Replace awards with social media icons in Jobs page header
 - Add FE for awards block
+- Add FE for the benefits list
 
 ## 67.1 (2023-01-31)
 
