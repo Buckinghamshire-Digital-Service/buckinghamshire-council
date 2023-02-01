@@ -20,10 +20,14 @@
     }
 
     &__category-title {
-        @include font-size(m);
-        line-height: 28px;
+        @include font-size(s);
         color: $color--charcoal;
         margin: 0 0 5px;
+
+        @include media-query(px550) {
+            @include font-size(m);
+            line-height: 28px;
+        }
     }
 
     &__category-title-label {
