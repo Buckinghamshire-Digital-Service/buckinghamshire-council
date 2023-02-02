@@ -45,6 +45,10 @@
         </p>
     </section>
 
+    {% if page.media %}
+        {% include "patterns/molecules/jobs-media-block/jobs-media-block.html" with jobs_media_snippet=page.media %}
+    {% endif %}
+
     {% if page.awards %}
         {% include "patterns/molecules/awards-block/awards-block.html" with awards_snippet=page.awards %}
     {% endif %}
