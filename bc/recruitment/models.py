@@ -33,7 +33,7 @@ from bc.utils.choices import IconChoice
 from ..utils.blocks import StoryBlock
 from ..utils.constants import RICH_TEXT_FEATURES
 from ..utils.models import BasePage
-from .blocks import AwardBlock
+from .blocks import AwardBlock, JobPlatformBlock, MediaBlock
 from .constants import JOB_BOARD_CHOICES
 from .text_utils import extract_salary_range
 
@@ -362,6 +362,24 @@ class AwardsSnippet(models.Model):
         return self.heading
 
 
+@register_snippet
+class JobPlatformsMediaSnippet(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.CharField(max_length=255)
+    cta = models.CharField(max_length=255, verbose_name="Call to action text")
+    job_platforms = StreamField([("platform", JobPlatformBlock())], use_json_field=True)
+    media_embed = StreamField(
+        [("media", MediaBlock())],
+        block_counts={
+            "media": {"max_num": 1},
+        },
+        use_json_field=True,
+    )
+
+    def __str__(self):
+        return self.title
+
+
 class RecruitmentHomePage(RoutablePageMixin, BasePage):
     template = "patterns/pages/home/home_page--jobs.html"
 
@@ -386,6 +404,14 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
     awards = models.ForeignKey(
         "recruitment.AwardsSnippet",
         verbose_name="Awards snippet",
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+    media = models.ForeignKey(
+        "recruitment.JobPlatformsMediaSnippet",
+        verbose_name="Job platforms media snippet",
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
@@ -427,8 +453,9 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
             ],
             "Hero",
         ),
-        FieldPanel("awards"),
         FieldPanel("body"),
+        FieldPanel("media"),
+        FieldPanel("awards"),
     ]
     settings_panels = BasePage.settings_panels + [
         FieldPanel(
