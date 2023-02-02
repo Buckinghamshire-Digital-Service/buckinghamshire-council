@@ -1,5 +1,16 @@
 .benefits-list {
     $root: &;
+    background-color: $color--light-grey;
+    padding: 0 $grid--small 60px;
+
+    @include media-query(tablet-portrait) {
+        padding: 0 $grid--large 60px;
+    }
+
+    &__wrap {
+        max-width: 990px;
+        margin: 0 auto;
+    }
 
     &__grid {
         display: flex;
@@ -7,7 +18,7 @@
         justify-content: space-between;
         flex-direction: column;
 
-        @include media-query(tablet-portrait) {
+        @include media-query(tablet-landscape) {
             flex-direction: row;
         }
     }
@@ -20,7 +31,7 @@
             margin-right: 0;
         }
 
-        @include media-query(tablet-portrait) {
+        @include media-query(tablet-landscape) {
             width: calc(33% - 30px);
             margin: 0 30px 50px 0;
         }
@@ -91,7 +102,7 @@
         position: relative;
         z-index: 2;
 
-        @include media-query(tablet-portrait) {
+        @include media-query(tablet-landscape) {
             @include font-size(l);
         }
     }

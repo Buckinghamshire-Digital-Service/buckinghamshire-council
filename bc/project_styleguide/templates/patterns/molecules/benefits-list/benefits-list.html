@@ -1,10 +1,11 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
-<section aria-labelledby="working-at-buckinghamshire-title" class="benefits-list">
-    <h2 class="heading heading--xxl" id="working-at-buckinghamshire-title">Working at Buckinghamshire</h2>
+<div class="u-breakout benefits-list">
+    <section aria-labelledby="working-at-buckinghamshire-title" class="benefits-list__wrap">
+        <h2 class="heading heading--xxl" id="working-at-buckinghamshire-title">Working at Buckinghamshire</h2>
 
-    <ul class="benefits-list__grid">
-        {% for benefit in benefits_list %}
+        <ul class="benefits-list__grid">
+            {% for benefit in benefits_list %}
             <li class="benefits-list__item{% if not benefit.image %} benefits-list__item--no-image{% endif %}">
                 <a class="benefits-list__card" href="{{ benefit.url }}">
                     {% if benefit.image %}
@@ -19,11 +20,12 @@
                     </div>
                 </a>
             </li>
-        {% endfor %}
-    </ul>
+            {% endfor %}
+        </ul>
 
-    <p class="benefits-list__link-wrap">
-        {# TODO: Add href var #}
-        <a class="benefits-list__bottom-link" href="#">Visit our guide page</a>
-    </p>
-</section>
+        <p class="benefits-list__link-wrap">
+            {# TODO: Add href var #}
+            <a class="benefits-list__bottom-link" href="#">Visit our guide page</a>
+        </p>
+    </section>
+</div>
