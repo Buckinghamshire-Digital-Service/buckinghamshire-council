@@ -1,83 +1,43 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
-{% comment %} TODO: To be updated as part of FE ticket {% endcomment %}
-
-<section class="job-platforms-block" aria-labelledby="job-platforms-title">
-    <h2 class="" id="job-platforms-title">{{ jobs_media_snippet.title }}</h2>
-    <div class="">
-        <p class="">{{ jobs_media_snippet.description }}</p>
-        <p class=""><strong>{{ jobs_media_snippet.cta }}</strong></p>
-    </div>
-    <ul class="job-platforms-block__list">
-        {% for job_platform in jobs_media_snippet.job_platforms %}
-            {% with job_platform.value as platform %}
-                <li class="job-platforms-block__list-item">
-                    <a class="job-platforms-block__link" href="{{ platform.url }}" aria-label="{{ platform.title }}">
-                        {% image platform.image max-185x90 %}
-                    </a>
-                </li>
-            {% endwith %}
-        {% endfor %}
-    </ul>
-    <div class="">
-        {% for media_item in jobs_media_snippet.media_embed %}
-            {# max_num = 1 so we actually don't expect more than 1 item #}
-            {% with media_item.value as item %}
-                {% comment "There are three cases to handle" %}
-                    1. image + embed
-                    2. image + url (no embed)
-                    3. embed only
-                {% endcomment %}
-                {% if item.image %}
-                    {% image item.image width-600 as video_preview %}
-                    {% if item.embed %} {# case 1 #}
-                        <div class="video-modal__wrapper" data-video-modal>
-                            <div class="video-modal__preview" style="background-image: url('{{ video_preview.file.url }}')">
-                                <a class="video-modal__button" aria-label="Open video" data-modal-open>
-                                    <svg class="video-modal__button-icon" width="65" height="65">
-                                        <use xlink:href="#play" />
-                                    </svg>
+<div class="u-breakout">
+    <section class="job-platforms-block" aria-labelledby="job-platforms-title">
+        <div class="job-platforms-block__inner">
+            <div class="job-platforms-block__content">
+                <h2 class="job-platforms-block__title" id="job-platforms-title">{{ jobs_media_snippet.title }}</h2>
+                <p class="job-platforms-block__text">{{ jobs_media_snippet.description }}</p>
+                <p class="job-platforms-block__text job-platforms-block__text--callout">{{ jobs_media_snippet.cta }}</p>
+                <ul class="job-platforms-block__list">
+                    {% for job_platform in jobs_media_snippet.job_platforms %}
+                        {% with job_platform.value as platform %}
+                            <li class="job-platforms-block__list-item">
+                                <a class="job-platforms-block__link" href="{{ platform.url }}" aria-label="{{ platform.title }}">
+                                    {% image platform.image max-185x90 %}
                                 </a>
-                            </div>
-                            <div data-modal-window class="video-modal" aria-live="polite">
-                                <button data-modal-close class="video-modal__close" aria-label="Close video">
-                                    <svg class="video-modal__close-icon" width="48" height="48">
-                                        <use xlink:href="#close" />
-                                    </svg>
-                                </button>
-                                <div class="video-modal__container">
-                                    <div style="padding-bottom: 56.25%;" class="responsive-object">
-                                        {{ item.embed }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    {% elif item.url %} {# case 2 #}
-                        <div class="">
-                            <a class="" href="{{ item.url }}">
-                                <img src="{{ video_preview.file.url }}"
-                                    alt="{{ video_preview.title }}"
-                                    class="" />
-                            </a>
+                            </li>
+                        {% endwith %}
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="job-platforms-block__media">
+                {% for block in jobs_media_snippet.media_embed %}
+                    {# max_num = 1 so we actually don't expect more than 1 item #}
+                    {% comment "There are two cases to handle" %}
+                        1. image + url
+                        2. embed only
+                    {% endcomment %}
+                    {% if block.block_type == 'image_with_link' %}
+                        <a class="job-platforms-block__image-link" href="{{ block.value.url }}" title="{{ block.value.url }}" aria-label="{{ block.value.url }}">
+                            {% image block.value.image fill-480x265 class="job-platforms-block__image" %}
+                        </a>
+                    {% elif block.block_type == 'embed' %}
+                        <div class="responsive-object job-platforms-block__embed">
+                            {{ block.value }}
                         </div>
                     {% endif %}
-                {% elif item.embed and not item.image %} {# case 3 #}
-                    <div class="video-modal__wrapper" data-video-modal>
-                        <div data-modal-window class="video-modal" aria-live="polite">
-                            <button data-modal-close class="video-modal__close" aria-label="Close video">
-                                <svg class="video-modal__close-icon" width="48" height="48">
-                                    <use xlink:href="#close" />
-                                </svg>
-                            </button>
-                            <div class="video-modal__container">
-                                <div style="padding-bottom: 56.25%;" class="responsive-object">
-                                    {{ item.embed }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endwith %}
-        {% endfor %}
-    </div>
-</section>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</div>

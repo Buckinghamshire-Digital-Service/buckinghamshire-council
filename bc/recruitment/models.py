@@ -368,13 +368,7 @@ class JobPlatformsMediaSnippet(models.Model):
     description = models.CharField(max_length=255)
     cta = models.CharField(max_length=255, verbose_name="Call to action text")
     job_platforms = StreamField([("platform", JobPlatformBlock())], use_json_field=True)
-    media_embed = StreamField(
-        [("media", MediaBlock())],
-        block_counts={
-            "media": {"max_num": 1},
-        },
-        use_json_field=True,
-    )
+    media_embed = StreamField(MediaBlock(), max_num=1, use_json_field=True)
 
     def __str__(self):
         return self.title

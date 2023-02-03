@@ -1,8 +1,4 @@
-from django.core.exceptions import ValidationError
-from django.forms.utils import ErrorList
-
 from wagtail import blocks
-from wagtail.blocks.struct_block import StructBlockValidationError
 from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 
@@ -29,61 +25,25 @@ class JobPlatformBlock(blocks.StructBlock):
         icon = "plus-inverse"
 
 
-class MediaBlock(blocks.StructBlock):
-    """Image or Embed or both"""
+class ImageWithLinkBlock(blocks.StructBlock):
+    """Image with link"""
 
-    embed = EmbedBlock(required=False)
-    image = ImageChooserBlock(required=False)
+    image = ImageChooserBlock()
     url = blocks.URLBlock(
-        required=False,
-        help_text="Optional URL for the image, if the embed is not specified",
+        help_text="Link for the image",
     )
 
-    def clean(self, value):
-        """
-        Valid combinations:
+    class Meta:
+        icon = "image"
 
-        1. embed
-        2. embed + image
-        3. image + url
-        """
-        struct_value = super().clean(value)
 
-        errors = {}
-        embed = value.get("embed")
-        image = value.get("image")
-        url = value.get("url")
+class MediaBlock(blocks.StreamBlock):
+    """Image with link or Embed"""
 
-        if not embed:
-            if not image:
-                error = ErrorList(
-                    [
-                        ValidationError(
-                            "Please specify either an image or an embed, or both."
-                        )
-                    ]
-                )
-                errors["embed"] = errors["image"] = error
-
-            if not url:
-                error = ErrorList(
-                    [
-                        ValidationError(
-                            "Please specify a url and an image if you are not using the embed field."
-                        )
-                    ]
-                )
-                errors["url"] = error
-        else:
-            if url:
-                error = ErrorList(
-                    [ValidationError("A url is not required if you specify an embed.")]
-                )
-                errors["url"] = error
-
-        if errors:
-            raise StructBlockValidationError(errors)
-        return struct_value
+    embed = EmbedBlock(
+        help_text="Embed URL, e.g. https://www.youtube.com/watch?v=Js8dIRxwSRY"
+    )
+    image_with_link = ImageWithLinkBlock()
 
     class Meta:
         icon = "media"
