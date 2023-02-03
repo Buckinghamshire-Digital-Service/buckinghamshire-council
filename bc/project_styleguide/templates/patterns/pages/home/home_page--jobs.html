@@ -11,8 +11,8 @@
 
 {% block content %}
 
-    {% if page.benefits_list %}
-        {% include "patterns/molecules/benefits-list/benefits-list.html" with benefits_list=page.benefits_list %}
+    {% if benefits_list %}
+        {% include "patterns/molecules/benefits-list/benefits-list.html" with benefits_list=benefits_list index_page=page.related_recruitment_index_page %}
     {% endif %}
 
     <section class="categories" aria-labelledby="job-cat-title">

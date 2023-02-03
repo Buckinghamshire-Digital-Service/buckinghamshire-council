@@ -6,26 +6,30 @@
 
         <ul class="benefits-list__grid">
             {% for benefit in benefits_list %}
-            <li class="benefits-list__item{% if not benefit.image %} benefits-list__item--no-image{% endif %}">
-                <a class="benefits-list__card" href="{{ benefit.url }}">
-                    {% if benefit.image %}
-                    {% image benefit.image fill-310x240 class="benefits-list__image" %}
-                    {% endif %}
-                    <div class="benefits-list__content">
-                        <svg class="benefits-list__wave" aria-hidden="true" focusable="false">
-                            <use xlink:href="#wave"></use>
-                        </svg>
-                        <h3 class="benefits-list__title">{{ benefit.title }}</h3>
-                        {% include "patterns/atoms/icons/icon.html" with name="arrow" classname="icon--benefit-arrow benefits-list__icon" %}
-                    </div>
-                </a>
-            </li>
+                {% comment %}
+                    The top 3 cards should be rendered with images, while the bottom 3 shouldn't
+                {% endcomment %}
+                <li class="benefits-list__item{% if forloop.counter > 3 %} benefits-list__item--no-image{% endif %}">
+                    <a class="benefits-list__card" href="{{ benefit.url }}">
+                        {% if forloop.counter < 4 %}
+                            {% if benefit.listing_image %}
+                                {% image benefit.listing_image fill-310x240 class="benefits-list__image" %}
+                            {% endif %}
+                        {% endif %}
+                        <div class="benefits-list__content">
+                            <svg class="benefits-list__wave" aria-hidden="true" focusable="false">
+                                <use xlink:href="#wave"></use>
+                            </svg>
+                            <h3 class="benefits-list__title">{{ benefit.title }}</h3>
+                            {% include "patterns/atoms/icons/icon.html" with name="arrow" classname="icon--benefit-arrow benefits-list__icon" %}
+                        </div>
+                    </a>
+                </li>
             {% endfor %}
         </ul>
 
         <p class="benefits-list__link-wrap">
-            {# TODO: Add href var #}
-            <a class="benefits-list__bottom-link" href="#">Visit our guide page</a>
+            <a class="benefits-list__bottom-link" href="{% pageurl index_page %}">Visit our guide page</a>
         </p>
     </section>
 </div>
