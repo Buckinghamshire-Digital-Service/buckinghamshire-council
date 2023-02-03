@@ -18,6 +18,32 @@
         display: inline-block;
     }
 
+    &__jobs-image {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 380px;
+        height: 500px;
+        mask-image: url('../images/hero-blob.png');
+        mask-repeat: no-repeat;
+        mask-size: 100%;
+        display: none;
+
+        @include media-query(tablet-landscape) {
+            display: block;
+        }
+
+        @include media-query(desktop) {
+            width: 600px;
+        }
+    }
+
+    &__search-link {
+        @include font-size(s);
+        text-decoration: none;
+        font-weight: $weight--bold;
+    }
+
     &--with-alert {
         @include media-query(tablet-portrait) {
             padding-bottom: 60px;
@@ -60,9 +86,15 @@
     }
 
     &--jobs {
-        background-color: $color--earth;
+        background-color: $color--light-grey;
         margin-bottom: $grid--large;
-        min-height: 330px;
+
+        @include media-query(tablet-landscape) {
+            position: relative;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+        }
 
         #{$root} {
             &__strapline {

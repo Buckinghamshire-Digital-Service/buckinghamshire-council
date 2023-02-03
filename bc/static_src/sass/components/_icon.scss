@@ -52,4 +52,28 @@
         width: 60px;
         height: 56px;
     }
+
+    &--blob-line {
+        fill: transparent;
+        width: 390px;
+        height: 310px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: none;
+
+        @include media-query(tablet-landscape) {
+            display: block;
+        }
+
+        @include media-query(desktop) {
+            width: 600px;
+            height: 500px;
+        }
+    }
+
+    &--hero-search-link {
+        stroke: $color--river;
+        width: 18px;
+    }
 }

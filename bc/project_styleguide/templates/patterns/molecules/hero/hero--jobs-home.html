@@ -1,7 +1,12 @@
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
-{# Note that the background image is set in the parent page template using the background-image-style.html include #}
-<div class="hero hero--jobs hero--with-search background-image-style">
+<div class="hero hero--jobs hero--with-search">
+
+    {% image page.hero_image fill-610x540 as hero_image %}
+
+    <div class="hero__jobs-image" style="background-image: url({{ hero_image.url }})"></div>
+    {% include "patterns/atoms/icons/icon.html" with name="blob-line" %}
+
     <div class="wrapper wrapper--large">
         <h1 class="hero__strapline heading heading--xxxl">{{ page.hero_title }}</h1>
 
@@ -15,7 +20,12 @@
                 </button>
             </form>
 
-            <a class="hero__search-link" href="{% url 'search' %}">{{ page.hero_link_text }}</a>
+            <p>
+                <a class="hero__search-link" href="{% url 'search' %}">
+                    {{ page.hero_link_text }}
+                    {% include "patterns/atoms/icons/icon.html" with name="arrow" classname="icon--hero-search-link" %}
+                </a>
+            </p>
         </div>
     </div>
 </div>

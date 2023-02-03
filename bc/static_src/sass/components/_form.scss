@@ -123,10 +123,13 @@
     }
 
     &--jobs-hero {
-        margin-bottom: 15px;
+        margin-bottom: 20px;
 
         input[type='text'] {
-            border: 0;
+            border: 1px solid $color--lighter-blue;
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+            max-width: 470px;
 
             // change colour to match bg and 'hide' placeholder on mobile, to avoid being cut off & unreadable
             &::placeholder {
