@@ -29,6 +29,7 @@ Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/67.1...68.
 - Replace awards with social media icons in Jobs page header
 - Add icons for category cards and update styles
 - Restyle jobs page hero
+- Add FE for job media block
 
 ## 67.1 (2023-01-31)
 
