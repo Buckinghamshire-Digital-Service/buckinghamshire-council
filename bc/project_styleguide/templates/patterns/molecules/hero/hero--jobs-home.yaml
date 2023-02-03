@@ -1,5 +1,13 @@
 context:
   page:
-    strapline: Find a job in Buckinghamshire
-  vacancies: 303
+    hero_title: Find your dream job
+    hero_subtitle: Over 100 job opportunities available daily.
+    hero_link_text: Browse all current vacancies
   search_url: '#'
+
+tags:
+  image:
+    page.hero_image fill-610x540 as hero_image:
+      target_var: hero_image
+      raw:
+        url: https://placekitten.com/g/610/540
