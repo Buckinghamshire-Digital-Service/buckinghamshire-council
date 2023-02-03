@@ -124,6 +124,11 @@
 
     &--jobs-hero {
         margin-bottom: 20px;
+        justify-content: center;
+
+        @include media-query(tablet-landscape) {
+            justify-content: flex-start;
+        }
 
         input[type='text'] {
             border: 1px solid $color--lighter-blue;

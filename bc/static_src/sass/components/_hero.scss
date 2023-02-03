@@ -4,9 +4,11 @@
     background-size: cover;
     background-position: center;
     padding: $grid 0;
+    text-align: center;
 
-    @include media-query(tablet-portrait) {
+    @include media-query(tablet-landscape) {
         padding: $grid--large 0;
+        text-align: left;
     }
 
     &__strapline {
@@ -96,9 +98,15 @@
             align-items: center;
         }
 
-        #{$root} {
-            &__strapline {
-                line-height: 1.2;
+        #{$root}__strapline {
+            color: $color--default;
+            line-height: 1.2;
+            max-width: 100%;
+            text-align: center;
+
+            @include media-query(tablet-landscape) {
+                max-width: 530px;
+                text-align: left;
             }
         }
     }
