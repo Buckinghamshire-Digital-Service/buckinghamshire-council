@@ -11,7 +11,7 @@
                         <a class="awards-block__link" href="{{ award.url }}" aria-label="{{ award.title }}">
                     {% endif %}
 
-                        {% image award.image max-185x90 %}
+                        {% image award.image max-185x90 title=award.title %}
 
                     {% if award.url %}
                         </a>
