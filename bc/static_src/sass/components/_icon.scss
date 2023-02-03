@@ -70,6 +70,10 @@
             width: 600px;
             height: 500px;
         }
+
+        @include target-ie11() {
+            display: none;
+        }
     }
 
     &--hero-search-link {
