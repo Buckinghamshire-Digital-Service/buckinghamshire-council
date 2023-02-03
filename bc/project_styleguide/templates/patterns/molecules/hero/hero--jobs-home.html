@@ -10,6 +10,10 @@
     <div class="wrapper wrapper--large">
         <h1 class="hero__strapline heading heading--xxxl">{{ page.hero_title }}</h1>
 
+        {% if page.hero_subtitle %}
+            <p class="hero__subtitle">{{ page.hero_subtitle }}</p>
+        {% endif %}
+
         <div class="hero__search">
             <form action="{% url 'search' %}" method="get" role="search" class="form form--hero-search form--jobs-hero">
                 <input class="input" id="search--hero" type="text" placeholder="Search jobs, e.g. “Teacher in Aylesbury”" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>

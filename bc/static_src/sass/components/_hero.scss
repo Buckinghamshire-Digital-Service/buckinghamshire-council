@@ -46,6 +46,11 @@
         font-weight: $weight--bold;
     }
 
+    &__subtitle {
+        @include font-size(s);
+        margin-top: 0;
+    }
+
     &--with-alert {
         @include media-query(tablet-portrait) {
             padding-bottom: 60px;
@@ -103,6 +108,7 @@
             line-height: 1.2;
             max-width: 100%;
             text-align: center;
+            margin-bottom: 15px;
 
             @include media-query(tablet-landscape) {
                 max-width: 530px;
