@@ -23,22 +23,6 @@ class JobSubcategoryFactory(factory.django.DjangoModelFactory):
         model = "recruitment.JobSubcategory"
 
 
-class RecruitmentIndexPageFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = "recruitment.RecruitmentIndexPage"
-
-    title = factory.Sequence(lambda n: f"Recruitment IndexPage")
-    listing_summary = "Recruitment IndexPage"
-    hero_image = factory.SubFactory("bc.images.tests.fixtures.ImageFactory")
-
-    @classmethod
-    def build_with_fk_objs_committed(cls, **kwargs):
-        from bc.images.tests.fixtures import ImageFactory
-
-        image = ImageFactory()
-        return cls.build(hero_image=image, **kwargs)
-
-
 class RecruitmentHomePageFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = "recruitment.RecruitmentHomePage"
@@ -46,9 +30,6 @@ class RecruitmentHomePageFactory(factory.django.DjangoModelFactory):
     title = factory.Sequence(lambda n: f"Recruitment HomePage")
     listing_summary = "Recruitment HomePage"
     hero_image = factory.SubFactory("bc.images.tests.fixtures.ImageFactory")
-    related_recruitment_index_page = factory.SubFactory(
-        "bc.recruitment.tests.fixtures.RecruitmentIndexPageFactory"
-    )
     hero_title = "foo"
     hero_link_text = "foo"
     search_box_placeholder = "foo"
@@ -59,10 +40,8 @@ class RecruitmentHomePageFactory(factory.django.DjangoModelFactory):
         from bc.images.tests.fixtures import ImageFactory
 
         image = ImageFactory()
-        related_recruitment_index_page = RecruitmentIndexPageFactory()
         return cls.build(
             hero_image=image,
-            related_recruitment_index_page=related_recruitment_index_page,
             **kwargs,
         )
 

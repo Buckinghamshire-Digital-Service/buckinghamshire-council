@@ -476,16 +476,6 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
         ),
     ]
 
-    def clean(self):
-        super().clean()
-        # related_recruitment_index_page must be specified
-        if not self.related_recruitment_index_page:
-            raise ValidationError(
-                {
-                    "related_recruitment_index_page": "The related recruitment index page must be set."
-                }
-            )
-
     def get_related_recruitment_index_page_subpages(self):
         """
         Return the first 6 subpages of the specified related_recruitment_index_page
