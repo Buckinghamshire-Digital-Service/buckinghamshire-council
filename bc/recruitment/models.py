@@ -22,6 +22,7 @@ from wagtail import blocks
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.fields import StreamField
+from wagtail.models import Page
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 
@@ -384,6 +385,11 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
     hero_title = models.CharField(
         max_length=255, help_text="e.g. Finding a job in Buckinghamshire"
     )
+    hero_subtitle = models.CharField(
+        max_length=255,
+        blank=True,
+        help_text="e.g. Over 100 job opportunities available daily.",
+    )
     hero_image = models.ForeignKey(
         "images.CustomImage",
         null=True,
@@ -435,6 +441,14 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
         blank=True,
         use_json_field=True,
     )
+    related_recruitment_index_page = models.ForeignKey(
+        "recruitment.RecruitmentIndexPage",
+        on_delete=models.PROTECT,
+        null=True,
+        related_name="+",
+        help_text="The page whose “top 6” child pages will be displayed as cards on the current page",
+    )
+
     search_fields = BasePage.search_fields + [index.SearchField("hero_title")]
 
     content_panels = BasePage.content_panels + [
@@ -450,6 +464,7 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
         FieldPanel("body"),
         FieldPanel("media"),
         FieldPanel("awards"),
+        FieldPanel("related_recruitment_index_page"),
     ]
     settings_panels = BasePage.settings_panels + [
         FieldPanel(
@@ -460,8 +475,17 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
         ),
     ]
 
+    def get_related_recruitment_index_page_subpages(self):
+        """
+        Return the first 6 subpages of the specified related_recruitment_index_page
+        """
+        if self.related_recruitment_index_page:
+            return self.related_recruitment_index_page.child_pages[:6]
+        return Page.objects.none()
+
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
+        context["benefits_list"] = self.get_related_recruitment_index_page_subpages()
         context["job_categories"] = JobCategory.get_categories_summary(homepage=self)
 
         return context
