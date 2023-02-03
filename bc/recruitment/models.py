@@ -445,6 +445,7 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
         "recruitment.RecruitmentIndexPage",
         on_delete=models.PROTECT,
         null=True,
+        blank=True,
         related_name="+",
         help_text="The page whose “top 6” child pages will be displayed as cards on the current page",
     )
@@ -474,6 +475,16 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
             ),
         ),
     ]
+
+    def clean(self):
+        super().clean()
+        # related_recruitment_index_page must be specified
+        if not self.related_recruitment_index_page:
+            raise ValidationError(
+                {
+                    "related_recruitment_index_page": "The related recruitment index page must be set."
+                }
+            )
 
     def get_related_recruitment_index_page_subpages(self):
         """
