@@ -2,9 +2,11 @@
     $root: &;
     background-color: $color--light-grey;
     padding: 0 $grid--small 60px;
+    margin-bottom: 30px;
 
     @include media-query(tablet-portrait) {
         padding: 0 $grid--large 60px;
+        margin-bottom: 60px;
     }
 
     &__wrap {

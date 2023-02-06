@@ -94,7 +94,6 @@
 
     &--jobs {
         background-color: $color--light-grey;
-        margin-bottom: $grid--large;
 
         @include media-query(tablet-landscape) {
             position: relative;
