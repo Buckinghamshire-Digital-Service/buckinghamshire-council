@@ -479,6 +479,9 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
     def get_related_recruitment_index_page_subpages(self):
         """
         Return the first 6 subpages of the specified related_recruitment_index_page
+
+        NOTE: in the template, the first 3 subpages are rendered with images,
+        while the images are not rendered for the last three.
         """
         if self.related_recruitment_index_page:
             return self.related_recruitment_index_page.child_pages[:6]
