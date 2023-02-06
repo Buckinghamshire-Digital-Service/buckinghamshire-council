@@ -31,6 +31,8 @@ Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/67.1...68.
 - Restyle jobs page hero
 - Add FE for job media block
 - Add JobPlatformBlock, MediaBlock & JobPlatformsMediaSnippet
+- Add hero subtitle to **RecruitmentHomePage**,
+- Update **RecruitmentHomePage** to display the first 6 children of a specified **RecruitmentIndexPage**.
 
 ## 67.1 (2023-01-31)
 
