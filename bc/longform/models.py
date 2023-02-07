@@ -87,7 +87,7 @@ class LongformPage(BasePage):
         return 1 if self.is_numbered else None
 
     def get_index(self):
-        return [self] + list(self.get_children().specific())
+        return [self] + list(self.get_children().live().specific())
 
     @property
     def content_title(self):
