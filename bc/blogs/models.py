@@ -233,7 +233,7 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
         categories = (
             self.blog_categories.annotate(
                 num_related_posts=models.Count(
-                    "related_posts", models.Q(related_posts__live=True)
+                    "related_posts", filter=models.Q(related_posts__live=True)
                 )
             )
             .filter(num_related_posts__gt=0)
