@@ -7,7 +7,7 @@ from django.utils.functional import cached_property
 
 from wagtail import blocks
 from wagtail.admin.staticfiles import versioned_static
-from wagtail.contrib.table_block.blocks import TableBlock
+from wagtail.contrib.table_block.blocks import TableBlock as BaseTableBlock
 from wagtail.contrib.typed_table_block.blocks import TypedTableBlock
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
@@ -15,8 +15,24 @@ from wagtail.images.blocks import ImageChooserBlock
 
 from .constants import RICH_TEXT_FEATURES
 from .models import ImportantPages
-from .utils import is_number
+from .utils import convert_markdown_links_to_html, is_number
 from .widgets import BarChartInput, LineChartInput, PieChartInput
+
+
+class TableBlock(BaseTableBlock):
+    def render(self, value, context=None):
+        data = value["data"]
+        for row_index, row in enumerate(data):
+            for cell_index, cell in enumerate(row):
+                if cell:
+                    data[row_index][cell_index] = convert_markdown_links_to_html(cell)
+        value["data"] = data
+        return super().render(value, context)
+
+    def get_table_options(self, table_options=None):
+        options = super().get_table_options(table_options)
+        options["renderer"] = "html"
+        return options
 
 
 class AlignedBlock(blocks.StreamBlock):
