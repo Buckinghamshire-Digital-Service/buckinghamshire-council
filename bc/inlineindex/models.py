@@ -33,6 +33,7 @@ class InlineIndexMixin(object):
         return self.has_unpublished_changes or not self.live
 
     def viewing_page_draft(self, request):
+        request.is_preview = getattr(request, "is_preview", False)
         return request.is_preview and self.draft_for_page_available()
 
     def get_index_page_and_children(self, include_draft_pages):
