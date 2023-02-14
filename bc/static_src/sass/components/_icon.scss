@@ -55,8 +55,8 @@
 
     &--blob-line {
         fill: transparent;
-        width: 390px;
-        height: 310px;
+        width: 500px;
+        height: 420px;
         position: absolute;
         top: 0;
         right: 0;
@@ -69,6 +69,7 @@
         @include media-query(desktop) {
             width: 600px;
             height: 500px;
+            right: -130px;
         }
 
         @include target-ie11() {

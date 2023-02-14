@@ -22,12 +22,15 @@
         position: absolute;
         top: 0;
         right: 0;
-        width: 380px;
+        width: 500px;
         height: 500px;
         mask-image: url('../images/hero-blob.png');
         mask-repeat: no-repeat;
         mask-size: 100%;
         display: none;
+        background-position: top right;
+        background-repeat: no-repeat;
+        background-size: contain;
 
         @include media-query(tablet-landscape) {
             display: block;
@@ -35,6 +38,7 @@
 
         @include media-query(desktop) {
             width: 600px;
+            right: -130px;
         }
     }
 
@@ -47,6 +51,25 @@
     &__subtitle {
         @include font-size(s);
         margin-top: 0;
+    }
+
+    &__jobs-wrapper {
+        position: relative;
+        width: 100%;
+
+        @include media-query(desktop) {
+            max-width: $site-width;
+            margin: 0 auto;
+        }
+    }
+
+    &__jobs-content {
+        padding-left: 40px;
+        padding-top: 115px;
+
+        @include media-query(desktop) {
+            padding-left: 50px;
+        }
     }
 
     &--with-alert {
@@ -105,16 +128,14 @@
     &--jobs-home {
         background-color: $color--light-grey;
         text-align: center;
+        padding: 0;
 
         @include media-query(tablet-portrait) {
             text-align: left;
         }
 
         @include media-query(tablet-landscape) {
-            position: relative;
             min-height: 500px;
-            display: flex;
-            align-items: center;
         }
 
         #{$root}__strapline {

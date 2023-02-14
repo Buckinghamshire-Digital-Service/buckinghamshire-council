@@ -136,6 +136,14 @@
             border-bottom-left-radius: 3px;
             max-width: 470px;
 
+            @include media-query(tablet-landscape) {
+                max-width: 370px;
+            }
+
+            @include media-query(desktop) {
+                max-width: 470px;
+            }
+
             // change colour to match bg and 'hide' placeholder on mobile, to avoid being cut off & unreadable
             &::placeholder {
                 color: $color--white;
