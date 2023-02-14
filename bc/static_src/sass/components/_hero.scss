@@ -4,11 +4,9 @@
     background-size: cover;
     background-position: center;
     padding: $grid 0;
-    text-align: center;
 
-    @include media-query(tablet-landscape) {
+    @include media-query(tablet-portrait) {
         padding: $grid--large 0;
-        text-align: left;
     }
 
     &__strapline {
@@ -93,7 +91,24 @@
     }
 
     &--jobs {
+        background-color: $color--earth;
+        min-height: 330px;
+
+        #{$root} {
+            &__strapline {
+                color: $color--default;
+                line-height: 1.2;
+            }
+        }
+    }
+
+    &--jobs-home {
         background-color: $color--light-grey;
+        text-align: center;
+
+        @include media-query(tablet-portrait) {
+            text-align: left;
+        }
 
         @include media-query(tablet-landscape) {
             position: relative;
