@@ -64,8 +64,14 @@
     }
 
     &__jobs-content {
-        padding-left: 40px;
-        padding-top: 115px;
+        padding: 50px 10px;
+        text-align: center;
+
+        @include media-query(tablet-landscape) {
+            padding-left: 40px;
+            padding-top: 115px;
+            text-align: left;
+        }
 
         @include media-query(desktop) {
             padding-left: 50px;
