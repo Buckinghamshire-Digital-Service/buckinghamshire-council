@@ -146,6 +146,7 @@
             margin-bottom: 15px;
 
             @include media-query(tablet-landscape) {
+                @include font-size(xxxxl);
                 max-width: 530px;
                 text-align: left;
             }
