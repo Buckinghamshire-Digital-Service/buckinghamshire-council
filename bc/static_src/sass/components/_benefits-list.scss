@@ -155,4 +155,12 @@
             height: 130px;
         }
     }
+
+    &__heading {
+        text-align: center;
+
+        @include media-query(tablet-landscape) {
+            text-align: left;
+        }
+    }
 }

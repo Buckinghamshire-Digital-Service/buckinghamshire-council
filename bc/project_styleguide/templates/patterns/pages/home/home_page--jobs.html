@@ -16,7 +16,7 @@
     {% endif %}
 
     <section class="categories" aria-labelledby="job-cat-title">
-        <h2 class="heading heading--xl" id="job-cat-title">Search top job categories</h2>
+        <h2 class="heading heading--xl categories__heading" id="job-cat-title">Search top job categories</h2>
 
         <div class="categories__grid grid grid--categories">
             {% for cat in job_categories|slice:":6" %}

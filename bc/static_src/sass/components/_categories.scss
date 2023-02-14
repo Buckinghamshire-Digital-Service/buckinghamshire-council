@@ -70,6 +70,14 @@
         position: absolute;
     }
 
+    &__heading {
+        text-align: center;
+
+        @include media-query(tablet-landscape) {
+            text-align: left;
+        }
+    }
+
     @include target-ie11() {
         &__category-title,
         &__job-count {
