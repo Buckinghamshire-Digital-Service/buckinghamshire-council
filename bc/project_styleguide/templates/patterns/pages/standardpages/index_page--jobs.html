@@ -9,10 +9,10 @@
 {% endblock %}
 
 {% block hero %}
-    {% include "patterns/molecules/hero/hero--jobs.html" %}
+    {% include "patterns/molecules/hero/hero--jobs-home.html" with show_breadcrumbs=True %}
 {% endblock %}
 
-{% comment %} breadcrumbs included inside hero--jobs.html {% endcomment %}
+{% comment %} breadcrumbs included inside hero--jobs-home.html {% endcomment %}
 {% block breadcrumbs %}{% endblock %}
 
 {% block content %}
