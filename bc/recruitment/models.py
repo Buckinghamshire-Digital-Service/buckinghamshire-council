@@ -449,6 +449,12 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
         related_name="+",
         help_text="The page whose “top 6” child pages will be displayed as cards on the current page",
     )
+    recruitment_index_link_text = models.CharField(
+        verbose_name="Related recruitment index page link text",
+        max_length=255,
+        blank=True,
+        help_text="e.g. If blank, a default of 'Visit our guide page' will be used",
+    )
 
     search_fields = BasePage.search_fields + [index.SearchField("hero_title")]
 
@@ -456,6 +462,7 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
         MultiFieldPanel(
             [
                 FieldPanel("hero_title"),
+                FieldPanel("hero_subtitle"),
                 FieldPanel("hero_image"),
                 FieldPanel("search_box_placeholder"),
                 FieldPanel("hero_link_text"),
@@ -466,6 +473,7 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
         FieldPanel("media"),
         FieldPanel("awards"),
         FieldPanel("related_recruitment_index_page"),
+        FieldPanel("recruitment_index_link_text"),
     ]
     settings_panels = BasePage.settings_panels + [
         FieldPanel(

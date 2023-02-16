@@ -29,7 +29,7 @@
         </ul>
 
         <p class="benefits-list__link-wrap">
-            <a class="benefits-list__bottom-link" href="{% pageurl index_page %}">Visit our guide page</a>
+            <a class="benefits-list__bottom-link" href="{% pageurl index_page %}">{% firstof page.recruitment_index_link_text "Visit our guide page" %}</a>
         </p>
     </section>
 </div>
