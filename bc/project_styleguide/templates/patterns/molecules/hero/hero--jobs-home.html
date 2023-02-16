@@ -5,6 +5,13 @@
     {% image page.hero_image fill-610x540 as hero_image %}
 
     <div class="hero__jobs-wrapper">
+
+        {% if show_breadcrumbs %}
+            <div class="wrapper wrapper--large">
+                {% include "patterns/molecules/navigation/breadcrumbs.html" %}
+            </div>
+        {% endif %}
+
         <div class="hero__jobs-image" style="background-image: url({{ hero_image.url }})"></div>
         {% include "patterns/atoms/icons/icon.html" with name="blob-line" %}
         <div class="hero__jobs-content">

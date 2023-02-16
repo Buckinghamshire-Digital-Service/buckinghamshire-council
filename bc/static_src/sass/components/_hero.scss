@@ -177,4 +177,13 @@
     &--404 {
         margin-bottom: $grid;
     }
+
+    // Account for breadcrumb
+    .template-jobs-index & {
+        &__jobs-content {
+            @include media-query(tablet-landscape) {
+                padding-top: 85px;
+            }
+        }
+    }
 }

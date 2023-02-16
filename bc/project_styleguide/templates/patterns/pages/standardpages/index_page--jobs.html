@@ -1,6 +1,8 @@
 {% extends base_page_template %}
 {% load wagtailcore_tags wagtailimages_tags navigation_tags static %}
 
+{% block body_class %}template-jobs-index {{ block.super }}{% endblock %}
+
 {% block extra_css %}
     {% image page.hero_image fill-450x350 as mobile_image %}
     {% image page.hero_image fill-900x700 as retina_mobile_image %}
