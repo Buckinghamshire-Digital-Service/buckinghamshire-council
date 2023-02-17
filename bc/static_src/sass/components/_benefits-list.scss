@@ -273,5 +273,29 @@
 
     .template-jobs-index & {
         margin-bottom: 0;
+
+        &__item {
+            &--no-image {
+                margin-top: 30px;
+
+                @include media-query(tablet-landscape) {
+                    margin-top: 0;
+                }
+            }
+        }
+
+        &__grid {
+            @include media-query(tablet-landscape) {
+                align-items: flex-start;
+            }
+        }
+
+        &__content {
+            min-height: 215px;
+
+            @include media-query(tablet-landscape) {
+                min-height: 185px;
+            }
+        }
     }
 }
