@@ -29,7 +29,7 @@
                                     </svg>
                                     <h3 class="benefits-list__title">{% firstof subpage.listing_title subpage.title %}</h3>
                                     {% if subpage.listing_summary %}
-                                        <p class="">{{ subpage.listing_summary }}</p>
+                                        <p class="benefits-list__text">{{ subpage.listing_summary }}</p>
                                     {% endif %}
                                     {% include "patterns/atoms/icons/icon.html" with name="arrow" classname="icon--benefit-arrow benefits-list__icon" %}
                                 </div>
