@@ -41,7 +41,9 @@
         </div>
     {% endif %}
 
-    <section class="section section--main" aria-label="subpages">
-        {% include_block page.body %}
-    </section>
+    {% if page.body %}
+        <section class="section section--main" aria-label="subpages">
+            {% include_block page.body %}
+        </section>
+    {% endif %}
 {% endblock %}
