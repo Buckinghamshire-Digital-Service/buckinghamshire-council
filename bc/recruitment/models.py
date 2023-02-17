@@ -579,13 +579,24 @@ class RecruitmentIndexPage(BasePage):
     hero_image = models.ForeignKey(
         "images.CustomImage",
         null=True,
+        blank=True,
         related_name="+",
         on_delete=models.SET_NULL,
+    )
+    hero_subtitle = models.CharField(
+        max_length=255,
+        blank=True,
     )
     body = StreamField(StoryBlock(required=False), blank=True, use_json_field=True)
 
     content_panels = BasePage.content_panels + [
-        FieldPanel("hero_image"),
+        MultiFieldPanel(
+            [
+                FieldPanel("hero_subtitle"),
+                FieldPanel("hero_image"),
+            ],
+            "Hero",
+        ),
         FieldPanel("body"),
     ]
 
