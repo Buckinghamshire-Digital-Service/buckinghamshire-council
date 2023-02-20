@@ -13,7 +13,9 @@
                     <a class="benefits-list__card" href="{{ benefit.url }}">
                         {% if forloop.counter < 4 %}
                             {% if benefit.listing_image %}
-                                {% image benefit.listing_image fill-310x240 class="benefits-list__image" %}
+                                <div class="benefits-list__image-wrap">
+                                    {% image benefit.listing_image fill-310x240 class="benefits-list__image" %}
+                                </div>
                             {% endif %}
                         {% endif %}
                         <div class="benefits-list__content">

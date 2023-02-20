@@ -95,12 +95,22 @@
             #{$root}__icon {
                 transform: translate3d(5px, 0, 0);
             }
+
+            #{$root}__image {
+                transform: scale(1.1);
+            }
         }
     }
 
     &__image {
         border-top-left-radius: 3px;
         border-top-right-radius: 3px;
+        transform: scale(1);
+        transition: transform $transition;
+    }
+
+    &__image-wrap {
+        overflow: hidden;
     }
 
     &__title {
