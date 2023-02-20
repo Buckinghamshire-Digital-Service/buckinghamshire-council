@@ -20,7 +20,9 @@
                             <a class="benefits-list__card" href="{% pageurl subpage %}">
 
                                 {% if subpage.listing_image %}
-                                    {% image subpage.listing_image fill-310x240 class="benefits-list__image" %}
+                                    <div class="benefits-list__image-wrap">
+                                        {% image subpage.listing_image fill-310x240 class="benefits-list__image" %}
+                                    </div>
                                 {% endif %}
 
                                 <div class="benefits-list__content">
