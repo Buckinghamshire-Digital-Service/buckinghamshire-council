@@ -6,12 +6,18 @@
 
         <ul class="benefits-list__grid">
             {% for benefit in benefits_list %}
-                <li class="benefits-list__item">
+                {% comment %}
+                    The top 3 cards should be rendered with images, while the bottom 3 shouldn't.
+                    The 3rd card shows the image on desktop but not on tablet/mobile.
+                {% endcomment %}
+                <li class="benefits-list__item{% if forloop.counter > 3 %} benefits-list__item--no-image{% endif %}{% if forloop.counter == 3 %} benefits-list__item--third{% endif %}">
                     <a class="benefits-list__card" href="{{ benefit.url }}">
-                        {% if benefit.listing_image %}
-                            <div class="benefits-list__image-wrap">
-                                <img src="https://via.placeholder.com/310x240" alt="" class="benefits-list__image">
-                            </div>
+                        {% if forloop.counter < 4 %}
+                            {% if benefit.listing_image %}
+                                <div class="benefits-list__image-wrap">
+                                    {% image benefit.listing_image fill-310x240 class="benefits-list__image" %}
+                                </div>
+                            {% endif %}
                         {% endif %}
                         <div class="benefits-list__content">
                             <svg class="benefits-list__wave" aria-hidden="true" focusable="false">
