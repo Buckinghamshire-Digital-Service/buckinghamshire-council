@@ -34,10 +34,10 @@
                 </form>
             </div>
 
-            {% get_fis_directory as fis_directory_url %}
-            {% if fis_directory_url %}
+            {% get_directory_url as directory_url %}
+            {% if directory_url %}
                 <p class="search-header__outro">
-                    <a href="{{ fis_directory_url }}">Find local activities and organisations</a>
+                    <a href="{{ directory_url }}">Find local activities and organisations</a>
                     in our directory.
                 </p>
             {% endif %}
