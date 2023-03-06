@@ -10,10 +10,12 @@
     }
 
     &__strapline {
-        color: $color--white;
+        color: $color--off-black;
         line-height: 1.2;
-        max-width: 530px;
         margin-bottom: $grid;
+        padding: $grid--small;
+        background-color: $color--white;
+        display: inline-block;
     }
 
     &--with-alert {
@@ -28,18 +30,21 @@
 
         #{$root} {
             &__heading {
-                color: $color--white;
+                color: $color--off-black;
                 margin-bottom: $grid;
                 max-width: 600px;
+                background-color: $color--white;
+                padding: $grid--small;
+                padding-bottom: 0;
             }
 
             &__strapline {
                 @include font-size(m);
-                color: $color--white;
                 display: none;
                 line-height: 1.4;
                 margin-top: 0;
                 margin-bottom: $grid--small;
+                color: $color--off-black;
             }
 
             @include media-query(tablet-portrait) {
@@ -61,9 +66,15 @@
 
         #{$root} {
             &__strapline {
-                color: $color--default;
                 line-height: 1.2;
             }
+        }
+    }
+
+    // Added so that this doesn't get lost during resolving merge conflicts with the jobs branch
+    &--jobs-home {
+        #{$root}__strapline {
+            background-color: transparent;
         }
     }
 
