@@ -27,6 +27,9 @@ def convert_markdown_links_to_html(text):
             link = match.group(3)
             link_text = match.group(3)
         if link and link_text:
+            # check if link is a number
+            if is_number(link):
+                continue
             if not link.startswith("http"):
                 link = "http://" + link
             text = text.replace(

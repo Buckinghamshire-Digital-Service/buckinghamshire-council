@@ -33,3 +33,15 @@ class TestMarkdownLinksConverter(SimpleTestCase):
             "www.example.com?query=string</a>"
         )
         self.assertEqual(convert_markdown_links_to_html(text), expected)
+
+    def test_with_float_number(self):
+        text = "A line with a text and a link 1.5"
+        expected = "A line with a text and a link 1.5"
+        self.assertEqual(convert_markdown_links_to_html(text), expected)
+
+    def test_with_ipaddress(self):
+        text = "A line with a text and a link 127.0.0.1"
+        expected = (
+            'A line with a text and a link <a href="http://127.0.0.1">127.0.0.1</a>'
+        )
+        self.assertEqual(convert_markdown_links_to_html(text), expected)
