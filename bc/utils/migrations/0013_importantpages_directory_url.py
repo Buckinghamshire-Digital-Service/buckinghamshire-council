@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("utils", "0011_wagtail_3_upgrade"),
+        ("utils", "0012_sort_collections_order"),
     ]
 
     operations = [
