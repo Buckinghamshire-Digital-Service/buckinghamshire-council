@@ -13,3 +13,13 @@ ALERT_SUBSCRIPTION_STATUSES = {
     "STATUS_LINK_EXPIRED": "link_expired",
     "STATUS_UNSUBSCRIBED": "unsubscribed",
 }
+
+PLAIN_TEXT_TABLE_HELP_TEXT = """This table will be displayed as plain text on the page. You can add links to individuals cells by:
+    <br>
+    <ul>
+        <li>simply pasting the link into the cell. e.g. if www.gov.uk is pasted onto the table, it will be
+        output as <a href="http://www.gov.uk">www.gov.uk</a></li>
+        <li>adding a link with a different link text, this can be done using the following syntax:
+        [link text](www.gov.uk). This will output as <a href="http://www.gov.uk">link text</a></li>
+    </ul>
+    """
