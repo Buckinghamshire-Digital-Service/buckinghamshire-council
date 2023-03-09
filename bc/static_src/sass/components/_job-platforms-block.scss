@@ -25,7 +25,7 @@
     &__media {
         width: 100%;
         background-image: url('../images/wave.svg');
-        padding: 50px 30px 30px;
+        padding: 70px 30px 30px;
         background-repeat: no-repeat;
         background-size: contain;
 
@@ -41,6 +41,7 @@
         }
 
         @include media-query(px550) {
+            padding: 110px 30px 30px;
             background-size: cover;
         }
 
