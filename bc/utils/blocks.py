@@ -4,19 +4,38 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
 from django.utils.functional import cached_property
+from django.utils.safestring import mark_safe
 
 from wagtail import blocks
 from wagtail.admin.staticfiles import versioned_static
-from wagtail.contrib.table_block.blocks import TableBlock
+from wagtail.contrib.table_block.blocks import TableBlock as BaseTableBlock
 from wagtail.contrib.typed_table_block.blocks import TypedTableBlock
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 
-from .constants import RICH_TEXT_FEATURES
+from .constants import PLAIN_TEXT_TABLE_HELP_TEXT, RICH_TEXT_FEATURES
 from .models import ImportantPages
-from .utils import is_number
+from .utils import convert_markdown_links_to_html, is_number
 from .widgets import BarChartInput, LineChartInput, PieChartInput
+
+
+class TableBlock(BaseTableBlock):
+    def render(self, value, context=None):
+        if not value:
+            return super().render(value, context)
+        data = value["data"]
+        for row_index, row in enumerate(data):
+            for cell_index, cell in enumerate(row):
+                if cell:
+                    data[row_index][cell_index] = convert_markdown_links_to_html(cell)
+        value["data"] = data
+        return super().render(value, context)
+
+    def get_table_options(self, table_options=None):
+        options = super().get_table_options(table_options)
+        options["renderer"] = "html"
+        return options
 
 
 class AlignedBlock(blocks.StreamBlock):
@@ -41,19 +60,36 @@ class CaptionedTableBlock(blocks.StructBlock):
         ctx = super().get_context(value, parent_context)
 
         rows = []
-        columns = next(ctx["value"]["table"].rows)
         num_rows = 0
 
-        for column_data in columns:
-            # column_data.value contains the cells of a single column
-            block_name = column_data.block.name
-            curr_row = 0
-            for row_data in column_data.value:
-                if num_rows <= curr_row:
-                    rows.append([])
-                    num_rows += 1
-                rows[curr_row].append({"block_name": block_name, "value": row_data})
-                curr_row += 1
+        for row in value["table"].rows:
+            rows.append([])
+            for col_ind, col in enumerate(row):
+                for internal_ind, internal_col in enumerate(col.value):
+                    while internal_ind + num_rows >= len(rows):
+                        rows.append([])
+                    rows[internal_ind + num_rows].append(
+                        {
+                            "block_name": col.block.name,
+                            "value": internal_col,
+                            "ind": col_ind,
+                        }
+                    )
+            num_rows = len(rows)
+
+        if rows:
+            # equalise all rows to maintain alignment
+            max_row_length = max([len(row) for row in rows])
+            for row in rows:
+                for i in range(max_row_length):
+                    try:
+                        col = row[i]
+                        if col["ind"] != i:
+                            row.insert(
+                                i, {"block_name": "rich_text", "value": "", "ind": i}
+                            )
+                    except IndexError:
+                        row.append({"block_name": "rich_text", "value": "", "ind": i})
 
         ctx["value"]["rows"] = rows
         return ctx
@@ -98,7 +134,7 @@ class HighlightBlock(blocks.RichTextBlock):
 
     def __init__(self, *args, **kwargs):
         # Setting features in class Meta doesn't work, so add it on init
-        default_features = ["h3", "big-text"] + RICH_TEXT_FEATURES
+        default_features = ["h2", "h3", "big-text"] + RICH_TEXT_FEATURES
         features = kwargs.get("features", default_features)
         super().__init__(*args, features=features, **kwargs)
 
@@ -482,7 +518,9 @@ class BaseStoryBlock(blocks.StreamBlock):
     image = ImageBlock()
     embed = EmbedBlock()
     local_area_links = LocalAreaLinksBlock()
-    plain_text_table = TableBlock(group="Table")
+    plain_text_table = TableBlock(
+        group="Table", help_text=mark_safe(PLAIN_TEXT_TABLE_HELP_TEXT)
+    )
     table = CaptionedTableBlock(group="Table")
     button = ButtonBlock()
     highlight = HighlightBlock()

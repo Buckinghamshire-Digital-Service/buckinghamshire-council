@@ -777,9 +777,6 @@ EMAIL_BACKEND = "django_gov_notify.backends.NotifyEmailBackend"
 GOVUK_NOTIFY_API_KEY = env.get("GOVUK_NOTIFY_API_KEY")
 GOVUK_NOTIFY_PLAIN_EMAIL_TEMPLATE_ID = env.get("GOVUK_NOTIFY_PLAIN_EMAIL_TEMPLATE_ID")
 
-# FIS directory
-FIS_DIRECTORY_BASE_URL = env.get("FIS_DIRECTORY_BASE_URL")
-
 
 # Lumesse TalentLink API credentials
 TALENTLINK_API_KEY = env.get("TALENTLINK_API_KEY")

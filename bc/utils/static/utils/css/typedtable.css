@@ -1,0 +1,21 @@
+.typed-table-block {
+    width: 1500px;
+}
+
+.typed-table-block table {
+    min-width: 70%;
+}
+
+.typed-table-block [data-streamfield-stream-container] > div:nth-child(2n) {
+    height: 150px;
+}
+
+/* stylelint-disable selector-max-specificity */
+/* stylelint-disable selector-class-pattern */
+.typed-table-block
+    [data-streamfield-stream-container]
+    > div:nth-child(2n)
+    .public-DraftEditor-content {
+    height: 100px;
+    overflow: scroll;
+}
