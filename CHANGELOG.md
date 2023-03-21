@@ -2,7 +2,7 @@
 
 ## 68.0 (2023-03-21)
 
-Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/67.1...67.0>
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/67.1...68.0>
 
 - Add setting to add directory links for each site, removing the dependency on env variable
 - Reorder collections sorted by name to fix error while adding new collections
@@ -14,18 +14,16 @@ Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/67.1...67.
 - Fix issue of import page function close button missing after wagtail upgrade to 4.x.x
 - Add backoff to search view
 
-- [Wagtail transfer modal dialog adjustments](https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/625)
-
 ## 67.1 (2023-01-31)
 
-Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/67.1...67.0>
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/67.0...67.1>
 
 - Fix pages deployment <https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/555>
 - Update sentry <https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/575>
 
 ## 67.0 (2023-01-31)
 
-Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/67.0...66.0>
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/66.0...67.0>
 
 - Add optional intro field to subsite home page
 - Fix/Remove LGPS pages from BC council search results
@@ -35,19 +33,19 @@ Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/67.0...66.
 
 ## 66.0 (2023-01-31)
 
-Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/66.0...65.1>
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/65.1...66.0>
 
 - Upgrade wagtail v4.1
 
 ## 65.1 (2023-01-25)
 
-Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/65.1...65.0>
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/65.0...65.1>
 
 - Fix: Handle URLs longer than 200 characters in feedback comment form
 
 ## 65.0 (2022-11-29)
 
-Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/65.0...64.0>
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/64.0...65.0>
 
 - Change Homepage FieldPanels to MultiFieldPanels
 - Add EventIndexPage and NewsIndex as child of SubsiteHomePage
@@ -61,7 +59,7 @@ Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/65.0...64.
 
 ## 64.0 (2022-10-19)
 
-Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/64.0...63.1>
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/63.1...64.0>
 
 - Rename Family Information Service Homepage to Subsite Homepage
 - Allow all subpage types to be created under Subsite Homepages
@@ -79,13 +77,13 @@ Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/64.0...63.
 
 ## 63.1 (2022-10-03)
 
-Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/63.1...63.0>
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/63.0...63.1>
 
 - Add configurable timeout to Python client for maps.buckscc.gov.uk API
 
 ## 63.0 (2022-09-27)
 
-Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/63.0...62.0>
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/62.0...63.0>
 
 - **A11y**: Add `overflow-wrap` & `word-break` CSS properties to `<ul>` & `<ol>` elements to prevent text from overflowing its line box, causing problems particularly on smaller devices.
 - **A11y**: Fix accessibility on Blog Home Page template by adding `listitem` role to `<span>` elements in unordered lists
