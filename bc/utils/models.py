@@ -389,8 +389,13 @@ class ImportantPages(BaseSiteSetting):
     cookie_information_page = models.ForeignKey(
         "wagtailcore.Page", null=True, on_delete=models.SET_NULL, related_name="+"
     )
+    directory_url = models.URLField(
+        blank=True,
+        help_text="URL to the directory page (meant to be used by CAB and FIS sites).",
+    )
 
     panels = [
         FieldPanel("contact_us_page"),
         FieldPanel("cookie_information_page"),
+        FieldPanel("directory_url"),
     ]
