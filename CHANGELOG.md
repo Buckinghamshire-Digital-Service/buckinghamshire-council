@@ -1,6 +1,18 @@
 # Release History
 
-## Unreleased
+## 68.0 (2023-03-21)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/67.1...67.0>
+
+- Add setting to add directory links for each site, removing the dependency on env variable
+- Reorder collections sorted by name to fix error while adding new collections
+- Add dark background with light color text to hero headings and subheadings
+- Add link formatting options in table and change styles of typedtable
+- Add h2 option to highlight block
+- Remove category count related to unpublished pages
+- Remove unpublished chapter pages from menu
+- Fix issue of import page function close button missing after wagtail upgrade to 4.x.x
+- Add backoff to search view
 
 - [Wagtail transfer modal dialog adjustments](https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/625)
 
