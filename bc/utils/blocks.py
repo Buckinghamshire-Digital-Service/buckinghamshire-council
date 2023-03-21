@@ -134,7 +134,7 @@ class HighlightBlock(blocks.RichTextBlock):
 
     def __init__(self, *args, **kwargs):
         # Setting features in class Meta doesn't work, so add it on init
-        default_features = ["h3", "big-text"] + RICH_TEXT_FEATURES
+        default_features = ["h2", "h3", "big-text"] + RICH_TEXT_FEATURES
         features = kwargs.get("features", default_features)
         super().__init__(*args, features=features, **kwargs)
 
