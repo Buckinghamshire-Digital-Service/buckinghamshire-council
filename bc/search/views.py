@@ -15,6 +15,10 @@ from django.views.generic.base import View
 from wagtail.models import Page, Site
 from wagtail.search.models import Query
 
+import backoff
+import elasticsearch
+import requests
+
 from bc.blogs.models import BlogGlobalHomePage, BlogHomePage, BlogPostPage
 from bc.campaigns.models import CampaignIndexPage, CampaignPage
 from bc.family_information.models import SubsiteHomePage
@@ -36,6 +40,16 @@ from bc.utils.models import SystemMessagesSettings
 
 @method_decorator(csrf_exempt, name="dispatch")
 class SearchView(View):
+    # Retry the search call to Elasticsearch if it fails within 30 seconds
+    @backoff.on_exception(
+        backoff.expo,
+        (
+            requests.exceptions.Timeout,
+            requests.exceptions.ConnectionError,
+            elasticsearch.exceptions.TransportError,
+        ),
+        max_time=30,
+    )
     def get(self, request, *args, **kwargs):
         search_query = request.GET.get("query", None)
         page = request.GET.get("page", 1)

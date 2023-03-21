@@ -62,11 +62,7 @@ See also: https://www.elastic.co/guide/en/elasticsearch/reference/current/query-
 
 ### Developing the Elasticsearch search engine configuration
 
-The Docker container will default to using Postgres for search, and ignoring some of the extra search features such as synonyms. However, it does have Elasticsearch5 installed. To use this, set the search backend in local settings to `bc.search.elasticsearch5` and the URL to "http://localhost:9200". You will also have to install the proper version of the Elasticsearch library that Wagtail will use under the hood:
-
-```bash
-$ pip install "elasticsearch>=5.0.0,<6.0.0" # for Elasticsearch 5.x
-```
+The docker-compose set-up contains an ElasticSearch 7 instance to query against locally. When running this for the first time, run `dj update_index` to populate the index.
 
 Alternatively, use a free Bonsai sandbox Elasticsearch instance, and set these credentials locally, using the `bc.search.elasticsearch7` backend. An example of this configuration is in `bc/settings/local.py.example`.
 

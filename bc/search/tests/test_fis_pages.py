@@ -10,7 +10,14 @@ from bc.family_information.tests.fixtures import (
 from bc.images.tests.fixtures import ImageFactory
 from bc.standardpages.tests.fixtures import InformationPageFactory
 
+from .utils import (
+    delete_test_indices_from_elasticsearch,
+    get_search_settings_for_test,
+    update_search_index,
+)
 
+
+@override_settings(SEARCH_BACKEND=get_search_settings_for_test())
 class FISPagesIncludedTest(TestCase):
     def setUp(self):
         self.fis_homepage = SubsiteHomePageFactory()
@@ -23,12 +30,15 @@ class FISPagesIncludedTest(TestCase):
                 banner_image=image,
             )
         )
-
+        update_search_index()
         response = self.client.get(reverse("search") + "?query=screwdrivers")
 
         self.assertIn(
             Page.objects.get(pk=hit_page.pk), response.context["search_results"]
         )
+
+    def tearDown(self):
+        delete_test_indices_from_elasticsearch()
 
 
 class LGPSPagesSearchTest(TestCase):

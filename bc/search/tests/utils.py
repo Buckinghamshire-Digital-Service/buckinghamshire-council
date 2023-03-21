@@ -1,3 +1,5 @@
+from io import StringIO
+
 from django.conf import settings
 from django.core.management import call_command
 
@@ -7,7 +9,7 @@ ORIGINAL_INDEX_NAME = settings.WAGTAILSEARCH_BACKENDS["default"].get("INDEX")
 
 
 def update_search_index():
-    call_command("update_index")
+    call_command("update_index", stdout=StringIO())
 
 
 def is_elasticsearch_backend(backend):

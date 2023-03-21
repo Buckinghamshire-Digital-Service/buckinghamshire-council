@@ -21,6 +21,7 @@ services:
       STATIC_DIR: /app/static/
       STATIC_URL: /static/
       HEROKU_APP_NAME: 'local-dev'
+      BONSAI_URL: 'elastic://elastic:9200'
     command: tail -f /dev/null # do nothing forever - exec commands elsewhere
     ports:
       - 8000:8000 # runserver
@@ -60,7 +61,7 @@ services:
     depends_on:
       - db
       - redis
-
+      - elastic
   db:
     image: postgres:12.3
     expose:
@@ -84,3 +85,12 @@ services:
       - 6379
     logging:
       driver: none
+
+  elastic:
+    image: elasticsearch:7.9.2
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
