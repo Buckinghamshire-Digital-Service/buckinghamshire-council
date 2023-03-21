@@ -1,4 +1,6 @@
+from django.templatetags.static import static
 from django.urls import path, reverse
+from django.utils.safestring import mark_safe
 
 from wagtail import hooks
 from wagtail.admin.menu import AdminOnlyMenuItem
@@ -148,3 +150,19 @@ def register_big_text_feature(features):
     }
 
     features.register_converter_rule("contentstate", feature_name, db_conversion)
+
+
+@hooks.register("insert_editor_js")
+def editor_js():
+    return mark_safe(
+        '<script type="text/javascript" src="%s"></script>'
+        % static("utils/js/table-with-links.js")
+    )
+
+
+@hooks.register("insert_editor_css")
+def editor_css():
+    return mark_safe(
+        '<link rel="stylesheet" type="text/css" href="%s">'
+        % static("utils/css/typedtable.css")
+    )
