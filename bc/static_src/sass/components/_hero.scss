@@ -30,12 +30,9 @@
 
         #{$root} {
             &__heading {
-                color: $color--off-black;
+                color: $color--white;
                 margin-bottom: $grid;
                 max-width: 600px;
-                background-color: $color--white;
-                padding: $grid--small;
-                padding-bottom: 0;
             }
 
             &__strapline {
@@ -44,7 +41,10 @@
                 line-height: 1.4;
                 margin-top: 0;
                 margin-bottom: $grid--small;
-                color: $color--off-black;
+                background-color: transparent;
+                color: $color--white;
+                padding: 0;
+                max-width: 530px;
             }
 
             @include media-query(tablet-portrait) {
