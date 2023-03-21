@@ -58,7 +58,3 @@ try:
     from .local import *  # noqa
 except ImportError:
     pass
-
-
-# FIS defaults
-FIS_DIRECTORY_BASE_URL = "#"

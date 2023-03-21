@@ -3,7 +3,7 @@ from django.conf import settings
 
 from wagtail.coreutils import camelcase_to_underscore
 
-from bc.utils.models import SocialMediaSettings
+from bc.utils.models import ImportantPages, SocialMediaSettings
 
 register = template.Library()
 
@@ -47,7 +47,10 @@ def get_default_site():
     return settings.WAGTAILADMIN_BASE_URL
 
 
-# Get FIS directory base URL
-@register.simple_tag(name="get_fis_directory")
-def get_fis_directory():
-    return settings.FIS_DIRECTORY_BASE_URL
+# Get directory base URL
+@register.simple_tag(name="get_directory_url", takes_context=True)
+def get_directory_url(context):
+    request = context["request"]
+    setting = ImportantPages.for_request(request)
+    if setting:
+        return setting.directory_url
