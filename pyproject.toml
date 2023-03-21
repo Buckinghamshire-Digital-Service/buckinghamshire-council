@@ -24,7 +24,6 @@ gunicorn = {version = "19.9.0", optional = true}
 psycopg2 = "2.7.7"
 PyJWT = "2.0.0"
 redis = "2.10.6"
-responses = "0.16.0"
 scout-apm = "2.0.2"
 tabulate = "0.8.7"
 urllib3 = "1.26.11"
@@ -37,6 +36,8 @@ wagtailgeowidget = "6.2.0"
 whitenoise = "5.0"
 zeep = "3.4.0"
 sentry-sdk = "^1.9.8"
+backoff = "^2.2.1"
+responses = "0.16.0"
 
 [tool.poetry.extras]
 gunicorn = ["gunicorn"]
