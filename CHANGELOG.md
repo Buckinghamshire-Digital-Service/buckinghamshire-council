@@ -1,5 +1,11 @@
 # Release History
 
+## 68.1 (2023-03-22)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/68.0...68.1>
+
+- Fix rendering of chart blocks
+
 ## 68.0 (2023-03-21)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/67.1...68.0>
