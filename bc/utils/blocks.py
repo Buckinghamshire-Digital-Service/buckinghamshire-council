@@ -237,7 +237,7 @@ class ButtonBlock(blocks.StructBlock):
         template = "patterns/molecules/streamfield/blocks/button_block.html"
 
 
-class BaseChartBlock(TableBlock):
+class BaseChartBlock(BaseTableBlock):
     @property
     def media(self):
         return forms.Media(
