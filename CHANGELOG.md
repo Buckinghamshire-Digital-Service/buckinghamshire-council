@@ -1,5 +1,22 @@
 # Release History
 
+## Unreleased
+
+- Create **AwardsSnippet** and update **RecruitmentHomePage** with a FK to the **AwardsSnippet**
+- Define an **IconChoice** [TextChoices](https://docs.djangoproject.com/en/3.2/ref/models/fields/#enumeration-types) model and update **JobCategory** with an `icon` field whose choices are `IconChoice.choices`
+- Update the `delete_docker_database` task in `fabfile.py` to create a `heroku_ext` schema. See [Migrating Extensions to `heroku_ext` schema](https://help.heroku.com/Y1FIZ0MA/migrating-extensions-to-heroku_ext-schema) for more details.
+- Replace awards with social media icons in Jobs page header
+- Add FE for awards block
+- Add FE for the benefits list
+- Replace awards with social media icons in Jobs page header
+- Add icons for category cards and update styles
+- Restyle jobs page hero
+- Add FE for job media block
+- Add JobPlatformBlock, MediaBlock & JobPlatformsMediaSnippet
+- Add hero subtitle to **RecruitmentHomePage**,
+- Update **RecruitmentHomePage** to display the first 6 children of a specified **RecruitmentIndexPage**.
+- Update hero and card styles on job index page
+
 ## 68.1 (2023-03-22)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/68.0...68.1>
@@ -19,21 +36,6 @@ Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/67.1...68.
 - Remove unpublished chapter pages from menu
 - Fix issue of import page function close button missing after wagtail upgrade to 4.x.x
 - Add backoff to search view
-
-- Create **AwardsSnippet** and update **RecruitmentHomePage** with a FK to the **AwardsSnippet**
-- Define an **IconChoice** [TextChoices](https://docs.djangoproject.com/en/3.2/ref/models/fields/#enumeration-types) model and update **JobCategory** with an `icon` field whose choices are `IconChoice.choices`
-- Update the `delete_docker_database` task in `fabfile.py` to create a `heroku_ext` schema. See [Migrating Extensions to `heroku_ext` schema](https://help.heroku.com/Y1FIZ0MA/migrating-extensions-to-heroku_ext-schema) for more details.
-- Replace awards with social media icons in Jobs page header
-- Add FE for awards block
-- Add FE for the benefits list
-- Replace awards with social media icons in Jobs page header
-- Add icons for category cards and update styles
-- Restyle jobs page hero
-- Add FE for job media block
-- Add JobPlatformBlock, MediaBlock & JobPlatformsMediaSnippet
-- Add hero subtitle to **RecruitmentHomePage**,
-- Update **RecruitmentHomePage** to display the first 6 children of a specified **RecruitmentIndexPage**.
-- Update hero and card styles on job index page
 
 ## 67.1 (2023-01-31)
 
