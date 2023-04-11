@@ -1,0 +1,301 @@
+.benefits-list {
+    $root: &;
+    background-color: $color--light-grey;
+    padding: 0 $grid--small 60px;
+    margin-bottom: 30px;
+
+    @include media-query(tablet-portrait) {
+        padding: 0 $grid--large 60px;
+        margin-bottom: 60px;
+    }
+
+    &__wrap {
+        max-width: 990px;
+        margin: 0 auto;
+    }
+
+    &__grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+
+        @include media-query(tablet-portrait) {
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        @include media-query(tablet-landscape) {
+            justify-content: space-between;
+        }
+    }
+
+    &__item {
+        margin-bottom: 30px;
+        max-width: 310px;
+        width: 100%;
+
+        @include media-query(tablet-portrait) {
+            width: 50%;
+            margin: 0 0 50px 0;
+
+            &:nth-child(odd) {
+                margin-right: 30px;
+            }
+        }
+
+        @include media-query(tablet-landscape) {
+            width: calc(33% - 30px);
+            margin: 0 30px 50px 0;
+
+            // remove margin from bottom 3
+            &:nth-last-child(-n + 3) {
+                margin-bottom: 0;
+            }
+
+            // remove margin from odd children
+            &:nth-child(odd) {
+                margin-right: 30px;
+            }
+
+            // remove right margin from 3rd item
+            &:nth-child(3n) {
+                margin-right: 0;
+            }
+        }
+
+        // 3rd item has an image on desktop but not on mobile/tablet
+        &--third {
+            position: relative;
+
+            #{$root}__image-wrap {
+                display: none;
+
+                @include media-query(tablet-landscape) {
+                    display: block;
+                }
+            }
+
+            #{$root}__card {
+                &::before {
+                    content: '';
+                    background-color: $color--teal-light;
+                    position: absolute;
+                    top: -24px;
+                    right: 0;
+                    bottom: 20px;
+                    left: 0;
+                    border-top-right-radius: 3px;
+                    border-top-left-radius: 3px;
+
+                    /* stylelint-disable-next-line max-nesting-depth */
+                    @include media-query(tablet-landscape) {
+                        display: none;
+                    }
+                }
+
+                &::after {
+                    content: '';
+                    background-color: $color--teal;
+                    position: absolute;
+                    top: -24px;
+                    border-top-left-radius: 3px;
+                    width: 50px;
+                    height: 100%;
+                    transition: background-color $transition;
+
+                    /* stylelint-disable-next-line max-nesting-depth */
+                    @include media-query(tablet-landscape) {
+                        display: none;
+                    }
+                }
+            }
+
+            #{$root}__wave {
+                top: -38px;
+
+                @include media-query(tablet-landscape) {
+                    top: -40px;
+                }
+            }
+        }
+
+        // Any child after the 3rd item does not show an image
+        &--no-image {
+            position: relative;
+
+            #{$root}__image-wrap {
+                display: none;
+            }
+
+            #{$root}__content {
+                border-top-left-radius: 3px;
+                border-top-right-radius: 3px;
+            }
+
+            #{$root}__card {
+                &::before {
+                    content: '';
+                    background-color: $color--teal-light;
+                    position: absolute;
+                    top: -24px;
+                    right: 0;
+                    bottom: 20px;
+                    left: 0;
+                    border-top-right-radius: 3px;
+                    border-top-left-radius: 3px;
+                }
+
+                &::after {
+                    content: '';
+                    background-color: $color--teal;
+                    position: absolute;
+                    top: -24px;
+                    border-top-left-radius: 3px;
+                    width: 50px;
+                    height: 100%;
+                    transition: background-color $transition;
+                }
+            }
+
+            #{$root}__wave {
+                top: -38px;
+
+                @include media-query(tablet-landscape) {
+                    top: -40px;
+                }
+            }
+        }
+    }
+
+    &__card {
+        text-decoration: none;
+
+        #{$hover-states} {
+            &::after {
+                background-color: $color--teal-dark;
+            }
+
+            #{$root}__content {
+                color: $color--teal-dark;
+                background-color: $color--teal-dark;
+            }
+
+            #{$root}__icon {
+                transform: translate3d(5px, 0, 0);
+            }
+
+            #{$root}__image {
+                transform: scale(1.1);
+            }
+        }
+    }
+
+    &__image {
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        transform: scale(1);
+        transition: transform $transition;
+    }
+
+    &__image-wrap {
+        overflow: hidden;
+    }
+
+    &__title {
+        @include font-size(m);
+        line-height: 30px;
+        color: $color--white;
+        font-weight: $weight--bold;
+        position: relative;
+        z-index: 2;
+
+        @include media-query(tablet-landscape) {
+            @include font-size(l);
+        }
+    }
+
+    &__content {
+        color: $color--teal;
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
+        padding: 25px;
+        position: relative;
+        transition: background-color $transition, color $transition;
+        min-height: 125px;
+        background-color: $color--teal;
+    }
+
+    &__icon {
+        position: absolute;
+        bottom: 15px;
+        right: 20px;
+        z-index: 2;
+    }
+
+    &__link-wrap {
+        text-align: center;
+        margin-bottom: 0;
+    }
+
+    &__bottom-link {
+        @include font-size(s);
+        font-weight: $weight--bold;
+        color: $color--river;
+    }
+
+    &__wave {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        width: 100%;
+
+        @include target-ie11() {
+            top: -30px;
+            height: 130px;
+        }
+    }
+
+    &__heading {
+        text-align: center;
+
+        @include media-query(tablet-landscape) {
+            text-align: left;
+        }
+    }
+
+    &__text {
+        color: $color--white;
+        position: relative;
+        z-index: 2;
+    }
+
+    .template-jobs-index & {
+        margin-bottom: 0;
+
+        &__item {
+            &--no-image {
+                margin-top: 30px;
+
+                @include media-query(tablet-landscape) {
+                    margin-top: 0;
+                }
+            }
+        }
+
+        &__grid {
+            @include media-query(tablet-landscape) {
+                align-items: flex-start;
+            }
+        }
+
+        &__content {
+            min-height: 215px;
+
+            @include media-query(tablet-landscape) {
+                min-height: 185px;
+            }
+        }
+    }
+}

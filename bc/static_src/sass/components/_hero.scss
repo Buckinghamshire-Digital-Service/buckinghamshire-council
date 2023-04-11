@@ -18,6 +18,66 @@
         display: inline-block;
     }
 
+    &__jobs-image {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 500px;
+        height: 500px;
+        mask-image: url('../images/hero-blob.png');
+        mask-repeat: no-repeat;
+        mask-size: 100%;
+        display: none;
+        background-position: top right;
+        background-repeat: no-repeat;
+        background-size: contain;
+
+        @include media-query(tablet-landscape) {
+            display: block;
+        }
+
+        @include media-query(desktop) {
+            width: 580px;
+            right: -130px;
+        }
+    }
+
+    &__search-link {
+        @include font-size(s);
+        text-decoration: none;
+        font-weight: $weight--bold;
+    }
+
+    &__subtitle {
+        @include font-size(s);
+        margin-top: 0;
+    }
+
+    &__jobs-wrapper {
+        position: relative;
+        width: 100%;
+
+        @include media-query(tablet-landscape) {
+            max-width: $site-width;
+            margin: 0 auto;
+        }
+    }
+
+    &__jobs-content {
+        padding: 50px 10px;
+        text-align: center;
+
+        @include media-query(tablet-landscape) {
+            padding-left: 50px;
+            padding-top: 115px;
+            text-align: left;
+        }
+
+        @include media-query(desktop) {
+            padding-left: 50px;
+        }
+    }
+
     &--with-alert {
         @include media-query(tablet-portrait) {
             padding-bottom: 60px;
@@ -61,20 +121,42 @@
 
     &--jobs {
         background-color: $color--earth;
-        margin-bottom: $grid--large;
         min-height: 330px;
 
         #{$root} {
             &__strapline {
+                color: $color--default;
                 line-height: 1.2;
             }
         }
     }
 
-    // Added so that this doesn't get lost during resolving merge conflicts with the jobs branch
     &--jobs-home {
+        background-color: $color--light-grey;
+        text-align: center;
+        padding: 0;
+
+        @include media-query(tablet-portrait) {
+            text-align: left;
+        }
+
+        @include media-query(tablet-landscape) {
+            min-height: 500px;
+        }
+
         #{$root}__strapline {
+            color: $color--default;
+            line-height: 1.2;
+            max-width: 100%;
+            text-align: center;
+            margin-bottom: 15px;
             background-color: transparent;
+
+            @include media-query(tablet-landscape) {
+                @include font-size(xxxxl);
+                max-width: 530px;
+                text-align: left;
+            }
         }
     }
 
@@ -88,5 +170,14 @@
 
     &--404 {
         margin-bottom: $grid;
+    }
+
+    // Account for breadcrumb
+    .template-jobs-index & {
+        &__jobs-content {
+            @include media-query(tablet-landscape) {
+                padding-top: 85px;
+            }
+        }
     }
 }

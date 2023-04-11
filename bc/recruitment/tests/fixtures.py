@@ -9,7 +9,6 @@ factory.Faker._DEFAULT_LOCALE = "en_GB"
 
 
 class JobCategoryFactory(factory.django.DjangoModelFactory):
-
     title = factory.Sequence(lambda n: f"Job Category {n}")
     description = factory.Faker("sentence", nb_words=10)
 
@@ -18,7 +17,6 @@ class JobCategoryFactory(factory.django.DjangoModelFactory):
 
 
 class JobSubcategoryFactory(factory.django.DjangoModelFactory):
-
     title = factory.Sequence(lambda n: f"Job Subcategory {n}")
 
     class Meta:
@@ -42,7 +40,10 @@ class RecruitmentHomePageFactory(factory.django.DjangoModelFactory):
         from bc.images.tests.fixtures import ImageFactory
 
         image = ImageFactory()
-        return cls.build(hero_image=image, **kwargs)
+        return cls.build(
+            hero_image=image,
+            **kwargs,
+        )
 
 
 class TalentLinkJobFactory(factory.django.DjangoModelFactory):

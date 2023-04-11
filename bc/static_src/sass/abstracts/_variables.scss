@@ -3,6 +3,7 @@
 $color--white: #fff;
 $color--black: #000;
 
+$color--black-60: rgba(0, 0, 0, 0.6);
 $color--off-black: #141414;
 $color--red: #d4351c;
 $color--border: rgba($color--off-black, 0.2);
@@ -23,6 +24,13 @@ $color--slate: #3c3c3b;
 $color--mustard: #fcbc00;
 $color--purple: #51247a;
 $color--orange: #ee7e00;
+$color--teal: #005961;
+$color--teal-light: #008484;
+$color--teal-dark: #00474e;
+$color--light-grey: #f2f8fb;
+$color--light-blue: #4c95cd;
+$color--lighter-blue: #f2f7fb;
+$color--teal-lighter: #008484;
 
 $color--earth: #d0cdc4;
 $color--earth-light: #f7f6f2;
@@ -77,6 +85,8 @@ $weight--light: 200;
 $base-font-size: 16px; // 12 in designs
 $base-line-height: 25px;
 $font-sizes: (
+    // xxxl = 57px
+        xxxxl: 57px,
     // xxxl = 48px = 36 in designs
         xxxl: 48px,
     // xxl = 42px = 32 in designs
