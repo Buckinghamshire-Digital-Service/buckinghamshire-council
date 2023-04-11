@@ -150,19 +150,13 @@
             max-width: 100%;
             text-align: center;
             margin-bottom: 15px;
+            background-color: transparent;
 
             @include media-query(tablet-landscape) {
                 @include font-size(xxxxl);
                 max-width: 530px;
                 text-align: left;
             }
-        }
-    }
-
-    // Added so that this doesn't get lost during resolving merge conflicts with the jobs branch
-    &--jobs-home {
-        #{$root}__strapline {
-            background-color: transparent;
         }
     }
 
