@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 69.0 (2023-04-11)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/68.1...69.0>
 
 - Create **AwardsSnippet** and update **RecruitmentHomePage** with a FK to the **AwardsSnippet**
 - Define an **IconChoice** [TextChoices](https://docs.djangoproject.com/en/3.2/ref/models/fields/#enumeration-types) model and update **JobCategory** with an `icon` field whose choices are `IconChoice.choices`
