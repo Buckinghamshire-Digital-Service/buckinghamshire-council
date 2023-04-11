@@ -1,0 +1,23 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<section class="awards-block" aria-labelledby="awards-title">
+    <h2 class="heading heading--xl heading--centered" id="awards-title">{{ awards_snippet.heading }}</h2>
+
+    <ul class="awards-block__list">
+        {% for award_block in awards_snippet.awards %}
+            {% with award_block.value as award %}
+                <li class="awards-block__list-item">
+                    {% if award.url %}
+                        <a class="awards-block__link" href="{{ award.url }}" aria-label="{{ award.title }}">
+                    {% endif %}
+
+                        {% image award.image max-185x90 title=award.title %}
+
+                    {% if award.url %}
+                        </a>
+                    {% endif %}
+                </li>
+            {% endwith %}
+        {% endfor %}
+    </ul>
+</section>

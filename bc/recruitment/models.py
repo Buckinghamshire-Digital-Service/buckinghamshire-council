@@ -22,14 +22,19 @@ from wagtail import blocks
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.fields import StreamField
+from wagtail.models import Page
 from wagtail.search import index
+from wagtail.snippets.models import register_snippet
 
 from django_gov_notify.message import NotifyEmailMessage
 from wagtailorderable.models import Orderable
 
+from bc.utils.choices import IconChoice
+
 from ..utils.blocks import StoryBlock
 from ..utils.constants import RICH_TEXT_FEATURES
 from ..utils.models import BasePage
+from .blocks import AwardBlock, JobPlatformBlock, MediaBlock
 from .constants import JOB_BOARD_CHOICES
 from .text_utils import extract_salary_range
 
@@ -58,6 +63,11 @@ class JobSubcategory(models.Model):
 
 class JobCategory(Orderable, models.Model):
     title = models.CharField(max_length=128)
+    icon = models.CharField(
+        max_length=20,
+        blank=True,
+        choices=IconChoice.choices,
+    )
     description = models.TextField(blank=True)
     subcategories = models.ManyToManyField(JobSubcategory, related_name="categories")
     is_schools_and_early_years = models.BooleanField(default=False)
@@ -102,6 +112,7 @@ class JobCategory(Orderable, models.Model):
             .exclude(category=None)
             .values("category")
             .annotate(key=F("subcategory__categories__slug"))
+            .annotate(icon=F("subcategory__categories__icon"))
             .annotate(count=Count("category"))
             .annotate(label=F("subcategory__categories__title"))
             .annotate(description=F("subcategory__categories__description"))
@@ -338,6 +349,32 @@ def callback_talentlinkjob_delete_attachments_and_logo(
         instance.logo.delete()
 
 
+@register_snippet
+class AwardsSnippet(models.Model):
+    heading = models.CharField(max_length=255)
+    awards = StreamField([("award", AwardBlock())], use_json_field=True)
+
+    panels = [
+        FieldPanel("heading"),
+        FieldPanel("awards"),
+    ]
+
+    def __str__(self):
+        return self.heading
+
+
+@register_snippet
+class JobPlatformsMediaSnippet(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.CharField(max_length=255)
+    cta = models.CharField(max_length=255, verbose_name="Call to action text")
+    job_platforms = StreamField([("platform", JobPlatformBlock())], use_json_field=True)
+    media_embed = StreamField(MediaBlock(), max_num=1, use_json_field=True)
+
+    def __str__(self):
+        return self.title
+
+
 class RecruitmentHomePage(RoutablePageMixin, BasePage):
     template = "patterns/pages/home/home_page--jobs.html"
 
@@ -347,6 +384,11 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
     job_board = models.CharField(max_length=20, blank=True, unique=True)
     hero_title = models.CharField(
         max_length=255, help_text="e.g. Finding a job in Buckinghamshire"
+    )
+    hero_subtitle = models.CharField(
+        max_length=255,
+        blank=True,
+        help_text="e.g. Over 100 job opportunities available daily.",
     )
     hero_image = models.ForeignKey(
         "images.CustomImage",
@@ -359,6 +401,23 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
         help_text="eg. Search jobs, e.g. “Teacher in Aylesbury”",
     )
     hero_link_text = models.CharField(max_length=255, help_text="e.g. Browse jobs")
+    awards = models.ForeignKey(
+        "recruitment.AwardsSnippet",
+        verbose_name="Awards snippet",
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+    media = models.ForeignKey(
+        "recruitment.JobPlatformsMediaSnippet",
+        verbose_name="Job platforms media snippet",
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+
     body = StreamField(
         blocks.StreamBlock(
             [
@@ -382,12 +441,28 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
         blank=True,
         use_json_field=True,
     )
+    related_recruitment_index_page = models.ForeignKey(
+        "recruitment.RecruitmentIndexPage",
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="+",
+        help_text="The page whose “top 6” child pages will be displayed as cards on the current page",
+    )
+    recruitment_index_link_text = models.CharField(
+        verbose_name="Related recruitment index page link text",
+        max_length=255,
+        blank=True,
+        help_text="e.g. If blank, a default of 'Visit our guide page' will be used",
+    )
+
     search_fields = BasePage.search_fields + [index.SearchField("hero_title")]
 
     content_panels = BasePage.content_panels + [
         MultiFieldPanel(
             [
                 FieldPanel("hero_title"),
+                FieldPanel("hero_subtitle"),
                 FieldPanel("hero_image"),
                 FieldPanel("search_box_placeholder"),
                 FieldPanel("hero_link_text"),
@@ -395,6 +470,10 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
             "Hero",
         ),
         FieldPanel("body"),
+        FieldPanel("media"),
+        FieldPanel("awards"),
+        FieldPanel("related_recruitment_index_page"),
+        FieldPanel("recruitment_index_link_text"),
     ]
     settings_panels = BasePage.settings_panels + [
         FieldPanel(
@@ -405,8 +484,20 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
         ),
     ]
 
+    def get_related_recruitment_index_page_subpages(self):
+        """
+        Return the first 6 subpages of the specified related_recruitment_index_page
+
+        NOTE: in the template, the first 3 subpages are rendered with images,
+        while the images are not rendered for the last three.
+        """
+        if self.related_recruitment_index_page:
+            return self.related_recruitment_index_page.child_pages[:6]
+        return Page.objects.none()
+
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
+        context["benefits_list"] = self.get_related_recruitment_index_page_subpages()
         context["job_categories"] = JobCategory.get_categories_summary(homepage=self)
 
         return context
@@ -488,13 +579,24 @@ class RecruitmentIndexPage(BasePage):
     hero_image = models.ForeignKey(
         "images.CustomImage",
         null=True,
+        blank=True,
         related_name="+",
         on_delete=models.SET_NULL,
+    )
+    hero_subtitle = models.CharField(
+        max_length=255,
+        blank=True,
     )
     body = StreamField(StoryBlock(required=False), blank=True, use_json_field=True)
 
     content_panels = BasePage.content_panels + [
-        FieldPanel("hero_image"),
+        MultiFieldPanel(
+            [
+                FieldPanel("hero_subtitle"),
+                FieldPanel("hero_image"),
+            ],
+            "Hero",
+        ),
         FieldPanel("body"),
     ]
 

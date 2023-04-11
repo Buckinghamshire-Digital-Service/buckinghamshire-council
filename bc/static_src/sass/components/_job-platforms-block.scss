@@ -1,0 +1,141 @@
+.job-platforms-block {
+    background-color: $color--lighter-blue;
+    max-width: 1100px;
+    margin: 0 auto 60px;
+
+    @include media-query(tablet-landscape) {
+        background-image: url('../images/media-background.svg');
+        background-repeat: no-repeat;
+        background-position: top right;
+        padding: 60px 60px 40px;
+    }
+
+    &__title {
+        @include font-size(xl);
+        font-weight: $weight--bold;
+        margin-bottom: 15px;
+    }
+
+    &__inner {
+        @include media-query(tablet-landscape) {
+            display: flex;
+        }
+    }
+
+    &__media {
+        width: 100%;
+        background-image: url('../images/wave.svg');
+        padding: 70px 30px 30px;
+        background-repeat: no-repeat;
+        background-size: contain;
+
+        // add a background fill in under the video/image
+        &::after {
+            content: '';
+            background-color: $color--teal-lighter;
+            position: absolute;
+            width: 100%;
+            height: 30%;
+            bottom: 0;
+            left: 0;
+        }
+
+        @include media-query(px550) {
+            padding: 110px 30px 30px;
+            background-size: cover;
+        }
+
+        @include media-query(tablet-landscape) {
+            background-image: none;
+            padding: 0;
+
+            &::after {
+                display: none;
+            }
+        }
+    }
+
+    &__content {
+        padding: 30px 30px 0;
+        width: 100%;
+
+        @include media-query(tablet-landscape) {
+            margin-right: 30px;
+            padding: 0;
+        }
+    }
+
+    &__text,
+    &__title {
+        text-align: center;
+
+        @include media-query(tablet-landscape) {
+            text-align: left;
+            max-width: 345px;
+        }
+    }
+
+    &__text {
+        margin: 0 0 30px;
+
+        &--callout {
+            margin: 0 0 15px;
+            font-weight: $weight--bold;
+        }
+    }
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        @include media-query(tablet-landscape) {
+            justify-content: flex-start;
+        }
+    }
+
+    &__list-item {
+        margin: 0 15px 15px 0;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    &__link {
+        position: relative;
+        display: block;
+
+        #{$hover-states} {
+            &::after {
+                opacity: 0.2;
+            }
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: $color--black-60;
+            opacity: 0;
+            transition: opacity $transition;
+            border-radius: 3px;
+        }
+    }
+
+    &__image-link {
+        display: block;
+        text-align: center;
+    }
+
+    &__embed,
+    &__image {
+        position: relative;
+        z-index: 1;
+    }
+}

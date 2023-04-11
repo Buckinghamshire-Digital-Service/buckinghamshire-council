@@ -1,0 +1,25 @@
+context:
+  jobs_media_snippet:
+    title: We ensure your next step is a step forward.
+    description: Learn more about how it would be like to be part of Buckinghamshire.
+    cta: Read what they say about us on
+    media_embed:
+      - value:
+          image: True
+          url: True
+    job_platforms:
+      - value:
+          url: '#'
+          title: Glassdoor
+      - value:
+          url: '#'
+          title: Glassdoor
+
+tags:
+  image:
+    platform.image max-185x90:
+      raw: |
+        <img src="https://via.placeholder.com/185x90" width="185" height="90">
+    item.image fill-480x265 class="job-platforms-block__image":
+      raw: |
+        <img src="https://via.placeholder.com/480x265" width="480" height="265">

@@ -97,4 +97,16 @@
             }
         }
     }
+
+    &--categories {
+        grid-template-columns: 1fr;
+
+        @include media-query(tablet-portrait) {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @include media-query(tablet-landscape) {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+    }
 }

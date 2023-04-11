@@ -1,0 +1,43 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="u-breakout">
+    <section class="job-platforms-block" aria-labelledby="job-platforms-title">
+        <div class="job-platforms-block__inner">
+            <div class="job-platforms-block__content">
+                <h2 class="job-platforms-block__title" id="job-platforms-title">{{ jobs_media_snippet.title }}</h2>
+                <p class="job-platforms-block__text">{{ jobs_media_snippet.description }}</p>
+                <p class="job-platforms-block__text job-platforms-block__text--callout">{{ jobs_media_snippet.cta }}</p>
+                <ul class="job-platforms-block__list">
+                    {% for job_platform in jobs_media_snippet.job_platforms %}
+                        {% with job_platform.value as platform %}
+                            <li class="job-platforms-block__list-item">
+                                <a class="job-platforms-block__link" href="{{ platform.url }}" aria-label="{{ platform.title }}">
+                                    {% image platform.image max-185x90 %}
+                                </a>
+                            </li>
+                        {% endwith %}
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="job-platforms-block__media">
+                {% for block in jobs_media_snippet.media_embed %}
+                    {# max_num = 1 so we actually don't expect more than 1 item #}
+                    {% comment "There are two cases to handle" %}
+                        1. image + url
+                        2. embed only
+                    {% endcomment %}
+                    {% if block.block_type == 'image_with_link' %}
+                        <a class="job-platforms-block__image-link" href="{{ block.value.url }}" title="{{ block.value.url }}" aria-label="{{ block.value.url }}">
+                            {% image block.value.image fill-480x265 class="job-platforms-block__image" %}
+                        </a>
+                    {% elif block.block_type == 'embed' %}
+                        <div class="responsive-object job-platforms-block__embed">
+                            {{ block.value }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</div>

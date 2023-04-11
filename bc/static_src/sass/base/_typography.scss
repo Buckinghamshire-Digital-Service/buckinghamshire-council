@@ -138,6 +138,10 @@ small {
         line-height: 1.35;
         margin: 0 0 $grid--large;
     }
+
+    &--centered {
+        text-align: center;
+    }
 }
 
 .introduction {

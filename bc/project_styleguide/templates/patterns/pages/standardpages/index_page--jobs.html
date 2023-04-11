@@ -1,43 +1,51 @@
 {% extends base_page_template %}
 {% load wagtailcore_tags wagtailimages_tags navigation_tags static %}
 
-{% block extra_css %}
-    {% image page.hero_image fill-450x350 as mobile_image %}
-    {% image page.hero_image fill-900x700 as retina_mobile_image %}
-    {% image page.hero_image fill-1440x350 as desktop_image %}
-    {% include "patterns/atoms/image/background-image-style.html" with class="hero" mobile_image=mobile_image retina_mobile_image=retina_mobile_image desktop_image=desktop_image %}
-{% endblock %}
+{% block body_class %}template-jobs-index {{ block.super }}{% endblock %}
 
 {% block hero %}
-    {% include "patterns/molecules/hero/hero--jobs.html" %}
+    {% include "patterns/molecules/hero/hero--jobs-home.html" with show_breadcrumbs=True %}
 {% endblock %}
 
-{% comment %} breadcrumbs included inside hero--jobs.html {% endcomment %}
+{% comment %} breadcrumbs included inside hero--jobs-home.html {% endcomment %}
 {% block breadcrumbs %}{% endblock %}
 
 {% block content %}
-    <section class="section section--main" aria-label="subpages">
-        <div class="grid grid--index">
-            {% for subpage in subpages %}
-                <a class="card card--jobs" href="{% pageurl subpage %}">
-                    <div class="card__image">
-                        {% image subpage.listing_image fill-400x400 as mobile_image %}
-                        {% image subpage.listing_image fill-800x800 as retina_mobile_image %}
-                        {% include "patterns/atoms/image/image.html" with mobile_image=mobile_image retina_mobile_image=retina_mobile_image desktop_image=mobile_image alt="" %}
-                    </div>
-                    <div class="card__content">
-                        <h2 class="card__title heading">
-                            {% firstof subpage.listing_title subpage.title %}
-                        </h2>
-                        {% if subpage.listing_summary %}
-                            <p class="card__summary">{{ subpage.listing_summary }}</p>
-                        {% endif %}
-                        <p class="card__more" aria-hidden="true">Find out more</p>
-                    </div>
-                </a>
-            {% endfor %}
-        </div>
+    {% if subpages %}
+        <div class="u-breakout benefits-list">
+            <div class="benefits-list__wrap">
+                <ul class="benefits-list__grid">
+                    {% for subpage in subpages %}
+                        <li class="benefits-list__item{% if not subpage.listing_image %} benefits-list__item--no-image{% endif %}">
+                            <a class="benefits-list__card" href="{% pageurl subpage %}">
 
-        {% include_block page.body %}
-    </section>
+                                {% if subpage.listing_image %}
+                                    <div class="benefits-list__image-wrap">
+                                        {% image subpage.listing_image fill-310x240 class="benefits-list__image" %}
+                                    </div>
+                                {% endif %}
+
+                                <div class="benefits-list__content">
+                                    <svg class="benefits-list__wave" aria-hidden="true" focusable="false">
+                                        <use xlink:href="#wave"></use>
+                                    </svg>
+                                    <h3 class="benefits-list__title">{% firstof subpage.listing_title subpage.title %}</h3>
+                                    {% if subpage.listing_summary %}
+                                        <p class="benefits-list__text">{{ subpage.listing_summary }}</p>
+                                    {% endif %}
+                                    {% include "patterns/atoms/icons/icon.html" with name="arrow" classname="icon--benefit-arrow benefits-list__icon" %}
+                                </div>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if page.body %}
+        <section class="section section--main" aria-label="subpages">
+            {% include_block page.body %}
+        </section>
+    {% endif %}
 {% endblock %}

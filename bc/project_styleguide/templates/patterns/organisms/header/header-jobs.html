@@ -8,13 +8,64 @@
 
         <div class="header__heading">
             <a href="/" class="header__heading-title">Jobs and Careers</a>
-
-            <div class="header__heading-logos">
-                <img class="header__heading-logo header__heading-logo--padding" src="{% static 'images/dc-logo.png' %}" alt="Disability Confident Employer "/>
-                <img class="header__heading-logo" src="{% static 'images/rest_less_age_diverse_employer.png' %}" alt="Restless Age Diverse Employer "/>
-                <img class="header__heading-logo" src="{% static 'images/enei-logo.png' %}" alt="Employers Network for equality and inclusion "/>
-                <img class="header__heading-logo" src="{% static 'images/tide-winners.png' %}" alt="Talent Inclusion & Diversity Evaluation Bronze Standard 2021 "/>
-            </div>
         </div>
+
+        {% with socialSettings=settings.utils.SocialMediaSettings %}
+            {% if socialSettings.has_any_setting %}
+                <ul class="header__social-icons">
+                    {% if socialSettings.facebook_app_id %}
+                        <li class="header__social-item">
+                            <a href="https://www.facebook.com/{{ socialSettings.facebook_app_id }}"
+                                target="_blank"
+                                rel="nofollow noreferrer"
+                                aria-label="Buckinghamshire Council Careers Facebook"
+                                class="header__social-icon"
+                            >
+                                    {% include "patterns/atoms/icons/icon.html" with name="facebook-alt" classname="icon--header-social" %}
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% if socialSettings.twitter_handle %}
+                        <li class="header__social-item">
+                            <a href="https://twitter.com/{{ socialSettings.twitter_handle }}"
+                                target="_blank"
+                                rel="nofollow noreferrer"
+                                aria-label="Buckinghamshire Council Careers Twitter"
+                                class="header__social-icon"
+                            >
+                                {% include "patterns/atoms/icons/icon.html" with name="twitter-alt" classname="icon--header-social" %}
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% if socialSettings.instagram_username %}
+                        <li class="header__social-item">
+                            <a href="https://www.instagram.com/{{ socialSettings.instagram_username }}"
+                                target="_blank"
+                                rel="nofollow noreferrer"
+                                aria-label="Buckinghamshire Council Careers Instagram"
+                                class="header__social-icon"
+                            >
+                                {% include "patterns/atoms/icons/icon.html" with name="instagram-alt" classname="icon--header-social" %}
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% if socialSettings.linkedin_organisation_url %}
+                        <li class="header__social-item">
+                            <a href="{{ socialSettings.linkedin_organisation_url }}"
+                                target="_blank"
+                                rel="nofollow noreferrer"
+                                aria-label="Buckinghamshire Council Careers Linkedin"
+                                class="header__social-icon"
+                            >
+                                {% include "patterns/atoms/icons/icon.html" with name="linkedin-alt" classname="icon--header-social" %}
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        {% endwith %}
     </div>
 </div>
