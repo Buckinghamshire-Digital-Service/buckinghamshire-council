@@ -1,5 +1,11 @@
 # Release History
 
+## 69.1 (2023-05-02)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.0...69.1>
+
+- [Update table block to only convert explicitly formatted markdown links](https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/648)
+
 ## 69.0 (2023-04-11)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/68.1...69.0>
