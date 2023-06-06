@@ -7,8 +7,8 @@ from wagtail.admin.panels import FieldPanel, FieldRowPanel, InlinePanel, MultiFi
 from wagtail.fields import RichTextField, StreamField
 from wagtail.rich_text import expand_db_html
 
-from wagtailgeowidget.edit_handlers import GeoAddressPanel, GoogleMapsPanel
 from wagtailgeowidget.helpers import geosgeometry_str_to_struct
+from wagtailgeowidget.panels import GeoAddressPanel, GoogleMapsPanel
 
 from bc.area_finder.utils import validate_postcode
 from bc.utils.blocks import StoryBlock
