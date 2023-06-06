@@ -24,11 +24,7 @@ ARG POETRY_HOME=/opt/poetry
 ARG POETRY_INSTALL_ARGS="--no-dev"
 
 # IMPORTANT: Remember to review both of these when upgrading
-ARG POETRY_VERSION=1.1.15
-# To get this value locally:
-# $ wget https://raw.githubusercontent.com/python-poetry/poetry/1.1.8/get-poetry.py
-# $ sha1sum get-poetry.py
-ARG POETRY_INSTALLER_SHA=eedf0fe5a31e5bb899efa581cbe4df59af02ea5f
+ARG POETRY_VERSION=1.4.2
 
 # Install dependencies in a virtualenv
 ENV VIRTUAL_ENV=/venv
@@ -53,10 +49,10 @@ WORKDIR /app
 #    read by Gunicorn.
 #  * GUNICORN_CMD_ARGS - additional arguments to be passed to Gunicorn. This
 #    variable is read by Gunicorn
-ENV PATH=${POETRY_HOME}/bin:$VIRTUAL_ENV/bin:$PATH \
+ENV PATH=$VIRTUAL_ENV/bin:$PATH \
     POETRY_INSTALL_ARGS=${POETRY_INSTALL_ARGS} \
     PYTHONUNBUFFERED=1 \
-    DJANGO_SETTINGS_MODULE=wagtailkit_repo_name.settings.production \
+    DJANGO_SETTINGS_MODULE=bc.settings.production \
     PORT=8000 \
     WEB_CONCURRENCY=3 \
     GUNICORN_CMD_ARGS="-c gunicorn-conf.py --max-requests 1200 --max-requests-jitter 50 --access-logfile - --timeout 25"
@@ -65,43 +61,12 @@ ENV PATH=${POETRY_HOME}/bin:$VIRTUAL_ENV/bin:$PATH \
 ARG BUILD_ENV
 ENV BUILD_ENV=${BUILD_ENV}
 
-# Set default environment variables. They are used at build time and runtime.
-# If you specify your own environment variables on Heroku or Dokku, they will
-# override the ones set here. The ones below serve as sane defaults only.
-#  * PYTHONUNBUFFERED - This is useful so Python does not hold any messages
-#    from being output.
-#    https://docs.python.org/3.8/using/cmdline.html#envvar-PYTHONUNBUFFERED
-#    https://docs.python.org/3.8/using/cmdline.html#cmdoption-u
-#  * PYTHONPATH - enables use of django-admin command.
-#  * DJANGO_SETTINGS_MODULE - default settings used in the container.
-#  * PORT - default port used. Please match with EXPOSE so it works on Dokku.
-#    Heroku will ignore EXPOSE and only set PORT variable. PORT variable is
-#    read/used by Gunicorn.
-#  * WEB_CONCURRENCY - number of workers used by Gunicorn. The variable is
-#    read by Gunicorn.
-#  * GUNICORN_CMD_ARGS - additional arguments to be passed to Gunicorn. This
-#    variable is read by Gunicorn
-ENV PYTHONUNBUFFERED=1 \
-    PYTHONPATH=/app \
-    DJANGO_SETTINGS_MODULE=bc.settings.production \
-    PORT=8000 \
-    WEB_CONCURRENCY=3 \
-    GUNICORN_CMD_ARGS="-c gunicorn-conf.py --max-requests 1200 --access-logfile -"
-
 # Port exposed by this container. Should default to the port used by your WSGI
 # server (Gunicorn). This is read by Dokku only. Heroku will ignore this.
 EXPOSE 8000
 
-# Install poetry using the installer (keeps Poetry's dependencies isolated from the app's)
-# chown protects us against cases where files downloaded by poetry have invalid ownership
-# (see https://git.torchbox.com/internal/wagtail-kit/-/merge_requests/682)
-# chmod ensures poetry dependencies are accessible when packages are installed
-RUN wget https://raw.githubusercontent.com/python-poetry/poetry/${POETRY_VERSION}/get-poetry.py && \
-    echo "${POETRY_INSTALLER_SHA} get-poetry.py" | sha1sum -c - && \
-    python get-poetry.py && \
-    rm get-poetry.py && \
-    chown -R root:root ${POETRY_HOME} && \
-    chmod -R 0755 ${POETRY_HOME}
+# Install poetry at the system level
+RUN pip install --no-cache poetry==${POETRY_VERSION}
 
 # Copy gunicorn config overrides.
 COPY gunicorn-conf.py ./
@@ -118,10 +83,13 @@ USER bc
 # Install your app's Python requirements.
 RUN python -m venv $VIRTUAL_ENV
 COPY --chown=bc pyproject.toml poetry.lock ./
-RUN pip install --upgrade pip && poetry install ${POETRY_INSTALL_ARGS} --no-root --extras gunicorn
+RUN pip install --no-cache --upgrade pip && poetry install ${POETRY_INSTALL_ARGS} --no-root --extras gunicorn && rm -rf $HOME/.cache
 
 # Copy application code.
 COPY --chown=bc . .
+
+# Run poetry install again to install our project (so the the bc package is always importable)
+RUN poetry install ${POETRY_INSTALL_ARGS}
 
 # Collect static. This command will move static files from application
 # directories and "static_compiled" folder to the main static directory that

@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- Wagtail 4.2 Upgrade
+
 ## 69.1 (2023-05-02)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.0...69.1>
