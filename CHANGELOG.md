@@ -1,5 +1,11 @@
 # Release History
 
+## 69.2 (2023-06-06)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.1...69.2>
+
+- [Wagtail 4.2 Upgrade](https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/651)
+
 ## 69.1 (2023-05-02)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.0...69.1>
