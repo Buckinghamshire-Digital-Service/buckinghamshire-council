@@ -16,3 +16,10 @@ class InformationPageFactory(wagtail_factories.PageFactory):
 
     title = factory.Sequence(lambda n: f"Information Index {n}")
     listing_summary = "Information Page"
+
+
+class RedirectPageFactory(wagtail_factories.PageFactory):
+    class Meta:
+        model = "standardpages.RedirectPage"
+
+    listing_summary = "Redirect Page"
