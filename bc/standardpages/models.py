@@ -2,6 +2,7 @@ from urllib.parse import unquote
 
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.shortcuts import redirect
 from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
@@ -167,3 +168,6 @@ class RedirectPage(BasePage):
             return self.internal_page.relative_url(current_site, request)
         else:
             return self.external_url
+
+    def serve(self, request, *args, **kwargs):
+        return redirect(self.relative_url(None, request))
