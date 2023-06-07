@@ -6,7 +6,7 @@ from wagtail.test.utils import WagtailTestUtils
 from bc.home.models import HomePage
 
 from ..models import InformationPage
-from .fixtures import IndexPageFactory, InformationPageFactory
+from .fixtures import IndexPageFactory, InformationPageFactory, RedirectPageFactory
 
 
 class IndexPageModelTests(TestCase, WagtailTestUtils):
@@ -245,3 +245,25 @@ class IndexPageModelTests(TestCase, WagtailTestUtils):
             reverse("wagtailadmin_pages:view_draft", args=(redirect_page.id,))
         )
         self.assertEqual(response.status_code, 200)
+
+
+class RedirectPageTest(TestCase):
+    def setUp(self) -> None:
+        self.homepage = HomePage.objects.first()
+        self.index_page = IndexPageFactory.build()
+        self.homepage.add_child(instance=self.index_page)
+
+    def test_redirect_page_redirects_to_internal_page(self):
+        redirect_page = RedirectPageFactory.build(internal_page=self.index_page)
+        self.homepage.add_child(instance=redirect_page)
+
+        resp = self.client.get(redirect_page.url)
+        self.assertRedirects(resp, self.index_page.url)
+
+    def test_redirect_page_redirects_to_external_url(self):
+        external_url = self.index_page.full_url
+        redirect_page = RedirectPageFactory.build(external_url=external_url)
+        self.homepage.add_child(instance=redirect_page)
+
+        resp = self.client.get(redirect_page.url)
+        self.assertRedirects(resp, external_url, fetch_redirect_response=False)

@@ -1,5 +1,11 @@
 # Release History
 
+## 69.3 (2023-06-07)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.2...69.3>
+
+- [Make **RedirectPage** redirect to target url when directly visited](https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/606)
+
 ## 69.2 (2023-06-06)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.1...69.2>
