@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 69.4 (2023-07-07)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.3...69.4>
 
 - [Upgrade Django to 3.2.20 for CVE-2023-36053](https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/655)
 
