@@ -447,7 +447,7 @@ class TestValidation(TestCase):
             validators=[
                 FileExtensionValidator(allowed_extensions=VALID_FILE_EXTENSIONS)
             ],
-            widget=forms.ClearableFileInput(attrs={"multiple": True}),
+            widget=forms.ClearableFileInput(attrs={"allow_multiple_selected": True}),
         )
         field_schema_name_mapping = {
             "description": DESCRIPTION_SCHEMA_NAME,

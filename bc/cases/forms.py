@@ -132,7 +132,7 @@ class ComplaintForm(BaseCaseForm):
         label="Upload files",
         required=False,
         validators=[FileExtensionValidator(allowed_extensions=VALID_FILE_EXTENSIONS)],
-        widget=forms.ClearableFileInput(attrs={"multiple": True}),
+        widget=forms.ClearableFileInput(attrs={"allow_multiple_selected": True}),
     )
 
     def __init__(self, *args, **kwargs):
@@ -192,7 +192,7 @@ class FOIForm(BaseCaseForm):
         label="Upload files",
         required=False,
         validators=[FileExtensionValidator(allowed_extensions=VALID_FILE_EXTENSIONS)],
-        widget=forms.ClearableFileInput(attrs={"multiple": True}),
+        widget=forms.ClearableFileInput(attrs={"allow_multiple_selected": True}),
     )
 
     field_schema_name_mapping = {
@@ -281,7 +281,7 @@ class SARForm(BaseCaseForm):
         label="Upload proof of identity",
         required=False,
         validators=[FileExtensionValidator(allowed_extensions=VALID_FILE_EXTENSIONS)],
-        widget=forms.ClearableFileInput(attrs={"multiple": True}),
+        widget=forms.ClearableFileInput(attrs={"allow_multiple_selected": True}),
         help_text="To help us process your request quicker, upload two "
         "forms of ID that clearly show your name, date of birth and "
         "current address. For example, your driving licence and a utility "
@@ -458,7 +458,7 @@ class DisclosureForm(BaseCaseForm):
         "You can also upload any other relevant documents. ",
         required=False,
         validators=[FileExtensionValidator(allowed_extensions=VALID_FILE_EXTENSIONS)],
-        widget=forms.ClearableFileInput(attrs={"multiple": True}),
+        widget=forms.ClearableFileInput(attrs={"allow_multiple_selected": True}),
     )
 
     @property
