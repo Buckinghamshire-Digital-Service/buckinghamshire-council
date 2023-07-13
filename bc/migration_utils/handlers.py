@@ -44,7 +44,7 @@ def handle_page(page, attrs, mapper):
 
 
 def handle_revision(revision, attrs, mapper):
-    revision_content = json.loads(revision.content_json)
+    revision_content = revision.content
 
     should_save = False
     for attr in attrs:
@@ -57,7 +57,7 @@ def handle_revision(revision, attrs, mapper):
 
         if mapped:
             revision_content[attr] = json.dumps(stream_data)
-            revision.content_json = json.dumps(revision_content)
+            revision.content = revision_content
 
     if should_save:
         revision.save()
