@@ -1,9 +1,8 @@
 from django.test import TestCase, override_settings
 from django.urls import reverse
 
-from wagtail.contrib.search_promotions.models import SearchPromotion
+from wagtail.contrib.search_promotions.models import Query, SearchPromotion
 from wagtail.models import Page
-from wagtail.search.models import Query
 
 from bc.home.models import HomePage
 from bc.standardpages.tests.fixtures import InformationPageFactory

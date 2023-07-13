@@ -2,10 +2,9 @@ from django.conf import settings
 from django.test import RequestFactory, TestCase, override_settings
 from django.urls import reverse
 
-from wagtail.contrib.search_promotions.models import SearchPromotion
+from wagtail.contrib.search_promotions.models import Query, SearchPromotion
 from wagtail.models import Page, Site
 from wagtail.search.backends import get_search_backend
-from wagtail.search.models import Query
 
 from bc.home.models import HomePage
 from bc.home.tests.fixtures import HomePageFactory
