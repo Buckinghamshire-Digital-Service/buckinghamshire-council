@@ -1,6 +1,5 @@
 from django.templatetags.static import static
 from django.urls import path, reverse
-from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
 from wagtail import hooks
@@ -152,16 +151,6 @@ def register_big_text_feature(features):
     }
 
     features.register_converter_rule("contentstate", feature_name, db_conversion)
-
-
-# This style has been added so that the close icon in the modal dialog is visible e.g. not white.
-# It can be removed entirely once the package is updated to be compatible with wagtail 4+.
-@hooks.register("insert_global_admin_css")
-def wagtail_transfer_admin_fix_css():
-    return format_html(
-        '<link rel="stylesheet" href="{}">',
-        static("vendor/wagtail_transfer/css/modal.css"),
-    )
 
 
 @hooks.register("insert_editor_js")

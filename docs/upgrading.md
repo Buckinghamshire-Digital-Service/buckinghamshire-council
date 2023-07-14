@@ -2,14 +2,6 @@
 
 This document describes aspects of the system which should be given particular attention when upgrading Wagtail or its dependencies.
 
-## Known technical debt
-
-Wagtail transfer isn't currently completely compatible with the wagtail version use here. v4.1
-
-There is a admin hook in place bc/utils/wagtail_hooks.py (wagtail_transfer_admin_fix_css) to inject some temporary css.
-
-Once Wagtail transfer is made compatible the template can be removed.
-
 ## Critical paths
 
 The following areas of functionality are critical paths for the site which don't have full automated tests and should be checked manually.
