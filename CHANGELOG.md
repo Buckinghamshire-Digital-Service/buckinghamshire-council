@@ -1,5 +1,11 @@
 # Release History
 
+## 69.5 (2023-08-30)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.4...69.5>
+
+- [Fix collectstatic error when running fab build by upgrading python to 3.8, debian image, poetry and psycopg2](https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/658)
+
 ## 69.4 (2023-07-07)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.3...69.4>

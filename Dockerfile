@@ -1,4 +1,4 @@
-FROM node:12-alpine as frontend
+FROM node:12.22.12-alpine as frontend
 
 # Make build & post-install scripts behave as if we were in a CI environment (e.g. for logging verbosity purposes).
 ARG CI=true
@@ -8,6 +8,7 @@ COPY package.json package-lock.json .babelrc webpack.config.js ./
 RUN npm ci --no-optional --no-audit --progress=false
 
 # Install operating system dependencies.
+# npm needs this to sync directories.
 RUN apk add --no-cache rsync
 
 # Compile static files
@@ -18,13 +19,13 @@ RUN npm run build:prod
 # ones becase they use a different C compiler. Debian images also come with
 # all useful packages required for image manipulation out of the box. They
 # however weight a lot, approx. up to 1.5GiB per built image.
-FROM python:3.7.4-stretch as backend
+FROM python:3.8-bullseye as backend
 
 ARG POETRY_HOME=/opt/poetry
 ARG POETRY_INSTALL_ARGS="--no-dev"
 
 # IMPORTANT: Remember to review both of these when upgrading
-ARG POETRY_VERSION=1.4.2
+ARG POETRY_VERSION=1.5.1
 
 # Install dependencies in a virtualenv
 ENV VIRTUAL_ENV=/venv
