@@ -14,7 +14,7 @@ const hostWidgetInContainer = (result, targetEl) => {
 };
 
 const launchSafeSpace = () => {
-    fetch('https://apps.parcelforce.com/sso/')
+    fetch('https://safespaces.azurewebsites.net/')
         .then((resp) => resp.text())
         .then((resp) => hostWidgetInContainer(resp, document.body))
         .catch((err) => {
@@ -23,7 +23,7 @@ const launchSafeSpace = () => {
 };
 
 const isSafeSpaceAvailable = () => {
-    fetch('https://apps.parcelforce.com/sso/Home/IsAlive')
+    fetch('https://safespaces.azurewebsites.net/Home/IsAlive')
         .then((resp) => resp.json())
         .then((_) => launchSafeSpace()) // eslint-disable-line no-unused-vars
         .catch((err) => {
