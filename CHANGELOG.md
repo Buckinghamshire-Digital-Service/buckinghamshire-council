@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 69.6 (2023-09-05)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.5...69.6>
 
 - Update _Safe Spaces_ widget URLs
 
