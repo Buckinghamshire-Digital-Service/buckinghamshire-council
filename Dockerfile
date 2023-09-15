@@ -114,15 +114,18 @@ USER root
 # Update apt repositories
 RUN apt-get update --yes --quiet
 
-# Install node (Keep the version in sync with the node container above)
-RUN curl -fsSL https://deb.nodesource.com/setup_12.x | bash - && apt-get install -y nodejs
-
 # Install `psql`, useful for `manage.py dbshell`
 # `rsync` is used by mode to build the frontend.
 RUN apt-get install -y postgresql-client rsync
 
 # Restore user
 USER bc
+
+# Install nvm and node/npm
+ARG NVM_VERSION=0.39.3
+COPY --chown=bc .nvmrc ./
+RUN curl https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh | bash \
+    && bash --login -c "nvm install --no-progress && nvm alias default $(nvm run --silent --version)"
 
 # Pull in the node modules for the frontend
 COPY --chown=bc --from=frontend ./node_modules ./node_modules
