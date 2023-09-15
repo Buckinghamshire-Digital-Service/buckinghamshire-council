@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- Use [nvm](https://github.com/nvm-sh/nvm) to install Node.js
+
 ## 69.8 (2023-10-06)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.7...69.8>
