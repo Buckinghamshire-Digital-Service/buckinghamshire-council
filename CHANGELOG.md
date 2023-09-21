@@ -1,5 +1,11 @@
 # Release History
 
+## 69.7 (2023-09-21)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.6...69.7>
+
+- Use the same Postgres version (v13.10) everywhere.
+
 ## 69.6 (2023-09-05)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.5...69.6>
