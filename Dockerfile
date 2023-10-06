@@ -111,10 +111,7 @@ FROM backend as dev
 # Swap user, so the following tasks can be run as root
 USER root
 
-# Update stretch repositories
-RUN sed -i -e 's/deb.debian.org/archive.debian.org/g' \
-    -e 's|security.debian.org|archive.debian.org/|g' \
-    -e '/stretch-updates/d' /etc/apt/sources.list
+# Update apt repositories
 RUN apt-get update --yes --quiet
 
 # Install node (Keep the version in sync with the node container above)
