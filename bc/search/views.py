@@ -195,6 +195,7 @@ class SearchView(View):
                 "no_result_text": no_result_text,
                 "search_query": search_query,
                 "search_results": search_results,
+                "SEO_NOINDEX": True,
             }
         )
 
