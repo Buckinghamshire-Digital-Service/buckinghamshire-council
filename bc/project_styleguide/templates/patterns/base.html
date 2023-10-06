@@ -17,7 +17,7 @@
             search engines crawling admin domains.:8000
             This ignores ports for simplicity.
         {% endcomment %}
-        {% if request.get_host != current_site.hostname or request.get_host in NONINDEXED_HOSTS %}
+        {% if request.get_host != current_site.hostname or request.get_host in NONINDEXED_HOSTS or SEO_NOINDEX %}
             <meta name="robots" content="noindex" />
         {% endif %}
 

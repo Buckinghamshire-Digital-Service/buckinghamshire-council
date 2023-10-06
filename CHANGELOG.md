@@ -1,5 +1,11 @@
 # Release History
 
+## 69.8 (2023-10-06)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.7...69.8>
+
+- [Fixes for Google spam issue](https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/665)
+
 ## 69.7 (2023-09-21)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.6...69.7>
