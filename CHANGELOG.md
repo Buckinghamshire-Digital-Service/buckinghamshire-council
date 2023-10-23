@@ -1,8 +1,11 @@
 # Release History
 
-## Unreleased
+## 69.9 (2023-10-23)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.8...69.9>
 
 - Use [nvm](https://github.com/nvm-sh/nvm) to install Node.js
+- Add fix for object has no attribute 'is_preview'
 
 ## 69.8 (2023-10-06)
 
