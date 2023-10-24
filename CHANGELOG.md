@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- [Update Waste Wizard api url](https://torchbox.monday.com/boards/1143413211/views/811717/pulses/1259231588)
+
 ## 69.9 (2023-10-23)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.8...69.9>
