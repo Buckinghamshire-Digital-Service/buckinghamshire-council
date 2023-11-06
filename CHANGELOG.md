@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add a template for the RedirectPage type
+
 ## 69.10 (2023-10-24)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.9...69.10>
