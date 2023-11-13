@@ -363,3 +363,12 @@ class AreaFinderTest(TestCase):
         self.assertEqual(resp.headers["content-type"], "application/json")
         json_response = resp.json()
         self.assertIn("error", json_response)
+
+    @mock.patch("bc.area_finder.views.BucksMapsClient")
+    def test_connectionerror(self, mock_client):
+        mock_client().query_postcode.side_effect = ConnectionError
+        resp = self.client.get(self.url + "?postcode=W1A+1AA")
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.headers["content-type"], "application/json")
+        json_response = resp.json()
+        self.assertIn("error", json_response)
