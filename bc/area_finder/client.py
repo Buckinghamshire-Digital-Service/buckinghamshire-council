@@ -44,29 +44,27 @@ class BucksMapsClient:
         "f": "pjson",
     }
 
-    def __init__(self):
+    def _post(self, data):
         """
-        Setting up a session with retries due to Sentry ConnectionError seen in production;
+        Set up a session with retries for handling Sentry ConnectionError in production.
 
-        - backoff_factor is increase in sleep time between retries (10%)
-        - status_forcelist is the list of status codes to retry on
-        - allowed_methods is the set of uppercased HTTP method verbs that we should retry on.
+        - `backoff_factor`: Increase in sleep time between retries (10%).
+        - `status_forcelist`: List of status codes to retry on.
+        - `allowed_methods`: Set of uppercased HTTP method verbs for retries.
 
-        Here we will retry the request 3 times if it fails with a 502, 503 or 504 error
-        with an increasing length of time between retries.
+        Retry the request 3 times with an increasing delay if it fails with a 502-504, 598 error.
         """
         self.session = Session()
 
         retries = Retry(
             total=3,
             backoff_factor=0.1,
-            status_forcelist=[502, 503, 504],
+            status_forcelist=[502, 503, 504, 598],
             allowed_methods={"POST"},
         )
 
         self.session.mount(self.base_url, adapter=HTTPAdapter(max_retries=retries))
 
-    def _post(self, data):
         response = self.session.post(
             self.base_url,
             data=data,
