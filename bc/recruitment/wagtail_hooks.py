@@ -1,11 +1,8 @@
 from django.utils.html import format_html
 
-from wagtail.contrib.modeladmin.options import (
-    ModelAdmin,
-    ModelAdminGroup,
-    modeladmin_register,
-)
 from wagtail.search.utils import OR
+
+from wagtail_modeladmin.options import ModelAdmin, ModelAdminGroup, modeladmin_register
 
 from bc.recruitment.models import JobAlertSubscription, TalentLinkJob
 
