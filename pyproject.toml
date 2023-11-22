@@ -39,6 +39,7 @@ sentry-sdk = "^1.19.1"
 backoff = "^2.2.1"
 responses = "0.16.0"
 django-filter = "^22.1"
+wagtail-modeladmin = "^1.0.0"
 
 [tool.poetry.extras]
 gunicorn = ["gunicorn"]
