@@ -741,12 +741,20 @@
   {
     "model": "wagtailcore.grouppagepermission",
     "pk": 1,
-    "fields": { "group": ["Moderators"], "page": 1, "permission_type": "add" }
+    "fields": {
+      "group": ["Moderators"],
+      "page": 1,
+      "permission": ["add_page", "wagtailcore", "page"]
+    }
   },
   {
     "model": "wagtailcore.grouppagepermission",
     "pk": 2,
-    "fields": { "group": ["Moderators"], "page": 1, "permission_type": "edit" }
+    "fields": {
+      "group": ["Moderators"],
+      "page": 1,
+      "permission": ["change_page", "wagtailcore", "page"]
+    }
   },
   {
     "model": "wagtailcore.grouppagepermission",
@@ -754,23 +762,35 @@
     "fields": {
       "group": ["Moderators"],
       "page": 1,
-      "permission_type": "publish"
+      "permission": ["publish_page", "wagtailcore", "page"]
     }
   },
   {
     "model": "wagtailcore.grouppagepermission",
     "pk": 4,
-    "fields": { "group": ["Editors"], "page": 1, "permission_type": "add" }
+    "fields": {
+      "group": ["Editors"],
+      "page": 1,
+      "permission": ["add_page", "wagtailcore", "page"]
+    }
   },
   {
     "model": "wagtailcore.grouppagepermission",
     "pk": 5,
-    "fields": { "group": ["Editors"], "page": 1, "permission_type": "edit" }
+    "fields": {
+      "group": ["Editors"],
+      "page": 1,
+      "permission": ["change_page", "wagtailcore", "page"]
+    }
   },
   {
     "model": "wagtailcore.grouppagepermission",
     "pk": 6,
-    "fields": { "group": ["Moderators"], "page": 1, "permission_type": "lock" }
+    "fields": {
+      "group": ["Moderators"],
+      "page": 1,
+      "permission": ["lock_page", "wagtailcore", "page"]
+    }
   },
   {
     "model": "wagtailcore.collection",
