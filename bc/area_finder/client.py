@@ -52,14 +52,14 @@ class BucksMapsClient:
         - `status_forcelist`: List of status codes to retry on.
         - `allowed_methods`: Set of uppercased HTTP method verbs for retries.
 
-        Retry the request 3 times with an increasing delay if it fails with a 502-504, 598 error.
+        Retry the request 3 times with an increasing delay if it fails with a 598 error.
         """
         self.session = Session()
 
         retries = Retry(
             total=3,
             backoff_factor=0.1,
-            status_forcelist=[502, 503, 504, 598],
+            status_forcelist=[598],
             allowed_methods={"POST"},
         )
 
