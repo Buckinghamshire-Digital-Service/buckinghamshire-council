@@ -37,6 +37,5 @@ A temporary solution is to fork the package dependency, tag the working branch, 
 The following packages are forked at the time of the latest upgrade (Wagtail 5.0):
 
 - `wagtail-django-recaptcha`
-- `wagtail-transfer`
 
 Please note that it is important to replace the usage of the git tags in the pyproject.toml file with the official release version from PyPI as soon as it becomes available. This ensures that we maintain compatibility with the official releases and benefit from any subsequent updates and improvements provided by the original package maintainers.
