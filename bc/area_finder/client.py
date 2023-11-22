@@ -45,21 +45,14 @@ class BucksMapsClient:
     }
 
     def _post(self, data):
-        """
-        Set up a session with retries for handling Sentry ConnectionError in production.
-
-        - `backoff_factor`: Increase in sleep time between retries (10%).
-        - `status_forcelist`: List of status codes to retry on.
-        - `allowed_methods`: Set of uppercased HTTP method verbs for retries.
-
-        Retry the request 3 times with an increasing delay if it fails with a 598 error.
-        """
+        # Set up a session with retries for handling Sentry ConnectionError in production
+        # for further information see documentation at docs/postcode-lookup.md
         self.session = Session()
 
         retries = Retry(
             total=3,
             backoff_factor=0.1,
-            status_forcelist=[598],
+            status_forcelist=[502, 503, 504, 598],
             allowed_methods={"POST"},
         )
 
