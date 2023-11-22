@@ -457,19 +457,25 @@ class PieChartBlock(BaseChartBlock):
         # Get total value
         total_value = 0
         for row in cleaned_data:
-            if is_number(row[1]):
-                total_value += float(row[1])
+            try:
+                if is_number(row[1]):
+                    total_value += float(row[1])
+            except IndexError:
+                pass
 
         # Use percentage values for the chart
         series_data = []
         for row in cleaned_data:
-            if is_number(row[1]):
-                series_value = round(float(row[1]) / total_value * 100, 1)
-            else:
-                series_value = row[1]
-            series = {"name": row[0], "y": series_value}
-            series_data.append(series)
-            row.append(f"{series_value}%")
+            try:
+                if is_number(row[1]):
+                    series_value = round(float(row[1]) / total_value * 100, 1)
+                else:
+                    series_value = row[1]
+                series = {"name": row[0], "y": series_value}
+                series_data.append(series)
+                row.append(f"{series_value}%")
+            except IndexError:
+                pass
 
         new_value = {"chart": {"type": "pie"}, "series": [{"data": series_data}]}
 
