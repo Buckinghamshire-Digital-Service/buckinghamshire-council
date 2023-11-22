@@ -161,7 +161,7 @@ def editor_js():
     )
 
 
-@hooks.register("insert_editor_css")
+@hooks.register("insert_global_admin_css")
 def editor_css():
     return mark_safe(
         '<link rel="stylesheet" type="text/css" href="%s">'
