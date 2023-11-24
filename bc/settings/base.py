@@ -104,7 +104,7 @@ INSTALLED_APPS = [
     "wagtail",
     "modelcluster",
     "taggit",
-    "captcha",
+    "django_recaptcha",
     "wagtailcaptcha",
     "django.contrib.admin",
     "django.contrib.auth",
