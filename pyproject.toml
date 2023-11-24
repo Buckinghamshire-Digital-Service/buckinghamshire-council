@@ -28,7 +28,7 @@ scout-apm = "2.0.2"
 tabulate = "0.8.7"
 urllib3 = "1.26.11"
 wagtail = "~5.1"
-wagtail-django-recaptcha = {git = "https://github.com/torchbox-forks/wagtail-django-recaptcha", tag = "2.1.0"}
+wagtail-django-recaptcha = {git = "https://github.com/torchbox-forks/wagtail-django-recaptcha", tag = "2.1.1+tbx"}
 wagtail-factories = "^4.1.0"
 wagtail-orderable = "^1.2.0"
 wagtail-transfer = "^0.9.3"
