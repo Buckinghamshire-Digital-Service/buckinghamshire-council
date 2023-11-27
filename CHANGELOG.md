@@ -2,7 +2,15 @@
 
 ## Unreleased
 
+## 69.12 (2023-11-27)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.11...69.12>
+
+- Bump wagtail version to 5.0.5
+
 ## 69.11 (2023-11-27)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.10...69.11>
 
 - Add a template for the RedirectPage type
 - Add a check for empty columns in the PieChartBlock
