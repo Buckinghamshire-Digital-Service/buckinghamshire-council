@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Bump wagtail version to 5.0.5
+
 ## 69.11 (2023-11-27)
 
 - Add a template for the RedirectPage type
