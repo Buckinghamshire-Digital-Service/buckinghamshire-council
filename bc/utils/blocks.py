@@ -465,7 +465,7 @@ class PieChartBlock(BaseChartBlock):
                 if is_number(row[1]):
                     total_value += float(row[1])
             except IndexError:
-                pass # Fails silently
+                pass  # Fails silently
 
         # Use percentage values for the chart
         series_data = []
@@ -483,7 +483,7 @@ class PieChartBlock(BaseChartBlock):
                 series_data.append(series)
                 row.append(f"{series_value}%")
             except IndexError:
-                pass # Fails silently
+                pass  # Fails silently
 
         new_value = {"chart": {"type": "pie"}, "series": [{"data": series_data}]}
 
