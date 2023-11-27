@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 69.11 (2023-11-27)
+
+- Add a template for the RedirectPage type
+- Add a check for empty columns in the PieChartBlock
+- Add a Retry to the BucksMapsClient
+- Upgrade Wagtail to 5.0
+
 ## 69.10 (2023-10-24)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.9...69.10>

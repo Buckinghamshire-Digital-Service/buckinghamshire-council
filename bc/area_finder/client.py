@@ -1,6 +1,8 @@
 from django.conf import settings
 
-import requests
+from requests import Session
+from requests.adapters import HTTPAdapter
+from urllib3.util import Retry
 
 
 class BucksMapsClient:
@@ -43,7 +45,20 @@ class BucksMapsClient:
     }
 
     def _post(self, data):
-        response = requests.post(
+        # Set up a session with retries for handling Sentry ConnectionError in production
+        # for further information see documentation at docs/postcode-lookup.md
+        self.session = Session()
+
+        retries = Retry(
+            total=3,
+            backoff_factor=0.1,
+            status_forcelist=[502, 503, 504, 598],
+            allowed_methods={"POST"},
+        )
+
+        self.session.mount(self.base_url, adapter=HTTPAdapter(max_retries=retries))
+
+        response = self.session.post(
             self.base_url,
             data=data,
             timeout=settings.BUCKS_MAPS_CLIENT_API_TIMEOUT_SECONDS,

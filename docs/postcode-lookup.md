@@ -17,3 +17,7 @@ If all the results for a query match a single district council (most queries), w
 The Python client is at `bc.area_finder.client.BucksMapsClient`. The timeout for the upstream API can be configured with the environment variable:
 
 - `BUCKS_MAPS_CLIENT_API_TIMEOUT_SECONDS` (must be parsable as a `float`; defaults to `10`)
+- Retries are implemented to handle a Sentry ConnectionError see in production.
+  - `backoff_factor`: Increase in sleep time between retries (10%).
+  - `status_forcelist`: List of status codes to retry on.
+  - `allowed_methods`: Set of uppercased HTTP method verbs for retries.

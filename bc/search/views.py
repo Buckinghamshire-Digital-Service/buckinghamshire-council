@@ -12,8 +12,8 @@ from django.utils.timezone import now
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View
 
+from wagtail.contrib.search_promotions.models import Query
 from wagtail.models import Page, Site
-from wagtail.search.models import Query
 
 import backoff
 import elasticsearch

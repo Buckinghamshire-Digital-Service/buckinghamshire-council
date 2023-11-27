@@ -1,0 +1,2 @@
+context:
+  base_page_template: 'patterns/base_page.html'

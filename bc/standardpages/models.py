@@ -133,6 +133,10 @@ class IndexPage(BasePage):
 
 
 class RedirectPage(BasePage):
+    # This page type returns a redirect, the template is never served on the frontend.
+    # In the Wagtail admin, without a template it will throw an error when the preview is opened.
+    template = "patterns/pages/standardpages/redirect_page.html"
+
     internal_page = models.ForeignKey(
         "wagtailcore.Page",
         null=True,

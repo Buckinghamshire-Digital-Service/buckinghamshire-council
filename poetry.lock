@@ -841,6 +841,17 @@ docs = ["furo (>=2023.5.20)", "sphinx (>=7.0.1)", "sphinx-autodoc-typehints (>=1
 testing = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "diff-cover (>=7.5)", "pytest (>=7.3.1)", "pytest-cov (>=4.1)", "pytest-mock (>=3.10)", "pytest-timeout (>=2.1)"]
 
 [[package]]
+name = "filetype"
+version = "1.2.0"
+description = "Infer file type and MIME type of any file/buffer. No external dependencies."
+optional = false
+python-versions = "*"
+files = [
+    {file = "filetype-1.2.0-py2.py3-none-any.whl", hash = "sha256:7ce71b6880181241cf7ac8697a2f1eb6a8bd9b429f7ad6d27b8db9ba5f1c2d25"},
+    {file = "filetype-1.2.0.tar.gz", hash = "sha256:66b56cd6474bf41d8c54660347d37afcc3f7d1970648de365c102ef77548aadb"},
+]
+
+[[package]]
 name = "flake8"
 version = "3.7.7"
 description = "the modular source code checker: pep8, pyflakes and co"
@@ -1226,6 +1237,16 @@ files = [
     {file = "MarkupSafe-2.1.3-cp311-cp311-musllinux_1_1_x86_64.whl", hash = "sha256:5bbe06f8eeafd38e5d0a4894ffec89378b6c6a625ff57e3028921f8ff59318ac"},
     {file = "MarkupSafe-2.1.3-cp311-cp311-win32.whl", hash = "sha256:dd15ff04ffd7e05ffcb7fe79f1b98041b8ea30ae9234aed2a9168b5797c3effb"},
     {file = "MarkupSafe-2.1.3-cp311-cp311-win_amd64.whl", hash = "sha256:134da1eca9ec0ae528110ccc9e48041e0828d79f24121a1a146161103c76e686"},
+    {file = "MarkupSafe-2.1.3-cp312-cp312-macosx_10_9_universal2.whl", hash = "sha256:f698de3fd0c4e6972b92290a45bd9b1536bffe8c6759c62471efaa8acb4c37bc"},
+    {file = "MarkupSafe-2.1.3-cp312-cp312-macosx_10_9_x86_64.whl", hash = "sha256:aa57bd9cf8ae831a362185ee444e15a93ecb2e344c8e52e4d721ea3ab6ef1823"},
+    {file = "MarkupSafe-2.1.3-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:ffcc3f7c66b5f5b7931a5aa68fc9cecc51e685ef90282f4a82f0f5e9b704ad11"},
+    {file = "MarkupSafe-2.1.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:47d4f1c5f80fc62fdd7777d0d40a2e9dda0a05883ab11374334f6c4de38adffd"},
+    {file = "MarkupSafe-2.1.3-cp312-cp312-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:1f67c7038d560d92149c060157d623c542173016c4babc0c1913cca0564b9939"},
+    {file = "MarkupSafe-2.1.3-cp312-cp312-musllinux_1_1_aarch64.whl", hash = "sha256:9aad3c1755095ce347e26488214ef77e0485a3c34a50c5a5e2471dff60b9dd9c"},
+    {file = "MarkupSafe-2.1.3-cp312-cp312-musllinux_1_1_i686.whl", hash = "sha256:14ff806850827afd6b07a5f32bd917fb7f45b046ba40c57abdb636674a8b559c"},
+    {file = "MarkupSafe-2.1.3-cp312-cp312-musllinux_1_1_x86_64.whl", hash = "sha256:8f9293864fe09b8149f0cc42ce56e3f0e54de883a9de90cd427f191c346eb2e1"},
+    {file = "MarkupSafe-2.1.3-cp312-cp312-win32.whl", hash = "sha256:715d3562f79d540f251b99ebd6d8baa547118974341db04f5ad06d5ea3eb8007"},
+    {file = "MarkupSafe-2.1.3-cp312-cp312-win_amd64.whl", hash = "sha256:1b8dd8c3fd14349433c79fa8abeb573a55fc0fdd769133baac1f5e07abf54aeb"},
     {file = "MarkupSafe-2.1.3-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:8e254ae696c88d98da6555f5ace2279cf7cd5b3f52be2b5cf97feafe883b58d2"},
     {file = "MarkupSafe-2.1.3-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:cb0932dc158471523c9637e807d9bfb93e06a95cbf010f1a38b98623b929ef2b"},
     {file = "MarkupSafe-2.1.3-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:9402b03f1a1b4dc4c19845e5c749e3ab82d5078d16a2a4c2cd2df62d57bb0707"},
@@ -2141,19 +2162,19 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 
 [[package]]
 name = "wagtail"
-version = "4.2.4"
+version = "5.0.3"
 description = "A Django content management system."
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "wagtail-4.2.4-py3-none-any.whl", hash = "sha256:93e8d39a14a44099ca620e46613a3a2319b1d10c622dc7f0ff8658807b18190c"},
-    {file = "wagtail-4.2.4.tar.gz", hash = "sha256:4bf146194e1725cd4305bf1998f507d46f587e207d609bc2ec73a6c5cce04410"},
+    {file = "wagtail-5.0.3-py3-none-any.whl", hash = "sha256:2e4203661527a6df3d2f446b1bfca33db4682c760efd3e2aa6116ff30e3193d6"},
+    {file = "wagtail-5.0.3.tar.gz", hash = "sha256:c07c8df294e1d2c73f62d0624580aa9437bc1419405b3b2b2f1038e58a514848"},
 ]
 
 [package.dependencies]
 anyascii = ">=0.1.5"
 beautifulsoup4 = ">=4.8,<4.12"
-Django = ">=3.2,<4.2"
+Django = ">=3.2,<4.3"
 django-filter = ">=2.2,<23"
 django-modelcluster = ">=6.0,<7.0"
 django-permissionedforms = ">=0.1,<1.0"
@@ -2164,14 +2185,14 @@ draftjs-exporter = ">=2.1.5,<3.0"
 html5lib = ">=0.999,<2"
 l18n = ">=2018.5"
 openpyxl = ">=3.0.10,<4.0"
-Pillow = ">=4.0.0,<10.0.0"
+Pillow = ">=9.1.0,<10.0.0"
 requests = ">=2.11.1,<3.0"
 telepath = ">=0.1.1,<1"
-Willow = ">=1.4,<1.5"
+Willow = ">=1.5,<1.6"
 
 [package.extras]
 docs = ["Sphinx (>=1.5.2)", "myst-parser (==0.18.1)", "pyenchant (>=3.1.1,<4)", "sphinx-autobuild (>=0.6.0)", "sphinx-copybutton (>=0.5,<1.0)", "sphinx-wagtail-theme (==6.0.0)", "sphinxcontrib-spelling (>=5.4.0,<6)"]
-testing = ["Jinja2 (>=3.0,<3.2)", "azure-mgmt-cdn (>=12.0,<13.0)", "azure-mgmt-frontdoor (>=1.0,<1.1)", "black (==22.3.0)", "boto3 (>=1.16,<1.17)", "coverage (>=3.7.0)", "curlylint (==0.13.1)", "django-pattern-library (>=0.7,<0.8)", "djhtml (==1.4.13)", "doc8 (==0.8.1)", "elasticsearch (>=5.0,<6.0)", "flake8 (>=3.6.0)", "flake8-assertive (==2.0.0)", "flake8-blind-except (==0.1.1)", "flake8-comprehensions (==3.8.0)", "flake8-print (==5.0.0)", "freezegun (>=0.3.8)", "isort (==5.6.4)", "polib (>=1.1,<2.0)", "python-dateutil (>=2.7)", "pytz (>=2014.7)", "semgrep (==1.3.0)", "wagtail-factories (>=4.0,<5)"]
+testing = ["Jinja2 (>=3.0,<3.2)", "azure-mgmt-cdn (>=12.0,<13.0)", "azure-mgmt-frontdoor (>=1.0,<1.1)", "black (==22.3.0)", "boto3 (>=1.16,<1.17)", "coverage (>=3.7.0)", "curlylint (==0.13.1)", "django-pattern-library (>=0.7,<0.8)", "djhtml (==1.5.2)", "doc8 (==0.8.1)", "elasticsearch (>=5.0,<6.0)", "factory-boy (>=3.2)", "flake8 (>=3.6.0,<6.1)", "flake8-assertive (==2.0.0)", "flake8-blind-except (==0.1.1)", "flake8-comprehensions (==3.8.0)", "flake8-print (==5.0.0)", "freezegun (>=0.3.8)", "isort (==5.6.4)", "polib (>=1.1,<2.0)", "python-dateutil (>=2.7)", "pytz (>=2014.7)", "semgrep (==1.3.0)"]
 
 [[package]]
 name = "wagtail-django-recaptcha"
@@ -2179,15 +2200,20 @@ version = "1.0"
 description = "A simple recaptcha field for Wagtail Form Pages."
 optional = false
 python-versions = "*"
-files = [
-    {file = "wagtail-django-recaptcha-1.0.tar.gz", hash = "sha256:fc177e75da966e9db1dfd9a566c40d30567518d9280b5db4fec4d50a8c853154"},
-]
+files = []
+develop = false
 
 [package.dependencies]
 django-recaptcha = "*"
 
 [package.extras]
-testing = ["coverage (>=4.1.0,<4.2)", "flake8 (>=3.2.0,<3.3)", "isort (==4.2.5)", "tox (>=2.3.1,<2.4)", "wagtail (==2.0)"]
+testing = ["coverage (>=6.5.0,<6.6)", "flake8 (>=5.0.4,<5.1)", "isort (>=5.10.1)", "tox (>=3.26.0,<3.27)", "wagtail (>=4.1)"]
+
+[package.source]
+type = "git"
+url = "https://github.com/torchbox-forks/wagtail-django-recaptcha"
+reference = "2.0.0"
+resolved_reference = "35975f98176af5d5a2515ec0e9de116e33a37fda"
 
 [[package]]
 name = "wagtail-factories"
@@ -2210,27 +2236,26 @@ test = ["coverage (==6.0)", "flake8 (==4.0.0)", "flake8-blind-except (==0.1.1)",
 
 [[package]]
 name = "wagtail-orderable"
-version = "1.1.0"
+version = "1.2.0"
 description = "Orderable support for Wagtail"
 optional = false
 python-versions = "*"
 files = [
-    {file = "wagtail-orderable-1.1.0.tar.gz", hash = "sha256:7e4486098caf788d752913a070f54ea0657c3d5c0f584ec8e42756f03ac75c2f"},
-    {file = "wagtail_orderable-1.1.0-py3-none-any.whl", hash = "sha256:957c87fd1186d726475c5292252327c395a94d2e3f0f34617a1c87f00c3d748a"},
+    {file = "wagtail-orderable-1.2.0.tar.gz", hash = "sha256:3355f91d09cd711960a03d83d2783d35b38735da6cd51fc9ab28fdbf635da050"},
+    {file = "wagtail_orderable-1.2.0-py3-none-any.whl", hash = "sha256:b1b951013630cfb6ab13b189a51cfcc78faa668f6b3bd8811359b331e2666763"},
 ]
 
 [package.dependencies]
-wagtail = ">=2.15"
+wagtail = ">=4.1"
 
 [[package]]
 name = "wagtail-transfer"
 version = "0.9.1"
-description = "Content transfer for Wagtail"
+description = ""
 optional = false
 python-versions = ">=3.7"
-files = [
-    {file = "wagtail_transfer-0.9.1-py3-none-any.whl", hash = "sha256:10eff61eadb30d788cee4e59e659b7042ee49dd6831c87e48288026a6125bddb"},
-]
+files = []
+develop = false
 
 [package.dependencies]
 wagtail = ">=4.1"
@@ -2238,19 +2263,25 @@ wagtail = ">=4.1"
 [package.extras]
 docs = ["mkdocs (>=1.0,<1.1)", "mkdocs-material (>=4.6,<4.7)"]
 
+[package.source]
+type = "git"
+url = "https://github.com/torchbox-forks/wagtail-transfer"
+reference = "wagtail-50"
+resolved_reference = "379390326f8e0b05aa4677bdc58416da97ee3bd6"
+
 [[package]]
 name = "wagtailgeowidget"
-version = "7.0.0"
+version = "8.0.0"
 description = "Wagtail-Geo-Widget is the complete map solution for your Wagtail site."
 optional = false
 python-versions = "*"
 files = [
-    {file = "wagtailgeowidget-7.0.0-py3-none-any.whl", hash = "sha256:bbe60f2c454b373538bd3d5a77c707476235951c0c5e9386694a1f9fc9b0bc03"},
-    {file = "wagtailgeowidget-7.0.0.tar.gz", hash = "sha256:90f9654702bcefe39c4ab09d60a624bb3f27ea7bfc38f3ab2d9582903c14efea"},
+    {file = "wagtailgeowidget-8.0.0-py3-none-any.whl", hash = "sha256:59eb0c4261c3be92af5a8d3db006c374f38c8a0a84ae3b0b8de51c1370991810"},
+    {file = "wagtailgeowidget-8.0.0.tar.gz", hash = "sha256:786bcac1fbb6d1ba8b1918d6292e5164394e8d269c102ae4ee411a18f664d07c"},
 ]
 
 [package.dependencies]
-Wagtail = ">=2.15"
+Wagtail = ">=4.1"
 
 [package.extras]
 test = ["factory-boy", "pytest", "pytest-django"]
@@ -2337,17 +2368,21 @@ brotli = ["Brotli"]
 
 [[package]]
 name = "willow"
-version = "1.4.1"
+version = "1.5.1"
 description = "A Python image library that sits on top of Pillow, Wand and OpenCV"
 optional = false
-python-versions = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*"
+python-versions = ">=3.7"
 files = [
-    {file = "Willow-1.4.1-py2.py3-none-any.whl", hash = "sha256:fc4042696d090e75aef922fa1ed26d483c764f005b36cf523cf7c34e69d5dd7a"},
-    {file = "Willow-1.4.1.tar.gz", hash = "sha256:0df8ff528531e00b48d40bf72ed81beac1dc82f2d42e5bbed4aff0218bef8c0d"},
+    {file = "Willow-1.5.1-py3-none-any.whl", hash = "sha256:ffb95732d4729d1a3478407f697b623467d6ebd1da77e0d44c1016bc69825711"},
+    {file = "Willow-1.5.1.tar.gz", hash = "sha256:b7a4909110133fdb1e2287592e0673cc255e0286e1cd53427ee68df1c9220c4c"},
 ]
 
+[package.dependencies]
+defusedxml = ">=0.7,<1.0"
+filetype = ">=1.0.10,<1.1.0 || >1.1.0"
+
 [package.extras]
-testing = ["Pillow (>=6.0.0,<10.0.0)", "Wand (>=0.6,<1.0)", "mock (>=3.0,<4.0)"]
+testing = ["Pillow (>=9.1.0,<11.0.0)", "Wand (>=0.6,<1.0)", "mock (>=3.0,<4.0)", "pillow-heif (>=0.7.0,<1.0.0)"]
 
 [[package]]
 name = "zeep"
@@ -2400,4 +2435,4 @@ gunicorn = ["gunicorn"]
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.8"
-content-hash = "f3e0f1aebd8f608212c6e3f7714f7ed5d453e1ffab5f2a386e5d34cb7ad9d3ec"
+content-hash = "b70144eea291e117bf0e1c2751fec8e6f005f001c5bfd75939d6f4883e7d09cd"

@@ -36,7 +36,7 @@ def area_finder(request):
 
     try:
         resp = client.query_postcode(formatted_postcode)
-    except (HTTPError, Timeout):
+    except (HTTPError, Timeout, ConnectionError):
         return JsonResponse(
             {"error": "Request failed, try again"}, status=status.HTTP_400_BAD_REQUEST
         )
