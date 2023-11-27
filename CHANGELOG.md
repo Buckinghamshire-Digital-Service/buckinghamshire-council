@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 69.11 (2023-11-27)
+
 - Add a template for the RedirectPage type
 - Add a check for empty columns in the PieChartBlock
 - Add a Retry to the BucksMapsClient
