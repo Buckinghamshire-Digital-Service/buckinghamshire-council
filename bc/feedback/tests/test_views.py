@@ -1,11 +1,16 @@
+from datetime import datetime
 from http import HTTPStatus
 
-from django.test import Client, TestCase, override_settings
+from django.test import Client, RequestFactory, TestCase, override_settings
 from django.urls import reverse
 
 from wagtail import models as wagtail_models
+from wagtail.test.utils import WagtailTestUtils
+
+from freezegun import freeze_time
 
 from bc.feedback.models import FeedbackComment, UsefulnessFeedback
+from bc.feedback.views import FeedbackCommentReportView
 from bc.home.tests.fixtures import HomePageFactory
 from bc.standardpages.tests.fixtures import InformationPageFactory
 
@@ -349,3 +354,73 @@ class TestFeedbackFormFeatureFlags(CreateInfoPageMixin, TestCase):
         for key in self.expected_context_keys:
             with self.subTest(key=key):
                 self.assertNotIn(key, response.context)
+
+
+@freeze_time("2024-01-09 12:00:00")
+class TestFeedbackCommentReportView(WagtailTestUtils, TestCase):
+    def setUp(self):
+        self.default_site = wagtail_models.Site.objects.get(is_default_site=True)
+        self.root_page = self.default_site.root_page
+        self.info_page = InformationPageFactory.build()
+        self.root_page.add_child(instance=self.info_page)
+
+        self.user = self.login()
+        self.url = reverse("feedback_comment_report")
+
+        # Create a FeedbackComment
+        self.comment = FeedbackComment.objects.create(
+            created=datetime.now(),
+            page=self.info_page,
+            action="I was doing X",
+            issue="Y went wrong",
+        )
+
+    def get(self, params={}):
+        return self.client.get(self.url, params)
+
+    def test_view_date_filter_has_results(self):
+        factory = RequestFactory()
+
+        # Create a request with date filters with expected hits
+        request = factory.get(
+            "/admin/reports/feedback-comments/",
+            {"created_after": "2024-01-08", "created_before": "2024-01-10"},
+        )
+
+        # Set the request user
+        request.user = self.user
+
+        # Create an instance of the view
+        view = FeedbackCommentReportView()
+
+        # Set the request on the view
+        view.request = request
+
+        # Get the queryset
+        queryset = view.get_queryset()
+
+        # Assert that only feedback comments within the specified date range are included
+        self.assertEqual(list(queryset), [self.comment])
+
+    def test_view_date_filter_has_no_results(self):
+        factory = RequestFactory()
+
+        # Create a request with date filters without hits
+        request = factory.get(
+            "/admin/reports/feedback-comments/", {"created_after": "2024-01-10"}
+        )
+
+        # Set the request user
+        request.user = self.user
+
+        # Create an instance of the view
+        view = FeedbackCommentReportView()
+
+        # Set the request on the view
+        view.request = request
+
+        # Get the queryset
+        queryset = view.get_queryset()
+
+        # Assert that only feedback comments within the specified date range are included
+        self.assertEqual(queryset.count(), 0)
