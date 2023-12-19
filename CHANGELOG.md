@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.12...HEAD>
+
+- Update cookie message to hide from devices which have previously declined cookies.
+
 ## 69.12 (2023-11-27)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.11...69.12>
