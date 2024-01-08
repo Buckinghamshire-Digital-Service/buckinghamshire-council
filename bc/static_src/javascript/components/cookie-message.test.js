@@ -64,4 +64,13 @@ describe('CookieWarning', () => {
         );
         expect(Cookies.get('client-cookie')).toBe('decline cookies');
     });
+
+    it('does not activate if cookie is rejected', () => {
+        Cookies.set('client-cookie', 'decline cookies');
+
+        new CookieWarning(document.querySelector(CookieWarning.selector()));
+        expect(document.querySelector('[data-cookie-message]').className).toBe(
+            'cookie inactive',
+        );
+    });
 });

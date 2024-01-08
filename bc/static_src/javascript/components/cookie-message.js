@@ -30,8 +30,12 @@ class CookieWarning {
             return;
         }
 
+        // If cookie has been declined, do not show the cookie message
+        if (Cookies.get(this.cookieName) === this.declineValue) {
+            this.messageContainer.classList.add(this.inactiveClass);
+        }
         // If consent is required and not given, show the cookie message
-        if (!this.hasConsent()) {
+        else if (!this.hasConsent()) {
             this.messageContainer.classList.add(this.activeClass);
         }
     }
