@@ -4,6 +4,10 @@
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.13...HEAD>
 
+- Add `django_filters` to `INSTALLED_APPS`
+- Create a filter for the `FeedbackCommentReportView`
+- Use the newly-created `FeedbackCommentFilterSet`
+
 ## 69.13 (2024-01-08)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.12...69.13>
