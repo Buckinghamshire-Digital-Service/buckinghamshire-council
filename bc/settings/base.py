@@ -82,7 +82,6 @@ INSTALLED_APPS = [
     "bc.users",
     "bc.utils",
     "wagtail_transfer",
-    "django_filters",
     "rest_framework",
     "wagtailorderable",
     "wagtail.contrib.modeladmin",
