@@ -11,7 +11,7 @@ def register_usefulness_feedback_report_menu_item():
     return menu.MenuItem(
         UsefulnessFeedbackReportView.title,
         urls.reverse("usefuleness_feedback_report"),
-        classnames="icon icon-" + UsefulnessFeedbackReportView.header_icon,
+        classname="icon icon-" + UsefulnessFeedbackReportView.header_icon,
         order=300,
     )
 
@@ -32,7 +32,7 @@ def register_feedback_comment_report_menu_item():
     return menu.MenuItem(
         FeedbackCommentReportView.title,
         urls.reverse("feedback_comment_report"),
-        classnames="icon icon-" + FeedbackCommentReportView.header_icon,
+        classname="icon icon-" + FeedbackCommentReportView.header_icon,
         order=400,
     )
 
