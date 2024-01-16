@@ -10,7 +10,7 @@ from wagtail.test.utils import WagtailTestUtils
 from freezegun import freeze_time
 
 from bc.feedback.models import FeedbackComment, UsefulnessFeedback
-from bc.feedback.views import FeedbackCommentReportView
+from bc.feedback.views import FeedbackCommentReportView, UsefulnessFeedbackReportView
 from bc.home.tests.fixtures import HomePageFactory
 from bc.standardpages.tests.fixtures import InformationPageFactory
 
@@ -357,6 +357,109 @@ class TestFeedbackFormFeatureFlags(CreateInfoPageMixin, TestCase):
 
 
 @freeze_time("2024-01-09 12:00:00")
+class TestUsefulnessFeedbackReportView(WagtailTestUtils, TestCase):
+    def setUp(self):
+        self.default_site = wagtail_models.Site.objects.get(is_default_site=True)
+        self.root_page = self.default_site.root_page
+
+        # Create info pages
+        self.info_page_1 = InformationPageFactory.build()
+        self.info_page_2 = InformationPageFactory.build()
+
+        # Add info pages to root page
+        self.root_page.add_child(instance=self.info_page_1)
+        self.root_page.add_child(instance=self.info_page_2)
+
+        self.user = self.login()
+        self.url = reverse("usefuleness_feedback_report")
+
+        # Create some feedbacks
+        self.useful_feedback = UsefulnessFeedback.objects.create(
+            created=datetime.now(),
+            page=self.info_page_1,
+            original_url=self.info_page_1.url,
+            useful=True,
+        )
+        self.useless_feedback = UsefulnessFeedback.objects.create(
+            created=datetime.now(),
+            page=self.info_page_2,
+            original_url=self.info_page_2.url,
+            useful=False,
+        )
+
+    def test_view_filters_have_results(self):
+        factory = RequestFactory()
+
+        # Filter for useful feedback in the expected date rangae
+        request = factory.get(
+            self.url,
+            {
+                "created_after": "2024-01-08",
+                "created_before": "2024-01-10",
+                "useful": True,
+            },
+        )
+
+        # Set the request user
+        request.user = self.user
+
+        # Create an instance of the view
+        view = UsefulnessFeedbackReportView()
+
+        # Set the request on the view
+        view.request = request
+
+        # Get the queryset
+        queryset = view.get_queryset()
+
+        # Assert that only useful feedbacks within the specified date range are included
+        self.assertEqual(list(queryset), [self.useful_feedback])
+
+        # Filter for useless feedback in the expected date rangae
+        request = factory.get(
+            self.url,
+            {
+                "created_after": "2024-01-08",
+                "created_before": "2024-01-10",
+                "useful": False,
+            },
+        )
+
+        # Set the request on the view
+        view.request = request
+
+        # Get the queryset
+        queryset = view.get_queryset()
+
+        # Assert that only useless feedbacks within the specified date range are included
+        self.assertEqual(list(queryset), [self.useless_feedback])
+
+    def test_view_filters_have_no_results(self):
+        factory = RequestFactory()
+
+        # Create a request with date filters without hits
+        request = factory.get(
+            self.url,
+            {"created_after": "2024-01-10"},
+        )
+
+        # Set the request user
+        request.user = self.user
+
+        # Create an instance of the view
+        view = UsefulnessFeedbackReportView()
+
+        # Set the request on the view
+        view.request = request
+
+        # Get the queryset
+        queryset = view.get_queryset()
+
+        # Assert that there are no results
+        self.assertEqual(queryset.count(), 0)
+
+
+@freeze_time("2024-01-09 12:00:00")
 class TestFeedbackCommentReportView(WagtailTestUtils, TestCase):
     def setUp(self):
         self.default_site = wagtail_models.Site.objects.get(is_default_site=True)
@@ -375,15 +478,12 @@ class TestFeedbackCommentReportView(WagtailTestUtils, TestCase):
             issue="Y went wrong",
         )
 
-    def get(self, params={}):
-        return self.client.get(self.url, params)
-
     def test_view_date_filter_has_results(self):
         factory = RequestFactory()
 
         # Create a request with date filters with expected hits
         request = factory.get(
-            "/admin/reports/feedback-comments/",
+            self.url,
             {"created_after": "2024-01-08", "created_before": "2024-01-10"},
         )
 
@@ -406,9 +506,7 @@ class TestFeedbackCommentReportView(WagtailTestUtils, TestCase):
         factory = RequestFactory()
 
         # Create a request with date filters without hits
-        request = factory.get(
-            "/admin/reports/feedback-comments/", {"created_after": "2024-01-10"}
-        )
+        request = factory.get(self.url, {"created_after": "2024-01-10"})
 
         # Set the request user
         request.user = self.user
