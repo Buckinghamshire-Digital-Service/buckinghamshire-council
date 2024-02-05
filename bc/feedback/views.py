@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from wagtail.admin.views import reports as report_views
 
+from bc.feedback.filters import FeedbackCommentFilterSet, UsefulnessFeedbackFilterSet
 from bc.feedback.forms import FeedbackCommentForm, UsefulnessFeedbackForm
 from bc.feedback.models import FeedbackComment, UsefulnessFeedback
 
@@ -68,9 +69,16 @@ class UsefulnessFeedbackReportView(report_views.ReportView):
         "get_current_url": "URL",
         "original_url": "Original URL",
     }
+    filterset_class = UsefulnessFeedbackFilterSet
 
     def get_queryset(self):
-        return UsefulnessFeedback.objects.all().order_by("-created")
+        queryset = UsefulnessFeedback.objects.all().order_by("-created")
+
+        # Apply the filterset
+        filterset = self.filterset_class(data=self.request.GET, queryset=queryset)
+        queryset = filterset.qs
+
+        return queryset
 
 
 @method_decorator(csrf_exempt, name="dispatch")
@@ -130,5 +138,13 @@ class FeedbackCommentReportView(report_views.ReportView):
         "original_url": "Original URL",
     }
 
+    filterset_class = FeedbackCommentFilterSet
+
     def get_queryset(self):
-        return FeedbackComment.objects.all().order_by("-created")
+        queryset = FeedbackComment.objects.all().order_by("-created")
+
+        # Apply the filterset
+        filterset = self.filterset_class(data=self.request.GET, queryset=queryset)
+        queryset = filterset.qs
+
+        return queryset

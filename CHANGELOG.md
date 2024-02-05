@@ -2,7 +2,13 @@
 
 ## Unreleased
 
-Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.13...HEAD>
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.14...HEAD>
+
+## 69.14 (2024-02-05)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.13...69.14>
+
+- Add a DateRangeFilter to the FeedbackCommentReportView and UsefulnessFeedbackReportView
 
 ## 69.13 (2024-01-08)
 
