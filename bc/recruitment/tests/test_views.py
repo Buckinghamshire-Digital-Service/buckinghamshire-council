@@ -53,7 +53,7 @@ class TestApplyConfigKey(TestCase):
             title="lock picker", homepage=self.homepage_internal
         )
         resp = self.client.get(
-            job.application_url, HTTP_HOST=self.site_internal.hostname + ":80"
+            job.application_url, headers={"host": self.site_internal.hostname + ":80"}
         )
 
         self.assertEqual(resp.status_code, 200)
@@ -77,7 +77,7 @@ class TestApplyConfigKey(TestCase):
             title="sausage stuffer", homepage=self.homepage
         )
         resp = self.client.get(
-            job.application_url, HTTP_HOST=self.site.hostname + ":80"
+            job.application_url, headers={"host": self.site.hostname + ":80"}
         )
 
         self.assertEqual(resp.status_code, 200)
@@ -108,7 +108,7 @@ class TestApplyConfigKey(TestCase):
                     + self.homepage.reverse_subpage("apply")
                     + "?jobId="
                     + str(job_id),
-                    HTTP_HOST=self.site.hostname + ":80",
+                    headers={"host": self.site.hostname + ":80"}
                 )
                 self.assertEqual(resp.status_code, 404)
 
@@ -132,7 +132,7 @@ class TestApplyConfigKey(TestCase):
                     + self.homepage.reverse_subpage("apply")
                     + "?jobId="
                     + str(job_id),
-                    HTTP_HOST=self.site.hostname + ":80",
+                    headers={"host": self.site.hostname + ":80"}
                 )
                 self.assertEqual(resp.status_code, 200)
 
@@ -150,7 +150,7 @@ class TestApplyConfigKey(TestCase):
             title="puncture patcher", homepage=self.homepage
         )
         resp = self.client.get(
-            job.application_url, HTTP_HOST=self.site.hostname + ":80"
+            job.application_url, headers={"host": self.site.hostname + ":80"}
         )
 
         self.assertEqual(resp.status_code, 200)
@@ -170,7 +170,7 @@ class TestApplyConfigKey(TestCase):
             self.homepage.full_url
             + self.homepage.reverse_subpage("apply")
             + "?jobId=abc-123",
-            HTTP_HOST=self.site.hostname + ":80",
+            headers={"host": self.site.hostname + ":80"}
         )
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.context["show_sidebar"], False)
