@@ -381,6 +381,11 @@ if "AWS_STORAGE_BUCKET_NAME" in env:
     # Not having this setting may have consequences in losing files.
     AWS_S3_FILE_OVERWRITE = False
 
+    # Default ACL for new files should be "private" - not accessible to the
+    # public. Images should be made available to public via the bucket policy,
+    # where the documents should use wagtail-storages.
+    AWS_DEFAULT_ACL = "private"
+
     # We generally use this setting in the production to put the S3 bucket
     # behind a CDN using a custom domain, e.g. media.llamasavers.com.
     # https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#cloudfront
