@@ -216,3 +216,41 @@ Set `ENABLE_JOBS_SEARCH_ALERT_SUBSCRIPTIONS=false` in environment variables. Thi
 ### Feedback widget
 
 Set `ENABLE_FEEDBACK_WIDGET=false` in environment variables. This removes the form from the page footer, but does not disable the corresponding views.
+
+## Cross-Site Request Forgery (CSRF) Protection
+
+Including values in the `CSRF_TRUSTED_ORIGINS` setting in your Django deployment is crucial for bolstering security, especially in multi-domain environments. By specifying trusted domains from which form submissions are accepted without requiring CSRF tokens, you strike a balance between security and usability.
+
+This ensures that legitimate requests from trusted domains proceed smoothly while still protecting against CSRF attacks from untrusted sources. In essence, `CSRF_TRUSTED_ORIGINS` helps prevent false positives and enhances the overall security posture of your application by allowing you to explicitly define trusted origins for CSRF protection.
+
+To set the value on Heroku:
+
+**Using Heroku CLI**
+
+1. Open your terminal or command prompt.
+2. Log in to your Heroku account using the Heroku CLI:
+
+```bash
+heroku login
+```
+
+3. Navigate to your Django project directory.
+4. Set the `CSRF_TRUSTED_ORIGINS` config variable using the Heroku CLI:
+
+```bash
+heroku config:set CSRF_TRUSTED_ORIGINS=your_trusted_origin_here
+```
+
+5. Replace `your_trusted_origin_here` with the domain(s) you want to trust for CSRF protection. If you have multiple origins, separate them with commas.
+
+**Using Heroku Dashboard**
+
+1. Log in to your Heroku account and navigate to your Heroku Dashboard.
+2. Select your Django application from the list of apps.
+3. Go to the "Settings" tab.
+4. Scroll down to the "Config Vars" section.
+5. Click on the "Reveal Config Vars" button if it's not already visible.
+6. Add a new config var with the key `CSRF_TRUSTED_ORIGINS` and specify the trusted origin(s) as the value. If you have multiple origins, separate them with commas.
+7. Click "Add" or "Save" to save the changes.
+
+Once you've set the `CSRF_TRUSTED_ORIGINS` config variable on Heroku, your Django application will use the specified trusted origins for CSRF protection. Make sure to restart your Heroku application after making these changes for them to take effect.
