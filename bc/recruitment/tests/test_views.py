@@ -108,7 +108,7 @@ class TestApplyConfigKey(TestCase):
                     + self.homepage.reverse_subpage("apply")
                     + "?jobId="
                     + str(job_id),
-                    headers={"host": self.site.hostname + ":80"}
+                    headers={"host": self.site.hostname + ":80"},
                 )
                 self.assertEqual(resp.status_code, 404)
 
@@ -132,7 +132,7 @@ class TestApplyConfigKey(TestCase):
                     + self.homepage.reverse_subpage("apply")
                     + "?jobId="
                     + str(job_id),
-                    headers={"host": self.site.hostname + ":80"}
+                    headers={"host": self.site.hostname + ":80"},
                 )
                 self.assertEqual(resp.status_code, 200)
 
@@ -170,7 +170,7 @@ class TestApplyConfigKey(TestCase):
             self.homepage.full_url
             + self.homepage.reverse_subpage("apply")
             + "?jobId=abc-123",
-            headers={"host": self.site.hostname + ":80"}
+            headers={"host": self.site.hostname + ":80"},
         )
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.context["show_sidebar"], False)
