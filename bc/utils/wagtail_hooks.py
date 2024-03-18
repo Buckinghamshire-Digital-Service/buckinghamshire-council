@@ -6,12 +6,8 @@ from wagtail import hooks
 from wagtail.admin.menu import AdminOnlyMenuItem
 from wagtail.admin.rich_text.converters.html_to_contentstate import BlockElementHandler
 from wagtail.admin.rich_text.editors.draftail import features as draftail_features
-from wagtail.contrib.modeladmin.options import (
-    ModelAdmin,
-    ModelAdminGroup,
-    modeladmin_register,
-)
 
+from wagtail_modeladmin.options import ModelAdmin, ModelAdminGroup, modeladmin_register
 from wagtailorderable.modeladmin.mixins import OrderableMixin
 
 from bc.events.models import EventType
@@ -85,7 +81,7 @@ def register_unpublished_changes_report_menu_item():
     return AdminOnlyMenuItem(
         "Pages with unpublished changes",
         reverse("unpublished_changes_report"),
-        classnames="icon icon-" + UnpublishedChangesReportView.header_icon,
+        classname="icon icon-" + UnpublishedChangesReportView.header_icon,
         order=700,
     )
 
@@ -106,7 +102,7 @@ def register_missing_metadata_report_menu_item():
     return AdminOnlyMenuItem(
         "Pages with missing metadata",
         reverse("missing_metadata_report"),
-        classnames="icon icon-" + MissingMetadataReportView.header_icon,
+        classname="icon icon-" + MissingMetadataReportView.header_icon,
         order=700,
     )
 
@@ -161,7 +157,7 @@ def editor_js():
     )
 
 
-@hooks.register("insert_editor_css")
+@hooks.register("insert_global_admin_css")
 def editor_css():
     return mark_safe(
         '<link rel="stylesheet" type="text/css" href="%s">'

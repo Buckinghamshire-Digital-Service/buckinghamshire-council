@@ -1,7 +1,7 @@
 from django.apps import apps
 from django.conf import settings
 from django.contrib import admin
-from django.urls import include, path, re_path
+from django.urls import include, path
 from django.views.decorators.vary import vary_on_headers
 from django.views.generic import TemplateView
 
@@ -37,7 +37,7 @@ private_urlpatterns = [
         JobAlertUnsubscribeView.as_view(),
         name="unsubscribe_job_alert",
     ),
-    re_path(r"^wagtail-transfer/", include(wagtailtransfer_urls)),
+    path("wagtail-transfer/", include(wagtailtransfer_urls)),
 ]
 
 

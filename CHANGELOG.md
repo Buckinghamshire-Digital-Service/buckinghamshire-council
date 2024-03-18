@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 70.00 (2024-03-18)
+
+Wagtail 5.2 and Django 4.2 upgrade
+
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.14...HEAD>
 
 ## 69.14 (2024-02-05)

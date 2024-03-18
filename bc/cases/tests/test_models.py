@@ -144,7 +144,7 @@ class CaseFormPageTest(TestCase):
         session.save()
         with self.assertTemplateUsed("patterns/pages/cases/form_page_landing.html"):
             resp = self.client.get(self.case_form_page.url)
-        self.assertNotIn("form", resp.context)
+        self.assertFalse(resp.context["case_reference"])
 
 
 class CaseNameFormattingTest(TestCase):

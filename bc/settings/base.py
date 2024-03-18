@@ -43,6 +43,15 @@ if "ALLOWED_HOSTS" in env:
 if "NONINDEXED_HOSTS" in env:
     NONINDEXED_HOSTS = env["NONINDEXED_HOSTS"].split(",")
 
+# A list of trusted origins for unsafe requests (e.g. POST).
+# For requests that include the Origin header,
+# Django’s CSRF protection requires that header match
+# the origin present in the Host header.
+# Important: values must include the scheme (e.g. https://) and the hostname
+# https://docs.djangoproject.com/en/stable/ref/settings/#csrf-trusted-origins
+if "CSRF_TRUSTED_ORIGINS" in env:
+    CSRF_TRUSTED_ORIGINS = env["CSRF_TRUSTED_ORIGINS"].split(",")
+
 
 # Application definition
 
@@ -84,7 +93,7 @@ INSTALLED_APPS = [
     "wagtail_transfer",
     "rest_framework",
     "wagtailorderable",
-    "wagtail.contrib.modeladmin",
+    "wagtail_modeladmin",
     "wagtail.contrib.settings",
     "wagtail.contrib.search_promotions",
     "wagtail.contrib.forms",
@@ -104,7 +113,7 @@ INSTALLED_APPS = [
     "wagtail",
     "modelcluster",
     "taggit",
-    "captcha",
+    "django_recaptcha",
     "wagtailcaptcha",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -277,7 +286,6 @@ TIME_ZONE = "Europe/London"
 
 USE_I18N = True
 
-USE_L10N = True
 
 USE_TZ = True
 
@@ -292,8 +300,13 @@ USE_TZ = True
 # The static files with this backend are generated when you run
 # "django-admin collectstatic".
 # http://whitenoise.evans.io/en/stable/#quickstart-for-django-apps
-# https://docs.djangoproject.com/en/stable/ref/settings/#staticfiles-storage
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# https://docs.djangoproject.com/en/stable/ref/settings/#std-setting-STORAGES
+STORAGES = {
+    "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    },
+}
 
 # Place static files that need a specific URL (such as robots.txt and favicon.ico) in the "public" folder
 WHITENOISE_ROOT = os.path.join(BASE_DIR, "public")
@@ -354,8 +367,8 @@ if "AWS_STORAGE_BUCKET_NAME" in env:
     # Add django-storages to the installed apps
     INSTALLED_APPS.append("storages")
 
-    # https://docs.djangoproject.com/en/stable/ref/settings/#default-file-storage
-    DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+    # https://docs.djangoproject.com/en/stable/ref/settings/#std-setting-STORAGES
+    STORAGES["default"]["BACKEND"] = "storages.backends.s3boto3.S3Boto3Storage"
 
     AWS_STORAGE_BUCKET_NAME = env["AWS_STORAGE_BUCKET_NAME"]
 
@@ -367,6 +380,11 @@ if "AWS_STORAGE_BUCKET_NAME" in env:
     # https://docs.wagtail.io/en/stable/advanced_topics/deploying.html#cloud-storage
     # Not having this setting may have consequences in losing files.
     AWS_S3_FILE_OVERWRITE = False
+
+    # Default ACL for new files should be "private" - not accessible to the
+    # public. Images should be made available to public via the bucket policy,
+    # where the documents should use wagtail-storages.
+    AWS_DEFAULT_ACL = "private"
 
     # We generally use this setting in the production to put the S3 bucket
     # behind a CDN using a custom domain, e.g. media.llamasavers.com.
@@ -614,17 +632,14 @@ if "SECURE_HSTS_SECONDS" in env:
     SECURE_HSTS_SECONDS = int(env["SECURE_HSTS_SECONDS"])
 
 
-# https://docs.djangoproject.com/en/stable/ref/settings/#secure-browser-xss-filter
-if env.get("SECURE_BROWSER_XSS_FILTER", "true").lower().strip() == "true":
-    SECURE_BROWSER_XSS_FILTER = True
-
-
 # https://docs.djangoproject.com/en/stable/ref/settings/#secure-content-type-nosniff
 if env.get("SECURE_CONTENT_TYPE_NOSNIFF", "true").lower().strip() == "true":
     SECURE_CONTENT_TYPE_NOSNIFF = True
 
 
 # Content Security policy settings
+# Most modern browsers don’t honor the X-XSS-Protection HTTP header.
+# You can use Content-Security-Policy without allowing 'unsafe-inline' scripts instead.
 # http://django-csp.readthedocs.io/en/latest/configuration.html
 if "CSP_DEFAULT_SRC" in env:
     MIDDLEWARE.append("csp.middleware.CSPMiddleware")
@@ -891,3 +906,9 @@ BIRDBATH_PROCESSORS = [
     "bc.blogs.birdbath.DeleteAllBlogAlertSubscriptionProcessor",
     "bc.recruitment.birdbath.DeleteAllRecruitmentAlertSubscriptionProcessor",
 ]
+
+# Isolates the browsing context exclusively to same-origin documents.
+# Cross-origin documents are not loaded in the same browsing context.
+# Set to "same-origin-allow-popups" to allow popups
+# from third-party applications like PayPal or Zoom as needed
+SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin"
