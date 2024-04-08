@@ -3,6 +3,7 @@ from django.test import RequestFactory, TestCase, override_settings
 from django.urls import reverse
 
 from wagtail.models import Page, Site
+from wagtail.test.utils import WagtailTestUtils
 
 from bc.home.tests.fixtures import HomePageFactory
 from bc.recruitment.tests.fixtures import RecruitmentHomePageFactory
@@ -16,7 +17,7 @@ RECRUITMENT_HOSTNAME = "bar.example.com"
 
 
 @override_settings(ALLOWED_HOSTS=[MAIN_HOSTNAME, RECRUITMENT_HOSTNAME])
-class BasePageTemplateTest(TestCase):
+class BasePageTemplateTest(WagtailTestUtils, TestCase):
     def setUp(self):
         root_page = Page.objects.get(id=1)
 
@@ -120,6 +121,48 @@ class BasePageTemplateTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, BASE_PAGE_TEMPLATE_RECRUITMENT)
         self.assertTemplateNotUsed(response, BASE_PAGE_TEMPLATE)
+        self.assertEqual(
+            response.context["base_page_template"], BASE_PAGE_TEMPLATE_RECRUITMENT
+        )
+
+    @override_settings(
+        ALLOWED_HOSTS=[MAIN_HOSTNAME, RECRUITMENT_HOSTNAME, "oof.example.com"]
+    )
+    def test_default_site_handling(self):
+        """
+        Checks that the global_vars context processor handles requests without breaking,
+        regardless of whether a default site is set
+        """
+        # We're testing the /admin/ page, so we need to log in first
+        self.user = self.login()
+
+        # Test that no site is returned for requests with unknown server names,
+        # when no default site is set
+        default_site = Site.objects.get(is_default_site=True)
+        default_site.is_default_site = False
+        default_site.save()
+        request = RequestFactory().get("/admin/", SERVER_NAME="oof.example.com")
+        self.assertIsNone(Site.find_for_request(request))
+
+        # Test that fallback values are added by the context processor
+        # for requests with unknown server names, when no default site is set
+        response = self.client.get("/admin/", SERVER_NAME="oof.example.com")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["is_pensions_site"], False)
+        self.assertEqual(response.context["base_page_template"], BASE_PAGE_TEMPLATE)
+
+        # Test that the default site is returned for requests with unknown server names,
+        # when one is set
+        self.recruitment_site.is_default_site = True
+        self.recruitment_site.save()
+        request = RequestFactory().get("/admin/", SERVER_NAME="oof.example.com")
+        self.assertEqual(Site.find_for_request(request), self.recruitment_site)
+
+        # Test that site-specific values are added by the context processor
+        # for requests with unknown server names, when a default site is set
+        response = self.client.get("/admin/", SERVER_NAME="oof.example.com")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["is_pensions_site"], False)
         self.assertEqual(
             response.context["base_page_template"], BASE_PAGE_TEMPLATE_RECRUITMENT
         )
