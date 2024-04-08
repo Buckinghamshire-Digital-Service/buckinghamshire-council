@@ -13,7 +13,7 @@ class LookupPageFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = "forms.LookupPage"
 
-    title = factory.Sequence(lambda n: f"Lookup Response Page")
+    title = factory.Sequence(lambda n: "Lookup Response Page")
     listing_summary = "Lookup Response Page"
     form_heading = "Look something up"
     input_label = "Submit this query"
