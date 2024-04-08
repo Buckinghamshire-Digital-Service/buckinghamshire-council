@@ -27,7 +27,7 @@ class RecruitmentHomePageFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = "recruitment.RecruitmentHomePage"
 
-    title = factory.Sequence(lambda n: f"Recruitment HomePage")
+    title = factory.Sequence(lambda n: "Recruitment HomePage")
     listing_summary = "Recruitment HomePage"
     hero_image = factory.SubFactory("bc.images.tests.fixtures.ImageFactory")
     hero_title = "foo"

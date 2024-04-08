@@ -1,12 +1,17 @@
 # Release History
 
-## Unreleased
+## 70.01 (2024-04-03)
+
+- Update `flake8` to version 3.8.4 for Python 3.8 compatibility
+- Fix `global_vars` context processor when no default site is set
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/70.01...70.00>
 
 ## 70.00 (2024-03-18)
 
 Wagtail 5.2 and Django 4.2 upgrade
 
-Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/69.14...HEAD>
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/70.00...69.14>
 
 ## 69.14 (2024-02-05)
 

@@ -26,7 +26,7 @@ class Command(BaseCommand):
         # We import jobs for each Recruitment Homepage, including draft ones
         # so it is possible to import jobs before going live.
         if not RecruitmentHomePage.objects.exists():
-            msg = f"Please create a RecruitmentHomePage page before running the import."
+            msg = "Please create a RecruitmentHomePage page before running the import."
             self.stdout.write(self.style.ERROR(msg))
 
         for homepage in RecruitmentHomePage.objects.all():
@@ -157,7 +157,7 @@ class Command(BaseCommand):
                     imported_before=import_timestamp, homepage=homepage
                 )
             except Exception as e:
-                msg = f"Error occurred while deleting jobs:\n" + str(e)
+                msg = "Error occurred while deleting jobs:\n" + str(e)
                 errors.append(msg)
 
             self.stdout.write("No more results")
