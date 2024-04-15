@@ -5,7 +5,7 @@ description = "Buckinghamshire Council Website"
 authors = ["Torchbox <hello@torchbox.com>"]
 
 [tool.poetry.dependencies]
-python = "~3.8"
+python = "~3.11"
 bleach = "3.1.0"
 dj-database-url = "0.5.0"
 Django = "~4.2"
