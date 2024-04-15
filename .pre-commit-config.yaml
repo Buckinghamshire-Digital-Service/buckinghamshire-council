@@ -1,11 +1,11 @@
 repos:
-  - repo: https://github.com/pre-commit/mirrors-isort
-    rev: v4.3.15
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.13.2
     hooks:
       - id: isort
         language_version: python3
   - repo: https://github.com/pycqa/flake8
-    rev: 3.8.4
+    rev: 7.0.0
     hooks:
       - id: flake8
         language_version: python3
@@ -53,3 +53,7 @@ repos:
               package-lock.json|
               poetry.lock
           )$
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.15.2
+    hooks:
+      - id: pyupgrade

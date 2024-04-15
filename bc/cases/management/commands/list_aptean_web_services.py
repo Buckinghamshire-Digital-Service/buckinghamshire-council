@@ -12,23 +12,19 @@ class Command(BaseCommand):
 
         soup = client.get_web_service_meta_data()
 
-        found_service_names = set(
-            [
-                webservice.find("name").text.strip()
-                for webservice in soup.find_all("webservice")
-            ]
-        )
+        found_service_names = {
+            webservice.find("name").text.strip()
+            for webservice in soup.find_all("webservice")
+        }
 
-        expected_create_case_services = set(
-            [
-                settings.RESPOND_COMPLAINTS_WEBSERVICE,
-                settings.RESPOND_FOI_WEBSERVICE,
-                settings.RESPOND_SAR_WEBSERVICE,
-                settings.RESPOND_COMMENTS_WEBSERVICE,
-                settings.RESPOND_COMPLIMENTS_WEBSERVICE,
-                settings.RESPOND_DISCLOSURES_WEBSERVICE,
-            ]
-        )
+        expected_create_case_services = {
+            settings.RESPOND_COMPLAINTS_WEBSERVICE,
+            settings.RESPOND_FOI_WEBSERVICE,
+            settings.RESPOND_SAR_WEBSERVICE,
+            settings.RESPOND_COMMENTS_WEBSERVICE,
+            settings.RESPOND_COMPLIMENTS_WEBSERVICE,
+            settings.RESPOND_DISCLOSURES_WEBSERVICE,
+        }
         found_create_case_services = found_service_names & expected_create_case_services
         other_found_services = found_service_names - expected_create_case_services
 

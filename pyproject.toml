@@ -52,8 +52,8 @@ pymdown-extensions = "9.3"
 # Linting
 black = "22.3.0"
 detect-secrets = "0.13.0"
-flake8 = "3.8.4"
-isort = "4.3.18"
+flake8 = "7.0.0"
+isort = "5.13.2"
 seed-isort-config = "1.9.0"
 
 # Database snapshots
@@ -70,6 +70,7 @@ honcho = "^1.1.0"
 pre-commit = "1.16.1"
 Werkzeug = "0.14.1"
 tblib = "^3.0.0"
+pyupgrade = "^3.15.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

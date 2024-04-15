@@ -2,7 +2,6 @@ import itertools
 
 from django.db import models
 from django.utils.functional import cached_property
-
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.fields import StreamField
@@ -13,7 +12,7 @@ from bc.utils.blocks import StoryBlock
 from bc.utils.models import BasePage, RelatedPage
 
 
-class InlineIndexMixin(object):
+class InlineIndexMixin:
     """
     Mixin to define shared functionality between the index and the child pages.
 

@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.views.decorators.cache import cache_control
-
 from wagtail.contrib.frontend_cache.utils import purge_url_from_cache
 from wagtail.models import Site
 
@@ -10,7 +9,7 @@ def purge_cache_on_all_sites(path):
         return
 
     for site in Site.objects.all():
-        purge_url_from_cache("%s%s" % (site.root_url.rstrip("/"), path))
+        purge_url_from_cache("{}{}".format(site.root_url.rstrip("/"), path))
 
 
 def get_default_cache_control_kwargs():
