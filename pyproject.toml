@@ -61,7 +61,6 @@ DSLR = "0.2.0"
 stellar = "0.4.5"
 
 # Pinned for stellar 0.4.5
-SQLAlchemy = "1.2.5"
 SQLAlchemy-Utils = "0.33.1"
 
 # Development dependencies
