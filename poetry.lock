@@ -645,6 +645,20 @@ files = [
 Django = ">=3.2"
 
 [[package]]
+name = "django-upgrade"
+version = "1.16.0"
+description = "Automatically upgrade your Django project code."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django-upgrade-1.16.0.tar.gz", hash = "sha256:7e473e8ecf234a531448d4a0c1c772746fa831fc762eae3d7578f13f6d847370"},
+    {file = "django_upgrade-1.16.0-py3-none-any.whl", hash = "sha256:605708b130368ee6dd304df00253f184a7c2f00d1c2dd5d4dac41a31307a2a14"},
+]
+
+[package.dependencies]
+tokenize-rt = ">=4.1"
+
+[[package]]
 name = "djangorestframework"
 version = "3.14.0"
 description = "Web APIs for Django, made easy."
@@ -2500,4 +2514,4 @@ gunicorn = ["gunicorn"]
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.11"
-content-hash = "1a8341d46621db297c1fbfc84610a35c9ed0976888d2117cb3e6ac9ac664b193"
+content-hash = "743dcd6250a3a59990141aa00672a3dd0d995de3a154949fcd9ab1f46e77890c"

@@ -39,6 +39,7 @@ backoff = "^2.2.1"
 responses = "~0.25"
 django-filter = "^23.5"
 wagtail-modeladmin = "^1.0.0"
+django-upgrade = "^1.16.0"
 
 [tool.poetry.extras]
 gunicorn = ["gunicorn"]
