@@ -1,12 +1,12 @@
 """
 Django settings for bc project.
 """
+
 import os
 import sys
 
-from wagtail.embeds.oembed_providers import youtube
-
 import dj_database_url
+from wagtail.embeds.oembed_providers import youtube
 
 env = os.environ.copy()
 

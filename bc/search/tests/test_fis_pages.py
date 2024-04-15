@@ -1,6 +1,5 @@
 from django.test import TestCase, override_settings
 from django.urls import reverse
-
 from wagtail.models import Page, Site
 
 from bc.family_information.tests.fixtures import (

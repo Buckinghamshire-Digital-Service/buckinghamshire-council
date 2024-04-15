@@ -1,8 +1,7 @@
 import textwrap
 
-from django.test import TestCase
-
 from bs4 import BeautifulSoup
+from django.test import TestCase
 from lxml import etree
 
 from bc.cases.backends.respond.constants import (

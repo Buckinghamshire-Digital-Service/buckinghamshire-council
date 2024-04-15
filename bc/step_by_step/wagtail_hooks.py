@@ -1,5 +1,4 @@
 from django.dispatch import receiver
-
 from wagtail.signals import page_published
 
 from .models import StepByStepPage

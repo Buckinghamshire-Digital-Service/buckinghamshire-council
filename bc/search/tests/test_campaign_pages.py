@@ -1,6 +1,5 @@
 from django import test, urls
 from django.test import override_settings
-
 from wagtail.models import Page
 
 from bc.campaigns.tests.fixtures import CampaignPageFactory

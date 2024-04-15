@@ -2,7 +2,6 @@ import logging
 
 from django.conf import settings
 from django.core.cache import caches
-
 from zeep.cache import Base
 
 logger = logging.getLogger(__name__)

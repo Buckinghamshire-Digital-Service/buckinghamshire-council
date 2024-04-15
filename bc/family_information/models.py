@@ -2,7 +2,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.functional import cached_property
-
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.coreutils import resolve_model_string
 from wagtail.models import Page

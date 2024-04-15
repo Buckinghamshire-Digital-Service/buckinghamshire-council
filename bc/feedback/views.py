@@ -4,7 +4,6 @@ from django import http, urls
 from django.utils.decorators import method_decorator
 from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
-
 from wagtail.admin.views import reports as report_views
 
 from bc.feedback.filters import FeedbackCommentFilterSet, UsefulnessFeedbackFilterSet

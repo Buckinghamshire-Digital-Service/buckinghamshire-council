@@ -1,9 +1,7 @@
 from django.core.management.base import BaseCommand
-
+from tabulate import tabulate
 from wagtail.blocks import StreamValue
 from wagtail.contrib.redirects.models import Redirect
-
-from tabulate import tabulate
 
 from bc.cases.models import (
     ApteanRespondCaseFormPage,

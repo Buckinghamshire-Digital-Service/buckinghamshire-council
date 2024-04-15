@@ -3,7 +3,6 @@ from django.db import models
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.utils.functional import cached_property
-
 from wagtail import blocks
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.admin.widgets.slug import SlugInput

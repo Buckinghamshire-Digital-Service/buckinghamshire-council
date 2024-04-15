@@ -1,14 +1,12 @@
+from bs4 import BeautifulSoup
 from django.db import models
 from django.shortcuts import redirect, render
 from django.utils.functional import cached_property
-
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.fields import RichTextField, StreamField
 from wagtail.search import index
-
-from bs4 import BeautifulSoup
 
 from bc.cases.backends.respond.client import RespondClientException, get_client
 from bc.cases.backends.respond.constants import (
@@ -172,9 +170,9 @@ class ApteanRespondCaseFormPage(RoutablePageMixin, BasePage):
                     form, case_reference = self.process_form_submission(form)
                     if form.is_valid():  # still
                         # store the case_reference in the session for the thank you page
-                        request.session[
-                            self.get_case_reference_session_key()
-                        ] = case_reference
+                        request.session[self.get_case_reference_session_key()] = (
+                            case_reference
+                        )
                         request.session[self.get_landing_page_session_key()] = True
                         return redirect(self.url, permanent=False)
             else:

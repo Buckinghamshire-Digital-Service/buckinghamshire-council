@@ -1,5 +1,8 @@
 from itertools import chain
 
+import backoff
+import elasticsearch
+import requests
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Case, CharField, OuterRef, Subquery, When
@@ -11,13 +14,8 @@ from django.utils.html import escape
 from django.utils.timezone import now
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View
-
 from wagtail.contrib.search_promotions.models import Query
 from wagtail.models import Page, Site
-
-import backoff
-import elasticsearch
-import requests
 
 from bc.blogs.models import BlogGlobalHomePage, BlogHomePage, BlogPostPage
 from bc.campaigns.models import CampaignIndexPage, CampaignPage

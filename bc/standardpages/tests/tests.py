@@ -1,6 +1,5 @@
 from django.test import TestCase, override_settings
 from django.urls import reverse
-
 from wagtail.test.utils import WagtailTestUtils
 
 from bc.home.models import HomePage

@@ -1,7 +1,6 @@
 from django import forms
 from django.forms import ValidationError
 from django.template.defaultfilters import slugify
-
 from wagtail.admin.forms import WagtailAdminPageForm
 
 

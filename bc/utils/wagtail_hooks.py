@@ -1,12 +1,10 @@
 from django.templatetags.static import static
 from django.urls import path, reverse
 from django.utils.safestring import mark_safe
-
 from wagtail import hooks
 from wagtail.admin.menu import AdminOnlyMenuItem
 from wagtail.admin.rich_text.converters.html_to_contentstate import BlockElementHandler
 from wagtail.admin.rich_text.editors.draftail import features as draftail_features
-
 from wagtail_modeladmin.options import ModelAdmin, ModelAdminGroup, modeladmin_register
 from wagtailorderable.modeladmin.mixins import OrderableMixin
 

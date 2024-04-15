@@ -1,7 +1,6 @@
 import copy
 
 from django.conf import settings
-
 from wagtail.search.backends.elasticsearch5 import (
     Elasticsearch5SearchBackend,
     Elasticsearch5SearchQueryCompiler,

@@ -1,13 +1,11 @@
 from unittest import mock
 
+import requests
 from django.test import TestCase, override_settings
 from django.urls import reverse
 from django.utils.html import escape
-
-from wagtail.models import Page, Site
-
-import requests
 from elasticsearch.exceptions import TransportError
+from wagtail.models import Page, Site
 
 from bc.home.tests.fixtures import HomePageFactory
 from bc.recruitment.utils import is_recruitment_site

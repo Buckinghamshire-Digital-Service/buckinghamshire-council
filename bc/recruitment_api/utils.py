@@ -1,11 +1,10 @@
 from urllib.parse import urlsplit
 
-from django.core.files.base import ContentFile
-from django.utils.html import strip_tags
-
 from bleach.sanitizer import Cleaner
 from bs4 import BeautifulSoup
 from dateutil.parser import parse
+from django.core.files.base import ContentFile
+from django.utils.html import strip_tags
 from zeep.helpers import serialize_object
 
 from bc.documents.models import CustomDocument

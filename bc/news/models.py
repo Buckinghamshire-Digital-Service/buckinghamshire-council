@@ -3,7 +3,6 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.db.models.functions import Coalesce
 from django.utils.functional import cached_property
-
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.fields import StreamField

@@ -1,11 +1,9 @@
 from unittest.mock import patch
 
+from bs4 import BeautifulSoup
 from django.test import TestCase
-
 from wagtail.embeds import oembed_providers
 from wagtail.embeds.finders import get_finders
-
-from bs4 import BeautifulSoup
 
 from bc.utils.embed_finders import CustomOEmbedFinder, YouTubeNoCookieAndRelFinder
 

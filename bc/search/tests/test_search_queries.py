@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.test import RequestFactory, TestCase, override_settings
 from django.urls import reverse
-
 from wagtail.contrib.search_promotions.models import Query, SearchPromotion
 from wagtail.models import Page, Site
 from wagtail.search.backends import get_search_backend

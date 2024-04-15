@@ -1,13 +1,11 @@
 from io import BytesIO
 from mimetypes import guess_extension
 
+import requests
 from django.core.files.images import ImageFile
 from django.db import models
-
 from wagtail.images.models import AbstractImage, AbstractRendition, Image
 from wagtail.models import Collection
-
-import requests
 
 
 class CustomImage(AbstractImage):

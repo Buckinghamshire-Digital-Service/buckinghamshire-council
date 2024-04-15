@@ -6,10 +6,8 @@ from unittest import mock
 from django.core.management import call_command
 from django.http import QueryDict
 from django.test import RequestFactory, TestCase, override_settings
-
-from wagtail.models import Page, Site
-
 from freezegun import freeze_time
+from wagtail.models import Page, Site
 
 from bc.home.tests.fixtures import HomePageFactory
 from bc.recruitment.constants import JOB_BOARD_CHOICES, JOB_FILTERS

@@ -6,10 +6,8 @@ from unittest import mock
 from django.core.management import call_command
 from django.test import TestCase
 from django.utils import timezone
-
-from wagtail.models import Page
-
 from freezegun import freeze_time
+from wagtail.models import Page
 
 from bc.documents.models import CustomDocument
 from bc.documents.tests.fixtures import DocumentFactory

@@ -1,12 +1,10 @@
 from django.db import models
 from django.db.models.expressions import Case, When
 from django.utils.functional import cached_property
-
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel
 from wagtail.fields import RichTextField, StreamField
 from wagtail.rich_text import expand_db_html
-
 from wagtailgeowidget.helpers import geosgeometry_str_to_struct
 from wagtailgeowidget.panels import GeoAddressPanel, GoogleMapsPanel
 

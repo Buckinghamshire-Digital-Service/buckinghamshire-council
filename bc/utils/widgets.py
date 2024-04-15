@@ -1,5 +1,4 @@
 from django import forms
-
 from wagtail.telepath import register
 from wagtail.widget_adapters import WidgetAdapter
 

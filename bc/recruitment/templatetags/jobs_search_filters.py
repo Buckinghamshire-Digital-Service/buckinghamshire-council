@@ -1,7 +1,6 @@
 from django import template
 from django.db.models import F, Value
 from django.db.models.functions import StrIndex
-
 from wagtail.models import Site
 
 from bc.recruitment.models import JobCategory, TalentLinkJob

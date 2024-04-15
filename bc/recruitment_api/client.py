@@ -1,5 +1,4 @@
 from django.conf import settings
-
 from zeep import Client
 from zeep.wsse import UsernameToken
 

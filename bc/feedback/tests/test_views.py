@@ -3,11 +3,9 @@ from http import HTTPStatus
 
 from django.test import Client, RequestFactory, TestCase, override_settings
 from django.urls import reverse
-
+from freezegun import freeze_time
 from wagtail import models as wagtail_models
 from wagtail.test.utils import WagtailTestUtils
-
-from freezegun import freeze_time
 
 from bc.feedback.models import FeedbackComment, UsefulnessFeedback
 from bc.feedback.views import FeedbackCommentReportView, UsefulnessFeedbackReportView

@@ -4,7 +4,6 @@ from django.core.management.base import BaseCommand
 from django.http import QueryDict
 from django.template.loader import render_to_string
 from django.utils.timezone import now
-
 from django_gov_notify.message import NotifyEmailMessage
 
 from bc.recruitment.models import (

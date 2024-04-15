@@ -1,10 +1,9 @@
 from typing import List
 from unittest import mock
 
+import responses
 from django.test import TestCase
 from django.urls import reverse
-
-import responses
 from faker import Faker
 from requests import ReadTimeout, Response
 

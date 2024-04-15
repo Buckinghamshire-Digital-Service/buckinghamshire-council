@@ -1,6 +1,5 @@
 from django.test import TestCase
 from django.urls import reverse
-
 from wagtail.models import Site
 from wagtail.test.utils import WagtailTestUtils
 from wagtail.test.utils.form_data import nested_form_data, rich_text, streamfield

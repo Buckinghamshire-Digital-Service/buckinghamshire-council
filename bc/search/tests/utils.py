@@ -2,7 +2,6 @@ from io import StringIO
 
 from django.conf import settings
 from django.core.management import call_command
-
 from wagtail.search.backends import get_search_backend
 
 ORIGINAL_INDEX_NAME = settings.WAGTAILSEARCH_BACKENDS["default"].get("INDEX")

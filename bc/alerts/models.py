@@ -1,12 +1,10 @@
+from bs4 import BeautifulSoup
 from django import forms
 from django.core.exceptions import ValidationError
 from django.db import models
-
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.fields import RichTextField
 from wagtail.models import Page
-
-from bs4 import BeautifulSoup
 
 from bc.utils.constants import RICH_PARAGRAPH_FEATURES
 

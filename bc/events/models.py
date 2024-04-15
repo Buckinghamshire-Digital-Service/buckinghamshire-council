@@ -9,7 +9,6 @@ from django.utils import timezone
 from django.utils.functional import cached_property
 from django.utils.http import urlencode
 from django.utils.translation import gettext_lazy as _
-
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel
 from wagtail.fields import StreamField

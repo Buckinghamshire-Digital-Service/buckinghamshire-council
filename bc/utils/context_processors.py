@@ -1,7 +1,6 @@
 import logging
 
 from django.conf import settings
-
 from wagtail.models import Site
 
 from bc.family_information.utils import is_subsite

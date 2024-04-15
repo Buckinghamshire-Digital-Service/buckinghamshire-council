@@ -1,5 +1,4 @@
 from django.core.management.base import BaseCommand
-
 from tabulate import tabulate
 
 from bc.cases.backends.respond.client import get_client

@@ -1,5 +1,4 @@
 from django import urls
-
 from wagtail import hooks
 from wagtail.admin import menu
 

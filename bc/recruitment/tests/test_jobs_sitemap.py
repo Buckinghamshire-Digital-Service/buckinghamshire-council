@@ -2,10 +2,8 @@ import datetime
 import xml.etree.ElementTree as ET
 
 from django.test import Client, TestCase, override_settings
-
-from wagtail.models import Page, Site
-
 from freezegun import freeze_time
+from wagtail.models import Page, Site
 
 from bc.recruitment.constants import JOB_BOARD_CHOICES
 
