@@ -39,7 +39,6 @@ backoff = "^2.2.1"
 responses = "~0.25"
 django-filter = "^23.5"
 wagtail-modeladmin = "^1.0.0"
-django-upgrade = "^1.16.0"
 
 [tool.poetry.extras]
 gunicorn = ["gunicorn"]
@@ -64,6 +63,7 @@ pre-commit = "3.7.0"
 Werkzeug = "3.0.2"
 tblib = "^3.0.0"
 pyupgrade = "^3.15.2"
+django-upgrade = "^1.16.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
