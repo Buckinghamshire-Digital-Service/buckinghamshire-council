@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- upgrade python to 3.11
+
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/70.01...HEAD>
 
 ## 70.01 (2024-04-03)
