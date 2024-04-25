@@ -21,6 +21,12 @@ As much as possible, we want to use the official releases available on PyPI for 
 
 It is important to replace the usage of the git tags in the pyproject.toml file with the official release version from PyPI as soon as they become available.
 
+## Upgrade tooling
+
+[django-upgrade](https://github.com/adamchainz/django-upgrade) and [pyupgrade](https://github.com/asottile/pyupgrade) are available to help with upgrading Django and Python code respectively.
+
+Please check that the versions in use are up to date and consider running these tools to help with the upgrade process. Check the pyproject.toml and the pre-commit configuration for the versions in use.
+
 ## Critical paths
 
 The following areas of functionality are critical paths for the site which don't have full automated tests and should be checked manually.
