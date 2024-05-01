@@ -2,7 +2,6 @@ import itertools
 
 from django.db import models
 from django.utils.functional import cached_property
-
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.fields import StreamField
@@ -90,7 +89,7 @@ class InlineIndex(InlineIndexMixin, BasePage):
     )
     intro_text = models.TextField(blank=True)
 
-    body = StreamField(StoryBlock(), use_json_field=True)
+    body = StreamField(StoryBlock())
 
     is_inline_index = True
     is_inline_index_child = False
@@ -158,7 +157,7 @@ class InlineIndex(InlineIndexMixin, BasePage):
 class InlineIndexChild(InlineIndexMixin, BasePage):
     template = InlineIndex.template
 
-    body = StreamField(StoryBlock(), use_json_field=True)
+    body = StreamField(StoryBlock())
 
     is_inline_index = False
     is_inline_index_child = True

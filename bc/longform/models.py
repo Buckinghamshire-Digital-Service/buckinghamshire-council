@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.db import models
 from django.utils.functional import cached_property
-
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.fields import StreamField
 from wagtail.search import index
@@ -43,7 +42,7 @@ class LongformPage(BasePage):
         max_length=255,
     )
     intro_text = models.TextField(blank=True)
-    body = StreamField(LongformStoryBlock(), use_json_field=True)
+    body = StreamField(LongformStoryBlock())
 
     document = models.ForeignKey(
         settings.WAGTAILDOCS_DOCUMENT_MODEL,
@@ -105,7 +104,7 @@ class LongformChapterPage(BasePage):
     class Meta:
         verbose_name = "Long-form content chapter page"
 
-    body = StreamField(LongformStoryBlock(), use_json_field=True)
+    body = StreamField(LongformStoryBlock())
 
     search_fields = BasePage.search_fields + [index.SearchField("body")]
 

@@ -3,7 +3,6 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.db.models.functions import Coalesce
 from django.utils.functional import cached_property
-
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.fields import StreamField
@@ -50,7 +49,7 @@ class NewsPage(BasePage):
         "news item appears to have been published.",
     )
     introduction = models.TextField(blank=True)
-    body = StreamField(StoryBlock(), use_json_field=True)
+    body = StreamField(StoryBlock())
 
     search_fields = BasePage.search_fields + [
         index.SearchField("introduction"),

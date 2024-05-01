@@ -4,7 +4,6 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.shortcuts import redirect
 from django.utils.functional import cached_property
-
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.fields import StreamField
@@ -63,7 +62,7 @@ class BaseInformationPage(BasePage):
 class InformationPage(BaseInformationPage):
     template = "patterns/pages/standardpages/information_page.html"
 
-    body = StreamField(StoryBlock(), use_json_field=True)
+    body = StreamField(StoryBlock())
 
 
 class StoryBlockWithWasteWizard(StoryBlock):
@@ -77,7 +76,7 @@ class WasteWizardPage(BaseInformationPage):
     template = "patterns/pages/standardpages/information_page.html"
     is_waste_wizard_page = True
 
-    body = StreamField(StoryBlockWithWasteWizard(), use_json_field=True)
+    body = StreamField(StoryBlockWithWasteWizard())
 
     content_panels = BasePage.content_panels + [
         FieldPanel("display_contents"),

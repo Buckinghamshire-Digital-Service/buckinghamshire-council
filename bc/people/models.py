@@ -2,7 +2,6 @@ from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.utils.functional import cached_property
-
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.fields import StreamField
@@ -74,7 +73,7 @@ class PersonPage(BasePage):
     job_title = models.CharField(max_length=255)
     introduction = models.TextField(blank=True)
     website = models.URLField(blank=True, max_length=255)
-    biography = StreamField(StoryBlock(), blank=True, use_json_field=True)
+    biography = StreamField(StoryBlock(), blank=True)
     email = models.EmailField(blank=True)
 
     content_panels = BasePage.content_panels + [
