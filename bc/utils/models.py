@@ -3,10 +3,8 @@ from django.db import models
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.utils.functional import cached_property
-
 from wagtail import blocks
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
-from wagtail.admin.widgets.slug import SlugInput
 from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Orderable, Page
@@ -345,7 +343,7 @@ class BasePage(SocialFields, ListingFields, Page):
         [
             MultiFieldPanel(
                 [
-                    FieldPanel("slug", widget=SlugInput),
+                    FieldPanel("slug"),
                     FieldPanel("seo_title"),
                     FieldPanel("show_in_menus"),
                     FieldPanel("search_description"),
