@@ -5,8 +5,9 @@ Django settings for bc project.
 import os
 import sys
 
-import dj_database_url
 from wagtail.embeds.oembed_providers import youtube
+
+import dj_database_url
 
 env = os.environ.copy()
 

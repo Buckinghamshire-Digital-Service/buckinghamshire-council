@@ -1,4 +1,5 @@
 from django.db import models
+
 from wagtail.admin.panels import FieldPanel
 from wagtail.blocks import StructBlock, TextBlock
 from wagtail.blocks.field_block import RichTextBlock

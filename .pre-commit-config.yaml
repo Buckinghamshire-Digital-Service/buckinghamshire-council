@@ -53,3 +53,8 @@ repos:
               package-lock.json|
               poetry.lock
           )$
+  - repo: https://github.com/adamchainz/django-upgrade
+    rev: '1.16.0' # replace with latest tag on GitHub
+    hooks:
+      - id: django-upgrade
+        args: [--target-version, '4.2'] # Replace with Django version

@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.utils.functional import cached_property
+
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.fields import StreamField
 from wagtail.search import index

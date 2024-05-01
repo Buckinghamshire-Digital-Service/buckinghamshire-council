@@ -1,5 +1,6 @@
 from django.db import models
 from django.shortcuts import redirect
+
 from wagtail import fields
 from wagtail import models as wt_models
 from wagtail.admin.panels import FieldPanel

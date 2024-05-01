@@ -2,6 +2,7 @@ import itertools
 
 from django.db import models
 from django.utils.functional import cached_property
+
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.fields import StreamField

@@ -9,7 +9,7 @@ from django.template.defaultfilters import slugify
 from django.template.loader import render_to_string
 from django.utils.functional import cached_property
 from django.views.generic import TemplateView
-from django_gov_notify.message import NotifyEmailMessage
+
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from wagtail import models as wt_models
 from wagtail.admin.panels import (
@@ -20,6 +20,8 @@ from wagtail.admin.panels import (
 )
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.fields import StreamField
+
+from django_gov_notify.message import NotifyEmailMessage
 
 from bc.blogs.forms import BlogHomePageForm, BlogPostPageForm
 from bc.utils.blocks import StoryBlock

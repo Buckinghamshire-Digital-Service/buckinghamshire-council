@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
 from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
+
 from wagtail import blocks
 from wagtail.admin.staticfiles import versioned_static
 from wagtail.contrib.table_block.blocks import TableBlock as BaseTableBlock

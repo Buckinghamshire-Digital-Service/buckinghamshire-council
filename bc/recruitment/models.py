@@ -17,7 +17,7 @@ from django.urls import reverse
 from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify
-from django_gov_notify.message import NotifyEmailMessage
+
 from wagtail import blocks
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
@@ -25,6 +25,8 @@ from wagtail.fields import StreamField
 from wagtail.models import Page
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
+
+from django_gov_notify.message import NotifyEmailMessage
 from wagtailorderable.models import Orderable
 
 from bc.utils.choices import IconChoice

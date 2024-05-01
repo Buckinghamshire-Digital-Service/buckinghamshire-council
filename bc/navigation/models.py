@@ -1,4 +1,5 @@
 from django.db import models
+
 from modelcluster.models import ClusterableModel
 from wagtail import blocks
 from wagtail.admin.panels import FieldPanel
