@@ -90,7 +90,10 @@
 
         #{$root} {
             &__heading {
-                color: $color--white;
+                background-color: $color--white;
+                color: $color--slate;
+                display: inline-block;
+                padding: $grid--small;
                 margin-bottom: $grid;
                 max-width: 600px;
             }
@@ -108,10 +111,6 @@
             }
 
             @include media-query(tablet-portrait) {
-                &__heading {
-                    margin-bottom: 0;
-                }
-
                 &__strapline {
                     display: block;
                 }

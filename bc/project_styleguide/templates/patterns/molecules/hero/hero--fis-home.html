@@ -5,9 +5,9 @@
     <div class="wrapper wrapper--large">
         <h1 class="hero__heading heading heading--xxxl">{{ page.title }}</h1>
 
-        {% if page.description %}
+        {% comment %} {% if page.description %}
             <p class="hero__strapline subheading">{{ page.description }}</p>
-        {% endif %}
+        {% endif %} {% endcomment %}
 
         <div class="hero__search">
             <form
