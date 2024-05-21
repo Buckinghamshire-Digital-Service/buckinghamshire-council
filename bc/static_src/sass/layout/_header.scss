@@ -34,7 +34,6 @@
         }
 
         .template-home-page &,
-        .template-fis-home &,
         .template-jobs-home &,
         .template-searchresults & {
             display: none;
@@ -52,8 +51,13 @@
         }
 
         #{$root}__search {
-            margin-top: 0;
-            width: auto;
+            display: none;
+
+            @include media-query(tablet-portrait) {
+                display: block;
+                margin-top: 0;
+                width: auto;
+            }
         }
 
         #{$root}__search-button {
@@ -218,6 +222,7 @@
         }
 
         @include media-query(px550) {
+            @include font-size(m);
             flex: 0 1 50%;
             line-height: 1.25;
             margin-top: 0;
@@ -260,9 +265,10 @@
             display: none;
         }
 
-        @include media-query(tablet-landscape) {
+        @include media-query(tablet-portrait) {
             &__heading {
-                display: block;
+                display: flex;
+                align-items: center;
             }
         }
     }
