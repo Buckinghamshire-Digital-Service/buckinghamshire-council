@@ -33,6 +33,12 @@
         }
     }
 
+    &--half {
+        @include media-query(tablet-portrait) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
     &--thirds {
         @include media-query(tablet-portrait) {
             grid-template-columns: repeat(2, 1fr);
