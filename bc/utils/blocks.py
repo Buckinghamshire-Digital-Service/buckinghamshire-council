@@ -305,6 +305,22 @@ class BaseChartBlock(BaseTableBlock):
 
         return cleaned_table
 
+    def clean(self, value):
+        """
+        In Wagtail 6.0, the TableBlock header controls were switched to
+        a field (`table_header_choice`) that requires user input.
+
+        References:
+        - https://docs.wagtail.org/en/stable/releases/6.0.html#accessibility-improvements
+        - https://github.com/wagtail/wagtail/blob/ab9d1edb/wagtail/contrib/table_block/blocks.py#L162
+        - https://github.com/wagtail/wagtail/blob/ab9d1edb/wagtail/contrib/table_block/blocks.py#L131-L134
+
+        This ensures that `table_header_choice` is not empty,
+        otherwise, a ValidationError is raised
+        """
+        value["table_header_choice"] = "both"
+        return super().clean(value)
+
     class Meta:
         abstract = True
         template = "patterns/molecules/streamfield/blocks/chart_block.html"
