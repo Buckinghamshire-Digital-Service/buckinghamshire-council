@@ -1,0 +1,45 @@
+.search-promotions {
+    $root: &;
+    border: 5px solid $color--river;
+
+    &__container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: $grid--small;
+
+        @include media-query(tablet-portrait) {
+            padding: $grid;
+        }
+    }
+
+    &__heading {
+        color: $color--slate;
+        margin-top: 0;
+    }
+
+    &__subheading {
+        @include font-size(xs);
+        color: $color--slate;
+        font-weight: $weight--bold;
+        margin-bottom: $grid--min;
+    }
+
+    &__links {
+        margin-bottom: $grid--small;
+    }
+
+    &__link {
+        display: block;
+        font-weight: $weight--bold;
+        margin-bottom: $grid--min;
+    }
+
+    &__button {
+        padding: $grid--min $grid--small;
+    }
+
+    &__button-icon {
+        margin-right: $grid--min;
+    }
+}
