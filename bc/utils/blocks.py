@@ -316,7 +316,10 @@ class BaseChartBlock(BaseTableBlock):
         - https://github.com/wagtail/wagtail/blob/ab9d1edb/wagtail/contrib/table_block/blocks.py#L131-L134
 
         This ensures that `table_header_choice` is not empty,
-        otherwise, a ValidationError is raised
+        otherwise, a ValidationError is raised.
+
+        Since the chart blocks *always* have row and column labels,
+        we set the value of `table_header_choice` to "both"
         """
         value["table_header_choice"] = "both"
         return super().clean(value)
