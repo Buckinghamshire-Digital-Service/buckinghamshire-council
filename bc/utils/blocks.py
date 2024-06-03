@@ -305,6 +305,25 @@ class BaseChartBlock(BaseTableBlock):
 
         return cleaned_table
 
+    def clean(self, value):
+        """
+        In Wagtail 6.0, the TableBlock header controls were switched to
+        a field (`table_header_choice`) that requires user input.
+
+        References:
+        - https://docs.wagtail.org/en/stable/releases/6.0.html#accessibility-improvements
+        - https://github.com/wagtail/wagtail/blob/ab9d1edb/wagtail/contrib/table_block/blocks.py#L162
+        - https://github.com/wagtail/wagtail/blob/ab9d1edb/wagtail/contrib/table_block/blocks.py#L131-L134
+
+        This ensures that `table_header_choice` is not empty,
+        otherwise, a ValidationError is raised.
+
+        Since the chart blocks *always* have row and column labels,
+        we set the value of `table_header_choice` to "both"
+        """
+        value["table_header_choice"] = "both"
+        return super().clean(value)
+
     class Meta:
         abstract = True
         template = "patterns/molecules/streamfield/blocks/chart_block.html"
@@ -551,12 +570,10 @@ class NestedStoryBlock(BaseStoryBlock):
         # Bump down template for heading fields so headings don't clash with those outside the accordion
         self.child_blocks["heading"] = copy.deepcopy(self.child_blocks["heading"])
         self.child_blocks["subheading"] = copy.deepcopy(self.child_blocks["subheading"])
-        self.child_blocks[
-            "heading"
-        ].meta.template = "patterns/molecules/streamfield/blocks/subheading_block.html"
-        self.child_blocks[
-            "subheading"
-        ].meta.template = (
+        self.child_blocks["heading"].meta.template = (
+            "patterns/molecules/streamfield/blocks/subheading_block.html"
+        )
+        self.child_blocks["subheading"].meta.template = (
             "patterns/molecules/streamfield/blocks/subsubheading_block.html"
         )
 

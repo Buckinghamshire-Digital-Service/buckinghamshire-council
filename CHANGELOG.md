@@ -4,6 +4,12 @@
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/70.01...HEAD>
 
+## 71.00 (2024-06-03)
+
+[Wagtail 6.0](https://docs.wagtail.org/en/latest/releases/6.0.html) upgrade
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/70.01...71.00>
+
 ## 70.01 (2024-04-03)
 
 - Update `flake8` to version 3.8.4 for Python 3.8 compatibility

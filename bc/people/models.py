@@ -74,7 +74,7 @@ class PersonPage(BasePage):
     job_title = models.CharField(max_length=255)
     introduction = models.TextField(blank=True)
     website = models.URLField(blank=True, max_length=255)
-    biography = StreamField(StoryBlock(), blank=True, use_json_field=True)
+    biography = StreamField(StoryBlock(), blank=True)
     email = models.EmailField(blank=True)
 
     content_panels = BasePage.content_panels + [

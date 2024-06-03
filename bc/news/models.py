@@ -50,7 +50,7 @@ class NewsPage(BasePage):
         "news item appears to have been published.",
     )
     introduction = models.TextField(blank=True)
-    body = StreamField(StoryBlock(), use_json_field=True)
+    body = StreamField(StoryBlock())
 
     search_fields = BasePage.search_fields + [
         index.SearchField("introduction"),

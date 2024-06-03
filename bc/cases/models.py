@@ -70,8 +70,7 @@ class ApteanRespondCaseFormPage(RoutablePageMixin, BasePage):
     form = models.CharField(max_length=255, choices=APTEAN_FORM_CHOICES)
 
     body = StreamField(
-        CaseFormStoryBlock(block_counts={"form_link_button": {"min_num": 1}}),
-        use_json_field=True,
+        CaseFormStoryBlock(block_counts={"form_link_button": {"min_num": 1}})
     )
 
     introduction = RichTextField(
@@ -172,9 +171,9 @@ class ApteanRespondCaseFormPage(RoutablePageMixin, BasePage):
                     form, case_reference = self.process_form_submission(form)
                     if form.is_valid():  # still
                         # store the case_reference in the session for the thank you page
-                        request.session[
-                            self.get_case_reference_session_key()
-                        ] = case_reference
+                        request.session[self.get_case_reference_session_key()] = (
+                            case_reference
+                        )
                         request.session[self.get_landing_page_session_key()] = True
                         return redirect(self.url, permanent=False)
             else:

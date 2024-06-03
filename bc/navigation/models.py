@@ -41,13 +41,11 @@ class NavigationSettings(BaseSiteSetting, ClusterableModel):
             max_num=3,
         ),
         blank=True,
-        use_json_field=True,
     )
     footer_links = StreamField(
         [("link", LinkBlock())],
         blank=True,
         help_text="Single list of elements at the base of the page.",
-        use_json_field=True,
     )
 
     panels = [
