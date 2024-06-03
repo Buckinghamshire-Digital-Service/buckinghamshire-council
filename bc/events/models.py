@@ -65,7 +65,7 @@ class EventPage(BasePage):
     country = models.CharField(_("Country"), blank=True, max_length=255)
 
     introduction = models.TextField(blank=True)
-    body = StreamField(StoryBlock(), use_json_field=True)
+    body = StreamField(StoryBlock())
 
     search_fields = BasePage.search_fields + [
         index.SearchField("introduction"),

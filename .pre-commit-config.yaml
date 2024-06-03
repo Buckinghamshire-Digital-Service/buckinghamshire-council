@@ -1,16 +1,16 @@
 repos:
-  - repo: https://github.com/pre-commit/mirrors-isort
-    rev: v4.3.15
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.13.2
     hooks:
       - id: isort
         language_version: python3
   - repo: https://github.com/pycqa/flake8
-    rev: 3.8.4
+    rev: 5.0.4
     hooks:
       - id: flake8
         language_version: python3
   - repo: https://github.com/python/black
-    rev: 22.3.0
+    rev: 24.4.2
     hooks:
       - id: black
         language_version: python3
@@ -53,3 +53,8 @@ repos:
               package-lock.json|
               poetry.lock
           )$
+  - repo: https://github.com/adamchainz/django-upgrade
+    rev: '1.16.0' # replace with latest tag on GitHub
+    hooks:
+      - id: django-upgrade
+        args: [--target-version, '4.2'] # Replace with Django version

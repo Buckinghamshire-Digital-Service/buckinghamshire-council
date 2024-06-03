@@ -1,6 +1,7 @@
 """
 Django settings for bc project.
 """
+
 import os
 import sys
 
@@ -252,7 +253,7 @@ else:
         "default": {"BACKEND": "wagtail.search.backends.database"}
     }
 # Reduction factor between 0 and 1 to apply to the relevanve score of search
-# results with the NewsPage content type. See bc.search.elasticsearch5.
+# results with the NewsPage content type. See bc.search.elasticsearch7.
 SEARCH_BOOST_FACTOR_NEWS_PAGE = float(env.get("SEARCH_BOOST_FACTOR_NEWS_PAGE", 0.5))
 
 

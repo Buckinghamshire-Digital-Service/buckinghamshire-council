@@ -335,7 +335,7 @@ class BlogAboutPage(BasePage):
         blank=True,
     )
 
-    body = StreamField(StoryBlock(), use_json_field=True)
+    body = StreamField(StoryBlock())
 
     content_panels = BasePage.content_panels + [
         FieldPanel("intro_text"),
@@ -372,7 +372,7 @@ class BlogPostPage(BasePage):
     author = models.TextField()
     date_published = models.DateField()
 
-    body = StreamField(StoryBlock(), use_json_field=True)
+    body = StreamField(StoryBlock())
 
     content_panels = BasePage.content_panels + [
         FieldPanel("categories", widget=CheckboxSelectMultiple),

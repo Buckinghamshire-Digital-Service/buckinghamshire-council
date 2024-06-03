@@ -22,7 +22,7 @@ class StepByStepPage(BasePage):
     intro_text = models.TextField(blank=True)
     introduction = RichTextField(editor="with_h2")
 
-    steps = StreamField([("step", StepBlock())], use_json_field=True)
+    steps = StreamField([("step", StepBlock())])
 
     content_panels = BasePage.content_panels + [
         FieldPanel("intro_text"),
