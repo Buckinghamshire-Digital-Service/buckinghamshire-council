@@ -26,6 +26,8 @@
     }
 
     &__search {
+        // adds visible border around input field for high contrast mode
+        border: 1px solid transparent;
         width: 100%;
         margin-top: $grid--small;
 
