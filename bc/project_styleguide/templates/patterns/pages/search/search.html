@@ -28,9 +28,17 @@
                 {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke icon--white button__icon" %}
             </button>
         </form>
+
+        {% comment %} TODO: remove this once new promotional block is finished {% endcomment %}
+        {% if search_input_help_text %}
+            <div class="search__help-text">
+                {{ search_input_help_text|richtext }}
+            </div>
+        {% endif %}
     </div>
 
     {% comment %} New curated search suggestions {% endcomment %}
+    {% comment %} TODO: only show on FIS search page {% endcomment %}
     <div class="search-promotions">
         <div class="search-promotions__container">
             <h2 class="search-promotions__heading heading heading--s">Find services, activities or support groups local to you</h2>
