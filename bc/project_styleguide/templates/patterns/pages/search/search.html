@@ -28,59 +28,22 @@
                 {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke icon--white button__icon" %}
             </button>
         </form>
-
-        {% if search_input_help_text %}
-            <div class="search__help-text">
-                {{ search_input_help_text|richtext }}
-            </div>
-        {% endif %}
     </div>
 
     {% comment %} New curated search suggestions {% endcomment %}
     <div class="search-promotions">
         <div class="search-promotions__container">
-            <div class="search-promotions__content wrapper wrapper--page">
-                <h2 class="search-promotions__heading heading heading--m">Find services, activities or support groups local to you</h2>
+            <h2 class="search-promotions__heading heading heading--s">Find services, activities or support groups local to you</h2>
 
-                <h2 class="search-promotions__heading heading heading--xl">
-                    SEND support and activities by local organisations
-                </h2>
+            <button class="search-promotions__button button button--search" type="submit" aria-label="Submit">
+                {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke icon--white search-promotions__button-icon" %}
 
-                <p>Use our service directory to find special educational needs and disabilities (SEND) services, activities, support groups run by local organisations.</p>
-
-                <h3 class="search-promotions__subheading">
-                    Popular searches
-                </h3>
-
-                <ul class="search-promotions__links">
-                    <li>
-                        <a href="/" class="search-promotions__link">activities for children and young people</a>
-                    </li>
-                    <li>
-                        <a href="/" class="search-promotions__link">autism support</a>
-                    </li>
-                    <li>
-                        <a href="/" class="search-promotions__link">childcare and early years</a>
-                    </li>
-                    <li>
-                        <a href="/" class="search-promotions__link">local family centres</a>
-                    </li>
-                    <li>
-                        <a href="/" class="search-promotions__link">parent support groups</a>
-                    </li>
-                </ul>
-
-                <button class="search-promotions__button button button--search" type="submit" aria-label="Submit">
-                    {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke icon--white search-promotions__button-icon" %}
-
-                    Search the service directory
-                </button>
-            </div>
+                Search the service directory
+            </button>
         </div> 
     </div>
 
     <div class="wrapper wrapper--page search">
-
         {% if search_results %}
             <section class="search__results" aria-label="Search results">
                 <header class="search__results-header">
