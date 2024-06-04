@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Update link block component to always display list items for all screen sizes (following user testing feedback)
+
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/70.01...HEAD>
 
 ## 71.00 (2024-06-03)
