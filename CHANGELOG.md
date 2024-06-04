@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Update FIS search in header - remove dropdown search and simplify to single text input, consistent with the standard homepage
+- Add transparent border to search inputs to improve visibility of input boundary in high contrast mode
+
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/70.01...HEAD>
 
 ## 71.00 (2024-06-03)
