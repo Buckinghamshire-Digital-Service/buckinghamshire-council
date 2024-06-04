@@ -63,7 +63,7 @@ class BaseInformationPage(BasePage):
 class InformationPage(BaseInformationPage):
     template = "patterns/pages/standardpages/information_page.html"
 
-    body = StreamField(StoryBlock(), use_json_field=True)
+    body = StreamField(StoryBlock())
 
 
 class StoryBlockWithWasteWizard(StoryBlock):
@@ -77,7 +77,7 @@ class WasteWizardPage(BaseInformationPage):
     template = "patterns/pages/standardpages/information_page.html"
     is_waste_wizard_page = True
 
-    body = StreamField(StoryBlockWithWasteWizard(), use_json_field=True)
+    body = StreamField(StoryBlockWithWasteWizard())
 
     content_panels = BasePage.content_panels + [
         FieldPanel("display_contents"),

@@ -33,8 +33,7 @@ class CampaignPage(BasePage):
         on_delete=models.SET_NULL,
     )
     body = fields.StreamField(
-        CampaignPageStoryBlock(block_counts={"heading": {"min_num": 3, "max_num": 3}}),
-        use_json_field=True,
+        CampaignPageStoryBlock(block_counts={"heading": {"min_num": 3, "max_num": 3}})
     )
 
     content_panels = BasePage.content_panels + [

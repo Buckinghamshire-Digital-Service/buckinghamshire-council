@@ -81,7 +81,7 @@ def register_unpublished_changes_report_menu_item():
     return AdminOnlyMenuItem(
         "Pages with unpublished changes",
         reverse("unpublished_changes_report"),
-        classname="icon icon-" + UnpublishedChangesReportView.header_icon,
+        icon_name=UnpublishedChangesReportView.header_icon,
         order=700,
     )
 
@@ -102,7 +102,7 @@ def register_missing_metadata_report_menu_item():
     return AdminOnlyMenuItem(
         "Pages with missing metadata",
         reverse("missing_metadata_report"),
-        classname="icon icon-" + MissingMetadataReportView.header_icon,
+        icon_name=MissingMetadataReportView.header_icon,
         order=700,
     )
 

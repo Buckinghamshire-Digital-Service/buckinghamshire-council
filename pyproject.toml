@@ -26,7 +26,7 @@ PyJWT = "2.0.0"
 scout-apm = "~3.1"
 tabulate = "0.8.7"
 urllib3 = "1.26.11"
-wagtail = "~5.2"
+wagtail = "~6.0"
 wagtail-django-recaptcha = {git = "https://github.com/torchbox-forks/wagtail-django-recaptcha", tag = "2.1.1+tbx"}
 wagtail-factories = "^4.1.0"
 wagtail-orderable = "^1.2.0"
@@ -38,7 +38,7 @@ sentry-sdk = "^1.40.5"
 backoff = "^2.2.1"
 responses = "0.16.0"
 django-filter = "^23.5"
-wagtail-modeladmin = "^1.0.0"
+wagtail-modeladmin = "^2.0.0"
 
 [tool.poetry.extras]
 gunicorn = ["gunicorn"]
@@ -50,10 +50,10 @@ mkdocs-material = "8.2.8"
 pymdown-extensions = "9.3"
 
 # Linting
-black = "22.3.0"
+black = "24.4.2"
 detect-secrets = "0.13.0"
-flake8 = "3.8.4"
-isort = "4.3.18"
+flake8 = "~5.0"
+isort = "5.13.2"
 seed-isort-config = "1.9.0"
 
 # Database snapshots
@@ -70,6 +70,7 @@ honcho = "^1.1.0"
 pre-commit = "1.16.1"
 Werkzeug = "0.14.1"
 tblib = "^3.0.0"
+django-upgrade = "^1.16.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
