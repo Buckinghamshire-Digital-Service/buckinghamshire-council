@@ -212,10 +212,16 @@ class School(index.Indexed, models.Model):
     class HubEmail(models.TextChoices):
         SENSCB = "sencsb@buckinghamshire.gov.uk", "sencsb@buckinghamshire.gov.uk"
         SENWYC = "senwyc@buckinghamshire.gov.uk", "senwyc@buckinghamshire.gov.uk"
-        SENAYLESBURY = "Senaylesbury@buckinghamshire.gov.uk", "Senaylesbury@buckinghamshire.gov.uk"
+        SENAYLESBURY = (
+            "Senaylesbury@buckinghamshire.gov.uk",
+            "Senaylesbury@buckinghamshire.gov.uk",
+        )
 
     name = models.TextField()
-    hub_email = models.CharField(choices=HubEmail.choices, blank=True, )
+    hub_email = models.CharField(
+        choices=HubEmail.choices,
+        blank=True,
+    )
     ehc_co = models.ForeignKey(
         "family_information.EHCCo",
         on_delete=models.SET_NULL,

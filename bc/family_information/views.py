@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+
 from wagtail.admin.viewsets.chooser import ChooserViewSet
 from wagtail.search.backends import get_search_backend
 
@@ -20,7 +21,6 @@ class EHCCoChooserViewSet(ChooserViewSet):
 ehc_co_chooser_viewset = EHCCoChooserViewSet("ehc_co_chooser")
 
 
-
 def get_matching_schools(request):
     q = request.GET.get("q", "")
     search_backend = get_search_backend()
@@ -28,10 +28,7 @@ def get_matching_schools(request):
     results = search_backend.autocomplete(q, School)
 
     return JsonResponse(
-        [
-            {"id": school.id, "text": school.name}
-            for school in results
-        ],
+        [{"id": school.id, "text": school.name} for school in results],
         safe=False,
     )
 

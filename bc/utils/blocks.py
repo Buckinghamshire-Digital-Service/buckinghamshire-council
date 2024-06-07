@@ -530,7 +530,9 @@ class EHCCoSearchBlock(blocks.StaticBlock):
 
     def get_context(self, value, parent_context=None):
         context = super().get_context(value, parent_context)
-        context["get_matching_schools_url"] = reverse("family_information:get_matching_schools")
+        context["get_matching_schools_url"] = reverse(
+            "family_information:get_matching_schools"
+        )
         context["get_corresponding_ehc_co_url"] = reverse(
             "family_information:get_corresponding_ehc_co"
         )
