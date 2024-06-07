@@ -235,7 +235,7 @@ class School(index.Indexed, models.Model):
             )
 
     search_fields = [
-        index.SearchField("name"),
+        index.AutocompleteField("name"),
     ]
 
     def __str__(self):
