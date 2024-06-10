@@ -23,6 +23,7 @@
     {% include "patterns/molecules/hero/hero--fis-home.html" %}
 
     {% comment %} New top tasks component {% endcomment %}
+    {% comment %} TODO: BE snippet {% endcomment %}
     <div class="section section--bg-earth-light section--vertical-padding">
         <div class="wrapper wrapper--large">
             <h2 class="heading heading--l">What do you want to do?</h2>
@@ -64,6 +65,30 @@
                 {{ page.heading }}
             </h2>
         {% endif %}
+
+        {% comment %} New featured cards {% endcomment %}
+        {% comment %} TODO: BE for two featured cards {% endcomment %}
+        <div class="grid grid--index grid--half" data-height-equalizer>
+            {% for subpage in page.child_pages %}
+                {% if forloop.counter == 1 or forloop.counter == 2 %}
+                    <a class="card card--fis-home" href="{% pageurl subpage %}">
+                        <div class="card__image">
+                            {% image subpage.listing_image fill-350x250 as desktop_image %}
+                            {% include "patterns/atoms/image/image.html" with mobile_image=desktop_image retina_mobile_image=desktop_image desktop_image=desktop_image alt=subpage.listing_image.alt_text %}
+                        </div>
+
+                        <div class="card__content" data-height-equalizer-child>
+                            <h2 class="card__title heading">
+                                {% firstof subpage.listing_title subpage.title %}
+                            </h2>
+                            {% if subpage.listing_summary %}
+                                <p class="card__summary">{{ subpage.listing_summary }}</p>
+                            {% endif %}
+                        </div>
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
 
         <div class="grid grid--index grid--fis-home" data-height-equalizer>
             {% for subpage in page.child_pages %}
