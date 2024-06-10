@@ -6,10 +6,6 @@
         @include font-size(m);
     }
 
-    &__list {
-        display: block;
-    }
-
     &__list-item {
         padding-left: 25px;
         margin-bottom: 5px;
