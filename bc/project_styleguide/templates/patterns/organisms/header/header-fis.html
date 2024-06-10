@@ -12,7 +12,7 @@
             <div class="header__search">
                 <form action="{% url 'search' %}" method="get" role="search" class="form form--header-search">
                     <label class="u-sr-only" for="search">Search this website</label>
-                    <input class="input" id="search" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
+                    <input class="input" id="search" type="text" placeholder="Find advice, support or activities..." name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
                     <button class="button button--basic button--header button--no-border" type="submit" aria-label="Submit">
                         {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke button__icon" %}
                     </button>
