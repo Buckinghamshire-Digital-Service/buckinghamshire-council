@@ -37,7 +37,8 @@
 
         .template-home-page &,
         .template-jobs-home &,
-        .template-searchresults & {
+        .template-searchresults &,
+        .template-fis-home & {
             display: none;
         }
 
@@ -56,7 +57,6 @@
             margin-bottom: $grid--min;
 
             @include media-query(tablet-portrait) {
-                display: block;
                 margin-top: 0;
                 margin-bottom: 0;
                 width: auto;
@@ -266,6 +266,20 @@
 
         #{$hover-states} {
             color: $color--grey-light;
+        }
+    }
+
+    .template-fis-home & {
+        &__heading,
+        &__search {
+            display: none;
+        }
+
+        @include media-query(tablet-portrait) {
+            &__heading {
+                display: flex;
+                align-items: center;
+            }
         }
     }
 }
