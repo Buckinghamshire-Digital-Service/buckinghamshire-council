@@ -90,12 +90,12 @@
 
         #{$root} {
             &__heading {
-                color: $color--off-black;
-                line-height: 1.2;
-                margin-bottom: $grid--small;
-                padding: $grid--small;
                 background-color: $color--white;
+                color: $color--slate;
                 display: inline-block;
+                line-height: 1.2;
+                padding: $grid--small;
+                margin-bottom: $grid;
                 max-width: 600px;
             }
 
