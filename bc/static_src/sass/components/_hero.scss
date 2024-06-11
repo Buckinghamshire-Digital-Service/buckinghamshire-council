@@ -86,7 +86,7 @@
 
     &--fis {
         background-color: $color--earth;
-        margin-bottom: $grid--large;
+        // margin-bottom: $grid--large;
 
         #{$root} {
             &__heading {
@@ -170,6 +170,19 @@
 
     &--404 {
         margin-bottom: $grid;
+    }
+
+    &--index {
+        background-color: $color--sky;
+        padding: $grid 0;
+
+        #{$root} {
+            &__heading {
+                color: $color--white;
+                margin-bottom: $grid;
+                max-width: 960px;
+            }
+        }
     }
 
     // Account for breadcrumb

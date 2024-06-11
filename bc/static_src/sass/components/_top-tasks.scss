@@ -1,0 +1,19 @@
+.top-tasks {
+    &__item {
+        display: flex;
+        align-items: flex-start;
+        gap: $grid--min;
+    }
+
+    &__link {
+        @include font-size(s);
+        font-weight: $weight--bold;
+    }
+
+    &__icon {
+        color: $color--river;
+        height: 20px;
+        width: 20px;
+        margin-top: 4px;
+    }
+}
