@@ -1,0 +1,18 @@
+<div class="activities-listing u-breakout">
+    <div class="activities-listing__inner">
+        <h2 class="activities-listing__heading heading heading--l">Activities in Amersham Family Centre</h2>
+
+        <ul>
+            {% for activity in activities %}
+                <li class="activities-listing__item">
+                    <h3 class="activities-listing__item-heading heading heading--m">{{ activity.title }}</h3>
+                    <p>{{ activity.intro|truncatechars:106 }}</p>
+
+                    {% for tag in activity.tags %}
+                        <span class="activities-listing__tag{% if tag.highlight %} activities-listing__tag--highlight{% endif %}">{{ tag.title }}</span>
+                    {% endfor %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

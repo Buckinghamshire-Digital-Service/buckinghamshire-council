@@ -1,0 +1,63 @@
+.activities-listing {
+    background-color: $color--earth-light;
+    padding: 30px 0;
+
+    &__heading {
+        margin: 0 0 30px;
+    }
+
+    &__inner {
+        margin: 0 auto;
+
+        @include media-query(desktop) {
+            max-width: $wrapper--small;
+        }
+    }
+
+    &__item {
+        background-color: $color--white;
+        padding: 25px 20px;
+
+        & + & {
+            margin-top: 20px;
+        }
+    }
+
+    &__item-heading {
+        margin-top: 0;
+    }
+
+    &__tag {
+        display: inline-block;
+        position: relative;
+        padding: 0 5px;
+        margin: 0 5px;
+
+        &::after {
+            content: '•';
+            position: absolute;
+            right: -0.6em;
+            top: 0;
+        }
+
+        &:first-of-type {
+            margin-left: 0;
+            padding-left: 0;
+        }
+
+        &:last-of-type::after {
+            content: '';
+        }
+
+        &--highlight {
+            padding: 2px 5px;
+            background-color: $color--mustard-10;
+            margin-right: 0;
+            font-weight: $weight--bold;
+
+            &::after {
+                content: '';
+            }
+        }
+    }
+}
