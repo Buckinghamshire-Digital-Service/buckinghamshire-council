@@ -5,7 +5,11 @@
         <ul>
             {% for activity in activities %}
                 <li class="activities-listing__item">
-                    <h3 class="activities-listing__item-heading heading heading--m">{{ activity.title }}</h3>
+                    <h3 class="activities-listing__item-heading heading heading--m">
+                        <a href="{{ activity.href }}" class="activities-listing__item-link">
+                            {{ activity.title }}
+                        </a>
+                    </h3>
                     <p>{{ activity.intro|truncatechars:106 }}</p>
 
                     {% for tag in activity.tags %}

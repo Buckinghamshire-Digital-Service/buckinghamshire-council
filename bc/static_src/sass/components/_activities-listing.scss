@@ -50,6 +50,10 @@
         margin-top: 0;
     }
 
+    &__item-link {
+        color: $color--charcoal;
+    }
+
     &__tag {
         display: inline-block;
         position: relative;
