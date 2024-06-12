@@ -1,15 +1,28 @@
 context:
   activities:
     - title: Early Signs of Exploitation (Online Workshop)
+      href: '#'
       intro: Parents are invited to attend a workshop that will teach them about the early signs of child exploitation
       tags:
         - title: Free
         - title: Recently Updated
-          highlight: true
     - title: Amersham Gamily Centre
+      href: '#'
       intro: Amersham Family Centre has a varied timetable of activities for families, children and young people aged 0 to 19 years
       tags:
         - title: Part of local offer
           highlight: true
+        - title: Free
+    - title: How To Build Confidence and Self-Esteem for Young People (Online)
+      href: '#'
+      intro: Online How to Build Confidence and Self-Esteem Online Course for Young People. Want to feel better about yourself?
+      tags:
+        - title: Part of local offer
+          highlight: true
+        - title: Free
         - title: Recently Updated
+    - title: Thinking about Volunteering On-line Workshop
+      href: '#'
+      intro: Thinking about Volunteering Workshop. Join our free two-hour online workshop on Tuesday 26 March, 9:30am to 11:30am. Build
+      tags:
         - title: Free

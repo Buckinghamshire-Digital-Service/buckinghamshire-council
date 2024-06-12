@@ -11,6 +11,20 @@ context:
       telephone: 01296 382415
       email_address: lib-ayl@buckinghamshire.gov.uk
     image: https://placekitten.com/g/700/250
+    live_related_pages:
+      - page:
+          live: true
+          specific:
+            title: Page title
+      - page:
+          live: true
+          specific:
+            title: Page title
+            listing_title: Listing title
+      - page:
+          live: true
+          specific:
+            title: Page title
 
 tags:
   include_block:
@@ -20,4 +34,6 @@ tags:
       template_name: 'patterns/organisms/activities-listing/activities-listing.html'
   pageurl:
     ancestor_page:
+      raw: '#'
+    specific_related_page:
       raw: '#'
