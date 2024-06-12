@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.utils.functional import cached_property
 
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.admin.panels import FieldPanel, HelpPanel, MultiFieldPanel
 from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Orderable, Page
@@ -276,6 +276,13 @@ class SystemMessagesSettings(BaseSiteSetting):
         ),
     )
 
+    search_cta_title = models.CharField("Title", blank=True, max_length=255)
+    search_cta_button = StreamField(
+        LinkBlock(max_num=1),
+        blank=True,
+        verbose_name="Button",
+    )
+
     def clean_fields(self, exclude=None):
         exclude = exclude or []
         errors = {}
@@ -295,6 +302,19 @@ class SystemMessagesSettings(BaseSiteSetting):
                 FieldPanel("body_no_search_results"),
             ],
             "Search",
+        ),
+        MultiFieldPanel(
+            [
+                HelpPanel(
+                    "This is a call to action (CTA) shown to users on the search page, "
+                    "right below the search bar.<br>"
+                    "Fill out both the title field and the button field "
+                    "for the CTA to show."
+                ),
+                FieldPanel("search_cta_title"),
+                FieldPanel("search_cta_button"),
+            ],
+            "Search Page Call to Action",
         ),
     ]
 
