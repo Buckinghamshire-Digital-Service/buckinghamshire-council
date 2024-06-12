@@ -182,16 +182,17 @@ class SearchView(View):
         except EmptyPage:
             search_results = paginator.page(paginator.num_pages)
 
-        search_input_help_text = SystemMessagesSettings.for_site(
-            site
-        ).search_input_help_text
-        no_result_text = SystemMessagesSettings.for_request(
-            request
-        ).body_no_search_results.format(searchterms=escape(search_query))
+        # System Message Settings
+        system_message_settings = SystemMessagesSettings.for_request(request)
+        no_result_text = system_message_settings.body_no_search_results.format(
+            searchterms=escape(search_query)
+        )
 
         context.update(
             {
-                "search_input_help_text": search_input_help_text,
+                "search_cta_button": system_message_settings.search_cta_button,
+                "search_cta_title": system_message_settings.search_cta_title,
+                "search_input_help_text": system_message_settings.search_input_help_text,
                 "no_result_text": no_result_text,
                 "search_query": search_query,
                 "search_results": search_results,
