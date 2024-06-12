@@ -1,6 +1,21 @@
 .activities-listing {
     background-color: $color--earth-light;
     padding: 30px 0;
+    position: relative;
+
+    @include media-query(tablet-landscape) {
+        &::after {
+            content: '';
+            background-color: $color--earth-light;
+            position: absolute;
+            z-index: -1;
+            width: 162px;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            transform: translateX(100%);
+        }
+    }
 
     &__heading {
         margin: 0 0 30px;
