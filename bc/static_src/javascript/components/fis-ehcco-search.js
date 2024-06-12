@@ -20,12 +20,14 @@ class EHCCOSearch {
             '[data-autocomplete-school]',
         );
         this.ehccoName = this.node.querySelector('[data-autocomplete-name]');
+        this.result = this.node.querySelector('[data-autocomplete-result]');
 
         this.state = {
             school: null,
             name: null,
         };
 
+        this.result.classList.add('is-hidden');
         this.bindEvents();
     }
 
@@ -94,6 +96,7 @@ class EHCCOSearch {
 
     displayResult() {
         if (this.state.school && this.state.name) {
+            this.result.classList.remove('is-hidden');
             this.ehccoSchool.textContent = this.state.school;
             this.ehccoName.textContent = this.state.name;
         }
