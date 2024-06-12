@@ -22,36 +22,10 @@
 {% block hero %}
     {% include "patterns/molecules/hero/hero--fis-home.html" %}
 
-    {% comment %} New top tasks component {% endcomment %}
-    {% comment %} TODO: BE snippet {% endcomment %}
-    <div class="section section--bg-earth-light section--vertical-padding">
-        <div class="wrapper wrapper--large">
-            <h2 class="heading heading--l">What do you want to do?</h2>
-
-            <ul class="grid grid--half">
-                <li class="top-tasks__item">
-                    {% include "patterns/atoms/icons/icon.html" with name="circle-arrow-right" classname="icon--stroke top-tasks__icon" %}
-
-                    <a href="/" class="top-tasks__link">Find an Education, health and care (EHC) co-ordinator</a>
-                </li>
-                <li class="top-tasks__item">
-                    {% include "patterns/atoms/icons/icon.html" with name="circle-arrow-right" classname="icon--stroke top-tasks__icon" %}
-
-                    <a href="/" class="top-tasks__link">Request a new or replacement Max Card</a>
-                </li>
-                <li class="top-tasks__item">
-                    {% include "patterns/atoms/icons/icon.html" with name="circle-arrow-right" classname="icon--stroke top-tasks__icon" %}
-
-                    <a href="/" class="top-tasks__link">Register for a HAF place</a>
-                </li>
-                <li class="top-tasks__item">
-                    {% include "patterns/atoms/icons/icon.html" with name="circle-arrow-right" classname="icon--stroke top-tasks__icon" %}
-
-                    <a href="/" class="top-tasks__link">Help with childcare costs</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    {% comment %} TODO: Top tasks BE snippet {% endcomment %}
+    {% if page.top_tasks %}
+        {% include "patterns/molecules/top-tasks.html" %}
+    {% endif %}
 {% endblock %}
 
 {% block breadcrumbs %}{% endblock %}
@@ -66,7 +40,7 @@
             </h2>
         {% endif %}
 
-        {% comment %} New featured cards {% endcomment %}
+        {% comment %} New featured cards - this will need updating once we have new code for BE, this is just for FE testing! {% endcomment %}
         {% comment %} TODO: BE for two featured cards {% endcomment %}
         <div class="grid grid--index grid--half" data-height-equalizer>
             {% for subpage in page.child_pages %}
