@@ -198,6 +198,47 @@ class LocalAreaLinksBlock(blocks.StructBlock):
         return context
 
 
+class LinkBlockValue(blocks.StructValue):
+    def get_text(self):
+        if title := self.get("title"):
+            return title
+        if page := self.get("page"):
+            return page.specific.listing_title or page.title
+        return ""
+
+    def get_url(self):
+        if page := self.get("page"):
+            return page.url
+        if url := self.get("url"):
+            return url
+        return ""
+
+
+class ExternalLinkBlock(blocks.StructBlock):
+    url = blocks.URLBlock()
+    title = blocks.CharBlock()
+
+    class Meta:
+        icon = "link"
+        label = "External link"
+        value_class = LinkBlockValue
+
+
+class InternalLinkBlock(blocks.StructBlock):
+    page = blocks.PageChooserBlock()
+    title = blocks.CharBlock(required=False)
+
+    class Meta:
+        icon = "link"
+        label = "Internal link"
+        value_class = LinkBlockValue
+
+
+class LinkBlock(blocks.StreamBlock):
+    external_link = ExternalLinkBlock()
+    internal_link = InternalLinkBlock()
+
+
 class ButtonBlock(blocks.StructBlock):
     text = blocks.CharBlock(form_classname="title")
     link_url = blocks.URLBlock(required=False)

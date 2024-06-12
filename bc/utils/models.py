@@ -4,13 +4,13 @@ from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.utils.functional import cached_property
 
-from wagtail import blocks
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Orderable, Page
 from wagtail.snippets.models import register_snippet
 
+from bc.utils.blocks import LinkBlock
 from bc.utils.cache import get_default_cache_control_decorator
 from bc.utils.constants import RICH_TEXT_FEATURES
 
@@ -181,31 +181,7 @@ class CallToActionSnippet(models.Model):
         related_name="+",
     )
 
-    link = StreamField(
-        blocks.StreamBlock(
-            [
-                (
-                    "external_link",
-                    blocks.StructBlock(
-                        [("url", blocks.URLBlock()), ("title", blocks.CharBlock())],
-                        icon="link",
-                    ),
-                ),
-                (
-                    "internal_link",
-                    blocks.StructBlock(
-                        [
-                            ("page", blocks.PageChooserBlock()),
-                            ("title", blocks.CharBlock(required=False)),
-                        ],
-                        icon="link",
-                    ),
-                ),
-            ],
-            required=True,
-        ),
-        blank=True,
-    )
+    link = StreamField(LinkBlock(), blank=True)
 
     panels = [
         FieldPanel("title"),
