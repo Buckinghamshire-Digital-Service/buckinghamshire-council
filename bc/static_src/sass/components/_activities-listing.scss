@@ -54,21 +54,34 @@
         color: $color--charcoal;
     }
 
+    &__tags {
+        display: inline-flex;
+        flex-direction: column;
+
+        @include media-query(px550) {
+            display: block;
+        }
+    }
+
     &__tag {
         display: inline-block;
         position: relative;
         padding: 0 5px;
-        margin: 0 5px;
+        margin: 3px;
 
-        &::after {
-            content: '•';
-            position: absolute;
-            right: -0.6em;
-            top: 0;
-        }
+        @include media-query(px550) {
+            margin: 0 5px;
 
-        &:first-of-type {
-            margin-left: -3px;
+            &::after {
+                content: '•';
+                position: absolute;
+                right: -0.6em;
+                top: 0;
+            }
+
+            &:first-of-type {
+                margin-left: -3px;
+            }
         }
 
         &:last-of-type::after {

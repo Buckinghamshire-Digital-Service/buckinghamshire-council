@@ -12,16 +12,20 @@
                     </h3>
                     <p>{{ activity.intro|truncatechars:106 }}</p>
 
-                    {% for tag in activity.tags %}
-                        {% if tag.highlight %}
-                            <span class="activities-listing__tag activities-listing__tag--highlight">
-                                {% include "patterns/atoms/icons/icon.html" with name="tick" classname="icon--tag-tick activities-listing__tag-icon" %}
-                                {{ tag.title }}
-                            </span>
-                        {% else %}
-                            <span class="activities-listing__tag">{{ tag.title }}</span>
-                        {% endif %}
-                    {% endfor %}
+                    {% if activity.tags|length > 0 %}
+                        <ul class="activities-listing__tags">
+                            {% for tag in activity.tags %}
+                                {% if tag.highlight %}
+                                    <li class="activities-listing__tag activities-listing__tag--highlight">
+                                        {% include "patterns/atoms/icons/icon.html" with name="tick" classname="icon--tag-tick activities-listing__tag-icon" %}
+                                        {{ tag.title }}
+                                    </li>
+                                {% else %}
+                                    <li class="activities-listing__tag">{{ tag.title }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
                 </li>
             {% endfor %}
         </ul>
