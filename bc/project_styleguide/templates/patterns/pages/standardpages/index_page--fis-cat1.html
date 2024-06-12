@@ -3,7 +3,7 @@
 
 {% block body_class %}template-fis-category-send {{ block.super }}{% endblock %}
 
-{% comment %} breadcrumbs included inside hero component {% endcomment %}
+{% comment %} breadcrumbs are included inside hero index component {% endcomment %}
 {% block breadcrumbs %}{% endblock %}
 
 {% block hero %}
@@ -11,6 +11,11 @@
 {% endblock %}
 
 {% block content %}
+    {% comment %} TODO: Toptasks BE {% endcomment %}
+    {% if page.top_tasks %}
+        {% include "patterns/molecules/top-tasks.html" %}
+    {% endif %}
+
     <div>
         {% if page.introduction %}
             <p>{{ page.introduction }}</p>

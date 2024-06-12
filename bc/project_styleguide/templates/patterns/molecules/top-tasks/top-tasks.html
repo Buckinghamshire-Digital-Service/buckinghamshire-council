@@ -1,0 +1,17 @@
+{% load wagtailcore_tags %}
+
+<div class="section section--bg-earth-light section--vertical-padding">
+    <div class="wrapper wrapper--large">
+        <h2 class="heading heading--l">{{ heading }}</h2>
+
+        <ul class="grid grid--half">
+            {% for task in tasks %}
+                <li class="top-tasks__item">
+                    {% include "patterns/atoms/icons/icon.html" with name="circle-arrow-right" classname="icon--stroke top-tasks__icon" %}
+
+                    <a href="{{ task.link_url }}" class="top-tasks__link">{{ task.link_text }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
