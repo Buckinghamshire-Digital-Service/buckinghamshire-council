@@ -2,8 +2,12 @@
     background-color: $color--earth-light;
     padding: 30px 0;
     position: relative;
+    margin-bottom: 40px;
 
     @include media-query(tablet-landscape) {
+        // On the location page there is a sidebar which offsets
+        // this component and leaves a gap on the right.
+        // This covers the gap with a pseudo element.
         &::after {
             content: '';
             background-color: $color--earth-light;
