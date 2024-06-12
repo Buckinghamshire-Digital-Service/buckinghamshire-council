@@ -1,4 +1,6 @@
 context:
+  page:
+    title: Aylesbury Library
   activities:
     - title: Early Signs of Exploitation (Online Workshop)
       href: '#'
