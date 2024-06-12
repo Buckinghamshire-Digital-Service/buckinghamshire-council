@@ -15,7 +15,6 @@ from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 
 from .constants import PLAIN_TEXT_TABLE_HELP_TEXT, RICH_TEXT_FEATURES
-from .models import ImportantPages
 from .utils import convert_markdown_links_to_html, is_number
 from .widgets import BarChartInput, LineChartInput, PieChartInput
 
@@ -190,6 +189,8 @@ class LocalAreaLinksBlock(blocks.StructBlock):
             "Wycombe": value["wycombe_url"],
         }
         if parent_context is not None and parent_context.get("request"):
+            from .models import ImportantPages
+
             request = parent_context["request"]
             context["contact_us_page"] = ImportantPages.for_request(
                 request
