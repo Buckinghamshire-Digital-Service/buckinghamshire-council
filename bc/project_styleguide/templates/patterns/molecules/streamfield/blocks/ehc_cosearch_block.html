@@ -8,17 +8,21 @@
 
 <div class="ehcco-search" data-ehcco-search data-matching-schools-url="{{ get_matching_schools_url|escapejs }}" data-ehc-co-url="{{ get_corresponding_ehc_co_url|escapejs }}">
     <div class="ehcco-search__container">
-        <h2 class="ehcco-search__heading heading heading--s">Find your EHC coordinator by typing the name of your education provider</h2>
+        <div data-autocomplete-search class="ehcco-search__search">
+            <h2 class="ehcco-search__heading heading heading--s">Find your EHC coordinator by typing the name of your education provider</h2>
 
-        <label class="ehcco-search__label" for="school-search">Type the name of a nursery, school or college</label>
-        <div data-autocomplete-wrapper></div>
-        <div data-autocomplete-list id="autocomplete-list" class="autocomplete-items"></div>
+            <label class="ehcco-search__label" for="school-search">Type the name of a nursery, school or college</label>
+            <div data-autocomplete-wrapper></div>
+            <div data-autocomplete-list id="autocomplete-list" class="autocomplete-items"></div>
+        </div>
 
-        <div class="ehcco-search__result">
-            <p class="ehcco-search__result-heading heading--xl">
-                The EHC coordinator for <span data-autocomplete-school id="school"></span> is <span data-autocomplete-name id="ehcco-name"></span>
+        <div data-autocomplete-result class="ehcco-search__result">
+            <p class="ehcco-search__result-heading heading heading--xl">
+                The EHC coordinator for <span data-autocomplete-school></span> is <span data-autocomplete-name></span>
             </p>
-            <p class="heading heading--s">You can contact your EHC co-ordinator via email, use firstname.surname@buckinghamshire.gov.uk</p>
+            <div class="rich-text">
+                <p>You can contact your EHC co-ordinator via email, use <span class="heading"><span data-autocomplete-email>firstname.surname</span>@buckinghamshire.gov.uk</span></p>
+            </div>
         </div>
     </div>
 </div>
