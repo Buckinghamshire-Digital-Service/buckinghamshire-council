@@ -41,8 +41,7 @@
         }
 
         &:first-of-type {
-            margin-left: 0;
-            padding-left: 0;
+            margin-left: -3px;
         }
 
         &:last-of-type::after {

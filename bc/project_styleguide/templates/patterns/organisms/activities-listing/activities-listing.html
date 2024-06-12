@@ -9,7 +9,14 @@
                     <p>{{ activity.intro|truncatechars:106 }}</p>
 
                     {% for tag in activity.tags %}
-                        <span class="activities-listing__tag{% if tag.highlight %} activities-listing__tag--highlight{% endif %}">{{ tag.title }}</span>
+                        {% if tag.highlight %}
+                            <span class="activities-listing__tag activities-listing__tag--highlight">
+                                {% include "patterns/atoms/icons/icon.html" with name="tick" classname="icon--tag-tick activities-listing__tag-icon" %}
+                                {{ tag.title }}
+                            </span>
+                        {% else %}
+                            <span class="activities-listing__tag">{{ tag.title }}</span>
+                        {% endif %}
                     {% endfor %}
                 </li>
             {% endfor %}
