@@ -20,11 +20,13 @@ class EHCCOSearch {
             '[data-autocomplete-school]',
         );
         this.ehccoName = this.node.querySelector('[data-autocomplete-name]');
+        this.ehccoEmail = this.node.querySelector('[data-autocomplete-email]');
         this.result = this.node.querySelector('[data-autocomplete-result]');
 
         this.state = {
             school: null,
             name: null,
+            email: null,
         };
 
         this.result.classList.add('is-hidden');
@@ -89,6 +91,7 @@ class EHCCOSearch {
             })
             .then((data) => {
                 this.state.name = data.name;
+                this.state.email = data.email;
                 this.displayResult();
             })
             .catch((error) => console.error('error getting EHCCO', error));
@@ -99,6 +102,7 @@ class EHCCOSearch {
             this.result.classList.remove('is-hidden');
             this.ehccoSchool.textContent = this.state.school;
             this.ehccoName.textContent = this.state.name;
+            this.ehccoEmail.textContent = this.state.email;
         }
     }
 }
