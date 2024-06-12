@@ -1,38 +1,40 @@
-<div class="activities-listing u-breakout">
-    <div class="activities-listing__inner">
-        <h2 class="activities-listing__heading heading heading--l">Activities in {{ page.title }}</h2>
+{% if activities|length > 0 %}
+    <div class="activities-listing u-breakout">
+        <div class="activities-listing__inner">
+            <h2 class="activities-listing__heading heading heading--l">Activities in {{ page.title }}</h2>
 
-        <ul>
-            {% for activity in activities %}
-                <li class="activities-listing__item">
-                    <h3 class="activities-listing__item-heading heading heading--m">
-                        <a href="{{ activity.href }}" class="activities-listing__item-link">
-                            {{ activity.title }}
-                        </a>
-                    </h3>
-                    <p>{{ activity.intro|truncatechars:106 }}</p>
+            <ul>
+                {% for activity in activities %}
+                    <li class="activities-listing__item">
+                        <h3 class="activities-listing__item-heading heading heading--m">
+                            <a href="{{ activity.href }}" class="activities-listing__item-link">
+                                {{ activity.title }}
+                            </a>
+                        </h3>
+                        <p>{{ activity.intro|truncatechars:106 }}</p>
 
-                    {% if activity.tags|length > 0 %}
-                        <ul class="activities-listing__tags">
-                            {% for tag in activity.tags %}
-                                {% if tag.highlight %}
-                                    <li class="activities-listing__tag activities-listing__tag--highlight">
-                                        {% include "patterns/atoms/icons/icon.html" with name="tick" classname="icon--tag-tick activities-listing__tag-icon" %}
-                                        {{ tag.title }}
-                                    </li>
-                                {% else %}
-                                    <li class="activities-listing__tag">{{ tag.title }}</li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
+                        {% if activity.tags|length > 0 %}
+                            <ul class="activities-listing__tags">
+                                {% for tag in activity.tags %}
+                                    {% if tag.highlight %}
+                                        <li class="activities-listing__tag activities-listing__tag--highlight">
+                                            {% include "patterns/atoms/icons/icon.html" with name="tick" classname="icon--tag-tick activities-listing__tag-icon" %}
+                                            {{ tag.title }}
+                                        </li>
+                                    {% else %}
+                                        <li class="activities-listing__tag">{{ tag.title }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
 
-        {# TODO: Only show button if there's more that X listings and populate 'href' #}
-        <div class="activities-listing__cta-wrap">
-            <a href="#" class="button button--no-underline">View all activities</a>
+            {# TODO: Only show button if there's more that X listings and populate 'href' #}
+            <div class="activities-listing__cta-wrap">
+                <a href="#" class="button button--no-underline">View all activities</a>
+            </div>
         </div>
     </div>
-</div>
+{% endif %}
