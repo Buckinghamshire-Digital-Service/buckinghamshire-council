@@ -29,7 +29,6 @@ class EHCCOSearch {
             email: null,
         };
 
-        this.result.classList.add('is-hidden');
         this.bindEvents();
     }
 
@@ -39,7 +38,7 @@ class EHCCOSearch {
             id: 'school-search', // To match the existing HTML element
             inputClasses: 'ehcco-search__input',
             menuClasses: 'ehcco-search__options',
-            showNoOptionsFound: false,
+            showNoOptionsFound: true,
             source: (query, populateResults) => {
                 this.fetchMatchingSchools(query)
                     .then((results) => {
