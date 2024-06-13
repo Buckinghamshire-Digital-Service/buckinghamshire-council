@@ -24,7 +24,15 @@
     }
 
     &__button {
+        color: $color--white;
         padding: $grid--min $grid--small;
+        text-decoration: none;
+
+        &:hover,
+        &:active,
+        &:focus {
+            color: $color--white;
+        }
     }
 
     &__button-icon {
