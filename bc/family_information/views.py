@@ -22,6 +22,7 @@ ehc_co_chooser_viewset = EHCCoChooserViewSet("ehc_co_chooser")
 
 
 def get_matching_schools(request):
+    """Return a list of schools that match the query string."""
     q = request.GET.get("q", "")
     search_backend = get_search_backend()
 
@@ -34,6 +35,7 @@ def get_matching_schools(request):
 
 
 def get_corresponding_ehc_co(request):
+    """Return the name and email of the EHC Co for the given school."""
     school_id = request.GET.get("school_id", "")
     school = get_object_or_404(School, id=school_id)
     ehc_co = school.ehc_co
