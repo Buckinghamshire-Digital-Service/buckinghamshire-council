@@ -1,7 +1,6 @@
 .search-widget {
     background-color: $color--river;
     color: $color--white;
-    padding: 30px;
     width: 100%;
     max-width: 650px;
 
@@ -10,6 +9,10 @@
         grid-template-columns: 2fr 1fr;
         grid-gap: $grid;
         max-width: 100%;
+    }
+
+    &__form {
+        padding: 30px;
     }
 
     &__heading {

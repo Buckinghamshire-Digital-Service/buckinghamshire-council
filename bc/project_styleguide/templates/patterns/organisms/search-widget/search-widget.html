@@ -1,11 +1,11 @@
 {% load wagtailimages_tags %}
 <div class="search-widget{% if image %} search-widget--with-image{% endif %}">
-    <h2 class="search-widget__heading heading heading--l">{{ title|default:"Find activities and organisations near you" }}</h2>
-    <form>
+    <form class="search-widget__form">
+        <h2 class="search-widget__heading heading heading--l">{{ title|default:"Find activities and organisations near you" }}</h2>
         <div class="search-widget__form-layout">
             <div>
                 <label for="activity-service-search" class="search-widget__label">Search activities and services</label>
-                <input id="activity-service-search" class="search-widget__input" type="text" placeholder="{{ placeholder|default:"Search for activities and services" }}" />
+                <input id="activity-service-search" class="search-widget__input" type="text" placeholder="{{ placeholder|default:"E.g. Swimming for children" }}" />
             </div>
 
             <div>
@@ -19,6 +19,9 @@
         </button>
     </form>
     {% if image %}
-        {% image image fill-300x300 %}
+    <div>
+
+        {% image image fill-500x500 %}
+    </div>
     {% endif %}
 </div>

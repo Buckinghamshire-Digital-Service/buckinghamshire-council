@@ -1,0 +1,8 @@
+context:
+  image: true
+
+tags:
+  image:
+    image fill-500x500:
+      raw: |
+        <img src="https://picsum.photos/500.webp">
