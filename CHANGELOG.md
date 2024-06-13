@@ -2,11 +2,11 @@
 
 ## Unreleased
 
-Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/70.01...HEAD>
-
 - Accessibility fix: page does not start with a h1
 - Accessibility fix: aria-label not allowed on subpages div
 - Accessibility fix: heading order not correct for footer column headings
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/70.01...HEAD>
 
 ## 71.00 (2024-06-03)
 
