@@ -1,0 +1,46 @@
+.search-widget {
+    background-color: $color--river;
+    color: $color--white;
+    padding: 30px;
+    width: 100%;
+    max-width: 650px;
+
+    &--with-image {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-gap: $grid;
+        max-width: 100%;
+    }
+
+    &__heading {
+        margin-top: 0;
+    }
+
+    &__button {
+        margin-top: 20px;
+
+        svg {
+            fill: transparent;
+            stroke: $color--slate;
+            width: 20px;
+            height: 20px;
+            margin-right: 7px;
+        }
+    }
+
+    &__form-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: $grid--small;
+    }
+
+    &__label {
+        display: block;
+        margin-bottom: 2px;
+    }
+
+    &__input {
+        padding: 5px;
+        width: 100%;
+    }
+}

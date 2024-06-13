@@ -1,0 +1,24 @@
+{% load wagtailimages_tags %}
+<div class="search-widget{% if image %} search-widget--with-image{% endif %}">
+    <h2 class="search-widget__heading heading heading--l">{{ title|default:"Find activities and organisations near you" }}</h2>
+    <form>
+        <div class="search-widget__form-layout">
+            <div>
+                <label for="activity-service-search" class="search-widget__label">Search activities and services</label>
+                <input id="activity-service-search" class="search-widget__input" type="text" placeholder="{{ placeholder|default:"Search for activities and services" }}" />
+            </div>
+
+            <div>
+                <label for="region-search" class="search-widget__label">Enter town/postcode</label>
+                <input id="region-search" class="search-widget__input" type="text" placeholder="{{ placeholder|default:"E.g. Buckingham" }}" />
+            </div>
+        </div>
+        <button class="search-widget__button button button--basic">
+            {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--" %}
+            Search directory
+        </button>
+    </form>
+    {% if image %}
+        {% image image fill-300x300 %}
+    {% endif %}
+</div>
