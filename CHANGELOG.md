@@ -4,6 +4,10 @@
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/70.01...HEAD>
 
+- Accessibility fix: page does not start with a h1
+- Accessibility fix: aria-label not allowed on subpages div
+- Accessibility fix: heading order not correct for footer column headings
+
 ## 71.00 (2024-06-03)
 
 [Wagtail 6.0](https://docs.wagtail.org/en/latest/releases/6.0.html) upgrade
