@@ -3,9 +3,10 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.functional import cached_property
 
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from modelcluster.fields import ParentalKey
+from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.coreutils import resolve_model_string
-from wagtail.models import Page
+from wagtail.models import Orderable, Page
 from wagtail.search import index
 
 from ..news.models import NewsIndex
@@ -78,6 +79,15 @@ class FISBannerFields(models.Model):
         )
 
 
+class SubsiteHomePageTopTask(Orderable, models.Model):
+    source = ParentalKey("family_information.SubsiteHomePage", related_name="top_tasks")
+    top_task = models.ForeignKey(
+        "utils.TopTask", on_delete=models.CASCADE, related_name="+"
+    )
+
+    panels = [FieldPanel("top_task")]
+
+
 class SubsiteHomePage(FISBannerFields, BasePage):
     template = "patterns/pages/home/home_page--fis.html"
 
@@ -85,6 +95,7 @@ class SubsiteHomePage(FISBannerFields, BasePage):
 
     is_pensions_site = models.BooleanField(default=False)
 
+    # Hero
     hero_image = models.ForeignKey(
         "images.CustomImage",
         null=True,
@@ -93,6 +104,10 @@ class SubsiteHomePage(FISBannerFields, BasePage):
     )
     description = models.TextField(blank=True)
     search_placeholder = models.CharField(max_length=100, blank=True)
+
+    top_tasks_heading = models.CharField(
+        blank=True, default="What do you want to do?", max_length=255
+    )
 
     heading = models.CharField(
         blank=True, default="Get information, advice and guidance", max_length=255
@@ -106,6 +121,7 @@ class SubsiteHomePage(FISBannerFields, BasePage):
         related_name="+",
     )
 
+    # Footer
     search_prompt_text = models.TextField(
         blank=True, help_text="Text to prompt user to search"
     )
@@ -127,6 +143,13 @@ class SubsiteHomePage(FISBannerFields, BasePage):
                     FieldPanel("search_placeholder"),
                 ],
                 heading="Hero",
+            ),
+            MultiFieldPanel(
+                [
+                    FieldPanel("top_tasks_heading", heading="Heading"),
+                    InlinePanel("top_tasks", label="Tasks"),
+                ],
+                heading="Top tasks",
             ),
             FieldPanel("heading"),
         ]
