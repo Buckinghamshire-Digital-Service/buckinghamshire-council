@@ -9,6 +9,7 @@ from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Orderable, Page
+from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 
 from bc.utils.cache import get_default_cache_control_decorator
@@ -216,6 +217,21 @@ class CallToActionSnippet(models.Model):
 
     def __str__(self):
         return self.title
+
+
+@register_snippet
+class TopTask(index.Indexed, LinkFields):
+    search_fields = [
+        index.AutocompleteField("link_text"),
+        # Search by the title of linked pages.
+        index.RelatedFields(
+            "link_page",
+            [index.AutocompleteField("title")],
+        ),
+    ]
+
+    def __str__(self):
+        return self.get_link_text()
 
 
 @register_setting
