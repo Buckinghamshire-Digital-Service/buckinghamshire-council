@@ -1,6 +1,7 @@
 context:
   base_page_template: 'patterns/base_page--fis.html'
   page:
+    search_widget_image: true
     call_to_action:
       title: Stub content
       summary: Check out our awesome stub content
@@ -26,6 +27,19 @@ context:
         listing_summary: Get help with finding childcare and early education funding
       - listing_title: Information, advice and support
         listing_summary: Parenting support, help for carers and other advice for families
+    child_pages:
+      - title: Childcare and early years
+        listing_summary: Get help with finding childcare and early education funding
+      - title: Information, advice and support
+        listing_summary: Parenting support, help for carers and other advice for families
+      - title: Young people (13 to 25 years old)
+        listing_summary: Support for young people, including work and education
+      - title: Family centres and support
+        listing_summary: Find family centres and contact the Family Support Service
+      - title: Special education needs and disabilities
+        listing_summary: Our local offer supports children and young people with SEND
+      - title: Things to do
+        listing_summary: Search our directory for activities and events near you
 
 tags:
   image:
@@ -45,8 +59,19 @@ tags:
       target_var: retina_mobile_image
       raw:
         url: https://placekitten.com/g/900/700
+    image fill-300x270 as mobile_image:
+      target_var: mobile_image
+      raw:
+        url: https://picsum.photos/300/270.webp
+    image fill-600x540 as retina_mobile_image:
+      target_var: retina_mobile_image
+      raw:
+        url: https://picsum.photos/600/540.webp
+
   pageurl:
     block.value.page:
       raw: '#'
     subpage:
+      raw: '#'
+    block.value.page:
       raw: '#'
