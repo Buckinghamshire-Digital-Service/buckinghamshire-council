@@ -72,4 +72,8 @@ class Migration(migrations.Migration):
                 blank=True,
             ),
         ),
+        migrations.RemoveField(
+            model_name="systemmessagessettings",
+            name="search_input_help_text",
+        ),
     ]
