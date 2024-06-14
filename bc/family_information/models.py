@@ -172,12 +172,16 @@ class SubsiteHomePage(FISBannerFields, BasePage):
 
     @cached_property
     def child_pages(self):
-        """Get child pages for the homepage listing.
+        """Get child pages for the homepage listing excluding children that are already
+        in the highlighted_cards field.
 
         Returns a queryset of this page's live, public children, of the following page types
         - CategoryPage, CategoryTypeOnePage, CategoryTypeTwoPage, IndexPage, NewsIndex
         ordered by Wagtail explorer custom sort (ie. path).
         """
+        highlighted_card_ids = [
+            card.value.id for row in self.highlighted_cards for card in row.value
+        ]
         return (
             Page.objects.child_of(self)
             .filter(
@@ -190,6 +194,7 @@ class SubsiteHomePage(FISBannerFields, BasePage):
                 ).values()
             )
             .filter(show_in_menus=True)
+            .exclude(id__in=highlighted_card_ids)
             .live()
             .public()
             .specific()
