@@ -22,9 +22,8 @@
 {% block hero %}
     {% include "patterns/molecules/hero/hero--fis-home.html" %}
 
-    {% comment %} TODO: Top tasks BE snippet {% endcomment %}
-    {% if page.top_tasks %}
-        {% include "patterns/molecules/top-tasks.html" %}
+    {% if page.top_tasks.all %}
+        {% include "patterns/molecules/top-tasks/top-tasks.html" with heading=page.top_tasks_heading tasks=page.top_tasks.all %}
     {% endif %}
 {% endblock %}
 
