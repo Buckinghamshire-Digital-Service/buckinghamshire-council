@@ -6,14 +6,21 @@
     margin-bottom: $grid;
 
     &--with-image {
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        grid-gap: $grid;
         max-width: 100%;
+
+        @include media-query(tablet-landscape) {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-gap: $grid;
+        }
     }
 
     &__form {
-        padding: 30px;
+        padding: 20px;
+
+        @include media-query(tablet-landscape) {
+            padding: 30px;
+        }
     }
 
     &__heading {
@@ -29,13 +36,18 @@
             width: 18px;
             height: 18px;
             margin-right: 7px;
+            flex-shrink: 0;
         }
     }
 
     &__form-layout {
         display: grid;
-        grid-template-columns: 1fr 1fr;
         grid-gap: $grid--small;
+
+        @include media-query(tablet-portrait) {
+            grid-template-columns: 1fr 1fr;
+            align-items: flex-end;
+        }
     }
 
     &__label {
@@ -47,9 +59,19 @@
         @include font-size(s);
         padding: 5px;
         width: 100%;
+        max-width: 320px;
+
+        @include media-query(tablet-portrait) {
+            max-width: 100%;
+        }
     }
 
     &__image {
-        margin-left: auto;
+        display: none;
+
+        @include media-query(tablet-landscape) {
+            margin-left: auto;
+            display: block;
+        }
     }
 }
