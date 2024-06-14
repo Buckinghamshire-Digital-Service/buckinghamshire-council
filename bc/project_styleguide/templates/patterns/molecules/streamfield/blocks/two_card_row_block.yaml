@@ -1,0 +1,22 @@
+context:
+  value:
+    - value:
+        specific:
+          listing_image: True
+          listing_title: Lorem ipsum 1
+          listing_summary: Dolor sit amet 1
+    - value:
+        specific:
+          listing_image: True
+          listing_title: Lorem ipsum 2
+          listing_summary: Dolor sit amet 2
+
+tags:
+  image:
+    page.listing_image fill-350x250 as desktop_image:
+      target_var: desktop_image
+      raw:
+        url: https://via.placeholder.com/350x250
+  pageurl:
+    page:
+      raw: '#'

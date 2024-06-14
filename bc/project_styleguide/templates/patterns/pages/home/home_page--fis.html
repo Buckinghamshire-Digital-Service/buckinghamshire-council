@@ -39,29 +39,9 @@
             </h2>
         {% endif %}
 
-        {% comment %} New featured cards - this will need updating once we have new code for BE, this is just for FE testing! {% endcomment %}
-        {% comment %} TODO: BE for two featured cards {% endcomment %}
-        <div class="grid grid--index grid--half" data-height-equalizer>
-            {% for subpage in page.child_pages %}
-                {% if forloop.counter == 1 or forloop.counter == 2 %}
-                    <a class="card card--fis-home" href="{% pageurl subpage %}">
-                        <div class="card__image">
-                            {% image subpage.listing_image fill-350x250 as desktop_image %}
-                            {% include "patterns/atoms/image/image.html" with mobile_image=desktop_image retina_mobile_image=desktop_image desktop_image=desktop_image alt=subpage.listing_image.alt_text %}
-                        </div>
-
-                        <div class="card__content" data-height-equalizer-child>
-                            <h2 class="card__title heading">
-                                {% firstof subpage.listing_title subpage.title %}
-                            </h2>
-                            {% if subpage.listing_summary %}
-                                <p class="card__summary">{{ subpage.listing_summary }}</p>
-                            {% endif %}
-                        </div>
-                    </a>
-                {% endif %}
-            {% endfor %}
-        </div>
+        {% if page.highlighted_cards %}
+            {% include_block page.highlighted_cards %}
+        {% endif %}
 
         <div class="grid grid--index grid--fis-home" data-height-equalizer>
             {% for subpage in page.child_pages %}
