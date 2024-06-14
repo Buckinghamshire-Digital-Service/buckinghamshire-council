@@ -1,5 +1,7 @@
 <div class="grid grid--index grid--half" data-height-equalizer>
-    {% for card in value %}
-        {% include "patterns/molecules/page-card/page-card.html" with classes="card--fis-home" page=card.value.specific show_image=True %}
-    {% endfor %}
+    {% if page_class == 'SubsiteHomePage' %}
+        {% for card in value %}
+            {% include "patterns/molecules/page-card/page-card.html" with classes="card--fis-home" page=card.value.specific show_image=True %}
+        {% endfor %}
+    {% endif %}
 </div>

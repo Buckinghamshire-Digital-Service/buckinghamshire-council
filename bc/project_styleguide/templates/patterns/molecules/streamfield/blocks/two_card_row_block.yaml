@@ -1,4 +1,5 @@
 context:
+  page_class: SubsiteHomePage
   value:
     - value:
         specific:
