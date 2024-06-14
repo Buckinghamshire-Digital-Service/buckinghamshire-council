@@ -6,12 +6,14 @@ from django.utils.functional import cached_property
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.coreutils import resolve_model_string
+from wagtail.fields import StreamField
 from wagtail.models import Orderable, Page
 from wagtail.search import index
 
 from ..news.models import NewsIndex
 from ..standardpages.models import IndexPage
 from ..utils.models import BasePage
+from .blocks import ThreeCardRowBlock, TwoCardRowBlock
 
 
 class FISBannerFields(models.Model):
@@ -105,8 +107,18 @@ class SubsiteHomePage(FISBannerFields, BasePage):
     description = models.TextField(blank=True)
     search_placeholder = models.CharField(max_length=100, blank=True)
 
+    # Top tasks
     top_tasks_heading = models.CharField(
         blank=True, default="What do you want to do?", max_length=255
+    )
+
+    # Highlighted cards
+    highlighted_cards = StreamField(
+        [
+            ("two_card_row", TwoCardRowBlock()),
+            ("three_card_row", ThreeCardRowBlock()),
+        ],
+        blank=True,
     )
 
     heading = models.CharField(
@@ -152,6 +164,7 @@ class SubsiteHomePage(FISBannerFields, BasePage):
                 heading="Top tasks",
             ),
             FieldPanel("heading"),
+            FieldPanel("highlighted_cards"),
         ]
         + FISBannerFields.content_panels
         + [FieldPanel("search_prompt_text"), FieldPanel("call_to_action")]
