@@ -3,6 +3,11 @@ context:
 
 tags:
   image:
-    image fill-300x270 class="search-widget__image":
-      raw: |
-        <img src="https://picsum.photos/300/270.webp" class="search-widget__image">
+    image fill-300x270 as mobile_image:
+      target_var: mobile_image
+      raw:
+        url: https://picsum.photos/300/270.webp
+    image fill-600x540 as retina_mobile_image:
+      target_var: retina_mobile_image
+      raw:
+        url: https://picsum.photos/600/540.webp

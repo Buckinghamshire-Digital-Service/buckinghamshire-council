@@ -19,6 +19,9 @@
         </button>
     </form>
     {% if image %}
-        {% image image fill-300x270 class="search-widget__image" %}
+        {% image image fill-300x270 as mobile_image %}
+        {% image image fill-600x540 as retina_mobile_image %}
+
+        {% include "patterns/atoms/image/image.html" with mobile_image=mobile_image retina_mobile_image=retina_mobile_image desktop_image=retina_mobile_image alt="" classes="search-widget__image" %}
     {% endif %}
 </div>
