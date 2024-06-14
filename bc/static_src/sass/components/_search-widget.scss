@@ -3,6 +3,7 @@
     color: $color--white;
     width: 100%;
     max-width: 650px;
+    margin-bottom: $grid;
 
     &--with-image {
         display: grid;
@@ -16,7 +17,7 @@
     }
 
     &__heading {
-        margin-top: 0;
+        margin: 0 0 $grid--small;
     }
 
     &__button {
@@ -25,8 +26,8 @@
         svg {
             fill: transparent;
             stroke: $color--slate;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             margin-right: 7px;
         }
     }
@@ -43,7 +44,12 @@
     }
 
     &__input {
+        @include font-size(s);
         padding: 5px;
         width: 100%;
+    }
+
+    &__image {
+        margin-left: auto;
     }
 }

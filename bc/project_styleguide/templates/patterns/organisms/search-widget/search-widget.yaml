@@ -3,6 +3,6 @@ context:
 
 tags:
   image:
-    image fill-500x500:
+    image fill-300x270 class="search-widget__image":
       raw: |
-        <img src="https://picsum.photos/500.webp">
+        <img src="https://picsum.photos/300/270.webp" class="search-widget__image">
