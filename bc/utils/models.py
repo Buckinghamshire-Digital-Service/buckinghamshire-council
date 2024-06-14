@@ -81,7 +81,7 @@ class LinkFields(models.Model):
 
     def get_link_url(self):
         if self.link_page:
-            return self.link_page.get_url
+            return self.link_page.get_url()
 
         return self.link_url
 
