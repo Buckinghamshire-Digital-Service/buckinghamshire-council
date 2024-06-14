@@ -65,21 +65,7 @@
 
         <div class="grid grid--index grid--fis-home" data-height-equalizer>
             {% for subpage in page.child_pages %}
-                <a class="card card--fis-home" href="{% pageurl subpage %}">
-                    <div class="card__image">
-                        {% image subpage.listing_image fill-350x250 as desktop_image %}
-                        {% include "patterns/atoms/image/image.html" with mobile_image=desktop_image retina_mobile_image=desktop_image desktop_image=desktop_image alt=subpage.listing_image.alt_text %}
-                    </div>
-
-                    <div class="card__content" data-height-equalizer-child>
-                        <h2 class="card__title heading">
-                            {% firstof subpage.listing_title subpage.title %}
-                        </h2>
-                        {% if subpage.listing_summary %}
-                            <p class="card__summary">{{ subpage.listing_summary }}</p>
-                        {% endif %}
-                    </div>
-                </a>
+                {% include "patterns/molecules/page-card/page-card.html" with page=subpage %}
             {% endfor %}
         </div>
     </div>

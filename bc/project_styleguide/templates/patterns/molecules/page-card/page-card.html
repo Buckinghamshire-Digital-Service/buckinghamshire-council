@@ -1,0 +1,21 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% if page %}
+    <a class="card {{ classes }}" href="{% pageurl page %}">
+        {% if show_image and page.listing_image %}
+            <div class="card__image">
+                {% image page.listing_image fill-350x250 as desktop_image %}
+                {% include "patterns/atoms/image/image.html" with mobile_image=desktop_image retina_mobile_image=desktop_image desktop_image=desktop_image alt=page.listing_image.alt_text %}
+            </div>
+        {% endif %}
+
+        <div class="card__content" data-height-equalizer-child>
+            <h2 class="card__title heading">
+                {% firstof page.listing_title page.title %}
+            </h2>
+            {% if page.listing_summary %}
+                <p class="card__summary">{{ page.listing_summary }}</p>
+            {% endif %}
+        </div>
+    </a>
+{% endif %}

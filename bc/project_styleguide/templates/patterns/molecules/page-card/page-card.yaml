@@ -1,0 +1,19 @@
+context:
+  classes: card--fis-home
+  page:
+    listing_image:
+      alt_text: Listing image alt text
+    listing_summary: Listing summary
+    listing_title: Listing title
+    title: Title
+  show_image: True
+
+tags:
+  image:
+    page.listing_image fill-350x250 as desktop_image:
+      target_var: desktop_image
+      raw:
+        url: https://via.placeholder.com/350x250
+  pageurl:
+    page:
+      raw: '#'
