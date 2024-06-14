@@ -192,7 +192,6 @@ class SearchView(View):
             {
                 "search_cta_button": system_message_settings.search_cta_button,
                 "search_cta_title": system_message_settings.search_cta_title,
-                "search_input_help_text": system_message_settings.search_input_help_text,
                 "no_result_text": no_result_text,
                 "search_query": search_query,
                 "search_results": search_results,

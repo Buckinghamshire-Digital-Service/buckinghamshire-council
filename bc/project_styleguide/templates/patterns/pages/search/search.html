@@ -28,13 +28,6 @@
                 {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke icon--white button__icon" %}
             </button>
         </form>
-
-        {% comment %} TODO: remove this once new promotional block is finished {% endcomment %}
-        {% if search_input_help_text %}
-            <div class="search__help-text">
-                {{ search_input_help_text|richtext }}
-            </div>
-        {% endif %}
     </div>
 
     {% comment %} New curated search suggestions {% endcomment %}
