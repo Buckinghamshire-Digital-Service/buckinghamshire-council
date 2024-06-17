@@ -1,8 +1,8 @@
 # Release History
 
-## Unreleased
+## 71.01 (2024-06-17)
 
-Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/70.01...HEAD>
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/71.00...71.01>
 
 - Validate Talentlink-imported images as if uploaded through the Wagtail admin
 
