@@ -4,6 +4,8 @@
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/70.01...HEAD>
 
+- Validate Talentlink-imported images as if uploaded through the Wagtail admin
+
 ## 71.00 (2024-06-03)
 
 [Wagtail 6.0](https://docs.wagtail.org/en/latest/releases/6.0.html) upgrade
