@@ -8,14 +8,13 @@
 
 {% block hero %}
     {% include "patterns/molecules/hero/hero--index.html" %}
+
+    {% if page.top_tasks.all %}
+        {% include "patterns/molecules/top-tasks/top-tasks.html" with heading=page.top_tasks_heading tasks=page.top_tasks.all %}
+    {% endif %}
 {% endblock %}
 
 {% block content %}
-    {% comment %} TODO: Toptasks BE {% endcomment %}
-    {% if page.top_tasks %}
-        {% include "patterns/molecules/top-tasks.html" %}
-    {% endif %}
-
     <div>
         {% if page.introduction %}
             <p>{{ page.introduction }}</p>
