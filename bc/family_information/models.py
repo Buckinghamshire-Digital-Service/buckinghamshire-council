@@ -282,7 +282,23 @@ class BaseCategoryPage(FISBannerFields, BasePage):
 
     @cached_property
     def child_pages(self):
-        return self.get_children().live().public().specific().order_by("path")
+        """Get child pages for the current category page, excluding children that are
+        already in the body field.
+        """
+        selected_card_ids = [
+            card.value.id
+            for row in self.body
+            for card in row.value
+            if row.block_type == "cards"
+        ]
+        return (
+            self.get_children()
+            .exclude(id__in=selected_card_ids)
+            .live()
+            .public()
+            .specific()
+            .order_by("path")
+        )
 
 
 class CategoryTypeOnePage(BaseCategoryPage):
