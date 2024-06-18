@@ -4,8 +4,7 @@
     <a class="card {{ classes }}" href="{% pageurl page %}">
         {% if show_image and page.listing_image %}
             <div class="card__image">
-                {% image page.listing_image fill-350x250 as desktop_image %}
-                {% include "patterns/atoms/image/image.html" with mobile_image=desktop_image retina_mobile_image=desktop_image desktop_image=desktop_image alt=page.listing_image.alt_text %}
+                {% image page.listing_image fill-350x250 %}
             </div>
         {% endif %}
 
