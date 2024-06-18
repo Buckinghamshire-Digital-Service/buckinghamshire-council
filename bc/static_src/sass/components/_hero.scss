@@ -171,6 +171,19 @@
         margin-bottom: $grid;
     }
 
+    &--index {
+        background-color: $color--sky;
+        padding: $grid 0;
+
+        #{$root} {
+            &__heading {
+                color: $color--white;
+                margin-bottom: $grid;
+                max-width: 960px;
+            }
+        }
+    }
+
     // Account for breadcrumb
     .template-jobs-index & {
         &__jobs-content {
