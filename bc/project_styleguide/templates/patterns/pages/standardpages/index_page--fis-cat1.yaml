@@ -35,5 +35,7 @@ tags:
   pageurl:
     ancestor_page:
       raw: '#'
+    page:
+      raw: '#'
     subpage:
       raw: '#'

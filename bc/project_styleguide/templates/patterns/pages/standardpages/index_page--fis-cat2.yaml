@@ -19,11 +19,10 @@ context:
     title: Childcare and early years
 
 tags:
-  image:
-    subpage.listing_image fill-600x500:
-      raw: '<img src="https://via.placeholder.com/600x500">'
   pageurl:
     ancestor_page:
+      raw: '#'
+    page:
       raw: '#'
     subpage:
       raw: '#'
