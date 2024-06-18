@@ -4,16 +4,17 @@ from django.db import models
 from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
+from wagtail import blocks
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.coreutils import resolve_model_string
 from wagtail.fields import StreamField
-from wagtail.models import Orderable, Page
+from wagtail.models import Page
 from wagtail.search import index
 
 from ..news.models import NewsIndex
 from ..standardpages.models import IndexPage
-from ..utils.models import BasePage
-from .blocks import ThreeCardRowBlock, TwoCardRowBlock
+from ..utils.models import BasePage, PageTopTask
+from .blocks import CardsBlock, ThreeCardRowBlock, TwoCardRowBlock
 
 
 class FISBannerFields(models.Model):
@@ -81,13 +82,8 @@ class FISBannerFields(models.Model):
         )
 
 
-class SubsiteHomePageTopTask(Orderable, models.Model):
+class SubsiteHomePageTopTask(PageTopTask):
     source = ParentalKey("family_information.SubsiteHomePage", related_name="top_tasks")
-    top_task = models.ForeignKey(
-        "utils.TopTask", on_delete=models.CASCADE, related_name="+"
-    )
-
-    panels = [FieldPanel("top_task")]
 
 
 class SubsiteHomePage(FISBannerFields, BasePage):
@@ -202,10 +198,77 @@ class SubsiteHomePage(FISBannerFields, BasePage):
         )
 
 
+class CategoryTypeOnePageTopTask(PageTopTask):
+    source = ParentalKey(
+        "family_information.CategoryTypeOnePage", related_name="top_tasks"
+    )
+
+
+class CategoryTypeTwoPageTopTask(PageTopTask):
+    source = ParentalKey(
+        "family_information.CategoryTypeTwoPage", related_name="top_tasks"
+    )
+
+
+class CategoryPageTopTask(PageTopTask):
+    source = ParentalKey("family_information.CategoryPage", related_name="top_tasks")
+
+
 class BaseCategoryPage(FISBannerFields, BasePage):
     parent_page_types = ["SubsiteHomePage"]
 
-    content_panels = BasePage.content_panels + FISBannerFields.content_panels
+    # Top tasks
+    top_tasks_heading = models.CharField(
+        blank=True, default="What do you want to do?", max_length=255
+    )
+
+    # Content
+    body = StreamField(
+        [
+            (
+                "heading",
+                blocks.CharBlock(
+                    icon="title",
+                    template="patterns/molecules/streamfield/blocks/heading_block.html",
+                ),
+            ),
+            ("cards", CardsBlock()),
+        ],
+        blank=True,
+    )
+
+    # Other child pages
+    other_pages_heading = models.CharField(default="Others", max_length=255)
+
+    content_panels = (
+        BasePage.content_panels
+        + [
+            MultiFieldPanel(
+                [
+                    FieldPanel("top_tasks_heading", heading="Heading"),
+                    InlinePanel("top_tasks", label="Tasks"),
+                ],
+                heading="Top tasks",
+            ),
+            FieldPanel(
+                "body",
+                help_text=(
+                    "This replaces the full list of child pages. Any child pages not "
+                    "listed in this field will be displayed under the 'Other pages' "
+                    "section."
+                ),
+            ),
+            FieldPanel(
+                "other_pages_heading",
+                help_text=(
+                    "Any child pages not added to the Body field will be displayed "
+                    "below this heading. (If the Body field is blank, this heading "
+                    " isn't displayed.)"
+                ),
+            ),
+        ]
+        + FISBannerFields.content_panels
+    )
     search_fields = BasePage.search_fields + FISBannerFields.search_fields
 
     class Meta:
