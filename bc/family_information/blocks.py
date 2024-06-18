@@ -10,7 +10,18 @@ class NCardRowBlock(blocks.StreamBlock):
         return context
 
 
+class CardsBlock(NCardRowBlock):
+    """A block that displays 3 pages per row, but accepts more than 3 pages."""
+
+    class Meta:
+        label = "Cards"
+        min_num = 1
+        template = "patterns/molecules/streamfield/blocks/cards_block.html"
+
+
 class TwoCardRowBlock(NCardRowBlock):
+    """A block that only accepts 2 pages, to display the 2 pages in one row."""
+
     class Meta:
         label = "Two-card row"
         max_num = 2
@@ -19,6 +30,8 @@ class TwoCardRowBlock(NCardRowBlock):
 
 
 class ThreeCardRowBlock(NCardRowBlock):
+    """A block that only accepts 3 pages, to display the 3 pages in one row."""
+
     class Meta:
         label = "Three-card row"
         max_num = 3
