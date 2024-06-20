@@ -254,6 +254,18 @@ class SystemMessagesSettings(BaseSiteSetting):
         features=RICH_TEXT_FEATURES,
     )
 
+    search_input_help_text = RichTextField(
+        "Search Input Help Text",
+        blank=True,
+        null=True,
+        features=RICH_TEXT_FEATURES,
+        help_text=(
+            "This text will appear below the input field on the search page. "
+            "You can use it to direct the users or suggest other pages where to find "
+            "information."
+        ),
+    )
+
     body_no_search_results = RichTextField(
         "No Search Results Message",
         default="<p>No results found.</p>",
@@ -287,6 +299,7 @@ class SystemMessagesSettings(BaseSiteSetting):
         MultiFieldPanel([FieldPanel("title_404"), FieldPanel("body_404")], "404 page"),
         MultiFieldPanel(
             [
+                FieldPanel("search_input_help_text"),
                 FieldPanel("body_no_search_results"),
             ],
             "Search",
