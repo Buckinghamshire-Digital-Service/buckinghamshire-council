@@ -25,7 +25,7 @@
             If not, behave like before: display all child pages.
         {% endcomment %}
         {% include_block page.body %}
-        {% if page.other_pages_heading and page.body %}
+        {% if page.other_pages_heading and page.body and page.child_pages %}
             <h2 class="heading heading--l" id="{{ page.other_pages_heading|slugify }}">{{ page.other_pages_heading }}</h2>
         {% endif %}
         <div
