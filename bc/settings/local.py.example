@@ -52,39 +52,41 @@ YANDEX_VERIFICATION_STRING = "test_string"
 # ENABLE_JOBS_SEARCH_ALERT_SUBSCRIPTIONS = False  # Uncomment to disable
 
 
+# Wagtail Search - Uncomment to use a personal Bonsai elasticsearch instance.
 # NB we're not overriding all of this, only the URL, but because of the order of imports
 # it's easier just to paste the lot
-PERSONAL_BONSAI_URL = "See docs. Get a free sandbox Bonsai instance from bonsai.io"
-WAGTAILSEARCH_BACKENDS = {
-    "default": {
-        "BACKEND": "bc.search.elasticsearch7",
-        "URLS": [PERSONAL_BONSAI_URL],
-        "INDEX": "wagtail",
-        "TIMEOUT": 5,
-        "OPTIONS": {},
-        "INDEX_SETTINGS": {
-            "settings": {
-                "index": {"number_of_shards": 1, "number_of_replicas": 0},
-                "analysis": {
-                    "analyzer": {
-                        "default": {
-                            "tokenizer": "whitespace",
-                            "filter": [
-                                "lowercase",
-                                "synonym",  # see bc.search.elasticsearch7.SearchBackend
-                                "porter_stem",
-                                "english_stop_words",
-                            ]
-                        },
-                    },
-                    "filter": {
-                        "english_stop_words": {
-                            "type": "stop",
-                            "stopwords": "_english_",
-                        },
-                    },
-                },
-            },
-        }
-    }
-}
+# --------------------------------------------------------------------------------------
+# PERSONAL_BONSAI_URL = "See docs. Get a free sandbox Bonsai instance from bonsai.io"
+# WAGTAILSEARCH_BACKENDS = {
+#     "default": {
+#         "BACKEND": "bc.search.elasticsearch7",
+#         "URLS": [PERSONAL_BONSAI_URL],
+#         "INDEX": "wagtail",
+#         "TIMEOUT": 5,
+#         "OPTIONS": {},
+#         "INDEX_SETTINGS": {
+#             "settings": {
+#                 "index": {"number_of_shards": 1, "number_of_replicas": 0},
+#                 "analysis": {
+#                     "analyzer": {
+#                         "default": {
+#                             "tokenizer": "whitespace",
+#                             "filter": [
+#                                 "lowercase",
+#                                 "synonym",  # see bc.search.elasticsearch7.SearchBackend
+#                                 "porter_stem",
+#                                 "english_stop_words",
+#                             ]
+#                         },
+#                     },
+#                     "filter": {
+#                         "english_stop_words": {
+#                             "type": "stop",
+#                             "stopwords": "_english_",
+#                         },
+#                     },
+#                 },
+#             },
+#         }
+#     }
+# }
