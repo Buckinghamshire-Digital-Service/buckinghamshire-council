@@ -32,6 +32,13 @@
 
     {% comment %} New curated search suggestions {% endcomment %}
     {% if search_cta_title and search_cta_button %}
+        {# When we have a search cta, we want to display the number of results above it. #}
+        <header class="search__results-header search__results-header--no-border">
+            {% with count=search_results.paginator.count %}
+                <h2 class="heading heading--l">{{ count }} result{{ count|pluralize }} for ‘{{ search_query }}’</h2>
+            {% endwith %}
+        </header>
+
         <div class="search-promotions">
             <div class="search-promotions__container">
                 <h2 class="search-promotions__heading heading heading--s">{{ search_cta_title }}</h2>
@@ -51,11 +58,14 @@
     <div class="wrapper wrapper--page search">
         {% if search_results %}
             <section class="search__results" aria-label="Search results">
-                <header class="search__results-header">
-                    {% with count=search_results.paginator.count %}
-                        <h2 class="heading heading--l">{{ count }} result{{ count|pluralize }} for ‘{{ search_query }}’</h2>
-                    {% endwith %}
-                </header>
+                {% if not search_cta_title or not search_cta_button %}
+                    {# When we don't have a search cta, we want to display the number of results here instead. #}
+                    <header class="search__results-header">
+                        {% with count=search_results.paginator.count %}
+                            <h2 class="heading heading--l">{{ count }} result{{ count|pluralize }} for ‘{{ search_query }}’</h2>
+                        {% endwith %}
+                    </header>
+                {% endif %}
 
                 {% for result in search_results %}
                     {% if result.page %}
