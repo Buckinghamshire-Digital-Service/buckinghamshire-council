@@ -312,7 +312,6 @@ class CategoryTypeTwoPage(BaseCategoryPage):
 
 
 class CategoryPage(BaseCategoryPage):
-    template = "patterns/pages/standardpages/index_page--fis-cat.html"
     display_banner_at_top = models.BooleanField(default=False)
 
     content_panels = (
