@@ -109,7 +109,7 @@ class SubsiteHomePage(FISBannerFields, BasePage):
 
     # Top tasks
     top_tasks_heading = models.CharField(
-        blank=True, default="What do you want to do?", max_length=255
+        default="What do you want to do?", max_length=255
     )
 
     # Highlighted cards
