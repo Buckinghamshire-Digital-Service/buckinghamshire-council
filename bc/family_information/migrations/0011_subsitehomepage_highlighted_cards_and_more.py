@@ -38,9 +38,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="subsitehomepage",
             name="top_tasks_heading",
-            field=models.CharField(
-                blank=True, default="What do you want to do?", max_length=255
-            ),
+            field=models.CharField(default="What do you want to do?", max_length=255),
         ),
         migrations.CreateModel(
             name="SubsiteHomePageTopTask",
