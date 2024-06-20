@@ -281,7 +281,7 @@ class BaseCategoryPage(FISBannerFields, BasePage):
         ]
 
     @cached_property
-    def child_pages(self):
+    def other_child_pages(self):
         """Get child pages for the current category page, excluding children that are
         already in the body field.
         """
