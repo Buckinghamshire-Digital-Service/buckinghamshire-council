@@ -39,11 +39,13 @@
     {% comment %} New curated search suggestions {% endcomment %}
     {% if search_cta_title and search_cta_button %}
         {# When we have a search cta, we want to display the number of results above it. #}
-        <header class="search__results-header search__results-header--no-border">
-            {% with count=search_results.paginator.count %}
-                <h2 class="heading heading--l">{{ count }} result{{ count|pluralize }} for ‘{{ search_query }}’</h2>
-            {% endwith %}
-        </header>
+        {% if search_results %}
+            <header class="search__results-header search__results-header--no-border">
+                {% with count=search_results.paginator.count %}
+                    <h2 class="heading heading--l">{{ count }} result{{ count|pluralize }} for ‘{{ search_query }}’</h2>
+                {% endwith %}
+            </header>
+        {% endif %}
 
         <div class="search-promotions">
             <div class="search-promotions__container">
