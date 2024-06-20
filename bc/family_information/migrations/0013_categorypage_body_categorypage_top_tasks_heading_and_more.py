@@ -40,9 +40,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="categorypage",
             name="top_tasks_heading",
-            field=models.CharField(
-                blank=True, default="What do you want to do?", max_length=255
-            ),
+            field=models.CharField(default="What do you want to do?", max_length=255),
         ),
         migrations.AddField(
             model_name="categorypage",
@@ -74,9 +72,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="categorytypeonepage",
             name="top_tasks_heading",
-            field=models.CharField(
-                blank=True, default="What do you want to do?", max_length=255
-            ),
+            field=models.CharField(default="What do you want to do?", max_length=255),
         ),
         migrations.AddField(
             model_name="categorytypeonepage",
@@ -108,9 +104,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="categorytypetwopage",
             name="top_tasks_heading",
-            field=models.CharField(
-                blank=True, default="What do you want to do?", max_length=255
-            ),
+            field=models.CharField(default="What do you want to do?", max_length=255),
         ),
         migrations.AddField(
             model_name="categorytypetwopage",
