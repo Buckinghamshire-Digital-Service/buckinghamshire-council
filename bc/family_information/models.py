@@ -317,7 +317,32 @@ class CategoryPage(BaseCategoryPage):
 
     content_panels = (
         BasePage.content_panels
-        + [FieldPanel("display_banner_at_top")]
+        + [
+            FieldPanel("display_banner_at_top"),
+            MultiFieldPanel(
+                [
+                    FieldPanel("top_tasks_heading", heading="Heading"),
+                    InlinePanel("top_tasks", label="Tasks"),
+                ],
+                heading="Top tasks",
+            ),
+            FieldPanel(
+                "body",
+                help_text=(
+                    "This replaces the full list of child pages. Any child pages not "
+                    "listed in this field will be displayed under the 'Other pages' "
+                    "section."
+                ),
+            ),
+            FieldPanel(
+                "other_pages_heading",
+                help_text=(
+                    "Any child pages not added to the Body field will be displayed "
+                    "below this heading. (If the Body field is blank, this heading "
+                    " isn't displayed.)"
+                ),
+            ),
+        ]
         + FISBannerFields.content_panels
     )
 
