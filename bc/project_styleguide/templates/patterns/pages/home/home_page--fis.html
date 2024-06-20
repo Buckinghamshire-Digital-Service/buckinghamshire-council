@@ -44,7 +44,7 @@
         {% endif %}
 
         <div class="grid grid--index grid--fis-home" data-height-equalizer>
-            {% for subpage in page.child_pages %}
+            {% for subpage in page.other_child_pages %}
                 {% include "patterns/molecules/page-card/page-card.html" with classes="card--fis-home" page=subpage %}
             {% endfor %}
         </div>

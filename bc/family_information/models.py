@@ -171,7 +171,7 @@ class SubsiteHomePage(FISBannerFields, BasePage):
     )
 
     @cached_property
-    def child_pages(self):
+    def other_child_pages(self):
         """Get child pages for the homepage listing excluding children that are already
         in the highlighted_cards field.
 
