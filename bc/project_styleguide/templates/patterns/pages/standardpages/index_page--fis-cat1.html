@@ -11,7 +11,7 @@
             <p>{{ page.introduction }}</p>
         {% endif %}
 
-        <div
+        <section
             aria-label="Subpages"
             class="grid grid--fis-index grid--index grid--thirds"
             data-height-equalizer
@@ -35,7 +35,7 @@
                     </div>
                 </a>
             {% endfor %}
-        </div>
+        </section>
     </div>
 
     {% include "patterns/molecules/directory-banner/directory-banner.html" with classes="directory-banner--with-space" %}
