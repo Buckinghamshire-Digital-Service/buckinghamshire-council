@@ -3,8 +3,15 @@
 ## Unreleased
 
 - Update link block component to always display list items for all screen sizes (following user testing feedback)
+- Accessibility fix: page does not start with a h1
+- Accessibility fix: aria-label not allowed on subpages div
+- Accessibility fix: heading order not correct for footer column headings
 
-Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/70.01...HEAD>
+## 71.01 (2024-06-17)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/71.00...71.01>
+
+- Validate Talentlink-imported images as if uploaded through the Wagtail admin
 
 ## 71.00 (2024-06-03)
 
