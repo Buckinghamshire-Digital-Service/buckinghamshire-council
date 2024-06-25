@@ -1,5 +1,11 @@
 # Release History
 
+## Unreleased
+
+- Accessibility fix: page does not start with a h1
+- Accessibility fix: aria-label not allowed on subpages div
+- Accessibility fix: heading order not correct for footer column headings
+
 ## 71.01 (2024-06-17)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/71.00...71.01>
