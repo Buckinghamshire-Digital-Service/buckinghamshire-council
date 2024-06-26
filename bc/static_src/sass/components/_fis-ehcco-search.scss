@@ -2,6 +2,10 @@
     $root: &;
     border: 4px solid $color--river;
 
+    &.is-hidden {
+        display: none;
+    }
+
     &__container {
         padding: $grid--small;
 
@@ -60,7 +64,7 @@
 
         .autocomplete__option {
             display: inline-flex;
-            align-items: center;
+            align-items: flex-start;
             cursor: pointer;
             padding: 5px;
             width: 100%;
@@ -74,6 +78,7 @@
                 width: 14px;
                 // icon width + padding
                 padding-left: calc(14px + #{$grid--min});
+                top: 6px;
                 position: relative;
             }
 

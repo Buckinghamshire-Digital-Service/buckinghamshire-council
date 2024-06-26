@@ -7,6 +7,9 @@ class EHCCOSearch {
 
     constructor(node) {
         this.node = node;
+        // only show the search if JS is enabled
+        this.node.classList.remove('is-hidden');
+
         this.searchWrapper = this.node.querySelector(
             '[data-autocomplete-wrapper]',
         );
