@@ -39,6 +39,9 @@ class EHCCOSearch {
             inputClasses: 'ehcco-search__input',
             menuClasses: 'ehcco-search__options',
             showNoOptionsFound: true,
+            tNoResults: () =>
+                'No results found - please check the name of your education provider',
+            minLength: 3,
             source: (query, populateResults) => {
                 this.fetchMatchingSchools(query)
                     .then((results) => {
