@@ -15,6 +15,8 @@ from ..news.models import NewsIndex
 from ..standardpages.models import IndexPage
 from ..utils.models import BasePage, PageTopTask
 from .blocks import CardsBlock, ThreeCardRowBlock, TwoCardRowBlock
+from ..utils.blocks import FISDirectoryWidgetBlock
+from ..utils.models import BasePage
 
 
 class FISBannerFields(models.Model):
@@ -121,6 +123,10 @@ class SubsiteHomePage(FISBannerFields, BasePage):
         blank=True, default="Get information, advice and guidance", max_length=255
     )
 
+    fis_directory_widget = StreamField(
+        [("fis_directory_widget", FISDirectoryWidgetBlock())], blank=True, max_num=1
+    )
+
     call_to_action = models.ForeignKey(
         "utils.CallToActionSnippet",
         blank=True,
@@ -161,6 +167,7 @@ class SubsiteHomePage(FISBannerFields, BasePage):
             ),
             FieldPanel("heading"),
             FieldPanel("highlighted_cards"),
+            FieldPanel("fis_directory_widget"),
         ]
         + FISBannerFields.content_panels
         + [FieldPanel("search_prompt_text"), FieldPanel("call_to_action")]
@@ -240,6 +247,19 @@ class BaseCategoryPage(FISBannerFields, BasePage):
     # Other child pages
     other_pages_heading = models.CharField(default="Others", max_length=255)
 
+    fis_directory_widget = StreamField(
+        [
+            (
+                "fis_directory_widget",
+                FISDirectoryWidgetBlock(
+                    template="patterns/organisms/search-widget/search-widget.html"
+                ),
+            )
+        ],
+        blank=True,
+        max_num=1,
+    )
+
     content_panels = (
         BasePage.content_panels
         + [
@@ -266,9 +286,10 @@ class BaseCategoryPage(FISBannerFields, BasePage):
                     " isn't displayed.)"
                 ),
             ),
-        ]
-        + FISBannerFields.content_panels
+            FieldPanel("fis_directory_widget"),
+        ] + FISBannerFields.content_panels
     )
+
     search_fields = BasePage.search_fields + FISBannerFields.search_fields
 
     class Meta:

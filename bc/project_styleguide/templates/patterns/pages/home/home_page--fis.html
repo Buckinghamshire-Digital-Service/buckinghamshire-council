@@ -50,9 +50,8 @@
         </div>
     </div>
 
-    {# TODO: Remove directory-banner.html when search-widget.html is ready for use and remove conditional #}
-    {% if page.search_widget %}
-        {% include "patterns/organisms/search-widget/search-widget.html" %}
+    {% if page.fis_directory_widget %}
+        {% include_block page.fis_directory_widget %}
     {% endif %}
 
     {% include "patterns/molecules/directory-banner/directory-banner.html" with classes="directory-banner--with-space" %}

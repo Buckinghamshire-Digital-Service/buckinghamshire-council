@@ -41,6 +41,10 @@
         </section>
     </div>
 
+    {% if page.fis_directory_widget %}
+        {% include_block page.fis_directory_widget %}
+    {% endif %}
+
     {% include "patterns/molecules/directory-banner/directory-banner.html" with classes="directory-banner--with-space" %}
 
     {% include "patterns/molecules/search-prompt/search-prompt--fis.html" with search_prompt_text=page.get_parent.specific.search_prompt_text %}

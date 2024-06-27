@@ -1,23 +1,28 @@
 {% load wagtailimages_tags %}
 
-<div class="search-widget">
-    <form class="search-widget__form form">
-        <h2 class="search-widget__heading heading heading--xl">{{ title|default:"Find activities and organisations near you" }}</h2>
+<div class="search-widget {% if classes %}{{ classes }}{% endif %}">
+    <form class="search-widget__form form" action="https://directory.{{ value.directory }}.buckinghamshire.gov.uk/" method="get">
+        <h2 class="search-widget__heading heading heading--xl">{{ value.title|default:"Find activities and organisations near you" }}</h2>
         <div class="search-widget__form-layout">
             <div>
-                <label for="activity-service-search" class="search-widget__label label">{{ search_label }}</label>
-                <input id="activity-service-search" class="search-widget__input input" type="text" placeholder="{{ activity_input_placeholder|default:"E.g. Swimming for children" }}" />
+                <label for="activity-service-search" class="search-widget__label label">Search activities and services</label>
+                <input name="keywords" id="activity-service-search" class="search-widget__input input" type="text" placeholder="{{ value.search_placeholder|default:"E.g. Swimming for children" }}" />
             </div>
 
             <div>
-                <label for="region-search" class="search-widget__label">{{ location_label }}</label>
-                <input id="region-search" class="search-widget__input input" type="text" placeholder="{{ region_input_placeholder|default:"E.g. Buckingham" }}" />
+                <label for="region-search" class="search-widget__label">Enter town/postcode</label>
+                {% include 'patterns/molecules/location-autocomplete/location-autocomplete.html' with location_autocomplete_id="region-search" location_autocomplete_classes="search-widget__input input" location_autocomplete_placeholder="E.g. Buckingham" %}
             </div>
+
+            {% for key, value in extra_query_params %}
+                <input type="hidden" name="{{ key }}" value="{{ value }}">
+            {% endfor %}
 
             <button class="search-widget__button button">
                 {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" %}
-                {{ cta_label }}
+                Search directory
             </button>
         </div>
     </form>
 </div>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_V3_APIKEY }}&libraries=places"></script>

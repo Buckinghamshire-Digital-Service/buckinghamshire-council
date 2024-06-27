@@ -42,6 +42,10 @@
                 </div>
             </section>
 
+            {% if page.fis_directory_widget %}
+                {% include_block page.fis_directory_widget %}
+            {% endif %}
+
             {% include "patterns/molecules/directory-banner/directory-banner.html" with classes="directory-banner--with-space" %}
         </div>
     </div>

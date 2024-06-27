@@ -1,4 +1,5 @@
 import copy
+from urllib.parse import parse_qsl
 
 from django import forms
 from django.core.exceptions import ValidationError
@@ -578,6 +579,38 @@ class EHCCoSearchBlock(blocks.StaticBlock):
         context["get_corresponding_ehc_co_url"] = reverse(
             "family_information:get_corresponding_ehc_co"
         )
+
+
+class FISDirectoryWidgetBlock(blocks.StructBlock):
+    title = blocks.CharBlock(required=True, help_text="Title of the widget")
+    search_placeholder = blocks.CharBlock(
+        required=False, help_text="Placeholder text for the search input"
+    )
+    directory = blocks.ChoiceBlock(
+        choices=[
+            ("send", "send"),
+            ("familyinfo", "familyinfo"),
+        ],
+        required=True,
+        help_text="Which directory to search",
+    )
+    extra_query_params = blocks.CharBlock(
+        required=False, help_text="Extra query parameters to add to the search"
+    )
+
+    class Meta:
+        template = "patterns/molecules/streamfield/blocks/search-widget.html"
+        icon = "link"
+        label = "FIS Directory Widget"
+
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context)
+        if value["extra_query_params"]:
+            extra_query_params = value["extra_query_params"]
+            if extra_query_params.startswith("?"):
+                extra_query_params = extra_query_params[1:]
+            extra_query_params = parse_qsl(extra_query_params)
+            context["extra_query_params"] = extra_query_params
         return context
 
 
@@ -619,6 +652,7 @@ class BaseStoryBlock(blocks.StreamBlock):
     highlight = HighlightBlock()
     inset_text = InsetTextBlock()
     ehc_co_search = EHCCoSearchBlock(label="EHCCo Search")
+    fis_directory_widget = FISDirectoryWidgetBlock()
 
     class Meta:
         abstract = True
