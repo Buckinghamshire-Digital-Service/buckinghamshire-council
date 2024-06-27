@@ -1,21 +1,12 @@
 .search-widget {
-    background-color: $color--river;
-    color: $color--white;
+    background-color: $color--river-tint;
+    border-left: 5px solid $color--river;
+    color: $color--default;
     width: 100%;
-    max-width: 650px;
     margin-bottom: $grid;
 
-    &--with-image {
-        max-width: 100%;
-
-        @include media-query(tablet-landscape) {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            grid-gap: $grid;
-        }
-    }
-
     &__form {
+        max-width: $site-width;
         padding: 20px;
 
         @include media-query(tablet-landscape) {
@@ -28,14 +19,16 @@
     }
 
     &__button {
-        margin-top: 20px;
+        margin-top: 10px;
+        flex-grow: 0;
+        max-width: max-content;
 
         svg {
             fill: transparent;
-            stroke: $color--slate;
+            stroke: $color--white;
             width: 18px;
             height: 18px;
-            margin-right: 7px;
+            margin-right: 10px;
             flex-shrink: 0;
         }
     }
@@ -44,8 +37,8 @@
         display: grid;
         grid-gap: $grid--small;
 
-        @include media-query(tablet-portrait) {
-            grid-template-columns: 1fr 1fr;
+        @include media-query(tablet-landscape) {
+            grid-template-columns: 1fr 1fr 1fr;
             align-items: flex-end;
         }
     }
@@ -57,21 +50,14 @@
 
     &__input {
         @include font-size(s);
+        border-radius: 0;
+        border: 1px solid $color--default;
         padding: 5px;
         width: 100%;
         max-width: 320px;
 
         @include media-query(tablet-portrait) {
             max-width: 100%;
-        }
-    }
-
-    &__image {
-        display: none;
-
-        @include media-query(tablet-landscape) {
-            margin-left: auto;
-            display: block;
         }
     }
 }

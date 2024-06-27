@@ -1,27 +1,23 @@
 {% load wagtailimages_tags %}
-<div class="search-widget{% if image %} search-widget--with-image{% endif %}">
-    <form class="search-widget__form">
-        <h2 class="search-widget__heading heading heading--l">{{ title|default:"Find activities and organisations near you" }}</h2>
+
+<div class="search-widget">
+    <form class="search-widget__form form">
+        <h2 class="search-widget__heading heading heading--xl">{{ title|default:"Find activities and organisations near you" }}</h2>
         <div class="search-widget__form-layout">
             <div>
-                <label for="activity-service-search" class="search-widget__label">Search activities and services</label>
-                <input id="activity-service-search" class="search-widget__input" type="text" placeholder="{{ activity_input_placeholder|default:"E.g. Swimming for children" }}" />
+                <label for="activity-service-search" class="search-widget__label label">{{ search_label }}</label>
+                <input id="activity-service-search" class="search-widget__input input" type="text" placeholder="{{ activity_input_placeholder|default:"E.g. Swimming for children" }}" />
             </div>
 
             <div>
-                <label for="region-search" class="search-widget__label">Enter town/postcode</label>
-                <input id="region-search" class="search-widget__input" type="text" placeholder="{{ region_input_placeholder|default:"E.g. Buckingham" }}" />
+                <label for="region-search" class="search-widget__label">{{ location_label }}</label>
+                <input id="region-search" class="search-widget__input input" type="text" placeholder="{{ region_input_placeholder|default:"E.g. Buckingham" }}" />
             </div>
-        </div>
-        <button class="search-widget__button button button--basic">
-            {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" %}
-            Search directory
-        </button>
-    </form>
-    {% if image %}
-        {% image image fill-300x270 as mobile_image %}
-        {% image image fill-600x540 as retina_mobile_image %}
 
-        {% include "patterns/atoms/image/image.html" with mobile_image=mobile_image retina_mobile_image=retina_mobile_image desktop_image=retina_mobile_image alt="" classes="search-widget__image" %}
-    {% endif %}
+            <button class="search-widget__button button">
+                {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" %}
+                {{ cta_label }}
+            </button>
+        </div>
+    </form>
 </div>

@@ -1,13 +1,4 @@
 context:
-  image: true
-
-tags:
-  image:
-    image fill-300x270 as mobile_image:
-      target_var: mobile_image
-      raw:
-        url: https://picsum.photos/300/270.webp
-    image fill-600x540 as retina_mobile_image:
-      target_var: retina_mobile_image
-      raw:
-        url: https://picsum.photos/600/540.webp
+  search_label: Search activities and services
+  location_label: Enter town/postcode
+  cta_label: Search directory
