@@ -1,7 +1,7 @@
 context:
   base_page_template: 'patterns/base_page--fis.html'
   page:
-    search_widget_image: true
+    search_widget: true
     call_to_action:
       title: Stub content
       summary: Check out our awesome stub content
