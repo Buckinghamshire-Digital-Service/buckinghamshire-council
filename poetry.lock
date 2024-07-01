@@ -12,17 +12,6 @@ files = [
 ]
 
 [[package]]
-name = "appdirs"
-version = "1.4.4"
-description = "A small Python module for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
-optional = false
-python-versions = "*"
-files = [
-    {file = "appdirs-1.4.4-py2.py3-none-any.whl", hash = "sha256:a841dacd6b99318a741b166adb07e19ee71a274450e68237b4650ca1055ab128"},
-    {file = "appdirs-1.4.4.tar.gz", hash = "sha256:7d5d0167b2b1ba821647616af46a749d1c653740dd0d2415100fe26e27afdf41"},
-]
-
-[[package]]
 name = "asgiref"
 version = "3.7.2"
 description = "ASGI specs, helper code, and adapters"
@@ -248,17 +237,6 @@ urllib3 = {version = ">=1.25.4,<1.27", markers = "python_version < \"3.10\""}
 
 [package.extras]
 crt = ["awscrt (==0.19.19)"]
-
-[[package]]
-name = "cached-property"
-version = "1.5.2"
-description = "A decorator for caching properties in classes."
-optional = false
-python-versions = "*"
-files = [
-    {file = "cached-property-1.5.2.tar.gz", hash = "sha256:9fa5755838eecbb2d234c3aa390bd80fbd3ac6b6869109bfc1b499f7bd89a130"},
-    {file = "cached_property-1.5.2-py2.py3-none-any.whl", hash = "sha256:df4f613cf7ad9a588cc381aaf4a512d26265ecebd5eb9e1ba12f1319eb85a6a0"},
-]
 
 [[package]]
 name = "certifi"
@@ -494,20 +472,20 @@ bcrypt = ["bcrypt"]
 
 [[package]]
 name = "django-basic-auth-ip-whitelist"
-version = "0.5"
+version = "0.6.0"
 description = "Hide your Django site behind basic authentication mechanism with IP whitelisting support."
 optional = false
 python-versions = ">=3.4"
 files = [
-    {file = "django-basic-auth-ip-whitelist-0.5.tar.gz", hash = "sha256:8e859303a802574a121a1787bdf96ca2c16140bb9003da96e28323e7a80d99fc"},
-    {file = "django_basic_auth_ip_whitelist-0.5-py3-none-any.whl", hash = "sha256:c64cc3e1bbf736d5e6d6c3468c16003cfc4d01cdfb92cd9e7bbe9fbcd5bdf9be"},
+    {file = "django_basic_auth_ip_whitelist-0.6.0-py3-none-any.whl", hash = "sha256:f866c1822861ab6612efb9adec03b12279a82314783aa721c843acfbea04b0b7"},
+    {file = "django_basic_auth_ip_whitelist-0.6.0.tar.gz", hash = "sha256:51fbef4d483cfccb15d0c38605fd149fd307314ad8a9308580a6b693b94b3329"},
 ]
 
 [package.dependencies]
-Django = ">=1.8,<5"
+Django = ">=1.8,<6"
 
 [package.extras]
-lint = ["black (==20.8b1)", "flake8 (==3.8.4)", "isort (==5.7.0)"]
+lint = ["black (==24.4.2)", "flake8 (==7.0.0)", "isort (==5.13.2)"]
 
 [[package]]
 name = "django-birdbath"
@@ -1748,19 +1726,19 @@ plugins = ["importlib-metadata"]
 
 [[package]]
 name = "pyjwt"
-version = "2.0.0"
+version = "2.8.0"
 description = "JSON Web Token implementation in Python"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.7"
 files = [
-    {file = "PyJWT-2.0.0-py3-none-any.whl", hash = "sha256:5c2ff2eb27d7e342dfc3cafcc16412781f06db2690fbef81922b0172598f085b"},
-    {file = "PyJWT-2.0.0.tar.gz", hash = "sha256:7a2b271c6dac2fda9e0c33d176c4253faba2c6c6b3a99c7f28a32c3c97522779"},
+    {file = "PyJWT-2.8.0-py3-none-any.whl", hash = "sha256:59127c392cc44c2da5bb3192169a91f429924e17aff6534d70fdc02ab3e04320"},
+    {file = "PyJWT-2.8.0.tar.gz", hash = "sha256:57e28d156e3d5c10088e0c68abb90bfac3df82b40a71bd0daa20c65ccd5c23de"},
 ]
 
 [package.extras]
-crypto = ["cryptography (>=3.3.1,<4.0.0)"]
-dev = ["coverage[toml] (==5.0.4)", "cryptography (>=3.3.1,<4.0.0)", "mypy", "pre-commit", "pytest (>=6.0.0,<7.0.0)", "sphinx", "sphinx-rtd-theme", "zope.interface"]
-docs = ["sphinx", "sphinx-rtd-theme", "zope.interface"]
+crypto = ["cryptography (>=3.4.0)"]
+dev = ["coverage[toml] (==5.0.4)", "cryptography (>=3.4.0)", "pre-commit", "pytest (>=6.0.0,<7.0.0)", "sphinx (>=4.5.0,<5.0.0)", "sphinx-rtd-theme", "zope.interface"]
+docs = ["sphinx (>=4.5.0,<5.0.0)", "sphinx-rtd-theme", "zope.interface"]
 tests = ["coverage[toml] (==5.0.4)", "pytest (>=6.0.0,<7.0.0)"]
 
 [[package]]
@@ -1892,6 +1870,20 @@ urllib3 = ">=1.21.1,<3"
 [package.extras]
 socks = ["PySocks (>=1.5.6,!=1.5.7)"]
 use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
+
+[[package]]
+name = "requests-file"
+version = "2.1.0"
+description = "File transport adapter for Requests"
+optional = false
+python-versions = "*"
+files = [
+    {file = "requests_file-2.1.0-py2.py3-none-any.whl", hash = "sha256:cf270de5a4c5874e84599fc5778303d496c10ae5e870bfa378818f35d21bda5c"},
+    {file = "requests_file-2.1.0.tar.gz", hash = "sha256:0f549a3f3b0699415ac04d167e9cb39bccfb730cb832b4d20be3d9867356e658"},
+]
+
+[package.dependencies]
+requests = ">=1.0.0"
 
 [[package]]
 name = "requests-toolbelt"
@@ -2233,13 +2225,13 @@ SQLAlchemy-Utils = ">=0.26.11"
 
 [[package]]
 name = "tabulate"
-version = "0.8.7"
+version = "0.9.0"
 description = "Pretty-print tabular data"
 optional = false
-python-versions = "*"
+python-versions = ">=3.7"
 files = [
-    {file = "tabulate-0.8.7-py3-none-any.whl", hash = "sha256:ac64cb76d53b1231d364babcd72abbb16855adac7de6665122f97b593f1eb2ba"},
-    {file = "tabulate-0.8.7.tar.gz", hash = "sha256:db2723a20d04bcda8522165c73eea7c300eda74e0ce852d9022e0159d7895007"},
+    {file = "tabulate-0.9.0-py3-none-any.whl", hash = "sha256:024ca478df22e9340661486f85298cff5f6dcdba14f3813e8830015b9ed1948f"},
+    {file = "tabulate-0.9.0.tar.gz", hash = "sha256:0095b12bf5966de529c0feb1fa08671671b3368eec77d7ef7ab114be2c068b3c"},
 ]
 
 [package.extras]
@@ -2694,32 +2686,29 @@ files = [
 
 [[package]]
 name = "zeep"
-version = "3.4.0"
-description = "A modern/fast Python SOAP client based on lxml / requests"
+version = "4.2.1"
+description = "A Python SOAP client"
 optional = false
-python-versions = "*"
+python-versions = ">=3.7"
 files = [
-    {file = "zeep-3.4.0-py2.py3-none-any.whl", hash = "sha256:59a4068ab3817b589ee21c6c34166c35baa8f2be7ad69f045d005076a29911c1"},
-    {file = "zeep-3.4.0.tar.gz", hash = "sha256:0e98669cfeb60756231ae185498f9ae21b30b2681786b8de58ed34c3b93e41dd"},
+    {file = "zeep-4.2.1-py3-none-any.whl", hash = "sha256:6754feb4c34a4b6d65fbc359252bf6654dcce3937bf1d95aae4402a60a8f5939"},
+    {file = "zeep-4.2.1.tar.gz", hash = "sha256:72093acfdb1d8360ed400869b73fbf1882b95c4287f798084c42ee0c1ff0e425"},
 ]
 
 [package.dependencies]
-appdirs = ">=1.4.0"
 attrs = ">=17.2.0"
-cached-property = ">=1.3.0"
-defusedxml = ">=0.4.1"
 isodate = ">=0.5.4"
-lxml = ">=3.1.0"
+lxml = ">=4.6.0"
+platformdirs = ">=1.4.0"
 pytz = "*"
 requests = ">=2.7.0"
+requests-file = ">=1.5.1"
 requests-toolbelt = ">=0.7.1"
-six = ">=1.9.0"
 
 [package.extras]
-async = ["aiohttp (>=1.0)"]
+async = ["httpx (>=0.15.0)"]
 docs = ["sphinx (>=1.4.0)"]
-test = ["aioresponses (>=0.4.1)", "flake8 (==3.3.0)", "flake8-blind-except (==0.1.1)", "flake8-debugger (==1.4.0)", "flake8-imports (==0.1.1)", "freezegun (==0.3.8)", "isort (==4.2.15)", "mock (==2.0.0)", "pretend (==1.0.8)", "pytest (==3.1.3)", "pytest-cov (==2.5.1)", "pytest-tornado (==0.4.5)", "requests-mock (>=0.7.0)"]
-tornado = ["tornado (>=4.0.2,<5)"]
+test = ["coverage[toml] (==5.2.1)", "flake8 (==3.8.3)", "flake8-blind-except (==0.1.1)", "flake8-debugger (==3.2.1)", "flake8-imports (==0.1.1)", "freezegun (==0.3.15)", "isort (==5.3.2)", "pretend (==1.0.9)", "pytest (==6.2.5)", "pytest-asyncio", "pytest-cov (==2.8.1)", "pytest-httpx", "requests-mock (>=0.7.0)"]
 xmlsec = ["xmlsec (>=0.6.1)"]
 
 [[package]]
@@ -2743,4 +2732,4 @@ gunicorn = ["gunicorn"]
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.8"
-content-hash = "c45f138b9d5f9ddf353354e0333c9ed5ce70931db943ca7a9e409449f52ecc59"
+content-hash = "c1b372e4f1c14fa79813465a7e67de229767bc58c6bd91dcbec3ac7e19b04faf"
