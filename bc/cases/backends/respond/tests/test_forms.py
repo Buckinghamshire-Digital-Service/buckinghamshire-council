@@ -114,7 +114,7 @@ class TestFormXML(TestCase):
         soup = BeautifulSoup(etree.tostring(form.get_xml(form.cleaned_data)), "xml")
         self.maxDiff = None
         self.assertEqual(
-            soup.find("Activities").prettify(),
+            soup.find("Activities").prettify().strip("\n"),
             textwrap.dedent(
                 """\
                 <Activities>
@@ -158,7 +158,7 @@ class TestFormXML(TestCase):
         soup = BeautifulSoup(etree.tostring(form.get_xml(form.cleaned_data)), "xml")
         self.maxDiff = None
         self.assertEqual(
-            soup.find("Activities").prettify(),
+            soup.find("Activities").prettify().strip("\n"),
             textwrap.dedent(
                 """\
                 <Activities>
