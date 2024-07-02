@@ -25,6 +25,8 @@ Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/72.01...73
 - Modify FIS category index page
 - Fix accessibility issues from Silktide
 
+- Wagtail 6.1 upgrade
+
 ## 72.01 (2024-06-26)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/72.00...72.01>
