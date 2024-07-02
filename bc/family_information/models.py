@@ -312,6 +312,11 @@ class BaseCategoryPage(FISBannerFields, BasePage):
             elif has_heading:
                 context["blocks_under_headings"].append(item.value)
 
+        # Show the other_pages_heading field?
+        context["show_other_pages_heading"] = (
+            self.other_pages_heading and self.body and self.other_child_pages
+        )
+
         return context
 
 
