@@ -752,6 +752,20 @@ files = [
 tokenize-rt = ">=4.1"
 
 [[package]]
+name = "django-xff"
+version = "1.4.0"
+description = "Django X-Forwarded-For Properly"
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-xff-1.4.0.tar.gz", hash = "sha256:fc87333f64d2ff2ce4ab6449e814240f9f195c290d2c8789ca81a1c98f5522ec"},
+    {file = "django_xff-1.4.0-py2.py3-none-any.whl", hash = "sha256:8935dce34383d65b545564a3cc17dc8010c8cdec231b0932e6073ddc766d679d"},
+]
+
+[package.dependencies]
+Django = ">=1.8.2"
+
+[[package]]
 name = "djangorestframework"
 version = "3.15.2"
 description = "Web APIs for Django, made easy."
@@ -3069,4 +3083,4 @@ gunicorn = ["gunicorn"]
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.8"
-content-hash = "28562fc13cfcea3a43b9a041d0e45e2cc1f55c5488caa87b07aaaa820a8e7d79"
+content-hash = "a3e261c4d685241c03a21724286ad16dd3f9d245c4c96d983052ff4005669ed6"

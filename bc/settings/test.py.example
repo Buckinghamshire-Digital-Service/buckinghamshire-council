@@ -40,3 +40,7 @@ CACHES = {
         "LOCATION": "database_cache",
     }
 }
+
+
+# Ignore proxy count in tests
+XFF_ALWAYS_PROXY = False

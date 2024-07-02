@@ -141,6 +141,7 @@ MIDDLEWARE = [
     # SecurityMiddleware.
     # http://whitenoise.evans.io/en/stable/#quickstart-for-django-apps
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    "xff.middleware.XForwardedForMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "bc.utils.middleware.CustomCsrfViewMiddleware",
@@ -446,6 +447,7 @@ LOGGING = {
             "level": "WARNING",
             "propagate": False,
         },
+        "xff": {"handlers": ["console"], "level": "WARNING", "propagate": False},
     },
 }
 
@@ -714,6 +716,8 @@ if env.get("BASIC_AUTH_ENABLED", "false").lower().strip() == "true":
         ].split(",")
 
     BASIC_AUTH_DISABLE_CONSUMING_AUTHORIZATION_HEADER = True
+
+XFF_TRUSTED_PROXY_DEPTH = int(env.get("XFF_TRUSTED_PROXY_DEPTH", 1))
 
 AUTH_USER_MODEL = "users.User"
 
