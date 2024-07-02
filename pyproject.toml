@@ -39,6 +39,8 @@ backoff = "^2.2.1"
 responses = "0.25.3"
 django-filter = "^24.2"
 wagtail-modeladmin = "^2.0.0"
+html5lib = "^1.1"
+beautifulsoup4 = "^4.12.3"
 
 [tool.poetry.extras]
 gunicorn = ["gunicorn"]
