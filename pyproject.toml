@@ -25,7 +25,7 @@ psycopg2 = "~2.9"
 PyJWT = "2.8.0"
 scout-apm = "~3.1"
 tabulate = "0.9.0"
-urllib3 = "1.26.11"
+urllib3 = "1.26.19"
 wagtail = "~6.1"
 wagtail-django-recaptcha = {git = "https://github.com/torchbox-forks/wagtail-django-recaptcha", tag = "2.1.1+tbx"}
 wagtail-factories = "^4.2.1"
