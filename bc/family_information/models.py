@@ -300,6 +300,20 @@ class BaseCategoryPage(FISBannerFields, BasePage):
             .order_by("path")
         )
 
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+
+        # Get a list of all blocks that are below a heading block.
+        context["blocks_under_headings"] = []
+        has_heading = False
+        for item in self.body:
+            if item.block_type == "heading":
+                has_heading = True
+            elif has_heading:
+                context["blocks_under_headings"].append(item.value)
+
+        return context
+
 
 class CategoryTypeOnePage(BaseCategoryPage):
     template = "patterns/pages/standardpages/index_page--fis-cat1.html"

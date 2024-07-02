@@ -5,7 +5,7 @@
         data-height-equalizer
     >
         {% for card in value %}
-            {% include "patterns/molecules/page-card/page-card.html" with classes="card--fis-index" page=card.value.specific %}
+            {% include "patterns/molecules/page-card/page-card.html" with classes="card--fis-index" has_heading=has_heading page=card.value.specific %}
         {% endfor %}
     </div>
 {% endif %}

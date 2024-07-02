@@ -6,7 +6,14 @@ class NCardRowBlock(blocks.StreamBlock):
 
     def get_context(self, value, parent_context=None):
         context = super().get_context(value, parent_context)
+
+        # Get the page's class.
         context["page_class"] = parent_context["page"]._meta.object_name
+
+        # Check if the block is preceded by a heading.
+        blocks_under_headings = parent_context.get("blocks_under_headings", [])
+        context["has_heading"] = value in blocks_under_headings
+
         return context
 
 
