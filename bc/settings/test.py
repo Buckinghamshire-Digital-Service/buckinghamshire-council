@@ -1,19 +1,5 @@
 from .base import *  # noqa
 
-
-"""
-The `fab run-test` command will run tests using the production.py settings file.
-This will result with test failures due to the settings in production.py.
-
-If you want to run tests locally, you can use this test.py settings file.
-
-Copy this file and name it test.py in the same directory.
-
-Run the tests from inside the web container:
-    dj test --settings=bc.settings.test
-"""
-
-
 SECRET_KEY = "fake_secret_key_to_run_tests"
 
 RECAPTCHA_PUBLIC_KEY = "dummy_public_key"
@@ -28,10 +14,6 @@ RESPOND_DISCLOSURES_WEBSERVICE = "TestCreateDisclosures"
 
 SECURE_SSL_REDIRECT = False
 
-# Don't run birdbath in tests.
-BIRDBATH_REQUIRED = False
-
-
 WAGTAILSEARCH_BACKENDS = {"default": {"BACKEND": "wagtail.search.backends.database"}}
 
 CACHES = {
@@ -40,7 +22,6 @@ CACHES = {
         "LOCATION": "database_cache",
     }
 }
-
 
 # Ignore proxy count in tests
 XFF_ALWAYS_PROXY = False

@@ -134,7 +134,7 @@ test_python:
     - postgres:13.10
   variables:
     # Run tests with the production settings.
-    DJANGO_SETTINGS_MODULE: bc.settings.production
+    DJANGO_SETTINGS_MODULE: bc.settings.test
 
     # SECRET_KEY is required by Django to start.
     SECRET_KEY: fake_secret_key_to_run_tests
