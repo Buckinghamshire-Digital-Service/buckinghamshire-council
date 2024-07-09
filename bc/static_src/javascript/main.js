@@ -20,6 +20,7 @@ import Chart from './components/chart';
 import GoogleMap from './components/map';
 import Steps from './components/steps';
 import ContentsScroller from './components/contents-scroller';
+import EHCCOSearch from './components/fis-ehcco-search';
 
 // Add polyfill fix for forEach carousel
 import foreachPolyfill from './polyfills/foreach-polyfill';
@@ -149,6 +150,10 @@ document.addEventListener('DOMContentLoaded', () => {
         MapListSwitcher.selector(),
     )) {
         new MapListSwitcher(element);
+    }
+
+    for (const search of document.querySelectorAll(EHCCOSearch.selector())) {
+        new EHCCOSearch(search);
     }
 
     // Test react - add a div with a data attribute of `data-test-react` to test
