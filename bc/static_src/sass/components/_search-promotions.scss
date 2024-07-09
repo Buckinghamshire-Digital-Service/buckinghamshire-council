@@ -1,0 +1,42 @@
+.search-promotions {
+    $root: &;
+    border: 5px solid $color--river;
+
+    &__container {
+        padding: $grid--small;
+
+        @include media-query(tablet-landscape) {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: $grid;
+        }
+    }
+
+    &__heading {
+        color: $color--slate;
+        margin-top: 0;
+        margin-bottom: $grid--small;
+
+        @include media-query(tablet-landscape) {
+            margin-bottom: 0;
+        }
+    }
+
+    &__button {
+        color: $color--white;
+        padding: $grid--min $grid--small;
+        text-decoration: none;
+        border-radius: 0;
+
+        &:hover,
+        &:active,
+        &:focus {
+            color: $color--white;
+        }
+    }
+
+    &__button-icon {
+        margin-right: $grid--min;
+    }
+}
