@@ -16,7 +16,6 @@ from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 
 from .constants import PLAIN_TEXT_TABLE_HELP_TEXT, RICH_TEXT_FEATURES
-from .models import ImportantPages
 from .utils import convert_markdown_links_to_html, is_number
 from .widgets import BarChartInput, LineChartInput, PieChartInput
 
@@ -191,11 +190,54 @@ class LocalAreaLinksBlock(blocks.StructBlock):
             "Wycombe": value["wycombe_url"],
         }
         if parent_context is not None and parent_context.get("request"):
+            from .models import ImportantPages
+
             request = parent_context["request"]
             context["contact_us_page"] = ImportantPages.for_request(
                 request
             ).contact_us_page
         return context
+
+
+class LinkBlockValue(blocks.StructValue):
+    def get_text(self):
+        if title := self.get("title"):
+            return title
+        if page := self.get("page"):
+            return page.specific.listing_title or page.title
+        return ""
+
+    def get_url(self):
+        if page := self.get("page"):
+            return page.url
+        if url := self.get("url"):
+            return url
+        return ""
+
+
+class ExternalLinkBlock(blocks.StructBlock):
+    url = blocks.URLBlock()
+    title = blocks.CharBlock()
+
+    class Meta:
+        icon = "link"
+        label = "External link"
+        value_class = LinkBlockValue
+
+
+class InternalLinkBlock(blocks.StructBlock):
+    page = blocks.PageChooserBlock()
+    title = blocks.CharBlock(required=False)
+
+    class Meta:
+        icon = "link"
+        label = "Internal link"
+        value_class = LinkBlockValue
+
+
+class LinkBlock(blocks.StreamBlock):
+    external_link = ExternalLinkBlock()
+    internal_link = InternalLinkBlock()
 
 
 class ButtonBlock(blocks.StructBlock):

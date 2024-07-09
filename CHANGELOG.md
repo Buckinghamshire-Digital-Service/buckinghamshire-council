@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add new search promotional block on search page
+
 ## 72.01 (2024-06-26)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/72.00...72.01>
