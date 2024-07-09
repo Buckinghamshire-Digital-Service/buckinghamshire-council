@@ -2,7 +2,7 @@
 
 <div class="section section--bg-earth-light section--vertical-padding">
     <div class="wrapper wrapper--large">
-        <h2 class="heading heading--l">{{ heading }}</h2>
+        <h2 class="heading heading--l">{{ heading|default:'What do you want to do?' }}</h2>
 
         <ul class="grid grid--half">
             {% for item in tasks %}

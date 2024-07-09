@@ -167,7 +167,7 @@ class SubsiteHomePage(FISBannerFields, BasePage):
     )
 
     @cached_property
-    def child_pages(self):
+    def other_child_pages(self):
         """Get child pages for the homepage listing excluding children that are already
         in the highlighted_cards field.
 
@@ -369,3 +369,59 @@ class CategoryPage(BaseCategoryPage):
             return "patterns/pages/standardpages/index_page--fis-cat2.html"
         else:
             return "patterns/pages/standardpages/index_page--fis-cat1.html"
+
+
+class School(index.Indexed, models.Model):
+    class HubEmail(models.TextChoices):
+        SENSCB = "sencsb@buckinghamshire.gov.uk", "sencsb@buckinghamshire.gov.uk"
+        SENWYC = "senwyc@buckinghamshire.gov.uk", "senwyc@buckinghamshire.gov.uk"
+        SENAYLESBURY = (
+            "Senaylesbury@buckinghamshire.gov.uk",
+            "Senaylesbury@buckinghamshire.gov.uk",
+        )
+
+    name = models.TextField()
+    hub_email = models.CharField(
+        choices=HubEmail.choices,
+        blank=True,
+    )
+    ehc_co = models.ForeignKey(
+        "family_information.EHCCo",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name="schools",
+    )
+
+    def clean(self) -> None:
+        super().clean()
+        if not (self.hub_email or self.ehc_co):
+            raise ValidationError(
+                {
+                    "hub_email": "Either hub email or EHCCo should be filled",
+                    "ehc_co": "Either hub email or EHCCo should be filled",
+                }
+            )
+
+    search_fields = [
+        index.AutocompleteField("name"),
+    ]
+
+    def __str__(self):
+        return self.name
+
+
+class EHCCo(index.Indexed, models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+
+    def __str__(self):
+        return self.name
+
+    search_fields = [
+        index.SearchField("name"),
+    ]
+
+    class Meta:
+        verbose_name = "EHCCo"
+        verbose_name_plural = "EHCCos"

@@ -17,7 +17,9 @@
 {% block content %}
     <div>
         {% if page.introduction %}
-            <p>{{ page.introduction }}</p>
+            <div class="page__introduction">
+                <p>{{ page.introduction }}</p>
+            </div>
         {% endif %}
 
         {% comment %}
@@ -28,7 +30,7 @@
         {% if show_other_pages_heading %}
             <h2 class="heading heading--l" id="{{ page.other_pages_heading|slugify }}">{{ page.other_pages_heading }}</h2>
         {% endif %}
-        <div
+        <section
             aria-label="Subpages"
             class="grid grid--fis-index grid--index grid--thirds"
             data-height-equalizer
@@ -36,7 +38,7 @@
             {% for subpage in page.other_child_pages %}
                 {% include "patterns/molecules/page-card/page-card.html" with classes="card--fis-index" has_heading=show_other_pages_heading page=subpage %}
             {% endfor %}
-        </div>
+        </section>
     </div>
 
     {% include "patterns/molecules/directory-banner/directory-banner.html" with classes="directory-banner--with-space" %}
