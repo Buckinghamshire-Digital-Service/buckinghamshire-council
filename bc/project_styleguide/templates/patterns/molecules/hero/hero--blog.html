@@ -16,8 +16,8 @@
         </div>
         <div class="sidebar">
             <form action="{{ page.search_url }}" method="get" role="search" class="form blog-hero__form">
-                <input class="input" name="query" type="text" placeholder="Search the {{ page.title|lower }}" {% if search_query %} value="{{ search_query }}"{% endif %}>
-                <label class="u-sr-only">Search the {{ page.title|lower }}</label>
+                <input id="blog-search" class="input" name="query" type="text" placeholder="Search the {{ page.title|lower }}" {% if search_query %} value="{{ search_query }}"{% endif %}>
+                <label for="blog-search" class="u-sr-only">Search the {{ page.title|lower }}</label>
                 <button class="button button--blog-search" type="submit" aria-label="Submit">
                     {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke icon--white button__icon" %}
                 </button>
