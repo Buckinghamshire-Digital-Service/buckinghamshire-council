@@ -21,6 +21,10 @@
 
 {% block hero %}
     {% include "patterns/molecules/hero/hero--fis-home.html" %}
+
+    {% if page.top_tasks.all %}
+        {% include "patterns/molecules/top-tasks/top-tasks.html" with heading=page.top_tasks_heading tasks=page.top_tasks.all %}
+    {% endif %}
 {% endblock %}
 
 {% block breadcrumbs %}{% endblock %}
@@ -30,28 +34,19 @@
     {# Category cards #}
     <div>
         {% if page.heading %}
-        <h2 class="heading heading--xl">
-            {{ page.heading }}
-        </h2>
+            <h2 class="page__heading heading heading--xl">
+                {{ page.heading }}
+            </h2>
         {% endif %}
-        <div class="grid grid--index grid--fis-home" data-height-equalizer>
-        {% for subpage in page.child_pages %}
-            <a class="card card--fis-home" href="{% pageurl subpage %}">
-                <div class="card__image">
-                    {% image subpage.listing_image fill-350x250 as desktop_image %}
-                    {% include "patterns/atoms/image/image.html" with mobile_image=desktop_image retina_mobile_image=desktop_image desktop_image=desktop_image alt=subpage.listing_image.alt_text %}
-                </div>
 
-                <div class="card__content" data-height-equalizer-child>
-                    <h2 class="card__title heading">
-                        {% firstof subpage.listing_title subpage.title %}
-                    </h2>
-                    {% if subpage.listing_summary %}
-                        <p class="card__summary">{{ subpage.listing_summary }}</p>
-                    {% endif %}
-                </div>
-            </a>
-        {% endfor %}
+        {% if page.highlighted_cards %}
+            {% include_block page.highlighted_cards %}
+        {% endif %}
+
+        <div class="grid grid--index grid--fis-home" data-height-equalizer>
+            {% for subpage in page.other_child_pages %}
+                {% include "patterns/molecules/page-card/page-card.html" with classes="card--fis-home" page=subpage %}
+            {% endfor %}
         </div>
     </div>
 

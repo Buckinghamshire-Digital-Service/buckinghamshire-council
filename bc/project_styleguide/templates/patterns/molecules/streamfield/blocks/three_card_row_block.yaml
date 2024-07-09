@@ -1,0 +1,26 @@
+context:
+  page_class: SubsiteHomePage
+  value:
+    - value:
+        specific:
+          listing_image: True
+          listing_title: Lorem ipsum 1
+          listing_summary: Dolor sit amet 1
+    - value:
+        specific:
+          listing_image: True
+          listing_title: Lorem ipsum 2
+          listing_summary: Dolor sit amet 2
+    - value:
+        specific:
+          listing_image: True
+          listing_title: Lorem ipsum 3
+          listing_summary: Dolor sit amet 3
+
+tags:
+  image:
+    page.listing_image fill-350x250:
+      raw: '<img src="https://via.placeholder.com/350x250" width="350" height="250" alt="Listing image alt text">'
+  pageurl:
+    page:
+      raw: '#'
