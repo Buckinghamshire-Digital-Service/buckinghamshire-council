@@ -9,9 +9,15 @@
         {% endif %}
 
         <div class="card__content" data-height-equalizer-child>
-            <h2 class="card__title heading">
-                {% firstof page.listing_title page.title %}
-            </h2>
+            {% if has_heading %}
+                <h3 class="card__title heading">
+                    {% firstof page.listing_title page.title %}
+                </h3>
+            {% else %}
+                <h2 class="card__title heading">
+                    {% firstof page.listing_title page.title %}
+                </h2>
+            {% endif %}
             {% if page.listing_summary %}
                 <p class="card__summary">{{ page.listing_summary }}</p>
             {% endif %}

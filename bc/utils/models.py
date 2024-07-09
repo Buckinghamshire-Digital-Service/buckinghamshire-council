@@ -210,6 +210,18 @@ class TopTask(index.Indexed, LinkFields):
         return self.get_link_text()
 
 
+class PageTopTask(Orderable, models.Model):
+    top_task = models.ForeignKey(
+        "utils.TopTask", on_delete=models.CASCADE, related_name="+"
+    )
+
+    panels = [FieldPanel("top_task")]
+
+    class Meta:
+        abstract = True
+        ordering = ["sort_order"]
+
+
 @register_setting
 class SocialMediaSettings(BaseSiteSetting):
     twitter_handle = models.CharField(
