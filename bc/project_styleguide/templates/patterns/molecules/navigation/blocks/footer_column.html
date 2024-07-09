@@ -1,8 +1,7 @@
 {% load wagtailcore_tags %}
 <div class="footer__column">
     {% if value.heading %}
-        <h5 class="footer__column-heading">{{ value.heading }}</h5>
-        {# FIXME Would a h5 be an issue for screen readers due to the jump in levels? #}
+        <h2 class="footer__column-heading">{{ value.heading }}</h2>
     {% endif %}
     {{ value.content|richtext }}
 </div>

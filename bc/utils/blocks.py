@@ -3,6 +3,7 @@ import copy
 from django import forms
 from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
+from django.urls import reverse
 from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
 
@@ -521,6 +522,23 @@ class PieChartBlock(BaseChartBlock):
         return super().render(new_value, new_context)
 
 
+class EHCCoSearchBlock(blocks.StaticBlock):
+    class Meta:
+        admin_text = "This will be replaced by the EHC CoSearch widget"
+        icon = "placeholder"
+        template = "patterns/molecules/streamfield/blocks/ehc_cosearch_block.html"
+
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context)
+        context["get_matching_schools_url"] = reverse(
+            "family_information:get_matching_schools"
+        )
+        context["get_corresponding_ehc_co_url"] = reverse(
+            "family_information:get_corresponding_ehc_co"
+        )
+        return context
+
+
 class BaseStoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(
         form_classname="full title",
@@ -558,6 +576,7 @@ class BaseStoryBlock(blocks.StreamBlock):
     button = ButtonBlock()
     highlight = HighlightBlock()
     inset_text = InsetTextBlock()
+    ehc_co_search = EHCCoSearchBlock(label="EHCCo Search")
 
     class Meta:
         abstract = True
