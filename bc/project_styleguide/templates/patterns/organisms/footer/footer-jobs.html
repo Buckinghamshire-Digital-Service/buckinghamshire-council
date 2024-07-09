@@ -26,7 +26,7 @@
                         <a href="https://www.facebook.com/{{ settings.utils.SocialMediaSettings.facebook_app_id }}"
                             target="_blank"
                             rel="nofollow noreferrer"
-                            aria-label="Buckinghamshire Council Careers Facebook">
+                            aria-label="Buckinghamshire Council Careers Facebook - opens in a new tab">
                             {% include "patterns/atoms/icons/icon.html" with name="facebook" classname="icon--footer-social" %}
                         </a>
                     {% endif %}
@@ -34,15 +34,15 @@
                         <a href="https://twitter.com/{{ settings.utils.SocialMediaSettings.twitter_handle }}"
                             target="_blank"
                             rel="nofollow noreferrer"
-                            aria-label="Buckinghamshire Council Careers Twitter">
-                            {% include "patterns/atoms/icons/icon.html" with name="twitter" classname="icon--footer-social" %}
+                            aria-label="Buckinghamshire Council Careers X (formerly Twitter) - opens in a new tab">
+                            {% include "patterns/atoms/icons/icon.html" with name="x" classname="icon--footer-social" %}
                         </a>
                     {% endif %}
                     {% if settings.utils.SocialMediaSettings.youtube_channel_url %}
                         <a href="{{ settings.utils.SocialMediaSettings.youtube_channel_url }}"
                             target="_blank"
                             rel="nofollow noreferrer"
-                            aria-label="Buckinghamshire Council Careers Youtube">
+                            aria-label="Buckinghamshire Council Careers Youtube - opens in a new tab">
                             {% include "patterns/atoms/icons/icon.html" with name="youtube" classname="icon--footer-social" %}
                         </a>
                     {% endif %}
@@ -50,7 +50,7 @@
                         <a href="https://www.instagram.com/{{ settings.utils.SocialMediaSettings.instagram_username }}"
                             target="_blank"
                             rel="nofollow noreferrer"
-                            aria-label="Buckinghamshire Council Careers Instagram">
+                            aria-label="Buckinghamshire Council Careers Instagram - opens in a new tab">
                             {% include "patterns/atoms/icons/icon.html" with name="instagram" classname="icon--footer-social" %}
                         </a>
                     {% endif %}
@@ -58,7 +58,7 @@
                         <a href="{{ settings.utils.SocialMediaSettings.linkedin_organisation_url }}"
                             target="_blank"
                             rel="nofollow noreferrer"
-                            aria-label="Buckinghamshire Council Careers Linkedin">
+                            aria-label="Buckinghamshire Council Careers Linkedin - opens in a new tab">
                             {% include "patterns/atoms/icons/icon.html" with name="linkedin" classname="icon--footer-social" %}
                         </a>
                     {% endif %}

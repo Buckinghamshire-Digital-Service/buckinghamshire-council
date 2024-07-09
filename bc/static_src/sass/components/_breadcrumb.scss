@@ -55,6 +55,12 @@
 
     &__link {
         color: $color--link;
+        display: inline-block;
+        margin: 0.25rem 0;
+
+        @include media-query(tablet-portrait) {
+            margin: 0;
+        }
 
         &--current {
             text-decoration: none;
