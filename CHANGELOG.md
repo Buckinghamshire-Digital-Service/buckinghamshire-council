@@ -1,8 +1,15 @@
 # Release History
 
-## Unreleased
+## 73.0 (2024-07-09)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/72.01...73.0>
 
 - Add new search promotional block on search page
+- Add FIS EHCCo search
+- Modify FIS search results view
+- Modify FIS homepage
+- Modify FIS category index page
+- Fix accessibility issues from Silktide
 
 ## 72.01 (2024-06-26)
 
