@@ -1,11 +1,15 @@
 context:
   heading: 'What do you want to do?'
   tasks:
-    - link: /
-      link_text: 'Find an Education, health and care (EHC) co-ordinator'
-    - link: /
-      link_text: 'Request a new or replacement Max Card'
-    - link: /
-      link_text: 'Register for a HAF place'
-    - link: /
-      link_text: 'Help with childcare costs'
+    - top_task:
+        get_link_text: 'Find an Education, health and care (EHC) co-ordinator'
+        get_link_url: /
+    - top_task:
+        get_link_text: 'Request a new or replacement Max Card'
+        get_link_url: /
+    - top_task:
+        get_link_text: 'Register for a HAF place'
+        get_link_url: /
+    - top_task:
+        get_link_text: 'Help with childcare costs'
+        get_link_url: /

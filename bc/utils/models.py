@@ -8,6 +8,7 @@ from wagtail.admin.panels import FieldPanel, HelpPanel, MultiFieldPanel
 from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Orderable, Page
+from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 
 from bc.utils.blocks import LinkBlock
@@ -81,7 +82,7 @@ class LinkFields(models.Model):
 
     def get_link_url(self):
         if self.link_page:
-            return self.link_page.get_url
+            return self.link_page.get_url()
 
         return self.link_url
 
@@ -192,6 +193,21 @@ class CallToActionSnippet(models.Model):
 
     def __str__(self):
         return self.title
+
+
+@register_snippet
+class TopTask(index.Indexed, LinkFields):
+    search_fields = [
+        index.AutocompleteField("link_text"),
+        # Search by the title of linked pages.
+        index.RelatedFields(
+            "link_page",
+            [index.AutocompleteField("title")],
+        ),
+    ]
+
+    def __str__(self):
+        return self.get_link_text()
 
 
 @register_setting

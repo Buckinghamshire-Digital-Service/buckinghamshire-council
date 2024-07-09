@@ -5,9 +5,9 @@
     <div class="wrapper wrapper--large">
         <h1 class="hero__heading heading heading--xxxl">{{ page.title }}</h1>
 
-        {% if page.description %}
+        {% comment %} {% if page.description %}
             <p class="hero__strapline subheading">{{ page.description }}</p>
-        {% endif %}
+        {% endif %} {% endcomment %}
 
         <div class="hero__search">
             <form
@@ -23,7 +23,7 @@
                     class="input"
                     id="search--hero"
                     name="query"
-                    placeholder="{% firstof page.search_placeholder "Search our website" %}"
+                    placeholder="{% firstof page.search_placeholder "Find advice, support, activities and services..." %}"
                     type="text"
                 >
                 <button

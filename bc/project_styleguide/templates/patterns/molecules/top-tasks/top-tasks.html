@@ -2,14 +2,14 @@
 
 <div class="section section--bg-earth-light section--vertical-padding">
     <div class="wrapper wrapper--large">
-        <h2 class="heading heading--l">{{ heading }}</h2>
+        <h2 class="heading heading--l">{{ heading|default:'What do you want to do?' }}</h2>
 
         <ul class="grid grid--half">
-            {% for task in tasks %}
+            {% for item in tasks %}
                 <li class="top-tasks__item">
                     {% include "patterns/atoms/icons/icon.html" with name="circle-arrow-right" classname="icon--stroke top-tasks__icon" %}
 
-                    <a href="{{ task.link_url }}" class="top-tasks__link">{{ task.link_text }}</a>
+                    <a href="{{ item.top_task.get_link_url }}" class="top-tasks__link">{{ item.top_task.get_link_text }}</a>
                 </li>
             {% endfor %}
         </ul>
