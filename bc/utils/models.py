@@ -4,13 +4,14 @@ from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.utils.functional import cached_property
 
-from wagtail import blocks
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.admin.panels import FieldPanel, HelpPanel, MultiFieldPanel
 from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Orderable, Page
+from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 
+from bc.utils.blocks import LinkBlock
 from bc.utils.cache import get_default_cache_control_decorator
 from bc.utils.constants import RICH_TEXT_FEATURES
 
@@ -81,7 +82,7 @@ class LinkFields(models.Model):
 
     def get_link_url(self):
         if self.link_page:
-            return self.link_page.get_url
+            return self.link_page.get_url()
 
         return self.link_url
 
@@ -181,31 +182,7 @@ class CallToActionSnippet(models.Model):
         related_name="+",
     )
 
-    link = StreamField(
-        blocks.StreamBlock(
-            [
-                (
-                    "external_link",
-                    blocks.StructBlock(
-                        [("url", blocks.URLBlock()), ("title", blocks.CharBlock())],
-                        icon="link",
-                    ),
-                ),
-                (
-                    "internal_link",
-                    blocks.StructBlock(
-                        [
-                            ("page", blocks.PageChooserBlock()),
-                            ("title", blocks.CharBlock(required=False)),
-                        ],
-                        icon="link",
-                    ),
-                ),
-            ],
-            required=True,
-        ),
-        blank=True,
-    )
+    link = StreamField(LinkBlock(), blank=True)
 
     panels = [
         FieldPanel("title"),
@@ -216,6 +193,33 @@ class CallToActionSnippet(models.Model):
 
     def __str__(self):
         return self.title
+
+
+@register_snippet
+class TopTask(index.Indexed, LinkFields):
+    search_fields = [
+        index.AutocompleteField("link_text"),
+        # Search by the title of linked pages.
+        index.RelatedFields(
+            "link_page",
+            [index.AutocompleteField("title")],
+        ),
+    ]
+
+    def __str__(self):
+        return self.get_link_text()
+
+
+class PageTopTask(Orderable, models.Model):
+    top_task = models.ForeignKey(
+        "utils.TopTask", on_delete=models.CASCADE, related_name="+"
+    )
+
+    panels = [FieldPanel("top_task")]
+
+    class Meta:
+        abstract = True
+        ordering = ["sort_order"]
 
 
 @register_setting
@@ -289,6 +293,7 @@ class SystemMessagesSettings(BaseSiteSetting):
             "information."
         ),
     )
+
     body_no_search_results = RichTextField(
         "No Search Results Message",
         default="<p>No results found.</p>",
@@ -298,6 +303,13 @@ class SystemMessagesSettings(BaseSiteSetting):
             "returns no results. You can include the search terms in the message by "
             "writing {searchterms}."
         ),
+    )
+
+    search_cta_title = models.CharField("Title", blank=True, max_length=255)
+    search_cta_button = StreamField(
+        LinkBlock(max_num=1),
+        blank=True,
+        verbose_name="Button",
     )
 
     def clean_fields(self, exclude=None):
@@ -319,6 +331,19 @@ class SystemMessagesSettings(BaseSiteSetting):
                 FieldPanel("body_no_search_results"),
             ],
             "Search",
+        ),
+        MultiFieldPanel(
+            [
+                HelpPanel(
+                    "This is a call to action (CTA) shown to users on the search page, "
+                    "right below the search bar.<br>"
+                    "Fill out both the title field and the button field "
+                    "for the CTA to show."
+                ),
+                FieldPanel("search_cta_title"),
+                FieldPanel("search_cta_button"),
+            ],
+            "Search Page Call to Action",
         ),
     ]
 

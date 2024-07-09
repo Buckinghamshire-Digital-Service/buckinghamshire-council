@@ -5,9 +5,9 @@
     <ul class="sidebar__link-list">
         {% if page.socials.twitter_handle %}
         <span role="listitem" class="sidebar__link sidebar__link--flex">
-            {% include "patterns/atoms/icons/icon.html" with name="twitter" classname="icon--blog-social" %}
+            {% include "patterns/atoms/icons/icon.html" with name="x" classname="icon--blog-social" %}
             <a href="https://twitter.com/{{ page.socials.twitter_handle }}"
-                aria-label="{{ page.title }} Twitter"
+                aria-label="{{ page.title }} X (formerly Twitter) - opens in new tab"
                 target="_blank"
                 rel="nofollow noreferrer">
                 Twitter
@@ -18,7 +18,7 @@
         <span role="listitem" class="sidebar__link sidebar__link--flex">
             {% include "patterns/atoms/icons/icon.html" with name="facebook" classname="icon--blog-social" %}
             <a href="{{ page.socials.facebook_page_url }}"
-                aria-label="{{ page.title }} Facebook"
+                aria-label="{{ page.title }} Facebook - opens in a new tab"
                 target="_blank"
                 rel="nofollow noreferrer">
                 Facebook
@@ -29,7 +29,7 @@
         <span role="listitem" class="sidebar__link sidebar__link--flex">
             {% include "patterns/atoms/icons/icon.html" with name="linkedin" classname="icon--blog-social" %}
             <a href="{{ page.socials.linkedin_url }}"
-                aria-label="{{ page.title }} LinkedIn"
+                aria-label="{{ page.title }} LinkedIn - opens in a new tab"
                 target="_blank"
                 rel="nofollow noreferrer">
                 LinkedIn
@@ -40,7 +40,7 @@
         <span role="listitem" class="sidebar__link sidebar__link--flex">
             {% include "patterns/atoms/icons/icon.html" with name="youtube" classname="icon--blog-social" %}
             <a href="{{ page.socials.youtube_channel_url }}"
-                aria-label="{{ page.title }} YouTube"
+                aria-label="{{ page.title }} YouTube - opens in a new tab"
                 target="_blank"
                 rel="nofollow noreferrer">
                 YouTube

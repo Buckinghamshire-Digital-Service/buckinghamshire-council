@@ -1,4 +1,5 @@
 context:
+  base_page_template: 'patterns/base_page--fis.html'
   page:
     call_to_action:
       title: Stub content
@@ -45,5 +46,7 @@ tags:
       raw:
         url: https://placekitten.com/g/900/700
   pageurl:
+    block.value.page:
+      raw: '#'
     subpage:
       raw: '#'

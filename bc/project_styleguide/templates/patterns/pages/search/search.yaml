@@ -1,4 +1,10 @@
 context:
+  base_page_template: 'patterns/base_page.html'
+  search_cta_button:
+    - value:
+        get_text: Search the service directory
+        get_url: '#'
+  search_cta_title: Find services, activities or support groups local to you
   search_query: test query
   search_results:
     - specific:
@@ -35,3 +41,8 @@ context:
           - is_root: false
             depth: 5
             title: We need to go deeper
+
+tags:
+  pageurl:
+    result:
+      raw: '#'

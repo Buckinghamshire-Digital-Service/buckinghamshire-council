@@ -86,32 +86,31 @@
 
     &--fis {
         background-color: $color--earth;
-        margin-bottom: $grid--large;
 
         #{$root} {
             &__heading {
-                color: $color--white;
+                background-color: $color--white;
+                color: $color--slate;
+                display: inline-block;
+                line-height: 1.2;
+                padding: $grid--small;
                 margin-bottom: $grid;
                 max-width: 600px;
             }
 
             &__strapline {
                 @include font-size(m);
+                padding: $grid--small;
                 display: none;
                 line-height: 1.4;
                 margin-top: 0;
                 margin-bottom: $grid--small;
-                background-color: transparent;
-                color: $color--white;
-                padding: 0;
+                background-color: $color--white;
+                color: $color--off-black;
                 max-width: 530px;
             }
 
             @include media-query(tablet-portrait) {
-                &__heading {
-                    margin-bottom: 0;
-                }
-
                 &__strapline {
                     display: block;
                 }
@@ -170,6 +169,19 @@
 
     &--404 {
         margin-bottom: $grid;
+    }
+
+    &--index {
+        background-color: $color--sky;
+        padding: $grid 0;
+
+        #{$root} {
+            &__heading {
+                color: $color--white;
+                margin-bottom: $grid;
+                max-width: 960px;
+            }
+        }
     }
 
     // Account for breadcrumb

@@ -17,10 +17,15 @@
         }
     }
 
-    &--family-info {
-        margin-bottom: 20px;
+    &--index {
         .breadcrumb__link {
             color: $color--white;
+
+            &:active,
+            &:focus {
+                color: $color--white;
+            }
+
             &:hover {
                 color: $color--white;
                 text-decoration: none;
@@ -50,6 +55,12 @@
 
     &__link {
         color: $color--link;
+        display: inline-block;
+        margin: 0.25rem 0;
+
+        @include media-query(tablet-portrait) {
+            margin: 0;
+        }
 
         &--current {
             text-decoration: none;
