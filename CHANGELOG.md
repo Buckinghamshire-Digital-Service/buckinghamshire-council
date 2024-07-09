@@ -4,7 +4,20 @@
 
 - Add new search promotional block on search page
 
-Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/70.01...HEAD>
+## 72.01 (2024-06-26)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/72.00...72.01>
+
+- Wagtail 6.0 upgrade fix add classname to include for patterns/atoms/icons/icon.html
+
+## 72.00 (2024-06-25)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/71.01...72.00>
+
+- Update link block component to always display list items for all screen sizes (following user testing feedback)
+- Accessibility fix: page does not start with a h1
+- Accessibility fix: aria-label not allowed on subpages div
+- Accessibility fix: heading order not correct for footer column headings
 
 ## 71.01 (2024-06-17)
 
