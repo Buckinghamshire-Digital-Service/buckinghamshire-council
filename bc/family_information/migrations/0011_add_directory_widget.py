@@ -47,7 +47,7 @@ class Migration(migrations.Migration):
                                 (
                                     "extra_query_params",
                                     wagtail.blocks.CharBlock(
-                                        help_text="Extra query parameters to add to the search",
+                                        help_text="Extra query parameters to add to the search, e.g. ?collection=things-to-do&needs=autism",
                                         required=False,
                                     ),
                                 ),
@@ -94,7 +94,7 @@ class Migration(migrations.Migration):
                                 (
                                     "extra_query_params",
                                     wagtail.blocks.CharBlock(
-                                        help_text="Extra query parameters to add to the search",
+                                        help_text="Extra query parameters to add to the search, e.g. ?collection=things-to-do&needs=autism",
                                         required=False,
                                     ),
                                 ),
@@ -141,7 +141,7 @@ class Migration(migrations.Migration):
                                 (
                                     "extra_query_params",
                                     wagtail.blocks.CharBlock(
-                                        help_text="Extra query parameters to add to the search",
+                                        help_text="Extra query parameters to add to the search, e.g. ?collection=things-to-do&needs=autism",
                                         required=False,
                                     ),
                                 ),
@@ -188,7 +188,7 @@ class Migration(migrations.Migration):
                                 (
                                     "extra_query_params",
                                     wagtail.blocks.CharBlock(
-                                        help_text="Extra query parameters to add to the search",
+                                        help_text="Extra query parameters to add to the search, e.g. ?collection=things-to-do&needs=autism",
                                         required=False,
                                     ),
                                 ),

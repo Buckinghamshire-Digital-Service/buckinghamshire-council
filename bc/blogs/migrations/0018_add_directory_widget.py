@@ -12,12 +12,12 @@ import wagtail.images.blocks
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("standardpages", "0040_tableblock_help_text"),
+        ("blogs", "0017_tableblock_help_text"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name="informationpage",
+            model_name="blogaboutpage",
             name="body",
             field=wagtail.fields.StreamField(
                 [
@@ -254,7 +254,7 @@ class Migration(migrations.Migration):
                                 (
                                     "extra_query_params",
                                     wagtail.blocks.CharBlock(
-                                        help_text="Extra query parameters to add to the search",
+                                        help_text="Extra query parameters to add to the search, e.g. ?collection=things-to-do&needs=autism",
                                         required=False,
                                     ),
                                 ),
@@ -561,7 +561,7 @@ class Migration(migrations.Migration):
                                                                         (
                                                                             "extra_query_params",
                                                                             wagtail.blocks.CharBlock(
-                                                                                help_text="Extra query parameters to add to the search",
+                                                                                help_text="Extra query parameters to add to the search, e.g. ?collection=things-to-do&needs=autism",
                                                                                 required=False,
                                                                             ),
                                                                         ),
@@ -613,7 +613,7 @@ class Migration(migrations.Migration):
             ),
         ),
         migrations.AlterField(
-            model_name="wastewizardpage",
+            model_name="blogpostpage",
             name="body",
             field=wagtail.fields.StreamField(
                 [
@@ -850,7 +850,7 @@ class Migration(migrations.Migration):
                                 (
                                     "extra_query_params",
                                     wagtail.blocks.CharBlock(
-                                        help_text="Extra query parameters to add to the search",
+                                        help_text="Extra query parameters to add to the search, e.g. ?collection=things-to-do&needs=autism",
                                         required=False,
                                     ),
                                 ),
@@ -1157,7 +1157,7 @@ class Migration(migrations.Migration):
                                                                         (
                                                                             "extra_query_params",
                                                                             wagtail.blocks.CharBlock(
-                                                                                help_text="Extra query parameters to add to the search",
+                                                                                help_text="Extra query parameters to add to the search, e.g. ?collection=things-to-do&needs=autism",
                                                                                 required=False,
                                                                             ),
                                                                         ),
@@ -1205,7 +1205,6 @@ class Migration(migrations.Migration):
                             ]
                         ),
                     ),
-                    ("waste_wizard", bc.utils.blocks.WasteWizardSnippetBlock()),
                 ]
             ),
         ),

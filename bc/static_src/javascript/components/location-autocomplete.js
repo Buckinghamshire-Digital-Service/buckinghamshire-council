@@ -10,7 +10,14 @@ class LocationAutocomplete {
     constructor(node) {
         this.container = node;
         this.form = node.closest('form');
+
+        if (!this.form) {
+            throw new Error('No form found for autocomplete container');
+        }
         this.labelId = node.dataset.labelId;
+        if (!this.labelId) {
+            throw new Error('No label ID found for autocomplete container');
+        }
 
         this.latInput = this.form.querySelector('input[name="lat"]');
         this.lngInput = this.form.querySelector('input[name="lng"]');
@@ -90,6 +97,9 @@ class LocationAutocomplete {
             },
         });
         this.autocompleteInput = this.container.querySelector('input');
+        if (!this.autocompleteInput) {
+            throw new Error('No input element found in autocomplete container');
+        }
         this.autocompleteInput.setAttribute(
             'placeholder',
             this.form

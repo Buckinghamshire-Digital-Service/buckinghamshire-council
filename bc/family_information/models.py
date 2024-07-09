@@ -15,7 +15,7 @@ from ..news.models import NewsIndex
 from ..standardpages.models import IndexPage
 from ..utils.models import BasePage, PageTopTask
 from .blocks import CardsBlock, ThreeCardRowBlock, TwoCardRowBlock
-from ..utils.blocks import FISDirectoryWidgetBlock
+from ..utils.blocks import DirectoryWidgetBlock
 from ..utils.models import BasePage
 
 
@@ -124,7 +124,7 @@ class SubsiteHomePage(FISBannerFields, BasePage):
     )
 
     fis_directory_widget = StreamField(
-        [("fis_directory_widget", FISDirectoryWidgetBlock())], blank=True, max_num=1
+        [("fis_directory_widget", DirectoryWidgetBlock())], blank=True, max_num=1
     )
 
     call_to_action = models.ForeignKey(
@@ -251,7 +251,7 @@ class BaseCategoryPage(FISBannerFields, BasePage):
         [
             (
                 "fis_directory_widget",
-                FISDirectoryWidgetBlock(
+                DirectoryWidgetBlock(
                     template="patterns/organisms/search-widget/search-widget.html"
                 ),
             )

@@ -581,7 +581,7 @@ class EHCCoSearchBlock(blocks.StaticBlock):
         )
 
 
-class FISDirectoryWidgetBlock(blocks.StructBlock):
+class DirectoryWidgetBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=True, help_text="Title of the widget")
     search_placeholder = blocks.CharBlock(
         required=False, help_text="Placeholder text for the search input"
@@ -595,7 +595,10 @@ class FISDirectoryWidgetBlock(blocks.StructBlock):
         help_text="Which directory to search",
     )
     extra_query_params = blocks.CharBlock(
-        required=False, help_text="Extra query parameters to add to the search"
+        required=False,
+        help_text=(
+            "Extra query parameters to add to the search, e.g. ?collection=things-to-do&needs=autism"
+        ),
     )
 
     class Meta:
@@ -652,7 +655,7 @@ class BaseStoryBlock(blocks.StreamBlock):
     highlight = HighlightBlock()
     inset_text = InsetTextBlock()
     ehc_co_search = EHCCoSearchBlock(label="EHCCo Search")
-    fis_directory_widget = FISDirectoryWidgetBlock()
+    fis_directory_widget = DirectoryWidgetBlock()
 
     class Meta:
         abstract = True

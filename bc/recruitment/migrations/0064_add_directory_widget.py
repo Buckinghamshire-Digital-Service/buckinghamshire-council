@@ -12,12 +12,12 @@ import wagtail.images.blocks
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("news", "0033_django_40_upgrade"),
+        ("recruitment", "0063_tableblock_help_text"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name="newspage",
+            model_name="recruitmentindexpage",
             name="body",
             field=wagtail.fields.StreamField(
                 [
@@ -254,7 +254,7 @@ class Migration(migrations.Migration):
                                 (
                                     "extra_query_params",
                                     wagtail.blocks.CharBlock(
-                                        help_text="Extra query parameters to add to the search",
+                                        help_text="Extra query parameters to add to the search, e.g. ?collection=things-to-do&needs=autism",
                                         required=False,
                                     ),
                                 ),
@@ -561,7 +561,7 @@ class Migration(migrations.Migration):
                                                                         (
                                                                             "extra_query_params",
                                                                             wagtail.blocks.CharBlock(
-                                                                                help_text="Extra query parameters to add to the search",
+                                                                                help_text="Extra query parameters to add to the search, e.g. ?collection=things-to-do&needs=autism",
                                                                                 required=False,
                                                                             ),
                                                                         ),
@@ -609,7 +609,8 @@ class Migration(migrations.Migration):
                             ]
                         ),
                     ),
-                ]
+                ],
+                blank=True,
             ),
         ),
     ]
