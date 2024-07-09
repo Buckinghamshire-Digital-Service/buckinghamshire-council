@@ -1,0 +1,10 @@
+{% load wagtailcore_tags %}
+
+{# Note that the background image is set in the parent page template using the background-image-style.html include #}
+<div class="hero hero--index">
+    <div class="wrapper wrapper--large">
+        {% include "patterns/molecules/navigation/breadcrumbs.html" with custom_class="breadcrumb--index" %}
+
+        <h1 class="hero__heading heading heading--xxl">{{ page.title }}</h1>
+    </div>
+</div>
