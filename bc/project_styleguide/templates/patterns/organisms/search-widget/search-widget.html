@@ -1,7 +1,7 @@
 {% load wagtailimages_tags %}
 
 <div class="search-widget {% if classes %}{{ classes }}{% endif %}">
-    <form class="search-widget__form form" action="https://directory.{{ value.directory }}.buckinghamshire.gov.uk/" method="get">
+    <form class="search-widget__form form" action="{{ directory_url }}" method="get">
         <h2 class="search-widget__heading heading heading--xl">{{ value.title|default:"Find activities and organisations near you" }}</h2>
         <div class="search-widget__form-layout">
             <div>

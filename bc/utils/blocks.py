@@ -614,6 +614,9 @@ class DirectoryWidgetBlock(blocks.StructBlock):
                 extra_query_params = extra_query_params[1:]
             extra_query_params = parse_qsl(extra_query_params)
             context["extra_query_params"] = extra_query_params
+        context["directory_url"] = (
+            f'https://directory.{value["directory"]}.buckinghamshire.gov.uk/'
+        )
         return context
 
 
