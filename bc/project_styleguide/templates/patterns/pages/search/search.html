@@ -1,5 +1,5 @@
 {% extends base_page_template %}
-{% load static wagtailcore_tags wagtailsettings_tags %}
+{% load static wagtailcore_tags %}
 
 {% block body_class %}template-searchresults{% endblock %}
 
@@ -28,20 +28,52 @@
                 {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke icon--white button__icon" %}
             </button>
         </form>
+
         {% if search_input_help_text %}
             <div class="search__help-text">
                 {{ search_input_help_text|richtext }}
             </div>
         {% endif %}
+    </div>
 
+    {% comment %} New curated search suggestions {% endcomment %}
+    {% if search_cta_title and search_cta_button %}
+        {# When we have a search cta, we want to display the number of results above it. #}
+        {% if search_results %}
+            <header class="search__results-header search__results-header--no-border">
+                {% with count=search_results.paginator.count %}
+                    <h2 class="heading heading--l">{{ count }} result{{ count|pluralize }} for ‘{{ search_query }}’</h2>
+                {% endwith %}
+            </header>
+        {% endif %}
 
+        <div class="search-promotions">
+            <div class="search-promotions__container">
+                <h2 class="search-promotions__heading heading heading--s">{{ search_cta_title }}</h2>
+
+                {# There will only be one. #}
+                {% for button in search_cta_button %}
+                    <a class="search-promotions__button button button--search" href="{{ button.value.get_url }}">
+                        {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke icon--white search-promotions__button-icon" %}
+
+                        {{ button.value.get_text }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="wrapper wrapper--page search">
         {% if search_results %}
             <section class="search__results" aria-label="Search results">
-                <header class="search__results-header">
-                    {% with count=search_results.paginator.count %}
-                        <h2 class="heading heading--l">{{ count }} result{{ count|pluralize }} for ‘{{ search_query }}’</h2>
-                    {% endwith %}
-                </header>
+                {% if not search_cta_title or not search_cta_button %}
+                    {# When we don't have a search cta, we want to display the number of results here instead. #}
+                    <header class="search__results-header">
+                        {% with count=search_results.paginator.count %}
+                            <h2 class="heading heading--l">{{ count }} result{{ count|pluralize }} for ‘{{ search_query }}’</h2>
+                        {% endwith %}
+                    </header>
+                {% endif %}
 
                 {% for result in search_results %}
                     {% if result.page %}

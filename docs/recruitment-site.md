@@ -136,6 +136,10 @@ This is a concatenation of multiple `custom_field` fields, whose format is a 'la
 
 This is either the text of the first `<p>` element in the first custom_field value from above, or the entire first custom_field value, if it is formatted as plain text.
 
+#### Logo
+
+Logo images are pulled from their remote location and imported to Wagtail's image library. If an image doesn't pass Wagtail's validation, it's rejected and the field left blank. This means that some images allowed by TalentLink may not be imported - e.g. if they exceed the size allowed by the `MAX_IMAGE_PIXELS` setting.
+
 ## Job Alerts
 
 ### Management command
