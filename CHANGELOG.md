@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 75.0 (2024-07-10)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/74.0...75.0>
 
 - Reinstate removed header styles
 - Make header height uniform across all pages in fis site
