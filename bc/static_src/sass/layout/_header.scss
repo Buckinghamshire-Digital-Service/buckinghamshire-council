@@ -151,6 +151,10 @@
                 @include font-size(l);
             }
         }
+
+        .template-fis-home & {
+            padding: 17px 0;
+        }
     }
 
     &--jobs {
