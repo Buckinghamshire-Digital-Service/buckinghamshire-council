@@ -26,6 +26,8 @@
     }
 
     &__search {
+        // adds visible border around input field for high contrast mode
+        border: 1px solid transparent;
         width: 100%;
         margin-top: $grid--small;
 
@@ -34,9 +36,9 @@
         }
 
         .template-home-page &,
-        .template-fis-home &,
         .template-jobs-home &,
-        .template-searchresults & {
+        .template-searchresults &,
+        .template-fis-home & {
             display: none;
         }
 
@@ -46,14 +48,19 @@
     }
 
     &--fis {
-        #{$root}__heading,
-        #{$root}__heading-title {
+        #{$root}__heading {
             display: block;
+            margin-top: $grid--min;
         }
 
         #{$root}__search {
-            margin-top: 0;
-            width: auto;
+            margin-bottom: $grid--min;
+
+            @include media-query(tablet-portrait) {
+                margin-top: 0;
+                margin-bottom: 0;
+                width: auto;
+            }
         }
 
         #{$root}__search-button {
@@ -83,6 +90,13 @@
             @include font-size(s);
             color: $color--white;
             margin: 0 $grid--min;
+        }
+
+        @include media-query(px550) {
+            #{$root}__heading-title {
+                display: block;
+                margin-bottom: $grid--min;
+            }
         }
 
         @include media-query(tablet-portrait) {
@@ -218,6 +232,7 @@
         }
 
         @include media-query(px550) {
+            @include font-size(m);
             flex: 0 1 50%;
             line-height: 1.25;
             margin-top: 0;
@@ -260,9 +275,10 @@
             display: none;
         }
 
-        @include media-query(tablet-landscape) {
+        @include media-query(tablet-portrait) {
             &__heading {
-                display: block;
+                display: flex;
+                align-items: center;
             }
         }
     }

@@ -209,6 +209,15 @@
         background: darken($backgroundColor, 3%);
         color: $textColor;
     }
+
+    .icon {
+        fill: $textColor;
+
+        &--stroke {
+            fill: transparent;
+            stroke: $textColor;
+        }
+    }
 }
 
 @mixin focus() {

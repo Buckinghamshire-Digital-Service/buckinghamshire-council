@@ -83,6 +83,15 @@
         @include button($color--slate, $color--leaf, $color--leaf);
     }
 
+    &--no-border {
+        border-bottom: 0;
+
+        &:focus,
+        &:active {
+            border-bottom: 0;
+        }
+    }
+
     &--area-search {
         display: flex;
         min-height: 40px;
