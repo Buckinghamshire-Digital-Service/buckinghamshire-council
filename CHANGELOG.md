@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 74.0 (2024-07-10)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/73.0...74.0>
 
 - Update FIS search in header - remove dropdown search and simplify to single text input, consistent with the standard homepage
 - Add transparent border to search inputs to improve visibility of input boundary in high contrast mode
