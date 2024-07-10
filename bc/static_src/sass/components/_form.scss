@@ -120,6 +120,10 @@
 
     &--fis-hero {
         margin-bottom: 15px;
+
+        input[type='text'] {
+            max-width: 590px;
+        }
     }
 
     &--jobs-hero {

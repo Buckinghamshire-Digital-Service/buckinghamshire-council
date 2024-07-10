@@ -5,7 +5,37 @@
 - Update FIS search in header - remove dropdown search and simplify to single text input, consistent with the standard homepage
 - Add transparent border to search inputs to improve visibility of input boundary in high contrast mode
 
-Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/70.01...HEAD>
+## 73.0 (2024-07-09)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/72.01...73.0>
+
+- Add new search promotional block on search page
+- Add FIS EHCCo search
+- Modify FIS search results view
+- Modify FIS homepage
+- Modify FIS category index page
+- Fix accessibility issues from Silktide
+
+## 72.01 (2024-06-26)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/72.00...72.01>
+
+- Wagtail 6.0 upgrade fix add classname to include for patterns/atoms/icons/icon.html
+
+## 72.00 (2024-06-25)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/71.01...72.00>
+
+- Update link block component to always display list items for all screen sizes (following user testing feedback)
+- Accessibility fix: page does not start with a h1
+- Accessibility fix: aria-label not allowed on subpages div
+- Accessibility fix: heading order not correct for footer column headings
+
+## 71.01 (2024-06-17)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/71.00...71.01>
+
+- Validate Talentlink-imported images as if uploaded through the Wagtail admin
 
 ## 71.00 (2024-06-03)
 

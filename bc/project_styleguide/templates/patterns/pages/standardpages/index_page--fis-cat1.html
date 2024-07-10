@@ -3,39 +3,42 @@
 
 {% block body_class %}template-fis-category-send {{ block.super }}{% endblock %}
 
+{% comment %} breadcrumbs are included inside hero index component {% endcomment %}
+{% block breadcrumbs %}{% endblock %}
+
+{% block hero %}
+    {% include "patterns/molecules/hero/hero--index.html" %}
+
+    {% if page.top_tasks.all %}
+        {% include "patterns/molecules/top-tasks/top-tasks.html" with heading=page.top_tasks_heading tasks=page.top_tasks.all %}
+    {% endif %}
+{% endblock %}
+
 {% block content %}
     <div>
-        <h1 class="heading heading--xxl">{{ page.title }}</h1>
-
         {% if page.introduction %}
-            <p>{{ page.introduction }}</p>
+            <div class="page__introduction">
+                <p>{{ page.introduction }}</p>
+            </div>
         {% endif %}
 
-        <div
+        {% comment %}
+            If content was added to the page body, use that content.
+            If not, behave like before: display all child pages.
+        {% endcomment %}
+        {% include_block page.body %}
+        {% if show_other_pages_heading %}
+            <h2 class="heading heading--l" id="{{ page.other_pages_heading|slugify }}">{{ page.other_pages_heading }}</h2>
+        {% endif %}
+        <section
             aria-label="Subpages"
             class="grid grid--fis-index grid--index grid--thirds"
             data-height-equalizer
         >
-            {% for subpage in page.child_pages %}
-                <a class="card card--fis-index" href="{% pageurl subpage %}">
-                    {% if forloop.counter0 < 3 %}
-                        <div class="card__image">
-                            {% image subpage.listing_image fill-350x250 as desktop_image %}
-                            {% include "patterns/atoms/image/image.html" with mobile_image=desktop_image retina_mobile_image=desktop_image desktop_image=desktop_image alt=subpage.listing_image.alt_text %}
-                        </div>
-                    {% endif %}
-
-                    <div class="card__content" data-height-equalizer-child>
-                        <h2 class="card__title heading">
-                            {% firstof subpage.listing_title subpage.title %}
-                        </h2>
-                        {% if subpage.listing_summary %}
-                            <p class="card__summary">{{ subpage.listing_summary }}</p>
-                        {% endif %}
-                    </div>
-                </a>
+            {% for subpage in page.other_child_pages %}
+                {% include "patterns/molecules/page-card/page-card.html" with classes="card--fis-index" has_heading=show_other_pages_heading page=subpage %}
             {% endfor %}
-        </div>
+        </section>
     </div>
 
     {% include "patterns/molecules/directory-banner/directory-banner.html" with classes="directory-banner--with-space" %}

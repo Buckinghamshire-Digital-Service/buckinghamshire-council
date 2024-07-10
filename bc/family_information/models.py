@@ -3,14 +3,18 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.functional import cached_property
 
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from modelcluster.fields import ParentalKey
+from wagtail import blocks
+from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.coreutils import resolve_model_string
+from wagtail.fields import StreamField
 from wagtail.models import Page
 from wagtail.search import index
 
 from ..news.models import NewsIndex
 from ..standardpages.models import IndexPage
-from ..utils.models import BasePage
+from ..utils.models import BasePage, PageTopTask
+from .blocks import CardsBlock, ThreeCardRowBlock, TwoCardRowBlock
 
 
 class FISBannerFields(models.Model):
@@ -78,6 +82,10 @@ class FISBannerFields(models.Model):
         )
 
 
+class SubsiteHomePageTopTask(PageTopTask):
+    source = ParentalKey("family_information.SubsiteHomePage", related_name="top_tasks")
+
+
 class SubsiteHomePage(FISBannerFields, BasePage):
     template = "patterns/pages/home/home_page--fis.html"
 
@@ -85,6 +93,7 @@ class SubsiteHomePage(FISBannerFields, BasePage):
 
     is_pensions_site = models.BooleanField(default=False)
 
+    # Hero
     hero_image = models.ForeignKey(
         "images.CustomImage",
         null=True,
@@ -93,6 +102,20 @@ class SubsiteHomePage(FISBannerFields, BasePage):
     )
     description = models.TextField(blank=True)
     search_placeholder = models.CharField(max_length=100, blank=True)
+
+    # Top tasks
+    top_tasks_heading = models.CharField(
+        blank=True, default="What do you want to do?", max_length=255
+    )
+
+    # Highlighted cards
+    highlighted_cards = StreamField(
+        [
+            ("two_card_row", TwoCardRowBlock()),
+            ("three_card_row", ThreeCardRowBlock()),
+        ],
+        blank=True,
+    )
 
     heading = models.CharField(
         blank=True, default="Get information, advice and guidance", max_length=255
@@ -106,6 +129,7 @@ class SubsiteHomePage(FISBannerFields, BasePage):
         related_name="+",
     )
 
+    # Footer
     search_prompt_text = models.TextField(
         blank=True, help_text="Text to prompt user to search"
     )
@@ -128,20 +152,32 @@ class SubsiteHomePage(FISBannerFields, BasePage):
                 ],
                 heading="Hero",
             ),
+            MultiFieldPanel(
+                [
+                    FieldPanel("top_tasks_heading", heading="Heading"),
+                    InlinePanel("top_tasks", label="Tasks"),
+                ],
+                heading="Top tasks",
+            ),
             FieldPanel("heading"),
+            FieldPanel("highlighted_cards"),
         ]
         + FISBannerFields.content_panels
         + [FieldPanel("search_prompt_text"), FieldPanel("call_to_action")]
     )
 
     @cached_property
-    def child_pages(self):
-        """Get child pages for the homepage listing.
+    def other_child_pages(self):
+        """Get child pages for the homepage listing excluding children that are already
+        in the highlighted_cards field.
 
         Returns a queryset of this page's live, public children, of the following page types
         - CategoryPage, CategoryTypeOnePage, CategoryTypeTwoPage, IndexPage, NewsIndex
         ordered by Wagtail explorer custom sort (ie. path).
         """
+        highlighted_card_ids = [
+            card.value.id for row in self.highlighted_cards for card in row.value
+        ]
         return (
             Page.objects.child_of(self)
             .filter(
@@ -154,6 +190,7 @@ class SubsiteHomePage(FISBannerFields, BasePage):
                 ).values()
             )
             .filter(show_in_menus=True)
+            .exclude(id__in=highlighted_card_ids)
             .live()
             .public()
             .specific()
@@ -161,10 +198,77 @@ class SubsiteHomePage(FISBannerFields, BasePage):
         )
 
 
+class CategoryTypeOnePageTopTask(PageTopTask):
+    source = ParentalKey(
+        "family_information.CategoryTypeOnePage", related_name="top_tasks"
+    )
+
+
+class CategoryTypeTwoPageTopTask(PageTopTask):
+    source = ParentalKey(
+        "family_information.CategoryTypeTwoPage", related_name="top_tasks"
+    )
+
+
+class CategoryPageTopTask(PageTopTask):
+    source = ParentalKey("family_information.CategoryPage", related_name="top_tasks")
+
+
 class BaseCategoryPage(FISBannerFields, BasePage):
     parent_page_types = ["SubsiteHomePage"]
 
-    content_panels = BasePage.content_panels + FISBannerFields.content_panels
+    # Top tasks
+    top_tasks_heading = models.CharField(
+        default="What do you want to do?", max_length=255
+    )
+
+    # Content
+    body = StreamField(
+        [
+            (
+                "heading",
+                blocks.CharBlock(
+                    icon="title",
+                    template="patterns/molecules/streamfield/blocks/heading_block.html",
+                ),
+            ),
+            ("cards", CardsBlock()),
+        ],
+        blank=True,
+    )
+
+    # Other child pages
+    other_pages_heading = models.CharField(default="Others", max_length=255)
+
+    content_panels = (
+        BasePage.content_panels
+        + [
+            MultiFieldPanel(
+                [
+                    FieldPanel("top_tasks_heading", heading="Heading"),
+                    InlinePanel("top_tasks", label="Tasks"),
+                ],
+                heading="Top tasks",
+            ),
+            FieldPanel(
+                "body",
+                help_text=(
+                    "This replaces the full list of child pages. Any child pages not "
+                    "listed in this field will be displayed under the 'Other pages' "
+                    "section."
+                ),
+            ),
+            FieldPanel(
+                "other_pages_heading",
+                help_text=(
+                    "Any child pages not added to the Body field will be displayed "
+                    "below this heading. (If the Body field is blank, this heading "
+                    " isn't displayed.)"
+                ),
+            ),
+        ]
+        + FISBannerFields.content_panels
+    )
     search_fields = BasePage.search_fields + FISBannerFields.search_fields
 
     class Meta:
@@ -177,8 +281,43 @@ class BaseCategoryPage(FISBannerFields, BasePage):
         ]
 
     @cached_property
-    def child_pages(self):
-        return self.get_children().live().public().specific().order_by("path")
+    def other_child_pages(self):
+        """Get child pages for the current category page, excluding children that are
+        already in the body field.
+        """
+        selected_card_ids = [
+            card.value.id
+            for row in self.body
+            for card in row.value
+            if row.block_type == "cards"
+        ]
+        return (
+            self.get_children()
+            .exclude(id__in=selected_card_ids)
+            .live()
+            .public()
+            .specific()
+            .order_by("path")
+        )
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+
+        # Get a list of all blocks that are below a heading block.
+        context["blocks_under_headings"] = []
+        has_heading = False
+        for item in self.body:
+            if item.block_type == "heading":
+                has_heading = True
+            elif has_heading:
+                context["blocks_under_headings"].append(item.value)
+
+        # Show the other_pages_heading field?
+        context["show_other_pages_heading"] = (
+            self.other_pages_heading and self.body and self.other_child_pages
+        )
+
+        return context
 
 
 class CategoryTypeOnePage(BaseCategoryPage):
@@ -192,12 +331,36 @@ class CategoryTypeTwoPage(BaseCategoryPage):
 
 
 class CategoryPage(BaseCategoryPage):
-    template = "patterns/pages/standardpages/index_page--fis-cat.html"
     display_banner_at_top = models.BooleanField(default=False)
 
     content_panels = (
         BasePage.content_panels
-        + [FieldPanel("display_banner_at_top")]
+        + [
+            FieldPanel("display_banner_at_top"),
+            MultiFieldPanel(
+                [
+                    FieldPanel("top_tasks_heading", heading="Heading"),
+                    InlinePanel("top_tasks", label="Tasks"),
+                ],
+                heading="Top tasks",
+            ),
+            FieldPanel(
+                "body",
+                help_text=(
+                    "This replaces the full list of child pages. Any child pages not "
+                    "listed in this field will be displayed under the 'Other pages' "
+                    "section."
+                ),
+            ),
+            FieldPanel(
+                "other_pages_heading",
+                help_text=(
+                    "Any child pages not added to the Body field will be displayed "
+                    "below this heading. (If the Body field is blank, this heading "
+                    " isn't displayed.)"
+                ),
+            ),
+        ]
         + FISBannerFields.content_panels
     )
 
@@ -206,3 +369,59 @@ class CategoryPage(BaseCategoryPage):
             return "patterns/pages/standardpages/index_page--fis-cat2.html"
         else:
             return "patterns/pages/standardpages/index_page--fis-cat1.html"
+
+
+class School(index.Indexed, models.Model):
+    class HubEmail(models.TextChoices):
+        SENSCB = "sencsb@buckinghamshire.gov.uk", "sencsb@buckinghamshire.gov.uk"
+        SENWYC = "senwyc@buckinghamshire.gov.uk", "senwyc@buckinghamshire.gov.uk"
+        SENAYLESBURY = (
+            "Senaylesbury@buckinghamshire.gov.uk",
+            "Senaylesbury@buckinghamshire.gov.uk",
+        )
+
+    name = models.TextField()
+    hub_email = models.CharField(
+        choices=HubEmail.choices,
+        blank=True,
+    )
+    ehc_co = models.ForeignKey(
+        "family_information.EHCCo",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name="schools",
+    )
+
+    def clean(self) -> None:
+        super().clean()
+        if not (self.hub_email or self.ehc_co):
+            raise ValidationError(
+                {
+                    "hub_email": "Either hub email or EHCCo should be filled",
+                    "ehc_co": "Either hub email or EHCCo should be filled",
+                }
+            )
+
+    search_fields = [
+        index.AutocompleteField("name"),
+    ]
+
+    def __str__(self):
+        return self.name
+
+
+class EHCCo(index.Indexed, models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+
+    def __str__(self):
+        return self.name
+
+    search_fields = [
+        index.SearchField("name"),
+    ]
+
+    class Meta:
+        verbose_name = "EHCCo"
+        verbose_name_plural = "EHCCos"

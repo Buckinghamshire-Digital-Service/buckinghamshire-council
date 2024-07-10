@@ -1,0 +1,105 @@
+.ehcco-search {
+    $root: &;
+    border: 4px solid $color--river;
+
+    &.is-hidden {
+        display: none;
+    }
+
+    &__container {
+        padding: $grid--small;
+
+        @include media-query(tablet-landscape) {
+            padding: $grid;
+        }
+    }
+
+    &__heading {
+        margin-top: 0;
+        margin-bottom: $grid--min;
+
+        @include media-query(tablet-landscape) {
+            margin-bottom: 0;
+        }
+    }
+
+    &__label {
+        @include font-size(s);
+        display: block;
+        color: $color--grey-accessible;
+        margin: $grid--min 0;
+    }
+
+    &__input {
+        @include font-size(s);
+        border: 2px solid $color--off-black;
+        border-radius: 0;
+        padding: $grid--min / 2 $grid--min;
+        width: 100%;
+        min-height: $grid--medium;
+
+        &::placeholder {
+            opacity: 1;
+            color: $color--charcoal-75;
+        }
+
+        &:focus,
+        &:focus-within {
+            outline: 0;
+            box-shadow: 0 0 0 4px $color--mustard;
+        }
+    }
+
+    &__options {
+        @include font-size(s);
+        border-left: 2px solid $color--off-black;
+        border-bottom: 2px solid $color--off-black;
+        border-right: 2px solid $color--off-black;
+        padding: 5px 3px 3px 3px;
+        width: 100%;
+
+        &.autocomplete__menu--hidden {
+            display: none;
+        }
+
+        .autocomplete__option {
+            display: inline-flex;
+            align-items: flex-start;
+            cursor: pointer;
+            padding: 5px;
+            width: 100%;
+
+            &::before {
+                content: '';
+                background-image: url('../images/search-icon.svg');
+                background-repeat: no-repeat;
+                display: block;
+                height: 14px;
+                width: 14px;
+                // icon width + padding
+                padding-left: calc(14px + #{$grid--min});
+                top: 6px;
+                position: relative;
+            }
+
+            &:hover {
+                background-color: $color--grey-light;
+            }
+        }
+    }
+
+    &__result {
+        border-left: 5px solid $color--river;
+        padding-left: $grid--small;
+        margin-top: $grid;
+        word-wrap: break-word;
+
+        p {
+            margin-bottom: 0;
+        }
+
+        &.is-hidden {
+            display: none;
+        }
+    }
+}

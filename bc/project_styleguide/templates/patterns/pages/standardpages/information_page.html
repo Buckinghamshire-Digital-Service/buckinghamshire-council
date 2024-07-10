@@ -8,28 +8,30 @@
             <h1 class="heading heading--xxl">{{ page.title }}</h1>
 
             {% if page.display_contents and page.h2_blocks %}
-            <nav class="index-nav" aria-label="Headings in this page" data-contents-list id="contents-list">
-                <h2 class="index-nav__title">Contents</h2>
-                <ul class="index-nav__list">
-                    {% for block in page.h2_blocks %}
-                        <li class="index-nav__item">
-                            <a class="index-nav__link" href="#{{ block.value|slugify }}">{{ block.value }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </nav>
+                <nav class="index-nav" aria-label="Headings in this page" data-contents-list id="contents-list">
+                    <h2 class="index-nav__title">Contents</h2>
+                    <ul class="index-nav__list">
+                        {% for block in page.h2_blocks %}
+                            <li class="index-nav__item">
+                                <a class="index-nav__link" href="#{{ block.value|slugify }}">{{ block.value }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
             {% endif %}
             {% include 'patterns/molecules/intro-text/intro-text.html' %}
 
             <div {% if page.display_contents and page.h2_blocks %}class="section--inline-index"{% endif %}>
                 {% include_block page.body %}
             </div>
-            <div class="contents-list__scroller" data-contents-scroller>
-                <a href="#contents-list" class="back-to-contents">
-                    {% include "patterns/atoms/icons/icon.html" with name="arrow" classname="icon--stroke back-to-contents__icon" %}
-                    <span class="back-to-contents__text">Contents</span>
-                </a>
-            </div>
+            {% if page.display_contents and page.h2_blocks %}
+                <div class="contents-list__scroller" data-contents-scroller>
+                    <a href="#contents-list" class="back-to-contents">
+                        {% include "patterns/atoms/icons/icon.html" with name="arrow" classname="icon--stroke back-to-contents__icon" %}
+                        <span class="back-to-contents__text">Contents</span>
+                    </a>
+                </div>
+            {% endif %}
         </div>
         {% if not page.is_waste_wizard_page %}
         <div class="sidebar">
