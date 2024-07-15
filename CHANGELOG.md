@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- Wagtail 6.1 upgrade
+
 ## 75.0 (2024-07-10)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/74.0...75.0>
@@ -24,8 +28,6 @@ Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/72.01...73
 - Modify FIS homepage
 - Modify FIS category index page
 - Fix accessibility issues from Silktide
-
-- Wagtail 6.1 upgrade
 
 ## 72.01 (2024-06-26)
 
