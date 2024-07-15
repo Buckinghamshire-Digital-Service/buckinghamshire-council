@@ -760,7 +760,7 @@ WAGTAILADMIN_RICH_TEXT_EDITORS = {
 WAGTAILDOCS_DOCUMENT_MODEL = "documents.CustomDocument"
 
 
-PASSWORD_REQUIRED_TEMPLATE = "patterns/pages/wagtail/password_required.html"
+WAGTAIL_PASSWORD_REQUIRED_TEMPLATE = "patterns/pages/wagtail/password_required.html"
 
 
 # Default field for automatic primary keys. (Introduced in Django 3.2)
