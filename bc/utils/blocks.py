@@ -1,8 +1,10 @@
 import copy
+import logging
 from urllib.parse import parse_qsl
 
 from django import forms
 from django.core.exceptions import ValidationError
+from django.db.models import TextChoices
 from django.forms.utils import ErrorList
 from django.urls import reverse
 from django.utils.functional import cached_property
@@ -19,6 +21,8 @@ from wagtail.images.blocks import ImageChooserBlock
 from .constants import PLAIN_TEXT_TABLE_HELP_TEXT, RICH_TEXT_FEATURES
 from .utils import convert_markdown_links_to_html, is_number
 from .widgets import BarChartInput, LineChartInput, PieChartInput
+
+logger = logging.getLogger(__name__)
 
 
 class TableBlock(BaseTableBlock):
@@ -581,16 +585,22 @@ class EHCCoSearchBlock(blocks.StaticBlock):
         )
 
 
-class DirectoryWidgetBlock(blocks.StructBlock):
+class Directory(TextChoices):
+    SEND = "send", "SEND"
+    FAMILYINFO = "familyinfo", "Family Information Service"
+
+
+def get_directory_url(directory: Directory, /) -> str:
+    return f"https://directory.{directory.value}.buckinghamshire.gov.uk/"
+
+
+class DirectorySearchBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=True, help_text="Title of the widget")
     search_placeholder = blocks.CharBlock(
         required=False, help_text="Placeholder text for the search input"
     )
     directory = blocks.ChoiceBlock(
-        choices=[
-            ("send", "send"),
-            ("familyinfo", "familyinfo"),
-        ],
+        choices=Directory.choices,
         required=True,
         help_text="Which directory to search",
     )
@@ -604,19 +614,23 @@ class DirectoryWidgetBlock(blocks.StructBlock):
     class Meta:
         template = "patterns/molecules/streamfield/blocks/search-widget.html"
         icon = "link"
-        label = "FIS Directory Widget"
 
     def get_context(self, value, parent_context=None):
         context = super().get_context(value, parent_context)
+        try:
+            directory = Directory(value["directory"])
+        except ValueError:
+            logger.error("Invalid directory value", exc_info=True)
+            return context
+
+        # Build the query params and the target URL for the directory search.
         if value["extra_query_params"]:
             extra_query_params = value["extra_query_params"]
             if extra_query_params.startswith("?"):
                 extra_query_params = extra_query_params[1:]
             extra_query_params = parse_qsl(extra_query_params)
             context["extra_query_params"] = extra_query_params
-        context["directory_url"] = (
-            f'https://directory.{value["directory"]}.buckinghamshire.gov.uk/'
-        )
+        context["directory_url"] = get_directory_url(directory)
         return context
 
 
@@ -658,7 +672,7 @@ class BaseStoryBlock(blocks.StreamBlock):
     highlight = HighlightBlock()
     inset_text = InsetTextBlock()
     ehc_co_search = EHCCoSearchBlock(label="EHCCo Search")
-    fis_directory_widget = DirectoryWidgetBlock()
+    directory_search = DirectorySearchBlock()
 
     class Meta:
         abstract = True

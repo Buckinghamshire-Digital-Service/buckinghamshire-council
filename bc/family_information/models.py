@@ -15,7 +15,7 @@ from ..news.models import NewsIndex
 from ..standardpages.models import IndexPage
 from ..utils.models import BasePage, PageTopTask
 from .blocks import CardsBlock, ThreeCardRowBlock, TwoCardRowBlock
-from ..utils.blocks import DirectoryWidgetBlock
+from ..utils.blocks import DirectorySearchBlock
 from ..utils.models import BasePage
 
 
@@ -123,8 +123,8 @@ class SubsiteHomePage(FISBannerFields, BasePage):
         blank=True, default="Get information, advice and guidance", max_length=255
     )
 
-    fis_directory_widget = StreamField(
-        [("fis_directory_widget", DirectoryWidgetBlock())], blank=True, max_num=1
+    directory_search = StreamField(
+        [("directory_search", DirectorySearchBlock())], blank=True, max_num=1
     )
 
     call_to_action = models.ForeignKey(
@@ -167,7 +167,7 @@ class SubsiteHomePage(FISBannerFields, BasePage):
             ),
             FieldPanel("heading"),
             FieldPanel("highlighted_cards"),
-            FieldPanel("fis_directory_widget"),
+            FieldPanel("directory_search"),
         ]
         + FISBannerFields.content_panels
         + [FieldPanel("search_prompt_text"), FieldPanel("call_to_action")]
@@ -247,11 +247,11 @@ class BaseCategoryPage(FISBannerFields, BasePage):
     # Other child pages
     other_pages_heading = models.CharField(default="Others", max_length=255)
 
-    fis_directory_widget = StreamField(
+    directory_search = StreamField(
         [
             (
-                "fis_directory_widget",
-                DirectoryWidgetBlock(
+                "directory_search",
+                DirectorySearchBlock(
                     template="patterns/organisms/search-widget/search-widget.html"
                 ),
             )
@@ -286,7 +286,7 @@ class BaseCategoryPage(FISBannerFields, BasePage):
                     " isn't displayed.)"
                 ),
             ),
-            FieldPanel("fis_directory_widget"),
+            FieldPanel("directory_search"),
         ] + FISBannerFields.content_panels
     )
 
