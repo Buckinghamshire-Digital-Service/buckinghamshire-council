@@ -26,10 +26,22 @@
             If content was added to the page body, use that content.
             If not, behave like before: display all child pages.
         {% endcomment %}
+
         {% include_block page.body %}
+
+        {% if page.body %}
+            {% comment %}
+                If content was added to page.body put the search widget under that but above the other child pages.
+            {% endcomment %}
+            {% if page.directory_search %}
+                {% include_block page.directory_search %}
+            {% endif %}
+        {% endif %}
+
         {% if show_other_pages_heading %}
             <h2 class="heading heading--l" id="{{ page.other_pages_heading|slugify }}">{{ page.other_pages_heading }}</h2>
         {% endif %}
+
         <section
             aria-label="Subpages"
             class="grid grid--fis-index grid--index grid--thirds"
@@ -41,8 +53,13 @@
         </section>
     </div>
 
-    {% if page.directory_search %}
-        {% include_block page.directory_search %}
+     {% if not page.body %}
+        {% comment %}
+            If content wasn't added to page.body put the search widget under child pages.
+        {% endcomment %}
+        {% if page.directory_search %}
+            {% include_block page.directory_search %}
+        {% endif %}
     {% endif %}
 
     {% include "patterns/molecules/directory-banner/directory-banner.html" with classes="directory-banner--with-space" %}
