@@ -381,7 +381,7 @@ class CategoryPage(BaseCategoryPage):
                     " isn't displayed.)"
                 ),
             ),
-            FieldPanel("directory_search")
+            FieldPanel("directory_search"),
         ]
         + FISBannerFields.content_panels
     )
