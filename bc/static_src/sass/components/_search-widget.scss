@@ -41,10 +41,6 @@
         @include media-query(tablet-landscape) {
             grid-template-columns: 1fr 1fr 1fr;
             align-items: flex-end;
-
-            #{$root}--sf & {
-                grid-template-columns: 1fr 1fr;
-            }
         }
     }
 
