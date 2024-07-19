@@ -613,7 +613,7 @@ class DirectorySearchBlock(blocks.StructBlock):
 
     class Meta:
         template = "patterns/molecules/streamfield/blocks/search-widget.html"
-        icon = "link"
+        icon = "search"
 
     def get_context(self, value, parent_context=None):
         context = super().get_context(value, parent_context)

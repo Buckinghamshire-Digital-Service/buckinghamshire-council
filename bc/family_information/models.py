@@ -13,10 +13,9 @@ from wagtail.search import index
 
 from ..news.models import NewsIndex
 from ..standardpages.models import IndexPage
+from ..utils.blocks import DirectorySearchBlock
 from ..utils.models import BasePage, PageTopTask
 from .blocks import CardsBlock, ThreeCardRowBlock, TwoCardRowBlock
-from ..utils.blocks import DirectorySearchBlock
-from ..utils.models import BasePage
 
 
 class FISBannerFields(models.Model):
@@ -287,7 +286,8 @@ class BaseCategoryPage(FISBannerFields, BasePage):
                 ),
             ),
             FieldPanel("directory_search"),
-        ] + FISBannerFields.content_panels
+        ]
+        + FISBannerFields.content_panels
     )
 
     search_fields = BasePage.search_fields + FISBannerFields.search_fields

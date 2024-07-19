@@ -69,8 +69,6 @@ tags:
         url: https://picsum.photos/600/540.webp
 
   pageurl:
-    block.value.page:
-      raw: '#'
     subpage:
       raw: '#'
     block.value.page:
