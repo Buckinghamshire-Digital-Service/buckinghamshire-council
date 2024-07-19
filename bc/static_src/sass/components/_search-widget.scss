@@ -61,4 +61,20 @@
             max-width: 100%;
         }
     }
+
+    &--sf {
+        #{$root}__form-layout {
+            @include media-query(tablet-landscape) {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    }
+
+    .template-fis-home & {
+        #{$root}__form-layout {
+            @include media-query(tablet-landscape) {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+    }
 }
