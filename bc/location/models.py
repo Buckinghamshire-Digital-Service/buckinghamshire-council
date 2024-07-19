@@ -14,6 +14,8 @@ from bc.area_finder.utils import validate_postcode
 from bc.utils.blocks import StoryBlock
 from bc.utils.models import BasePage, RelatedPage
 
+from .blocks import LocationPageStoryBlock
+
 
 class LocationIndexPage(BasePage):
     template = "patterns/pages/location/location_index_page.html"
@@ -94,7 +96,7 @@ class LocationPage(BasePage):
     email_address = models.EmailField(blank=True)
 
     body = StreamField(
-        StoryBlock(),
+        LocationPageStoryBlock(),
         help_text="Generic body content. This will appear after the map in the template.",
     )
 
