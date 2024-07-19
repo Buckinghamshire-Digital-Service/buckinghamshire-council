@@ -43,16 +43,16 @@
             {% include_block page.highlighted_cards %}
         {% endif %}
 
+        {% if page.directory_search %}
+            {% include_block page.directory_search %}
+        {% endif %}
+
         <div class="grid grid--index grid--fis-home" data-height-equalizer>
             {% for subpage in page.other_child_pages %}
                 {% include "patterns/molecules/page-card/page-card.html" with classes="card--fis-home" page=subpage %}
             {% endfor %}
         </div>
     </div>
-
-    {% if page.directory_search %}
-        {% include_block page.directory_search %}
-    {% endif %}
 
     {% include "patterns/molecules/directory-banner/directory-banner.html" with classes="directory-banner--with-space" %}
 
