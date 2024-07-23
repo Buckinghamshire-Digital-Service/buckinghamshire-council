@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- Remove search-header--fis
+
 ## 75.0 (2024-07-10)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/74.0...75.0>
