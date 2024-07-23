@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Change div to section on cards_block.html to prevent aria-label warning
+- Remove search-header--fis
 
 ## 75.0 (2024-07-10)
 
