@@ -1,22 +1,24 @@
 context:
   page:
     title: Aylesbury Library
+  heading: Activities in Aylesbury
+  view_all_activities_url: '#'
   activities:
     - title: Early Signs of Exploitation (Online Workshop)
-      href: '#'
+      url: '#'
       intro: Parents are invited to attend a workshop that will teach them about the early signs of child exploitation
       tags:
         - title: Free
         - title: Recently Updated
     - title: Amersham Gamily Centre
-      href: '#'
+      url: '#'
       intro: Amersham Family Centre has a varied timetable of activities for families, children and young people aged 0 to 19 years
       tags:
         - title: Part of local offer
           highlight: true
         - title: Free
     - title: How To Build Confidence and Self-Esteem for Young People (Online)
-      href: '#'
+      url: '#'
       intro: Online How to Build Confidence and Self-Esteem Online Course for Young People. Want to feel better about yourself?
       tags:
         - title: Part of local offer

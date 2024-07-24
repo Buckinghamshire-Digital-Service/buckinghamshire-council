@@ -1,18 +1,7 @@
-from collections.abc import Sequence
-from dataclasses import dataclass
-from typing import cast
-
-from dataclasses_json import dataclass_json
+from typing import List, Sequence, cast
 
 from .client import BaseOutpostClient
-from .types import Directory, Taxonomy
-
-
-@dataclass_json
-@dataclass
-class Service:
-    id: int
-    name: str
+from .types import APIService, Category, Directory
 
 
 class ServiceDirectoryResources:
@@ -25,22 +14,24 @@ class ServiceDirectoryResources:
         self,
         *,
         directories: Sequence[Directory],
-        taxonomies: Sequence[Taxonomy],
+        taxonomies: Sequence[Category],
         per_page: int,
         page: int
-    ) -> list[Service]:
+    ) -> List[APIService]:
         """
         https://github.com/wearefuturegov/outpost-api-service/wiki/Search-services
         """
-        service_schema = Service.schema()
+        service_schema = APIService.schema()
         response = self.client.get(
             "services",
             params={
-                "directories": ",".join(directory.value for directory in directories),
-                "taxonomies": ",".join(taxonomy.value for taxonomy in taxonomies),
+                "directories": ",".join(
+                    directory.api_value for directory in directories
+                ),
+                "taxonomies": ",".join(taxonomy.api_value for taxonomy in taxonomies),
                 "per_page": str(per_page),
                 "page": str(page),
             },
         )
         services = service_schema.load(response["content"], many=True)
-        return cast(list[Service], services)
+        return cast(List[APIService], services)

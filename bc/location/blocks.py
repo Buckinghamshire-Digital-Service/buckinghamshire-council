@@ -3,4 +3,4 @@ from bc.utils.blocks import StoryBlock
 
 
 class LocationPageStoryBlock(StoryBlock):
-    directory_activities = DirectoryActivitiesBlock(required=False)
+    directory_activities = DirectoryActivitiesBlock()

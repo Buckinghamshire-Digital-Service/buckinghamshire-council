@@ -430,6 +430,10 @@ LOGGING = {
             "format": "[%(asctime)s][%(process)d][%(levelname)s][%(name)s] %(message)s"
         }
     },
+    "root": {
+        "handlers": ["console"],
+        "level": "WARNING",
+    },
     "loggers": {
         "bc": {"handlers": ["console"], "level": "INFO", "propagate": False},
         "wagtail": {
