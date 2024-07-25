@@ -26,6 +26,8 @@ class TaxonomyIndexView(IndexView):
         return queryset
 
 
+# TODO: Consider making TaxonomyModelViewSet read-only once upgraded to newer
+#       Wagtail that supports ModelViewSet inspect views.
 class TaxonomyModelViewSet(ModelViewSet):
     add_to_settings_menu = True
     copy_view_enabled = False
