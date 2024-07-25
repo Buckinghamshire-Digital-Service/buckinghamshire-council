@@ -30,8 +30,6 @@ tags:
   include_block:
     page.body:
       template_name: 'patterns/molecules/streamfield/stream_block.html'
-    page.activities_listing:
-      template_name: 'patterns/organisms/activities-listing/activities-listing.html'
   pageurl:
     ancestor_page:
       raw: '#'
