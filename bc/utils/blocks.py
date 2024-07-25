@@ -586,12 +586,22 @@ class EHCCoSearchBlock(blocks.StaticBlock):
 
 
 class Directory(TextChoices):
-    SEND = "send", "SEND"
+    BUCKS_ONLINE_DIRECTORY = "bucks_online_directory", "Bucks Online Directory"
     FAMILYINFO = "familyinfo", "Family Information Service"
+    SEND = "send", "SEND"
 
 
 def get_directory_url(directory: Directory, /) -> str:
-    return f"https://directory.{directory.value}.buckinghamshire.gov.uk/"
+    if directory is Directory.BUCKS_ONLINE_DIRECTORY:
+        return "https://directory.buckinghamshire.gov.uk/"
+    elif any(directory is member for member in [Directory.FAMILYINFO, Directory.SEND]):
+        return (
+            f"https://directory.{directory.value}.buckinghamshire.gov.uk/"  # noqa: E231
+        )
+    else:
+        raise NotImplementedError(
+            f"get_directory_url is not implemented for: {repr(directory)}"
+        )
 
 
 class DirectorySearchBlock(blocks.StructBlock):
@@ -630,7 +640,13 @@ class DirectorySearchBlock(blocks.StructBlock):
                 extra_query_params = extra_query_params[1:]
             extra_query_params = parse_qsl(extra_query_params)
             context["extra_query_params"] = extra_query_params
-        context["directory_url"] = get_directory_url(directory)
+
+        try:
+            context["directory_url"] = get_directory_url(directory)
+        except NotImplementedError:
+            logger.exception("Could not get directory URL.")
+            context["directory_url"] = None
+
         return context
 
 

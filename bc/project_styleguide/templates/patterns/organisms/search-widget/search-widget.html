@@ -1,27 +1,29 @@
 {% load wagtailimages_tags %}
 
-<div class="search-widget {% if classes %}{{ classes }}{% endif %}">
-    <form class="search-widget__form form" action="{{ directory_url }}" method="get">
-        <h2 class="search-widget__heading heading heading--xl">{{ value.title|default:"Find activities and organisations near you" }}</h2>
-        <div class="search-widget__form-layout">
-            <div>
-                <label for="activity-service-search" class="search-widget__label label">Search</label>
-                <input name="keywords" id="activity-service-search" class="search-widget__input input" type="text" placeholder="{{ value.search_placeholder|default:"Enter a search" }}" />
+{% if directory_url %}
+    <div class="search-widget {% if classes %}{{ classes }}{% endif %}">
+        <form class="search-widget__form form" action="{{ directory_url }}" method="get">
+            <h2 class="search-widget__heading heading heading--xl">{{ value.title|default:"Find activities and organisations near you" }}</h2>
+            <div class="search-widget__form-layout">
+                <div>
+                    <label for="activity-service-search" class="search-widget__label label">Search</label>
+                    <input name="keywords" id="activity-service-search" class="search-widget__input input" type="text" placeholder="{{ value.search_placeholder|default:"Enter a search" }}" />
+                </div>
+
+                <div>
+                    <label for="region-search" class="search-widget__label">Enter town/postcode</label>
+                    {% include 'patterns/molecules/location-autocomplete/location-autocomplete.html' with location_autocomplete_id="region-search" location_autocomplete_classes="search-widget__input input" location_autocomplete_placeholder="E.g. Buckingham" %}
+                </div>
+
+                {% for key, value in extra_query_params %}
+                    <input type="hidden" name="{{ key }}" value="{{ value }}">
+                {% endfor %}
+
+                <button class="search-widget__button button">
+                    {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" %}
+                    Search directory
+                </button>
             </div>
-
-            <div>
-                <label for="region-search" class="search-widget__label">Enter town/postcode</label>
-                {% include 'patterns/molecules/location-autocomplete/location-autocomplete.html' with location_autocomplete_id="region-search" location_autocomplete_classes="search-widget__input input" location_autocomplete_placeholder="E.g. Buckingham" %}
-            </div>
-
-            {% for key, value in extra_query_params %}
-                <input type="hidden" name="{{ key }}" value="{{ value }}">
-            {% endfor %}
-
-            <button class="search-widget__button button">
-                {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" %}
-                Search directory
-            </button>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
+{% endif %}

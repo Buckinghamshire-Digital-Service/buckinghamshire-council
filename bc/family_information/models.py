@@ -244,7 +244,7 @@ class BaseCategoryPage(FISBannerFields, BasePage):
     )
 
     # Other child pages
-    other_pages_heading = models.CharField(default="Others", max_length=255)
+    other_pages_heading = models.CharField(default="Others", max_length=255, blank=True)
 
     directory_search = StreamField(
         [
