@@ -20,20 +20,20 @@ from . import admin_choosers, api_client
 logger = logging.getLogger(__name__)
 
 
-class _ActivityTag(TypedDict):
+class _ServiceTag(TypedDict):
     highlight: bool
     title: str
 
 
-class _ActivityContext(TypedDict):
+class _ServiceContext(TypedDict):
     intro: str
     name: str
     url: str
-    tags: List[_ActivityTag]
+    tags: List[_ServiceTag]
 
 
-class DirectoryActivitiesBlockContext(TypedDict):
-    activities: Optional[Sequence[_ActivityContext]]
+class _DirectoryServicesBlockContext(TypedDict):
+    activities: Optional[Sequence[_ServiceContext]]
     heading: str
 
 
@@ -90,7 +90,7 @@ class DirectoryServicesBlock(blocks.StructBlock):
 
     def get_context(
         self, value, parent_context=None
-    ) -> DirectoryActivitiesBlockContext:
+    ) -> _DirectoryServicesBlockContext:
         context = super().get_context(value, parent_context=parent_context)
 
         directory = value["service_directory"]
@@ -124,7 +124,7 @@ class DirectoryServicesBlock(blocks.StructBlock):
         directory: ServiceDirectory,
         categories: Sequence[Taxonomy],
         collection: Taxonomy,
-    ) -> List[_ActivityContext]:
+    ) -> List[_ServiceContext]:
         client = api_client.get_api_client_class()(
             base_url=directory.directory_api_url,
         )
@@ -145,14 +145,14 @@ class DirectoryServicesBlock(blocks.StructBlock):
         collection_filter = collection.remote_slug if collection is not None else None
         categories_filter = [category.remote_slug for category in categories]
 
-        activities_context: List[_ActivityContext] = []
+        services_context: List[_ServiceContext] = []
         for service in services:
-            tags: List[_ActivityTag] = []
+            tags: List[_ServiceTag] = []
             if service.local_offer:
                 tags.append({"highlight": True, "title": "Part of local offer"})
             if service.free:
                 tags.append({"highlight": False, "title": "Free"})
-            if service.updated_at <= timezone.now() + cls.RECENTLY_UPDATED_TIMEDELTA:
+            if service.updated_at <= timezone.now() - cls.RECENTLY_UPDATED_TIMEDELTA:
                 tags.append({"highlight": False, "title": "Recently updated"})
 
             url = format_service_detail_page_url(
@@ -162,14 +162,14 @@ class DirectoryServicesBlock(blocks.StructBlock):
                 frontend_url=directory.frontend_url,
             )
 
-            activity_context: _ActivityContext = {
+            service_context: _ServiceContext = {
                 "intro": cls._format_activity_intro(service),
                 "name": service.name,
                 "url": url,
                 "tags": tags,
             }
-            activities_context.append(activity_context)
-        return activities_context
+            services_context.append(service_context)
+        return services_context
 
     @classmethod
     def _format_activity_intro(

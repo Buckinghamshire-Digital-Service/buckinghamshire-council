@@ -8,7 +8,7 @@ class Command(BaseCommand):
     help = "Fetch and create service directory taxonomies from the API"
 
     def handle(self, *args, **options) -> None:
-        for directory in ServiceDirectory.objects.all():
+        for directory in ServiceDirectory.objects.enabled().iterator():
             try:
                 taxonomies.fetch_and_create_taxonomies(directory, api_timeout=60)
             except taxonomies.DirectoryIsNotEnabled:

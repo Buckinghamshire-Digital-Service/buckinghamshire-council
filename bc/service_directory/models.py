@@ -5,6 +5,11 @@ from wagtail.admin.panels import FieldPanel, HelpPanel, MultiFieldPanel
 from wagtail.search import index
 
 
+class ServiceDirectoryQuerySet(models.QuerySet):
+    def enabled(self):
+        return self.filter(is_enabled=True)
+
+
 class ServiceDirectory(index.Indexed, models.Model):
     FRONTEND_URL_HELP_TEXT = (
         "What URL users use to access the directory interface, "
@@ -37,6 +42,7 @@ class ServiceDirectory(index.Indexed, models.Model):
     management_api_url = models.URLField(
         verbose_name="management API URL", help_text=MANAGEMENT_API_URL_HELP_TEXT
     )
+    objects = ServiceDirectoryQuerySet.as_manager()
 
     panels = [
         FieldPanel("admin_name"),
