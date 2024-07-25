@@ -31,6 +31,6 @@ if wagtail.VERSION >= (6, 2):
 @hooks.register("register_permissions")
 def register_service_directory_permissions():
     content_types = ContentType.objects.get_for_models(
-        [models.ServiceDirectory, models.Taxonomy]
-    )
+        models.ServiceDirectory, models.Taxonomy
+    ).values()
     return Permission.objects.filter(content_type__in=content_types)
