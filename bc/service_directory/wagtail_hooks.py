@@ -22,12 +22,14 @@ def register_service_directory_model_viewset_group():
     return admin_views.ServiceDirectoryModelViewSetGroup()
 
 
+if wagtail.VERSION >= (6, 2):
+    raise Exception(
+        "ModelViewSet permissions should be registered automatically on Wagtail 6.2"
+    )
+
+
 @hooks.register("register_permissions")
 def register_service_directory_permissions():
-    if wagtail.VERSION >= (6, 2):
-        raise Exception(
-            "Those permissions should be registered automatically on Wagtail 6.2"
-        )
     content_types = ContentType.objects.get_for_models(
         [models.ServiceDirectory, models.Taxonomy]
     )
