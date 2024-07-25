@@ -1,4 +1,3 @@
-import logging
 from typing import Optional
 
 from bc.service_directory import api_schema
@@ -6,8 +5,6 @@ from bc.service_directory.resources import ManageDirectoryAPIResources
 
 from .api_client import get_api_client_class
 from .models import ServiceDirectory, Taxonomy
-
-logger = logging.getLogger(__name__)
 
 
 class DirectoryIsNotEnabled(Exception):
