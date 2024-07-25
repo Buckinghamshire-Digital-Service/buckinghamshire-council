@@ -1,0 +1,34 @@
+from django.contrib.auth.models import Permission
+from django.contrib.contenttypes.models import ContentType
+
+import wagtail
+from wagtail import hooks
+
+from . import admin_choosers, admin_views, models
+
+
+@hooks.register("register_admin_viewset")
+def register_service_directory_chooser_viewset():
+    return admin_choosers.service_directory_chooser_viewset
+
+
+@hooks.register("register_admin_viewset")
+def register_taxonomy_chooser_viewset():
+    return admin_choosers.taxonomy_chooser_viewset
+
+
+@hooks.register("register_admin_viewset")
+def register_service_directory_model_viewset_group():
+    return admin_views.ServiceDirectoryModelViewSetGroup()
+
+
+@hooks.register("register_permissions")
+def register_service_directory_permissions():
+    if wagtail.VERSION >= (6, 2):
+        raise Exception(
+            "Those permissions should be registered automatically on Wagtail 6.2"
+        )
+    content_types = ContentType.objects.get_for_models(
+        [models.ServiceDirectory, models.Taxonomy]
+    )
+    return Permission.objects.filter(content_type__in=content_types)

@@ -87,6 +87,7 @@ INSTALLED_APPS = [
     "bc.recruitment",
     "bc.recruitment_api",
     "bc.search.apps.SearchConfig",
+    "bc.service_directory",
     "bc.standardpages",
     "bc.step_by_step",
     "bc.users",
