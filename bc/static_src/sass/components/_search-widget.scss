@@ -7,7 +7,11 @@
     margin: $grid--large 0;
 
     .wrapper--desktop-reverse & {
-        margin-bottom: 0;
+        margin: 0;
+
+        @include media-query(tablet-landscape) {
+            margin: $grid--large 0 0;
+        }
     }
 
     &__form {
