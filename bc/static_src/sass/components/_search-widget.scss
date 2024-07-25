@@ -6,6 +6,10 @@
     width: 100%;
     margin: $grid--large 0;
 
+    .wrapper--desktop-reverse & {
+        margin-bottom: 0;
+    }
+
     &__form {
         max-width: $site-width;
         padding: 20px;
