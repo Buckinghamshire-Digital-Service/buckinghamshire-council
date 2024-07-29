@@ -41,4 +41,5 @@ nav:
       - 'Location maps widget': 'location-maps-widget.md'
       - 'Postcode lookup': 'postcode-lookup.md'
   - 'Contributing': 'contributing.md'
+  - 'Technical debt': technical-debt.md
   - 'CHANGELOG': 'CHANGELOG.md'
