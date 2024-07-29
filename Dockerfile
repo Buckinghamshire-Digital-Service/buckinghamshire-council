@@ -25,7 +25,7 @@ ARG POETRY_HOME=/opt/poetry
 ARG POETRY_INSTALL_ARGS="--no-dev"
 
 # IMPORTANT: Remember to review both of these when upgrading
-ARG POETRY_VERSION=1.8.2
+ARG POETRY_VERSION=1.8.3
 
 # Install dependencies in a virtualenv
 ENV VIRTUAL_ENV=/venv

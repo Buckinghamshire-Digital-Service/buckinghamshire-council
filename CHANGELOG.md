@@ -1,5 +1,15 @@
 # Release History
 
+## Unreleased
+
+- ...
+
+## 77.0 (2024-07-29)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/76.0...77.0>
+
+- [Wagtail 6.1](https://docs.wagtail.org/en/latest/releases/6.1.html) upgrade
+
 ## 76.0 (2024-07-23)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/75.0...76.0>
