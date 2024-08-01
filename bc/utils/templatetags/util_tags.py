@@ -1,5 +1,6 @@
 from django import template
 from django.conf import settings
+
 from wagtail.coreutils import camelcase_to_underscore
 
 from bc.utils.models import ImportantPages, SocialMediaSettings

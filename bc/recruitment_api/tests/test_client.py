@@ -1,10 +1,11 @@
 import pathlib
 from unittest.mock import MagicMock
 
-import responses
 from django.conf import settings
 from django.core.cache import caches
 from django.test import TestCase, override_settings
+
+import responses
 from lxml import etree
 
 from bc.recruitment.constants import JOB_BOARD_CHOICES

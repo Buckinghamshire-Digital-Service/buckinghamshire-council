@@ -1,4 +1,5 @@
 from django.template.loader import render_to_string
+
 from django_gov_notify.message import NotifyEmailMessage
 
 from bc.blogs.models import BlogAlertSubscription, BlogHomePage, BlogPostPage

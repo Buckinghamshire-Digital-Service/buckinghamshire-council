@@ -2,9 +2,10 @@ import hmac
 import logging
 from base64 import b64encode
 
+from django.conf import settings
+
 import requests
 from bs4 import BeautifulSoup
-from django.conf import settings
 
 logger = logging.getLogger(__name__)
 client = None

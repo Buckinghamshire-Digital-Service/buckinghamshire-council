@@ -1,4 +1,5 @@
 from django.middleware.csrf import CsrfViewMiddleware
+
 from wagtail.models import Page
 from wagtail.views import serve
 

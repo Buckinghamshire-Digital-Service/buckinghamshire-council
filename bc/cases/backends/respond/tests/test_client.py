@@ -1,9 +1,10 @@
 import textwrap
 
-import requests
-import responses
 from django.conf import settings
 from django.test import TestCase, override_settings
+
+import requests
+import responses
 
 from bc.cases.backends.respond.client import RespondClientException, get_client
 

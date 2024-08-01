@@ -1,7 +1,8 @@
 from datetime import timedelta
 
-from bs4 import BeautifulSoup
 from django import template
+
+from bs4 import BeautifulSoup
 
 from bc.utils.blocks import ImageBlock
 

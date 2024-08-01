@@ -1,8 +1,9 @@
 import json
 
-from bs4 import BeautifulSoup
 from django.core.exceptions import ValidationError
 from django.test import TestCase
+
+from bs4 import BeautifulSoup
 
 from bc.home.models import HomePage
 from bc.images.tests.fixtures import ImageFactory

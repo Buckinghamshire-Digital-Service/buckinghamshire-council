@@ -3,9 +3,11 @@ import uuid
 from collections import namedtuple
 from http import HTTPStatus
 
-from bs4 import BeautifulSoup
 from django.test import TestCase
+
 from wagtail.blocks import StreamValue
+
+from bs4 import BeautifulSoup
 
 from bc.home.models import HomePage
 

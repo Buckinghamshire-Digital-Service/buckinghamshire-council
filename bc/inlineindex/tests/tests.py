@@ -1,9 +1,11 @@
 from http import HTTPStatus
 
-import bs4
 from django.test import RequestFactory, TestCase, override_settings
 from django.urls import reverse
+
 from wagtail.test.utils import WagtailTestUtils
+
+import bs4
 
 from bc.home.models import HomePage
 from bc.inlineindex.tests.fixtures import InlineIndexChildFactory, InlineIndexFactory

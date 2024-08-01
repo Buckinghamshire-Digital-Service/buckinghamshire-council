@@ -1,4 +1,5 @@
 from django.db import models
+
 from wagtail.documents.models import AbstractDocument
 from wagtail.documents.models import Document as WagtailDocument
 

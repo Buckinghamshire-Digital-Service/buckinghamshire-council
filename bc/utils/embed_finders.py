@@ -1,9 +1,11 @@
 from urllib.parse import parse_qs, urlencode, urlparse, urlunparse
 
-from bs4 import BeautifulSoup
 from django.core.exceptions import ImproperlyConfigured
+
 from wagtail.embeds.finders.oembed import OEmbedFinder
 from wagtail.embeds.oembed_providers import youtube
+
+from bs4 import BeautifulSoup
 
 
 class CustomOEmbedFinder(OEmbedFinder):

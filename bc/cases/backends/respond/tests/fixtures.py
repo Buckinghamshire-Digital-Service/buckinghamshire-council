@@ -1,5 +1,6 @@
-from bs4 import BeautifulSoup
 from django.conf import settings
+
+from bs4 import BeautifulSoup
 
 
 def generate_webservice_xml(*args, **kwargs):

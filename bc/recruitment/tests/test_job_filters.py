@@ -1,4 +1,5 @@
 from django.test import RequestFactory, TestCase, override_settings
+
 from wagtail.models import Page, Site
 
 from bc.recruitment.constants import JOB_BOARD_CHOICES

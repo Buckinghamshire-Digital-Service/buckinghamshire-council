@@ -1,11 +1,13 @@
 from urllib.parse import unquote
 
-import responses
 from django.core.exceptions import FieldError
 from django.http import QueryDict
 from django.test import TestCase, override_settings
 from django.urls import reverse
+
 from wagtail.models import Page, Site
+
+import responses
 
 from bc.recruitment.constants import JOB_BOARD_CHOICES, POSTCODES_API_BASE_URL
 from bc.recruitment.forms import SearchAlertSubscriptionForm

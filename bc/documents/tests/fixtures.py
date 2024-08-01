@@ -1,5 +1,6 @@
-import factory
 from django.core.files.base import ContentFile
+
+import factory
 
 
 class DocumentFactory(factory.django.DjangoModelFactory):

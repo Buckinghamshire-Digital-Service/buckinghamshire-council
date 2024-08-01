@@ -1,6 +1,7 @@
 import re
 
 from django.db import transaction
+
 from wagtail.contrib.frontend_cache.utils import PurgeBatch
 from wagtail.models import Page
 

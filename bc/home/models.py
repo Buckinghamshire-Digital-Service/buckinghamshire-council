@@ -3,6 +3,7 @@ import json
 from django.db import models
 from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
+
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.search import index
 

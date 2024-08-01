@@ -1,5 +1,6 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
+
 from wagtail.admin.panels import FieldPanel
 
 

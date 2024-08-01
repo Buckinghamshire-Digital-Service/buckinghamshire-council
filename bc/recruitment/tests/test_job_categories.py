@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.utils.text import slugify
+
 from wagtail.models import Page
 
 from bc.recruitment.constants import JOB_BOARD_CHOICES

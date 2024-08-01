@@ -1,6 +1,7 @@
 import unittest
 
 from django.test import TestCase, override_settings
+
 from wagtail.models import Page
 from wagtail.search.backends import get_search_backend
 

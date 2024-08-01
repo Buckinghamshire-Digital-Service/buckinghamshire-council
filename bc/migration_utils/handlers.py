@@ -1,6 +1,7 @@
 import json
 
 from django.core.serializers.json import DjangoJSONEncoder
+
 from wagtail.blocks.stream_block import StreamValue
 
 

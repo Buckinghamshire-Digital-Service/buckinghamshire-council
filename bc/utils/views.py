@@ -1,5 +1,6 @@
 from django.db.models import Q
 from django.views import defaults
+
 from wagtail.admin.views.reports import PageReportView
 from wagtail.models import Page
 
