@@ -1,8 +1,5 @@
 from itertools import chain
 
-import backoff
-import elasticsearch
-import requests
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Case, CharField, OuterRef, Subquery, When
@@ -14,8 +11,13 @@ from django.utils.html import escape
 from django.utils.timezone import now
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View
+
 from wagtail.contrib.search_promotions.models import Query
 from wagtail.models import Page, Site
+
+import backoff
+import elasticsearch
+import requests
 
 from bc.blogs.models import BlogGlobalHomePage, BlogHomePage, BlogPostPage
 from bc.campaigns.models import CampaignIndexPage, CampaignPage
@@ -183,13 +185,17 @@ class SearchView(View):
         search_input_help_text = SystemMessagesSettings.for_site(
             site
         ).search_input_help_text
-        no_result_text = SystemMessagesSettings.for_request(
-            request
-        ).body_no_search_results.format(searchterms=escape(search_query))
+        # System Message Settings
+        system_message_settings = SystemMessagesSettings.for_request(request)
+        no_result_text = system_message_settings.body_no_search_results.format(
+            searchterms=escape(search_query)
+        )
 
         context.update(
             {
                 "search_input_help_text": search_input_help_text,
+                "search_cta_button": system_message_settings.search_cta_button,
+                "search_cta_title": system_message_settings.search_cta_title,
                 "no_result_text": no_result_text,
                 "search_query": search_query,
                 "search_results": search_results,

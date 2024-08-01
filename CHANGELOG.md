@@ -6,6 +6,73 @@
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/70.01...HEAD>
 
+- ...
+
+## 77.0 (2024-07-29)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/76.0...77.0>
+
+- [Wagtail 6.1](https://docs.wagtail.org/en/latest/releases/6.1.html) upgrade
+
+## 76.0 (2024-07-23)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/75.0...76.0>
+
+- Change div to section on cards_block.html to prevent aria-label warning
+- Remove search-header--fis
+
+## 75.0 (2024-07-10)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/74.0...75.0>
+
+- Reinstate removed header styles
+- Make header height uniform across all pages in fis site
+
+## 74.0 (2024-07-10)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/73.0...74.0>
+
+- Update FIS search in header - remove dropdown search and simplify to single text input, consistent with the standard homepage
+- Add transparent border to search inputs to improve visibility of input boundary in high contrast mode
+
+## 73.0 (2024-07-09)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/72.01...73.0>
+
+- Add new search promotional block on search page
+- Add FIS EHCCo search
+- Modify FIS search results view
+- Modify FIS homepage
+- Modify FIS category index page
+- Fix accessibility issues from Silktide
+
+## 72.01 (2024-06-26)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/72.00...72.01>
+
+- Wagtail 6.0 upgrade fix add classname to include for patterns/atoms/icons/icon.html
+
+## 72.00 (2024-06-25)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/71.01...72.00>
+
+- Update link block component to always display list items for all screen sizes (following user testing feedback)
+- Accessibility fix: page does not start with a h1
+- Accessibility fix: aria-label not allowed on subpages div
+- Accessibility fix: heading order not correct for footer column headings
+
+## 71.01 (2024-06-17)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/71.00...71.01>
+
+- Validate Talentlink-imported images as if uploaded through the Wagtail admin
+
+## 71.00 (2024-06-03)
+
+[Wagtail 6.0](https://docs.wagtail.org/en/latest/releases/6.0.html) upgrade
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/70.01...71.00>
+
 ## 70.01 (2024-04-03)
 
 - Update `flake8` to version 3.8.4 for Python 3.8 compatibility

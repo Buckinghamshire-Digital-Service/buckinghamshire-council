@@ -3,34 +3,46 @@
 
 {% block body_class %}template-fis-category-regular {{ block.super }}{% endblock %}
 
+{% comment %} breadcrumbs are included inside hero index component {% endcomment %}
+{% block breadcrumbs %}{% endblock %}
+
+{% block hero %}
+    {% include "patterns/molecules/hero/hero--index.html" %}
+
+    {% if page.top_tasks.all %}
+        {% include "patterns/molecules/top-tasks/top-tasks.html" with heading=page.top_tasks_heading tasks=page.top_tasks.all %}
+    {% endif %}
+{% endblock %}
+
 {% block content %}
     <div>
-        <h1 class="heading heading--xxl">{{ page.title }}</h1>
-
         {% if page.introduction %}
             <p>{{ page.introduction }}</p>
         {% endif %}
 
         <div class="wrapper wrapper--desktop-reverse">
 
-            <div
-                aria-label="Subpages"
-                class="grid grid--fis-index grid--index grid--thirds"
-                data-height-equalizer
-            >
-                {% for subpage in page.child_pages %}
-                    <a class="card" href="{% pageurl subpage %}" data-height-equalizer-child>
-                        <h2 class="card__title heading">
-                            {% firstof subpage.listing_title subpage.title %}
-                        </h2>
-                        {% if subpage.listing_summary %}
-                            <p class="card__summary">{{ subpage.listing_summary }}</p>
-                        {% endif %}
-                    </a>
-                {% endfor %}
-            </div>
+            {% comment %}
+                If content was added to the page body, use that content.
+                If not, behave like before: display all child pages.
+            {% endcomment %}
+            <div>
+                {% include_block page.body %}
+                {% if show_other_pages_heading %}
+                    <h2 class="heading heading--l" id="{{ page.other_pages_heading|slugify }}">{{ page.other_pages_heading }}</h2>
+                {% endif %}
+                <section
+                    aria-label="Subpages"
+                    class="grid grid--fis-index grid--index grid--thirds"
+                    data-height-equalizer
+                >
+                    {% for subpage in page.other_child_pages %}
+                        {% include "patterns/molecules/page-card/page-card.html" with classes="card--fis-index" has_heading=show_other_pages_heading page=subpage %}
+                    {% endfor %}
+                </div>
+            </section>
 
-            {% include "patterns/molecules/directory-banner/directory-banner.html" %}
+            {% include "patterns/molecules/directory-banner/directory-banner.html" with classes="directory-banner--with-space" %}
         </div>
     </div>
 

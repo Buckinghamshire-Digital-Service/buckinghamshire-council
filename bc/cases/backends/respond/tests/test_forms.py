@@ -1,12 +1,13 @@
 import textwrap
 
-from bs4 import BeautifulSoup
 from django import forms
 from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.validators import FileExtensionValidator
 from django.test import TestCase
 from django.utils.datastructures import MultiValueDict
+
+from bs4 import BeautifulSoup
 from lxml import etree
 
 from bc.cases.backends.respond.constants import (
@@ -113,7 +114,7 @@ class TestFormXML(TestCase):
         soup = BeautifulSoup(etree.tostring(form.get_xml(form.cleaned_data)), "xml")
         self.maxDiff = None
         self.assertEqual(
-            soup.find("Activities").prettify(),
+            soup.find("Activities").prettify().strip("\n"),
             textwrap.dedent(
                 """\
                 <Activities>
@@ -157,7 +158,7 @@ class TestFormXML(TestCase):
         soup = BeautifulSoup(etree.tostring(form.get_xml(form.cleaned_data)), "xml")
         self.maxDiff = None
         self.assertEqual(
-            soup.find("Activities").prettify(),
+            soup.find("Activities").prettify().strip("\n"),
             textwrap.dedent(
                 """\
                 <Activities>

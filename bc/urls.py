@@ -4,14 +4,17 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.decorators.vary import vary_on_headers
 from django.views.generic import TemplateView
+
 from wagtail import urls as wagtail_urls
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.utils.urlpatterns import decorate_urlpatterns
+
 from wagtail_transfer import urls as wagtailtransfer_urls
 
 from bc.area_finder import urls as area_finder_urls
+from bc.family_information import urls as family_information_urls
 from bc.feedback import urls as feedback_urls
 from bc.search.views import JobAlertConfirmView, JobAlertUnsubscribeView, SearchView
 from bc.utils.cache import get_default_cache_control_decorator
@@ -24,6 +27,7 @@ private_urlpatterns = [
     path("feedback/", include(feedback_urls, namespace="feedback")),
     # Search cache-control headers are set on the view itself.
     path("search/", SearchView.as_view(), name="search"),
+    path("family_information/", include(family_information_urls)),
     path("api/v2/area-finder/", include(area_finder_urls)),
     path(
         "confirm_job_alert/<str:token>/",

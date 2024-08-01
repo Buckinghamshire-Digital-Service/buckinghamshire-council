@@ -9,7 +9,7 @@ from django.template.defaultfilters import slugify
 from django.template.loader import render_to_string
 from django.utils.functional import cached_property
 from django.views.generic import TemplateView
-from django_gov_notify.message import NotifyEmailMessage
+
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from wagtail import models as wt_models
 from wagtail.admin.panels import (
@@ -20,6 +20,8 @@ from wagtail.admin.panels import (
 )
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.fields import StreamField
+
+from django_gov_notify.message import NotifyEmailMessage
 
 from bc.blogs.forms import BlogHomePageForm, BlogPostPageForm
 from bc.utils.blocks import StoryBlock
@@ -333,7 +335,7 @@ class BlogAboutPage(BasePage):
         blank=True,
     )
 
-    body = StreamField(StoryBlock(), use_json_field=True)
+    body = StreamField(StoryBlock())
 
     content_panels = BasePage.content_panels + [
         FieldPanel("intro_text"),
@@ -370,7 +372,7 @@ class BlogPostPage(BasePage):
     author = models.TextField()
     date_published = models.DateField()
 
-    body = StreamField(StoryBlock(), use_json_field=True)
+    body = StreamField(StoryBlock())
 
     content_panels = BasePage.content_panels + [
         FieldPanel("categories", widget=CheckboxSelectMultiple),

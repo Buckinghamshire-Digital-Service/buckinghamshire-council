@@ -449,7 +449,7 @@ def run_test(c):
             "python",
             "manage.py",
             "test",
-            "--settings=bc.settings.production",
+            "--settings=bc.settings.test",
         ]
     )
 

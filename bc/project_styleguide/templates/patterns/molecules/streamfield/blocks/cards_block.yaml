@@ -1,0 +1,24 @@
+context:
+  page_class: CategoryPage
+  value:
+    - value:
+        specific:
+          listing_title: Lorem ipsum 1
+          listing_summary: Dolor sit amet 1
+    - value:
+        specific:
+          listing_title: Lorem ipsum 2
+          listing_summary: Dolor sit amet 2
+    - value:
+        specific:
+          listing_title: Lorem ipsum 3
+          listing_summary: Dolor sit amet 3
+    - value:
+        specific:
+          listing_title: Lorem ipsum 4
+          listing_summary: Dolor sit amet 4
+
+tags:
+  pageurl:
+    page:
+      raw: '#'

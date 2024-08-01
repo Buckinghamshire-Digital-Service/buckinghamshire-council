@@ -1,4 +1,5 @@
 from django import urls
+
 from wagtail import hooks
 from wagtail.admin import menu
 
@@ -10,7 +11,7 @@ def register_usefulness_feedback_report_menu_item():
     return menu.MenuItem(
         UsefulnessFeedbackReportView.title,
         urls.reverse("usefuleness_feedback_report"),
-        classname="icon icon-" + UsefulnessFeedbackReportView.header_icon,
+        icon_name=UsefulnessFeedbackReportView.header_icon,
         order=300,
     )
 
@@ -31,7 +32,7 @@ def register_feedback_comment_report_menu_item():
     return menu.MenuItem(
         FeedbackCommentReportView.title,
         urls.reverse("feedback_comment_report"),
-        classname="icon icon-" + FeedbackCommentReportView.header_icon,
+        icon_name=FeedbackCommentReportView.header_icon,
         order=400,
     )
 

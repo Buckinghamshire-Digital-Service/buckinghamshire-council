@@ -17,7 +17,7 @@ from django.urls import reverse
 from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify
-from django_gov_notify.message import NotifyEmailMessage
+
 from wagtail import blocks
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
@@ -25,6 +25,8 @@ from wagtail.fields import StreamField
 from wagtail.models import Page
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
+
+from django_gov_notify.message import NotifyEmailMessage
 from wagtailorderable.models import Orderable
 
 from bc.utils.choices import IconChoice
@@ -350,7 +352,7 @@ def callback_talentlinkjob_delete_attachments_and_logo(
 @register_snippet
 class AwardsSnippet(models.Model):
     heading = models.CharField(max_length=255)
-    awards = StreamField([("award", AwardBlock())], use_json_field=True)
+    awards = StreamField([("award", AwardBlock())])
 
     panels = [
         FieldPanel("heading"),
@@ -366,8 +368,8 @@ class JobPlatformsMediaSnippet(models.Model):
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     cta = models.CharField(max_length=255, verbose_name="Call to action text")
-    job_platforms = StreamField([("platform", JobPlatformBlock())], use_json_field=True)
-    media_embed = StreamField(MediaBlock(), max_num=1, use_json_field=True)
+    job_platforms = StreamField([("platform", JobPlatformBlock())])
+    media_embed = StreamField(MediaBlock(), max_num=1)
 
     def __str__(self):
         return self.title
@@ -437,7 +439,6 @@ class RecruitmentHomePage(RoutablePageMixin, BasePage):
             required=False,
         ),
         blank=True,
-        use_json_field=True,
     )
     related_recruitment_index_page = models.ForeignKey(
         "recruitment.RecruitmentIndexPage",
@@ -585,7 +586,7 @@ class RecruitmentIndexPage(BasePage):
         max_length=255,
         blank=True,
     )
-    body = StreamField(StoryBlock(required=False), blank=True, use_json_field=True)
+    body = StreamField(StoryBlock(required=False), blank=True)
 
     content_panels = BasePage.content_panels + [
         MultiFieldPanel(

@@ -1,11 +1,18 @@
+import logging
+import warnings
 from io import BytesIO
 from mimetypes import guess_extension
 
-import requests
 from django.core.files.images import ImageFile
 from django.db import models
+
 from wagtail.images.models import AbstractImage, AbstractRendition, Image
 from wagtail.models import Collection
+
+import requests
+from PIL.Image import DecompressionBombError, DecompressionBombWarning
+
+logger = logging.getLogger(__name__)
 
 
 class CustomImage(AbstractImage):
@@ -21,6 +28,33 @@ class Rendition(AbstractRendition):
 
     class Meta:
         unique_together = [["image", "filter_spec", "focal_point_key"]]
+
+
+class ImageImportException(Exception):
+    pass
+
+
+def get_validated_image_form(image_file, image_data):
+    """Validate imported images as if uploaded through the Wagtail admin"""
+    from wagtail.images.forms import get_image_form
+
+    CustomImageForm = get_image_form(CustomImage)
+    image_form = CustomImageForm(image_data, {"file": image_file})
+    with warnings.catch_warnings():
+        # Escalate DecompressionBombWarning to error level
+        warnings.simplefilter("error", DecompressionBombWarning)
+        try:
+            if not image_form.is_valid():
+                for field_name, errors in image_form.errors.items():
+                    logger.warning(
+                        f"Image validation failed in {field_name} importing {image_file.name} from TalentLink: {errors}"
+                    )
+        except (DecompressionBombError, DecompressionBombWarning) as e:
+            logger.warning(
+                f"Image validation failed importing {image_file.name} from TalentLink: {e}"
+            )
+            image_form.add_error("file", e)
+    return image_form
 
 
 def import_image_from_url(
@@ -40,12 +74,17 @@ def import_image_from_url(
         image_file = ImageFile(
             BytesIO(image_file_response.content), name=image_filename
         )
-        new_image = CustomImage(
-            title=title,
-            file=image_file,
-            talentlink_image_id=talentlink_image_id,
-            collection=collection,
-        )
-        # new_image.collection = collection
-        new_image.save()
+        image_data = {
+            "title": title,
+            "talentlink_image_id": talentlink_image_id,
+            "collection": collection,
+        }
+
+        image_form = get_validated_image_form(image_file, image_data)
+        if image_form.errors:
+            raise ImageImportException(
+                f"File rejected due to validation errors:\n{image_form.errors.as_text()}"
+            )
+
+        new_image = image_form.save()
         return new_image

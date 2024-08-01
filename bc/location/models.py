@@ -1,10 +1,12 @@
 from django.db import models
 from django.db.models.expressions import Case, When
 from django.utils.functional import cached_property
+
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel
 from wagtail.fields import RichTextField, StreamField
 from wagtail.rich_text import expand_db_html
+
 from wagtailgeowidget.helpers import geosgeometry_str_to_struct
 from wagtailgeowidget.panels import GeoAddressPanel, GoogleMapsPanel
 
@@ -18,7 +20,7 @@ class LocationIndexPage(BasePage):
     subpage_types = ["location.LocationPage"]
 
     body = RichTextField(editor="with_h2")
-    additional_info = StreamField(StoryBlock(), use_json_field=True, blank=True)
+    additional_info = StreamField(StoryBlock(), blank=True)
 
     content_panels = BasePage.content_panels + [
         FieldPanel("body"),
@@ -63,7 +65,6 @@ class LocationPage(BasePage):
 
     additional_info = StreamField(
         StoryBlock(),
-        use_json_field=True,
         blank=True,
         help_text=(
             "Additional information about this location like opening times, facilities, etc. "
@@ -94,7 +95,6 @@ class LocationPage(BasePage):
 
     body = StreamField(
         StoryBlock(),
-        use_json_field=True,
         help_text="Generic body content. This will appear after the map in the template.",
     )
 

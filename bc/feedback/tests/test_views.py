@@ -3,9 +3,11 @@ from http import HTTPStatus
 
 from django.test import Client, RequestFactory, TestCase, override_settings
 from django.urls import reverse
-from freezegun import freeze_time
+
 from wagtail import models as wagtail_models
 from wagtail.test.utils import WagtailTestUtils
+
+from freezegun import freeze_time
 
 from bc.feedback.models import FeedbackComment, UsefulnessFeedback
 from bc.feedback.views import FeedbackCommentReportView, UsefulnessFeedbackReportView
@@ -392,8 +394,8 @@ class TestUsefulnessFeedbackReportView(WagtailTestUtils, TestCase):
         request = factory.get(
             self.url,
             {
-                "created_after": "2024-01-08",
-                "created_before": "2024-01-10",
+                "created_from": "2024-01-08",
+                "created_to": "2024-01-10",
                 "useful": True,
             },
         )
@@ -417,8 +419,8 @@ class TestUsefulnessFeedbackReportView(WagtailTestUtils, TestCase):
         request = factory.get(
             self.url,
             {
-                "created_after": "2024-01-08",
-                "created_before": "2024-01-10",
+                "created_from": "2024-01-08",
+                "created_to": "2024-01-10",
                 "useful": False,
             },
         )
@@ -438,7 +440,7 @@ class TestUsefulnessFeedbackReportView(WagtailTestUtils, TestCase):
         # Create a request with date filters without hits
         request = factory.get(
             self.url,
-            {"created_after": "2024-01-10"},
+            {"created_from": "2024-01-10"},
         )
 
         # Set the request user
@@ -482,7 +484,7 @@ class TestFeedbackCommentReportView(WagtailTestUtils, TestCase):
         # Create a request with date filters with expected hits
         request = factory.get(
             self.url,
-            {"created_after": "2024-01-08", "created_before": "2024-01-10"},
+            {"created_from": "2024-01-08", "created_to": "2024-01-10"},
         )
 
         # Set the request user
@@ -504,7 +506,7 @@ class TestFeedbackCommentReportView(WagtailTestUtils, TestCase):
         factory = RequestFactory()
 
         # Create a request with date filters without hits
-        request = factory.get(self.url, {"created_after": "2024-01-10"})
+        request = factory.get(self.url, {"created_from": "2024-01-10"})
 
         # Set the request user
         request.user = self.user

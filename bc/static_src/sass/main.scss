@@ -90,6 +90,9 @@
 @import 'components/intro-text';
 @import 'components/blog-categories';
 @import 'components/map-switcher';
+@import 'components/fis-ehcco-search';
+@import 'components/search-promotions';
+@import 'components/top-tasks';
 
 // Pages
 @import 'pages/blogglobalhomepage';
@@ -98,6 +101,7 @@
 // Layout
 @import 'layout/footer';
 @import 'layout/header';
+@import 'layout/page';
 @import 'layout/sidebar';
 
 // Utilities

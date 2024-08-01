@@ -11,7 +11,6 @@ import Carousel from './components/carousel';
 import ConditionalField from './components/conditional-field';
 import HeightEqualizer from './components/height-equalizer';
 import ProgressBar from './components/progress-bar';
-import ToggleTarget from './components/toggle-target';
 import VideoModal from './components/video-modal';
 import FormSubmit from './components/form-submit';
 import Filters from './components/job-filters';
@@ -20,6 +19,7 @@ import Chart from './components/chart';
 import GoogleMap from './components/map';
 import Steps from './components/steps';
 import ContentsScroller from './components/contents-scroller';
+import EHCCOSearch from './components/fis-ehcco-search';
 
 // Add polyfill fix for forEach carousel
 import foreachPolyfill from './polyfills/foreach-polyfill';
@@ -111,12 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
         new ProgressBar(progressbar);
     }
 
-    for (const toggleTarget of document.querySelectorAll(
-        ToggleTarget.selector(),
-    )) {
-        new ToggleTarget(toggleTarget);
-    }
-
     for (const videomodal of document.querySelectorAll(VideoModal.selector())) {
         new VideoModal(videomodal);
     }
@@ -149,6 +143,10 @@ document.addEventListener('DOMContentLoaded', () => {
         MapListSwitcher.selector(),
     )) {
         new MapListSwitcher(element);
+    }
+
+    for (const search of document.querySelectorAll(EHCCOSearch.selector())) {
+        new EHCCOSearch(search);
     }
 
     // Test react - add a div with a data attribute of `data-test-react` to test

@@ -3,8 +3,10 @@ import copy
 from django import forms
 from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
+from django.urls import reverse
 from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
+
 from wagtail import blocks
 from wagtail.admin.staticfiles import versioned_static
 from wagtail.contrib.table_block.blocks import TableBlock as BaseTableBlock
@@ -14,7 +16,6 @@ from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 
 from .constants import PLAIN_TEXT_TABLE_HELP_TEXT, RICH_TEXT_FEATURES
-from .models import ImportantPages
 from .utils import convert_markdown_links_to_html, is_number
 from .widgets import BarChartInput, LineChartInput, PieChartInput
 
@@ -189,11 +190,54 @@ class LocalAreaLinksBlock(blocks.StructBlock):
             "Wycombe": value["wycombe_url"],
         }
         if parent_context is not None and parent_context.get("request"):
+            from .models import ImportantPages
+
             request = parent_context["request"]
             context["contact_us_page"] = ImportantPages.for_request(
                 request
             ).contact_us_page
         return context
+
+
+class LinkBlockValue(blocks.StructValue):
+    def get_text(self):
+        if title := self.get("title"):
+            return title
+        if page := self.get("page"):
+            return page.specific.listing_title or page.title
+        return ""
+
+    def get_url(self):
+        if page := self.get("page"):
+            return page.url
+        if url := self.get("url"):
+            return url
+        return ""
+
+
+class ExternalLinkBlock(blocks.StructBlock):
+    url = blocks.URLBlock()
+    title = blocks.CharBlock()
+
+    class Meta:
+        icon = "link"
+        label = "External link"
+        value_class = LinkBlockValue
+
+
+class InternalLinkBlock(blocks.StructBlock):
+    page = blocks.PageChooserBlock()
+    title = blocks.CharBlock(required=False)
+
+    class Meta:
+        icon = "link"
+        label = "Internal link"
+        value_class = LinkBlockValue
+
+
+class LinkBlock(blocks.StreamBlock):
+    external_link = ExternalLinkBlock()
+    internal_link = InternalLinkBlock()
 
 
 class ButtonBlock(blocks.StructBlock):
@@ -303,6 +347,25 @@ class BaseChartBlock(BaseTableBlock):
                 removed_count += 1
 
         return cleaned_table
+
+    def clean(self, value):
+        """
+        In Wagtail 6.0, the TableBlock header controls were switched to
+        a field (`table_header_choice`) that requires user input.
+
+        References:
+        - https://docs.wagtail.org/en/stable/releases/6.0.html#accessibility-improvements
+        - https://github.com/wagtail/wagtail/blob/ab9d1edb/wagtail/contrib/table_block/blocks.py#L162
+        - https://github.com/wagtail/wagtail/blob/ab9d1edb/wagtail/contrib/table_block/blocks.py#L131-L134
+
+        This ensures that `table_header_choice` is not empty,
+        otherwise, a ValidationError is raised.
+
+        Since the chart blocks *always* have row and column labels,
+        we set the value of `table_header_choice` to "both"
+        """
+        value["table_header_choice"] = "both"
+        return super().clean(value)
 
     class Meta:
         abstract = True
@@ -501,6 +564,23 @@ class PieChartBlock(BaseChartBlock):
         return super().render(new_value, new_context)
 
 
+class EHCCoSearchBlock(blocks.StaticBlock):
+    class Meta:
+        admin_text = "This will be replaced by the EHC CoSearch widget"
+        icon = "placeholder"
+        template = "patterns/molecules/streamfield/blocks/ehc_cosearch_block.html"
+
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context)
+        context["get_matching_schools_url"] = reverse(
+            "family_information:get_matching_schools"
+        )
+        context["get_corresponding_ehc_co_url"] = reverse(
+            "family_information:get_corresponding_ehc_co"
+        )
+        return context
+
+
 class BaseStoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(
         form_classname="full title",
@@ -538,6 +618,7 @@ class BaseStoryBlock(blocks.StreamBlock):
     button = ButtonBlock()
     highlight = HighlightBlock()
     inset_text = InsetTextBlock()
+    ehc_co_search = EHCCoSearchBlock(label="EHCCo Search")
 
     class Meta:
         abstract = True

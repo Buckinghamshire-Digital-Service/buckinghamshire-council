@@ -10,7 +10,6 @@
             <a href="/" class="header__heading-title">{% header_title %}</a>
 
             <div class="header__search">
-                {% if is_pensions_site %}
                 <form action="{% url 'search' %}" method="get" role="search" class="form form--header-search">
                     <label class="u-sr-only" for="search">Search this website</label>
                     <input class="input" id="search" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
@@ -18,16 +17,8 @@
                         {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke icon--white button__icon" %}
                     </button>
                 </form>
-                {% else %}
-                <button data-toggle-target="search-header" class="header__search-button">
-                    {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="header__search-icon" %}
-                    <span class="header__search-text">Search</span>
-                    {% include "patterns/atoms/icons/icon.html" with name="chevron-small" classname="header__search-icon header__search-icon--rotate" %}
-                </button>
-                {% endif %}
             </div>
         </div>
     </div>
 </div>
 
-{% include "patterns/organisms/search-header/search-header--fis.html" %}

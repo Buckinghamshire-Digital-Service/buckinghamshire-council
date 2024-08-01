@@ -1,10 +1,12 @@
 from django.templatetags.static import static
 from django.urls import path, reverse
 from django.utils.safestring import mark_safe
+
 from wagtail import hooks
 from wagtail.admin.menu import AdminOnlyMenuItem
 from wagtail.admin.rich_text.converters.html_to_contentstate import BlockElementHandler
 from wagtail.admin.rich_text.editors.draftail import features as draftail_features
+
 from wagtail_modeladmin.options import ModelAdmin, ModelAdminGroup, modeladmin_register
 from wagtailorderable.modeladmin.mixins import OrderableMixin
 
@@ -79,7 +81,7 @@ def register_unpublished_changes_report_menu_item():
     return AdminOnlyMenuItem(
         "Pages with unpublished changes",
         reverse("unpublished_changes_report"),
-        classname="icon icon-" + UnpublishedChangesReportView.header_icon,
+        icon_name=UnpublishedChangesReportView.header_icon,
         order=700,
     )
 
@@ -100,7 +102,7 @@ def register_missing_metadata_report_menu_item():
     return AdminOnlyMenuItem(
         "Pages with missing metadata",
         reverse("missing_metadata_report"),
-        classname="icon icon-" + MissingMetadataReportView.header_icon,
+        icon_name=MissingMetadataReportView.header_icon,
         order=700,
     )
 

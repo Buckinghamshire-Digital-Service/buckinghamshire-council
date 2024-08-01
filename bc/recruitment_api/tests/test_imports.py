@@ -6,12 +6,14 @@ from unittest import mock
 from django.core.management import call_command
 from django.test import TestCase
 from django.utils import timezone
-from freezegun import freeze_time
+
 from wagtail.models import Page
+
+from freezegun import freeze_time
 
 from bc.documents.models import CustomDocument
 from bc.documents.tests.fixtures import DocumentFactory
-from bc.images.models import CustomImage
+from bc.images.models import CustomImage, ImageImportException
 from bc.images.tests.fixtures import ImageFactory, mock_import_image_from_url
 from bc.recruitment.constants import JOB_BOARD_CHOICES
 from bc.recruitment.models import JobSubcategory, TalentLinkJob
@@ -1317,3 +1319,42 @@ class LogoTest(TestCase, ImportTestMixin):
             CustomImage.objects.get(id=logo.id),
             msg="Job 2 and its logo should be unaffected when Job 1 is deleted.",
         )
+
+    def test_bad_logo_is_not_imported(
+        self, mock_import_image_from_url, mock_get_client
+    ):
+        original_image_count = CustomImage.objects.all().count()
+        advertisements = [
+            get_advertisement(talentlink_id=1, title="New title 1"),
+            get_advertisement(talentlink_id=2, title="New title 2"),
+        ]
+
+        job_1_get_logo_response = [get_logo(id="aaa")]
+        job_2_get_logo_response = [get_logo(id="bbb")]
+        logos = [job_1_get_logo_response, job_2_get_logo_response]
+
+        mock_import_image_from_url.side_effect = ImageImportException(
+            "File rejected due to validation errors."
+        )
+
+        mock_get_client.return_value = self.get_mocked_client(
+            advertisements, logos=logos
+        )
+
+        out = StringIO()
+        call_command("import_jobs", stdout=out)
+        out.seek(0)
+        output = out.read()
+
+        self.assertIn("2 new jobs created", output)
+        self.assertIn("0 new images imported", output)
+        self.assertEqual(CustomImage.objects.all().count(), original_image_count)
+        self.assertEqual(
+            TalentLinkJob.objects.get(talentlink_id=1).logo,
+            None,
+        )
+        self.assertEqual(
+            TalentLinkJob.objects.get(talentlink_id=2).logo,
+            None,
+        )
+        self.assertIn("Error occurred while importing logo image", output)
