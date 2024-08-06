@@ -1,8 +1,10 @@
 # Release History
 
-## Unreleased
+## 78.0 (2024-08-06)
 
-- ...
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/77.0...78.0>
+
+- [Directory search block](https://trello.com/c/09eNT1iH/6-fis-directory-search-widget-fe-and-be) ([Merge request #712](https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/712))
 
 ## 77.0 (2024-07-29)
 
