@@ -24,7 +24,8 @@ def register_service_directory_model_viewset_group():
 
 if wagtail.VERSION >= (6, 2):
     raise Exception(
-        "ModelViewSet permissions should be registered automatically on Wagtail 6.2"
+        "ModelViewSet permissions should be registered automatically on Wagtail 6.2. "
+        "Please re-test if they do in the groups."
     )
 
 

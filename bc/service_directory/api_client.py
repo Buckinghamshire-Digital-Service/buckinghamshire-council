@@ -21,7 +21,7 @@ class ServiceDirectoryClientError(Exception):
 
 
 class ServiceDirectoryRequestsClient(BaseServiceDirectoryClient):
-    timeout: float
+    timeout: Optional[float]
     base_url: str
 
     def __init__(self, *, base_url: str, timeout: Optional[float] = 5):
@@ -63,11 +63,7 @@ class ServiceDirectoryRequestsClient(BaseServiceDirectoryClient):
     def construct_url(self, /, path: str, *, base_url: Optional[str] = None) -> str:
         if base_url is None:
             base_url = self.base_url
-        if path.startswith("/"):
-            path = path[1:]
-        if not base_url.endswith("/"):
-            base_url = base_url + "/"
-        return f"{base_url}{path}"
+        return "/".join((base_url.rstrip("/"), path.lstrip("/")))
 
 
 def get_api_client_class() -> Type[BaseServiceDirectoryClient]:

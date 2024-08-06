@@ -12,16 +12,16 @@ class ServiceDirectoryQuerySet(models.QuerySet):
 
 class ServiceDirectory(index.Indexed, models.Model):
     FRONTEND_URL_HELP_TEXT = (
-        "What URL users use to access the directory interface, "
-        'e.g. "https://directory.familyinfo.buckinghamshire.gov.uk/". '
+        "The URL for users use to access the directory interface, "
+        'for example: "https://directory.familyinfo.buckinghamshire.gov.uk/". '
         "This is used to generate links to the directory services"
     )
     DIRECTORY_API_URL_HELP_TEXT = (
-        "What URL the specific directory API is available at, "
-        'e.g. "https://api.familyinfo.buckinghamshire.gov.uk/api/v1"'
+        "The URL of the specific directory API is available at, "
+        'for example: "https://api.familyinfo.buckinghamshire.gov.uk/api/v1"'
     )
     MANAGEMENT_API_URL_HELP_TEXT = (
-        "What URL the management directory API is available at, e.g. "
+        "The URL of the directory management API is available at, for example: "
         '"https://manage-directory-listing.buckinghamshire.gov.uk/api/v1"'
     )
 
@@ -37,7 +37,7 @@ class ServiceDirectory(index.Indexed, models.Model):
     directory_api_slug = models.CharField(
         max_length=255,
         verbose_name="directory API slug",
-        help_text='Slug used to identify this directory in the directory API, e.g. "bfis"',
+        help_text='Slug used to identify this directory in the directory API, for example: "bfis"',
     )
     management_api_url = models.URLField(
         verbose_name="management API URL", help_text=MANAGEMENT_API_URL_HELP_TEXT
