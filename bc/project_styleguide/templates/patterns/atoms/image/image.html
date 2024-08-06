@@ -1,5 +1,5 @@
 <picture>
     <source srcset="{{ desktop_image.url }}" media="(min-width: 768px)">
     <source srcset="{{ mobile_image.url }}, {{ retina_mobile_image.url }} 2x">
-    <img src="{{ desktop_image.url }}" alt="{{ alt }}">
+    <img src="{{ desktop_image.url }}" alt="{{ alt }}" {% if classes %}class="{{ classes }}"{% endif %}>
 </picture>

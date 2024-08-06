@@ -20,6 +20,7 @@ import GoogleMap from './components/map';
 import Steps from './components/steps';
 import ContentsScroller from './components/contents-scroller';
 import EHCCOSearch from './components/fis-ehcco-search';
+import LocationAutocomplete from './components/location-autocomplete';
 
 // Add polyfill fix for forEach carousel
 import foreachPolyfill from './polyfills/foreach-polyfill';
@@ -147,6 +148,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (const search of document.querySelectorAll(EHCCOSearch.selector())) {
         new EHCCOSearch(search);
+    }
+
+    for (const locationAutocomplete of document.querySelectorAll(
+        LocationAutocomplete.selector(),
+    )) {
+        new LocationAutocomplete(locationAutocomplete);
     }
 
     // Test react - add a div with a data attribute of `data-test-react` to test

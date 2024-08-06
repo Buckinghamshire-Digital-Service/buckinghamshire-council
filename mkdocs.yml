@@ -38,6 +38,7 @@ nav:
       - 'Recruitment site': 'recruitment-site.md'
       - 'Complaints and requests': 'complaints-and-requests.md'
       - 'Live chat client': 'live-chat-client.md'
+      - 'Location autocomplete': 'location-autocomplete.md'
       - 'Location maps widget': 'location-maps-widget.md'
       - 'Postcode lookup': 'postcode-lookup.md'
   - 'Contributing': 'contributing.md'

@@ -1,7 +1,10 @@
 import copy
+import logging
+from urllib.parse import parse_qsl
 
 from django import forms
 from django.core.exceptions import ValidationError
+from django.db.models import TextChoices
 from django.forms.utils import ErrorList
 from django.urls import reverse
 from django.utils.functional import cached_property
@@ -18,6 +21,8 @@ from wagtail.images.blocks import ImageChooserBlock
 from .constants import PLAIN_TEXT_TABLE_HELP_TEXT, RICH_TEXT_FEATURES
 from .utils import convert_markdown_links_to_html, is_number
 from .widgets import BarChartInput, LineChartInput, PieChartInput
+
+logger = logging.getLogger(__name__)
 
 
 class TableBlock(BaseTableBlock):
@@ -578,6 +583,70 @@ class EHCCoSearchBlock(blocks.StaticBlock):
         context["get_corresponding_ehc_co_url"] = reverse(
             "family_information:get_corresponding_ehc_co"
         )
+
+
+class Directory(TextChoices):
+    BUCKS_ONLINE_DIRECTORY = "bucks_online_directory", "Bucks Online Directory"
+    FAMILYINFO = "familyinfo", "Family Information Service"
+    SEND = "send", "SEND"
+
+
+def get_directory_url(directory: Directory, /) -> str:
+    if directory is Directory.BUCKS_ONLINE_DIRECTORY:
+        return "https://directory.buckinghamshire.gov.uk/"
+    elif any(directory is member for member in [Directory.FAMILYINFO, Directory.SEND]):
+        return (
+            f"https://directory.{directory.value}.buckinghamshire.gov.uk/"  # noqa: E231
+        )
+    else:
+        raise NotImplementedError(
+            f"get_directory_url is not implemented for: {repr(directory)}"
+        )
+
+
+class DirectorySearchBlock(blocks.StructBlock):
+    title = blocks.CharBlock(required=True, help_text="Title of the widget")
+    search_placeholder = blocks.CharBlock(
+        required=False, help_text="Placeholder text for the search input"
+    )
+    directory = blocks.ChoiceBlock(
+        choices=Directory.choices,
+        required=True,
+        help_text="Which directory to search",
+    )
+    extra_query_params = blocks.CharBlock(
+        required=False,
+        help_text=(
+            "Extra query parameters to add to the search, e.g. ?collection=things-to-do&needs=autism"
+        ),
+    )
+
+    class Meta:
+        template = "patterns/molecules/streamfield/blocks/search-widget.html"
+        icon = "search"
+
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context)
+        try:
+            directory = Directory(value["directory"])
+        except ValueError:
+            logger.error("Invalid directory value", exc_info=True)
+            return context
+
+        # Build the query params and the target URL for the directory search.
+        if value["extra_query_params"]:
+            extra_query_params = value["extra_query_params"]
+            if extra_query_params.startswith("?"):
+                extra_query_params = extra_query_params[1:]
+            extra_query_params = parse_qsl(extra_query_params)
+            context["extra_query_params"] = extra_query_params
+
+        try:
+            context["directory_url"] = get_directory_url(directory)
+        except NotImplementedError:
+            logger.exception("Could not get directory URL.")
+            context["directory_url"] = None
+
         return context
 
 
@@ -619,6 +688,7 @@ class BaseStoryBlock(blocks.StreamBlock):
     highlight = HighlightBlock()
     inset_text = InsetTextBlock()
     ehc_co_search = EHCCoSearchBlock(label="EHCCo Search")
+    directory_search = DirectorySearchBlock()
 
     class Meta:
         abstract = True

@@ -1,0 +1,25 @@
+.location-autocomplete {
+    position: relative;
+
+    .autocomplete__menu {
+        position: absolute;
+        width: 100%;
+        border: 1px solid $color--charcoal;
+        z-index: 10;
+
+        &--hidden {
+            display: none;
+        }
+    }
+
+    .autocomplete__option {
+        padding: $grid--small;
+        cursor: pointer;
+        background-color: $color--white;
+
+        &:hover,
+        &:focus {
+            background-color: $color--charcoal-25;
+        }
+    }
+}
