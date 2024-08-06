@@ -14,3 +14,6 @@ SESSION_COOKIE_SECURE = True
 # Ensure that the CSRF cookie is only sent by browsers under an HTTPS connection.
 # https://docs.djangoproject.com/en/stable/ref/settings/#csrf-cookie-secure
 CSRF_COOKIE_SECURE = True
+
+# Error if there aren't enough proxies in between
+XFF_ALWAYS_PROXY = True

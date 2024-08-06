@@ -11,7 +11,6 @@ import Carousel from './components/carousel';
 import ConditionalField from './components/conditional-field';
 import HeightEqualizer from './components/height-equalizer';
 import ProgressBar from './components/progress-bar';
-import ToggleTarget from './components/toggle-target';
 import VideoModal from './components/video-modal';
 import FormSubmit from './components/form-submit';
 import Filters from './components/job-filters';
@@ -111,12 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
         ProgressBar.selector(),
     )) {
         new ProgressBar(progressbar);
-    }
-
-    for (const toggleTarget of document.querySelectorAll(
-        ToggleTarget.selector(),
-    )) {
-        new ToggleTarget(toggleTarget);
     }
 
     for (const videomodal of document.querySelectorAll(VideoModal.selector())) {
