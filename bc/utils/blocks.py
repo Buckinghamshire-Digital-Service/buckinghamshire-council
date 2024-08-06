@@ -1,4 +1,6 @@
 import copy
+import logging
+from urllib.parse import parse_qsl
 
 from django import forms
 from django.core.exceptions import ValidationError
@@ -19,6 +21,8 @@ from wagtail.images.blocks import ImageChooserBlock
 from .constants import PLAIN_TEXT_TABLE_HELP_TEXT, RICH_TEXT_FEATURES
 from .utils import convert_markdown_links_to_html, is_number
 from .widgets import BarChartInput, LineChartInput, PieChartInput
+
+logger = logging.getLogger(__name__)
 
 
 class TableBlock(BaseTableBlock):
@@ -684,6 +688,7 @@ class BaseStoryBlock(blocks.StreamBlock):
     highlight = HighlightBlock()
     inset_text = InsetTextBlock()
     ehc_co_search = EHCCoSearchBlock(label="EHCCo Search")
+    directory_search = DirectorySearchBlock()
 
     class Meta:
         abstract = True

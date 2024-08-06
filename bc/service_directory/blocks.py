@@ -88,9 +88,7 @@ class DirectoryServicesBlock(blocks.StructBlock):
 
         return cleaned_data
 
-    def get_context(
-        self, value, parent_context=None
-    ) -> _DirectoryServicesBlockContext:
+    def get_context(self, value, parent_context=None) -> _DirectoryServicesBlockContext:
         context = super().get_context(value, parent_context=parent_context)
 
         directory = value["service_directory"]
