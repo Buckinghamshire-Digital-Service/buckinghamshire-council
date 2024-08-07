@@ -9,8 +9,8 @@ from django.utils.text import Truncator
 from wagtail import blocks
 
 from bc.service_directory import api_schema
+from bc.service_directory import resources as api_resources
 from bc.service_directory.models import ServiceDirectory, Taxonomy
-from bc.service_directory.resources import ServiceDirectoryAPIResources
 from bc.service_directory.services import (
     format_service_detail_page_url,
     format_services_listing_page_url,
@@ -139,7 +139,7 @@ class DirectoryServicesBlock(blocks.StructBlock):
         client = api_client.get_api_client_class()(
             base_url=directory.directory_api_url,
         )
-        api = ServiceDirectoryAPIResources(client=client)
+        api = api_resources.ServiceDirectoryAPIResources(client=client)
         taxonomies = [category.remote_slug for category in categories]
 
         try:
@@ -149,7 +149,10 @@ class DirectoryServicesBlock(blocks.StructBlock):
                 per_page=4,
                 page=1,
             )
-        except api_client.ServiceDirectoryClientError as e:
+        except (
+            api_client.ServiceDirectoryClientError,
+            api_resources.ServiceDirectoryValidationError,
+        ) as e:
             raise CouldNotFetchActivities from e
 
         # Context for building the URL.

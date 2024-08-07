@@ -12,7 +12,6 @@ class Service:
     description: str
     id: int
     name: str
-    url: str
     free: Optional[bool]
     local_offer: Optional[Dict[str, Any]]
     updated_at: datetime.datetime = dataclasses.field(

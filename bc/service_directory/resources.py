@@ -1,7 +1,13 @@
 from typing import List, Sequence, cast
 
+from marshmallow.exceptions import ValidationError as MarshmallowValidationError
+
 from . import api_schema
 from .api_client import BaseServiceDirectoryClient
+
+
+class ServiceDirectoryValidationError(Exception):
+    pass
 
 
 class BaseResources:
@@ -33,7 +39,12 @@ class ServiceDirectoryAPIResources(BaseResources):
                 "page": str(page),
             },
         )
-        services = service_schema.load(response["content"], many=True)
+        if "content" not in response:
+            raise ServiceDirectoryValidationError("Missing 'content' key in response")
+        try:
+            services = service_schema.load(response["content"], many=True)
+        except MarshmallowValidationError as e:
+            raise ServiceDirectoryValidationError from e
         return cast(List[api_schema.Service], services)
 
 
