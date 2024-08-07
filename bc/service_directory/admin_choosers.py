@@ -12,7 +12,7 @@ class ServiceDirectoryChooserViewSet(ChooserViewSet):
 
 
 service_directory_chooser_viewset = ServiceDirectoryChooserViewSet(
-    "service-directory-chooser"
+    "service-directory/directory-chooser"
 )
 
 
@@ -25,7 +25,20 @@ class TaxonomyChooserViewSet(ChooserViewSet):
     per_page = 50
 
     def get_object_list(self):
-        return self.model.objects.select_related("fetched_with_directory")
+        return self.model.objects.select_related("fetched_with")
 
 
-taxonomy_chooser_viewset = TaxonomyChooserViewSet("service-directory-taxonomy-chooser")
+taxonomy_chooser_viewset = TaxonomyChooserViewSet("service-directory/taxonomy-chooser")
+
+
+class DirectoryManagementAPIChooserViewSet(ChooserViewSet):
+    choose_another_text = "Choose a management API"
+    choose_one_text = "Choose a management API"
+    edit_item_text = "Edit this management API"
+    icon = "cog"
+    model = models.DirectoryManagementAPI
+
+
+directory_management_api_chooser_viewset = DirectoryManagementAPIChooserViewSet(
+    "service-directory/directory-management-api-chooser"
+)

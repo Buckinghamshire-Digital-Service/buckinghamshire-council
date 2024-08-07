@@ -5,9 +5,43 @@ from wagtail.admin.panels import FieldPanel, HelpPanel, MultiFieldPanel
 from wagtail.search import index
 
 
-class ServiceDirectoryQuerySet(models.QuerySet):
+class DirectoryManagementAPIQuerySet(models.QuerySet):
     def enabled(self):
         return self.filter(is_enabled=True)
+
+
+class DirectoryManagementAPI(models.Model):
+    MANAGEMENT_API_URL_HELP_TEXT = (
+        "The URL of the directory management API is available at, for example: "
+        '"https://manage-directory-listing.buckinghamshire.gov.uk/api/v1"'
+    )
+    admin_name = models.CharField(max_length=128)
+    is_enabled = models.BooleanField(default=True)
+    api_url = models.URLField(
+        verbose_name="API URL", help_text=MANAGEMENT_API_URL_HELP_TEXT
+    )
+
+    objects = DirectoryManagementAPIQuerySet.as_manager()
+
+    panels = [
+        FieldPanel("admin_name"),
+        FieldPanel("is_enabled"),
+        FieldPanel("api_url"),
+    ]
+
+    search_fields = [
+        index.SearchField("admin_name"),
+        index.AutocompleteField("admin_name"),
+        index.SearchField("api_url"),
+        index.AutocompleteField("api_url"),
+        index.FilterField("is_enabled"),
+    ]
+
+    class Meta:
+        verbose_name = "directory management API"
+
+    def __str__(self) -> str:
+        return self.admin_name
 
 
 class ServiceDirectory(index.Indexed, models.Model):
@@ -20,12 +54,7 @@ class ServiceDirectory(index.Indexed, models.Model):
         "The URL of the specific directory API is available at, "
         'for example: "https://api.familyinfo.buckinghamshire.gov.uk/api/v1"'
     )
-    MANAGEMENT_API_URL_HELP_TEXT = (
-        "The URL of the directory management API is available at, for example: "
-        '"https://manage-directory-listing.buckinghamshire.gov.uk/api/v1"'
-    )
 
-    is_enabled = models.BooleanField(default=True)
     frontend_url = models.URLField(
         verbose_name="frontend interface URL", help_text=FRONTEND_URL_HELP_TEXT
     )
@@ -39,15 +68,17 @@ class ServiceDirectory(index.Indexed, models.Model):
         verbose_name="directory API slug",
         help_text='Slug used to identify this directory in the directory API, for example: "bfis"',
     )
-    management_api_url = models.URLField(
-        verbose_name="management API URL", help_text=MANAGEMENT_API_URL_HELP_TEXT
+    directory_management_api = models.ForeignKey(
+        DirectoryManagementAPI,
+        on_delete=models.PROTECT,
+        verbose_name="directory management API",
+        help_text="Directory management API used to fetch taxonomies for use with this directory",
     )
-    objects = ServiceDirectoryQuerySet.as_manager()
 
     panels = [
         FieldPanel("admin_name"),
-        FieldPanel("is_enabled"),
         FieldPanel("frontend_url"),
+        FieldPanel("directory_management_api"),
         MultiFieldPanel(
             [
                 FieldPanel("directory_api_url"),
@@ -55,15 +86,14 @@ class ServiceDirectory(index.Indexed, models.Model):
             ],
             heading="Directory API",
         ),
-        FieldPanel("management_api_url"),
     ]
 
     search_fields = [
         index.SearchField("admin_name"),
         index.AutocompleteField("admin_name"),
-        index.FilterField("is_enabled"),
         index.SearchField("directory_api_slug"),
         index.AutocompleteField("directory_api_slug"),
+        index.FilterField("directory_management_api"),
     ]
 
     class Meta:
@@ -78,8 +108,8 @@ class Taxonomy(index.Indexed, models.Model):
         "<strong>{}</strong>",
         "Do not edit these values as they come from the API! This is enabled for debugging purposes only.",
     )
-    fetched_with_directory = models.ForeignKey(
-        ServiceDirectory, on_delete=models.CASCADE, related_name="taxonomies"
+    fetched_with = models.ForeignKey(
+        DirectoryManagementAPI, on_delete=models.CASCADE, related_name="taxonomies"
     )
     label = models.CharField(max_length=255)
     level = models.IntegerField()
@@ -95,13 +125,15 @@ class Taxonomy(index.Indexed, models.Model):
         index.SearchField("remote_slug"),
         index.AutocompleteField("remote_slug"),
         index.RelatedFields(
-            "fetched_with_directory",
+            "fetched_with",
             [
                 index.SearchField("admin_name"),
                 index.AutocompleteField("admin_name"),
+                index.SearchField("api_url"),
+                index.AutocompleteField("api_url"),
             ],
         ),
-        index.FilterField("fetched_with_directory"),
+        index.FilterField("fetched_with"),
         index.FilterField("level"),
     ]
 
@@ -117,12 +149,12 @@ class Taxonomy(index.Indexed, models.Model):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["fetched_with_directory", "remote_id"],
-                name="unique_remote_id_per_directory",
+                fields=["fetched_with", "remote_id"],
+                name="unique_remote_id_per_directory_management_api",
             ),
         ]
         verbose_name = "service directory taxonomy"
         verbose_name_plural = "service directory taxonomies"
 
     def __str__(self) -> str:
-        return f"{self.label} ({self.fetched_with_directory})"
+        return f"{self.label} ({self.fetched_with})"

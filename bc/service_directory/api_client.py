@@ -46,7 +46,7 @@ class ServiceDirectoryRequestsClient(BaseServiceDirectoryClient):
     ) -> Mapping:
         kwargs.setdefault("timeout", self.timeout)
         url = self.construct_url(path)
-        logger.info("Making %s HTTP call to: %s (%r)", method, url, params)
+        logger.info("Making a %s HTTP call to: %s (params=%r)", method, url, params)
         try:
             response = self.session.request(method, url, params=params, **kwargs)
         except requests.RequestException as e:

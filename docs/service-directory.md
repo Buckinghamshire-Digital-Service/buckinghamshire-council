@@ -41,4 +41,4 @@ That is done on the view when the page request happens.
 Parsing and validation is done using https://github.com/lidatong/dataclasses-json/. Expect to see validation error exceptions if API shape changes.
 
 ## Configuration
-The API endpoints are configured in Wagtail admin under "Service directory" -> "Directories".
+The API endpoints are configured in Wagtail admin under "Service directory" -> "Directories" and "Service directory" -> "Management APIs".

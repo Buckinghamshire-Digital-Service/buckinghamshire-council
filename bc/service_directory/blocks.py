@@ -2,6 +2,7 @@ import datetime
 import logging
 from typing import Any, List, Mapping, Optional, Sequence, TypedDict
 
+from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django.utils.text import Truncator
 
@@ -71,16 +72,28 @@ class DirectoryServicesBlock(blocks.StructBlock):
         collection = cleaned_data.get("collection")
 
         errors = {}
+        category_errors = {}
 
-        for category in categories:
-            if category.fetched_with_directory != directory:
-                errors["categories"].setdefault("fetched_with_directory", []).append(
-                    "Categories must be fetched with the same directory as the service directory"
+        for i, category in enumerate(categories):
+            if category.fetched_with != directory.directory_management_api:
+                category_errors[i] = ValidationError(
+                    "Categories must be fetched with the same directory management API as associated "
+                    f"with the service directory: {directory.directory_management_api.admin_name}"
                 )
+        if category_errors:
+            errors["categories"] = blocks.ListBlockValidationError(
+                block_errors=category_errors
+            )
 
-        if collection is not None and collection.fetched_with_directory != directory:
-            errors["collection"].setdefault("fetched_with_directory", []).append(
-                "Collection must be fetched with the same directory as the service directory"
+        if (
+            collection is not None
+            and collection.fetched_with != directory.directory_management_api
+        ):
+            errors.setdefault("collection", []).append(
+                ValidationError(
+                    "Collection must be fetched with the same directory management API as associated with "
+                    f"the service directory: {directory.directory_management_api.admin_name}"
+                )
             )
 
         if errors:
