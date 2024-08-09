@@ -1,0 +1,128 @@
+.activities-listing {
+    background-color: $color--earth-light;
+    padding: 30px 0;
+    position: relative;
+    margin-bottom: 40px;
+
+    @include media-query(tablet-landscape) {
+        // On the location page there is a sidebar which offsets
+        // this component and leaves a gap on the right.
+        // This covers the gap with a pseudo element.
+        &::after {
+            content: '';
+            background-color: $color--earth-light;
+            position: absolute;
+            z-index: -1;
+            width: 162px;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            transform: translateX(100%);
+        }
+    }
+
+    &__heading {
+        margin: 0 0 30px;
+    }
+
+    &__inner {
+        margin: 0 auto;
+        padding-right: $grid--small;
+        padding-left: $grid--small;
+
+        @include media-query(tablet-portrait) {
+            padding-right: $grid--large;
+            padding-left: $grid--large;
+        }
+
+        @include media-query(tablet-landscape) {
+            padding: 0;
+            max-width: $wrapper--small;
+        }
+    }
+
+    &__item {
+        background-color: $color--white;
+        padding: 25px 20px;
+        position: relative;
+
+        // Add focus state to the whole card
+        &:focus-within {
+            outline: $color--mustard-10 solid 3px;
+        }
+
+        & + & {
+            margin-top: 20px;
+        }
+    }
+
+    &__item-heading {
+        margin-top: 0;
+    }
+
+    &__item-link {
+        color: $color--charcoal;
+
+        // Allow all of the card to be clickable
+        &::before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &__tags {
+        display: inline-flex;
+        flex-direction: column;
+
+        @include media-query(px550) {
+            display: block;
+        }
+    }
+
+    &__tag {
+        display: inline-block;
+        position: relative;
+        padding: 0 5px;
+        margin: 3px;
+
+        @include media-query(px550) {
+            margin: 0 5px;
+
+            &::after {
+                content: '•';
+                position: absolute;
+                right: -0.6em;
+                top: 0;
+            }
+
+            &:first-of-type {
+                margin-left: -3px;
+            }
+        }
+
+        &:last-of-type::after {
+            content: '';
+        }
+
+        &--highlight {
+            padding: 2px 5px;
+            background-color: $color--mustard-10;
+            margin-right: 0;
+            font-weight: $weight--bold;
+
+            &::after {
+                content: '';
+            }
+        }
+    }
+
+    &__cta-wrap {
+        text-align: center;
+        margin-top: 30px;
+    }
+}

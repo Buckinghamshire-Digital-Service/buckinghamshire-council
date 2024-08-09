@@ -41,6 +41,7 @@ nav:
       - 'Location autocomplete': 'location-autocomplete.md'
       - 'Location maps widget': 'location-maps-widget.md'
       - 'Postcode lookup': 'postcode-lookup.md'
+      - 'Service directory': service-directory.md
   - 'Contributing': 'contributing.md'
   - 'Technical debt': technical-debt.md
   - 'CHANGELOG': 'CHANGELOG.md'
