@@ -4,6 +4,7 @@
 
 - EHCCo widget: Update widget heading text
 - EHCCo widget: Make emails clickable by converting them to links
+- EHCCo widget: Change fallback text from TBC to awaiting allocation
 
 ## 78.2 (2024-08-14)
 
