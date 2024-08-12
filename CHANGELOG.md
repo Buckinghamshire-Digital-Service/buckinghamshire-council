@@ -3,6 +3,7 @@
 ## Unreleased
 
 - EHCCo widget: Update widget heading text
+- EHCCo widget: Make emails clickable by converting them to links
 
 ## 78.2 (2024-08-14)
 
