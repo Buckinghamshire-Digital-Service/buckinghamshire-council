@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- Don't cache WasteWizardPages, as they need to be cookie-sensitive
+
 ## 78.0 (2024-08-13)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/77.0...78.0>
