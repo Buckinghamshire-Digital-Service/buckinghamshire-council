@@ -3,7 +3,9 @@ from urllib.parse import unquote
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.shortcuts import redirect
+from django.utils.decorators import method_decorator
 from django.utils.functional import cached_property
+from django.views.decorators.cache import never_cache
 
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, InlinePanel
@@ -73,6 +75,7 @@ class StoryBlockWithWasteWizard(StoryBlock):
         block_counts = {"waste_wizard": {"max_num": 1}}
 
 
+@method_decorator(never_cache, name="serve")
 class WasteWizardPage(BaseInformationPage):
     template = "patterns/pages/standardpages/information_page.html"
     is_waste_wizard_page = True
