@@ -87,6 +87,7 @@ INSTALLED_APPS = [
     "bc.recruitment",
     "bc.recruitment_api",
     "bc.search.apps.SearchConfig",
+    "bc.service_directory",
     "bc.standardpages",
     "bc.step_by_step",
     "bc.users",
@@ -429,6 +430,10 @@ LOGGING = {
         "verbose": {
             "format": "[%(asctime)s][%(process)d][%(levelname)s][%(name)s] %(message)s"
         }
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "WARNING",
     },
     "loggers": {
         "bc": {"handlers": ["console"], "level": "INFO", "propagate": False},

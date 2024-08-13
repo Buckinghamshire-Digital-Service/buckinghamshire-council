@@ -1,0 +1,43 @@
+{% if activities %}
+    <div class="activities-listing u-breakout">
+        <div class="activities-listing__inner">
+            {% if heading %}
+                <h2 class="activities-listing__heading heading heading--l">{{ heading }}</h2>
+            {% endif %}
+
+            <ul>
+                {% for activity in activities %}
+                    <li class="activities-listing__item">
+                        <h3 class="activities-listing__item-heading heading heading--m">
+                            <a href="{{ activity.url }}" class="activities-listing__item-link">
+                                {{ activity.name }}
+                            </a>
+                        </h3>
+                        <p>{{ activity.intro }}</p>
+
+                        {% if activity.tags %}
+                            <ul class="activities-listing__tags">
+                                {% for tag in activity.tags %}
+                                    {% if tag.highlight %}
+                                        <li class="activities-listing__tag activities-listing__tag--highlight">
+                                            {% include "patterns/atoms/icons/icon.html" with name="tick" classname="icon--tag-tick activities-listing__tag-icon" %}
+                                            {{ tag.title }}
+                                        </li>
+                                    {% else %}
+                                        <li class="activities-listing__tag">{{ tag.title }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+
+            {% if view_all_activities_url %}
+                <div class="activities-listing__cta-wrap">
+                    <a href="{{ view_all_activities_url }}" class="button button--no-underline">View all activities</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}
