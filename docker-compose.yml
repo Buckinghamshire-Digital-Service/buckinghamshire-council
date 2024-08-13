@@ -63,7 +63,7 @@ services:
       - redis
       - elastic
   db:
-    image: postgres:13.10
+    image: postgres:16
     expose:
       - 5432
     environment:
