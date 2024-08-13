@@ -48,7 +48,11 @@
             data-height-equalizer
         >
             {% for subpage in page.other_child_pages %}
-                {% include "patterns/molecules/page-card/page-card.html" with classes="card--fis-index" has_heading=show_other_pages_heading page=subpage %}
+                {% if page.display_featured_images and forloop.counter <= 3 %}
+                    {% include "patterns/molecules/page-card/page-card.html" with show_image=True classes="card--fis-index" has_heading=show_other_pages_heading page=subpage %}
+                {% else %}
+                    {% include "patterns/molecules/page-card/page-card.html" with show_image=False classes="card--fis-index" has_heading=show_other_pages_heading page=subpage %}
+                {% endif %}
             {% endfor %}
         </section>
     </div>
