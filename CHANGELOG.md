@@ -1,5 +1,11 @@
 # Release History
 
+## 78.2 (2024-08-14)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/78.1...78.2>
+
+- Fix ehcco api calls being made to the wrong endpoint
+
 ## 78.1 (2024-08-13)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/78.0...78.1>

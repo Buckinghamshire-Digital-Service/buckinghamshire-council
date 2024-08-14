@@ -583,6 +583,7 @@ class EHCCoSearchBlock(blocks.StaticBlock):
         context["get_corresponding_ehc_co_url"] = reverse(
             "family_information:get_corresponding_ehc_co"
         )
+        return context
 
 
 class Directory(TextChoices):
