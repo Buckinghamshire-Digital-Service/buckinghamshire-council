@@ -1,10 +1,11 @@
-<!-- Search widget for finding the EHC coordinator for a school
-    The context variables available to this template are:
-    - get_matching_schools_url: URL to the API endpoint that returns matching schools,
-    use with the 'q' query parameter to search
-    - get_corresponding_ehc_co_url: URL to the API endpoint that returns the corresponding EHC coordinator for a school,
-    use with the 'school_id' query parameter to get the coordinator
--->
+{% comment %}
+Search widget for finding the EHC coordinator for a school
+The context variables available to this template are:
+- get_matching_schools_url: URL to the API endpoint that returns matching schools,
+use with the 'q' query parameter to search
+- get_corresponding_ehc_co_url: URL to the API endpoint that returns the corresponding EHC coordinator for a school,
+use with the 'school_id' query parameter to get the coordinator
+{% endcomment %}
 
 <div class="ehcco-search is-hidden" data-ehcco-search data-matching-schools-url="{{ get_matching_schools_url|escapejs }}" data-ehc-co-url="{{ get_corresponding_ehc_co_url|escapejs }}">
     <div class="ehcco-search__container">
