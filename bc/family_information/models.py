@@ -305,6 +305,10 @@ class BaseCategoryPage(FISBannerFields, BasePage):
         ]
 
     @cached_property
+    def has_featured_pages(self):
+        return any(row.block_type == "cards" for row in self.body)
+
+    @cached_property
     def other_child_pages(self):
         """Get child pages for the current category page, excluding children that are
         already in the body field.
