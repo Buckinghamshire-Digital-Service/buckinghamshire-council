@@ -5,6 +5,7 @@
 - EHCCo widget: Update widget heading text
 - EHCCo widget: Make emails clickable by converting them to links
 - EHCCo widget: Change fallback text from TBC to awaiting allocation
+- Add option to display images for first three pages in category page
 
 ## 78.2 (2024-08-14)
 
