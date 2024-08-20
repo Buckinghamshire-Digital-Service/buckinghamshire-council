@@ -9,6 +9,9 @@ class NCardRowBlock(blocks.StreamBlock):
 
         # Get the page's class.
         context["page_class"] = parent_context["page"]._meta.object_name
+        context["display_featured_images"] = getattr(
+            parent_context["page"], "display_featured_images", False
+        )
 
         # Check if the block is preceded by a heading.
         blocks_under_headings = parent_context.get("blocks_under_headings", [])
