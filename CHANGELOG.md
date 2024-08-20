@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- EHCCo widget: Update widget heading text
+
 ## 78.2 (2024-08-14)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/78.1...78.2>

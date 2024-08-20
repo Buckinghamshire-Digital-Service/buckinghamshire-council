@@ -17,17 +17,7 @@
     &__heading {
         margin-top: 0;
         margin-bottom: $grid--min;
-
-        @include media-query(tablet-landscape) {
-            margin-bottom: 0;
-        }
-    }
-
-    &__label {
-        @include font-size(s);
         display: block;
-        color: $color--grey-accessible;
-        margin: $grid--min 0;
     }
 
     &__input {
