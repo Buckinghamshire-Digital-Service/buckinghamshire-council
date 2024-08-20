@@ -228,6 +228,8 @@ class BaseCategoryPage(FISBannerFields, BasePage):
         default="What do you want to do?", max_length=255
     )
 
+    display_featured_images = models.BooleanField(default=False)
+
     # Content
     body = StreamField(
         [
@@ -262,6 +264,7 @@ class BaseCategoryPage(FISBannerFields, BasePage):
     content_panels = (
         BasePage.content_panels
         + [
+            FieldPanel("display_featured_images"),
             MultiFieldPanel(
                 [
                     FieldPanel("top_tasks_heading", heading="Heading"),
@@ -300,6 +303,10 @@ class BaseCategoryPage(FISBannerFields, BasePage):
         return super().allowed_subpage_models() + [
             resolve_model_string("standardpages.IndexPage")
         ]
+
+    @cached_property
+    def has_featured_pages(self):
+        return any(row.block_type == "cards" for row in self.body)
 
     @cached_property
     def other_child_pages(self):

@@ -1,5 +1,14 @@
 # Release History
 
+## 79.0 (2024-08-20)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/78.2...79.0>
+
+- EHCCo widget: Update widget heading text
+- EHCCo widget: Make emails clickable by converting them to links
+- EHCCo widget: Change fallback text from TBC to awaiting allocation
+- Add option to display images for first three pages in category page
+
 ## 78.2 (2024-08-14)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/78.1...78.2>

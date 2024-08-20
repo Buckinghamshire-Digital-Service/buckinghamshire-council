@@ -46,7 +46,7 @@ def get_corresponding_ehc_co(request):
         }
     else:
         context = {
-            "name": "TBC",
+            "name": "awaiting allocation",
             "email": school.hub_email,
         }
     return JsonResponse(context)
