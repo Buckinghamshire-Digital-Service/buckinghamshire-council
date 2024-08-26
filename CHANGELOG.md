@@ -4,9 +4,33 @@
 
 - upgrade python to 3.11
 
-Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/70.01...HEAD>
+## 79.0 (2024-08-20)
 
-- ...
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/78.2...79.0>
+
+- EHCCo widget: Update widget heading text
+- EHCCo widget: Make emails clickable by converting them to links
+- EHCCo widget: Change fallback text from TBC to awaiting allocation
+- Add option to display images for first three pages in category page
+
+## 78.2 (2024-08-14)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/78.1...78.2>
+
+- Fix ehcco api calls being made to the wrong endpoint
+
+## 78.1 (2024-08-13)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/78.0...78.1>
+
+- Don't cache WasteWizardPages, as they need to be cookie-sensitive
+
+## 78.0 (2024-08-13)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/77.0...78.0>
+
+- [Directory search block](https://trello.com/c/09eNT1iH/6-fis-directory-search-widget-fe-and-be) ([Merge request #712](https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/712))
+- [Directory services block](https://trello.com/c/CcEf4OYn) ([Merge request #727](https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/727))
 
 ## 77.0 (2024-07-29)
 

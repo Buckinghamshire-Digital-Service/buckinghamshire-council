@@ -12,6 +12,7 @@
 @import 'base/typography';
 
 // Components
+@import 'components/activities-listing';
 @import 'components/alert';
 @import 'components/apply';
 @import 'components/area-links';
@@ -69,6 +70,7 @@
 @import 'components/search-header';
 @import 'components/search-prompt';
 @import 'components/search-result';
+@import 'components/search-widget';
 @import 'components/section';
 @import 'components/split-content';
 @import 'components/skip-link';
@@ -93,6 +95,7 @@
 @import 'components/fis-ehcco-search';
 @import 'components/search-promotions';
 @import 'components/top-tasks';
+@import 'components/location-autocomplete';
 
 // Pages
 @import 'pages/blogglobalhomepage';

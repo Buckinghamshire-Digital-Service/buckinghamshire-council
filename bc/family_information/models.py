@@ -13,6 +13,7 @@ from wagtail.search import index
 
 from ..news.models import NewsIndex
 from ..standardpages.models import IndexPage
+from ..utils.blocks import DirectorySearchBlock
 from ..utils.models import BasePage, PageTopTask
 from .blocks import CardsBlock, ThreeCardRowBlock, TwoCardRowBlock
 
@@ -121,6 +122,10 @@ class SubsiteHomePage(FISBannerFields, BasePage):
         blank=True, default="Get information, advice and guidance", max_length=255
     )
 
+    directory_search = StreamField(
+        [("directory_search", DirectorySearchBlock())], blank=True, max_num=1
+    )
+
     call_to_action = models.ForeignKey(
         "utils.CallToActionSnippet",
         blank=True,
@@ -161,6 +166,7 @@ class SubsiteHomePage(FISBannerFields, BasePage):
             ),
             FieldPanel("heading"),
             FieldPanel("highlighted_cards"),
+            FieldPanel("directory_search"),
         ]
         + FISBannerFields.content_panels
         + [FieldPanel("search_prompt_text"), FieldPanel("call_to_action")]
@@ -222,6 +228,8 @@ class BaseCategoryPage(FISBannerFields, BasePage):
         default="What do you want to do?", max_length=255
     )
 
+    display_featured_images = models.BooleanField(default=False)
+
     # Content
     body = StreamField(
         [
@@ -238,11 +246,25 @@ class BaseCategoryPage(FISBannerFields, BasePage):
     )
 
     # Other child pages
-    other_pages_heading = models.CharField(default="Others", max_length=255)
+    other_pages_heading = models.CharField(default="Others", max_length=255, blank=True)
+
+    directory_search = StreamField(
+        [
+            (
+                "directory_search",
+                DirectorySearchBlock(
+                    template="patterns/organisms/search-widget/search-widget.html"
+                ),
+            )
+        ],
+        blank=True,
+        max_num=1,
+    )
 
     content_panels = (
         BasePage.content_panels
         + [
+            FieldPanel("display_featured_images"),
             MultiFieldPanel(
                 [
                     FieldPanel("top_tasks_heading", heading="Heading"),
@@ -266,9 +288,11 @@ class BaseCategoryPage(FISBannerFields, BasePage):
                     " isn't displayed.)"
                 ),
             ),
+            FieldPanel("directory_search"),
         ]
         + FISBannerFields.content_panels
     )
+
     search_fields = BasePage.search_fields + FISBannerFields.search_fields
 
     class Meta:
@@ -279,6 +303,10 @@ class BaseCategoryPage(FISBannerFields, BasePage):
         return super().allowed_subpage_models() + [
             resolve_model_string("standardpages.IndexPage")
         ]
+
+    @cached_property
+    def has_featured_pages(self):
+        return any(row.block_type == "cards" for row in self.body)
 
     @cached_property
     def other_child_pages(self):
@@ -360,6 +388,7 @@ class CategoryPage(BaseCategoryPage):
                     " isn't displayed.)"
                 ),
             ),
+            FieldPanel("directory_search"),
         ]
         + FISBannerFields.content_panels
     )

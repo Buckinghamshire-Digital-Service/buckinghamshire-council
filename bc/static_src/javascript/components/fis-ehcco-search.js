@@ -107,7 +107,7 @@ class EHCCOSearch {
             this.result.classList.remove('is-hidden');
             this.ehccoSchool.textContent = this.state.school;
             this.ehccoName.textContent = this.state.name;
-            this.ehccoEmail.textContent = this.state.email;
+            this.ehccoEmail.innerHTML = `<a href="mailto:${this.state.email}">${this.state.email}</a>`;
         }
     }
 }
