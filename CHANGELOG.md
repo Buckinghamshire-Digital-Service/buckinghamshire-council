@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- Upgrade node version from v12 to v20
+
 ## 82.8 (2025-01-08)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/82.7...82.8>
