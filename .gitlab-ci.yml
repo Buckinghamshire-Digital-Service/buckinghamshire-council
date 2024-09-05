@@ -30,7 +30,7 @@ stages:
     policy: pull
 
 .node:
-  image: node:14-alpine
+  image: node:20-alpine
   extends: .cache_static
   needs:
     - static

@@ -37,7 +37,7 @@ install:
   - pip install flake8
 
   # Install node
-  - nvm install 12
+  - nvm install 20
 
   # Install node dependencies
   - npm ci --no-optional --no-audit --progress=false
