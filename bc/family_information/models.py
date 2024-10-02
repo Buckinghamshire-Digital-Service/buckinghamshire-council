@@ -261,37 +261,33 @@ class BaseCategoryPage(FISBannerFields, BasePage):
         max_num=1,
     )
 
-    content_panels = (
-        BasePage.content_panels
-        + [
-            FieldPanel("display_featured_images"),
-            MultiFieldPanel(
-                [
-                    FieldPanel("top_tasks_heading", heading="Heading"),
-                    InlinePanel("top_tasks", label="Tasks"),
-                ],
-                heading="Top tasks",
+    content_panels = [
+        FieldPanel("display_featured_images"),
+        MultiFieldPanel(
+            [
+                FieldPanel("top_tasks_heading", heading="Heading"),
+                InlinePanel("top_tasks", label="Tasks"),
+            ],
+            heading="Top tasks",
+        ),
+        FieldPanel(
+            "body",
+            help_text=(
+                "This replaces the full list of child pages. Any child pages not "
+                "listed in this field will be displayed under the 'Other pages' "
+                "section."
             ),
-            FieldPanel(
-                "body",
-                help_text=(
-                    "This replaces the full list of child pages. Any child pages not "
-                    "listed in this field will be displayed under the 'Other pages' "
-                    "section."
-                ),
+        ),
+        FieldPanel(
+            "other_pages_heading",
+            help_text=(
+                "Any child pages not added to the Body field will be displayed "
+                "below this heading. (If the Body field is blank, this heading "
+                " isn't displayed.)"
             ),
-            FieldPanel(
-                "other_pages_heading",
-                help_text=(
-                    "Any child pages not added to the Body field will be displayed "
-                    "below this heading. (If the Body field is blank, this heading "
-                    " isn't displayed.)"
-                ),
-            ),
-            FieldPanel("directory_search"),
-        ]
-        + FISBannerFields.content_panels
-    )
+        ),
+        FieldPanel("directory_search"),
+    ] + FISBannerFields.content_panels
 
     search_fields = BasePage.search_fields + FISBannerFields.search_fields
 
@@ -365,32 +361,8 @@ class CategoryPage(BaseCategoryPage):
         BasePage.content_panels
         + [
             FieldPanel("display_banner_at_top"),
-            MultiFieldPanel(
-                [
-                    FieldPanel("top_tasks_heading", heading="Heading"),
-                    InlinePanel("top_tasks", label="Tasks"),
-                ],
-                heading="Top tasks",
-            ),
-            FieldPanel(
-                "body",
-                help_text=(
-                    "This replaces the full list of child pages. Any child pages not "
-                    "listed in this field will be displayed under the 'Other pages' "
-                    "section."
-                ),
-            ),
-            FieldPanel(
-                "other_pages_heading",
-                help_text=(
-                    "Any child pages not added to the Body field will be displayed "
-                    "below this heading. (If the Body field is blank, this heading "
-                    " isn't displayed.)"
-                ),
-            ),
-            FieldPanel("directory_search"),
         ]
-        + FISBannerFields.content_panels
+        + BaseCategoryPage.content_panels
     )
 
     def get_template(self, request, *args, **kwargs):
