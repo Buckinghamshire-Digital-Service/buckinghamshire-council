@@ -1,0 +1,20 @@
+{% extends base_page_template %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block hero %}
+    {% include "patterns/molecules/hero/hero.html" %}
+{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+    {% include "patterns/organisms/link-block-grid/link-block-grid.html" %}
+
+    {% include "patterns/molecules/cta/call_to_action.html" with call_to_action=page.call_to_action %}
+
+    {% include "patterns/organisms/latest-articles/latest-articles.html" %}
+{% endblock %}
+
+{% block extra_js %}
+    <script type = "application/ld+json" >{{ page.schema_org_markup }}</script>
+{% endblock %}
