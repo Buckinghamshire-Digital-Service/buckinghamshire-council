@@ -1,5 +1,11 @@
 # Release History
 
+## UNRELEASED
+
+- Add promotional site navigation
+- Add promotional home page
+- Add promotional site content page
+
 ## 79.0 (2024-08-20)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/78.2...79.0>
