@@ -1,6 +1,6 @@
 # Release History
 
-## Unreleased
+## 80.0 (2024-10-08)
 
 - Fix panels on category page
 - Update wycombe url for school hub
