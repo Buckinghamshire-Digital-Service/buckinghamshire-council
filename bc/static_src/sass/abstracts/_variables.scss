@@ -54,6 +54,9 @@ $color--link: $color--primary;
 $color--link-hover: $color--sky;
 $color--link-active: $color--grape;
 
+// Promo colours
+$color--promo-mid-blue: #65b6e7;
+
 // Button colours
 $button-colours: (
     primary: (
@@ -137,6 +140,7 @@ $breakpoints: (
 $site-width: 1090px;
 $wrapper--small: 650px;
 $wrapper--page: 735px;
+$wrapper--promo: 1280px;
 
 // Grid setup
 $grid: 30px;

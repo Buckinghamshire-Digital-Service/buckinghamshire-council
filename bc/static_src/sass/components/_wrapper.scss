@@ -78,4 +78,9 @@
     &--margin {
         margin: $grid auto;
     }
+
+    &--promo {
+        margin: 0 auto;
+        max-width: $wrapper--promo;
+    }
 }
