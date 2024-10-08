@@ -17,9 +17,6 @@ class PrimaryNavigationItem(blocks.StructBlock):
         help='Auto-populated pages with "Show in menus" selected in their "Promote" tab',
     )
 
-    class Meta:
-        template = ("patterns/molecules/navigation/blocks/menu_item.html",)
-
 
 class PromotionalSiteConfiguration(Page):
     parent_page_types = ("promotional.PromotionalHomePage",)
