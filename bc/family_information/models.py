@@ -375,7 +375,10 @@ class CategoryPage(BaseCategoryPage):
 class School(index.Indexed, models.Model):
     class HubEmail(models.TextChoices):
         SENSCB = "sencsb@buckinghamshire.gov.uk", "sencsb@buckinghamshire.gov.uk"
-        SENWYC = "senwyc@buckinghamshire.gov.uk", "senwyc@buckinghamshire.gov.uk"
+        SENWYC = (
+            "senwycombe@buckinghamshire.gov.uk",
+            "senwycombe@buckinghamshire.gov.uk",
+        )
         SENAYLESBURY = (
             "Senaylesbury@buckinghamshire.gov.uk",
             "Senaylesbury@buckinghamshire.gov.uk",
