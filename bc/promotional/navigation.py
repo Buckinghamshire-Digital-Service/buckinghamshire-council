@@ -67,12 +67,16 @@ class PrimaryNavigation:
         nav: MutableSequence[PrimaryNavigationItem] = []
 
         for item in self.site_config.primary_navigation:
-            page = item.value["page"].specific
+            page = item.value["page"]
             if page is None or not page.live:
                 # Skip pages that are not live or not existent anymore.
                 continue
 
-            # We don't validate page view restrictions.
+            page = page.specific
+
+            # NB We don't validate page view restrictions. Worst case scenario a link
+            # is inaccessible from the nav.
+
             subitems: MutableSequence[PrimaryNavigationSubItem] = []
             on_current_site = item.value["page"].get_site() == self.site
             if item.value["populate_child_pages"]:
