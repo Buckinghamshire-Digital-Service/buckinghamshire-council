@@ -1,8 +1,9 @@
 from django import http
+from django.db import models
 from django.utils.html import format_html
 
 from wagtail import blocks
-from wagtail.admin.panels import FieldPanel, HelpPanel
+from wagtail.admin.panels import FieldPanel, HelpPanel, MultiFieldPanel
 from wagtail.fields import StreamField
 from wagtail.models import Page
 
@@ -10,7 +11,9 @@ from wagtail.models import Page
 class PrimaryNavigationItem(blocks.StructBlock):
     page = blocks.PageChooserBlock()
     title = blocks.CharBlock(
-        help_text="Leave blank to use the page's own title", required=False
+        help_text="Leave blank to use the page's own title",
+        required=False,
+        max_length=64,
     )
     populate_child_pages = blocks.BooleanBlock(
         required=False,
@@ -27,7 +30,17 @@ class PromotionalSiteConfiguration(Page):
 
     primary_navigation = StreamField(
         [("primary_navigation_item", PrimaryNavigationItem())],
-        help_text="Primary navigation items",
+    )
+    primary_cta_link_text = models.CharField(
+        max_length=128, blank=True, verbose_name="primary CTA link text"
+    )
+    primary_cta_link_page = models.ForeignKey(
+        "wagtailcore.Page",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="+",
+        verbose_name="primary CTA link page",
     )
 
     content_panels = [
@@ -40,6 +53,13 @@ class PromotionalSiteConfiguration(Page):
         ),
         FieldPanel("title"),
         FieldPanel("primary_navigation"),
+        MultiFieldPanel(
+            (
+                FieldPanel("primary_cta_link_text"),
+                FieldPanel("primary_cta_link_page"),
+            ),
+            heading="Primary Call to Action",
+        ),
     ]
 
     def serve(self, request, *args, **kwargs):
