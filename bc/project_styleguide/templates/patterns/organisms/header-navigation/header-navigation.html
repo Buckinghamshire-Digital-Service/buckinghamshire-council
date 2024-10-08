@@ -16,3 +16,7 @@
     {% endfor %}
     </ul>
 {% endif %}
+
+{% if primary_cta %}
+    Primary CTA: <a href="{{ primary_cta.url }}">{{ primary_cta.text }}</a>
+{% endif %}
