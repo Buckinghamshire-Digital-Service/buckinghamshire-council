@@ -56,4 +56,4 @@ class PromotionalStoryBlock(blocks.StreamBlock):
     detail = DetailBlock()
 
     class Meta:
-        template = "patterns/molecules/streamfield/stream_block.html"
+        template = "patterns/molecules/streamfield-promotional/stream_block.html"

@@ -1,8 +1,11 @@
 from django.db import models
 
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.fields import StreamField
 
 from bc.utils.models import BasePage
+
+from ..blocks.cards import LinkCards
 
 
 class PromotionalHomePage(BasePage):
@@ -26,6 +29,14 @@ class PromotionalHomePage(BasePage):
     )
     hero_link_text = models.CharField(max_length=255)
 
+    teasers = StreamField(
+        [
+            ("link_cards", LinkCards()),
+        ],
+        max_num=1,
+        blank=True,
+    )
+
     search_fields = BasePage.search_fields.copy()
     content_panels = BasePage.content_panels + [
         MultiFieldPanel(
@@ -38,6 +49,7 @@ class PromotionalHomePage(BasePage):
             ),
             heading="Hero",
         ),
+        FieldPanel("teasers"),
     ]
 
     def get_context(self, request, *args, **kwargs):
