@@ -12,12 +12,44 @@
     padding: $grid--min / 2 $grid--small;
     border-radius: 6px;
     text-decoration: none;
+    text-align: center;
     cursor: pointer;
+    border: 3px solid transparent;
+    line-height: 24px;
     transition: color $transition, background-color $transition;
 
     &--white-bg {
         background-color: $color--white;
         color: $color--river;
+
+        #{$hover-states} {
+            color: $color--white;
+            background-color: $color--river;
+        }
+
+        &:active {
+            background-color: $color--link-active;
+        }
+    }
+
+    &--blue-bg {
+        background-color: $color--river;
+        color: $color--white;
+
+        #{$hover-states} {
+            color: $color--river;
+            background-color: $color--white;
+        }
+
+        &:active {
+            background-color: $color--link-active;
+        }
+    }
+
+    &--blue-border {
+        background-color: $color--white;
+        color: $color--river;
+        border-color: $color--river;
 
         #{$hover-states} {
             color: $color--white;

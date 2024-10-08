@@ -83,4 +83,9 @@
         margin: 0 auto;
         max-width: $wrapper--promo;
     }
+
+    &--promo-inner {
+        margin: 0 auto;
+        max-width: $wrapper--promo-inner;
+    }
 }
