@@ -1,0 +1,13 @@
+{% load wagtailimages_tags %}
+<div>
+    {% image image fill-400x150 %}
+    <h2>{{ title }}</h2>
+    {% if description %}
+        <div>
+            {{ description|linebreaks }}
+        </div>
+    {% endif %}
+    {% if link_url and link_text %}
+        <a href="{{ link_url }}">{% if link_highlight %}HIGHLIGHT: {% endif %}{{ link_text }}</a>
+    {% endif %}
+</div>
