@@ -1,5 +1,10 @@
 # Release History
 
+## Unreleased
+
+- Fix panels on category page
+- Update wycombe url for school hub
+
 ## 79.0 (2024-08-20)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/78.2...79.0>
