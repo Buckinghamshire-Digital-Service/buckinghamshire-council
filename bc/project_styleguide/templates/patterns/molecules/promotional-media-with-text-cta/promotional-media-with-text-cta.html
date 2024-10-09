@@ -1,21 +1,25 @@
 {% load wagtailembeds_tags wagtailimages_tags %}
 
-<div>
-    {% if embed_url %}
-        {% embed embed_url %}
-    {% endif %}
-
-    {% image image fill-400x150 %}
-
-    <h2>{{ title }}</h2>
-
-    {% if text %}
-        <div>
-            {{ text|linebreaks }}
+<div class="wrapper wrapper--promo-inner">
+    <div class="media-with-text">
+        <div class="media-with-text__media">
+            {% if embed_url %}
+                {% embed embed_url %}
+            {% else %}
+                {% image image fill-400x150 %}
+            {% endif %}
         </div>
-    {% endif %}
+        <div class="media-with-text__content">
+            <h2 class="media-with-text__title">{{ title }}</h2>
+            {% if text %}
+                <div class="media-with-text__description">
+                    {{ text|linebreaks }}
+                </div>
+            {% endif %}
 
-    {% if link_url and link_text %}
-        <a href="{{ link_url }}">{{ link_text }}</a>
-    {% endif %}
+            {% if link_url and link_text %}
+                <a class="promo-button promo-button--blue-border promo-button--transparent-bg" href="{{ link_url }}">{{ link_text }}</a>
+            {% endif %}
+        </div>
+    </div>
 </div>

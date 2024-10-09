@@ -75,6 +75,10 @@
         }
     }
 
+    &--transparent-bg {
+        background-color: transparent;
+    }
+
     &--extra-padding {
         padding: $grid--min / 2 $grid--medium;
     }
