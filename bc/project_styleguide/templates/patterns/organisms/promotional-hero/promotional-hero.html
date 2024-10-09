@@ -1,0 +1,19 @@
+{% load wagtailimages_tags %}
+
+{% image image fill-1800x668 as rendition %}
+
+<div
+    {% if rendition %}style="background-image: url('{{ rendition.url }}')"{% endif %}
+>
+    <h2>{{ title }}</h2>
+
+    {% if text %}
+        <div>
+            {{ text|linebreaks }}
+        </div>
+    {% endif %}
+
+    {% if link_url and link_text %}
+        <a href="{{ link_url }}">{{ link_text }}</a>
+    {% endif %}
+</div>

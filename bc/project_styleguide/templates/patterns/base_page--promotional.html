@@ -1,6 +1,6 @@
 {% extends "patterns/base.html" %}
 
-{% load alert_tags static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags %}
+{% load alert_tags promotional_navigation static util_tags wagtailuserbar wagtailcore_tags wagtailimages_tags %}
 
 {% wagtail_site as current_site %}
 
@@ -107,6 +107,8 @@
     {% include "patterns/molecules/cookie-message/cookie-message.html" %}
 
     {% include "patterns/organisms/header/header.html" %}
+    {% promotional_primary_navigation %}
+
 
 {% endblock header %}
 

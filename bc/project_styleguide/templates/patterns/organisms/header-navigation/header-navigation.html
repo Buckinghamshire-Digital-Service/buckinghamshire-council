@@ -1,0 +1,22 @@
+{% if items %}
+    <ul>
+    {% for item in items %}
+        <li>
+        <a href="{{ item.url }}">{% if item.current %}(CURRENT) {% endif %}{{ item.title }}</a>
+        {% if item.items %}
+            <ul>
+            {% for subitem in item.items %}
+                <li>
+                <a href="{{ subitem.url }}">-- {% if subitem.current %}(CURRENT) {% endif %}{{ subitem.title }}</a>
+                </li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+{% if primary_cta %}
+    Primary CTA: <a href="{{ primary_cta.url }}">{{ primary_cta.text }}</a>
+{% endif %}
