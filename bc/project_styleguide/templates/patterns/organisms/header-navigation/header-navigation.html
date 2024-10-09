@@ -75,7 +75,7 @@
         {% for item in items %}
             <li class="primary-nav-mobile__item {% if item.items %}primary-nav-mobile__item--is-parent{% endif %}">
             <a class="primary-nav-mobile__link {% if item.items %}primary-nav-mobile__link--has-children{% else %}primary-nav-mobile__link--no-children{% endif %}" data-open-subnav aria-haspopup="true" aria-expanded="false" href="{{ item.url }}">
-                <span class="primary-nav-mobile__text">{% if item.current %}(CURRENT) {% endif %}{{ item.title }}</span>
+                <span class="primary-nav-mobile__text">{% if item.current %}{% endif %}{{ item.title }}</span>
             </a>
             {% if item.items %}
                 <div class="sub-nav-mobile" data-subnav>
@@ -85,7 +85,7 @@
                         </li>
                     {% for subitem in item.items %}
                         <li class="sub-nav-mobile__item sub-nav-mobile__item--parent">
-                            <a class="sub-nav-mobile__link sub-nav-mobile__link--parent" href="{{ subitem.url }}">{% if subitem.current %}(CURRENT) {% endif %}{{ subitem.title }}</a>
+                            <a class="sub-nav-mobile__link sub-nav-mobile__link--parent" href="{{ subitem.url }}">{% if subitem.current %}{% endif %}{{ subitem.title }}</a>
                         </li>
                     {% endfor %}
                     </ul>
