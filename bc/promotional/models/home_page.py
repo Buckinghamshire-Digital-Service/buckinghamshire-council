@@ -7,6 +7,7 @@ from bc.promotional.blocks.cta import MediaWithTextCTA
 from bc.utils.models import BasePage
 
 from ..blocks.cards import LinkCards
+from ..blocks.explainer import Explainer
 
 
 class PromotionalHomePage(BasePage):
@@ -45,6 +46,12 @@ class PromotionalHomePage(BasePage):
         verbose_name="media with text call to action",
     )
 
+    explainer = StreamField(
+        [("explainer", Explainer())],
+        max_num=1,
+        blank=True,
+    )
+
     search_fields = BasePage.search_fields.copy()
     content_panels = BasePage.content_panels + [
         MultiFieldPanel(
@@ -59,6 +66,7 @@ class PromotionalHomePage(BasePage):
         ),
         FieldPanel("teasers"),
         FieldPanel("media_with_text_cta"),
+        FieldPanel("explainer"),
     ]
 
     def get_context(self, request, *args, **kwargs):

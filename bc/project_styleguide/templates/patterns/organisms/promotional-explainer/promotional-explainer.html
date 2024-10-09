@@ -1,0 +1,34 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div>
+    <h2>{{ title }}</h2>
+
+    {% if text %}
+        {{ text|richtext }}
+    {% endif %}
+
+    {# Accordion #}
+    {% if details %}
+        {% include_block details %}
+    {% endif %}
+
+    {% if cta %}
+        <div>
+            <h3>{{ cta.title }}</h3>
+
+            {% image cta.image fill-150x200 %}
+            {% if cta.links %}
+                <ul>
+                    {% for link in cta.links %}
+                        {% if link.page %}
+                            {% pageurl link.page as link_url %}
+                        {% endif %}
+                        <li>
+                            <a href="{{ link_url }}">{% if forloop.first %}HIGHLIGHT: {% endif %}{{ link.text }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
