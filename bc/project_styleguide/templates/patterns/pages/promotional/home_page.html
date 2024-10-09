@@ -8,8 +8,6 @@
 {% block breadcrumbs %}{% endblock %}
 
 {% block content %}
-    {% include "patterns/organisms/link-block-grid/link-block-grid.html" %}
-
     {% include "patterns/organisms/promotional-hero/promotional-hero.html" with title=page.hero_title text=page.hero_text image=page.hero_image link_url=hero_link_url link_text=page.hero_link_text %}
 
     {% if page.teasers %}

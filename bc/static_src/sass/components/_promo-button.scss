@@ -46,6 +46,20 @@
         }
     }
 
+    &--leaf-bg {
+        background-color: $color--leaf;
+        color: $color--dark-charcoal;
+
+        #{$hover-states} {
+            background-color: $color--white;
+            color: $color--dark-charcoal;
+        }
+
+        &:active {
+            background-color: $color--link-active;
+        }
+    }
+
     &--blue-border {
         background-color: $color--white;
         color: $color--river;
@@ -59,5 +73,9 @@
         &:active {
             background-color: $color--link-active;
         }
+    }
+
+    &--extra-padding {
+        padding: $grid--min / 2 $grid--medium;
     }
 }

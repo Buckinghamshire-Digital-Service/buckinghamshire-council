@@ -1,3 +1,23 @@
+{% load static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags %}
+
+<div class="header">
+    <div class="header__inner wrapper wrapper--large">
+        <a class="header__home-link" href="/" aria-label="Buckinghamshire Council">
+            {% include "patterns/atoms/icons/icon.html" with name="logo" classname="header__logo" %}
+        </a>
+
+        <div class="header__heading">
+            <a href="/" class="header__heading-title">
+                <img class="header__promotional-logo" src="{% static 'images/promotional/foster-with-bucks-logo.png' %}" alt="Foster with Bucks">
+            </a>
+        </div>
+
+        {% if primary_cta %}
+            <a href="{{ primary_cta.url }}" class="promo-button promo-button--leaf-bg promo-button--extra-padding">{{ primary_cta.text }}</a>
+        {% endif %}
+    </div>
+</div>
+
 {% if items %}
     <ul>
     {% for item in items %}
@@ -17,6 +37,14 @@
     </ul>
 {% endif %}
 
-{% if primary_cta %}
-    Primary CTA: <a href="{{ primary_cta.url }}">{{ primary_cta.text }}</a>
+{% if show_search %}
+<div class="header__search">
+    <form action="{% url 'search' %}" method="get" role="search" class="form form--header-search">
+        <label class="u-sr-only" for="search">Search this website</label>
+        <input class="input" id="search" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
+        <button class="button button--search button--header" type="submit" aria-label="Submit">
+            {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke icon--white button__icon" %}
+        </button>
+    </form>
+</div>
 {% endif %}
