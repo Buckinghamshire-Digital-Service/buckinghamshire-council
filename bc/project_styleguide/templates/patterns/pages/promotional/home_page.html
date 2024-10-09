@@ -18,6 +18,10 @@
         {% include "patterns/pages/promotional/home-page/media-with-text-cta.html" with block=page.media_with_text_cta.0.value %}
     {% endif %}
 
+    {% if page.explainer %}
+        {% include "patterns/pages/promotional/home-page/explainer.html" with block=page.explainer.0.value %}
+    {% endif %}
+
     {% include "patterns/molecules/cta/call_to_action.html" with call_to_action=page.call_to_action %}
 
     {% include "patterns/organisms/latest-articles/latest-articles.html" %}
