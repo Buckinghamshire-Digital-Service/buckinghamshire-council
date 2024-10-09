@@ -1,0 +1,54 @@
+.media-with-text {
+    display: grid;
+    margin: 50px 0;
+    background-color: $color--leaf-light;
+    border-radius: 8px;
+    overflow: hidden;
+
+    @include media-query(tablet-portrait) {
+        border-radius: 16px;
+    }
+
+    @include media-query(tablet-portrait) {
+        grid-template-columns: 1fr 1fr;
+        margin: 115px 0;
+    }
+
+    &__media {
+        border-radius: 8px 8px 0 0;
+
+        @include media-query(tablet-portrait) {
+            border-radius: 16px 0 0 16px;
+        }
+    }
+
+    &__content {
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+
+        @include media-query(tablet-portrait) {
+            padding: 60px 50px;
+        }
+    }
+
+    &__title {
+        @include font-size(l);
+        color: $color--river;
+        line-height: 31px;
+        font-weight: $weight--bold;
+    }
+
+    &__description {
+        @include font-size(s);
+        line-height: 24px;
+        color: $color--slate;
+    }
+
+    // Override video container
+    .video__container {
+        height: 100%;
+    }
+}
