@@ -1,0 +1,7 @@
+{% load wagtailcore_tags %}
+
+{% if block.link_page %}
+    {% pageurl block.link_page as link_url %}
+{% endif %}
+
+{% include "patterns/molecules/promotional-media-with-text-cta/promotional-media-with-text-cta.html" with title=block.title text=block.text embed_url=block.embed.url image=block.image link_url=link_url link_text=block.link_text %}

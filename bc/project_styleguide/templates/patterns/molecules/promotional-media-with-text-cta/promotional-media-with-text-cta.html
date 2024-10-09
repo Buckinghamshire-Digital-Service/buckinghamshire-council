@@ -1,0 +1,21 @@
+{% load wagtailembeds_tags wagtailimages_tags %}
+
+<div>
+    {% if embed_url %}
+        {% embed embed_url %}
+    {% endif %}
+
+    {% image image fill-400x150 %}
+
+    <h2>{{ title }}</h2>
+
+    {% if text %}
+        <div>
+            {{ text|linebreaks }}
+        </div>
+    {% endif %}
+
+    {% if link_url and link_text %}
+        <a href="{{ link_url }}">{{ link_text }}</a>
+    {% endif %}
+</div>

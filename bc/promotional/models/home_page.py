@@ -3,6 +3,7 @@ from django.db import models
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.fields import StreamField
 
+from bc.promotional.blocks.cta import MediaWithTextCTA
 from bc.utils.models import BasePage
 
 from ..blocks.cards import LinkCards
@@ -37,6 +38,13 @@ class PromotionalHomePage(BasePage):
         blank=True,
     )
 
+    media_with_text_cta = StreamField(
+        [("media_with_text_cta", MediaWithTextCTA())],
+        max_num=1,
+        blank=True,
+        verbose_name="media with text call to action",
+    )
+
     search_fields = BasePage.search_fields.copy()
     content_panels = BasePage.content_panels + [
         MultiFieldPanel(
@@ -50,6 +58,7 @@ class PromotionalHomePage(BasePage):
             heading="Hero",
         ),
         FieldPanel("teasers"),
+        FieldPanel("media_with_text_cta"),
     ]
 
     def get_context(self, request, *args, **kwargs):
