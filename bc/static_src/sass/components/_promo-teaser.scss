@@ -37,6 +37,10 @@
         margin: 10px 0 25px;
         color: $color--dark-charcoal;
         line-height: 21px;
+
+        p {
+            margin: 0;
+        }
     }
 
     &__button {
