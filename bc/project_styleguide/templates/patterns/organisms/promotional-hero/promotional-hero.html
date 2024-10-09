@@ -7,13 +7,13 @@
         <div class="promo-hero-home__inner">
             <h1 class="promo-hero-home__title">{{ title }}</h1>
             {% if text %}
-                <div>
-                    <p class="promo-hero-home__description">{{ text|linebreaks }}</p>
+                <div class="promo-hero-home__description">
+                    {{ text|linebreaks }}
                 </div>
             {% endif %}
            
             {% if link_url and link_text %}
-                <a href="{{ link_url }}" class="promo-button promo-button--white-bg">{{ link_text }}</a>
+                <a href="{{ link_url }}" class="promo-button promo-button--white-bg promo-button--extra-padding">{{ link_text }}</a>
             {% endif %}
         </div>
         <div class="promo-hero-home__image-wrapper">

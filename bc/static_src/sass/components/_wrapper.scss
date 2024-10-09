@@ -87,5 +87,10 @@
     &--promo-inner {
         margin: 0 auto;
         max-width: $wrapper--promo-inner;
+        padding: 0 10px;
+
+        @include media-query(tablet-portrait) {
+            padding: 0 25px;
+        }
     }
 }
