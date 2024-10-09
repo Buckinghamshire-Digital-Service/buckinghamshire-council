@@ -19,7 +19,8 @@
 </div>
 
 {% if items %}
-    <ul>
+<div class="wrapper wrapper--large">
+    <ul class="promo-navigation">
     {% for item in items %}
         <li>
         <a href="{{ item.url }}">{% if item.current %}(CURRENT) {% endif %}{{ item.title }}</a>
@@ -35,6 +36,7 @@
         </li>
     {% endfor %}
     </ul>
+</div>
 {% endif %}
 
 {% if show_search %}
