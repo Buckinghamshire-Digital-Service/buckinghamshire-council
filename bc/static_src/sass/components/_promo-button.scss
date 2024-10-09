@@ -50,9 +50,11 @@
         background-color: $color--leaf;
         color: $color--dark-charcoal;
 
-        #{$hover-states} {
-            background-color: $color--white;
-            color: $color--dark-charcoal;
+        @include media-query(mob-landscape) {
+            #{$hover-states} {
+                background-color: $color--white;
+                color: $color--dark-charcoal;
+            }
         }
 
         &:active {

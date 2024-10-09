@@ -1,0 +1,58 @@
+.button-menu-toggle {
+    position: relative;
+    display: block;
+    width: 36px;
+    height: 24px;
+    margin-left: 2px;
+    background: transparent;
+    border: 0;
+    transition: $transition;
+
+    &__line {
+        position: absolute;
+        left: 4px;
+        display: block;
+        width: 27px;
+        height: 3px;
+        background-color: $color--white;
+        transform: rotate(0deg);
+        transition: top, width, transform, left, $transition;
+        border-radius: 2px;
+
+        &:nth-child(1) {
+            top: 0;
+
+            .is-open & {
+                top: 10px;
+                left: 50%;
+                width: 0%;
+            }
+        }
+
+        &:nth-child(2) {
+            top: 10px;
+
+            .is-open & {
+                transform: rotate(45deg);
+            }
+        }
+
+        &:nth-child(3) {
+            top: 10px;
+
+            .is-open & {
+                transform: rotate(-45deg);
+            }
+        }
+
+        &:nth-child(4) {
+            top: 20px;
+
+            .is-open & {
+                top: 10px;
+                left: 50%;
+                width: 0%;
+            }
+        }
+    }
+}

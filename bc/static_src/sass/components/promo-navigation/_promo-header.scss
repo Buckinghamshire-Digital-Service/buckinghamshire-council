@@ -1,0 +1,90 @@
+.promo-header {
+    $root: &;
+    padding: 12px 0;
+    background-color: $color--primary;
+
+    &__inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__home-link {
+        display: block;
+    }
+
+    &__promotional-logo {
+        width: 249px;
+        height: 100%;
+        object-fit: contain;
+        display: none;
+
+        @include media-query(tablet-portrait) {
+            display: block;
+        }
+    }
+
+    &__mobile-promotional-logo {
+        width: 177px;
+        margin-top: 15px;
+
+        @include media-query(tablet-portrait) {
+            display: none;
+        }
+    }
+
+    &__heading {
+        align-items: center;
+        display: flex;
+        flex: 1 0 0;
+        justify-content: space-between;
+    }
+
+    &__logo {
+        text-align: center;
+
+        @include media-query(mob-portrait) {
+            flex: auto;
+        }
+
+        @include media-query(px550) {
+            @include font-size(m);
+            margin-top: 0;
+        }
+    }
+
+    &__primary-cta {
+        display: none;
+
+        @include media-query(tablet-portrait) {
+            display: block;
+        }
+    }
+
+    &__menu-toggle {
+        @include font-size(xxs);
+        color: $color--white;
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+        padding: 12px 0 10px;
+
+        @include media-query(tablet-portrait) {
+            display: none;
+        }
+    }
+
+    &__mobile-controls {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        @include media-query(mob-landscape) {
+            gap: 15px;
+        }
+
+        @include media-query(tablet-portrait) {
+            display: none;
+        }
+    }
+}
