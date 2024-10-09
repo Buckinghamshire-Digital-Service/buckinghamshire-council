@@ -11,10 +11,9 @@
         {% endfor %}
     </div>
 
-    {% comment %}
-        This button is required on the streamfield variant of this component, but isn't displayed on the home-page
-    {% endcomment %}
-    <div class="promo-teasers-button">
-        <a href="#" class="promo-button promo-button--blue-border">Secondary button</a>
-    </div>
+    {% if link_page and link_text %}
+        <div class="promo-teasers-button">
+            <a href="{% pageurl link_page %}" class="promo-button promo-button--blue-border">{{ link_text }}</a>
+        </div>
+    {% endif %}
 </div>

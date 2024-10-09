@@ -12,3 +12,5 @@ class LinkCard(blocks.StructBlock):
 
 class LinkCards(blocks.StructBlock):
     items = blocks.ListBlock(LinkCard, max_num=3)
+    link_page = blocks.PageChooserBlock(required=False)
+    link_text = blocks.CharBlock(max_length=64, required=False)
