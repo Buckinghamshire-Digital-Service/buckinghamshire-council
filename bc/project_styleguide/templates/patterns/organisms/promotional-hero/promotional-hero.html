@@ -2,18 +2,22 @@
 
 {% image image fill-1800x668 as rendition %}
 
-<div
-    {% if rendition %}style="background-image: url('{{ rendition.url }}')"{% endif %}
->
-    <h2>{{ title }}</h2>
-
-    {% if text %}
-        <div>
-            {{ text|linebreaks }}
+<div class="wrapper wrapper--promo"></div>
+    <div class="promo-hero-home">
+        <div class="promo-hero-home__inner">
+            <h1 class="promo-hero-home__title">{{ title }}</h1>
+            {% if text %}
+                <div>
+                    <p class="promo-hero-home__description">{{ text|linebreaks }}</p>
+                </div>
+            {% endif %}
+           
+            {% if link_url and link_text %}
+                <a href="{{ link_url }}" class="promo-button promo-button--white-bg">{{ link_text }}</a>
+            {% endif %}
         </div>
-    {% endif %}
-
-    {% if link_url and link_text %}
-        <a href="{{ link_url }}">{{ link_text }}</a>
-    {% endif %}
+        <div class="promo-hero-home__image-wrapper">
+            <div class="promo-hero-home__image" {% if rendition %}style="background-image: url('{{ rendition.url }}')"{% endif %}>
+        </div>
+    </div>
 </div>
