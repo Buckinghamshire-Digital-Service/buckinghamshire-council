@@ -1,11 +1,9 @@
 {% load wagtailcore_tags %}
 
-{% for value in block %}
-    {% for item in value.value.items %}
-        {% if item.link_page %}
-            {% pageurl item.link_page as card_url %}
-        {% endif %}
+{% for item in items %}
+    {% if item.link_page %}
+        {% pageurl item.link_page as card_url %}
+    {% endif %}
 
-        {% include "patterns/molecules/promotional-card/promotional-card.html" with title=item.title description=item.description image=item.image link_url=card_url link_text=item.link_text link_highlight=forloop.last %}
-    {% endfor %}
+    {% include "patterns/molecules/promotional-card/promotional-card.html" with title=item.title description=item.description image=item.image link_url=card_url link_text=item.link_text link_highlight=forloop.last %}
 {% endfor %}

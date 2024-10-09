@@ -13,7 +13,11 @@
     {% include "patterns/organisms/promotional-hero/promotional-hero.html" with title=page.hero_title text=page.hero_text image=page.hero_image link_url=hero_link_url link_text=page.hero_link_text %}
 
     {% if page.teasers %}
-        {% include "patterns/pages/promotional/home-page/teasers.html" with block=page.teasers %}
+        {% include "patterns/pages/promotional/home-page/teasers.html" with items=page.teasers.0.value.items %}
+    {% endif %}
+
+    {% if page.media_with_text_cta %}
+        {% include "patterns/pages/promotional/home-page/media-with-text-cta.html" with block=page.media_with_text_cta.0.value %}
     {% endif %}
 
     {% include "patterns/molecules/cta/call_to_action.html" with call_to_action=page.call_to_action %}
