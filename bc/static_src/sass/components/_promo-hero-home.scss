@@ -1,0 +1,66 @@
+.promo-hero-home {
+    position: relative;
+    display: grid;
+    background-color: $color--promo-mid-blue;
+    overflow: hidden;
+    min-height: 415px;
+
+    @include media-query(tablet-landscape) {
+        grid-template-columns: 4fr 3fr;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 98px;
+        background-image: url('../images/promotional/lego-left.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    &__inner {
+        margin: 0 40px 0 clamp(125px, 25%, 200px);
+        align-self: center;
+        max-width: 400px;
+    }
+
+    &__title {
+        @include font-size(xxl);
+        color: $color--river;
+        font-weight: $weight--bold;
+        line-height: 50px;
+    }
+
+    &__description {
+        @include font-size(s);
+        color: $color--river;
+        line-height: 24px;
+    }
+
+    &__image-wrapper {
+        position: relative;
+        width: 550px;
+        height: 160%;
+        border-radius: 50% 0 0 50%;
+        overflow: hidden;
+        transform: translate3d(0, -20%, 0);
+        border-top: 12px solid $color--white;
+        border-bottom: 12px solid $color--white;
+        border-left: 12px solid $color--white;
+        display: none;
+
+        @include media-query(tablet-landscape) {
+            display: block;
+        }
+    }
+
+    &__image {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+    }
+}

@@ -16,6 +16,7 @@ $color--grape: #3e2d73;
 $color--leaf: #9fc63b;
 $color--leaf-mid: #82a04d;
 $color--leaf-dark: #4a8500;
+$color--dark-charcoal: #202020;
 $color--charcoal: #212121;
 $color--charcoal-10: #eee;
 $color--charcoal-25: #cecece;
@@ -53,6 +54,12 @@ $color--tertiary: $color--charcoal;
 $color--link: $color--primary;
 $color--link-hover: $color--sky;
 $color--link-active: $color--grape;
+
+// Promo colours
+$color--promo-mid-blue: #65b6e7;
+$color--bricks-green: #6fb62c;
+$color--bricks-orange: #f18419;
+$color--bricks-pink: #e45398;
 
 // Button colours
 $button-colours: (
@@ -137,6 +144,8 @@ $breakpoints: (
 $site-width: 1090px;
 $wrapper--small: 650px;
 $wrapper--page: 735px;
+$wrapper--promo: 1280px;
+$wrapper--promo-inner: 1100px;
 
 // Grid setup
 $grid: 30px;

@@ -1,0 +1,16 @@
+.promo-teasers {
+    display: grid;
+    gap: 25px;
+    margin-top: 50px;
+
+    @include media-query(tablet-portrait) {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 37px;
+        margin-top: 115px;
+    }
+}
+
+.promo-teasers-button {
+    text-align: center;
+    margin: 50px 0;
+}
