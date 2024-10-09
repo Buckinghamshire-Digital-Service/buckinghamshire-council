@@ -56,8 +56,8 @@ class Migration(migrations.Migration):
                                 "sencsb@buckinghamshire.gov.uk",
                             ),
                             (
-                                "senwyc@buckinghamshire.gov.uk",
-                                "senwyc@buckinghamshire.gov.uk",
+                                "senwycombe@buckinghamshire.gov.uk",
+                                "senwycombe@buckinghamshire.gov.uk",
                             ),
                             (
                                 "Senaylesbury@buckinghamshire.gov.uk",
