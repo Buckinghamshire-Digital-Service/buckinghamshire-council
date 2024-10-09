@@ -3,28 +3,39 @@
     display: grid;
     background-color: $color--promo-mid-blue;
     overflow: hidden;
-    min-height: 415px;
+    padding: 40px 0;
+    min-height: 350px;
 
     @include media-query(tablet-landscape) {
         grid-template-columns: 4fr 3fr;
+        padding: 0;
+        min-height: 415px;
     }
 
     &::before {
         content: '';
         position: absolute;
-        left: 0;
+        left: -21px;
         top: 0;
         height: 100%;
         width: 98px;
         background-image: url('../images/promotional/lego-left.svg');
         background-size: contain;
         background-repeat: no-repeat;
+
+        @include media-query(tablet-portrait) {
+            left: 0;
+        }
     }
 
     &__inner {
-        margin: 0 40px 0 clamp(125px, 25%, 200px);
+        margin: 0 20px 0 75px;
         align-self: center;
         max-width: 400px;
+
+        @include media-query(tablet-portrait) {
+            margin: 0 40px 0 clamp(125px, 25%, 200px);
+        }
     }
 
     &__title {

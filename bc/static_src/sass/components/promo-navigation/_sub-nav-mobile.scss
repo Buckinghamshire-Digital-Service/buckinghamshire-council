@@ -1,0 +1,98 @@
+/*
+Styles for the lower levels of the navigation at mobile
+Note that in the navigation settings we refer to 'level 1 and 2 children'.
+Here we refer to 'level 1 children' as 'level 2' and 'level 2 children' as 'level 3'.
+*/
+
+// At mobile, the sub-navigation appears when a top level item is clicked, and also when a second level item is clicked. The second and third levels are shown in separate views
+
+// div element at levels 2 and 3 of the menu
+.sub-nav-mobile {
+    $root: &;
+    background-color: $color--white;
+    height: calc(100vh - 81px);
+    left: 0;
+    opacity: 0;
+    overflow: hidden;
+    overflow-y: visible;
+    position: fixed;
+    top: 102px;
+    transition: visibility 0ms ease-out 50ms, opacity 0.25s ease-out 50ms;
+    visibility: hidden;
+    width: 100%;
+    z-index: 10;
+
+    // the unordered list containing the level 2 menu items
+    // also used for the level 3 menu items
+    &__list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    // the list item for each menu item in the 2nd and 3rd levels
+    &__item {
+        position: relative;
+        width: 100%;
+    }
+
+    // The link for each menu item in the 2nd and 3rd level
+    &__link {
+        display: flex;
+        padding: 10px;
+        gap: 18px;
+        align-items: center;
+
+        #{$root}__item:last-child & {
+            border-bottom: none;
+        }
+
+        // styles for links with children
+        &--has-children {
+            padding: 10px;
+        }
+
+        // styles for links without children
+        &--no-children {
+            padding: 10px;
+        }
+
+        // back link which goes one level up in the mobile menu
+        &--back {
+            width: 100%;
+            padding: 10px;
+        }
+    }
+
+    // back icon which sits inside the back link
+    &__icon-back {
+        transform: rotate(180deg);
+        width: 18px;
+        height: 21px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        transition: transform $transition;
+
+        #{$root}__link:hover & {
+            transform: rotate(180deg) translateX(10px);
+        }
+    }
+
+    // arrow icon which indicates the mobile menu has another level
+    &__icon-mobile {
+        width: 18px;
+        height: 21px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        transition: transform $transition;
+
+        #{$root}__link:hover & {
+            transform: translateX(10px);
+        }
+    }
+
+    // active state
+    &.is-visible {
+        opacity: 1;
+        visibility: visible;
+    }
+}

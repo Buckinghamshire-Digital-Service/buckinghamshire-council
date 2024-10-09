@@ -100,8 +100,15 @@
 @import 'components/promo-button';
 @import 'components/promo-teasers';
 @import 'components/promo-teaser';
-@import 'components/promo-navigation';
 @import 'components/media-with-text';
+
+// Promo navigation
+@import 'components/promo-navigation/primary-nav-desktop';
+@import 'components/promo-navigation/primary-nav-mobile';
+@import 'components/promo-navigation/sub-nav-desktop-mini';
+@import 'components/promo-navigation/sub-nav-mobile';
+@import 'components/promo-navigation/button-menu-toggle';
+@import 'components/promo-navigation/promo-header';
 
 // Pages
 @import 'pages/blogglobalhomepage';

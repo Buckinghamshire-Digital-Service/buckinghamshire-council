@@ -1,42 +1,105 @@
 {% load static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags %}
 
-<div class="header">
-    <div class="header__inner wrapper wrapper--large">
-        <a class="header__home-link" href="/" aria-label="Buckinghamshire Council">
-            {% include "patterns/atoms/icons/icon.html" with name="logo" classname="header__logo" %}
-        </a>
-
-        <div class="header__heading">
-            <a href="/" class="header__heading-title">
-                <img class="header__promotional-logo" src="{% static 'images/promotional/foster-with-bucks-logo.png' %}" alt="Foster with Bucks">
+<div class="promo-header">
+    <div class="promo-header__inner wrapper wrapper--large">
+        <div>
+            <a class="promo-header__home-link" href="/" aria-label="Buckinghamshire Council">
+                {% include "patterns/atoms/icons/icon.html" with name="logo" classname="header__logo" %}
             </a>
+            <img class="promo-header__mobile-promotional-logo" src="{% static 'images/promotional/foster-with-bucks-logo.png' %}" alt="Foster with Bucks">
         </div>
 
+        <img class="promo-header__promotional-logo" src="{% static 'images/promotional/foster-with-bucks-logo.png' %}" alt="Foster with Bucks">
+
         {% if primary_cta %}
-            <a href="{{ primary_cta.url }}" class="promo-button promo-button--leaf-bg promo-button--extra-padding">{{ primary_cta.text }}</a>
+            <div class="promo-header__primary-cta">
+                <a href="{{ primary_cta.url }}" class="promo-button promo-button--leaf-bg promo-button--extra-padding">{{ primary_cta.text }}</a>
+            </div>
         {% endif %}
+
+        <div class="promo-header__mobile-controls">
+            <button class="promo-header__menu-toggle" data-mobile-menu-toggle aria-haspopup="true" aria-expanded="false" aria-label="Mobile menu toggle">
+                <span>Menu</span>
+                <div class="button-menu-toggle">
+                    <span class="button-menu-toggle__line"></span>
+                    <span class="button-menu-toggle__line"></span>
+                    <span class="button-menu-toggle__line"></span>
+                    <span class="button-menu-toggle__line"></span>
+                </div>
+            </button>
+            <a href="/">
+                <span class="u-sr-only">Search</span>
+                {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke icon--white button__icon" %}
+            </a>
+        </div>
     </div>
 </div>
 
 {% if items %}
 <div class="wrapper wrapper--large">
-    <ul class="promo-navigation">
-    {% for item in items %}
-        <li>
-        <a href="{{ item.url }}">{% if item.current %}(CURRENT) {% endif %}{{ item.title }}</a>
-        {% if item.items %}
-            <ul>
-            {% for subitem in item.items %}
-                <li>
-                <a href="{{ subitem.url }}">-- {% if subitem.current %}(CURRENT) {% endif %}{{ subitem.title }}</a>
-                </li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-        </li>
-    {% endfor %}
-    </ul>
+    <nav aria-label="Main navigation" class="primary-nav-desktop" data-desktop-menu>
+        <ul data-primary-nav class="primary-nav-desktop__list">
+        {% for item in items %}
+            <li class="primary-nav-desktop__item primary-nav-desktop__item--is-parent {% if item.current %}primary-nav-desktop__item--active{% endif %}" data-has-subnav>
+                <a class="primary-nav-desktop__link primary-nav-desktop__link--has-children" data-open-subnav aria-haspopup="true" aria-expanded="false" href="{{ item.url }}">
+                    <span class="primary-nav-desktop__text">{{ item.title }}</span>
+                    {% if item.items %}
+                        <div class="primary-nav-desktop__icon-wrapper">
+                            <svg width="24" height="22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m15.875 9.5-3.88 3.88-3.88-3.88a.996.996 0 1 0-1.41 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59a.996.996 0 0 0 0-1.41c-.39-.38-1.03-.39-1.42 0Z" fill="#2C2D84"/></svg>
+                        </div>
+                    {% endif %}
+                </a>
+                {% if item.items %}
+                    <div class="sub-nav-desktop-mini">
+                        <ul class="sub-nav-desktop-mini__list">
+                        {% for subitem in item.items %}
+                            <li class="sub-nav-desktop-mini__item">
+                                <a class="sub-nav-desktop-mini__link {% if subitem.current %}current-class{% endif %}" href="{{ subitem.url }}">
+                                    {{ subitem.title }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    </nav>
 </div>
+{% endif %}
+
+{% if items %}
+<nav aria-label="Main navigation" class="primary-nav-mobile" data-mobile-menu>
+    <ul data-primary-nav class="primary-nav-mobile__list">
+        {% for item in items %}
+            <li class="primary-nav-mobile__item {% if item.items %}primary-nav-mobile__item--is-parent{% endif %}">
+            <a class="primary-nav-mobile__link {% if item.items %}primary-nav-mobile__link--has-children{% else %}primary-nav-mobile__link--no-children{% endif %}" data-open-subnav aria-haspopup="true" aria-expanded="false" href="{{ item.url }}">
+                <span class="primary-nav-mobile__text">{% if item.current %}(CURRENT) {% endif %}{{ item.title }}</span>
+            </a>
+            {% if item.items %}
+                <div class="sub-nav-mobile" data-subnav>
+                    <ul class="sub-nav-mobile__list">
+                        <li class="sub-nav-mobile__item sub-nav-mobile__item--back">
+                            <button data-subnav-back class="sub-nav-mobile__link sub-nav-mobile__link--back">Back</button>
+                        </li>
+                    {% for subitem in item.items %}
+                        <li class="sub-nav-mobile__item sub-nav-mobile__item--parent">
+                            <a class="sub-nav-mobile__link sub-nav-mobile__link--parent" href="{{ subitem.url }}">{% if subitem.current %}(CURRENT) {% endif %}{{ subitem.title }}</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            </li>
+        {% endfor %}
+        <li>
+            <div class="primary-nav-mobile__link">
+                <a href="{{ primary_cta.url }}" class="promo-button promo-button--leaf-bg promo-button--extra-padding">{{ primary_cta.text }}</a>
+            </div>
+        </li>
+    </ul>
+</nav>
 {% endif %}
 
 {% if show_search %}
