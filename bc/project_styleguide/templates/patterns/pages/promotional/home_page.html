@@ -11,7 +11,7 @@
     {% include "patterns/organisms/promotional-hero/promotional-hero.html" with title=page.hero_title text=page.hero_text image=page.hero_image link_url=hero_link_url link_text=page.hero_link_text %}
 
     {% if page.teasers %}
-        {% include "patterns/pages/promotional/home-page/teasers.html" with items=page.teasers.0.value.items link_page=page.teasers.0.value.link_page link_text=page.teasers.0.value.link_text %}
+        {% include_block page.teasers %}
     {% endif %}
 
     {% if page.media_with_text_cta %}
