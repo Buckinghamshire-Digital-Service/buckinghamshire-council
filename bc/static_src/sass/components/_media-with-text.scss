@@ -4,6 +4,7 @@
     background-color: $color--leaf-light;
     border-radius: 8px;
     overflow: hidden;
+    min-height: 280px;
 
     @include media-query(tablet-portrait) {
         border-radius: 16px;
@@ -20,6 +21,12 @@
         @include media-query(tablet-portrait) {
             border-radius: 16px 0 0 16px;
         }
+    }
+
+    &__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
     &__content {
