@@ -1,7 +1,7 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
 <div class="wrapper wrapper--promo-inner promo-explainer-wrapper">
-    <div class="promo-explainer">
+    <div class="promo-explainer {% if cta %}promo-explainer--bottom-padding{% endif %}">
         <div class="wrapper wrapper--promo-reading">
             <h2 class="promo-explainer__title">{{ title }}</h2>
             {% if text %}
@@ -12,27 +12,40 @@
             {% if details %}
                 {% include_block details %}
             {% endif %}
-
         </div>
     </div>
 
     {% if cta %}
         <div class="promo-home-cta">
-            <h3>{{ cta.title }}</h3>
+            <div class="promo-home-cta__image-wrapper">
+                {% image cta.image fill-590x590 as rendition %}
+                <div class="promo-home-cta__image" {% if rendition %}style="background-image: url('{{ rendition.url }}')"{% endif %}></div>
+            </div>
 
-            {% image cta.image fill-150x200 %}
-            {% if cta.links %}
-                <ul>
-                    {% for link in cta.links %}
-                        {% if link.page %}
-                            {% pageurl link.page as link_url %}
-                        {% endif %}
-                        <li>
-                            <a href="{{ link_url }}">{% if forloop.first %}HIGHLIGHT: {% endif %}{{ link.text }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
+            <div class="promo-home-cta__content">
+                <h2 class="promo-home-cta__title">{{ cta.title }}</h2>
+
+                {% if cta.text %}
+                    <div class="promo-home-cta__description">
+                        <div class="rich-text">
+                            <p>{{ cta.text }}</p>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if cta.links %}
+                    <div class="promo-home-cta__buttons">
+                        {% for link in cta.links %}
+                            {% if link.page %}
+                                {% pageurl link.page as link_url %}
+                            {% endif %}
+                            <a class="promo-button promo-button--extra-padding {% if forloop.first %}promo-button--leaf-bg{% else %}promo-button--white-border{% endif %}" href="{{ link_url }}">
+                                {{ link.text }}
+                            </a>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
         </div>
     {% endif %}
 </div>
