@@ -1,19 +1,23 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
-<div>
-    <h2>{{ title }}</h2>
+<div class="wrapper wrapper--promo-inner promo-explainer-wrapper">
+    <div class="promo-explainer">
+        <div class="wrapper wrapper--promo-reading">
+            <h2 class="promo-explainer__title">{{ title }}</h2>
+            {% if text %}
+                {{ text|richtext }}
+            {% endif %}
 
-    {% if text %}
-        {{ text|richtext }}
-    {% endif %}
+            {# Accordion #}
+            {% if details %}
+                {% include_block details %}
+            {% endif %}
 
-    {# Accordion #}
-    {% if details %}
-        {% include_block details %}
-    {% endif %}
+        </div>
+    </div>
 
     {% if cta %}
-        <div>
+        <div class="promo-home-cta">
             <h3>{{ cta.title }}</h3>
 
             {% image cta.image fill-150x200 %}
