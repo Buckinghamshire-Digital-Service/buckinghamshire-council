@@ -15,6 +15,8 @@ from bc.utils.blocks import (
 )
 from bc.utils.constants import PLAIN_TEXT_TABLE_HELP_TEXT, RICH_TEXT_FEATURES
 
+from .cards import LinkCards
+
 
 class PromotionalStoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(
@@ -54,6 +56,7 @@ class PromotionalStoryBlock(blocks.StreamBlock):
     inset_text = InsetTextBlock()
     accordion = Accordion()
     detail = DetailBlock()
+    link_cards = LinkCards()
 
     class Meta:
         template = "patterns/molecules/streamfield-promotional/stream_block.html"

@@ -1,0 +1,13 @@
+<div class="wrapper wrapper--promo-inner">
+    <div class="promo-teasers">
+        {% for item in items %}
+            {% include "patterns/molecules/promotional-card/promotional-card.html" with title=item.title description=item.description image=item.image link_url=item.link_url link_text=item.link_text link_highlight=item.link_highlight %}
+        {% endfor %}
+    </div>
+
+    {% if link_url and link_text %}
+        <div class="promo-teasers-button">
+            <a href="{{ link_url }}" class="promo-button promo-button--blue-border">{{ link_text }}</a>
+        </div>
+    {% endif %}
+</div>
