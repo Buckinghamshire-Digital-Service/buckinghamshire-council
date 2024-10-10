@@ -77,6 +77,21 @@
         }
     }
 
+    &--white-border {
+        background-color: transparent;
+        color: $color--white;
+        border-color: $color--white;
+
+        #{$hover-states} {
+            color: $color--river;
+            background-color: $color--white;
+        }
+
+        &:active {
+            background-color: $color--link-active;
+        }
+    }
+
     &--transparent-bg {
         background-color: transparent;
     }

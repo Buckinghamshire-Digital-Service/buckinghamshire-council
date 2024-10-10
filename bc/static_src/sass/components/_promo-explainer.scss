@@ -14,6 +14,7 @@
     position: relative;
     padding-bottom: 150px;
     margin: 75px 0 50px 50%;
+    overflow-x: clip;
 
     @include media-query(mob-landscape) {
         margin-top: 110px;
@@ -44,6 +45,12 @@
             top: -125px;
             width: 110%;
             height: 250px;
+        }
+    }
+
+    &--bottom-padding {
+        @include media-query(tablet-landscape) {
+            padding-bottom: 250px;
         }
     }
 
