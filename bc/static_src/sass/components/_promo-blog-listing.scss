@@ -1,5 +1,11 @@
 .promo-blog-listing {
-    margin-bottom: 100px;
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 1;
+
+    @include media-query(tablet-portrait) {
+        margin-bottom: 50px;
+    }
 
     &__title {
         @include font-size(xl);
