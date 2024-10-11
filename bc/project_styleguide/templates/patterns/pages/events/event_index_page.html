@@ -3,7 +3,7 @@
 
 {% block content %}
 
-    <div class="wrapper wrapper--flex news">
+    <div class="wrapper {% if promotional_site %} wrapper--large {% else %} wrapper--flex {% endif %} news">
         <section class="section section--main" aria-label="Listing of events">
             <h1 class="heading heading--xxl">{{ page.title }}</h1>
             {% if events %}

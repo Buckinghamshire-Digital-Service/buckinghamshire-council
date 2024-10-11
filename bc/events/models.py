@@ -13,8 +13,10 @@ from django.utils.translation import gettext_lazy as _
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel
 from wagtail.fields import StreamField
+from wagtail.models import Site
 from wagtail.search import index
 
+from bc.promotional.utils import is_promotional_site
 from bc.utils.blocks import StoryBlock
 from bc.utils.models import BasePage, RelatedPage
 
@@ -148,12 +150,23 @@ class EventPage(BasePage):
         if errors:
             raise ValidationError(errors)
 
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context["promotional_site"] = is_promotional_site(
+            Site.find_for_request(request)
+        )
+        return context
+
 
 class EventIndexPage(BasePage):
     template = "patterns/pages/events/event_index_page.html"
 
     subpage_types = ["EventPage"]
-    parent_page_types = ["home.HomePage", "family_information.SubsiteHomePage"]
+    parent_page_types = [
+        "home.HomePage",
+        "family_information.SubsiteHomePage",
+        "promotional.PromotionalHomePage",
+    ]
 
     def _annotated_descendant_events(self):
         return (
@@ -206,6 +219,7 @@ class EventIndexPage(BasePage):
                 "events": events,
                 "past_events": past_events,
                 "upcoming_events": upcoming_events,
+                "promotional_site": is_promotional_site(Site.find_for_request(request)),
             }
         )
 

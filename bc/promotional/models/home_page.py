@@ -15,6 +15,7 @@ class PromotionalHomePage(BasePage):
     subpage_types = [
         "promotional.PromotionalSiteConfiguration",
         "promotional.PromotionalContentPage",
+        "events.EventIndexPage",
     ]
     template = "patterns/pages/promotional/home_page.html"
 
