@@ -1,0 +1,47 @@
+.promo-blog-card {
+    text-decoration: none;
+
+    &__image {
+        display: none;
+
+        @include media-query(tablet-portrait) {
+            display: block;
+            border-radius: 8px;
+            object-fit: cover;
+            width: 100%;
+        }
+    }
+
+    &__meta {
+        @include font-size(xs);
+        color: $color--dark-charcoal;
+        margin: 0;
+
+        @include media-query(tablet-portrait) {
+            margin: 25px 0 16px;
+        }
+    }
+
+    &__title {
+        @include font-size(m);
+        font-weight: $weight--bold;
+        color: $color--river;
+        line-height: 28px;
+        text-decoration: underline;
+        margin-top: 5px;
+
+        @include media-query(tablet-portrait) {
+            margin-top: 15px;
+        }
+    }
+
+    &__description {
+        margin: 15px 0;
+        color: $color--dark-charcoal;
+
+        p {
+            margin: 0;
+            line-height: 21px;
+        }
+    }
+}
