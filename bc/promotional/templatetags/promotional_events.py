@@ -68,9 +68,7 @@ def upcoming_events(context) -> UpcomingEventsContext:
                 "date": format_event_date(event.start_date, None, event.end_date, None),
                 "summary": event.listing_summary or event.introduction,
                 "image": event.listing_image,
-                "types": [
-                    through.event_type.title for through in event.event_types.all()
-                ],
+                "location": event.location_name,
                 "url": event.get_url(request=request),
             }
         )
