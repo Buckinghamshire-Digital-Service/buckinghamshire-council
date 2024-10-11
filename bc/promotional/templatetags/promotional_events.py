@@ -19,9 +19,10 @@ register = template.Library()
 class EventContext(TypedDict):
     title: str
     date: str
+    location: str
     summary: str
     image: Optional[CustomImage]
-    types: Sequence[str]
+    url: str
 
 
 class UpcomingEventsContext(TypedDict):
@@ -59,7 +60,7 @@ def upcoming_events(context) -> UpcomingEventsContext:
         events, "event_types__event_type", "listing_image__rendition"
     )
 
-    events_context = []
+    events_context: Sequence[EventContext] = []
 
     for event in events:
         events_context.append(
