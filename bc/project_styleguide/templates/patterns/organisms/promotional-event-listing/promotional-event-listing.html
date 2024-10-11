@@ -1,0 +1,28 @@
+<div class="promo-event-listing">
+    <div class="wrapper wrapper--promo-inner">
+        <h2 class="promo-event-listing__title">Title</h2>
+
+        {# Card #}
+        <div class="promo-event-listing__inner">
+            <a href="" class="promo-event-card">
+                <div class="promo-event-card__inner">
+                    <h3 class="promo-event-card__title">Title</h3>
+                    <div class="promo-event-card__meta">
+                        <div>
+                            {% include "patterns/atoms/icons/icon.html" with name="calendar" classname="promo-event-card__icon promo-event-card__icon--calendar" %}
+                            <span>Date &ndash; Date</span>
+                        </div>
+                        <div>
+                            {% include "patterns/atoms/icons/icon.html" with name="map-pin" classname="promo-event-card__icon promo-event-card__icon--map-pin" %}
+                            <span>Location</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="promo-event-listing__button">
+            <a href="" class="promo-button promo-button--white-border">Label</a>
+        </div>
+    </div>
+</div>
