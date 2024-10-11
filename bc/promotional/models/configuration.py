@@ -42,6 +42,14 @@ class PromotionalSiteConfiguration(Page):
         related_name="+",
         verbose_name="primary CTA link page",
     )
+    events_feed = models.ForeignKey(
+        "events.EventIndexPage",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="+",
+        help_text="Select the events feed page to fetch events from on this site",
+    )
 
     content_panels = [
         HelpPanel(
@@ -60,6 +68,7 @@ class PromotionalSiteConfiguration(Page):
             ),
             heading="Primary Call to Action",
         ),
+        FieldPanel("events_feed"),
     ]
 
     def serve(self, request, *args, **kwargs):
