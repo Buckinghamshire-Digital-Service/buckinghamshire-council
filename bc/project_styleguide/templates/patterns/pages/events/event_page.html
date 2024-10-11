@@ -3,7 +3,7 @@
 
 {% block content %}
 
-    <div class="wrapper wrapper--flex article">
+    <div class="wrapper {% if promotional_site %} wrapper--large {% else %} wrapper--flex {% endif %} article">
         <div class="section section--main">
 
             <h1 class="heading heading--xxl">{{ page.title }}</h1>
