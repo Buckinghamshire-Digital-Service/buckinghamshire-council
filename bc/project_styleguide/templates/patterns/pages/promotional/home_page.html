@@ -22,6 +22,9 @@
         {% include "patterns/pages/promotional/home-page/explainer.html" with block=page.explainer.0.value %}
     {% endif %}
 
+    {# Blog listing #}
+    {% include "patterns/organisms/promotional-blog-listing/promotional-blog-listing.html" %}
+
     {% include "patterns/molecules/cta/call_to_action.html" with call_to_action=page.call_to_action %}
 
     {% include "patterns/organisms/latest-articles/latest-articles.html" %}
