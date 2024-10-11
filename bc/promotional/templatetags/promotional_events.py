@@ -73,6 +73,7 @@ def upcoming_events(context) -> UpcomingEventsContext:
                 "types": [
                     through.event_type.title for through in event.event_types.all()
                 ],
+                "url": event.get_url(request=request),
             }
         )
 
