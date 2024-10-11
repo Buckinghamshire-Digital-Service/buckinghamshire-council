@@ -1,0 +1,26 @@
+{% load wagtailimages_tags %}
+
+<div class="promo-home-cta">
+    <div class="promo-home-cta__image-wrapper">
+        {% image value.image fill-590x590 as rendition %}
+        <div class="promo-home-cta__image" {% if rendition %}style="background-image: url('{{ rendition.url }}')"{% endif %}></div>
+    </div>
+
+    <div class="promo-home-cta__content">
+        <h2 class="promo-home-cta__title">{{ value.title }}</h2>
+
+        {% if value.text %}
+            <div class="promo-home-cta__description">
+                <div class="rich-text">
+                    {{ value.text|linebreaks }}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if link_url and value.link_text %}
+            <a href="{{ link_url }}">
+                {{ value.link_text }}
+            </a>
+        {% endif %}
+    </div>
+</div>
