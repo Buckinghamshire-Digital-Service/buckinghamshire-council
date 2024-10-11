@@ -1,0 +1,43 @@
+{% load wagtailimages_tags %}
+
+{% if visible %}
+    <h2>Upcoming events</h2>
+    <div>
+        {% if events %}
+            {% for event in events %}
+                <div>
+                    <a class="article-index__link" href="{{ event_url }}">
+                        <h3 class="heading article-index__title">
+                            {{ event.title }}
+                        </h3>
+                    </a>
+                    {% if event.types %}
+                        <span>{{ event.types|join:", " }}</span>
+                    {% endif %}
+                    </a>
+
+                    <div class="article-index__meta">
+                        {{ event.date }}
+                    </div>
+
+                    {% if event.summary %}
+                        <p class="article-index__summary">{{ event.summary }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="article-index__image {% if not event.image %}article-index__image--empty{% endif %}">
+                    {% if event.image %}
+                        {# A listing image is purely decorative. Set blank alt text. #}
+                        {% image event.image fill-500x250 alt="" %}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% else %}
+            No upcoming events
+        {% endif %}
+
+        {% if view_all_url %}
+            <a href="{{ view_all_url }}">View all events</a>
+        {% endif %}
+    </div>
+{% endif %}

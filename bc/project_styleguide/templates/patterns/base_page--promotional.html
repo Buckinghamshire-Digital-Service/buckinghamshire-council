@@ -1,6 +1,6 @@
 {% extends "patterns/base_promotional.html" %}
 
-{% load alert_tags promotional_navigation static util_tags wagtailuserbar wagtailcore_tags wagtailimages_tags %}
+{% load alert_tags promotional_navigation promotional_events static util_tags wagtailuserbar wagtailcore_tags wagtailimages_tags %}
 
 {% wagtail_site as current_site %}
 
@@ -122,5 +122,6 @@
 {% endblock alerts %}
 
 {% block footer %}
+    {% upcoming_events %}
     {% include "patterns/organisms/footer/footer.html" with newsletter=False %}
 {% endblock footer %}
