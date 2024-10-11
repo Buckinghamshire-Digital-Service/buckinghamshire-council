@@ -65,9 +65,7 @@ def upcoming_events(context) -> UpcomingEventsContext:
         events_context.append(
             {
                 "title": event.listing_title or event.title,
-                "date": format_event_date(
-                    event.start_date, event.start_time, event.end_date, event.end_time
-                ),
+                "date": format_event_date(event.start_date, None, event.end_date, None),
                 "summary": event.listing_summary or event.introduction,
                 "image": event.listing_image,
                 "types": [
