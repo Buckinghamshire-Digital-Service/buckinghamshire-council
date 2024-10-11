@@ -26,6 +26,8 @@ class Explainer(blocks.StructBlock):
     title = blocks.CharBlock(max_length=128)
     text = blocks.RichTextBlock(required=False)
     details = Accordion()
+    details_link_page = blocks.PageChooserBlock(required=False)
+    details_link_text = blocks.CharBlock(max_length=128, required=False)
     cta = blocks.StreamBlock(
         [("cta", ExplainerCTA())], max_num=1, required=False, label="Call to action"
     )

@@ -12,6 +12,10 @@
             {% if details %}
                 {% include_block details %}
             {% endif %}
+
+            {% if details_link_page is not None and details_link_text %}
+                <a href="{% pageurl details_link_page %}">{{ details_link_text }}</a>
+            {% endif %}
         </div>
     </div>
 
