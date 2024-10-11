@@ -1,0 +1,24 @@
+{% load wagtailimages_tags %}
+
+{% image image fill-1200x780 as rendition %}
+
+<div class="wrapper wrapper--promo">
+    <div class="promo-hero-home">
+        <div class="promo-hero-home__inner">
+            {% include "patterns/molecules/navigation/breadcrumbs.html" %}
+            <h1 class="promo-hero-home__title">{{ title }}</h1>
+            {% if text %}
+                <div class="promo-hero-home__description">
+                    {{ text|linebreaks }}
+                </div>
+            {% endif %}
+
+            {% if link_url and link_text %}
+                <a href="{{ link_url }}" class="promo-button promo-button--white-bg promo-button--extra-padding">{{ link_text }}</a>
+            {% endif %}
+        </div>
+        <div class="promo-hero-home__image-wrapper">
+            <div class="promo-hero-home__image" {% if rendition %}style="background-image: url('{{ rendition.url }}')"{% endif %}></div>
+        </div>
+    </div>
+</div>
