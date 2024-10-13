@@ -37,8 +37,8 @@
         color: $color--white;
 
         #{$hover-states} {
-            color: $color--river;
-            background-color: $color--white;
+            color: $color--white;
+            background-color: $color--river-dark;
         }
 
         &:active {
@@ -52,7 +52,7 @@
 
         @include media-query(mob-landscape) {
             #{$hover-states} {
-                background-color: $color--white;
+                background-color: $color--leaf-hover;
                 color: $color--dark-charcoal;
             }
         }
@@ -69,7 +69,7 @@
 
         #{$hover-states} {
             color: $color--white;
-            background-color: $color--river;
+            background-color: $color--river-dark;
         }
 
         &:active {

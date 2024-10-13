@@ -14,7 +14,9 @@
             {% endif %}
 
             {% if details_link_page is not None and details_link_text %}
-                <a href="{% pageurl details_link_page %}">{{ details_link_text }}</a>
+                <div class="promo-explainer__button">
+                    <a class="promo-button promo-button--blue-border promo-button--transparent-bg promo-button--extra-padding" href="{% pageurl details_link_page %}">{{ details_link_text }}</a>
+                </div>
             {% endif %}
         </div>
     </div>

@@ -1,5 +1,16 @@
 .feedback-widget-wrapper {
     border-bottom: 10px solid $color--sky;
+
+    &--promo {
+        background-color: $color--sky;
+        border-bottom: 0;
+
+        .feedback-widget {
+            padding-left: 0;
+            padding-right: 0;
+            border-bottom: 0;
+        }
+    }
 }
 
 .feedback-widget {

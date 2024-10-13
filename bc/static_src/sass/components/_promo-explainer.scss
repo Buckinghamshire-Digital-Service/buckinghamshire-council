@@ -78,4 +78,12 @@
             stroke: $color--pink;
         }
     }
+
+    &__button {
+        margin-top: 25px;
+
+        @include media-query(tablet-portrait) {
+            margin-top: 50px;
+        }
+    }
 }

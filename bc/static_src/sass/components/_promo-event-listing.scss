@@ -1,6 +1,6 @@
 .promo-event-listing {
     position: relative;
-    margin: 75px 0 100px 50%;
+    margin: 75px 0 0 50%;
     background-color: $color--river;
     padding: 90px 0 50px;
     width: 100vw;
@@ -9,7 +9,7 @@
 
     @include media-query(tablet-landscape) {
         padding: 185px 0 100px;
-        margin: 0 0 100px 50%;
+        margin-top: 0;
     }
 
     &::before {
