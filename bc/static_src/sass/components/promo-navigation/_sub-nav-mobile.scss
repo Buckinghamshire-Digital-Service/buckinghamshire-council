@@ -10,7 +10,7 @@ Here we refer to 'level 1 children' as 'level 2' and 'level 2 children' as 'leve
 .sub-nav-mobile {
     $root: &;
     background-color: $color--promo-light-blue;
-    height: calc(100vh - 81px);
+    height: calc(100vh - 127px);
     left: 0;
     opacity: 0;
     overflow: hidden;
