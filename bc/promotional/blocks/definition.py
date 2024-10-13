@@ -28,7 +28,7 @@ class PromotionalStoryBlock(blocks.StreamBlock):
             ' e.g. "Lorem @ 2 ipsum" becomes "lorem-2-ipsum"'
         ),
         icon="title",
-        template="patterns/molecules/streamfield/blocks/heading_block.html",
+        template="patterns/molecules/streamfield/blocks/promo_heading_block.html",
         group="Heading",
         label="Main heading",
     )
@@ -40,7 +40,7 @@ class PromotionalStoryBlock(blocks.StreamBlock):
             ' e.g. "Lorem @ 2 ipsum" becomes "lorem-2-ipsum"'
         ),
         icon="title",
-        template="patterns/molecules/streamfield/blocks/subheading_block.html",
+        template="patterns/molecules/streamfield/blocks/promo_subheading_block.html",
         group="Heading",
     )
     paragraph = blocks.RichTextBlock(
@@ -52,7 +52,9 @@ class PromotionalStoryBlock(blocks.StreamBlock):
         group="Table", help_text=mark_safe(PLAIN_TEXT_TABLE_HELP_TEXT)
     )
     table = CaptionedTableBlock(group="Table")
-    button = ButtonBlock()
+    button = ButtonBlock(
+        template="patterns/molecules/streamfield/blocks/promo_button_block.html"
+    )
     highlight = HighlightBlock()
     inset_text = InsetTextBlock()
     accordion = Accordion()

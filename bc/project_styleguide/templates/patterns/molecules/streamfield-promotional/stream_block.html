@@ -2,10 +2,12 @@
 
 {% for block in value %}
     {% if block.block_type == 'table' %}
-        <div class="table-container">
+        <div class="promo-table-container">
             {% include_block block %}
         </div>
     {% else %}
-        {% include_block block %}
+        <div class="promo-sf promo-sf--{{ block.block_type }}">
+            {% include_block block %}
+        </div>
     {% endif %}
 {% endfor %}

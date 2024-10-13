@@ -4,7 +4,7 @@ from wagtail.images.blocks import ImageChooserBlock
 
 class CalloutWithImage(blocks.StructBlock):
     title = blocks.CharBlock(max_length=128)
-    text = blocks.TextBlock(max_length=1024, required=False)
+    text = blocks.RichTextBlock(max_length=1024, required=False)
     image = ImageChooserBlock()
     link_page = blocks.PageChooserBlock(required=False)
     link_text = blocks.CharBlock(max_length=128, required=False)

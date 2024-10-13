@@ -96,7 +96,9 @@
 @import 'components/search-promotions';
 @import 'components/top-tasks';
 @import 'components/location-autocomplete';
+@import 'components/media-with-text';
 @import 'components/promo-hero-home';
+@import 'components/promo-hero-content';
 @import 'components/promo-button';
 @import 'components/promo-teasers';
 @import 'components/promo-teaser';
@@ -106,7 +108,11 @@
 @import 'components/promo-blog-card';
 @import 'components/promo-event-listing';
 @import 'components/promo-event-card';
-@import 'components/media-with-text';
+@import 'components/promo-breadcrumbs';
+
+// Promo streamfield
+@import 'components/promo-rich-text';
+@import 'components/promo-sf';
 
 // Promo navigation
 @import 'components/promo-navigation/primary-nav-desktop';
