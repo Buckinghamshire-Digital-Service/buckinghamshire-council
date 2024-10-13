@@ -1,6 +1,6 @@
 class DesktopSubMenu {
     static selector() {
-        return '[data-desktop-menu] [data-open-subnav]';
+        return '[data-desktop-menu] [data-open-promo-subnav]';
     }
 
     static parentSelector() {
@@ -43,7 +43,7 @@ class DesktopSubMenu {
             this.allToggleNodes.forEach((item) => {
                 if (item !== this.toggleNode) {
                     item.classList.remove(this.activeClass);
-                    item.querySelector('[data-open-subnav]').setAttribute(
+                    item.querySelector('[data-open-promo-subnav]').setAttribute(
                         'aria-expanded',
                         'false',
                     );

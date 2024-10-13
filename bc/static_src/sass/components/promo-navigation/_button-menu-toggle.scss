@@ -1,4 +1,5 @@
 .button-menu-toggle {
+    $root: &;
     position: relative;
     display: block;
     width: 36px;
@@ -8,13 +9,21 @@
     border: 0;
     transition: $transition;
 
+    &--promo {
+        margin-left: 0;
+
+        #{$root}__line {
+            width: 32px;
+        }
+    }
+
     &__line {
         position: absolute;
         left: 4px;
         display: block;
         width: 27px;
         height: 3px;
-        background-color: $color--white;
+        background-color: $color--river;
         transform: rotate(0deg);
         transition: top, width, transform, left, $transition;
         border-radius: 2px;

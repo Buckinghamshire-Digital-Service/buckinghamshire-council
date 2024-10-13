@@ -6,15 +6,14 @@ Styles for the top level of the navigation at mobile
 // There are separate nav elements for desktop and mobile
 .primary-nav-mobile {
     $root: &;
-
-    background-color: $color--white;
+    background-color: $color--promo-light-blue;
     height: calc(100vh - 71px);
     left: 0;
     opacity: 0;
     overflow: hidden;
     overflow-y: visible;
     position: fixed;
-    top: 102px;
+    top: 127px;
     transition: visibility 0ms ease-out 50ms, opacity 0.25s ease-out 50ms;
     visibility: hidden;
     width: 100%;
@@ -41,14 +40,21 @@ Styles for the top level of the navigation at mobile
     &__item {
         position: relative;
         width: 100%;
+        border-top: 1px solid $color--promo-border-blue;
+
+        &--button {
+            padding-top: 8px;
+        }
     }
 
     // top level menu links
     &__link {
+        @include font-size(s);
         display: flex;
-        padding: 10px;
+        padding: 12px 20px;
         justify-content: space-between;
         align-items: center;
+        text-decoration: none;
 
         #{$root}__item:last-child & {
             border-bottom: none;
@@ -69,6 +75,31 @@ Styles for the top level of the navigation at mobile
 
         @include media-query(tablet-portrait) {
             display: none;
+        }
+    }
+
+    &__button {
+        width: 100%;
+        max-width: 400px;
+
+        @include media-query(tablet-portrait) {
+            width: auto;
+            max-width: initial;
+        }
+    }
+
+    &__icon {
+        height: 28px;
+        transition: transform, stroke, 0.2s ease;
+        stroke: $color--bricks-pink;
+        stroke-width: 4;
+        transform: rotate(-90deg);
+        width: 17px;
+        flex-grow: 0;
+        flex-shrink: 0;
+
+        #{$root}__button:focus & {
+            stroke: $color--off-black;
         }
     }
 }

@@ -82,6 +82,8 @@
     &--promo {
         margin: 0 auto;
         max-width: $wrapper--promo;
+        position: relative;
+        z-index: 1;
     }
 
     &--promo-inner {

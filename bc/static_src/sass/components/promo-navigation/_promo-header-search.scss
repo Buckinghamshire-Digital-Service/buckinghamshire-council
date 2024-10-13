@@ -1,0 +1,71 @@
+.promo-header-search {
+    $root: &;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+
+    &__form {
+        display: flex;
+        position: relative;
+
+        @include media-query(tablet-portrait) {
+            padding: 11px 0;
+        }
+
+        &--desktop {
+            display: none;
+
+            @include media-query(tablet-portrait) {
+                display: block;
+            }
+        }
+
+        &--mobile {
+            @include media-query(tablet-portrait) {
+                display: none;
+            }
+        }
+    }
+
+    // Needed to beat specificity
+    input[type='text'] {
+        border-color: $color--charcoal-25;
+        max-width: 190px;
+        padding: 3px 50px 3px 10px;
+        min-height: initial;
+
+        @include media-query(tablet-portrait) {
+            max-width: 540px;
+            min-height: 45px;
+            padding: 5px 10px;
+        }
+    }
+
+    &__button {
+        background-color: transparent;
+        position: absolute;
+        right: 0;
+        padding: 5px 13px 5px 12px;
+        transition: $transition background-color;
+        min-height: initial;
+
+        @include media-query(tablet-portrait) {
+            min-height: 45px;
+        }
+
+        #{$hover-states} {
+            background-color: $color--river;
+
+            #{$root}__button-icon {
+                stroke: $color--white;
+            }
+        }
+    }
+
+    &__button-icon {
+        stroke: $color--river;
+        width: 20px;
+        transition: $transition stroke;
+    }
+}

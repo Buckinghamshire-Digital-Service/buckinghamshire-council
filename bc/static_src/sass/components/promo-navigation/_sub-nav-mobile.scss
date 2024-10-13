@@ -9,14 +9,14 @@ Here we refer to 'level 1 children' as 'level 2' and 'level 2 children' as 'leve
 // div element at levels 2 and 3 of the menu
 .sub-nav-mobile {
     $root: &;
-    background-color: $color--white;
+    background-color: $color--promo-light-blue;
     height: calc(100vh - 81px);
     left: 0;
     opacity: 0;
     overflow: hidden;
     overflow-y: visible;
     position: fixed;
-    top: 102px;
+    top: 127px;
     transition: visibility 0ms ease-out 50ms, opacity 0.25s ease-out 50ms;
     visibility: hidden;
     width: 100%;
@@ -27,6 +27,7 @@ Here we refer to 'level 1 children' as 'level 2' and 'level 2 children' as 'leve
     &__list {
         display: flex;
         flex-direction: column;
+        border-bottom: 1px solid $color--promo-border-blue;
     }
 
     // the list item for each menu item in the 2nd and 3rd levels
@@ -35,12 +36,16 @@ Here we refer to 'level 1 children' as 'level 2' and 'level 2 children' as 'leve
         width: 100%;
     }
 
-    // The link for each menu item in the 2nd and 3rd level
+    // top level menu links
     &__link {
+        @include font-size(s);
         display: flex;
-        padding: 10px;
         gap: 18px;
         align-items: center;
+        border-top: 1px solid $color--promo-border-blue;
+        padding: 12px 20px;
+        justify-content: space-between;
+        text-decoration: none;
 
         #{$root}__item:last-child & {
             border-bottom: none;
@@ -58,22 +63,31 @@ Here we refer to 'level 1 children' as 'level 2' and 'level 2 children' as 'leve
 
         // back link which goes one level up in the mobile menu
         &--back {
+            color: $color--slate;
             width: 100%;
-            padding: 10px;
+            gap: 10px;
+            justify-content: flex-start;
+        }
+
+        &--current {
+            @include font-size(m);
+            font-weight: $weight--bold;
         }
     }
 
     // back icon which sits inside the back link
     &__icon-back {
-        transform: rotate(180deg);
-        width: 18px;
-        height: 21px;
+        height: 28px;
+        transition: transform, stroke, 0.2s ease;
+        stroke: $color--river;
+        stroke-width: 4;
+        transform: rotate(90deg);
+        width: 17px;
         flex-grow: 0;
         flex-shrink: 0;
-        transition: transform $transition;
 
-        #{$root}__link:hover & {
-            transform: rotate(180deg) translateX(10px);
+        #{$root}__button:focus & {
+            stroke: $color--off-black;
         }
     }
 
