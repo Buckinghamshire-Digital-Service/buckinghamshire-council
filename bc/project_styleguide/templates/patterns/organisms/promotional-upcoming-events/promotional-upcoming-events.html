@@ -1,43 +1,40 @@
 {% load wagtailimages_tags %}
 
 {% if visible %}
-    <h2>Upcoming events</h2>
-    <div>
+<div class="promo-event-listing">
+    <div class="wrapper wrapper--promo-inner">
+        <h2 class="promo-event-listing__title">Upcoming events</h2>
         {% if events %}
-            {% for event in events %}
-                <div>
-                    <a class="article-index__link" href="{{ event.url }}">
-                        <h3 class="heading article-index__title">
-                            {{ event.title }}
-                        </h3>
+            <div class="promo-event-listing__inner">
+                {% for event in events %}
+                    <a href="{{ event.url }}" class="promo-event-card">
+                        <div class="promo-event-card__inner">
+                            <h3 class="promo-event-card__title">{{ event.title }}</h3>
+                            <div class="promo-event-card__meta">
+                                <div>
+                                    {% include "patterns/atoms/icons/icon.html" with name="calendar" classname="promo-event-card__icon promo-event-card__icon--calendar" %}
+                                    <span>{{ event.date }}</span>
+                                </div>
+                                {% if event.location %}
+                                    <div>
+                                        {% include "patterns/atoms/icons/icon.html" with name="map-pin" classname="promo-event-card__icon promo-event-card__icon--map-pin" %}
+                                        <span>{{ event.location }}</span>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
                     </a>
-                    {% if event.location %}
-                        <span>{{ event.location }}</span>
-                    {% endif %}
-                    </a>
-
-                    <div class="article-index__meta">
-                        {{ event.date }}
-                    </div>
-
-                    {% if event.summary %}
-                        <p class="article-index__summary">{{ event.summary }}</p>
-                    {% endif %}
-                </div>
-
-                <div class="article-index__image {% if not event.image %}article-index__image--empty{% endif %}">
-                    {% if event.image %}
-                        {# A listing image is purely decorative. Set blank alt text. #}
-                        {% image event.image fill-500x250 alt="" %}
-                    {% endif %}
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         {% else %}
             No upcoming events
         {% endif %}
 
         {% if view_all_url %}
-            <a href="{{ view_all_url }}">View all events</a>
+            <div class="promo-event-listing__button">
+                <a href="{{ view_all_url }}" class="promo-button promo-button--white-border">View all events</a>
+            </div>
         {% endif %}
     </div>
+</div>
 {% endif %}

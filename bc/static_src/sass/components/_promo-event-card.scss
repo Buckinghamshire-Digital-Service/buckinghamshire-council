@@ -61,25 +61,20 @@
         color: $color--dark-charcoal;
         display: grid;
         gap: 10px;
-
-        @include media-query(px550) {
-            display: flex;
-            justify-content: space-between;
-        }
     }
 
     &__icon {
         color: $color--slate;
         width: 20px;
         height: 22px;
+        display: none;
+
+        @include media-query(px550) {
+            display: inline;
+        }
 
         &--calendar {
             margin-right: 2px;
-            display: none;
-
-            @include media-query(px550) {
-                display: inline;
-            }
         }
     }
 }
