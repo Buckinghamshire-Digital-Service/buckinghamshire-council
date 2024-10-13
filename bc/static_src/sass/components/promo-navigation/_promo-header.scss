@@ -1,12 +1,13 @@
 .promo-header {
     $root: &;
-    padding: 12px 0;
     background-color: $color--primary;
 
     &__inner {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding: 12px 25px;
+        gap: 15px;
     }
 
     &__home-link {
@@ -14,13 +15,12 @@
     }
 
     &__promotional-logo {
-        width: 249px;
-        height: 100%;
-        object-fit: contain;
-        display: none;
+        display: flex;
 
-        @include media-query(tablet-portrait) {
-            display: block;
+        img {
+            width: 249px;
+            height: 100%;
+            object-fit: contain;
         }
     }
 
@@ -31,13 +31,6 @@
         @include media-query(tablet-portrait) {
             display: none;
         }
-    }
-
-    &__heading {
-        align-items: center;
-        display: flex;
-        flex: 1 0 0;
-        justify-content: space-between;
     }
 
     &__logo {
@@ -62,12 +55,24 @@
     }
 
     &__menu-toggle {
-        @include font-size(xxs);
-        color: $color--white;
+        @include font-size(xs);
+        color: $color--river;
         display: flex;
         width: 100%;
         justify-content: flex-end;
-        padding: 12px 0 10px;
+        column-gap: 5px;
+
+        @include media-query(tablet-portrait) {
+            display: none;
+        }
+    }
+
+    &__mobile-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: $color--white;
+        padding: 10px 20px;
 
         @include media-query(tablet-portrait) {
             display: none;
@@ -76,7 +81,6 @@
 
     &__mobile-controls {
         display: flex;
-        align-items: center;
         gap: 5px;
 
         @include media-query(mob-landscape) {

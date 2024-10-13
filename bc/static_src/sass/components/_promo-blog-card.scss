@@ -1,5 +1,12 @@
 .promo-blog-card {
+    $root: &;
     text-decoration: none;
+
+    #{$hover-states} {
+        #{$root}__title {
+            color: $color--sky;
+        }
+    }
 
     &__image {
         display: none;
@@ -29,6 +36,7 @@
         line-height: 28px;
         text-decoration: underline;
         margin-top: 5px;
+        transition: $transition color;
 
         @include media-query(tablet-portrait) {
             margin-top: 15px;

@@ -1,47 +1,60 @@
 {% load static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags %}
 
+{# Desktop header top bar #}
 <div class="promo-header">
-    <div class="promo-header__inner wrapper wrapper--large">
-        <div>
-            <a class="promo-header__home-link" href="/" aria-label="Buckinghamshire Council">
-                {% include "patterns/atoms/icons/icon.html" with name="logo" classname="header__logo" %}
-            </a>
-            <img class="promo-header__mobile-promotional-logo" src="{% static 'images/promotional/foster-with-bucks-logo.png' %}" alt="Foster with Bucks">
-        </div>
+    <div class="promo-header__inner wrapper wrapper--promo-inner">
 
-        <img class="promo-header__promotional-logo" src="{% static 'images/promotional/foster-with-bucks-logo.png' %}" alt="Foster with Bucks">
+        {# Main Bucks logo #}
+        <a class="promo-header__home-link" href="/" aria-label="Buckinghamshire Council">
+            {% include "patterns/atoms/icons/icon.html" with name="logo" classname="header__logo" %}
+        </a>
+
+        {# Foster with Bucks logo #}
+        <div class="promo-header__promotional-logo">
+            <img src="{% static 'images/promotional/foster-with-bucks-logo.png' %}" alt="Foster with Bucks">
+        </div>
 
         {% if primary_cta %}
             <div class="promo-header__primary-cta">
                 <a href="{{ primary_cta.url }}" class="promo-button promo-button--leaf-bg promo-button--extra-padding">{{ primary_cta.text }}</a>
             </div>
         {% endif %}
+    </div>
+
+    {# Search and hamburger #}
+    <div class="promo-header__mobile-meta">
+        <div class="promo-header-search">
+            <form action="{% url 'search' %}" method="get" role="search" class="form promo-header-search__form promo-header-search__form--mobile">
+                <label class="u-sr-only" for="search--promo-page">Search this website</label>
+                <input class="input promo-header-search__input" id="search--promo-page" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
+                <button class="button promo-header-search__button" type="submit" aria-label="Submit">
+                    {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke promo-header-search__button-icon" %}
+                </button>
+            </form>
+        </div>
 
         <div class="promo-header__mobile-controls">
             <button class="promo-header__menu-toggle" data-mobile-menu-toggle aria-haspopup="true" aria-expanded="false" aria-label="Mobile menu toggle">
                 <span>Menu</span>
-                <div class="button-menu-toggle">
+                <div class="button-menu-toggle button-menu-toggle--promo">
                     <span class="button-menu-toggle__line"></span>
                     <span class="button-menu-toggle__line"></span>
                     <span class="button-menu-toggle__line"></span>
                     <span class="button-menu-toggle__line"></span>
                 </div>
             </button>
-            <a href="/">
-                <span class="u-sr-only">Search</span>
-                {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke icon--white button__icon" %}
-            </a>
         </div>
     </div>
 </div>
 
+{# Desktop navigation #}
 {% if items %}
-<div class="wrapper wrapper--large">
+<div class="wrapper wrapper--promo-inner promo-header-search">
     <nav aria-label="Main navigation" class="primary-nav-desktop" data-desktop-menu>
         <ul data-primary-nav class="primary-nav-desktop__list">
         {% for item in items %}
-            <li class="primary-nav-desktop__item primary-nav-desktop__item--is-parent {% if item.current %}primary-nav-desktop__item--active{% endif %}" data-has-subnav>
-                <a class="primary-nav-desktop__link primary-nav-desktop__link--has-children" data-open-subnav aria-haspopup="true" aria-expanded="false" href="{{ item.url }}">
+            <li class="primary-nav-desktop__item primary-nav-desktop__item--is-parent {% if item.current %}primary-nav-desktop__item--active{% endif %}" {% if item.items %}data-has-subnav{% endif %}>
+                <a class="primary-nav-desktop__link primary-nav-desktop__link--has-children"  {% if item.items %}data-open-promo-subnav{% endif %} aria-haspopup="true" aria-expanded="false" href="{{ item.url }}">
                     <span class="primary-nav-desktop__text">{{ item.title }}</span>
                     {% if item.items %}
                         <div class="primary-nav-desktop__icon-wrapper">
@@ -54,7 +67,7 @@
                         <ul class="sub-nav-desktop-mini__list">
                         {% for subitem in item.items %}
                             <li class="sub-nav-desktop-mini__item">
-                                <a class="sub-nav-desktop-mini__link {% if subitem.current %}current-class{% endif %}" href="{{ subitem.url }}">
+                                <a class="sub-nav-desktop-mini__link" href="{{ subitem.url }}">
                                     {{ subitem.title }}
                                 </a>
                             </li>
@@ -66,26 +79,45 @@
         {% endfor %}
         </ul>
     </nav>
+
+    {# Desktop search #}
+    <form action="{% url 'search' %}" method="get" role="search" class="form promo-header-search__form promo-header-search__form--desktop">
+        <label class="u-sr-only" for="search--promo-page">Search this website</label>
+        <input class="input promo-header-search__input" id="search--promo-page" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
+        <button class="button promo-header-search__button" type="submit" aria-label="Submit">
+            {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke promo-header-search__button-icon" %}
+        </button>
+    </form>
 </div>
 {% endif %}
 
+{# Mobile navigation #}
 {% if items %}
 <nav aria-label="Main navigation" class="primary-nav-mobile" data-mobile-menu>
     <ul data-primary-nav class="primary-nav-mobile__list">
         {% for item in items %}
             <li class="primary-nav-mobile__item {% if item.items %}primary-nav-mobile__item--is-parent{% endif %}">
-            <a class="primary-nav-mobile__link {% if item.items %}primary-nav-mobile__link--has-children{% else %}primary-nav-mobile__link--no-children{% endif %}" data-open-subnav aria-haspopup="true" aria-expanded="false" href="{{ item.url }}">
-                <span class="primary-nav-mobile__text">{% if item.current %}{% endif %}{{ item.title }}</span>
+            <a class="primary-nav-mobile__link {% if item.items %}primary-nav-mobile__link--has-children{% else %}primary-nav-mobile__link--no-children{% endif %}" {% if item.items %}data-open-promo-subnav{% endif %} aria-haspopup="true" aria-expanded="false" href="{{ item.url }}">
+                <span class="primary-nav-mobile__text">{{ item.title }}</span>
+                {% if item.items %}
+                    {% include "patterns/atoms/icons/icon.html" with name="chevron" classname="icon--stroke primary-nav-mobile__icon" %}
+                {% endif %}
             </a>
             {% if item.items %}
                 <div class="sub-nav-mobile" data-subnav>
                     <ul class="sub-nav-mobile__list">
                         <li class="sub-nav-mobile__item sub-nav-mobile__item--back">
-                            <button data-subnav-back class="sub-nav-mobile__link sub-nav-mobile__link--back">Back</button>
+                            <button data-subnav-back class="sub-nav-mobile__link sub-nav-mobile__link--back">
+                                {% include "patterns/atoms/icons/icon.html" with name="chevron" classname="icon--stroke sub-nav-mobile__icon-back" %}
+                                Back
+                            </button>
+                        </li>
+                        <li class="sub-nav-mobile__item">
+                            <a class="sub-nav-mobile__link sub-nav-mobile__link--current" href="{{ item.url }}">In &ldquo;{{ item.title }}&rdquo;</a>
                         </li>
                     {% for subitem in item.items %}
-                        <li class="sub-nav-mobile__item sub-nav-mobile__item--parent">
-                            <a class="sub-nav-mobile__link sub-nav-mobile__link--parent" href="{{ subitem.url }}">{% if subitem.current %}{% endif %}{{ subitem.title }}</a>
+                        <li class="sub-nav-mobile__item">
+                            <a class="sub-nav-mobile__link" href="{{ subitem.url }}">{{ subitem.title }}</a>
                         </li>
                     {% endfor %}
                     </ul>
@@ -93,23 +125,12 @@
             {% endif %}
             </li>
         {% endfor %}
-        <li>
+        <li class="primary-nav-mobile__item primary-nav-mobile__item--button">
             <div class="primary-nav-mobile__link">
-                <a href="{{ primary_cta.url }}" class="promo-button promo-button--leaf-bg promo-button--extra-padding">{{ primary_cta.text }}</a>
+                <a href="{{ primary_cta.url }}" class="primary-nav-mobile__button promo-button promo-button--leaf-bg promo-button--extra-padding">{{ primary_cta.text }}</a>
             </div>
         </li>
     </ul>
 </nav>
 {% endif %}
 
-{% if show_search %}
-<div class="header__search">
-    <form action="{% url 'search' %}" method="get" role="search" class="form form--header-search">
-        <label class="u-sr-only" for="search">Search this website</label>
-        <input class="input" id="search" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-        <button class="button button--search button--header" type="submit" aria-label="Submit">
-            {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke icon--white button__icon" %}
-        </button>
-    </form>
-</div>
-{% endif %}

@@ -1,6 +1,6 @@
 class PromoMobileSubMenu {
     static selector() {
-        return '[data-mobile-menu] [data-open-subnav]';
+        return '[data-mobile-menu] [data-open-promo-subnav]';
     }
 
     constructor(node) {
