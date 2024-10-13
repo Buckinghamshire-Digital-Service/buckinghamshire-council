@@ -1,0 +1,18 @@
+.promo-sf {
+    &--heading,
+    &--subheading {
+        color: $color--river;
+    }
+
+    &--heading,
+    &--subheading,
+    &--paragraph {
+        margin: 0 auto;
+        max-width: $wrapper--promo-reading;
+        padding: 0 20px;
+
+        @include media-query(tablet-portrait) {
+            padding: 0 25px;
+        }
+    }
+}
