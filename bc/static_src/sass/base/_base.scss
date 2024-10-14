@@ -20,6 +20,8 @@ body {
 
     &.no-scroll {
         overflow-y: hidden;
+        position: fixed;
+        width: 100%;
     }
 }
 
