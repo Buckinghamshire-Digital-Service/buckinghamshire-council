@@ -9,7 +9,7 @@
         padding: 12px 20px;
         gap: 15px;
 
-        @include media-query(tablet-landscape) {
+        @include media-query(tablet-portrait) {
             padding: 12px 25px;
         }
     }
