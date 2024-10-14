@@ -43,12 +43,21 @@
         color: $color--river;
         font-weight: $weight--bold;
         line-height: 50px;
+        margin-bottom: 15px;
     }
 
     &__description {
         @include font-size(s);
         color: $color--river;
         line-height: 24px;
+
+        p {
+            margin: 0;
+        }
+    }
+
+    &__button {
+        margin-top: 20px;
     }
 
     &__image-wrapper {
