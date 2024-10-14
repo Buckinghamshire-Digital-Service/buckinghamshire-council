@@ -83,6 +83,7 @@
         color: $color--river;
         font-weight: $weight--bold;
         line-height: 50px;
+        margin-bottom: 15px;
 
         /* stylelint-disable value-no-vendor-prefix, property-no-vendor-prefix */
         @include media-query(tablet-landscape) {
@@ -97,6 +98,10 @@
         @include font-size(s);
         color: $color--river;
         line-height: 24px;
+
+        p {
+            margin: 0;
+        }
     }
 
     &__image-wrapper {
@@ -121,5 +126,9 @@
         height: 100%;
         background-size: cover;
         background-position: center;
+    }
+
+    &__button {
+        margin-top: 20px;
     }
 }
