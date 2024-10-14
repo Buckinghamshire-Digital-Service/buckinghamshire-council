@@ -6,8 +6,12 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 12px 25px;
+        padding: 12px 20px;
         gap: 15px;
+
+        @include media-query(tablet-landscape) {
+            padding: 12px 25px;
+        }
     }
 
     &__home-link {
