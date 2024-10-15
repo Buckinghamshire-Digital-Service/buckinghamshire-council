@@ -15,6 +15,10 @@
         display: block;
     }
 
+    .page--promotional & {
+        background-color: $color--white;
+    }
+
     &__container {
         @include font-size(xs);
         padding: $grid 0;
