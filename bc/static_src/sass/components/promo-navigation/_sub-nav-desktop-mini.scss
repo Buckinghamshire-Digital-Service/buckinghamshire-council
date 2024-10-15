@@ -10,7 +10,8 @@ Here we refer to 'level 1 children' as 'level 2' and 'level 2 children' as 'leve
     $root: &;
     padding: 0;
     position: absolute;
-    width: 220px;
+    width: 100%;
+    min-width: 220px;
     // for high contrast mode
     border: 1px solid transparent;
     visibility: hidden;

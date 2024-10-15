@@ -43,9 +43,28 @@ Styles for the top level of the navigation at desktop
 
     // top level menu links
     &__link {
+        position: relative;
         text-decoration: none;
         display: inline-block;
         padding: 11px 0;
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: calc(100% - 5px);
+            height: 4px;
+            background-color: $color--river;
+            transition: $transition opacity;
+            opacity: 0;
+        }
+
+        &:hover {
+            &::before {
+                opacity: 1;
+            }
+        }
     }
 
     // top level menu link text

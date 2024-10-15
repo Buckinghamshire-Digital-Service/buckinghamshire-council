@@ -11,6 +11,9 @@
 
     &--promo {
         margin-left: 0;
+        width: auto;
+        display: flex;
+        align-items: center;
 
         #{$root}__line {
             width: 32px;
@@ -62,6 +65,16 @@
                 left: 50%;
                 width: 0%;
             }
+        }
+    }
+
+    &__icon {
+        stroke-width: 3px;
+        width: 16px;
+        height: 11px;
+
+        .is-open & {
+            transform: rotate(180deg);
         }
     }
 }
