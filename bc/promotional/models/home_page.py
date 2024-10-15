@@ -16,6 +16,7 @@ class PromotionalHomePage(BasePage):
         "promotional.PromotionalSiteConfiguration",
         "promotional.PromotionalContentPage",
         "events.EventIndexPage",
+        "blogs.bloghomepage",
     ]
     template = "patterns/pages/promotional/home_page.html"
 

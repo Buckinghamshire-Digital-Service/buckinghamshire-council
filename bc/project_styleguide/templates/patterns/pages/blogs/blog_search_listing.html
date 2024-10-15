@@ -1,10 +1,12 @@
 {% extends 'patterns/base_page--blogs.html' %}
-{% load wagtailcore_tags wagtailimages_tags static %}
+{% load promotional_utils wagtailcore_tags wagtailimages_tags static %}
+
+{% is_promotional_site as promotional_site %}
 
 {% block content %}
     {% include "patterns/molecules/hero/hero--blog.html" %}
 
-    <div class="wrapper wrapper--flex blog-page">
+    <div class="wrapper {% if promotional_site %} wrapper--large {% else %} wrapper--flex {% endif %} blog-page">
         <div class="section section--main">
             <h2 class="heading heading--xl blog-page__title blog-page__title--search">Search results for {{ page.title|lower }}</h2>
             {% include "patterns/molecules/blog-list/blog-list.html" with items=page_obj.object_list %}
