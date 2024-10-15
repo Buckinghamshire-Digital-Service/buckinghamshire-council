@@ -125,11 +125,13 @@
             {% endif %}
             </li>
         {% endfor %}
-        <li class="primary-nav-mobile__item primary-nav-mobile__item--button">
-            <div class="primary-nav-mobile__link">
-                <a href="{{ primary_cta.url }}" class="primary-nav-mobile__button promo-button promo-button--leaf-bg promo-button--extra-padding">{{ primary_cta.text }}</a>
-            </div>
-        </li>
+        {% if primary_cta %}
+            <li class="primary-nav-mobile__item primary-nav-mobile__item--button">
+                <div class="primary-nav-mobile__link">
+                    <a href="{{ primary_cta.url }}" class="primary-nav-mobile__button promo-button promo-button--leaf-bg promo-button--extra-padding">{{ primary_cta.text }}</a>
+                </div>
+            </li>
+        {% endif %}
     </ul>
 </nav>
 {% endif %}
