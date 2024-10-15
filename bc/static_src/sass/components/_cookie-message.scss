@@ -15,8 +15,16 @@
         display: block;
     }
 
+    // Move to the bottom of the page on promo site(s)
     .page--promotional & {
         background-color: $color--white;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+
+        @include media-query(tablet-portrait) {
+            position: relative;
+        }
     }
 
     &__container {
