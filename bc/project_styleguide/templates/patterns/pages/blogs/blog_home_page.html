@@ -1,5 +1,7 @@
 {% extends 'patterns/base_page--blogs.html' %}
 
+{% load promotional_utils %}
+
 {% block content %}
     {% include "patterns/molecules/hero/hero--blog.html" %}
 
@@ -7,7 +9,9 @@
         {% include 'patterns/molecules/featured_blog_post/featured_blog_post.html' with page=page.featured_blogpost_page listing_image=page.featured_image %}
     {% endif %}
 
-    <div class="wrapper wrapper--flex">
+    {% is_promotional_site as promotional_site %}
+    <div class="wrapper {% if promotional_site %} wrapper--large {% else %} wrapper--flex {% endif %} blog-page">
+
         <div class="section section--main">
             {% include "patterns/molecules/blog-list/blog-list.html" with items=blogs.object_list %}
             {% include "patterns/molecules/pagination/pagination.html" with modifier="pagination--centred" paginator_page=blogs %}

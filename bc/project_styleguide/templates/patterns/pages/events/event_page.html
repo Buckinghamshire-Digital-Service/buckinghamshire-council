@@ -1,5 +1,7 @@
 {% extends base_page_template %}
-{% load wagtailcore_tags wagtailimages_tags static event_tags %}
+{% load promotional_utils wagtailcore_tags wagtailimages_tags static event_tags %}
+
+{% is_promotional_site as promotional_site %}
 
 {% block content %}
 
