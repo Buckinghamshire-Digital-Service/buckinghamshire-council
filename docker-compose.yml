@@ -80,7 +80,7 @@ services:
       - .:/app:ro
 
   redis:
-    image: redis:6
+    image: redis:7.2
     expose:
       - 6379
     logging:

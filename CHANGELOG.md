@@ -1,5 +1,12 @@
 # Release History
 
+## 80.1 (2024-10-15)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/80.0...80.1>
+
+- Update Redis config to use up-to-date Torchbox standard, including compatibility with Heroku's Redis services (which use self-signed certificates for secure connections)
+- Update local dev config to match Heroku version
+
 ## 80.0 (2024-10-08)
 
 - Fix panels on category page
