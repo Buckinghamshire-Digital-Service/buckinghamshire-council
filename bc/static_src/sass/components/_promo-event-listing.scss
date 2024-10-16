@@ -3,9 +3,9 @@
     margin: 75px 0 0 50%;
     background-color: $color--river;
     padding: 90px 0 50px;
-    width: 100vw;
     transform: translateX(-50%);
-    overflow-x: clip;
+    width: 100%;
+    overflow: hidden;
 
     @include media-query(tablet-landscape) {
         padding: 185px 0 100px;
