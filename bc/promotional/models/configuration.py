@@ -1,11 +1,12 @@
 from django import http
 from django.db import models
+from django.utils.cache import add_never_cache_headers
 from django.utils.html import format_html
 
 from wagtail import blocks
 from wagtail.admin.panels import FieldPanel, HelpPanel, MultiFieldPanel
 from wagtail.fields import StreamField
-from wagtail.models import Page
+from wagtail.models import Page, Site
 
 
 class PrimaryNavigationItem(blocks.StructBlock):
@@ -72,4 +73,21 @@ class PromotionalSiteConfiguration(Page):
     ]
 
     def serve(self, request, *args, **kwargs):
-        raise http.Http404("Headless page")
+        """
+        We want to redirect the editors clicking live in Wagtail admin to the homepage,
+        instead of showing them 404.
+        """
+        site = Site.find_for_request(request)
+        if site is None or site.root_page is None:
+            raise http.Http404()
+
+        response = http.HttpResponseRedirect(
+            site.root_page.specific.get_url(request=request)
+        )
+
+        # Make sure redirect is not cached or indexed.
+        del response["cache-control"]
+        add_never_cache_headers(response)
+        response["X-Robots-Tag"] = "noindex"
+
+        return response
