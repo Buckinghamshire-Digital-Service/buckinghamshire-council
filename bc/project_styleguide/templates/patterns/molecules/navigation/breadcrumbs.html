@@ -1,8 +1,13 @@
-{% load wagtailcore_tags %}
+{% load promotional_utils wagtailcore_tags %}
 
+{% is_promotional_site as promotional_site %}
 
 
 {% if page.get_ancestors|length > 1 %}
+{% if promotional_site %}
+    <div class="wrapper wrapper--promo-inner">
+{% endif %}
+
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb {{ custom_class }}">
             {% for ancestor_page in page.get_ancestors %}
@@ -21,4 +26,8 @@
             {% endfor %}
         </ol>
     </nav>
+
+{% if promotional_site %}
+    </div>
+{% endif %}
 {% endif %}
