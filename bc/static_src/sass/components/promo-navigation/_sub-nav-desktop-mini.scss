@@ -36,6 +36,7 @@ Here we refer to 'level 1 children' as 'level 2' and 'level 2 children' as 'leve
     // the list item for each menu item at the 2nd level
     &__item {
         @include font-size(s);
+        line-height: 24px;
     }
 
     // The link for each menu item in the 2nd and 3rd level
@@ -46,6 +47,10 @@ Here we refer to 'level 1 children' as 'level 2' and 'level 2 children' as 'leve
 
         #{$root}__item:last-child & {
             border-bottom: none;
+        }
+
+        &--bold {
+            font-weight: $weight--bold;
         }
     }
 

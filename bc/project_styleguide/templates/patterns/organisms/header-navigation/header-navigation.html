@@ -62,6 +62,11 @@
                 {% if item.items %}
                     <div class="sub-nav-desktop-mini">
                         <ul class="sub-nav-desktop-mini__list">
+                            <li class="sub-nav-desktop-mini__item">
+                                <a class="sub-nav-desktop-mini__link sub-nav-desktop-mini__link--bold" href="{{ item.url }}">
+                                    {{ item.title }}
+                                </a>
+                            </li>
                         {% for subitem in item.items %}
                             <li class="sub-nav-desktop-mini__item">
                                 <a class="sub-nav-desktop-mini__link" href="{{ subitem.url }}">
