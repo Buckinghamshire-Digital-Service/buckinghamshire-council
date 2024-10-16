@@ -2,6 +2,7 @@ from django.db import models
 
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.fields import StreamField
+from wagtail.search import index
 
 from bc.utils.models import BasePage
 
@@ -32,6 +33,8 @@ class PromotionalContentPage(BasePage):
     hero_link_text = models.CharField(max_length=255)
 
     body = StreamField(PromotionalStoryBlock())
+
+    search_fields = BasePage.search_fields + [index.SearchField("body")]
 
     content_panels = BasePage.content_panels + [
         MultiFieldPanel(
