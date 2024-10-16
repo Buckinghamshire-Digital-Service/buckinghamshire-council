@@ -11,6 +11,7 @@ from bc.utils.blocks import (
     HighlightBlock,
     ImageBlock,
     InsetTextBlock,
+    QuoteBlock,
     TableBlock,
 )
 from bc.utils.constants import PLAIN_TEXT_TABLE_HELP_TEXT, RICH_TEXT_FEATURES
@@ -65,6 +66,7 @@ class PromotionalStoryBlock(blocks.StreamBlock):
     callout_with_image = CalloutWithImage()
     steps = Steps()
     media_with_text_cta = SecondaryMediaWithTextCTA()
+    quote = QuoteBlock()
 
     class Meta:
         template = "patterns/molecules/streamfield-promotional/stream_block.html"
