@@ -28,7 +28,7 @@ class EventContext(TypedDict):
 class UpcomingEventsContext(TypedDict):
     visible: bool
     events: Sequence[EventContext]
-    view_all_events_url: Optional[str]
+    view_all_url: Optional[str]
 
 
 # Promotional primary navigation
@@ -47,11 +47,11 @@ def upcoming_events(context) -> UpcomingEventsContext:
             "Failed to get promotional site configuration for site_pk=%s.",
             current_site.pk,
         )
-        return {"visible": False, "events": [], "view_all_events_url": None}
+        return {"visible": False, "events": [], "view_all_url": None}
 
     events_index = site_config.events_feed
     if events_index is None:
-        return {"visible": False, "events": [], "view_all_events_url": None}
+        return {"visible": False, "events": [], "view_all_url": None}
 
     events_index = events_index.specific
 
@@ -77,5 +77,5 @@ def upcoming_events(context) -> UpcomingEventsContext:
     return {
         "visible": True,
         "events": events_context,
-        "view_all_events_url": events_index.get_url(request=request),
+        "view_all_url": events_index.get_url(request=request),
     }
