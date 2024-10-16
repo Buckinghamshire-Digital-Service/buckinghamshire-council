@@ -25,6 +25,8 @@ from bc.family_information.models import SubsiteHomePage
 from bc.family_information.utils import is_pension_subsite
 from bc.inlineindex.models import InlineIndexChild
 from bc.longform.models import LongformChapterPage
+from bc.promotional.models import PromotionalSiteConfiguration
+from bc.promotional.utils import is_promotional_site
 from bc.recruitment.forms import SearchAlertSubscriptionForm
 from bc.recruitment.models import JobAlertSubscription
 from bc.recruitment.utils import (
@@ -60,6 +62,7 @@ class SearchView(View):
         site = Site.find_for_request(request)
         site_is_recruitment = is_recruitment_site(site)
         site_is_pensions = is_pension_subsite(site)
+        site_is_promotional = is_promotional_site(site)
         if site_is_recruitment:
             template_path = "patterns/pages/search/search--jobs.html"
             homepage = Site.find_for_request(request).root_page
@@ -70,36 +73,44 @@ class SearchView(View):
                 context["job_alert_form"] = SearchAlertSubscriptionForm
         else:
             if search_query:
-                promotions = (
-                    Query.get(search_query)
-                    .editors_picks.annotate(
-                        section_label=Case(
-                            When(
-                                page__path__startswith=site.root_page.path,
-                                then=Subquery(
-                                    Page.objects
-                                    # don't self-annotate section indexes
-                                    .exclude(pk=OuterRef("page__pk"))
-                                    .filter(
-                                        depth=3,
-                                        path__withinstart=OuterRef("page__path"),
-                                    )
-                                    .values("title")
+                if not site_is_promotional:
+                    promotions = (
+                        Query.get(search_query)
+                        .editors_picks.annotate(
+                            section_label=Case(
+                                When(
+                                    page__path__startswith=site.root_page.path,
+                                    then=Subquery(
+                                        Page.objects
+                                        # don't self-annotate section indexes
+                                        .exclude(pk=OuterRef("page__pk"))
+                                        .filter(
+                                            depth=3,
+                                            path__withinstart=OuterRef("page__path"),
+                                        )
+                                        .values("title")
+                                    ),
                                 ),
-                            ),
-                            default=Subquery(
-                                Site.objects.filter(
-                                    root_page__path__withinstart=OuterRef("page__path")
-                                ).values("site_name")
-                            ),
-                            output_field=CharField(),
+                                default=Subquery(
+                                    Site.objects.filter(
+                                        root_page__path__withinstart=OuterRef(
+                                            "page__path"
+                                        )
+                                    ).values("site_name")
+                                ),
+                                output_field=CharField(),
+                            )
                         )
+                        .all()
                     )
-                    .all()
-                )
-                promotion_page_ids = promotions.values_list("page_id", flat=True)
+                    promotion_page_ids = promotions.values_list("page_id", flat=True)
 
-                exclude_page_ids = set(promotion_page_ids)
+                    exclude_page_ids = set(promotion_page_ids)
+                else:
+                    # Disable promotions on promotional subsites.
+                    promotions = []
+                    promotion_page_ids = []
+                    exclude_page_ids = set()
 
                 # This assumes that the only subsite that is not a recruitment
                 # site is the pensions site.
@@ -116,6 +127,11 @@ class SearchView(View):
                     page_queryset_for_search = pension_pages
                 else:
                     page_queryset_for_search = Page.objects.live()
+
+                    if site_is_promotional:
+                        page_queryset_for_search = page_queryset_for_search.in_site(
+                            site
+                        ).not_type(PromotionalSiteConfiguration)
 
                     # Exclude Pages from pensions site
                     pensions_page_ids = pension_pages.values_list("pk", flat=True)
@@ -202,6 +218,9 @@ class SearchView(View):
                 "SEO_NOINDEX": True,
             }
         )
+
+        if site_is_promotional:
+            context.update({"promotional_site": True})
 
         if site_is_recruitment:
             context.update(

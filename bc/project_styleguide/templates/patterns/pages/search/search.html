@@ -18,7 +18,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="wrapper wrapper--page search">
+    <div class="wrapper {% if promotional_site %} wrapper--large {% else %} wrapper--page {% endif %} search">
         <h1 class="heading heading--xxl">Search</h1>
 
         <form action="{% url 'search' %}" method="get" role="search" class="form form--search">
@@ -38,32 +38,34 @@
 
     {% comment %} New curated search suggestions {% endcomment %}
     {% if search_cta_title and search_cta_button %}
-        {# When we have a search cta, we want to display the number of results above it. #}
-        {% if search_results %}
-            <header class="search__results-header search__results-header--no-border">
-                {% with count=search_results.paginator.count %}
-                    <h2 class="heading heading--l">{{ count }} result{{ count|pluralize }} for ‘{{ search_query }}’</h2>
-                {% endwith %}
-            </header>
-        {% endif %}
+        <div {% if promotional_site %} class="wrapper--large" {% endif %}>
+            {# When we have a search cta, we want to display the number of results above it. #}
+            {% if search_results %}
+                <header class="search__results-header search__results-header--no-border">
+                    {% with count=search_results.paginator.count %}
+                        <h2 class="heading heading--l">{{ count }} result{{ count|pluralize }} for ‘{{ search_query }}’</h2>
+                    {% endwith %}
+                </header>
+            {% endif %}
 
-        <div class="search-promotions">
-            <div class="search-promotions__container">
-                <h2 class="search-promotions__heading heading heading--s">{{ search_cta_title }}</h2>
+            <div class="search-promotions">
+                <div class="search-promotions__container">
+                    <h2 class="search-promotions__heading heading heading--s">{{ search_cta_title }}</h2>
 
-                {# There will only be one. #}
-                {% for button in search_cta_button %}
-                    <a class="search-promotions__button button button--search" href="{{ button.value.get_url }}">
-                        {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke icon--white search-promotions__button-icon" %}
+                    {# There will only be one. #}
+                    {% for button in search_cta_button %}
+                        <a class="search-promotions__button button button--search" href="{{ button.value.get_url }}">
+                            {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke icon--white search-promotions__button-icon" %}
 
-                        {{ button.value.get_text }}
-                    </a>
-                {% endfor %}
+                            {{ button.value.get_text }}
+                        </a>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     {% endif %}
 
-    <div class="wrapper wrapper--page search">
+    <div class="wrapper {% if promotional_site %} wrapper--large {% else %} wrapper--page {% endif %} search">
         {% if search_results %}
             <section class="search__results" aria-label="Search results">
                 {% if not search_cta_title or not search_cta_button %}
