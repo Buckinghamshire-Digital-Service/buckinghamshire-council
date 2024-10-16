@@ -70,9 +70,19 @@
         line-height: 24px;
         color: $color--white;
         max-width: 550px;
+        font-weight: 300;
+
+        p {
+            font-weight: 300;
+        }
 
         a {
             color: $color--white;
+
+            &:hover {
+                color: $color--white;
+                text-decoration-thickness: 2px;
+            }
         }
     }
 
@@ -97,5 +107,10 @@
 
     &__link {
         color: $color--white;
+
+        &:hover {
+            color: $color--white;
+            text-decoration-thickness: 2px;
+        }
     }
 }

@@ -71,6 +71,7 @@ Styles for the top level of the navigation at desktop
     &__text {
         @include font-size(s);
         color: $color--river;
+        word-break: normal;
     }
 
     // desktop arrows
