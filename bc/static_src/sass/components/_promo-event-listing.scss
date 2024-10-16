@@ -5,6 +5,7 @@
     padding: 90px 0 50px;
     transform: translateX(-50%);
     width: 100%;
+    overflow-x: clip;
 
     @include media-query(tablet-landscape) {
         padding: 185px 0 100px;
