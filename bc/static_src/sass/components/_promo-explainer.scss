@@ -29,28 +29,44 @@
         margin-bottom: 150px;
     }
 
-    &::before {
+    &::before,
+    &::after {
         content: '';
         position: absolute;
         width: 110%;
         height: 15vw;
-        top: -15vw;
         left: -5%;
-        background-color: $color--promo-light-blue;
         border-top-left-radius: 100%;
         border-top-right-radius: 100%;
         z-index: -1;
 
         @include media-query(tablet-landscape) {
-            top: -125px;
             width: 110%;
             height: 250px;
         }
     }
 
+    &::before {
+        top: -15vw;
+        background-color: $color--promo-light-blue;
+
+        @include media-query(tablet-landscape) {
+            top: -125px;
+        }
+    }
+
+    &::after {
+        bottom: -15vw;
+        background-color: $color--white;
+
+        @include media-query(tablet-landscape) {
+            bottom: -125px;
+        }
+    }
+
     &--bottom-padding {
         @include media-query(tablet-landscape) {
-            padding-bottom: 250px;
+            padding-bottom: 310px;
         }
     }
 
