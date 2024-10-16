@@ -18,7 +18,7 @@ from bc.utils.constants import PLAIN_TEXT_TABLE_HELP_TEXT, RICH_TEXT_FEATURES
 
 from .callouts import CalloutWithImage
 from .cards import LinkCards
-from .cta import SecondaryMediaWithTextCTA
+from .cta import AlignedMediaWithText, SecondaryMediaWithTextCTA
 from .steps import Steps
 
 
@@ -67,6 +67,7 @@ class PromotionalStoryBlock(blocks.StreamBlock):
     steps = Steps()
     media_with_text_cta = SecondaryMediaWithTextCTA()
     quote = QuoteBlock()
+    aligned_media_with_text = AlignedMediaWithText()
 
     class Meta:
         template = "patterns/molecules/streamfield-promotional/stream_block.html"

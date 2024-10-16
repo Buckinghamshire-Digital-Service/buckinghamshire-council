@@ -1,0 +1,7 @@
+{% load wagtailcore_tags %}
+
+<div>
+    {% for item in items %}
+        {% include_block item.block with alignment=item.alignment %}
+    {% endfor %}
+</div>
