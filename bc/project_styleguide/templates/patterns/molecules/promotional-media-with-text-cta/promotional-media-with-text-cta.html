@@ -1,7 +1,7 @@
 {% load wagtailembeds_tags wagtailimages_tags %}
 
 <div class="wrapper wrapper--promo-inner">
-    <div class="media-with-text {% if flavour %} media-with-text--{{ flavour }} {% endif %}">
+    <div class="media-with-text {% if flavour %} media-with-text--{{ flavour }} {% endif %} {% if alignment %} media-with-text--{{ alignment }} {% endif %}">
         <div class="media-with-text__media">
             {% if embed_url %}
                 {% embed embed_url %}

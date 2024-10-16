@@ -51,3 +51,30 @@ class SecondaryMediaWithTextCTA(BaseMediaWithTextCTA):
         context = super().get_context(value, parent_context=parent_context)
         context["flavour"] = "secondary"
         return context
+
+
+class AlignedMediaWithTextItem(BaseMediaWithTextCTA):
+    class Meta:
+        label = "Item"
+
+
+class AlignedMediaWithText(blocks.StructBlock):
+    items = blocks.ListBlock(AlignedMediaWithTextItem, min_num=1)
+
+    class Meta:
+        template = "patterns/organisms/promotional-aligned-media-with-text/promotional-aligned-media-with-text.html"
+
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context=parent_context)
+
+        items = []
+        for i, item in enumerate(value["items"]):
+            items.append(
+                {
+                    "block": item,
+                    "alignment": "left" if i % 2 == 0 else "right",
+                }
+            )
+
+        context["items"] = items
+        return context
