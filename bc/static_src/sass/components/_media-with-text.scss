@@ -1,10 +1,17 @@
 .media-with-text {
     display: grid;
     margin: 50px 0;
-    background-color: $color--leaf-light;
     border-radius: 8px;
     overflow: hidden;
     min-height: 280px;
+
+    &--primary {
+        background-color: $color--leaf-light;
+    }
+
+    &--secondary {
+        background-color: $color--white;
+    }
 
     @include media-query(tablet-portrait) {
         border-radius: 16px;

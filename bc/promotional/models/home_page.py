@@ -4,7 +4,7 @@ from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.fields import StreamField
 
 from bc.blogs.models import BlogPostPage
-from bc.promotional.blocks.cta import MediaWithTextCTA
+from bc.promotional.blocks.cta import PrimaryMediaWithTextCTA
 from bc.utils.models import BasePage
 
 from ..blocks.cards import LinkCards
@@ -43,7 +43,7 @@ class PromotionalHomePage(BasePage):
     )
 
     media_with_text_cta = StreamField(
-        [("media_with_text_cta", MediaWithTextCTA())],
+        [("media_with_text_cta", PrimaryMediaWithTextCTA())],
         max_num=1,
         blank=True,
         verbose_name="media with text call to action",

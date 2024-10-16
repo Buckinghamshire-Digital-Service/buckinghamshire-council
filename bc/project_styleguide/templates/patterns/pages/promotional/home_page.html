@@ -15,7 +15,7 @@
     {% endif %}
 
     {% if page.media_with_text_cta %}
-        {% include "patterns/pages/promotional/home-page/media-with-text-cta.html" with block=page.media_with_text_cta.0.value %}
+        {% include_block page.media_with_text_cta %}
     {% endif %}
 
     {% if page.explainer %}
