@@ -18,6 +18,12 @@
         }
     }
 
+    .page--promotional & {
+        @include media-query(tablet-landscape) {
+            flex: 0 0 350px;
+        }
+    }
+
     &__heading {
         @include font-size(m);
         margin-bottom: $grid--small;

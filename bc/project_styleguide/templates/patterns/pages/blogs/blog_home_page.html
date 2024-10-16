@@ -3,6 +3,12 @@
 {% load promotional_utils %}
 
 {% block content %}
+{% is_promotional_site as promotional_site %}
+
+{% if promotional_site %}
+    <div class="wrapper wrapper--promo-inner">
+{% endif %}
+
     {% include "patterns/molecules/hero/hero--blog.html" %}
 
     {% if page.featured_blogpost_page %}
@@ -10,7 +16,7 @@
     {% endif %}
 
     {% is_promotional_site as promotional_site %}
-    <div class="wrapper {% if promotional_site %} wrapper--large {% else %} wrapper--flex {% endif %} blog-page">
+    <div class="wrapper wrapper--flex blog-page">
 
         <div class="section section--main">
             {% include "patterns/molecules/blog-list/blog-list.html" with items=blogs.object_list %}
@@ -19,4 +25,8 @@
 
         {% include 'patterns/organisms/blogs-sidebar/blogs-sidebar.html' %}
     </div>
+
+{% if promotional_site %}
+    </div>
+{% endif %}
 {% endblock %}
