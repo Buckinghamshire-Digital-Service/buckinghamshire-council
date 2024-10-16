@@ -22,7 +22,7 @@ LOCAL_DUMP_DIR = "database_dumps"
 
 PRODUCTION_APP_INSTANCE = "buckinghamshire-production"
 STAGING_APP_INSTANCE = "buckinghamshire-staging"
-CONTENT_PREP_APP_INSTANCE = "buckinghamshire-content_prep"
+CONTENT_PREP_APP_INSTANCE = "buckinghamshire-content-prep"
 
 LOCAL_MEDIA_DIR = "media"
 LOCAL_IMAGES_DIR = LOCAL_MEDIA_DIR + "/original_images"
