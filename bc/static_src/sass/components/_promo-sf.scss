@@ -14,6 +14,8 @@
     &--embed,
     &--detail,
     &--highlight,
+    &--plain_text_table,
+    &--steps,
     &--inset_text {
         margin: 0 auto 50px;
         max-width: $wrapper--promo-reading;
@@ -26,7 +28,6 @@
     }
 
     // Promo inner width
-    &--plain_text_table,
     &--callout_with_image {
         margin: 0 auto 50px;
         max-width: $wrapper--promo-inner;
