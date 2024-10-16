@@ -17,6 +17,7 @@ from bc.utils.constants import PLAIN_TEXT_TABLE_HELP_TEXT, RICH_TEXT_FEATURES
 
 from .callouts import CalloutWithImage
 from .cards import LinkCards
+from .steps import Steps
 
 
 class PromotionalStoryBlock(blocks.StreamBlock):
@@ -61,6 +62,7 @@ class PromotionalStoryBlock(blocks.StreamBlock):
     detail = DetailBlock()
     link_cards = LinkCards()
     callout_with_image = CalloutWithImage()
+    steps = Steps()
 
     class Meta:
         template = "patterns/molecules/streamfield-promotional/stream_block.html"
