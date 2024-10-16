@@ -91,3 +91,7 @@ class PromotionalSiteConfiguration(Page):
         response["X-Robots-Tag"] = "noindex"
 
         return response
+
+    def get_sitemap_urls(self, request=None):
+        # We don't want this page in the sitemap.
+        return []
