@@ -24,7 +24,6 @@ class DesktopSubMenu {
     close() {
         this.toggleNode.classList.remove('active');
         this.node.setAttribute('aria-expanded', 'false');
-        this.body.classList.remove('no-scroll');
     }
 
     open() {
@@ -32,7 +31,6 @@ class DesktopSubMenu {
         document.dispatchEvent(menuOpenEvent);
         this.toggleNode.classList.add('active');
         this.node.setAttribute('aria-expanded', 'true');
-        this.body.classList.add('no-scroll');
     }
 
     bindEventListeners() {
