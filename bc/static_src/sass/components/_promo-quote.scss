@@ -1,0 +1,108 @@
+.promo-quote-wrapper {
+    overflow: hidden;
+
+    @include media-query(tablet-landscape) {
+        overflow: visible;
+    }
+}
+
+.promo-quote {
+    // Escape parent
+    width: 100vw;
+    transform: translateX(-50%);
+    background-color: $color--leaf-light;
+    position: relative;
+    margin: 50px 0 145px 50%;
+    padding: 150px 0 35px;
+    overflow-x: clip;
+
+    @include media-query(mob-landscape) {
+        padding: 170px 0 50px;
+    }
+
+    @include media-query(px550) {
+        padding-bottom: 100px;
+        margin-bottom: 175px;
+    }
+
+    @include media-query(tablet-portrait) {
+        margin-bottom: 220px;
+    }
+
+    @include media-query(tablet-landscape) {
+        padding: 250px 0 5px;
+        margin: 0 0 280px 50%;
+    }
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        width: 110%;
+        height: 15vw;
+        left: -5%;
+        z-index: -1;
+        border-bottom-left-radius: 100%;
+        border-bottom-right-radius: 100%;
+
+        @include media-query(tablet-landscape) {
+            width: 110%;
+            height: 250px;
+        }
+    }
+
+    &::before {
+        top: -10vw;
+        background-color: $color--white;
+
+        @include media-query(tablet-landscape) {
+            top: -170px;
+        }
+    }
+
+    &::after {
+        bottom: -15vw;
+        background-color: $color--leaf-light;
+
+        @include media-query(tablet-landscape) {
+            bottom: -125px;
+        }
+    }
+
+    &__icon {
+        margin-top: -70px;
+    }
+
+    &__title,
+    &__attr {
+        color: $color--river;
+        font-style: normal;
+        font-weight: $weight--bold;
+    }
+
+    &__title {
+        @include font-size(xl);
+        line-height: 35px;
+        margin: 50px 0 20px;
+    }
+
+    &__attr {
+        @include font-size(s);
+        position: relative;
+        line-height: 24px;
+        font-weight: $weight--bold;
+        padding-left: 40px;
+
+        &::before {
+            position: absolute;
+            content: '';
+            width: 25px;
+            height: 1px;
+            top: 0;
+            bottom: 0;
+            background-color: $color--river;
+            left: 0;
+            margin: auto 0;
+        }
+    }
+}

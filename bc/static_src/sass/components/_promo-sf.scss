@@ -15,7 +15,6 @@
     &--detail,
     &--highlight,
     &--plain_text_table,
-    &--steps,
     &--inset_text {
         margin: 0 auto 50px;
         max-width: $wrapper--promo-reading;
@@ -24,6 +23,18 @@
         @include media-query(tablet-portrait) {
             padding: 0 25px;
             margin: 0 auto 75px;
+        }
+    }
+
+    // Reading line width, modified margins
+    &--steps {
+        margin: 0 auto 75px;
+        max-width: $wrapper--promo-reading;
+        padding: 0 20px;
+
+        @include media-query(tablet-portrait) {
+            padding: 0 25px;
+            margin: 0 auto 100px;
         }
     }
 

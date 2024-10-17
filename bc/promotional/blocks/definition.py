@@ -66,7 +66,9 @@ class PromotionalStoryBlock(blocks.StreamBlock):
     callout_with_image = CalloutWithImage()
     steps = Steps()
     media_with_text_cta = SecondaryMediaWithTextCTA()
-    quote = QuoteBlock()
+    quote = QuoteBlock(
+        template="patterns/molecules/streamfield/blocks/promo_quote_block.html"
+    )
     aligned_media_with_text = AlignedMediaWithText()
 
     class Meta:
