@@ -1,10 +1,9 @@
 {% load wagtailimages_tags %}
 
-{% if visible %}
-<div class="promo-event-listing">
-    <div class="wrapper wrapper--promo-inner">
-        <h2 class="promo-event-listing__title">Upcoming events</h2>
-        {% if events %}
+{% if visible and events %}
+    <div class="promo-event-listing">
+        <div class="wrapper wrapper--promo-inner">
+            <h2 class="promo-event-listing__title">Upcoming events</h2>
             <div class="promo-event-listing__inner">
                 {% for event in events %}
                     <a href="{{ event.url }}" class="promo-event-card">
@@ -26,15 +25,11 @@
                     </a>
                 {% endfor %}
             </div>
-        {% else %}
-            No upcoming events
-        {% endif %}
-
-        {% if view_all_url %}
-            <div class="promo-event-listing__button">
-                <a href="{{ view_all_url }}" class="promo-button promo-button--white-border promo-button--extra-padding">View all events</a>
-            </div>
-        {% endif %}
+            {% if view_all_url %}
+                <div class="promo-event-listing__button">
+                    <a href="{{ view_all_url }}" class="promo-button promo-button--white-border promo-button--extra-padding">View all events</a>
+                </div>
+            {% endif %}
+        </div>
     </div>
-</div>
 {% endif %}
