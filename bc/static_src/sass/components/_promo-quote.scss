@@ -8,7 +8,7 @@
 
 .promo-quote {
     // Escape parent
-    width: 100vw;
+    width: calc(100vw - 15px);
     transform: translateX(-50%);
     background-color: $color--leaf-light;
     position: relative;

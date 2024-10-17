@@ -49,7 +49,9 @@ class PromotionalStoryBlock(blocks.StreamBlock):
     paragraph = blocks.RichTextBlock(
         features=RICH_TEXT_FEATURES,
     )
-    image = ImageBlock()
+    image = ImageBlock(
+        template="patterns/molecules/streamfield/blocks/promo_image_block.html"
+    )
     embed = EmbedBlock()
     plain_text_table = TableBlock(
         group="Table", help_text=mark_safe(PLAIN_TEXT_TABLE_HELP_TEXT)

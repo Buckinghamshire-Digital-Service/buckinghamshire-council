@@ -4,7 +4,7 @@
     background-color: $color--river;
     padding: 90px 0 50px;
     transform: translateX(-50%);
-    width: 100%;
+    width: calc(100vw - 15px);
     overflow-x: clip;
 
     @include media-query(tablet-landscape) {
