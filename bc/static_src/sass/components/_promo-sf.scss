@@ -16,6 +16,7 @@
     &--highlight,
     &--plain_text_table,
     &--inset_text {
+        position: relative;
         margin: 0 auto 50px;
         max-width: $wrapper--promo-reading;
         padding: 0 20px;
