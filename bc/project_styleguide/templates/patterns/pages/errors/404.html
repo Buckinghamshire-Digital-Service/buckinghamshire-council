@@ -11,7 +11,7 @@
 
 {% block content %}
 {% is_promotional_site as promotional_site %}
-    <div class="wrapper {% if promotional_site %}wrapper--promo-inner{% else %}wrapper--flex {% endif %}">
+    <div class="wrapper {% if promotional_site %}wrapper--promo-inner wrapper--promo-margin{% else %}wrapper--flex {% endif %}">
         <div class="section section--main">
             {{ settings.utils.SystemMessagesSettings.body_404|richtext }}
         </div>
