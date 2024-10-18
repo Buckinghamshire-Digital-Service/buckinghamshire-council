@@ -105,14 +105,4 @@
             padding: 0 25px;
         }
     }
-
-    &--promo-margin {
-        margin-top: 50px;
-        margin-bottom: 50px;
-
-        @include media-query(tablet-portrait) {
-            margin-top: 50px;
-            margin-bottom: 50px;
-        }
-    }
 }

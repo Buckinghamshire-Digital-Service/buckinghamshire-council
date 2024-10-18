@@ -11,8 +11,9 @@
 
 {% block content %}
 {% is_promotional_site as promotional_site %}
-    <div class="wrapper {% if promotional_site %}wrapper--promo-inner wrapper--promo-margin{% else %}wrapper--flex {% endif %}">
+    <div class="wrapper {% if promotional_site %}wrapper--promo-inner promo-404{% else %}wrapper--flex {% endif %}">
         <div class="section section--main">
+            <h1 class="promo-404__title">Page not found</h1>
             {{ settings.utils.SystemMessagesSettings.body_404|richtext }}
         </div>
     </div>
