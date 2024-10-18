@@ -1,5 +1,5 @@
 {% extends base_page_template %}
-{% load wagtailcore_tags wagtailsettings_tags %}
+{% load promotional_utils wagtailcore_tags wagtailsettings_tags %}
 
 {% block hero %}
     {% include "patterns/molecules/hero/hero-404.html" %}
@@ -10,11 +10,11 @@
 {% block breadcrumbs %}{% endblock %}
 
 {% block content %}
-
-    <div class="wrapper wrapper--flex">
+{% is_promotional_site as promotional_site %}
+    <div class="wrapper {% if promotional_site %}wrapper--promo-inner{% else %}wrapper--flex {% endif %}">
         <div class="section section--main">
             {{ settings.utils.SystemMessagesSettings.body_404|richtext }}
         </div>
     </div>
-
 {% endblock %}
+
