@@ -11,11 +11,14 @@
 
 {% block content %}
 {% is_promotional_site as promotional_site %}
-    <div class="wrapper {% if promotional_site %}wrapper--promo-inner promo-404{% else %}wrapper--flex {% endif %}">
-        <div class="section section--main">
-            <h1 class="promo-404__title">Page not found</h1>
-            {{ settings.utils.SystemMessagesSettings.body_404|richtext }}
-        </div>
+
+<div class="wrapper {% if promotional_site %}wrapper--promo-inner promo-404{% else %}wrapper--flex {% endif %}">
+    <div class="section section--main">
+        {% if promotional_site %}
+            <h1 class="promo-404__title">{{ settings.utils.SystemMessagesSettings.title_404 }}</h1>
+        {% endif %}
+        {{ settings.utils.SystemMessagesSettings.body_404|richtext }}
     </div>
+</div>
 {% endblock %}
 
