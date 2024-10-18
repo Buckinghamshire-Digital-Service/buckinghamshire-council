@@ -1,4 +1,5 @@
 .media-with-text {
+    $root: &;
     display: grid;
     margin: 50px 0;
     border-radius: 8px;
@@ -11,6 +12,15 @@
 
     &--secondary {
         background-color: $color--white;
+
+        #{$root}__media {
+            border-radius: 8px;
+            overflow: hidden;
+
+            @include media-query(tablet-portrait) {
+                border-radius: 16px;
+            }
+        }
     }
 
     @include media-query(tablet-portrait) {
