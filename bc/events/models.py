@@ -152,6 +152,10 @@ class EventPage(BasePage):
 class EventIndexPage(BasePage):
     template = "patterns/pages/events/event_index_page.html"
 
+    fetch_all_events = models.BooleanField(
+        help_text="Fetch events from all sites, instead of just displaying child pages of this page"
+    )
+
     subpage_types = ["EventPage"]
     parent_page_types = [
         "home.HomePage",
@@ -159,13 +163,15 @@ class EventIndexPage(BasePage):
         "promotional.PromotionalHomePage",
     ]
 
+    content_panels = BasePage.content_panels + [
+        FieldPanel("fetch_all_events"),
+    ]
+
     def _annotated_descendant_events(self):
-        return (
-            EventPage.objects.live()
-            .public()
-            .descendant_of(self)
-            .annotate(latest_date=Coalesce("end_date", "start_date"))
-        )
+        qs = EventPage.objects.live().public()
+        if not self.fetch_all_events:
+            qs = qs.descendant_of(self)
+        return qs.annotate(latest_date=Coalesce("end_date", "start_date"))
 
     @cached_property
     def upcoming_events(self):
