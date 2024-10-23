@@ -7,7 +7,6 @@ from django.db.models import prefetch_related_objects
 from wagtail.models import Site
 
 from bc.events.templatetags.event_tags import format_event_date
-from bc.images.models import CustomImage
 
 from .. import utils
 
@@ -21,7 +20,6 @@ class EventContext(TypedDict):
     date: str
     location: str
     summary: str
-    image: Optional[CustomImage]
     url: str
 
 
@@ -57,7 +55,8 @@ def upcoming_events(context) -> UpcomingEventsContext:
 
     events = events_index.upcoming_events[:4]
     prefetch_related_objects(
-        events, "event_types__event_type", "listing_image__renditions"
+        events,
+        "event_types__event_type",
     )
 
     events_context: Sequence[EventContext] = []
@@ -68,7 +67,6 @@ def upcoming_events(context) -> UpcomingEventsContext:
                 "title": event.listing_title or event.title,
                 "date": format_event_date(event.start_date, None, event.end_date, None),
                 "summary": event.listing_summary or event.introduction,
-                "image": event.listing_image,
                 "location": event.location_name,
                 "url": event.get_url(request=request),
             }
