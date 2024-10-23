@@ -57,7 +57,7 @@ def upcoming_events(context) -> UpcomingEventsContext:
 
     events = events_index.upcoming_events[:4]
     prefetch_related_objects(
-        events, "event_types__event_type", "listing_image__rendition"
+        events, "event_types__event_type", "listing_image__renditions"
     )
 
     events_context: Sequence[EventContext] = []
