@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
@@ -28,9 +29,13 @@ class PromotionalContentPage(BasePage):
         on_delete=models.SET_NULL,
     )
     hero_link_page = models.ForeignKey(
-        "wagtailcore.Page", null=True, on_delete=models.SET_NULL, related_name="+"
+        "wagtailcore.Page",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name="+",
     )
-    hero_link_text = models.CharField(max_length=255)
+    hero_link_text = models.CharField(max_length=255, blank=True)
 
     body = StreamField(PromotionalStoryBlock())
 
@@ -49,3 +54,21 @@ class PromotionalContentPage(BasePage):
         ),
         FieldPanel("body"),
     ]
+
+    def clean(self) -> None:
+        super().clean()
+
+        if not self.hero_link_text and self.hero_link_page is not None:
+            raise ValidationError(
+                {
+                    "hero_link_text": ValidationError(
+                        "Link text must be populated if a link is specified"
+                    )
+                }
+            )
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        if self.hero_link_page is not None and self.hero_link_page.live:
+            context["hero_link_url"] = self.hero_link_page.get_url(request=request)
+        return context

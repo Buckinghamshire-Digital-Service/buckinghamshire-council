@@ -15,8 +15,9 @@
                         {{ text|linebreaks }}
                     </div>
                 {% endif %}
-
+                {% if link_url and link_text %}
                     <a href="{{ link_url }}" class="promo-hero-content__button promo-button promo-button--blue-border promo-button--extra-padding promo-button--transparent-bg">{{ link_text }}</a>
+                {% endif %}
             </div>
         </div>
         <div aria-hidden="true"></div>

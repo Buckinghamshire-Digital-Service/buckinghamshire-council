@@ -95,7 +95,7 @@ class PromotionalHomePage(BasePage):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        if self.hero_link_page is not None:
+        if self.hero_link_page is not None and self.hero_link_page.live:
             context["hero_link_url"] = self.hero_link_page.get_url(request=request)
         context.update(self.get_recent_blog_posts_context(request=request))
         return context
