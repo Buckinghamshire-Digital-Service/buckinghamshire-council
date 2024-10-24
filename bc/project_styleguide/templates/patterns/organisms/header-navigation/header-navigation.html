@@ -51,7 +51,7 @@
         <ul data-primary-nav class="primary-nav-desktop__list">
         {% for item in items %}
             <li class="primary-nav-desktop__item primary-nav-desktop__item--is-parent {% if item.current %}primary-nav-desktop__item--active{% endif %}" {% if item.items %}data-has-subnav{% endif %}>
-                <a class="primary-nav-desktop__link primary-nav-desktop__link--has-children"  {% if item.items %}data-open-promo-subnav{% endif %} aria-haspopup="true" aria-expanded="false" href="{{ item.url }}">
+                <a class="primary-nav-desktop__link primary-nav-desktop__link--has-children"  {% if item.items %}data-open-promo-subnav{% endif %} aria-haspopup="true" aria-expanded="false" {% if item.url %} href="{{ item.url }}" {% endif %}>
                     <span class="primary-nav-desktop__text">{{ item.title }}</span>
                     {% if item.items %}
                         <div class="primary-nav-desktop__icon-wrapper">
@@ -94,7 +94,7 @@
     <ul data-primary-nav class="primary-nav-mobile__list">
         {% for item in items %}
             <li class="primary-nav-mobile__item {% if item.items %}primary-nav-mobile__item--is-parent{% endif %}">
-            <a class="primary-nav-mobile__link {% if item.items %}primary-nav-mobile__link--has-children{% else %}primary-nav-mobile__link--no-children{% endif %}" {% if item.items %}data-open-promo-subnav{% endif %} aria-haspopup="true" aria-expanded="false" href="{{ item.url }}">
+            <a class="primary-nav-mobile__link {% if item.items %}primary-nav-mobile__link--has-children{% else %}primary-nav-mobile__link--no-children{% endif %}" {% if item.items %}data-open-promo-subnav{% endif %} aria-haspopup="true" aria-expanded="false" {% if item.url %} href="{{ item.url }}" {% endif %}>
                 <span class="primary-nav-mobile__text">{{ item.title }}</span>
                 {% if item.items %}
                     {% include "patterns/atoms/icons/icon.html" with name="chevron" classname="icon--stroke primary-nav-mobile__icon" %}

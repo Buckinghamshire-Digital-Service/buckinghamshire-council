@@ -7,22 +7,28 @@ from django.core.cache import BaseCache
 from wagtail.models import Site
 
 from .models import PromotionalSiteConfiguration
+from .models.configuration import PrimaryNavigationItem as PrimaryNavigationItemBlock
+from .models.configuration import (
+    PrimaryNavigationSection as PrimaryNavigationSectionBlock,
+)
 
 logger = logging.getLogger(__name__)
 
 
-class BasePrimaryNavigationItem(TypedDict):
-    is_on_current_site: bool
+class PrimaryNavigationSubItem(TypedDict):
+    title: str
+    current: bool
     url: str
+    is_on_current_site: bool
+
+
+class PrimaryNavigationItem(TypedDict):
     title: str
     current: bool
 
-
-class PrimaryNavigationSubItem(BasePrimaryNavigationItem):
-    pass
-
-
-class PrimaryNavigationItem(BasePrimaryNavigationItem):
+    # Top-level nav item may be a page.
+    url: Optional[str]
+    is_on_current_site: Optional[bool]
     items: Sequence[PrimaryNavigationSubItem]
 
 
@@ -31,6 +37,7 @@ class PrimaryNavigation:
     cache_prefix: str
     site: Site
     site_config: PromotionalSiteConfiguration
+    CACHE_VERSION: Optional[int] = 2
 
     def __init__(
         self,
@@ -49,7 +56,9 @@ class PrimaryNavigation:
         self, *, current_path: str
     ) -> Sequence[PrimaryNavigationItem]:
         if self.cache:
-            nav = self.cache.get_or_set(self.cache_key(), self.build_navigation)
+            nav = self.cache.get_or_set(
+                self.cache_key(), self.build_navigation, version=self.CACHE_VERSION
+            )
         else:
             nav = self.build_navigation()
         return self.populate_navigation(nav=nav, current_path=current_path)
@@ -67,45 +76,54 @@ class PrimaryNavigation:
         nav: MutableSequence[PrimaryNavigationItem] = []
 
         for item in self.site_config.primary_navigation:
-            page = item.value["page"]
-            if page is None or not page.live:
-                # Skip pages that are not live or not existent anymore.
-                continue
+            if isinstance(item.block, PrimaryNavigationItemBlock):
 
-            page = page.specific
+                page = item.value["page"]
+                if page is None or not page.live:
+                    # Skip pages that are not live or not existent anymore.
+                    continue
 
-            # NB We don't validate page view restrictions. Worst case scenario a link
-            # is inaccessible from the nav.
+                page = page.specific
 
-            subitems: MutableSequence[PrimaryNavigationSubItem] = []
-            on_current_site = item.value["page"].get_site() == self.site
-            if item.value["populate_child_pages"]:
-                for subpage in (
-                    item.value["page"]
-                    .get_children()
-                    .live()
-                    .public()
-                    .in_menu()
-                    .specific()
-                    .order_by("path")
-                ):
+                nav.append(
+                    PrimaryNavigationItem(
+                        current=False,
+                        is_on_current_site=page.get_site() == self.site,
+                        url=page.get_url(current_site=self.site),
+                        items=[],
+                        title=item.value["title"] or page.title,
+                    )
+                )
+            elif isinstance(item.block, PrimaryNavigationSectionBlock):
+                subitems: MutableSequence[PrimaryNavigationSubItem] = []
+                for subitem in item.value["items"]:
+                    subpage = subitem["page"]
+                    # NB We don't validate page view restrictions. Worst case scenario a link
+                    # is inaccessible from the nav.
+                    # Skip deleted pages and non-live pages.
+                    if subpage is None or not subpage.live:
+                        continue
+
+                    subpage = subpage.specific
+                    on_current_site = subpage.get_site() == self.site
                     subitems.append(
                         PrimaryNavigationSubItem(
                             current=False,
                             is_on_current_site=on_current_site,
-                            title=subpage.title,
+                            title=subitem["title"] or subpage.title,
                             url=subpage.get_url(current_site=self.site),
                         )
                     )
-            nav.append(
-                PrimaryNavigationItem(
-                    current=False,
-                    is_on_current_site=page.get_site() == self.site,
-                    items=subitems,
-                    title=item.value["title"] or page.title,
-                    url=page.get_url(current_site=self.site),
-                )
-            )
+                if subitems:
+                    nav.append(
+                        PrimaryNavigationItem(
+                            url=None,
+                            is_on_current_site=None,
+                            current=False,
+                            items=subitems,
+                            title=item.value["title"] or subpage.title,
+                        )
+                    )
         return nav
 
     def populate_navigation(
@@ -120,34 +138,42 @@ class PrimaryNavigation:
             populated_subitems = []
             item_current = False
             for subitem in item["items"]:
-                subitem_current = self.item_is_current(
+                subitem_current = self.subitem_is_current(
                     item=subitem, current_path=current_path
                 )
                 if subitem_current:
                     item_current = True
                 populated_subitems.append({**subitem, "current": subitem_current})
-            if not item_current:
-                item_current = self.item_is_current(
-                    item=item, current_path=current_path
+            if (
+                item_current is False
+                and item["url"] is not None
+                and item["is_on_current_site"] is True
+            ):
+                item_current = self._url_is_current(
+                    url=item["url"], current_path=current_path
                 )
             populated_nav.append(
                 {**item, "items": populated_subitems, "current": item_current}
             )
         return populated_nav
 
-    def item_is_current(
-        self, *, item: BasePrimaryNavigationItem, current_path: str
+    def subitem_is_current(
+        self, *, item: PrimaryNavigationSubItem, current_path: str
     ) -> bool:
         if not item["is_on_current_site"]:
             return False
+        return self._url_is_current(url=item["url"], current_path=current_path)
 
+    def _url_is_current(self, *, url: str, current_path: str) -> bool:
         # Root page will escape the following check.
         # NB this will only work if the homepage is actually on "/".
-        if item["url"] == "/" and current_path != "/":
+        if url == "/" and current_path != "/":
             return False
 
         # In case the page URL is absolute, we want to extract the path only.
-        parsed_item_url_path = urlparse(item["url"]).path
+        # Although, this should not happen as we are only dealing with pages
+        # on the current site.
+        parsed_item_url_path = urlparse(url).path
         return parsed_item_url_path is not None and current_path.startswith(
             parsed_item_url_path
         )
@@ -160,7 +186,7 @@ class PrimaryNavigation:
         """
         if self.cache is not None:
             logger.info("PrimaryNavigation cache cleared for site_pk=%s", self.site.pk)
-            self.cache.delete(self.cache_key())
+            self.cache.delete(self.cache_key(), version=self.CACHE_VERSION)
         else:
             logger.warning(
                 "PrimaryNavigation cache for site_pk=%s was not cleared because cache is not set",

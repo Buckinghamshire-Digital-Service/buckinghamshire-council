@@ -9,16 +9,38 @@ from wagtail.fields import StreamField
 from wagtail.models import Page, Site
 
 
-class PrimaryNavigationItem(blocks.StructBlock):
+class PrimaryNavigationSubItem(blocks.StructBlock):
     page = blocks.PageChooserBlock()
     title = blocks.CharBlock(
-        help_text="Leave blank to use the page's own title",
+        required=False,
+        max_length=64,
+        help_text="If left blank, the page title will be used",
+    )
+
+
+class PrimaryNavigationSection(blocks.StructBlock):
+    """
+    Top-level navigation section that has no link but it's a collection
+    of child pages.
+    """
+
+    title = blocks.CharBlock(
         required=False,
         max_length=64,
     )
-    populate_child_pages = blocks.BooleanBlock(
+    items = blocks.ListBlock(PrimaryNavigationSubItem)
+
+
+class PrimaryNavigationItem(blocks.StructBlock):
+    """
+    Top-level navigation item without child pages.
+    """
+
+    page = blocks.PageChooserBlock()
+    title = blocks.CharBlock(
+        max_length=64,
+        help_text="If left blank, the page title will be used",
         required=False,
-        help='Auto-populated pages with "Show in menus" selected in their "Promote" tab',
     )
 
 
@@ -30,7 +52,10 @@ class PromotionalSiteConfiguration(Page):
     max_count_per_parent = 1
 
     primary_navigation = StreamField(
-        [("primary_navigation_item", PrimaryNavigationItem())],
+        [
+            ("primary_navigation_item", PrimaryNavigationItem()),
+            ("primary_navigation_section", PrimaryNavigationSection()),
+        ]
     )
     primary_cta_link_text = models.CharField(
         max_length=128, blank=True, verbose_name="primary CTA link text"
