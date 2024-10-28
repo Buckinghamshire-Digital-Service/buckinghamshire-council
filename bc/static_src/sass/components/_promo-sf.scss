@@ -52,6 +52,15 @@
         }
     }
 
+    // Link cards
+    &--link_cards {
+        margin-bottom: 50px;
+
+        @include media-query(tablet-portrait) {
+            margin-bottom: 100px;
+        }
+    }
+
     &--accordion {
         .rich-text {
             color: $color--slate;
