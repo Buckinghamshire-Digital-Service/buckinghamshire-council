@@ -109,9 +109,6 @@
                                 Back
                             </button>
                         </li>
-                        <li class="sub-nav-mobile__item">
-                            <a class="sub-nav-mobile__link sub-nav-mobile__link--current" href="{{ item.url }}">In &ldquo;{{ item.title }}&rdquo;</a>
-                        </li>
                     {% for subitem in item.items %}
                         <li class="sub-nav-mobile__item">
                             <a class="sub-nav-mobile__link" href="{{ subitem.url }}">{{ subitem.title }}</a>
