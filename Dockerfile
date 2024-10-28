@@ -24,7 +24,7 @@ FROM python:3.11-slim as backend
 ARG POETRY_INSTALL_ARGS="--without=dev"
 
 # IMPORTANT: Remember to review both of these when upgrading
-ARG POETRY_VERSION=1.8.3
+ARG POETRY_VERSION=1.8.4
 
 # Install dependencies in a virtualenv
 ENV VIRTUAL_ENV=/venv
