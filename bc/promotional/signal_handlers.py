@@ -33,8 +33,6 @@ def clear_primary_navigation_cache(instance: Model, **kwargs) -> None:
 
     if isinstance(instance, PromotionalSiteConfiguration):
         site_config = instance
-    elif instance.show_in_menus:
-        return
     else:
         try:
             site_config = utils.get_promotional_site_configuration(site)
