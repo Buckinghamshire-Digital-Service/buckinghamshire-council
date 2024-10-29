@@ -76,8 +76,8 @@ USER bc
 
 # Install your app's Python requirements.
 RUN python -m venv $VIRTUAL_ENV
-COPY --chown=wagtailkit_repo_name pyproject.toml poetry.lock ./
-RUN pip install --no-cache --upgrade pip && poetry install ${POETRY_INSTALL_ARGS} --no-root && rm -rf $HOME/.cache
+COPY --chown=bc pyproject.toml poetry.lock ./
+RUN pip install --no-cache --upgrade pip && poetry install ${POETRY_INSTALL_ARGS} --no-root --extras gunicorn && rm -rf $HOME/.cache
 
 COPY --chown=bc --from=frontend ./bc/static_compiled ./bc/static_compiled
 
@@ -98,7 +98,7 @@ COPY ./docker/bashrc.sh /home/bc/.bashrc
 
 # Run the WSGI server. It reads GUNICORN_CMD_ARGS, PORT and WEB_CONCURRENCY
 # environment variable hence we don't specify a lot options below.
-CMD gunicorn
+CMD ["gunicorn"]
 
 # These steps won't be run on production
 FROM backend as dev
