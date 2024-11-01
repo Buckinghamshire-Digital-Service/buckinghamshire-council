@@ -33,6 +33,8 @@
         margin: 0 auto 75px;
         max-width: $wrapper--promo-reading;
         padding: 0 20px;
+        position: relative;
+        z-index: 1;
 
         @include media-query(tablet-portrait) {
             padding: 0 25px;
