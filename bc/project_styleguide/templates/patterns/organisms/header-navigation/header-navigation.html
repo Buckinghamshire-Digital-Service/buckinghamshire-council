@@ -51,14 +51,22 @@
         <ul data-primary-nav class="primary-nav-desktop__list">
         {% for item in items %}
             <li class="primary-nav-desktop__item primary-nav-desktop__item--is-parent {% if item.current %}primary-nav-desktop__item--active{% endif %}" {% if item.items %}data-has-subnav{% endif %}>
-                <a class="primary-nav-desktop__link primary-nav-desktop__link--has-children"  {% if item.items %}data-open-promo-subnav{% endif %} aria-haspopup="true" aria-expanded="false" {% if item.url %} href="{{ item.url }}" {% endif %}>
+                {% if item.url %}
+                    <a class="primary-nav-desktop__link primary-nav-desktop__link--has-children"  {% if item.items %}data-open-promo-subnav{% endif %} aria-haspopup="true" aria-expanded="false" {% if item.url %} href="{{ item.url }}" {% endif %}>
+                {% else %}
+                    <button class="primary-nav-desktop__link primary-nav-desktop__link--has-children"  {% if item.items %}data-open-promo-subnav{% endif %} aria-haspopup="true" aria-expanded="false" {% if item.url %} href="{{ item.url }}" {% endif %}>
+                {% endif %} 
                     <span class="primary-nav-desktop__text">{{ item.title }}</span>
                     {% if item.items %}
                         <div class="primary-nav-desktop__icon-wrapper">
                             <svg width="24" height="22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m15.875 9.5-3.88 3.88-3.88-3.88a.996.996 0 1 0-1.41 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59a.996.996 0 0 0 0-1.41c-.39-.38-1.03-.39-1.42 0Z" fill="#2C2D84"/></svg>
                         </div>
                     {% endif %}
-                </a>
+                {% if item.url %}
+                    </a>
+                {% else %}
+                    </button>
+                {% endif %}
                 {% if item.items %}
                     <div class="sub-nav-desktop-mini">
                         <ul class="sub-nav-desktop-mini__list">
@@ -79,8 +87,8 @@
 
     {# Desktop search #}
     <form action="{% url 'search' %}" method="get" role="search" class="form promo-header-search__form promo-header-search__form--desktop">
-        <label class="u-sr-only" for="search--promo-page">Search this website</label>
-        <input class="input promo-header-search__input" id="search--promo-page" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
+        <label class="u-sr-only" for="search--promo-page-desktop">Search this website</label>
+        <input class="input promo-header-search__input" id="search--promo-page-desktop" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
         <button class="button promo-header-search__button" type="submit" aria-label="Submit">
             {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke promo-header-search__button-icon" %}
         </button>
