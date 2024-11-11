@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- upgrade python to 3.11
+
 ## 80.0 (2024-10-08)
 
 - Fix panels on category page

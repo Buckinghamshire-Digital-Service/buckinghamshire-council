@@ -319,13 +319,13 @@ class SchemaTest(TestCase):
     )
 
     def setUp(self):
-        with open("bc/cases/backends/respond/schemata/create_case.xsd", "r") as f:
+        with open("bc/cases/backends/respond/schemata/create_case.xsd") as f:
             schema = etree.XMLSchema(etree.XML(f.read().encode("utf-8")))
         self.parser = etree.XMLParser(schema=schema)
 
     def test_aptean_provided_example_submission(self):
         with open(
-            "bc/cases/backends/respond/schemata/example_create_case_submission.xml", "r"
+            "bc/cases/backends/respond/schemata/example_create_case_submission.xml"
         ) as f:
             etree.fromstring(f.read().encode("utf-8"), self.parser)
 
