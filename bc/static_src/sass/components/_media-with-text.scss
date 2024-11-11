@@ -34,6 +34,8 @@
 
         @include media-query(tablet-portrait) {
             border-radius: 16px 0 0 16px;
+            height: fit-content;
+            align-self: center;
         }
     }
 
