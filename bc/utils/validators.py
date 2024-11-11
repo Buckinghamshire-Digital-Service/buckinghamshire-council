@@ -9,9 +9,7 @@ def validate_facebook_domain(value):
     hostnames = ["www.facebook.com", "facebook.com"]
     if netloc not in hostnames:
         raise ValidationError(
-            (
-                f'{value} is not a Facebook URL. The domain part must be one of {", ".join(hostnames)}'
-            )
+            f'{value} is not a Facebook URL. The domain part must be one of {", ".join(hostnames)}'
         )
 
 
@@ -20,9 +18,7 @@ def validate_youtube_domain(value):
     hostnames = ["youtu.be", "www.youtube.com"]
     if netloc not in hostnames:
         raise ValidationError(
-            (
-                f'{value} is not a YouTube URL. The domain part must be one of {", ".join(hostnames)}'
-            )
+            f'{value} is not a YouTube URL. The domain part must be one of {", ".join(hostnames)}'
         )
 
 

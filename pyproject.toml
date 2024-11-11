@@ -5,15 +5,15 @@ description = "Buckinghamshire Council Website"
 authors = ["Torchbox <hello@torchbox.com>"]
 
 [tool.poetry.dependencies]
-python = "~3.8"
+python = "~3.11"
 bleach = "^6.1.0"
 dataclasses-json = "^0.6.7"
 dj-database-url = "2.2.0"
 Django = "~4.2"
 django-basic-auth-ip-whitelist = "^0.6"
 django-birdbath = "^2.0.0"
-django-csp = "3.8"
-django-gov-notify = "^0.5.0"
+django-csp = "~3.8"
+django-gov-notify = "^0.6.0"
 django-pattern-library = "~1.2.0"
 django-redis = "~5.4.0"
 django-referrer-policy = "1.0"
@@ -57,7 +57,7 @@ pymdown-extensions = "10.8.1"
 # Linting
 black = "24.4.2"
 detect-secrets = "1.5.0"
-flake8 = "~5.0"
+flake8 = "7.0.0"
 isort = "5.13.2"
 seed-isort-config = "2.2.0"
 
@@ -72,10 +72,13 @@ SQLAlchemy-Utils = "0.41.2"
 # Development dependencies
 django-extensions = "~3.2"
 honcho = "^1.1.0"
-pre-commit = "1.16.1"
+
+pre-commit = "3.7.0"
 Werkzeug = "3.0.3"
 tblib = "^3.0.0"
+pyupgrade = "^3.15.2"
 django-upgrade = "1.19.0"
+
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

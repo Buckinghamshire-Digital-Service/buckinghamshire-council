@@ -435,7 +435,7 @@ class BarChartBlock(BaseChartBlock):
 
         new_context.update(
             {
-                "id": "bar-{0}".format(value["id"]),
+                "id": "bar-{}".format(value["id"]),
                 "table_first": value["table_first"],
                 "table_headers": cleaned_data[0],
                 "table_data": cleaned_data[1:],
@@ -488,7 +488,7 @@ class LineChartBlock(BaseChartBlock):
 
         new_context.update(
             {
-                "id": "line-{0}".format(value["id"]),
+                "id": "line-{}".format(value["id"]),
                 "table_first": value["table_first"],
                 "table_headers": cleaned_data[0],
                 "table_data": cleaned_data[1:],
@@ -556,7 +556,7 @@ class PieChartBlock(BaseChartBlock):
 
         new_context.update(
             {
-                "id": "pie-{0}".format(value["id"]),
+                "id": "pie-{}".format(value["id"]),
                 "table_first": value["table_first"],
                 "table_headers": ["", "Values", "Percentage (%)"],
                 "table_data": cleaned_data,

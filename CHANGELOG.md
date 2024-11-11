@@ -1,5 +1,13 @@
 # Release History
 
+## Unreleased
+
+## 80.2 (2024-11-11)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/80.1...80.2>
+
+- upgrade python to 3.11
+
 ## 80.1 (2024-10-15)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/80.0...80.1>

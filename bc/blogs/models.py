@@ -209,6 +209,10 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
                 }
             )
 
+    def serve_preview(self, request, mode_name):
+        self._is_preview = True
+        return super().serve_preview(request, mode_name)
+
     def get_context(self, request, *args, **kwargs):
         page = request.GET.get("page", 1)
         blogs = BlogPostPage.objects.child_of(self).live().order_by("-date_published")
@@ -230,15 +234,22 @@ class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
 
     @property
     def categories(self):
-        categories = (
-            self.blog_categories.annotate(
+        qs = self.blog_categories.all()
+        select_values = ("name", "slug")
+
+        if getattr(self, "_is_preview", None):
+            categories = []
+            for category in qs.values(*select_values):
+                categories.append({**category, "num_related_posts": None})
+
+        else:
+            qs = qs.annotate(
                 num_related_posts=models.Count(
                     "related_posts", filter=models.Q(related_posts__live=True)
                 )
-            )
-            .filter(num_related_posts__gt=0)
-            .values("name", "num_related_posts", "slug")
-        )
+            ).filter(num_related_posts__gt=0)
+            categories = qs.values(*select_values, "num_related_posts")
+
         for category in categories:
             category["url"] = self.category_url(category=category["slug"])
         return categories

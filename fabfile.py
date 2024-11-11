@@ -8,7 +8,7 @@ from invoke.tasks import task
 
 # Process .env file
 if os.path.exists(".env"):
-    with open(".env", "r") as f:
+    with open(".env") as f:
         for line in f.readlines():
             if not line or line.startswith("#") or "=" not in line:
                 continue
@@ -22,7 +22,7 @@ LOCAL_DUMP_DIR = "database_dumps"
 
 PRODUCTION_APP_INSTANCE = "buckinghamshire-production"
 STAGING_APP_INSTANCE = "buckinghamshire-staging"
-CONTENT_PREP_APP_INSTANCE = "buckinghamshire-content_prep"
+CONTENT_PREP_APP_INSTANCE = "buckinghamshire-content-prep"
 
 LOCAL_MEDIA_DIR = "media"
 LOCAL_IMAGES_DIR = LOCAL_MEDIA_DIR + "/original_images"

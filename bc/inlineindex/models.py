@@ -13,7 +13,7 @@ from bc.utils.blocks import StoryBlock
 from bc.utils.models import BasePage, RelatedPage
 
 
-class InlineIndexMixin(object):
+class InlineIndexMixin:
     """
     Mixin to define shared functionality between the index and the child pages.
 
