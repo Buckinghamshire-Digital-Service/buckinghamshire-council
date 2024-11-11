@@ -29,7 +29,6 @@ from itertools import chain
 
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import migrations
-
 from wagtail.blocks import StreamValue
 
 

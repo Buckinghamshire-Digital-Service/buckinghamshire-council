@@ -26,7 +26,7 @@ class ClientTestMixin:
 class ClientTest(TestCase, ClientTestMixin):
     @responses.activate
     def test_creating_normal_client_calls_url(self):
-        with open(wsdl_file_path, "r") as f:
+        with open(wsdl_file_path) as f:
             xml = f.read()
         responses.add(
             responses.GET,
@@ -143,7 +143,7 @@ class AuthenticationTest(TestCase, ClientTestMixin):
 )
 class ZeepCacheTest(TestCase, ClientTestMixin):
     def setUp(self):
-        with open(wsdl_file_path, "r") as f:
+        with open(wsdl_file_path) as f:
             xml = f.read()
         responses.add(
             responses.GET,

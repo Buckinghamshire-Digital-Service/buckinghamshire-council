@@ -29,7 +29,7 @@ class JobCategorySlugTest(TestCase):
             JobCategoryFactory(title="My title"),
             JobCategoryFactory(title="My title"),
         ]
-        self.assertEqual(len(set([jc.slug for jc in job_categories])), 3)
+        self.assertEqual(len({jc.slug for jc in job_categories}), 3)
 
     def test_job_category_retains_slug(self):
         job_category = JobCategoryFactory(title="My title")

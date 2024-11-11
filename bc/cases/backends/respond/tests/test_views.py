@@ -52,7 +52,7 @@ class TestClient(TestCase):
 
     @responses.activate
     def _get_client(self):
-        with open(pathlib.Path(__file__).parent / "fixtures/getservices.xml", "r") as f:
+        with open(pathlib.Path(__file__).parent / "fixtures/getservices.xml") as f:
             services_xml = f.read()
         responses.add(
             responses.GET,
@@ -61,7 +61,7 @@ class TestClient(TestCase):
             status=200,
             content_type="text/xml",
         )
-        with open(pathlib.Path(__file__).parent / "fixtures/getfields.xml", "r") as f:
+        with open(pathlib.Path(__file__).parent / "fixtures/getfields.xml") as f:
             fields_xml = f.read()
         responses.add(
             responses.GET,
@@ -71,9 +71,7 @@ class TestClient(TestCase):
             status=200,
             content_type="text/xml",
         )
-        with open(
-            pathlib.Path(__file__).parent / "fixtures/getcategories.xml", "r"
-        ) as f:
+        with open(pathlib.Path(__file__).parent / "fixtures/getcategories.xml") as f:
             categories_xml = f.read()
         responses.add(
             responses.GET,

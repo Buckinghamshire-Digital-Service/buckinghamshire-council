@@ -28,4 +28,4 @@ class WithinStart(PatternLookup):
         path_lookup = self.param_pattern % field_sql
         rhs_sql = connection.operators["contains"] % path_lookup
         lhs_sql = path_sql
-        return "%s %s" % (lhs_sql, rhs_sql), params
+        return "{} {}".format(lhs_sql, rhs_sql), params
