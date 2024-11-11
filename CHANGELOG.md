@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 80.2 (2024-11-11)
+
 - upgrade python to 3.11
 
 ## 80.1 (2024-10-15)
