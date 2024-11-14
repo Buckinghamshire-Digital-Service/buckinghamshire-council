@@ -1,10 +1,8 @@
 # Release History
 
-## UNRELEASED
+## 81.0 (2024-11-14)
 
-- Add promotional site navigation
-- Add promotional home page
-- Add promotional site content page
+- Add promotional site page types
 
 ## 80.2 (2024-11-11)
 
