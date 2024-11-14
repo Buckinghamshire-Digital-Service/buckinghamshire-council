@@ -1,0 +1,140 @@
+{% load static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags %}
+
+{# Desktop header top bar #}
+<div class="promo-header">
+    <div class="promo-header__inner wrapper wrapper--promo-inner">
+
+        {# Main Bucks logo #}
+        <a class="promo-header__home-link" href="/" aria-label="Buckinghamshire Council">
+            {% include "patterns/atoms/icons/icon.html" with name="logo" classname="header__logo" %}
+        </a>
+
+        {# Foster with Bucks logo #}
+        <div class="promo-header__promotional-logo">
+            <img src="{% static 'images/promotional/foster-with-bucks-logo.png' %}" alt="Foster with Bucks">
+        </div>
+
+        {% if primary_cta %}
+            <div class="promo-header__primary-cta">
+                <a href="{{ primary_cta.url }}" class="promo-button promo-button--leaf-bg promo-button--extra-padding">{{ primary_cta.text }}</a>
+            </div>
+        {% endif %}
+    </div>
+
+    {# Search and hamburger #}
+    <div class="promo-header__mobile-meta">
+        <div class="promo-header-search">
+            <form action="{% url 'search' %}" method="get" role="search" class="form promo-header-search__form promo-header-search__form--mobile">
+                <label class="u-sr-only" for="search--promo-page">Search this website</label>
+                <input class="input promo-header-search__input" id="search--promo-page" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
+                <button class="button promo-header-search__button" type="submit" aria-label="Submit">
+                    {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke promo-header-search__button-icon" %}
+                </button>
+            </form>
+        </div>
+
+        <div class="promo-header__mobile-controls">
+            <button class="promo-header__menu-toggle" data-mobile-menu-toggle aria-haspopup="true" aria-expanded="false" aria-label="Mobile menu toggle">
+                <span>Menu</span>
+                <div class="button-menu-toggle button-menu-toggle--promo">
+                    {% include "patterns/atoms/icons/icon.html" with name="chevron" classname="icon--stroke button-menu-toggle__icon" %}
+                </div>
+            </button>
+        </div>
+    </div>
+</div>
+
+{# Desktop navigation #}
+{% if items %}
+<div class="wrapper wrapper--promo-inner promo-header-search">
+    <nav aria-label="Main navigation" class="primary-nav-desktop" data-desktop-menu>
+        <ul data-primary-nav class="primary-nav-desktop__list">
+        {% for item in items %}
+            <li class="primary-nav-desktop__item primary-nav-desktop__item--is-parent {% if item.current %}primary-nav-desktop__item--active{% endif %}" {% if item.items %}data-has-subnav{% endif %}>
+                {% if item.url %}
+                    <a class="primary-nav-desktop__link primary-nav-desktop__link--has-children"  {% if item.items %}data-open-promo-subnav{% endif %} aria-haspopup="true" aria-expanded="false" {% if item.url %} href="{{ item.url }}" {% endif %}>
+                {% else %}
+                    <button class="primary-nav-desktop__link primary-nav-desktop__link--has-children"  {% if item.items %}data-open-promo-subnav{% endif %} aria-haspopup="true" aria-expanded="false" {% if item.url %} href="{{ item.url }}" {% endif %}>
+                {% endif %} 
+                    <span class="primary-nav-desktop__text">{{ item.title }}</span>
+                    {% if item.items %}
+                        <div class="primary-nav-desktop__icon-wrapper">
+                            <svg width="24" height="22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m15.875 9.5-3.88 3.88-3.88-3.88a.996.996 0 1 0-1.41 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59a.996.996 0 0 0 0-1.41c-.39-.38-1.03-.39-1.42 0Z" fill="#2C2D84"/></svg>
+                        </div>
+                    {% endif %}
+                {% if item.url %}
+                    </a>
+                {% else %}
+                    </button>
+                {% endif %}
+                {% if item.items %}
+                    <div class="sub-nav-desktop-mini">
+                        <ul class="sub-nav-desktop-mini__list">
+                        {% for subitem in item.items %}
+                            <li class="sub-nav-desktop-mini__item">
+                                <a class="sub-nav-desktop-mini__link" href="{{ subitem.url }}">
+                                    {{ subitem.title }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    </nav>
+
+    {# Desktop search #}
+    <form action="{% url 'search' %}" method="get" role="search" class="form promo-header-search__form promo-header-search__form--desktop">
+        <label class="u-sr-only" for="search--promo-page-desktop">Search this website</label>
+        <input class="input promo-header-search__input" id="search--promo-page-desktop" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
+        <button class="button promo-header-search__button" type="submit" aria-label="Submit">
+            {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke promo-header-search__button-icon" %}
+        </button>
+    </form>
+</div>
+{% endif %}
+
+{# Mobile navigation #}
+{% if items %}
+<nav aria-label="Main navigation" class="primary-nav-mobile" data-mobile-menu>
+    <ul data-primary-nav class="primary-nav-mobile__list">
+        {% for item in items %}
+            <li class="primary-nav-mobile__item {% if item.items %}primary-nav-mobile__item--is-parent{% endif %}">
+            <a class="primary-nav-mobile__link {% if item.items %}primary-nav-mobile__link--has-children{% else %}primary-nav-mobile__link--no-children{% endif %}" {% if item.items %}data-open-promo-subnav{% endif %} aria-haspopup="true" aria-expanded="false" {% if item.url %} href="{{ item.url }}" {% endif %}>
+                <span class="primary-nav-mobile__text">{{ item.title }}</span>
+                {% if item.items %}
+                    {% include "patterns/atoms/icons/icon.html" with name="chevron" classname="icon--stroke primary-nav-mobile__icon" %}
+                {% endif %}
+            </a>
+            {% if item.items %}
+                <div class="sub-nav-mobile" data-subnav>
+                    <ul class="sub-nav-mobile__list">
+                        <li class="sub-nav-mobile__item sub-nav-mobile__item--back">
+                            <button data-subnav-back class="sub-nav-mobile__link sub-nav-mobile__link--back">
+                                {% include "patterns/atoms/icons/icon.html" with name="chevron" classname="icon--stroke sub-nav-mobile__icon-back" %}
+                                Back
+                            </button>
+                        </li>
+                    {% for subitem in item.items %}
+                        <li class="sub-nav-mobile__item">
+                            <a class="sub-nav-mobile__link" href="{{ subitem.url }}">{{ subitem.title }}</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            </li>
+        {% endfor %}
+        {% if primary_cta %}
+            <li class="primary-nav-mobile__item primary-nav-mobile__item--button">
+                <div class="primary-nav-mobile__link">
+                    <a href="{{ primary_cta.url }}" class="primary-nav-mobile__button promo-button promo-button--leaf-bg promo-button--extra-padding">{{ primary_cta.text }}</a>
+                </div>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+

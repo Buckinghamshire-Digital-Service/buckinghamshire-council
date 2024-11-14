@@ -1,6 +1,10 @@
 # Release History
 
-## Unreleased
+## UNRELEASED
+
+- Add promotional site navigation
+- Add promotional home page
+- Add promotional site content page
 
 ## 80.2 (2024-11-11)
 

@@ -22,6 +22,12 @@ import ContentsScroller from './components/contents-scroller';
 import EHCCOSearch from './components/fis-ehcco-search';
 import LocationAutocomplete from './components/location-autocomplete';
 
+// Promo nav
+import PromoMobileMenu from './components/promo/promo-mobile-menu';
+import PromoMobileSubMenu from './components/promo/promo-mobile-sub-menu';
+import DesktopSubMenu from './components/promo/desktop-sub-menu';
+import DesktopCloseMenus from './components/promo/desktop-close-menus';
+
 // Add polyfill fix for forEach carousel
 import foreachPolyfill from './polyfills/foreach-polyfill';
 // Add polyfill fix for closest() method in conditional fields
@@ -155,6 +161,27 @@ document.addEventListener('DOMContentLoaded', () => {
     )) {
         new LocationAutocomplete(locationAutocomplete);
     }
+
+    // Promo
+    for (const promoMobileMenu of document.querySelectorAll(
+        PromoMobileMenu.selector(),
+    )) {
+        new PromoMobileMenu(promoMobileMenu);
+    }
+
+    for (const promoMobileSubMenu of document.querySelectorAll(
+        PromoMobileSubMenu.selector(),
+    )) {
+        new PromoMobileSubMenu(promoMobileSubMenu);
+    }
+
+    for (const desktopSubMenu of document.querySelectorAll(
+        DesktopSubMenu.selector(),
+    )) {
+        new DesktopSubMenu(desktopSubMenu);
+    }
+
+    new DesktopCloseMenus();
 
     // Test react - add a div with a data attribute of `data-test-react` to test
     for (const element of document.querySelectorAll('[data-test-react]')) {

@@ -1,0 +1,104 @@
+.promo-aligned-media-with-text-wrapper {
+    overflow: hidden;
+
+    @include media-query(tablet-landscape) {
+        overflow: visible;
+    }
+}
+
+.promo-aligned-media-with-text {
+    // Escape parent
+    width: calc(100vw - 15px);
+    transform: translateX(-50%);
+    background-color: $color--earth-light;
+    position: relative;
+    margin: 50px 0 145px 50%;
+    padding: 70px 0 25px;
+    overflow-x: clip;
+
+    @include media-query(mob-landscape) {
+        padding: 75px 0 50px;
+    }
+
+    @include media-query(px550) {
+        padding-bottom: 100px;
+        margin-bottom: 175px;
+    }
+
+    @include media-query(tablet-portrait) {
+        margin-bottom: 220px;
+    }
+
+    @include media-query(tablet-landscape) {
+        padding: 100px 0 5px;
+        margin: 80px 0 280px 50%;
+    }
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        width: 110%;
+        height: 15vw;
+        left: -5%;
+        z-index: -1;
+        border-bottom-left-radius: 100%;
+        border-bottom-right-radius: 100%;
+
+        @include media-query(tablet-landscape) {
+            width: 110%;
+            height: 250px;
+        }
+    }
+
+    &::before {
+        top: -10vw;
+        background-color: $color--white;
+
+        @include media-query(tablet-landscape) {
+            top: -170px;
+        }
+    }
+
+    &::after {
+        bottom: -15vw;
+        background-color: $color--earth-light;
+
+        @include media-query(tablet-landscape) {
+            bottom: -125px;
+        }
+    }
+
+    .media-with-text {
+        border-radius: 8px;
+
+        @include media-query(tablet-portrait) {
+            border-radius: 16px;
+            margin: 90px 0 50px;
+            column-gap: 20px;
+
+            &--right {
+                .media-with-text__media {
+                    order: 1;
+                }
+            }
+        }
+
+        &__media {
+            border-radius: 8px;
+            overflow: hidden;
+
+            @include media-query(tablet-portrait) {
+                border-radius: 16px;
+            }
+        }
+
+        &__content {
+            padding: 25px 0 0;
+
+            @include media-query(tablet-portrait) {
+                padding: 60px 40px;
+            }
+        }
+    }
+}

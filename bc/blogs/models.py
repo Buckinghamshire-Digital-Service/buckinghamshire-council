@@ -139,7 +139,7 @@ class BlogHomePageCategories(wt_models.Orderable, Category):
 class BlogHomePage(RoutablePageMixin, SocialMediaLinks, BasePage):
     base_form_class = BlogHomePageForm
 
-    parent_page_types = ["blogs.blogglobalhomepage"]
+    parent_page_types = ["blogs.blogglobalhomepage", "promotional.PromotionalHomePage"]
     subpage_types = ["blogs.blogpostpage", "blogs.blogaboutpage"]
 
     template = "patterns/pages/blogs/blog_home_page.html"

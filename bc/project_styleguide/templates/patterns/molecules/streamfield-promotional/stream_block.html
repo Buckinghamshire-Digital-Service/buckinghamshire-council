@@ -1,0 +1,13 @@
+{% load wagtailcore_tags %}
+
+{% for block in value %}
+    {% if block.block_type == 'table' %}
+        <div class="promo-table-container">
+            {% include_block block %}
+        </div>
+    {% else %}
+        <div class="promo-sf promo-sf--{{ block.block_type }}">
+            {% include_block block %}
+        </div>
+    {% endif %}
+{% endfor %}

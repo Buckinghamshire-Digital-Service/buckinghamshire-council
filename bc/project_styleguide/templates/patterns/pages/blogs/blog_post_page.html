@@ -1,10 +1,16 @@
 {% extends 'patterns/base_page--blogs.html' %}
-{% load wagtailcore_tags wagtailimages_tags static %}
+{% load promotional_utils wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
+
+{% is_promotional_site as promotional_site %}
+{% if promotional_site %}
+    <div class="wrapper wrapper--promo-inner">
+{% endif %}
+
     {% include "patterns/molecules/hero/hero--blog.html" with page=page.homepage link_back=True %}
 
-    <div class="wrapper wrapper--flex blog-page">
+    <div class="wrapper wrapper--flex">
         <div class="section section--main">
             <h2 class="heading heading--xxl blog-page__title">{{ page.title }}</h2>
             <p class="blog-page__meta">
@@ -24,4 +30,7 @@
 
         {% include 'patterns/organisms/blogs-sidebar/blogs-sidebar.html' with page=page.homepage %}
     </div>
+{% if promotional_site %}
+    </div>
+{% endif %}
 {% endblock %}

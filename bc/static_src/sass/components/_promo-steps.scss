@@ -1,0 +1,30 @@
+/* stylelint-disable max-nesting-depth */
+.promo-sf {
+    &--steps {
+        .steps-nav {
+            display: flex;
+            flex-direction: column;
+
+            &__circle {
+                color: $color--black;
+                background-color: $color--promo-light-purple;
+                border: 3px solid $color--promo-purple;
+            }
+
+            &__step {
+                max-width: 100%;
+
+                &::after {
+                    left: 0;
+                    border-left: 3px solid $color--promo-purple;
+                }
+
+                &:last-child {
+                    &::before {
+                        border-bottom-color: $color--promo-purple;
+                    }
+                }
+            }
+        }
+    }
+}

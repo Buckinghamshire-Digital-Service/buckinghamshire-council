@@ -1,0 +1,10 @@
+{% load wagtailcore_tags %}
+
+<div class="promo-aligned-media-with-text-wrapper">
+    <div class="promo-aligned-media-with-text">
+        {% for item in items %}
+            {% include_block item.block with alignment=item.alignment %}
+        {% endfor %}
+    </div>
+</div>
+

@@ -1,0 +1,62 @@
+/*
+Styles for the second level of navigation at desktop, in the case when a third
+level is not shown
+Note that in the navigation settings we refer to 'level 1 and 2 children'.
+Here we refer to 'level 1 children' as 'level 2' and 'level 2 children' as 'level 3'.
+*/
+
+// div element at level 2 of the menu
+.sub-nav-desktop-mini {
+    $root: &;
+    padding: 0;
+    position: absolute;
+    width: 100%;
+    min-width: 220px;
+    // for high contrast mode
+    border: 1px solid transparent;
+    visibility: hidden;
+    opacity: 0;
+    top: 59px;
+    left: 0;
+    overflow: hidden;
+    background: $color--white;
+    z-index: 10;
+    overflow-y: visible; // allow scrolling within the nav
+    transition: visibility 0ms ease-out 50ms, opacity 250ms ease-out 50ms;
+
+    // just in case we have a menu drop down at the end of the menu
+    &--right {
+        position: absolute;
+        top: 10px;
+        left: auto;
+        right: -50px;
+        margin-right: 10px;
+    }
+
+    // the list item for each menu item at the 2nd level
+    &__item {
+        @include font-size(s);
+        line-height: 24px;
+    }
+
+    // The link for each menu item in the 2nd and 3rd level
+    &__link {
+        display: block;
+        padding: 10px;
+        border-bottom: 1px solid $color--river-tint;
+
+        #{$root}__item:last-child & {
+            border-bottom: none;
+        }
+
+        &--bold {
+            font-weight: $weight--bold;
+        }
+    }
+
+    // active state
+    .active & {
+        opacity: 1;
+        visibility: visible;
+    }
+}

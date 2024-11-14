@@ -1,0 +1,35 @@
+{% load wagtailimages_tags %}
+
+{% if visible and events %}
+    <div class="promo-event-listing">
+        <div class="wrapper wrapper--promo-inner">
+            <h2 class="promo-event-listing__title">Upcoming events</h2>
+            <div class="promo-event-listing__inner">
+                {% for event in events %}
+                    <a href="{{ event.url }}" class="promo-event-card">
+                        <div class="promo-event-card__inner">
+                            <h3 class="promo-event-card__title">{{ event.title }}</h3>
+                            <div class="promo-event-card__meta">
+                                <div>
+                                    {% include "patterns/atoms/icons/icon.html" with name="calendar" classname="promo-event-card__icon promo-event-card__icon--calendar" %}
+                                    <span>{{ event.date }}</span>
+                                </div>
+                                {% if event.location %}
+                                    <div>
+                                        {% include "patterns/atoms/icons/icon.html" with name="map-pin" classname="promo-event-card__icon promo-event-card__icon--map-pin" %}
+                                        <span>{{ event.location }}</span>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+            {% if view_all_url %}
+                <div class="promo-event-listing__button">
+                    <a href="{{ view_all_url }}" class="promo-button promo-button--white-border promo-button--extra-padding">View all events</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}

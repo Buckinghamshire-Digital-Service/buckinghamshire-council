@@ -1,0 +1,81 @@
+.media-with-text {
+    $root: &;
+    display: grid;
+    margin: 50px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    min-height: 280px;
+
+    &--primary {
+        background-color: $color--leaf-light;
+    }
+
+    &--secondary {
+        background-color: $color--white;
+
+        #{$root}__media {
+            border-radius: 8px;
+            overflow: hidden;
+
+            @include media-query(tablet-portrait) {
+                border-radius: 16px;
+            }
+        }
+    }
+
+    @include media-query(tablet-portrait) {
+        border-radius: 16px;
+        grid-template-columns: 1fr 1fr;
+        margin: 115px 0;
+    }
+
+    &__media {
+        border-radius: 8px 8px 0 0;
+
+        @include media-query(tablet-portrait) {
+            border-radius: 16px 0 0 16px;
+            height: fit-content;
+            align-self: center;
+        }
+    }
+
+    &__image {
+        width: 100%;
+        object-fit: cover;
+        height: 175px;
+
+        @include media-query(tablet-portrait) {
+            height: 100%;
+        }
+    }
+
+    &__content {
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+
+        @include media-query(tablet-portrait) {
+            padding: 60px 50px;
+        }
+    }
+
+    &__title {
+        @include font-size(l);
+        color: $color--river;
+        line-height: 31px;
+        font-weight: $weight--bold;
+    }
+
+    &__description {
+        @include font-size(s);
+        line-height: 24px;
+        color: $color--slate;
+    }
+
+    // Override video container
+    .video__container {
+        height: 100%;
+    }
+}

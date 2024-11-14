@@ -1,0 +1,112 @@
+/*
+Styles for the lower levels of the navigation at mobile
+Note that in the navigation settings we refer to 'level 1 and 2 children'.
+Here we refer to 'level 1 children' as 'level 2' and 'level 2 children' as 'level 3'.
+*/
+
+// At mobile, the sub-navigation appears when a top level item is clicked, and also when a second level item is clicked. The second and third levels are shown in separate views
+
+// div element at levels 2 and 3 of the menu
+.sub-nav-mobile {
+    $root: &;
+    background-color: $color--promo-light-blue;
+    height: calc(100vh - 127px);
+    left: 0;
+    opacity: 0;
+    overflow: hidden;
+    overflow-y: visible;
+    position: fixed;
+    top: 127px;
+    transition: visibility 0ms ease-out 50ms, opacity 0.25s ease-out 50ms;
+    visibility: hidden;
+    width: 100%;
+    z-index: 10;
+
+    // the unordered list containing the level 2 menu items
+    // also used for the level 3 menu items
+    &__list {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid $color--promo-border-blue;
+    }
+
+    // the list item for each menu item in the 2nd and 3rd levels
+    &__item {
+        position: relative;
+        width: 100%;
+    }
+
+    // top level menu links
+    &__link {
+        @include font-size(s);
+        display: flex;
+        gap: 18px;
+        align-items: center;
+        border-top: 1px solid $color--promo-border-blue;
+        padding: 12px 20px;
+        justify-content: space-between;
+        text-decoration: none;
+
+        #{$root}__item:last-child & {
+            border-bottom: none;
+        }
+
+        // styles for links with children
+        &--has-children {
+            padding: 10px;
+        }
+
+        // styles for links without children
+        &--no-children {
+            padding: 10px;
+        }
+
+        // back link which goes one level up in the mobile menu
+        &--back {
+            color: $color--slate;
+            width: 100%;
+            gap: 10px;
+            justify-content: flex-start;
+        }
+
+        &--current {
+            @include font-size(m);
+            font-weight: $weight--bold;
+        }
+    }
+
+    // back icon which sits inside the back link
+    &__icon-back {
+        height: 28px;
+        transition: transform, stroke, 0.2s ease;
+        stroke: $color--river;
+        stroke-width: 4;
+        transform: rotate(90deg);
+        width: 17px;
+        flex-grow: 0;
+        flex-shrink: 0;
+
+        #{$root}__button:focus & {
+            stroke: $color--off-black;
+        }
+    }
+
+    // arrow icon which indicates the mobile menu has another level
+    &__icon-mobile {
+        width: 18px;
+        height: 21px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        transition: transform $transition;
+
+        #{$root}__link:hover & {
+            transform: translateX(10px);
+        }
+    }
+
+    // active state
+    &.is-visible {
+        opacity: 1;
+        visibility: visible;
+    }
+}

@@ -1,0 +1,30 @@
+{% load wagtailimages_tags %}
+
+{% image image fill-1200x780 as rendition %}
+
+<div class="wrapper wrapper--promo">
+    <div class="promo-hero-content">
+        <div class="promo-hero-content__wrapper">
+            <div class="{% if image %}promo-breadcrumb-constrained-width{% endif %}">
+                {% include "patterns/molecules/navigation/promotional-breadcrumbs.html" with image=image %}
+            </div>
+            <div class="promo-hero-content__inner {% if not image %}promo-hero-content__inner--no-image{% endif %}">
+                <h1 class="promo-hero-content__title">{{ title }}</h1>
+                {% if text %}
+                    <div class="promo-hero-content__description">
+                        {{ text|linebreaks }}
+                    </div>
+                {% endif %}
+                {% if link_url and link_text %}
+                    <a href="{{ link_url }}" class="promo-hero-content__button promo-button promo-button--blue-border promo-button--extra-padding promo-button--transparent-bg">{{ link_text }}</a>
+                {% endif %}
+            </div>
+        </div>
+        <div aria-hidden="true"></div>
+        {% if image %}
+            <div class="promo-hero-content__image-wrapper">
+                <div class="promo-hero-content__image" {% if rendition %}style="background-image: url('{{ rendition.url }}')"{% endif %}></div>
+            </div>
+        {% endif %}
+    </div>
+</div>

@@ -1,7 +1,12 @@
 {% extends base_page_template %}
-{% load wagtailcore_tags wagtailimages_tags static event_tags %}
+{% load promotional_utils wagtailcore_tags wagtailimages_tags static event_tags %}
 
 {% block content %}
+{% is_promotional_site as promotional_site %}
+
+{% if promotional_site %}
+    <div class="wrapper wrapper--promo-inner">
+{% endif %}
 
     <div class="wrapper wrapper--flex article">
         <div class="section section--main">
@@ -36,4 +41,7 @@
         </div>
     </div>
 
+{% if promotional_site %}
+    </div>
+{% endif %}
 {% endblock %}

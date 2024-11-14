@@ -96,6 +96,36 @@
 @import 'components/search-promotions';
 @import 'components/top-tasks';
 @import 'components/location-autocomplete';
+@import 'components/media-with-text';
+@import 'components/promo-hero-home';
+@import 'components/promo-hero-content';
+@import 'components/promo-button';
+@import 'components/promo-teasers';
+@import 'components/promo-teaser';
+@import 'components/promo-explainer';
+@import 'components/promo-home-cta';
+@import 'components/promo-blog-listing';
+@import 'components/promo-blog-card';
+@import 'components/promo-event-listing';
+@import 'components/promo-event-card';
+@import 'components/promo-breadcrumbs';
+@import 'components/promo-quote';
+@import 'components/promo-steps';
+@import 'components/promo-aligned-media-with-text';
+@import 'components/promo-404';
+
+// Promo streamfield
+@import 'components/promo-rich-text';
+@import 'components/promo-sf';
+
+// Promo navigation
+@import 'components/promo-navigation/primary-nav-desktop';
+@import 'components/promo-navigation/primary-nav-mobile';
+@import 'components/promo-navigation/sub-nav-desktop-mini';
+@import 'components/promo-navigation/sub-nav-mobile';
+@import 'components/promo-navigation/button-menu-toggle';
+@import 'components/promo-navigation/promo-header';
+@import 'components/promo-navigation/promo-header-search';
 
 // Pages
 @import 'pages/blogglobalhomepage';

@@ -1,0 +1,57 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="wrapper wrapper--promo-inner promo-explainer-wrapper">
+    <div class="promo-explainer {% if cta %}promo-explainer--bottom-padding{% endif %}">
+        <div class="wrapper wrapper--promo-reading">
+            <h2 class="promo-explainer__title">{{ title }}</h2>
+            {% if text %}
+                {{ text|richtext }}
+            {% endif %}
+
+            {# Accordion #}
+            {% if details %}
+                {% include_block details %}
+            {% endif %}
+
+            {% if details_link_page is not None and details_link_text %}
+                <div class="promo-explainer__button">
+                    <a class="promo-button promo-button--blue-border promo-button--transparent-bg promo-button--extra-padding" href="{% pageurl details_link_page %}">{{ details_link_text }}</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if cta %}
+        <div class="promo-home-cta">
+            <div class="promo-home-cta__image-wrapper">
+                {% image cta.image fill-590x590 as rendition %}
+                <div class="promo-home-cta__image" {% if rendition %}style="background-image: url('{{ rendition.url }}')"{% endif %}></div>
+            </div>
+
+            <div class="promo-home-cta__content">
+                <h2 class="promo-home-cta__title">{{ cta.title }}</h2>
+
+                {% if cta.text %}
+                    <div class="promo-home-cta__description">
+                        <div class="rich-text">
+                            <p>{{ cta.text }}</p>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if cta.links %}
+                    <div class="promo-home-cta__buttons">
+                        {% for link in cta.links %}
+                            {% if link.page %}
+                                {% pageurl link.page as link_url %}
+                            {% endif %}
+                            <a class="promo-button promo-button--extra-padding {% if forloop.first %}promo-button--leaf-bg{% else %}promo-button--white-border{% endif %}" href="{{ link_url }}">
+                                {{ link.text }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+</div>

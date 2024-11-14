@@ -1,0 +1,16 @@
+
+<div class="wrapper wrapper--promo-inner promo-quote-wrapper">
+    <blockquote class="promo-quote">
+        <div class="wrapper wrapper--promo-reading">
+            <div class="promo-quote__icon">
+                <svg width="76" height="68" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#a)"><path d="M22.36 66.12H-.36V41.64c-.107-3.52.373-6.827 1.44-9.92 1.173-3.093 2.773-5.813 4.8-8.16a25.229 25.229 0 0 1 7.2-5.76 25.707 25.707 0 0 1 9.28-3.04v10.56c-4.053 1.387-6.827 3.467-8.32 6.24-1.493 2.667-2.24 5.973-2.24 9.92h10.56v24.64Zm34.08 0H33.72V41.64c-.107-3.52.373-6.827 1.44-9.92 1.173-3.093 2.773-5.813 4.8-8.16a25.23 25.23 0 0 1 7.2-5.76 25.707 25.707 0 0 1 9.28-3.04v10.56c-4.053 1.387-6.827 3.467-8.32 6.24-1.493 2.667-2.24 5.973-2.24 9.92h10.56v24.64Z" fill="#6FB62C"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h76v68H0z"/></clipPath></defs></svg>
+            </div>
+           <h2 class="promo-quote__title">{{ value.quote }}”</h2>
+        
+            {% if value.attribution %}
+                <footer class="promo-quote__attr">{{ value.attribution }}</footer>
+            {% endif %}
+        </div>
+    </blockquote>
+</div>
+

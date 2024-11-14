@@ -78,4 +78,31 @@
     &--margin {
         margin: $grid auto;
     }
+
+    &--promo {
+        margin: 0 auto;
+        max-width: $wrapper--promo;
+        position: relative;
+        z-index: 1;
+    }
+
+    &--promo-inner {
+        margin: 0 auto;
+        max-width: $wrapper--promo-inner;
+        padding: 0 20px;
+
+        @include media-query(tablet-portrait) {
+            padding: 0 25px;
+        }
+    }
+
+    &--promo-reading {
+        margin: 0 auto;
+        max-width: $wrapper--promo-reading;
+        padding: 0 20px;
+
+        @include media-query(tablet-portrait) {
+            padding: 0 25px;
+        }
+    }
 }

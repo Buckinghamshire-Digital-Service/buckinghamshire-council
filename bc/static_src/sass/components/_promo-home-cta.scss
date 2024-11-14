@@ -1,0 +1,116 @@
+.promo-home-cta {
+    $root: &;
+    background-color: $color--river;
+    margin: -115px 0 50px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+
+    @include media-query(tablet-landscape) {
+        border-radius: 16px;
+        margin: -380px 0 115px;
+        display: grid;
+        min-height: 320px;
+        grid-template-columns: 1fr 2fr;
+    }
+
+    &--sf {
+        margin: 0;
+
+        @include media-query(tablet-landscape) {
+            margin: 0;
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    &__image-wrapper {
+        position: relative;
+        width: 100%;
+        height: 160%;
+        border-radius: 0 50% 50% 0;
+        overflow: hidden;
+        transform: translate3d(0, -20%, 0);
+        border-top: 12px solid $color--white;
+        border-bottom: 12px solid $color--white;
+        border-right: 12px solid $color--white;
+        display: none;
+
+        @include media-query(tablet-landscape) {
+            display: block;
+        }
+    }
+
+    &__image {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+    }
+
+    &__content {
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+
+        @include media-query(tablet-landscape) {
+            padding: 60px 50px 60px 80px;
+        }
+    }
+
+    &__title {
+        @include font-size(l);
+        font-weight: $weight--bold;
+        line-height: 31px;
+        color: $color--white;
+    }
+
+    &__description {
+        line-height: 24px;
+        color: $color--white;
+        max-width: 550px;
+        font-weight: 300;
+
+        p {
+            font-weight: 300;
+        }
+
+        a {
+            color: $color--white;
+
+            &:hover {
+                color: $color--white;
+                text-decoration-thickness: 2px;
+            }
+        }
+    }
+
+    &__buttons {
+        display: grid;
+        gap: 20px;
+        width: 100%;
+
+        .promo-button {
+            width: 100%;
+        }
+
+        @include media-query(px550) {
+            display: flex;
+            gap: 25px;
+
+            .promo-button {
+                width: auto;
+            }
+        }
+    }
+
+    &__link {
+        color: $color--white;
+
+        &:hover {
+            color: $color--white;
+            text-decoration-thickness: 2px;
+        }
+    }
+}

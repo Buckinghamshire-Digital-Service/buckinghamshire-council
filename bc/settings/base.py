@@ -84,6 +84,7 @@ INSTALLED_APPS = [
     "bc.family_information",
     "bc.news",
     # "bc.people",  To re-enable, also uncomment code in bc/utils/wagtail_hooks.py
+    "bc.promotional",
     "bc.recruitment",
     "bc.recruitment_api",
     "bc.search.apps.SearchConfig",

@@ -1,0 +1,17 @@
+{% load wagtailimages_tags %}
+<div class="promo-teaser">
+    {% image image fill-340x220 class="promo-teaser__image" %}
+    <div class="promo-teaser__inner">
+        <div>
+            <h2 class="promo-teaser__title">{{ title }}</h2>
+            {% if description %}
+                <div class="promo-teaser__description">
+                    {{ description|linebreaks }}
+                </div>
+            {% endif %}
+        </div>
+        {% if link_url and link_text %}
+            <a href="{{ link_url }}" class="promo-button promo-teaser__button {% if link_highlight %}promo-button--blue-bg{% else %}promo-button--blue-border{% endif %}">{{ link_text }}</a>
+        {% endif %}
+    </div>
+</div>

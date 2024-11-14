@@ -1,4 +1,7 @@
-{% load wagtailcore_tags %}
+{% load promotional_utils wagtailcore_tags %}
+
+
+{% is_promotional_site as promotional_site %}
 
 <div class="blog-hero">
     <div class="wrapper wrapper--flex">
@@ -14,14 +17,16 @@
                 {% endif %}
             </h1>
         </div>
-        <div class="sidebar">
-            <form action="{{ page.search_url }}" method="get" role="search" class="form blog-hero__form">
-                <input id="blog-search" class="input" name="query" type="text" placeholder="Search the {{ page.title|lower }}" {% if search_query %} value="{{ search_query }}"{% endif %}>
-                <label for="blog-search" class="u-sr-only">Search the {{ page.title|lower }}</label>
-                <button class="button button--blog-search" type="submit" aria-label="Submit">
-                    {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke icon--white button__icon" %}
-                </button>
-            </form>
-        </div>
+        {% if not promotional_site %}
+            <div class="sidebar">
+                <form action="{{ page.search_url }}" method="get" role="search" class="form blog-hero__form">
+                    <input id="blog-search" class="input" name="query" type="text" placeholder="Search the {{ page.title|lower }}" {% if search_query %} value="{{ search_query }}"{% endif %}>
+                    <label for="blog-search" class="u-sr-only">Search the {{ page.title|lower }}</label>
+                    <button class="button button--blog-search" type="submit" aria-label="Submit">
+                        {% include "patterns/atoms/icons/icon.html" with name="magnifying-glass" classname="icon--stroke icon--white button__icon" %}
+                    </button>
+                </form>
+            </div>
+        {% endif %}
     </div>
 </div>

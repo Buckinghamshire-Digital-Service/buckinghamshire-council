@@ -1,0 +1,33 @@
+{% extends base_page_template %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block hero %}
+    {% include "patterns/molecules/hero/hero.html" %}
+{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+    {% include "patterns/organisms/promotional-hero/promotional-hero.html" with title=page.hero_title text=page.hero_text image=page.hero_image link_url=hero_link_url link_text=page.hero_link_text %}
+
+    {% if page.teasers %}
+        {% include_block page.teasers %}
+    {% endif %}
+
+    {% if page.media_with_text_cta %}
+        {% include_block page.media_with_text_cta %}
+    {% endif %}
+
+    {% if page.explainer %}
+        {% include "patterns/pages/promotional/home-page/explainer.html" with block=page.explainer.0.value %}
+    {% endif %}
+
+    {# Blog listing #}
+    {% if recent_blog_posts %}
+        {% include "patterns/organisms/promotional-blog-listing/promotional-blog-listing.html" with posts=recent_blog_posts title=recent_blog_posts_title view_all_url=recent_blog_posts_view_all_url view_all_text=recent_blog_posts_view_all_text  %}
+    {% endif %}
+
+    {% include "patterns/molecules/cta/call_to_action.html" with call_to_action=page.call_to_action %}
+
+    {% include "patterns/organisms/latest-articles/latest-articles.html" %}
+{% endblock %}

@@ -1,0 +1,32 @@
+{% load wagtailimages_tags %}
+
+{% if posts %}
+    <div class="wrapper wrapper--promo-inner">
+        <div class="promo-blog-listing">
+            <h2 class="promo-blog-listing__title">{{ title }}</h2>
+
+            <div class="promo-blog-listing__inner">
+
+                {% for post in posts %}
+                    <a href="{{ post.url }}" class="promo-blog-card">
+                        {% image post.image fill-325x203 class="promo-blog-card__image" %}
+                        <p class="promo-blog-card__meta">{{ post.published_on|date:"d F Y"  }} {% if post.categories %} &ndash; {{ post.categories|join:", " }}{% endif %}</p>
+                        <h3 class="promo-blog-card__title">{{ post.title }}</h3>
+                        {% if post.introduction %}
+                            <div class="promo-blog-card__description">
+                                {{ post.introduction|truncatewords:50 }}
+                            </div>
+                        {% endif %}
+                    </a>
+                {% endfor %}
+
+            </div>
+
+            {% if view_all_url and view_all_text %}
+                <div class="promo-blog-listing__button">
+                    <a href="{{ view_all_url }}" class="promo-button promo-button--blue-border promo-button--extra-padding">{{ view_all_text }}</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}

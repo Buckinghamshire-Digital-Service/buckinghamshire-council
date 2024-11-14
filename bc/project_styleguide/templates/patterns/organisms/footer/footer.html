@@ -1,7 +1,7 @@
 {% load static wagtailuserbar wagtailcore_tags navigation_tags util_tags feedback_tags %}
 
-<div class="feedback-widget-wrapper">
-    <div class="wrapper wrapper--large">
+<div class="feedback-widget-wrapper {% if promotional %}feedback-widget-wrapper--promo{% endif %}">
+    <div class="wrapper {% if promotional %}wrapper--promo-inner{% endif %}">
         {% feedback_widget %}
     </div>
 </div>

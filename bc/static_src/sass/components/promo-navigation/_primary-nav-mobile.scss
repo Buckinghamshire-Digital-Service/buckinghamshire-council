@@ -1,0 +1,105 @@
+/*
+Styles for the top level of the navigation at mobile
+*/
+
+// the nav element surrounding the whole navigation
+// There are separate nav elements for desktop and mobile
+.primary-nav-mobile {
+    $root: &;
+    background-color: $color--promo-light-blue;
+    height: calc(100vh - 127px);
+    left: 0;
+    opacity: 0;
+    overflow: hidden;
+    overflow-y: visible;
+    position: fixed;
+    top: 127px;
+    transition: visibility 0ms ease-out 50ms, opacity 0.25s ease-out 50ms;
+    visibility: hidden;
+    width: 100%;
+    z-index: 13;
+    display: block;
+
+    @include media-query(tablet-portrait) {
+        display: none;
+    }
+
+    // active state
+    &.is-visible {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    // Top level menu unordered list
+    &__list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    // top level menu list items
+    &__item {
+        position: relative;
+        width: 100%;
+        border-top: 1px solid $color--promo-border-blue;
+
+        &--button {
+            padding-top: 8px;
+        }
+    }
+
+    // top level menu links
+    &__link {
+        @include font-size(s);
+        display: flex;
+        padding: 12px 20px;
+        justify-content: space-between;
+        align-items: center;
+        text-decoration: none;
+
+        #{$root}__item:last-child & {
+            border-bottom: none;
+        }
+    }
+
+    // mobile arrow - appears if there are children
+    &__icon-mobile {
+        width: 18px;
+        height: 21px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        transition: transform $transition;
+
+        #{$root}__link:hover & {
+            transform: translateX(10px);
+        }
+
+        @include media-query(tablet-portrait) {
+            display: none;
+        }
+    }
+
+    &__button {
+        width: 100%;
+        max-width: 400px;
+
+        @include media-query(tablet-portrait) {
+            width: auto;
+            max-width: initial;
+        }
+    }
+
+    &__icon {
+        height: 28px;
+        transition: transform, stroke, 0.2s ease;
+        stroke: $color--bricks-pink;
+        stroke-width: 4;
+        transform: rotate(-90deg);
+        width: 17px;
+        flex-grow: 0;
+        flex-shrink: 0;
+
+        #{$root}__button:focus & {
+            stroke: $color--off-black;
+        }
+    }
+}
