@@ -3,7 +3,7 @@ from .base import *  # noqa
 SECRET_KEY = "fake_secret_key_to_run_tests"
 
 RECAPTCHA_PUBLIC_KEY = "dummy_public_key"
-RECAPTCHA_PRIVATE_KEY = "dummy_private_key"
+RECAPTCHA_PRIVATE_KEY = "dummy_private_key"  # pragma: allowlist secret
 
 RESPOND_COMPLAINTS_WEBSERVICE = "TestCreateComplaints"
 RESPOND_FOI_WEBSERVICE = "TestCreateFOI"

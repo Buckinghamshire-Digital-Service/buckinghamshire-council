@@ -52,10 +52,10 @@ static:
 poetry:
   # If you update the python image version here, make sure you update all jobs that depend on this
   # and the version in the Dockerfile and provision scripts as well
-  image: python:3.8-bullseye
+  image: python:3.11-bullseye
   stage: build
   variables:
-    POETRY_VERSION: 1.8.3
+    POETRY_VERSION: 1.8.4
   script:
     - pip install poetry==$POETRY_VERSION
     - python -m venv venv
@@ -70,7 +70,7 @@ poetry:
 
 # Check python code style.
 flake8:
-  image: python:3.8-bullseye
+  image: python:3.11-bullseye
   stage: test
   dependencies:
     - poetry
@@ -82,7 +82,7 @@ flake8:
 # Check imports sort order, i.e. check whether they are in an alphabetical
 # order and grouped properly.
 isort:
-  image: python:3.8-bullseye
+  image: python:3.11-bullseye
   stage: test
   dependencies:
     - poetry
@@ -111,7 +111,7 @@ lint_format:
 
 # Run black and check for changes
 black:
-  image: python:3.8-bullseye
+  image: python:3.11-bullseye
   stage: test
   dependencies:
     - poetry
@@ -123,7 +123,7 @@ black:
 # Check settings, migrations and run tests.
 test_python:
   # Make sure this Python version matches the version in your Dockerfile.
-  image: python:3.8-bullseye
+  image: python:3.11-bullseye
   extends: .cache_static
   stage: test
   needs:
@@ -241,7 +241,7 @@ deploy_content_prep:
   <<: *heroku_deployment_template
 
 pages:
-  image: python:3.8
+  image: python:3.11
   stage: pages
   only:
     - master
