@@ -2,9 +2,13 @@
 
 ## 81.0 (2024-11-14)
 
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/80.2...81.0>
+
 - Add promotional site page types
 
 ## 80.2 (2024-11-11)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/80.1...80.2>
 
 - upgrade python to 3.11
 
