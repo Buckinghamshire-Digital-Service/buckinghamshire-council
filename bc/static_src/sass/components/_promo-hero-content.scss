@@ -57,6 +57,11 @@
             width: 126%;
             height: 250px;
         }
+
+        @include media-query(desktop) {
+            height: 350px;
+            top: 87%;
+        }
     }
 
     &__wrapper {
