@@ -61,6 +61,10 @@
         color: $color--river;
         line-height: 50px;
         margin-bottom: 15px;
+
+        @include media-query(tablet-landscape) {
+            margin-top: 90px;
+        }
     }
 
     &__description {
