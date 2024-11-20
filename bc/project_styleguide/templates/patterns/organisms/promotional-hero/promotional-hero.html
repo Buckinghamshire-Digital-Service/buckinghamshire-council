@@ -2,7 +2,23 @@
 
 {% image image fill-1200x780 as rendition %}
 
-<div class="wrapper wrapper--promo">
+<div class="promo-hero-home-wrapper">
+
+    <div class="promo-hero-home__inner-content-mid" aria-hidden="true">
+        <div class="promo-hero-home__inner-content-mid-container">
+            <h1 class="promo-hero-home__title">{{ title }}</h1>
+            {% if text %}
+                <div class="promo-hero-home__description">
+                    {{ text|linebreaks }}
+                </div>
+            {% endif %}
+        
+            {% if link_url and link_text %}
+                <a href="{{ link_url }}" class="promo-hero-home__button promo-button promo-button--white-bg promo-button--extra-padding">{{ link_text }}</a>
+            {% endif %}
+        </div>
+    </div>
+
     <div class="promo-hero-home">
         <div class="promo-hero-home__inner">
             <h1 class="promo-hero-home__title">{{ title }}</h1>
