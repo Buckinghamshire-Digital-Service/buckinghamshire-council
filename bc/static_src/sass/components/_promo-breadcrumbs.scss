@@ -33,6 +33,12 @@
                 display: none;
             }
         }
+
+        &--no-chevron {
+            &::after {
+                display: none;
+            }
+        }
     }
 
     &__link {

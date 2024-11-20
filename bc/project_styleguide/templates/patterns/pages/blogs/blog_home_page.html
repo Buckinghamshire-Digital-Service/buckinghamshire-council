@@ -1,21 +1,76 @@
 {% extends 'patterns/base_page--blogs.html' %}
 
-{% load promotional_utils %}
+{% load promotional_utils wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
 {% is_promotional_site as promotional_site %}
 
+{# Promo blog listing #}
 {% if promotional_site %}
-    <div class="wrapper wrapper--promo-inner">
-{% endif %}
 
+    {% include "patterns/molecules/hero/hero--promo-blog.html" %}
+
+    <div class="wrapper wrapper--flex wrapper--z-index-1 blog-page">
+        <div class="section section--main">
+
+            <ul class="promo-blog-cards">
+                {% if page.featured_blogpost_page %}
+                    <li class="promo-blog-listing-card">
+                        <div>
+                            <a class="promo-blog-listing-card__link" href="{% pageurl page.featured_blogpost_page %}">
+                                <h2 class="promo-blog-listing-card__title">{{ page.featured_blogpost_page.title }}</h2>
+                            </a>
+
+                            <p class="promo-blog-listing-card__content">
+                                {{ page.featured_blogpost_page.intro_text|truncatewords:50 }}
+                            </p>
+                        </div>
+
+                        <div>
+                            {% if page.featured_image %}
+                                {% image page.featured_image fill-420x220 class="promo-blog-listing-card__image" %}
+                            {% endif %}
+                        </div>
+                    </li>
+                {% endif %}
+
+                {% for item in blogs.object_list %}
+                    <li class="promo-blog-listing-card">
+                        <div>
+                            <p class="promo-blog-listing-card__meta">
+                                {{ item.date_published|date:"d F Y" }}
+                            </p>
+
+                            <a class="promo-blog-listing-card__link" href="{% pageurl item %}">
+                                <h2 class="promo-blog-listing-card__title">{{ item.title }}</h2>
+                            </a>
+
+                            <p class="promo-blog-listing-card__content">
+                                {{ item.intro_text|truncatewords:50 }}
+                            </p>
+                        </div>
+
+                        <div>
+                            {% if item.image %}
+                                {% image item.image fill-420x220 class="promo-blog-listing-card__image" %}
+                            {% endif %}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+            
+            {% include "patterns/molecules/pagination/pagination.html" with modifier="pagination--centred" paginator_page=blogs %}
+        </div>
+    </div>
+
+{# Default blog listing #}
+{% else %}
     {% include "patterns/molecules/hero/hero--blog.html" %}
 
     {% if page.featured_blogpost_page %}
         {% include 'patterns/molecules/featured_blog_post/featured_blog_post.html' with page=page.featured_blogpost_page listing_image=page.featured_image %}
     {% endif %}
 
-    {% is_promotional_site as promotional_site %}
     <div class="wrapper wrapper--flex blog-page">
 
         <div class="section section--main">
@@ -24,9 +79,6 @@
         </div>
 
         {% include 'patterns/organisms/blogs-sidebar/blogs-sidebar.html' %}
-    </div>
-
-{% if promotional_site %}
     </div>
 {% endif %}
 {% endblock %}
