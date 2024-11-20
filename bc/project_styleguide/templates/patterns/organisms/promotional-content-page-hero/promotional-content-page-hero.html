@@ -5,9 +5,6 @@
 <div class="promo-hero-content-wrapper">
     <div class="promo-hero-content">
         <div class="promo-hero-content__wrapper">
-            <div class="{% if image %}promo-breadcrumb-constrained-width{% endif %}">
-                {% include "patterns/molecules/navigation/promotional-breadcrumbs.html" with image=image %}
-            </div>
             <div class="promo-hero-content__inner {% if not image %}promo-hero-content__inner--no-image{% endif %}">
                 <h1 class="promo-hero-content__title">{{ title }}</h1>
                 {% if text %}
