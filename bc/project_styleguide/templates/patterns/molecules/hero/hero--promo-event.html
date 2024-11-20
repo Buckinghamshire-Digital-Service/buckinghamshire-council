@@ -1,0 +1,22 @@
+{% load promotional_utils wagtailcore_tags %}
+
+{% is_promotional_site as promotional_site %}
+
+<div class="wrapper wrapper--promo-inner promo-hero-blog-wrapper">
+    <div class="promo-hero-blog">
+        <div class="wrapper wrapper--promo-inner">
+            <div class="promo-breadcrumb">
+                <span class="promo-breadcrumb__item promo-breadcrumb__item--no-chevron">
+                    <a class="promo-breadcrumb__link" href="{% pageurl page.get_parent %}">{{ page.get_parent.title }}</a>
+                </span>
+            </div>
+
+           <h1 class="promo-hero-blog__title">{{ page.title }}</h1>
+
+            <div class="promo-hero-blog__description">
+                <p>Todo: BE field for this introduction text</p>
+            </div>
+        </div>
+    </blockquote>
+</div>
+

@@ -1,0 +1,107 @@
+.promo-blog-cards {
+    display: grid;
+    row-gap: 40px;
+    margin-bottom: 40px;
+
+    @include media-query(tablet-landscape) {
+        row-gap: 60px;
+        margin-bottom: 60px;
+    }
+}
+
+.promo-blog-listing-card {
+    $root: &;
+    display: grid;
+
+    @include media-query(tablet-portrait) {
+        gap: 50px;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @include media-query(tablet-landscape) {
+        gap: 70px;
+        grid-template-columns: 1fr 420px;
+    }
+
+    &:nth-of-type(4n-3) {
+        #{$root}__image {
+            border-color: $color--bricks-pink;
+        }
+    }
+
+    &:nth-of-type(4n-2) {
+        #{$root}__image {
+            border-color: $color--bricks-green;
+        }
+    }
+
+    &:nth-of-type(4n-1) {
+        #{$root}__image {
+            border-color: $color--bricks-blue;
+        }
+    }
+
+    &:nth-of-type(4n) {
+        #{$root}__image {
+            border-color: $color--bricks-orange;
+        }
+    }
+
+    &:not(:last-of-type) {
+        padding-bottom: 40px;
+        border-bottom: 1px solid $color--charcoal-25;
+
+        @include media-query(tablet-landscape) {
+            padding-bottom: 60px;
+        }
+    }
+
+    &--event {
+        @include media-query(tablet-landscape) {
+            grid-template-columns: 420px 1fr;
+        }
+
+        #{$root}__image {
+            margin: 0 0 20px;
+
+            @include media-query(tablet-portrait) {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &__meta,
+    &__content {
+        @include font-size(s);
+        color: $color--slate;
+        line-height: 24px;
+    }
+
+    &__meta {
+        margin-top: 0;
+
+        &--margin-top {
+            margin-top: 20px;
+        }
+    }
+
+    &__content {
+        margin-bottom: 0;
+    }
+
+    &__title {
+        @include font-size(xl);
+        line-height: 35px;
+        font-weight: $weight--bold;
+    }
+
+    &__image {
+        margin-top: 20px;
+        border-radius: 8px;
+        border-bottom: 10px solid transparent;
+
+        @include media-query(tablet-portrait) {
+            margin-top: 0;
+        }
+    }
+}
