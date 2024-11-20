@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- Replace the `hero_link_page` and `hero_link_text` fields of a Promotional Content page with the `LinkBlock` from the `bc.utils.blocks` module.
+
 ## 81.0 (2024-11-14)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/80.2...81.0>

@@ -1,10 +1,10 @@
-from django.core.exceptions import ValidationError
 from django.db import models
 
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.fields import StreamField
 from wagtail.search import index
 
+from bc.utils import blocks
 from bc.utils.models import BasePage
 
 from ..blocks.definition import PromotionalStoryBlock
@@ -28,14 +28,11 @@ class PromotionalContentPage(BasePage):
         related_name="+",
         on_delete=models.SET_NULL,
     )
-    hero_link_page = models.ForeignKey(
-        "wagtailcore.Page",
-        on_delete=models.SET_NULL,
+    hero_link = StreamField(
+        blocks.LinkBlock,
         blank=True,
-        null=True,
-        related_name="+",
+        max_num=1,
     )
-    hero_link_text = models.CharField(max_length=255, blank=True)
 
     body = StreamField(PromotionalStoryBlock())
 
@@ -47,28 +44,25 @@ class PromotionalContentPage(BasePage):
                 FieldPanel("hero_title"),
                 FieldPanel("hero_text"),
                 FieldPanel("hero_image"),
-                FieldPanel("hero_link_page"),
-                FieldPanel("hero_link_text"),
+                FieldPanel("hero_link"),
             ),
             heading="Hero",
         ),
         FieldPanel("body"),
     ]
 
-    def clean(self) -> None:
-        super().clean()
-
-        if not self.hero_link_text and self.hero_link_page is not None:
-            raise ValidationError(
-                {
-                    "hero_link_text": ValidationError(
-                        "Link text must be populated if a link is specified"
-                    )
-                }
-            )
-
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        if self.hero_link_page is not None and self.hero_link_page.live:
-            context["hero_link_url"] = self.hero_link_page.get_url(request=request)
+
+        link_block = self.hero_link[0] if self.hero_link else None
+        if not link_block:
+            context.update({"hero_link": None})
+        elif link_block.block_type == "internal_link":
+            page = link_block.value.get("page")
+            # Ensure page exists and is live.
+            if page and page.live:
+                context.update({"hero_link": link_block.value})
+        elif link_block.block_type == "external_link":
+            context.update({"hero_link": link_block.value})
+
         return context
