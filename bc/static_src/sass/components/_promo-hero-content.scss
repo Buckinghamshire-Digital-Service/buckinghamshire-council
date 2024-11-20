@@ -3,6 +3,10 @@
 
     @include media-query(tablet-landscape) {
         overflow: visible;
+
+        + div {
+            margin-top: -75px;
+        }
     }
 }
 
@@ -17,6 +21,7 @@
     overflow: hidden;
     padding: 20px 0 50px;
     margin: 0 0 50px 50%;
+    z-index: 1;
 
     @include media-query(mob-landscape) {
         padding-bottom: 80px;
