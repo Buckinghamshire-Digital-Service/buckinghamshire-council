@@ -4,6 +4,6 @@
 {% block breadcrumbs %}{# Breadcrumbs are included in the hero component #}{% endblock %}
 
 {% block content %}
-    {% include "patterns/organisms/promotional-content-page-hero/promotional-content-page-hero.html" with title=page.hero_title text=page.hero_text image=page.hero_image link_url=hero_link_url link_text=page.hero_link_text %}
+    {% include "patterns/organisms/promotional-content-page-hero/promotional-content-page-hero.html" with title=page.hero_title text=page.hero_text image=page.hero_image link=hero_link %}
     {% include_block page.body %}
 {% endblock %}
