@@ -21,6 +21,16 @@
         }
     }
 
+    &__inner {
+        .page--promotional & {
+            padding: 0 20px;
+
+            @include media-query(tablet-portrait) {
+                padding: 0 25px;
+            }
+        }
+    }
+
     &__columns {
         @include media-query(tablet-landscape) {
             display: flex;
