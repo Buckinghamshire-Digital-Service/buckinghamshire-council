@@ -63,3 +63,11 @@
         }
     }
 }
+
+.promo-spacer {
+    padding: 50px 0;
+
+    @include media-query(tablet-portrait) {
+        padding: 75px 0;
+    }
+}
