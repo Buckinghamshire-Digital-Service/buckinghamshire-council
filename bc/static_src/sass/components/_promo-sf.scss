@@ -91,6 +91,12 @@
         margin-top: 50px;
     }
 
+    &--button + &--paragraph,
+    &--button + &--heading,
+    &--button + &--subheading {
+        margin-top: 50px;
+    }
+
     &--quote,
     &--aligned_media_with_text {
         + .promo-sf--paragraph,
