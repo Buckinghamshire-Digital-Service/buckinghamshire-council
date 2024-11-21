@@ -44,6 +44,7 @@ wagtail-modeladmin = "^2.0.0"
 html5lib = "^1.1"
 beautifulsoup4 = "^4.12.3"
 django-xff = "^1.4.0"
+phonenumberslite = "^8.13.50"
 
 [tool.poetry.extras]
 gunicorn = ["gunicorn"]

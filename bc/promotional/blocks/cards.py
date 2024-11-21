@@ -1,44 +1,104 @@
+from logging import getLogger
+
 from django.core.exceptions import ValidationError
 
 from wagtail import blocks
 from wagtail.images.blocks import ImageChooserBlock
+
+import phonenumbers
+
+logger = getLogger(__name__)
+
+
+class PhoneNumberBlock(blocks.CharBlock):
+    def clean(self, value):
+        value = super().clean(value)
+        if not value:
+            raise ValidationError("Please enter a valid phone number")
+
+        try:
+            phone_number = phonenumbers.parse(value, "GB")
+        except phonenumbers.NumberParseException:
+            raise ValidationError("Please enter a valid phone number")
+        except Exception:
+            logger.exception(
+                "Unexpected exception happened when trying to parse a phone number"
+            )
+            raise ValidationError("Could not parse the phone number")
+
+        if not phonenumbers.is_possible_number(phone_number):
+            raise ValidationError("Please enter a valid phone number")
+
+        return phonenumbers.format_number(
+            phone_number, phonenumbers.PhoneNumberFormat.E164
+        )
+
+
+class CardLinkStructValue(blocks.StructValue):
+    def get_button_link_block(self):
+        button_link = self.get("button_link")
+        return button_link[0] if button_link else None
+
+    # return an href-ready value for button_link
+    def get_button_link(self):
+        block = self.get_button_link_block()
+
+        if not block:
+            return None
+
+        match block.block_type:
+            case "internal_link" if block.value and block.value.live:
+                return block.value.url
+            case "external_link":
+                return block.value
+            case "email":
+                return f"mailto:{block.value}"
+            case "phone_number":
+                try:
+                    phone_number = phonenumbers.parse(block.value, "GB")
+
+                except phonenumbers.NumberParseException:
+                    logger.exception(
+                        "Invalid phone number found when trying to parse a value "
+                        "from the database"
+                    )
+                    return None
+                except Exception:
+                    logger.exception(
+                        "Unexpected exception when trying to parse a phone number "
+                        "from the database"
+                    )
+                    return None
+
+                number = phonenumbers.format_number(
+                    phone_number, phonenumbers.PhoneNumberFormat.RFC3966
+                )
+                return number
+            case _:
+                return None
 
 
 class LinkCard(blocks.StructBlock):
     title = blocks.CharBlock(max_length=128)
     description = blocks.TextBlock(max_length=255)
     image = ImageChooserBlock()
-    link_page = blocks.PageChooserBlock(
-        required=False,
-        help_text="Please choose an internal page or specify the URL, not both at the same time",
+    button_text = blocks.CharBlock(max_length=128)
+    button_link = blocks.StreamBlock(
+        [
+            ("internal_link", blocks.PageChooserBlock()),
+            ("external_link", blocks.URLBlock()),
+            ("email", blocks.EmailBlock()),
+            (
+                "phone_number",
+                PhoneNumberBlock(),
+            ),
+        ],
+        required=True,
+        max_num=1,
     )
-    link_url = blocks.URLBlock(
-        required=False,
-        label="Link URL",
-        help_text="Please specify the URL or an internal page, not both at the same time",
-    )
-    link_text = blocks.CharBlock(max_length=128)
 
-    def clean(self, value) -> None:
-        result = super().clean(value)
-        errors = {}
-        if value["link_page"] is not None and value["link_url"]:
-            errors["link_page"] = ValidationError(
-                "Page cannot be specified at the same time as the URL"
-            )
-            errors["link_url"] = ValidationError(
-                "URL cannot be specified at the same time as the page"
-            )
-        elif value["link_page"] is None and not value["link_url"]:
-            msg = (
-                "Page and URL fields cannot be both empty at the same time. "
-                "Please specify value for one of those fields"
-            )
-            for key in ("link_page", "link_url"):
-                errors[key] = ValidationError(msg)
-        if errors:
-            raise blocks.StructBlockValidationError(block_errors=errors)
-        return result
+    class Meta:
+        value_class = CardLinkStructValue
 
 
 class LinkCards(blocks.StructBlock):
@@ -49,6 +109,20 @@ class LinkCards(blocks.StructBlock):
     class Meta:
         icon = "grip"
         template = "patterns/organisms/promotional-cards/promotional-cards.html"
+
+    def clean(self, value):
+        cleaned_data = super().clean(value)
+
+        if cleaned_data.get("link_page") and not cleaned_data.get("link_text"):
+            raise blocks.StructBlockValidationError(
+                block_errors={
+                    "link_text": ValidationError(
+                        "Link text is required if a link page has been set."
+                    )
+                }
+            )
+
+        return cleaned_data
 
     def get_context(self, value, parent_context=None):
         context = super().get_context(value, parent_context=parent_context)
@@ -66,15 +140,10 @@ class LinkCards(blocks.StructBlock):
     def get_items_context(self, items_value, *, request):
         items = []
         for item in items_value:
-            page = item["link_page"]
-            url = item["link_url"]
+            button_url = item.get_button_link()
 
-            if url:
-                link_url = url
-            elif page is not None and page.live:
-                link_url = page.get_url(request=request)
-            # Skip cards for deleted pages
-            else:
+            # Skip cards without link
+            if not button_url:
                 continue
 
             items.append(
@@ -82,10 +151,13 @@ class LinkCards(blocks.StructBlock):
                     "title": item["title"],
                     "description": item["description"],
                     "image": item["image"],
-                    "link_url": link_url,
-                    "link_text": item["link_text"],
+                    "link_url": button_url,
+                    "link_text": item["button_text"],
                     "link_highlight": False,
                 }
             )
-        items[-1]["link_highlight"] = True
+
+        if items:
+            items[-1].update({"link_highlight": True})
+
         return items
