@@ -6,6 +6,7 @@
 - Add `phonenumberlite` (version 8.13.50+) dependency to the project
 - Add PhoneNumberBlock to the Promotional Content blocks module
 - Update Promotional Content LinkCard block have to allow more field choices (internal_link, external_link, email or a phone_number
+- Replace the `link_page` and `link_text` fields with of the CalloutWithImage Block with a LinkBlock from the `bc.utils.blocks` module.
 
 ## 81.0 (2024-11-14)
 
