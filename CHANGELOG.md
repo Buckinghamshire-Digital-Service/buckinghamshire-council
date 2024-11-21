@@ -1,5 +1,16 @@
 # Release History
 
+## 81.1 (2024-11-21)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/81.0...81.1>
+
+- Various FE fixes/updates
+- Replace the `hero_link_page` and `hero_link_text` fields of a Promotional Content page with the `LinkBlock` from the `bc.utils.blocks` module
+- Replace the `link_page` and `link_text` fields with of the CalloutWithImage Block with a LinkBlock from the `bc.utils.blocks` module
+- Update Promotional Content LinkCard block to allow more field choices (`internal_link`, `external_link`, `email` or a `phone_number`)
+- Add `phonenumberlite` (version 8.13.50+) dependency to the project
+- Add PhoneNumberBlock to the Promotional Content blocks module
+
 ## 81.0 (2024-11-14)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/80.2...81.0>

@@ -50,6 +50,10 @@
         max-width: 400px;
 
         @include media-query(tablet-portrait) {
+            margin: 0 20px 0 120px;
+        }
+
+        @include media-query(tablet-landscape) {
             margin: 0 40px 0 clamp(125px, 25%, 200px);
         }
 
@@ -57,15 +61,6 @@
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-        }
-
-        @media only screen and (min-width: 1650px) {
-            margin: 0 auto;
-            padding-left: 90px;
-            max-width: 490px;
-            opacity: 1;
-            visibility: visible;
-            pointer-events: initial;
         }
     }
 
@@ -85,10 +80,6 @@
         @media only screen and (min-width: 1335px) {
             display: flex;
             min-height: 465px;
-        }
-
-        @media only screen and (min-width: 1650px) {
-            display: none;
         }
     }
 

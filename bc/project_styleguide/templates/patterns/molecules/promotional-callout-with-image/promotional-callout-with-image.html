@@ -8,16 +8,15 @@
 
     <div class="promo-home-cta__content">
         <h2 class="promo-home-cta__title">{{ value.title }}</h2>
-
         {% if value.text %}
             <div class="promo-home-cta__description">
                 {{ value.text }}
             </div>
         {% endif %}
-
-        {% if link_url and value.link_text %}
-            <a class="promo-button promo-button--white-border" href="{{ link_url }}">
-                {{ value.link_text }}
+        
+        {% if link %}
+            <a class="promo-button promo-button--white-border" href="{{ link.get_url }}">
+                {{ link.get_text }}
             </a>
         {% endif %}
     </div>

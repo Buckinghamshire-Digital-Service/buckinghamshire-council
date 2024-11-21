@@ -57,6 +57,11 @@
             width: 126%;
             height: 250px;
         }
+
+        @include media-query(desktop) {
+            height: 350px;
+            top: 87%;
+        }
     }
 
     &__wrapper {
@@ -72,6 +77,9 @@
             left: 0;
             right: 0;
             padding: 0 25px;
+            display: grid;
+            align-items: center;
+            height: calc(100% - 60px);
         }
     }
 
@@ -99,7 +107,7 @@
         @include media-query(tablet-landscape) {
             display: -webkit-box;
             -webkit-box-orient: vertical;
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 4;
             overflow: hidden;
         }
     }
