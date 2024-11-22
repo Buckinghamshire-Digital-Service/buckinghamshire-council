@@ -40,7 +40,7 @@
         background-repeat: no-repeat;
 
         @include media-query(tablet-portrait) {
-            left: 0;
+            left: -1px;
         }
     }
 
@@ -136,5 +136,11 @@
         height: 100%;
         background-size: cover;
         background-position: center;
+        position: absolute;
+        top: 136px;
+
+        @media only screen and (min-width: 1650px) {
+            top: 150px;
+        }
     }
 }
