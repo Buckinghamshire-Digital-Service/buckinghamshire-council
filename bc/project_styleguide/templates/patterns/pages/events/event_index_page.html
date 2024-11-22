@@ -7,59 +7,60 @@
 {% is_promotional_site as promotional_site %}
 
 {% if promotional_site %}
-    {% include "patterns/molecules/hero/hero--promo-blog.html" %}
 
-    <div class="wrapper wrapper--flex wrapper--z-index-1">
-        <div class="section section--main">
-            {% if events %}
-                {% if events.object_list.exists %}
-                    <ul class="promo-blog-cards">
-                        {% for event in events.object_list.specific %}
-                            <li class="promo-blog-listing-card promo-blog-listing-card--event">
+    <div class="wrapper wrapper--promo-inner promo-hero-blog-wrapper">
+        
+        {% include "patterns/molecules/hero/hero--promo-blog.html" %}
 
-                                <div>
-                                    {% if event.listing_image %}
-                                        {% image event.listing_image fill-420x220 class="promo-blog-listing-card__image" %}
-                                    {% endif %}
-                                </div>
+        <div class="wrapper wrapper--flex wrapper--z-index-1">
+            <div class="section section--main">
+                {% if events %}
+                    {% if events.object_list.exists %}
+                        <ul class="promo-blog-cards">
+                            {% for event in events.object_list.specific %}
+                                <li class="promo-blog-listing-card promo-blog-listing-card--event">
 
-                                <div>
-                                    <a class="promo-blog-listing-card__link" href="{% pageurl event %}">
-                                        <h2 class="promo-blog-listing-card__title">{% firstof event.listing_title event.title %}</h2>
-                                    </a>
+                                    <div>
+                                        {% if event.listing_image %}
+                                            {% image event.listing_image fill-420x220 class="promo-blog-listing-card__image" %}
+                                        {% endif %}
+                                    </div>
+                                    <div>
+                                        <a class="promo-blog-listing-card__link" href="{% pageurl event %}">
+                                            <h2 class="promo-blog-listing-card__title">{% firstof event.listing_title event.title %}</h2>
+                                        </a>
 
-                                    <p class="promo-blog-listing-card__meta promo-blog-listing-card__meta--margin-top">
-                                        {% format_event_date event.start_date event.start_time event.end_date event.end_time %}
-                                    </p>
-
-                                    {% if event.listing_summary or event.introduction %}
-                                        <p class="promo-blog-listing-card__content">
-                                            {% firstof event.listing_summary event.introduction %}
+                                        <p class="promo-blog-listing-card__meta promo-blog-listing-card__meta--margin-top">
+                                            {% format_event_date event.start_date event.start_time event.end_date event.end_time %}
                                         </p>
-                                    {% endif %}
-                                </div>
 
-                            </li>
-                        {% endfor %}
-                    </ul>
+                                        {% if event.listing_summary or event.introduction %}
+                                            <p class="promo-blog-listing-card__content">
+                                                {% firstof event.listing_summary event.introduction %}
+                                            </p>
+                                        {% endif %}
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
 
-                    {% include "patterns/molecules/pagination/pagination.html" with paginator_page=events %}
+                        {% include "patterns/molecules/pagination/pagination.html" with paginator_page=events %}
 
-                {% else %}
-                    {# no items on any page #}
+                    {% else %}
+                        {# no items on any page #}
+                    {% endif %}
+
+                    {% if show_past and upcoming_events.exists %}
+                        <a href="{% pageurl page %}">View upcoming events</a>
+                    {% elif past_events.exists %}
+                        <a href="{% pageurl page %}?past=True">View past events</a>
+                    {% endif %}
                 {% endif %}
 
-                {% if show_past and upcoming_events.exists %}
-                    <a href="{% pageurl page %}">View upcoming events</a>
-                {% elif past_events.exists %}
-                    <a href="{% pageurl page %}?past=True">View past events</a>
-                {% endif %}
-            {% endif %}
-
+                </div>
             </div>
         </div>
     </div>
-
 {% else %}
     <div class="wrapper wrapper--flex news">
         <section class="section section--main" aria-label="Listing of events">
