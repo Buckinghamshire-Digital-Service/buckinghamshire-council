@@ -2,6 +2,12 @@
 
 ## 82.0 (2024-11-25)
 
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/82...82.1>
+
+- FE: Fix SF stacking
+
+## 82.0 (2024-11-25)
+
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/81.1...82.0>
 
 - Various FE fixes/updates
