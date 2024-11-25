@@ -99,4 +99,18 @@
     &--extra-padding {
         padding: $grid--min / 2 $grid--medium;
     }
+
+    &--mobile-only {
+        @media only screen and (min-width: 1335px) {
+            display: none;
+        }
+    }
+
+    &--desktop-only {
+        display: none;
+
+        @media only screen and (min-width: 1335px) {
+            display: inline-flex;
+        }
+    }
 }
