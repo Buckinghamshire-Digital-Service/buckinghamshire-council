@@ -13,7 +13,7 @@
 .promo-hero-content {
     // Escape parent
     position: relative;
-    width: calc(100vw - 15px);
+    width: 100vw;
     transform: translateX(-50%);
     overflow-x: clip;
     display: grid;
@@ -25,6 +25,7 @@
 
     @include media-query(mob-landscape) {
         padding-bottom: 100px;
+        width: calc(100vw - 15px);
     }
 
     @include media-query(tablet-portait) {

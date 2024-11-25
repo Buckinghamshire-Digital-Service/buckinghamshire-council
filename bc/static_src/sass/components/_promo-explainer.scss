@@ -8,13 +8,17 @@
 
 .promo-explainer {
     // Escape parent
-    width: calc(100vw - 15px);
+    width: 100vw;
     transform: translateX(-50%);
     background-color: $color--promo-light-blue;
     position: relative;
     padding-bottom: 150px;
     margin: 75px 0 50px 50%;
     overflow-x: clip;
+
+    @include media-query(mob-landscape) {
+        width: calc(100vw - 15px);
+    }
 
     @include media-query(mob-landscape) {
         margin-top: 110px;
