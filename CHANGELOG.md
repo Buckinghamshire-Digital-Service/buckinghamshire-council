@@ -1,5 +1,13 @@
 # Release History
 
+## 82.0 (2024-11-25)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/81.1...82.0>
+
+- Various FE fixes/updates
+- Add description field to the `EventIndexPage`
+- Update the `hero--promo-blog.html` molecule to display a description in both the the `BlogHomePage` and `EventIndexPage` hero
+
 ## 81.1 (2024-11-21)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/81.0...81.1>

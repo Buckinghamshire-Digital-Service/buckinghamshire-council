@@ -4,8 +4,12 @@
     background-color: $color--river;
     padding: 90px 0 50px;
     transform: translateX(-50%);
-    width: calc(100vw - 15px);
+    width: 100vw;
     overflow-x: clip;
+
+    @include media-query(mob-landscape) {
+        width: calc(100vw - 15px);
+    }
 
     @include media-query(tablet-landscape) {
         padding: 185px 0 100px;
