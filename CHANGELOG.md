@@ -1,8 +1,14 @@
 # Release History
 
-## 82.0 (2024-11-25)
+## 82.2 (2024-11-25)
 
-Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/82...82.1>
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/82.1...82.2>
+
+- FE: A11y fix for hero button
+
+## 82.1 (2024-11-25)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/82.0...82.1>
 
 - FE: Fix SF stacking
 
