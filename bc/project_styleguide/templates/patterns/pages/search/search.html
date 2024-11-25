@@ -6,7 +6,7 @@
 {% block title %}{% if search_query %}Search results for &ldquo;{{ search_query }}&rdquo;{% else %}Search{% endif %}{% endblock %}
 
 {% block breadcrumbs %}
-    <div class="wrapper wrapper--large">
+    <div class="wrapper {% if promotional_site %} wrapper--promo-inner {% else %} wrapper--large {% endif %}">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb__item">
@@ -18,7 +18,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="wrapper {% if promotional_site %} wrapper--large {% else %} wrapper--page {% endif %} search">
+    <div class="wrapper {% if promotional_site %} wrapper--promo-inner {% else %} wrapper--page {% endif %} search">
         <h1 class="heading heading--xxl">Search</h1>
 
         <form action="{% url 'search' %}" method="get" role="search" class="form form--search">
@@ -38,7 +38,7 @@
 
     {% comment %} New curated search suggestions {% endcomment %}
     {% if search_cta_title and search_cta_button %}
-        <div {% if promotional_site %} class="wrapper--large" {% endif %}>
+        <div {% if promotional_site %} class="wrapper--promo-inner" {% endif %}>
             {# When we have a search cta, we want to display the number of results above it. #}
             {% if search_results %}
                 <header class="search__results-header search__results-header--no-border">
@@ -65,7 +65,7 @@
         </div>
     {% endif %}
 
-    <div class="wrapper {% if promotional_site %} wrapper--large {% else %} wrapper--page {% endif %} search">
+    <div class="wrapper {% if promotional_site %} wrapper--promo-inner {% else %} wrapper--page {% endif %} search">
         {% if search_results %}
             <section class="search__results" aria-label="Search results">
                 {% if not search_cta_title or not search_cta_button %}

@@ -152,10 +152,6 @@ class EventPage(BasePage):
 class EventIndexPage(BasePage):
     template = "patterns/pages/events/event_index_page.html"
 
-    fetch_all_events = models.BooleanField(
-        help_text="Fetch events from all sites, instead of just displaying child pages of this page"
-    )
-
     subpage_types = ["EventPage"]
     parent_page_types = [
         "home.HomePage",
@@ -163,7 +159,13 @@ class EventIndexPage(BasePage):
         "promotional.PromotionalHomePage",
     ]
 
+    description = models.TextField(blank=True)
+    fetch_all_events = models.BooleanField(
+        help_text="Fetch events from all sites, instead of just displaying child pages of this page"
+    )
+
     content_panels = BasePage.content_panels + [
+        FieldPanel("description"),
         FieldPanel("fetch_all_events"),
     ]
 

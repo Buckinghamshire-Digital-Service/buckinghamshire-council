@@ -1,14 +1,14 @@
 {% load wagtailimages_tags %}
 
-{% image image fill-1200x980 as rendition %}
+{% image image fill-1200x980 format-jpeg as rendition %}
 
 <div class="promo-hero-home-wrapper">
 
-    <div class="promo-hero-home__inner-content-mid" aria-hidden="true">
+    <div class="promo-hero-home__inner-content-mid">
         <div class="promo-hero-home__inner-content-mid-container">
-            <h1 class="promo-hero-home__title">{{ title }}</h1>
+            <h1 class="promo-hero-home__title" aria-hidden="true">{{ title }}</h1>
             {% if text %}
-                <div class="promo-hero-home__description">
+                <div class="promo-hero-home__description" aria-hidden="true">
                     {{ text|linebreaks }}
                 </div>
             {% endif %}
