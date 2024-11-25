@@ -19,12 +19,12 @@
     display: grid;
     background-color: $color--promo-light-blue;
     overflow: hidden;
-    padding: 20px 0 50px;
+    padding: 50px 0 80px;
     margin: 0 0 50px 50%;
     z-index: 1;
 
     @include media-query(mob-landscape) {
-        padding-bottom: 80px;
+        padding-bottom: 100px;
     }
 
     @include media-query(tablet-portait) {
@@ -150,6 +150,16 @@
         height: 100%;
         background-size: cover;
         background-position: center;
+        position: absolute;
+        top: 80px;
+
+        @media only screen and (min-width: 1650px) {
+            top: 80px;
+        }
+
+        @media only screen and (min-width: 1755px) {
+            top: 150px;
+        }
     }
 
     &__button {
