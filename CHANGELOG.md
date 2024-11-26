@@ -1,5 +1,11 @@
 # Release History
 
+## 82.3 (2024-11-25)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/82.2...82.3>
+
+- FE: Fix heading hierarchy
+
 ## 82.2 (2024-11-25)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/82.1...82.2>
