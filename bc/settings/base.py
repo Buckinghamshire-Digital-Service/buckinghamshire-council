@@ -767,6 +767,11 @@ if "PRIMARY_HOST" in env:
 WAGTAILIMAGES_IMAGE_MODEL = "images.CustomImage"
 WAGTAILIMAGES_FEATURE_DETECTION_ENABLED = False
 
+# https://docs.wagtail.org/en/stablereference/settings.html#wagtailimages-max-image-pixels
+WAGTAILIMAGES_MAX_IMAGE_PIXELS = int(
+    env.get("WAGTAILIMAGES_MAX_IMAGE_PIXELS", 10_000_000)
+)
+
 # Rich text settings to remove unneeded features
 # We normally don't want editors to use the images
 # in the rich text editor, for example.
