@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 82.4 (2024-11-27)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/82.3...82.4>
 
 - Add setting to limit max image size
 
