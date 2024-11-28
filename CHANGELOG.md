@@ -1,5 +1,11 @@
 # Release History
 
+## 82.5 (2024-11-28)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/82.4...82.5>
+
+- FE: Post-launch enhancements
+
 ## 82.4 (2024-11-27)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/82.3...82.4>
