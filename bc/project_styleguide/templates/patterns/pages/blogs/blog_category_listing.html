@@ -3,15 +3,17 @@
 {% is_promotional_site as promotional_site %}
 
 {% block content %}
-    {% include "patterns/molecules/hero/hero--blog.html" %}
+    <div class="blog-category-wrapper">
+        {% include "patterns/molecules/hero/hero--blog.html" %}
 
-    <div class="wrapper {% if promotional_site %} wrapper--large {% else %} wrapper--flex {% endif %} blog-page">
-        <div class="section section--main">
-            <h2 class="heading heading--xl blog-page__title blog-page__title--search">Category: {{ category.name }}</h2>
-            {% include "patterns/molecules/blog-list/blog-list.html" with items=page_obj.object_list %}
-            {% include "patterns/molecules/pagination/pagination.html" with modifier="pagination--centred" paginator_page=page_obj %}
+        <div class="wrapper wrapper--flex blog-page">
+            <div class="section section--main">
+                <p class="heading heading--xl blog-page__title blog-page__title--search">Category: {{ category.name }}</p>
+                {% include "patterns/molecules/blog-list/blog-list.html" with items=page_obj.object_list %}
+                {% include "patterns/molecules/pagination/pagination.html" with modifier="pagination--centred" paginator_page=page_obj %}
+            </div>
+
+            {% include 'patterns/organisms/blogs-sidebar/blogs-sidebar.html' %}
         </div>
-
-        {% include 'patterns/organisms/blogs-sidebar/blogs-sidebar.html' %}
     </div>
 {% endblock %}

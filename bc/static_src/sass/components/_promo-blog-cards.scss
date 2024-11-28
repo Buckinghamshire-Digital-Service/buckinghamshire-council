@@ -74,7 +74,7 @@
     &__content {
         @include font-size(s);
         color: $color--slate;
-        line-height: 24px;
+        line-height: 1.5rem;
     }
 
     &__meta {
