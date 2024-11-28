@@ -1,5 +1,11 @@
 # Release History
 
+## 82.6 (2024-11-28)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/82.5...82.6>
+
+- FE: Reinstate breadcrumb on non-fostering event index pages
+
 ## 82.5 (2024-11-28)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/82.4...82.5>
