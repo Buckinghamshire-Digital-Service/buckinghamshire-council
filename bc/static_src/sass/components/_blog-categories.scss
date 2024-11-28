@@ -4,3 +4,15 @@
         margin-left: $grid--small;
     }
 }
+
+.blog-category-wrapper {
+    .page--promotional & {
+        margin: 0 auto;
+        max-width: $wrapper--promo-inner;
+        padding: 0 20px;
+
+        @include media-query(tablet-portrait) {
+            padding: 0 25px;
+        }
+    }
+}
