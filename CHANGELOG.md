@@ -1,5 +1,11 @@
 # Release History
 
+## 82.7 (2024-11-29)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/82.6...82.7>
+
+- FE: Fix spacing between rich-text and callout block
+
 ## 82.6 (2024-11-28)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/82.5...82.6>
