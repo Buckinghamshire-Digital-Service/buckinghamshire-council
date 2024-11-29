@@ -111,6 +111,14 @@
             }
         }
     }
+
+    &--paragraph + &--callout_with_image {
+        margin-top: 50px;
+
+        @include media-query(tablet-portrait) {
+            margin-top: 75px;
+        }
+    }
 }
 
 .promo-table-container {
