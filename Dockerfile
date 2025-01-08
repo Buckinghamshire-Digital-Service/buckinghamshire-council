@@ -1,4 +1,4 @@
-FROM node:12.22.12-alpine as frontend
+FROM node:14-alpine AS frontend
 
 # Make build & post-install scripts behave as if we were in a CI environment (e.g. for logging verbosity purposes).
 ARG CI=true
@@ -19,7 +19,7 @@ RUN npm run build:prod
 # ones becase they use a different C compiler. Debian images also come with
 # all useful packages required for image manipulation out of the box. They
 # however weight a lot, approx. up to 1.5GiB per built image.
-FROM python:3.11-slim as backend
+FROM python:3.11-slim AS backend
 
 ARG POETRY_INSTALL_ARGS="--without=dev"
 
@@ -101,7 +101,7 @@ COPY ./docker/bashrc.sh /home/bc/.bashrc
 CMD ["gunicorn"]
 
 # These steps won't be run on production
-FROM backend as dev
+FROM backend AS dev
 
 # Swap user, so the following tasks can be run as root
 USER root
@@ -117,7 +117,7 @@ RUN apt-get install -y postgresql-client rsync
 USER bc
 
 # Install nvm and node/npm
-ARG NVM_VERSION=0.39.3
+ARG NVM_VERSION=0.40.1
 COPY --chown=bc .nvmrc ./
 RUN curl https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh | bash \
     && bash --login -c "nvm install --no-progress && nvm alias default $(nvm run --silent --version)"

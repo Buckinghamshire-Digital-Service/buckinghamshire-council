@@ -73,6 +73,9 @@ Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/80.2...81.
 
 - Add promotional site page types
 
+- Bump Node.js from [v12](https://nodejs.org/en/blog/release/v12.22.12) to [v14](https://nodejs.org/en/blog/release/v14.21.3)
+- [Wagtail 6.1](https://docs.wagtail.org/en/latest/releases/6.2.html) upgrade
+
 ## 80.2 (2024-11-11)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/80.1...80.2>

@@ -60,9 +60,13 @@ class FeedbackThankYouView(generic.TemplateView):
 
 
 class UsefulnessFeedbackReportView(report_views.ReportView):
-    title = "Usefulness feedback"
+    page_title = "Usefulness feedback"
+    index_url_name = "usefuleness_feedback_report"
+    index_results_url_name = "usefuleness_feedback_report_results"
     header_icon = "help"
-    template_name = "patterns/pages/reports/usefulness_feedback_report.html"
+    results_template_name = (
+        "patterns/pages/reports/usefulness_feedback_report_results.html"
+    )
     list_export = ["created", "get_title", "get_current_url", "original_url", "useful"]
     export_headings = {
         "get_title": "Page",
@@ -121,9 +125,13 @@ class FeedbackCommentCreateView(generic.CreateView):
 
 
 class FeedbackCommentReportView(report_views.ReportView):
-    title = "Feedback comments"
+    page_title = "Feedback comments"
+    index_url_name = "feedback_comment_report"
+    index_results_url_name = "feedback_comment_report_results"
     header_icon = "edit"
-    template_name = "patterns/pages/reports/feedback_comment_report.html"
+    results_template_name = (
+        "patterns/pages/reports/feedback_comment_report_results.html"
+    )
     list_export = [
         "created",
         "get_title",

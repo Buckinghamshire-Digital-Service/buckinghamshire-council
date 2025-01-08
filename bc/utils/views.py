@@ -1,6 +1,8 @@
 from django.db.models import Q
 from django.views import defaults
 
+from wagtail.admin.auth import permission_denied
+from wagtail.admin.views.pages.listing import ExplorablePageFilterSet
 from wagtail.admin.views.reports import PageReportView
 from wagtail.models import Page
 
@@ -18,8 +20,13 @@ def server_error(request, template_name="patterns/pages/errors/500.html"):
 class UnpublishedChangesReportView(PageReportView):
 
     header_icon = "doc-empty-inverse"
-    template_name = "patterns/pages/reports/unpublished_changes_report.html"
-    title = "Pages with unpublished changes"
+    results_template_name = (
+        "patterns/pages/reports/unpublished_changes_report_results.html"
+    )
+    page_title = "Pages with unpublished changes"
+    index_url_name = "unpublished_changes_report"
+    index_results_url_name = "unpublished_changes_report_results"
+    filterset_class = ExplorablePageFilterSet
 
     list_export = PageReportView.list_export + ["last_published_at"]
     export_headings = dict(
@@ -29,12 +36,22 @@ class UnpublishedChangesReportView(PageReportView):
     def get_queryset(self):
         return Page.objects.filter(has_unpublished_changes=True)
 
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_superuser:
+            return permission_denied(request)
+        return super().dispatch(request, *args, **kwargs)
+
 
 class MissingMetadataReportView(PageReportView):
 
     header_icon = "search"
-    template_name = "patterns/pages/reports/missing_metadata_report.html"
-    title = "Pages missing SEO metadata"
+    results_template_name = (
+        "patterns/pages/reports/missing_metadata_report_results.html"
+    )
+    page_title = "Pages missing SEO metadata"
+    index_url_name = "missing_metadata_report"
+    index_results_url_name = "missing_metadata_report_results"
+    filterset_class = ExplorablePageFilterSet
 
     list_export = PageReportView.list_export + ["seo_title", "search_description"]
     export_headings = dict(
@@ -57,3 +74,8 @@ class MissingMetadataReportView(PageReportView):
         return Page.objects.exclude(depth=1).filter(
             Q(seo_title="") | Q(search_description="")
         )
+
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_superuser:
+            return permission_denied(request)
+        return super().dispatch(request, *args, **kwargs)

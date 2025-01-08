@@ -30,7 +30,7 @@ stages:
     policy: pull
 
 .node:
-  image: node:12.22.12-alpine
+  image: node:14-alpine
   extends: .cache_static
   needs:
     - static
@@ -137,7 +137,7 @@ test_python:
     DJANGO_SETTINGS_MODULE: bc.settings.test
 
     # SECRET_KEY is required by Django to start.
-    SECRET_KEY: fake_secret_key_to_run_tests
+    SECRET_KEY: fake_secret_key_to_run_tests # pragma: allowlist secret
 
     # Silence RECAPTCHA
     RECAPTCHA_PUBLIC_KEY: 'dummy-key-value'
