@@ -8,8 +8,8 @@ from bc.feedback.models import FeedbackComment, UsefulnessFeedback
 
 
 class FeedbackCommentFilterSet(django_filters.FilterSet):
-    created = django_filters.DateTimeFromToRangeFilter(
-        widget=DateRangePickerWidget(),
+    created = django_filters.DateFromToRangeFilter(
+        widget=DateRangePickerWidget,
     )
 
     class Meta:
@@ -18,8 +18,8 @@ class FeedbackCommentFilterSet(django_filters.FilterSet):
 
 
 class UsefulnessFeedbackFilterSet(django_filters.FilterSet):
-    created = django_filters.DateTimeFromToRangeFilter(
-        widget=DateRangePickerWidget(),
+    created = django_filters.DateFromToRangeFilter(
+        widget=DateRangePickerWidget,
     )
 
     useful = django_filters.ChoiceFilter(
