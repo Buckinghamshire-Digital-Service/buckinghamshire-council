@@ -9,11 +9,11 @@ from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel
-from wagtail.contrib.forms.forms import FormBuilder
 from wagtail.contrib.forms.models import AbstractFormField
 from wagtail.fields import RichTextField
 from wagtail.search import index
 
+from wagtailcaptcha.forms import WagtailCaptchaFormBuilder
 from wagtailcaptcha.models import WagtailCaptchaEmailForm
 
 from bc.area_finder.utils import validate_postcode
@@ -35,7 +35,7 @@ class FormField(AbstractFormField):
     panels = AbstractFormField.panels + [FieldPanel("additional_text")]
 
 
-class CustomFormBuilder(FormBuilder):
+class CustomFormBuilder(WagtailCaptchaFormBuilder):
     # create a function that returns an instanced Django form field
     # function name must match create_<field_type_key>_field
     def create_checkbox_field(self, field, options):

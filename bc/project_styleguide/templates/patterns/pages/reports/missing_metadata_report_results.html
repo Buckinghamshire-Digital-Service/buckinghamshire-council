@@ -1,9 +1,9 @@
-{% extends 'wagtailadmin/reports/base_page_report.html' %}
+{% extends 'wagtailadmin/reports/base_page_report_results.html' %}
 
-{% block listing %}
+{% block results %}
     {% include 'patterns/molecules/reports/_list_missing_metadata.html' %}
 {% endblock %}
 
-{% block no_results %}
+{% block no_results_message %}
     <p>No pages with missing SEO metadata.</p>
 {% endblock %}

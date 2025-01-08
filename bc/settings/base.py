@@ -138,7 +138,7 @@ INSTALLED_APPS = [
 # https://docs.djangoproject.com/en/stable/topics/http/middleware/
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    # Whitenoise middleware is used to server static files (CSS, JS, etc.).
+    # Whitenoise middleware is used to serve static files (CSS, JS, etc.).
     # According to the official documentation it should be listed underneath
     # SecurityMiddleware.
     # http://whitenoise.evans.io/en/stable/#quickstart-for-django-apps
@@ -278,7 +278,7 @@ else:
     WAGTAILSEARCH_BACKENDS = {
         "default": {"BACKEND": "wagtail.search.backends.database"}
     }
-# Reduction factor between 0 and 1 to apply to the relevanve score of search
+# Reduction factor between 0 and 1 to apply to the relevance score of search
 # results with the NewsPage content type. See bc.search.elasticsearch7.
 SEARCH_BOOST_FACTOR_NEWS_PAGE = float(env.get("SEARCH_BOOST_FACTOR_NEWS_PAGE", 0.5))
 
@@ -794,7 +794,9 @@ WAGTAILADMIN_RICH_TEXT_EDITORS = {
 WAGTAILDOCS_DOCUMENT_MODEL = "documents.CustomDocument"
 
 
-WAGTAIL_PASSWORD_REQUIRED_TEMPLATE = "patterns/pages/wagtail/password_required.html"
+WAGTAIL_PASSWORD_REQUIRED_TEMPLATE = (
+    "patterns/pages/wagtail/password_required.html"  # pragma: allowlist secret
+)
 
 
 # Default field for automatic primary keys. (Introduced in Django 3.2)

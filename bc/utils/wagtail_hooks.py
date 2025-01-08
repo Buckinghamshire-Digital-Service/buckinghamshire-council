@@ -94,6 +94,12 @@ def register_unpublished_changes_report_url():
             UnpublishedChangesReportView.as_view(),
             name="unpublished_changes_report",
         ),
+        # Results-only view to add support for AJAX-based filtering
+        path(
+            "reports/unpublished-changes/results/",
+            UnpublishedChangesReportView.as_view(results_only=True),
+            name="unpublished_changes_report_results",
+        ),
     ]
 
 
@@ -114,6 +120,12 @@ def register_missing_metadata_report_url():
             "reports/missing-metadata/",
             MissingMetadataReportView.as_view(),
             name="missing_metadata_report",
+        ),
+        # Results-only view to add support for AJAX-based filtering
+        path(
+            "reports/missing-metadata/results/",
+            MissingMetadataReportView.as_view(results_only=True),
+            name="missing_metadata_report_results",
         ),
     ]
 

@@ -8,24 +8,24 @@ repos:
     hooks:
       - id: isort
   - repo: https://github.com/pycqa/flake8
-    rev: 7.0.0
+    rev: 7.1.1
     hooks:
       - id: flake8
   - repo: https://github.com/python/black
-    rev: 24.4.2
+    rev: 24.10.0
     hooks:
       - id: black
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.15.2
+    rev: v3.19.0
     hooks:
       - id: pyupgrade
   - repo: https://github.com/adamchainz/django-upgrade
-    rev: '1.16.0' # replace with latest tag on GitHub
+    rev: '1.22.1' # replace with latest tag on GitHub
     hooks:
       - id: django-upgrade
         args: [--target-version, '4.2'] # Replace with Django version
   - repo: https://github.com/python-poetry/poetry
-    rev: '1.8.2' # keep version in sync with version installed in the Dockerfile
+    rev: '1.8.4' # keep version in sync with version installed in the Dockerfile
     hooks:
       - id: poetry-check
       - id: poetry-lock
@@ -49,19 +49,19 @@ repos:
           - '@babel/preset-env@7.5.0'
           - '@babel/preset-react@7.0.0'
           - babel-eslint@10.0.2
-  - repo: https://github.com/prettier/prettier
-    rev: 1.18.2
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v3.1.0
     hooks:
       - id: prettier
   - repo: https://github.com/awebdeveloper/pre-commit-stylelint
-    rev: c4c991cd38b0218735858716b09924f8b20e3812
+    rev: c4c991cd38b0218735858716b09924f8b20e3812 # pragma: allowlist secret
     hooks:
       - id: stylelint
         additional_dependencies:
           - stylelint@10.1.0
           - stylelint-config-torchbox@0.5.0
   - repo: git@github.com:Yelp/detect-secrets
-    rev: v0.13.0
+    rev: v1.5.0
     hooks:
       - id: detect-secrets
         args: ['--baseline', '.secrets.baseline']
@@ -71,8 +71,3 @@ repos:
               package-lock.json|
               poetry.lock
           )$
-  - repo: https://github.com/adamchainz/django-upgrade
-    rev: '1.19.0' # replace with latest tag on GitHub
-    hooks:
-      - id: django-upgrade
-        args: [--target-version, '4.2'] # Replace with Django version
