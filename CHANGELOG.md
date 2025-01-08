@@ -1,5 +1,11 @@
 # Release History
 
+## 82.8 (2025-01-08)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/82.7...82.8>
+
+- Upgrade Wagtail to v6.2
+
 ## 82.7 (2024-11-29)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/82.6...82.7>
