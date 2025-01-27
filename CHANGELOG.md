@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Upgrade to Wagtail 6.3
 - Upgrade node version from v12 to v20
 
 ## 82.8 (2025-01-08)

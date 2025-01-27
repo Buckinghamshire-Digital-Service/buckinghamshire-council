@@ -2,7 +2,7 @@ from django.db.models import Q
 from django.views import defaults
 
 from wagtail.admin.auth import permission_denied
-from wagtail.admin.views.pages.listing import ExplorablePageFilterSet
+from wagtail.admin.views.pages.listing import GenericPageFilterSet
 from wagtail.admin.views.reports import PageReportView
 from wagtail.models import Page
 
@@ -26,7 +26,7 @@ class UnpublishedChangesReportView(PageReportView):
     page_title = "Pages with unpublished changes"
     index_url_name = "unpublished_changes_report"
     index_results_url_name = "unpublished_changes_report_results"
-    filterset_class = ExplorablePageFilterSet
+    filterset_class = GenericPageFilterSet
 
     list_export = PageReportView.list_export + ["last_published_at"]
     export_headings = dict(
@@ -51,7 +51,7 @@ class MissingMetadataReportView(PageReportView):
     page_title = "Pages missing SEO metadata"
     index_url_name = "missing_metadata_report"
     index_results_url_name = "missing_metadata_report_results"
-    filterset_class = ExplorablePageFilterSet
+    filterset_class = GenericPageFilterSet
 
     list_export = PageReportView.list_export + ["seo_title", "search_description"]
     export_headings = dict(

@@ -55,7 +55,7 @@ poetry:
   image: python:3.11-bullseye
   stage: build
   variables:
-    POETRY_VERSION: 1.8.4
+    POETRY_VERSION: 1.8.5
   script:
     - pip install poetry==$POETRY_VERSION
     - python -m venv venv
