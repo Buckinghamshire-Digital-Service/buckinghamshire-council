@@ -8,7 +8,7 @@ authors = ["Torchbox <hello@torchbox.com>"]
 # Platform
 python = "~3.11"
 Django = "~4.2"
-wagtail = "~6.2"
+wagtail = "~6.3"
 gunicorn = {version = "~22.0", optional = true}
 psycopg2 = "~2.9"
 
@@ -18,10 +18,10 @@ django-birdbath = "^2.0.0"
 django-csp = "~3.8"
 django-filter = "^24.2"
 django-gov-notify = "^0.6.0"
-django-pattern-library = "~1.2.0"
+django-pattern-library = "^1.3.0"
 django-redis = "~5.4.0"
 django-referrer-policy = "1.0"
-django-storages = {version = "1.14.3", extras = ["boto3"]}
+django-storages = {version = "1.14.4", extras = ["boto3"]}
 django-xff = "^1.4.0"
 dj-database-url = "2.3.0"
 
@@ -42,10 +42,10 @@ elasticsearch = "7.9.0"
 factory-boy = "~3.3"
 freezegun = "1.5.1"
 html5lib = "^1.1"
-PyJWT = "2.9.0"
+PyJWT = "2.10.1"
 requests = "^2.32.3"
-responses = "0.25.3"
-scout-apm = "~3.2"
+responses = "0.25.6"
+scout-apm = "^3.3.0"
 sentry-sdk = "^2.7.1"
 tabulate = "0.9.0"
 whitenoise = "~6.8"
@@ -59,7 +59,7 @@ gunicorn = ["gunicorn"]
 # Docs dependencies
 mkdocs = "~1.6"
 mkdocs-material = "~9.5"
-pymdown-extensions = "~10.12"
+pymdown-extensions = "~10.14"
 
 # Linting
 black = "~24"
@@ -73,7 +73,7 @@ DSLR = "0.4.0"
 stellar = "0.4.5"
 
 # Pinned for stellar 0.4.5
-SQLAlchemy = "2.0.31"
+SQLAlchemy = "2.0.37"
 SQLAlchemy-Utils = "0.41.2"
 
 # Development dependencies
@@ -83,7 +83,7 @@ honcho = "~2.0"
 pre-commit = "~4.0"
 Werkzeug = "~3.1"
 tblib = "^3.0.0"
-pyupgrade = "^3.15.2"
+pyupgrade = "^3.19.1"
 django-upgrade = "~1.22"
 
 

@@ -1,4 +1,4 @@
-FROM node:14-alpine AS frontend
+FROM node:20-alpine as frontend
 
 # Make build & post-install scripts behave as if we were in a CI environment (e.g. for logging verbosity purposes).
 ARG CI=true
@@ -24,7 +24,7 @@ FROM python:3.11-slim AS backend
 ARG POETRY_INSTALL_ARGS="--without=dev"
 
 # IMPORTANT: Remember to review both of these when upgrading
-ARG POETRY_VERSION=1.8.4
+ARG POETRY_VERSION=1.8.5
 
 # Install dependencies in a virtualenv
 ENV VIRTUAL_ENV=/venv
