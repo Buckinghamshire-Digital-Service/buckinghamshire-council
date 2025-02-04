@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 82.9 (2025-01-08)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/82.8...82.9>
 
 - Upgrade to Wagtail 6.3
 - Upgrade node version from v12 to v20
