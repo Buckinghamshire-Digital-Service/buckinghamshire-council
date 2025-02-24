@@ -704,11 +704,10 @@ REFERRER_POLICY = env.get(
 ).strip()
 
 # Recaptcha
-# These settings are required for the captcha challange to work.
+# These settings are required for the captcha challenge to work.
 # https://github.com/springload/wagtail-django-recaptcha
 
 if "RECAPTCHA_PUBLIC_KEY" in env and "RECAPTCHA_PRIVATE_KEY" in env:
-    NOCAPTCHA = True
     RECAPTCHA_PUBLIC_KEY = env["RECAPTCHA_PUBLIC_KEY"]
     RECAPTCHA_PRIVATE_KEY = env["RECAPTCHA_PRIVATE_KEY"]
 

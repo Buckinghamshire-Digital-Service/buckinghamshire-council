@@ -5,7 +5,7 @@ DEBUG = True
 
 
 # This key to be used locally only.
-SECRET_KEY = "foo"
+SECRET_KEY = "foo"  # pragma: allowlist secret
 
 # Enable FE component library
 PATTERN_LIBRARY_ENABLED = True
