@@ -1,1 +1,2 @@
-Checkboxes FE TODO
+<input type="checkbox" class="checkbox-button__checkbox" name="{{ widget.name }}"{% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %}{% include "django/forms/widgets/attrs.html" %}>
+<label{% if widget.attrs.id %} class="checkbox-button" for="{{ widget.attrs.id }}"{% endif %}>{{ widget.label }}</label>

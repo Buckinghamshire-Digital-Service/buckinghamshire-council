@@ -18,6 +18,8 @@ from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 
+from bc.forms.blocks import EmbeddedFormBlock
+
 from .constants import PLAIN_TEXT_TABLE_HELP_TEXT, RICH_TEXT_FEATURES
 from .utils import convert_markdown_links_to_html, is_number
 from .widgets import BarChartInput, LineChartInput, PieChartInput
@@ -701,6 +703,7 @@ class BaseStoryBlock(blocks.StreamBlock):
     inset_text = InsetTextBlock()
     ehc_co_search = EHCCoSearchBlock(label="EHCCo Search")
     directory_search = DirectorySearchBlock()
+    form = EmbeddedFormBlock()
 
     class Meta:
         abstract = True

@@ -1,0 +1,18 @@
+{% load wagtailcore_tags %}
+
+<div class="embedded-form">
+    <h2 class="heading heading--l embedded-form__title" id="{{ embedding_id }}">{{ page.title }}</h2>
+
+    {% if embed_success %}
+        <div class="form__success">
+            <h3 class="form__success--heading">{{ page.thank_you_heading|default:'Thank you' }}</h3>
+            <div>{{ page.thank_you_text|richtext }}</div>
+        </div>
+    {% else %}
+        {% if page.introduction %}
+            <div class="helpful-hint">{{ page.introduction }}</div>
+        {% endif %}
+
+        {% include "patterns/organisms/form-templates/includes/standard-form.html" with embed_id=embedding_page.pk embed_form_id=embedding_id %}
+    {% endif %}
+</div>

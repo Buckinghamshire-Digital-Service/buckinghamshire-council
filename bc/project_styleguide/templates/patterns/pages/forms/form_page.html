@@ -1,74 +1,31 @@
 {% extends base_page_template %}
-{% load wagtailcore_tags wagtailimages_tags form_tags util_tags static %}
+{% load promotional_utils %}
 
 {% block content %}
+    {% is_promotional_site as promotional_site %}
+    {% if promotional_site %}
+        <div class="wrapper wrapper--promo-inner">
+    {% endif %}
 
-    <div class="intro">
-        <div class="container">
-            <h1 class="heading heading--xxl">{{ page.title }}</h1>
-            <div class="helpful-hint">{{ page.introduction }}</div>
-        </div>
-    </div>
-
-    <div class="main-body">
-        <div class="container">
-            {% if page.form_fields.exists %}
-                    <form action="{% pageurl page %}" method="post" class="form form--standard" data-form>
-                        <div class="form__container">
-
-                            {% if form.errors %}
-                                <div class="form__errors">
-                                    There were some errors with your form. Please amend the fields highlighted below.
-                                </div>
-                            {% endif %}
-
-                            {% for field in form %}
-
-                                {% get_form_additional_text page field as additional_text %}
-                                {{ additional_text|richtext }}
-
-                                {% with widget_type=field|widget_type field_type=field|field_type %}
-                                    <div class="form-item {% if field_type %}form-item--{{ field_type }}{% endif %} {% if widget_type %}form-item--{{ widget_type }}{% endif %} {% if field.errors %}form-item--errors{% endif %}">
-
-                                        {% if field.errors %}
-                                            <div class="form-item__errors">
-                                                {{ field.errors }}
-                                            </div>
-                                        {% endif %}
-
-                                        {% if widget_type == 'hidden_input' %}
-                                            {# HTML Validation: Hidden inputs must not have a `for` attribute #}
-                                            <label class="form-item__label {% if field.field.required %}required{% endif %}">{{ field.label }} {% if field.field.required %}<span class="form-item__required" aria-hidden="true">*</span><span class="u-sr-only">Required</span>{% endif %}</label>
-                                            {{ field }}
-                                            {% if field.help_text %}<div class="form-item__help">{{ field.help_text }}</div>{% endif %}
-                                        {% elif widget_type == 'checkbox_input' %}
-                                            <label{% if field.id_for_label %} for="{{ field.id_for_label }}"{% endif %} class="form-item__label {% if field.field.required %}required{% endif %}">{{ field.label }} {% if field.field.required %}<span class="form-item__required" aria-hidden="true">*</span><span class="u-sr-only">Required</span>{% endif %}</label>
-                                            {{ field }}
-                                            {% if field.help_text %}<div class="form-item__help">{{ field.help_text }}</div>{% endif %}
-                                        {% elif widget_type == 'radio_select' %}
-                                            <fieldset>
-                                                <legend class="form-item__label {% if field.field.required %}required{% endif %}">{{ field.label }} {% if field.field.required %}<span class="form-item__required">*</span>{% endif %}</legend>
-                                                {{ field }}
-                                                {% if field.help_text %}<div class="form-item__help">{{ field.help_text }}</div>{% endif %}
-                                            </fieldset>
-                                        {% else %}
-                                            <label{% if field.id_for_label %} for="{{ field.id_for_label }}"{% endif %} class="form-item__label {% if field.field.required %}required{% endif %}">{{ field.label }} {% if field.field.required %}<span class="form-item__required" aria-hidden="true">*</span><span class="u-sr-only">Required</span>{% endif %}</label>
-                                            {% if field.help_text %}<div class="form-item__help">{{ field.help_text }}</div>{% endif %}
-
-                                            {% if widget_type == 'date_input' or widget_type == 'date_time_input' %}<div class="{{ widget_type }}">{% endif %}
-                                            {{ field }}
-                                            {% if widget_type == 'date_input' or widget_type == 'date_time_input' %}</div>{% endif %}
-                                        {% endif %}
-
-                                    </div>
-                                {% endwith %}
-
-                            {% endfor %}
-                            <input class="form__submit button" type="submit" value="{% if page.action_text %}{{ page.action_text|safe }}{% else %}Submit{% endif %}" />
-                        </div>
-                    </form>
+    <div class="section {% if promotional_site %}section--vertical-padding {% else %} section--main {% endif %}">
+        <div class="intro">
+            <div class="container">
+                <h1 class="heading heading--xxl">{{ page.title }}</h1>
+                {% if page.introduction %}
+                    <div class="helpful-hint">{{ page.introduction }}</div>
                 {% endif %}
+            </div>
+        </div>
+
+        <div class="main-body">
+            <div class="container">
+                {% if page.form_fields.exists %}
+                    {% include "patterns/organisms/form-templates/includes/standard-form.html" %}
+                {% endif %}
+            </div>
         </div>
     </div>
-
+    {% if promotional_site %}
+        </div>
+    {% endif %}
 {% endblock %}

@@ -101,6 +101,8 @@ The navigational index of the documentation files is defined in the `mkdocs.yml`
 
 - This project uses a custom implementation of [Wagtail's form builder](https://docs.wagtail.org/en/stable/reference/contrib/forms/index.html), located in the `bc.forms` app. It adds a new management command called `stale_submissions` which is meant to be run daily on the server (with its `--delete` flag). This command will delete submissions for forms which are configured for it.
 
+- It also comes with a custom `EmbeddedFormBlock` streamfield block that lets editors embed forms from a `FormPage` inside another page.
+
 ## Contributing
 
 To contribute to this project, please review the [notes on contributing](./contributing.md).

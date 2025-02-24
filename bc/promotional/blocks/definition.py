@@ -3,6 +3,7 @@ from django.utils.safestring import mark_safe
 from wagtail import blocks
 from wagtail.embeds.blocks import EmbedBlock
 
+from bc.forms.blocks import EmbeddedFormBlock
 from bc.utils.blocks import (
     Accordion,
     ButtonBlock,
@@ -72,6 +73,7 @@ class PromotionalStoryBlock(blocks.StreamBlock):
         template="patterns/molecules/streamfield/blocks/promo_quote_block.html"
     )
     aligned_media_with_text = AlignedMediaWithText()
+    form = EmbeddedFormBlock()
 
     class Meta:
         template = "patterns/molecules/streamfield-promotional/stream_block.html"

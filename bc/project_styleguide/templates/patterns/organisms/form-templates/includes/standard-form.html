@@ -1,0 +1,65 @@
+{% load promotional_utils wagtailcore_tags form_tags util_tags %}
+
+<form action="{% pageurl page %}" method="post" class="form form--standard" data-form>
+    <div class="form__container">
+
+        {% if form.errors %}
+            <div class="form__errors">
+                There were some errors with your form. Please amend the fields highlighted below.
+            </div>
+        {% endif %}
+
+        {% for field in form %}
+
+            {% get_form_additional_text page field as additional_text %}
+            {{ additional_text|richtext }}
+
+            {% with widget_type=field|widget_type field_type=field|field_type %}
+                <div class="form-item {% if field_type %}form-item--{{ field_type }}{% endif %} {% if widget_type %}form-item--{{ widget_type }}{% endif %} {% if field.errors %}form-item--errors{% endif %}">
+
+                    {% if field.errors %}
+                        <div class="form-item__errors">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+
+                    {% if widget_type == 'hidden_input' %}
+                        {# HTML Validation: Hidden inputs must not have a `for` attribute #}
+                        <label class="form-item__label {% if field.field.required %}required{% endif %}">{{ field.label }} {% if field.field.required %}<span class="form-item__required" aria-hidden="true">*</span><span class="u-sr-only">Required</span>{% endif %}</label>
+                        {{ field }}
+                        {% if field.help_text %}<div class="form-item__help">{{ field.help_text }}</div>{% endif %}
+                    {% elif widget_type == 'checkbox_input' %}
+                        <label{% if field.id_for_label %} for="{{ field.id_for_label }}"{% endif %} class="form-item__label {% if field.field.required %}required{% endif %}">{{ field.label }} {% if field.field.required %}<span class="form-item__required" aria-hidden="true">*</span><span class="u-sr-only">Required</span>{% endif %}</label>
+                        {{ field }}
+                        {% if field.help_text %}<div class="form-item__help">{{ field.help_text }}</div>{% endif %}
+                    {% elif widget_type == 'radio_select' %}
+                        <fieldset>
+                            <legend class="form-item__label {% if field.field.required %}required{% endif %}">{{ field.label }} {% if field.field.required %}<span class="form-item__required">*</span>{% endif %}</legend>
+                            {{ field }}
+                            {% if field.help_text %}<div class="form-item__help">{{ field.help_text }}</div>{% endif %}
+                        </fieldset>
+                    {% else %}
+                        <label{% if field.id_for_label %} for="{{ field.id_for_label }}"{% endif %} class="form-item__label {% if field.field.required %}required{% endif %}">{{ field.label }} {% if field.field.required %}<span class="form-item__required" aria-hidden="true">*</span><span class="u-sr-only">Required</span>{% endif %}</label>
+                        {% if field.help_text %}<div class="form-item__help">{{ field.help_text }}</div>{% endif %}
+
+                        {% if widget_type == 'date_input' or widget_type == 'date_time_input' %}<div class="{{ widget_type }}">{% endif %}
+                        {{ field }}
+                        {% if widget_type == 'date_input' or widget_type == 'date_time_input' %}</div>{% endif %}
+                    {% endif %}
+
+                </div>
+            {% endwith %}
+        {% endfor %}
+
+        {% is_promotional_site as promotional_site %}
+        {% if promotional_site %}
+            <input class="form__submit promo-button promo-button--blue-bg" type="submit" value="{% if page.action_text %}{{ page.action_text|safe }}{% else %}Submit{% endif %}" />
+        {% else %}
+            <input class="form__submit button" type="submit" value="{% if page.action_text %}{{ page.action_text|safe }}{% else %}Submit{% endif %}" />
+        {% endif %}
+        {% if embed_id and embed_form_id %}
+            <input type="hidden" name="embed_id" value="{{ embed_id }}" />
+            <input type="hidden" name="embed_form_id" value="{{ embed_form_id }}" />
+        {% endif %}
+    </div>
+</form>

@@ -4,9 +4,11 @@ from django import forms
 from django.contrib.postgres.fields import ArrayField
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 from django.utils import timezone
 from django.utils.functional import cached_property
+from django.utils.safestring import mark_safe
 
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel
@@ -14,6 +16,7 @@ from wagtail.contrib.forms.models import AbstractFormField
 from wagtail.contrib.forms.models import FormSubmission as WagtailFormSubmission
 from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
 from wagtail.fields import RichTextField
+from wagtail.models import Page
 from wagtail.search import index
 
 from wagtailcaptcha.forms import WagtailCaptchaFormBuilder
@@ -71,6 +74,14 @@ class FormPage(WagtailCaptchaEmailForm, BasePage):
     subpage_types = []
 
     introduction = models.TextField(blank=True)
+    thank_you_heading = models.CharField(
+        max_length=200,
+        blank=True,
+        help_text=mark_safe(
+            "The heading displayed above the <strong>Thank you text</strong>. "
+            'Defaults to "Thank you".'
+        ),
+    )
     thank_you_text = RichTextField(
         blank=True,
         help_text="Text displayed to the user on successful submission of the form",
@@ -92,7 +103,13 @@ class FormPage(WagtailCaptchaEmailForm, BasePage):
         FieldPanel("introduction"),
         InlinePanel("form_fields", label="Form fields"),
         FieldPanel("action_text"),
-        FieldPanel("thank_you_text"),
+        MultiFieldPanel(
+            [
+                FieldPanel("thank_you_heading", heading="Heading"),
+                FieldPanel("thank_you_text", heading="Text"),
+            ],
+            "Thank you message",
+        ),
         MultiFieldPanel(
             [
                 FieldRowPanel(
@@ -109,6 +126,51 @@ class FormPage(WagtailCaptchaEmailForm, BasePage):
     ]
 
     form_builder = CustomFormBuilder
+
+    def get_embed_id(self, suffix=None):
+        """
+        Return an embed id for the current form page.
+        Because the same form could potentially be embedded multiple times on the
+        same page, sometimes a suffix is needed.
+        """
+        parts = [self.slug]
+        if suffix is not None:
+            parts.append(str(suffix))
+        return "_".join(parts)
+
+    def render_landing_page(self, request, form_submission=None, *args, **kwargs):
+        """
+        If handling an embedded form then a redirection should be issued when
+        that form is submitted (and valid). Otherwise display the standard
+        success template.
+        """
+        if request.method != "POST" or form_submission is None:
+            return super().render_landing_page(
+                request, form_submission, *args, **kwargs
+            )
+        try:
+            embed_page = Page.objects.get(pk=request.POST["embed_id"]).specific
+            embed_form_id = request.POST["embed_form_id"]
+        except (KeyError, Page.DoesNotExist):
+            # In case the embed parameters are missing or invalid, default to the
+            # standard behavior of showing the success message on a separate
+            # page rather than throwing an error.
+            return super().render_landing_page(
+                request, form_submission, *args, **kwargs
+            )
+
+        redirect_url = (
+            embed_page.get_url(request)
+            + f"?embed_success={embed_form_id}#{embed_form_id}"
+        )
+        return redirect(redirect_url)
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        if request.method == "POST":
+            context["embed_id"] = request.POST.get("embed_id")
+            context["embed_form_id"] = request.POST.get("embed_form_id")
+        return context
 
 
 class FormSubmissionQuerySet(models.QuerySet):
