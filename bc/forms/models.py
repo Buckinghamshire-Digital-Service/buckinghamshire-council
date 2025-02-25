@@ -12,6 +12,7 @@ from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel
 from wagtail.contrib.forms.models import AbstractFormField
 from wagtail.contrib.forms.models import FormSubmission as WagtailFormSubmission
+from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
 from wagtail.fields import RichTextField
 from wagtail.search import index
 
@@ -326,3 +327,16 @@ class LookupPage(BasePage):
         context = self.get_context(request)
         context["lookup_response"] = lookup_response
         return TemplateResponse(request, self.landing_page_template, context)
+
+
+@register_setting
+class FormSubmissionAccessControl(BaseGenericSetting):
+    groups_with_access = models.ManyToManyField(
+        "auth.Group",
+        help_text="The group(s) that can see form submissions",
+    )
+
+    panels = [FieldPanel("groups_with_access", widget=forms.CheckboxSelectMultiple())]
+
+    class Meta:
+        verbose_name = "Form submission access control"

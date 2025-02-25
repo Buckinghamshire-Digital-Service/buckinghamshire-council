@@ -1,6 +1,8 @@
+from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 from django.core.management import call_command
 from django.test import TestCase
+from django.urls import reverse
 
 from wagtail.admin.panels import get_form_for_model
 
@@ -17,6 +19,7 @@ from bc.forms.models import (
 )
 from bc.home.models import HomePage
 from bc.standardpages.tests.fixtures import InformationPageFactory
+from bc.users.models import User
 
 
 class PostcodeLookupResponseRequestTests(TestCase):
@@ -380,3 +383,56 @@ class SubmissionAutoDeletionTestCase(TestCase):
     def test_command_deletion(self):
         call_command("stale_submissions", delete=True)
         self.assertQuerySetEqual(FormSubmission.objects.all(), [])
+
+
+class FormSubmissionAccessControlTestCase(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        homepage = HomePage.objects.first()
+        cls.form_page = homepage.add_child(
+            instance=FormPage(
+                title="Test form",
+                slug="test-form",
+                listing_summary="Test form",
+            )
+        )
+        FormField.objects.create(
+            page=cls.form_page,
+            label="Name",
+            field_type="singleline",
+            required=True,
+        )
+        cls.form_page.formsubmission_set.create(form_data={"name": "Test Name"})
+        cls.submissions_url = reverse(
+            "wagtailforms:list_submissions", args=(cls.form_page.pk,)
+        )
+
+        editor_group = Group.objects.get(name="Editors")
+        access_group = Group.objects.create(name="Access")
+        no_access_group = Group.objects.create(name="No access")
+
+        cls.access_control = FormSubmissionAccessControl.load()
+        cls.access_control.groups_with_access.add(access_group)
+
+        cls.users = {
+            "superuser": User.objects.create_superuser(username="superuser"),
+            "access": User.objects.create(username="access"),
+            "noaccess": User.objects.create(username="noaccess"),
+        }
+        cls.users["access"].groups.add(editor_group, access_group)
+        cls.users["noaccess"].groups.add(editor_group, no_access_group)
+
+    def test_superuser(self):
+        self.client.force_login(self.users["superuser"])
+        response = self.client.get(self.submissions_url)
+        self.assertContains(response, "<td>Test Name</td>", html=True)
+
+    def test_user_with_access(self):
+        self.client.force_login(self.users["access"])
+        response = self.client.get(self.submissions_url)
+        self.assertContains(response, "<td>Test Name</td>", html=True)
+
+    def test_user_with_no_access(self):
+        self.client.force_login(self.users["noaccess"])
+        response = self.client.get(self.submissions_url)
+        self.assertRedirects(response, "/admin/")
