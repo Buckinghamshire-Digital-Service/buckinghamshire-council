@@ -97,6 +97,10 @@ The navigational index of the documentation files is defined in the `mkdocs.yml`
 - [Complaints and request forms](complaints-and-requests.md) features is based on the Aptean Respond case management platform.
 - [Location maps widget](location-maps-widget.md) is based on the Google Maps API.
 
+## Unique features
+
+- This project uses a custom implementation of [Wagtail's form builder](https://docs.wagtail.org/en/stable/reference/contrib/forms/index.html), located in the `bc.forms` app. It adds a new management command called `stale_submissions` which is meant to be run daily on the server (with its `--delete` flag). This command will delete submissions for forms which are configured for it.
+
 ## Contributing
 
 To contribute to this project, please review the [notes on contributing](./contributing.md).

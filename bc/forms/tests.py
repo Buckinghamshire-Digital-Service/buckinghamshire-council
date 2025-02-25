@@ -1,11 +1,20 @@
 from django.core.exceptions import ValidationError
+from django.core.management import call_command
 from django.test import TestCase
 
 from wagtail.admin.panels import get_form_for_model
 
+from freezegun import freeze_time
+
 from bc.forms.fixtures import LookupPageFactory, PostcodeLookupResponseFactory
 from bc.forms.forms import LookupPageForm
-from bc.forms.models import LookupPage
+from bc.forms.models import (
+    FormField,
+    FormPage,
+    FormSubmission,
+    FormSubmissionAccessControl,
+    LookupPage,
+)
 from bc.home.models import HomePage
 from bc.standardpages.tests.fixtures import InformationPageFactory
 
@@ -316,3 +325,58 @@ class PostcodeLookupResponseAdminTests(TestCase):
         )
         form = MyLookupPageForm(data)
         self.assertTrue(form.is_valid())
+
+
+class SubmissionAutoDeletionTestCase(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        homepage = HomePage.objects.first()
+        cls.form_page = homepage.add_child(
+            instance=FormPage(
+                title="Test form",
+                slug="test-form",
+                listing_summary="Test form",
+                auto_delete=7,
+            )
+        )
+        # create submissions with different `submit_time` values
+        cls.submissions = []
+        for timestamp in [
+            "2025-01-01 12:00:00+00:00",
+            "2025-01-03 12:00:00+00:00",
+            "2025-01-05 12:00:00+00:00",
+        ]:
+            submission = cls.form_page.formsubmission_set.create(form_data={})
+            submission.submit_time = timestamp
+            submission.save(update_fields=["submit_time"])
+            cls.submissions.append(submission)
+
+    @freeze_time("2024-01-01 12:00:00")  # a year before
+    def test_submissions_in_future(self):
+        self.assertQuerySetEqual(FormSubmission.objects.stale(), [])
+
+    @freeze_time("2026-01-01 12:00:00")  # a year after
+    def test_submissions_all_stale(self):
+        self.assertQuerySetEqual(
+            FormSubmission.objects.stale(), self.submissions, ordered=False
+        )
+
+    @freeze_time("2025-01-09 12:00:00")  # 8 days after the first submission
+    def test_submissions_partial_stale(self):
+        self.assertQuerySetEqual(FormSubmission.objects.stale(), self.submissions[:1])
+
+    @freeze_time("2025-01-10 10:00:00")  # exactly 7 days after the second submission
+    def test_submissions_partial_stale_same_day(self):
+        self.assertQuerySetEqual(FormSubmission.objects.stale(), self.submissions[:1])
+
+    @freeze_time("2026-01-01 12:00:00")
+    def test_command_is_safe_by_default(self):
+        call_command("stale_submissions")
+        self.assertQuerySetEqual(
+            FormSubmission.objects.all(), self.submissions, ordered=False
+        )
+
+    @freeze_time("2026-01-01 12:00:00")
+    def test_command_deletion(self):
+        call_command("stale_submissions", delete=True)
+        self.assertQuerySetEqual(FormSubmission.objects.all(), [])

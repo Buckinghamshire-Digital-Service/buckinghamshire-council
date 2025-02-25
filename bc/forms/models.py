@@ -5,11 +5,13 @@ from django.contrib.postgres.fields import ArrayField
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.template.response import TemplateResponse
+from django.utils import timezone
 from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel
 from wagtail.contrib.forms.models import AbstractFormField
+from wagtail.contrib.forms.models import FormSubmission as WagtailFormSubmission
 from wagtail.fields import RichTextField
 from wagtail.search import index
 
@@ -56,6 +58,12 @@ class FormPage(WagtailCaptchaEmailForm, BasePage):
     Maintain this in bc.utils.middleware.
     """
 
+    class AUTO_DELETE(models.IntegerChoices):
+        NO_DELETE = 0, "Don't delete submissions"
+        WEEK = 7, "One week"
+        MONTH = 30, "One month"
+        QUARTER = 90, "Three months"
+
     template = "patterns/pages/forms/form_page.html"
     landing_page_template = "patterns/pages/forms/form_page_landing.html"
 
@@ -69,6 +77,12 @@ class FormPage(WagtailCaptchaEmailForm, BasePage):
     )
     action_text = models.CharField(
         max_length=32, blank=True, help_text='Form action text. Defaults to "Submit"'
+    )
+
+    auto_delete = models.PositiveIntegerField(
+        choices=AUTO_DELETE.choices,
+        default=AUTO_DELETE.NO_DELETE,
+        help_text="Delete submissions automatically after this amount of time",
     )
 
     search_fields = BasePage.search_fields + [index.SearchField("introduction")]
@@ -90,9 +104,48 @@ class FormPage(WagtailCaptchaEmailForm, BasePage):
             ],
             "Email",
         ),
+        FieldPanel("auto_delete"),
     ]
 
     form_builder = CustomFormBuilder
+
+
+class FormSubmissionQuerySet(models.QuerySet):
+    def with_delete_after(self):
+        """
+        Adds a `delete_after` annotation on the queryset which corresponds to
+        the date after which the form submission should be deleted. If the
+        submission should not be auto-deleted, the value will be NULL.
+        """
+        # Using page__formpage allows joining the FormSubmission with the
+        # corresponding FormPage (whereas `page` would join with the base Page
+        # model which doesn't have an `auto_delete` field).
+        cutoff_date = models.ExpressionWrapper(
+            # With postgres, adding a Date to an integer is equivalent to adding
+            # that number of days to the date.
+            models.F("submit_time__date") + models.F("page__formpage__auto_delete"),
+            output_field=models.DateField(),
+        )
+        expr = models.Case(
+            models.When(page__formpage__auto_delete__gt=0, then=cutoff_date)
+        )
+        return self.annotate(delete_after=expr)
+
+    def stale(self):
+        """
+        Return all submissions that should be deleted as of today.
+        """
+        queryset = self.with_delete_after()
+        return queryset.exclude(delete_after__isnull=True).filter(
+            delete_after__lt=timezone.localdate()
+        )
+
+
+class FormSubmission(WagtailFormSubmission):
+    objects = FormSubmissionQuerySet.as_manager()
+
+    class Meta:
+        proxy = True
 
 
 class PostcodeLookupResponse(models.Model):

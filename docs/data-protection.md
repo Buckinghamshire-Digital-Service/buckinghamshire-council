@@ -40,7 +40,7 @@ PII is stored in the database, in the models:
 
 - `bc.recruitment.models.JobAlertSubscription`
 - `bc.users.models.User`
-- `wagtail.contrib.forms.models.FormSubmission` (Wagtail FormPage instances)
+- `bc.forms.models.FormSubmission` (Wagtail FormPage instances)
 
 Potentially users submit feedback form responses which store personally identifying information in the model `bc.feedback.models.FeedbackComment`, though this is not invited.
 
