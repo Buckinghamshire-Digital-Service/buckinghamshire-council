@@ -1,8 +1,17 @@
 # Release History
 
-## Unreleased
+## 83.0 (2025-03-03)
 
-- Accessibility fixes
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/82.9...83.0>
+
+- Make content searchable in accordions
+- Fix alignment of plain text tables
+- Add missing label to form field
+- Fix unstructured headings when using tables
+- Fix a11y issues from Silktide
+- Fix missing content after headings
+- Add missing aria labels to sidebars and postcode lookup search
+- Add missing aria label to the FIS card block
 
 ## 82.9 (2025-01-08)
 
