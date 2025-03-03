@@ -40,7 +40,7 @@
                     {% if block.block_type == "heading" %}
                         <div class="card card--campaign-toc">
                             <a href="#{{ block.value|slugify }}">
-                                <h2 class="card__title">{{ block.value }}</h2>
+                                <p class="card__title">{{ block.value }}</p>
                             </a>
                         </div>
                     {% endif %}

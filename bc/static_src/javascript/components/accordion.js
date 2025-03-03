@@ -24,6 +24,12 @@ class Accordion {
                 this.open();
             }
         });
+
+        this.answer.addEventListener('beforematch', () => {
+            if (!this.state.open) {
+                this.open();
+            }
+        });
     }
 
     open() {
@@ -32,7 +38,7 @@ class Accordion {
         }
         this.accordion.classList.toggle('is-open');
         this.question.setAttribute('aria-expanded', 'true');
-        this.answer.setAttribute('aria-hidden', 'false');
+        this.answer.removeAttribute('hidden');
         this.state.open = true;
     }
 
@@ -42,7 +48,7 @@ class Accordion {
         }
         this.accordion.classList.toggle('is-open');
         this.question.setAttribute('aria-expanded', 'false');
-        this.answer.setAttribute('aria-hidden', 'true');
+        this.answer.setAttribute('hidden', 'until-found');
         this.state.open = false;
     }
 }

@@ -30,10 +30,10 @@
 {% if blog_home_pages %}
 <div class="wrapper wrapper--flex">
     <div class="sidebar sidebar--no-margin">
-        <h1 class="heading heading--xxl">All our blogs</h1>
+        <h2 class="heading heading--xxl">All our blogs</h2>
     </div>
     <div class="section section--main">
-        <h1 class="heading heading--xxl blog-global-home-page__heading">{{ blog_home_pages|length }} <sup class="heading--m">Blogs</sup></h1>
+        <p class="heading heading--xxl blog-global-home-page__heading">{{ blog_home_pages|length }} <sup class="heading--m">Blogs</sup></p>
         <section class="listing listing--blog" aria-label="Subpages">
             {% for subpage in blog_home_pages %}
             <article class="listing__item listing__item--blog" aria-labelledby="listing__item--{{ forloop.counter }}">

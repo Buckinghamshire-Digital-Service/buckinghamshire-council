@@ -21,7 +21,8 @@
                 data-accordion-answer
                 class="accordion__content"
                 aria-labelledby="question-{{ accordion_id }}-{{ forloop.counter }}"
-                aria-hidden="true">
+                hidden="until-found"
+                >
                 {% include_block accordion.content %}
             </div>
         </div>

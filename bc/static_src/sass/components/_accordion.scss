@@ -68,11 +68,13 @@
         }
 
         #{$root}__content {
-            border-left: 4px solid $color--grey-border;
-            margin-bottom: 0;
-            margin-left: 5px;
-            padding: 10px 15px 10px 16px;
-            margin-top: 10px;
+            .rich-text {
+                border-left: 4px solid $color--grey-border;
+                margin-bottom: 0;
+                margin-left: 5px;
+                padding: 10px 15px 10px 16px;
+                margin-top: 10px;
+            }
         }
     }
 
@@ -179,10 +181,7 @@
     }
 
     &__content {
-        display: none;
-        margin-bottom: 10px;
-        margin-left: 20px + 17px; // icon's right margin + icon width
-        margin-top: 15px;
+        display: inherit;
 
         &--search-filters {
             margin-bottom: 0;
@@ -190,6 +189,10 @@
         }
 
         .rich-text {
+            margin-bottom: 10px;
+            margin-left: 20px + 17px; // icon's right margin + icon width
+            margin-top: 15px;
+
             p {
                 &:last-child {
                     margin-bottom: 0;

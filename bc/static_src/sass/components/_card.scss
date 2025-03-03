@@ -147,6 +147,7 @@
             &__title {
                 @include font-size(m);
                 font-weight: $weight--bold;
+                margin: 0;
             }
         }
     }

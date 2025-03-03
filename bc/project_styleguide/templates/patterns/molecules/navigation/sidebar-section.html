@@ -2,10 +2,10 @@
 
 {% if related_pages %}
 <section
-    {% if related_pages %} aria-labelledby="sidebar-heading"{% endif %}
+    {% if related_pages %} aria-labelledby="sidebar-heading-{% if sidebar_title %}{{ sidebar_title|slugify }}{% else %}related-content{% endif %}"{% endif %}
     {% if classes %}class="{{classes}}"{% endif %}
 >
-        <h2 class="sidebar__heading heading" id="sidebar-heading">
+        <h2 class="sidebar__heading heading" id="sidebar-heading-{% if sidebar_title %}{{ sidebar_title|slugify }}{% else %}related-content{% endif %}">
             {% if sidebar_title %}
                 {{ sidebar_title }}
             {% else %}

@@ -4,7 +4,7 @@
     <h2 class="sidebar__heading heading">Follow us</h2>
     <ul class="sidebar__link-list">
         {% if page.socials.twitter_handle %}
-        <span role="listitem" class="sidebar__link sidebar__link--flex">
+        <li class="sidebar__link sidebar__link--flex">
             {% include "patterns/atoms/icons/icon.html" with name="x" classname="icon--blog-social" %}
             <a href="https://twitter.com/{{ page.socials.twitter_handle }}"
                 aria-label="{{ page.title }} X (formerly Twitter) - opens in new tab"
@@ -12,10 +12,10 @@
                 rel="nofollow noreferrer">
                 Twitter
             </a>
-        </span>
+        </li>
         {% endif %}
         {% if page.socials.facebook_page_url %}
-        <span role="listitem" class="sidebar__link sidebar__link--flex">
+        <li class="sidebar__link sidebar__link--flex">
             {% include "patterns/atoms/icons/icon.html" with name="facebook" classname="icon--blog-social" %}
             <a href="{{ page.socials.facebook_page_url }}"
                 aria-label="{{ page.title }} Facebook - opens in a new tab"
@@ -23,10 +23,10 @@
                 rel="nofollow noreferrer">
                 Facebook
             </a>
-        </span>
+        </li>
         {% endif %}
         {% if page.socials.linkedin_url %}
-        <span role="listitem" class="sidebar__link sidebar__link--flex">
+        <li class="sidebar__link sidebar__link--flex">
             {% include "patterns/atoms/icons/icon.html" with name="linkedin" classname="icon--blog-social" %}
             <a href="{{ page.socials.linkedin_url }}"
                 aria-label="{{ page.title }} LinkedIn - opens in a new tab"
@@ -37,7 +37,7 @@
         </span>
         {% endif %}
         {% if page.socials.youtube_channel_url %}
-        <span role="listitem" class="sidebar__link sidebar__link--flex">
+        <li class="sidebar__link sidebar__link--flex">
             {% include "patterns/atoms/icons/icon.html" with name="youtube" classname="icon--blog-social" %}
             <a href="{{ page.socials.youtube_channel_url }}"
                 aria-label="{{ page.title }} YouTube - opens in a new tab"
