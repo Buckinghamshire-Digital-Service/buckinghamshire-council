@@ -181,7 +181,13 @@
     }
 
     &__content {
-        display: inherit;
+        display: none;
+
+        &[hidden] {
+            /* stylelint-disable-next-line property-no-unknown */
+            content-visibility: hidden; // needed to support the hidden until-found attribute
+            display: inherit;
+        }
 
         &--search-filters {
             margin-bottom: 0;
