@@ -1,5 +1,11 @@
 # Release History
 
+## 83.1 (2025-03-03)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/83.0...83.1>
+
+- Add support for hidden until-found attr in accordion and steps styles
+
 ## 83.0 (2025-03-03)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/82.9...83.0>

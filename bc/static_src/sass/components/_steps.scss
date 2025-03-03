@@ -185,7 +185,13 @@
     }
 
     &__panel {
-        display: inherit;
+        display: none;
+
+        &[hidden] {
+            /* stylelint-disable-next-line property-no-unknown */
+            content-visibility: hidden; // needed to support the hidden until-found attribute
+            display: inherit;
+        }
 
         .rich-text {
             padding-bottom: 20px;
