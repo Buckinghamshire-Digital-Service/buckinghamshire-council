@@ -7,7 +7,7 @@ describe('Accordion', () => {
         document.body.innerHTML = `
             <div class="accordion" data-accordion>
                 <a class="accordion__title" data-accordion-question aria-expanded="false" tabindex="0">What goes on and on and has an i in the middle?</a>
-                <div class="accordion__content" data-accordion-answer aria-hidden="true">
+                <div class="accordion__content" data-accordion-answer hidden="until-found">
                     An Onion
                 </div>
             </div>
@@ -19,8 +19,8 @@ describe('Accordion', () => {
         expect(
             document
                 .querySelector('[data-accordion-answer]')
-                .getAttribute('aria-hidden'),
-        ).toBe('true');
+                .hasAttribute('hidden'),
+        ).toBe(true);
     });
 
     it('shows the answer when the question is clicked', () => {
@@ -32,8 +32,8 @@ describe('Accordion', () => {
         expect(
             document
                 .querySelector('[data-accordion-answer]')
-                .getAttribute('aria-hidden'),
-        ).toBe('false');
+                .hasAttribute('hidden'),
+        ).toBe(false);
     });
 
     it('hides the answer when the question is clicked if already open', () => {
@@ -45,14 +45,14 @@ describe('Accordion', () => {
         expect(
             document
                 .querySelector('[data-accordion-answer]')
-                .getAttribute('aria-hidden'),
-        ).toBe('false');
+                .hasAttribute('hidden'),
+        ).toBe(false);
 
         question.dispatchEvent(new Event('click'));
         expect(
             document
                 .querySelector('[data-accordion-answer]')
-                .getAttribute('aria-hidden'),
-        ).toBe('true');
+                .hasAttribute('hidden'),
+        ).toBe(true);
     });
 });

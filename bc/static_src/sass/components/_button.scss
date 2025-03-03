@@ -58,6 +58,12 @@
     &--search {
         min-height: 40px;
         padding: 5px 15px;
+
+        &:focus {
+            outline: 0;
+            border: 3px solid $color--off-black;
+            box-shadow: 0 0 0 4px $color--mustard;
+        }
     }
 
     &--blog-search {

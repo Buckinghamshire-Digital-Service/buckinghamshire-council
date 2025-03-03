@@ -85,6 +85,11 @@
         input {
             border-right: 0;
             max-width: 100%;
+
+            &:focus {
+                border: 3px solid $color--off-black;
+                border-right: 0;
+            }
         }
     }
 
@@ -102,6 +107,11 @@
                     width: auto;
                 }
             }
+
+            &:focus {
+                border: 3px solid $color--off-black;
+                border-right: 0;
+            }
         }
     }
 
@@ -114,6 +124,11 @@
 
             @include media-query(tablet-portrait) {
                 width: 100%;
+            }
+
+            &:focus {
+                border: 3px solid $color--off-black;
+                border-right: 0;
             }
         }
     }

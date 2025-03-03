@@ -18,7 +18,8 @@
             class="accordion__content"
             data-accordion-answer
             aria-labelledby="question-{{ value.title|slugify }}"
-            aria-hidden="true">
+            hidden="until-found"
+            >
             {{ value.content|richtext }}
         </div>
     </div>

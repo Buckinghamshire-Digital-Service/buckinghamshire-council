@@ -42,7 +42,8 @@ table {
         }
     }
 
-    // support for pre-2.15 tables
+    // support for pre-2.15 and plain text tables
+    th[scope='row'],
     .row-header {
         text-align: left;
     }
