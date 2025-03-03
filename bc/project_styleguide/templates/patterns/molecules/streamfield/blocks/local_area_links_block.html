@@ -15,6 +15,7 @@
             method="get"
             url="{% url 'area_finder' %}"
             data-area-search
+            aria-label="Postcode information search"
         >
             <div data-intro-text class="area-links__intro">{{ value.introduction|richtext }}</div>
             <div data-response-text class="area-search__response-text"></div>

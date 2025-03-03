@@ -55,7 +55,8 @@
                             data-accordion-answer
                             id="answer-{{ forloop.counter }}"
                             aria-labelledby="question-{{ forloop.counter }}"
-                            aria-hidden="false">
+                            hidden="until-found"
+                            >
                             <fieldset class="search-filters__fieldset">
                                 <legend class="u-sr-only">{{ filter.title }}</legend>
                                 {% for option in filter.options %}

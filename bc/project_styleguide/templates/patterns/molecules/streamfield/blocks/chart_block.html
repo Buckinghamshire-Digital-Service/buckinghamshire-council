@@ -4,9 +4,9 @@
 
 {% comment %} A chart block - will toggle between a table and a chart version of the data {% endcomment %}
 <div class="chart-block" data-chart-block>
-    <h2 class="heading heading--m chart-block__title">
+    <h3 class="heading heading--m chart-block__title">
         {% if title %}{{ title }}{% else %}{{ default_title }}{% endif %}
-    </h2>
+    </h3>
 
     <div class="chart-block__link-wrapper">
         <button aria-label="Display as table" class="button button--link chart-block__link {% if table_first %}chart-block__link--inactive{% endif %}" {% if table_first %}aria-hidden="true" tabindex="-1"{% endif %} data-to-table>Table</button>
