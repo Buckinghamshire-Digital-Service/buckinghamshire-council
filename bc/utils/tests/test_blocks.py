@@ -88,135 +88,73 @@ class TestStreamfieldHeadingTemplates(TestCase):
     def setUp(self):
         self.homepage = HomePage.objects.first()
 
-    def test_heading_uses_heading_template(self):
-        page = self.homepage.add_child(
-            instance=InformationPageFactory.build(
-                body=json.dumps(
-                    [
-                        {
-                            "type": "heading",
-                            "value": "I should use the heading_block.html template",
-                        }
-                    ]
-                )
+    def test_non_nested_headings(self):
+        ALL_TEMPLATES = {
+            "heading_block",
+            "subheading_block",
+            "subsubheading_block",
+        }
+        page = self.homepage.add_child(instance=InformationPageFactory.build())
+        for heading_type, template_used in [
+            ("heading", "heading_block"),
+            ("subheading", "subheading_block"),
+        ]:
+            page.body = json.dumps([{"type": heading_type, "value": "test"}])
+            page.save(update_fields=["body"])
+            response = self.client.get(page.url)
+            self.assertEqual(response.status_code, 200)
+            self.assertTemplateUsed(
+                response,
+                f"patterns/molecules/streamfield/blocks/{template_used}.html",
             )
-        )
-        response = self.client.get(page.url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(
-            response, "patterns/molecules/streamfield/blocks/heading_block.html"
-        )
-
-        self.assertTemplateNotUsed(
-            response, "patterns/molecules/streamfield/blocks/subheading_block.html"
-        )
-        self.assertTemplateNotUsed(
-            response, "patterns/molecules/streamfield/blocks/subsubheading_block.html"
-        )
-
-    def test_subheading_uses_subheading_template(self):
-        page = self.homepage.add_child(
-            instance=InformationPageFactory.build(
-                body=json.dumps(
-                    [
-                        {
-                            "type": "subheading",
-                            "value": "I should use the subheading_block.html template",
-                        }
-                    ]
+            for unused in ALL_TEMPLATES - {template_used}:
+                self.assertTemplateNotUsed(
+                    response,
+                    f"patterns/molecules/streamfield/blocks/{unused}.html",
                 )
+
+    def test_nested_headings(self):
+        ALL_TEMPLATES = {
+            "heading_block",
+            "subheading_block",
+            "subsubheading_block",
+        }
+        page = self.homepage.add_child(instance=InformationPageFactory.build())
+        for heading_type, template_used in [
+            ("heading", "subheading_block"),
+            ("subheading", "subsubheading_block"),
+        ]:
+            page.body = json.dumps(
+                [
+                    {
+                        "type": "accordion",
+                        "value": {
+                            "items": [
+                                {
+                                    "content": [
+                                        {
+                                            "type": heading_type,
+                                            "value": "test nested heading",
+                                        },
+                                    ]
+                                }
+                            ]
+                        },
+                    }
+                ]
             )
-        )
-        response = self.client.get(page.url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(
-            response, "patterns/molecules/streamfield/blocks/subheading_block.html"
-        )
-
-        self.assertTemplateNotUsed(
-            response, "patterns/molecules/streamfield/blocks/heading_block.html"
-        )
-        self.assertTemplateNotUsed(
-            response, "patterns/molecules/streamfield/blocks/subsubheading_block.html"
-        )
-
-    def test_heading_within_accordion_uses_subheading_template(self):
-        page = self.homepage.add_child(
-            instance=InformationPageFactory.build(
-                body=json.dumps(
-                    [
-                        {
-                            "type": "accordion",
-                            "value": {
-                                "items": [
-                                    {
-                                        "content": [
-                                            {
-                                                "type": "heading",
-                                                "value": "Being inside an accordion, "
-                                                "with its own h2 title, I should use "
-                                                "subheading_block.html",
-                                            },
-                                        ]
-                                    }
-                                ]
-                            },
-                        }
-                    ]
+            page.save(update_fields=["body"])
+            response = self.client.get(page.url)
+            self.assertEqual(response.status_code, 200)
+            self.assertTemplateUsed(
+                response,
+                f"patterns/molecules/streamfield/blocks/{template_used}.html",
+            )
+            for unused in ALL_TEMPLATES - {template_used}:
+                self.assertTemplateNotUsed(
+                    response,
+                    f"patterns/molecules/streamfield/blocks/{unused}.html",
                 )
-            )
-        )
-        response = self.client.get(page.url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(
-            response, "patterns/molecules/streamfield/blocks/subheading_block.html"
-        )
-
-        self.assertTemplateNotUsed(
-            response, "patterns/molecules/streamfield/blocks/heading_block.html"
-        )
-        self.assertTemplateNotUsed(
-            response, "patterns/molecules/streamfield/blocks/subsubheading_block.html"
-        )
-
-    def test_subheading_within_accordion_uses_subsubheading_template(self):
-        page = self.homepage.add_child(
-            instance=InformationPageFactory.build(
-                body=json.dumps(
-                    [
-                        {
-                            "type": "accordion",
-                            "value": {
-                                "items": [
-                                    {
-                                        "content": [
-                                            {
-                                                "type": "subheading",
-                                                "value": "Being inside an accordion, "
-                                                "with its own h2 title, I should use "
-                                                "subsubheading_block.html",
-                                            },
-                                        ]
-                                    }
-                                ]
-                            },
-                        }
-                    ]
-                )
-            )
-        )
-        response = self.client.get(page.url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(
-            response, "patterns/molecules/streamfield/blocks/subsubheading_block.html"
-        )
-
-        self.assertTemplateNotUsed(
-            response, "patterns/molecules/streamfield/blocks/heading_block.html"
-        )
-        self.assertTemplateNotUsed(
-            response, "patterns/molecules/streamfield/blocks/subheading_block.html"
-        )
 
 
 class TestImageOrEmbedBlock(TestCase):
