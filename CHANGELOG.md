@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Accessibility fixes for accordions and footer link
+- Switch GIS provider for BucksMapsClient to maps.buckinghamshire.gov.uk
 
 ## 83.1 (2025-03-03)
 
