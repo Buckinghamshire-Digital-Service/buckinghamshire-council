@@ -3,7 +3,7 @@
 <div class="accordion__container" id="{{ accordion_id }}">
     {% for accordion in accordions %}
         <div class="accordion" data-accordion>
-            <h2 class="accordion__header">
+            <h3 class="accordion__header">
                 <button
                     id="question-{{ accordion_id }}-{{ forloop.counter }}"
                     class="accordion__button"
@@ -15,7 +15,7 @@
                         {{ accordion.title }}
                     </span>
                 </button>
-            </h2>
+            </h3>
             <div
                 id="answer-{{ accordion_id }}-{{ forloop.counter }}"
                 role="region"
