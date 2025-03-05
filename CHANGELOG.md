@@ -4,6 +4,7 @@
 
 - Accessibility fixes for accordions and footer link
 - Switch GIS provider for BucksMapsClient to maps.buckinghamshire.gov.uk
+- Add `WAGTAILSEARCH_HITS_MAX_AGE` setting to use in conjunction with `searchpromotions_garbage_collect` management command.
 
 ## 83.1 (2025-03-03)
 
