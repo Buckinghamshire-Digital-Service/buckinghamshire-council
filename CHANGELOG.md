@@ -8,6 +8,7 @@
 - Change accordions' headers from h2 to h3
 - Reduce height of formbuilder's multiline text boxes (5 -> 3 lines)
 - Restore ability to specify choices by lines (instead of comma-separated) for multi-checkbox formbuilder fields
+- Add H4 level blocks to BaseStoryBlock
 
 ## 83.1 (2025-03-03)
 

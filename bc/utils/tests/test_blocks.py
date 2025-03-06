@@ -93,11 +93,13 @@ class TestStreamfieldHeadingTemplates(TestCase):
             "heading_block",
             "subheading_block",
             "subsubheading_block",
+            "subsubsubheading_block",
         }
         page = self.homepage.add_child(instance=InformationPageFactory.build())
         for heading_type, template_used in [
             ("heading", "heading_block"),
             ("subheading", "subheading_block"),
+            ("subsubheading", "subsubheading_block"),
         ]:
             page.body = json.dumps([{"type": heading_type, "value": "test"}])
             page.save(update_fields=["body"])
@@ -118,11 +120,13 @@ class TestStreamfieldHeadingTemplates(TestCase):
             "heading_block",
             "subheading_block",
             "subsubheading_block",
+            "subsubsubheading_block",
         }
         page = self.homepage.add_child(instance=InformationPageFactory.build())
         for heading_type, template_used in [
             ("heading", "subheading_block"),
             ("subheading", "subsubheading_block"),
+            ("subsubheading", "subsubsubheading_block"),
         ]:
             page.body = json.dumps(
                 [
