@@ -7,6 +7,7 @@
 - Add `WAGTAILSEARCH_HITS_MAX_AGE` setting to use in conjunction with `searchpromotions_garbage_collect` management command.
 - Change accordions' headers from h2 to h3
 - Reduce height of formbuilder's multiline text boxes (5 -> 3 lines)
+- Restore ability to specify choices by lines (instead of comma-separated) for multi-checkbox formbuilder fields
 
 ## 83.1 (2025-03-03)
 
