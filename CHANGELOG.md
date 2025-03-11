@@ -1,5 +1,9 @@
 # Release History
 
+## Unreleased
+
+- Accessibility fixes for accordions and footer link
+
 ## 83.1 (2025-03-03)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/83.0...83.1>
