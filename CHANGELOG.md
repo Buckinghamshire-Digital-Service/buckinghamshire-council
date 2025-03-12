@@ -1,5 +1,17 @@
 # Release History
 
+## 84.0 (2025-03-12)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/83.1...84.0>
+
+- Accessibility fixes for accordions and footer link
+- Switch GIS provider for BucksMapsClient to maps.buckinghamshire.gov.uk
+- Add `WAGTAILSEARCH_HITS_MAX_AGE` setting to use in conjunction with `searchpromotions_garbage_collect` management command.
+- Change accordions' headers from h2 to h3
+- Reduce height of formbuilder's multiline text boxes (5 -> 3 lines)
+- Restore ability to specify choices by lines (instead of comma-separated) for multi-checkbox formbuilder fields
+- Add H4 level blocks to BaseStoryBlock
+
 ## 83.1 (2025-03-03)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/83.0...83.1>

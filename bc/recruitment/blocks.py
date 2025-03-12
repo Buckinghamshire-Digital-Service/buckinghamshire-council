@@ -4,9 +4,7 @@ from wagtail.images.blocks import ImageChooserBlock
 
 
 class AwardBlock(blocks.StructBlock):
-    title = blocks.CharBlock(
-        form_classname="full title", icon="title", label="Award title"
-    )
+    title = blocks.CharBlock(form_classname="title", icon="title", label="Award title")
     image = ImageChooserBlock()
     url = blocks.URLBlock(required=False)
 
@@ -17,7 +15,7 @@ class AwardBlock(blocks.StructBlock):
 class JobPlatformBlock(blocks.StructBlock):
     """e.g. Indeed, Glassdoor"""
 
-    title = blocks.CharBlock(form_classname="full title", icon="title", label="Name")
+    title = blocks.CharBlock(form_classname="title", icon="title", label="Name")
     image = ImageChooserBlock(label="Logo")
     url = blocks.URLBlock()
 

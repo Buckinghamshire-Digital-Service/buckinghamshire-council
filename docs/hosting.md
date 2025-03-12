@@ -42,3 +42,4 @@ When you set up a server you should make sure the following scheduled tasks are 
 - `django-admin publish_scheduled_pages` - every 10 minutes or more often. This is necessary to make publishing scheduled pages work.
 - `django-admin clearsessions` - once a day (not necessary, but useful).
 - `django-admin update_index` - once a day (not necessary, but useful to make sure the search index stays intact).
+- `django-admin searchpromotions_garbage_collect` - once a day (by default 30 days of search hits will be retained, but it can be configured using the `WAGTAILSEARCH_HITS_MAX_AGE` environment variable).

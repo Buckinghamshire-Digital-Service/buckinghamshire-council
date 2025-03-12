@@ -653,7 +653,7 @@ class DirectorySearchBlock(blocks.StructBlock):
 
 class BaseStoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(
-        form_classname="full title",
+        form_classname="title",
         help_text=(
             "The link to this heading uses the heading text in lowercase, with no"
             " symbols, and with the spaces replaced with hyphens."
@@ -665,7 +665,7 @@ class BaseStoryBlock(blocks.StreamBlock):
         label="Main heading",
     )
     subheading = blocks.CharBlock(
-        form_classname="full title",
+        form_classname="title",
         help_text=(
             "The link to this subheading uses the subheading text in lowercase, with no"
             " symbols, and with the spaces replaced with hyphens."
@@ -673,6 +673,17 @@ class BaseStoryBlock(blocks.StreamBlock):
         ),
         icon="title",
         template="patterns/molecules/streamfield/blocks/subheading_block.html",
+        group="Heading",
+    )
+    subsubheading = blocks.CharBlock(
+        form_classname="title",
+        help_text=(
+            "The link to this subsubheading uses the subsubheading text in lowercase, "
+            "with no symbols, and with the spaces replaced with hyphens."
+            ' e.g. "Lorem @ 2 ipsum" becomes "lorem-2-ipsum"'
+        ),
+        icon="title",
+        template="patterns/molecules/streamfield/blocks/subsubheading_block.html",
         group="Heading",
     )
     paragraph = blocks.RichTextBlock(
@@ -702,11 +713,17 @@ class NestedStoryBlock(BaseStoryBlock):
         # Bump down template for heading fields so headings don't clash with those outside the accordion
         self.child_blocks["heading"] = copy.deepcopy(self.child_blocks["heading"])
         self.child_blocks["subheading"] = copy.deepcopy(self.child_blocks["subheading"])
+        self.child_blocks["subsubheading"] = copy.deepcopy(
+            self.child_blocks["subsubheading"]
+        )
         self.child_blocks["heading"].meta.template = (
             "patterns/molecules/streamfield/blocks/subheading_block.html"
         )
         self.child_blocks["subheading"].meta.template = (
             "patterns/molecules/streamfield/blocks/subsubheading_block.html"
+        )
+        self.child_blocks["subsubheading"].meta.template = (
+            "patterns/molecules/streamfield/blocks/subsubsubheading_block.html"
         )
 
 
@@ -717,7 +734,7 @@ class Accordion(blocks.StructBlock):
                 (
                     "title",
                     blocks.CharBlock(
-                        form_classname="full title",
+                        form_classname="title",
                         icon="title",
                         label="Accordion title",
                     ),
@@ -734,9 +751,7 @@ class Accordion(blocks.StructBlock):
 
 
 class DetailBlock(blocks.StructBlock):
-    title = blocks.CharBlock(
-        form_classname="full title", icon="title", label="Detail title"
-    )
+    title = blocks.CharBlock(form_classname="title", icon="title", label="Detail title")
     content = blocks.RichTextBlock(features=RICH_TEXT_FEATURES, label="Detail content")
 
     class Meta:

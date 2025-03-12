@@ -13,7 +13,7 @@ from bc.utils.constants import RICH_TEXT_FEATURES
 
 class NumberedHeadingBlock(blocks.CharBlock):
     class Meta:
-        classname = "full title"
+        classname = "title"
         group = "Heading"
         icon = "title"
         label = "Numbered main heading"
@@ -22,7 +22,7 @@ class NumberedHeadingBlock(blocks.CharBlock):
 
 class NumberedSubheadingBlock(blocks.CharBlock):
     class Meta:
-        classname = "full title"
+        classname = "title"
         group = "Heading"
         icon = "title"
         template = (
@@ -39,18 +39,6 @@ class NumberedParagraphBlock(blocks.RichTextBlock):
 # Main streamfield block to be inherited by Longform Pages
 # Consider if any new blocks are also needed on utils/blocks.py
 class LongformStoryBlock(BaseStoryBlock):
-    subsubheading = blocks.CharBlock(
-        form_classname="full title",
-        help_text=(
-            "The link to this subsubheading uses the subsubheading text in lowercase, "
-            "with no symbols, and with the spaces replaced with hyphens."
-            ' e.g. "Lorem @ 2 ipsum" becomes "lorem-2-ipsum"'
-        ),
-        icon="title",
-        template="patterns/molecules/streamfield/blocks/subsubheading_block.html",
-        group="Heading",
-        label="H4",
-    )
     numbered_heading = NumberedHeadingBlock(
         help_text=(
             "Adds a number to the heading if is_numbered is not enabled on the long-form"
@@ -82,3 +70,4 @@ class LongformStoryBlock(BaseStoryBlock):
         super().__init__(*args, **kwargs)
         self.base_blocks["heading"].label = "H2"
         self.base_blocks["subheading"].label = "H3"
+        self.base_blocks["subsubheading"].label = "H4"

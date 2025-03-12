@@ -69,10 +69,10 @@
 
     p {
         @include font-size(s);
+    }
 
-        a {
-            display: inline-block;
-        }
+    a {
+        display: inline-block;
     }
 
     h2 {

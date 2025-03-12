@@ -112,7 +112,7 @@ class FullWidthBanner(blocks.StructBlock):
 
 class CampaignPageStoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(
-        form_classname="full title",
+        form_classname="title",
         help_text=(
             "3 required. The link to this heading uses the heading text in lowercase, "
             "with no symbols, and with the spaces replaced with hyphens."

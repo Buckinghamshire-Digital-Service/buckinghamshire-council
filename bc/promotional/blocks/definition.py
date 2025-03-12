@@ -24,7 +24,7 @@ from .steps import Steps
 
 class PromotionalStoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(
-        form_classname="full title",
+        form_classname="title",
         help_text=(
             "The link to this heading uses the heading text in lowercase, with no"
             " symbols, and with the spaces replaced with hyphens."
@@ -36,7 +36,7 @@ class PromotionalStoryBlock(blocks.StreamBlock):
         label="Main heading",
     )
     subheading = blocks.CharBlock(
-        form_classname="full title",
+        form_classname="title",
         help_text=(
             "The link to this subheading uses the subheading text in lowercase, with no"
             " symbols, and with the spaces replaced with hyphens."

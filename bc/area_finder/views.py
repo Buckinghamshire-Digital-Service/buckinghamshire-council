@@ -17,7 +17,7 @@ from bc.area_finder.utils import (
 @api_view(["GET"])
 @authentication_classes([])
 def area_finder(request):
-    """Map a postcode to a local area website, using maps.buckscc.gov.uk API"""
+    """Map a postcode to a local area website, using maps.buckinghamshire.gov.uk API"""
     postcode = request.GET.get("postcode")
 
     if not postcode:

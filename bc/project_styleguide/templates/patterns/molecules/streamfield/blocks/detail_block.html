@@ -2,7 +2,7 @@
 
 <div class="accordion__container">
     <div class="accordion accordion--detail" data-accordion>
-        <h2 class="accordion__header">
+        <h3 class="accordion__header">
             <button
                 id="question-{{ value.title|slugify }}"
                 class="accordion__button"
@@ -12,9 +12,10 @@
                 {% include "patterns/atoms/icons/icon.html" with name="chevron" classname="icon--stroke accordion__icon" viewBox="0 0 51.8 103.7" %}
                 <span class="accordion__title">{{ value.title }}</span>
             </button>
-        </h2>
+        </h3>
         <div
             id="answer-{{ value.title|slugify }}"
+            role="region"
             class="accordion__content"
             data-accordion-answer
             aria-labelledby="question-{{ value.title|slugify }}"

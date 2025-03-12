@@ -953,3 +953,12 @@ BIRDBATH_PROCESSORS = [
 # Set to "same-origin-allow-popups" to allow popups
 # from third-party applications like PayPal or Zoom as needed
 SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin"
+
+
+# wagtail.contrib.search_promotions
+# The setting is used for ./manage.py searchpromotions_garbage_collect.
+# Default to 30 days (instead of 7) unless configured otherwise
+try:
+    WAGTAILSEARCH_HITS_MAX_AGE = int(env["WAGTAILSEARCH_HITS_MAX_AGE"])
+except (KeyError, ValueError):
+    pass

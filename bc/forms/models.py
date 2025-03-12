@@ -44,8 +44,8 @@ class CustomFormBuilder(WagtailCaptchaFormBuilder):
 
     def create_checkboxes_field(self, field, options):
         # Based on code in wagtail.contrib.forms, but changing widget
-        options["choices"] = [(x.strip(), x.strip()) for x in field.choices.split(",")]
-        options["initial"] = [x.strip() for x in field.default_value.split(",")]
+        options["choices"] = self.get_formatted_field_choices(field)
+        options["initial"] = self.get_formatted_field_initial(field)
         return forms.MultipleChoiceField(widget=CustomCheckboxSelectMultiple, **options)
 
 

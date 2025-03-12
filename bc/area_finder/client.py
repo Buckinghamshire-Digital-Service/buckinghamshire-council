@@ -6,12 +6,15 @@ from urllib3.util import Retry
 
 
 class BucksMapsClient:
-    """Python client for the upstream API maps.buckscc.gov.uk.
+    """Python client for the upstream API maps.buckinghamshire.gov.uk.
 
     See documentation at docs/postcode-lookup.md.
     """
 
-    base_url = "https://maps.buckscc.gov.uk/arcgis/rest/services/Corporate/NLPG_Districts/FeatureServer/0/query"
+    base_url = (
+        "https://maps.buckinghamshire.gov.uk"
+        "/server/rest/services/BC/District_Postcode_Lookup/FeatureServer/0/query"
+    )
     base_data = {
         "objectIds": "",
         "time": "",
