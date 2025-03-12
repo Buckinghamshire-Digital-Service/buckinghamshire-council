@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 84.0 (2025-03-12)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/83.1...84.0>
 
 - Accessibility fixes for accordions and footer link
 - Switch GIS provider for BucksMapsClient to maps.buckinghamshire.gov.uk
