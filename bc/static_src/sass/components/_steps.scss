@@ -156,6 +156,7 @@
     &__button-text {
         position: relative;
         color: $color--river;
+        text-align: left;
         border-bottom: 2px solid transparent;
 
         .steps-nav__button:hover & {
