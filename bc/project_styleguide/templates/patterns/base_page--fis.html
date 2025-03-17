@@ -6,7 +6,7 @@
 
 {% block meta_tags %}
     {% if GOOGLE_TAG_MANAGER_ID %}
-        {% include "pages/includes/GTM/script_head.html" %}
+        {% include "patterns/pages/includes/GTM/script_head.html" %}
     {% endif %}
 
     {% if YANDEX_VERIFICATION_STRING %}
@@ -68,7 +68,7 @@
 
 {% block body_top %}
     {% if GOOGLE_TAG_MANAGER_ID %}
-        {% include "paterns/pages/includes/GTM/noscript_body.html" %}
+        {% include "patterns/pages/includes/GTM/noscript_body.html" %}
     {% endif %}
 {% endblock body_top %}
 
