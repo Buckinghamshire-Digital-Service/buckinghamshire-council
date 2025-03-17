@@ -1,0 +1,1355 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://Buckinghamshire-Digital-Service.github.io/buckinghamshire-council/front-end-tooling/">
+      
+      
+        <link rel="prev" href="../project-conventions/">
+      
+      
+        <link rel="next" href="../hosting/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>Front end tooling - Buckinghamshire Council</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.bcfcd587.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#front-end-tooling" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Buckinghamshire Council" class="md-header__button md-logo" aria-label="Buckinghamshire Council" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Buckinghamshire Council
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Front end tooling
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Buckinghamshire-Digital-Service/buckinghamshire-council/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Buckinghamshire Council" class="md-nav__button md-logo" aria-label="Buckinghamshire Council" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Buckinghamshire Council
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Buckinghamshire-Digital-Service/buckinghamshire-council/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../project-conventions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Project conventions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Front end tooling
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Front end tooling
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#whats-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      What's required
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-a-new-project-from-the-wagtail-kit-tooling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting up a new project from the wagtail-kit tooling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-included" class="md-nav__link">
+    <span class="md-ellipsis">
+      What's included
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-and-updating-the-tooling-when-making-changes-wagtail-kit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using and updating the tooling when making changes wagtail-kit
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using and updating the tooling when making changes wagtail-kit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-the-tooling-whilst-making-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running the tooling whilst making changes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#making-changes-to-the-tooling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Making changes to the tooling
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#developing-with-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      Developing with it
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Developing with it">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-npm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using npm
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tests
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploying-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploying it
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploying it">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build scripts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debug script
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#react-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      React support
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#third-party-libraries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Third party libraries
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-details-of-the-packages-included" class="md-nav__link">
+    <span class="md-ellipsis">
+      Further details of the packages included
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#react-specific-packages" class="md-nav__link">
+    <span class="md-ellipsis">
+      React specific packages
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hosting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hosting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../email-and-sms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Email and SMS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../continuous-integration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Continuous integration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../continuous-deployment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Continuous deployment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data and Privacy
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Data and Privacy
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../anonymised-data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Anonymised data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-protection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data protection
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cookies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cookies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    External Integrations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            External Integrations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recruitment-site/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Recruitment site
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../complaints-and-requests/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Complaints and requests
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../live-chat-client/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Live chat client
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../location-autocomplete/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Location autocomplete
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../location-maps-widget/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Location maps widget
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../postcode-lookup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Postcode lookup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../service-directory/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Service directory
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Custom features
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            Custom features
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../custom-features/form-builder/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formbuilder customisations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../technical-debt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Technical debt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CHANGELOG/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CHANGELOG
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#whats-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      What's required
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-a-new-project-from-the-wagtail-kit-tooling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting up a new project from the wagtail-kit tooling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-included" class="md-nav__link">
+    <span class="md-ellipsis">
+      What's included
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-and-updating-the-tooling-when-making-changes-wagtail-kit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using and updating the tooling when making changes wagtail-kit
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using and updating the tooling when making changes wagtail-kit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-the-tooling-whilst-making-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running the tooling whilst making changes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#making-changes-to-the-tooling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Making changes to the tooling
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#developing-with-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      Developing with it
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Developing with it">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-npm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using npm
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tests
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploying-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploying it
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploying it">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build scripts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debug script
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#react-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      React support
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#third-party-libraries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Third party libraries
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-details-of-the-packages-included" class="md-nav__link">
+    <span class="md-ellipsis">
+      Further details of the packages included
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#react-specific-packages" class="md-nav__link">
+    <span class="md-ellipsis">
+      React specific packages
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="front-end-tooling">Front End Tooling<a class="headerlink" href="#front-end-tooling" title="Permanent link">&para;</a></h1>
+<p>This set of tooling should form the basis for any new wagtail projects. It can also be used for custom django builds - simply copy the <code>static_src</code> directory from here to your build.</p>
+<h2 id="whats-required">What's required<a class="headerlink" href="#whats-required" title="Permanent link">&para;</a></h2>
+<p>You can run the tooling within the VM where Node.js is pre-installed, but if you are using Mac OS, you will likely have issues with performance of <code>npm install</code> and other <code>npm</code> commands. It is adviced to Mac OS users to have node on the host machine.
+To install node on the host machine we recommend using <a href="https://github.com/creationix/nvm"><code>nvm</code></a>. Once you have <code>nvm</code> installed simply run <code>nvm install</code> to install and activate the version of node required for the project. Refer to the <a href="https://github.com/creationix/nvm#usage"><code>nvm</code> documentation</a> for more details about available commands.</p>
+<h2 id="setting-up-a-new-project-from-the-wagtail-kit-tooling">Setting up a new project from the wagtail-kit tooling<a class="headerlink" href="#setting-up-a-new-project-from-the-wagtail-kit-tooling" title="Permanent link">&para;</a></h2>
+<p>The wagtail-kit tooling is versioned via <code>package.json</code>, and the <code>package-lock.json</code> lockfile pins all of the project’s direct and transitive dependencies. If you wish to start the project with up to date dependencies without doing manual upgrades, you can discard the lockfile and re-create it:</p>
+<div class="codehilite"><pre><span></span><code>rm<span class="w"> </span>-rf<span class="w"> </span>node_modules
+rm<span class="w"> </span>package-lock.json
+npm<span class="w"> </span>install
+</code></pre></div>
+
+<p>Remember to then commit the updated <code>package-lock.json</code>.</p>
+<h2 id="whats-included">What's included<a class="headerlink" href="#whats-included" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="http://sass-lang.com/">Sass</a> CSS with <a href="https://github.com/postcss/autoprefixer">auto-prefixing</a>.</li>
+<li><a href="https://babeljs.io">Babel</a> for ES2015+ support.</li>
+<li><a href="https://www.browsersync.io">Browsersync</a> for autoreloading.</li>
+<li><a href="https://webpack.js.org/">Webpack</a> for module bundling.</li>
+<li>With <code>babel-loader</code> to process JavaScript.</li>
+<li>With <code>css-loader</code>, <code>postcss-loader</code>, and <code>sass-loader</code> to process stylesheets.</li>
+<li>Consideration for images, currently copying the directory only - to avoid slowdowns and non-essential dependancies. We encourage using SVG for UI vectors and pre-optimised UI photograph assets.</li>
+<li><a href="#build-scripts">Build commands</a> for generating testable or deployable assets only</li>
+<li>CSS linting with <code>stylelint</code></li>
+<li>JS linting with <code>eslint</code></li>
+<li><a href="https://jestjs.io/">Jest</a> for JavaScript unit tests.</li>
+<li>React support</li>
+</ul>
+<h2 id="using-and-updating-the-tooling-when-making-changes-wagtail-kit">Using and updating the tooling when making changes wagtail-kit<a class="headerlink" href="#using-and-updating-the-tooling-when-making-changes-wagtail-kit" title="Permanent link">&para;</a></h2>
+<p>Updating and running the tooling in wagtail-kit is a bit fiddly, as if you create a <code>node_modules</code> folder in <code>/wagtail-kit/bc</code> the watcher script will throw an error.</p>
+<h3 id="running-the-tooling-whilst-making-changes">Running the tooling whilst making changes<a class="headerlink" href="#running-the-tooling-whilst-making-changes" title="Permanent link">&para;</a></h3>
+<p>To run the tooling inside the <code>wagtail-kit</code> build, ensure that you run <code>npm install</code> from inside the built image, i.e. <code>wagtail-kit/built_image/ck_repo_name</code></p>
+<h3 id="making-changes-to-the-tooling">Making changes to the tooling<a class="headerlink" href="#making-changes-to-the-tooling" title="Permanent link">&para;</a></h3>
+<p>The easiest way to install new packages is to run <code>npm install --save-dev package_name</code> in <code>wagtail-kit/built_image/ck_repo_name</code>, but then copy the resultant changes to <code>package.json</code> and <code>package-lock.json</code> over to <code>/wagtail-kit/bc</code> in order to save and commit them. Note that when you do this you need to edit the copied files and change all instances of <code>ck_repo_name</code> to <code>bc</code>. Also make sure you turn off the watcher.py script before making changes in <code>built_image</code>.</p>
+<p>Changes to the config files can be made directly in <code>/wagtail-kit/bc</code>.</p>
+<h2 id="developing-with-it">Developing with it<a class="headerlink" href="#developing-with-it" title="Permanent link">&para;</a></h2>
+<ul>
+<li>To start the development environment, run <code>npm start</code> (or if that does not work <code>npm run serve</code>) - to stop this process press <code>ctrl + c</code>.</li>
+<li>This will start Browsersync and make the project available at <code>http://localhost:3000/</code>. If another process is using this port, check terminal for an updated URL. You can change this configuation by modifying the <code>browsersync.config.js</code> file, documented here <a href="https://www.browsersync.io/docs/options">https://www.browsersync.io/docs/options</a>.</li>
+<li>Source files for developing your project are in <code>static_src</code> and the distribution folder for the compiled assets is <code>static_compiled</code>. Don't make direct changes to the <code>static_compiled</code> directory as they will be overwritten.</li>
+</ul>
+<h3 id="using-npm">Using npm<a class="headerlink" href="#using-npm" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Install all packages from <code>package.json</code>: <code>npm install</code></li>
+<li>Add new packages that are only required for development, e.g. tooling: <code>npm install --save-dev package_name</code> (this will add it to <code>package.json</code> and <code>package-lock.json</code> too)</li>
+<li>Add new packages required in production, e.g. react: <code>npm install --save-prod package_name</code></li>
+<li>To upgrade packages run <code>npm update package_name</code> or <code>npm update</code> to update them all.</li>
+</ul>
+<h2 id="tests">Tests<a class="headerlink" href="#tests" title="Permanent link">&para;</a></h2>
+<p>JavaScript unit tests for this project use <a href="https://jestjs.io/">Jest</a>. Here are commands you can use:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Run the whole test suite once.</span>
+npm<span class="w"> </span>run<span class="w"> </span><span class="nb">test</span>
+<span class="c1"># Run the whole test suite, collecting test coverage information.</span>
+npm<span class="w"> </span>run<span class="w"> </span>test:coverage
+<span class="c1"># Start Jest in watch mode, to run tests on a subset of the files.</span>
+npm<span class="w"> </span>run<span class="w"> </span>test:watch
+</code></pre></div>
+
+<h2 id="deploying-it">Deploying it<a class="headerlink" href="#deploying-it" title="Permanent link">&para;</a></h2>
+<h3 id="build-scripts">Build scripts<a class="headerlink" href="#build-scripts" title="Permanent link">&para;</a></h3>
+<p>To only build assets for either development or production you can use</p>
+<ul>
+<li><code>npm run build</code> To build development assets</li>
+<li><code>npm run build:prod</code> To build assets with minification and vendor prefixes</li>
+</ul>
+<h3 id="debug-script">Debug script<a class="headerlink" href="#debug-script" title="Permanent link">&para;</a></h3>
+<p>To test production, minified and vendor prefixed assets you can use</p>
+<ul>
+<li><code>npm run debug</code> To develop with a simple http server, no browsersync and production assets</li>
+</ul>
+<h2 id="react-support">React support<a class="headerlink" href="#react-support" title="Permanent link">&para;</a></h2>
+<p>The wagtail-kit tooling now supports react out of the box.</p>
+<p>Note that react is installed as a dependency and imported via main.js.</p>
+<p>You can test that compilation of react is working by uncommenting the relevant lines in <code>javascript/main.js</code> and <code>javascript/components/test-react.js</code>. If you don't need react in your project, make sure you don't uncomment these lines or remove them completely. This will help to keep the compiled js file size down.</p>
+<h2 id="third-party-libraries">Third party libraries<a class="headerlink" href="#third-party-libraries" title="Permanent link">&para;</a></h2>
+<p>We no longer have a 'vendor' folder for these. Instead find ones that are packaged as npm libraries and install them as dependencies (see 'using npm' above). If they have CSS that needs including, this can be imported directly from the node_modules folder - see the example for glide in main.scss.</p>
+<h2 id="further-details-of-the-packages-included">Further details of the packages included<a class="headerlink" href="#further-details-of-the-packages-included" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>autoprefixer</strong> - adds vendor prefixes as necessary for the browsers defined in <code>browserslist</code> in the npm config <a href="https://www.npmjs.com/package/autoprefixer">https://www.npmjs.com/package/autoprefixer</a></li>
+<li><strong>babel-core</strong> - transpiler for es6 / react <a href="https://www.npmjs.com/package/babel-core">https://www.npmjs.com/package/babel-core</a></li>
+<li><strong>babel-eslint</strong> - add-on for extra linting of experimental features (may not be necessary for all projects) <a href="https://www.npmjs.com/package/babel-eslint">https://www.npmjs.com/package/babel-eslint</a></li>
+<li><strong>babel-jest</strong> - use Babel with Jest <a href="https://jestjs.io/docs/en/getting-started#using-babel">https://jestjs.io/docs/en/getting-started#using-babel</a></li>
+<li><strong>babel-loader</strong> - use babel with webpack - <a href="https://www.npmjs.com/package/babel-loader">https://www.npmjs.com/package/babel-loader</a></li>
+<li><strong>babel-preset-env</strong> - babel preset for the latest version of es6, es2015
+  etc. <a href="https://www.npmjs.com/package/babel-preset-env">https://www.npmjs.com/package/babel-preset-env</a> <a href="https://babeljs.io/env/">https://babeljs.io/env/</a>
+  <a href="https://babeljs.io/docs/plugins/">https://babeljs.io/docs/plugins/</a></li>
+<li><strong>browser-sync</strong> - for automatic reloading of your browser when changes are made to CSS / JS files <a href="https://www.npmjs.com/package/browser-sync">https://www.npmjs.com/package/browser-sync</a></li>
+<li><strong>css-loader</strong> – add support for Webpack to load stylesheets.</li>
+<li><strong>cssnano</strong> – minify CSS with safe optimisations - <a href="https://cssnano.co/">https://cssnano.co/</a>.</li>
+<li><strong>eslint</strong> - lint your javascript <a href="https://www.npmjs.com/package/eslint">https://www.npmjs.com/package/eslint</a></li>
+<li><strong>jest</strong> - testing framework for JavaScript <a href="https://jestjs.io/">https://jestjs.io/</a></li>
+<li><strong>sass</strong> - compiles Sass to CSS <a href="https://www.npmjs.com/package/sass">https://www.npmjs.com/package/sass</a></li>
+<li><strong>"mini-css-extract-plugin"</strong> - extract CSS generated by Webpack into separate files.</li>
+<li><strong>"copy-webpack-plugin"</strong> - reproduce path exactly when building static assets, in our case from <code>static_src/vendor</code> to <code>static_compiled/vendor</code>.</li>
+<li><strong>npm-run-all</strong> - run more than one npm script concurrently - used by some of our npm scripts <a href="https://www.npmjs.com/package/npm-run-all">https://www.npmjs.com/package/npm-run-all</a></li>
+<li><strong>onchange</strong> - watches for changes in a set of files - used by our watch scripts <a href="https://www.npmjs.com/package/onchange">https://www.npmjs.com/package/onchange</a></li>
+<li><strong>postcss-cli</strong> - required by <code>autoprefixer</code> - <a href="https://www.npmjs.com/package/postcss-cli">https://www.npmjs.com/package/postcss-cli</a></li>
+<li><strong>"postcss-loader"</strong> - integrate PostCSS preprocessing into Webpack’s styles loading.</li>
+<li><strong>postcss-custom-properties</strong> - polyfill for CSS custom properties - <a href="https://www.npmjs.com/package/postcss-custom-properties">https://www.npmjs.com/package/postcss-custom-properties</a></li>
+<li><strong>stylelint</strong> - Linting for styles - <a href="https://stylelint.io">https://stylelint.io</a></li>
+<li><strong>sass-loader</strong> - integrate Sass preprocessing into Webpack’s styles loading.</li>
+<li><strong>webpack</strong> - Bundler for js files (can do much more too) - <a href="https://www.npmjs.com/package/webpack">https://www.npmjs.com/package/webpack</a> <a href="https://webpack.js.org/concepts/">https://webpack.js.org/concepts/</a></li>
+<li><strong>webpack-cli</strong> - The webpack command calls this behind the scenese (as of webpack v 4) <a href="https://www.npmjs.com/package/webpack-cli">https://www.npmjs.com/package/webpack-cli</a></li>
+</ul>
+<h2 id="react-specific-packages">React specific packages<a class="headerlink" href="#react-specific-packages" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>babel-polyfill</strong> - IE11 fallbacks for some js functions <a href="https://www.npmjs.com/package/babel-polyfill">https://www.npmjs.com/package/babel-polyfill</a></li>
+<li><strong>babel-preset-react</strong> - babel preset for react. <a href="https://www.npmjs.com/package/babel-preset-react">https://www.npmjs.com/package/babel-preset-react</a> <a href="https://babeljs.io/env/">https://babeljs.io/env/</a> <a href="https://babeljs.io/docs/plugins/">https://babeljs.io/docs/plugins/</a></li>
+<li><strong>eslint-plugin-react</strong> - linting for react and jsx <a href="https://www.npmjs.com/package/eslint-plugin-react">https://www.npmjs.com/package/eslint-plugin-react</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+    
+  </body>
+</html>
