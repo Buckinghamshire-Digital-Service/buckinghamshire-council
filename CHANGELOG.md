@@ -1,6 +1,13 @@
 # Release History
 
-## Unreleased
+## 85.0 (2025-03-17)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/84.0...85.0>
+
+- Fix alignment in steps block
+- Add management command for deleting old form submissions
+- Restrict form submissions to specific groups
+- Add embeddable form block
 
 ## 84.0 (2025-03-12)
 
