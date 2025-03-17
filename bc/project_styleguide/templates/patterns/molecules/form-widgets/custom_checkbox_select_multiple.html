@@ -1,10 +1,9 @@
 {% with id=widget.attrs.id %}<ul{% if id %} id="{{ id }}"{% endif %}{% if widget.attrs.class %} class="{{ widget.attrs.class }}"{% endif %}>{% for group, options, index in widget.optgroups %}
   {% for option in options %}
     {% with option as widget %}
-    <li class="checkbox-button__set">
-      <input type="checkbox" class="checkbox-button__checkbox" name="{{ widget.name }}"{% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %}{% include "django/forms/widgets/attrs.html" %}>
-      <label{% if widget.attrs.id %} class="checkbox-button" for="{{ widget.attrs.id }}"{% endif %}>{{ widget.label }}</label>
-    </li>
+      <li class="checkbox-button__set">
+        {% include "patterns/molecules/form-widgets/custom_checkbox_select_single.html" %}
+      </li>
     {% endwith %}
   {% endfor %}
 {% endfor %}

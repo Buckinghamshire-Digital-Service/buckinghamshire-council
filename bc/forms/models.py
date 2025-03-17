@@ -4,13 +4,19 @@ from django import forms
 from django.contrib.postgres.fields import ArrayField
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.shortcuts import redirect
 from django.template.response import TemplateResponse
+from django.utils import timezone
 from django.utils.functional import cached_property
+from django.utils.safestring import mark_safe
 
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel
 from wagtail.contrib.forms.models import AbstractFormField
+from wagtail.contrib.forms.models import FormSubmission as WagtailFormSubmission
+from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
 from wagtail.fields import RichTextField
+from wagtail.models import Page
 from wagtail.search import index
 
 from wagtailcaptcha.forms import WagtailCaptchaFormBuilder
@@ -56,12 +62,26 @@ class FormPage(WagtailCaptchaEmailForm, BasePage):
     Maintain this in bc.utils.middleware.
     """
 
+    class AUTO_DELETE(models.IntegerChoices):
+        NO_DELETE = 0, "Don't delete submissions"
+        WEEK = 7, "One week"
+        MONTH = 30, "One month"
+        QUARTER = 90, "Three months"
+
     template = "patterns/pages/forms/form_page.html"
     landing_page_template = "patterns/pages/forms/form_page_landing.html"
 
     subpage_types = []
 
     introduction = models.TextField(blank=True)
+    thank_you_heading = models.CharField(
+        max_length=200,
+        blank=True,
+        help_text=mark_safe(
+            "The heading displayed above the <strong>Thank you text</strong>. "
+            'Defaults to "Thank you".'
+        ),
+    )
     thank_you_text = RichTextField(
         blank=True,
         help_text="Text displayed to the user on successful submission of the form",
@@ -71,13 +91,25 @@ class FormPage(WagtailCaptchaEmailForm, BasePage):
         max_length=32, blank=True, help_text='Form action text. Defaults to "Submit"'
     )
 
+    auto_delete = models.PositiveIntegerField(
+        choices=AUTO_DELETE.choices,
+        default=AUTO_DELETE.NO_DELETE,
+        help_text="Delete submissions automatically after this amount of time",
+    )
+
     search_fields = BasePage.search_fields + [index.SearchField("introduction")]
 
     content_panels = BasePage.content_panels + [
         FieldPanel("introduction"),
         InlinePanel("form_fields", label="Form fields"),
         FieldPanel("action_text"),
-        FieldPanel("thank_you_text"),
+        MultiFieldPanel(
+            [
+                FieldPanel("thank_you_heading", heading="Heading"),
+                FieldPanel("thank_you_text", heading="Text"),
+            ],
+            "Thank you message",
+        ),
         MultiFieldPanel(
             [
                 FieldRowPanel(
@@ -90,9 +122,93 @@ class FormPage(WagtailCaptchaEmailForm, BasePage):
             ],
             "Email",
         ),
+        FieldPanel("auto_delete"),
     ]
 
     form_builder = CustomFormBuilder
+
+    def get_embed_id(self, suffix=None):
+        """
+        Return an embed id for the current form page.
+        Because the same form could potentially be embedded multiple times on the
+        same page, sometimes a suffix is needed.
+        """
+        parts = [self.slug]
+        if suffix is not None:
+            parts.append(str(suffix))
+        return "_".join(parts)
+
+    def render_landing_page(self, request, form_submission=None, *args, **kwargs):
+        """
+        If handling an embedded form then a redirection should be issued when
+        that form is submitted (and valid). Otherwise display the standard
+        success template.
+        """
+        if request.method != "POST" or form_submission is None:
+            return super().render_landing_page(
+                request, form_submission, *args, **kwargs
+            )
+        try:
+            embed_page = Page.objects.get(pk=request.POST["embed_id"]).specific
+            embed_form_id = request.POST["embed_form_id"]
+        except (KeyError, Page.DoesNotExist):
+            # In case the embed parameters are missing or invalid, default to the
+            # standard behavior of showing the success message on a separate
+            # page rather than throwing an error.
+            return super().render_landing_page(
+                request, form_submission, *args, **kwargs
+            )
+
+        redirect_url = (
+            embed_page.get_url(request)
+            + f"?embed_success={embed_form_id}#{embed_form_id}"
+        )
+        return redirect(redirect_url)
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        if request.method == "POST":
+            context["embed_id"] = request.POST.get("embed_id")
+            context["embed_form_id"] = request.POST.get("embed_form_id")
+        return context
+
+
+class FormSubmissionQuerySet(models.QuerySet):
+    def with_delete_after(self):
+        """
+        Adds a `delete_after` annotation on the queryset which corresponds to
+        the date after which the form submission should be deleted. If the
+        submission should not be auto-deleted, the value will be NULL.
+        """
+        # Using page__formpage allows joining the FormSubmission with the
+        # corresponding FormPage (whereas `page` would join with the base Page
+        # model which doesn't have an `auto_delete` field).
+        cutoff_date = models.ExpressionWrapper(
+            # With postgres, adding a Date to an integer is equivalent to adding
+            # that number of days to the date.
+            models.F("submit_time__date") + models.F("page__formpage__auto_delete"),
+            output_field=models.DateField(),
+        )
+        expr = models.Case(
+            models.When(page__formpage__auto_delete__gt=0, then=cutoff_date)
+        )
+        return self.annotate(delete_after=expr)
+
+    def stale(self):
+        """
+        Return all submissions that should be deleted as of today.
+        """
+        queryset = self.with_delete_after()
+        return queryset.exclude(delete_after__isnull=True).filter(
+            delete_after__lt=timezone.localdate()
+        )
+
+
+class FormSubmission(WagtailFormSubmission):
+    objects = FormSubmissionQuerySet.as_manager()
+
+    class Meta:
+        proxy = True
 
 
 class PostcodeLookupResponse(models.Model):
@@ -273,3 +389,16 @@ class LookupPage(BasePage):
         context = self.get_context(request)
         context["lookup_response"] = lookup_response
         return TemplateResponse(request, self.landing_page_template, context)
+
+
+@register_setting
+class FormSubmissionAccessControl(BaseGenericSetting):
+    groups_with_access = models.ManyToManyField(
+        "auth.Group",
+        help_text="The group(s) that can see form submissions",
+    )
+
+    panels = [FieldPanel("groups_with_access", widget=forms.CheckboxSelectMultiple())]
+
+    class Meta:
+        verbose_name = "Form submission access control"

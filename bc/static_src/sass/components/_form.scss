@@ -13,6 +13,17 @@
         background-color: $color--tertiary;
     }
 
+    &__success {
+        padding: 20px;
+        background-color: $color--leaf-light;
+
+        &--heading {
+            @include font-size(m);
+            font-weight: bold;
+            color: $color--leaf-dark;
+        }
+    }
+
     &__submit {
         @include button($color--slate, $color--leaf, $color--leaf);
 

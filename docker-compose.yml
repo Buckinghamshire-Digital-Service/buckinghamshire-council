@@ -11,11 +11,9 @@ services:
       DATABASE_URL: postgres://bc:bc@db:5432/bc # pragma: allowlist secret
       DJANGO_SETTINGS_MODULE: bc.settings.dev
       MEDIA_DIR: /app/media/
-      RECAPTCHA_PRIVATE_KEY: UPDATE_THIS # pragma: allowlist secret
-      RECAPTCHA_PUBLIC_KEY: UPDATE_THIS
       REDIS_URL: redis://redis
       ENABLE_DJANGO_DEFENDER: 'false'
-      SECRET_KEY: local_dev_secret_key
+      SECRET_KEY: local_dev_secret_key # pragma: allowlist secret
       SECURE_SSL_REDIRECT: 'false'
       STATIC_DIR: /app/static/
       STATIC_URL: /static/

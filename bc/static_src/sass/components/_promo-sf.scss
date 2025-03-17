@@ -8,6 +8,7 @@
     &--image,
     &--accordion,
     &--embed,
+    &--form,
     &--detail,
     &--highlight,
     &--plain_text_table,
@@ -84,6 +85,15 @@
 
             &__icon {
                 stroke: $color--pink;
+            }
+        }
+    }
+
+    &--form {
+        .embedded-form {
+            &__title {
+                @include font-size(xl);
+                color: $color--river;
             }
         }
     }
