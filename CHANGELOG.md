@@ -1,5 +1,11 @@
 # Release History
 
+## Unreleased
+
+- Add Silktide as a cookie consent manager
+- Remove old cookie consent manager
+- Remove (unused) Fathom analytics
+
 ## 85.0 (2025-03-17)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/84.0...85.0>
