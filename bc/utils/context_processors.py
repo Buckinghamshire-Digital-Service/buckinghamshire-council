@@ -46,7 +46,6 @@ def global_vars(request):
         "FATHOM_SITE_ID": getattr(settings, "FATHOM_SITE_ID", None),
         "base_page_template": base_page_template,
         "is_pensions_site": is_pensions_site,
-        "COOKIE_DOMAIN": getattr(settings, "COOKIE_DOMAIN", None),
         "NONINDEXED_HOSTS": getattr(settings, "NONINDEXED_HOSTS", []),
         "GOOGLE_MAPS_V3_APIKEY": getattr(settings, "GOOGLE_MAPS_V3_APIKEY", ""),
     }

@@ -823,9 +823,6 @@ FATHOM_SITE_ID = env.get("FATHOM_SITE_ID")
 # For Yandex search indexing verification
 YANDEX_VERIFICATION_STRING = env.get("YANDEX_VERIFICATION_STRING")
 
-# Current domain for setting cookies
-COOKIE_DOMAIN = env.get("COOKIE_DOMAIN", "")
-
 
 # GOV.UK Notify service
 EMAIL_BACKEND = "django_gov_notify.backends.NotifyEmailBackend"
