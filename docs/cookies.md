@@ -4,7 +4,6 @@ See also: [Data Protection](data-protection.md)
 
 The website team values minimising cookies, and data protection. Examples include:
 
-- using Fathom Analytics, which is cookie-free, instead of e.g. Google Analytics
 - a clear listing of all cookies at https://www.buckinghamshire.gov.uk/about/cookies/
 
 ## Integrating with other services

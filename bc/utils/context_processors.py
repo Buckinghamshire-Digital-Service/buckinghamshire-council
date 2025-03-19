@@ -43,7 +43,6 @@ def global_vars(request):
         "YANDEX_VERIFICATION_STRING": getattr(
             settings, "YANDEX_VERIFICATION_STRING", None
         ),
-        "FATHOM_SITE_ID": getattr(settings, "FATHOM_SITE_ID", None),
         "base_page_template": base_page_template,
         "is_pensions_site": is_pensions_site,
         "NONINDEXED_HOSTS": getattr(settings, "NONINDEXED_HOSTS", []),
