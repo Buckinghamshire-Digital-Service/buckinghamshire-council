@@ -3,3 +3,4 @@ coverage
 static_compiled
 venv
 bc/utils/static/utils/js/vendor
+bc/static_src/vendor/silktide

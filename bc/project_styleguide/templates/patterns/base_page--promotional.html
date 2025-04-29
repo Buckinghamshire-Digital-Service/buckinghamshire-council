@@ -6,12 +6,7 @@
 
 {% block meta_tags %}
     {% if GOOGLE_TAG_MANAGER_ID %}
-        {# To enable GTM code you need to specify GOOGLE_TAG_MANAGER_ID in Django settings #}
-        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','{{ GOOGLE_TAG_MANAGER_ID|escapejs }}');</script>
+        {% include "patterns/pages/includes/GTM/script_head.html" %}
     {% endif %}
 
     {% if YANDEX_VERIFICATION_STRING %}
@@ -73,38 +68,12 @@
 
 {% block body_top %}
     {% if GOOGLE_TAG_MANAGER_ID %}
-        {# To enable GTM code you need to specify GOOGLE_TAG_MANAGER_ID in Django settings #}
-        <!-- Google Tag Manager (noscript) -->
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ GOOGLE_TAG_MANAGER_ID|urlencode }}"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-        <!-- End Google Tag Manager (noscript) -->
+        {% include "patterns/pages/includes/GTM/noscript_body.html" %}
     {% endif %}
 {% endblock body_top %}
 
-{% block body_bottom %}
-    {% if FATHOM_SITE_ID %}
-        <!-- Fathom - simple website analytics - https://usefathom.com -->
-        <script>
-        (function(f, a, t, h, o, m){
-        a[h]=a[h]||function(){
-        (a[h].q=a[h].q||[]).push(arguments)
-        };
-        o=f.createElement('script'),
-        m=f.getElementsByTagName('script')[0];
-        o.async=1; o.src=t; o.id='fathom-script';
-        m.parentNode.insertBefore(o,m)
-        })(document, window, 'https://cdn.usefathom.com/tracker.js', 'fathom');
-        fathom('set', 'siteId', '{{ FATHOM_SITE_ID }}');
-        fathom('trackPageview');
-        </script>
-        <!-- / Fathom -->
-    {% endif %}
-{% endblock body_bottom %}
-
 {% block header %}
     {% include "patterns/molecules/skip-link/skip-link.html" %}
-
-    {% include "patterns/molecules/cookie-message/cookie-message.html" %}
 
     {% promotional_primary_navigation %}
 
