@@ -673,13 +673,14 @@ if env.get("SECURE_CONTENT_TYPE_NOSNIFF", "true").lower().strip() == "true":
 # Most modern browsers don’t honor the X-XSS-Protection HTTP header.
 # You can use Content-Security-Policy without allowing 'unsafe-inline' scripts instead.
 # http://django-csp.readthedocs.io/en/latest/configuration.html
-if "CSP_DEFAULT_SRC" in env:
+if any(k.startswith("CSP_") for k in env):
     MIDDLEWARE.append("csp.middleware.CSPMiddleware")
 
     # The “special” source values of 'self', 'unsafe-inline', 'unsafe-eval', and 'none' must be quoted!
     # e.g.: CSP_DEFAULT_SRC = "'self'" Without quotes they will not work as intended.
 
-    CSP_DEFAULT_SRC = env.get("CSP_DEFAULT_SRC").split(",")
+    if "CSP_DEFAULT_SRC" in env:
+        CSP_DEFAULT_SRC = env.get("CSP_DEFAULT_SRC").split(",")
     if "CSP_SCRIPT_SRC" in env:
         CSP_SCRIPT_SRC = env.get("CSP_SCRIPT_SRC").split(",")
     if "CSP_STYLE_SRC" in env:
@@ -694,6 +695,12 @@ if "CSP_DEFAULT_SRC" in env:
         CSP_BASE_URI = env.get("CSP_BASE_URI").split(",")
     if "CSP_OBJECT_SRC" in env:
         CSP_OBJECT_SRC = env.get("CSP_OBJECT_SRC").split(",")
+    if "CSP_FRAME_ANCESTORS" in env:
+        # The frame-ancestors CSP directive replaces the X-Frame-Options header
+        MIDDLEWARE.remove(
+            "django.middleware.clickjacking.XFrameOptionsMiddleware",
+        )
+        CSP_FRAME_ANCESTORS = env.get("CSP_FRAME_ANCESTORS").split(",")
 
 
 # Referrer-policy header settings.

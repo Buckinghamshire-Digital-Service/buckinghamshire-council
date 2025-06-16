@@ -84,7 +84,7 @@ This environment variable only needs to be set on source instances.
 
 On the destination site, you need to configure `WAGTAILTRANSFER_SOURCE_KEY` and `WAGTAILTRANSFER_SOURCE_URL`.
 `WAGTAILTRANSFER_SOURCE_KEY` on the destination instance needs to match the `WAGTAILTRANSFER_SECRET_KEY` used on the source instance.
-E.g. if on the staging instance you have used `WAGTAILTRANSFER_SECRET_KEY="abc123"` (which is not recommended), then you would set `WAGTAILTRANSFER_SOURCE_KEY="abc123` on the production instance.
+E.g. if on the staging instance you have used `WAGTAILTRANSFER_SECRET_KEY="abc123"` (which is not recommended), then you would set `WAGTAILTRANSFER_SOURCE_KEY="abc123` on the production instance. <!-- pragma: allowlist secret -->
 
 Additionally, you need to configure `WAGTAILTRANSFER_SOURCE_URL` on the destination instance, so that Wagtail Transfer knows the endpoint to send its requests to.
 E.g. on production you might set: `WAGTAILTRANSFER_SOURCE_URL="https://staging.example.com/wagtail-transfer/"`
@@ -254,3 +254,15 @@ heroku config:set CSRF_TRUSTED_ORIGINS=your_trusted_origin_here
 7. Click "Add" or "Save" to save the changes.
 
 Once you've set the `CSRF_TRUSTED_ORIGINS` config variable on Heroku, your Django application will use the specified trusted origins for CSRF protection. Make sure to restart your Heroku application after making these changes for them to take effect.
+
+## Frame ancestors
+
+If a `CSP_FRAME_ANCESTORS` environment variable is present it will be used as a `Content-Security-Policy: frame-ancestors` [header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-ancestors), allowing the domains listed to embed the sites in an iframe.
+
+**Only trusted domains should be added to this list**.
+
+If present, the variable should be a comma-separated list with items of the form:
+
+- `'self'` (the quotes are required) to allow the site to embed itself;
+- `'none'` (quotes here are alos required) to ban the site from being embedded;
+- `https://example.com` (the protocol `http://` or `https://` is required).
