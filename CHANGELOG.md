@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 87.0 (2025-07-01)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/86.0...87.0>
 
 - Add configuration option for CSP_FRAME_ANCESTORS
 
