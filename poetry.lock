@@ -2906,13 +2906,18 @@ version = "1.2.0"
 description = "Orderable support for Wagtail"
 optional = false
 python-versions = "*"
-files = [
-    {file = "wagtail-orderable-1.2.0.tar.gz", hash = "sha256:3355f91d09cd711960a03d83d2783d35b38735da6cd51fc9ab28fdbf635da050"},
-    {file = "wagtail_orderable-1.2.0-py3-none-any.whl", hash = "sha256:b1b951013630cfb6ab13b189a51cfcc78faa668f6b3bd8811359b331e2666763"},
-]
+files = []
+develop = false
 
 [package.dependencies]
-wagtail = ">=4.1"
+wagtail = ">=5.2"
+wagtail-modeladmin = ">=2.0.0"
+
+[package.source]
+type = "git"
+url = "https://github.com/torchbox-forks/wagtail-orderable"
+reference = "1.3.1+tbx"
+resolved_reference = "03c6425f44526e301bfe869e9d33b696324382c6"
 
 [[package]]
 name = "wagtail-transfer"
@@ -2932,17 +2937,17 @@ docs = ["mkdocs (>=1.0,<1.1)", "mkdocs-material (>=4.6,<4.7)"]
 
 [[package]]
 name = "wagtailgeowidget"
-version = "8.1.1"
+version = "8.2.1"
 description = "Wagtail-Geo-Widget is the complete map solution for your Wagtail site."
 optional = false
 python-versions = "*"
 files = [
-    {file = "wagtailgeowidget-8.1.1-py3-none-any.whl", hash = "sha256:30379aaf773762c36d139ababdf239ce77aa6514a1d80cbffcbdb5a495626b0e"},
-    {file = "wagtailgeowidget-8.1.1.tar.gz", hash = "sha256:3fbf83da821c787a3dae03885861e96a89e0cf0dd680b0ac158a4d8a55c5e7ec"},
+    {file = "wagtailgeowidget-8.2.1-py3-none-any.whl", hash = "sha256:d1a999b745b9f8ca89d0ed300a1fd614ffe3a396b9165ef9f2ee0e1a0d5ab5ab"},
+    {file = "wagtailgeowidget-8.2.1.tar.gz", hash = "sha256:afff70050eda3f80109a09d6c93fa8817897a50d7da002018092bcf84824c265"},
 ]
 
 [package.dependencies]
-Wagtail = ">=4.1"
+Wagtail = ">=5.2"
 
 [package.extras]
 test = ["factory-boy", "pytest", "pytest-django"]
@@ -3177,4 +3182,4 @@ gunicorn = ["gunicorn"]
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.11"
-content-hash = "bc3180b68728ddef60b229bca03ee126ee21d522d9b8ad8f03c038daeae89b30"
+content-hash = "63fb5375923a081314e8e1bacadc4dd8113df0bc4ebbe2bc220813191e593d75"
