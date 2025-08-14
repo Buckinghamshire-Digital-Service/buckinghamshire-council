@@ -101,7 +101,7 @@ class SearchView(View):
                                 output_field=CharField(),
                             )
                         )
-                        .all()
+                        .filter(page__live=True)
                     )
                     promotion_page_ids = promotions.values_list("page_id", flat=True)
 
