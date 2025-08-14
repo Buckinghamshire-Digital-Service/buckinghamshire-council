@@ -712,10 +712,8 @@ if any(k.startswith("CSP_") for k in env):
         CSP_FRAME_ANCESTORS = env.get("CSP_FRAME_ANCESTORS").split(",")
 
 
-# Referrer-policy header settings.
-# https://django-referrer-policy.readthedocs.io/en/1.0/
-
-REFERRER_POLICY = env.get(
+# https://docs.djangoproject.com/en/stable/ref/middleware/#referrer-policy
+SECURE_REFERRER_POLICY = env.get(
     "SECURE_REFERRER_POLICY", "no-referrer-when-downgrade"
 ).strip()
 
