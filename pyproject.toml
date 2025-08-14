@@ -64,7 +64,7 @@ pymdown-extensions = "~10.16"
 black = "~25"
 detect-secrets = "1.5.0"
 flake8 = "~7.3"
-isort = "5.13.2"
+isort = "^6.0.1"
 seed-isort-config = "2.2.0"
 
 # Database snapshots
