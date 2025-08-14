@@ -10,6 +10,8 @@ Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/87.0...87.
 
 - Add configuration option to be able to set CSP_DEFAULT_SRC=None
 
+- Upgrade to Wagtail 7.0.2 (via 6.4.2)
+
 ## 87.0 (2025-07-01)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/86.0...87.0>
