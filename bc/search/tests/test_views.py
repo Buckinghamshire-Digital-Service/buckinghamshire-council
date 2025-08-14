@@ -116,7 +116,7 @@ class BackoffSearchTest(TestCase):
         Using this method done for ease of testing and to avoid having to mock the Wagtail Search backend.
         """
         mocked_method.side_effect = [
-            TransportError(),
+            TransportError("Test Error"),
             requests.exceptions.ConnectionError(),
             requests.exceptions.Timeout(),
             is_recruitment_site(self.site),
