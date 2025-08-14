@@ -57,33 +57,33 @@ gunicorn = ["gunicorn"]
 [tool.poetry.group.dev.dependencies]
 # Docs dependencies
 mkdocs = "~1.6"
-mkdocs-material = "~9.5"
-pymdown-extensions = "~10.14"
+mkdocs-material = "~9.6"
+pymdown-extensions = "~10.16"
 
 # Linting
-black = "~24"
+black = "~25"
 detect-secrets = "1.5.0"
-flake8 = "~7.1"
+flake8 = "~7.3"
 isort = "5.13.2"
 seed-isort-config = "2.2.0"
 
 # Database snapshots
-DSLR = "0.4.0"
+DSLR = "^0.6.0"
 stellar = "0.4.5"
 
 # Pinned for stellar 0.4.5
-SQLAlchemy = "2.0.37"
+SQLAlchemy = "^2.0.43"
 SQLAlchemy-Utils = "0.41.2"
 
 # Development dependencies
-django-extensions = "~3.2"
+django-extensions = "~4.1"
 honcho = "~2.0"
 
-pre-commit = "~4.0"
+pre-commit = "~4.3"
 Werkzeug = "~3.1"
-tblib = "^3.0.0"
-pyupgrade = "^3.19.1"
-django-upgrade = "~1.22"
+tblib = "^3.1.0"
+pyupgrade = "^3.20.0"
+django-upgrade = "~1.25"
 
 
 [build-system]
