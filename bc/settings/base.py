@@ -681,6 +681,8 @@ if any(k.startswith("CSP_") for k in env):
 
     if "CSP_DEFAULT_SRC" in env:
         CSP_DEFAULT_SRC = env.get("CSP_DEFAULT_SRC").split(",")
+        if CSP_DEFAULT_SRC == [""]:  # env var was there but empty
+            CSP_DEFAULT_SRC = None
     if "CSP_SCRIPT_SRC" in env:
         CSP_SCRIPT_SRC = env.get("CSP_SCRIPT_SRC").split(",")
     if "CSP_STYLE_SRC" in env:
