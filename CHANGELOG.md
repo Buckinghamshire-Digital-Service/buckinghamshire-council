@@ -1,5 +1,7 @@
 # Release History
 
+## Unreleased
+
 ## 87.1 (2025-09-02)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/87.0...87.1>
