@@ -22,9 +22,9 @@ class CalloutWithImage(blocks.StructBlock):
 
         if link_block:
             match link_block.block_type:
-                case "internal_link" if link_block.value and link_block.value.get(
-                    "page"
-                ).live:
+                case "internal_link" if (
+                    link_block.value and link_block.value.get("page").live
+                ):
                     context.update({"link": link_block.value})
                 case "external_link":
                     context.update({"link": link_block.value})

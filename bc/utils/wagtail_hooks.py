@@ -161,7 +161,7 @@ def register_big_text_feature(features):
     features.register_converter_rule("contentstate", feature_name, db_conversion)
 
 
-@hooks.register("insert_editor_js")
+@hooks.register("insert_global_admin_js")
 def editor_js():
     return mark_safe(
         '<script type="text/javascript" src="%s"></script>'

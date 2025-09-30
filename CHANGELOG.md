@@ -1,10 +1,20 @@
 # Release History
 
+## Unreleased
+
+## 88.0 (2025-09-30)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/87.1...88.0>
+
+- Upgrade to Wagtail 7.0.3 (via 6.4.2)
+
 ## 87.1 (2025-09-02)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/87.0...87.1>
 
 - Add configuration option to be able to set CSP_DEFAULT_SRC=None
+
+- Upgrade to Wagtail 7.0.2 (via 6.4.2)
 
 ## 87.0 (2025-07-01)
 
