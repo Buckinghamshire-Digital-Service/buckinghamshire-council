@@ -187,6 +187,13 @@ DATABASES = {
     "default": dj_database_url.config(conn_max_age=600, default="postgres:///bc")
 }
 
+# https://docs.wagtail.org/en/stable/releases/6.4.html#background-tasks-run-at-end-of-current-transaction
+TASKS = {
+    "default": {
+        "BACKEND": "django_tasks.backends.immediate.ImmediateBackend",
+        "ENQUEUE_ON_COMMIT": False,
+    }
+}
 
 # Server-side cache settings. Do not confuse with front-end cache.
 # https://docs.djangoproject.com/en/stable/topics/cache/
@@ -638,7 +645,7 @@ CACHE_CONTROL_STALE_WHILE_REVALIDATE = int(
 # The Django default for the maximum number of GET or POST parameters is 1000. For large
 # Wagtail pages with many fields, we need to override this. See
 # https://docs.djangoproject.com/en/2.2/ref/settings/
-DATA_UPLOAD_MAX_NUMBER_FIELDS = int(env.get("DATA_UPLOAD_MAX_NUMBER_FIELDS", 1000))
+DATA_UPLOAD_MAX_NUMBER_FIELDS = int(env.get("DATA_UPLOAD_MAX_NUMBER_FIELDS", 10_000))
 
 # When set to True, client-side JavaScript will not to be able to access the CSRF cookie.
 # https://docs.djangoproject.com/en/stable/ref/settings/#csrf-cookie-httponly
@@ -705,10 +712,8 @@ if any(k.startswith("CSP_") for k in env):
         CSP_FRAME_ANCESTORS = env.get("CSP_FRAME_ANCESTORS").split(",")
 
 
-# Referrer-policy header settings.
-# https://django-referrer-policy.readthedocs.io/en/1.0/
-
-REFERRER_POLICY = env.get(
+# https://docs.djangoproject.com/en/stable/ref/middleware/#referrer-policy
+SECURE_REFERRER_POLICY = env.get(
     "SECURE_REFERRER_POLICY", "no-referrer-when-downgrade"
 ).strip()
 
