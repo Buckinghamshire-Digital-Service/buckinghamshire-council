@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Fix footer link on blog homepage
+
 ## 88.0 (2025-09-30)
 
 Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/87.1...88.0>
