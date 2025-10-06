@@ -1,6 +1,8 @@
 # Release History
 
-## Unreleased
+## 88.1 (2025-10-06)
+
+Compare: <https://git.torchbox.com/buckinghamshire-council/bc/compare/88.0...88.1>
 
 - Fix footer link on blog homepage
 - Update documentation about `GOOGLE_MAPS_V3_APIKEY`
