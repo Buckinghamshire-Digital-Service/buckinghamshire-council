@@ -1,0 +1,4890 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://Buckinghamshire-Digital-Service.github.io/buckinghamshire-council/CHANGELOG/">
+      
+      
+        <link rel="prev" href="../technical-debt/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>CHANGELOG - Buckinghamshire Council</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.bcfcd587.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#release-history" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Buckinghamshire Council" class="md-header__button md-logo" aria-label="Buckinghamshire Council" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Buckinghamshire Council
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CHANGELOG
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Buckinghamshire-Digital-Service/buckinghamshire-council/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Buckinghamshire Council" class="md-nav__button md-logo" aria-label="Buckinghamshire Council" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Buckinghamshire Council
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Buckinghamshire-Digital-Service/buckinghamshire-council/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../project-conventions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Project conventions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../front-end-tooling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Front end tooling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hosting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hosting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../infrastructure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Infrastructure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../email-and-sms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Email and SMS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../continuous-integration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Continuous integration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../continuous-deployment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Continuous deployment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data and Privacy
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Data and Privacy
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../anonymised-data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Anonymised data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-protection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data protection
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cookies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cookies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    External Integrations
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            External Integrations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recruitment-site/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Recruitment site
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../complaints-and-requests/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Complaints and requests
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../live-chat-client/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Live chat client
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../location-autocomplete/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Location autocomplete
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../location-maps-widget/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Location maps widget
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../postcode-lookup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Postcode lookup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../service-directory/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Service directory
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Custom features
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            Custom features
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../custom-features/form-builder/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formbuilder customisations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../technical-debt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Technical debt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    CHANGELOG
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    CHANGELOG
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#881-2025-10-06" class="md-nav__link">
+    <span class="md-ellipsis">
+      88.1 (2025-10-06)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#880-2025-09-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      88.0 (2025-09-30)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#871-2025-09-02" class="md-nav__link">
+    <span class="md-ellipsis">
+      87.1 (2025-09-02)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#870-2025-07-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      87.0 (2025-07-01)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#860-2025-04-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      86.0 (2025-04-29)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#850-2025-03-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      85.0 (2025-03-17)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#840-2025-03-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      84.0 (2025-03-12)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#831-2025-03-03" class="md-nav__link">
+    <span class="md-ellipsis">
+      83.1 (2025-03-03)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#830-2025-03-03" class="md-nav__link">
+    <span class="md-ellipsis">
+      83.0 (2025-03-03)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#829-2025-01-08" class="md-nav__link">
+    <span class="md-ellipsis">
+      82.9 (2025-01-08)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#828-2025-01-08" class="md-nav__link">
+    <span class="md-ellipsis">
+      82.8 (2025-01-08)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#827-2024-11-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      82.7 (2024-11-29)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#826-2024-11-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      82.6 (2024-11-28)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#825-2024-11-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      82.5 (2024-11-28)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#824-2024-11-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      82.4 (2024-11-27)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#823-2024-11-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      82.3 (2024-11-25)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#822-2024-11-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      82.2 (2024-11-25)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#821-2024-11-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      82.1 (2024-11-25)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#820-2024-11-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      82.0 (2024-11-25)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#811-2024-11-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      81.1 (2024-11-21)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#810-2024-11-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      81.0 (2024-11-14)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#802-2024-11-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      80.2 (2024-11-11)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#801-2024-10-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      80.1 (2024-10-15)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#800-2024-10-08" class="md-nav__link">
+    <span class="md-ellipsis">
+      80.0 (2024-10-08)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#790-2024-08-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      79.0 (2024-08-20)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#782-2024-08-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      78.2 (2024-08-14)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#781-2024-08-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      78.1 (2024-08-13)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#780-2024-08-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      78.0 (2024-08-13)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#770-2024-07-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      77.0 (2024-07-29)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#760-2024-07-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      76.0 (2024-07-23)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#750-2024-07-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      75.0 (2024-07-10)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#740-2024-07-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      74.0 (2024-07-10)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#730-2024-07-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      73.0 (2024-07-09)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7201-2024-06-26" class="md-nav__link">
+    <span class="md-ellipsis">
+      72.01 (2024-06-26)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7200-2024-06-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      72.00 (2024-06-25)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7101-2024-06-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      71.01 (2024-06-17)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7100-2024-06-03" class="md-nav__link">
+    <span class="md-ellipsis">
+      71.00 (2024-06-03)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7001-2024-04-03" class="md-nav__link">
+    <span class="md-ellipsis">
+      70.01 (2024-04-03)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7000-2024-03-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      70.00 (2024-03-18)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6914-2024-02-05" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.14 (2024-02-05)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6913-2024-01-08" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.13 (2024-01-08)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6912-2023-11-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.12 (2023-11-27)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6911-2023-11-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.11 (2023-11-27)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6910-2023-10-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.10 (2023-10-24)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#699-2023-10-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.9 (2023-10-23)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#698-2023-10-06" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.8 (2023-10-06)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#697-2023-09-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.7 (2023-09-21)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#696-2023-09-05" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.6 (2023-09-05)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#695-2023-08-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.5 (2023-08-30)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#694-2023-07-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.4 (2023-07-07)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#693-2023-06-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.3 (2023-06-07)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#692-2023-06-06" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.2 (2023-06-06)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#691-2023-05-02" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.1 (2023-05-02)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#690-2023-04-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.0 (2023-04-11)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#681-2023-03-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      68.1 (2023-03-22)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#680-2023-03-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      68.0 (2023-03-21)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#671-2023-01-31" class="md-nav__link">
+    <span class="md-ellipsis">
+      67.1 (2023-01-31)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#670-2023-01-31" class="md-nav__link">
+    <span class="md-ellipsis">
+      67.0 (2023-01-31)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#660" class="md-nav__link">
+    <span class="md-ellipsis">
+      66.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#651-2023-01-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      65.1 (2023-01-25)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#650-2022-11-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      65.0 (2022-11-29)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#640-2022-10-19" class="md-nav__link">
+    <span class="md-ellipsis">
+      64.0 (2022-10-19)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#631-2022-10-03" class="md-nav__link">
+    <span class="md-ellipsis">
+      63.1 (2022-10-03)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#630-2022-09-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      63.0 (2022-09-27)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#620-2022-08-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      62.0 (2022-08-30)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#610-2022-08-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      61.0 (2022-08-09)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#610-2022-08-09_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      61.0 (2022-08-09)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#601-2022-07-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      60.1 (2022-07-27)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#600-2022-07-26" class="md-nav__link">
+    <span class="md-ellipsis">
+      60.0 (2022-07-26)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#590-2022-07-19" class="md-nav__link">
+    <span class="md-ellipsis">
+      59.0 (2022-07-19)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#580-2022-07-04" class="md-nav__link">
+    <span class="md-ellipsis">
+      58.0 (2022-07-04)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#570-2022-06-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      57.0 (2022-06-30)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#560-2022-06-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      56.0 (2022-06-28)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#550-2022-06-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      55.0 (2022-06-28)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#542-2022-06-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      54.2 (2022-06-28)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#541-2022-05-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      54.1 (2022-05-23)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#540-2022-05-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      54.0 (2022-05-12)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#530-2022-01-31" class="md-nav__link">
+    <span class="md-ellipsis">
+      53.0 (2022-01-31)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#521-2022-01-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      52.1 (2022-01-25)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#520-2022-01-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      52.0 (2022-01-24)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#510-2022-01-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      51.0 (2022-01-20)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#503-2022-01-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      50.3 (2022-01-11)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#502-2022-01-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      50.2 (2022-01-11)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#501-2022-01-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      50.1 (2022-01-07)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#500-2022-01-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      50.0 (2022-01-07)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#490-2021-12-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      49.0 (2021-12-17)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#480-2021-12-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      48.0 (2021-12-14)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#470-2021-12-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      47.0 (2021-12-01)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#460-2021-11-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      46.0 (2021-11-29)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#451-2021-11-05" class="md-nav__link">
+    <span class="md-ellipsis">
+      45.1 (2021-11-05)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#450-2021-10-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      45.0 (2021-10-12)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#441-2021-10-06" class="md-nav__link">
+    <span class="md-ellipsis">
+      44.1 (2021-10-06)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#440-2021-10-04" class="md-nav__link">
+    <span class="md-ellipsis">
+      44.0 (2021-10-04)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#431-2021-09-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      43.1 (2021-09-27)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#430-2021-09-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      43.0 (2021-09-17)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#420-2021-08-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      42.0 (2021-08-25)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#410-2021-08-19" class="md-nav__link">
+    <span class="md-ellipsis">
+      41.0 (2021-08-19)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#400-2021-07-19" class="md-nav__link">
+    <span class="md-ellipsis">
+      40.0 (2021-07-19)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#391-2021-07-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      39.1 (2021-07-07)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#390-2021-07-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      39.0 (2021-07-01)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#380-2021-06-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      38.0 (2021-06-28)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#373-2021-06-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      37.3 (2021-06-11)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#372-2021-06-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      37.2 (2021-06-10)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#371-2021-06-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      37.1 (2021-06-09)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#370-2021-06-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      37.0 (2021-06-07)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#361-2021-05-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      36.1 (2021-05-25)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#360-2021-05-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      36.0 (2021-05-20)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#352-2021-04-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      35.2 (2021-04-21)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#351-2021-02-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      35.1 (2021-02-24)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#350-2021-02-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      35.0 (2021-02-18)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#341-2021-02-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      34.1 (2021-02-15)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#340-2021-02-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      34.0 (2021-02-15)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#330-2021-02-02" class="md-nav__link">
+    <span class="md-ellipsis">
+      33.0 (2021-02-02)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#321-2021-01-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      32.1 (2021-01-28)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#320-2021-01-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      32.0 (2021-01-27)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#310-2021-01-19" class="md-nav__link">
+    <span class="md-ellipsis">
+      31.0 (2021-01-19)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#303-2021-01-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      30.3 (2021-01-14)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#302-2021-01-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      30.2 (2021-01-13)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#301-2020-12-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      30.1 (2020-12-14)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#300-2020-12-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      30.0 (2020-12-14)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#290-2020-11-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      29.0 (2020-11-30)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#280-2020-11-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      28.0 (2020-11-25)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#270-2020-10-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      27.0 (2020-10-15)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#260-2020-09-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      26.0 (2020-09-22)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#250-2020-09-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      25.0 (2020-09-14)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#240-2020-08-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      24.0 (2020-08-20)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#230-2020-07-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      23.0 (2020-07-27)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#220-2020-07-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      22.0 (2020-07-23)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#210-2020-07-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      21.0 (2020-07-09)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#200-2020-07-02" class="md-nav__link">
+    <span class="md-ellipsis">
+      20.0 (2020-07-02)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#191-2020-06-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      19.1 (2020-06-23)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#190-2020-06-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      19.0 (2020-06-11)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#180-2020-06-04" class="md-nav__link">
+    <span class="md-ellipsis">
+      18.0 (2020-06-04)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#170-2020-05-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      17.0 (2020-05-21)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#161-2020-05-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      16.1 (2020-05-20)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#160-2020-05-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      16.0 (2020-05-07)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#151-2020-05-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.1 (2020-05-01)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#150-2020-05-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.0 (2020-05-01)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#140-2020-04-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      14.0 (2020-04-22)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#130-2020-04-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      13.0 (2020-04-20)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#120-2020-04-02" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.0 (2020-04-02)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#110-2020-04-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.0 (2020-04-01)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#100-2020-03-31" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.0 (2020-03-31)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#90-2020-03-31" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.0 (2020-03-31)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#80-2020-03-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.0 (2020-03-30)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#70-2020-03-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.0 (2020-03-25)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#60-2020-03-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.0 (2020-03-24)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#50-2020-03-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.0 (2020-03-20)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#40-2020-02-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.0 (2020-02-24)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-2020-02-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 (2020-02-17)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-2020-02-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 (2020-02-10)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#30-2020-02-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.0 (2020-02-10)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-2020-01-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 (2020-01-22)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-2020-01-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.0 (2020-01-21)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-2019-12-19" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 (2019-12-19)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-2019-12-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.0 (2019-12-18)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#881-2025-10-06" class="md-nav__link">
+    <span class="md-ellipsis">
+      88.1 (2025-10-06)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#880-2025-09-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      88.0 (2025-09-30)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#871-2025-09-02" class="md-nav__link">
+    <span class="md-ellipsis">
+      87.1 (2025-09-02)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#870-2025-07-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      87.0 (2025-07-01)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#860-2025-04-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      86.0 (2025-04-29)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#850-2025-03-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      85.0 (2025-03-17)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#840-2025-03-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      84.0 (2025-03-12)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#831-2025-03-03" class="md-nav__link">
+    <span class="md-ellipsis">
+      83.1 (2025-03-03)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#830-2025-03-03" class="md-nav__link">
+    <span class="md-ellipsis">
+      83.0 (2025-03-03)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#829-2025-01-08" class="md-nav__link">
+    <span class="md-ellipsis">
+      82.9 (2025-01-08)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#828-2025-01-08" class="md-nav__link">
+    <span class="md-ellipsis">
+      82.8 (2025-01-08)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#827-2024-11-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      82.7 (2024-11-29)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#826-2024-11-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      82.6 (2024-11-28)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#825-2024-11-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      82.5 (2024-11-28)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#824-2024-11-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      82.4 (2024-11-27)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#823-2024-11-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      82.3 (2024-11-25)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#822-2024-11-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      82.2 (2024-11-25)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#821-2024-11-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      82.1 (2024-11-25)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#820-2024-11-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      82.0 (2024-11-25)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#811-2024-11-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      81.1 (2024-11-21)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#810-2024-11-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      81.0 (2024-11-14)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#802-2024-11-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      80.2 (2024-11-11)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#801-2024-10-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      80.1 (2024-10-15)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#800-2024-10-08" class="md-nav__link">
+    <span class="md-ellipsis">
+      80.0 (2024-10-08)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#790-2024-08-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      79.0 (2024-08-20)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#782-2024-08-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      78.2 (2024-08-14)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#781-2024-08-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      78.1 (2024-08-13)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#780-2024-08-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      78.0 (2024-08-13)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#770-2024-07-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      77.0 (2024-07-29)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#760-2024-07-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      76.0 (2024-07-23)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#750-2024-07-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      75.0 (2024-07-10)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#740-2024-07-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      74.0 (2024-07-10)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#730-2024-07-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      73.0 (2024-07-09)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7201-2024-06-26" class="md-nav__link">
+    <span class="md-ellipsis">
+      72.01 (2024-06-26)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7200-2024-06-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      72.00 (2024-06-25)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7101-2024-06-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      71.01 (2024-06-17)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7100-2024-06-03" class="md-nav__link">
+    <span class="md-ellipsis">
+      71.00 (2024-06-03)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7001-2024-04-03" class="md-nav__link">
+    <span class="md-ellipsis">
+      70.01 (2024-04-03)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7000-2024-03-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      70.00 (2024-03-18)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6914-2024-02-05" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.14 (2024-02-05)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6913-2024-01-08" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.13 (2024-01-08)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6912-2023-11-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.12 (2023-11-27)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6911-2023-11-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.11 (2023-11-27)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6910-2023-10-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.10 (2023-10-24)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#699-2023-10-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.9 (2023-10-23)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#698-2023-10-06" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.8 (2023-10-06)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#697-2023-09-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.7 (2023-09-21)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#696-2023-09-05" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.6 (2023-09-05)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#695-2023-08-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.5 (2023-08-30)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#694-2023-07-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.4 (2023-07-07)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#693-2023-06-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.3 (2023-06-07)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#692-2023-06-06" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.2 (2023-06-06)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#691-2023-05-02" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.1 (2023-05-02)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#690-2023-04-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      69.0 (2023-04-11)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#681-2023-03-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      68.1 (2023-03-22)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#680-2023-03-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      68.0 (2023-03-21)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#671-2023-01-31" class="md-nav__link">
+    <span class="md-ellipsis">
+      67.1 (2023-01-31)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#670-2023-01-31" class="md-nav__link">
+    <span class="md-ellipsis">
+      67.0 (2023-01-31)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#660" class="md-nav__link">
+    <span class="md-ellipsis">
+      66.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#651-2023-01-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      65.1 (2023-01-25)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#650-2022-11-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      65.0 (2022-11-29)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#640-2022-10-19" class="md-nav__link">
+    <span class="md-ellipsis">
+      64.0 (2022-10-19)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#631-2022-10-03" class="md-nav__link">
+    <span class="md-ellipsis">
+      63.1 (2022-10-03)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#630-2022-09-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      63.0 (2022-09-27)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#620-2022-08-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      62.0 (2022-08-30)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#610-2022-08-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      61.0 (2022-08-09)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#610-2022-08-09_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      61.0 (2022-08-09)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#601-2022-07-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      60.1 (2022-07-27)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#600-2022-07-26" class="md-nav__link">
+    <span class="md-ellipsis">
+      60.0 (2022-07-26)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#590-2022-07-19" class="md-nav__link">
+    <span class="md-ellipsis">
+      59.0 (2022-07-19)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#580-2022-07-04" class="md-nav__link">
+    <span class="md-ellipsis">
+      58.0 (2022-07-04)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#570-2022-06-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      57.0 (2022-06-30)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#560-2022-06-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      56.0 (2022-06-28)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#550-2022-06-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      55.0 (2022-06-28)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#542-2022-06-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      54.2 (2022-06-28)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#541-2022-05-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      54.1 (2022-05-23)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#540-2022-05-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      54.0 (2022-05-12)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#530-2022-01-31" class="md-nav__link">
+    <span class="md-ellipsis">
+      53.0 (2022-01-31)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#521-2022-01-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      52.1 (2022-01-25)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#520-2022-01-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      52.0 (2022-01-24)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#510-2022-01-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      51.0 (2022-01-20)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#503-2022-01-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      50.3 (2022-01-11)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#502-2022-01-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      50.2 (2022-01-11)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#501-2022-01-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      50.1 (2022-01-07)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#500-2022-01-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      50.0 (2022-01-07)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#490-2021-12-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      49.0 (2021-12-17)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#480-2021-12-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      48.0 (2021-12-14)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#470-2021-12-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      47.0 (2021-12-01)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#460-2021-11-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      46.0 (2021-11-29)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#451-2021-11-05" class="md-nav__link">
+    <span class="md-ellipsis">
+      45.1 (2021-11-05)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#450-2021-10-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      45.0 (2021-10-12)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#441-2021-10-06" class="md-nav__link">
+    <span class="md-ellipsis">
+      44.1 (2021-10-06)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#440-2021-10-04" class="md-nav__link">
+    <span class="md-ellipsis">
+      44.0 (2021-10-04)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#431-2021-09-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      43.1 (2021-09-27)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#430-2021-09-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      43.0 (2021-09-17)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#420-2021-08-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      42.0 (2021-08-25)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#410-2021-08-19" class="md-nav__link">
+    <span class="md-ellipsis">
+      41.0 (2021-08-19)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#400-2021-07-19" class="md-nav__link">
+    <span class="md-ellipsis">
+      40.0 (2021-07-19)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#391-2021-07-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      39.1 (2021-07-07)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#390-2021-07-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      39.0 (2021-07-01)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#380-2021-06-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      38.0 (2021-06-28)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#373-2021-06-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      37.3 (2021-06-11)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#372-2021-06-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      37.2 (2021-06-10)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#371-2021-06-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      37.1 (2021-06-09)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#370-2021-06-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      37.0 (2021-06-07)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#361-2021-05-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      36.1 (2021-05-25)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#360-2021-05-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      36.0 (2021-05-20)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#352-2021-04-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      35.2 (2021-04-21)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#351-2021-02-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      35.1 (2021-02-24)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#350-2021-02-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      35.0 (2021-02-18)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#341-2021-02-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      34.1 (2021-02-15)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#340-2021-02-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      34.0 (2021-02-15)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#330-2021-02-02" class="md-nav__link">
+    <span class="md-ellipsis">
+      33.0 (2021-02-02)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#321-2021-01-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      32.1 (2021-01-28)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#320-2021-01-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      32.0 (2021-01-27)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#310-2021-01-19" class="md-nav__link">
+    <span class="md-ellipsis">
+      31.0 (2021-01-19)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#303-2021-01-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      30.3 (2021-01-14)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#302-2021-01-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      30.2 (2021-01-13)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#301-2020-12-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      30.1 (2020-12-14)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#300-2020-12-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      30.0 (2020-12-14)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#290-2020-11-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      29.0 (2020-11-30)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#280-2020-11-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      28.0 (2020-11-25)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#270-2020-10-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      27.0 (2020-10-15)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#260-2020-09-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      26.0 (2020-09-22)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#250-2020-09-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      25.0 (2020-09-14)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#240-2020-08-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      24.0 (2020-08-20)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#230-2020-07-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      23.0 (2020-07-27)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#220-2020-07-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      22.0 (2020-07-23)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#210-2020-07-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      21.0 (2020-07-09)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#200-2020-07-02" class="md-nav__link">
+    <span class="md-ellipsis">
+      20.0 (2020-07-02)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#191-2020-06-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      19.1 (2020-06-23)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#190-2020-06-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      19.0 (2020-06-11)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#180-2020-06-04" class="md-nav__link">
+    <span class="md-ellipsis">
+      18.0 (2020-06-04)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#170-2020-05-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      17.0 (2020-05-21)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#161-2020-05-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      16.1 (2020-05-20)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#160-2020-05-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      16.0 (2020-05-07)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#151-2020-05-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.1 (2020-05-01)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#150-2020-05-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.0 (2020-05-01)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#140-2020-04-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      14.0 (2020-04-22)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#130-2020-04-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      13.0 (2020-04-20)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#120-2020-04-02" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.0 (2020-04-02)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#110-2020-04-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.0 (2020-04-01)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#100-2020-03-31" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.0 (2020-03-31)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#90-2020-03-31" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.0 (2020-03-31)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#80-2020-03-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.0 (2020-03-30)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#70-2020-03-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.0 (2020-03-25)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#60-2020-03-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.0 (2020-03-24)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#50-2020-03-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.0 (2020-03-20)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#40-2020-02-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.0 (2020-02-24)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-2020-02-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 (2020-02-17)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-2020-02-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 (2020-02-10)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#30-2020-02-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.0 (2020-02-10)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-2020-01-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 (2020-01-22)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-2020-01-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.0 (2020-01-21)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-2019-12-19" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 (2019-12-19)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-2019-12-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.0 (2019-12-18)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="release-history">Release History<a class="headerlink" href="#release-history" title="Permanent link">&para;</a></h1>
+<h2 id="881-2025-10-06">88.1 (2025-10-06)<a class="headerlink" href="#881-2025-10-06" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/88.0...88.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/88.0...88.1</a></p>
+<ul>
+<li>Fix footer link on blog homepage</li>
+<li>Update documentation about <code>GOOGLE_MAPS_V3_APIKEY</code></li>
+</ul>
+<h2 id="880-2025-09-30">88.0 (2025-09-30)<a class="headerlink" href="#880-2025-09-30" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/87.1...88.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/87.1...88.0</a></p>
+<ul>
+<li>Upgrade to Wagtail 7.0.3 (via 6.4.2)</li>
+</ul>
+<h2 id="871-2025-09-02">87.1 (2025-09-02)<a class="headerlink" href="#871-2025-09-02" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/87.0...87.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/87.0...87.1</a></p>
+<ul>
+<li>
+<p>Add configuration option to be able to set CSP_DEFAULT_SRC=None</p>
+</li>
+<li>
+<p>Upgrade to Wagtail 7.0.2 (via 6.4.2)</p>
+</li>
+</ul>
+<h2 id="870-2025-07-01">87.0 (2025-07-01)<a class="headerlink" href="#870-2025-07-01" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/86.0...87.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/86.0...87.0</a></p>
+<ul>
+<li>Add configuration option for CSP_FRAME_ANCESTORS</li>
+</ul>
+<h2 id="860-2025-04-29">86.0 (2025-04-29)<a class="headerlink" href="#860-2025-04-29" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/85.0...86.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/85.0...86.0</a></p>
+<ul>
+<li>Add Silktide as a cookie consent manager</li>
+<li>Remove old cookie consent manager</li>
+<li>Remove (unused) Fathom analytics</li>
+</ul>
+<h2 id="850-2025-03-17">85.0 (2025-03-17)<a class="headerlink" href="#850-2025-03-17" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/84.0...85.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/84.0...85.0</a></p>
+<ul>
+<li>Fix alignment in steps block</li>
+<li>Add management command for deleting old form submissions</li>
+<li>Restrict form submissions to specific groups</li>
+<li>Add embeddable form block</li>
+</ul>
+<h2 id="840-2025-03-12">84.0 (2025-03-12)<a class="headerlink" href="#840-2025-03-12" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/83.1...84.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/83.1...84.0</a></p>
+<ul>
+<li>Accessibility fixes for accordions and footer link</li>
+<li>Switch GIS provider for BucksMapsClient to maps.buckinghamshire.gov.uk</li>
+<li>Add <code>WAGTAILSEARCH_HITS_MAX_AGE</code> setting to use in conjunction with <code>searchpromotions_garbage_collect</code> management command.</li>
+<li>Change accordions' headers from h2 to h3</li>
+<li>Reduce height of formbuilder's multiline text boxes (5 -&gt; 3 lines)</li>
+<li>Restore ability to specify choices by lines (instead of comma-separated) for multi-checkbox formbuilder fields</li>
+<li>Add H4 level blocks to BaseStoryBlock</li>
+</ul>
+<h2 id="831-2025-03-03">83.1 (2025-03-03)<a class="headerlink" href="#831-2025-03-03" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/83.0...83.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/83.0...83.1</a></p>
+<ul>
+<li>Add support for hidden until-found attr in accordion and steps styles</li>
+</ul>
+<h2 id="830-2025-03-03">83.0 (2025-03-03)<a class="headerlink" href="#830-2025-03-03" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/82.9...83.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/82.9...83.0</a></p>
+<ul>
+<li>Make content searchable in accordions</li>
+<li>Fix alignment of plain text tables</li>
+<li>Add missing label to form field</li>
+<li>Fix unstructured headings when using tables</li>
+<li>Fix a11y issues from Silktide</li>
+<li>Fix missing content after headings</li>
+<li>Add missing aria labels to sidebars and postcode lookup search</li>
+<li>Add missing aria label to the FIS card block</li>
+</ul>
+<h2 id="829-2025-01-08">82.9 (2025-01-08)<a class="headerlink" href="#829-2025-01-08" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/82.8...82.9">https://git.torchbox.com/buckinghamshire-council/bc/compare/82.8...82.9</a></p>
+<ul>
+<li>Upgrade to Wagtail 6.3</li>
+<li>Upgrade node version from v12 to v20</li>
+</ul>
+<h2 id="828-2025-01-08">82.8 (2025-01-08)<a class="headerlink" href="#828-2025-01-08" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/82.7...82.8">https://git.torchbox.com/buckinghamshire-council/bc/compare/82.7...82.8</a></p>
+<ul>
+<li>Upgrade Wagtail to v6.2</li>
+</ul>
+<h2 id="827-2024-11-29">82.7 (2024-11-29)<a class="headerlink" href="#827-2024-11-29" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/82.6...82.7">https://git.torchbox.com/buckinghamshire-council/bc/compare/82.6...82.7</a></p>
+<ul>
+<li>FE: Fix spacing between rich-text and callout block</li>
+</ul>
+<h2 id="826-2024-11-28">82.6 (2024-11-28)<a class="headerlink" href="#826-2024-11-28" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/82.5...82.6">https://git.torchbox.com/buckinghamshire-council/bc/compare/82.5...82.6</a></p>
+<ul>
+<li>FE: Reinstate breadcrumb on non-fostering event index pages</li>
+</ul>
+<h2 id="825-2024-11-28">82.5 (2024-11-28)<a class="headerlink" href="#825-2024-11-28" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/82.4...82.5">https://git.torchbox.com/buckinghamshire-council/bc/compare/82.4...82.5</a></p>
+<ul>
+<li>FE: Post-launch enhancements</li>
+</ul>
+<h2 id="824-2024-11-27">82.4 (2024-11-27)<a class="headerlink" href="#824-2024-11-27" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/82.3...82.4">https://git.torchbox.com/buckinghamshire-council/bc/compare/82.3...82.4</a></p>
+<ul>
+<li>Add setting to limit max image size</li>
+</ul>
+<h2 id="823-2024-11-25">82.3 (2024-11-25)<a class="headerlink" href="#823-2024-11-25" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/82.2...82.3">https://git.torchbox.com/buckinghamshire-council/bc/compare/82.2...82.3</a></p>
+<ul>
+<li>FE: Fix heading hierarchy</li>
+</ul>
+<h2 id="822-2024-11-25">82.2 (2024-11-25)<a class="headerlink" href="#822-2024-11-25" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/82.1...82.2">https://git.torchbox.com/buckinghamshire-council/bc/compare/82.1...82.2</a></p>
+<ul>
+<li>FE: A11y fix for hero button</li>
+</ul>
+<h2 id="821-2024-11-25">82.1 (2024-11-25)<a class="headerlink" href="#821-2024-11-25" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/82.0...82.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/82.0...82.1</a></p>
+<ul>
+<li>FE: Fix SF stacking</li>
+</ul>
+<h2 id="820-2024-11-25">82.0 (2024-11-25)<a class="headerlink" href="#820-2024-11-25" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/81.1...82.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/81.1...82.0</a></p>
+<ul>
+<li>Various FE fixes/updates</li>
+<li>Add description field to the <code>EventIndexPage</code></li>
+<li>Update the <code>hero--promo-blog.html</code> molecule to display a description in both the the <code>BlogHomePage</code> and <code>EventIndexPage</code> hero</li>
+</ul>
+<h2 id="811-2024-11-21">81.1 (2024-11-21)<a class="headerlink" href="#811-2024-11-21" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/81.0...81.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/81.0...81.1</a></p>
+<ul>
+<li>Various FE fixes/updates</li>
+<li>Replace the <code>hero_link_page</code> and <code>hero_link_text</code> fields of a Promotional Content page with the <code>LinkBlock</code> from the <code>bc.utils.blocks</code> module</li>
+<li>Replace the <code>link_page</code> and <code>link_text</code> fields with of the CalloutWithImage Block with a LinkBlock from the <code>bc.utils.blocks</code> module</li>
+<li>Update Promotional Content LinkCard block to allow more field choices (<code>internal_link</code>, <code>external_link</code>, <code>email</code> or a <code>phone_number</code>)</li>
+<li>Add <code>phonenumberlite</code> (version 8.13.50+) dependency to the project</li>
+<li>Add PhoneNumberBlock to the Promotional Content blocks module</li>
+</ul>
+<h2 id="810-2024-11-14">81.0 (2024-11-14)<a class="headerlink" href="#810-2024-11-14" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/80.2...81.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/80.2...81.0</a></p>
+<ul>
+<li>
+<p>Add promotional site page types</p>
+</li>
+<li>
+<p>Bump Node.js from <a href="https://nodejs.org/en/blog/release/v12.22.12">v12</a> to <a href="https://nodejs.org/en/blog/release/v14.21.3">v14</a></p>
+</li>
+<li><a href="https://docs.wagtail.org/en/latest/releases/6.2.html">Wagtail 6.1</a> upgrade</li>
+</ul>
+<h2 id="802-2024-11-11">80.2 (2024-11-11)<a class="headerlink" href="#802-2024-11-11" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/80.1...80.2">https://git.torchbox.com/buckinghamshire-council/bc/compare/80.1...80.2</a></p>
+<ul>
+<li>upgrade python to 3.11</li>
+</ul>
+<h2 id="801-2024-10-15">80.1 (2024-10-15)<a class="headerlink" href="#801-2024-10-15" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/80.0...80.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/80.0...80.1</a></p>
+<ul>
+<li>Update Redis config to use up-to-date Torchbox standard, including compatibility with Heroku's Redis services (which use self-signed certificates for secure connections)</li>
+<li>Update local dev config to match Heroku version</li>
+</ul>
+<h2 id="800-2024-10-08">80.0 (2024-10-08)<a class="headerlink" href="#800-2024-10-08" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Fix panels on category page</li>
+<li>Update wycombe url for school hub</li>
+</ul>
+<h2 id="790-2024-08-20">79.0 (2024-08-20)<a class="headerlink" href="#790-2024-08-20" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/78.2...79.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/78.2...79.0</a></p>
+<ul>
+<li>EHCCo widget: Update widget heading text</li>
+<li>EHCCo widget: Make emails clickable by converting them to links</li>
+<li>EHCCo widget: Change fallback text from TBC to awaiting allocation</li>
+<li>Add option to display images for first three pages in category page</li>
+</ul>
+<h2 id="782-2024-08-14">78.2 (2024-08-14)<a class="headerlink" href="#782-2024-08-14" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/78.1...78.2">https://git.torchbox.com/buckinghamshire-council/bc/compare/78.1...78.2</a></p>
+<ul>
+<li>Fix ehcco api calls being made to the wrong endpoint</li>
+</ul>
+<h2 id="781-2024-08-13">78.1 (2024-08-13)<a class="headerlink" href="#781-2024-08-13" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/78.0...78.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/78.0...78.1</a></p>
+<ul>
+<li>Don't cache WasteWizardPages, as they need to be cookie-sensitive</li>
+</ul>
+<h2 id="780-2024-08-13">78.0 (2024-08-13)<a class="headerlink" href="#780-2024-08-13" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/77.0...78.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/77.0...78.0</a></p>
+<ul>
+<li><a href="https://trello.com/c/09eNT1iH/6-fis-directory-search-widget-fe-and-be">Directory search block</a> (<a href="https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/712">Merge request #712</a>)</li>
+<li><a href="https://trello.com/c/CcEf4OYn">Directory services block</a> (<a href="https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/727">Merge request #727</a>)</li>
+</ul>
+<h2 id="770-2024-07-29">77.0 (2024-07-29)<a class="headerlink" href="#770-2024-07-29" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/76.0...77.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/76.0...77.0</a></p>
+<ul>
+<li><a href="https://docs.wagtail.org/en/latest/releases/6.1.html">Wagtail 6.1</a> upgrade</li>
+</ul>
+<h2 id="760-2024-07-23">76.0 (2024-07-23)<a class="headerlink" href="#760-2024-07-23" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/75.0...76.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/75.0...76.0</a></p>
+<ul>
+<li>Change div to section on cards_block.html to prevent aria-label warning</li>
+<li>Remove search-header--fis</li>
+</ul>
+<h2 id="750-2024-07-10">75.0 (2024-07-10)<a class="headerlink" href="#750-2024-07-10" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/74.0...75.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/74.0...75.0</a></p>
+<ul>
+<li>Reinstate removed header styles</li>
+<li>Make header height uniform across all pages in fis site</li>
+</ul>
+<h2 id="740-2024-07-10">74.0 (2024-07-10)<a class="headerlink" href="#740-2024-07-10" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/73.0...74.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/73.0...74.0</a></p>
+<ul>
+<li>Update FIS search in header - remove dropdown search and simplify to single text input, consistent with the standard homepage</li>
+<li>Add transparent border to search inputs to improve visibility of input boundary in high contrast mode</li>
+</ul>
+<h2 id="730-2024-07-09">73.0 (2024-07-09)<a class="headerlink" href="#730-2024-07-09" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/72.01...73.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/72.01...73.0</a></p>
+<ul>
+<li>Add new search promotional block on search page</li>
+<li>Add FIS EHCCo search</li>
+<li>Modify FIS search results view</li>
+<li>Modify FIS homepage</li>
+<li>Modify FIS category index page</li>
+<li>Fix accessibility issues from Silktide</li>
+</ul>
+<h2 id="7201-2024-06-26">72.01 (2024-06-26)<a class="headerlink" href="#7201-2024-06-26" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/72.00...72.01">https://git.torchbox.com/buckinghamshire-council/bc/compare/72.00...72.01</a></p>
+<ul>
+<li>Wagtail 6.0 upgrade fix add classname to include for patterns/atoms/icons/icon.html</li>
+</ul>
+<h2 id="7200-2024-06-25">72.00 (2024-06-25)<a class="headerlink" href="#7200-2024-06-25" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/71.01...72.00">https://git.torchbox.com/buckinghamshire-council/bc/compare/71.01...72.00</a></p>
+<ul>
+<li>Update link block component to always display list items for all screen sizes (following user testing feedback)</li>
+<li>Accessibility fix: page does not start with a h1</li>
+<li>Accessibility fix: aria-label not allowed on subpages div</li>
+<li>Accessibility fix: heading order not correct for footer column headings</li>
+</ul>
+<h2 id="7101-2024-06-17">71.01 (2024-06-17)<a class="headerlink" href="#7101-2024-06-17" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/71.00...71.01">https://git.torchbox.com/buckinghamshire-council/bc/compare/71.00...71.01</a></p>
+<ul>
+<li>Validate Talentlink-imported images as if uploaded through the Wagtail admin</li>
+</ul>
+<h2 id="7100-2024-06-03">71.00 (2024-06-03)<a class="headerlink" href="#7100-2024-06-03" title="Permanent link">&para;</a></h2>
+<p><a href="https://docs.wagtail.org/en/latest/releases/6.0.html">Wagtail 6.0</a> upgrade</p>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/70.01...71.00">https://git.torchbox.com/buckinghamshire-council/bc/compare/70.01...71.00</a></p>
+<h2 id="7001-2024-04-03">70.01 (2024-04-03)<a class="headerlink" href="#7001-2024-04-03" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Update <code>flake8</code> to version 3.8.4 for Python 3.8 compatibility</li>
+<li>Fix <code>global_vars</code> context processor when no default site is set</li>
+</ul>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/70.01...70.00">https://git.torchbox.com/buckinghamshire-council/bc/compare/70.01...70.00</a></p>
+<h2 id="7000-2024-03-18">70.00 (2024-03-18)<a class="headerlink" href="#7000-2024-03-18" title="Permanent link">&para;</a></h2>
+<p>Wagtail 5.2 and Django 4.2 upgrade</p>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/70.00...69.14">https://git.torchbox.com/buckinghamshire-council/bc/compare/70.00...69.14</a></p>
+<h2 id="6914-2024-02-05">69.14 (2024-02-05)<a class="headerlink" href="#6914-2024-02-05" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/69.13...69.14">https://git.torchbox.com/buckinghamshire-council/bc/compare/69.13...69.14</a></p>
+<ul>
+<li>Add a DateRangeFilter to the FeedbackCommentReportView and UsefulnessFeedbackReportView</li>
+</ul>
+<h2 id="6913-2024-01-08">69.13 (2024-01-08)<a class="headerlink" href="#6913-2024-01-08" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/69.12...69.13">https://git.torchbox.com/buckinghamshire-council/bc/compare/69.12...69.13</a></p>
+<ul>
+<li>Update cookie message to hide from devices which have previously declined cookies.</li>
+</ul>
+<h2 id="6912-2023-11-27">69.12 (2023-11-27)<a class="headerlink" href="#6912-2023-11-27" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/69.11...69.12">https://git.torchbox.com/buckinghamshire-council/bc/compare/69.11...69.12</a></p>
+<ul>
+<li>Bump wagtail version to 5.0.5</li>
+</ul>
+<h2 id="6911-2023-11-27">69.11 (2023-11-27)<a class="headerlink" href="#6911-2023-11-27" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/69.10...69.11">https://git.torchbox.com/buckinghamshire-council/bc/compare/69.10...69.11</a></p>
+<ul>
+<li>Add a template for the RedirectPage type</li>
+<li>Add a check for empty columns in the PieChartBlock</li>
+<li>Add a Retry to the BucksMapsClient</li>
+<li>Upgrade Wagtail to 5.0</li>
+</ul>
+<h2 id="6910-2023-10-24">69.10 (2023-10-24)<a class="headerlink" href="#6910-2023-10-24" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/69.9...69.10">https://git.torchbox.com/buckinghamshire-council/bc/compare/69.9...69.10</a></p>
+<ul>
+<li><a href="https://torchbox.monday.com/boards/1143413211/views/811717/pulses/1259231588">Update Waste Wizard api url</a></li>
+</ul>
+<h2 id="699-2023-10-23">69.9 (2023-10-23)<a class="headerlink" href="#699-2023-10-23" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/69.8...69.9">https://git.torchbox.com/buckinghamshire-council/bc/compare/69.8...69.9</a></p>
+<ul>
+<li>Use <a href="https://github.com/nvm-sh/nvm">nvm</a> to install Node.js</li>
+<li>Add fix for object has no attribute 'is_preview'</li>
+</ul>
+<h2 id="698-2023-10-06">69.8 (2023-10-06)<a class="headerlink" href="#698-2023-10-06" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/69.7...69.8">https://git.torchbox.com/buckinghamshire-council/bc/compare/69.7...69.8</a></p>
+<ul>
+<li><a href="https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/665">Fixes for Google spam issue</a></li>
+</ul>
+<h2 id="697-2023-09-21">69.7 (2023-09-21)<a class="headerlink" href="#697-2023-09-21" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/69.6...69.7">https://git.torchbox.com/buckinghamshire-council/bc/compare/69.6...69.7</a></p>
+<ul>
+<li>Use the same Postgres version (v13.10) everywhere.</li>
+</ul>
+<h2 id="696-2023-09-05">69.6 (2023-09-05)<a class="headerlink" href="#696-2023-09-05" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/69.5...69.6">https://git.torchbox.com/buckinghamshire-council/bc/compare/69.5...69.6</a></p>
+<ul>
+<li>Update <em>Safe Spaces</em> widget URLs</li>
+</ul>
+<h2 id="695-2023-08-30">69.5 (2023-08-30)<a class="headerlink" href="#695-2023-08-30" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/69.4...69.5">https://git.torchbox.com/buckinghamshire-council/bc/compare/69.4...69.5</a></p>
+<ul>
+<li><a href="https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/658">Fix collectstatic error when running fab build by upgrading python to 3.8, debian image, poetry and psycopg2</a></li>
+</ul>
+<h2 id="694-2023-07-07">69.4 (2023-07-07)<a class="headerlink" href="#694-2023-07-07" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/69.3...69.4">https://git.torchbox.com/buckinghamshire-council/bc/compare/69.3...69.4</a></p>
+<ul>
+<li><a href="https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/655">Upgrade Django to 3.2.20 for CVE-2023-36053</a></li>
+</ul>
+<h2 id="693-2023-06-07">69.3 (2023-06-07)<a class="headerlink" href="#693-2023-06-07" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/69.2...69.3">https://git.torchbox.com/buckinghamshire-council/bc/compare/69.2...69.3</a></p>
+<ul>
+<li><a href="https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/606">Make <strong>RedirectPage</strong> redirect to target url when directly visited</a></li>
+</ul>
+<h2 id="692-2023-06-06">69.2 (2023-06-06)<a class="headerlink" href="#692-2023-06-06" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/69.1...69.2">https://git.torchbox.com/buckinghamshire-council/bc/compare/69.1...69.2</a></p>
+<ul>
+<li><a href="https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/651">Wagtail 4.2 Upgrade</a></li>
+</ul>
+<h2 id="691-2023-05-02">69.1 (2023-05-02)<a class="headerlink" href="#691-2023-05-02" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/69.0...69.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/69.0...69.1</a></p>
+<ul>
+<li><a href="https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/648">Update table block to only convert explicitly formatted markdown links</a></li>
+</ul>
+<h2 id="690-2023-04-11">69.0 (2023-04-11)<a class="headerlink" href="#690-2023-04-11" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/68.1...69.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/68.1...69.0</a></p>
+<ul>
+<li>Create <strong>AwardsSnippet</strong> and update <strong>RecruitmentHomePage</strong> with a FK to the <strong>AwardsSnippet</strong></li>
+<li>Define an <strong>IconChoice</strong> <a href="https://docs.djangoproject.com/en/3.2/ref/models/fields/#enumeration-types">TextChoices</a> model and update <strong>JobCategory</strong> with an <code>icon</code> field whose choices are <code>IconChoice.choices</code></li>
+<li>Update the <code>delete_docker_database</code> task in <code>fabfile.py</code> to create a <code>heroku_ext</code> schema. See <a href="https://help.heroku.com/Y1FIZ0MA/migrating-extensions-to-heroku_ext-schema">Migrating Extensions to <code>heroku_ext</code> schema</a> for more details.</li>
+<li>Replace awards with social media icons in Jobs page header</li>
+<li>Add FE for awards block</li>
+<li>Add FE for the benefits list</li>
+<li>Replace awards with social media icons in Jobs page header</li>
+<li>Add icons for category cards and update styles</li>
+<li>Restyle jobs page hero</li>
+<li>Add FE for job media block</li>
+<li>Add JobPlatformBlock, MediaBlock &amp; JobPlatformsMediaSnippet</li>
+<li>Add hero subtitle to <strong>RecruitmentHomePage</strong>,</li>
+<li>Update <strong>RecruitmentHomePage</strong> to display the first 6 children of a specified <strong>RecruitmentIndexPage</strong>.</li>
+<li>Update hero and card styles on job index page</li>
+</ul>
+<h2 id="681-2023-03-22">68.1 (2023-03-22)<a class="headerlink" href="#681-2023-03-22" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/68.0...68.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/68.0...68.1</a></p>
+<ul>
+<li>Fix rendering of chart blocks</li>
+</ul>
+<h2 id="680-2023-03-21">68.0 (2023-03-21)<a class="headerlink" href="#680-2023-03-21" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/67.1...68.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/67.1...68.0</a></p>
+<ul>
+<li>Add setting to add directory links for each site, removing the dependency on env variable</li>
+<li>Reorder collections sorted by name to fix error while adding new collections</li>
+<li>Add dark background with light color text to hero headings and subheadings</li>
+<li>Add link formatting options in table and change styles of typedtable</li>
+<li>Add h2 option to highlight block</li>
+<li>Remove category count related to unpublished pages</li>
+<li>Remove unpublished chapter pages from menu</li>
+<li>Fix issue of import page function close button missing after wagtail upgrade to 4.x.x</li>
+<li>Add backoff to search view</li>
+</ul>
+<h2 id="671-2023-01-31">67.1 (2023-01-31)<a class="headerlink" href="#671-2023-01-31" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/67.0...67.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/67.0...67.1</a></p>
+<ul>
+<li>Fix pages deployment <a href="https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/555">https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/555</a></li>
+<li>Update sentry <a href="https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/575">https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/575</a></li>
+</ul>
+<h2 id="670-2023-01-31">67.0 (2023-01-31)<a class="headerlink" href="#670-2023-01-31" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/66.0...67.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/66.0...67.0</a></p>
+<ul>
+<li>Add optional intro field to subsite home page</li>
+<li>Fix/Remove LGPS pages from BC council search results</li>
+<li>Add newsindex page to child pages list for display</li>
+<li>Change card content alignment from space-between to start</li>
+<li>Add index page as child page of all category page types</li>
+</ul>
+<h2 id="660">66.0<a class="headerlink" href="#660" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/65.1...66.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/65.1...66.0</a></p>
+<ul>
+<li>Upgrade wagtail v4.1</li>
+</ul>
+<h2 id="651-2023-01-25">65.1 (2023-01-25)<a class="headerlink" href="#651-2023-01-25" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/65.0...65.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/65.0...65.1</a></p>
+<ul>
+<li>Fix: Handle URLs longer than 200 characters in feedback comment form</li>
+</ul>
+<h2 id="650-2022-11-29">65.0 (2022-11-29)<a class="headerlink" href="#650-2022-11-29" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/64.0...65.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/64.0...65.0</a></p>
+<ul>
+<li>Change Homepage FieldPanels to MultiFieldPanels</li>
+<li>Add EventIndexPage and NewsIndex as child of SubsiteHomePage</li>
+<li>Display child pages of Inlineindex pages in search on mobile devices</li>
+<li>Add line between contents and body in InformationPage</li>
+<li>Allow alert page to be null, and add search fields for alert modeladmin</li>
+<li>Add RedirectPage type</li>
+<li>Add WasteWizardPage type and WasteWizardSnippet</li>
+<li>Add h2 to body rich text field</li>
+<li>Make banner fields optional, and editable search prompt text, and new category page with banner position setting</li>
+</ul>
+<h2 id="640-2022-10-19">64.0 (2022-10-19)<a class="headerlink" href="#640-2022-10-19" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/63.1...64.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/63.1...64.0</a></p>
+<ul>
+<li>Rename Family Information Service Homepage to Subsite Homepage</li>
+<li>Allow all subpage types to be created under Subsite Homepages</li>
+<li>Display child index pages on rendered Subsite home pages</li>
+<li>Synchronise docker-compose file version numbers</li>
+<li>Add list_creatable_pages management command</li>
+<li>Update parent_page_types and subpage_types attrs for many models</li>
+<li>Change functionality of listing title</li>
+<li>Make listing summary mandatory</li>
+<li>Remove draft blog pages from listing</li>
+<li>Modify location index and location page to have additional content</li>
+<li>Remove child policy pages from search</li>
+<li>Show child index pages as part of a larger section in search</li>
+<li>Add default social image for pages</li>
+</ul>
+<h2 id="631-2022-10-03">63.1 (2022-10-03)<a class="headerlink" href="#631-2022-10-03" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/63.0...63.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/63.0...63.1</a></p>
+<ul>
+<li>Add configurable timeout to Python client for maps.buckscc.gov.uk API</li>
+</ul>
+<h2 id="630-2022-09-27">63.0 (2022-09-27)<a class="headerlink" href="#630-2022-09-27" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/62.0...63.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/62.0...63.0</a></p>
+<ul>
+<li><strong>A11y</strong>: Add <code>overflow-wrap</code> &amp; <code>word-break</code> CSS properties to <code>&lt;ul&gt;</code> &amp; <code>&lt;ol&gt;</code> elements to prevent text from overflowing its line box, causing problems particularly on smaller devices.</li>
+<li><strong>A11y</strong>: Fix accessibility on Blog Home Page template by adding <code>listitem</code> role to <code>&lt;span&gt;</code> elements in unordered lists</li>
+<li><strong>A11y</strong>: Add <code>&lt;h2&gt;</code> headings to the <code>introduction</code> RichTextField in the StepByStepPage model, thus allowing for creation of an accessible heading order.</li>
+</ul>
+<h2 id="620-2022-08-30">62.0 (2022-08-30)<a class="headerlink" href="#620-2022-08-30" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/574/diffs">https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/574/diffs</a></p>
+<ul>
+<li><a href="https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/548">Wagtail 3.0 upgrade</a></li>
+<li><a href="https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/573">Support/birdbath flightpath</a></li>
+</ul>
+<h2 id="610-2022-08-09">61.0 (2022-08-09)<a class="headerlink" href="#610-2022-08-09" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/60.1...61.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/60.1...61.0</a></p>
+<ul>
+<li>Add <code>BlogAboutPage</code></li>
+<li>Prevent more <code>InformationPage</code>s from being added to the <code>BlogHomePage</code></li>
+<li>Allow the use of formatted table blocks and plain text table blocks in most pages</li>
+</ul>
+<h2 id="610-2022-08-09_1">61.0 (2022-08-09)<a class="headerlink" href="#610-2022-08-09_1" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/60.1...61.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/60.1...61.0</a></p>
+<ul>
+<li>Add <code>BlogAboutPage</code></li>
+<li>Prevent more <code>InformationPage</code>s from being added to the <code>BlogHomePage</code></li>
+<li>Allow the use of formatted table blocks and plain text table blocks in most pages</li>
+</ul>
+<h2 id="601-2022-07-27">60.1 (2022-07-27)<a class="headerlink" href="#601-2022-07-27" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/60.0...60.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/60.0...60.1</a></p>
+<ul>
+<li>Change dbs field label on jobs sidebar</li>
+</ul>
+<h2 id="600-2022-07-26">60.0 (2022-07-26)<a class="headerlink" href="#600-2022-07-26" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/59.0...60.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/59.0...60.0</a></p>
+<ul>
+<li>Remove bottom border from last section on sidebar</li>
+<li>Add button to decline cookies</li>
+<li>Change dbs_check from booleanfield to a textfield</li>
+<li>Add categories to blogs</li>
+<li>Add subscriptions to blogs</li>
+<li>Add Blog global homepage</li>
+</ul>
+<h2 id="590-2022-07-19">59.0 (2022-07-19)<a class="headerlink" href="#590-2022-07-19" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/58.0...59.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/58.0...59.0</a></p>
+<ul>
+<li>Add safe spaces banner to site footer</li>
+</ul>
+<h2 id="580-2022-07-04">58.0 (2022-07-04)<a class="headerlink" href="#580-2022-07-04" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/57.0...58.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/57.0...58.0</a></p>
+<ul>
+<li>Docker for development work <a href="https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/522">https://git.torchbox.com/buckinghamshire-council/bc/-/merge_requests/522</a></li>
+</ul>
+<h2 id="570-2022-06-30">57.0 (2022-06-30)<a class="headerlink" href="#570-2022-06-30" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/56.0...57.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/56.0...57.0</a></p>
+<ul>
+<li>Add placeholder blog global homepage</li>
+</ul>
+<h2 id="560-2022-06-28">56.0 (2022-06-28)<a class="headerlink" href="#560-2022-06-28" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/55.0...56.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/55.0...56.0</a></p>
+<ul>
+<li>Add beacons for different steps throughout a job application</li>
+</ul>
+<h2 id="550-2022-06-28">55.0 (2022-06-28)<a class="headerlink" href="#550-2022-06-28" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/54.2...55.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/54.2...55.0</a></p>
+<ul>
+<li>Add model for <code>BlogHomePage</code> and corresponding template</li>
+<li>Add model and UI for <code>BlogPostPage</code></li>
+<li>Add backend for blogs search</li>
+<li>Add recent posts block to blog sidebar</li>
+<li>Add social media links to blog sidebars</li>
+<li>Add search bar for the blog site</li>
+<li>Add blogs list UI component</li>
+<li>Add filtered view - search results</li>
+<li>Add pagination on blog homepage</li>
+<li>Add featured blog post UI</li>
+<li>Fix blog listing border</li>
+<li>Add intro text to be displayed in blog home page listings</li>
+</ul>
+<h2 id="542-2022-06-28">54.2 (2022-06-28)<a class="headerlink" href="#542-2022-06-28" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/54.1...54.2">https://git.torchbox.com/buckinghamshire-council/bc/compare/54.1...54.2</a></p>
+<ul>
+<li>Fix aria labels of buttons in pagination and local area link blocks</li>
+</ul>
+<h2 id="541-2022-05-23">54.1 (2022-05-23)<a class="headerlink" href="#541-2022-05-23" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/54.0...54.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/54.0...54.1</a></p>
+<ul>
+<li>Fix tables not showing horizontal lines between rows</li>
+<li>Add rich text and numeric options to typedtable</li>
+</ul>
+<h2 id="540-2022-05-12">54.0 (2022-05-12)<a class="headerlink" href="#540-2022-05-12" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/53.0...54.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/53.0...54.0</a></p>
+<ul>
+<li>Update Black to a newer version to fix _unicodefun linting issue. Also applied formatting on existing files.</li>
+<li>Add aligned columns to typedtable</li>
+<li>Add intro text field to several page types</li>
+<li>Make alert length 255 characters long (text only)</li>
+<li>Fix issues with hidden content being focusable</li>
+<li>Fix issues with form field not being labelled</li>
+<li>Migrate to heroku-deploy</li>
+</ul>
+<h2 id="530-2022-01-31">53.0 (2022-01-31)<a class="headerlink" href="#530-2022-01-31" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/52.1...53.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/52.1...53.0</a></p>
+<ul>
+<li>Prefix Sentry release variable with environment name, for easier debugging</li>
+<li>Add inset text component to StoryBlock</li>
+<li>Fix issues with job sitemap displaying jobs from other domains</li>
+</ul>
+<h2 id="521-2022-01-25">52.1 (2022-01-25)<a class="headerlink" href="#521-2022-01-25" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/52.0...52.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/52.0...52.1</a></p>
+<ul>
+<li>Fix location page referencing deleted sidebar template</li>
+</ul>
+<h2 id="520-2022-01-24">52.0 (2022-01-24)<a class="headerlink" href="#520-2022-01-24" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/51.0...52.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/51.0...52.0</a></p>
+<ul>
+<li>Add LocationIndex and Location pages</li>
+<li>Update documentation to summarise use of wagtail-geo-widget for maps</li>
+</ul>
+<h2 id="510-2022-01-20">51.0 (2022-01-20)<a class="headerlink" href="#510-2022-01-20" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/50.3...51.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/50.3...51.0</a></p>
+<ul>
+<li>Add 'Part of' section to sidebar for pages referenced by StepByStepPage</li>
+<li>Fix event datetime formats</li>
+<li>Add contents section with 'Scroll to top' feature for InformationPage</li>
+</ul>
+<h2 id="503-2022-01-11">50.3 (2022-01-11)<a class="headerlink" href="#503-2022-01-11" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/50.2...50.3">https://git.torchbox.com/buckinghamshire-council/bc/compare/50.2...50.3</a></p>
+<ul>
+<li>Fix: Treat 'table' block values as TableBlock instances when nested in Accordion</li>
+</ul>
+<h2 id="502-2022-01-11">50.2 (2022-01-11)<a class="headerlink" href="#502-2022-01-11" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/50.1...50.2">https://git.torchbox.com/buckinghamshire-council/bc/compare/50.1...50.2</a></p>
+<ul>
+<li>Fix alignment issue for tables where first column is a header</li>
+</ul>
+<h2 id="501-2022-01-07">50.1 (2022-01-07)<a class="headerlink" href="#501-2022-01-07" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/50.0...50.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/50.0...50.1</a></p>
+<ul>
+<li>Fix an issue with job searches by postcode, due to a query expression change in Django 3.2</li>
+</ul>
+<h2 id="500-2022-01-07">50.0 (2022-01-07)<a class="headerlink" href="#500-2022-01-07" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/49.0...50.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/49.0...50.0</a></p>
+<ul>
+<li>Upgrade Wagtail to 2.15.1, Django to 3.2.9, django-pattern-library to 0.5,
+  django-redis to 4.11.0, factory-boy to 3.2.1, freezegun to 1.1.0, responses to 0.16.0,
+  wagtail-factories to 2.0.1, and whitenoise to 5.0; and replace deprecated &amp; removed
+  functions &amp; fields</li>
+<li>Upgrade TableBlock to TypedTableBlock</li>
+<li>Update data protection docs with an extra table to anonymise</li>
+</ul>
+<h2 id="490-2021-12-17">49.0 (2021-12-17)<a class="headerlink" href="#490-2021-12-17" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/48.0...49.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/48.0...49.0</a></p>
+<ul>
+<li>StepByStepPage — Change body of each step to a RichTextField</li>
+</ul>
+<h2 id="480-2021-12-14">48.0 (2021-12-14)<a class="headerlink" href="#480-2021-12-14" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/47.0...48.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/47.0...48.0</a></p>
+<ul>
+<li>Add TIDE winners logo to Jobs site header</li>
+</ul>
+<h2 id="470-2021-12-01">47.0 (2021-12-01)<a class="headerlink" href="#470-2021-12-01" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/46.0...47.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/46.0...47.0</a></p>
+<ul>
+<li>Postcode Lookup — Update the area links block UI to permit only querying by postcode</li>
+<li>Postcode Lookup — Remove local area links lists from search results</li>
+<li>Postcode Lookup — Use the internal Buckinghamshire maps API</li>
+<li>Postcode Lookup — Query additional address data for border postcodes</li>
+<li>Postcode Lookup — Update documentation</li>
+</ul>
+<h2 id="460-2021-11-29">46.0 (2021-11-29)<a class="headerlink" href="#460-2021-11-29" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/45.1...46.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/45.1...46.0</a></p>
+<ul>
+<li>Add Step-by-Step page type</li>
+<li>Add accordion block to long-form content pages</li>
+<li>Fix process_block_numbers to consider non-heading numbers</li>
+<li>Change search result label &amp; date colour to meet WCAG AA standard</li>
+<li>Change paragraph number to meet WCAG AA standard</li>
+</ul>
+<h2 id="451-2021-11-05">45.1 (2021-11-05)<a class="headerlink" href="#451-2021-11-05" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/45.0...45.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/45.0...45.1</a></p>
+<ul>
+<li>Fix accordion element IDs and aria roles mismatch</li>
+</ul>
+<h2 id="450-2021-10-12">45.0 (2021-10-12)<a class="headerlink" href="#450-2021-10-12" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/44.1...45.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/44.1...45.0</a></p>
+<ul>
+<li>No longer set CSRF cookies for FormPage forms and derivatives, or job search form</li>
+<li>Update job category and subcategory filtering documentation</li>
+<li>Use RoutablePageMixin and redirects to show Aptean Respond instruction, form, and success pages</li>
+</ul>
+<h2 id="441-2021-10-06">44.1 (2021-10-06)<a class="headerlink" href="#441-2021-10-06" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/44.0...44.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/44.0...44.1</a></p>
+<ul>
+<li>Upgrade Wagtail Transfer to 0.8.2</li>
+</ul>
+<h2 id="440-2021-10-04">44.0 (2021-10-04)<a class="headerlink" href="#440-2021-10-04" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/43.0...44.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/43.0...44.0</a></p>
+<ul>
+<li>333 Fix to accordion alignment</li>
+<li>Accessibility 321 Fix job search results validation issues</li>
+<li>Relabel heading blocks on longform pages, and add H4 block</li>
+</ul>
+<h2 id="431-2021-09-27">43.1 (2021-09-27)<a class="headerlink" href="#431-2021-09-27" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/43.0...43.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/43.0...43.1</a></p>
+<ul>
+<li>Make settings.DATA_UPLOAD_MAX_NUMBER_FIELDS configurable</li>
+</ul>
+<h2 id="430-2021-09-17">43.0 (2021-09-17)<a class="headerlink" href="#430-2021-09-17" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/42.0...43.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/42.0...43.0</a></p>
+<ul>
+<li>Accessibility 250 Fix HTML validation: element style not allowed as child of element main</li>
+<li>Accessibility 250 Fix job search input placeholder text contrast</li>
+<li>Remove unused call to action StreamField block template</li>
+<li>Use "or" search operator</li>
+<li>Use Longform Page chapter headings in the table of contents and pagination</li>
+</ul>
+<h2 id="420-2021-08-25">42.0 (2021-08-25)<a class="headerlink" href="#420-2021-08-25" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/41.0...42.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/41.0...42.0</a></p>
+<ul>
+<li>15: Add campaign page type</li>
+<li>Permit configuring some host names never to be indexed by external search engines</li>
+</ul>
+<h2 id="410-2021-08-19">41.0 (2021-08-19)<a class="headerlink" href="#410-2021-08-19" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/40.0...41.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/40.0...41.0</a></p>
+<ul>
+<li>Add "DBS check" field to TalentLink jobs and display the information in the sidebar</li>
+</ul>
+<h2 id="400-2021-07-19">40.0 (2021-07-19)<a class="headerlink" href="#400-2021-07-19" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/39.1...40.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/39.1...40.0</a></p>
+<ul>
+<li>Add chart StreamField blocks to long-form content pages</li>
+<li>Stop using CSRF tokens for feedback widget</li>
+</ul>
+<h2 id="391-2021-07-07">39.1 (2021-07-07)<a class="headerlink" href="#391-2021-07-07" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/39.0...39.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/39.0...39.1</a></p>
+<ul>
+<li>Upgrade Django to 2.2.24</li>
+</ul>
+<h2 id="390-2021-07-01">39.0 (2021-07-01)<a class="headerlink" href="#390-2021-07-01" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/38.0...39.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/38.0...39.0</a></p>
+<ul>
+<li>Add CI job to deploy the master branch to Content Prep server</li>
+<li>Enable content transfer between Wagtail instances using <a href="https://github.com/wagtail/wagtail-transfer">https://github.com/wagtail/wagtail-transfer</a></li>
+<li>Upgrade Wagtail to version 2.13.2</li>
+</ul>
+<h2 id="380-2021-06-28">38.0 (2021-06-28)<a class="headerlink" href="#380-2021-06-28" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/37.3...38.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/37.3...38.0</a></p>
+<ul>
+<li>Add feature flags to disable page feedback and job alert forms</li>
+<li>Add validation of duplicate responses to LookupPage admin</li>
+<li>Fix 128: Use inline index subtitle in table of contents and pagination</li>
+<li>Use PostgreSQL 13.3 in Vagrant box and CI</li>
+</ul>
+<h2 id="373-2021-06-11">37.3 (2021-06-11)<a class="headerlink" href="#373-2021-06-11" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/37.2...37.3">https://git.torchbox.com/buckinghamshire-council/bc/compare/37.2...37.3</a></p>
+<ul>
+<li>Fix: Field label typo in page feedback form</li>
+</ul>
+<h2 id="372-2021-06-10">37.2 (2021-06-10)<a class="headerlink" href="#372-2021-06-10" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/37.1...37.2">https://git.torchbox.com/buckinghamshire-council/bc/compare/37.1...37.2</a></p>
+<ul>
+<li>Fix: Handle URLs longer than 200 characters in page feedback form</li>
+</ul>
+<h2 id="371-2021-06-09">37.1 (2021-06-09)<a class="headerlink" href="#371-2021-06-09" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/37.0...37.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/37.0...37.1</a></p>
+<ul>
+<li>Fix (Accessibility): Duplicate HTML element IDs in feedback form</li>
+<li>Fix (Accessibility): Prevent duplicate h2 element IDs in alerts</li>
+<li>Fix: StreamField typo causing missing block types in editor in Wagtail 2.13</li>
+<li>Upgrade Wagtail to version 2.13.1</li>
+</ul>
+<h2 id="370-2021-06-07">37.0 (2021-06-07)<a class="headerlink" href="#370-2021-06-07" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/36.1...37.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/36.1...37.0</a></p>
+<ul>
+<li>40: Feedback forms and reports</li>
+<li>Accessibility improvements</li>
+<li>Add multiple severity levels to sitewide alert</li>
+<li>Fix: StreamField typo causing RecursionError in Wagtail 2.13</li>
+<li>Upgrade Wagtail to version 2.13</li>
+<li>Use the newly released django-gov-notify library for GOV.UK Notify integration</li>
+</ul>
+<h2 id="361-2021-05-25">36.1 (2021-05-25)<a class="headerlink" href="#361-2021-05-25" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/36.0...36.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/36.0...36.1</a></p>
+<ul>
+<li>Fix: Include attachments in FOI form data</li>
+</ul>
+<h2 id="360-2021-05-20">36.0 (2021-05-20)<a class="headerlink" href="#360-2021-05-20" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/35.2...36.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/35.2...36.0</a></p>
+<ul>
+<li>Add ENEI logo to Jobs site header</li>
+<li>Update CI config to use the cache to store artefacts</li>
+<li>Upgrade Django to 2.2.21</li>
+</ul>
+<h2 id="352-2021-04-21">35.2 (2021-04-21)<a class="headerlink" href="#352-2021-04-21" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/35.1...35.2">https://git.torchbox.com/buckinghamshire-council/bc/compare/35.1...35.2</a></p>
+<ul>
+<li>Fix: XSS vulnerability in "no search results" page</li>
+</ul>
+<h2 id="351-2021-02-24">35.1 (2021-02-24)<a class="headerlink" href="#351-2021-02-24" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/35.0...35.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/35.0...35.1</a></p>
+<ul>
+<li>Upgrade Django to 2.2.19</li>
+</ul>
+<h2 id="350-2021-02-18">35.0 (2021-02-18)<a class="headerlink" href="#350-2021-02-18" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/34.1...35.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/34.1...35.0</a></p>
+<ul>
+<li>498: Reduce news boost in search results</li>
+<li>513: Allow second FIS homepage for Care Advice microsite</li>
+<li>517: Fix: Preview behind basic auth with new <code>baipw</code> version</li>
+<li>518: Include FIS pages in search results</li>
+<li>519: Fix: OGL below links and typo</li>
+<li>520: Fix: Add <code>search_input_help_text</code> setting to allow directory link for FIS</li>
+<li>521: Fix: Upgrade Wagtail 2.12.2 to prevent migration issue in CI</li>
+</ul>
+<h2 id="341-2021-02-15">34.1 (2021-02-15)<a class="headerlink" href="#341-2021-02-15" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/33.0...34.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/33.0...34.1</a></p>
+<ul>
+<li>Fix: Update GitHub Pages workflow to ensure publication of docs</li>
+</ul>
+<h2 id="340-2021-02-15">34.0 (2021-02-15)<a class="headerlink" href="#340-2021-02-15" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/33.0...34.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/33.0...34.0</a></p>
+<ul>
+<li>239: Prepare repository for open sourcing</li>
+<li>508: Upgrade Wagtail to version 2.12</li>
+<li>Fix: Check page exists before calling pageurl in footer</li>
+</ul>
+<h2 id="330-2021-02-02">33.0 (2021-02-02)<a class="headerlink" href="#330-2021-02-02" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/32.1...33.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/32.1...33.0</a></p>
+<ul>
+<li>466: [longform 9] Prepare base template for long-form content pages</li>
+<li>466: [longform 14] Add hero image to long-form content pages</li>
+<li>466: [longform 10] Add numbered headings for long-form content pages</li>
+<li>489: Allow information page under FIS home page.</li>
+<li>Upgrade <code>django-basic-auth-ip-whitelist</code> to avoid caching of 401 resonses.</li>
+</ul>
+<h2 id="321-2021-01-28">32.1 (2021-01-28)<a class="headerlink" href="#321-2021-01-28" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/32.0...32.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/32.0...32.1</a></p>
+<ul>
+<li>335: Fix so that component images aren't overwritten</li>
+</ul>
+<h2 id="320-2021-01-27">32.0 (2021-01-27)<a class="headerlink" href="#320-2021-01-27" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/31.0...32.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/31.0...32.0</a></p>
+<ul>
+<li>335: Responsive images for mobile</li>
+<li>366: Annotate search results with section or site name</li>
+<li>392: Use default sharing text if no sharing text set on page</li>
+<li>467: Enable automatic creation of redirects for moving pages and slug changes.</li>
+<li>483: Add date to news pages in search results</li>
+</ul>
+<h2 id="310-2021-01-19">31.0 (2021-01-19)<a class="headerlink" href="#310-2021-01-19" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/30.3...31.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/30.3...31.0</a></p>
+<ul>
+<li>381: Wagtail number list in the editor shouldn't be partially hidden for double digits+</li>
+<li>450: Prevent draft <code>InlineIndexChild</code> pages from being listed in index and navigation on live pages</li>
+<li>477: Upgrade Wagtail to 2.11</li>
+</ul>
+<h2 id="303-2021-01-14">30.3 (2021-01-14)<a class="headerlink" href="#303-2021-01-14" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/30.2...30.3">https://git.torchbox.com/buckinghamshire-council/bc/compare/30.2...30.3</a></p>
+<ul>
+<li>490: Bump <code>notifications-python-client</code> to version 5.7.1 for <code>PyJWT</code> 2.0.0 compatibility (fix email send errors)</li>
+</ul>
+<h2 id="302-2021-01-13">30.2 (2021-01-13)<a class="headerlink" href="#302-2021-01-13" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/30.1...30.2">https://git.torchbox.com/buckinghamshire-council/bc/compare/30.1...30.2</a></p>
+<ul>
+<li>464: Remove footer columns requirement in navigation settings</li>
+</ul>
+<h2 id="301-2020-12-14">30.1 (2020-12-14)<a class="headerlink" href="#301-2020-12-14" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/30.0...30.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/30.0...30.1</a></p>
+<ul>
+<li>478: Exclude FIS pages from search (temporary fix until FIS content is ready)</li>
+</ul>
+<h2 id="300-2020-12-14">30.0 (2020-12-14)<a class="headerlink" href="#300-2020-12-14" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/29.0...30.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/29.0...30.0</a></p>
+<ul>
+<li>402: Add anchor links for streamfield heading blocks</li>
+<li>472: Upgrade Wagtail to 2.10</li>
+<li>475: FIS Allow <code>IndexPage</code> as child page of <code>CategoryTypeOnePage</code> and <code>CategoryTypeTwoPage</code></li>
+<li>476: FISAllow <code>InformationPage</code> as child page of <code>CategoryTypeOnePage</code> and <code>CategoryTypeTwoPage</code></li>
+</ul>
+<h2 id="290-2020-11-30">29.0 (2020-11-30)<a class="headerlink" href="#290-2020-11-30" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/28.0...29.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/28.0...29.0</a></p>
+<ul>
+<li>Add support for Elasticsearch backend</li>
+<li>Add configurable search synonyms</li>
+<li>Use Porter stemming algorithm search filter, for English grammar</li>
+<li>Add an English stop words search filter</li>
+<li>Prevent password-protected pages from appearing in search results</li>
+<li>Add StreamField ImageBlock alt text field</li>
+</ul>
+<h2 id="280-2020-11-25">28.0 (2020-11-25)<a class="headerlink" href="#280-2020-11-25" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/27.0...28.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/27.0...28.0</a></p>
+<ul>
+<li>FIS Homepage: Style page and components</li>
+<li>FIS Category Type 1 / SEND Page: Style page and components</li>
+<li>FIS Category Type 2 / Regular Page: Style page and components</li>
+<li>FIS Inline Index Page: Hide sidebar</li>
+<li>FIS Footer: Style footer</li>
+<li>FIS Header: Style header</li>
+<li>Update margins between paragraphs in accordion blocks</li>
+<li>Add an editable body that will show when there's no results in the Search page</li>
+<li>Add schema.org Organization markup to home page</li>
+<li>Add new 'Am I in lockdown?' streamfields - FE styling</li>
+<li>Add new Highlight StreamField block</li>
+<li>Add LookupPage type to search for information about postcodes</li>
+<li>Accessibility 12 Fix HTML validation error for duplicated IDs when searching</li>
+<li>Fix edge-case failure with middleware is_recruitment_site check</li>
+<li>Fix form errors in pattern library</li>
+</ul>
+<h2 id="270-2020-10-15">27.0 (2020-10-15)<a class="headerlink" href="#270-2020-10-15" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/26.0...27.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/26.0...27.0</a></p>
+<ul>
+<li>Add Wagtail admin report of pages missing SEO metadata, and those with unpublished changes</li>
+<li>Accessibility 89 Form error handling - add explanatory text and supporting aria-labels for required fields</li>
+<li>Accessibility 91 Add in missing fieldsets for radio input groups</li>
+<li>Add schema.org markup to job detail page</li>
+</ul>
+<h2 id="260-2020-09-22">26.0 (2020-09-22)<a class="headerlink" href="#260-2020-09-22" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/25.0...26.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/25.0...26.0</a></p>
+<ul>
+<li>Add an 'OGL' logo, statement and link to the footer</li>
+<li>Accessibility 17 Add subpages to the Jobs sitemap</li>
+<li>Accessibility 76 Improve accordion markup &amp; styles (including job filters)</li>
+<li>Accessibility 93 Add meaningful link text for pagination</li>
+<li>Accessibility 94 Add aria-labels to social links</li>
+<li>Accessibility 87 Improve markup of feedback widget buttons and add aria-labels</li>
+<li>Silently ignore SQL injection attempts in job search</li>
+</ul>
+<h2 id="250-2020-09-14">25.0 (2020-09-14)<a class="headerlink" href="#250-2020-09-14" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/24.0...25.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/24.0...25.0</a></p>
+<ul>
+<li>Fix string spacing issue in Aptean forms help text</li>
+<li>Change complaints form contact fields</li>
+</ul>
+<h2 id="240-2020-08-20">24.0 (2020-08-20)<a class="headerlink" href="#240-2020-08-20" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/23.0...24.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/23.0...24.0</a></p>
+<ul>
+<li>Refactor Aptean Respond API integration to give more control over form presentation</li>
+<li>Add file field support to Aptean Respond forms</li>
+<li>Custom sizes for input fields</li>
+<li>Sitewide alert messages</li>
+<li>Always show application forms front end component, even if the job ID is not imported</li>
+</ul>
+<h2 id="230-2020-07-27">23.0 (2020-07-27)<a class="headerlink" href="#230-2020-07-27" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/22.0...23.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/22.0...23.0</a></p>
+<ul>
+<li>Accessibility 77 Further changes to prevent horizontal scrolling on smaller mobile devices</li>
+<li>Add social media text &amp; new icon/links to footer</li>
+<li>Fix for bottom of homepage displaying incorrectly on IE11</li>
+</ul>
+<h2 id="220-2020-07-23">22.0 (2020-07-23)<a class="headerlink" href="#220-2020-07-23" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/21.0...22.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/21.0...22.0</a></p>
+<ul>
+<li>Upgrade Wagtail to 2.9.3</li>
+<li>Configure Wagtail's Cloudflare front end cache invalidation</li>
+<li>Add to documentation about caching infrastructure</li>
+<li>Jobs: Add Restless logo to header</li>
+<li>Jobs 166 set up reuse application button</li>
+<li>Accessibility 47 Increase contrast of form help text</li>
+<li>Accessibility 80 Improve landmark aria labelling</li>
+<li>Accessibility 81 Content not included in landmarks</li>
+</ul>
+<h2 id="210-2020-07-09">21.0 (2020-07-09)<a class="headerlink" href="#210-2020-07-09" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/20.0...21.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/20.0...21.0</a></p>
+<ul>
+<li>Accessibility 79 Hide sidebar aria-labelledby attribute when there are no related pages</li>
+<li>Add page feedback widget</li>
+</ul>
+<h2 id="200-2020-07-02">20.0 (2020-07-02)<a class="headerlink" href="#200-2020-07-02" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/19.1...20.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/19.1...20.0</a></p>
+<ul>
+<li>Add cookie banner to recruitment / jobs site</li>
+<li>Make max-width larger on main wrapper</li>
+<li>Adjust line height of headings</li>
+<li>Progressive disclosure details (BE)</li>
+<li>Update newsletter signup URL</li>
+<li>Add favicon to recruitment site</li>
+<li>Reinstate display of promoted search results</li>
+<li>Fix 'no results found' message when there is no search query</li>
+<li>Enable embedding YouTube videos without using cookies and without showing
+  unrelated video links</li>
+<li>Make the homepage child sections 'menu' respect the 'show_in_menus' property</li>
+<li>Mobile-friendly tables</li>
+<li>Accessibility 77 Remove horizontal scrolling for smaller mobile devices</li>
+<li>Accessibility 78 Improve pagination link text (Silktide improvement)</li>
+<li>Improve the method for returning a formatted Aptean Respond case reference number</li>
+</ul>
+<h2 id="191-2020-06-23">19.1 (2020-06-23)<a class="headerlink" href="#191-2020-06-23" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/19.0...19.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/19.0...19.1</a></p>
+<ul>
+<li>Add cache prevention headers to Aptean Respond form pages</li>
+</ul>
+<h2 id="190-2020-06-11">19.0 (2020-06-11)<a class="headerlink" href="#190-2020-06-11" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/18.0...19.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/18.0...19.0</a></p>
+<ul>
+<li>Upgrade Wagtail to 2.9</li>
+<li>404 page</li>
+<li>Styling of label text on checkboxes and radio buttons</li>
+<li>Remove current page from breadcrumbs</li>
+<li>Adjust margins before / after buttons and other elements</li>
+<li>Fix search results font sizes / styling</li>
+<li>Fix incorrect heading levels for body text headings and subheadings</li>
+</ul>
+<h2 id="180-2020-06-04">18.0 (2020-06-04)<a class="headerlink" href="#180-2020-06-04" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/17.0...18.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/17.0...18.0</a></p>
+<ul>
+<li>Upgrade Django to 2.2.13</li>
+<li>Permit subdomain sites to have different base templates, depending on homepage type</li>
+<li>Sign up to council newsletter(s) from the homepage</li>
+<li>Update cookie notice</li>
+<li>Fix job alert emails</li>
+<li>Make the job application page return 404 status for bad IDs</li>
+<li>Update job search salary filter to use searchable salary instead of salary range</li>
+<li>Add documentation about CI deployments</li>
+<li>Update documentation about personally-identifying data</li>
+<li>Add documentation about the procedure for resetting the staging branch/server/db</li>
+</ul>
+<h2 id="170-2020-05-21">17.0 (2020-05-21)<a class="headerlink" href="#170-2020-05-21" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/16.1...17.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/16.1...17.0</a></p>
+<ul>
+<li>Change GitLab HTML syntax highlighter</li>
+<li>Accessibility 37 Improve aria role of alert panel</li>
+<li>Accessibility 53 Hide footer links landmark if there are none</li>
+<li>Accessibility 55 Email alert subscription form improvements</li>
+<li>Accessibility 56 Remove extra role="search" form from header on search page</li>
+<li>Accessibility 57 Label complementary landmarks</li>
+<li>Accessibility 61 Remove alt text for decorative images</li>
+</ul>
+<h2 id="161-2020-05-20">16.1 (2020-05-20)<a class="headerlink" href="#161-2020-05-20" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/16.0...16.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/16.0...16.1</a></p>
+<ul>
+<li>Enable a job board-dependent template variable for the application page. This
+  fixes internal job applications.</li>
+<li>Fix an error when job application URL query is badly formatted</li>
+</ul>
+<h2 id="160-2020-05-07">16.0 (2020-05-07)<a class="headerlink" href="#160-2020-05-07" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/15.1...16.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/15.1...16.0</a></p>
+<ul>
+<li>Fix for employer logo sizes (FE)</li>
+<li>Add active checkbox counter &amp; reset filters button for job search (FE)</li>
+<li>Progressive accordion styling update (including postcode search fix)</li>
+<li>Accessibility 14 Increase contrast of Highlighted Content heading</li>
+<li>Accessibility 16 Fix Jobs filter fieldset legends</li>
+<li>Accessibility 18 Page content should be in a landmark</li>
+<li>Accessibility 19 Remove nesting for landmarks</li>
+<li>Accessibility 44 &amp; 75 Pagination improvements</li>
+<li>Accessibility 58 Add screen-reader-only text to filters’ item count</li>
+<li>Accessibility 60 Fix typo in location field placeholder</li>
+<li>Accessibility 62 Hide "Find out more" for screen reader users (Jobs benefits)</li>
+</ul>
+<h2 id="151-2020-05-01">15.1 (2020-05-01)<a class="headerlink" href="#151-2020-05-01" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/15.0...15.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/15.0...15.1</a></p>
+<ul>
+<li>Fix for breadcrumbs</li>
+</ul>
+<h2 id="150-2020-05-01">15.0 (2020-05-01)<a class="headerlink" href="#150-2020-05-01" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/14.0...15.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/14.0...15.0</a></p>
+<ul>
+<li>Add tests for job categories import fix</li>
+<li>Add unit tests for Aptean Respond integration</li>
+<li>Subheading block (BE)</li>
+<li>Styling fix for links to local areas</li>
+<li>Fix spacing in breadcrumb navigation</li>
+<li>Fix spacing on job detail template</li>
+<li>Fix for multiple form submissions</li>
+<li>142 Internal jobs site</li>
+<li>Alert panel and Aptean Form Page confirmation page template update</li>
+<li>Reformat Aptean Respond submitted case reference numbers for display to users</li>
+<li>Accessibility 1 Remove redundant/inappropriate ARIA role overrides</li>
+<li>Accessibility 8 Hide all site icons for screen reader users</li>
+<li>Accessibility 9 Improvements to screen reader only navigational content</li>
+<li>Accessibility 11 Fix HTML validation errors on the main site</li>
+<li>Accessibility 13 Fix jobs search filters HTML validation errors on IDs</li>
+<li>Accessibility 9 &amp; 13 Breadcrumb improvements</li>
+<li>Accessibility 22 Switch unnecessary heading tag to link in Jobs header</li>
+<li>Accessibility 23 Increase contrast of jobs filter help text</li>
+<li>Accessibility 28 Update language attribute on all templates</li>
+<li>Accessibility 36 Update homepage table of contents &amp; add aria-labelledby</li>
+</ul>
+<h2 id="140-2020-04-22">14.0 (2020-04-22)<a class="headerlink" href="#140-2020-04-22" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/13.0...14.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/13.0...14.0</a></p>
+<ul>
+<li>135 Employer logos (BE)</li>
+<li>176 Jobs fix import location</li>
+<li>204 Jobs fix salary imports (BE)</li>
+</ul>
+<h2 id="130-2020-04-20">13.0 (2020-04-20)<a class="headerlink" href="#130-2020-04-20" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/12.0...13.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/12.0...13.0</a></p>
+<ul>
+<li>Upgrade Wagtail to 2.7.2 and Django to 2.2.12</li>
+<li>Add documentation about Aptean Respond cases backend, and cookies</li>
+<li>Make the separate forms on the jobs search page cooperate</li>
+<li>Styling tweaks on recruitment index page ('benefits' page)</li>
+<li>Add favicon</li>
+<li>140 Job site breadcrumbs on all pages</li>
+<li>155 Jobs extra filters (BE)</li>
+<li>161 Update job search filter styles and add custom select form field</li>
+<li>173 Search local council area by postcode</li>
+<li>179 Jobs additional fields BE</li>
+</ul>
+<h2 id="120-2020-04-02">12.0 (2020-04-02)<a class="headerlink" href="#120-2020-04-02" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/11.0...12.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/11.0...12.0</a></p>
+<ul>
+<li>136 Employer logos (FE)</li>
+<li>172 Add live chat support feature</li>
+<li>174 Fix button padding</li>
+<li>175 Remove hard coded Bucks logo from job detail pages</li>
+<li>193 Fix issue with duplicate JobSubcategory titles</li>
+</ul>
+<h2 id="110-2020-04-01">11.0 (2020-04-01)<a class="headerlink" href="#110-2020-04-01" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/10.0...11.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/10.0...11.0</a></p>
+<ul>
+<li>Improve page 'Promote' tab SEO field labels</li>
+<li>100 Job categories (FE)</li>
+<li>158 Job application form styling</li>
+</ul>
+<h2 id="100-2020-03-31">10.0 (2020-03-31)<a class="headerlink" href="#100-2020-03-31" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/9.0...10.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/9.0...10.0</a></p>
+<ul>
+<li>114 StreamField Button Link block (BE)</li>
+<li>125 Job attachments</li>
+<li>138 Additional job sidebar fields (FE)</li>
+<li>139 Additional job sidebar fields (BE)</li>
+<li>148 Delete outdated jobs when running import command</li>
+</ul>
+<h2 id="90-2020-03-31">9.0 (2020-03-31)<a class="headerlink" href="#90-2020-03-31" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/8.0...9.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/8.0...9.0</a></p>
+<ul>
+<li>129 Jobs postcode search</li>
+<li>169 Adjust position of form field help text</li>
+<li>Forms integration with Aptean Respond API</li>
+<li>Fix an issue with CI deployments</li>
+</ul>
+<h2 id="80-2020-03-30">8.0 (2020-03-30)<a class="headerlink" href="#80-2020-03-30" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/7.0...8.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/7.0...8.0</a></p>
+<ul>
+<li>Update documentation to reflect change in git workflow.</li>
+<li>108 Search alert (FE)</li>
+<li>112 Unsubscribe from alerts (FE)</li>
+<li>115 StreamField Button Link block</li>
+<li>117 StreamField Table styles</li>
+<li>121 Progressive disclosure accordion</li>
+<li>122 General formatting improvements</li>
+<li>123 Subheading block</li>
+<li>163 Add Fathom Analytics</li>
+<li>201 additional components</li>
+</ul>
+<h2 id="70-2020-03-25">7.0 (2020-03-25)<a class="headerlink" href="#70-2020-03-25" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/6.0...7.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/6.0...7.0</a></p>
+<ul>
+<li>51 Events Page front end</li>
+<li>68 News Page front end</li>
+<li>105 Job applications back-end</li>
+<li>106 Job applications front-end</li>
+<li>109 Job alert subscription</li>
+<li>110 Job search alert notifications</li>
+<li>111 Job alert unsubscribe</li>
+<li>130 Add a Schools and Early years search filter, and enable Job Category to be tagged as such.</li>
+<li>133 Search by job number</li>
+</ul>
+<h2 id="60-2020-03-24">6.0 (2020-03-24)<a class="headerlink" href="#60-2020-03-24" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/5.0...6.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/5.0...6.0</a></p>
+<ul>
+<li>Added image and embed blocks to StoryBlock</li>
+</ul>
+<h2 id="50-2020-03-20">5.0 (2020-03-20)<a class="headerlink" href="#50-2020-03-20" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/4.0...5.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/4.0...5.0</a></p>
+<ul>
+<li>Enable FormPages</li>
+<li>Add Yandex and Bing verification strings</li>
+</ul>
+<h2 id="40-2020-02-24">4.0 (2020-02-24)<a class="headerlink" href="#40-2020-02-24" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/3.2...4.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/3.2...4.0</a></p>
+<ul>
+<li>Update deployment documentation</li>
+<li>59 Jobs homepage</li>
+<li>62 Jobs detail page</li>
+<li>85 TalentLink API client, and importer commands</li>
+<li>90 Jobs Category and homepage categories listing</li>
+<li>92 Recruitment index page</li>
+<li>94 Jobs import HTML formatting improvements</li>
+<li>96 Jobs search: add category filter</li>
+<li>99 Add slugs to job category</li>
+<li>104 Add job subcategory</li>
+</ul>
+<h2 id="32-2020-02-17">3.2 (2020-02-17)<a class="headerlink" href="#32-2020-02-17" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/3.1...3.2">https://git.torchbox.com/buckinghamshire-council/bc/compare/3.1...3.2</a></p>
+<ul>
+<li>116 Enable StreamField Table Block</li>
+<li>118 Add border to search inputs</li>
+</ul>
+<h2 id="31-2020-02-10">3.1 (2020-02-10)<a class="headerlink" href="#31-2020-02-10" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/3.0...3.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/3.0...3.1</a></p>
+<ul>
+<li>82 Adjust header logo size</li>
+</ul>
+<h2 id="30-2020-02-10">3.0 (2020-02-10)<a class="headerlink" href="#30-2020-02-10" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/2.1...3.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/2.1...3.0</a></p>
+<ul>
+<li>Django 2.2.10</li>
+<li>Hotfix: Pin Redis version in requirements.txt</li>
+<li>Update CI pipeline stage names and order to make progress clearer</li>
+<li>83 Specify border radius on inputs</li>
+<li>87 Remove flag from external links</li>
+<li>88 Updated IndexPage to allow it to be created under IndexPage</li>
+<li>Fix: Update "Home" breadcrumb link target to work with multiple sites</li>
+</ul>
+<h2 id="21-2020-01-22">2.1 (2020-01-22)<a class="headerlink" href="#21-2020-01-22" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/2.0...2.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/2.0...2.1</a></p>
+<p>Temporary changes for launch</p>
+<ul>
+<li>Remove email signup form</li>
+<li>Remove cookie banner</li>
+</ul>
+<h2 id="20-2020-01-21">2.0 (2020-01-21)<a class="headerlink" href="#20-2020-01-21" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/1.1...2.0">https://git.torchbox.com/buckinghamshire-council/bc/compare/1.1...2.0</a></p>
+<ul>
+<li>26 Add GOV.UK Notify email backend</li>
+<li>79 Redirect-to field on all pages</li>
+<li>66 Update Call to Action snippet to support multiple links</li>
+<li>47 Search results to display local area links where applicable</li>
+<li>67 Enabled News and Events apps. Add latest news and events to homepage.</li>
+<li>76 Homepage temporary banner</li>
+<li>86 Amend Local Area Links postscript default text</li>
+<li>84 Site wide alpha banner</li>
+<li>43, 71 Inline Index page</li>
+</ul>
+<h2 id="11-2019-12-19">1.1 (2019-12-19)<a class="headerlink" href="#11-2019-12-19" title="Permanent link">&para;</a></h2>
+<p>Compare: <a href="https://git.torchbox.com/buckinghamshire-council/bc/compare/1.0...1.1">https://git.torchbox.com/buckinghamshire-council/bc/compare/1.0...1.1</a></p>
+<ul>
+<li>Django 2.2.9 security release</li>
+</ul>
+<h2 id="10-2019-12-18">1.0 (2019-12-18)<a class="headerlink" href="#10-2019-12-18" title="Permanent link">&para;</a></h2>
+<p><a href="https://git.torchbox.com/buckinghamshire-council/bc/-/tags/1.0">https://git.torchbox.com/buckinghamshire-council/bc/-/tags/1.0</a></p>
+<ul>
+<li>7, 27 IndexPage</li>
+<li>Added child_pages, featured_pages and ordinary_pages properties</li>
+<li>Updated page context and template to remove paginator and to use above properties</li>
+<li>Added unit tests</li>
+<li>Added automatic secret detection to pre-commit hooks</li>
+<li>9 Homepage hero and homepage unit tests</li>
+<li>10 Information page</li>
+<li>Make H2 available as a block only, not in RichTextBlocks</li>
+<li>Limit rich text features</li>
+<li>Local Area Links block</li>
+<li>21 disable events, news, people, and forms apps as we are not using them yet.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+    
+  </body>
+</html>
